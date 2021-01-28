@@ -255,6 +255,7 @@ class AdminController extends Controller
 
     public static function vendorAdd($filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, $meta)
     {        
+    
         $organizations=new Organization;
         $organizations->image=$filename;
         $organizations->email=$email;
@@ -269,8 +270,6 @@ class AdminController extends Controller
         $organizations->service_type =$service_type;
         $organizations->meta =json_encode($meta);
         $result= $organizations->save();
-
-        $last_id = $query->id;
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
@@ -316,6 +315,25 @@ class AdminController extends Controller
             return Helper::response(true,"Data Deleted successfully");
     }
 
-   
+    public static function vendorAddKyc($filename, $filename2, $filename3, $filename4, $filename5, $banking_details)
+    {
+        $insertedId = $Organization->id;
+
+        print_r($insertedId);
+        // $org_kyc=new Org_kyc;
+        // $org_kyc->org_id=$$insertedId;
+        // $org_kyc->email=$email;
+        // $org_kyc->phone=$phone;
+        // $org_kyc->org_name=$org_name;
+        // $org_kyc->lat =$lat;
+        // $org_kyc->lng =$lng;
+        // $org_kyc->zone_id =$zone;
+        // $org_kyc->pincode =$pincode;
+        // $org_kyc->city =$city;
+        // $org_kyc->state =$state;
+        // $org_kyc->service_type =$service_type;
+        // $org_kyc->meta =json_encode($meta);
+        // $result= $org_kyc->save();
+    }
 
 }

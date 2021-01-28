@@ -301,7 +301,7 @@ class Route extends Controller
 
         $filename=""; 
         if($request->hasfile('bidnest_agreement')){
-            $file=$request->file('image');
+            $file=$request->file('bidnest_agreement');
             $extension=$file->getClientOriginalExtension();
             $filename=time().'.'.$extension;
             $file->move('bidnest_agreement',$filename);
@@ -309,10 +309,42 @@ class Route extends Controller
 
         $filename2=""; 
         if($request->hasfile('adhaar_card')){
-            $file=$request->file('image');
+            $file=$request->file('adhaar_card');
             $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('adhaar_card',$filename);
+            $filename2=time().'.'.$extension;
+            $file->move('adhaar_card',$filename2);
         }
+
+        $filename3=""; 
+        if($request->hasfile('pan_card')){
+            $file=$request->file('pan_card');
+            $extension=$file->getClientOriginalExtension();
+            $filename3=time().'.'.$extension;
+            $file->move('pan_card',$filename3);
+        }
+
+        $filename4=""; 
+        if($request->hasfile('gst_certificate')){
+            $file=$request->file('gst_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $filename4=time().'.'.$extension;
+            $file->move('gst_certificate',$filename4);
+        }
+
+
+        $filename5=""; 
+        if($request->hasfile('gst_certificate')){
+            $file=$request->file('gst_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $filename5=time().'.'.$extension;
+            $file->move('gst_certificate',$filename5);
+        }
+
+        $banking_details = array("account_no"=>$request->fname, "bank"=>$request->lname, "name"=>$request->phone2, "ifsc"=>$request->gender, "branch"=>$request->gstin);
+
+        if($validation->fails())
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(AdminController::vendorAddKyc($filename, $filename2, $filename3, $filename4, $filename5, $banking_details));
     }
 }

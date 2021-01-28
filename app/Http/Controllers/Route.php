@@ -283,4 +283,36 @@ class Route extends Controller
     {
         return response()->json(AdminController::vendorDelete($id));
     }
+
+    public function vendors_kyc()
+    {
+
+    }
+
+    public function vendor_add_kyc(Request $request)
+    {
+        $validation = Validator::make($request->all(),[ 
+            'bidnest_agreement' => 'required', 'adhaar_card' => 'required',
+            'pan_card' => 'required', 'gst_certificate' => 'required',
+            'company_reg_certificate' => 'required', 'account_no' => 'required',
+            'bank' => 'required', 'name' => 'required',
+            'ifsc' => 'required', 'branch' => 'required'
+        ]);
+
+        $filename=""; 
+        if($request->hasfile('bidnest_agreement')){
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extension;
+            $file->move('bidnest_agreement',$filename);
+        }
+
+        $filename2=""; 
+        if($request->hasfile('adhaar_card')){
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extension;
+            $file->move('adhaar_card',$filename);
+        }
+    }
 }

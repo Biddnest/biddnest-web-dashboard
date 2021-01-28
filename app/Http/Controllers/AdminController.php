@@ -270,6 +270,8 @@ class AdminController extends Controller
         $organizations->meta =json_encode($meta);
         $result= $organizations->save();
 
+        $last_id = $query->id;
+
         if(!$result)
             return Helper::response(false,"Couldn't save data");
         else              

@@ -8,6 +8,7 @@ use App\Models\Service;
 use App\Models\Subservice;
 use App\Models\Inventory;
 use App\Models\Organization;
+use App\Models\Org_kyc;
 use App\Helper;
 use App\Sms;
 
@@ -270,7 +271,6 @@ class AdminController extends Controller
         $organizations->service_type =$service_type;
         $organizations->meta =json_encode($meta);
         $result= $organizations->save();
-
         if(!$result)
             return Helper::response(false,"Couldn't save data");
         else              
@@ -315,25 +315,24 @@ class AdminController extends Controller
             return Helper::response(true,"Data Deleted successfully");
     }
 
-    public static function vendorAddKyc($filename, $filename2, $filename3, $filename4, $filename5, $banking_details)
+    public static function vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details)
     {
-        $insertedId = $Organization->id;
+        $last = DB::table('organizations')->latest()->first();
+       
+        $org_kyc=new Org_kyc;
+        $org_kyc->org_id= $last->id;
+        $org_kyc->aadhar_card=$filename_adhaar_card;
+        $org_kyc->pan_card=$filename_pan_card;
+        $org_kyc->gst_certificate=$filename_gst_certificate;
+        $org_kyc->company_reg_certificate =$company_reg_certificate;
+        $org_kyc->bidnest_agreement =$filename_bidnest_agreement;
+        $org_kyc->banking_details =json_encode($banking_details);
+        $result= $org_kyc->save();
 
-        print_r($insertedId);
-        // $org_kyc=new Org_kyc;
-        // $org_kyc->org_id=$$insertedId;
-        // $org_kyc->email=$email;
-        // $org_kyc->phone=$phone;
-        // $org_kyc->org_name=$org_name;
-        // $org_kyc->lat =$lat;
-        // $org_kyc->lng =$lng;
-        // $org_kyc->zone_id =$zone;
-        // $org_kyc->pincode =$pincode;
-        // $org_kyc->city =$city;
-        // $org_kyc->state =$state;
-        // $org_kyc->service_type =$service_type;
-        // $org_kyc->meta =json_encode($meta);
-        // $result= $org_kyc->save();
+        if(!$result)
+            return Helper::response(false,"Couldn't save data");
+        else              
+            return Helper::response(true,"save data successfully");
     }
 
 }

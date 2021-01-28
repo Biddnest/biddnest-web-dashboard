@@ -292,59 +292,57 @@ class Route extends Controller
     public function vendor_add_kyc(Request $request)
     {
         $validation = Validator::make($request->all(),[ 
-            'bidnest_agreement' => 'required', 'adhaar_card' => 'required',
-            'pan_card' => 'required', 'gst_certificate' => 'required',
-            'company_reg_certificate' => 'required', 'account_no' => 'required',
+            'account_no' => 'required',
             'bank' => 'required', 'name' => 'required',
             'ifsc' => 'required', 'branch' => 'required'
         ]);
 
-        $filename=""; 
+        $filename_bidnest_agreement=""; 
         if($request->hasfile('bidnest_agreement')){
             $file=$request->file('bidnest_agreement');
             $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('bidnest_agreement',$filename);
+            $filename_bidnest_agreement=time().'.'.$extension;
+            $file->move('bidnest_agreement',$filename_bidnest_agreement);
         }
 
-        $filename2=""; 
+        $filename_adhaar_card=""; 
         if($request->hasfile('adhaar_card')){
             $file=$request->file('adhaar_card');
             $extension=$file->getClientOriginalExtension();
-            $filename2=time().'.'.$extension;
-            $file->move('adhaar_card',$filename2);
+            $filename_adhaar_card=time().'.'.$extension;
+            $file->move('adhaar_card',$filename_adhaar_card);
         }
 
-        $filename3=""; 
+        $filename_pan_card=""; 
         if($request->hasfile('pan_card')){
             $file=$request->file('pan_card');
             $extension=$file->getClientOriginalExtension();
-            $filename3=time().'.'.$extension;
-            $file->move('pan_card',$filename3);
+            $filename_pan_card=time().'.'.$extension;
+            $file->move('pan_card',$filename_pan_card);
         }
 
-        $filename4=""; 
+        $filename_gst_certificate=""; 
         if($request->hasfile('gst_certificate')){
             $file=$request->file('gst_certificate');
             $extension=$file->getClientOriginalExtension();
-            $filename4=time().'.'.$extension;
-            $file->move('gst_certificate',$filename4);
+            $filename_gst_certificate=time().'.'.$extension;
+            $file->move('gst_certificate',$filename_gst_certificate);
         }
 
 
-        $filename5=""; 
-        if($request->hasfile('gst_certificate')){
-            $file=$request->file('gst_certificate');
+        $company_reg_certificate=""; 
+        if($request->hasfile('company_reg_certificate')){
+            $file=$request->file('company_reg_certificate');
             $extension=$file->getClientOriginalExtension();
-            $filename5=time().'.'.$extension;
-            $file->move('gst_certificate',$filename5);
+            $company_reg_certificate=time().'.'.$extension;
+            $file->move('company_reg_certificate',$company_reg_certificate);
         }
 
-        $banking_details = array("account_no"=>$request->fname, "bank"=>$request->lname, "name"=>$request->phone2, "ifsc"=>$request->gender, "branch"=>$request->gstin);
+        $banking_details = array("account_no"=>$request->account_no, "bank"=>$request->bank, "name"=>$request->name, "ifsc"=>$request->ifsc, "branch"=>$request->branch);
 
         if($validation->fails())
             return response()->json(Helper::response(false,"validation failed", $validation->errors()));
         else
-            return response()->json(AdminController::vendorAddKyc($filename, $filename2, $filename3, $filename4, $filename5, $banking_details));
+            return response()->json(AdminController::vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details));
     }
 }

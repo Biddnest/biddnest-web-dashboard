@@ -12,3 +12,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /public/bidnest_agreement
+/public/adhaar_card
+/public/pan_card
+/public/gst_certificate
+/public/company_reg_certificate
+

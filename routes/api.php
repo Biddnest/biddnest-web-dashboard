@@ -19,7 +19,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('dashboard')->group(function () {
-    Route::get('/dashboard', [Router::class,'dashboard'])->name("dashboard");
+    // Route::get('/dashboard', [Router::class,'dashboard'])->name("dashboard");
 
     //services APIs
     Route::get('/services',[Router::class,'service'])->name("service");

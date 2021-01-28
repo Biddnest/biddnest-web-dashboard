@@ -63,11 +63,11 @@ class AdminController extends Controller
         return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");              
     }
 
-    public static function dashboard()
-    {
-        $record=DB::table('orders')->select('order_id','status','amount')->orderByRaw('created_at DESC')->limit(5)->get();
-        return $record ;  
-    }
+    // public static function dashboard()
+    // {
+    //     $record=DB::table('orders')->select('order_id','status','amount')->orderByRaw('created_at DESC')->limit(5)->get();
+    //     return $record ;  
+    // }
 
     public static function serviceAdd($name)
     {

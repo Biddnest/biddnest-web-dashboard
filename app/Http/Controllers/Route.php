@@ -55,17 +55,17 @@ class Route extends Controller
             return response()->json(AdminController::resetPassword($request->password, $request->bearer));
     }
 
-    public function dashboard()
-    {
-        // if(Session::has('username'))
-        // {
-            return response()->json(AdminController::dashboard());
-        // }
-        // else
-        // {
-        //     return response()->json(Helper::response(false,"login first"));
-        // }
-    }
+    // public function dashboard()
+    // {
+    //     // if(Session::has('username'))
+    //     // {
+    //         return response()->json(AdminController::dashboard());
+    //     // }
+    //     // else
+    //     // {
+    //     //     return response()->json(Helper::response(false,"login first"));
+    //     // }
+    // }
 
 
     public function service_add(Request $request)

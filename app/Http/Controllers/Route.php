@@ -286,7 +286,7 @@ class Route extends Controller
 
     public function vendors_kyc()
     {
-
+        return response()->json(AdminController::kycList());
     }
 
     public function vendor_add_kyc(Request $request)
@@ -344,5 +344,62 @@ class Route extends Controller
             return response()->json(Helper::response(false,"validation failed", $validation->errors()));
         else
             return response()->json(AdminController::vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details));
+    }
+
+    public function vendor_edit_kyc(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[ 
+            'account_no' => 'required',
+            'bank' => 'required', 'name' => 'required',
+            'ifsc' => 'required', 'branch' => 'required'
+        ]);
+
+        $filename_bidnest_agreement=""; 
+        if($request->hasfile('bidnest_agreement')){
+            $file=$request->file('bidnest_agreement');
+            $extension=$file->getClientOriginalExtension();
+            $filename_bidnest_agreement=time().'.'.$extension;
+            $file->move('bidnest_agreement',$filename_bidnest_agreement);
+        }
+
+        $filename_adhaar_card=""; 
+        if($request->hasfile('adhaar_card')){
+            $file=$request->file('adhaar_card');
+            $extension=$file->getClientOriginalExtension();
+            $filename_adhaar_card=time().'.'.$extension;
+            $file->move('adhaar_card',$filename_adhaar_card);
+        }
+
+        $filename_pan_card=""; 
+        if($request->hasfile('pan_card')){
+            $file=$request->file('pan_card');
+            $extension=$file->getClientOriginalExtension();
+            $filename_pan_card=time().'.'.$extension;
+            $file->move('pan_card',$filename_pan_card);
+        }
+
+        $filename_gst_certificate=""; 
+        if($request->hasfile('gst_certificate')){
+            $file=$request->file('gst_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $filename_gst_certificate=time().'.'.$extension;
+            $file->move('gst_certificate',$filename_gst_certificate);
+        }
+
+
+        $company_reg_certificate=""; 
+        if($request->hasfile('company_reg_certificate')){
+            $file=$request->file('company_reg_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $company_reg_certificate=time().'.'.$extension;
+            $file->move('company_reg_certificate',$company_reg_certificate);
+        }
+
+        $banking_details = array("account_no"=>$request->account_no, "bank"=>$request->bank, "name"=>$request->name, "ifsc"=>$request->ifsc, "branch"=>$request->branch);
+
+        if($validation->fails())
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(AdminController::vendorEditKyc($id, $filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details));
     }
 }

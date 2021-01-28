@@ -51,5 +51,6 @@ Route::prefix('vendor')->group(function () {
     Route::get('/vendors/delete/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 
     Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");
-    Route::post('/vendors/add/kyc',[Router::class,'vendor_add_kyc'])->name("vendor_add_kyc");  
+    Route::post('/vendors/add/kyc',[Router::class,'vendor_add_kyc'])->name("vendor_add_kyc");
+    Route::post('/vendors/edit/kyc/{id}',[Router::class,'vendor_edit_kyc'])->name("vendor_edit_kyc");  
 });

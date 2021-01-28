@@ -315,6 +315,16 @@ class AdminController extends Controller
             return Helper::response(true,"Data Deleted successfully");
     }
 
+    public static function kycList()
+    {
+        $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't fetche data");
+        else            
+            return Helper::response(true,"Data fetched successfully", $result);
+    }
+
     public static function vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details)
     {
         $last = DB::table('organizations')->latest()->first();
@@ -333,6 +343,20 @@ class AdminController extends Controller
             return Helper::response(false,"Couldn't save data");
         else              
             return Helper::response(true,"save data successfully");
+    }
+
+    public static function vendorEditKyc($id, $filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details)
+    {
+        $result=DB::update(
+            'update org_kycs set aadhar_card = ?, pan_card=?, gst_certificate=?, company_reg_certificate=?, bidnest_agreement=?,  banking_details=? where id = ?',
+                [$filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $filename_bidnest_agreement, json_encode($banking_details), $id]
+            );
+    
+            
+            if(!$result)
+                return Helper::response(false,"Couldn't update data", $result);
+            else            
+                return Helper::response(true,"Data updated successfully", $result);
     }
 
 }

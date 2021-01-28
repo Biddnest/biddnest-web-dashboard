@@ -402,4 +402,9 @@ class Route extends Controller
         else
             return response()->json(AdminController::vendorEditKyc($id, $filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details));
     }
+
+    public function vendor_fetch_kyc($id)
+    {
+        return response()->json(AdminController::kycFetch($id));
+    }
 }

@@ -359,4 +359,14 @@ class AdminController extends Controller
                 return Helper::response(true,"Data updated successfully", $result);
     }
 
+    public static function kycFetch($id)
+    {
+        $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0, 'id'=>$id])->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't fetche data");
+        else            
+            return Helper::response(true,"Data fetched successfully", $result);
+    }
+
 }

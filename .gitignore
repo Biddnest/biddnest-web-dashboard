@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /storage/*.key
+/vendor
+.env
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
@@ -14,4 +16,5 @@ yarn-error.log
 /public/pan_card
 /public/gst_certificate
 /public/company_reg_certificate
+/public/inventory
 

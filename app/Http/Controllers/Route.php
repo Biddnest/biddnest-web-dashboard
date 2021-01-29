@@ -410,6 +410,11 @@ class Route extends Controller
 
     public function vendor_delete_kyc($id)
     {
-        
+        return response()->json(AdminController::kycDelete($id));
+    }
+
+    public function vendors_list()
+    {
+        return response()->json(AdminController::vendorList());
     }
 }

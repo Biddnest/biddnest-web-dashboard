@@ -369,4 +369,27 @@ class AdminController extends Controller
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
+    public static function kycDelete($id)
+    {
+        $result=DB::update(
+            'update org_kycs set deleted = ? where id = ?',
+            [1, $id]
+        );
+    
+        if(!$result)
+            return Helper::response(false,"Couldn't Delete data $result");
+        else           
+            return Helper::response(true,"Data Deleted successfully");
+    }
+
+    public static function vendorList()
+    {
+        $result=DB::table('organizations') ->join('org_kycs', 'organizations.id', '=', 'org_kycs.org_id')->select('*')->where(['org_kycs.status'=> 1, 'org_kycs.deleted'=>0, 'organizations.status'=> 1, 'organizations.deleted'=>0])->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Display data");
+        else            
+            return Helper::response(true,"Data Display successfully", $result);
+    }
+
 }

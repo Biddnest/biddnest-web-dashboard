@@ -407,4 +407,9 @@ class Route extends Controller
     {
         return response()->json(AdminController::kycFetch($id));
     }
+
+    public function vendor_delete_kyc($id)
+    {
+        
+    }
 }

@@ -392,4 +392,14 @@ class AdminController extends Controller
             return Helper::response(true,"Data Display successfully", $result);
     }
 
+    public static function vendorsOrgFetch($id)
+    {
+        $result=DB::table('organizations') ->join('org_kycs', 'organizations.id', '=', 'org_kycs.org_id')->select('*')->where(['organizations.id'=>$id])->first();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't fetch data");
+        else            
+            return Helper::response(true,"Data fetch successfully", $result);
+    }
+
 }

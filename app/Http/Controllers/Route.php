@@ -417,4 +417,9 @@ class Route extends Controller
     {
         return response()->json(AdminController::vendorList());
     }
+
+    public function vendors_org_fetch($id)
+    {
+        return response()->json(AdminController::vendorsOrgFetch($id));
+    }
 }

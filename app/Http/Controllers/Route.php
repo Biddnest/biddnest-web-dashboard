@@ -92,9 +92,9 @@ class Route extends Controller
         // }
     }
 
-    public function service_fetch($id)
+    public function service_get($id)
     {
-        return response()->json(AdminController::serviceFetch($id));
+        return response()->json(AdminController::serviceGet($id));
     }
 
     public function service_edit(Request $request, $id)
@@ -139,14 +139,14 @@ class Route extends Controller
             'name' => 'required'
         ]);
         if($validation->fails())
-        return response()->json(Helper::response(false,"validation failed", $validation->errors()));
-      else
-          return response()->json(AdminController::subServiceEdit($request->name, $request->service_id, $id));
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(AdminController::subServiceEdit($request->name, $request->service_id, $id));
     }
 
-    public function sub_service_fetch($id)
+    public function sub_service_get($id)
     {
-        return response()->json(AdminController::subServiceFetch($id));
+        return response()->json(AdminController::subServiceGet($id));
     }
 
     public function sub_service_delete($id)
@@ -176,7 +176,7 @@ class Route extends Controller
         }
 
         if($validation->fails())
-          return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
         else
             return response()->json(AdminController::inventoriesAdd($request->name, $request->subservice_id, $request->material, $filename));
     }
@@ -203,9 +203,9 @@ class Route extends Controller
             return response()->json(AdminController::inventoriesEdit($request->name, $request->subservice_id, $request->material, $filename, $id));
     }
 
-    public function inventories_fetch($id)
+    public function inventories_get($id)
     {
-        return response()->json(AdminController::inventoriesFetch($id));
+        return response()->json(AdminController::inventoriesGet($id));
     }
 
     public function inventories_delete($id)
@@ -286,33 +286,145 @@ class Route extends Controller
 
     public function vendors_kyc()
     {
-
+        return response()->json(AdminController::kycList());
     }
 
     public function vendor_add_kyc(Request $request)
     {
         $validation = Validator::make($request->all(),[ 
-            'bidnest_agreement' => 'required', 'adhaar_card' => 'required',
-            'pan_card' => 'required', 'gst_certificate' => 'required',
-            'company_reg_certificate' => 'required', 'account_no' => 'required',
+            'account_no' => 'required',
             'bank' => 'required', 'name' => 'required',
             'ifsc' => 'required', 'branch' => 'required'
         ]);
 
-        $filename=""; 
+        $filename_bidnest_agreement=""; 
         if($request->hasfile('bidnest_agreement')){
-            $file=$request->file('image');
+            $file=$request->file('bidnest_agreement');
             $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('bidnest_agreement',$filename);
+            $filename_bidnest_agreement=time().'.'.$extension;
+            $file->move('bidnest_agreement',$filename_bidnest_agreement);
         }
 
-        $filename2=""; 
+        $filename_adhaar_card=""; 
         if($request->hasfile('adhaar_card')){
-            $file=$request->file('image');
+            $file=$request->file('adhaar_card');
             $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('adhaar_card',$filename);
+            $filename_adhaar_card=time().'.'.$extension;
+            $file->move('adhaar_card',$filename_adhaar_card);
         }
+
+        $filename_pan_card=""; 
+        if($request->hasfile('pan_card')){
+            $file=$request->file('pan_card');
+            $extension=$file->getClientOriginalExtension();
+            $filename_pan_card=time().'.'.$extension;
+            $file->move('pan_card',$filename_pan_card);
+        }
+
+        $filename_gst_certificate=""; 
+        if($request->hasfile('gst_certificate')){
+            $file=$request->file('gst_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $filename_gst_certificate=time().'.'.$extension;
+            $file->move('gst_certificate',$filename_gst_certificate);
+        }
+
+
+        $company_reg_certificate=""; 
+        if($request->hasfile('company_reg_certificate')){
+            $file=$request->file('company_reg_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $company_reg_certificate=time().'.'.$extension;
+            $file->move('company_reg_certificate',$company_reg_certificate);
+        }
+
+        $banking_details = array("account_no"=>$request->account_no, "bank"=>$request->bank, "name"=>$request->name, "ifsc"=>$request->ifsc, "branch"=>$request->branch);
+
+        if($validation->fails())
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(AdminController::vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details));
+    }
+
+    public function vendor_edit_kyc(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[ 
+            'account_no' => 'required',
+            'bank' => 'required', 'name' => 'required',
+            'ifsc' => 'required', 'branch' => 'required'
+        ]);
+
+        $filename_bidnest_agreement=""; 
+        if($request->hasfile('bidnest_agreement')){
+            $file=$request->file('bidnest_agreement');
+            $extension=$file->getClientOriginalExtension();
+            $filename_bidnest_agreement=time().'.'.$extension;
+            $file->move('bidnest_agreement',$filename_bidnest_agreement);
+        }
+
+        $filename_adhaar_card=""; 
+        if($request->hasfile('adhaar_card')){
+            $file=$request->file('adhaar_card');
+            $extension=$file->getClientOriginalExtension();
+            $filename_adhaar_card=time().'.'.$extension;
+            $file->move('adhaar_card',$filename_adhaar_card);
+        }
+
+        $filename_pan_card=""; 
+        if($request->hasfile('pan_card')){
+            $file=$request->file('pan_card');
+            $extension=$file->getClientOriginalExtension();
+            $filename_pan_card=time().'.'.$extension;
+            $file->move('pan_card',$filename_pan_card);
+        }
+
+        $filename_gst_certificate=""; 
+        if($request->hasfile('gst_certificate')){
+            $file=$request->file('gst_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $filename_gst_certificate=time().'.'.$extension;
+            $file->move('gst_certificate',$filename_gst_certificate);
+        }
+
+
+        $company_reg_certificate=""; 
+        if($request->hasfile('company_reg_certificate')){
+            $file=$request->file('company_reg_certificate');
+            $extension=$file->getClientOriginalExtension();
+            $company_reg_certificate=time().'.'.$extension;
+            $file->move('company_reg_certificate',$company_reg_certificate);
+        }
+
+        $banking_details = array("account_no"=>$request->account_no, "bank"=>$request->bank, "name"=>$request->name, "ifsc"=>$request->ifsc, "branch"=>$request->branch);
+
+        if($validation->fails())
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(AdminController::vendorEditKyc($id, $filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details));
+    }
+
+    public function vendor_fetch_kyc($id)
+    {
+        return response()->json(AdminController::kycFetch($id));
+    }
+
+    public function vendor_delete_kyc($id)
+    {
+        return response()->json(AdminController::kycDelete($id));
+    }
+
+    public function vendors_list()
+    {
+        return response()->json(AdminController::vendorList());
+    }
+
+    public function vendors_get_record($id)
+    {
+        return response()->json(AdminController::vendorsGetRecord($id));
+    }
+
+    public function vendors_delete_record($id)
+    {
+        return response()->json(AdminController::vendorsDeleteRecord($id));
     }
 }

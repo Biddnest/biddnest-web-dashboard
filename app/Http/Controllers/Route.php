@@ -139,9 +139,9 @@ class Route extends Controller
             'name' => 'required'
         ]);
         if($validation->fails())
-        return response()->json(Helper::response(false,"validation failed", $validation->errors()));
-      else
-          return response()->json(AdminController::subServiceEdit($request->name, $request->service_id, $id));
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(AdminController::subServiceEdit($request->name, $request->service_id, $id));
     }
 
     public function sub_service_get($id)
@@ -176,7 +176,7 @@ class Route extends Controller
         }
 
         if($validation->fails())
-          return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
         else
             return response()->json(AdminController::inventoriesAdd($request->name, $request->subservice_id, $request->material, $filename));
     }

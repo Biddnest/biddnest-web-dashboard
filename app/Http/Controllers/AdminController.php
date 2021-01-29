@@ -104,9 +104,9 @@ class AdminController extends Controller
             return Helper::response(true,"Data updated successfully");
     }
 
-    public static function serviceFetch($id)
+    public static function serviceGet($id)
     {
-        $result=DB::table('services')->select('*')->where('id', $id)->get();
+        $result=DB::table('services')->select('*')->where('id', $id)->first();
       
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
@@ -162,13 +162,13 @@ class AdminController extends Controller
             return Helper::response(true,"Data updated successfully");
     }
 
-    public static function subServiceFetch($id)
+    public static function subServiceGet($id)
     {
-        $result=DB::table('subservices')->select('*')->where('id', $id)->get();
+        $result=DB::table('subservices')->select('*')->where('id', $id)->first();
         if(!$result)
-            return Helper::response(false,"Couldn't updatfetche data");
+            return Helper::response(false,"Couldn't display data");
         else               
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data display successfully", $result);
     }
 
     public static function subServiceDelete($id)
@@ -223,13 +223,13 @@ class AdminController extends Controller
             return Helper::response(true,"Data updated successfully");
     }
 
-    public static function inventoriesFetch($id)
+    public static function inventoriesGet($id)
     {
-        $result=DB::table('inventories')->select('*')->where('id', $id)->get();
+        $result=DB::table('inventories')->select('*')->where('id', $id)->first();
         if(!$result)
-            return Helper::response(false,"Couldn't updatfetche data");
+            return Helper::response(false,"Couldn't Display data");
         else            
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data Display successfully", $result);
     }
 
     public static function inventoriesDelete($id)
@@ -279,7 +279,7 @@ class AdminController extends Controller
 
     public static function vendorFetch($id)
     {
-        $result=DB::table('organizations')->select('*')->where('id', $id)->get();
+        $result=DB::table('organizations')->select('*')->where('id', $id)->first();
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
@@ -361,7 +361,7 @@ class AdminController extends Controller
 
     public static function kycFetch($id)
     {
-        $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0, 'id'=>$id])->get();
+        $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0, 'id'=>$id])->first();
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
@@ -392,7 +392,7 @@ class AdminController extends Controller
             return Helper::response(true,"Data Display successfully", $result);
     }
 
-    public static function vendorsOrgFetch($id)
+    public static function vendorsGetRecord($id)
     {
         $result=DB::table('organizations') ->join('org_kycs', 'organizations.id', '=', 'org_kycs.org_id')->select('*')->where(['organizations.id'=>$id])->first();
 
@@ -400,6 +400,24 @@ class AdminController extends Controller
             return Helper::response(false,"Couldn't fetch data");
         else            
             return Helper::response(true,"Data fetch successfully", $result);
+    }
+
+    public static function vendorsDeleteRecord($id)
+    {
+        $result=DB::update(
+            'update org_kycs set deleted = ? where org_id = ?',
+            [1, $id]
+        );
+
+        $result1=DB::update(
+            'update organizations set deleted = ? where id = ?',
+            [1, $id]
+        );
+
+        if(!$result && !$result1)
+            return Helper::response(false,"Couldn't Delete data",$result);
+        else           
+            return Helper::response(true,"Data Deleted successfully");
     }
 
 }

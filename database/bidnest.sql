@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2021 at 11:37 AM
+-- Generation Time: Jan 29, 2021 at 10:14 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -76,7 +76,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `inventories` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `sub_service_id` int(11) NOT NULL,
   `material` varchar(50) NOT NULL,
   `image` varchar(100) NOT NULL,
@@ -85,6 +85,13 @@ CREATE TABLE `inventories` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventories`
+--
+
+INSERT INTO `inventories` (`id`, `name`, `sub_service_id`, `material`, `image`, `status`, `updated_at`, `created_at`, `deleted`) VALUES
+(1, 'abcd', 2, 'steel', '1611911569.png', 1, '2021-01-29 03:42:49', '2021-01-29 03:42:49', 0);
 
 -- --------------------------------------------------------
 
@@ -150,7 +157,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `organizations` (
   `id` int(11) NOT NULL,
-  `parent_org_id` int(11) NOT NULL,
+  `parent_org_id` int(11) DEFAULT NULL,
   `image` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phone` varchar(12) NOT NULL,
@@ -165,11 +172,20 @@ CREATE TABLE `organizations` (
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `meta` text NOT NULL,
   `verification_status` int(11) NOT NULL DEFAULT 0,
-  `remarks` text NOT NULL,
+  `remarks` text DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `organizations`
+--
+
+INSERT INTO `organizations` (`id`, `parent_org_id`, `image`, `email`, `phone`, `org_name`, `lat`, `lng`, `zone_id`, `pincode`, `city`, `state`, `service_type`, `status`, `meta`, `verification_status`, `remarks`, `updated_at`, `created_at`, `deleted`) VALUES
+(2, NULL, '', 'abc@gmail.com', '95685695859', 'abcd', 123.25, 122.35, 1, '123546', 'pune', 'maharashtra', 'a', 1, '{\"auth_fname\":\"abc2\",\"auth_lname\":\"abc45\",\"secondory_phone\":\"12365485958\",\"gender\":\"Female\",\"gstin_no\":\"123456as\",\"org_description\":\"abcd abcd\",\"address_line_1\":\"abcd bbn\",\"address_line_2\":\"abcd bbs\"}', 0, NULL, '2021-01-28 05:46:26', '2021-01-28 05:46:26', 0),
+(3, NULL, '', 'abc@gmail.com', '95685695859', 'abcd', 123.25, 122.35, 1, '123546', 'pune', 'maharashtra', 'a', 1, '{\"auth_fname\":\"abc2\",\"auth_lname\":\"abc45\",\"secondory_phone\":\"12365485958\",\"gender\":\"Female\",\"gstin_no\":\"123456as\",\"org_description\":\"abcd abcd\",\"address_line_1\":\"abcd bbn\",\"address_line_2\":\"abcd bbs\"}', 0, NULL, '2021-01-28 05:47:13', '2021-01-28 05:47:13', 0),
+(4, NULL, '', 'abc@gmail.com', '95685695859', 'abcd', 123.25, 122.35, 1, '123546', 'pune', 'maharashtra', 'a', 1, '{\"auth_fname\":\"abc2\",\"auth_lname\":\"abc45\",\"secondory_phone\":\"12365485958\",\"gender\":\"Female\",\"gstin_no\":\"123456as\",\"org_description\":\"abcd abcd\",\"address_line_1\":\"abcd bbn\",\"address_line_2\":\"abcd bbs\"}', 0, NULL, '2021-01-28 05:47:28', '2021-01-28 05:47:28', 1);
 
 -- --------------------------------------------------------
 
@@ -191,6 +207,13 @@ CREATE TABLE `org_kycs` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `org_kycs`
+--
+
+INSERT INTO `org_kycs` (`id`, `org_id`, `aadhar_card`, `pan_card`, `gst_certificate`, `company_reg_certificate`, `bidnest_agreement`, `banking_details`, `status`, `updated_at`, `created_at`, `deleted`) VALUES
+(2, 4, '', '', '', '', '', '{\"account_no\":\"1222233334444\",\"bank\":\"BOI\",\"name\":\"ABC ABC\",\"ifsc\":\"ABC222500\",\"branch\":\"ABC\"}', 1, '2021-01-28 07:30:07', '2021-01-28 07:30:07', 1);
 
 -- --------------------------------------------------------
 
@@ -218,6 +241,14 @@ CREATE TABLE `services` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `name`, `status`, `updated_at`, `created_at`, `deleted`) VALUES
+(1, 'test5', 1, '2021-01-29 02:51:23', '2021-01-29 02:51:23', 1),
+(2, 'test6', 1, '2021-01-29 02:51:57', '2021-01-29 02:51:57', 1);
 
 -- --------------------------------------------------------
 
@@ -249,6 +280,13 @@ CREATE TABLE `subservices` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subservices`
+--
+
+INSERT INTO `subservices` (`id`, `service_id`, `name`, `status`, `updated_at`, `created_at`, `deleted`) VALUES
+(2, 1, 'test5', 1, '2021-01-29 03:37:43', '2021-01-29 03:37:43', 0);
 
 -- --------------------------------------------------------
 
@@ -290,6 +328,13 @@ CREATE TABLE `zones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `zones`
+--
+
+INSERT INTO `zones` (`id`, `name`, `lat`, `lng`, `service_radius`, `area`, `city`, `district`, `state`, `status`, `updated_at`, `created_at`, `deleted`) VALUES
+(1, 'Mumbai', 123.25, 12.35, 12.25, 'abc', 'thane', 'thane', 'Maharashtra', 1, '2021-01-28 11:16:17', '2021-01-28 11:16:17', 0);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -311,6 +356,7 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `inventories`
 --
 ALTER TABLE `inventories`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `subservice_id` (`sub_service_id`);
 
 --
@@ -344,6 +390,7 @@ ALTER TABLE `organizations`
 -- Indexes for table `org_kycs`
 --
 ALTER TABLE `org_kycs`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `org_fk_id` (`org_id`);
 
 --
@@ -403,6 +450,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `inventories`
+--
+ALTER TABLE `inventories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
@@ -424,19 +477,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `organizations`
 --
 ALTER TABLE `organizations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `org_kycs`
+--
+ALTER TABLE `org_kycs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subservices`
 --
 ALTER TABLE `subservices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -448,7 +507,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `zones`
 --
 ALTER TABLE `zones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

@@ -92,9 +92,9 @@ class Route extends Controller
         // }
     }
 
-    public function service_fetch($id)
+    public function service_get($id)
     {
-        return response()->json(AdminController::serviceFetch($id));
+        return response()->json(AdminController::serviceGet($id));
     }
 
     public function service_edit(Request $request, $id)
@@ -144,9 +144,9 @@ class Route extends Controller
           return response()->json(AdminController::subServiceEdit($request->name, $request->service_id, $id));
     }
 
-    public function sub_service_fetch($id)
+    public function sub_service_get($id)
     {
-        return response()->json(AdminController::subServiceFetch($id));
+        return response()->json(AdminController::subServiceGet($id));
     }
 
     public function sub_service_delete($id)
@@ -203,9 +203,9 @@ class Route extends Controller
             return response()->json(AdminController::inventoriesEdit($request->name, $request->subservice_id, $request->material, $filename, $id));
     }
 
-    public function inventories_fetch($id)
+    public function inventories_get($id)
     {
-        return response()->json(AdminController::inventoriesFetch($id));
+        return response()->json(AdminController::inventoriesGet($id));
     }
 
     public function inventories_delete($id)
@@ -418,8 +418,13 @@ class Route extends Controller
         return response()->json(AdminController::vendorList());
     }
 
-    public function vendors_org_fetch($id)
+    public function vendors_get_record($id)
     {
-        return response()->json(AdminController::vendorsOrgFetch($id));
+        return response()->json(AdminController::vendorsGetRecord($id));
+    }
+
+    public function vendors_delete_record($id)
+    {
+        return response()->json(AdminController::vendorsDeleteRecord($id));
     }
 }

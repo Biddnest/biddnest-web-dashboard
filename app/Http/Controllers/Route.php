@@ -5,9 +5,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Helper;
 use Session;
+use App\Http\Middleware\VerifyJwtToken;
 
 class Route extends Controller
 {
+    public function __construct(){
+        $this->middleware(VerifyJwtToken::class)->except(['login','forgot_password_send_otp','forgot_password_verify_otp']);
+    }
+
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[

@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use App\Models\Admin;
 use App\Models\Service;
 use App\Models\Subservice;
 use App\Models\Inventory;
@@ -12,36 +14,37 @@ use App\Models\Org_kyc;
 use App\Helper;
 use App\Sms;
 
+use  App\Jobs\SendOtp;
+
 
 class AdminController extends Controller
 {
     public static function login($username, $password)
     {
-        $admin_user=DB::table('admins')->where(['username'=>$username, 'status'=>1])->first();
-        if(!$admin_user){
-            return Helper::response(false,"username is invalid or Deactivate");
-        }
-        return password_verify($password, $admin_user->password) ? Helper::response(true, "username has been loged in") : Helper::response(false, "password is incorrect");
+        $admin_user=Admin::where(['username'=>$username, 'status'=>1, 'deleted'=>0])->first();
+        if(!$admin_user)
+            return Helper::response(false,"Incorrect username or password");
+
+        return password_verify($password, $admin_user->password) ? Helper::response(true, "Login was successfull", ["token"=>Helper::generateAuthToken(["email"=>$admin_user->email,"password"=>$password]),"expiry"=>CarbonImmutable::now()->add(365, 'day')]) : Helper::response(false, "password is incorrect");
 
     }
 
     public static function forgotPasswordSendOtp($phone)
     {
-        $user_phone=DB::table('admins')->where('phone',$phone)->first();
-        if(!$user_phone){
+        $user_phone=Admin::where('phone',$phone)->first();
+        if(!$user_phone)
             return Helper::response(false,"Phone number is not registered");
-        }
+
         if($phone == $user_phone->phone)
         {
             $otp = Helper::generateOTP(6);
+//          $msg= SendOtp::dispatch($otp, $phone)->afterResponse();
+            dispatch(function() use($otp, $phone){
+                Sms::sendOtp($phone, $otp);
+                Admin::where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
+            })->afterResponse();
 
-            $insert_otp=DB::table('admins')->where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
-
-            if(!$insert_otp){
-                return Helper::response(false,"Couldn't save Otp");
-            }
-            $msg= Sms::sendOtp($phone,$otp);
-            return !$msg[0] ? Helper::response(false,"Couldn't sent Otp",$msg["error"]) : Helper::response(true,"otp has been sent successfully");
+            return Helper::response(true,"Otp has been sent successfully.");
 
         }
     }

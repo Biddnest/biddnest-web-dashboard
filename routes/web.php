@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-   
-// });
+Route::get('/', function () {
+//phpinfo();
+    print_r(json_encode(opcache_get_status()));
+});
 
 
 

@@ -15,8 +15,6 @@ use App\Sms;
 
 class AdminController extends Controller
 {
-    
-
     public static function login($username, $password)
     {
         $admin_user=DB::table('admins')->where(['username'=>$username, 'status'=>1])->first();
@@ -35,16 +33,16 @@ class AdminController extends Controller
         }
         if($phone == $user_phone->phone)
         {
-           $otp = Helper::generateOTP(6); 
+            $otp = Helper::generateOTP(6);
 
             $insert_otp=DB::table('admins')->where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
 
             if(!$insert_otp){
                 return Helper::response(false,"Couldn't save Otp");
-            }             
-                $msg= Sms::sendOtp($phone,$otp);
-                return !$msg[0] ? Helper::response(false,"Couldn't sent Otp",$msg["error"]) : Helper::response(true,"otp has been sent successfully");  
-        
+            }
+            $msg= Sms::sendOtp($phone,$otp);
+            return !$msg[0] ? Helper::response(false,"Couldn't sent Otp",$msg["error"]) : Helper::response(true,"otp has been sent successfully");
+
         }
     }
 
@@ -61,13 +59,13 @@ class AdminController extends Controller
     {
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $update_password=DB::table('admins')->where('id',$bearer)->update(['password' => $hash]);
-        return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");              
+        return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
     }
 
     // public static function dashboard()
     // {
     //     $record=DB::table('orders')->select('order_id','status','amount')->orderByRaw('created_at DESC')->limit(5)->get();
-    //     return $record ;  
+    //     return $record ;
     // }
 
     public static function serviceAdd($name)
@@ -78,7 +76,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        else             
+        else
             return Helper::response(true,"save data successfully");
     }
 
@@ -87,7 +85,7 @@ class AdminController extends Controller
         $service=DB::table('services')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
         if(!$service)
             return Helper::response(false,"Records not exist");
-        else              
+        else
             return Helper::response(true,"Data displayed successfully", $service);
     }
 
@@ -100,17 +98,17 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't update data");
-        else             
+        else
             return Helper::response(true,"Data updated successfully");
     }
 
     public static function serviceGet($id)
     {
         $result=DB::table('services')->select('*')->where('id', $id)->first();
-      
+
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
-        else              
+        else
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
@@ -123,7 +121,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");
-        else              
+        else
             return Helper::response(true,"Data Deleted successfully");
     }
 
@@ -132,7 +130,7 @@ class AdminController extends Controller
         $subservice=DB::table('subservices')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
         if(!$subservice)
             return Helper::response(false,"Records not exist");
-        else              
+        else
             return Helper::response(true,"Data displayed successfully", $subservice);
     }
 
@@ -145,7 +143,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        else               
+        else
             return Helper::response(true,"save data successfully");
     }
 
@@ -158,7 +156,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't update data");
-        else              
+        else
             return Helper::response(true,"Data updated successfully");
     }
 
@@ -167,7 +165,7 @@ class AdminController extends Controller
         $result=DB::table('subservices')->select('*')->where('id', $id)->first();
         if(!$result)
             return Helper::response(false,"Couldn't display data");
-        else               
+        else
             return Helper::response(true,"Data display successfully", $result);
     }
 
@@ -180,7 +178,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");
-        else              
+        else
             return Helper::response(true,"Data Deleted successfully");
     }
 
@@ -189,7 +187,7 @@ class AdminController extends Controller
         $inventories=DB::table('inventories')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
         if(!$inventories)
             return Helper::response(false,"Records not exist");
-        else              
+        else
             return Helper::response(true,"Data displayed successfully", $inventories);
     }
 
@@ -206,7 +204,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        else              
+        else
             return Helper::response(true,"save data successfully");
     }
 
@@ -219,7 +217,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't update data");
-        else            
+        else
             return Helper::response(true,"Data updated successfully");
     }
 
@@ -228,7 +226,7 @@ class AdminController extends Controller
         $result=DB::table('inventories')->select('*')->where('id', $id)->first();
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
-        else            
+        else
             return Helper::response(true,"Data Display successfully", $result);
     }
 
@@ -241,7 +239,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");
-        else           
+        else
             return Helper::response(true,"Data Deleted successfully");
     }
 
@@ -250,13 +248,13 @@ class AdminController extends Controller
         $vendors=DB::table('organizations')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
         if(!$vendors)
             return Helper::response(false,"Records not exist", $vendors);
-        else              
+        else
             return Helper::response(true,"Data displayed successfully", $vendors);
     }
 
     public static function vendorAdd($filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, $meta)
-    {        
-    
+    {
+
         $organizations=new Organization;
         $organizations->image=$filename;
         $organizations->email=$email;
@@ -273,7 +271,7 @@ class AdminController extends Controller
         $result= $organizations->save();
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        else              
+        else
             return Helper::response(true,"save data successfully");
     }
 
@@ -283,7 +281,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
-        else            
+        else
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
@@ -291,14 +289,14 @@ class AdminController extends Controller
     {
 
         $result=DB::update(
-        'update organizations set image = ?, email=?, phone=?, org_name=?, lat=?, lng=?, zone_id=?, pincode=?, city=?, state=?, service_type=?, meta=? where id = ?',
+            'update organizations set image = ?, email=?, phone=?, org_name=?, lat=?, lng=?, zone_id=?, pincode=?, city=?, state=?, service_type=?, meta=? where id = ?',
             [$filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, json_encode($meta), $id]
         );
 
-        
+
         if(!$result)
             return Helper::response(false,"Couldn't update data", $result);
-        else            
+        else
             return Helper::response(true,"Data updated successfully", $result);
     }
 
@@ -311,7 +309,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");
-        else           
+        else
             return Helper::response(true,"Data Deleted successfully");
     }
 
@@ -321,14 +319,14 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
-        else            
+        else
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
     public static function vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details)
     {
         $last = DB::table('organizations')->latest()->first();
-       
+
         $org_kyc=new Org_kyc;
         $org_kyc->org_id= $last->id;
         $org_kyc->aadhar_card=$filename_adhaar_card;
@@ -341,7 +339,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        else              
+        else
             return Helper::response(true,"save data successfully");
     }
 
@@ -349,14 +347,14 @@ class AdminController extends Controller
     {
         $result=DB::update(
             'update org_kycs set aadhar_card = ?, pan_card=?, gst_certificate=?, company_reg_certificate=?, bidnest_agreement=?,  banking_details=? where id = ?',
-                [$filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $filename_bidnest_agreement, json_encode($banking_details), $id]
-            );
-    
-            
-            if(!$result)
-                return Helper::response(false,"Couldn't update data", $result);
-            else            
-                return Helper::response(true,"Data updated successfully", $result);
+            [$filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $filename_bidnest_agreement, json_encode($banking_details), $id]
+        );
+
+
+        if(!$result)
+            return Helper::response(false,"Couldn't update data", $result);
+        else
+            return Helper::response(true,"Data updated successfully", $result);
     }
 
     public static function kycFetch($id)
@@ -365,7 +363,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
-        else            
+        else
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
@@ -375,10 +373,10 @@ class AdminController extends Controller
             'update org_kycs set deleted = ? where id = ?',
             [1, $id]
         );
-    
+
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");
-        else           
+        else
             return Helper::response(true,"Data Deleted successfully");
     }
 
@@ -388,7 +386,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
-        else            
+        else
             return Helper::response(true,"Data Display successfully", $result);
     }
 
@@ -398,7 +396,7 @@ class AdminController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't fetch data");
-        else            
+        else
             return Helper::response(true,"Data fetch successfully", $result);
     }
 
@@ -416,7 +414,7 @@ class AdminController extends Controller
 
         if(!$result && !$result1)
             return Helper::response(false,"Couldn't Delete data",$result);
-        else           
+        else
             return Helper::response(true,"Data Deleted successfully");
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -38,11 +39,14 @@ class AdminController extends Controller
         if($phone == $user_phone->phone)
         {
             $otp = Helper::generateOTP(6);
-//          $msg= SendOtp::dispatch($otp, $phone)->afterResponse();
-            dispatch(function() use($otp, $phone){
+          $msg= SendOtp::dispatch($otp, $phone)->delay(Carbon::now()->addSecond(10))->afterResponse();
+            //Sms::sendOtp($phone, $otp);
+            //Admin::where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
+
+            /*dispatch(function() use($otp, $phone){
                 Sms::sendOtp($phone, $otp);
                 Admin::where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
-            })->afterResponse();
+            })->delay(now()->addMinutes(10))->afterResponse();*/
 
             return Helper::response(true,"Otp has been sent successfully.");
 

@@ -27,7 +27,6 @@ class VerifyJwtToken
                 return $next($request);
         } catch (\Exception $e) {
             return response()->json(["status"=>"fail", "message"=>"You are not authorized to access this application.","data"=>["error"=>$e->getMessage()]])->setStatusCode(401);
-
         }
 
     }

@@ -63,3 +63,11 @@ Route::prefix('vendor')->group(function () {
     Route::get('/vendors/org/fetch/{id}',[Router::class,'vendors_get_record'])->name("vendors_get_record");
     Route::get('/vendors/org/delete/{id}',[Router::class,'vendors_delete_record'])->name("vendors_delete_record");
 });
+
+Route::prefix('user')->group(function () {
+    Route::get('/users',[Router::class,'get'])->name("users");
+    Route::post('/users/add',[Router::class,'add'])->name("add");
+    Route::put('/users/fetch/{id}',[Router::class,'getone'])->name("getone");
+    Route::post('/users/edit/{id}',[Router::class,'update'])->name("update");
+    Route::delete('/users/delete/{id}',[Router::class,'delete'])->name("delete");
+});

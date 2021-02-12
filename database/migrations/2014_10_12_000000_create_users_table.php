@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateUsersTable extends Migration
 {
@@ -17,10 +18,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->char('name');
             $table->char('email')->unique();
+            $table->char('phone');
             $table->char('gender')->nullable();
-            $table->date('DOB');           
+            $table->date('dob');      
+            $table->boolean('status')->default(1);     
             $table->timestamps();
-            $table->boolean('deleted');
+            $table->boolean('deleted')->default(0);
         });
     }
 

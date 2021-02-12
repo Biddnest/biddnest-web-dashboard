@@ -427,4 +427,47 @@ class Route extends Controller
     {
         return response()->json(AdminController::vendorsDeleteRecord($id));
     }
+
+    public function get()
+    {
+        return response()->json(UserController::get());
+    }
+
+    public function add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[ 
+            'name' => 'required', 'email' => 'required',
+            'phone' => 'required', 'gender' => 'required', 
+            'dob' => 'required'
+        ]);
+
+        if($validation->fails())
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(UserController::add($request->name, $request->email, $request->phone, $request->gender, $request->dob));
+    }
+
+    public function getone($id)
+    {
+        return response()->json(UserController::getOne($id));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[ 
+            'name' => 'required', 'email' => 'required',
+            'phone' => 'required', 'gender' => 'required', 
+            'dob' => 'required'
+        ]);
+
+        if($validation->fails())
+            return response()->json(Helper::response(false,"validation failed", $validation->errors()));
+        else
+            return response()->json(UserController::update($request->name, $request->email, $request->phone, $request->gender, $request->dob, $id));
+    }
+
+    public function delete($id)
+    {
+        return response()->json(UserController::delete($id));
+    }
 }

@@ -22,7 +22,11 @@ class AdminController extends Controller
 {
     public static function login($username, $password)
     {
-        $admin_user=Admin::where(['username'=>$username, 'status'=>1, 'deleted'=>0])->first();
+        $admin_user=Admin::where(['username'=>$username])
+            ->OrWhere(['email'=>$username])
+            ->where([ 'status'=>1, 'deleted'=>0])
+            ->first();
+
         if(!$admin_user)
             return Helper::response(false,"Incorrect username or password");
 
@@ -36,21 +40,14 @@ class AdminController extends Controller
         if(!$user_phone)
             return Helper::response(false,"Phone number is not registered");
 
-        if($phone == $user_phone->phone)
-        {
-            $otp = Helper::generateOTP(6);
-          $msg= SendOtp::dispatch($otp, $phone)->delay(Carbon::now()->addSecond(10))->afterResponse();
-            //Sms::sendOtp($phone, $otp);
-            //Admin::where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
-
-            /*dispatch(function() use($otp, $phone){
+        $otp = Helper::generateOTP(6);
+//          $msg= SendOtp::dispatch($otp, $phone)->delay(Carbon::now()->addSecond(10))->afterResponse();
+            dispatch(function() use($otp, $phone){
                 Sms::sendOtp($phone, $otp);
                 Admin::where('phone',$phone)->update(['otp' => $otp, 'forgot_pwd'=>1]);
-            })->delay(now()->addMinutes(10))->afterResponse();*/
+            })->afterResponse();
 
             return Helper::response(true,"Otp has been sent successfully.");
-
-        }
     }
 
     public static function verifyOtp($otp,$bearer)
@@ -68,12 +65,6 @@ class AdminController extends Controller
         $update_password=DB::table('admins')->where('id',$bearer)->update(['password' => $hash]);
         return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
     }
-
-    // public static function dashboard()
-    // {
-    //     $record=DB::table('orders')->select('order_id','status','amount')->orderByRaw('created_at DESC')->limit(5)->get();
-    //     return $record ;
-    // }
 
     public static function serviceAdd($name)
     {

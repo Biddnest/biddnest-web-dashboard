@@ -2,9 +2,12 @@
 
 namespace App;
 use Carbon\CarbonImmutable;
+use Faker\Provider\File;
 use \Firebase\JWT\JWT;
 use http\Env\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Fabito\AvatarGenerator\Avatar;
 
 class Helper
 {
@@ -31,6 +34,16 @@ class Helper
             "nbf" => CarbonImmutable::now()->timestamp,
             "exp" => CarbonImmutable::now()->add(365, 'day')->timestamp,
         ], config('jwt.secret'));
+    }
+
+    public static function saveFile($file,$filename,$folderName){
+        return Storage::disk('local')->put("public/".$folderName."/".$filename, $file) ? asset("storage/".$folderName."/".$filename) : false;
+    }
+
+    public static function generateAvatar($name){
+        $generator = new Avatar();
+        return $generator->name($name)->font("../resources/fonts/Gilroy-Medium.ttf")->backgroundColor('#FDC403')->size(100)->toPng();
+
     }
 
 }

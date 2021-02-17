@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
-class UserFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Admin::class;
 
     /**
      * Define the model's default state.
@@ -25,10 +25,12 @@ class UserFactory extends Factory
         return [
             'fname' => $this->faker->firstName,
             'lname' => $this->faker->lastName,
+            'username' => $this->faker->userName,
+            'password' => $this->faker->password,
+            'role' => $this->faker->randomElements([1,2,3,4]),
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->phoneNumber,
-            'gender'=>$this->faker->randomElement(['male','female','other']),
-            'dob'=>$this->faker->date('Y-m-d'),
+            'meta' => []
         ];
     }
 }

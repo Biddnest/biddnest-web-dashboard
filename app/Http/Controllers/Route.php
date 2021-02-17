@@ -10,7 +10,7 @@ use App\Http\Middleware\VerifyJwtToken;
 class Route extends Controller
 {
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['login','forgot_password_send_otp','forgot_password_verify_otp']);
+        //$this->middleware(VerifyJwtToken::class)->except(['login','forgot_password_send_otp','forgot_password_verify_otp']);
     }
 
     public function login(Request $request)
@@ -59,19 +59,6 @@ class Route extends Controller
         else
             return AdminController::resetPassword($request->password, $request->bearer);
     }
-
-    // public function dashboard()
-    // {
-    //     // if(Session::has('username'))
-    //     // {
-    //         return response()->json(AdminController::dashboard());
-    //     // }
-    //     // else
-    //     // {
-    //     //     return response()->json(Helper::response(false,"login first"));
-    //     // }
-    // }
-
 
     public function service_add(Request $request)
     {

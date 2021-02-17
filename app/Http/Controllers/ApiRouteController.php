@@ -13,7 +13,7 @@ use App\StringFormatter;
 class ApiRouteController extends Controller
 {
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['login','verifyLoginOtp','signupUser']);
+        $this->middleware(VerifyJwtToken::class)->except(['login','verifyLoginOtp']);
     }
 
     public function login(Request $request)
@@ -63,7 +63,34 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return UserController::signupUser($request->phone, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $request->referral_code);
+            return UserController::signupUser($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $request->referral_code);
+
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string|max:50',
+            'lname' => 'required|string|max:50',
+            'email' => 'required|email|max:50',
+            'gender' => 'required|string|max:6',
+            'dob' => 'required|date',
+            'avatar'=> 'nullable|string'
+        ]);
+
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'fname' => 'capitalizeFirst',
+            'lname' => 'capitalizeFirst',
+            'gender' => 'lowercase',
+            'email' => 'lowercase',
+            'dob' => 'date'
+        ]);
+
+//        print_r($request->token_data_id);exit;
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+        else
+            return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->avatar);
 
     }
 

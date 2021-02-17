@@ -12,6 +12,9 @@ Route::prefix('v1')->group(function () {
     Route::post("/auth/login",[ApiRouter::class, 'login']);
     Route::post("/auth/login/verify-otp",[ApiRouter::class, 'verifyLoginOtp']);
     Route::post("/auth/signup",[ApiRouter::class, 'signupUser']);
+
+
+    Route::put("/profile/update",[ApiRouter::class, 'updateProfile']);
 });
 
 

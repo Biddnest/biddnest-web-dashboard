@@ -8,16 +8,16 @@ use App\Models\User;
 use App\Sms;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
-use PHPUnit\TextUI\Help;
-use function MongoDB\BSON\toJSON;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 
 class UserController extends Controller
 {
     private static $publicData =['fname','lname','email','phone','dob','avatar'];
 
     function __construct(){
-//    $this->publicData = ['fname','lname','email','phone','dob','avatar'];
     }
+
     public static function login($phone)
     {
         $user = User::where(['phone'=>$phone])
@@ -62,26 +62,34 @@ class UserController extends Controller
         else if($user->verf_code == $otp) {
             User::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
 
-            return Helper::response(true, "Otp has been verified");
+            $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
+
+            return Helper::response(true, "Otp has been verified",[
+                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+            ]);
         }else {
             return Helper::response(false, "Incorrect otp provided");
         }
     }
 
-    public static function signupUser($phone, $fname, $lname, $email, $gender, $ref_code){
-        $user = User::where("phone",$phone)->where([ 'deleted'=>0])->first();
-        /*if(!$user)
-            return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
+    public static function signupUser($id, $fname, $lname, $email, $gender, $ref_code){
+        $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
+        if(!$user)
+            return Helper::response(false, "The phone number is not registered. Invalid action",null,401);
 
         if($user->otp_verified === 0)
-            return Helper::response(false, "OTP has not been verified. Invalid Action.",null,401);
+            return Helper::response(false, "OTP has not been verified. Invalid action.",null,401);
 
         if($user->fname !== null ||$user->lname !== null || $user->gender !== null )
-            return Helper::response(false, "User is already signed up. Invalid action.",null,401);*/
+            return Helper::response(false, "User is already signed up. Invalid action.",null,401);
+
+        $emailExists = User::where("email",$email)->where("id","!=",$id)->first();
+        if($emailExists)
+            return Helper::response(false, "The email id $email is already linked to another account.",null,401);
 
         $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
 
-        $updated_user = User::where("phone",$phone)->update([
+        User::where("id",$id)->update([
             'fname'=>$fname,
             'lname'=>$lname,
             'email'=>$email,
@@ -91,11 +99,43 @@ class UserController extends Controller
             "status"=>1
         ]);
 
-        $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
 
         return Helper::response(true, "User has been signed up",[
-            "user"=>User::select(self::$publicData)->findOrFail($user->id),
-            "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+            "user"=>User::select(self::$publicData)->findOrFail($user->id)
         ]);
+    }
+
+    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar){
+        $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
+        if(!$user)
+            return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
+
+        if($user->status !== 1)
+            return Helper::response(false, "User is not verified or is banned. Invalid action.",null,401);
+
+        $emailExists = User::where("email",$email)->where("id","!=",$id)->first();
+        if($emailExists)
+            return Helper::response(false, "The email id $email is already linked to another account.",null,401);
+
+        $updateColumns = [
+            'fname'=>$fname,
+            'lname'=>$lname,
+            'email'=>$email,
+            'gender'=>$gender,
+            'dob'=>$dob,
+        ];
+        if($avatar){
+            $image = new ImageManager(array('driver' => 'imagick'));
+            $image->configure(array('driver' => 'gd'));
+            $avatar_file_name = $user->fname."-".$user->lname."-".$user->id.".png";
+            $updateColumns["avatar"] = Helper::saveFile($image->make($avatar)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
+        }
+
+        User::where("id",$id)->update($updateColumns);
+
+        return Helper::response(true, "Profile has been updated.",[
+            "user"=>User::select(self::$publicData)->findOrFail($user->id)
+        ]);
+
     }
 }

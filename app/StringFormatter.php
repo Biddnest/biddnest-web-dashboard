@@ -29,6 +29,12 @@ class StringFormatter
                 case "capitalizeAll":
                     $formattedData->$key = ucwords($input[$key]);
                 break;
+                case "date":
+                    $formattedData->$key = date("Y-m-d", strtotime($input[$key]));
+                break;
+                case "datetime":
+                    $formattedData->$key = date("Y-m-d H:i:s", strtotime($input[$key]));
+                break;
                 default:
                     $formattedData->$key = $input[$key];
             }

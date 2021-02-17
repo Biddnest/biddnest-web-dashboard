@@ -33,6 +33,7 @@ class Helper
             "iat" => CarbonImmutable::now()->timestamp,
             "nbf" => CarbonImmutable::now()->timestamp,
             "exp" => CarbonImmutable::now()->add(365, 'day')->timestamp,
+            "payload" => $data
         ], config('jwt.secret'));
     }
 

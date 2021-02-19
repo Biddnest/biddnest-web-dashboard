@@ -13,8 +13,8 @@ class CreateServicesSubservicesMapsTable extends Migration
      */
     public function up()
     {
-        Schema::create('servicesSubservicesMaps', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('services_subservices_maps', function (Blueprint $table) {
+            $table->id();
             $table->integer('service_id')->index('service_id');
             $table->foreign('service_id')->references('id')->on('services')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->integer('subservice_id')->index('subservice_id');

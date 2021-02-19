@@ -20,6 +20,7 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('vendors')->group(function () {
 
+    Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

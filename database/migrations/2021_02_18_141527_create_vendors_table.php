@@ -14,13 +14,14 @@ class CreateVendorsTable extends Migration
     public function up()
     {
         Schema::create('vendors', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('fname',30);
             $table->string('lname',30);
-            $table->string('email',50)->unique();
+            $table->string('email',50)->unique()->nullable();
             $table->string('phone',12)->unique();
-            $table->text('password');
-            $table->foreign('org_id')->references('id')->on('organizations')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->string('password');
+            $table->string('pin')->nullable();
+            $table->integer('org_id')->foreign('org_id')->references('id')->on('organizations')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->text('meta');
             $table->integer('user_role');
             $table->tinyInteger('status')->default(1);

@@ -20,6 +20,11 @@ use  App\Jobs\SendOtp;
 
 class AdminController extends Controller
 {
+    /**
+     * @param $username
+     * @param $password
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function login($username, $password)
     {
         $admin_user=Admin::where(['username'=>$username])
@@ -34,6 +39,10 @@ class AdminController extends Controller
 
     }
 
+    /**
+     * @param $phone
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function forgotPasswordSendOtp($phone)
     {
         $user_phone=Admin::where('phone',$phone)->first();
@@ -50,7 +59,12 @@ class AdminController extends Controller
             return Helper::response(true,"Otp has been sent successfully.");
     }
 
-    public static function verifyOtp($otp,$bearer)
+    /**
+     * @param $otp
+     * @param $bearer
+     * @return \Illuminate\Http\JsonResponse|object
+     */
+    public static function verifyOtp($otp, $bearer)
     {
         $admin_user=DB::table('admins')->where(['id'=> $bearer, 'forgot_pwd'=>1])->first();
         if(!$admin_user){
@@ -59,6 +73,11 @@ class AdminController extends Controller
         return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified") : Helper::response(false, "otp is incorrect");
     }
 
+    /**
+     * @param $password
+     * @param $bearer
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function resetPassword($password, $bearer)
     {
         $hash = password_hash($password, PASSWORD_BCRYPT);
@@ -66,7 +85,7 @@ class AdminController extends Controller
         return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
     }
 
-    /*public static function kycList()
+    public static function kycList()
     {
         $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
 
@@ -169,6 +188,6 @@ class AdminController extends Controller
             return Helper::response(false,"Couldn't Delete data",$result);
         else
             return Helper::response(true,"Data Deleted successfully");
-    }*/
+    }
 
 }

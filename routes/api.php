@@ -9,11 +9,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::post("/auth/login",[ApiRouter::class, 'login']);
-    Route::post("/auth/login/verify-otp",[ApiRouter::class, 'verifyLoginOtp']);
-    Route::post("/auth/signup",[ApiRouter::class, 'signupUser']);
-
-
+    Route::prefix('auth')->group(function () {
+        Route::post("/login", [ApiRouter::class, 'login']);
+        Route::post("/login/verify-otp", [ApiRouter::class, 'verifyLoginOtp']);
+        Route::post("/signup", [ApiRouter::class, 'signupUser']);
+    });
     Route::put("/profile/update",[ApiRouter::class, 'updateProfile']);
 });
 

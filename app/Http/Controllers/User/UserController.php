@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
 namespace App\Http\Controllers\User;
 
@@ -13,11 +16,15 @@ use Intervention\Image\ImageManager;
 
 class UserController extends Controller
 {
-    private static $publicData =['fname','lname','email','phone','dob','avatar'];
+    private static $publicData =['fname','lname','email','phone','dob','avatar','gender'];
 
     function __construct(){
     }
 
+    /**
+     * @param $phone
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function login($phone)
     {
         $user = User::where(['phone'=>$phone])
@@ -51,6 +58,11 @@ class UserController extends Controller
         return Helper::response(true, "Otp has been sent to the phone.", $data);
     }
 
+    /**
+     * @param $phone
+     * @param $otp
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function verifyLoginOtp($phone, $otp){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
@@ -72,6 +84,15 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @param $fname
+     * @param $lname
+     * @param $email
+     * @param $gender
+     * @param $ref_code
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function signupUser($id, $fname, $lname, $email, $gender, $ref_code){
         $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
         if(!$user)
@@ -85,7 +106,7 @@ class UserController extends Controller
 
         $emailExists = User::where("email",$email)->where("id","!=",$id)->first();
         if($emailExists)
-            return Helper::response(false, "The email id $email is already linked to another account.",null,401);
+            return Helper::response(false, "The email id $email is already linked to another account.",);
 
         $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
 
@@ -105,6 +126,16 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @param $fname
+     * @param $lname
+     * @param $email
+     * @param $gender
+     * @param $dob
+     * @param $avatar
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar){
         $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
         if(!$user)
@@ -115,7 +146,7 @@ class UserController extends Controller
 
         $emailExists = User::where("email",$email)->where("id","!=",$id)->first();
         if($emailExists)
-            return Helper::response(false, "The email id $email is already linked to another account.",null,401);
+            return Helper::response(false, "The email id $email is already linked to another account.");
 
         $updateColumns = [
             'fname'=>$fname,

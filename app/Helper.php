@@ -43,7 +43,7 @@ class Helper
 
     public static function generateAvatar($name){
         $generator = new Avatar();
-        return $generator->name($name)->font("../resources/fonts/Gilroy-Medium.ttf")->backgroundColor('#FDC403')->size(100)->toPng();
+        return $generator->name($name)->font("../resources/fonts/Gilroy-Medium.ttf")->backgroundColor('#'.config("theme.color.code"))->size(100)->toPng();
 
     }
 

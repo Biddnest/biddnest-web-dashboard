@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project is built and maintained by Diginnovators Private Limited.
+ */
 
 namespace App\Http\Controllers;
 
@@ -10,12 +13,23 @@ use App\Http\Middleware\VerifyJwtToken;
 use App\StringFormatter;
 
 
+/**
+ * Class ApiRouteController
+ * @package App\Http\Controllers
+ */
 class ApiRouteController extends Controller
 {
+    /**
+     * ApiRouteController constructor.
+     */
     public function __construct(){
         $this->middleware(VerifyJwtToken::class)->except(['login','verifyLoginOtp']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -28,6 +42,10 @@ class ApiRouteController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public function verifyLoginOtp(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -42,6 +60,10 @@ class ApiRouteController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public function signupUser(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -67,6 +89,10 @@ class ApiRouteController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public function updateProfile(Request $request)
     {
         $validation = Validator::make($request->all(),[

@@ -4,10 +4,10 @@
     <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiRouteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiRouteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/User/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyJwtToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyJwtToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/StringFormatter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/StringFormatter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,7 +161,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/fonts" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.composer" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -195,7 +195,7 @@
       <workItem from="1612441669235" duration="1705000" />
       <workItem from="1612770117176" duration="148000" />
       <workItem from="1612880031509" duration="7086000" />
-      <workItem from="1613133267306" duration="32937000" />
+      <workItem from="1613133267306" duration="37048000" />
     </task>
     <servers />
   </component>

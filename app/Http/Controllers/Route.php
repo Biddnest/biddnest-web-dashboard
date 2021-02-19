@@ -419,4 +419,19 @@ class Route extends Controller
     {
         return AdminController::vendorsDeleteRecord($id);
     }
+
+
+
+
+    public function vendor_login()
+    {
+        $validation = Validator::make($request->all(),[
+            'email' => 'required|string',
+            'password' => 'required'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorController::login($request->email, $request->password);
+    }
 }

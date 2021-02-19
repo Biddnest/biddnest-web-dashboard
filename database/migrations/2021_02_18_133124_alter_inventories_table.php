@@ -14,7 +14,8 @@ class AlterInventoriesTable extends Migration
     public function up()
     {
         Schema::table('inventories', function (Blueprint $table) {
-            // $table->dropColumn('sub_service_id');
+           
+            $table->dropColumn('sub_service_id');
             $table->string('size');
         });
     }

@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VendorUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VendorUserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Org_kyc.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Org_kyc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Organization.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Organization.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Subservice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Subservice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/AdminFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/AdminFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_admins_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_admins_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_inventories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_inventories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_login_logs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_login_logs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_logs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_logs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_org_kycs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_org_kycs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_organizations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_organizations_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_subservices_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_subservices_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_zones_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114624_create_zones_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114626_add_foreign_keys_to_inventories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114626_add_foreign_keys_to_inventories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114626_add_foreign_keys_to_organizations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114626_add_foreign_keys_to_organizations_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_16_114626_add_foreign_keys_to_subservices_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_16_114626_add_foreign_keys_to_subservices_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_18_133124_alter_inventories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_18_133124_alter_inventories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_18_133802_create_servicesSubservicesMaps_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_18_133802_create_servicesSubservicesMaps_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_18_135623_create_subservicesInventoriesMaps_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_18_135623_create_subservicesInventoriesMaps_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +191,7 @@
       <workItem from="1612880031509" duration="7086000" />
       <workItem from="1613133267306" duration="38670000" />
       <workItem from="1614057758498" duration="1584000" />
-      <workItem from="1614254803883" duration="11250000" />
+      <workItem from="1614254803883" duration="11474000" />
     </task>
     <servers />
   </component>

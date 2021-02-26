@@ -10,4 +10,5 @@ class Org_kyc extends Model
 
 //    protected $table = "org_kyc";
     use HasFactory;
+
 }

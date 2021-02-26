@@ -14,7 +14,7 @@ class AddForeignKeysToSubservicesTable extends Migration
     public function up()
     {
         Schema::table('subservices', function (Blueprint $table) {
-            $table->foreign('service_id', 'service_id')->references('id')->on('services')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('service_id')->references('id')->on('services')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 

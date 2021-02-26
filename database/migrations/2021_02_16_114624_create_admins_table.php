@@ -14,7 +14,7 @@ class CreateAdminsTable extends Migration
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('fname', 30);
             $table->string('lname', 30);
             $table->string('username', 50)->unique('username');
@@ -27,7 +27,7 @@ class CreateAdminsTable extends Migration
             $table->tinyInteger('forgot_pwd');
             $table->integer('status')->default(1);
             $table->timestamps();
-            $table->integer('deleted')->default(0);
+            $table->tinyInteger('deleted')->default(0);
         });
     }
 

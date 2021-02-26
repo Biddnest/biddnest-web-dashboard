@@ -17,7 +17,7 @@ use App\Http\Controllers\Route as Router;
 */
 
 Route::get('/', function () {
-//phpinfo();
+phpinfo();
 });
 
 

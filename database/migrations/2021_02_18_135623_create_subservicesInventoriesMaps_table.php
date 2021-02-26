@@ -15,9 +15,9 @@ class CreateSubservicesInventoriesMapsTable extends Migration
     {
         Schema::create('subservices_inventories_maps', function (Blueprint $table) {
             $table->id();
-            $table->integer('subservice_id')->index('subservice_id');
+            $table->unsignedBigInteger('subservice_id')->index('subservice_id');
             $table->foreign('subservice_id')->references('id')->on('subservices')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->integer('inventory_id')->index('inventory_id');
+            $table->unsignedBigInteger('inventory_id')->index('inventory_id');
             $table->foreign('inventory_id')->references('id')->on('inventories')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->string('size_material_id')->nullable();
             $table->tinyInteger('status')->default(1);

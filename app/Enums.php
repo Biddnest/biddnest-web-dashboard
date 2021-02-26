@@ -9,9 +9,19 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Fabito\AvatarGenerator\Avatar;
 
-class VendorRoles
+class VendorEnums
 {
-    static $OWNER = 1;
-    static $MANAGER = 2;
+    public static $ROLES = ["admin"=>1, "manager"=>2];
+    public static $STATUS = ["active"=>1, "suspended"=>2];
+}
+
+class AdminEnums{
+    public static $ROLES = ["admin"=>1, "zone_admin"=>2, "marketing"=>3];
+    public static $STATUS = ["active"=>1, "suspended"=>2];
+}
+
+class CommonEnums{
+    public static $YES = 1;
+    public static $NO = 0;
 }
 

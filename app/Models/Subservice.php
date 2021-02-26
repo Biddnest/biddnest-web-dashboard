@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Subservice extends Model
 {
     use HasFactory;
+
+    public function inventories(){
+        $this->hasManyThrough();
+}
 }

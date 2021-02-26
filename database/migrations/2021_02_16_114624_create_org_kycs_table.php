@@ -14,8 +14,8 @@ class CreateOrgKycsTable extends Migration
     public function up()
     {
         Schema::create('org_kycs', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('org_id')->index('org_fk_id');
+            $table->id();
+            $table->unsignedBigInteger('org_id')->index('org_fk_id');
             $table->string('aadhar_card', 100)->nullable();
             $table->string('pan_card', 100)->nullable();
             $table->string('gst_certificate', 100)->nullable();

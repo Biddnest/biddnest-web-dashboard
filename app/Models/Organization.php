@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Organization extends Model
 {
     use HasFactory;
+
+    public function kyc(){
+        $this->hasOne(Org_kyc::class);
+    }
 }

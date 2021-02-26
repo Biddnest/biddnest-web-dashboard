@@ -15,9 +15,9 @@ class CreateServicesSubservicesMapsTable extends Migration
     {
         Schema::create('services_subservices_maps', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id')->index('service_id');
+            $table->unsignedBigInteger('service_id')->index('service_id');
             $table->foreign('service_id')->references('id')->on('services')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->integer('subservice_id')->index('subservice_id');
+            $table->unsignedBigInteger('subservice_id')->index('subservice_id');
             $table->foreign('subservice_id')->references('id')->on('subservices')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

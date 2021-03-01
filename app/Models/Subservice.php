@@ -9,7 +9,7 @@ class Subservice extends Model
 {
     use HasFactory;
 
-    public function inventories(){
+    /*public function inventories(){
         $this->hasManyThrough();
-}
+}*/
 }

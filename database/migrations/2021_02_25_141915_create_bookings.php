@@ -21,9 +21,9 @@ class CreateBookings extends Migration
 
             $table->unsignedBigInteger("organization_id")->index("organization_id")->nullable();
 
-            $table->foreign('user_id')->references("id")->on('users')->onDelete('RESTRICT');
+            $table->foreign('user_id')->references("id")->on('users');
 
-            $table->foreign('organization_id')->references("id")->on('organizations')->onDelete('RESTRICT');
+            $table->foreign('organization_id')->references("id")->on('organizations');
 
             $table->string("movement_type");
             $table->string("source_lat");

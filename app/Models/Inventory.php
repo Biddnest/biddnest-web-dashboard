@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+
+    public  function subservices(){
+        $this->belongsToMany(Subservice::class);
+    }
 }

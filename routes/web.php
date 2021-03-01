@@ -36,31 +36,34 @@ Route::prefix('web/api')->group(function () {
 
     //services APIs
     Route::get('/services',[Router::class,'service'])->name("service");
-    Route::post('/services/add',[Router::class,'service_add'])->name("service_add");
-    Route::put('/services/edit/{id}',[Router::class,'service_edit'])->name("service_edit");
-    Route::get('/services/get/{id}',[Router::class,'service_get'])->name("service_get");
-    Route::delete('/services/delete/{id}',[Router::class,'service_delete'])->name("service_delete");
+    Route::post('/services',[Router::class,'service_add'])->name("service_add");
+    Route::put('/services',[Router::class,'service_edit'])->name("service_edit");
+    Route::get('/services/{id}',[Router::class,'service_get'])->name("service_get");
+    Route::delete('/services/{id}',[Router::class,'service_delete'])->name("service_delete");
+
+    Route::get('/services/{id}/sub-services',[Router::class,'subservice_get_by_service'])->name("sub_service_get_by_service");
+
 
     //sub-services APIs
-    Route::get('/subservices',[Router::class,'sub_service'])->name("sub_service");
-    Route::post('/subservices/add',[Router::class,'sub_service_add'])->name("sub_service_add");
-    Route::put('/subservices/edit/{id}',[Router::class,'sub_service_edit'])->name("sub_service_edit");
-    Route::get('/subservices/get/{id}',[Router::class,'sub_service_get'])->name("sub_service_get");
-    Route::delete('/subservices/delete/{id}',[Router::class,'sub_service_delete'])->name("sub_service_delete");
+    Route::get('/sub-services',[Router::class,'sub_service'])->name("sub_service");
+    Route::post('/sub-services',[Router::class,'sub_service_add'])->name("sub_service_add");
+    Route::put('/sub-services',[Router::class,'sub_service_edit'])->name("sub_service_edit");
+    Route::get('/sub-services/{id}',[Router::class,'sub_service_get'])->name("sub_service_get");
+    Route::delete('/sub-services/{id}',[Router::class,'sub_service_delete'])->name("sub_service_delete");
 
     //inventory APIs
     Route::get('/inventories',[Router::class,'inventories'])->name("inventories");
-    Route::post('/inventories/add',[Router::class,'inventories_add'])->name("inventories_add");
-    Route::put('/inventories/edit/{id}',[Router::class,'inventories_edit'])->name("inventories_edit");
-    Route::get('/inventories/get/{id}',[Router::class,'inventories_get'])->name("inventories_get");
-    Route::delete('/inventories/delete/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
+    Route::post('/inventories',[Router::class,'inventories_add'])->name("inventories_add");
+    Route::put('/inventories',[Router::class,'inventories_edit'])->name("inventories_edit");
+    Route::get('/inventories/{id}',[Router::class,'inventories_get'])->name("inventories_get");
+    Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
     //organization API's
     Route::get('/organizations',[Router::class,'vendors'])->name("vendors");
-    Route::post('/organzations/create',[Router::class,'vendor_add'])->name("vendor_add");
-    Route::put('/organizations/{id}/update',[Router::class,'vendor_edit'])->name("vendor_edit");
+    Route::post('/organzations',[Router::class,'vendor_add'])->name("vendor_add");
+    Route::put('/organizations',[Router::class,'vendor_edit'])->name("vendor_edit");
     Route::get('/organizations/{id}',[Router::class,'vendor_fetch'])->name("vendor_fetch");
-    Route::delete('/organizations/{id}/delete',[Router::class,'vendor_delete'])->name("vendor_delete");
+    Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 });
 
 

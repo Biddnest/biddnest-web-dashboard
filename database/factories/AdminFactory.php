@@ -30,7 +30,6 @@ class AdminFactory extends Factory
             'role' => $this->faker->randomElements([1,2,3,4]),
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->phoneNumber,
-            'meta' => json_encode([])
         ];
     }
 }

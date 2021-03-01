@@ -215,6 +215,8 @@ return array(
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
     'Database\\Factories\\AdminFactory' => $baseDir . '/database/factories/AdminFactory.php',
     'Database\\Factories\\OrganizationFactory' => $baseDir . '/database/factories/OrganizationFactory.php',
+    'Database\\Factories\\ServiceFactory' => $baseDir . '/database/factories/ServiceFactory.php',
+    'Database\\Factories\\SubServiceFactory' => $baseDir . '/database/factories/SubServiceFactory.php',
     'Database\\Factories\\TestFactory' => $baseDir . '/database/factories/TestFactory.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Factories\\VendorFactory' => $baseDir . '/database/factories/VendorFactory.php',

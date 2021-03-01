@@ -14,8 +14,8 @@ class AddForeignKeysToOrganizationsTable extends Migration
     public function up()
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->foreign('parent_org_id')->references('id')->on('organizations')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('zone_id')->references('id')->on('zones')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('parent_org_id')->references('id')->on('organizations');
+            $table->foreign('zone_id')->references('id')->on('zones');
         });
     }
 

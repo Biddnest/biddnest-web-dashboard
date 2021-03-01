@@ -14,7 +14,7 @@ class AddForeignKeysToOrgKycsTable extends Migration
     public function up()
     {
         Schema::table('org_kycs', function (Blueprint $table) {
-            $table->foreign('org_id', 'org_fk_id')->references('id')->on('organizations')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('org_id', 'org_fk_id')->references('id')->on('organizations');
         });
     }
 

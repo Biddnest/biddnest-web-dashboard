@@ -52,8 +52,9 @@ class UserController extends Controller
         }
 
         dispatch(function() use($phone, $otp){
-            Sms::sendOtp($phone, $otp);
+          Sms::sendOtp($phone, $otp);
         })->afterResponse();
+        $data['otp'] = $otp;
 
         return Helper::response(true, "Otp has been sent to the phone.", $data);
     }
@@ -108,7 +109,7 @@ class UserController extends Controller
         if($emailExists)
             return Helper::response(false, "The email id $email is already linked to another account.",);
 
-        $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
+            $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
 
         User::where("id",$id)->update([
             'fname'=>$fname,

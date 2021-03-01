@@ -35,6 +35,9 @@ class StringFormatter
                 case "datetime":
                     $formattedData->$key = date("Y-m-d H:i:s", strtotime($input[$key]));
                 break;
+                case "json":
+                    $formattedData->$key = json_encode($input[$key]);
+                break;
                 default:
                     $formattedData->$key = $input[$key];
             }

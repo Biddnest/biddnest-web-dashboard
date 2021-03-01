@@ -18,8 +18,8 @@ class CreateTableBookingInventories extends Migration
             $table->unsignedBigInteger("booking_id")->index("booking_id");
             $table->unsignedBigInteger("inventory_id")->index("inventory_id");
 
-            $table->foreign('booking_id' )->references("id")->on('bookings')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('inventory_id')->references("id")->on('inventories')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('booking_id' )->references("id")->on('bookings');
+            $table->foreign('inventory_id')->references("id")->on('inventories');
 
             $table->string("name");
             $table->string("material");

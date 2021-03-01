@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Inventory;
+use App\StringFormatter;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Helper;
@@ -13,6 +15,7 @@ class Route extends Controller
         //$this->middleware(VerifyJwtToken::class)->except(['login','forgot_password_send_otp','forgot_password_verify_otp']);
     }
 
+    /*Auth*/
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -60,91 +63,118 @@ class Route extends Controller
             return AdminController::resetPassword($request->password, $request->bearer);
     }
 
+
+    /*Services*/
     public function service_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'name' => 'required',
+            'image' => 'required'
         ]);
 
         if($validation->fails())
           return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return AdminController::serviceAdd($request->name);
+            return ServiceController::add(ucwords($request->name), $request->image);
     }
 
-    public function service()
+    public function service(Request $request)
     {
-        // if(Session::has('email'))
-        // {
-            return AdminController::service();
-        // }
-        // else
-        // {
-        //     return response()->json(Helper::response(false,"login first"));
-        // }
+            return ServiceController::get();
     }
 
-    public function service_get($id)
+    public function service_get(Request $request)
     {
-        return AdminController::serviceGet($id);
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+        return ServiceController::serviceGet($request->id);
     }
 
-    public function service_edit(Request $request, $id)
+    public function service_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'name' => 'required',
+            'image' => 'required',
+            'id' => 'required|integer'
         ]);
 
         if($validation->fails())
           return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return AdminController::serviceEdit($request->name, $id);
+            return ServiceController::update($request->id, ucwords($request->name), $request->image);
     }
 
-    public function service_delete($id)
+    public function service_delete(Request $request)
     {
-        return AdminController::serviceDelete($id);
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer'
+        ]);
+        return AdminController::serviceDelete($request->id);
     }
 
-    public function sub_service()
-    {
-        return AdminController::subService();
-    }
 
+    /*Subservices*/
     public function sub_service_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'service_id' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'required',
+            'service_id'=>'required|integer'
         ]);
 
-        if($validation->fails())
-          return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::subServiceAdd($request->name, $request->service_id);
-    }
-
-    public function sub_service_edit(Request $request, $id)
-    {
-        $validation = Validator::make($request->all(),[
-            'service_id' => 'required',
-            'name' => 'required'
-        ]);
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return AdminController::subServiceEdit($request->name, $request->service_id, $id);
+            return SubserviceController::add($request->service_id,ucwords($request->name), $request->image);
     }
 
-    public function sub_service_get($id)
+    public function subservice(Request $request)
     {
-        return AdminController::subServiceGet($id);
+        return SubserviceController::get();
     }
 
-    public function sub_service_delete($id)
+    public function subservice_get(Request $request)
     {
-        return AdminController::subServiceDelete($id);
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+        return SubServiceController::get($request->id);
     }
+
+    public function subservice_get_by_service(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+        return SubserviceController::getByService($request->id);
+    }
+
+    public function subservice_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name' => 'required',
+            'image' => 'required',
+            'id' => 'required|integer',
+            'service_id'=>'required|integer'
+
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return ServiceController::update($request->id, $request->service_id, ucwords($request->name), $request->image);
+    }
+
+    public function subservice_delete(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer'
+        ]);
+        return AdminController::serviceDelete($request->id);
+    }
+
+    /*Inventories*/
 
     public function inventories()
     {
@@ -154,23 +184,25 @@ class Route extends Controller
     public function inventories_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'subservice_id' => 'required',
+//            'subservice_id' => 'required',
             'name' => 'required',
-            'material' => 'required'
+            'material' => 'required',
+            'size' => 'required',
+            'image' => 'required|string',
+            'icon' => 'required|string'
         ]);
 
-        $filename="";
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('inventory',$filename);
-        }
+
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::inventoriesAdd($request->name, $request->subservice_id, $request->material, $filename);
+
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'name' => 'capitalizeAll',
+            'material' => 'json',
+            'size' => 'json'
+        ]);
+            return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->icon);
     }
 
     public function inventories_edit(Request $request, $id)
@@ -423,7 +455,7 @@ class Route extends Controller
 
 
 
-    public function vendor_login()
+    public function vendor_login(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'email' => 'required|string',

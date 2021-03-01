@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToLoginLogsTable extends Migration
+class AlterSubservicesInventoriesMapAddQuantity extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddForeignKeysToLoginLogsTable extends Migration
      */
     public function up()
     {
-        Schema::table('login_logs', function (Blueprint $table) {
-            $table->foreign('admin_id', 'admin_id')->references('id')->on('admins');
+        Schema::table('subservices_inventories_maps', function (Blueprint $table) {
+
+            $table->string('quantity')->after('material')->nullable();
         });
     }
 
@@ -25,8 +26,6 @@ class AddForeignKeysToLoginLogsTable extends Migration
      */
     public function down()
     {
-        Schema::table('login_logs', function (Blueprint $table) {
-            $table->dropForeign('admin_id');
-        });
+        //
     }
 }

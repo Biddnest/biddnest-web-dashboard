@@ -57,7 +57,7 @@
                                         <h3 class="f-18">Recent Orders</h3>
                                     </div>
                                     <div class="p-10 card-head left">
-                                        <a><i><img src="./assets/images/filter.svg" alt="" srcset=""></i>
+                                        <a><i><img src="{{asset('static/images/filter.svg') }}" alt="" srcset=""></i>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item border-top-bottom" href="#">
                                                 <div class="form-check">

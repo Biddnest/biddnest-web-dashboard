@@ -17,7 +17,7 @@
                         <div class="brand-wrapper text-center mb-3 mt-1">
                           <div class="brand-logo">
                            
-                              <img class="logo" src="{{ asset('images/violet_logo.png') }}"  width="50%"/>
+                              <img class="logo" src="{{ asset('static/images/violet_logo.png') }}"  width="50%"/>
                           </div>
                           <hr class="logo-seprator">
                       <div class="tagline text-center"> <span>Make your move simple</span></div>

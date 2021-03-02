@@ -2,12 +2,12 @@
 
 @section('content')
 <main data-barba="container" data-barba-namespace="login">
-<div class="loader"></div>
+    <div class="loader"></div>
     <div class="container-fluid" >
         <div class="row ">
             <!-- IMAGE CONTAINER BEGIN  login-graphics-->
             <div class="col-sm-6 p-0">
-                <img src="{{ asset('images/Background.png') }}" width="90%" height="100%">
+                <img src="{{ asset('static/images/Background.png') }}" width="90%" height="100%">
             </div>
             <!-- IMAGE CONTAINER END -->
 
@@ -18,7 +18,7 @@
                     <div class="brand-wrapper text-center mb-3 mt-1">
                     <div class="brand-logo ">
                         
-                        <img class="logo" src="{{ asset('images/violet_logo.png') }}" width="50%" />
+                        <img class="logo" src="{{ asset('static/images/violet_logo.png') }}" width="50%" />
                     </div>
                     <hr class="logo-seprator">
                 <div class="tagline text-center"> <span>Make your move simple</span></div>

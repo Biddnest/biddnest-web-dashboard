@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="386.351" height="188" viewBox="0 0 386.351 188">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_11793" data-name="Path 11793" d="M707-1627h333.681v151.92H707Z" transform="translate(-707 1627)" fill="none" clip-rule="evenodd"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Path_11803" data-name="Path 11803" d="M709-1491.436q8.289-10.633,10.706-9.883c5.326.629,7.517,14.322,14.787,18.441s15.248,2.439,19.679,1.2,8.755-6.175,13.25-3.706,9.662,4.815,12.279,3.122,6.533-15.5,10.742-15.5,9.238,7.019,11.718,3.509,7.54-24.029,11.192-21.445,8.328,16.309,11.68,16.309,10.791-6.477,13.314-10.38,5.959-13.853,9.174-13.853,18.566,18.409,23.643,15.526,8.8-15.6,12.95-19.085,9.218-8.608,10.911-14.736,7.43-31.52,10.084-30.289c5.508,5.239,8.487,30.289,21.5,32.029,6.23-2.2,8.986-71.495,13.375-71.495,3.049,1.587,7.654,26.526,13.088,26.526s8.649-.419,10.623,2.155,7.651,10.785,11.432,10.785,8.129-15.122,12.483-15.122H998.16c2.288,0,7.479-6.489,10.42-6.489s10.534,18.193,12.53,18.193,9.744-3.522,11.266-7.367q1.521-3.845,11.012-40.012v150.151H709Z" transform="translate(-709 1623)" fill="none" clip-rule="evenodd"/>
+    </clipPath>
+  </defs>
+  <g id="Group_12618" data-name="Group 12618" transform="translate(-1029 -436)">
+    <g id="Group_12491" data-name="Group 12491" transform="translate(1079.529 444)">
+      <g id="Group_12492" data-name="Group 12492" transform="translate(0)">
+        <g id="Group_12017" data-name="Group 12017" clip-path="url(#clip-path)">
+          <g id="Group_12496" data-name="Group 12496" transform="translate(-1.3 -1.796)">
+            <path id="Path_11791" data-name="Path 11791" d="M702-1632h336.281v155.511H702Z" transform="translate(-702 1632)" fill="#fff"/>
+          </g>
+        </g>
+        <g id="Group_12495" data-name="Group 12495" transform="translate(0 1.415)">
+          <g id="Group_12018" data-name="Group 12018">
+            <path id="Path_11794" data-name="Path 11794" d="M0,1H333.681" transform="translate(0 -1)" fill="none" stroke="#e9ecee" stroke-linecap="square" stroke-width="1"/>
+          </g>
+          <g id="Group_12019" data-name="Group 12019" transform="translate(0 29.015)">
+            <path id="Path_11795" data-name="Path 11795" d="M0,1H333.681" transform="translate(0 -1)" fill="none" stroke="#e9ecee" stroke-linecap="square" stroke-width="1"/>
+          </g>
+          <g id="Group_12020" data-name="Group 12020" transform="translate(0 59.274)">
+            <path id="Path_11796" data-name="Path 11796" d="M0,1H333.681" transform="translate(0 -1)" fill="none" stroke="#e9ecee" stroke-linecap="square" stroke-width="1"/>
+          </g>
+          <g id="Group_12021" data-name="Group 12021" transform="translate(0 89.45)">
+            <path id="Path_11797" data-name="Path 11797" d="M0,1H333.681" transform="translate(0 -1)" fill="none" stroke="#e9ecee" stroke-linecap="square" stroke-width="1"/>
+          </g>
+          <g id="Group_12022" data-name="Group 12022" transform="translate(0 119.267)">
+            <path id="Path_11798" data-name="Path 11798" d="M0,1H333.681" transform="translate(0 -1)" fill="none" stroke="#e9ecee" stroke-linecap="square" stroke-width="1"/>
+          </g>
+          <g id="Group_12023" data-name="Group 12023" transform="translate(0 149.443)">
+            <path id="Path_11799" data-name="Path 11799" d="M0,1H333.681" transform="translate(0 -1)" fill="none" stroke="rgba(241,241,241,0.6)" stroke-linecap="square" stroke-width="2"/>
+          </g>
+        </g>
+        <g id="Group_12026" data-name="Group 12026" transform="translate(0.708 1.415)" clip-path="url(#clip-path-2)">
+          <g id="Group_12494" data-name="Group 12494" transform="translate(-1.301 -1.796)">
+            <path id="Path_11801" data-name="Path 11801" d="M704-1628h336.991v153.743H704Z" transform="translate(-704 1628)" fill="rgba(0,122,255,0.1)"/>
+          </g>
+        </g>
+        <g id="Group_12497" data-name="Group 12497" transform="translate(0.708 1.415)">
+          <g id="Group_12027" data-name="Group 12027">
+            <path id="Path_11804" data-name="Path 11804" d="M0,131.55q8.289-10.632,10.706-9.882c5.326.628,7.516,14.321,14.787,18.439s15.248,2.439,19.679,1.2,8.755-6.174,13.25-3.706,9.662,4.814,12.279,3.121,6.533-15.495,10.742-15.495,9.238,7.019,11.718,3.509,7.54-24.026,11.192-21.443,8.329,16.308,11.68,16.308,10.791-6.476,13.314-10.378,5.959-13.851,9.174-13.851,18.566,18.407,23.642,15.525,8.8-15.6,12.95-19.083,9.218-8.606,10.911-14.734,7.43-31.517,10.084-30.285c5.508,5.238,8.487,30.285,21.5,32.025,6.23-2.2,8.986-71.487,13.375-71.487,3.049,1.587,7.655,26.523,13.088,26.523s8.65-.419,10.623,2.155,7.651,10.784,11.432,10.784,8.129-15.121,12.483-15.121H289.16c2.288,0,7.479-6.488,10.42-6.488s10.534,18.191,12.53,18.191,9.744-3.522,11.266-7.366Q324.9,36.163,334.388,0" fill="none" stroke="#007aff" stroke-width="1.5"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <text id="_21_Dec" data-name="21 Dec" transform="translate(1080 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="0" y="0">21 Dec</tspan></text>
+    <text id="_22_Dec" data-name="22 Dec" transform="translate(1169 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-34.981" y="0">22 Dec</tspan></text>
+    <text id="_23_Dec" data-name="23 Dec" transform="translate(1219 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-34.981" y="0">23 Dec</tspan></text>
+    <text id="_24_Dec" data-name="24 Dec" transform="translate(1268 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-34.981" y="0">24 Dec</tspan></text>
+    <g id="Group_12617" data-name="Group 12617">
+      <text id="_3.5_L" data-name="3.5 L" transform="translate(1055 450)" fill="#3ba3fb" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-25.235" y="0">3.5 L</tspan></text>
+      <text id="_3_L" data-name="3 L" transform="translate(1056 478)" fill="#3ba3fb" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-16.048" y="0">3 L</tspan></text>
+      <text id="_2.5_L" data-name="2.5 L" transform="translate(1055 507)" fill="#3ba3fb" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-25.235" y="0">2.5 L</tspan></text>
+      <text id="_2_L" data-name="2 L" transform="translate(1055 538)" fill="#3ba3fb" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-16.048" y="0">2 L</tspan></text>
+      <text id="_1_L" data-name="1 L" transform="translate(1055 598)" fill="#3ba3fb" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-16.048" y="0">1 L</tspan></text>
+      <text id="_1.5_L" data-name="1.5 L" transform="translate(1055 569)" fill="#3ba3fb" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-25.235" y="0">1.5 L</tspan></text>
+    </g>
+    <text id="_26_Dec" data-name="26 Dec" transform="translate(1367 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-34.981" y="0">26 Dec</tspan></text>
+    <text id="_27_Dec" data-name="27 Dec" transform="translate(1415 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-34.981" y="0">27 Dec</tspan></text>
+    <text id="_25_Dec" data-name="25 Dec" transform="translate(1317 621)" fill="#3ba3fb" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="-0.025em"><tspan x="-34.981" y="0">25 Dec</tspan></text>
+  </g>
+</svg>

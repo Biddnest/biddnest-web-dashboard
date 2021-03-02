@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WebController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,4 +67,15 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 });
 
+
+Route::prefix('front')->group(function () {
+
+        Route::get('/login',[WebController::class,'login'])->name("login");
+        Route::get('/forgotpassword',[WebController::class,'forgotpassword'])->name("forgotpassword");
+        Route::get('/verifyotp',[WebController::class,'verifyotp'])->name("verifyotp");
+        Route::get('/reset_password',[WebController::class,'reset_password'])->name("verifyotp");
+
+        Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
+
+});
 

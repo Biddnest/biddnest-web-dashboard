@@ -82,7 +82,7 @@ class InventoryController extends Controller
     public static function getBySubservice($id)
     {
         $result=Inventory::whereIn("id", function($ids){
-            return DB::table("subservices_inventories_maps")->pluck("id");
+            return DB::table("subservices_inventories_maps")->pluck("subservice_id");
         })->get();
 
         if(!$result)

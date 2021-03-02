@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\Organization;
+use App\VendorEnums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,7 @@ class OrganisationController extends Controller
             return Helper::response(true,"Data displayed successfully", $vendors);
     }
 
-    public static function add($filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, $meta)
+    public static function add($filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, $meta, $admin, $org_users)
     {
 
         $organizations=new Organization;
@@ -39,6 +40,35 @@ class OrganisationController extends Controller
         $organizations->service_type =$service_type;
         $organizations->meta =json_encode($meta);
         $result= $organizations->save();
+
+        $vendor = new Vendor();
+        $vendor->fname = $admin['fname'];
+        $vendor->lname = $admin['fname'];
+        $vendor->email = $admin['fname'];
+        $vendor->phone = $admin['fname'];
+        $vendor->pasword = $admin['fname'];
+        $vendor->pin = null;
+        $vendor->org_id = $organizations->id;
+        $vendor->meta = json_encode($admin['meta']);
+        $vendor->role = VendorEnums::$ROLES["admin"];
+        $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6));
+        $vendor->save();
+
+        foreach ($org_users as $users){
+            $vendor = new Vendor();
+            $vendor->fname = $users['fname'];
+            $vendor->lname = $users['fname'];
+            $vendor->email = $users['fname'];
+            $vendor->phone = $users['fname'];
+            $vendor->pasword = $users['fname'];
+            $vendor->pin = null;
+            $vendor->org_id = $organizations->id;
+            $vendor->meta = json_encode($users['meta']);
+            $vendor->role = $users['user_role'] == VendorEnums::$ROLES["admin"] ? VendorEnums::$ROLES["admin"] : VendorEnums::$ROLES["manager"];
+            $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6));
+            $vendor->save();
+        }
+
         if(!$result)
             return Helper::response(false,"Couldn't save data");
         else

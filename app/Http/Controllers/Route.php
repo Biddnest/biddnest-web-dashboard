@@ -120,13 +120,14 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'name' => 'required',
             'image' => 'required',
-            'service_id'=>'required|integer'
+            'service_id'=>'required|integer',
+            'inventories'=>'required|nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return SubserviceController::add($request->service_id,ucwords($request->name), $request->image);
+            return SubserviceController::add($request->service_id,ucwords($request->name), $request->image, $request->inventories);
     }
 
     public function subservice(Request $request)
@@ -139,7 +140,7 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer',
         ]);
-        return SubServiceController::get($request->id);
+        return SubServiceController::getOne($request->id);
     }
 
     public function subservice_get_by_service(Request $request)

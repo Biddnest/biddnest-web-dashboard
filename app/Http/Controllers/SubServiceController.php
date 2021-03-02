@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper;
+use App\Models\Inventory;
 use App\Models\Subservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class SubServiceController extends Controller
     {
     }
 
-    public static function add($service_id, $name,$image)
+    public static function add($service_id, $name,$image, $inventories)
     {
 
         $imageman = new ImageManager(array('driver' => 'imagick'));
@@ -28,10 +29,23 @@ class SubServiceController extends Controller
         $subservice->image = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices");
         $result= $subservice->save();
 
+        if($inventories) {
+            foreach ($inventories as $inventory) {
+                DB::table("subservices_inventories_maps")->insert([
+                    "subservice_id" => $subservice->id,
+                    "inventory_id" => $inventory["id"],
+                    "size" => $inventory["size"],
+                    "material" => $inventory["material"],
+                    "quantity" => $inventory["quantity"]
+                ]);
+            }
+        }
+
+
         if(!$result)
             return Helper::response(false,"Couldn't save data");
         else
-            return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($subservice->id)]);
+            return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->with("inventories")->findOrFail($subservice->id)]);
     }
 
     public static function get()
@@ -59,8 +73,6 @@ class SubServiceController extends Controller
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));
         $image_name = "subservice".$name."-".$id.".png";
-
-
         $subservice=Subservice::where("id", $id)->update([
             "name"=>$name,
             "service_id"=>$service_id,
@@ -75,7 +87,7 @@ class SubServiceController extends Controller
 
     public static function getOne($id)
     {
-        $result=Subservice::select(self::$public_data)->findOrFail($id);
+        $result=Subservice::select(self::$public_data)->with("inventories")->findOrFail($id);
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");

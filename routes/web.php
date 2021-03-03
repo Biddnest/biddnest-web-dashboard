@@ -82,6 +82,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('orders')->group(function () {
             Route::get('/orders-booking',[WebController::class,'ordersBookings'])->name("orders-booking");
             Route::get('/order-details',[WebController::class,'orderDetails'])->name("order-details");
+            Route::get('/create-order',[WebController::class,'createOrder'])->name("create-order");
         });
 
 });

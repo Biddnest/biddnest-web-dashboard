@@ -31,3 +31,5 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('static/js/progress-bar.js') }}"></script>        
 
 <script src="{{ asset('static/js/main.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>

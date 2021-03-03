@@ -41,4 +41,10 @@ class WebController extends Controller
     {
         return view('order.orderdetails');
     }
+
+    public function createOrder()
+    {
+        // return "soccess";
+        return view('order.createorder');
+    }
 }

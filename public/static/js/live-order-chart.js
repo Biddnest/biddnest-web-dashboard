@@ -84,7 +84,7 @@ var myChart = new Chart(document.getElementById('mychart'), {
 
 $('#my-legend-con').html(myChart.generateLegend());
 
-console.log(document.getElementById('my-legend-con'));
+// console.log(document.getElementById('my-legend-con'));
 
 
 

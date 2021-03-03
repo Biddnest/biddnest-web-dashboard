@@ -1,4 +1,4 @@
-<main class="dashboard grey-bg" data-barba="container" data-barba-namespace="dashboard">
+<main class="dashboard grey-bg"  data-barba="container" data-barba-namespace="sidebar">
     <div class="menu-sidebar">
         <div class="side-nav-bar">
             <div class="Brand-logo">
@@ -10,7 +10,7 @@
             <div class="nav-links">
                 <ul class="menu p-1">
                     <li class="menu-item active-menu-item">
-                        <a class="regular-nav" href="index.html">
+                        <a class="regular-nav" href="{{ route('dashboard')}}">
                             <span class="side-nac-icon">
                                 <span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> 
                             </span> Dashboard
@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <ul class="sub-menu booking" id="booking">
-                        <li class="sub-menu-item  "><a href="booking-orders.html"><i
+                        <li class="sub-menu-item"><a href="{{ route('orders-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Booking & Orders</a></li>
                         <li class="sub-menu-item"><a href="Create-new-order.html"><i

@@ -1,3 +1,4 @@
+
 var totaltime = 30;
 var finalTime = 0;
 

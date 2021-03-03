@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" data-barba="container" data-barba-namespace="header">
     <!-- top_nav_bar -->
     <div class="h-auto">
         <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation">

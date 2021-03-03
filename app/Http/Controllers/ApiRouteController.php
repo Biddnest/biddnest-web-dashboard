@@ -23,7 +23,7 @@ class ApiRouteController extends Controller
      * ApiRouteController constructor.
      */
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['login','verifyLoginOtp']);
+        $this->middleware(VerifyJwtToken::class)->except(['config','login','verifyLoginOtp']);
     }
 
     /**
@@ -118,6 +118,10 @@ class ApiRouteController extends Controller
         else
             return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->avatar);
 
+    }
+
+    public static function config(Request $request){
+        return CustomerApp\SettingsController::getSettings();
     }
 
 }

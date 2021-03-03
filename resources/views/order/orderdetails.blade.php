@@ -360,7 +360,7 @@
                         <div class=" text-center border-left-blue">
                           <h3 class="text-center f-18 theme-text bold p-10">Quotation statitics</h3>
                       
-                      <img src="./assets/images/graph/graphbid.svg" alt="" srcset="">
+                      <img src="{{ asset('static/images/graph/graphbid.svg')}}" alt="" srcset="">
                       
                         </div>
                       </div>
@@ -613,7 +613,7 @@
                         <div class="d-flex  justify-content-between p-10 white-space">
                           
                           <div class="col-sm-4">Generate Payment Link </div>
-                          <button class="col-sm-4  btn m-0 p-05 status-badge green-bg"> <img src="./assets/images/Icon metro-link.svg" alt="" srcset="">
+                          <button class="col-sm-4  btn m-0 p-05 status-badge green-bg"> <img src="{{ asset('static/images/Icon metro-link.svg')}}" alt="" srcset="">
                             <span>Link</span> </button>
                           </div>
                           <div class="d-flex  justify-content-between p-10">
@@ -635,7 +635,7 @@
                       <div class="d-flex p-10 vertical-center text-center ">
                           
                         <div class="text-center p-10 margin-auto">
-                          <img src="./assets/images/checkmark.svg" alt="" srcset="">
+                          <img src="{{ asset('static/images/checkmark.svg')}}" alt="" srcset="">
                         
                           <h3 class="text-center p-10">Payment Done Successfully !</h3>
                         
@@ -705,19 +705,19 @@
                               <div class="steps-container">
                                 <div class="steps-status ">
                                     <div class="step-dot">
-                                      <img src="./assets/images/tick.png" />
+                                      <img src="{{ asset('static/images/tick.png')}}" />
                                     </div>
                                     <p class="step-title">Bidding</p>
                                 </div>
                                 <div class="steps-status ">
                                     <div class="step-dot">
-                                        <img src="./assets/images/tick.png" />
+                                        <img src="{{ asset('static/images/tick.png')}}" />
                                     </div>
                                     <p class="step-title">Scheduled</p>
                                 </div>
                                 <div class="steps-status">
                                     <div class="step-dot">
-                                      <img src="./assets/images/tick.png" />
+                                      <img src="{{ asset('static/images/tick.png')}}" />
                                     </div>
                                     <p class="step-title">Driver Assigned</p>
                                 </div>
@@ -969,7 +969,7 @@
                                   Completed
                                 </div>
                                 <div class="theme-text f-14 p-15 mt-2">
-                                  <i> <img src="./assets/images/ratings.svg" alt="" srcset=""> </i>
+                                  <i> <img src="{{ asset('static/images/ratings.svg')}}" alt="" srcset=""> </i>
                                 </div>
                             
                                 

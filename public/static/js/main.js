@@ -1,5 +1,41 @@
 
 
+
+var input = document.querySelector("#phone");
+window.intlTelInput(input, {
+    initialCountry: "in",
+    separateDialCode: true,
+    autoPlaceholder: "9739912345",
+
+    // iti.setCountry("");
+
+    // any initialisation options go here
+});
+
+
+var input = document.querySelector("#phonefriend");
+window.intlTelInput(input, {
+    initialCountry: "in",
+    separateDialCode: true,
+    autoPlaceholder: "9739912345",
+
+    // iti.setCountry("");
+
+    // any initialisation options go here
+});
+
+var input = document.querySelector("#phone-pop-up");
+window.intlTelInput(input, {
+    initialCountry: "in",
+    separateDialCode: true,
+    autoPlaceholder: "9739912345",
+
+    // iti.setCountry("");
+
+    // any initialisation options go here
+});
+
+
 $(document).ready(function(){
 
     $(function() {
@@ -33,6 +69,8 @@ $(document).ready(function(){
             $('.email-label').html("Email")
         }
     });
+
+    
 
     // Toggle divs
     $(".reject").click(function(){
@@ -81,24 +119,118 @@ $(document).ready(function(){
         $('.bidlist-table').toggleClass('diplay-none');
     });
 
-});
 
-barba.init({
+    $("#switch").change(function () {
+        $(".toggle-input").toggleClass('diplay-none');
+       
+    });
+
+      // Toggle divs
+    $(".reject").click(function () {
+       
+        $('.rejection-message').toggleClass("diplay-none");
+        $('.order-cards').toggleClass("diplay-none");
+        $('.reject-btn').html('Submit')
+
+    });
+    $("#backbtn").click(function () {
+       
+       $('.rejection-message').addClass("diplay-none");
+       $('.order-cards').removeClass("diplay-none");
+      
+
+    });
+   
+    $("#economy").change(function(){
+        if($("#economy").is(":checked")){
+            $(".eco").addClass("blue-bg")
+            $(".pre").removeClass("blue-bg")
+            $('.eco-card').addClass("border-white")
+            $('.pre-card').removeClass("border-white")
+        }else{
+            $(".eco").removeClass("blue-bg")
+            $('.eco-card').removeClass("border-white")
+        }  
+    });
+    $("#premium").change(function(){
+        if($("#premium").is(":checked")){
+        $(".pre").addClass("blue-bg");
+        $(".eco").removeClass("blue-bg")
+        $('.eco-card').removeClass("border-white")
+        $('.pre-card').addClass("border-white")
+        }else{
+        $(".pre").removeClass("blue-bg")
+        $('.pre-card').removeClass("border-white")
+        }
+    })
+
+
+    var i=1;
+    $("#addnew-btn").click(function(){
+
+     $('#addr'+i).html(`<th scope='row'>
+       <div class="select">
+         <select class="form-control" id="table-select">
+       <option>sku123456</option>
+       <option>sku123456</option>
+       <option>sku123456</option>
+       <option>sku123456</option>
+       </select>
+         </div>
         
+         
+
+       
+       </th><td class='text-center'> <div class="select">
+         <select class="form-control">
+       <option>2</option>
+       <option>4</option>
+       <option>8</option>
+       <option>24</option>
+       </select>
+         </div></td> <td class=""> <div class="select">
+         <select class="form-control" id="table-select">
+       <option>Small</option>
+       <option>Large</option>
+       <option>Medium</option>
+     
+       </select>
+         </div></td> <td> <button class=" btn btn-1 theme-bg white-text " >
+            Add </button> </td>`);
+
+        $('#items').append('<tr id="addr'+(i+1)+'"></tr>');
+        i++; 
+    });
+
+
+    $(".eco").click(function(){
+   
+        $("#economy").prop("checked", true);
+        $(".eco").addClass("blue-bg")
+          $(".pre").removeClass("blue-bg")
+          $('.eco-card').addClass("border-white")
+          $('.pre-card').removeClass("border-white")
+      
+    
+      });
+      $(".pre").click(function(){
+     
+       $("#premium").prop("checked", true);
+       $(".pre").addClass("blue-bg");
+          $(".eco").removeClass("blue-bg")
+          $('.eco-card').removeClass("border-white")
+          $('.pre-card').addClass("border-white")
+     });
+
 });
 
+$('#tomap').locationpicker();
+$('#frommap').locationpicker();
 
-barba.hooks.before((data) => {
-    NProgress.inc();
+('.dateselect').datepicker({
+    format: 'mm/dd/yyyy',
   });
 
-barba.hooks.after((data) => {
-    NProgress.done();
-            window.scrollTo(0, 0);
-            return false;
-});
-
-    
 
   
 

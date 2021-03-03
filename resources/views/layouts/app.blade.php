@@ -12,6 +12,12 @@
             .modal-body{
                 margin-left: 6.5px;
             }
+            .btn-1{
+                width: 100%;
+            }
+            #myTab{
+                margin-left: -4px;
+            }
         </style>
         @endsection
     </head>

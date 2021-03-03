@@ -49,7 +49,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/sub-services',[Router::class,'sub_service'])->name("sub_service");
     Route::post('/sub-services',[Router::class,'sub_service_add'])->name("sub_service_add");
     Route::put('/sub-services',[Router::class,'sub_service_edit'])->name("sub_service_edit");
-    Route::get('/sub-services/{id}',[Router::class,'subservice_get'])->name("sub_service_get");
+    Route::get('/sub-services/{id}',[Router::class,'sub_service_get'])->name("sub_service_get");
     Route::delete('/sub-services/{id}',[Router::class,'sub_service_delete'])->name("sub_service_delete");
 
     //inventory APIs
@@ -89,6 +89,12 @@ Route::prefix('admin')->group(function () {
         Route::prefix('orders')->group(function () {
             Route::get('/orders-booking',[WebController::class,'ordersBookings'])->name("orders-booking");
             Route::get('/order-details',[WebController::class,'orderDetails'])->name("order-details");
+            Route::get('/create-order',[WebController::class,'createOrder'])->name("create-order");
+        });
+
+        Route::prefix('customers')->group(function () {
+            Route::get('/customers',[WebController::class,'customers'])->name("customers");
+            Route::get('/create-customers',[WebController::class,'createCustomers'])->name("create-customers");
         });
 
 });

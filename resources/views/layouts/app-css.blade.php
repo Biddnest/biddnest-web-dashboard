@@ -13,10 +13,18 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" />
 
-        <!-- telephone input plugin -->
-        <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+        
+          <!-- telephone input plugin -->
+          <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
+
+           <!-- date-time picker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
 
-        
-        
+        <!-- Toggle btn -->
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">  

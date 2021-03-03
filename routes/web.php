@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WebController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -73,4 +74,22 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
 });
 
+
+Route::prefix('admin')->group(function () {
+
+        Route::get('/login',[WebController::class,'login'])->name("login");
+        Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");
+        Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("verifyotp");
+        Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-password");
+
+        Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
+
+
+        //booking and orders
+        Route::prefix('orders')->group(function () {
+            Route::get('/orders-booking',[WebController::class,'ordersBookings'])->name("orders-booking");
+            Route::get('/order-details',[WebController::class,'orderDetails'])->name("order-details");
+        });
+
+});
 

@@ -85,5 +85,10 @@ Route::prefix('admin')->group(function () {
             Route::get('/create-order',[WebController::class,'createOrder'])->name("create-order");
         });
 
+        Route::prefix('customers')->group(function () {
+            Route::get('/customers',[WebController::class,'customers'])->name("customers");
+            Route::get('/create-customers',[WebController::class,'createCustomers'])->name("create-customers");
+        });
+
 });
 

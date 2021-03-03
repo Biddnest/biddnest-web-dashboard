@@ -26,12 +26,12 @@
                         <li class="sub-menu-item"><a href="{{ route('orders-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Booking & Orders</a></li>
-                        <li class="sub-menu-item"><a href="Create-new-order.html"><i
+                        <li class="sub-menu-item"><a href="{{ route('orders-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Create New Order</a></li>
-                        <li class="sub-menu-item"><a href="edit-order.html"><i
+                        <!-- <li class="sub-menu-item"><a href="edit-order.html"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
-                                    Edit Order</a></li>
+                                    Edit Order</a></li> -->
                     </ul>
                     <li class="menu-item b-purple" data-toggle="#vendors" href="#Vendors" role="button"
                             aria-expanded="false" aria-controls="Vendors"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-store "></i></span> </span> Vendors Management</a>
@@ -59,14 +59,14 @@
                     </li>
                     <!-- sublinks -->
                     <ul class="sub-menu" id="Customer">
-                        <li class="sub-menu-item"><a href="customers.html"><i class="fa fa-dot-circle-o icons-space mr-2"
+                        <li class="sub-menu-item"><a href="{{ route('customers')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>Customers</a></li>
-                        <li class="sub-menu-item"><a href=" add-new-customer.html"> <i
+                        <li class="sub-menu-item"><a href="{{ route('create-customers')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create
                                     Customer</a></li>
-                        <li class="sub-menu-item"> <a href="Edit-customer.html"> <i
+                        <!-- <li class="sub-menu-item"> <a href="Edit-customer.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Customer
-                                    Details</a></li>
+                                    Details</a></li> -->
                     </ul>
                     <li class="menu-item" data-toggle="" href="#Categories" role="button" aria-expanded="false"
                             aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories</a>

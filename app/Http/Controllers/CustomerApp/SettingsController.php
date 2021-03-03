@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CustomerApp;
 
 
 use App\Enums;
-use App\AppEnums as Enums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

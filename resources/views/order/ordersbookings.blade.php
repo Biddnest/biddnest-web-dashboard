@@ -62,7 +62,7 @@
                                 </tr>
                             </thead>
                             <tbody class="mtop-20  f-13">
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                         <td>Gao</td>
                                         <td>Bengaluru</td>
@@ -73,7 +73,7 @@
                                             <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                         </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Chennai</td>
                                     <td>Mumbai</td>
@@ -84,7 +84,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                     </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Guntur</td>
                                     <td>Kolkata</td>
@@ -95,7 +95,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                     </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Hopete</td>
                                     <td>Bengaluru</td>
@@ -106,7 +106,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                     </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Sringeri</td>
                                     <td>Bengaluru</td>
@@ -117,7 +117,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                      </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking')toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up')toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Mumbai</td>
                                     <td>Chennai</td>
@@ -128,7 +128,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                     </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Kozhikode</td>
                                     <td>Bengaluru</td>
@@ -139,7 +139,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                     </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Kovallam</td>
                                     <td>kochi</td>
@@ -150,7 +150,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                     </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Benguluru</td>
                                     <td>Kochi</td>
@@ -187,7 +187,7 @@
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Gao</td>
                                     <td>Bengaluru</td>
@@ -195,7 +195,7 @@
                                     <td>Wayne Pvt Ltd</td>
                                     <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Chennai</td>
                                     <td>Mumbai</td>
@@ -203,7 +203,7 @@
                                     <td>Wayne Pvt Ltd</td>
                                     <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Guntur</td>
                                     <td>Kolkata</td>
@@ -211,7 +211,7 @@
                                     <td>Wayne Pvt Ltd</td>
                                     <td class=""><span class="green-bg text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                         <td scope="row">SKU123456</td>
                                         <td>Hopete</td>
                                         <td>Bengaluru</td>
@@ -219,7 +219,7 @@
                                         <td>Wayne Pvt Ltd</td>
                                         <td class=""><span class="green-bg text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                         <td scope="row">SKU123456</td>
                                         <td>Sringeri</td>
                                         <td>Bengaluru</td>
@@ -227,7 +227,7 @@
                                         <td>Wayne Pvt Ltd</td>
                                         <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Mumbai</td>
                                     <td>Chennai</td>
@@ -235,7 +235,7 @@
                                     <td>Wayne Pvt Ltd</td>
                                     <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Kozhikode</td>
                                     <td>Bengaluru</td>
@@ -243,7 +243,7 @@
                                     <td>Wayne Pvt Ltd</td>
                                     <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Kovallam</td>
                                     <td>kochi</td>
@@ -251,7 +251,7 @@
                                     <td>Wayne Pvt Ltd</td>
                                     <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('#orderbooking').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
                                     <td scope="row">SKU123456</td>
                                     <td>Benguluru</td>
                                     <td>Kochi</td>

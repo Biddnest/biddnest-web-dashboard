@@ -1,4 +1,4 @@
-        <footer class="text-center b-purple" data-barba="container" data-barba-namespace="footer">
+        <footer class="text-center b-purple" data-barba="container" data-barba-namespace="orderBookings">
             <hr>
             @php $year = date("Y"); @endphp
             <p>Copyright © {{ $year }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"

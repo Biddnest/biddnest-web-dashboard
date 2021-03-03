@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Fabito\AvatarGenerator\Avatar;
 
+class Enums{
+
+}
 class VendorEnums
 {
     public static $ROLES = ["admin"=>1, "manager"=>2];
@@ -23,5 +26,14 @@ class AdminEnums{
 class CommonEnums{
     public static $YES = 1;
     public static $NO = 0;
+}
+
+class AppEnums extends Enums    {
+    public static $GENDER = [
+        ["label"=>"Male", "value"=>"male"],
+        ["label"=>"Female", "value"=>"female"],
+        ["label"=>"Other", "value"=>"other"],
+    ];
+    public static $STATES = [];
 }
 

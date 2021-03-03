@@ -65,6 +65,13 @@ Route::prefix('web/api')->group(function () {
     Route::put('/organizations',[Router::class,'vendor_edit'])->name("vendor_edit");
     Route::get('/organizations/{id}',[Router::class,'vendor_fetch'])->name("vendor_fetch");
     Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
+
+    //zone APIs
+    Route::get('/zones',[Router::class,'zones'])->name("zones");
+    Route::post('/zones',[Router::class,'zones_add'])->name("zones_add");
+    Route::put('/zones',[Router::class,'zones_edit'])->name("zones_edit");
+    Route::get('/zones/{id}',[Router::class,'zones_get'])->name("zones_get");
+    Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
 });
 
 

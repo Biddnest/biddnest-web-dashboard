@@ -1,5 +1,6 @@
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">        
+        <title>@yield('title')</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Bootstrap CSS -->
@@ -15,7 +16,7 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-        
+
           <!-- telephone input plugin -->
           <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
 
@@ -27,4 +28,4 @@
 
         <!-- Toggle btn -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-    rel="stylesheet">  
+    rel="stylesheet">

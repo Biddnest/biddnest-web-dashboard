@@ -1,4 +1,4 @@
-        const mainMenuItems = [
+       /* const mainMenuItems = [
             { title: "Dashboard", url: "index.html", type: "None Expandable" },
             { title: "Reports", url: "reports.html", type: "None Expandable" },
             { title: "Booking & Orders", type: "Expandable" },
@@ -46,14 +46,14 @@
             { title: "Add New Users", url: "Add-New-Users.html" },
             { title: "Edit-users", url: "edit-users.html" },
         ]
-        
-       $(".menu-item").on("click",function (e) {
+
+       $("body").on("click",".menu-item",function (e) {
             var clickedItem = e.currentTarget.innerText.trim()
 
             for(var i = 0; i < mainMenuItems.length; i++) {
                 if (mainMenuItems[i].title === clickedItem && mainMenuItems[i].type === "None Expandable") {
-                    window.location.assign(mainMenuItems[i].url); 
-                    
+                    // window.location.assign(mainMenuItems[i].url);
+
                 } else {
                     if ($(this).next("ul").hasClass("show")){
                         $(this).next("ul").slideUp(200).toggle();
@@ -62,27 +62,27 @@
                             // $(".sub-menu").not("." +$(this).data("menu")).slideUp(200).toggle();
                             // setTimeout(() => {
                                 $(this).next("ul").slideDown(200).toggle();
-                                
+
                             // }, 1000);
 
-                            
+
                         // if(){
 
-                        // } 
+                        // }
 
 
                         }
                     }
                 }
             }
-        );
+        );*/
 
-        $(".sub-menu-item").on("click",function (e) {
+        $("body").on("click",".sub-menu-item",function (e) {
             var clickedItem = e.currentTarget.innerText.trim()
 
             for(var i = 0; i < subMenuItems.length; i++) {
                 if (subMenuItems[i].title === clickedItem ) {
-                    window.location.assign(subMenuItems[i].url); 
+                    // window.location.assign(subMenuItems[i].url);
                 }
             }
         });

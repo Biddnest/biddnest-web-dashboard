@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') Dashboard @endsection
 @section('content')
 
  <!-- Main Content -->
@@ -12,9 +12,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Last login at</li>
-                    <li class="breadcrumb-item"><a href="#">11:55:02 AM</a></li> 
+                    <li class="breadcrumb-item"><a href="#">11:55:02 AM</a></li>
                 </ol>
-            </nav> 
+            </nav>
         </div>
     </div>
     <!-- Dashboard cards -->
@@ -107,7 +107,7 @@
                             <td>0:03:02</td>
                             <td>₹2,300</td>
                         </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('#dashboard').toggleClass('display-pop-up');"             >  
+                        <tr class="tb-border cursor-pointer"   onclick="$('#dashboard').toggleClass('display-pop-up');"             >
                             <th scope="row"  style="text-decoration: underline;">SKU123456</th>
                             <td class=""><span class="  text-center status-badge red-bg ">Bounce Order</span>
                             </td>
@@ -129,7 +129,7 @@
                             <canvas id="mychart" height="150px" width="150px" ></canvas>
                         </div>
                         <div id="my-legend-con" class="legend-con"></div>
-                    </div>                            
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div class="revenue-chart">
-                        <canvas id="myRevenueChart" height="230px" width="700px"></canvas> 
+                        <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
                     </div>
                 </div>
             </div>

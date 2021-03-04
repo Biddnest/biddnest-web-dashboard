@@ -12,6 +12,16 @@ window.intlTelInput(input, {
     // any initialisation options go here
 });
 
+var input = document.querySelector("#phone1");
+window.intlTelInput(input, {
+            initialCountry: "in",
+            separateDialCode: true,
+            autoPlaceholder: "9739912345",
+
+            // iti.setCountry("");
+
+            // any initialisation options go here
+});
 
 var input = document.querySelector("#phonefriend");
 window.intlTelInput(input, {
@@ -25,6 +35,29 @@ window.intlTelInput(input, {
 });
 
 var input = document.querySelector("#phone-pop-up");
+window.intlTelInput(input, {
+    initialCountry: "in",
+    separateDialCode: true,
+    autoPlaceholder: "9739912345",
+
+    // iti.setCountry("");
+
+    // any initialisation options go here
+});
+
+//create vendor onboard ===============
+var input = document.querySelector("#input-blue");
+window.intlTelInput(input, {
+            initialCountry: "in",
+            separateDialCode: true,
+            autoPlaceholder: "9739912345",
+
+            // iti.setCountry("");
+
+            // any initialisation options go here
+});
+
+var input = document.querySelector("#Employee");
 window.intlTelInput(input, {
     initialCountry: "in",
     separateDialCode: true,
@@ -69,9 +102,7 @@ $(document).ready(function(){
             $('.email-label').html("Email")
         }
     });
-
     
-
     // Toggle divs
     $(".reject").click(function(){
         // alert('wle')
@@ -125,14 +156,6 @@ $(document).ready(function(){
        
     });
 
-      // Toggle divs
-    $(".reject").click(function () {
-       
-        $('.rejection-message').toggleClass("diplay-none");
-        $('.order-cards').toggleClass("diplay-none");
-        $('.reject-btn').html('Submit')
-
-    });
     $("#backbtn").click(function () {
        
        $('.rejection-message').addClass("diplay-none");
@@ -221,6 +244,7 @@ $(document).ready(function(){
           $('.eco-card').removeClass("border-white")
           $('.pre-card').addClass("border-white")
      });
+     
 
 });
 
@@ -230,6 +254,41 @@ $('#frommap').locationpicker();
 ('.dateselect').datepicker({
     format: 'mm/dd/yyyy',
   });
+
+
+  // create vendor onboard====
+  function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };  
+}
+const MAX_2_MB = 2000000;
+$(function() {
+    $("#aadhar-upload").change(function (e){
+        var selectedFile = e.target.files[0]
+        console.log('hello megha', getBase64(selectedFile))
+        var reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+
+        reader.onload = function (e) {
+            $('#aadhar-preview').attr('src', e.target.result);
+            $('#upload-btn').html('Remove Image')
+            $('#upload-btn').css('background-color', 'red' )
+
+        }
+
+        if (selectedFile.size > MAX_2_MB) {
+            $("#file-aadhar").html('Invalid file or File size has exceeded');
+        } else {
+            $("#file-aadhar").html(selectedFile.name.substr(0, 10) + "...");
+        }
+    });
+});
 
 
   

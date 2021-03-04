@@ -32,9 +32,14 @@ class WebController extends Controller
         return view('index');
     }
 
-    public function ordersBookings()
+    public function ordersBookingsLive()
     {
-        return view('order.ordersbookings');
+        return view('order.ordersbookings_live');
+    }
+
+    public function ordersBookingsPast()
+    {
+        return view('order.ordersbookings_past');
     }
 
     public function orderDetails()
@@ -54,5 +59,35 @@ class WebController extends Controller
     public function createCustomers()
     {
         return view('customer.createcustomer');
+    }
+
+    public function vendors()
+    {
+        return view('vendor.vendor');
+    }
+
+    public function createOnboardVendors()
+    {
+        return view('vendor.createvendor');
+    }
+
+    public function vendorsDetails()
+    {
+        return view('vendor.vendordetails');
+    }
+
+    public function leadVendors()
+    {
+        return view('vendor.lead');
+    }
+
+    public function pendingVendors()
+    {
+        return view('vendor.pending');
+    }
+
+    public function verifiedVendors()
+    {
+        return view('vendor.verified');
     }
 }

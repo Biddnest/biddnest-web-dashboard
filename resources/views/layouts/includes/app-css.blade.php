@@ -25,8 +25,10 @@
 
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
+        <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" />
 
         <!-- Toggle btn -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
-
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/> -->
+  

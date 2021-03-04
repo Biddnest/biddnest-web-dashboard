@@ -90,4 +90,49 @@ class WebController extends Controller
     {
         return view('vendor.verified');
     }
+
+    public function categories()
+    {
+        return view('categories.categories');
+    }
+
+    public function createCategories()
+    {
+        return view('categories.createcategories');
+    }
+
+    public function detailsCategories()
+    {
+        return view('categories.detailscategories');
+    }
+
+    public function subcateories()
+    {
+        return view('categories.subcateories');
+    }
+
+    public function createSubcateories()
+    {
+        return view('categories.createsubcateories');
+    }
+
+    public function inventories()
+    {
+        return view('categories.inventories');
+    }
+
+    public function createInventories()
+    {
+        return view('categories.createinventories');
+    }
+
+    public function detailsInventories()
+    {
+        return view('categories.detailsinventories');
+    }
+
+    public function editServices()
+    {
+        return view('categories.editservices');
+    }
 }

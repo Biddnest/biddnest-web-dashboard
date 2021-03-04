@@ -73,13 +73,13 @@
                     </li>
                     <!-- sublinks -->
                     <ul class="sub-menu" id="Categories">
-                        <li class="sub-menu-item"><a href="category-management.html"> <i
+                        <li class="sub-menu-item"><a href="{{ route('categories')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Categories</a>
                         </li>
-                        <li class="sub-menu-item"><a href="subcategory-management.html"> <i
+                        <li class="sub-menu-item"><a href="{{ route('subcateories')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Subcategories
                                     </a></li>
-                        <li class="sub-menu-item"> <a href="categories-subcategories.html"> <i
+                        <li class="sub-menu-item"> <a href="{{ route('inventories')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Inventory</a>
                         </li>
                     </ul>

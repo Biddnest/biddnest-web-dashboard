@@ -9,20 +9,20 @@
             <br>
             <div class="nav-links">
                 <ul class="menu p-1">
-                    <li class="menu-item active-menu-item">
+                    <li class="menu-item">
                         <a class="regular-nav" href="{{ route('dashboard')}}">
                             <span class="side-nac-icon">
                                 <span class="icon-sidebar"><i class="icon dripicons-meter "></i></span>
                             </span> Dashboard
                         </a>
                     </li>
-                    <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
+                    <li class="menu-item b-purple" role="button"
                             aria-expanded="false" aria-controls="Booking">
                         <a class=""><span class="side-nac-icon">
                             <span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span></span> Booking & Orders
                         </a>
                     </li>
-                    <ul class="sub-menu booking" id="booking">
+                    <ul class="sub-menu">
                         <li class="sub-menu-item"><a href="{{ route('orders-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Booking & Orders</a></li>
@@ -88,14 +88,14 @@
                     </li>
                     <!-- sublinks -->
                     <ul class="sub-menu" id="Coupons">
-                        <li class="sub-menu-item"><a href="coupons.html"> <i class="fa fa-dot-circle-o icons-space mr-2"
+                        <li class="sub-menu-item"><a href="{{ route('coupons')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>Coupons</a></li>
-                        <li class="sub-menu-item"><a href=" create-coupons.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('create-coupons')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create
                                     Coupons</a></li>
-                        <li class="sub-menu-item"> <a href="edit-coupons.html"> <i
+                        <!-- <li class="sub-menu-item"> <a href="edit-coupons.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Coupons</a>
-                        </li>
+                        </li> -->
                     </ul>
                     <li class="menu-item" data-toggle="" href="#Zone" role="button" aria-expanded="false"
                             aria-controls="Zone"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-location "></i></span> </span> Zone Managment</a>

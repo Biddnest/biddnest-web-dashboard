@@ -3,77 +3,9 @@
     <head>
         <!-- Required meta tags -->
         @include('layouts.includes.app-css')
-
-        @section('styles')
-        <style>
-            .nav-collapse .li{
-                list-style-type: none !important;
-            }
-            .modal-body{
-                margin-left: 6.5px;
-            }
-            .btn-1{
-                width: 100%;
-            }
-            #myTab{
-                margin-left: -4px;
-            }
-            .ml-48{
-                margin-left: 48px ;
-            }
-            .vendor-switch2.toggle-group.toggle-on.btn-xs {
-                background-color: #2E0789 !important;
-                padding: 12px !important;
-            }
-            .ml-15{
-                margin-left: -15px !important;
-            }
-            .pl-10{
-                padding-left: 10px;
-            }
-            .default-image {
-                width: 85px;
-                height: 65px;
-            }
-            .h-35 {
-                height: "35px !important";
-            }
-            .tagify {
-                padding: 0px !important;
-                /* height: 38px !important; */
-                /* background-color: #f1f9ff !important; */
-                border: 2px solid #DFE6EC!important;
-                border-radius: 5px !important;
-            }
-            .form-input textarea.form-control:focus {
-                border-color: #bcbcbc;
-                box-shadow: none;
-            }
-            select {
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                -o-appearance: none;
-            }
-            select + i.fa {
-                float: right;
-                margin-top: -26px;
-                margin-right: 5px;
-                pointer-events: none;
-                color: #2699fb;
-
-                padding-right: 8px;
-            }
-            .table td, .table th {
-                padding: 1.75rem !important;
-                vertical-align: top;
-                border-top:none; 
-                text-align: center;
-            }
-        </style>
-        @endsection
     </head>
-    <body data-barba="wrapper">
-        <main class="dashboard grey-bg"  data-barba="container" data-barba-namespace="sidebar">
+    <body>
+        <main class="dashboard grey-bg">
             @include('layouts.sidebar')
             <div class="content-wrapper">
                 <!-- top_nav_bar -->
@@ -120,37 +52,37 @@
                                                                 elit.</p>
                                                         </div>
                                                     </div>
-                                            </a></li>
+                                                </a></li>
                                             <li><a href="#">
-                                                <div class="d-flex notification-msg ">
-                                                    <div class="order-icon">
-                                                        <i class="icon dripicons-bell h-auto" ></i>
+                                                    <div class="d-flex notification-msg ">
+                                                        <div class="order-icon">
+                                                            <i class="icon dripicons-bell h-auto" ></i>
+                                                        </div>
+                                                        <div class="notification-details">
+                                                            <h6> Your order is placed</h6>
+                                                            <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                                                elit.</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="notification-details">
-                                                        <h6> Your order is placed</h6>
-                                                        <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                            elit.</p>
-                                                    </div>
-                                                </div>
-                                            </a></li>
+                                                </a></li>
                                             <li><a href="#">
-                                                <div class="d-flex notification-msg ">
-                                                    <div class="order-icon">
-                                                        <i class="icon dripicons-bell h-auto" ></i>
+                                                    <div class="d-flex notification-msg ">
+                                                        <div class="order-icon">
+                                                            <i class="icon dripicons-bell h-auto" ></i>
+                                                        </div>
+                                                        <div class="notification-details">
+                                                            <h6> Your order is placed</h6>
+                                                            <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                                                elit.</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="notification-details">
-                                                        <h6> Your order is placed</h6>
-                                                        <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                            elit.</p>
-                                                    </div>
-                                                </div>
-                                            </a></li>
+                                                </a></li>
                                         </ul>
                                     </div>
                                 </li>
                                 <li class="account-settings">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
+                                        width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
                                         <defs>
                                             <style>
                                                 .a {
@@ -195,15 +127,17 @@
                             </ul>
                         </div>
                     </nav>
+                    <div data-barba="wrapper">
                     @yield('content')
+                    </div>
+                    <!-- footer -->
                     <footer class="text-center b-purple">
                         <hr>
                         @php $year = date("Y"); @endphp
                         <p>Copyright © {{ $year }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
                                                                             target="_blank">BIDNEST</a>.</p>
                     </footer>
-                </div>
-                <!-- footer -->
+                </div>        
             </div>
 
             <!--dashboard Pop-ups -->
@@ -690,7 +624,7 @@
                                 <div class="col-lg-12 ">
                                     <div class="profile-section">
                                         <figure>
-                                            <img src="{{asset('static/images/big-profile.svg')}}" alt="">
+                                            <img src="assets/images/big-profile.svg" alt="">
                                         </figure>
                                         <div class="profile-details-side-pop">
                                             <ul>
@@ -1135,7 +1069,8 @@
                         </div>
                     </div>
                 </div>
-                </div><div class="modal fade" id="add-new-role" tabindex="-1" role="dialog" aria-labelledby="add-new-role"
+            </div>
+            <div class="modal fade" id="add-new-role" tabindex="-1" role="dialog" aria-labelledby="add-new-role"
                     aria-hidden="true">
                 <div class="modal-dialog theme-text input-text-blue" role="document">
                     <div class="modal-content w-1000 right-25">
@@ -1269,487 +1204,465 @@
                         </div>
                     </div>
                 </div>
-            </div>            
 
-            <!--vendor Pop-up -->
-            <div class="side-bar-pop-up" id="vendor">
-                <div class="modal-header pb-0 border-none">
-                    <h3 class="f-14">
-                        <ul class="nav nav-tabs pt-20 p-0" id="myTab" role="tablist">
-                            <li class="nav-item" style="margin-left: -16px; margin-right: 40px;">
-                                <a class="nav-link active pl-4 p-15" id="new-order-tab" data-toggle="tab" href="#vendor" role="tab"
-                                    aria-controls="home" aria-selected="true">Vendor Details</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#customer" role="tab"
-                                    aria-controls="profile" aria-selected="false">Vendor Insights</a>
-                            </li>
-        
-                        </ul>
-                    </h3>
-                
+            </div>
+
+
+           <!-- inventories -->
+           <div class="side-bar-pop-up h-100" id="inventory">
+                <div class="modal-header pb-0">
+                    <h3 class="theme-text p-2 mb-2 f-14"> Inventory Details</h3>
+
                     <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
                         onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                         <i class="fa fa-times theme-text" aria-hidden="true"></i>
                     </button>
                 </div>
-                <div class="modal-body border-top margin-topneg-7">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="vendor" role="tabpanel" aria-labelledby="past-tab">
-
-                            <div class="row d-flex  pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Vendor Name</h1>
-                                </div>
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">Mohan Kumar</h1>
-                                    <i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i>
-                                </div>
-                            </div>                       
-
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Org Name</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">Wayne Pvt Ltd</h1>
-                                    
-                                
-                                </div>
-                            </div>
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Phone Number</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">+91 - 9725364758</h1>                               
+                <div class="modal-body">
+                    <div class="row d-flex  pb-4 pl-3">
+                        <div class="col-lg-12 ">
+                            <div class="profile-section">
+                                <figure>
+                                    <img src="assets/images/big-profile.svg" alt="">
+                                </figure>
+                                <div class="profile-details-side-pop">
+                                    <ul>
+                                        <li>
+                                            <h1>Cupboards</h1>
+                                            <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;"
+                                            aria-hidden="true"></i>
+                                        </li>
+                                        <li>
+                                            <h2>Polycarbonate</h2>
+                                            <label class="switch mb-0" style="transform: scale(0.7);">
+                                                <input type="checkbox" id="switch">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Alt. Phone Number</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">+91 - 9725364798</h1>
-                                </div>
-                            </div>
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">City</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">Bengaluru</h1>
-                                </div>
-                            </div>
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Status</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <div class="status-badge light-bg">In Process</div>
-                                </div>
-                            </div>
-                            <div class="row d-flex pb-4 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Zone</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">Bengaluru Urban</h1>
-                                </div>
-                            </div>
-                            <div class="row pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Vendor Revenue Trend</h1>
-                                </div> 
-                                <div class="mt-3 ml-3">
-                                    <img src=" {{asset('static/images/graph/graph.svg')}}" alt="">
-                                </div>
-                            </div>
-
-
-                            <div class="d-flex justify-content-center p-20">
-                                <div class="">
-                                    <a class="white-text p-10" href="{{ route('vendor-details')}}">
-                                        <button class="btn theme-bg white-text my-0" style="width: 127px;
-                                        border-radius: 6px;">View More</button>
-                                    </a>
-                                </div>
-                            </div>
-
-
-
                         </div>
-                        <div class="tab-pane fade  margin-topneg-15" id="customer" role="tabpanel"
+                    </div>
+                    <div class="row d-flex  pb-4 pl-3">
+                        <div class="col-lg-6 align-items-center">
+                            <h1 class="side-popup-heading">Item ID</h1>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
+                            <h1 class="side-popup-content">IT1234445</h1>
+                        </div>
+                    </div>
+                    <div class="row d-flex pb-4 pl-3">
+                        <div class="col-lg-6 align-items-center">
+                            <h1 class="side-popup-heading">Category ID</h1>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
+                            <h1 class="side-popup-content">C1234098</h1>
+                        </div>
+                    </div>
+                    <div class="row d-flex pb-4 pl-3">
+                        <div class="col-lg-6 align-items-center">
+                            <h1 class="side-popup-heading">Vendor ID</h1>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
+                            <h1 class="side-popup-content">V0912374</h1>
+                        </div>
+                    </div>
+                    <div class="row d-flex pb-4 pl-3">
+                        <div class="col-lg-6 align-items-center">
+                            <h1 class="side-popup-heading">Zone </h1>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
+                            <h1 class="side-popup-content">Bengaluru Urban</h1>
+                        </div>
+                    </div>
+                    <div class="row d-flex pb-4 pl-3">
+                        <div class="col-lg-6 align-items-center">
+                            <h1 class="side-popup-heading">Transport Vehicle</h1>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
+                            <h1 class="side-popup-content">KA03 B 1176</h1>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center p-20">
+                        <div class="">
+                            <a class="white-text p-10" href="{{ route('details-inventories')}}">
+                                <button class="btn theme-bg white-text my-0" style="width: 127px;
+                                border-radius: 6px;">View More</button>
+                            </a>
+                        </div>
+                    </div>
+               
+
+            <!-- Cupons Pop-up -->
+            <div class="side-bar-pop-up" id="coupons">
+                <div class="modal-header">
+                <div class="theme-text heading f-18">Coupons Details </div>
+                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
+                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                        <!-- <span aria-hidden="true" >&times;</span> -->
+                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active margin-topneg-15" id="customer" role="tabpanel"
                             aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            
-                            <div class="row d-flex  pb-3 pt-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Service Type</h1>
-                                </div>
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">Economic</h1>
-                                    <i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i>
-                                </div>
-                            </div>                       
-                            
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Services Provided</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">Residential</h1>
-                                    
-                                
-                                </div>
-                            </div>
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">Alt. Phone Number</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">+91 - 9725364798</h1>                               
-                                </div>
-                            </div>
-                            <div class="row d-flex pb-3 pl-3">
-                                <div class="col-lg-6 align-items-center">
-                                    <h1 class="f-14  bold">No of branches</h1>
-                                </div> 
-                                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                                    <h1 class="side-popup-content">2</h1>
-                                </div>
-                            </div>
-                            
-                        
-                            <div class="d-flex row  p-20 border-top-pop">
-                                <div class="col-lg-6">
+                            <div class="d-flex  row  p-10">
+
+                                <div class="col-sm-6">
                                     <div class="theme-text f-14 bold">
-                                        List of Payouts
+                                        Coupons Code
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="theme-text f-14">
+                                        SKU1234456 
                                     </div>
                                 </div>
+                                <div class="col-sm-1">
+                                    <div class="theme-text f-14">
+                                    <i class="icon dripicons-pencil p-1 cursor-pointer"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+
                             </div>
-                            <table class="table text-center p-10 theme-text th-no-border">
-                                <thead class="secondg-bg p-0" >
+                            <div class="d-flex  row  p-10">
+
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Coupon ID 
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 d-flex justify-content-between">
+                                        Discount123456 
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="d-flex  row  p-10">
+
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Coupon Type 
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14">
+                                        Discount
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="d-flex  row  p-10">
+
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Coupon Usage 
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14">
+                                        <div class="d-flex vertical-center">
+                                            10
+                                        <div class="progress  ">
+                                            <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="d-flex  row  p-10">
+
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Coupon Description 
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14">
+                                        Get sale offer of 30%  on your
+                                        next order
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="d-flex  row  p-10">
+
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Zone 
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14">
+                                        Bengaluru Urban
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="d-flex  row  p-10 border-top-pop">
+
+                                <div class="col-sm-6">
+                                    <div class="theme-text f-14 bold">
+                                        Coupon List
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+                            <table class="table text-center p-10 theme-text">
+                                <thead class="secondg-bg  p-0">
                                     <tr>
-                                        <th scope="col">Payout ID</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Payout Date</th>
+                                        <th scope="col">Coupon</th>
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Order Date</th>
 
                                     </tr>
                                 </thead>
                                 <tbody class="mtop-20">
-                                    <tr class="cursor-pointer">
-                                        <td scope="row">
-                                            <p style="text-decoration: underline;margin: 0;">P12345</p>
-                                        </td>                                   
-                                        <td class="">
-                                            <div class="status-badge green-bg">Completed</div>
+                                    <tr class="tb-border  cursor-pointer">
+                                        <th scope="row">PACK12345</th>
+
+                                        <td class="text-center">SKU124672</td>
+                                        <td class="">23 Dec 20
                                         </td>
-                                        <td class="text-center">23 Dec 20</td>
 
                                     </tr>
-                                    <tr class="cursor-pointer">
-                                        <td scope="row">
-                                            <p style="text-decoration: underline;margin: 0;">P12346</p>
-                                        </td>                                   
-                                        <td class="">
-                                            <div class="status-badge ">Pending</div>
+                                    <tr class="tb-border  cursor-pointer">
+                                        <th scope="row">PACK12345</th>
+
+                                        <td class="text-center">SKU124672</td>
+                                        <td class="">23 Dec 20
                                         </td>
-                                        <td class="text-center">23 Dec 20</td>
 
                                     </tr>
-                                    <tr class="cursor-pointer" style="border-bottom: 1px solid #dee2e6;">
-                                        <td scope="row">
-                                            <p style="text-decoration: underline;margin: 0;">P12347</p>
-                                        </td>                                   
-                                        <td class="">
-                                            <div class="status-badge light-bg">Processing</div>
+                                    <tr class="tb-border  cursor-pointer">
+                                        <th scope="row">PACK12345</th>
+
+                                        <td class="text-center">SKU124672</td>
+                                        <td class="">23 Dec 20
                                         </td>
-                                        <td class="text-center">26 Dec 20</td>
+
                                     </tr>
-                                    
                                 </tbody>
                             </table>
 
-                            <div class="d-flex   justify-content-center p-20">
+                            <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{ route('vendor-details')}}">
-                                    <button class="btn theme-bg white-text my-0" style="width: 127px;
-                                    border-radius: 6px;">View More</button>
-                                        </a></div>
+                                <div class=""><a class="white-text p-10" href="{{ route('details-coupons')}}"><button
+                                            class="btn theme-bg white-text">View More</button></a></div>
 
 
 
 
                             </div>
                         </div>
-
+                    
 
                         <!--  -->
                     </div>
                 </div>
             </div>
 
-            <!-- categories -->
-            <div class="side-bar-pop-up h-100" id="categories">
-                <div class="modal-header pb-0">
-                    <h3 class="theme-text p-2 mb-2 f-14"> Categories Details</h3>
+            <!-- Create Cupons Pop-up -->
+            <div class="modal fade" id="for-friend" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+                <div class="modal-dialog theme-text" role="document">
+                    <div class="modal-content w-1000 right-25">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">For a friend</h5>
+                        <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="d-flex  row  p-20" >
 
-                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-12 ">
-                            <div class="profile-section">
-                                <figure>
-                                    <img src="assets/images/big-profile.svg" alt="">
-                                </figure>
-                                <div class="profile-details-side-pop">
-                                    <ul>
-                                        <li>
-                                            <h1>Cupboards</h1>
-                                            <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;"
-                                                aria-hidden="true"></i>
-                                        </li>
-                                        <li>
-                                            <h2>Polycarbonate</h2>
-                                            <label class="switch mb-0" style="transform: scale(0.7);">
-                                                <input type="checkbox" id="switch">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label class="phone-num-lable">Phone Number</label>
+                            <span class="">
+                                <input type="tel" id="phone-pop-up" placeholder="987654321" class=" form-control form-control-tel">
+                            <span class="error-message">Please enter  valid Phone number</span>
+                            </span>
+                            
+                            
                         </div>
-                    </div>
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Item ID</h1>
+                            
                         </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">IT1234445</h1>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label class="full-name">Full Name</label>
+                            <span class="">
+                                <input type="text" id="fullname" placeholder="David Jerome"  class="form-control">
+                            <span class="error-message">Please enter  valid Phone number</span>
+                            </span>
+                            
+                            
                         </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Category ID</h1>
                         </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">C1234098</h1>
+                        
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label class="email-label">Email</label>
+                            <span class="">
+                                <input type="email"  placeholder="abc@mail.com" id="E-mail" class="form-control">
+                            <span class="error-message">Please enter  valid Email</span>
+                            </span>
+                            
+                            
                         </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Vendor ID</h1>
+                            
                         </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">V0912374</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Zone </h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">Bengaluru Urban</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Transport Vehicle</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">KA03 B 1176</h1>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center p-20">
-                        <div class="">
-                            <a class="white-text p-10" href="{{route('details-categories')}}">
-                                <button class="btn theme-bg white-text my-0" style="width: 127px;
-                                border-radius: 6px;">View More</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- subcategories -->
-            <div class="side-bar-pop-up h-100" id="subcategories">
-                <div class="modal-header pb-0">
-                    <h3 class="theme-text p-2 mb-2 f-14"> Inventory Details</h3>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label>Gender</label>
+                            <span class="">
+                                <select  id="" class="form-control">
+                                <option >  Male</option>
+                                <option>  Female</option>
+                                
+                                </select>
+                            <span class="error-message">Please enter  valid</span>
+                            </span>
+                            
+                            
+                        </div>
+                            
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label>From Adress line 1</label>
+                            <span class="">
+                                <input type="text"  placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control">
+                            <span class="error-message">Please enter  valid</span>
+                            </span>
+                            
+                            
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label>From Adress line 2</label>
+                            <span class="">
+                                <input type="text"  placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control">
+                            <span class="error-message">Please enter  valid</span>
+                            </span>
+                            
+                            
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label>State</label>
+                            <span class="">
+                                <select  id="" class="form-control">
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                
+                                
+                                </select>
+                            <span class="error-message">Please enter  valid</span>
+                            </span>
+                            
+                            
+                        </div>
+                            
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label>City</label>
+                            <span class="">
+                                <input type="text"  placeholder="Benguluru" id="" class="form-control">
+                            <span class="error-message">Please enter  valid</span>
+                            </span>
+                            
+                            
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-input">
+                            <label>Pincode</label>
+                            <span class="">
+                                <input type="text"  placeholder="530000" id="" class="form-control">
+                            <span class="error-message">Please enter  valid</span>
+                            </span>
+                            
+                            
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w-50"><a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+                        <div class="w-50 text-right"><a class="white-text p-10" href="#"><button class="btn theme-bg white-text w-30">Send Otp</button></a></div>
+                    </div>
+                    </div>
+                </div>
+            </div> 
 
-                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-12 ">
-                            <div class="profile-section">
-                                <figure>
-                                    <img src="assets/images/big-profile.svg" alt="">
-                                </figure>
-                                <div class="profile-details-side-pop">
-                                    <ul>
-                                        <li>
-                                            <h1>Cupboards</h1>
-                                            <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;"
-                                                aria-hidden="true"></i>
-                                        </li>
-                                        <li>
-                                            <h2>Polycarbonate</h2>
-                                            <label class="switch mb-0" style="transform: scale(0.7);">
-                                                <input type="checkbox" id="switch">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Item ID</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">IT1234445</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Category ID</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">C1234098</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Vendor ID</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">V0912374</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Zone </h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">Bengaluru Urban</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Transport Vehicle</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">KA03 B 1176</h1>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center p-20">
-                        <div class="">
-                            <a class="white-text p-10" href="./inventory-details.html">
-                                <button class="btn theme-bg white-text my-0" style="width: 127px;
-                                border-radius: 6px;">View More</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- inventories -->
-            <div class="side-bar-pop-up h-100" id="inventories">
-                <div class="modal-header pb-0">
-                    <h3 class="theme-text p-2 mb-2 f-14"> Inventory Details</h3>
-
-                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-12 ">
-                            <div class="profile-section">
-                                <figure>
-                                    <img src="assets/images/big-profile.svg" alt="">
-                                </figure>
-                                <div class="profile-details-side-pop">
-                                    <ul>
-                                        <li>
-                                            <h1>Cupboards</h1>
-                                            <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;"
-                                                aria-hidden="true"></i>
-                                        </li>
-                                        <li>
-                                            <h2>Polycarbonate</h2>
-                                            <label class="switch mb-0" style="transform: scale(0.7);">
-                                                <input type="checkbox" id="switch">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Item ID</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">IT1234445</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Category ID</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">C1234098</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Vendor ID</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">V0912374</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Zone </h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">Bengaluru Urban</h1>
-                        </div>
-                    </div>
-                    <div class="row d-flex pb-4 pl-3">
-                        <div class="col-lg-6 align-items-center">
-                            <h1 class="side-popup-heading">Transport Vehicle</h1>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                            <h1 class="side-popup-content">KA03 B 1176</h1>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center p-20">
-                        <div class="">
-                            <a class="white-text p-10" href="{{route('details-categories')}}">
-                                <button class="btn theme-bg white-text my-0" style="width: 127px;
-                                border-radius: 6px;">View More</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         </main>
         @include('layouts.includes.app-js')
         @yield('scripts')

@@ -52,5 +52,3 @@ crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="slick/slick.min.js"></script>
 
-
-

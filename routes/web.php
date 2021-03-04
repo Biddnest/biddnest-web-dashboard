@@ -111,7 +111,6 @@ Route::prefix('admin')->group(function () {
         Route::prefix('categories')->group(function () {
             Route::get('/',[WebController::class,'categories'])->name("categories");
             Route::get('/create',[WebController::class,'createCategories'])->name("create-categories");
-            Route::get('/details',[WebController::class,'detailsCategories'])->name("details-categories");
 
             Route::get('/subcateories',[WebController::class,'subcateories'])->name("subcateories");
             Route::get('/subcateories/create',[WebController::class,'createSubcateories'])->name("create-subcateories");
@@ -121,5 +120,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/inventories/details',[WebController::class,'detailsInventories'])->name("details-inventories");
             Route::get('/inventories/services/edit',[WebController::class,'editServices'])->name("edit-services");
         }); 
+
+        Route::prefix('coupons')->group(function () {
+            Route::get('/',[WebController::class,'coupons'])->name("coupons");
+            Route::get('/create',[WebController::class,'createCoupons'])->name("create-coupons");
+            Route::get('/details',[WebController::class,'detailsCoupons'])->name("details-coupons");
+        });
 });
 

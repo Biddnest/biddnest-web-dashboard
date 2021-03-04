@@ -101,11 +101,6 @@ class WebController extends Controller
         return view('categories.createcategories');
     }
 
-    public function detailsCategories()
-    {
-        return view('categories.detailscategories');
-    }
-
     public function subcateories()
     {
         return view('categories.subcateories');
@@ -118,6 +113,7 @@ class WebController extends Controller
 
     public function inventories()
     {
+        // return "success";
         return view('categories.inventories');
     }
 
@@ -131,8 +127,18 @@ class WebController extends Controller
         return view('categories.detailsinventories');
     }
 
-    public function editServices()
+    public function coupons()
     {
-        return view('categories.editservices');
+        return view('coupons.coupons');
+    }
+
+    public function createCoupons()
+    {
+        return view('coupons.createcoupons');
+    }
+
+    public function detailsCoupons()
+    {
+        return view('coupons.detailscoupons');
     }
 }

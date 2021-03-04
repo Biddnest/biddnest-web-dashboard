@@ -45,6 +45,8 @@ window.intlTelInput(input, {
     // any initialisation options go here
 });
 
+
+
 //create vendor onboard ===============
 var input = document.querySelector("#input-blue");
 window.intlTelInput(input, {
@@ -251,6 +253,13 @@ $(document).ready(function(){
        $(".order-cards").toggle();
        $(".reject-btn").html("Submit");
      });
+
+     $(".collapse-form").click(function(){
+        $(this).toggleClass("form-open");
+        $(this).toggleClass("form-close");
+      });
+
+      $('.js-example-basic-multiple').select2();
      
 
 });

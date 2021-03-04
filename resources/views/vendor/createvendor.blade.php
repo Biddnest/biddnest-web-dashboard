@@ -3,7 +3,7 @@
 @section('content')
 
  <!-- Main Content -->
-<div class="main-content grey-bg">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-vendor">
                     <div class="d-flex  flex-row justify-content-between p-10">
                         <h3 class="heading1 ml-4 pl-2">Onboard Vendor</h3>
 

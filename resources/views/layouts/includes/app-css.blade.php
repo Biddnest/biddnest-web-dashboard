@@ -29,3 +29,24 @@
         <!-- Toggle btn -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
+        <style>
+            .nav-collapse .li{
+                list-style-type: none !important;
+            }
+            .modal-body{
+                margin-left: 6.5px;
+            }
+            .btn-1{
+                width: 100%;
+            }
+            #myTab{
+                margin-left: -4px;
+            }
+
+            main .menu-sidebar {
+                margin-top: 60px;
+            }
+            main .menu-sidebar .Brand-logo {
+                height: 60px;
+            }
+        </style>

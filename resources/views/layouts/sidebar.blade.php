@@ -9,20 +9,20 @@
             <br>
             <div class="nav-links">
                 <ul class="menu p-1">
-                    <li class="menu-item active-menu-item">
+                    <li class="menu-item">
                         <a class="regular-nav" href="{{ route('dashboard')}}">
                             <span class="side-nac-icon">
                                 <span class="icon-sidebar"><i class="icon dripicons-meter "></i></span>
                             </span> Dashboard
                         </a>
                     </li>
-                    <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
+                    <li class="menu-item b-purple" role="button"
                             aria-expanded="false" aria-controls="Booking">
                         <a class=""><span class="side-nac-icon">
                             <span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span></span> Booking & Orders
                         </a>
                     </li>
-                    <ul class="sub-menu booking" id="booking">
+                    <ul class="sub-menu">
                         <li class="sub-menu-item"><a href="{{ route('orders-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Booking & Orders</a></li>

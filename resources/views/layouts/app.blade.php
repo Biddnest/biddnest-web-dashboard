@@ -4,25 +4,11 @@
         <!-- Required meta tags -->
         @include('layouts.includes.app-css')
 
-        @section('styles')
-        <style>
-            .nav-collapse .li{
-                list-style-type: none !important;
-            }
-            .modal-body{
-                margin-left: 6.5px;
-            }
-            .btn-1{
-                width: 100%;
-            }
-            #myTab{
-                margin-left: -4px;
-            }
-        </style>
-        @endsection
+{{--        @yield('styles')--}}
+
     </head>
-    <body data-barba="wrapper">
-    <main class="dashboard grey-bg"  data-barba="container" data-barba-namespace="sidebar">
+    <body>
+    <main class="dashboard grey-bg">
         @include('layouts.sidebar')
         <div class="content-wrapper">
             <!-- top_nav_bar -->
@@ -144,7 +130,9 @@
                         </ul>
                     </div>
                 </nav>
+                <div data-barba="wrapper">
                 @yield('content')
+                </div>
         <footer class="text-center b-purple">
             <hr>
             @php $year = date("Y"); @endphp

@@ -45,3 +45,4 @@ crossorigin="anonymous"></script>
   
 <script src="{{ asset('static/js/barba.js') }}"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
+

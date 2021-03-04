@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') Orders And Bookings @endsection
 @section('content')
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderBookings">
@@ -33,7 +33,7 @@
                                     <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Live Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Past Orders</a>
+                                    <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
                                 </li>
                             </ul>
                         </h3>
@@ -173,104 +173,6 @@
                                 <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a></li>
                             </ul>
                         </div>                                  
-                    </div>
-                    <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
-                        <table class="table text-center p-0  theme-text ">
-                            <thead class="secondg-bg  p-0 f-14">
-                                <tr>
-                                    <th scope="col">Order ID</th>
-                                    <th scope="col">From</th>
-                                    <th scope="col">To</th>
-                                    <th scope="col">Order Date</th>
-                                    <th scope="col">Assigned Vendor</th>
-                                    <th scope="col">Order Status</th>
-                                </tr>
-                            </thead>
-                            <tbody class="mtop-20 f-13">
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Gao</td>
-                                    <td>Bengaluru</td>
-                                    <td>28 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Chennai</td>
-                                    <td>Mumbai</td>
-                                    <td>28 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Guntur</td>
-                                    <td>Kolkata</td>
-                                    <td>28 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                        <td scope="row">SKU123456</td>
-                                        <td>Hopete</td>
-                                        <td>Bengaluru</td>
-                                        <td>28 Dec 2020</td>
-                                        <td>Wayne Pvt Ltd</td>
-                                        <td class=""><span class="green-bg text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                        <td scope="row">SKU123456</td>
-                                        <td>Sringeri</td>
-                                        <td>Bengaluru</td>
-                                        <td>28 Dec 2020</td>
-                                        <td>Wayne Pvt Ltd</td>
-                                        <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Mumbai</td>
-                                    <td>Chennai</td>
-                                    <td>27 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Kozhikode</td>
-                                    <td>Bengaluru</td>
-                                    <td>27 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Kovallam</td>
-                                    <td>kochi</td>
-                                    <td>26 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Benguluru</td>
-                                    <td>Kochi</td>
-                                    <td>26 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
-                                </tr>
-                            </tbody>
-                        </table> 
-                        <div class="pagination">
-                            <ul>
-                                <li class="p-1">Page</li>
-                                <li class="digit">1</li>
-                                <li class="label">of</li>
-                                <li class="digit">20</li>
-                                <li class="button"><a href="#"><img src="{{ asset('static/images/Backward.svg')}}"></a></li>
-                                <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>

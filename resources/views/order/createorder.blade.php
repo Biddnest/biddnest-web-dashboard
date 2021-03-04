@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') Orders And Bookings @endsection
 @section('content')
 
 

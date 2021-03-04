@@ -38,19 +38,19 @@
                     </li>
                     <!-- vendor sublink -->
                     <ul class="sub-menu vendor" id="vendors">
-                        <li class="sub-menu-item"><a href="vendor-management.html"><i
+                        <li class="sub-menu-item"><a href="{{ route('vendors')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor
                                     Management</a></li>
-                        <li class="sub-menu-item"><a href="onboard-vendor.html"><i
+                        <li class="sub-menu-item"><a href="{{ route('create-vendors')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Onboard
                                     Vendor</a></li>
-                        <li class="sub-menu-item"> <a href="leads.html"><i class="fa fa-dot-circle-o icons-space mr-2"
+                        <li class="sub-menu-item"> <a href="{{ route('lead-vendors')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>
                                     Leads</a></li>
-                        <li class="sub-menu-item"> <a href="pending-vendors.html"> <i
+                        <li class="sub-menu-item"> <a href="{{ route('pending-vendors')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Pending
                                     Vendors</a></li>
-                        <li class="sub-menu-item"> <a href="verified-vendors.html"><i
+                        <li class="sub-menu-item"> <a href="{{ route('verified-vendors')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Verified
                                     Vendors</a></li>
                     </ul>

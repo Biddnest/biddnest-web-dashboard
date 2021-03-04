@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title') Customer Management @endsection
 @section('content')
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-customer">
                             <div class="d-flex  flex-row justify-content-between ">

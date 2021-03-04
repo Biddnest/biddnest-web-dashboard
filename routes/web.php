@@ -88,8 +88,9 @@ Route::prefix('admin')->group(function () {
 
         //booking and orders
         Route::prefix('booking')->group(function () {
-            Route::get('/',[WebController::class,'ordersBookings'])->name("orders-booking");
-            Route::get('/{id}',[WebController::class,'orderDetails'])->name("order-details");
+            Route::get('/',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
+            Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
+            Route::get('/details',[WebController::class,'orderDetails'])->name("order-details");
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
         });
 
@@ -98,5 +99,17 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createCustomers'])->name("create-customers");
         });
 
+        Route::prefix('vendors')->group(function () {
+            Route::get('/',[WebController::class,'vendors'])->name("vendors");
+            Route::get('/details',[WebController::class,'vendorsDetails'])->name("vendor-details");
+            Route::get('/create',[WebController::class,'createOnboardVendors'])->name("create-vendors");
+            Route::get('/lead',[WebController::class,'leadVendors'])->name("lead-vendors");
+            Route::get('/pending',[WebController::class,'pendingVendors'])->name("pending-vendors");
+            Route::get('/verified',[WebController::class,'verifiedVendors'])->name("verified-vendors");
+        });
+
+        Route::prefix('categories')->group(function () {
+
+        });
 });
 

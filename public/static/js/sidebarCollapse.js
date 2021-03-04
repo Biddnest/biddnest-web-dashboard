@@ -77,12 +77,20 @@
             }
         );*/
 
-        $("body").on("click",".sub-menu-item",function (e) {
-            var clickedItem = e.currentTarget.innerText.trim()
+        $("body").on("click",".menu-item",function (e) {
+            // var clickedItem = e.currentTarget.innerText.trim()
+            console.log("called");
 
-            for(var i = 0; i < subMenuItems.length; i++) {
-                if (subMenuItems[i].title === clickedItem ) {
-                    // window.location.assign(subMenuItems[i].url);
-                }
-            }
+            // $(this).hasClass("shown")
+            $(this).next("ul").slideDown(200).show();
+
+
+        });
+
+        $("body").on("click",".sub-menu-item",function (e) {
+            // var clickedItem = e.currentTarget.innerText.trim()
+            console.log("called");
+            $(this).parent(".sub-menu").prev("li.menu-item").addClass("active-menu-item");
+            $(this).addClass("active-sub-menu-item");
+            // return false;
         });

@@ -22,8 +22,9 @@
         @endsection
     </head>
     <body data-barba="wrapper">
+    <main class="dashboard grey-bg"  data-barba="container" data-barba-namespace="sidebar">
         @include('layouts.sidebar')
-        <div class="content-wrapper" data-barba="container" data-barba-namespace="header">
+        <div class="content-wrapper">
             <!-- top_nav_bar -->
             <div class="h-auto">
                 <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation">
@@ -143,10 +144,8 @@
                         </ul>
                     </div>
                 </nav>
-
                 @yield('content')
-
-        <footer class="text-center b-purple" data-barba="container" data-barba-namespace="orderBookings">
+        <footer class="text-center b-purple">
             <hr>
             @php $year = date("Y"); @endphp
             <p>Copyright © {{ $year }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
@@ -486,7 +485,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex   justify-content-center p-10">
-                            <div class=""><a class="white-text p-10" href="{{route('order-details')}}"><button class="btn theme-bg white-text">View More</button></a></div>
+                            <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="past-tab">
@@ -598,7 +597,7 @@
                         </div>
                         <div class="d-flex   justify-content-center p-10">
 
-                            <div class=""><a class="white-text p-10" href="{{route('order-details')}}"><button class="btn theme-bg white-text">View More</button></a></div>
+                            <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 

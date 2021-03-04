@@ -1,4 +1,4 @@
-<main class="dashboard grey-bg"  data-barba="container" data-barba-namespace="sidebar">
+
     <div class="menu-sidebar">
         <div class="side-nav-bar">
             <div class="Brand-logo">
@@ -12,14 +12,14 @@
                     <li class="menu-item active-menu-item">
                         <a class="regular-nav" href="{{ route('dashboard')}}">
                             <span class="side-nac-icon">
-                                <span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> 
+                                <span class="icon-sidebar"><i class="icon dripicons-meter "></i></span>
                             </span> Dashboard
                         </a>
                     </li>
                     <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
-                            aria-expanded="false" aria-controls="Booking"> 
+                            aria-expanded="false" aria-controls="Booking">
                         <a class=""><span class="side-nac-icon">
-                            <span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span></span> Booking & Orders 
+                            <span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span></span> Booking & Orders
                         </a>
                     </li>
                     <ul class="sub-menu booking" id="booking">
@@ -77,7 +77,7 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Categories</a>
                         </li>
                         <li class="sub-menu-item"><a href="subcategory-management.html"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Subcategories 
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Subcategories
                                     </a></li>
                         <li class="sub-menu-item"> <a href="categories-subcategories.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Inventory</a>

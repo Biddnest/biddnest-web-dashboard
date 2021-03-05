@@ -45,10 +45,10 @@
                                       <h3 class="f-18">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link  p-15" id="live-tab" href="{{ route('mail-notification')}}">Push Notifications</a>
+                                                <a class="nav-link  p-15" id="live-tab" href="{{ route('push-notification')}}">Push Notifications</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link active p-15" id="past-tab" href="mail-notification" role="tab" aria-controls="profile" aria-selected="false">Mails</a>
+                                                <a class="nav-link active p-15" id="past-tab" href="mail-notification" role="tab" aria-controls="profile" aria-selected="true">Mails</a>
                                             </li>
 
                                         </ul>
@@ -62,7 +62,7 @@
 
                                 <div class="tab-content margin-topneg-7" id="myTabContent">
 
-                                    <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+                                    <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
                                         <table class="table text-left p-0 theme-text mb-0 primary-table margin-topneg-35">
                                             <thead class="secondg-bg p-0">
                                                 <tr>
@@ -107,68 +107,62 @@
                                                     <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                             class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                                 </tr>
-                                                <tr class="tb-border cursor-pointer"
-                                               >
-                                                <td scope="row"> <img class="default-image w-74"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Ho! Ho! Ho! Xmas sale</td>
-                                                <td>Chennai Urban</td>
-                                                <td class="">
-                                                    <div class="status-badge light-green-bg">Public</div>
-                                                </td>
-                                                <td>
-                                                   This mail is to inform you...
-                                                    
-                                                </td>
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
+                                                    <tr class="tb-border cursor-pointer">
+                                                    <td scope="row"> <img class="default-image w-74"
+                                                            src="{{asset('static/images/default-image.svg')}}" alt=""></td>
+                                                    <td>Ho! Ho! Ho! Xmas sale</td>
+                                                    <td>Chennai Urban</td>
+                                                    <td class="">
+                                                        <div class="status-badge light-green-bg">Public</div>
+                                                    </td>
+                                                    <td>This mail is to inform you...</td>
+                                                    <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                         class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                           >
-                                            <td scope="row"> <img class="default-image w-74"
-                                                    src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                            <td>Make an easy move</td>
-                                            <td>Bengaluru Urban</td>
-                                            <td class="">
-                                                <div class="status-badge light-bg">Draft</div>
-                                            </td>
-                                            <td>
-                                               This mail is to inform you...
-                                                
-                                            </td>
-                                            <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                    class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                        </tr>
-                                        <tr class="tb-border cursor-pointer"
-                                       >
-                                        <td scope="row"> <img class="default-image w-74"
-                                                src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                        <td>Make an easy move</td>
-                                        <td>Chennai Urban</td>
-                                        <td class="">
-                                            <div class="status-badge light-bg">Draft</div>
-                                        </td>
-                                        <td>
-                                           This mail is to inform you...
-                                            
-                                        </td>
-                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                    </tr>
+                                                </tr>
+                                                <tr class="tb-border cursor-pointer">
+                                                    <td scope="row"> <img class="default-image w-74"
+                                                            src="{{asset('static/images/default-image.svg')}}" alt=""></td>
+                                                    <td>Make an easy move</td>
+                                                    <td>Bengaluru Urban</td>
+                                                    <td class="">
+                                                        <div class="status-badge light-bg">Draft</div>
+                                                    </td>
+                                                    <td>
+                                                    This mail is to inform you...
+                                                        
+                                                    </td>
+                                                    <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
+                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                </tr>
+                                                <tr class="tb-border cursor-pointer">
+                                                    <td scope="row"> <img class="default-image w-74"
+                                                            src="{{asset('static/images/default-image.svg')}}" alt=""></td>
+                                                    <td>Make an easy move</td>
+                                                    <td>Chennai Urban</td>
+                                                    <td class="">
+                                                        <div class="status-badge light-bg">Draft</div>
+                                                    </td>
+                                                    <td>
+                                                    This mail is to inform you...
+                                                        
+                                                    </td>
+                                                    <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
+                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                </tr>
                                             </tbody>
     
                                         </table>
                                         
-                                    <div class="pagination">
-                                        <ul>
-                                            <li class="p-1">Page</li>
-                                            <li class="digit">1</li>
-                                            <li class="label">of</li>
-                                            <li class="digit">20</li>
-                                            <li class="button"><a href="#"><img src="{{asset('static/images/Backward.svg')}}"></a></li>
-                                            <li class="button"><a href="#"><img src="{{asset('static/images/forward.svg')}}"></a></li>
-                                        </ul>
-                                    </div>
+                                        <div class="pagination">
+                                            <ul>
+                                                <li class="p-1">Page</li>
+                                                <li class="digit">1</li>
+                                                <li class="label">of</li>
+                                                <li class="digit">20</li>
+                                                <li class="button"><a href="#"><img src="{{asset('static/images/Backward.svg')}}"></a></li>
+                                                <li class="button"><a href="#"><img src="{{asset('static/images/forward.svg')}}"></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     
                                     <!--  -->

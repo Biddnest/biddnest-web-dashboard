@@ -32,6 +32,7 @@ class ApiRouteController extends Controller
      */
     public function login(Request $request)
     {
+        return "hai";
         $validation = Validator::make($request->all(),[
             'phone' => 'required|string|min:10'
         ]);

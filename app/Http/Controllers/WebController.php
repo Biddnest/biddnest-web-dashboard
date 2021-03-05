@@ -90,4 +90,55 @@ class WebController extends Controller
     {
         return view('vendor.verified');
     }
+
+    public function categories()
+    {
+        return view('categories.categories');
+    }
+
+    public function createCategories()
+    {
+        return view('categories.createcategories');
+    }
+
+    public function subcateories()
+    {
+        return view('categories.subcateories');
+    }
+
+    public function createSubcateories()
+    {
+        return view('categories.createsubcateories');
+    }
+
+    public function inventories()
+    {
+        // return "success";
+        return view('categories.inventories');
+    }
+
+    public function createInventories()
+    {
+        return view('categories.createinventories');
+    }
+
+    public function detailsInventories()
+    {
+        return view('categories.detailsinventories');
+    }
+
+    public function coupons()
+    {
+        return view('coupons.coupons');
+    }
+
+    public function createCoupons()
+    {
+        return view('coupons.createcoupons');
+    }
+
+    public function detailsCoupons()
+    {
+        return view('coupons.detailscoupons');
+    }
 }

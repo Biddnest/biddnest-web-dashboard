@@ -46,3 +46,9 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('static/js/barba.js') }}"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    
+<script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
+
+<script type="text/javascript" src="slick/slick.min.js"></script>
+

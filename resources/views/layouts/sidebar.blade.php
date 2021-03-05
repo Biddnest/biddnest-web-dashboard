@@ -33,10 +33,11 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Edit Order</a></li> -->
                     </ul>
-                    <li class="menu-item b-purple" role="button"
-                            aria-expanded="false"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-store "></i></span> </span> Vendors Management</a>
+                    <li class="menu-item b-purple" data-toggle="#vendors" href="#Vendors" role="button"
+                            aria-expanded="false" aria-controls="Vendors"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-store "></i></span> </span> Vendors Management</a>
                     </li>
                     <!-- vendor sublink -->
+                    <ul class="sub-menu vendor" id="vendors">
                         <li class="sub-menu-item"><a href="{{route('vendors')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor
                                     Management</a></li>
@@ -52,11 +53,12 @@
                         <li class="sub-menu-item"> <a href="{{route('verified-vendors')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Verified
                                     Vendors</a></li>
-                 
-                    <li class="menu-item" role="button" aria-expanded="false"
+                    </ul>
+                    <li class="menu-item" data-toggle="" href="#Customer" role="button" aria-expanded="false"
                             aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user"></i></span> </span>Customer Management</a>
                     </li>
                     <!-- sublinks -->
+                    <ul class="sub-menu" id="Customer">
                         <li class="sub-menu-item"><a href="{{route('customers')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>Customers</a></li>
                         <li class="sub-menu-item"><a href="{{route('create-customers')}}"> <i
@@ -65,6 +67,7 @@
                         <!-- <li class="sub-menu-item"> <a href="Edit-customer.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Customer
                                     Details</a></li> -->
+                    </ul>
                     <li class="menu-item" data-toggle="" href="#Categories" role="button" aria-expanded="false"
                             aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories</a>
                     </li>
@@ -101,21 +104,21 @@
                     <ul class="sub-menu" id="Zone">
                         <li class="sub-menu-item"><a href="{{route('zones')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>Zones</a></li>
-                        <li class="sub-menu-item"><a href=" create-zones.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('create-zones')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create Zones</a>
                         </li>
-                        <li class="sub-menu-item"> <a href="edit-zones.html"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Zone</a></li>
+                        <!-- <li class="sub-menu-item"> <a href="edit-zones.html"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Zone</a></li> -->
                     </ul>
                     <li class="menu-item" data-toggle="" href="#Sliders" role="button" aria-expanded="false"
                             aria-controls="Sliders"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-photo-group"></i></span> </span> Sliders & Banners</a>
                     </li>
                     <!-- sublinks -->
                     <ul class="sub-menu" id="Sliders">
-                        <li class="sub-menu-item"><a href="Sliders-Banners.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('slider')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sliders &
                                     Banners</a></li>
-                        <li class="sub-menu-item"><a href="Push-Notifications.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('push-notification')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>PushNotifications & Messages</a>
                         </li>
                         <li class="sub-menu-item"> <a href="testimonials.html"> <i

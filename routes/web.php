@@ -126,5 +126,10 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createCoupons'])->name("create-coupons");
             Route::get('/details',[WebController::class,'detailsCoupons'])->name("details-coupons");
         });
+
+        Route::prefix('zones')->group(function () {
+            Route::get('/',[WebController::class,'zones'])->name("zones");
+            Route::get('/create',[WebController::class,'createZones'])->name("create-zones");
+        });
 });
 

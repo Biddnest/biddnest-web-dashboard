@@ -141,4 +141,14 @@ class WebController extends Controller
     {
         return view('coupons.detailscoupons');
     }
+
+    public function zones()
+    {
+        return view('zones.zones');
+    }
+
+    public function createZones()
+    {
+        return "success";
+    }
 }

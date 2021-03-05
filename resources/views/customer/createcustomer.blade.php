@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title') Customer Management @endsection
 @section('content')
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-customer">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createcustomer">
                             <div class="d-flex  flex-row justify-content-between ">
                                 <h3 class="page-head text-left p-4 f-20">Create Customer</h3>
 

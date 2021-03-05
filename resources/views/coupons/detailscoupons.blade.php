@@ -2,7 +2,7 @@
 @section('title') Coupons And Offers @endsection
 @section('content')
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="details-coupons">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="detailscoupons">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4">Order Details</h3>
      

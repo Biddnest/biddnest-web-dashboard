@@ -41,6 +41,11 @@
         <!-- SLick -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
+        <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+
         <style>
             .nav-collapse .li{
                 list-style-type: none !important;
@@ -138,7 +143,15 @@
             }
             .f-l {
                 font-size: large;
+            }           
+            .p-8{
+                padding: 8px 16px !important;
             }
-            
+
+
+            /* error bredcrum */
+            .breadcrumb {
+                margin-top: -20px !important;
+            }
         </style>
 

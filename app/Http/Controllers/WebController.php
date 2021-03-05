@@ -172,8 +172,20 @@ class WebController extends Controller
         return view('sliderandbanner.pushnotification');
     }
 
+    public function createPushNotification()
+    {
+        return view('sliderandbanner.createpush');
+    }
+
     public function mailNotification()
     {
         return view('sliderandbanner.mailnotification');
     }
+
+    public function createMailNotification()
+    {
+        return view('sliderandbanner.createmail');
+    }
+
+
 }

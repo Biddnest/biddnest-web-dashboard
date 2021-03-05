@@ -138,7 +138,9 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
 
             Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
+            Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
             Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
+            Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
         });
 });
 

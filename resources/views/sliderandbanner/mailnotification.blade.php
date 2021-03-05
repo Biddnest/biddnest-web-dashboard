@@ -10,8 +10,8 @@
             <button class="btn theme-bg white-text dropdown-toggle"><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New </button>
                             <div class="dropdown">
                                 <ul>
-                                    <li><a href="create-new-notification.html">Push Notification</a></li>
-                                    <li><a href="create-new-message.html">Mail</a></li>
+                                    <li><a href="{{route('create-push-notification')}}">Push Notification</a></li>
+                                    <li><a href="{{route('create-mail-notification')}}">Mail</a></li>
                                  
                                 </ul>
                             </div>

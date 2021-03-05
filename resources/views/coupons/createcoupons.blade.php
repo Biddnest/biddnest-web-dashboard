@@ -2,7 +2,7 @@
 @section('title') Coupons And Offers @endsection
 @section('content')
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-coupons">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createcoupons">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4 theme-text">Create New Coupon</h3>
      

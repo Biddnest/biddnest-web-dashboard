@@ -2,7 +2,7 @@
 
 @section('content')
 
-<main data-barba="container" data-barba-namespace="reset_password">
+<main data-barba="container" data-barba-namespace="resetpassword">
 <div class="loader"></div>
         <div class="container-fluid">
             <div class="row ">

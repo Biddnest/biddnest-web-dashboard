@@ -149,6 +149,26 @@ class WebController extends Controller
 
     public function createZones()
     {
-        return "success";
+        return view('zones.createzones');
+    }
+
+    public function detailsZones()
+    {
+        return view('zones.detailszones');
+    }
+
+    public function slider()
+    {
+        return view('sliderandbanner.slider');
+    }
+
+    public function createSlider()
+    {
+        return view('sliderandbanner.createslider');
+    }
+
+    public function pushNotification()
+    {
+        return view('sliderandbanner.pushnotification');
     }
 }

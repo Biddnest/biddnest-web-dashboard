@@ -31,7 +31,29 @@ function changeMenu(){
     });
 }
 barba.init({
-
+    views: [{
+        namespace: 'slider',
+        afterEnter(data) {
+            $('.slick-container').slick({
+                arrows: false
+            });
+            $('.slick-container-2').slick({
+                arrows: false
+            });
+            $('.slick-container-3').slick({
+                arrows: false
+            });
+            $('.slick-container-4').slick({
+                arrows: false
+            });
+            $('.slick-container-5').slick({
+                arrows: false
+            });
+            $('.slick-container-6').slick({
+                arrows: false
+            });
+        }
+      }]
 });
 
 

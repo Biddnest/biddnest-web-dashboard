@@ -2,7 +2,7 @@
 @section('title') Vendor Management @endsection
 @section('content')
 <!-- Main Content -->
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="vendor-details">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="vendorDetails">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4">Order Details</h3>
      

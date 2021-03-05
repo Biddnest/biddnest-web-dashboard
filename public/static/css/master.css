@@ -344,7 +344,7 @@ h6 {
   width: 100%;
 }
 
-.w-80 {
+.w-90 {
   width: 90%;
 }
 
@@ -657,6 +657,7 @@ h6 {
   margin-bottom: 0;
   margin-left: 28px;
   margin-top: 30px;
+  font-size: 14px;
 }
 .form-inputs .form-check-inline {
   height: 30px;
@@ -892,6 +893,7 @@ h6 {
   text-align: right;
   margin-left: 10px;
   opacity: 0.4;
+  background-color: #fce181;
 }
 .progress.progress-bar {
   width: 30% !important;
@@ -995,10 +997,6 @@ p.zone-status {
 }
 .search-bar input:focus::placeholder {
   color: #686060;
-}
-
-html body main .dropdown-menu.menu-lg {
-  left: -89% !important;
 }
 
 .login-graphics {
@@ -1209,6 +1207,56 @@ html body main .dropdown-menu.menu-lg {
 .tb-border2 tbody tr {
   border-bottom: 1px solid #dad1d140;
   border-bottom-color: #dad1d140 !important;
+}
+
+.-mt-10 {
+  margin-top: -10px;
+}
+
+.-mt-30 {
+  margin-top: -30px;
+}
+
+.-mt-20 {
+  margin-top: -20px;
+}
+
+html body main .dropdown-menu {
+  border-radius: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  left: 3% !important;
+  top: 20% !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.13);
+}
+
+.bg-yellow {
+  color: #FDC403;
+}
+
+.p-color {
+  background-color: #FFEFEF;
+}
+
+.g-color {
+  background-color: #A3E7C5;
+}
+
+.light-green-bg {
+  background-color: #dcf6e9;
+}
+
+.w-74 {
+  width: 74% !important;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+a:hover {
+  color: inherit !important;
 }
 
 .Dashboard-scards .card {
@@ -1656,6 +1704,7 @@ input:checked + .slider:before {
 }
 .table thead th {
   border-bottom: none;
+  padding-left: 25px !important;
 }
 .table thead tr:hover {
   box-shadow: none !important;
@@ -1683,6 +1732,10 @@ input:checked + .slider:before {
   margin: 0;
   margin-top: 5px;
   font-size: 34px;
+}
+
+.w-24 {
+  width: 24% !important;
 }
 
 .Dashboard-lcards .table tbody tr:hover {
@@ -2589,7 +2642,9 @@ html body main .dropdown-menu {
   border-radius: 5px;
   padding-top: 0px;
   padding-bottom: 0px;
-  left: -73% !important;
+  left: 3% !important;
+  font-size: 14px !important;
+  top: 20% !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.13);
 }
 html body main .dropdown-item:focus, html body main .dropdown-item:hover {
@@ -2620,6 +2675,14 @@ html body .form-close:after {
   left: 25%;
   display: inline-block;
   vertical-align: baseline;
+}
+html body html body main .dropdown-menu {
+  border-radius: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  left: 3% !important;
+  top: 20% !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.13);
 }
 html body .br-5 {
   border-radius: 5px;
@@ -3437,7 +3500,7 @@ hr {
   min-height: 295px;
   position: relative;
   width: fit-content;
-  margin-top: 26px;
+  margin-top: 36px;
 }
 
 #myzonechart {
@@ -3486,8 +3549,8 @@ hr {
   text-align: right;
 }
 .legend-con li span.chart-legend {
-  width: 18px;
-  height: 18px;
+  width: 13px;
+  height: 13px;
   margin-right: 10px;
   margin-left: -30px;
   border-radius: 15px;
@@ -3496,7 +3559,7 @@ hr {
 .legend-con li .chart-legend-label-text {
   display: flex;
   justify-content: space-between;
-  width: 7em;
+  width: 9em;
   text-align: left;
   vertical-align: baseline;
 }

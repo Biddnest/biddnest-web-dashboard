@@ -130,6 +130,14 @@ Route::prefix('admin')->group(function () {
         Route::prefix('zones')->group(function () {
             Route::get('/',[WebController::class,'zones'])->name("zones");
             Route::get('/create',[WebController::class,'createZones'])->name("create-zones");
+            Route::get('/details',[WebController::class,'detailsZones'])->name("details-zones");
+        });
+
+        Route::prefix('slider')->group(function () {
+            Route::get('/',[WebController::class,'slider'])->name("slider");
+            Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
+
+            Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
         });
 });
 

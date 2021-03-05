@@ -2,7 +2,7 @@
 @section('title') Categories @endsection
 @section('content')
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-subcategory">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createsubcategory">
             <div class="d-flex flex-row justify-content-between">
               <h3 class="heading1 p-4">Create Subcategory</h3>
             </div>

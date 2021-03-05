@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Main Content -->
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-category">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createcategory">
             <div class="d-flex flex-row justify-content-between">
               <h3 class="heading1 p-4">Create Category</h3>
             </div>

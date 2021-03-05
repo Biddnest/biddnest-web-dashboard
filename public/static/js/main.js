@@ -260,7 +260,25 @@ $(document).ready(function(){
       });
 
       $('.js-example-basic-multiple').select2();
-     
+
+      $('.slick-container').slick({
+            arrows: false
+        });
+        $('.slick-container-2').slick({
+            arrows: false
+        });
+        $('.slick-container-3').slick({
+            arrows: false
+        });
+        $('.slick-container-4').slick({
+            arrows: false
+        });
+        $('.slick-container-5').slick({
+            arrows: false
+        });
+        $('.slick-container-6').slick({
+            arrows: false
+        });
 
 });
 
@@ -307,8 +325,16 @@ $(function() {
 });
 
 
-  
-
+$(function () {
+    $("table tbody").sortable();
+});
+var div = $('.cursor-pointer');
+div.mousedown(function () {
+    $(this).css("background-color", "#F1F9FF;");
+});
+div.mouseup(function () {
+    $(this).css("background-color", "#FFFFFF");
+});
 
 
 

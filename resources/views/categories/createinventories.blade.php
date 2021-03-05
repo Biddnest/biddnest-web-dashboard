@@ -2,7 +2,7 @@
 @section('title') Inventory @endsection
 @section('content')
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="create-inventories">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createinventories">
     <div class="main-content grey-bg mt-4">
         <div class="d-flex flex-row justify-content-between">
             <h3 class="heading1 ml-4 pl-2">Categories & Subcategories</h3>

@@ -17,11 +17,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-          <!-- telephone input plugin -->
-          <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
-
            <!-- date-time picker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+        <!-- sortable -->
+        <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+        <!-- SLick -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
@@ -29,14 +39,12 @@
         
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
 
-        <!-- Toggle btn -->
-        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-    rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+        <!-- telephone input plugin -->
+        <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
 
 
-       
+
+
         <style>
             .nav-collapse .li{
                 list-style-type: none !important;
@@ -109,5 +117,32 @@
                 border-top:none; 
                 text-align: center;
             }
+
+            .btn-xs {
+                font-size: 8px !important;
+            }
+            .slick-list {
+            width: 85px !important;
+            }
+
+            .slick-image {
+                width: 85px !important;
+            }
+
+            .w-25 {
+                width: 25% !important;
+            }
+
+            table .w-10 {
+                width: 10%;
+            }
+
+            table .w-30 {
+                width: 30%;
+            }
+            .f-l {
+                font-size: large;
+            }
+            
         </style>
 

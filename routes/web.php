@@ -138,6 +138,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
 
             Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
+            Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
         });
 });
 

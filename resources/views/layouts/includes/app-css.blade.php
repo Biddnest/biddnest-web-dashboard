@@ -15,14 +15,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" />
 
         <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet">        
 
-           <!-- date-time picker -->
+          <!-- telephone input plugin -->
+          <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
+
+          <!-- date-time picker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- Custom css -->
+        <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
+        <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" />
+        
+        <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
 
+        <!-- Toggle btn -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
     
@@ -33,14 +41,24 @@
         <!-- SLick -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
-        <!-- Custom css -->
-        <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
-        <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" />
-        
-        <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
 
-        <!-- telephone input plugin -->
-        <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

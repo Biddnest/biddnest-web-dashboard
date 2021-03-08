@@ -230,7 +230,6 @@ class WebController extends Controller
 
     public function vendorPayout()
     {
-        return "sds";
         return view('vendorpayout.vendorpayout');
     }
 

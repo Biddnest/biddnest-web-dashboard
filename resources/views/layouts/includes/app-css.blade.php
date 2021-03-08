@@ -151,5 +151,22 @@
             .breadcrumb {
                 margin-top: -20px !important;
             }
+
+            .toggle-handle {
+                position: absolute;
+                top: 10%;
+                left: 40px  !important;
+            }
+            .toggle.btn-outline-secondary .toggle-handle {
+                left: 73px  !important;
+            }
+            .toggle-off.btn-xs {
+                padding-left: 30px !important;
+            }
+            .btn-outline-primary:hover {
+                color: #fff;
+                background-color: #2E0789 !important;
+                border-color:#2E0789 !important;
+            }
         </style>
 

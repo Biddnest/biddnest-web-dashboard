@@ -242,4 +242,19 @@ class WebController extends Controller
     {
         return view('vendorpayout.detailspayout');
     }
+
+    public function users()
+    {
+        return view('users.users');
+    }
+
+    public function createUsers()
+    {
+        return view('users.createusers');
+    }
+
+    public function detailsUsers()
+    {
+        return view('users.detailseusers');
+    }
 }

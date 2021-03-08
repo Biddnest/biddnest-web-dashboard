@@ -162,5 +162,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createVendorPayout'])->name("create-payout");
             Route::get('/details',[WebController::class,'detailsVendorPayout'])->name("payout-details");
         });
+
+        Route::prefix('users')->group(function () {
+            Route::get('/',[WebController::class,'users'])->name("users");
+            Route::get('/create',[WebController::class,'createUsers'])->name("create-users");
+            Route::get('/details',[WebController::class,'detailsUsers'])->name("details-users");
+        });
 });
 

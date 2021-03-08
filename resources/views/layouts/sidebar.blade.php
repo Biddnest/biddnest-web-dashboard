@@ -160,15 +160,15 @@
                     </li>
                     <!-- sublinks -->
                     <ul class="sub-menu" id="Users">
-                        <li class="sub-menu-item"><a href="users-roles.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('users')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Users Roles</a>
                         </li>
-                        <li class="sub-menu-item"><a href="Add-New-Users.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('create-users')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Add New Users</a>
                         </li>
-                        <li class="sub-menu-item"> <a href="edit-users.html"> <i
+                        <!-- <li class="sub-menu-item"> <a href="edit-users.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit-users</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </ul>
             </div>

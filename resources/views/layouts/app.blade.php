@@ -142,6 +142,13 @@
 
         
             <div class="side-bar-pop-up">
+                <div class="theme-text heading f-18"> Complaint</div>
+                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
+                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                        <!-- <span aria-hidden="true" >&times;</span> -->
+                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div> 
               
         </main>

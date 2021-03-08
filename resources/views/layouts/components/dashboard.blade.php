@@ -1,4 +1,4 @@
-<div class="modal-header">
+                <div class="modal-header">
                     <div class="theme-text heading f-18">Order Details</div>
                     <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
                             onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">

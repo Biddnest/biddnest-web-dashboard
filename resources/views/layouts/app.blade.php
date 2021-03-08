@@ -142,15 +142,21 @@
 
         
             <div class="side-bar-pop-up">
-                <div class="theme-text heading f-18"> Complaint</div>
+            <div class="modal-header">
+                    <div class="theme-text heading f-18">Order Details</div>
                     <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                        <!-- <span aria-hidden="true" >&times;</span> -->
+                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                         <i class="fa fa-times theme-text" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active margin-topneg-15" id="customer" role="tabpanel"
+                            aria-labelledby="new-order-tab">
+                            <!-- form starts -->
+                          
+                        </div>
                     </div>
                 </div>
             </div> 

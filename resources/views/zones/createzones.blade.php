@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Dashboard @endsection
+@section('title') Zones @endsection
 @section('content')
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createzones">

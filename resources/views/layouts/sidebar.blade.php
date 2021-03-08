@@ -121,7 +121,7 @@
                         <li class="sub-menu-item"><a href="{{route('push-notification')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>PushNotifications & Messages</a>
                         </li>
-                        <li class="sub-menu-item"> <a href="testimonials.html"> <i
+                        <li class="sub-menu-item"> <a href="{{route('testimonials')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Testimonials</a>
                         </li>
                     </ul>
@@ -131,12 +131,12 @@
                             aria-controls="Reviews"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
                     </li>
                     <ul class="sub-menu" id="reviews">
-                        <li class="sub-menu-item"><a href="Reviews.html"> <i class="fa fa-dot-circle-o icons-space mr-2"
+                        <li class="sub-menu-item"><a href="{{route('review')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>Reviews</a></li>
-                        <li class="sub-menu-item"><a href="complaints.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                         </li>
-                        <li class="sub-menu-item"> <a href="service-requests.html"> <i
+                        <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Service
                                     Requests</a></li>
                     </ul>
@@ -145,15 +145,15 @@
                     </li>
                     <!-- sublinks -->
                     <ul class="sub-menu" id="Payout">
-                        <li class="sub-menu-item"><a href="vendor-payout.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('vendor-payout')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor Payout</a>
                         </li>
-                        <li class="sub-menu-item"><a href="create-vendors-payout.html"> <i
+                        <li class="sub-menu-item"><a href="{{route('create-payout')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create Payout</a>
                         </li>
-                        <li class="sub-menu-item"> <a href="edit-payout.html"> <i
+                        <!-- <li class="sub-menu-item"> <a href="edit-payout.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Payout</a>
-                        </li>
+                        </li> -->
                     </ul>
                     <li class="menu-item" data-toggle="" href="#Users" role="button" aria-expanded="false"
                             aria-controls=" Users"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user-group"></i></span> </span> Users & Roles</a>

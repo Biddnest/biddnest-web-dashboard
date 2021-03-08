@@ -187,5 +187,60 @@ class WebController extends Controller
         return view('sliderandbanner.createmail');
     }
 
+    public function testimonials()
+    {
+        return view('sliderandbanner.testimonials');
+    }
 
+    public function createTestimonials()
+    {
+        return view('sliderandbanner.createtestimonials');
+    }
+
+    public function review()
+    {
+        return view('reviewandratings.review');
+    }
+
+    public function createReview()
+    {
+        return view('reviewandratings.createreview');
+    }
+
+    public function complaints()
+    {
+        return view('reviewandratings.complaints');
+    }
+
+    public function createComplaints()
+    {
+        return view('reviewandratings.createcomplaints');
+    }
+
+    public function serviceRequests()
+    {
+        return view('reviewandratings.servicerequests');
+    }
+
+    public function createService()
+    {
+        return view('reviewandratings.createservice');
+    }
+
+
+    public function vendorPayout()
+    {
+        return "sds";
+        return view('vendorpayout.vendorpayout');
+    }
+
+    public function createVendorPayout()
+    {
+        return view('vendorpayout.createvendorpayout');
+    }
+
+    public function detailsVendorPayout()
+    {
+        return view('vendorpayout.detailspayout');
+    }
 }

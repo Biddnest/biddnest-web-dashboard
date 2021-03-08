@@ -141,6 +141,26 @@ Route::prefix('admin')->group(function () {
             Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
             Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
             Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
+
+            Route::get('/testimonials',[WebController::class,'testimonials'])->name("testimonials");
+            Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
+        });
+
+        Route::prefix('review')->group(function () {
+            Route::get('/',[WebController::class,'review'])->name("review");
+            Route::get('/create',[WebController::class,'createReview'])->name("create-review");
+
+            Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
+            Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");
+
+            Route::get('/service-requests',[WebController::class,'serviceRequests'])->name("service-requests");
+            Route::get('/service-requests/create',[WebController::class,'createService'])->name("create-service");
+        });
+
+        Route::prefix('vendor-payout')->group(function () {
+            Route::get('/',[WebController::class,'vendorPayout'])->name("vendor-payout");
+            Route::get('/create',[WebController::class,'createVendorPayout'])->name("create-payout");
+            Route::get('/details',[WebController::class,'detailsVendorPayout'])->name("payout-details");
         });
 });
 

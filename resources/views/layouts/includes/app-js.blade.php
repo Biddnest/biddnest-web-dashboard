@@ -24,6 +24,7 @@ crossorigin="anonymous"></script>
 
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    
 <!-- jsdelivr -->
 <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
 
@@ -48,5 +49,3 @@ crossorigin="anonymous"></script>
   
 <script src="{{ asset('static/js/barba.js') }}"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
-
-

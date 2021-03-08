@@ -17,6 +17,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">        
 
+        <!-- Toggle btn -->
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
+        <!-- sortable -->
+        <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+        <!-- SLick -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+
           <!-- telephone input plugin -->
           <link rel="stylesheet" href="{{ asset('static/css/intlTelInput.css')}}">
 
@@ -30,21 +40,6 @@
         
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
 
-        <!-- Toggle btn -->
-        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-    rel="stylesheet">
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-
-        <!-- sortable -->
-        <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
-        <!-- SLick -->
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-
-        <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
-    />
 
         <style>
             .nav-collapse .li{
@@ -147,7 +142,10 @@
             .p-8{
                 padding: 8px 16px !important;
             }
+            .w-38 {
+                width: 38%;
 
+            }
 
             /* error bredcrum */
             .breadcrumb {

@@ -157,7 +157,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/service-requests/create',[WebController::class,'createService'])->name("create-service");
         });
 
-        Route::prefix('vendor-payout')->group(function () {
+        Route::prefix('payout')->group(function () {
             Route::get('/',[WebController::class,'vendorPayout'])->name("vendor-payout");
             Route::get('/create',[WebController::class,'createVendorPayout'])->name("create-payout");
             Route::get('/details',[WebController::class,'detailsVendorPayout'])->name("payout-details");

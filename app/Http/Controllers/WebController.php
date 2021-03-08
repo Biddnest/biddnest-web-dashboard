@@ -230,12 +230,12 @@ class WebController extends Controller
 
     public function vendorPayout()
     {
-        return view('vendorpayout.vendorpayout');
+        return view('vendorpayout.payout');
     }
 
     public function createVendorPayout()
     {
-        return view('vendorpayout.createvendorpayout');
+        return view('vendorpayout.createpayout');
     }
 
     public function detailsVendorPayout()

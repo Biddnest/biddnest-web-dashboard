@@ -7,7 +7,7 @@
                             <div class="d-flex  flex-row justify-content-between vertical-center">
                                 <h3 class="page-head text-left p-4 f-20 theme-text">Vendor Payout</h3>
                                 <div class="mr-20">
-                                    <a href="'{{route(create-payout')}}">
+                                    <a href="{{route('create-payout')}}">
                                         <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
                                             aria-hidden="true"></i>CREATE PAYOUT</button>
                                     </a>

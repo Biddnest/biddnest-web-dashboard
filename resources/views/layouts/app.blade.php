@@ -149,6 +149,10 @@
                         <i class="fa fa-times theme-text" aria-hidden="true"></i>
                     </button>
                 </div>
+                <div class="modal-body">
+                    <div class="tab-content" id="myTabContent">
+                    </div>
+                </div>
             </div> 
               
         </main>

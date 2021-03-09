@@ -2,7 +2,7 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
-const helper = import("helpers");
+const helper = import("./helpers.js");
 
 const env = "development";
 
@@ -16,9 +16,9 @@ else
 
 /* AJAX Universal */
 $("body").on('submit',"form",() => {
-    var valid = $(this).parsley.validate();
+    // var valid = $(this).parsley().validate();
 
-    if(valid){
+    if(true){
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=text]");
@@ -29,24 +29,25 @@ $("body").on('submit',"form",() => {
             method: form.attr("method"),
             data:JSON.stringify(requestData),
             beforeSend: () => {
-                helper.triggerFormAnim(button);
+                // helper.triggerFormAnim(button);
             },
             success: (response) =>{
                 logger.debug(response);
+                console.log(response);
                 if(response.status == "success"){
                     if(form.data("next") == "redirect"){
-                        helper.redirectTo(form.data("url"));
+                        // helper.redirectTo(form.data("url"));
                     }
                     if(form.data("next") == "refresh"){
-                        helper.redirectTo($(location).attr("href"));
+                        // helper.redirectTo($(location).attr("href"));
                     }
                 }
                 else if(response.status == "fail"){
 
-                    if(form.data("alert") == "tiny")
-                        helper.tinyAlert("Oops",response.message);
-                    else
-                        helper.megaAlert("Oops",response.message);
+                    if(form.data("alert") == "tiny"){}
+                        // helper.tinyAlert("Oops",response.message);
+                    else{}
+                        // helper.megaAlert("Oops",response.message);
 
                 }
                 else{
@@ -57,7 +58,7 @@ $("body").on('submit',"form",() => {
                 logger.debug(error.responseText);
             },
         });
-        helper.triggerFormAnim(button, buttonPretext);
+        // helper.triggerFormAnim(button, buttonPretext);
         return false;
     }
     else{

@@ -28,12 +28,12 @@
                     
                     
                 <!-- Form -->
-                    <form class="px-3 login">
+                    <form class="px-3 login" action="{{route('admin_login')}}" method="POST" onsubmit="return false;" data-next="redirect" data-url="{{route('dashboard')}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>E-mail</label>
                         <span class="">
-                            <input type="email" name="" placeholder="error@gmail.com" tabindex="10" required class="form-control ">
+                            <input type="email" name="email" placeholder="error@gmail.com" tabindex="10" required class="form-control ">
                             <span class="error-message">Please enter  valid Email</span>
                         </span>
                         
@@ -42,15 +42,15 @@
                         <div class="form-input isinvalid">
                         <label>Password</label>
                         <span>
-                            <input type="password" name="" placeholder="Password" required class="form-control ">
+                            <input type="password" name="password" placeholder="Password" required class="form-control" >
                             <span class="error-message">Please enter the correct password</span>
                         </span>
                             
                         </div>
 
                         
-                        <a href="{{ route('dashboard') }}" class="btn btn-block">Login</a>
-                        
+                        <!-- <a type="submit" href="{{ route('dashboard') }}" class="btn btn-block">Login</a> -->
+                        <button type="submit" class="btn btn-block">Login</button>
                         
                         <div class="text-center"> 
                         <a class="link-regular" href="{{ route('forgotpassword') }}">Forgot Password?</a>

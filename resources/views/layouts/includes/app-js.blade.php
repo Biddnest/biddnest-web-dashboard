@@ -53,5 +53,7 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('static/js/barba.js') }}"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
 
+<script src="{{ asset('static/js/app/app.js') }}"></script>
+<script src="{{ asset('static/js/app/helper.js') }}"></script>
 
 

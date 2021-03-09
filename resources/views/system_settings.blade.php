@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title') Settings @endsection
+@section('title') API Settings @endsection
 @section('content')
 
 <!-- Main Content -->
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="settings">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="apisettings">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4 f-18">Website Settings</h3>
      

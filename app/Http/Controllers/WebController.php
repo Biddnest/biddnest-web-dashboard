@@ -32,10 +32,15 @@ class WebController extends Controller
         return view('index');
     }
 
+    public function apiSettings()
+    {
+        return view('system_settings');
+    }
+
 
     public function settings()
     {
-        return view('system_settings');
+        return view('general_settings');
     }
 
     public function ordersBookingsLive()

@@ -10,7 +10,7 @@
             <div class="content-wrapper">
                 <!-- top_nav_bar -->
                 <div class="h-auto">
-                    <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation">
+                    <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation header">
                         <form class="search-bar form-inline col-6 p-0">
                             <input class="form-control w-100 search-bar" type="search" placeholder="Search..."
                                 aria-label="Search">
@@ -18,10 +18,12 @@
                         <div class="col-6">
                             <ul class="header-controls d-flex flex-row justify-content-end">
                                 <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-toggles "height="15"></i></span> </a>
+
                                     <div class="dropdown settings">
                                         <ul>
                                             <li><a href="#">General Settings</a></li>
                                             <li><a href="#">API Settings</a></li>
+
                                         </ul>
                                     </div>
                                 </li>
@@ -37,6 +39,8 @@
                                                             <h6> Your order is placed</h6>
                                                             <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
                                                                 elit.</p>
+
+
                                                         </div>
                                                     </div>
                                                 </a>
@@ -50,6 +54,8 @@
                                                             <h6> Your order is placed</h6>
                                                             <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
                                                                 elit.</p>
+
+
                                                         </div>
                                                     </div>
                                                 </a></li>
@@ -62,6 +68,8 @@
                                                             <h6> Your order is placed</h6>
                                                             <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
                                                                 elit.</p>
+
+
                                                         </div>
                                                     </div>
                                                 </a></li>
@@ -74,11 +82,14 @@
                                                             <h6> Your order is placed</h6>
                                                             <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
                                                                 elit.</p>
+
+
                                                         </div>
                                                     </div>
                                                 </a></li>
                                         </ul>
                                     </div>
+
                                 </li>
                                 <li class="account-settings">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -115,12 +126,13 @@
                                         </g>
                                     </svg>
                                     <span>Amith Raji</span>
+
                                     <div class="dropdown">
                                         <ul>
-                                            <li><a href="#">My Profile</a></li>
-                                            <li><a href="#">Change Password</a></li>
+                                            <li><a href="{{route('details-users')}}">My Profile</a></li>
+                                            <li><a href="{{route('reset-password')}}">Change Password</a></li>
                                             <li><a href="#">System Settings</a></li>
-                                            <li><a href="#">Logout</a></li>
+                                            <li><a href="{{route('login')}}">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -142,23 +154,7 @@
 
         
             <div class="side-bar-pop-up">
-            <div class="modal-header">
-                    <div class="theme-text heading f-18">Order Details</div>
-                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="tab-content" id="myTabContent">
-
-                        <div class="tab-pane fade show active margin-topneg-15" id="customer" role="tabpanel"
-                            aria-labelledby="new-order-tab">
-                            <!-- form starts -->
-                          
-                        </div>
-                    </div>
-                </div>
+            
             </div> 
               
         </main>

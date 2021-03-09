@@ -1,0 +1,75 @@
+.canvas-con {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 295px;
+  position: relative;
+  width: fit-content;
+  margin-top: 26px;
+}
+
+#myzonechart {
+  height: 100%;
+  width: 100%;
+  min-height: 150px;
+}
+
+.zc-ref {
+  display: none;
+}
+
+.total-user {
+  position: absolute;
+  font-size: 16px;
+  margin-right: 52% !important;
+  margin-top: 26% !important;
+}
+
+.canvas-con-inner {
+  height: 100%;
+}
+
+.canvas-con-inner, .legend-con {
+  display: inline-block;
+}
+
+.legend-con {
+  font-family: Roboto;
+  display: inline-block;
+}
+
+.legend-con ul {
+  list-style: none;
+  margin-bottom: 10px;
+  font-family: 'Roboto';
+}
+
+.legend-con li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  justify-content: start;
+}
+
+.legend-con li div.legend-text {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+}
+
+.legend-con li span.chart-legend {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  margin-left: -30px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.legend-con li .chart-legend-label-text {
+  display: flex;
+  justify-content: space-between;
+  width: 7em;
+  text-align: left;
+  vertical-align: baseline;
+}

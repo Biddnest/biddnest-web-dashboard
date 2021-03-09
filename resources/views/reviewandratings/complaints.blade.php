@@ -2,6 +2,7 @@
 @section('title') Complaints @endsection
 @section('content')
 
+
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="complainnts">
                     <div class="d-flex  flex-row justify-content-between vertical-center">
                         <h3 class="page-head text-left p-4 f-20 theme-text">Complaints</h3>
@@ -18,7 +19,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active" aria-current="page">Complaint</li>
-                                    <li class="breadcrumb-item"><a href="service-requests.html">Services</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('service-requests')}}">Services</a></li>
                                 </ol>
                             </nav>
 
@@ -55,7 +56,7 @@
 
 <div class="row no-gutters">
     <div class="col-sm-8 p-3 ">
-        <h3 class="f-18 pl-8">Complaints</h3 >
+        <h3 class="f-18 pl-8 title">Complaints</h3 >
 
     </div>
     <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
@@ -130,6 +131,94 @@
         </div>
 </div>
 </div>
+
+
+
+
+
+
+                                <!-- <div class="header-wrap">
+                                    <h3 class="f-18">Complaints</h3>
+
+                                    <div class="header-wrap p-0">
+                                        <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <i><img src="./assets/images/filter.svg" alt="" srcset=""></i>
+
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item border-top-bottom" href="#">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="fdate">
+                                                    <label class="form-check-label" for="fdate">
+                                                        Order ID
+                                                    </label>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item border-top-bottom" href="#">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="todate">
+                                                    <label class="form-check-label" for="todate">
+                                                        Zone
+                                                    </label>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item border-top-bottom" href="#">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="vendorName">
+                                                    <label class="form-check-label" for="vendorName">
+                                                        City
+                                                    </label>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item border-top-bottom" href="#">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="Status">
+                                                    <label class="form-check-label" for="couponName">
+                                                        Type
+                                                    </label>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item border-top-bottom" href="#">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="Status">
+                                                    <label class="form-check-label" for="couponName">
+                                                        Date
+                                                    </label>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item border-top-bottom" href="#">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="Status">
+                                                    <label class="form-check-label" for="couponName">
+                                                        status
+                                                    </label>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                        <form class="form-inline  input-group search-bar">
+
+                                            <input class="form-control    icon-bg  br-5" type="search"
+                                                placeholder="Search..." aria-label="Search">
+
+
+                                        </form>
+                                    </div>
+
+
+                                </div> -->
+
+
+
+
+
+
 
                                 <div class="all-vender-details">
                                     <table class="table text-left p-0  mb-0">
@@ -278,6 +367,26 @@
                                 </div>
                             </div>
 
+                            <!-- <div class="text-right p-20" style="float: right;">
+                                        <nav aria-label="Page navigation example border-none">
+                                            <ul class="pagination ">
+                                                <li class="page-item active-page"><a
+                                                        class="page-link border-none  p-1 mtop-5 " href="#">1</a></li>
+                                                <li class="page-item theme-text"><a
+                                                        class="page-link border-none bg-transparent p-1 mtop-5"
+                                                        aria-disabled="">Of</a></li>
+                                                <li class="page-item "><a
+                                                        class="page-link border-none bg-transparent p-1 mtop-5 "
+                                                        href="#">20</a></li>
+                                                <li class="page-item"><a
+                                                        class="page-link border-none bg-transparent p-1 " href="#"><img
+                                                            src="assets/images/Backward.svg"></a></li>
+                                                <li class="page-item"><a
+                                                        class="page-link border-none bg-transparent p-1 " href="#"><img
+                                                            src="assets/images/forward.svg"></a></li>
+                                            </ul>
+                                        </nav>
+                                    </div> -->
                         </div>
 
                     </div>

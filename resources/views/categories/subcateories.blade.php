@@ -19,7 +19,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">Categories & Subcategories
                                 </li>
-                              <li class="breadcrumb-item"><a href="#">Subategory Management</a></li>
+                              <li class="breadcrumb-item"><a href="#">Subcategory Management</a></li>
                               
                             </ol>
                           </nav>
@@ -33,16 +33,19 @@
                         <div class="col-sm-12" style="padding-right: 0px;">
                             <div class="card h-auto p-0 pt-10">
                                 <div class="header-wrap" style="padding: 5px 20px;">
-                                    <h1 class="heading2 primary-text">Subcategory Management</h1>
+                                <header>
+                                        <h3 class="f-18">
+                                            Subcategory
+                                        </h3>
+                                    </header>   
+                                                                     
                                     <div class="p-10 card-head left col-sm-3">
-                                        <div class="">
-                                            <form class="form-inline  input-group search-bar">
-
-                                                <input class="form-control    icon-bg " type="search" placeholder="Search..." aria-label="Search">
-
-
-                                            </form>
-                                        </div>
+                                        <div class="search">
+                                            <input type="text" class="searchTerm" placeholder="Search...">
+                                            <button type="submit" class="searchButton">
+                                              <i class="fa fa-search"></i>
+                                           </button>
+                                         </div>
 
                                     </div>
                                 </div>

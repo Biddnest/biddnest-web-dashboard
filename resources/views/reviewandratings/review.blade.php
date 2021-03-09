@@ -2,6 +2,7 @@
 @section('title') Review @endsection
 @section('content')
 
+
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="review">
                     <div class="d-flex  flex-row justify-content-between">
                         <h3 class="page-head theme-text text-left p-4 f-20">Review & Ratings</h3>
@@ -18,7 +19,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active" aria-current="page">Review & Ratings</li>
-                                    <li class="breadcrumb-item"><a href="complaints.html">Manage Reviews</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('review')}}">Manage Reviews</a></li>
 
                                 </ol>
                             </nav>
@@ -50,7 +51,7 @@
 
                                 <div class="row no-gutters">
                                     <div class="col-sm-8 p-3 ">
-                                        <h3 class="f-18 pl-8">Complaints</h3 >
+                                        <h3 class="f-18 pl-8 title">Review</h3 >
                                 
                                     </div>
                                     <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
@@ -189,7 +190,7 @@
                                                     <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
                                                     <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
                                                 </td>
-                                                <td> <a href="edit-review.html"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i> <i
+                                                <td> <a href="{{route('create-review')}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i> <i
                                                         class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
                                                 </td>
                                             </tr>
@@ -382,5 +383,4 @@
                         </div>
                     </div>
 </div>
-
 @endsection

@@ -41,6 +41,20 @@
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
 
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+ 
+
+    
+        
+
+   
+    
+
+
+    
+
+
+        
         <style>
             .nav-collapse .li{
                 list-style-type: none !important;
@@ -56,10 +70,10 @@
             }
 
             main .menu-sidebar {
-                margin-top: 60px;
+                margin-top: 70px;
             }
             main .menu-sidebar .Brand-logo {
-                height: 60px;
+                height: 70px;
             }
     
             .ml-48{
@@ -75,7 +89,7 @@
             .pl-10{
                 padding-left: 10px;
             }
-            .default-image {
+            .default-image{
                 width: 85px;
                 height: 65px;
             }
@@ -164,9 +178,131 @@
                 padding-left: 30px !important;
             }
             .btn-outline-primary:hover {
-                color: #fff;
-                background-color: #2E0789 !important;
-                border-color:#2E0789 !important;
+            color: #fff;
+            background-color: #2E0789 !important;
+            border-color:#2E0789 !important;
+            } 
+            .Dashboard-lcards .table tbody tr:hover {
+                border: none !important;
             }
+
+            select.form-control:not([size]):not([multiple]) {
+                height: calc(2.25rem + 14px);
+            }
+
+
+            .Dashboard-lcards .table td, .Dashboard-lcards .table th {
+                padding: 0.75rem;
+                border-top: none;
+                vertical-align: baseline;
+            }
+            .Dashboard-lcards .table th {
+                padding: 1.75rem !important;
+                border-top: none;
+            }
+
+            .select-styled {
+                border-bottom-left-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+            }
+
+            
+
+
+            .order-status {
+            width: 85%;
+            align-self: center;
+            margin: 20px 80px;
+        }
+
+        .dash-line {
+            position: absolute;
+            border: none;
+            border-top: 2px dashed #C0E2FD;
+            height: 0px;
+            margin-left: 6px;
+            margin-top: 20px;
+            width: 90%;
+        }
+
+        .steps-container {
+            width: 100%;
+            align-self: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .step {
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .step-dot {
+            width: 38px;
+            height: 38px;
+            z-index: 1;
+            background-color: #2E0789;
+            border-radius: 19px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-title {
+            margin: 0 auto;
+            color: #2E0789;
+        }
+
+        .child-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            z-index: 1;
+            border: 3px solid white;
+        }
+
+        .background-color-lightblue {
+            background-color: #EFF7FF;
+        }
+
+        .table-width {
+            width: 95%;
+            margin: 0 auto;
+
+        }
+
+
+.toggle-group .toggle-on.btn-xs {
+    background-color: #2E0789 !important;
+    padding: 15px;
+    font-size: 12px !important;
+}
+.toggle-group .toggle-off.btn-xs {
+    background-color: #2E0789 !important;
+    border-color: #2E0789 !important;
+    padding: 15px;
+    font-size: 12px !important;
+}
+
+.header{
+    padding-top: 10px !important;
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+    padding-bottom: 10px !important;
+}
+
+
+input[type=checkbox], input[type=radio] {
+    margin: 4px -20px 0;
+}
+
+.title {
+    margin-top: 0 !important;
+    margin-bottom: 15px !important;
+    padding-left: 20px !important;
+}
         </style>
 

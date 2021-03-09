@@ -49,7 +49,7 @@
                             <div class="card  h-auto p-0 pt-10">
 
 
-                                <div class="row no-gutters">
+                                <div class="row no-gutters" style="margin-top: 5px;">
                                     <div class="col-sm-8 p-3 ">
                                         <h3 class="f-18 pl-8 title">Review</h3 >
                                 

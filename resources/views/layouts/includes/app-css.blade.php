@@ -300,8 +300,8 @@ input[type=checkbox], input[type=radio] {
 }
 
 .title {
-    margin-top: 0 !important;
-    margin-bottom: 15px !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
     padding-left: 20px !important;
 }
         </style>

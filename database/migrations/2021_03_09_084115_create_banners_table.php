@@ -17,6 +17,7 @@ class CreateBannersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('slider_id')->index('slider_id');
             $table->foreign('slider_id')->references('id')->on('sliders');
+            $table->string('image')->default(null)->nullable();
             $table->string("name");
             $table->string("url");
             $table->date('from_date');

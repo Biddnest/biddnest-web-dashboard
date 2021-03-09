@@ -11,22 +11,22 @@ class AlterAdminsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->text('zone_id');
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::table('admins', function (Blueprint $table) {
+    //         $table->text('zone_id');
+    //     });
+    // }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('admins', function (Blueprint $table) {
-            //
-        });
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  *
+    //  * @return void
+    //  */
+    // public function down()
+    // {
+    //     Schema::table('admins', function (Blueprint $table) {
+    //         //
+    //     });
+    // }
 }

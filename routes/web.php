@@ -72,6 +72,11 @@ Route::prefix('web/api')->group(function () {
     Route::put('/zones',[Router::class,'zones_edit'])->name("zones_edit");
     Route::get('/zones/{id}',[Router::class,'zones_get'])->name("zones_get");
     Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
+
+
+    //Sliders and Banners API
+    Route::post('/sliders',[Router::class,'sliders_add'])->name("sliders_add");
+    Route::post('/banners',[Router::class,'banners_add'])->name("banners_add");
 });
 
 

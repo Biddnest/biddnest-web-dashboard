@@ -45,9 +45,7 @@
                       aria-labelledby="new-order-tab"
                     >
                       <!-- form starts -->
-                      <form
-                        class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue"
-                      >
+                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue">
                         <!-- <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
@@ -92,11 +90,7 @@
                           <div class="col-lg-6">
                             <div class="form-input">
                               <label class="full-name">From date</label>
-                              <input
-                                type="text"
-                                class="dateselect form-control br-5"
-                                required="required"
-                              />
+                              <input type="text" name="from_date" class="dateselect form-control br-5" required="required"/>
                               <span class="error-message"
                                 >please enter valid date</span
                               >
@@ -105,11 +99,7 @@
                           <div class="col-lg-6">
                             <div class="form-input">
                               <label class="full-name">To date</label>
-                              <input
-                                type="text"
-                                class="dateselect form-control br-5"
-                                required="required"
-                              />
+                              <input type="text" name="to_date" class="dateselect form-control br-5" required="required" />
                               <span class="error-message"
                                 >please enter valid date</span
                               >

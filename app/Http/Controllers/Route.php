@@ -471,6 +471,11 @@ class Route extends Controller
 
      /*Sliders And Banners*/
 
+     public function sliders()
+     {
+        return SliderController::sliders();
+     }
+
      public function sliders_add(Request $request)
      {
         $validation = Validator::make($request->all(),[
@@ -486,6 +491,16 @@ class Route extends Controller
             return SliderController::SliderAdd($request->name, $request->type, $request->position, $request->platform, $request->size, $request->from_date, $request->to_date, $request->zone_specific);
      }
 
+     public function sliders_delete($id)
+     {
+        return SliderController::slidersDelete($id);
+     }
+
+     public function banners()
+     {
+        return SliderController::banners();
+     }
+
      public function banners_add(Request $request)
      {
         $data = $request->all();
@@ -494,10 +509,22 @@ class Route extends Controller
             'to_date' => 'required', 'order' => 'required'
         ]);
 
+        if($request->hasfile('image')){
+            $file =$request->file('image');
+            $imagedata = file_get_contents($file);
+            $base64 = base64_encode($imagedata);
+            $data['file'] = $base64;
+        }          
+
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else   
             return SliderController::BannerAdd($data);
+     }
+
+     public function banners_delete($id)
+     {
+        return SliderController::bannersDelete($id);
      }
 }

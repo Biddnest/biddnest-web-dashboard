@@ -75,8 +75,13 @@ Route::prefix('web/api')->group(function () {
 
 
     //Sliders and Banners API
+    Route::get('/sliders',[Router::class,'sliders'])->name("sliders");
     Route::post('/sliders',[Router::class,'sliders_add'])->name("sliders_add");
+    Route::delete('/sliders/{id}',[Router::class,'sliders_delete'])->name("sliders_delete");
+
+    Route::get('/banners',[Router::class,'banners'])->name("banners");
     Route::post('/banners',[Router::class,'banners_add'])->name("banners_add");
+    Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
 });
 
 

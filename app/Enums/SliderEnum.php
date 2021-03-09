@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Fabito\AvatarGenerator\Avatar;
 
 
-class AdminEnums{
-    public static $ROLES = ["admin"=>1, "zone_admin"=>2, "marketing"=>3];
+class SliderEnums
+{
+    public static $ZONE = ["universal"=>1, "zone"=>2];
     public static $STATUS = ["active"=>1, "suspended"=>2];
-    public static $VERIFIDE = ["YES"=>1, "NO"=>2];
 }

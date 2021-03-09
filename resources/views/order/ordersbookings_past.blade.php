@@ -2,7 +2,7 @@
 @section('title') Orders And Bookings @endsection
 @section('content')
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderBookings">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderBookingspast">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4 f-20">Bookings & Orders</h3>
         <div class="mr-20">
@@ -38,11 +38,12 @@
                             </ul>
                         </h3>
                     </div>
-                    <div class="p-10 card-head left col-sm-3">
-                        <div class="">
-                            <form class="form-inline  input-group search-bar">
-                                <input class="form-control    icon-bg " type="search" placeholder="Search..." aria-label="Search">
-                            </form>
+                    <div class="p-1 card-head left col-sm-3">
+                        <div class="search">
+                            <input type="text" class="searchTerm" placeholder="Search...">
+                            <button type="submit" class="searchButton">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -151,6 +152,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection

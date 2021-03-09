@@ -171,4 +171,90 @@ class WebController extends Controller
     {
         return view('sliderandbanner.pushnotification');
     }
+
+    public function createPushNotification()
+    {
+        return view('sliderandbanner.createpush');
+    }
+
+    public function mailNotification()
+    {
+        return view('sliderandbanner.mailnotification');
+    }
+
+    public function createMailNotification()
+    {
+        return view('sliderandbanner.createmail');
+    }
+
+    public function testimonials()
+    {
+        return view('sliderandbanner.testimonials');
+    }
+
+    public function createTestimonials()
+    {
+        return view('sliderandbanner.createtestimonials');
+    }
+
+    public function review()
+    {
+        return view('reviewandratings.review');
+    }
+
+    public function createReview()
+    {
+        return view('reviewandratings.createreview');
+    }
+
+    public function complaints()
+    {
+        return view('reviewandratings.complaints');
+    }
+
+    public function createComplaints()
+    {
+        return view('reviewandratings.createcomplaints');
+    }
+
+    public function serviceRequests()
+    {
+        return view('reviewandratings.servicerequests');
+    }
+
+    public function createService()
+    {
+        return view('reviewandratings.createservice');
+    }
+
+
+    public function vendorPayout()
+    {
+        return view('vendorpayout.payout');
+    }
+
+    public function createVendorPayout()
+    {
+        return view('vendorpayout.createpayout');
+    }
+
+    public function detailsVendorPayout()
+    {
+        return view('vendorpayout.detailspayout');
+    }
+
+    public function users()
+    {
+        return view('users.users');
+    }
+
+    public function createUsers()
+    {
+        return view('users.createusers');
+    }
+
+    public function detailsUsers()
+    {
+        return view('users.detailseusers');
+    }
 }

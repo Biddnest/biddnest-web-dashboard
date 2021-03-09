@@ -1,0 +1,97 @@
+
+// .pie{
+//     width: 150px;
+//     height: 150px;
+//     display: block;
+//     position: relative;
+//     left: 20%;
+//     margin: auto;
+//     border-radius: 50%;
+//     background-color: #2699FB;
+//     // border: 2px solid #2699FB;
+//     float: left;
+//     margin: 2em;
+//   .block{
+//     position:absolute;
+//     background:#fff;
+//     width:130px;
+//     height:130px;
+//     display:block;
+//     border-radius:50%;
+//     top:10px;
+//     left:10px;
+//   }
+
+// }
+// #time{
+//   font-size:3em;
+//   position:absolute;
+//   top:30%;
+//   left:33%;
+//   color:lighten(#000,60%);
+// }
+// .degree{
+//   /*90 + ( 360 * .1 )*/
+//       background-image:
+//         linear-gradient(90deg, transparent 50%, white 50%),
+//         linear-gradient(90deg, white 50%, transparent 50%);
+// }
+
+
+
+
+
+.base-timer {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: auto;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: $coolblue;
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  
+}

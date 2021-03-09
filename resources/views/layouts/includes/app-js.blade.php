@@ -50,8 +50,3 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
 
 
-
-
-
-
-

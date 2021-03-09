@@ -6,20 +6,7 @@
             <div class="d-flex flex-row justify-content-between">
               <h3 class="heading1 p-4">Create Slider & Banners</h3>
             </div>
-            <!-- <div class="d-flex flex-row text-left ml-120">
-              <a href="sliders-banners.html" class="text-decoration-none">
-                <h3 class="page-subhead text-left pb-3 f-20 theme-text">
-                  <i class="p-1">
-                    <img
-                      src="assets/images/Icon feather-chevrons-left.svg"
-                      alt=""
-                      srcset=""
-                    />
-                  </i>
-                  Back to Slider & Banners
-                </h3>
-              </a>
-            </div> -->
+            
             <!-- Dashboard cards -->
             <div class="d-flex  flex-row justify-content-between">
               <div class="page-head text-left p-5 pt-0 pb-0">

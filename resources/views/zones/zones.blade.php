@@ -53,9 +53,12 @@
                         <div class="col-sm-12">
                             <div class="card  h-auto p-0 pt-10">
                                 <div class="header-wrap">
-                                    <h3 class="f-18">Zone Management </h1>
+                                    <div class="col-sm-8 p-3 ">
+                                        <h3 class="f-18 title">Zone Management </h3>
+                                
+                                    </div>
 
-                                    <div class="header-wrap p-0">
+                                    <div class="header-wrap p-0 col-sm-1">
                                         <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                             <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
@@ -91,15 +94,15 @@
 
 
                                         </div>
-                                        <form class="form-inline  input-group search-bar">
-
-                                            <input class="form-control    icon-bg  br-5" type="search"
-                                                placeholder="Search..." aria-label="Search">
-
-
-                                        </form>
                                     </div>
-
+                                    <div class="card-head  pt-2  left col-sm-3">
+                                        <div class="search">
+                                           <input type="text" class="searchTerm" placeholder="Search...">
+                                           <button type="submit" class="searchButton">
+                                             <i class="fa fa-search"></i>
+                                          </button>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="all-vender-details">

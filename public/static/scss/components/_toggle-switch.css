@@ -1,0 +1,351 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  vertical-align: baseline;
+  top: 5px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2E0789;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 3px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 5px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 2px;
+}
+
+input:checked + .slider {
+  background-color: #2E0789;
+  opacity: 0.4;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2E0789;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.switch-small {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  top: 5px;
+}
+
+.switch-small input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-small {
+  /* Rounded sliders */
+}
+
+.switch-small.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2E0789;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 4px;
+}
+
+.switch-small .slider:before {
+  position: absolute;
+  content: "";
+  height: 11px;
+  width: 11px;
+  left: 25px;
+  bottom: 5px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.switch-small input:checked + .slider {
+  background-color: #2E0789;
+}
+
+.switch-small input:focus + .slider {
+  box-shadow: 0 0 1px #2E0789;
+}
+
+.switch-small input:checked + .slider:before {
+  -webkit-transform: translateX(-18px);
+  -ms-transform: translateX(-18px);
+  transform: translateX(-18px);
+}
+
+.switch-small .slider.round {
+  border-radius: 34px;
+}
+
+.switch-small .slider.round:before {
+  border-radius: 50%;
+}
+
+.switch-reverse {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.switch-reverse input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-reverse {
+  /* Rounded sliders */
+}
+
+.switch-reverse .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2E0789;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 5px;
+}
+
+.switch-reverse .slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 30px;
+  bottom: 5px;
+  border-radius: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch-reverse input:checked + .slider {
+  background-color: #2E0789;
+  opacity: 0.4;
+}
+
+.switch-reverse input:focus + .slider {
+  box-shadow: 0 0 1px #2E0789;
+}
+
+.switch-reverse input:checked + .slider:before {
+  -webkit-transform: translateX(-26px);
+  -ms-transform: translateX(-26px);
+  transform: translateX(-26px);
+}
+
+.switch-reverse .slider.round {
+  border-radius: 34px;
+}
+
+.switch-reverse .slider.round:before {
+  border-radius: 50%;
+}
+
+.toggle.btn-outline-primary .toggle-handle {
+  background-color: #fff !important;
+  border-color: #DFE6EC !important;
+}
+
+.toggle-group .toggle.btn-outline-primary .toggle-handle {
+  background-color: #2E0789 !important;
+  border-color: #DFE6EC !important;
+}
+
+.toggle-group .toggle-on.btn-xs {
+  background-color: #2E0789 !important;
+}
+
+.toggle-group .toggle-off.btn-xs {
+  background-color: #2E0789 !important;
+  border-color: #2E0789 !important;
+}
+
+.toggle-group .btn {
+  background-color: #ffff;
+}
+
+.toggle-handle {
+  position: absolute;
+  top: 17%;
+  right: 23px;
+  margin: 0 10px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 68% !important;
+  width: 12% !important;
+  border-width: 0 1px;
+  background-color: #fff !important;
+}
+
+.toggle-handle:hover {
+  background-color: #fff !important;
+}
+
+.btn-outline-primary {
+  color: #ffff !important;
+  background-color: #2E0789;
+  background-image: none;
+  border-color: #2E0789 !important;
+  border-radius: 5px !important;
+}
+
+.btn-outline-primary:hover {
+  border-color: #2E0789;
+}
+
+.btn-outline-secondary {
+  color: #ffff !important;
+  background-color: #2E0789;
+  background-image: none;
+  border-color: #2E0789 !important;
+  border-radius: 5px !important;
+}
+
+.btn-outline-secondary:hover {
+  border-color: #2E0789;
+}
+
+.toggle.btn-outline-secondary {
+  background-color: #2E0789;
+}
+
+.toggle.btn-outline-secondary .toggle-handle {
+  right: -20px;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+  font-size: 12px !important;
+}
+
+.toggle-on.btn-xs {
+  padding-right: 50px !important;
+}
+
+.toggle-off.btn-xs {
+  padding-left: 41px !important;
+}
+
+.table .toggle-handle {
+  position: absolute;
+  top: 15%;
+  left: 65px;
+  margin: 0 10px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 70% !important;
+  width: 12% !important;
+  border-width: 0 1px;
+  background-color: #fff !important;
+}
+
+.table .toggle.btn-outline-secondary .toggle-handle {
+  left: 103px;
+}
+
+.small-switch .btn-xs {
+  font-size: 8px !important;
+  color: #fff;
+}
+
+.small-switch .toggle-group .toggle-on.btn-xs {
+  background-color: #2E0789 !important;
+  color: #fff;
+}
+
+.small-switch .toggle-group .toggle-off.btn-xs {
+  background-color: #2E0789 !important;
+  color: #fff;
+}
+
+.small-switch .btn-outline-primary:hover {
+  color: #fff;
+  background-color: #2E0789;
+  border-color: #2E0789;
+}
+
+.small-switch .btn-outline-primary:active {
+  color: #fff;
+  background-color: #2E0789;
+  border-color: #2E0789;
+}
+
+.small-switch .btn-outline-primary:not(:disabled):not(.disabled):active, .small-switch .show > .btn-outline-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #2E0789;
+  border-color: #2E0789;
+}
+
+.btn-xs {
+  font-size: 8px !important;
+  color: #fff;
+}
+
+.btn-xs:hover {
+  background-color: #2E0789 !important;
+  border-color: #2E0789 !important;
+}
+
+.vendor-switch2 .toggle-group .toggle-on.btn-xs {
+  background-color: #2E0789 !important;
+  color: #fff;
+  padding: 12px;
+}
+
+.vendor-switch2 .toggle-group .toggle-off.btn-xs {
+  background-color: #2E0789 !important;
+  color: #fff;
+  padding: 12px;
+}

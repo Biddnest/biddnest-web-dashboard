@@ -1,0 +1,42 @@
+.header-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+.heading1{
+    margin: 2%;
+    
+}
+.all-vender-details{
+
+}
+.vender-all-details{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 20px;
+}
+
+
+.onboard-vendor-form{
+    .form-input label{
+        font-weight: $bold-weight;
+        color: $primary-text-color;
+    }
+
+    
+}
+
+.img-label{
+    font-size: 14px;
+    font-weight: 700;
+    color: $primary-text-color;
+    padding-left: 25px;
+    margin-bottom: 5px;
+}
+.vender-role-footer{
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;;
+}

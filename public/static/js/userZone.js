@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
 var chartData = [{label: 'Karnataka', value: 65 },{label: 'Maharashtra', value: 25},{label: 'Other', value: 15},  ]
 let chartConfig = {
     shapes: [
@@ -173,5 +173,3 @@ let chartConfig = {
     height: '100%',
     width: '100%',
   });
-
-});

@@ -1,0 +1,101 @@
+
+.profile-section{
+    display: flex;
+    .figure{
+        margin: 0;
+    }
+    .profile-details-side-pop{
+        margin-left: 15px;
+        width: 100%;
+        ul{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                h1{
+                    margin: 0;
+                    font-size: 16px;
+                    color: $text-color-one;
+                    font-weight: 600;
+                    padding-bottom: 5px;
+                }
+                h2{
+                    margin: 0;
+                    font-size: 15px;
+                    color: $text-color-one;
+                    font-weight: 500;
+                }
+                p{
+                    margin: 0;
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: $text-color-one;
+                }
+            }
+        }
+    }
+}
+
+.create-customer{
+    header{
+        padding: 20px 15px;
+        border-bottom: 2px solid #efefef;
+        h1{
+            font-size: 18px;
+            font-weight: 500;
+            color: $text-color-one;
+            margin: 0;
+        }
+    }
+}
+.form-wrapper{
+    padding: 20px 15px;
+    padding-bottom: 0;
+     .form-input label {
+        font-weight: 700;
+        color: $text-color-one;
+    }
+}
+
+.user-details-section{
+    .left-section{
+        background-color: #EFF7FF;
+        padding: 20px 20px;
+
+        .titlle{
+            p{
+                font-size: 14px;
+                font-weight: 500;
+                color: $text-color-one;
+            }
+        }
+    }
+    .right-section{
+       .information{
+        margin-top: 15px;
+        p{
+            font-size: 14px;
+            font-weight: 400;
+            color: $text-color-one
+
+        }
+       }
+
+    }
+}
+
+.edit-pen{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.fix-height{
+    height: 125px;
+    max-height: 125px;
+    min-height: 125px;
+}

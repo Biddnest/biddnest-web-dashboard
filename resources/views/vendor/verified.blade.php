@@ -38,14 +38,14 @@
                                     <div class="card  h-auto p-0 pt-10 ">
                                         <div class="header-wrap pl-10">
                                             <h3 class="f-18 pl-3">Verified Vendors</h3 >
-                                            <div>
-                                                <form class="form-inline  input-group search-bar">
-                                                    
-                                                    <input class="form-control    icon-bg  br-5" type="search" placeholder="Search..." aria-label="Search">
-                                                 
-                                                      
-                                                  </form>
-                                               </div>
+                                            <div class="p-1 card-head left col-sm-3">
+                                                    <div class="search">
+                                                       <input type="text" class="searchTerm" placeholder="Search...">
+                                                       <button type="submit" class="searchButton">
+                                                         <i class="fa fa-search"></i>
+                                                      </button>
+                                                    </div>
+                                            </div>
                                         </div>                                        
                                         <!-- <div class="all-vender-details"> -->
                                             <table class="table text-left p-10 theme-text th-no-border">

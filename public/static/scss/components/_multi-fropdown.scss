@@ -1,0 +1,73 @@
+.Dashboard-lcards .table tbody tr:hover {
+    border-color: transparent  !important;
+}
+.mul-btns .btn-group>.btn:first-child{
+    opacity: 0;
+width: 21px;
+margin-left: 78px;
+}
+.multiselect-selected-text{
+    width: 20px;
+    display: none;
+}
+
+.multiselect-container>li {
+   padding: 0;
+    border-bottom: 1px solid #BCE0FD;
+    // border-radius: 12px;
+    border-bottom: 2px solid #BCE0FD;
+    &:last-child{
+        border-bottom: none;        
+        border-bottom-right-radius: 14px;
+        border-bottom-left-radius: 14px;
+    }
+    &:first-child{
+        border-top-right-radius: 14px;
+        border-top-left-radius: 14px;
+    }
+    &:hover{
+        background-color: #F1F9FF;
+        a{
+            label.checkbox{
+              // background-color: #F1F9FF;
+               background-color: #F1F9FF;
+               font-weight: 600;
+              
+            }
+        }
+       
+    }
+    
+
+    }
+
+    .multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox {
+        padding: 5px 15px;
+        width: 100%;
+        background: #FFFFFF;
+        align-items: center;
+        display: flex;
+        font-size: 14px;
+        font-weight: 400;
+        color: #2699FB;
+}
+
+.multiselect-container>li>a>label>input[type=checkbox] {
+width: 16px;
+height: 16px;
+margin-bottom: 0 !important;
+margin-right: 10px;
+}
+
+.multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox {
+    margin: 0;
+    border-radius: 12px;
+    outline: none;
+    font-weight: 500 !important;
+    white-space: nowrap;
+}
+
+.multiselect-container>li>a {
+    padding: 0;
+    text-decoration: none;
+}

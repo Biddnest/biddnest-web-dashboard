@@ -10,7 +10,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
-        Route::any("/login", [ApiRouter::class, 'login']);
+        Route::post("/login", [ApiRouter::class, 'login']);
         Route::post("/login/verify-otp", [ApiRouter::class, 'verifyLoginOtp']);
         Route::post("/signup", [ApiRouter::class, 'signupUser']);
     });

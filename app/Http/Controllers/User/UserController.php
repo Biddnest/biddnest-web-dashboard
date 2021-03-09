@@ -65,6 +65,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse|object
      */
     public static function verifyLoginOtp($phone, $otp){
+        $data = null;
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
                 return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
@@ -80,8 +81,11 @@ class UserController extends Controller
             return Helper::response(true, "Otp has been verified",[
                 "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
             ]);
+            if($user->fname){
+                $data = $user;
+            }
         }else {
-            return Helper::response(false, "Incorrect otp provided");
+            return Helper::response(false, "Incorrect otp provided", $data);
         }
     }
 

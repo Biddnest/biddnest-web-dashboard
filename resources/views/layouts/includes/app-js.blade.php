@@ -43,10 +43,15 @@ crossorigin="anonymous"></script>
   <script src="{{ asset('static/js/maps.js') }}"></script>
   <script src="{{ asset('static/js/select.js') }}"></script>
 
+
+  <script src="{{ asset('static/js/froala_editor.min.js')}}"></script>
+<script src="{{ asset('static/js/froala_editor.pkgd.min.js')}}"></script>
+
 <!-- Optional JavaScript -->
 <script src="{{ asset('static/js/sidebarCollapse.js') }}"></script>
   
 <script src="{{ asset('static/js/barba.js') }}"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
+
 
 

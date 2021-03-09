@@ -131,7 +131,7 @@
                                         <ul>
                                             <li><a href="{{route('details-users')}}">My Profile</a></li>
                                             <li><a href="{{route('reset-password')}}">Change Password</a></li>
-                                            <li><a href="#">System Settings</a></li>
+                                            <li><a href="{{route('settings')}}">System Settings</a></li>
                                             <li><a href="{{route('login')}}">Logout</a></li>
                                         </ul>
                                     </div>

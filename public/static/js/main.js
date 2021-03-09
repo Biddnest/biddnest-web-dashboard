@@ -336,5 +336,7 @@ div.mouseup(function () {
     $(this).css("background-color", "#FFFFFF");
 });
 
-
+tinymce.init({
+    selector: '#mytextarea'
+    });
 

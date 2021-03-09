@@ -41,7 +41,7 @@
                                                 class="table text-center p-0 theme-text mb-0 primary-table">
                                                 <thead class="secondg-bg p-0">
                                                     <tr>
-                                                        <th scope="col" style="width: 4%;"></th>
+                                                        <!-- <th scope="col" style="width: 4%;"></th> -->
 
                                                         <th scope="col">Image</th>
                                                         <th scope="col">Banner Name</th>
@@ -53,9 +53,9 @@
                                                 </thead>
                                                 <tbody class="mtop-20 f-14">
                                                     <tr class="tb-border cursor-pointer clickable-row">
-                                                        <td class="f-l">
+                                                        <!-- <td class="f-l">
                                                             <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td>
+                                                        </td> -->
 
                                                         <td scope="row" class="span3" style="width: 25%;">
                                                             <div class="d-flex justify-content-center">
@@ -91,9 +91,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="tb-border cursor-pointer">
-                                                        <td class="f-l">
+                                                        <!-- <td class="f-l">
                                                             <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td>
+                                                        </td> -->
                                                         <td scope="row" style="width: 25%;">
                                                             <div class="d-flex justify-content-center">
                                                                 <img class="p-2"
@@ -124,9 +124,9 @@
                                                                 class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                                     </tr>
                                                     <tr class="tb-border cursor-pointer">
-                                                        <td class="f-l">
+                                                        <!-- <td class="f-l">
                                                             <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td>
+                                                        </td> -->
                                                         <td scope="row" style="width: 25%;">
                                                             <div class="d-flex justify-content-center">
                                                                 <img class="p-2"
@@ -160,9 +160,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="tb-border cursor-pointer">
-                                                        <td class="f-l">
+                                                        <!-- <td class="f-l">
                                                             <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td>
+                                                        </td> -->
                                                         <td scope="row" style="width: 25%;">
                                                             <div class="d-flex justify-content-center">
                                                                 <img class="p-2"
@@ -192,9 +192,9 @@
                                                             class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                                     </tr>
                                                     <tr class="tb-border cursor-pointer">
-                                                        <td class="f-l">
+                                                        <!-- <td class="f-l">
                                                             <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td>
+                                                        </td> -->
                                                         <td scope="row" style="width: 25%;">
                                                             <div class="d-flex justify-content-center">
                                                                 <img class="p-2"

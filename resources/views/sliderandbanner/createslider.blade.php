@@ -48,7 +48,7 @@
                       <form
                         class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue"
                       >
-                        <div class="d-flex row">
+                        <!-- <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
                             <div class="upload-section p-20 pt-0">
@@ -77,13 +77,6 @@
                                     <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"
                                       data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary"
                                       data-on="Active" data-off="Inactive" id="switch">
-                                    <!-- Button -->
-                                    <!-- <div class="theme-text f-20 mr-20">For me</div>
-                        <label class="switch mr-20">
-                            <input type="checkbox" id="switch">
-                            <span class="slider"></span>
-                          </label>
-                          <div class="theme-text f-20 ">Book for others</div> -->
           
                                   </div>
                                 </div>
@@ -93,7 +86,7 @@
                               </span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
 
                         <div class="d-flex row p-20">
                           <div class="col-lg-6">
@@ -223,6 +216,19 @@
                               
                               <span class="error-message"
                                 >Please enter valid Size</span
+                              >
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-input">
+                              <label class="phone-num-lable">Zone Specific</label>
+                              <select id="size" class="form-control br-5">
+                                <option>Universal</option>
+                                <option>Zone</option>
+                              </select>
+                              
+                              <span class="error-message"
+                                >Please enter valid TYpe</span
                               >
                             </div>
                           </div>

@@ -19,10 +19,10 @@
                             <ul class="header-controls d-flex flex-row justify-content-end">
                                 <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-toggles "height="15"></i></span> </a>
 
-                                    <div class="dropdown settings">
+                                    <div class="dropdown settings" style="height: auto;">
                                         <ul>
-                                            <li><a href="#">General Settings</a></li>
-                                            <li><a href="#">API Settings</a></li>
+                                            <!-- <li><a href="#">General Settings</a></li> -->
+                                            <li><a href="{{route('api-settings')}}">API Settings</a></li>
 
                                         </ul>
                                     </div>

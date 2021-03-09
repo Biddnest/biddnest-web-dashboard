@@ -85,6 +85,7 @@ Route::prefix('admin')->group(function () {
         
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
         Route::get('/settings',[WebController::class,'settings'])->name("settings");
+        Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
 
 
         //booking and orders

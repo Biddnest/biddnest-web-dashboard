@@ -19,13 +19,13 @@ class Route extends Controller
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'username' => 'required|string',
+            'email' => 'required|string',
             'password' => 'required',
         ]);
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return AdminController::login($request->username, $request->password);
+            return AdminController::login($request->email, $request->password);
 
     }
 

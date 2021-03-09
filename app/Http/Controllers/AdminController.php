@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\Admin;
@@ -14,6 +15,7 @@ use App\Models\Organization;
 use App\Models\Org_kyc;
 use App\Helper;
 use App\Sms;
+
 
 use  App\Jobs\SendOtp;
 
@@ -35,7 +37,22 @@ class AdminController extends Controller
         if(!$admin_user)
             return Helper::response(false,"Incorrect username or password");
 
-        return password_verify($password, $admin_user->password) ? Helper::response(true, "Login was successfull", ["token"=>Helper::generateAuthToken(["email"=>$admin_user->email,"password"=>$password]),"expiry"=>CarbonImmutable::now()->add(365, 'day')]) : Helper::response(false, "password is incorrect");
+        // return password_verify($password, $admin_user->password) ? Helper::response(true, "Login was successfull", ["token"=>Helper::generateAuthToken(["email"=>$admin_user->email,"password"=>$password]),"expiry"=>CarbonImmutable::now()->add(365, 'day')]) : Helper::response(false, "password is incorrect");
+
+
+        if(password_verify($password, $admin_user->password))
+        {
+           Session::put(['id'=>$admin_user->id,
+                        'name'=>$admin_user->fname.' '.$admin_user->lname,
+                        'email'=>$admin_user->email]);
+            Session::put('logged_in', true);
+            Session::put('user_role', $admin_user->role);
+
+           return Helper::response(true, "Login was successfull");
+        }
+        else{
+            return Helper::response(false, "password is incorrect");
+        }
 
     }
 

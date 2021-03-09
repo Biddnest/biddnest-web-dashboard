@@ -17,7 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->string("for");
             $table->unsignedBigInteger("user_id")->index("user_id")->nullable();
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger("admin_id")->index("admin_id")->nullable();
             $table->foreign('admin_id')->references('id')->on('admins');

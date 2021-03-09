@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+
+//    protected $hidden = ['laravel_through_key','created_at','updated_at','deleted'];
     use HasFactory;
 }

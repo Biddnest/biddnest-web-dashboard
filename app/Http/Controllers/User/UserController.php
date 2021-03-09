@@ -77,9 +77,16 @@ class UserController extends Controller
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
 
+            $data = null;
+            if($user->fname){
+                $data = $user;
+            }
+
             return Helper::response(true, "Otp has been verified",[
+                "user"=>$data,
                 "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
             ]);
+
         }else {
             return Helper::response(false, "Incorrect otp provided");
         }

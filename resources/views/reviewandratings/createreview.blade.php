@@ -46,7 +46,7 @@
                                         <div class="d-flex row  pl-4 pr-4 p-20">
                                             <div class="col-lg-6">
                                                 <div class="form-input">
-                                                    <label class="customer-name">Order ID</label>
+                                                    <label class="customer-name">Booking ID</label>
                                                     <span class="">
                                                         <input type="text" placeholder="SKU1234456"
                                                             id="constomer-name" class="form-control br-5" />
@@ -55,7 +55,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <div class="form-input">
                                                     <label class="full-name">Customer Name</label>
                                                     <span class="">
@@ -65,8 +65,8 @@
                                                             Designation</span>
                                                     </span>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6">
+                                            </div> -->
+                                            <!-- <div class="col-lg-6">
                                                 <div class="form-input">
                                                     <label class="full-name">Vendor Name</label>
                                                     <span class="">
@@ -76,7 +76,7 @@
                                                             Designation</span>
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
 
                                             <div class="col-lg-6">

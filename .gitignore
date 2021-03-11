@@ -14,4 +14,5 @@ yarn-error.log
 /public/gst_certificate
 /public/company_reg_certificate
 /public/inventory
+.idea/
 

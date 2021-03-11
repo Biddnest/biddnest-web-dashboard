@@ -57,10 +57,10 @@ class OrganisationController extends Controller
         foreach ($org_users as $users){
             $vendor = new Vendor();
             $vendor->fname = $users['fname'];
-            $vendor->lname = $users['fname'];
-            $vendor->email = $users['fname'];
-            $vendor->phone = $users['fname'];
-            $vendor->pasword = $users['fname'];
+            $vendor->lname = $users['lname'];
+            $vendor->email = $users['email'];
+            $vendor->phone = $users['phone'];
+            $vendor->password = $users['password'];
             $vendor->pin = null;
             $vendor->org_id = $organizations->id;
             $vendor->meta = json_encode($users['meta']);

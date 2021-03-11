@@ -5,11 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class SlideBanner extends Model
 {
+    protected $table = "banners";
     use HasFactory;
-
-    public function banners(){
-        return $this->hasMany(Banners::class);
-    }
 }

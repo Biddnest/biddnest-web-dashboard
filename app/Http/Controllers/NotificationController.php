@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    //
+    public function createNotification($for, $id, $title, $message){}
 }

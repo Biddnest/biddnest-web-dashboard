@@ -503,24 +503,20 @@ class Route extends Controller
 
      public function banners_add(Request $request)
      {
-        $data = $request->all();
-        $validation = Validator::make($data,[
-            'name' => 'required|string', 'from_date' => 'required',
-            'to_date' => 'required', 'order' => 'required'
+        $validation = Validator::make($request->all(),[
+            'id'=>"required|int",
+            'banners.*.name' => 'required|string',
+            'banners.*.from_date' => 'required|date',
+            'banners.*.to_date' => 'required|date',
+//            'banners.*.order' => 'required|int',
+            "banners.*.url" => 'required|url',
+            "banners.*.image" => 'required|string'
         ]);
-
-        if($request->hasfile('image')){
-            $file =$request->file('image');
-            $imagedata = file_get_contents($file);
-            $base64 = base64_encode($imagedata);
-            $data['file'] = $base64;
-        }          
-
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else   
-            return SliderController::BannerAdd($data);
+        else
+            return SliderController::addBanner($request->all());
      }
 
      public function banners_delete($id)

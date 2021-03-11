@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SlideBanner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
@@ -10,13 +11,15 @@ use App\Models\Slider;
 use App\Models\Banners;
 use App\Helper;
 use App\Sms;
+use Intervention\Image\ImageManager;
+use App\Enums\SliderEnums;
 
 class SliderController extends Controller
 {
 
-    public static function sliders()
+    public static function get()
     {
-        $result=DB::table('sliders')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();
+        $result=Slider::where(['status'=> 1, 'deleted'=>0])->with("banners")->get();
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
@@ -24,7 +27,17 @@ class SliderController extends Controller
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
-    public static function SliderAdd($name, $type, $position, $platform, $size, $from_date, $to_date, $zone_specific)
+    public static function getByZone($zones)
+    {
+        $result=Slider::where(['status'=> 1, 'deleted'=>0])->andWhereIn("zone_id",$zones)->with("banners")->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't fetche data");
+        else
+            return Helper::response(true,"Data fetched successfully", $result);
+    }
+
+    public static function add($name, $type, $position, $platform, $size, $from_date, $to_date, $zone_specific)
     {
         $slider=new Slider;
         $slider->name = $name;
@@ -41,23 +54,16 @@ class SliderController extends Controller
             return Helper::response(false,"Couldn't save data");
         else
             return Helper::response(true,"save data successfully");
-            
+
     }
 
-    public static function slidersDelete($id)
+    public static function delete($id)
     {
-        $result=DB::update(
-            'update sliders set deleted = ? where id = ?',
-            [1, $id]
-        );
+        $delete_slider=Slider::where("id",$id)->update(["deleted" => 1]);
+        $delete_banner=SlideBanner::where("slider_id", $id)->update(["deleted" => 1]);
 
-        $result=DB::update(
-            'update banners set deleted = ? where slider_id = ?',
-            [1, $id]
-        );
-
-        if(!$result)
-            return Helper::response(false,"Couldn't Delete data $result");
+        if(!$delete_slider)
+            return Helper::response(false,"Couldn't Delete data");
         else
             return Helper::response(true,"Data Deleted successfully");
     }
@@ -72,42 +78,58 @@ class SliderController extends Controller
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
-    public static function BannerAdd($data)
+    public static function addBanner($data)
     {
-        $last = DB::table('sliders')->latest()->first();
+        $slider = Slider::findOrFail($data["id"]);
+        if(!$slider)
+            return Helper::response(false,"Incorrect slider id.");
 
-        $name = $data['name'];
-        $from_date = $data['from_date'];
-        $to_date = $data['to_date'];
-        $order = $data['order'];
-        $url = $data['url'];
-        $img = $data['file'];
+        switch ($slider['size']){
+            case SliderEnums::$SIZE['wide']:
+                $width = SliderEnums::$BANNER_DIMENSIONS["wide"][0];
+                $height = SliderEnums::$BANNER_DIMENSIONS["wide"][1];
+                break;
+            case "square":
+                $width = SliderEnums::$BANNER_DIMENSIONS["square"][0];
+                $height = SliderEnums::$BANNER_DIMENSIONS["square"][1];
+                break;
+            default:
+                $width = SliderEnums::$BANNER_DIMENSIONS["wide"][0];
+                $height = SliderEnums::$BANNER_DIMENSIONS["wide"][1];
+        }
 
 
-        foreach($name as $key => $input) {
+        $image = new ImageManager(array('driver' => 'gd'));
+//        $image->configure(array('driver' => 'gd'));
+
+        $order = 0;
+
+        SlideBanner::where("slider_id",$data["id"])->delete();
+
+        foreach($data['banners'] as $banner) {
+            $banner_file_name = "banner-".$banner['name']."-".uniqid().".png";
             $banners=new Banners;
-            $banners->slider_id= $last->id;
-            $banners->image= isset($img[$key]) ? $img[$key] : '';
-            $banners->name=isset($name[$key]) ? $name[$key] : '';
-            $banners->url=isset($url[$key]) ? $url[$key] : '';
-            $banners->from_date=isset($from_date[$key]) ? $from_date[$key] : '';
-            $banners->to_date =isset($to_date[$key]) ? $to_date[$key] : '';
-            $banners->order =isset($order[$key]) ? $order[$key] : '';
+            $banners->slider_id= $data['id'];
+            $banners->image = Helper::saveFile($image->make($banner['image'])->resize($width,$height)->encode('png', 75),$banner_file_name,"slide-banners");
+            $banners->name= $banner['name'];
+            $banners->url= $banner['url'];
+            $banners->from_date= $banner['date']['from'];
+            $banners->to_date = $banner['date']['to'];
+            $banners->order = $order;
             $result= $banners->save();
-        }      
+            $order++;
+        }
 
-        if(!$result)
+        if(!$banner)
             return Helper::response(false,"Couldn't save data");
         else
-            return Helper::response(true,"save data successfully");
+            return Helper::response(true,"Banner Saved successfully",["slider"=>Slider::with("banners")->findOrFail($data['id'])]);
     }
 
     public static function bannersDelete($id)
     {
-        $result=DB::update(
-            'update banners set deleted = ? where id = ?',
-            [1, $id]
-        );
+        $result = SlideBanner::where("slider_id",$id)->destroy();
+
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");

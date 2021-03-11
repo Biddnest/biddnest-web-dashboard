@@ -120,6 +120,65 @@ class ApiRouteController extends Controller
 
     }
 
+    
+    //slider and banners
+    public function sliders()
+     {
+        return UserController::get();
+     }
+
+    public function sliders_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name' => 'required|string', 'type' => 'required',
+            'position' => 'required', 'platform' => 'required',
+            'size' => 'required', 'from_date' => 'required',
+            'to_date' => 'required', 'zone_specific' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return UserController::add($request->name, $request->type, $request->position, $request->platform, $request->size, $request->from_date, $request->to_date, $request->zone_specific);
+    }
+
+    public function sliders_delete($id)
+    {
+        return UserController::delete($id);
+    }
+
+    public function banners()
+    {
+        return UserController::banners();
+    }
+
+    public function banners_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>"required|int",
+            'banners.*.name' => 'required|string',
+            'banners.*.date.from' => 'required|date',
+            'banners.*.date.to' => 'required|date',
+            "banners.*.url" => 'required|url',
+            "banners.*.image" => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return UserController::addBanner($request->all());
+    }
+
+    public function banners_delete($id)
+    {
+        return UserController::deleteBanner($id);
+    }
+
+
+
+
+
+
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();
     }

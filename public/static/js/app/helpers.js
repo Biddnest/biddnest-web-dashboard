@@ -16,7 +16,15 @@ export function tinyAlert(title, message){}
 
 export function megaAlert(title, message){}
 
+export function inlineAlert(elem, message){
+    var alert = '<div class="alert alert-danger" role="alert">' +
+        ''+message+'</div>';
+    elem.prepend(alert);
+    // console.log(message);
+}
+
 export function triggerFormAnim(elem){
+    elem.closest("form").find(".alert").remove();
     elem.attr("disabled",true);
     elem.addClass("disabled");
     elem.html("...");

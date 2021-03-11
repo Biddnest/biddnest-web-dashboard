@@ -18,7 +18,7 @@ crossorigin="anonymous"></script>
   <script type="text/javascript" src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
 
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
@@ -33,7 +33,7 @@ crossorigin="anonymous"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
 
-<script src="{{ asset('static/js/intlTelInput.js') }}"></script> 
+<script src="{{ asset('static/js/intlTelInput.js') }}"></script>
 
 <script src="{{ asset('static/js/live-order-chart.js') }}"></script>
 <script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script>
@@ -41,7 +41,7 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('static/js/userZone.js') }}"></script>
 
 <script src="{{ asset('static/js/timer.js') }}"></script>
-<script src="{{ asset('static/js/progress-bar.js') }}"></script>   
+<script src="{{ asset('static/js/progress-bar.js') }}"></script>
 
 
   <script src="{{ asset('static/js/maps.js') }}"></script>
@@ -53,12 +53,12 @@ crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript -->
 <script src="{{ asset('static/js/sidebarCollapse.js') }}"></script>
-  
+
 <script src="{{ asset('static/js/barba.js') }}"></script>
 <script src="{{ asset('static/js/main.js') }}"></script>
 
 <script src="{{ asset('static/js/jquery.logger.js') }}"></script>
 
-<script src="{{ asset('static/js/app/app.js') }}"></script>
+<script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 
 

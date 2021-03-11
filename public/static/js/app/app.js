@@ -2,63 +2,71 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
-const helper = import("./helpers.js");
-
+// const helper = import("./helpers.js");
+import { redirectTo, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
+// require("./helpers");
 const env = "development";
 
 /* Initializations */
 const logger = $.Logger();
 
-if(env === "production")
+if(env == "production")
     logger.enable();
 else
     logger.disable();
 
+
+
 /* AJAX Universal */
-$("body").on('submit',"form",() => {
+$("body").on('submit',"form",function() {
     // var valid = $(this).parsley().validate();
+
 
     if(true){
         let form = $(this);
         let requestData = form.serializeJSON();
-        let button = form.find("button[type=text]");
+        let button = form.find("button[type=submit]");
         let buttonPretext = button.html();
+        logger.log(requestData);
 
         $.ajax({
             url:form.attr("action"),
             method: form.attr("method"),
-            data:JSON.stringify(requestData),
+            data: JSON.stringify(requestData),
+            contentType: "application/json",
             beforeSend: () => {
-                // helper.triggerFormAnim(button);
+                triggerFormAnim(button);
             },
             success: (response) =>{
-                logger.debug(response);
                 console.log(response);
+                logger.log(response);
                 if(response.status == "success"){
                     if(form.data("next") == "redirect"){
-                        // helper.redirectTo(form.data("url"));
+                        redirectTo(form.data("url"));
                     }
                     if(form.data("next") == "refresh"){
-                        // helper.redirectTo($(location).attr("href"));
+                        redirectTo($(location).attr("href"));
                     }
                 }
                 else if(response.status == "fail"){
 
-                    if(form.data("alert") == "tiny"){}
-                        // helper.tinyAlert("Oops",response.message);
-                    else{}
-                        // helper.megaAlert("Oops",response.message);
+                    if(form.data("alert") == "tiny")
+                       tinyAlert("Oops",response.message);
+                    else if(form.data("alert") == "inline")
+                        inlineAlert(form, response.message);
+                    else
+                        megaAlert("Oops",response.message);
 
                 }
                 else{
-                    logger.debug(response.message);
+                    logger.log(response.message);
                 }
             },
-            error: (error) =>{
-                logger.debug(error.responseText);
+            error: (error, b, c) =>{
+                logger.log(error.responseText, b, c);
             },
         });
-        // helper.triggerFormAnim(button, buttonPretext);
+        revertFormAnim(button, buttonPretext);
         return false;
     }
     else{

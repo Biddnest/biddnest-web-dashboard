@@ -126,7 +126,7 @@ class SliderController extends Controller
             return Helper::response(true,"Banner Saved successfully",["slider"=>Slider::with("banners")->findOrFail($data['id'])]);
     }
 
-    public static function bannersDelete($id)
+    public static function deleteBanner($id)
     {
         $result = SlideBanner::where("slider_id",$id)->destroy();
 

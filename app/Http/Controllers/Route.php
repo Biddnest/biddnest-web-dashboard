@@ -473,7 +473,7 @@ class Route extends Controller
 
      public function sliders()
      {
-        return SliderController::sliders();
+        return SliderController::get();
      }
 
      public function sliders_add(Request $request)
@@ -488,12 +488,12 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return SliderController::SliderAdd($request->name, $request->type, $request->position, $request->platform, $request->size, $request->from_date, $request->to_date, $request->zone_specific);
+            return SliderController::add($request->name, $request->type, $request->position, $request->platform, $request->size, $request->from_date, $request->to_date, $request->zone_specific);
      }
 
      public function sliders_delete($id)
      {
-        return SliderController::slidersDelete($id);
+        return SliderController::delete($id);
      }
 
      public function banners()
@@ -521,6 +521,6 @@ class Route extends Controller
 
      public function banners_delete($id)
      {
-        return SliderController::bannersDelete($id);
+        return SliderController::deleteBanner($id);
      }
 }

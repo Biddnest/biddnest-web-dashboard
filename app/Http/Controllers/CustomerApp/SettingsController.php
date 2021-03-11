@@ -31,6 +31,23 @@ class SettingsController extends Controller
                 "slider"=>[
                     "zone"=>SliderEnums::$ZONE,
                     "position"=>SliderEnums::$POSITION,
+                    "size"=>SliderEnums::$SIZE,
+                    "banner_dimensions"=>SliderEnums::$BANNER_DIMENSIONS,
+                    "platform"=>SliderEnums::$PLATFORM
+                ],
+                "admin"=>[
+                    "roles"=>AdminEnums::$ROLES,
+                    "verifide"=>AdminEnums::$VERIFIDE
+                ],
+                "mail"=>[
+                    "status"=>MailEnums::$STATUS
+                ],
+                "ticket"=>[
+                    "type"=>TicketEnums::$TYPE
+                ],
+                "vendor"=>[
+                    "roles"=>VendorEnums::$ROLES,
+                    "status"=>VendorEnums::$STATUS
                 ]
             ]
         ]);

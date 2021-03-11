@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CustomerApp;
 
 
 use App\Enums\AppEnums;
+use App\Enums\SliderEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,7 +27,11 @@ class SettingsController extends Controller
                ]
             ],
             "enums"=>[
-                "gender"=>AppEnums::$GENDER
+                "gender"=>AppEnums::$GENDER,
+                "slider"=>[
+                    "zone"=>SliderEnums::$ZONE,
+                    "position"=>SliderEnums::$POSITION,
+                ]
             ]
         ]);
     }

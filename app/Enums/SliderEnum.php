@@ -22,4 +22,7 @@ class SliderEnums
         "wide"=>[328,118],
         "square"=>[186,270]
         ];
+
+    public static $PLATFORM = ["app"=>0, "web"=>1];
+
 }

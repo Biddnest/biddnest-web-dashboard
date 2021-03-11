@@ -12,4 +12,7 @@ class Organization extends Model
     public function kyc(){
         $this->hasOne(Org_kyc::class);
     }
+    public function vendors(){
+        $this->hasMany(Vendor::class);
+    }
 }

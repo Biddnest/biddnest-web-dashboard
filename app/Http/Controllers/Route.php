@@ -506,8 +506,8 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id'=>"required|int",
             'banners.*.name' => 'required|string',
-            'banners.*.from_date' => 'required|date',
-            'banners.*.to_date' => 'required|date',
+            'banners.*.date.from' => 'required|date',
+            'banners.*.date.to' => 'required|date',
 //            'banners.*.order' => 'required|int',
             "banners.*.url" => 'required|url',
             "banners.*.image" => 'required|string'

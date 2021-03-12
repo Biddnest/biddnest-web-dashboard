@@ -19,10 +19,10 @@ Route::prefix('v1')->group(function () {
     Route::put("/profile/update",[ApiRouter::class, 'updateProfile']);
 
 
-    Route::post('/sliders',[ApiRouter::class,'getAppSliders']);
-    Route::post('/services',[ApiRouter::class,'getServices']);
-    Route::post('/subservices',[ApiRouter::class,'getSubServices']);
-    Route::post('/inventories',[ApiRouter::class,'getInventories']);
+    Route::get('/sliders',[ApiRouter::class,'getAppSliders']);
+    Route::get('/services',[ApiRouter::class,'getServices']);
+    Route::get('/subservices',[ApiRouter::class,'getSubServices']);
+    Route::get('/inventories',[ApiRouter::class,'getInventories']);
 
 });
 

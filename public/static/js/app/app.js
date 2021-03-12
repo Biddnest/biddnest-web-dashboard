@@ -52,7 +52,7 @@ $("body").on('submit',"form",function() {
 
                     if(form.data("alert") == "tiny")
                        tinyAlert("Oops",response.message);
-                    else if(form.data("alert") == "inline")
+                    else if(form.data("alert") == "inlinegit ")
                         inlineAlert(form, response.message);
                     else
                         megaAlert("Oops",response.message);

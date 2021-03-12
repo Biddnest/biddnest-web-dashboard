@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\Inventory;
+use App\Models\Service;
 use App\Models\Subservice;
+use App\Models\ServiceSubservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
+use App\Enums\CommonEnums;
 
 class SubServiceController extends Controller
 {
@@ -103,5 +106,22 @@ class SubServiceController extends Controller
             return Helper::response(false,"Couldn't Delete data $result");
         else
             return Helper::response(true,"Service deleted successfully");
+    }
+
+
+    public static function getSubservicesForApp($id)
+    {
+        // $serviceSubservice = new ServiceSubservice;
+        $subservice=Subservice::select(self::$public_data)
+        ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+        // ->whereIn("id", function($service) use($id){
+        //     return ServiceSubservice::where('service_id', $id)->pluck('subservice_id');
+        // })
+        ->whereIn("id", ServiceSubservice::where('service_id', $id)->pluck('subservice_id'))
+        ->get();
+        if(!$subservice)
+            return Helper::response(false,"Records not exist");
+        else
+            return Helper::response(true,"Data displayed successfully", ['subservices'=>$subservice]);
     }
 }

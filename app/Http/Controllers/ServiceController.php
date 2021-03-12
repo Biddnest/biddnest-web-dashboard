@@ -8,6 +8,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
+use App\Enums\CommonEnums;
 
 class ServiceController extends Controller
 {
@@ -40,6 +41,16 @@ class ServiceController extends Controller
             return Helper::response(false,"Records not exist");
         else
             return Helper::response(true,"Data displayed successfully", $service);
+    }
+
+
+    public static function getForApp($lat, $lng)
+    {
+        $service=Service::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        if(!$service)
+            return Helper::response(false,"Records not exist");
+        else
+            return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
     }
 
     public static function update($id, $name, $image)

@@ -112,13 +112,66 @@ class ApiRouteController extends Controller
             'dob' => 'date'
         ]);
 
-//        print_r($request->token_data_id);exit;
+        //        print_r($request->token_data_id);exit;
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
         else
             return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->avatar);
 
     }
+
+    public function getAppSliders(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return UserController::getAppSliders($request->lat, $request->lng);
+    }
+
+    public function getServices(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return ServiceController::getForApp($request->lat, $request->lng);
+    }
+    
+
+    public function getSubServices(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_id' => 'required|integer'
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return SubServiceController::getSubservicesForApp($request->service_id);
+    }
+
+    
+    public function getInventories(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_id' => 'required|integer'
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return InventoryController::getBySubserviceForApp($request->service_id);
+    }
+
 
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();

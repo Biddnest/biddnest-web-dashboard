@@ -8,11 +8,16 @@ namespace App\Http\Controllers\User;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\SlideBanner;
+use App\Models\Slider;
+use App\Models\Banners;
 use App\Sms;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
+use App\Enums\CommonEnums;
+use App\Enums\SliderEnum;
 
 class UserController extends Controller
 {
@@ -177,4 +182,24 @@ class UserController extends Controller
         ]);
 
     }
+
+    public static function getAppSliders($lat, $lng)
+    {
+       $date = date('Y-m-d');
+        $result=Slider::where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+        ->where('from_date','<=', $date)
+        ->where('to_date','>=', $date)
+        ->where('platform', SliderEnum::$PLATFORM['app'])->with(["banners"=> function($banner) use($date){
+            $banner->where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+            ->where('from_date','<=', $date)
+            ->where('to_date','>=', $date)->orderBy('order');
+        }])->get();
+
+       
+        if(!$result)
+            return Helper::response(false,"Couldn't fetche data");
+        else
+            return Helper::response(true,"Data fetched successfully", $result);
+    }
+
 }

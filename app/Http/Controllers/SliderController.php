@@ -12,7 +12,7 @@ use App\Models\Banners;
 use App\Helper;
 use App\Sms;
 use Intervention\Image\ImageManager;
-use App\Enums\SliderEnums;
+use App\Enums\SliderEnum;
 
 class SliderController extends Controller
 {
@@ -85,17 +85,17 @@ class SliderController extends Controller
             return Helper::response(false,"Incorrect slider id.");
 
         switch ($slider['size']){
-            case SliderEnums::$SIZE['wide']:
-                $width = SliderEnums::$BANNER_DIMENSIONS["wide"][0];
-                $height = SliderEnums::$BANNER_DIMENSIONS["wide"][1];
+            case SliderEnum::$SIZE['wide']:
+                $width = SliderEnum::$BANNER_DIMENSIONS["wide"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["wide"][1];
                 break;
             case "square":
-                $width = SliderEnums::$BANNER_DIMENSIONS["square"][0];
-                $height = SliderEnums::$BANNER_DIMENSIONS["square"][1];
+                $width = SliderEnum::$BANNER_DIMENSIONS["square"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["square"][1];
                 break;
             default:
-                $width = SliderEnums::$BANNER_DIMENSIONS["wide"][0];
-                $height = SliderEnums::$BANNER_DIMENSIONS["wide"][1];
+                $width = SliderEnum::$BANNER_DIMENSIONS["wide"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["wide"][1];
         }
 
 
@@ -126,7 +126,7 @@ class SliderController extends Controller
             return Helper::response(true,"Banner Saved successfully",["slider"=>Slider::with("banners")->findOrFail($data['id'])]);
     }
 
-    public static function bannersDelete($id)
+    public static function deleteBanner($id)
     {
         $result = SlideBanner::where("slider_id",$id)->destroy();
 

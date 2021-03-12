@@ -19,13 +19,11 @@ Route::prefix('v1')->group(function () {
     Route::put("/profile/update",[ApiRouter::class, 'updateProfile']);
 
 
-    Route::get('/sliders',[ApiRouter::class,'sliders']);
-    Route::post('/sliders',[ApiRouter::class,'sliders_add']);
-    Route::delete('/sliders/{id}',[ApiRouter::class,'sliders_delete']);
-
-    Route::get('/banners',[ApiRouter::class,'banners']);
-    Route::post('/banners',[ApiRouter::class,'banners_add']);
-    Route::delete('/banners/{id}',[ApiRouter::class,'banners_delete']);
+    Route::get('/sliders',[ApiRouter::class,'getAppSliders']);
+    Route::get('/services',[ApiRouter::class,'getServices']);
+    Route::get('/subservices',[ApiRouter::class,'getSubServices']);
+    Route::get('/inventories',[ApiRouter::class,'getInventories']);
+    
 });
 
 

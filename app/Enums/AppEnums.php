@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Fabito\AvatarGenerator\Avatar;
 
-class AppEnums extends Enums    {
+class AppEnums{
     public static $GENDER = [
         ["label"=>"Male", "value"=>"male"],
         ["label"=>"Female", "value"=>"female"],

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Slider extends Model
 {
     use HasFactory;
-
+    protected $hidden =['created_at', 'updated_at','deleted'];
     public function banners(){
         return $this->hasMany(Banners::class);
     }

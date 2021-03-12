@@ -4,7 +4,11 @@ namespace App\Http\Controllers\CustomerApp;
 
 
 use App\Enums\AppEnums;
-use App\Enums\SliderEnums;
+use App\Enums\SliderEnum;
+use App\Enums\TicketEnums;
+use App\Enums\MailEnums;
+use App\Enums\VendorEnums;
+use App\Enums\CommonEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,15 +33,10 @@ class SettingsController extends Controller
             "enums"=>[
                 "gender"=>AppEnums::$GENDER,
                 "slider"=>[
-                    "zone"=>SliderEnums::$ZONE,
-                    "position"=>SliderEnums::$POSITION,
-                    "size"=>SliderEnums::$SIZE,
-                    "banner_dimensions"=>SliderEnums::$BANNER_DIMENSIONS,
-                    "platform"=>SliderEnums::$PLATFORM
-                ],
-                "admin"=>[
-                    "roles"=>AdminEnums::$ROLES,
-                    "verifide"=>AdminEnums::$VERIFIDE
+                    "zone"=>SliderEnum::$ZONE,
+                    "position"=>SliderEnum::$POSITION,
+                    "size"=>SliderEnum::$SIZE,
+                    "banner_dimensions"=>SliderEnum::$BANNER_DIMENSIONS
                 ],
                 "mail"=>[
                     "status"=>MailEnums::$STATUS
@@ -48,6 +47,10 @@ class SettingsController extends Controller
                 "vendor"=>[
                     "roles"=>VendorEnums::$ROLES,
                     "status"=>VendorEnums::$STATUS
+                ],
+                "common"=>[
+                    "yes"=>CommonEnums::$YES,
+                    "no"=>CommonEnums::$NO
                 ]
             ]
         ]);

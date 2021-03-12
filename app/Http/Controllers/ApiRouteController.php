@@ -112,7 +112,7 @@ class ApiRouteController extends Controller
             'dob' => 'date'
         ]);
 
-//        print_r($request->token_data_id);exit;
+        //        print_r($request->token_data_id);exit;
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
         else
@@ -120,63 +120,57 @@ class ApiRouteController extends Controller
 
     }
 
+    public function getAppSliders(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return UserController::getAppSliders($request->lat, $request->lng);
+    }
+
+    public function getServices(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return ServiceController::getForApp($request->lat, $request->lng);
+    }
     
-    //slider and banners
-    public function sliders()
-     {
-        return UserController::get();
-     }
 
-    public function sliders_add(Request $request)
+    public function getSubServices(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'name' => 'required|string', 'type' => 'required',
-            'position' => 'required', 'platform' => 'required',
-            'size' => 'required', 'from_date' => 'required',
-            'to_date' => 'required', 'zone_specific' => 'required'
+            'service_id' => 'required|integer'
         ]);
-
+        
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return UserController::add($request->name, $request->type, $request->position, $request->platform, $request->size, $request->from_date, $request->to_date, $request->zone_specific);
+            return SubServiceController::getSubservicesForApp($request->service_id);
     }
 
-    public function sliders_delete($id)
-    {
-        return UserController::delete($id);
-    }
-
-    public function banners()
-    {
-        return UserController::banners();
-    }
-
-    public function banners_add(Request $request)
+    
+    public function getInventories(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'id'=>"required|int",
-            'banners.*.name' => 'required|string',
-            'banners.*.date.from' => 'required|date',
-            'banners.*.date.to' => 'required|date',
-            "banners.*.url" => 'required|url',
-            "banners.*.image" => 'required|string'
+            'service_id' => 'required|integer'
         ]);
-
+        
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return UserController::addBanner($request->all());
+            return InventoryController::getBySubserviceForApp($request->service_id);
     }
-
-    public function banners_delete($id)
-    {
-        return UserController::deleteBanner($id);
-    }
-
-
-
-
 
 
     public static function config(Request $request){

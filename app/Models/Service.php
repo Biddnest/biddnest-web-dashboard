@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+
+    public function subservices(){
+        return $this->hasManyThrough(Services::class,ServiceSubservice::class,'service_id','id','id','subservice_id');
+ }
 }

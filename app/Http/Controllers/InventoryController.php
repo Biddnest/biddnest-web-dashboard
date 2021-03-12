@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\Inventory;
+use App\Models\SubserviceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
+use App\Enums\CommonEnums;
 
 class InventoryController extends Controller
 {
@@ -99,6 +101,17 @@ class InventoryController extends Controller
             return Helper::response(false,"Couldn't Delete data");
         else
             return Helper::response(true,"Data Deleted successfully");
+    }
+
+    public static function getBySubserviceForApp($id)
+    {    
+        $result=Inventory::whereIn("id", SubserviceInventory::where('subservice_id', $id)->pluck('inventory_id'))
+        ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Display data");
+        else
+            return Helper::response(true,"Data Display successfully", $result);
     }
 
 }

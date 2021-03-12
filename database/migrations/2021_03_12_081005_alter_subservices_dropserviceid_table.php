@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterBannersTable extends Migration
+class AlterSubservicesDropserviceidTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterBannersTable extends Migration
      */
     public function up()
     {
-        Schema::table('banners', function (Blueprint $table) {
-            $table->string('image');
+        Schema::table('subservices', function (Blueprint $table) {
+            $table->dropcolumn('service_id');
         });
     }
 
@@ -25,7 +25,7 @@ class AlterBannersTable extends Migration
      */
     public function down()
     {
-        Schema::table('banners', function (Blueprint $table) {
+        Schema::table('subservices', function (Blueprint $table) {
             //
         });
     }

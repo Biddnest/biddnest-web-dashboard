@@ -15,4 +15,8 @@ class Organization extends Model
     public function vendors(){
         $this->hasMany(Vendor::class);
     }
+
+    public function bookings(){
+        $this->hasMany(Bookings::class);
+    }
 }

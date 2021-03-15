@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Bookings extends Model
+{
+    protected $table = "bookings";
+    use HasFactory;
+    protected $hidden = ['created_at','updated_at','deleted'];
+
+    public function organization(){
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+}

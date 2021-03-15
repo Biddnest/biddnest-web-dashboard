@@ -10,4 +10,8 @@ class User extends Model
 
     protected $hidden = ['laravel_through_key','created_at','updated_at','deleted'];
     use HasFactory;
+
+    public function bookings(){
+        $this->hasMany(Bookings::class);
+    }
 }

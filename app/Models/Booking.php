@@ -5,17 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bookings extends Model
+class Booking extends Model
 {
     protected $table = "bookings";
     use HasFactory;
     protected $hidden = ['created_at','updated_at','deleted'];
 
     public function organization(){
-        return $this->belongsTo(Organization::class);
+        return $this->hasOne(Organization::class);
     }
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
+
+    public function bookinginventory(){
+        return $this->hasOne(BookingInventory::class);
+    }
+
+
 }

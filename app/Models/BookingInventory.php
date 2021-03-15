@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class BookingInventory extends Model
 {
-
-    protected $hidden = ['laravel_through_key','created_at','updated_at','deleted'];
+    protected $table = "booking_inventories";
     use HasFactory;
+    protected $hidden = ['created_at','updated_at','deleted'];
 
     public function bookings(){
         return $this->hasMany(Bookings::class);

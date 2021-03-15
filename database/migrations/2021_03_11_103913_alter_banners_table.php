@@ -15,6 +15,7 @@ class AlterBannersTable extends Migration
     {
         Schema::table('banners', function (Blueprint $table) {
             $table->string('image');
+
         });
     }
 

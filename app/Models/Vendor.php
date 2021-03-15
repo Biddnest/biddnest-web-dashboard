@@ -11,6 +11,6 @@ class Vendor extends Model
     use HasFactory;
 
     public function organization(){
-        return $this->belongsTo(Organization::class);
+        return $this->hasOne(Organization::class);
     }
 }

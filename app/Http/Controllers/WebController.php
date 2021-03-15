@@ -3,12 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class WebController extends Controller
 {
     public function login()
     {
         return view('login.login');
+    }
+
+    public function logout()
+    {
+        /*Session::forget('sessionActive');
+        Session::forget('logged_in');
+        Session::forget('account');
+        Session::forget('user_role');*/
+
+        Session::flush();
+//        session_unset();
+        return response()->redirectToRoute('login');
     }
 
     public function forgotPassword()

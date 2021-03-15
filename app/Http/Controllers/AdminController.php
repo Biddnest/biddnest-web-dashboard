@@ -42,10 +42,10 @@ class AdminController extends Controller
 
         if(password_verify($password, $admin_user->password))
         {
-           Session::put(['id'=>$admin_user->id,
+           Session::put(["account"=>['id'=>$admin_user->id,
                         'name'=>$admin_user->fname.' '.$admin_user->lname,
-                        'email'=>$admin_user->email]);
-            Session::put('logged_in', true);
+                        'email'=>$admin_user->email]]);
+            Session::put('sessionActive', true);
             Session::put('user_role', $admin_user->role);
 
            return Helper::response(true, "Login was successfull");

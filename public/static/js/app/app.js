@@ -2,23 +2,24 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
+Logger.useDefaults();
+
 // const helper = import("./helpers.js");
-import { redirectTo, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
+import { redirectTo,redirectHard, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
 // require("./helpers");
 const env = "development";
 
 /* Initializations */
-const logger = $.Logger();
+// const logger = $.Logger();
 
-if(env == "production")
-    logger.enable();
-else
-    logger.disable();
-
+if(env != "development")
+    Logger.setLevel(Logger.OFF);
 
 
 /* AJAX Universal */
 $("body").on('submit',"form",function() {
+    // Logger.info("form called");
+    // console.log();
     // var valid = $(this).parsley().validate();
 
 
@@ -27,7 +28,7 @@ $("body").on('submit',"form",function() {
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
         let buttonPretext = button.html();
-        logger.log(requestData);
+        Logger.info(requestData);
 
         $.ajax({
             url:form.attr("action"),
@@ -38,32 +39,37 @@ $("body").on('submit',"form",function() {
                 triggerFormAnim(button);
             },
             success: (response) =>{
-                console.log(response);
-                logger.log(response);
+
+                Logger.info(response);
                 if(response.status == "success"){
-                    if(form.data("next") == "redirect"){
-                        redirectTo(form.data("url"));
-                    }
-                    if(form.data("next") == "refresh"){
-                        redirectTo($(location).attr("href"));
+                    if(form.data("next")){
+                        if(form.data("next") == "redirect"){
+                            if(form.data('redirect-type') == "hard")
+                                redirectHard(form.data("url"));
+                            else
+                                redirectTo(form.data("url"));
+                        }
+                        else if(form.data("next") == "refresh"){
+                            redirectTo($(location).attr("href"));
+                        }
                     }
                 }
                 else if(response.status == "fail"){
 
                     if(form.data("alert") == "tiny")
                        tinyAlert("Oops",response.message);
-                    else if(form.data("alert") == "inlinegit ")
+                    else if(form.data("alert") == "inline")
                         inlineAlert(form, response.message);
                     else
                         megaAlert("Oops",response.message);
 
                 }
                 else{
-                    logger.log(response.message);
+                    Logger.info(response.message);
                 }
             },
             error: (error, b, c) =>{
-                logger.log(error.responseText, b, c);
+                Logger.info(error.responseText, b, c);
             },
         });
         revertFormAnim(button, buttonPretext);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
 
 class WebController extends Controller
 {
@@ -77,7 +78,9 @@ class WebController extends Controller
     }
     public function customers()
     {
-        return view('customer.customer');
+        return view('customer.customer',[
+            "users"=>User::orderBy("id","DESC")->paginate(15)
+        ]);
     }
 
     public function createCustomers()

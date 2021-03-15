@@ -18,7 +18,8 @@ use App\Http\Controllers\Route as Router;
 */
 
 Route::get('/', function () {
-phpinfo();
+
+    return response()->redirectToRoute('login');
 });
 
 
@@ -86,13 +87,15 @@ Route::prefix('web/api')->group(function () {
 
 
 Route::prefix('admin')->group(function () {
-        Route::prefix('/auth')->group(function () {
+        Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
             Route::get('/login',[WebController::class,'login'])->name("login");
             Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");
             // Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("verifyotp");
             Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-password");
         });
-        
+            Route::get("/logout", [WebController::class, 'logout'])->name('logout');
+
+    Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
         Route::get('/settings',[WebController::class,'settings'])->name("settings");
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
@@ -131,7 +134,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/inventories/create',[WebController::class,'createInventories'])->name("create-inventories");
             Route::get('/inventories/details',[WebController::class,'detailsInventories'])->name("details-inventories");
             Route::get('/inventories/services/edit',[WebController::class,'editServices'])->name("edit-services");
-        }); 
+        });
 
         Route::prefix('coupons')->group(function () {
             Route::get('/',[WebController::class,'coupons'])->name("coupons");
@@ -180,5 +183,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createUsers'])->name("create-users");
             Route::get('/details',[WebController::class,'detailsUsers'])->name("details-users");
         });
+
+    });
+
 });
 

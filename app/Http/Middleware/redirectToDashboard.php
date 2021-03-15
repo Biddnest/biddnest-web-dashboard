@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-class CheckSession
+
+
+class redirectToDashboard
 {
     /**
      * Handle an incoming request.
@@ -18,10 +19,9 @@ class CheckSession
     public function handle(Request $request, Closure $next)
     {
 
-        if(!Session::get('sessionActive'))
-            return response()->redirectToRoute('login');
+        if(Session::get('sessionActive'))
+            return response()->redirectToRoute('dashboard');
 
-            return $next($request);
-
+        return $next($request);
     }
 }

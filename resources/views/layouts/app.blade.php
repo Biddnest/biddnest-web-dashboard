@@ -132,7 +132,7 @@
                                             <li><a href="{{route('details-users')}}">My Profile</a></li>
                                             <li><a href="{{route('reset-password')}}">Change Password</a></li>
                                             <li><a href="{{route('settings')}}">System Settings</a></li>
-                                            <li><a href="{{route('login')}}">Logout</a></li>
+                                            <li><a href="#0" onclick="location.assign('{{route('logout')}}')">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -149,14 +149,14 @@
                         <p>Copyright © {{ $year }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
                                                                             target="_blank">BIDNEST</a>.</p>
                     </footer>
-                </div>        
+                </div>
             </div>
 
-        
+
             <div class="side-bar-pop-up">
-            
-            </div> 
-              
+
+            </div>
+
         </main>
         @include('layouts.includes.app-js')
         @yield('scripts')

@@ -9,7 +9,15 @@ export function redirectTo(url){
     link.id = id;
     $("main").append(link);
     $("#"+id).click();*/
+    Logger.info("redirect-soft");
+
     barba.go(url);
+};
+
+export function redirectHard(url){
+    Logger.info("redirect-hard");
+
+    location.assign(url);
 };
 
 export function tinyAlert(title, message){}
@@ -20,14 +28,14 @@ export function inlineAlert(elem, message){
     var alert = '<div class="alert alert-danger" role="alert">' +
         ''+message+'</div>';
     elem.prepend(alert);
-    // console.log(message);
 }
 
 export function triggerFormAnim(elem){
     elem.closest("form").find(".alert").remove();
     elem.attr("disabled",true);
     elem.addClass("disabled");
-    elem.html("...");
+    var loader = '<svg class="spinner" width="16px" height="16px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>';
+    elem.html(loader);
 }
 
 export function revertFormAnim(elem, text){

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" />
 
         <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap"
-        rel="stylesheet">        
+        rel="stylesheet">
 
         <!-- Toggle btn -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
@@ -37,29 +37,29 @@
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
         <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" />
-        
+
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
- 
 
-    
-       
+
+
+
     <!-- text area editor -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
     <link rel="stylesheet" href="{{ asset('static/css/code_view.min.css')}}">
     <link rel="stylesheet" href="{{ asset('static/css/font_awesome.min.css')}}">
     <link rel="stylesheet" href="{{ asset('static/css/froala_editor.pkgd.min.css')}}">
 
-   
-    
 
 
-    
 
 
-        
+
+
+
+
         <style>
             .nav-collapse .li{
                 list-style-type: none !important;
@@ -80,7 +80,7 @@
             main .menu-sidebar .Brand-logo {
                 height: 70px;
             }
-    
+
             .ml-48{
                 margin-left: 48px ;
             }
@@ -99,7 +99,7 @@
                 height: 65px;
             }
             .h-35 {
-                height: "35px !important";
+                height: "35px" !important;
             }
             .tagify {
                 padding: 0px !important;
@@ -129,7 +129,7 @@
             .table td, .table th {
                 padding: 1.75rem !important;
                 vertical-align: top;
-                border-top:none; 
+                border-top:none;
                 text-align: center;
             }
 
@@ -157,7 +157,7 @@
             }
             .f-l {
                 font-size: large;
-            }           
+            }
             .p-8{
                 padding: 8px 16px !important;
             }
@@ -186,7 +186,7 @@
             color: #fff;
             background-color: #2E0789 !important;
             border-color:#2E0789 !important;
-            } 
+            }
             .Dashboard-lcards .table tbody tr:hover {
                 border: none !important;
             }
@@ -308,5 +308,104 @@
             }
 
 
+            .spinner-wrapper{
+
+                /*text-align: ;*/
+            }
+            .btn{
+                position: relative;
+            }
+            .spinner
+            {
+                stroke: #fff;
+                -webkit-animation: rotation 1.35s linear infinite;
+                animation: rotation 1.35s linear infinite;
+            }
+
+            @-webkit-keyframes rotation
+            {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                }
+            }
+
+            @keyframes rotation
+            {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                }
+            }
+
+            .circle
+            {
+                stroke-dasharray: 180;
+                stroke-dashoffset: 0;
+                -webkit-transform-origin: center;
+                -ms-transform-origin: center;
+                transform-origin: center;
+                -webkit-animation: turn 1.35s ease-in-out infinite;
+                animation: turn 1.35s ease-in-out infinite;
+            }
+
+            @-webkit-keyframes turn
+            {
+                0% {
+                    stroke-dashoffset: 180;
+                }
+
+                50% {
+                    stroke-dashoffset: 45;
+                    -webkit-transform: rotate(135deg);
+                    transform: rotate(135deg);
+                }
+
+                100% {
+                    stroke-dashoffset: 180;
+                    -webkit-transform: rotate(450deg);
+                    transform: rotate(450deg);
+                }
+            }
+
+            @keyframes turn
+            {
+                0% {
+                    stroke-dashoffset: 180;
+                }
+
+                50% {
+                    stroke-dashoffset: 45;
+                    -webkit-transform: rotate(135deg);
+                    transform: rotate(135deg);
+                }
+
+                100% {
+                    stroke-dashoffset: 180;
+                    -webkit-transform: rotate(450deg);
+                    transform: rotate(450deg);
+                }
+            }
+
+            .parsley-errors-list{
+             text-align: right;
+            }
+            .parsley-errors-list li{
+                list-style: none;
+                color: red;
+                /*padding: 3px 0;*/
+                font-family: "Gilroy";
+                font-weight: 600;
+            }
         </style>
 

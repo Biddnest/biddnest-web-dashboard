@@ -15,6 +15,7 @@ class AlterSubservicesDropserviceidTable extends Migration
     {
         Schema::table('subservices', function (Blueprint $table) {
             $table->dropcolumn('service_id');
+
         });
     }
 

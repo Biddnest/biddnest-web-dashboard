@@ -163,7 +163,7 @@ class ApiRouteController extends Controller
     public function getInventories(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'service_id' => 'required|integer'
+            'subservice_id' => 'required|integer'
         ]);
         
         if($validation->fails())

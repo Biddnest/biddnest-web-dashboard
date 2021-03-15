@@ -16,7 +16,7 @@ use App\Enums\CommonEnums;
 
 class BookingsController extends Controller
 {
-    public static function get()
+    public static function get()  
     {
         $result=Bookings::where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->with("user")->with("Organization")->get();
 

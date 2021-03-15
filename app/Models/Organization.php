@@ -19,4 +19,8 @@ class Organization extends Model
     public function bookings(){
         return $this->hasMany(Bookings::class);
     }
+
+    public function InventoryPrice(){
+        return $this->hasMany(InventoryPrice::class);
+    }
 }

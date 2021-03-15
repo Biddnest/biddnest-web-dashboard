@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiRouteController as ApiRouter;
+use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -30,6 +31,12 @@ Route::prefix('v1')->group(function () {
 Route::prefix('vendors')->group(function () {
 
     Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
+
+    Route::post('/inventory-price',[VendorApiRouter::class,'addPrice']);
+    Route::get('/inventory-price',[VendorApiRouter::class,'getInventoryprices']);
+    Route::put('/inventory-price',[VendorApiRouter::class,'updateInventoryprices']);
+    Route::delete('/inventory-price',[VendorApiRouter::class,'deleteInventoryprices']);
+    
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

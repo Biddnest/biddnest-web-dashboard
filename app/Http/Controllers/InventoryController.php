@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Helper;
-use App\Models\Inventory;
 use App\Models\SubserviceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
+use App\Models\Inventory;
+use App\Models\InventoryPrice;
+use App\Models\Organization;
+use App\Models\Service;
 use App\Enums\CommonEnums;
+use App\Enums\InventoryEnums;
 
 class InventoryController extends Controller
 {
@@ -103,6 +107,7 @@ class InventoryController extends Controller
             return Helper::response(true,"Data Deleted successfully");
     }
 
+    //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
     {    
         $result=Inventory::whereIn("id", SubserviceInventory::where('subservice_id', $id)->pluck('inventory_id'))
@@ -112,6 +117,92 @@ class InventoryController extends Controller
             return Helper::response(false,"Couldn't Display data");
         else
             return Helper::response(true,"Data Display successfully", $result);
+    }
+
+    //route controller => VendorApiRouteController
+    public static function addPrice($data)
+    {
+        $Organization = Organization::findOrFail($data["organization_id"]);
+        if(!$Organization)
+            return Helper::response(false,"Incorrect Organization id.");
+
+        $Service = Service::findOrFail($data["service_type"]);
+        if(!$Service)
+            return Helper::response(false,"Incorrect service type.");
+
+        $Inventory = Inventory::findOrFail($data["inventory_id"]);
+        if(!$Inventory)
+            return Helper::response(false,"Incorrect inventory id.");
+        
+        foreach($data['price'] as $price) {
+            $inventoryprice=new InventoryPrice;
+            $inventoryprice->organization_id= $data['organization_id'];
+            $inventoryprice->service_type= $data['service_type'];
+            $inventoryprice->inventory_id= $data['inventory_id'];
+            $inventoryprice->size= $price['size'];
+            $inventoryprice->material= $price['material'];
+            $inventoryprice->price_economics= $price['price']['economics'];
+            $inventoryprice->price_premium= $price['price']['premium'];
+            $result= $inventoryprice->save();
+        }
+
+        if(!$result)
+            return Helper::response(false,"Couldn't save data");
+        else
+            return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
+    }
+
+
+    public static function getByInventory($id)
+    {    
+        $result=InventoryPrice::whereIn("inventory_id", Inventory::where('id', $id)->pluck('id'))
+        ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Display data");
+        else
+            return Helper::response(true,"Data Display successfully", $result);
+    }
+
+    public static function updatePrice($data)
+    {
+        $Organization = Organization::findOrFail($data["organization_id"]);
+        if(!$Organization)
+            return Helper::response(false,"Incorrect Organization id.");
+
+        $Service = Service::findOrFail($data["service_type"]);
+        if(!$Service)
+            return Helper::response(false,"Incorrect service type.");
+
+        $Inventory = Inventory::findOrFail($data["inventory_id"]);
+        if(!$Inventory)
+            return Helper::response(false,"Incorrect inventory id.");
+
+        $updateColumns = [
+            "organization_id"=> $data['organization_id'],
+            "service_type"=> $data['service_type'],
+            "inventory_id"=> $data['inventory_id'],
+            "size"=> $data['size'],
+            "material"=> $data['material'],
+            "price_economics"=> $data['price']['economics'],
+            "price_premium"=> $data['price']['premium'],
+        ];
+
+        $InventoryPrice= InventoryPrice::where("id", $data['price_id'])->update($updateColumns);
+
+        return Helper::response(true, "Inventory Price has been updated.",[
+            "InventoryPrice"=>InventoryPrice::select('*')->findOrFail($InventoryPrice)
+        ]);
+    }
+
+    public static function deletePrice($id)
+    {
+        $result=InventoryPrice::where("id",$id)->update(["deleted"=>1]);
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Delete data $result");
+        else
+            return Helper::response(true,"Service deleted successfully");
     }
 
 }

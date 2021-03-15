@@ -86,8 +86,8 @@ Route::prefix('web/api')->group(function () {
 
 
     //bookings APIs
-    Route::get('/bookings',[Router::class,'bookings'])->name("bookings");
-    Route::post('/bookings',[Router::class,'bookings_add'])->name("bookings_add");
+    // Route::get('/bookings',[Router::class,'bookings'])->name("bookings");
+    // Route::post('/bookings',[Router::class,'addQuote']);
 });
 
 

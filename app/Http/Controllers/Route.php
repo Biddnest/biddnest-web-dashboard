@@ -530,21 +530,24 @@ class Route extends Controller
         return BookingsController::get();
      }
 
-     public function bookings_add(Request $request)
-     {
-        $validation = Validator::make($request->all(),[
-            'user_id'=>"required|int",
-            'organization_id'=>"required|int",
-            'movement_type' => 'required|string',
-            'source_lat' => 'required',
-            'source_lng' => 'required',
-            'dest_lat' => 'required',
-            'dest_lng' => 'required'
-        ]);
 
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return SliderController::add($request->all());
-     }
+    // public function addQuote(Request $request)
+    // {
+    //     $validation = Validator::make($request->all(),[
+    //         'service_id' => 'required|integer',
+    //         'source.lat' => 'required',
+    //         'source.lng' => 'required',
+    //         'destination.lat' => 'required',
+    //         'destination.lng' => 'required',
+    //         'movement_dates.*.date' =>'required',
+    //         'inventory_items.*.inventory_id' =>'required',
+    //         'inventory_items.*.material' =>'required',
+    //         'inventory_items.*.size' =>'required'
+    //         ]);
+        
+    //     if($validation->fails())
+    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
+    //     else
+    //         return BookingsController::getQuote($request->all());
+    // }
 }

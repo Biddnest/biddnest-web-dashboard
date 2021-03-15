@@ -122,9 +122,9 @@ class InventoryController extends Controller
     //route controller => VendorApiRouteController
     public static function addPrice($data)
     {
-        $Organization = Organization::findOrFail($data["organization_id"]);
-        if(!$Organization)
-            return Helper::response(false,"Incorrect Organization id.");
+        // $Organization = Organization::findOrFail($data["organization_id"]);
+        // if(!$Organization)
+        //     return Helper::response(false,"Incorrect Organization id.");
 
         $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
@@ -136,7 +136,7 @@ class InventoryController extends Controller
         
         foreach($data['price'] as $price) {
             $inventoryprice=new InventoryPrice;
-            $inventoryprice->organization_id= $data['organization_id'];
+            // $inventoryprice->organization_id= $data['organization_id'];
             $inventoryprice->service_type= $data['service_type'];
             $inventoryprice->inventory_id= $data['inventory_id'];
             $inventoryprice->size= $price['size'];
@@ -166,9 +166,9 @@ class InventoryController extends Controller
 
     public static function updatePrice($data)
     {
-        $Organization = Organization::findOrFail($data["organization_id"]);
-        if(!$Organization)
-            return Helper::response(false,"Incorrect Organization id.");
+        // $Organization = Organization::findOrFail($data["organization_id"]);
+        // if(!$Organization)
+        //     return Helper::response(false,"Incorrect Organization id.");
 
         $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
@@ -179,7 +179,7 @@ class InventoryController extends Controller
             return Helper::response(false,"Incorrect inventory id.");
 
         $updateColumns = [
-            "organization_id"=> $data['organization_id'],
+            // "organization_id"=> $data['organization_id'],
             "service_type"=> $data['service_type'],
             "inventory_id"=> $data['inventory_id'],
             "size"=> $data['size'],
@@ -204,5 +204,35 @@ class InventoryController extends Controller
         else
             return Helper::response(true,"Service deleted successfully");
     }
+
+
+    public static function getEconomicPrice($data)
+    {        
+        $finalprice=0.00;
+        foreach($data['inventory_items'] as $item) {
+            $minprice= InventoryPrice::where(["inventory_id"=>$item['id'],
+                                                "size"=>$item['size'],
+                                                "material"=>$item['material']])->min('price_economics');
+           $finalprice += $minprice * $item['quantity'] * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        }
+
+        return $finalprice;
+
+    }
+
+    public static function getPremiumPrice($data)
+    {        
+        $finalprice=0.00;
+        foreach($data['inventory_items'] as $item) {
+            $maxprice= InventoryPrice::where(["inventory_id"=>$item['id'],
+                                                "size"=>$item['size'],
+                                                "material"=>$item['material']])->min('price_premium');
+           $finalprice += $maxprice * $item['quantity'] * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        }
+
+        return $finalprice;
+
+    }
+    
 
 }

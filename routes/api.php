@@ -25,6 +25,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/subservices',[ApiRouter::class,'getSubServices']);
     Route::get('/inventories',[ApiRouter::class,'getInventories']);
 
+    //bookings APIs
+    Route::post('/bookings',[ApiRouter::class,'addQuote']);
 });
 
 
@@ -36,6 +38,8 @@ Route::prefix('vendors')->group(function () {
     Route::get('/inventory-price',[VendorApiRouter::class,'getInventoryprices']);
     Route::put('/inventory-price',[VendorApiRouter::class,'updateInventoryprices']);
     Route::delete('/inventory-price',[VendorApiRouter::class,'deleteInventoryprices']);
+
+    
     
 
     //org_kyc API's

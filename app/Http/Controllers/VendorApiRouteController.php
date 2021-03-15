@@ -16,12 +16,12 @@ class VendorApiRouteController extends Controller
     { 
         $validation = Validator::make($request->all(),[
             'inventory_id'=>"required|int",
-            'organization_id'=>"required|int",
+            // 'organization_id'=>"required|int",
             'service_type'=>"required|int",
             'price.*.size' => 'required|string',
-            'price.*.material' => 'required|string'
-            // 'price.*.price.economics' => 'required|decimal',
-            // 'price.*.price.premium' => 'required|decimal'
+            'price.*.material' => 'required|string',
+            'price.*.price.economics' => 'nullable',
+            'price.*.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())
@@ -46,10 +46,12 @@ class VendorApiRouteController extends Controller
         $validation = Validator::make($request->all(),[
             'price_id' => 'required|integer',
             'inventory_id'=>"required|int",
-            'organization_id'=>"required|int",
+            // 'organization_id'=>"required|int",
             'service_type'=>"required|int",
             'size' => 'required|string',
-            'material' => 'required|string'
+            'material' => 'required|string',
+            'price.*.price.economics' => 'nullable',
+            'price.*.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())

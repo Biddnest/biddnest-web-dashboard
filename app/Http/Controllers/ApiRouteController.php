@@ -172,6 +172,46 @@ class ApiRouteController extends Controller
             return InventoryController::getBySubserviceForApp($request->subservice_id);
     }
 
+    // public function getInventoryPrice(Request $request)
+    // {
+    //     $validation = Validator::make($request->all(),[
+    //         'source.lat'=>'required'
+    //         'source.lat'=>'required'
+    //         'destination.lat'=>'required'
+    //         'destination.lat'=>'required'
+    //         'item.*.id'=>'required',
+    //         'item.*.size'=>'required|string',
+    //         'item.*.material'=>'required|string',
+    //         'item.*.quantity'=>'required|integer',
+    //     ]);
+
+    //     if($validation->fails())
+    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
+    //     else
+    //         return InventoryController::getInventoryPrice($request->all());
+    // }
+
+    public function addQuote(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_id' => 'required|integer',
+            'source.lat' => 'required',
+            'source.lng' => 'required',
+            'destination.lat' => 'required',
+            'destination.lng' => 'required',
+            'movement_dates.*.date' =>'required',
+            'inventory_items.*.inventory_id' =>'required',
+            'inventory_items.*.material' =>'required',
+            'inventory_items.*.size' =>'required'
+            ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            $request->request->add(['token_payload' => $request->token_payload]);
+            return BookingsController::getQuote($request->all());
+    }
+
 
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();

@@ -14,4 +14,5 @@ class VendorEnums
 {
     public static $ROLES = ["admin"=>1, "manager"=>2];
     public static $STATUS = ["active"=>1, "suspended"=>2];
+    public static $VERIFICATION = ['pending'=>0, "approved"=>1, "rejected"=>2, "incomplete"=>3];
 }

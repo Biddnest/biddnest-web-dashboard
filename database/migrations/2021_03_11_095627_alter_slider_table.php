@@ -14,13 +14,13 @@ class AlterSliderTable extends Migration
     public function up()
     {
         Schema::table('sliders', function (Blueprint $table) {
-            $table->unsignedBigInteger("zone_id")->index("zone_id")->nullable();
+            $table->unsignedBigInteger("zone_id")->index("zone_id")->after("id")->nullable();
             $table->foreign('zone_id')->references('id')->on('zones');
 
-            $table->tinyInteger("type")->nullable();
-            $table->tinyInteger("position");
-            $table->tinyInteger("platform");
-            $table->tinyInteger("size");
+            $table->tinyInteger("type")->after("name")->nullable();
+            $table->tinyInteger("position")->after("type");
+            $table->tinyInteger("platform")->after("position");
+            $table->tinyInteger("size")->after("platform");
         });
     }
 

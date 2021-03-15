@@ -169,7 +169,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return InventoryController::getBySubserviceForApp($request->service_id);
+            return InventoryController::getBySubserviceForApp($request->subservice_id);
     }
 
 

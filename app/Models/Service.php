@@ -11,5 +11,9 @@ class Service extends Model
 
     public function subservices(){
         return $this->hasManyThrough(Services::class,ServiceSubservice::class,'service_id','id','id','subservice_id');
- }
+    }
+
+    public function InventoryPrice(){
+        return $this->hasMany(InventoryPrice::class);
+    }
 }

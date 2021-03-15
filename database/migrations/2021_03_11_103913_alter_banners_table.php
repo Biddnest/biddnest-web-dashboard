@@ -14,7 +14,8 @@ class AlterBannersTable extends Migration
     public function up()
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->string('image');
+            $table->string('image')->after("slider_id")->change();
+
         });
     }
 

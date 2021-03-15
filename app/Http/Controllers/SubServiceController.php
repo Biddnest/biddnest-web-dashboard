@@ -14,7 +14,7 @@ use App\Enums\CommonEnums;
 
 class SubServiceController extends Controller
 {
-    private static $public_data = ["id","service_id","name","image","status"];
+    private static $public_data = ["id","name","image","status"];
     public function __construct()
     {
     }
@@ -111,14 +111,11 @@ class SubServiceController extends Controller
 
     public static function getSubservicesForApp($id)
     {
-        // $serviceSubservice = new ServiceSubservice;
         $subservice=Subservice::select(self::$public_data)
         ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
-        // ->whereIn("id", function($service) use($id){
-        //     return ServiceSubservice::where('service_id', $id)->pluck('subservice_id');
-        // })
         ->whereIn("id", ServiceSubservice::where('service_id', $id)->pluck('subservice_id'))
         ->get();
+        
         if(!$subservice)
             return Helper::response(false,"Records not exist");
         else

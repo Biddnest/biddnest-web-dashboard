@@ -10,9 +10,17 @@ class Organization extends Model
     use HasFactory;
 
     public function kyc(){
-        $this->hasOne(Org_kyc::class);
+        return $this->hasOne(Org_kyc::class);
     }
     public function vendors(){
-        $this->hasMany(Vendor::class);
+        return $this->hasMany(Vendor::class);
+    }
+
+    public function bookings(){
+        return $this->hasMany(Bookings::class);
+    }
+
+    public function InventoryPrice(){
+        return $this->hasMany(InventoryPrice::class);
     }
 }

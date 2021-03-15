@@ -523,4 +523,28 @@ class Route extends Controller
      {
         return SliderController::deleteBanner($id);
      }
+
+
+     public function bookings()
+     {
+        return BookingsController::get();
+     }
+
+     public function bookings_add(Request $request)
+     {
+        $validation = Validator::make($request->all(),[
+            'user_id'=>"required|int",
+            'organization_id'=>"required|int",
+            'movement_type' => 'required|string',
+            'source_lat' => 'required',
+            'source_lng' => 'required',
+            'dest_lat' => 'required',
+            'dest_lng' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return SliderController::add($request->all());
+     }
 }

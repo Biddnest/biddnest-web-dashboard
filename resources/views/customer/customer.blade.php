@@ -69,7 +69,7 @@
 
     </a>
     <div class="dropdown-menu ">
-      
+
         <a class="dropdown-item border-top-bottom" href="#">
             <div class="form-check f-14">
                 <input class="form-check-input" type="checkbox" value="" id="city">
@@ -96,7 +96,7 @@
                 </label>
             </div>
         </a>
-        
+
 
 
     </div>
@@ -110,111 +110,6 @@
         </div>
 </div>
 </div>
-                               
-
-
-                                        <!-- <div  class="header-wrap justify-content-end pl-10"   >
-                                            <div class="">
-
-                                                <h3 class="f-18 pl-3">Verified Vendors</h3 >
-            
-                                                    </div>
-                                        <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i><img src="./assets/images/filter.svg" alt="" srcset=""></i>
-
-                                        </a>
-                                        <div class="dropdown-menu ">
-                                          
-                                            <a class="dropdown-item border-top-bottom" href="#">
-                                                <div class="form-check f-14">
-                                                    <input class="form-check-input" type="checkbox" value="" id="city">
-                                                    <label class="form-check-label" for="city">
-                                                        City
-                                                    </label>
-                                                </div>
-                                            </a>
-                                            <a class="dropdown-item border-top-bottom" href="#">
-                                                <div class="form-check f-14">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="Customer">
-                                                    <label class="form-check-label" for=" Customer">
-                                                        Customer Status
-                                                    </label>
-                                                </div>
-                                            </a>
-                                            <a class="dropdown-item border-top-bottom" href="#">
-                                                <div class="form-check f-14">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="customerType">
-                                                    <label class="form-check-label" for="customerType">
-                                                        Customer Type
-                                                    </label>
-                                                </div>
-                                            </a>
-                                            
-
-
-                                        </div>
-                                        <div class="p-1 card-head left col-sm-3">
-                                            <div class="search">
-                                               <input type="text" class="searchTerm" placeholder="Search...">
-                                               <button type="submit" class="searchButton">
-                                                 <i class="fa fa-search"></i>
-                                              </button>
-                                            </div>
-                                    </div>
-                                </div> -->
-                                       
-                                
-
-
-
-                                <!-- <div class="header-wrap">
-                                    <h3 class="f-18 "></h3>
-
-                                    <div class="header-wrap p-0">
-                                        <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i><img src="./assets/images/filter.svg" alt="" srcset=""></i>
-
-                                        </a>
-                                        <div class="dropdown-menu ">
-                                          
-                                            <a class="dropdown-item border-top-bottom" href="#">
-                                                <div class="form-check f-14">
-                                                    <input class="form-check-input" type="checkbox" value="" id="city">
-                                                    <label class="form-check-label" for="city">
-                                                        City
-                                                    </label>
-                                                </div>
-                                            </a>
-                                            <a class="dropdown-item border-top-bottom" href="#">
-                                                <div class="form-check f-14">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="Customer">
-                                                    <label class="form-check-label" for=" Customer">
-                                                        Customer Status
-                                                    </label>
-                                                </div>
-                                            </a>
-                                            <a class="dropdown-item border-top-bottom" href="#">
-                                                <div class="form-check f-14">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="customerType">
-                                                    <label class="form-check-label" for="customerType">
-                                                        Customer Type
-                                                    </label>
-                                                </div>
-                                            </a>
-                                            
-
-
-                                        </div>
-                                    </div>
-                                   
-
-                                </div> -->
 
 
 
@@ -229,147 +124,49 @@
                                                 <th scope="col">Customer Name</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">City</th>
-                                                <th scope="col" style="text-align: center;">Favourite</th>
                                                 <th scope="col" style="text-align: center;">Status</th>
                                                 <th scope="col" style="text-align: center;">Operations</th>
                                             </tr>
                                         </thead>
                                         <tbody class="mtop-20">
+                                           @foreach($users as $user)
                                             <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">David Jerome</td>
-                                                <td>+91-9739823457</td>
-                                                <td>davidjerome@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge light-bg">Enquiry</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Ann Hency</td>
-                                                <td>+91-9739823457</td>
-                                                <td>davidjerome@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge">In Transit</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Abhiram Rao</td>
-                                                <td>+91-9739823457</td>
-                                                <td>abhiramrao@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge green-bg">Awaiting Pickup</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Rohan Seth</td>
-                                                <td>+91-9739823457</td>
-                                                <td>rohanseth@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge">Bidding</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Abhishek Raghu</td>
-                                                <td>+91-9739823457</td>
-                                                <td>abhishekraghu@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge light-bg">Enquiry</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Mitraj Singh</td>
-                                                <td>+91-9739823457</td>
-                                                <td>mitrajsingh@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge red-bg">Completed</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Bhumika Kaur</td>
-                                                <td>+91-9739823457</td>
-                                                <td>bhumikakaur@ymail.com</td>
-                                                <td>Bengaluru</td>
-                                                <td style="text-align: center;">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                </td>
-                                                <td class="" style="text-align: center;">
-                                                    <div class="status-badge light-bg">Enquiry</div>
-                                                </td>
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
+                                                onclick="/*$('.side-bar-pop-up').toggleClass('display-pop-up');*/">
+                                                <td scope="row">{{ $user->fname }} {{ $user->lname }}</td>
+                                                <td>{{$user->phone}}</td>
+                                                <td>{{$user->email}}</td>
 
+                                                <td class="" style="text-align: center;">
+                                                    @if($user->status == 0)
+                                                    <div class="status-badge red-bg">Pending Signup</div>
+                                                    @else
+                                                        <div class="status-badge green-bg">Active</div>
+                                                    @endif
+                                                </td>
 
+                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
+                                                        aria-hidden="true"></i>
+                                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                                </td>
+                                            </tr>
+                                           @endforeach
                                         </tbody>
-
                                     </table>
                                     <div class="pagination">
+{{--                                        {{ $users->links() }}--}}
                                         <ul>
                                             <li class="p-1">Page</li>
-                                            <li class="digit">1</li>
+                                            <li class="digit">{{$users->currentPage()}}</li>
                                             <li class="label">of</li>
-                                            <li class="digit">20</li>
-                                            <li class="button"><a href="#"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                            <li class="digit">{{$users->lastPage()}}</li>
+                                            @if(!$users->onFirstPage())
+                                            <li class="button"><a href="{{$users->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
                                             </li>
-                                            <li class="button"><a href="#"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                            @endif
+                                            @if($users->currentPage() != $users->lastPage())
+                                            <li class="button"><a href="{{$users->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
                                             </li>
+                                             @endif
                                         </ul>
                                     </div>
                                 </div>

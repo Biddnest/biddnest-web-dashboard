@@ -82,7 +82,7 @@ class BookingsController extends Controller
                                             "lift"=>$data['destination']['meta']['lift']]);
         if($data['meta']['self_booking']===true)
         {
-            return $user = User::findOrfail($user_id);
+            $user = User::findOrfail($user_id);
             $booking->contact_details=json_encode(["name"=> $user['fname'].' '.$user['lname'],
                                                     "phone"=> $user['phone'],
                                                     'email'=>$user['email']]);

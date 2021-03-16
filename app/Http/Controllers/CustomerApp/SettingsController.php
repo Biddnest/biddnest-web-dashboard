@@ -11,6 +11,7 @@ use App\Enums\VendorEnums;
 use App\Enums\CommonEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\BookingEnums;
+use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -31,6 +32,10 @@ class SettingsController extends Controller
                    "version_code"=>1,
                    "version"=> "1.0.0",
                ]
+            ],
+            "keys"=>[
+                "google_api_key"=>Settings::where("key", "google_api_key")->pluck('value')[0],
+                "cancellation_reason_options"=>Settings::where("key", "cancellation_reason_options")->pluck('value')[0]
             ],
             "enums"=>[
                 "gender"=>AppEnums::$GENDER,

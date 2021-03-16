@@ -50,7 +50,7 @@ $("body").on('submit',"form",function() {
                                 redirectTo(form.data("url"));
                         }
                         else if(form.data("next") == "refresh"){
-                            redirectTo($(location).attr("href"));
+                            location.reload();
                         }
                     }
                 }

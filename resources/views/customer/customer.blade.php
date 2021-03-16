@@ -59,7 +59,7 @@
 
 <div class="row no-gutters">
     <div class="col-sm-8 p-3 ">
-        <h3 class="f-18 pl-8">Customers</h3 >
+        <h3 class="f-18 pl-8 title">Customers</h3 >
 
     </div>
     <div class="col-sm-1 -mr-4 pt-3 pl-8 ">

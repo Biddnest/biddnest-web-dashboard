@@ -34,7 +34,53 @@
                                 <div class="col-lg-12">
                                     <div class="card h-auto p-0 pt-10">
                                         <div class="header-wrap">
-                                            <h3 class="f-18">Sliders & Banners</h3>
+                                            <div class="col-sm-8 p-3 ">
+                                                <h3 class="f-18 title">Sliders & Banners </h3>
+                                
+                                            </div>
+
+                                            <div class="header-wrap p-0 col-sm-1">
+                                                <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item border-top-bottom" href="#">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="total-no-orders">
+                                                            <label class="form-check-label" for="total-no-orders">
+                                                                Total no of orders
+                                                            </label>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item border-top-bottom" href="#">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="statu">
+                                                            <label class="form-check-label" for="status">
+                                                                Status
+                                                            </label>
+                                                        </div>
+                                                    </a>
+                                                    <a class="dropdown-item border-top-bottom" href="#">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="city">
+                                                            <label class="form-check-label" for="city">
+                                                                City
+                                                            </label>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="card-head  pt-2  left col-sm-3">
+                                                <div class="search">
+                                                <input type="text" class="searchTerm" placeholder="Search...">
+                                                <button type="submit" class="searchButton">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="all-vender-details table-responsive-sm">
                                             <table style="table-layout: fixed; word-wrap: break-word;"

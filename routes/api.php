@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('bookings')->group(function () {
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
-        Route::post('/cancel',[ApiRouter::class,'cancelBooking']);
+        Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
     });
 });
 

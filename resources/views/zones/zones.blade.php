@@ -52,7 +52,7 @@
                     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
                         <div class="col-sm-12">
                             <div class="card  h-auto p-0 pt-10">
-                                <div class="header-wrap" style="margin-top: 5px;">
+                                <div class="header-wrap">
                                     <div class="col-sm-8 p-3 ">
                                         <h3 class="f-18 title">Zone Management </h3>
                                 

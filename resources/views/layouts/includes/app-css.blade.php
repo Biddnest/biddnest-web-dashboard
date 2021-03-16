@@ -411,5 +411,12 @@
             .pagination .label{
                 color: #000 !important;
             }
+
+            .header-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0px !important; 
+            }
         </style>
 

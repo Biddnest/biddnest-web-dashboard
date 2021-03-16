@@ -35,7 +35,7 @@ class SettingsController extends Controller
             ],
             "keys"=>[
                 "google_api_key"=>Settings::where("key", "google_api_key")->pluck('value')[0],
-                "cancellation_reason_options"=>Settings::where("key", "cancellation_reason_options")->pluck('value')[0]
+                "cancellation_reason_options"=>json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true)
             ],
             "enums"=>[
                 "gender"=>AppEnums::$GENDER,

@@ -12,6 +12,7 @@ use App\Models\MovementDates;
 use App\Models\BookingInventory;
 use App\Models\Inventory;
 use App\Models\Service;
+use App\Models\User;
 use App\Models\Settings;
 use App\Helper;
 use App\Sms;

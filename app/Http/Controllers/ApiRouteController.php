@@ -171,7 +171,12 @@ class ApiRouteController extends Controller
         else
             return InventoryController::getBySubserviceForApp($request->subservice_id);
     }
-
+    
+    public function getAllInventories()
+    {
+        return InventoryController::getInventoriesForApp();
+    }
+    
     // public function getInventoryPrice(Request $request)
     // {
     //     $validation = Validator::make($request->all(),[

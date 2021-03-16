@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/services',[ApiRouter::class,'getServices']);
     Route::get('/subservices',[ApiRouter::class,'getSubServices']);
     Route::get('/inventories',[ApiRouter::class,'getInventories']);
-
+    Route::get('/inventories/all',[ApiRouter::class,'getAllInventories']);
     //bookings APIs
     Route::prefix('bookings')->group(function () {
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);

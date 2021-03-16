@@ -14,7 +14,7 @@ use App\Enums\CommonEnums;
 
 class SubServiceController extends Controller
 {
-    private static $public_data = ["id","name","image","status"];
+    private static $public_data = ["id","name","image"];
     public function __construct()
     {
     }

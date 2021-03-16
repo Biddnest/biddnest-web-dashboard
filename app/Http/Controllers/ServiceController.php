@@ -12,7 +12,7 @@ use App\Enums\CommonEnums;
 
 class ServiceController extends Controller
 {
-    private static $public_data = ["id","name","image","inventory_quantity_type","status"];
+    private static $public_data = ["id","name","image","inventory_quantity_type"];
     public function __construct()
     {
     }

@@ -17,7 +17,7 @@ use App\Enums\ServiceEnums;
 
 class InventoryController extends Controller
 {
-    private static $public_data = ["id","name","image","icon","status"];
+    private static $public_data = ["id","name","image","icon","size","material"];
     public static function get()
     {
         $inventories=Inventory::all();
@@ -111,8 +111,18 @@ class InventoryController extends Controller
     //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
     {    
-        $result=Inventory::whereIn("id", SubserviceInventory::where('subservice_id', $id)->pluck('inventory_id'))
+        $result=Inventory::select(self::$public_data)->whereIn("id", SubserviceInventory::where('subservice_id', $id)->pluck('inventory_id'))
         ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Display data");
+        else
+            return Helper::response(true,"Data Display successfully", $result);
+    }
+
+    public static function getInventoriesForApp()
+    {    
+        $result=Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
 
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
@@ -123,10 +133,6 @@ class InventoryController extends Controller
     //route controller => VendorApiRouteController
     public static function addPrice($data)
     {
-        // $Organization = Organization::findOrFail($data["organization_id"]);
-        // if(!$Organization)
-        //     return Helper::response(false,"Incorrect Organization id.");
-
         $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
             return Helper::response(false,"Incorrect service type.");

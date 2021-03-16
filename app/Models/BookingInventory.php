@@ -11,7 +11,5 @@ class BookingInventory extends Model
     use HasFactory;
     protected $hidden = ['created_at','updated_at','deleted'];
 
-    public function bookings(){
-        return $this->hasMany(Bookings::class);
-    }
+
 }

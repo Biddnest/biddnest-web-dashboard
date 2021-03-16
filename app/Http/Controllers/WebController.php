@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
+use App\Models\Inventory;
+use App\Models\Service;
+use App\Models\Slider;
+use App\Models\Subservice;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
@@ -120,7 +126,10 @@ class WebController extends Controller
 
     public function categories()
     {
-        return view('categories.categories');
+        return view('categories.categories',[
+            "categories"=>Service::paginate(CommonEnums::$PAGE_LENGTH),
+//            "inventory_category_type"=>Serv
+        ]);
     }
 
     public function createCategories()
@@ -130,7 +139,9 @@ class WebController extends Controller
 
     public function subcateories()
     {
-        return view('categories.subcateories');
+        return view('categories.subcateories',[
+            "categories"=>Subservice::paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createSubcateories()
@@ -141,7 +152,9 @@ class WebController extends Controller
     public function inventories()
     {
         // return "success";
-        return view('categories.inventories');
+        return view('categories.inventories',[
+            "inventories"=>Inventory::paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createInventories()
@@ -171,7 +184,9 @@ class WebController extends Controller
 
     public function zones()
     {
-        return view('zones.zones');
+        return view('zones.zones',[
+            "zones"=>Zone::paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createZones()
@@ -184,15 +199,19 @@ class WebController extends Controller
         return view('zones.detailszones');
     }
 
+
     public function slider()
     {
-        return view('sliderandbanner.slider');
+        return view('sliderandbanner.slider',[
+            "sliders"=>Slider::with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createSlider()
     {
         return view('sliderandbanner.createslider');
     }
+
 
     public function pushNotification()
     {

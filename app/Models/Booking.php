@@ -20,7 +20,7 @@ class Booking extends Model
     }
 
     public function bookinginventory(){
-        return $this->hasOne(BookingInventory::class);
+        return $this->hasMany(BookingInventory::class);
     }
 
 

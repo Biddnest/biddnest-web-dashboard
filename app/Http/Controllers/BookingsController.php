@@ -121,6 +121,7 @@ class BookingsController extends Controller
 
         $estimate_quote =json_encode(["economic"=>$economic_price, "premium"=>$primium_price]);
         $booking->quote_estimate=$estimate_quote;
+        $booking->status=BookingEnums::$STATUS['enquiry'];
         $result=$booking->save(); 
 
         foreach($data["movement_dates"] as $dates)

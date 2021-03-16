@@ -191,7 +191,7 @@ class ApiRouteController extends Controller
             'source.meta.address' => 'required|string',
             'source.meta.city' => 'required|string',
             'source.meta.state' => 'required|string',
-            'source.meta.pincode' => 'required|integer',
+            'source.meta.pincode' => 'required|min:6|max:6',
             'source.meta.lift' => 'required|boolean',
 
             'destination.lat' => 'required|numeric',
@@ -202,10 +202,14 @@ class ApiRouteController extends Controller
             'destination.meta.address' => 'required|string',
             'destination.meta.city' => 'required|string',
             'destination.meta.state' => 'required|string',
-            'destination.meta.pincode' => 'required|integer',
+            'destination.meta.pincode' => 'required|min:6|max:6',
             'destination.meta.lift' => 'required|boolean',
 
-            'contact_details.*'  => 'nullable',
+            'contact_details' => "nullable",
+            'contact_details.name'  => 'nullable|string',
+            'contact_details.phone'  => 'nullable|min:10|max:10',
+            'contact_details.email'  => 'nullable|string',
+
 
             'meta.self_booking' => 'required|boolean',
             'meta.subcategory' => 'nullable|string',
@@ -224,6 +228,19 @@ class ApiRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return BookingsController::createEnquiry($request->all(), $request->token_payload->id);
+    }
+
+    public function confirmBooking(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_type' => 'required|string',
+            'public_booking_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->token_payload->id);
     }
 
 

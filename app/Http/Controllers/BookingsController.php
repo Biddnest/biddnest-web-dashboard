@@ -51,9 +51,11 @@ class BookingsController extends Controller
                 return  Helper::response(false,"You have pending order");
             }
         }
+        DB::beginTransaction();
 
         $inventory_quantity_type = Service::where("id",$data['service_id'])->pluck('inventory_quantity_type')[0];
         if($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]){
+            DB::rollBack();
             return Helper::response(false,"Unkown Service Type, Couldn't Proceed");
         }
 
@@ -124,13 +126,19 @@ class BookingsController extends Controller
             }
         }
 
-        $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type);
-        $economic_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-        $economic_price += $economic_price*($cost_structure["tax"]/100);
+        try{
+            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type);
+            $economic_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+            $economic_price += $economic_price*($cost_structure["tax"]/100);
 
-        $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type);  
-        $primium_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-        $primium_price += $primium_price*($cost_structure["tax"]/100);
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type);  
+            $primium_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+            $primium_price += $primium_price*($cost_structure["tax"]/100);
+        }
+        catch(Exception $e){
+            DB::rollBack();
+            return Helper::response(false,"Couldn't save data",["error"=>$e->getMessage()]);
+        }
 
         $estimate_quote =json_encode(["economic"=>$economic_price, "premium"=>$primium_price]);
         $booking->quote_estimate=$estimate_quote;
@@ -159,15 +167,42 @@ class BookingsController extends Controller
             $result_items=$bookinginventory->save();
         }       
 
-        
+       
         if(!$result && !$result_date && !$result_items)
+        {
+            DB::rollBack();
             return Helper::response(false,"Couldn't save data");
-        else
-            return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->findOrFail($booking->id)]);
+        }
+
+        DB::commit();
+        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->findOrFail($booking->id)]);
     }
 
-    public static function add()
+
+    public static function confirmBooking($public_booking_id, $service_type, $user_id)
     {
         
+        $exist= Booking::where(["user_id"=>$user_id,
+                                "public_booking_id"=>$public_booking_id])->first();
+        if(!$exist){
+            return Helper::response(false,"Order is not Exist");
+        }
+
+        if($exist['status']!=BookingEnums::$STATUS['enquiry']){
+            return Helper::response(false,"This order is not in Enquiry Status");
+        }
+
+        $booking_type= $service_type==0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
+    
+        $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
+                                            "public_booking_id"=>$exist->public_booking_id])
+                                            ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
+                                            "status"=>BookingEnums::$STATUS['placed']]);
+        if(!$confirmestimate)
+        {
+            return Helper::response(false,"Couldn't save data");
+        }
+                
+         return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->where("public_booking_id", $public_booking_id)->first()]);
     }
 }

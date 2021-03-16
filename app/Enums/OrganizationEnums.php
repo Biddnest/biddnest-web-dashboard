@@ -12,5 +12,5 @@ use Fabito\AvatarGenerator\Avatar;
 
 class OrganizationEnums
 {
-    public static $SERVICES = ["economic"=>1, "premium"=>2];
+    public static $SERVICES = ["economic"=>0, "premium"=>1];
 }

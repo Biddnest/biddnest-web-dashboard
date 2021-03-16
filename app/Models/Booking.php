@@ -27,5 +27,7 @@ class Booking extends Model
         return $this->hasMany(MovementDates::class);
     }
 
-
+    public function status_history(){
+        return $this->hasMany(BookingStatus::class);
+    }
 }

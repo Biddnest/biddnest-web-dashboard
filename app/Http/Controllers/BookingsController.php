@@ -13,6 +13,7 @@ use App\Models\BookingInventory;
 use App\Models\Inventory;
 use App\Models\Service;
 use App\Models\User;
+use App\Models\BookingStatus;
 use App\Models\Settings;
 use App\Helper;
 use App\Sms;
@@ -27,16 +28,7 @@ use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
-    public static function get()  
-    {
-        $result=Booking::where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->with("user")->with("Organization")->get();
-
-        if(!$result)
-            return Helper::response(false,"Couldn't fetche data");
-        else
-            return Helper::response(true,"Data fetched successfully", $result);
-    }
-
+   
     public static function createEnquiry($data, $user_id)
     {
         if(App::environment('production'))
@@ -145,6 +137,11 @@ class BookingsController extends Controller
         $booking->status=BookingEnums::$STATUS['enquiry'];
         $result=$booking->save(); 
 
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $booking->id;
+        $bookingstatus->status=BookingEnums::$STATUS['enquiry'];
+        $result_status = $bookingstatus->save();
+
         foreach($data["movement_dates"] as $dates)
         {
             $movementdates=new MovementDates;
@@ -168,14 +165,14 @@ class BookingsController extends Controller
         }       
 
        
-        if(!$result && !$result_date && !$result_items)
+        if(!$result && !$result_date && !$result_items && !$result_status)
         {
             DB::rollBack();
             return Helper::response(false,"Couldn't save data");
         }
 
         DB::commit();
-        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->findOrFail($booking->id)]);
+        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
 
@@ -198,11 +195,47 @@ class BookingsController extends Controller
                                             "public_booking_id"=>$exist->public_booking_id])
                                             ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
                                             "status"=>BookingEnums::$STATUS['placed']]);
-        if(!$confirmestimate)
+
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $exist->id;
+        $bookingstatus->status=BookingEnums::$STATUS['placed'];
+        $result_status = $bookingstatus->save();
+
+        if(!$confirmestimate && !$result_status)
         {
             return Helper::response(false,"Couldn't save data");
         }
                 
-         return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->where("public_booking_id", $public_booking_id)->first()]);
+         return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+    }
+
+    public static function cancelBooking($public_booking_id, $reason, $desc, $user_id)
+    {
+        $exist= Booking::where(["user_id"=>$user_id,
+                                "public_booking_id"=>$public_booking_id])->first();
+        if(!$exist){
+            return Helper::response(false,"Order is not Exist");
+        }
+
+        if($exist['status']==BookingEnums::$STATUS['cancelled']){
+            return Helper::response(false,"This order is already cancelled");
+        }
+
+        $cancelbooking = Booking::where(["user_id"=>$exist->user_id,
+        "public_booking_id"=>$exist->public_booking_id])
+        ->update(["status"=>BookingEnums::$STATUS['cancelled']]);
+
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $exist->id;
+        $bookingstatus->status=BookingEnums::$STATUS['cancelled'];
+        $bookingstatus->cancelled_meta=json_encode(["reason"=>$reason, "desc"=>$desc], true);
+        $result_status = $bookingstatus->save();
+
+        if(!$cancelbooking && !$result_status)
+        {
+            return Helper::response(false,"Couldn't save data");
+        }
+                
+         return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 }

@@ -243,6 +243,19 @@ class ApiRouteController extends Controller
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->token_payload->id);
     }
 
+    public function cancelBooking(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'reason' => 'required|string',
+            'desc' => 'required|string',
+            'public_booking_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->token_payload->id);
+    }
 
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();

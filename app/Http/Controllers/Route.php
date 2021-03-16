@@ -510,7 +510,7 @@ class Route extends Controller
             'banners.*.name' => 'required|string',
             'banners.*.date.from' => 'required|date',
             'banners.*.date.to' => 'required|date',
-//            'banners.*.order' => 'required|int',
+            //            'banners.*.order' => 'required|int',
             "banners.*.url" => 'required|url',
             "banners.*.image" => 'required|string'
         ]);

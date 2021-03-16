@@ -19,8 +19,12 @@ class Booking extends Model
         return $this->hasOne(User::class);
     }
 
-    public function bookinginventory(){
-        return $this->hasOne(BookingInventory::class);
+    public function inventories(){
+        return $this->hasMany(BookingInventory::class);
+    }
+
+    public function movement_dates(){
+        return $this->hasMany(MovementDates::class);
     }
 
 

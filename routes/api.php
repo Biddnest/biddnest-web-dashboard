@@ -26,7 +26,9 @@ Route::prefix('v1')->group(function () {
     Route::get('/inventories',[ApiRouter::class,'getInventories']);
 
     //bookings APIs
-    Route::post('/bookings',[ApiRouter::class,'addQuote']);
+    Route::prefix('bookings')->group(function () {
+        Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
+    });
 });
 
 

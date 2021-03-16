@@ -637,6 +637,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\Organization' => __DIR__ . '/../..' . '/app/Models/Organization.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
         'App\\Models\\ServiceSubservice' => __DIR__ . '/../..' . '/app/Models/ServiceSubservice.php',
+        'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
         'App\\Models\\SlideBanner' => __DIR__ . '/../..' . '/app/Models/SlideBanner.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Subservice' => __DIR__ . '/../..' . '/app/Models/Subservice.php',

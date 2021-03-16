@@ -13,6 +13,7 @@ use App\Models\Organization;
 use App\Models\Service;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
+use App\Enums\ServiceEnums;
 
 class InventoryController extends Controller
 {
@@ -206,28 +207,31 @@ class InventoryController extends Controller
     }
 
 
-    public static function getEconomicPrice($data)
+    public static function getEconomicPrice($data, $inventory_quantity_type)
     {        
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
-            $minprice= InventoryPrice::where(["inventory_id"=>$item['id'],
+            $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
                                                 "size"=>$item['size'],
-                                                "material"=>$item['material']])->min('price_economics');
-           $finalprice += $minprice * $item['quantity'] * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+                                                "material"=>$item['material']])->min('price_economics'
+                                            );
+            $quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
+           $finalprice += $minprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         }
 
         return $finalprice;
 
     }
 
-    public static function getPremiumPrice($data)
+    public static function getPremiumPrice($data , $inventory_quantity_type)
     {        
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
-            $maxprice= InventoryPrice::where(["inventory_id"=>$item['id'],
+            $maxprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
                                                 "size"=>$item['size'],
                                                 "material"=>$item['material']])->min('price_premium');
-           $finalprice += $maxprice * $item['quantity'] * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+            $quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
+           $finalprice += $maxprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         }
 
         return $finalprice;

@@ -12,6 +12,6 @@ class BookingInventory extends Model
     protected $hidden = ['created_at','updated_at','deleted'];
 
     public function bookings(){
-        return $this->hasMany(Bookings::class);
+        return $this->hasOne(Bookings::class);
     }
 }

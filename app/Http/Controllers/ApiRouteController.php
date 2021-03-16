@@ -191,7 +191,7 @@ class ApiRouteController extends Controller
     //         return InventoryController::getInventoryPrice($request->all());
     // }
 
-    public function addQuote(Request $request)
+    public function createEnquiry(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'service_id' => 'required|integer',
@@ -199,17 +199,17 @@ class ApiRouteController extends Controller
             'source.lng' => 'required',
             'destination.lat' => 'required',
             'destination.lng' => 'required',
-            'movement_dates.*.date' =>'required',
+            'movement_dates' =>'required',
             'inventory_items.*.inventory_id' =>'required',
             'inventory_items.*.material' =>'required',
             'inventory_items.*.size' =>'required'
             ]);
         
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            $request->request->add(['token_payload' => $request->token_payload]);
-            return BookingsController::getQuote($request->all());
+            return BookingsController::createEnquiry($request->all(), $request->token_payload->id);
     }
 
 

@@ -65,6 +65,7 @@ return array(
     'App\\Models\\Organization' => $baseDir . '/app/Models/Organization.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
     'App\\Models\\ServiceSubservice' => $baseDir . '/app/Models/ServiceSubservice.php',
+    'App\\Models\\Settings' => $baseDir . '/app/Models/Settings.php',
     'App\\Models\\SlideBanner' => $baseDir . '/app/Models/SlideBanner.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\Subservice' => $baseDir . '/app/Models/Subservice.php',

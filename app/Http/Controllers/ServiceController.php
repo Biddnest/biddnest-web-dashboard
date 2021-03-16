@@ -17,7 +17,7 @@ class ServiceController extends Controller
     {
     }
 
-    public static function add($name,$image)
+    public static function add($name,$image,$inventory_quantity_type)
     {
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));
@@ -25,6 +25,7 @@ class ServiceController extends Controller
         $image_name = "service".$name."-".uniqid().".png";
         $service=new Service;
         $service->name=$name;
+        $service->inventory_quantity_type=$inventory_quantity_type;
         $service->image = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services");
         $result= $service->save();
 
@@ -53,7 +54,7 @@ class ServiceController extends Controller
             return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
     }
 
-    public static function update($id, $name, $image)
+    public static function update($id, $name, $image, $inventory_quantity_type)
     {
         $image_name = "subservice".$name."-".$id.".png";
 
@@ -61,6 +62,7 @@ class ServiceController extends Controller
         $imageman->configure(array('driver' => 'gd'));
         $service=Service::where("id", $id)->update([
             "name"=>$name,
+            "inventory_quantity_type"=>$inventory_quantity_type,
             "image"=>Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services")
         ]);
 

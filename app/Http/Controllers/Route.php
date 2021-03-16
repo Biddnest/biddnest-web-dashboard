@@ -68,14 +68,15 @@ class Route extends Controller
     public function service_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'name' => 'required',
-            'image' => 'required'
+            'name' => 'required|string',
+            'image' => 'required|string',
+            'inventory_quantity_type' =>'required|integer'
         ]);
 
         if($validation->fails())
           return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return ServiceController::add(ucwords($request->name), $request->image);
+            return ServiceController::add(ucwords($request->name), $request->image, $request->inventory_quantity_type);
     }
 
     public function service(Request $request)
@@ -94,9 +95,10 @@ class Route extends Controller
     public function service_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'name' => 'required',
-            'image' => 'required',
-            'id' => 'required|integer'
+            'name' => 'required|srting',
+            'image' => 'required|srting',
+            'id' => 'required|integer',
+            'inventory_quantity_type' =>'required|integer'
         ]);
 
         if($validation->fails())
@@ -525,29 +527,4 @@ class Route extends Controller
      }
 
 
-     public function bookings()
-     {
-        return BookingsController::get();
-     }
-
-
-    // public function addQuote(Request $request)
-    // {
-    //     $validation = Validator::make($request->all(),[
-    //         'service_id' => 'required|integer',
-    //         'source.lat' => 'required',
-    //         'source.lng' => 'required',
-    //         'destination.lat' => 'required',
-    //         'destination.lng' => 'required',
-    //         'movement_dates.*.date' =>'required',
-    //         'inventory_items.*.inventory_id' =>'required',
-    //         'inventory_items.*.material' =>'required',
-    //         'inventory_items.*.size' =>'required'
-    //         ]);
-        
-    //     if($validation->fails())
-    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
-    //     else
-    //         return BookingsController::getQuote($request->all());
-    // }
 }

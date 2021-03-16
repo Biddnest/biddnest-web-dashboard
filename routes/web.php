@@ -84,10 +84,6 @@ Route::prefix('web/api')->group(function () {
     Route::post('/banners',[Router::class,'banners_add'])->name("banners_add");
     Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
 
-
-    //bookings APIs
-    // Route::get('/bookings',[Router::class,'bookings'])->name("bookings");
-    // Route::post('/bookings',[Router::class,'addQuote']);
 });
 
 

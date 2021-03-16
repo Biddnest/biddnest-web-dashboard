@@ -31,5 +31,7 @@ class Booking extends Model
         return $this->belongsTo(Service::class);
     }
 
-
+    public function status_history(){
+        return $this->hasMany(BookingStatus::class);
+    }
 }

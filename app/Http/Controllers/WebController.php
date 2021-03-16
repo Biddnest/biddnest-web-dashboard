@@ -2,6 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingEnums;
+use App\Enums\CommonEnums;
+use App\Enums\ServiceEnums;
+use App\Models\Booking;
+use App\Models\Inventory;
+use App\Models\Service;
+use App\Models\Slider;
+use App\Models\Subservice;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
@@ -59,12 +68,16 @@ class WebController extends Controller
 
     public function ordersBookingsLive()
     {
-        return view('order.ordersbookings_live');
+        return view('order.ordersbookings_live',[
+            "bookings" => Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->with('service')->with('organization')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function ordersBookingsPast()
     {
-        return view('order.ordersbookings_past');
+        return view('order.ordersbookings_past',[
+            "bookings" => Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function orderDetails()
@@ -120,7 +133,10 @@ class WebController extends Controller
 
     public function categories()
     {
-        return view('categories.categories');
+        return view('categories.categories',[
+            "categories"=>Service::paginate(CommonEnums::$PAGE_LENGTH),
+            "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
+        ]);
     }
 
     public function createCategories()
@@ -130,7 +146,9 @@ class WebController extends Controller
 
     public function subcateories()
     {
-        return view('categories.subcateories');
+        return view('categories.subcateories',[
+            "subcategories"=>Subservice::paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createSubcateories()
@@ -141,7 +159,9 @@ class WebController extends Controller
     public function inventories()
     {
         // return "success";
-        return view('categories.inventories');
+        return view('categories.inventories',[
+            "inventories"=>Inventory::paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createInventories()
@@ -171,7 +191,9 @@ class WebController extends Controller
 
     public function zones()
     {
-        return view('zones.zones');
+        return view('zones.zones',[
+            "zones"=>Zone::paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createZones()
@@ -184,15 +206,19 @@ class WebController extends Controller
         return view('zones.detailszones');
     }
 
+
     public function slider()
     {
-        return view('sliderandbanner.slider');
+        return view('sliderandbanner.slider',[
+            "sliders"=>Slider::with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function createSlider()
     {
         return view('sliderandbanner.createslider');
     }
+
 
     public function pushNotification()
     {

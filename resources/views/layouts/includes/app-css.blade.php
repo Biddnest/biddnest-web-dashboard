@@ -407,5 +407,9 @@
                 font-family: "Gilroy";
                 font-weight: 600;
             }
+
+            .pagination .label{
+                color: #000 !important;
+            }
         </style>
 

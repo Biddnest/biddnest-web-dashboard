@@ -20,14 +20,14 @@
                                       <li class="breadcrumb-item active" aria-current="page">Sliders & Banners
                                       </li>
                                       <li class="breadcrumb-item"><a href="categories-subcategories.html"> Manage Sliders</a></li>
-                                      
-                                     
+
+
                                     </ol>
                                   </nav>
-                                
-                                
+
+
                                 </div>
-                          
+
                             </div>
                             <!-- Dashboard cards -->
                             <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -46,183 +46,62 @@
                                                         <th scope="col">Image</th>
                                                         <th scope="col">Banner Name</th>
                                                         <th scope="col">Status</th>
-                                                        <th scope="col">Banner Type</th>
-                                                        <th scope="col">Operation</th>
+                                                        <th scope="col">Platform</th>
+                                                        <th scope="col">Created On</th>
+                                                        <th scope="col">Operations</th>
 
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mtop-20 f-14">
-                                                    <tr class="tb-border cursor-pointer clickable-row">
-                                                        <!-- <td class="f-l">
-                                                            <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td> -->
-
+                                                @foreach($sliders as $slider)
+                                                <tr class="tb-border cursor-pointer clickable-row">
                                                         <td scope="row" class="span3" style="width: 25%;">
                                                             <div class="d-flex justify-content-center">
                                                                 <img class="p-2"
-                                                                    onclick="$('.slick-container').slick('slickPrev')"
+                                                                    onclick="$('.slick-container_{{$slider->id}}').slick('slickPrev')"
                                                                     src="{{asset('static/images/Backward.svg')}}">
-                                                                <div class="slick-container">
+                                                                <div class="slick-container slick-container_{{$slider->id}}">
+                                                         @foreach($slider->banners as $banner)
                                                                     <img class="slick-image"
-                                                                        src="{{asset('static/images/default-image.svg')}}" alt="">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/big-profile.svg')}}" alt="">
+                                                                        src="{{$banner->image}}" alt="">
+                                                                    @endforeach
                                                                 </div>
                                                                 <img class="p-2"
-                                                                    onclick="$('.slick-container').slick('slickNext')"
+                                                                    onclick="$('.slick-container_{{$slider->id}}').slick('slickNext')"
                                                                     src="{{asset('static/images/forward.svg')}}">
                                                             </div>
                                                         </td>
 
                                                         <td class="span3"
                                                             onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            New Year Sale</td>
+                                                            {{$slider->name}}</td>
                                                         <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"
                                                             class="span2">
-                                                            <div class="status-badge">In Process</div>
+                                                            @if($slider->status == 0)
+                                                                <div class="status-badge red-bg">Inactive</div>
+                                                            @else
+                                                                <div class="status-badge green-bg">Active</div>
+                                                            @endif
                                                         </td>
                                                         <td class="span1"
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            Sale</td>
+                                                            onclick="/*$('.side-bar-pop-up').toggleClass('display-pop-up');*/">
+                                                            @if($slider->platform == 0)
+                                                                App
+                                                            @elseif($slider->platform == 1)
+                                                            Web
+                                                            @endif
+                                                            </td>
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($slider->created_at)->format("d M Y") }}
+                                                    </td>
                                                         <td
                                                             onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                                             <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                                 class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
                                                         </td>
                                                     </tr>
-                                                    <tr class="tb-border cursor-pointer">
-                                                        <!-- <td class="f-l">
-                                                            <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td> -->
-                                                        <td scope="row" style="width: 25%;">
-                                                            <div class="d-flex justify-content-center">
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-2').slick('slickPrev')"
-                                                                    src="{{asset('static/images/Backward.svg')}}">
-                                                                <div class="slick-container-2">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/default-image.svg')}}" alt="">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/big-profile.svg')}}" alt="">
-                                                                </div>
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-2').slick('slickNext')"
-                                                                    src="{{asset('static/images/forward.svg')}}">
-                                                            </div>
-                                                        </td>
-                                                        <td
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            Christmas sale</td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"
-                                                            class="">
-                                                            <div class="status-badge">In Process</div>
-                                                        </td>
-                                                        <td
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            Discount</td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer">
-                                                        <!-- <td class="f-l">
-                                                            <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td> -->
-                                                        <td scope="row" style="width: 25%;">
-                                                            <div class="d-flex justify-content-center">
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-3').slick('slickNext')"
-                                                                    src="{{asset('static/images/Backward.svg')}}">
-                                                                <div class="slick-container-3">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/default-image.svg')}}" alt="">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/big-profile.svg')}}" alt="">
-                                                                </div>
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-3').slick('slickNext')"
-                                                                    src="{{asset('static/images/forward.svg')}}">
-                                                            </div>
-                                                        </td>
-                                                        <td
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            Diwali discounts</td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"
-                                                            class="">
-                                                            <div class="status-badge">In Process</div>
-                                                        </td>
-                                                        <td
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            Discount</td>
-                                                        <td
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer">
-                                                        <!-- <td class="f-l">
-                                                            <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td> -->
-                                                        <td scope="row" style="width: 25%;">
-                                                            <div class="d-flex justify-content-center">
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-4').slick('slickPrev')"
-                                                                    src="{{asset('static/images/Backward.svg')}}">
-                                                                <div class="slick-container-4">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/default-image.svg')}}" alt="">
-                                                                    <img class="slick-image"
-                                                                        src="{{asset('static/images/big-profile.svg')}}" alt="">
-                                                                </div>
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-4').slick('slickNext')"
-                                                                    src="{{asset('static/images/forward.svg')}}">
-                                                            </div>
-                                                        </td>
-                                                        <td
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            New Year Sale</td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"">
-                                                            <div class=" status-badge">In Process
-                                                            </div>
-                                                        </td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">Sale</td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"> <i
-                                                            class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                            class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer">
-                                                        <!-- <td class="f-l">
-                                                            <i class="fa fa-arrows p-1" aria-hidden="true"></i>
-                                                        </td> -->
-                                                        <td scope="row" style="width: 25%;">
-                                                            <div class="d-flex justify-content-center">
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-5').slick('slickPrev')"
-                                                                    src="{{asset('static/images/Backward.svg')}}">
-                                                                <div class="slick-container-5">
-                                                                    <img class="slick-image" src="{{asset('static/images/default-image.svg')}}"
-                                                                        alt="">
-                                                                    <img class="slick-image" src="{{asset('static/images/big-profile.svg')}}"
-                                                                        alt="">
-                                                                </div>
-                                                                <img class="p-2"
-                                                                    onclick="$('.slick-container-5').slick('slickNext')"
-                                                                    src="{{asset('static/images/forward.svg')}}">
-                                                            </div>
-                                                        </td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"> New Year
-                                                            Sale
-                                                        </td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            <div class="status-badge">In Process</div>
-                                                        </td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">Sale</td>
-                                                        <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"> <i
-                                                                class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
-                                                        </td>
-                                                    </tr>
+                                                @endforeach
+
                                                 </tbody>
                                             </table>
                                         </div>

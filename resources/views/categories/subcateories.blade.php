@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="subcategory">
                     <div class="d-flex  flex-row justify-content-between">
-                        <h3 class="page-head theme-text text-left p-4 f-20">Subategory Management</h3>
+                        <h3 class="page-head theme-text text-left p-4 f-20">Subcategories</h3>
                         <div class="mr-20">
                             <a href="{{route('create-subcateories')}}">
                                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
@@ -20,13 +20,13 @@
                                 <li class="breadcrumb-item active" aria-current="page">Categories & Subcategories
                                 </li>
                               <li class="breadcrumb-item"><a href="#">Subcategory Management</a></li>
-                              
+
                             </ol>
                           </nav>
-                        
-                        
+
+
                         </div>
-                  
+
                     </div>
                     <!-- Dashboard cards -->
                     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -37,8 +37,8 @@
                                         <h3 class="f-18">
                                             Subcategory
                                         </h3>
-                                    </header>   
-                                                                     
+                                    </header>
+
                                     <div class="p-10 card-head left col-sm-3">
                                         <div class="search">
                                             <input type="text" class="searchTerm" placeholder="Search...">
@@ -55,88 +55,58 @@
                                             <tr>
                                                 <th scope="col">Image</th>
                                                 <th scope="col"> Name</th>
-                                                
-                                                <th scope="col">Add Category</th>
-                                               
+
+                                                <th scope="col">Status</th>
+
                                                 <th scope="col">Operation</th>
                                             </tr>
                                         </thead>
                                         <tbody class="mtop-20 f-13">
+                                        @foreach($subcategories as $subcategory)
                                             <tr class="tb-border cursor-pointer"
                                                 onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Cupboards</td>
-                                                
+                                                <td scope="row"> <img class="defau  lt-image"
+                                                        src="{{$subcategory->image}}" alt=""></td>
+                                                <td>{{$subcategory->name}}</td>
+
                                                 <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
+                                                    @switch($subcategory->status)
+                                                        @case(\App\Enums\CommonEnums::$YES)
+                                                        <span class="status-badge green-bg">Enabled</span>
+                                                        @break
+
+                                                        @case(\App\Enums\CommonEnums::$NO)
+                                                        <span class="status-badge red-bg"> Disabled</span>
+                                                        @break
+
+                                                        @default
+                                                        <span class="status-badge info-bg">Unknown</span>
+                                                    @endswitch
                                                 </td>
-                                               
+
                                                 <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
                                             </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Bed</td>
-                                           
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
-                                                </td>
-                                               
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Study Table</td>
-                                              
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
-                                                </td>
-                                               
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Dining Table</td>
-                                            
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
-                                                </td>
-                                              
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Sofa</td>
-                                         
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0">
-                                                        <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add
-                                                    </div>
-                                                </td>
-                                               
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
 
                                     </table>
+                                    <div class="pagination">
+                                        <ul>
+                                            <li class="p-1">Page</li>
+                                            <li class="digit">{{$subcategories->currentPage()}}</li>
+                                            <li class="label">of</li>
+                                            <li class="digit">{{$subcategories->lastPage()}}</li>
+                                            @if(!$subcategories->onFirstPage())
+                                                <li class="button"><a href="{{$subcategories->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                            @if($subcategories->currentPage() != $subcategories->lastPage())
+                                                <li class="button"><a href="{{$subcategories->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

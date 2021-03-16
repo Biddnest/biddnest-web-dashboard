@@ -153,7 +153,6 @@
                                         </tbody>
                                     </table>
                                     <div class="pagination">
-{{--                                        {{ $users->links() }}--}}
                                         <ul>
                                             <li class="p-1">Page</li>
                                             <li class="digit">{{$users->currentPage()}}</li>

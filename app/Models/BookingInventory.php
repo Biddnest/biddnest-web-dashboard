@@ -14,4 +14,5 @@ class BookingInventory extends Model
     public function bookings(){
         return $this->hasOne(Bookings::class);
     }
+
 }

@@ -171,45 +171,76 @@ class ApiRouteController extends Controller
         else
             return InventoryController::getBySubserviceForApp($request->subservice_id);
     }
+    
+    public function getAllInventories()
+    {
+        return InventoryController::getInventoriesForApp();
+    }
+    
 
-    // public function getInventoryPrice(Request $request)
-    // {
-    //     $validation = Validator::make($request->all(),[
-    //         'source.lat'=>'required'
-    //         'source.lat'=>'required'
-    //         'destination.lat'=>'required'
-    //         'destination.lat'=>'required'
-    //         'item.*.id'=>'required',
-    //         'item.*.size'=>'required|string',
-    //         'item.*.material'=>'required|string',
-    //         'item.*.quantity'=>'required|integer',
-    //     ]);
-
-    //     if($validation->fails())
-    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
-    //     else
-    //         return InventoryController::getInventoryPrice($request->all());
-    // }
-
-    public function addQuote(Request $request)
+    public function createEnquiry(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'service_id' => 'required|integer',
-            'source.lat' => 'required',
-            'source.lng' => 'required',
-            'destination.lat' => 'required',
-            'destination.lng' => 'required',
-            'movement_dates.*.date' =>'required',
-            'inventory_items.*.inventory_id' =>'required',
-            'inventory_items.*.material' =>'required',
-            'inventory_items.*.size' =>'required'
+
+            'source.lat' => 'required|numeric',
+            'source.lng' => 'required|numeric',
+
+            'source.meta.geocode' => 'nullable|string',
+            'source.meta.floor' => 'required|integer',
+            'source.meta.address' => 'required|string',
+            'source.meta.city' => 'required|string',
+            'source.meta.state' => 'required|string',
+            'source.meta.pincode' => 'required|min:6|max:6',
+            'source.meta.lift' => 'required|boolean',
+
+            'destination.lat' => 'required|numeric',
+            'destination.lng' => 'required|numeric',
+
+            'destination.meta.geocode' => 'nullable|string',
+            'destination.meta.floor' => 'required|integer',
+            'destination.meta.address' => 'required|string',
+            'destination.meta.city' => 'required|string',
+            'destination.meta.state' => 'required|string',
+            'destination.meta.pincode' => 'required|min:6|max:6',
+            'destination.meta.lift' => 'required|boolean',
+
+            'contact_details' => "nullable",
+            'contact_details.name'  => 'nullable|string',
+            'contact_details.phone'  => 'nullable|min:10|max:10',
+            'contact_details.email'  => 'nullable|string',
+
+
+            'meta.self_booking' => 'required|boolean',
+            'meta.subcategory' => 'nullable|string',
+            'meta.images.*' => 'required|string',
+
+            'movement_dates.*' =>'required|date',
+
+            'inventory_items.*.inventory_id' =>'required|integer',
+            'inventory_items.*.material' =>'required|string',
+            'inventory_items.*.size' =>'required|string',
+            'inventory_items.*.quantity' =>'required',
             ]);
         
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            $request->request->add(['token_payload' => $request->token_payload]);
-            return BookingsController::getQuote($request->all());
+            return BookingsController::createEnquiry($request->all(), $request->token_payload->id);
+    }
+
+    public function confirmBooking(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_type' => 'required|string',
+            'public_booking_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->token_payload->id);
     }
 
 

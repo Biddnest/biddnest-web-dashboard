@@ -16,10 +16,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Bookings & Orders</li>
-                    <li class="breadcrumb-item"><a href="#"> Manage Bookings</a></li>   
+                    <li class="breadcrumb-item"><a href="#"> Manage Bookings</a></li>
                 </ol>
-            </nav>     
-        </div>      
+            </nav>
+        </div>
     </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -50,100 +50,106 @@
                 <!-- Table -->
                 <div class="tab-content margin-topneg-42" id="myTabContent">
                     <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
-                        <table class="table text-center p-0  theme-text ">
+                        <table class="table text-center p-0   theme-text  ">
                             <thead class="secondg-bg  p-0 f-14">
-                                <tr>
-                                    <th scope="col">Order ID</th>
-                                    <th scope="col">From</th>
-                                    <th scope="col">To</th>
-                                    <th scope="col">Order Date</th>
-                                    <th scope="col">Assigned Vendor</th>
-                                    <th scope="col">Order Status</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">From</th>
+                                <th scope="col">To</th>
+                                <th scope="col">Service Type</th>
+                                <th scope="col">Assigned Vendor</th>
+                                <th scope="col">Order Status</th>
+                                <th scope="col">Operations</th>
+                            </tr>
                             </thead>
-                            <tbody class="mtop-20 f-13">
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Gao</td>
-                                    <td>Bengaluru</td>
-                                    <td>28 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
+                            <tbody class="mtop-20  f-13">
+                            @foreach($bookings as $booking)
+                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <td scope="row">{{$booking->public_booking_id}}</td>
+                                    <td>{{json_decode($booking->source_meta, true)['city']}}</td>
+                                    <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                    <td>
+                                        @switch($booking->service_type)
+                                            @case(\App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
+                                            {{$booking->service->name}} - Economic
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$BOOKING_TYPE['premium'])
+                                            {{$booking->service->name}} - Premium
+                                            @break
+
+                                            @default
+                                            {{$booking->service->name}} - Unknown
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                        @if($booking->organization_id)
+                                            {{$booking->organization->name}}
+                                        @else
+                                            Not Assigned
+                                        @endif
+                                    </td>
+                                    <td class="">
+                                        @switch($booking->status)
+                                            @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                            <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                            <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['bidding'])
+                                            <span class="status-badge green-bg  text-center td-padding">Bidding</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['rebidding'])
+                                            <span class="status-badge grey-bg  text-center td-padding">Rebidding</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                            <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                            <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                            <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                            <span class="status-badge green-bg  text-center td-padding">Completed</span>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                            <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
+                                            @break
+                                        @endswitch
+                                    </td>
+
+                                    <td> <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
+                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                    </td>
                                 </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Chennai</td>
-                                    <td>Mumbai</td>
-                                    <td>28 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Guntur</td>
-                                    <td>Kolkata</td>
-                                    <td>28 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                        <td scope="row">SKU123456</td>
-                                        <td>Hopete</td>
-                                        <td>Bengaluru</td>
-                                        <td>28 Dec 2020</td>
-                                        <td>Wayne Pvt Ltd</td>
-                                        <td class=""><span class="green-bg text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                        <td scope="row">SKU123456</td>
-                                        <td>Sringeri</td>
-                                        <td>Bengaluru</td>
-                                        <td>28 Dec 2020</td>
-                                        <td>Wayne Pvt Ltd</td>
-                                        <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Mumbai</td>
-                                    <td>Chennai</td>
-                                    <td>27 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg  text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Kozhikode</td>
-                                    <td>Bengaluru</td>
-                                    <td>27 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Kovallam</td>
-                                    <td>kochi</td>
-                                    <td>26 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
-                                </tr>
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up'').toggleClass('display-pop-up');">
-                                    <td scope="row">SKU123456</td>
-                                    <td>Benguluru</td>
-                                    <td>Kochi</td>
-                                    <td>26 Dec 2020</td>
-                                    <td>Wayne Pvt Ltd</td>
-                                    <td class=""><span class="green-bg   text-center td-padding">Completed</span></td>
-                                </tr>
+                            @endforeach
                             </tbody>
-                        </table> 
+                        </table>
                         <div class="pagination">
                             <ul>
                                 <li class="p-1">Page</li>
-                                <li class="digit">1</li>
+                                <li class="digit">{{$bookings->currentPage()}}</li>
                                 <li class="label">of</li>
-                                <li class="digit">20</li>
-                                <li class="button"><a href="#"><img src="{{ asset('static/images/Backward.svg')}}"></a></li>
-                                <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a></li>
+                                <li class="digit">{{$bookings->lastPage()}}</li>
+                                @if(!$bookings->onFirstPage())
+                                    <li class="button"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                    </li>
+                                @endif
+                                @if($bookings->currentPage() != $bookings->lastPage())
+                                    <li class="button"><a href="{{$bookings->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

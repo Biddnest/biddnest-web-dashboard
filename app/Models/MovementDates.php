@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MovementDates extends Model
 {
     protected $table = "movement_dates";
-    protected $hidden =['created_at', 'updated_at'];
+    protected $hidden =['id','booking_id','created_at', 'updated_at'];
     use HasFactory;
 
     public function bookings(){
-        return $this->hasMany(Bookings::class);
+        return $this->hasOne(Booking::class);
     }
 }

@@ -9,6 +9,8 @@ use App\Enums\TicketEnums;
 use App\Enums\MailEnums;
 use App\Enums\VendorEnums;
 use App\Enums\CommonEnums;
+use App\Enums\ServiceEnums;
+use App\Enums\BookingEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -51,6 +53,13 @@ class SettingsController extends Controller
                 "common"=>[
                     "yes"=>CommonEnums::$YES,
                     "no"=>CommonEnums::$NO
+                ],
+                "service"=>[
+                    "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
+                ],
+                "booking"=>[
+                    "status"=>BookingEnums::$STATUS,
+                    "booking_type"=>BookingEnums::$BOOKING_TYPE
                 ]
             ]
         ]);

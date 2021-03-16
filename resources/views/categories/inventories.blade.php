@@ -5,7 +5,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="inventories">
                     <div class="d-flex  flex-row justify-content-between">
-                        <h3 class="page-head theme-text text-left p-4 f-20">Categories & Subcategories</h3>
+                        <h3 class="page-head theme-text text-left p-4 f-20">Inventories</h3>
                         <div class="mr-20">
                             <a href="{{route('create-inventories')}}">
                                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
@@ -21,13 +21,13 @@
                                 <li class="breadcrumb-item active" aria-current="page">Categories & Subcategories
                                 </li>
                               <li class="breadcrumb-item"><a href="#">Inventory List</a></li>
-                              
+
                             </ol>
                           </nav>
-                        
-                        
+
+
                         </div>
-                  
+
                     </div>
                     <!-- Dashboard cards -->
                     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -59,135 +59,65 @@
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Item Name</th>
                                                 <th scope="col">Material</th>
-                                                <th scope="col">Parent Subcategory</th>
-                                                <th scope="col">Ratings</th>
+                                                <th scope="col">Size</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Operations</th>
                                             </tr>
                                         </thead>
                                         <tbody class="mtop-20 f-13">
+                                        @foreach($inventories as $inventory)
                                             <tr class="tb-border cursor-pointer"
                                                 >
                                                 <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Cupboards</td>
-                                                <td>Polycarbonate</td>
+                                                        src="{{$inventory->image}}" alt=""></td>
+                                                <td>{{$inventory->name}}</td>
+                                                <td>
+                                                    @foreach(json_decode($inventory->material, true) as $material)
+                                                        {{$material}},
+                                                    @endforeach
+                                                </td>
                                                 <td class="">
-                                                    <div class="status-badge">1 BHK</div>
+                                                    @foreach(json_decode($inventory->size, true) as $size)
+                                                        {{$size}},
+                                                    @endforeach
                                                 </td>
                                                 <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                                                        <p class="font-inactive f-12 zone-status">Inactive</p>
-                                                        <label class="switch-small ml-5"
-                                                            onchange="$('.zone-status').toggleClass('font-inactive')">
-                                                            <input type="checkbox" id="switch">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                        <p class="ml-5 zone-status f-12"> Active</p>
-                                                    </div> -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="switch">
+                                                    @switch($inventory->status)
+                                                        @case(\App\Enums\CommonEnums::$YES)
+                                                        <span class="status-badge green-bg">Enabled</span>
+                                                        @break
+
+                                                        @case(\App\Enums\CommonEnums::$NO)
+                                                        <span class="status-badge red-bg"> Disabled</span>
+                                                        @break
+
+                                                        @default
+                                                        <span class="status-badge info-bg">Unknown</span>
+                                                    @endswitch
                                                 </td>
                                                 <td> <i onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');" class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                         class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                             </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                               >
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Bed</td>
-                                                <td>Wood</td>
-                                                <td class="">
-                                                    <div class="status-badge">1 BHK</div>
-                                                </td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                                                        <p class="font-inactive f-12 zone-status">Inactive</p>
-                                                        <label class="switch-small ml-5"
-                                                            onchange="$('.zone-status').toggleClass('font-inactive')">
-                                                            <input type="checkbox" id="switch">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                        <p class="ml-5 zone-status f-12"> Active</p>
-                                                    </div> -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="switch">
-                                                </td>
-                                                <td> <i onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');" class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                              >
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Study Table</td>
-                                                <td>Polycarbonate</td>
-                                                <td class="">
-                                                    <div class="status-badge">1 BHK</div>
-                                                </td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                                                        <p class="font-inactive f-12 zone-status">Inactive</p>
-                                                        <label class="switch-small ml-5"
-                                                            onchange="$('.zone-status').toggleClass('font-inactive')">
-                                                            <input type="checkbox" id="switch">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                        <p class="ml-5 zone-status f-12"> Active</p>
-                                                    </div> -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
-                                                </td>
-                                                <td> <i onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');" class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                               >
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Dining Table</td>
-                                                <td>Acrylic</td>
-                                                <td class="">
-                                                    <div class="status-badge">1 BHK</div>
-                                                </td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                                                        <p class="font-inactive f-12 zone-status">Inactive</p>
-                                                        <label class="switch-small ml-5"
-                                                            onchange="$('.zone-status').toggleClass('font-inactive')">
-                                                            <input type="checkbox" id="switch">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                        <p class="ml-5 zone-status f-12"> Active</p>
-                                                    </div> -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
-                                                </td>
-                                                <td> <i onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');" class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                           >
-                                                <td scope="row"> <img class="default-image"
-                                                        src="{{asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Sofa</td>
-                                                <td>Leather</td>
-                                                <td class="">
-                                                    <div class="status-badge">1 BHK</div>
-                                                </td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                                                        <p class="font-inactive f-12 zone-status">Inactive</p>
-                                                        <label class="switch-small ml-5"
-                                                            onchange="$('.zone-status').toggleClass('font-inactive')">
-                                                            <input type="checkbox" id="switch">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                        <p class="ml-5 zone-status f-12"> Active</p>
-                                                    </div> -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
-                                                </td>
-                                                <td> <i onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');" class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
+                                        @endforeach
                                         </tbody>
 
                                     </table>
+                                    <div class="pagination">
+                                        <ul>
+                                            <li class="p-1">Page</li>
+                                            <li class="digit">{{$inventories->currentPage()}}</li>
+                                            <li class="label">of</li>
+                                            <li class="digit">{{$inventories->lastPage()}}</li>
+                                            @if(!$inventories->onFirstPage())
+                                                <li class="button"><a href="{{$inventories->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                            @if($inventories->currentPage() != $inventories->lastPage())
+                                                <li class="button"><a href="{{$inventories->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

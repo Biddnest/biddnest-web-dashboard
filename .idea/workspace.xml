@@ -2,14 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
+      <change afterPath="$PROJECT_DIR$/app/Enums/BookingInventoryEnums.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Enums/ServiceEnums.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Settings.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_03_16_060024_create_app_settings_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_03_16_063506_alter_bookings_estimate_cost_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_03_16_075903_alter_services_sddcolumn_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_03_16_081301_alter_booking_inventory_ddcolumn_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/CommonEnums.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/CommonEnums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/AdminEnums.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/AdminEnums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/BookingEnums.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/BookingEnums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/OrganizationEnums.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/OrganizationEnums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiRouteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiRouteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerApp/SettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerApp/SettingsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GeoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GeoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InventoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Route.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Route.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubServiceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WebController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WebController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Booking.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/BookingInventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/BookingInventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Organization.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Organization.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/MovementDates.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MovementDates.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/categories/categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/categories.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sliderandbanner/slider.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sliderandbanner/slider.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/categories/inventories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/inventories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/categories/subcateories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/subcateories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/customer/customer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/customer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/includes/app-css.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/includes/app-css.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/ordersbookings_live.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/ordersbookings_live.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/ordersbookings_past.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/ordersbookings_past.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +229,7 @@
       <workItem from="1614753683006" duration="14905000" />
       <workItem from="1615182554147" duration="25419000" />
       <workItem from="1615467333061" duration="1118000" />
-      <workItem from="1615786767049" duration="13434000" />
+      <workItem from="1615786767049" duration="18634000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1614851085109</created>

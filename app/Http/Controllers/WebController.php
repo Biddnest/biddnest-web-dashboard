@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\ServiceEnums;
+use App\Models\Booking;
 use App\Models\Inventory;
 use App\Models\Service;
 use App\Models\Slider;
@@ -65,12 +68,16 @@ class WebController extends Controller
 
     public function ordersBookingsLive()
     {
-        return view('order.ordersbookings_live');
+        return view('order.ordersbookings_live',[
+            "bookings" => Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->with('service')->with('organization')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function ordersBookingsPast()
     {
-        return view('order.ordersbookings_past');
+        return view('order.ordersbookings_past',[
+            "bookings" => Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
     }
 
     public function orderDetails()
@@ -128,7 +135,7 @@ class WebController extends Controller
     {
         return view('categories.categories',[
             "categories"=>Service::paginate(CommonEnums::$PAGE_LENGTH),
-//            "inventory_category_type"=>Serv
+            "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
         ]);
     }
 
@@ -140,7 +147,7 @@ class WebController extends Controller
     public function subcateories()
     {
         return view('categories.subcateories',[
-            "categories"=>Subservice::paginate(CommonEnums::$PAGE_LENGTH)
+            "subcategories"=>Subservice::paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 

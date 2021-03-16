@@ -60,86 +60,73 @@
                                                 <th scope="col" >Image</th>
                                                 <th scope="col">Category</th>
                                                 <th scope="col"> Inventory Quantity Type</th>
-
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Add Category</th>
-
                                                 <th scope="col">Operations</th>
                                             </tr>
                                         </thead>
                                         <tbody class="mtop-20 f-13">
+                                        @foreach($categories as $category)
                                             <tr class="tb-border cursor-pointer">                                                <td scope="row"> <img class="default-image"
-                                                        src="{{ asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Cupboards</td>
-                                                <td>Bengaluru</td>
+                                                        src="{{$category->image}}" alt=""></td>
+                                                <td>{{$category->name}}</td>
+                                                <td>
+                                                    @switch($category->inventory_quantity_type)
+                                                        @case($inventory_quantity_type['fixed'])
+                                                        Fixed
+                                                        @break
 
+                                                        @case($inventory_quantity_type['range'])
+                                                        Range
+                                                        @break
 
+                                                        @default
+                                                        Unknown
+                                                    @endswitch
+                                                </td>
+
+                                                <td>
+                                                    @switch($category->status)
+                                                        @case(\App\Enums\CommonEnums::$YES)
+                                                        <span class="status-badge green-bg">Enabled</span>
+                                                        @break
+
+                                                        @case(\App\Enums\CommonEnums::$NO)
+                                                       <span class="status-badge red-bg"> Disabled</span>
+                                                        @break
+
+                                                        @default
+                                                        <span class="status-badge info-bg">Unknown</span>
+                                                    @endswitch
+                                                </td>
                                                 <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
+                                                    <div class="btn btn-sm status-badge green-bg #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
                                                        Add</div>
                                                 </td>
 
                                                 <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
                                             </tr>
-                                            <tr class="tb-border cursor-pointer">                                                <td scope="row"> <img class="default-image"
-                                                        src="{{ asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Bed</td>
-                                                <td>Chennai</td>
-
-
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer">                                                <td scope="row"> <img class="default-image"
-                                                        src="{{ asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Study Table</td>
-                                                <td>Kochi</td>
-
-
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer">                                                <td scope="row"> <img class="default-image"
-                                                        src="{{ asset('static/images/default-image.svg')}}" alt=""></td>
-                                                <td>Dining Table</td>
-                                                <td>Kolkata</td>
-
-
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add</div>
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <!-- <tr class="tb-border cursor-pointer">                                                <td scope="row"> <img class="default-image"
-                                                        src="assets/images/default-image.svg" alt=""></td>
-                                                <td>Sofa</td>
-
-                                                <td class="">
-                                                    <div class="status-badge #FEF6E0">
-                                                        <i class="fa fa-plus p-1" aria-hidden="true"></i>
-                                                       Add
-                                                    </div>
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr> -->
+                                        @endforeach
                                         </tbody>
 
                                     </table>
+                                    <div class="pagination">
+                                        <ul>
+                                            <li class="p-1">Page</li>
+                                            <li class="digit">{{$categories->currentPage()}}</li>
+                                            <li class="label">of</li>
+                                            <li class="digit">{{$categories->lastPage()}}</li>
+                                            @if(!$categories->onFirstPage())
+                                                <li class="button"><a href="{{$categories->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                            @if($categories->currentPage() != $categories->lastPage())
+                                                <li class="button"><a href="{{$categories->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

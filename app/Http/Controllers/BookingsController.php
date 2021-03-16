@@ -72,14 +72,26 @@ class BookingsController extends Controller
                                             "lift"=>$data['source']['meta']['lift']]);
         $booking->destination_lat=$data['destination']['lat'];
         $booking->destination_lng=$data['destination']['lng'];
-        $booking->destination_meta=json_encode(["geocode">$data['destination']['meta']['geocode'],
+        $booking->destination_meta=json_encode(["geocode"=>$data['destination']['meta']['geocode'],
                                             "floor"=>$data['destination']['meta']['floor'],
                                             "address"=>$data['destination']['meta']['address'],
                                             "city"=>$data['destination']['meta']['city'],
                                             "state"=>$data['destination']['meta']['state'],
                                             "pincode"=>$data['destination']['meta']['pincode'],
                                             "lift"=>$data['destination']['meta']['lift']]);
-        $booking->contact_details=$data['contact_details'];
+        if($data['meta']['self_booking']===true)
+        {
+            $user = User::findOrfail($user_id);
+            $booking->contact_details=json_encode(["name"=> $user['fname'].' '.$user['lname'],
+                                                    "phone"=> $user['phone'],
+                                                    'email'=>$user['email']]);
+        }
+        else{
+            $booking->contact_details=json_encode(["name"=> $data['contact_details']['name'],
+                                                    "phone"=>$data['contact_details']['phone'],
+                                                    'email'=>$data['contact_details']['email']]);
+        }
+
         $images=[];
         $imageman = new ImageManager(array('driver' => 'gd'));
         foreach( $data['meta']['images'] as $key=>$image)

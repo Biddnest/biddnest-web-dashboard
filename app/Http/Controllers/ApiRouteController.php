@@ -177,24 +177,6 @@ class ApiRouteController extends Controller
         return InventoryController::getInventoriesForApp();
     }
     
-    // public function getInventoryPrice(Request $request)
-    // {
-    //     $validation = Validator::make($request->all(),[
-    //         'source.lat'=>'required'
-    //         'source.lat'=>'required'
-    //         'destination.lat'=>'required'
-    //         'destination.lat'=>'required'
-    //         'item.*.id'=>'required',
-    //         'item.*.size'=>'required|string',
-    //         'item.*.material'=>'required|string',
-    //         'item.*.quantity'=>'required|integer',
-    //     ]);
-
-    //     if($validation->fails())
-    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
-    //     else
-    //         return InventoryController::getInventoryPrice($request->all());
-    // }
 
     public function createEnquiry(Request $request)
     {

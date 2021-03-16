@@ -10,7 +10,9 @@ class GeoController extends Controller
         return 100.00;
     }
 
-    
+    // public static function distance(){
+    //     return 100.00;
+    // }
 
     public function getZones($lat, $lng){}
 }

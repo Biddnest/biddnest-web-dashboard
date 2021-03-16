@@ -58,7 +58,8 @@ class SettingsController extends Controller
                     "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
                 ],
                 "booking"=>[
-                    "status"=>BookingEnums::$STATUS
+                    "status"=>BookingEnums::$STATUS,
+                    "booking_type"=>BookingEnums::$BOOKING_TYPE
                 ]
             ]
         ]);

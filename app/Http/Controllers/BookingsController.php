@@ -64,7 +64,7 @@ class BookingsController extends Controller
         $booking->service_id=$data['service_id'];
         $booking->source_lat=$data['source']['lat'];
         $booking->source_lng=$data['source']['lng'];
-        $booking->source_meta=json_encode(["geocode">$data['source']['meta']['geocode'],
+        $booking->source_meta=json_encode(["geocode"=>$data['source']['meta']['geocode'],
                                             "floor"=>$data['source']['meta']['floor'],
                                             "address"=>$data['source']['meta']['address'],
                                             "city"=>$data['source']['meta']['city'],
@@ -82,7 +82,7 @@ class BookingsController extends Controller
                                             "lift"=>$data['destination']['meta']['lift']]);
         if($data['meta']['self_booking']===true)
         {
-            $user = User::findOrfail($user_id);
+            return $user = User::findOrfail($user_id);
             $booking->contact_details=json_encode(["name"=> $user['fname'].' '.$user['lname'],
                                                     "phone"=> $user['phone'],
                                                     'email'=>$user['email']]);
@@ -101,7 +101,7 @@ class BookingsController extends Controller
         }
         
 
-        $booking->meta=json_encode(["self_booking">$data['meta']['self_booking'],
+        $booking->meta=json_encode(["self_booking"=>$data['meta']['self_booking'],
                                     "subcategory"=>$data['meta']['subcategory'],
                                     "customer"=>json_encode(["remarks"=>$data['meta']['customer']['remarks']]),
                                     "images"=>$images]);

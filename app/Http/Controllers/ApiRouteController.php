@@ -182,14 +182,41 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'service_id' => 'required|integer',
-            'source.lat' => 'required',
-            'source.lng' => 'required',
-            'destination.lat' => 'required',
-            'destination.lng' => 'required',
-            'movement_dates' =>'required',
-            'inventory_items.*.inventory_id' =>'required',
-            'inventory_items.*.material' =>'required',
-            'inventory_items.*.size' =>'required'
+
+            'source.lat' => 'required|numeric',
+            'source.lng' => 'required|numeric',
+
+            'source.meta.geocode' => 'nullable|string',
+            'source.meta.floor' => 'required|integer',
+            'source.meta.address' => 'required|string',
+            'source.meta.city' => 'required|string',
+            'source.meta.state' => 'required|string',
+            'source.meta.pincode' => 'required|integer',
+            'source.meta.lift' => 'required|boolean',
+
+            'destination.lat' => 'required|numeric',
+            'destination.lng' => 'required|numeric',
+
+            'destination.meta.geocode' => 'nullable|string',
+            'destination.meta.floor' => 'required|integer',
+            'destination.meta.address' => 'required|string',
+            'destination.meta.city' => 'required|string',
+            'destination.meta.state' => 'required|string',
+            'destination.meta.pincode' => 'required|integer',
+            'destination.meta.lift' => 'required|boolean',
+
+            'contact_details.*'  => 'nullable',
+
+            'meta.self_booking' => 'required|boolean',
+            'meta.subcategory' => 'required|string',
+            'meta.images' => 'required|string',
+
+            'movement_dates.*' =>'required|date',
+
+            'inventory_items.*.inventory_id' =>'required|integer',
+            'inventory_items.*.material' =>'required|string',
+            'inventory_items.*.size' =>'required|string',
+            'inventory_items.*.quantity' =>'required',
             ]);
         
 

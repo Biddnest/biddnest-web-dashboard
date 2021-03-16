@@ -209,7 +209,7 @@ class ApiRouteController extends Controller
 
             'meta.self_booking' => 'required|boolean',
             'meta.subcategory' => 'nullable|string',
-            'meta.images' => 'required|string',
+            'meta.images.*' => 'required|string',
 
             'movement_dates.*' =>'required|date',
 

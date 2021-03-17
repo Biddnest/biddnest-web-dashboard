@@ -28,4 +28,9 @@ class Organization extends Model
     public function branch(){
         return $this->hasMany(Organization::class, "parent_org_id");
     }
+
+    public function services()
+    {
+        return $this->hasMany(OrganizationService::class);
+    }
 }

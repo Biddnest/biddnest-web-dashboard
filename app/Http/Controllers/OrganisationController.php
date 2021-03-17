@@ -77,7 +77,7 @@ class OrganisationController extends Controller
         if(!$vendor && !$result_organization)
             return Helper::response(false,"Couldn't save data");
         
-        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->findOrFail($organizations->id)]);
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
     }
 
 

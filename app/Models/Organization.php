@@ -24,4 +24,8 @@ class Organization extends Model
     public function InventoryPrice(){
         return $this->hasMany(InventoryPrice::class);
     }
+
+    public function branch(){
+        return $this->hasMany(Organization::class);
+    }
 }

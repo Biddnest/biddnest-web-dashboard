@@ -84,6 +84,46 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->findOrFail($organizations->id)]);
     }
 
+
+    public static function addBranch($data, $id)
+    {
+        $exist = Organization::findOrFail($id);
+        if(!$exist)
+            return Helper::response(false,"Incorrect slider id.");
+        $meta = json_decode($exist['meta'], true);
+
+        foreach($data['branch'] as $branch) {
+            $organizations=new Organization;
+            $organizations->parent_org_id = $id;
+
+            $meta['org_description']= $branch['organization']['org_type'];
+            $meta['address_line_1']= $branch['address']['add_line1'];
+            $meta['address_line_2']= $branch['address']['add_line2'];
+            $meta['landmark']= $branch['address']['landmark'];
+
+            $organizations->org_name =$branch['organization']['org_name'];
+            $organizations->org_type =$branch['organization']['org_type'];
+            $organizations->phone =$branch['phone']['primary'];
+            $organizations->lat =$branch['address']['lat'];
+            $organizations->lng =$branch['address']['lng'];
+            $organizations->zone_id =$branch['zone'];
+            $organizations->pincode =$branch['address']['pincode'];
+            $organizations->city =$branch['address']['city'];
+            $organizations->state =$branch['address']['state'];
+            $organizations->service_type =$branch['service_type'];
+            $organizations->service =$branch['service'];
+            $organizations->meta =json_encode($meta);
+            $organizations->commission = 0.0;
+            $result_organization= $organizations->save();
+        }
+
+        if(!$banner)
+            return Helper::response(false,"Couldn't save data");
+            
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('branch')->findOrFail($id)]);
+        
+    }
+
     public static function getOne($id)
     {
         $result=DB::table('organizations')->select('*')->where('id', $id)->first();

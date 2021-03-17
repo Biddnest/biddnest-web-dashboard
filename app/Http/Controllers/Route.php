@@ -293,18 +293,10 @@ class Route extends Controller
     public function branchAdd(Request $request, $id)
     {
         $validation = Validator::make($request->all(),[
-            'branch.*.image'=>'required|string',
-            'branch.*.fname' => 'required|string', 
-            'branch.*.lname' => 'required|string',
-            'branch.*.email' => 'required|string', 
-            'branch.*.gender'=> 'required|string',          
-
             'branch.*.phone.primary'=>'required|min:10|max:10',
-            'branch.*.phone.secondory'=>'nullable|min:10|max:10',
 
             'branch.*.organization.org_name' => 'required|string',
             'branch.*.organization.org_type' => 'required|string', 
-            'branch.*.organization.gstin' => 'required|string|min:15|max:15',
             'branch.*.organization.description' =>'required|string',
 
             'branch.*.address.add_line1' => 'required|string', 
@@ -319,6 +311,12 @@ class Route extends Controller
             'branch.*.service' =>'required|string',
             'branch.*.service_type' =>'required|string'
         ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addBranch($request->all(), $id);
+
     }
 
     public function vendor_fetch($id)

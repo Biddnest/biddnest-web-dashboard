@@ -55,12 +55,68 @@
                                 <div class="col-lg-12">
                                     <div class="card  h-auto p-0  pt-10">
                                         <div class="header-wrap">
-                                            <h3 class="f-18 pl-2">All Vendors</h3>
+                                            <!-- <h3 class="f-18 pl-2">All Vendors</h3>
                                             <a href="#">
                                                 <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                                            </a>
-                                        </div>
-                                        <div class="all-vender-details">
+                                            </a> -->
+
+                                            
+                                                <div class="col-sm-8 p-3 ">
+                                                    <h3 class="f-18 pl-8 title">All Vendors</h3 >
+
+                                                </div>
+                                                <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
+                                                    <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                        <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+
+                                                    </a>
+                                                    <div class="dropdown-menu ">
+
+                                                        <a class="dropdown-item border-top-bottom" href="#">
+                                                            <div class="form-check f-14">
+                                                                <input class="form-check-input" type="checkbox" value="" id="city">
+                                                                <label class="form-check-label" for="city">
+                                                                    City
+                                                                </label>
+                                                            </div>
+                                                        </a>
+                                                        <a class="dropdown-item border-top-bottom" href="#">
+                                                            <div class="form-check f-14">
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="Customer">
+                                                                <label class="form-check-label" for=" Customer">
+                                                                    Customer Status
+                                                                </label>
+                                                            </div>
+                                                        </a>
+                                                        <a class="dropdown-item border-top-bottom" href="#">
+                                                            <div class="form-check f-14">
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="customerType">
+                                                                <label class="form-check-label" for="customerType">
+                                                                    Customer Type
+                                                                </label>
+                                                            </div>
+                                                        </a>
+
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-head  pt-2  left col-sm-3">
+                                                    <div class="search">
+                                                        <input type="text" class="searchTerm" placeholder="Search...">
+                                                        <button type="submit" class="searchButton">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="all-vender-details">
                                             <table class="table text-center p-0 theme-text mb-0 primary-table">
                                                 <thead class="secondg-bg  p-0">
                                                     <tr>
@@ -151,8 +207,9 @@
                                                     <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a></li>
                                                 </ul>
                                             </div>
-                                        </div>
                                     </div>
+                                </div>
+                               
 
                                     <!-- <div class="text-right p-20" style="float: right;">
                                         <nav aria-label="Page navigation example border-none">
@@ -174,7 +231,7 @@
                                             </ul>
                                         </nav>
                                     </div> -->
-                                </div>
+                                
 
                             </div>
 

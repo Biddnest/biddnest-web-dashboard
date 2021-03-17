@@ -27,7 +27,7 @@
             <div class="card  h-auto p-0 pt-10">
                 <div class="d-flex flex-row justify-content-between p-10">
                     <div class=" card-head right text-left">
-                        <h3 class=" f-18 pb-0">
+                        <h3 class=" f-18 pb-0" style="margin-top: 0px !important;">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Live Order</a>

@@ -11,7 +11,7 @@ class Booking extends Model
     use HasFactory;
     protected $hidden = ['created_at','updated_at','deleted'];
 
-    public function organization(){
+    public function vendor(){
         return $this->belongsTo(Organization::class);
     }
 
@@ -28,7 +28,7 @@ class Booking extends Model
     }
 
     public function service(){
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class)->select(['name','image']);
     }
 
     public function status_history(){

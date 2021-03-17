@@ -27,9 +27,11 @@ Route::prefix('v1')->group(function () {
 
     //bookings APIs
     Route::prefix('bookings')->group(function () {
+        Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
         Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
+        
     });
 });
 

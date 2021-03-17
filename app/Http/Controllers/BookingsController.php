@@ -223,12 +223,11 @@ class BookingsController extends Controller
 
         $cancelbooking = Booking::where(["user_id"=>$exist->user_id,
         "public_booking_id"=>$exist->public_booking_id])
-        ->update(["status"=>BookingEnums::$STATUS['cancelled']]);
+        ->update(["status"=>BookingEnums::$STATUS['cancelled'], "cancelled_meta"=>json_encode(["reason"=>$reason, "desc"=>$desc], true)]);
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $exist->id;
         $bookingstatus->status=BookingEnums::$STATUS['cancelled'];
-        $bookingstatus->cancelled_meta=json_encode(["reason"=>$reason, "desc"=>$desc], true);
         $result_status = $bookingstatus->save();
 
         if(!$cancelbooking && !$result_status)
@@ -237,5 +236,18 @@ class BookingsController extends Controller
         }
                 
          return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+    }
+
+    public static function getBookingByPublicIdForApp($public_booking_id)
+    {
+        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
+                                "public_booking_id"=>$public_booking_id])->first();
+
+        if(!$bookingorder)
+        {
+            return Helper::response(false,"Couldn't Find data");
+        }
+                                        
+        return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('vendor')->with('service')->where("public_booking_id", $public_booking_id)->first()]);
     }
 }

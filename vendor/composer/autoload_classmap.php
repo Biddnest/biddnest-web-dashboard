@@ -59,6 +59,7 @@ return array(
     'App\\Models\\Banners' => $baseDir . '/app/Models/Banners.php',
     'App\\Models\\Booking' => $baseDir . '/app/Models/Booking.php',
     'App\\Models\\BookingInventory' => $baseDir . '/app/Models/BookingInventory.php',
+    'App\\Models\\BookingStatus' => $baseDir . '/app/Models/BookingStatus.php',
     'App\\Models\\Inventory' => $baseDir . '/app/Models/Inventory.php',
     'App\\Models\\InventoryPrice' => $baseDir . '/app/Models/InventoryPrice.php',
     'App\\Models\\MovementDates' => $baseDir . '/app/Models/MovementDates.php',

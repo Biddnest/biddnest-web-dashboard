@@ -24,7 +24,7 @@ class InventoryController extends Controller
         if(!$inventories)
             return Helper::response(false,"Records not exist");
         else
-            return Helper::response(true,"Data displayed successfully", $inventories);
+            return Helper::response(true,"Data displayed successfully",  ["inventories"=>$inventories]);
     }
 
     public static function add($name, $material, $size, $image, $icon)
@@ -83,7 +83,7 @@ class InventoryController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
         else
-            return Helper::response(true,"Data Display successfully", $result);
+            return Helper::response(true,"Data Display successfully",  ["inventory"=>$result]);
     }
 
     public static function getBySubservice($id)
@@ -95,7 +95,7 @@ class InventoryController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
         else
-            return Helper::response(true,"Data Display successfully", $result);
+            return Helper::response(true,"Data Display successfully",  ["subservices"=>$result]);
     }
 
     public static function delete($id)
@@ -127,7 +127,7 @@ class InventoryController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
         else
-            return Helper::response(true,"Data Display successfully", $result);
+            return Helper::response(true,"Data Display successfully", ["inventories"=>$result]);
     }
 
     //route controller => VendorApiRouteController
@@ -168,7 +168,7 @@ class InventoryController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
         else
-            return Helper::response(true,"Data Display successfully", $result);
+            return Helper::response(true,"Data Display successfully", ["InventoryPrice"=>$result]);
     }
 
     public static function updatePrice($data)

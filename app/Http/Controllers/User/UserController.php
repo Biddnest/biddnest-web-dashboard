@@ -199,7 +199,7 @@ class UserController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
         else
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
 }

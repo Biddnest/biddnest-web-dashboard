@@ -24,7 +24,7 @@ class SliderController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
         else
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
     public static function getByZone($zones)
@@ -34,7 +34,7 @@ class SliderController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
         else
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
     public static function add($name, $type, $position, $platform, $size, $from_date, $to_date, $zone_specific)
@@ -75,7 +75,7 @@ class SliderController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
         else
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data fetched successfully", ["banners"=>$result]);
     }
 
     public static function addBanner($data)

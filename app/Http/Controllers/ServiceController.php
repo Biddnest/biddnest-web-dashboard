@@ -41,7 +41,7 @@ class ServiceController extends Controller
         if(!$service)
             return Helper::response(false,"Records not exist");
         else
-            return Helper::response(true,"Data displayed successfully", $service);
+            return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
     }
 
 
@@ -79,7 +79,7 @@ class ServiceController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
         else
-            return Helper::response(true,"Data fetched successfully", $result);
+            return Helper::response(true,"Data fetched successfully", ['services'=>$result]);
     }
 
     public static function delete($id)

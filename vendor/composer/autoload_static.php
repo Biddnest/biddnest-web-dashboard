@@ -631,6 +631,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\Banners' => __DIR__ . '/../..' . '/app/Models/Banners.php',
         'App\\Models\\Booking' => __DIR__ . '/../..' . '/app/Models/Booking.php',
         'App\\Models\\BookingInventory' => __DIR__ . '/../..' . '/app/Models/BookingInventory.php',
+        'App\\Models\\BookingStatus' => __DIR__ . '/../..' . '/app/Models/BookingStatus.php',
         'App\\Models\\Inventory' => __DIR__ . '/../..' . '/app/Models/Inventory.php',
         'App\\Models\\InventoryPrice' => __DIR__ . '/../..' . '/app/Models/InventoryPrice.php',
         'App\\Models\\MovementDates' => __DIR__ . '/../..' . '/app/Models/MovementDates.php',

@@ -308,7 +308,7 @@ class Route extends Controller
             'branch.*.address.city' => 'required|string', 
             'branch.*.address.pincode' => 'required|min:6|max:6',
             'branch.*.zone' => 'required|integer',
-            'branch.*.service' =>'required|string',
+            'branch.*.service' =>'required|integer',
             'branch.*.service_type' =>'required|string'
         ]);
 

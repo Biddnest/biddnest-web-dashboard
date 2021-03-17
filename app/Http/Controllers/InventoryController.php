@@ -17,7 +17,7 @@ use App\Enums\ServiceEnums;
 
 class InventoryController extends Controller
 {
-    private static $public_data = ["id","name","image","icon","size","material"];
+    private static $public_data = ["id","name","image","icon","size","material","category"];
     public static function get()
     {
         $inventories=Inventory::all();
@@ -27,8 +27,8 @@ class InventoryController extends Controller
             return Helper::response(true,"Data displayed successfully",  ["inventories"=>$inventories]);
     }
 
-    public static function add($name, $material, $size, $image, $icon)
-    {
+    public static function add($name, $material, $size, $image, $category, $icon)
+    { 
 
         $image_name = "inventory-image".$name."-".uniqid().".png";
         $icon_name = "inventory-icon".$name."-".uniqid().".png";
@@ -39,6 +39,7 @@ class InventoryController extends Controller
         $inventory->name=$name;
         $inventory->size=$size;
         $inventory->material=$material;
+        $inventory->category=$category;
         $inventory->image=Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 75),$image_name,"inventories");
         $inventory->icon=Helper::saveFile($imageman->make($icon)->resize(100,100)->encode('png', 75),$icon_name,"inventories");
         $result= $inventory->save();

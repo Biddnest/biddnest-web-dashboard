@@ -84,13 +84,13 @@ class Route extends Controller
             return ServiceController::get();
     }
 
-    public function service_get(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer',
-        ]);
-        return ServiceController::serviceGet($request->id);
-    }
+    // public function service_get(Request $request)
+    // {
+    //     $validation = Validator::make($request->all(),[
+    //         'id' => 'required|integer',
+    //     ]);
+    //     return ServiceController::serviceGet($request->id);
+    // }
 
     public function service_edit(Request $request)
     {
@@ -192,6 +192,7 @@ class Route extends Controller
             'material' => 'required',
             'size' => 'required',
             'image' => 'required|string',
+            'category'=> 'required|string',
             'icon' => 'required|string'
         ]);
 
@@ -205,7 +206,7 @@ class Route extends Controller
             'material' => 'json',
             'size' => 'json'
         ]);
-            return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->icon);
+            return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
     public function inventories_edit(Request $request, $id)

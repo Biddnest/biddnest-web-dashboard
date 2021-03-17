@@ -39,7 +39,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/services',[Router::class,'service'])->name("service");
     Route::post('/services',[Router::class,'service_add'])->name("service_add");
     Route::put('/services',[Router::class,'service_edit'])->name("service_edit");
-    Route::get('/services/{id}',[Router::class,'service_get'])->name("service_get");
+    // Route::get('/services/{id}',[Router::class,'service_get'])->name("service_get");
     Route::delete('/services/{id}',[Router::class,'service_delete'])->name("service_delete");
 
     Route::get('/services/{id}/sub-services',[Router::class,'subservice_get_by_service'])->name("sub_service_get_by_service");

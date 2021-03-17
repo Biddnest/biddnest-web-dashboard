@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\Organization;
-use App\VendorEnums;
+use App\Models\Vendor;
+use App\Enums\VendorEnums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManager;
 
 class OrganisationController extends Controller
 {
@@ -23,56 +25,62 @@ class OrganisationController extends Controller
             return Helper::response(true,"Data displayed successfully", $vendors);
     }
 
-    public static function add($filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, $meta, $admin, $org_users)
+    public static function add($data, $meta, $admin)
     {
+        // return json_encode($meta);
+        $imageman = new ImageManager(array('driver' => 'gd'));
 
         $organizations=new Organization;
-        $organizations->image=$filename;
-        $organizations->email=$email;
-        $organizations->phone=$phone;
-        $organizations->org_name=$org_name;
-        $organizations->lat =$lat;
-        $organizations->lng =$lng;
-        $organizations->zone_id =$zone;
-        $organizations->pincode =$pincode;
-        $organizations->city =$city;
-        $organizations->state =$state;
-        $organizations->service_type =$service_type;
+        $image = $data['image'];
+        $uniq = uniqid();
+        $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq,"vendors/".$uniq.$data['organization']['org_name']);
+        $organizations->email=$data['email'];
+        $organizations->phone=$data['phone']['primary'];
+        $organizations->org_name=$data['organization']['org_name'];
+        $organizations->org_type=$data['organization']['org_type'];
+        $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng'];
+        $organizations->zone_id =$data['zone'];
+        $organizations->pincode =$data['address']['pincode'];
+        $organizations->city =$data['address']['city'];
+        $organizations->state =$data['address']['state'];
+        $organizations->service_type =json_encode($data['service_type']);
         $organizations->meta =json_encode($meta);
-        $result= $organizations->save();
+        $organizations->commission = 0.0;
+        $result_organization= $organizations->save();
 
+        // return $result_organization;
         $vendor = new Vendor();
         $vendor->fname = $admin['fname'];
-        $vendor->lname = $admin['fname'];
-        $vendor->email = $admin['fname'];
-        $vendor->phone = $admin['fname'];
-        $vendor->pasword = $admin['fname'];
+        $vendor->lname = $admin['lname'];
+        $vendor->email = $admin['email'];
+        $vendor->phone = $admin['phone'];
         $vendor->pin = null;
-        $vendor->org_id = $organizations->id;
+        $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin['meta']);
-        $vendor->role = VendorEnums::$ROLES["admin"];
-        $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6));
+        $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor->save();
 
-        foreach ($org_users as $users){
-            $vendor = new Vendor();
-            $vendor->fname = $users['fname'];
-            $vendor->lname = $users['lname'];
-            $vendor->email = $users['email'];
-            $vendor->phone = $users['phone'];
-            $vendor->password = $users['password'];
-            $vendor->pin = null;
-            $vendor->org_id = $organizations->id;
-            $vendor->meta = json_encode($users['meta']);
-            $vendor->role = $users['user_role'] == VendorEnums::$ROLES["admin"] ? VendorEnums::$ROLES["admin"] : VendorEnums::$ROLES["manager"];
-            $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6));
-            $vendor->save();
-        }
+        // foreach ($org_users as $users){
+        //     $vendor = new Vendor();
+        //     $vendor->fname = $users['fname'];
+        //     $vendor->lname = $users['lname'];
+        //     $vendor->email = $users['email'];
+        //     $vendor->phone = $users['phone'];
+        //     $vendor->password = $users['password'];
+        //     $vendor->pin = null;
+        //     $vendor->org_id = $organizations->id;
+        //     $vendor->meta = json_encode($users['meta']);
+        //     $vendor->role = $users['user_role'] == VendorEnums::$ROLES["admin"] ? VendorEnums::$ROLES["admin"] : VendorEnums::$ROLES["manager"];
+        //     $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6));
+        //     $vendor->save();
+        // }
 
-        if(!$result)
+        if(!$vendor && !$result_organization)
             return Helper::response(false,"Couldn't save data");
-        else
-            return Helper::response(true,"save data successfully");
+        
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->findOrFail($organizations->id)]);
     }
 
     public static function getOne($id)

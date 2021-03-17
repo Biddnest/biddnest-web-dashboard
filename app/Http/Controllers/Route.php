@@ -251,29 +251,42 @@ class Route extends Controller
     public function vendor_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'fname' => 'required', 'email' => 'required',
-            'lname' => 'required', 'phone' => 'required',
-            'org_name' => 'required', 'gstin' => 'required',
-            'add_line1' => 'required', 'add_line2' => 'required',
-            'lat' => 'required', 'lng' => 'required',
-            'zone' => 'required', 'state' => 'required',
-            'city' => 'required', 'pincode' => 'required'
+            'image'=>'required|string',
+            'fname' => 'required|string', 
+            'lname' => 'required|string',
+            'email' => 'required|string', 
+            'gender'=> 'required|string',          
+
+            'phone.primary'=>'required|min:10|max:10',
+            'phone.secondory'=>'nullable|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string', 
+            'organization.gstin' => 'required|string|min:15|max:15',
+            'organization.description' =>'required|string',
+
+            'address.add_line1' => 'required|string', 
+            'address.add_line2' => 'required|string',
+            'address.lat' => 'required||numeric', 
+            'address.lng' => 'required||numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string', 
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service_type.*' =>'required|string'
         ]);
-
-        $filename="";
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('organization',$filename);
-        }
-
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone2, "gender"=>$request->gender, "gstin_no"=>$request->gstin, "org_description"=>$request->description, "address_line_1"=>$request->add_line1,"address_line_2"=>$request->add_line2);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::vendorAdd($filename, $request->email, $request->phone, $request->org_name, $request->lat, $request->lng, $request->zone, $request->pincode, $request->city, $request->state, $request->service_type, $meta);
+
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'], "gender"=>$request->gender, "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address_line_1"=>$request->address['add_line1'],"address_line_2"=>$request->address['add_line2'], "landmark"=>$request->address['landmark']);
+
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["lat"=>$request->address['lat'], "lng"=>$request->address['lng']]);        
+       
+        return OrganisationController::add($request->all(), $meta, $admin);
+
+        // $request->image, $request->email, $request->phone['primary'], $request->org_name, $request->address['lat'], $request->['lng'], $request->zone, $request->address['pincode'], $request->address['city'], $request->address['state'],  $request->service_type,
     }
 
     public function vendor_fetch($id)

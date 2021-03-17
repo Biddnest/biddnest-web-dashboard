@@ -60,8 +60,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
     //organization API's
-    Route::get('/organizations',[Router::class,'vendors'])->name("vendors");
-    Route::post('/organzations',[Router::class,'vendor_add'])->name("vendor_add");
+    Route::get('/vendors',[Router::class,'vendors'])->name("vendors");
+    Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/organizations',[Router::class,'vendor_edit'])->name("vendor_edit");
     Route::get('/organizations/{id}',[Router::class,'vendor_fetch'])->name("vendor_fetch");
     Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");

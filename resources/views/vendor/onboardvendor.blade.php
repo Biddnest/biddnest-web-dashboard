@@ -352,7 +352,7 @@
                                 </div>
                             </div>
 
-                            <div class="accordion" id="comments">
+                           
                                 <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                                     style="border-top: 1px solid #70707040;">
                                     <div class="w-50"><a class="white-text p-10" href="#"><button
@@ -362,7 +362,7 @@
                                                                 class="btn theme-bg white-text w-30">Next</button></a>
                                     </div>
                                 </div>
-                            </div>
+                        
                         </form>
                          
                 </div>

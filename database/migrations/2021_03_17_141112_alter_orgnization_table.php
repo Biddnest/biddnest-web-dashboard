@@ -15,8 +15,7 @@ class AlterOrgnizationTable extends Migration
     {
         Schema::table('organizations', function (Blueprint $table) {
             $table->string('org_type')->after('org_name');
-            $table->dropcolumn('service');
-            $table->string('service_type')->after('state');
+            $table->string('service_type')->after('service');
         });
     }
 

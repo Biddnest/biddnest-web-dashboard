@@ -44,7 +44,8 @@ class OrganisationController extends Controller
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
         $organizations->state =$data['address']['state'];
-        $organizations->service_type =json_encode($data['service_type']);
+        $organizations->service_type =$data['service_type'];
+        $organizations->service =$data['service'];
         $organizations->meta =json_encode($meta);
         $organizations->commission = 0.0;
         $result_organization= $organizations->save();

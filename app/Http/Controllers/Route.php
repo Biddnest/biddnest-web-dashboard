@@ -248,7 +248,7 @@ class Route extends Controller
         return AdminController::vendorsList();
     }
 
-    public function vendor_add(Request $request)
+    public function vendorAdd(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'image'=>'required|string',
@@ -274,7 +274,8 @@ class Route extends Controller
             'address.city' => 'required|string', 
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
-            'service_type.*' =>'required|string'
+            'service_type' =>'required|string',
+            'service' =>'required|integer'
         ]);
 
         if($validation->fails())
@@ -287,6 +288,37 @@ class Route extends Controller
         return OrganisationController::add($request->all(), $meta, $admin);
 
         // $request->image, $request->email, $request->phone['primary'], $request->org_name, $request->address['lat'], $request->['lng'], $request->zone, $request->address['pincode'], $request->address['city'], $request->address['state'],  $request->service_type,
+    }
+
+    public function branchAdd(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[
+            'branch.*.image'=>'required|string',
+            'branch.*.fname' => 'required|string', 
+            'branch.*.lname' => 'required|string',
+            'branch.*.email' => 'required|string', 
+            'branch.*.gender'=> 'required|string',          
+
+            'branch.*.phone.primary'=>'required|min:10|max:10',
+            'branch.*.phone.secondory'=>'nullable|min:10|max:10',
+
+            'branch.*.organization.org_name' => 'required|string',
+            'branch.*.organization.org_type' => 'required|string', 
+            'branch.*.organization.gstin' => 'required|string|min:15|max:15',
+            'branch.*.organization.description' =>'required|string',
+
+            'branch.*.address.add_line1' => 'required|string', 
+            'branch.*.address.add_line2' => 'required|string',
+            'branch.*.address.lat' => 'required||numeric', 
+            'branch.*.address.lng' => 'required||numeric',
+            'branch.*.address.landmark'=> 'required|string',
+            'branch.*.address.state' => 'required|string',
+            'branch.*.address.city' => 'required|string', 
+            'branch.*.address.pincode' => 'required|min:6|max:6',
+            'branch.*.zone' => 'required|integer',
+            'branch.*.service' =>'required|string',
+            'branch.*.service_type' =>'required|string'
+        ]);
     }
 
     public function vendor_fetch($id)

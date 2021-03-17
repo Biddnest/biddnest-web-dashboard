@@ -117,7 +117,7 @@ class InventoryController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
         else
-            return Helper::response(true,"Data Display successfully", $result);
+            return Helper::response(true,"Data Display successfully", ["inventories"=>$result]);
     }
 
     public static function getInventoriesForApp()

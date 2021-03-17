@@ -122,6 +122,13 @@ Route::prefix('admin')->group(function () {
             Route::get('/lead',[WebController::class,'leadVendors'])->name("lead-vendors");
             Route::get('/pending',[WebController::class,'pendingVendors'])->name("pending-vendors");
             Route::get('/verified',[WebController::class,'verifiedVendors'])->name("verified-vendors");
+
+
+            Route::get('/onboard',[WebController::class,'onbaordVendor'])->name("onboard-vendors");
+            Route::get('/onboard/edit',[WebController::class,'onbaordEditr'])->name("onboard-edit-vendors");
+            Route::get('/onboard/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
+            Route::get('/onboard/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
+            Route::get('/onboard/role',[WebController::class,'onbaordUserRole'])->name("onboard-userrole-vendors");
         });
 
         Route::prefix('categories')->group(function () {

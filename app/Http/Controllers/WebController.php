@@ -310,4 +310,29 @@ class WebController extends Controller
     {
         return view('users.detailseusers');
     }
+
+    public function onbaordVendor()
+    {
+        return view('vendor.onboardvendor');
+    }
+
+    public function onbaordEditr()
+    {
+        return view('vendor.editonboard');
+    }
+
+    public function onbaordBranch()
+    {
+        return view('vendor.onboardaddbranch');
+    }
+
+    public function onbaordBank()
+    {
+        return view('vendor.onboardbank');
+    }
+
+    public function onbaordUserRole()
+    {
+        return view('vendor.onboarduserrole');
+    }
 }

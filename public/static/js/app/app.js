@@ -79,3 +79,25 @@ $("body").on('submit',"form",function() {
         //Do something here
     }
 });
+
+$("body").on('click', ".file-upload button", function (){
+if($(this).data('action') == "upload") {
+    $(this).parent().find("input[type=file]").click();
+}
+else{
+    $(".upload-preview").attr("src",IMAGE_PLACEHOLDER);
+    // $(this).html("UPLOAD IMAGE");
+}
+});
+
+$("body").on('input', "input[type=file]", function (event){
+    // var thiss = $(this);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        $(".upload-preview").attr("src", reader.result);
+        $(this).parent().find(".base-holder").val(reader.result);
+        $(this).parent().find(".btn").html("UPLOAD ANOTHER");
+    };
+    reader.readAsDataURL(file);
+});

@@ -16,7 +16,6 @@ use App\Http\Controllers\Route as Router;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
 
     return response()->redirectToRoute('login');
@@ -190,6 +189,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/',[WebController::class,'users'])->name("users");
             Route::get('/create',[WebController::class,'createUsers'])->name("create-users");
             Route::get('/details',[WebController::class,'detailsUsers'])->name("details-users");
+        });
+
+        Route::prefix('sidebar')->group(function(){
+            /*sample route below*/
+//            Route::get('/customer',[WebController::class,'users'])->name("sidebar_users");
         });
 
     });

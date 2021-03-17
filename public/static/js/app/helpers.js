@@ -43,3 +43,5 @@ export function revertFormAnim(elem, text){
     elem.removeAttr("disabled");
     elem.html(text);
 }
+
+

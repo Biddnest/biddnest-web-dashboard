@@ -16,14 +16,14 @@
                     </li>
                     <li class="breadcrumb-item"><a href="Push-Notifications.html">Category Management</a></li>
                     <li class="breadcrumb-item"><a href="#">Create Category</a></li>
-                    
-                   
+
+
                   </ol>
                 </nav>
-              
-              
+
+
               </div>
-        
+
           </div>
             <div
               class="d-flex flex-row justify-content-center Dashboard-lcards"
@@ -45,49 +45,34 @@
                       aria-labelledby="new-order-tab"
                     >
                       <!-- form starts -->
-                      <form
+                      <form action="{{route('service_add')}}" data-next="redirect" data-url="{{route('create-categories')}}" data-alert="tiny"
                         class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue"
                       >
                         <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
                             <div class="upload-section p-20 pt-0">
-                              <img
+                              <img class="upload-preview"
                                 src="{{asset('static/images/upload-image.svg')}}"
                                 alt=""
                               />
                               <div class="ml-1">
                                 <div class="file-upload">
                                   <input type="file" />
-                                  <button class="btn theme-bg white-text my-0">
+                                  <input type="text" class="base-holder" name="image" value="" required />
+                                  <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                     UPLOAD IMAGE
                                   </button>
                                 </div>
-                                <p>Max File size: 1MB</p>
+                                <p class="text-black">Max File size: 1MB</p>
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-6">
-                            <div class="form-input">
-                              <label class="full-name">Status</label>
-                              <div class="d-flex  flex-row small-switch">
-                                <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"
-                                  data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary"
-                                  data-on="Blocked" data-off="Unblocked" id="switch">
-                               
-      
-                              </div>
-                              <span class="error-message"
-                                >please enter valid date</span
-                              >
-                            </div>
-                          </div>
-                        
                         </div>
 
                         <div class="d-flex row p-20">
-                         
-                          
+
+
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Name</label>
@@ -102,31 +87,32 @@
                                   >
                                 </div>
                               </div>
-                       
+
                               <div class="col-lg-6">
                                 <div class="form-input">
-                                  <label class="phone-num-lable">Zone</label>
-                                  <input
+{{--                                  <label class="phone-num-lable">Zone</label>--}}
+                                  {{--<input
                                     type="text"
                                     placeholder="Mahadevapura,Whitefield"
                                     id="areas"
                                     class="form-control"
                                     name="tags"
-                                  />
-    
-                                  <span class="error-message"
+                                  />--}}
+                                    <input type="checkbox" checked data-toggle="toggle">
+
+                                    <span class="error-message"
                                     >Please enter valid Phone number</span
                                   >
                                 </div>
                               </div>
-                          
-                       
-                         
-                      
-                        
-                         
-                     
-                      
+
+
+
+
+
+
+
+
                         </div>
                         <div class="accordion" id="comments">
                           <div

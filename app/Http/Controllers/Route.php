@@ -254,8 +254,7 @@ class Route extends Controller
             'image'=>'required|string',
             'fname' => 'required|string', 
             'lname' => 'required|string',
-            'email' => 'required|string', 
-            'gender'=> 'required|string',          
+            'email' => 'required|string',          
 
             'phone.primary'=>'required|min:10|max:10',
             'phone.secondory'=>'nullable|min:10|max:10',
@@ -281,7 +280,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'], "gender"=>$request->gender, "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
         $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["lat"=>$request->address['lat'], "lng"=>$request->address['lng']]);        
        

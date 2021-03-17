@@ -32,35 +32,19 @@
 
           <!-- date-time picker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
-
-
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
         <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" />
-
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
-
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <!-- text area editor -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
     <link rel="stylesheet" href="{{ asset('static/css/code_view.min.css')}}">
     <link rel="stylesheet" href="{{ asset('static/css/font_awesome.min.css')}}">
     <link rel="stylesheet" href="{{ asset('static/css/froala_editor.pkgd.min.css')}}">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-
-
-
-
-
-
-
-
-        <style>
+    <style>
             .nav-collapse .li{
                 list-style-type: none !important;
             }
@@ -99,7 +83,7 @@
                 height: 65px;
             }
             .h-35 {
-                height: "35px" !important;
+                height: 35px !important;
             }
             .tagify {
                 padding: 0px !important;
@@ -416,7 +400,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 0px !important; 
+                padding: 0px !important;
+            }
+            .upload-preview{
+                max-height: 70px;
             }
         </style>
 

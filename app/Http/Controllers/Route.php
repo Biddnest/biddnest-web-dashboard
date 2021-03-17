@@ -292,22 +292,22 @@ class Route extends Controller
     public function branchAdd(Request $request, $id)
     {
         $validation = Validator::make($request->all(),[
-            'branch.*.phone.primary'=>'required|min:10|max:10',
+            'phone.primary'=>'required|min:10|max:10',
 
-            'branch.*.organization.org_name' => 'required|string',
-            'branch.*.organization.org_type' => 'required|string', 
-            'branch.*.organization.description' =>'required|string',
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string', 
+            'organization.description' =>'required|string',
  
-            'branch.*.address.address' => 'required|string',
-            'branch.*.address.lat' => 'required||numeric', 
-            'branch.*.address.lng' => 'required||numeric',
-            'branch.*.address.landmark'=> 'required|string',
-            'branch.*.address.state' => 'required|string',
-            'branch.*.address.city' => 'required|string', 
-            'branch.*.address.pincode' => 'required|min:6|max:6',
-            'branch.*.zone' => 'required|integer',
-            'branch.*.service.*' =>'required|integer',
-            'branch.*.service_type' =>'required|string'
+            'address.address' => 'required|string',
+            'address.lat' => 'required||numeric', 
+            'address.lng' => 'required||numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string', 
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
         ]);
 
         if($validation->fails())

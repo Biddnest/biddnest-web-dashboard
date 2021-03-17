@@ -86,37 +86,42 @@ class OrganisationController extends Controller
         $exist = Organization::findOrFail($id);
         if(!$exist)
             return Helper::response(false,"Incorrect slider id.");
+        
         $meta = json_decode($exist['meta'], true);
+        $meta['org_description']= $data['organization']['org_type'];
+        $meta['address']= $data['address']['address'];
+        $meta['landmark']= $data['address']['landmark'];
 
-        foreach($data['branch'] as $branch) {
-            $organizations=new Organization;
-            $organizations->parent_org_id = $id;
-
-            $meta['org_description']= $branch['organization']['org_type'];
-            $meta['address']= $branch['address']['address'];
-            $meta['landmark']= $branch['address']['landmark'];
-            $organizations->image = $exist['image'];
-            $organizations->email = $exist['email'];
-            $organizations->org_name =$branch['organization']['org_name'];
-            $organizations->org_type =$branch['organization']['org_type'];
-            $organizations->phone =$branch['phone']['primary'];
-            $organizations->lat =$branch['address']['lat'];
-            $organizations->lng =$branch['address']['lng'];
-            $organizations->zone_id =$branch['zone'];
-            $organizations->pincode =$branch['address']['pincode'];
-            $organizations->city =$branch['address']['city'];
-            $organizations->state =$branch['address']['state'];
-            $organizations->service_type =$branch['service_type'];
-            // $organizations->service =json_encode($branch['service']);
-            $organizations->meta =json_encode($meta);
-            $organizations->commission =$exist['commission'];
-            $result_organization= $organizations->save();
+        $organizations=new Organization;
+        $organizations->parent_org_id = $id;
+        $organizations->image = $exist['image'];
+        $organizations->email = $exist['email'];
+        $organizations->org_name =$data['organization']['org_name'];
+        $organizations->org_type =$data['organization']['org_type'];
+        $organizations->phone =$data['phone']['primary'];
+        $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng'];
+        $organizations->zone_id =$data['zone'];
+        $organizations->pincode =$data['address']['pincode'];
+        $organizations->city =$data['address']['city'];
+        $organizations->state =$data['address']['state'];
+        $organizations->service_type =$data['service_type'];
+        $organizations->meta =json_encode($meta);
+        $organizations->commission =$exist['commission'];
+        $result_organization= $organizations->save();
+        
+        foreach($data['service'] as $value)
+        {
+           $service=new OrganizationService;
+           $service->organization_id=$organizations->id;
+           $service->service_id=$value;
+           $result_service= $service->save();
         }
 
         if(!$result_organization)
             return Helper::response(false,"Couldn't save data");
             
-        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('branch')->findOrFail($id)]);
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
         
     }
 

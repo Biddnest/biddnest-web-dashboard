@@ -187,7 +187,7 @@ class Route extends Controller
     public function inventories_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-//            'subservice_id' => 'required',
+                    //  'subservice_id' => 'required',
             'name' => 'required',
             'material' => 'required',
             'size' => 'required',
@@ -209,31 +209,33 @@ class Route extends Controller
             return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
-    public function inventories_edit(Request $request, $id)
+    public function inventories_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'subservice_id' => 'required',
+            'id'=>'required',
             'name' => 'required',
-            'material' => 'required'
+            'material' => 'required',
+            'size' => 'required',
+            'image' => 'required|string',
+            'category'=> 'required|string',
+            'icon' => 'required|string'
         ]);
-
-        $filename="";
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('inventory',$filename);
-        }
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::inventoriesEdit($request->name, $request->subservice_id, $request->material, $filename, $id);
+
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'name' => 'capitalizeAll',
+            'material' => 'json',
+            'size' => 'json'
+        ]);
+
+        return InventoryController::update($request->id, $formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
     public function inventories_get($id)
     {
-        return AdminController::inventoriesGet($id);
+        return InventoryController::getOne($id);
     }
 
     public function inventories_delete($id)

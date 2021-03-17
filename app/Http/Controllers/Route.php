@@ -240,7 +240,7 @@ class Route extends Controller
 
     public function inventories_delete($id)
     {
-        return AdminController::inventoriesDelete($id);
+        return InventoryController::delete($id);
     }
 
     public function vendors()

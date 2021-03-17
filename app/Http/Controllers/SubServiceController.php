@@ -69,7 +69,7 @@ class SubServiceController extends Controller
 
     public static function getByService($service_id)
     {
-//        $service_id = is_array($service_id) :
+    //        $service_id = is_array($service_id) :
         $subservice=Subservice::select(self::$public_data)->where("service_id",$service_id)->get();
         if(!$subservice)
             return Helper::response(false,"Records not exist");

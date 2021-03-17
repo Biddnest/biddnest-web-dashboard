@@ -66,6 +66,7 @@ return array(
     'App\\Models\\Notification' => $baseDir . '/app/Models/Notification.php',
     'App\\Models\\Org_kyc' => $baseDir . '/app/Models/Org_kyc.php',
     'App\\Models\\Organization' => $baseDir . '/app/Models/Organization.php',
+    'App\\Models\\OrganizationService' => $baseDir . '/app/Models/OrganizationService.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
     'App\\Models\\ServiceSubservice' => $baseDir . '/app/Models/ServiceSubservice.php',
     'App\\Models\\Settings' => $baseDir . '/app/Models/Settings.php',

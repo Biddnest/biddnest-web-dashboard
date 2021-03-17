@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper;
 use App\Models\Organization;
 use App\Models\Vendor;
+use App\Models\OrganizationService;
 use App\Enums\VendorEnums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,13 +46,23 @@ class OrganisationController extends Controller
         $organizations->city =$data['address']['city'];
         $organizations->state =$data['address']['state'];
         $organizations->service_type =$data['service_type'];
-        $organizations->service =$data['service'];
+        // $organizations->service =json_encode($data['service']);
         $organizations->meta =json_encode($meta);
-        $organizations->commission = 0.0;
+        $organizations->commission = $data['commission'];
         $result_organization= $organizations->save();
 
+        // return $organizations->id;
+        // return json_decode($data['service'], true);
+        foreach($data['service'] as $value)
+        {
+           $service=new OrganizationService;
+           $service->organization_id=$organizations->id;
+           $service->service_id=$value;
+           $result_service= $service->save();
+        }
+
         // return $result_organization;
-        $vendor = new Vendor();
+        $vendor = new Vendor;
         $vendor->fname = $admin['fname'];
         $vendor->lname = $admin['lname'];
         $vendor->email = $admin['email'];
@@ -62,21 +73,6 @@ class OrganisationController extends Controller
         $vendor->user_role = VendorEnums::$ROLES["admin"];
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor->save();
-
-        // foreach ($org_users as $users){
-        //     $vendor = new Vendor();
-        //     $vendor->fname = $users['fname'];
-        //     $vendor->lname = $users['lname'];
-        //     $vendor->email = $users['email'];
-        //     $vendor->phone = $users['phone'];
-        //     $vendor->password = $users['password'];
-        //     $vendor->pin = null;
-        //     $vendor->org_id = $organizations->id;
-        //     $vendor->meta = json_encode($users['meta']);
-        //     $vendor->role = $users['user_role'] == VendorEnums::$ROLES["admin"] ? VendorEnums::$ROLES["admin"] : VendorEnums::$ROLES["manager"];
-        //     $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6));
-        //     $vendor->save();
-        // }
 
         if(!$vendor && !$result_organization)
             return Helper::response(false,"Couldn't save data");
@@ -97,10 +93,10 @@ class OrganisationController extends Controller
             $organizations->parent_org_id = $id;
 
             $meta['org_description']= $branch['organization']['org_type'];
-            $meta['address_line_1']= $branch['address']['add_line1'];
-            $meta['address_line_2']= $branch['address']['add_line2'];
+            $meta['address']= $branch['address']['address'];
             $meta['landmark']= $branch['address']['landmark'];
-
+            $organizations->image = $exist['image'];
+            $organizations->email = $exist['email'];
             $organizations->org_name =$branch['organization']['org_name'];
             $organizations->org_type =$branch['organization']['org_type'];
             $organizations->phone =$branch['phone']['primary'];
@@ -111,13 +107,13 @@ class OrganisationController extends Controller
             $organizations->city =$branch['address']['city'];
             $organizations->state =$branch['address']['state'];
             $organizations->service_type =$branch['service_type'];
-            $organizations->service =$branch['service'];
+            // $organizations->service =json_encode($branch['service']);
             $organizations->meta =json_encode($meta);
-            $organizations->commission = 0.0;
+            $organizations->commission =$exist['commission'];
             $result_organization= $organizations->save();
         }
 
-        if(!$banner)
+        if(!$result_organization)
             return Helper::response(false,"Couldn't save data");
             
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('branch')->findOrFail($id)]);

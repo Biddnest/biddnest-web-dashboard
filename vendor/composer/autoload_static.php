@@ -638,6 +638,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\Notification' => __DIR__ . '/../..' . '/app/Models/Notification.php',
         'App\\Models\\Org_kyc' => __DIR__ . '/../..' . '/app/Models/Org_kyc.php',
         'App\\Models\\Organization' => __DIR__ . '/../..' . '/app/Models/Organization.php',
+        'App\\Models\\OrganizationService' => __DIR__ . '/../..' . '/app/Models/OrganizationService.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
         'App\\Models\\ServiceSubservice' => __DIR__ . '/../..' . '/app/Models/ServiceSubservice.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',

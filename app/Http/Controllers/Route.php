@@ -265,8 +265,7 @@ class Route extends Controller
             'organization.gstin' => 'required|string|min:15|max:15',
             'organization.description' =>'required|string',
 
-            'address.add_line1' => 'required|string', 
-            'address.add_line2' => 'required|string',
+            'address.address' => 'required|string', 
             'address.lat' => 'required||numeric', 
             'address.lng' => 'required||numeric',
             'address.landmark'=> 'required|string',
@@ -275,13 +274,14 @@ class Route extends Controller
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
             'service_type' =>'required|string',
-            'service' =>'required|integer'
+            'service.*' =>'required',
+            'commission' =>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'], "gender"=>$request->gender, "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address_line_1"=>$request->address['add_line1'],"address_line_2"=>$request->address['add_line2'], "landmark"=>$request->address['landmark']);
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'], "gender"=>$request->gender, "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
         $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["lat"=>$request->address['lat'], "lng"=>$request->address['lng']]);        
        
@@ -298,9 +298,8 @@ class Route extends Controller
             'branch.*.organization.org_name' => 'required|string',
             'branch.*.organization.org_type' => 'required|string', 
             'branch.*.organization.description' =>'required|string',
-
-            'branch.*.address.add_line1' => 'required|string', 
-            'branch.*.address.add_line2' => 'required|string',
+ 
+            'branch.*.address.address' => 'required|string',
             'branch.*.address.lat' => 'required||numeric', 
             'branch.*.address.lng' => 'required||numeric',
             'branch.*.address.landmark'=> 'required|string',
@@ -308,7 +307,7 @@ class Route extends Controller
             'branch.*.address.city' => 'required|string', 
             'branch.*.address.pincode' => 'required|min:6|max:6',
             'branch.*.zone' => 'required|integer',
-            'branch.*.service' =>'required|integer',
+            'branch.*.service.*' =>'required|integer',
             'branch.*.service_type' =>'required|string'
         ]);
 

@@ -125,7 +125,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span>Amith Raji</span>
+                                    <span>{{\Illuminate\Support\Facades\Session::get("account")['name']}}</span>
 
                                     <div class="dropdown">
                                         <ul>

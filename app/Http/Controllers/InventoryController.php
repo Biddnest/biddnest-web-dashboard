@@ -28,7 +28,7 @@ class InventoryController extends Controller
     }
 
     public static function add($name, $material, $size, $image, $category, $icon)
-    { 
+    {
 
         $image_name = "inventory-image".$name."-".uniqid().".png";
         $icon_name = "inventory-icon".$name."-".uniqid().".png";
@@ -111,24 +111,20 @@ class InventoryController extends Controller
 
     //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
-    {    
-        $result=Inventory::select(self::$public_data)->whereIn("id", SubserviceInventory::where('subservice_id', $id)->pluck('inventory_id'))
-        ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-
-        if(!$result)
-            return Helper::response(false,"Couldn't Display data");
-        else
-            return Helper::response(true,"Data Display successfully", ["inventories"=>$result]);
+    {
+        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return Helper::response(true,"Data Display successfully", ["inventories"=>$result]);
     }
 
     public static function getInventoriesForApp()
-    {    
+    {
         $result=Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
 
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
         else
             return Helper::response(true,"Data Display successfully", ["inventories"=>$result]);
+
     }
 
     //route controller => VendorApiRouteController
@@ -141,7 +137,7 @@ class InventoryController extends Controller
         $Inventory = Inventory::findOrFail($data["inventory_id"]);
         if(!$Inventory)
             return Helper::response(false,"Incorrect inventory id.");
-        
+
         foreach($data['price'] as $price) {
             $inventoryprice=new InventoryPrice;
             // $inventoryprice->organization_id= $data['organization_id'];
@@ -162,7 +158,7 @@ class InventoryController extends Controller
 
 
     public static function getByInventory($id)
-    {    
+    {
         $result=InventoryPrice::whereIn("inventory_id", Inventory::where('id', $id)->pluck('id'))
         ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
 
@@ -215,7 +211,7 @@ class InventoryController extends Controller
 
 
     public static function getEconomicPrice($data, $inventory_quantity_type)
-    {        
+    {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
             $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
@@ -231,7 +227,7 @@ class InventoryController extends Controller
     }
 
     public static function getPremiumPrice($data , $inventory_quantity_type)
-    {        
+    {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
             $maxprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
@@ -244,6 +240,6 @@ class InventoryController extends Controller
         return $finalprice;
 
     }
-    
+
 
 }

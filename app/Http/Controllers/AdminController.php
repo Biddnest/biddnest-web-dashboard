@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\AdminZone;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,7 @@ class AdminController extends Controller
         $admin_user=Admin::where(['username'=>$username])
             ->OrWhere(['email'=>$username])
             ->where([ 'status'=>1, 'deleted'=>0])
+            ->with("zones")
             ->first();
 
         if(!$admin_user)
@@ -47,6 +49,13 @@ class AdminController extends Controller
                         'email'=>$admin_user->email]]);
             Session::put('sessionActive', true);
             Session::put('user_role', $admin_user->role);
+            $zone = [];
+            if(!$admin_user->zones){
+                foreach($admin_user->zones as $zone){
+                    $zones[] = $zone;
+                }
+            }
+            Session::put('zones', $zones);
 
            return Helper::response(true, "Login was successfull");
         }
@@ -112,99 +121,31 @@ class AdminController extends Controller
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
-    public static function vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details)
-    {
-        $last = DB::table('organizations')->latest()->first();
+   public static function update($id, $fname, $lname, $email, $phone, $role, $zones){
 
-        $org_kyc=new Org_kyc;
-        $org_kyc->org_id= $last->id;
-        $org_kyc->aadhar_card=$filename_adhaar_card;
-        $org_kyc->pan_card=$filename_pan_card;
-        $org_kyc->gst_certificate=$filename_gst_certificate;
-        $org_kyc->company_reg_certificate =$company_reg_certificate;
-        $org_kyc->bidnest_agreement =$filename_bidnest_agreement;
-        $org_kyc->banking_details =json_encode($banking_details);
-        $result= $org_kyc->save();
+       $exist= Admin::findOrFail($id);
+       if(!$exist){
+           return Helper::response(false,"Order is not Exist");
+       }
 
-        if(!$result)
-            return Helper::response(false,"Couldn't save data");
-        else
-            return Helper::response(true,"save data successfully");
-    }
+        $update = Admin::where("id",$id)->update([
+            "fname"=>$fname,
+            "lname"=>$lname,
+            "email"=>$email,
+            "phone"=>$phone,
+            "role"=>$role
+        ]);
 
-    public static function vendorEditKyc($id, $filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details)
-    {
-        $result=DB::update(
-            'update org_kycs set aadhar_card = ?, pan_card=?, gst_certificate=?, company_reg_certificate=?, bidnest_agreement=?,  banking_details=? where id = ?',
-            [$filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $filename_bidnest_agreement, json_encode($banking_details), $id]
-        );
+        foreach($zones as $zone){
+            $zone = new AdminZone;
+            $zone->admin_id = $id;
+            $zone->zone_id = $zone;
+            $zone->save();
+        }
 
-
-        if(!$result)
-            return Helper::response(false,"Couldn't update data", $result);
-        else
-            return Helper::response(true,"Data updated successfully", $result);
-    }
-
-    public static function kycFetch($id)
-    {
-        $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0, 'id'=>$id])->first();
-
-        if(!$result)
-            return Helper::response(false,"Couldn't fetche data");
-        else
-            return Helper::response(true,"Data fetched successfully", $result);
-    }
-
-    public static function kycDelete($id)
-    {
-        $result=DB::update(
-            'update org_kycs set deleted = ? where id = ?',
-            [1, $id]
-        );
-
-        if(!$result)
-            return Helper::response(false,"Couldn't Delete data $result");
-        else
-            return Helper::response(true,"Data Deleted successfully");
-    }
-
-    public static function vendorList()
-    {
-        $result=DB::table('organizations') ->join('org_kycs', 'organizations.id', '=', 'org_kycs.org_id')->select('*')->where(['org_kycs.status'=> 1, 'org_kycs.deleted'=>0, 'organizations.status'=> 1, 'organizations.deleted'=>0])->get();
-
-        if(!$result)
-            return Helper::response(false,"Couldn't Display data");
-        else
-            return Helper::response(true,"Data Display successfully", $result);
-    }
-
-    public static function vendorsGetRecord($id)
-    {
-        $result=DB::table('organizations') ->join('org_kycs', 'organizations.id', '=', 'org_kycs.org_id')->select('*')->where(['organizations.id'=>$id])->first();
-
-        if(!$result)
-            return Helper::response(false,"Couldn't fetch data");
-        else
-            return Helper::response(true,"Data fetch successfully", $result);
-    }
-
-    public static function vendorsDeleteRecord($id)
-    {
-        $result=DB::update(
-            'update org_kycs set deleted = ? where org_id = ?',
-            [1, $id]
-        );
-
-        $result1=DB::update(
-            'update organizations set deleted = ? where id = ?',
-            [1, $id]
-        );
-
-        if(!$result && !$result1)
-            return Helper::response(false,"Couldn't Delete data",$result);
-        else
-            return Helper::response(true,"Data Deleted successfully");
-    }
-
+       if(!$update)
+           return Helper::response(false,"Could not update admin.");
+       else
+           return Helper::response(true,"Data updated successfully", ["admin"=>Admin::with("zones")->findOrFail($id)]);
+   }
 }

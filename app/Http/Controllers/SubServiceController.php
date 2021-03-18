@@ -7,6 +7,7 @@ use App\Models\Inventory;
 use App\Models\Service;
 use App\Models\Subservice;
 use App\Models\ServiceSubservice;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
@@ -28,9 +29,15 @@ class SubServiceController extends Controller
         $image_name = "subservice".$name."-".uniqid().".png";
         $subservice=new Subservice();
         $subservice->name=$name;
-        $subservice->service_id=$service_id;
+        // $subservice->service_id=$service_id;
         $subservice->image = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices");
         $result= $subservice->save();
+
+        $service=new ServiceSubservice;
+        $service->service_id = $service_id;
+        $service->subservice_id = $subservice->id;
+        $service_result = $service->save();
+
 
         if($inventories) {
             foreach ($inventories as $inventory) {
@@ -45,7 +52,7 @@ class SubServiceController extends Controller
         }
 
 
-        if(!$result)
+        if(!$result && !$service_result)
             return Helper::response(false,"Couldn't save data");
         else
             return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->with("inventories")->findOrFail($subservice->id)]);
@@ -62,7 +69,7 @@ class SubServiceController extends Controller
 
     public static function getByService($service_id)
     {
-//        $service_id = is_array($service_id) :
+        //        $service_id = is_array($service_id) :
         $subservice=Subservice::select(self::$public_data)->where("service_id",$service_id)->get();
         if(!$subservice)
             return Helper::response(false,"Records not exist");
@@ -107,7 +114,6 @@ class SubServiceController extends Controller
         else
             return Helper::response(true,"Service deleted successfully");
     }
-
 
     public static function getSubservicesForApp($id)
     {

@@ -84,13 +84,13 @@ class Route extends Controller
             return ServiceController::get();
     }
 
-    public function service_get(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer',
-        ]);
-        return ServiceController::serviceGet($request->id);
-    }
+    // public function service_get(Request $request)
+    // {
+    //     $validation = Validator::make($request->all(),[
+    //         'id' => 'required|integer',
+    //     ]);
+    //     return ServiceController::serviceGet($request->id);
+    // }
 
     public function service_edit(Request $request)
     {
@@ -187,11 +187,12 @@ class Route extends Controller
     public function inventories_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-//            'subservice_id' => 'required',
+                    //  'subservice_id' => 'required',
             'name' => 'required',
             'material' => 'required',
             'size' => 'required',
             'image' => 'required|string',
+            'category'=> 'required|string',
             'icon' => 'required|string'
         ]);
 
@@ -205,39 +206,41 @@ class Route extends Controller
             'material' => 'json',
             'size' => 'json'
         ]);
-            return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->icon);
+            return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
-    public function inventories_edit(Request $request, $id)
+    public function inventories_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'subservice_id' => 'required',
+            'id'=>'required',
             'name' => 'required',
-            'material' => 'required'
+            'material' => 'required',
+            'size' => 'required',
+            'image' => 'required|string',
+            'category'=> 'required|string',
+            'icon' => 'required|string'
         ]);
-
-        $filename="";
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('inventory',$filename);
-        }
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::inventoriesEdit($request->name, $request->subservice_id, $request->material, $filename, $id);
+
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'name' => 'capitalizeAll',
+            'material' => 'json',
+            'size' => 'json'
+        ]);
+
+        return InventoryController::update($request->id, $formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
     public function inventories_get($id)
     {
-        return AdminController::inventoriesGet($id);
+        return InventoryController::getOne($id);
     }
 
     public function inventories_delete($id)
     {
-        return AdminController::inventoriesDelete($id);
+        return InventoryController::delete($id);
     }
 
     public function vendors()
@@ -248,29 +251,119 @@ class Route extends Controller
     public function vendor_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'fname' => 'required', 'email' => 'required',
-            'lname' => 'required', 'phone' => 'required',
-            'org_name' => 'required', 'gstin' => 'required',
-            'add_line1' => 'required', 'add_line2' => 'required',
-            'lat' => 'required', 'lng' => 'required',
-            'zone' => 'required', 'state' => 'required',
-            'city' => 'required', 'pincode' => 'required'
+            'image'=>'required|string',
+            'fname' => 'required|string', 
+            'lname' => 'required|string',
+            'email' => 'required|string',          
+
+            'phone.primary'=>'required|min:10|max:10',
+            'phone.secondory'=>'nullable|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string', 
+            'organization.gstin' => 'required|string|min:15|max:15',
+            'organization.description' =>'required|string',
+
+            'address.address' => 'required|string', 
+            'address.lat' => 'required|numeric', 
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string', 
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service_type' =>'required|string',
+            'service.*' =>'required',
+            'commission' =>'required'
         ]);
-
-        $filename="";
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('organization',$filename);
-        }
-
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone2, "gender"=>$request->gender, "gstin_no"=>$request->gstin, "org_description"=>$request->description, "address_line_1"=>$request->add_line1,"address_line_2"=>$request->add_line2);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::vendorAdd($filename, $request->email, $request->phone, $request->org_name, $request->lat, $request->lng, $request->zone, $request->pincode, $request->city, $request->state, $request->service_type, $meta);
+
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
+
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["vendor_id"=>null, "branch"=>null, "assigned_module"=>null]);        
+       
+        return OrganisationController::add($request->all(), $meta, $admin);
+    }
+
+    public function branch_add(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone.primary'=>'required|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string', 
+            'organization.description' =>'required|string',
+ 
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric', 
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string', 
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addBranch($request->all(), $id);
+
+    }
+
+    public function branch_delete(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::deleteBranch($request->id);
+
+    }
+
+    public function bank_add(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[
+            'acc_no'=>'required',
+            'banck_name'=>'required|string',
+            'holder_name'=>'required|string',
+            'ifcscode'=>'required|string',
+            'branch_name'=>'required|string',
+            'doc.aadhar_card' => 'required|string',
+            'doc.gst_certificate' => 'required|string', 
+            'doc.biddnest_agreement' =>'required|string',
+            'doc.pan_card' =>'required|string',
+            'doc.company_registration_certificate' =>'required|string',
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return OrganisationController::addBank($request->all(), $id);
+    }
+
+    public function role_add(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string', 
+            'lname' => 'required|string',
+            'email' => 'required|string',        
+            'phone'=>'required|min:10|max:10',
+            'assigned_module.*' => 'required|string', 
+            'branch' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addNewRole($request->all(), $id);
     }
 
     public function vendor_fetch($id)

@@ -154,7 +154,136 @@
 
 
             <div class="side-bar-pop-up">
+            </div>
 
+            <div class="modal fade" id="add-new-role" tabindex="-1" role="dialog" aria-labelledby="add-new-role"
+            aria-hidden="true">
+                <div class="modal-dialog theme-text input-text-blue" role="document">
+                    <div class="modal-content w-1000 right-25">
+                        <div class="modal-header">
+                            <h5 class="modal-title pl-3" id="exampleModalLongTitle">Add New Role</h5>
+                            <button type="button" class="close theme-text pr-3 mr-1" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="d-flex row p-20 pt-0 pb-0">
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Employee First Name</label>
+                                        <span class="">
+                                            <input type="text" id="fullname" placeholder="David" value="David"
+                                                class="form-control">
+                                            <span class="error-message">Please enter valid
+                                                First Name</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Employee Last Name</label>
+                                        <span class="">
+                                            <input type="text" id="fullname" placeholder="Jerome" value=""
+                                                class="form-control">
+                                            <span class="error-message">Please enter valid
+                                                Last Name</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Employee Contact Number</label>
+                                        <span class="">
+                                            <input type="tel" id="Employee" placeholder="9876543210" value=""
+                                                class=" form-control form-control-tel">
+                                            <span class="error-message">Please enter valid
+                                                Phone number</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Role Type</label>
+                                        <span class="">
+                                            <select id="" class="form-control">
+                                                <option>Junior Engineer</option>
+                                                <option>Senior Engineer</option>
+                                            </select>
+                                            <span class="error-message">Please enter valid
+                                                Service</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Vendor ID</label>
+                                        <span class="">
+                                            <input type="text" id="fullname" placeholder="V1234567" value=""
+                                                class="form-control">
+                                            <span class="error-message">Please enter valid
+                                                Vendor ID</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Branch</label>
+                                        <span class="">
+                                            <select id="" class="form-control">
+                                                <option>Delhi</option>
+                                                <option>Mumbai</option>
+                                            </select>
+                                            <span class="error-message">Please enter valid
+                                                Branch</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Organization ID</label>
+                                        <span class="">
+                                            <input type="text" id="fullname" placeholder="O123456" value="ORG123456"
+                                                class="form-control">
+                                            <span class="error-message">Please enter valid
+                                                Organization ID</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Email ID</label>
+                                        <span class="">
+                                            <input type="email" id="fullname" placeholder="abc@email.com" value="davidjerome@mail.com"
+                                                class="form-control">
+                                            <span class="error-message">Please enter valid
+                                                Email</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Password</label>
+                                        <span class="">
+                                            <input type="password" id="fullname" placeholder="Enter Password" value=""
+                                                class="form-control">
+                                            <span class="error-message">Please enter valid
+                                                Password</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="w-50"><a class="white-text p-10" href="#" data-dismiss="modal"
+                                    aria-label="Close"><button
+                                        class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+                            <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
+                                    aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </main>

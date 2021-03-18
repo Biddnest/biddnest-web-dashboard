@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
+    protected $hidden = ['commission','remarks','created_at','updated_at','deleted'];
+
     use HasFactory;
 
     public function kyc(){
@@ -21,5 +23,19 @@ class Organization extends Model
 
     public function InventoryPrice(){
         return $this->hasMany(InventoryPrice::class);
+    }
+
+    public function branch(){
+        return $this->hasMany(Organization::class, "parent_org_id");
+    }
+
+    public function services()
+    {
+        return $this->hasMany(OrganizationService::class);
+    }
+
+    public function bank()
+    {
+        return $this->hasOne(Org_kyc::class);
     }
 }

@@ -98,7 +98,8 @@ class BookingsController extends Controller
         $booking->meta=json_encode(["self_booking"=>$data['meta']['self_booking'],
                                     "subcategory"=>$data['meta']['subcategory'],
                                     "customer"=>json_encode(["remarks"=>$data['meta']['customer']['remarks']]),
-                                    "images"=>$images]);
+                                    "images"=>$images,
+                                    "timings"=>null]);
        
         $cost_structure=[];
         foreach(Settings::get() as $setting)
@@ -190,11 +191,15 @@ class BookingsController extends Controller
         }
 
         $booking_type= $service_type==0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
+
+        $timming = Settings::where("key", "bid_time")->pluck('value')[0];
+        $meta = json_decode($exist['meta'], true);
+        $meta['timings']['bid_result']= $timming;
     
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])
                                             ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
-                                            "status"=>BookingEnums::$STATUS['placed']]);
+                                            "status"=>BookingEnums::$STATUS['placed'], "meta" => json_encode($meta)]);
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $exist->id;

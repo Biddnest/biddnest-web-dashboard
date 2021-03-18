@@ -196,7 +196,7 @@ class BookingsController extends Controller
         $complete_time = Carbon::now()->addMinutes($timming);
 
         $meta = json_decode($exist['meta'], true);
-        $meta['timings']['bid_result']= $complete_time;
+        $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
     
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])

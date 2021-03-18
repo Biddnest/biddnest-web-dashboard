@@ -179,10 +179,56 @@ class OrganisationController extends Controller
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
             
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);        
+    }
+
+    public static function getBranch($id, $parent_org_id)
+    {
+        $exist = Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->first();
+        if(!$exist)
+            return Helper::response(false,"Invalide Data");
+        
+        return Organization::with('branch')->with('services')->findOrFail($id);
         
     }
 
+    public static function updateBranch($data, $id, $parent_org_id)
+    {
+        $exist = Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->first();
+        if(!$exist)
+            return Helper::response(false,"Incorrect Organization id.");
+
+        $meta = json_decode($exist['meta'], true);
+        $meta['org_description']= $data['organization']['org_type'];
+        $meta['address']= $data['address']['address'];
+        $meta['landmark']= $data['address']['landmark'];
+
+        $result_organization =Organization::where(["id"=>$id])
+        ->update([
+            "org_name"=>$data['organization']['org_name'],
+            "org_type"=>$data['organization']['org_type'],
+            "phone"=>$data['phone']['primary'],
+            "lat"=>$data['address']['lat'],
+            "lng"=>$data['address']['lng'],
+            "zone_id"=>$data['zone'],
+            "pincode"=>$data['address']['pincode'],
+            "city"=>$data['address']['city'],
+            "state"=>$data['address']['state'],
+            "service_type"=>$data['service_type'],
+            "meta" =>json_encode($meta)
+        ]);        
+        
+        foreach($data['service'] as $value)
+        {
+            $result_service=OrganizationService::where("organization_id", $id)
+            ->update(["service_id"=>$value]);
+        }
+
+        if(!$result_organization && !$result_service)
+            return Helper::response(false,"Couldn't save data");
+            
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);        
+    }
 
     public static function deleteBranch($id, $parent_org_id)
     {
@@ -196,28 +242,60 @@ class OrganisationController extends Controller
         return Helper::response(true,"Branch Deleted successfully");
     }
 
-    public static function addBank($data, $id)
+    public static function addBank($data, $id, $bank_id)
     {
-        $exist = Organization::findOrFail($id);
-        if(!$exist)
-            return Helper::response(false,"Incorrect Organization id.");
+        if(!$bank_id)
+        {
+            $exist = Organization::findOrFail($id);
+            if(!$exist)
+                return Helper::response(false,"Incorrect Organization id.");
 
-        $imageman = new ImageManager(array('driver' => 'gd'));
-        $meta =["account_no"=>$data['acc_no'],"banck_name"=>$data['banck_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
-        $bank = new Org_kyc;
-        $bank->organization_id = $id;
-        $bank->aadhar_card =Helper::saveFile($imageman->make($data['doc']['aadhar_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-        $bank->pan_card =Helper::saveFile($imageman->make($data['doc']['pan_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-        $bank->gst_certificate =Helper::saveFile($imageman->make($data['doc']['gst_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-        $bank->company_reg_certificate =Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-        $bank->bidnest_agreement =Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-        $bank->banking_details = json_encode($meta);
-        $result_bank = $bank->save();
+            $imageman = new ImageManager(array('driver' => 'gd'));
+            $meta =["account_no"=>$data['acc_no'],"banck_name"=>$data['banck_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+            $bank = new Org_kyc;
+            $bank->organization_id = $id;
+            $bank->aadhar_card =Helper::saveFile($imageman->make($data['doc']['aadhar_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+            $bank->pan_card =Helper::saveFile($imageman->make($data['doc']['pan_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+            $bank->gst_certificate =Helper::saveFile($imageman->make($data['doc']['gst_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+            $bank->company_reg_certificate =Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+            $bank->bidnest_agreement =Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+            $bank->banking_details = json_encode($meta);
+            $result_bank = $bank->save();
+        }
+        else
+        {
+            $exist = Org_kyc::where(["id"=>$id, "organization_id"=>$organization_id])->first();
+            if(!$exist)
+                return Helper::response(false,"Invalide or incorrect Organization id or Bank id ");
+
+            $imageman = new ImageManager(array('driver' => 'gd'));
+            $meta =["account_no"=>$data['acc_no'],"banck_name"=>$data['banck_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+
+            $result_bank= Org_kyc::where("id", $bank_id)
+            ->update([
+                "aadhar_card"=>Helper::saveFile($imageman->make($data['doc']['aadhar_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
+                "pan_card"=>Helper::saveFile($imageman->make($data['doc']['pan_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
+                "gst_certificate"=>Helper::saveFile($imageman->make($data['doc']['gst_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
+                "company_reg_certificate"=>Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
+                "bidnest_agreement"=>Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
+                "banking_details"=>$meta
+            ]);    
+        }
 
         if(!$result_bank)
             return Helper::response(false,"Couldn't save data");
         
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
+    }
+
+    public static function getBank($id, $organization_id)
+    {
+        $exist = Org_kyc::where(["id"=>$id, "organization_id"=>$organization_id])->first();
+        if(!$exist)
+            return Helper::response(false,"Invalide Data");
+        
+        return $getbranch = Org_kyc::findOrFail($id);
+        
     }
 
     public static function addNewRole($data, $id)
@@ -247,6 +325,45 @@ class OrganisationController extends Controller
         $vendor->password = $password;
         $vendor_result = $vendor->save();
 
+        if(!$vendor_result)
+            return Helper::response(false,"Couldn't save data");
+        
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
+    }
+
+    public static function getRole($id , $organization_id)
+    {
+        $exist =Vendor::where(["id"=>$id, "organization_id"=>$organization_id])->first();
+        if(!$exist)
+            return Helper::response(false,"Invalide Data");
+        
+        return Vendor::findOrFail($id);
+        
+    }
+
+    public static function editNewRole($data, $id, $role_id)
+    {
+        $exist =Vendor::where(["id"=>$role_id, "organization_id"=>$id])->first();
+        if(!$exist)
+            return Helper::response(false,"Incorrect Role or Organization id");
+
+        $meta = array(["branch"=>$data['branch']]);
+
+        if(!$data['password'])
+            $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+        else
+            $password = $exist['password'];
+
+        $vendor_result = Vendor::where(["id"=>$role_id, "organization_id"=>$id])
+        ->update([
+            "fname"=>$data['fname'],
+            "lname"=>$data['lname'],
+            "email"=>$data['email'],
+            "phone"=>$data['phone'],
+            "meta"=>$meta,
+            "password"=>$password
+        ]);
+        
         if(!$vendor_result)
             return Helper::response(false,"Couldn't save data");
         

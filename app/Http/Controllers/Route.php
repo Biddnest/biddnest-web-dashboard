@@ -365,6 +365,35 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return OrganisationController::addBranch($request->all(), $request->id);
+    }
+
+    public function branch_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'parent_org_id'=>'required',
+            'phone.primary'=>'required|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string', 
+            'organization.description' =>'required|string',
+ 
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric', 
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string', 
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::updateBranch($request->all(), $request->id, $request->parent_org_id);
 
     }
 
@@ -385,6 +414,7 @@ class Route extends Controller
     public function bank_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'bank_id'=>'nullable',
             'id' =>'required',
             'acc_no'=>'required',
             'banck_name'=>'required|string',
@@ -401,7 +431,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         
-        return OrganisationController::addBank($request->all(), $request->id);
+        return OrganisationController::addBank($request->all(), $request->id, $request->bank_id);
     }
 
     public function role_add(Request $request)
@@ -412,8 +442,7 @@ class Route extends Controller
             'lname' => 'required|string',
             'email' => 'required|string',        
             'phone'=>'required|min:10|max:10', 
-            'branch' => 'required',
-            'password'=>'nullable'
+            'branch' => 'required'
         ]);
 
         if($validation->fails())
@@ -422,6 +451,23 @@ class Route extends Controller
         return OrganisationController::addNewRole($request->all(), $request->id);
     }
 
+    public function role_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id' =>'required',
+            'role_id'=>'required',
+            'fname' => 'required|string', 
+            'lname' => 'required|string',
+            'email' => 'required|string',        
+            'phone'=>'required|min:10|max:10', 
+            'branch' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::editNewRole($request->all(), $request->id, $request->role_id);
+    }
 
     public function role_delete(Request $request)
     {
@@ -435,34 +481,6 @@ class Route extends Controller
 
         return OrganisationController::deleteRole($request->id, $request->organization_id);
     }
-
-
-   
-    // public function vendor_fetch_kyc($id)
-    // {
-    //     return AdminController::kycFetch($id);
-    // }
-
-    // public function vendor_delete_kyc($id)
-    // {
-    //     return AdminController::kycDelete($id);
-    // }
-
-    // public function vendors_list()
-    // {
-    //     return AdminController::vendorList();
-    // }
-
-    // public function vendors_get_record($id)
-    // {
-    //     return AdminController::vendorsGetRecord($id);
-    // }
-
-    // public function vendors_delete_record($id)
-    // {
-    //     return AdminController::vendorsDeleteRecord($id);
-    // }
-
 
     public function vendor_login(Request $request)
     {

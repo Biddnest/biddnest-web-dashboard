@@ -125,6 +125,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/intervention/image" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/fabian-tomischka/php-avatar-generator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mrclay/minify" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/htmlmin/htmlmin" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

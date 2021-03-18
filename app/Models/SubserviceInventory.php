@@ -9,4 +9,8 @@ class SubserviceInventory extends Model
 {
     protected $table = "subservices_inventories_maps";
     use HasFactory;
+
+    public function meta(){
+        return $this->hasOne(Inventory::class,"id","subservice_id");
+    }
 }

@@ -44,18 +44,12 @@ class ServiceController extends Controller
             return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
     }
 
-
-    public static function getForApp($lat, $lng)
-    {
-        $service=Service::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        if(!$service)
-            return Helper::response(false,"Records not exist");
-        else
-            return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
-    }
-
     public static function update($id, $name, $image, $inventory_quantity_type)
     {
+        $service_exist = Service::findOrFail($id);
+        if(!$service_exist)
+            return Helper::response(false,"Incorrect Service Id");
+
         $image_name = "subservice".$name."-".$id.".png";
 
         $imageman = new ImageManager(array('driver' => 'imagick'));
@@ -90,5 +84,15 @@ class ServiceController extends Controller
             return Helper::response(false,"Couldn't Delete data $result");
         else
             return Helper::response(true,"Service deleted successfully");
+    }
+
+    /*API For APP*/
+    public static function getForApp($lat, $lng)
+    {
+        $service=Service::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        if(!$service)
+            return Helper::response(false,"Records not exist");
+        else
+            return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
     }
 }

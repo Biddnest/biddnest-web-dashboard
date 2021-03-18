@@ -33,24 +33,22 @@ Route::prefix('web/api')->group(function () {
 
     });
 
-    // Route::get('/dashboard', [Router::class,'dashboard'])->name("dashboard");
-
     //services APIs
     Route::get('/services',[Router::class,'service'])->name("service");
     Route::post('/services',[Router::class,'service_add'])->name("service_add");
     Route::put('/services',[Router::class,'service_edit'])->name("service_edit");
-    // Route::get('/services/{id}',[Router::class,'service_get'])->name("service_get");
-    Route::delete('/services/{id}',[Router::class,'service_delete'])->name("service_delete");
+    Route::get('/services',[Router::class,'service_get'])->name("service_get");
+    Route::delete('/services',[Router::class,'service_delete'])->name("service_delete");
 
     Route::get('/services/{id}/sub-services',[Router::class,'subservice_get_by_service'])->name("sub_service_get_by_service");
 
 
     //sub-services APIs
-    Route::get('/sub-services',[Router::class,'sub_service'])->name("sub_service");
-    Route::post('/sub-services',[Router::class,'sub_service_add'])->name("sub_service_add");
-    Route::put('/sub-services',[Router::class,'sub_service_edit'])->name("sub_service_edit");
-    Route::get('/sub-services/{id}',[Router::class,'sub_service_get'])->name("sub_service_get");
-    Route::delete('/sub-services/{id}',[Router::class,'sub_service_delete'])->name("sub_service_delete");
+    Route::get('/sub-services',[Router::class,'subservice'])->name("sub_service");
+    Route::post('/sub-services',[Router::class,'subservice_add'])->name("sub_service_add");
+    Route::put('/sub-services',[Router::class,'subservice_edit'])->name("sub_service_edit");
+    Route::get('/sub-services',[Router::class,'subservice_get'])->name("sub_service_get");
+    Route::delete('/sub-services',[Router::class,'subservice_delete'])->name("sub_service_delete");
 
     //inventory APIs
     Route::get('/inventories',[Router::class,'inventories'])->name("inventories");

@@ -84,13 +84,13 @@ class Route extends Controller
             return ServiceController::get();
     }
 
-    // public function service_get(Request $request)
-    // {
-    //     $validation = Validator::make($request->all(),[
-    //         'id' => 'required|integer',
-    //     ]);
-    //     return ServiceController::serviceGet($request->id);
-    // }
+    public function service_get(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+        return ServiceController::getOne($request->id);
+    }
 
     public function service_edit(Request $request)
     {
@@ -117,7 +117,7 @@ class Route extends Controller
 
 
     /*Subservices*/
-    public function sub_service_add(Request $request)
+    public function subservice_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'name' => 'required',
@@ -129,7 +129,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return SubserviceController::add($request->service_id,ucwords($request->name), $request->image, $request->inventories);
+            return SubServiceController::add($request->service_id,ucwords($request->name), $request->image, $request->inventories);
     }
 
     public function subservice(Request $request)
@@ -142,6 +142,10 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer',
         ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
         return SubServiceController::getOne($request->id);
     }
 
@@ -150,6 +154,10 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer',
         ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
         return SubserviceController::getByService($request->id);
     }
 
@@ -174,6 +182,10 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer'
         ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
         return AdminController::serviceDelete($request->id);
     }
 
@@ -233,21 +245,36 @@ class Route extends Controller
         return InventoryController::update($request->id, $formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
-    public function inventories_get($id)
+    public function inventories_get(Request $request)
     {
-        return InventoryController::getOne($id);
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return InventoryController::getOne($request->id);
     }
 
-    public function inventories_delete($id)
+    public function inventories_delete(Request $request)
     {
-        return InventoryController::delete($id);
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|integer',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return InventoryController::delete($request->id);
     }
 
-    public function vendors()
-    {
-        return AdminController::vendorsList();
-    }
+    // public function vendors()
+    // {
+    //     return AdminController::vendorsList();
+    // }
 
+
+    /*Organization and Vendor*/
     public function vendor_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -481,6 +508,8 @@ class Route extends Controller
 
         return OrganisationController::deleteRole($request->id, $request->organization_id);
     }
+
+    /*Vendor login*/
 
     public function vendor_login(Request $request)
     {

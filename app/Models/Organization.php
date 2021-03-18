@@ -33,4 +33,9 @@ class Organization extends Model
     {
         return $this->hasMany(OrganizationService::class);
     }
+
+    public function bank()
+    {
+        return $this->hasOne(Org_kyc::class);
+    }
 }

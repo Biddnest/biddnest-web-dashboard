@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Org_kyc extends Model
 {
-
-//    protected $table = "org_kyc";
+    protected $hidden = ['created_at','updated_at','deleted'];
+    protected $table = "org_kycs";
     use HasFactory;
 
 }

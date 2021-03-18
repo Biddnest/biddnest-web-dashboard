@@ -248,7 +248,7 @@ class Route extends Controller
         return AdminController::vendorsList();
     }
 
-    public function vendorAdd(Request $request)
+    public function vendor_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'image'=>'required|string',
@@ -265,8 +265,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string', 
-            'address.lat' => 'required||numeric', 
-            'address.lng' => 'required||numeric',
+            'address.lat' => 'required|numeric', 
+            'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string', 
@@ -282,14 +282,12 @@ class Route extends Controller
 
         $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
-        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["lat"=>$request->address['lat'], "lng"=>$request->address['lng']]);        
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["vendor_id"=>null, "branch"=>null, "assigned_module"=>null]);        
        
         return OrganisationController::add($request->all(), $meta, $admin);
-
-        // $request->image, $request->email, $request->phone['primary'], $request->org_name, $request->address['lat'], $request->['lng'], $request->zone, $request->address['pincode'], $request->address['city'], $request->address['state'],  $request->service_type,
     }
 
-    public function branchAdd(Request $request, $id)
+    public function branch_add(Request $request, $id)
     {
         $validation = Validator::make($request->all(),[
             'phone.primary'=>'required|min:10|max:10',
@@ -299,8 +297,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
  
             'address.address' => 'required|string',
-            'address.lat' => 'required||numeric', 
-            'address.lng' => 'required||numeric',
+            'address.lat' => 'required|numeric', 
+            'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string', 
@@ -315,6 +313,57 @@ class Route extends Controller
 
         return OrganisationController::addBranch($request->all(), $id);
 
+    }
+
+    public function branch_delete(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::deleteBranch($request->id);
+
+    }
+
+    public function bank_add(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[
+            'acc_no'=>'required',
+            'banck_name'=>'required|string',
+            'holder_name'=>'required|string',
+            'ifcscode'=>'required|string',
+            'branch_name'=>'required|string',
+            'doc.aadhar_card' => 'required|string',
+            'doc.gst_certificate' => 'required|string', 
+            'doc.biddnest_agreement' =>'required|string',
+            'doc.pan_card' =>'required|string',
+            'doc.company_registration_certificate' =>'required|string',
+        ]);
+        
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return OrganisationController::addBank($request->all(), $id);
+    }
+
+    public function role_add(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string', 
+            'lname' => 'required|string',
+            'email' => 'required|string',        
+            'phone'=>'required|min:10|max:10',
+            'assigned_module.*' => 'required|string', 
+            'branch' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addNewRole($request->all(), $id);
     }
 
     public function vendor_fetch($id)

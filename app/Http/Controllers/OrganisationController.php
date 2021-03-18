@@ -6,7 +6,9 @@ use App\Helper;
 use App\Models\Organization;
 use App\Models\Vendor;
 use App\Models\OrganizationService;
+use App\Models\Org_kyc;
 use App\Enums\VendorEnums;
+use App\Enums\CommonEnums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
@@ -72,9 +74,9 @@ class OrganisationController extends Controller
         $vendor->meta = json_encode($admin['meta']);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
-        $vendor->save();
+        $vendor_result = $vendor->save();
 
-        if(!$vendor && !$result_organization)
+        if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
         
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
@@ -85,7 +87,7 @@ class OrganisationController extends Controller
     {
         $exist = Organization::findOrFail($id);
         if(!$exist)
-            return Helper::response(false,"Incorrect slider id.");
+            return Helper::response(false,"Incorrect Organization id.");
         
         $meta = json_decode($exist['meta'], true);
         $meta['org_description']= $data['organization']['org_type'];
@@ -118,11 +120,76 @@ class OrganisationController extends Controller
            $result_service= $service->save();
         }
 
-        if(!$result_organization)
+        if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
             
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
         
+    }
+
+
+    public static function deleteBranch($id)
+    {
+        $delete_branch=Organization::where("id",$id)->update(["deleted" => CommonEnums::$YES]);
+
+        // $delete_service=Organization::where("organization_id",$id)->update(["deleted" => 1]);
+
+        if(!$delete_branch)
+            return Helper::response(false,"Couldn't Delete branch");
+       
+        return Helper::response(true,"Branch Deleted successfully");
+    }
+
+    public static function addBank($data, $id)
+    {
+        $exist = Organization::findOrFail($id);
+        if(!$exist)
+            return Helper::response(false,"Incorrect Organization id.");
+
+        $imageman = new ImageManager(array('driver' => 'gd'));
+        $meta =["account_no"=>$data['acc_no'],"banck_name"=>$data['banck_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+        $bank = new Org_kyc;
+        $bank->organization_id = $id;
+        $bank->aadhar_card =Helper::saveFile($imageman->make($data['doc']['aadhar_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+        $bank->pan_card =Helper::saveFile($imageman->make($data['doc']['pan_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+        $bank->gst_certificate =Helper::saveFile($imageman->make($data['doc']['gst_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+        $bank->company_reg_certificate =Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+        $bank->bidnest_agreement =Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+        $bank->banking_details = json_encode($meta);
+        $result_bank = $bank->save();
+
+        if(!$result_bank)
+            return Helper::response(false,"Couldn't save data");
+        
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
+    }
+
+    public static function addNewRole($data, $id)
+    {
+        $organization_exist = Organization::findOrFail($id);
+        $vendor_exist = Vendor::where("organization_id", $id)->first();
+        if(!$organization_exist && !$vendor_exist)
+            return Helper::response(false,"Incorrect Organization id.");
+
+       
+        $meta = array("vendor_id"=>$vendor_exist->id, "branch"=>$data['branch'], "assigned_module"=>json_encode($data['assigned_module']));
+
+        $vendor = new Vendor;
+        $vendor->fname = $data['fname'];
+        $vendor->lname = $data['lname'];
+        $vendor->email = $data['email'];
+        $vendor->phone = $data['phone'];
+        $vendor->pin = null;
+        $vendor->organization_id = $id;
+        $vendor->meta = json_encode($meta);
+        $vendor->user_role = VendorEnums::$ROLES["manager"];
+        $vendor->password = password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+        $vendor_result = $vendor->save();
+
+        if(!$vendor_result)
+            return Helper::response(false,"Couldn't save data");
+        
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
     public static function getOne($id)
@@ -148,19 +215,6 @@ class OrganisationController extends Controller
             return Helper::response(false,"Couldn't update data", $result);
         else
             return Helper::response(true,"Data updated successfully", $result);
-    }
-
-    public static function delete($id)
-    {
-        $result=DB::update(
-            'update organizations set deleted = ? where id = ?',
-            [1, $id]
-        );
-
-        if(!$result)
-            return Helper::response(false,"Couldn't Delete data $result");
-        else
-            return Helper::response(true,"Data Deleted successfully");
     }
 
 }

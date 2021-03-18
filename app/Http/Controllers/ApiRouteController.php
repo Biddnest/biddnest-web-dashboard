@@ -269,6 +269,12 @@ class ApiRouteController extends Controller
             return BookingsController::getBookingByPublicIdForApp($request->id);
     }
 
+    public function getBookingHistory(Request $request)
+    {
+        return BookingsController::bookingHistory($request->token_payload->id);
+    }
+
+
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();
     }

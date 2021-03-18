@@ -176,7 +176,6 @@ class BookingsController extends Controller
         return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
-
     public static function confirmBooking($public_booking_id, $service_type, $user_id)
     {
         
@@ -256,5 +255,18 @@ class BookingsController extends Controller
         }
                                         
         return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('vendor')->with('service')->where("public_booking_id", $public_booking_id)->first()]);
+    }
+
+    public static function bookingHistory($user_id)
+    {
+        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
+                                "user_id"=>$user_id])->get();
+
+        if(!$bookingorder)
+        {
+            return Helper::response(false,"No Booking Found");
+        }
+                                                                
+        return Helper::response(true,"Data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('service')->where("user_id", $user_id)->get()]);
     }
 }

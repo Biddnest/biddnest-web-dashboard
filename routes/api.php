@@ -32,6 +32,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
         Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         
+        Route::get('/history',[ApiRouter::class,'getBookingHistory']);
     });
 });
 

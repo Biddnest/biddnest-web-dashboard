@@ -29,13 +29,14 @@ class ZoneController extends Controller
 
         if(!$zone->save)
             return Helper::response(false,"Error adding zones.");
-        else
-            return Helper::response(true,"Zone Added",[
-                "zone"=>Zone::findOrFail($zone->id)
-            ]);
+        
+        return Helper::response(true,"Zone Added",["zone"=>Zone::findOrFail($zone->id)]);
     }
 
-    public static function update($name, $lat, $lng, $radius, $area, $city, $district, $state){}
+    public static function update($name, $lat, $lng, $radius, $area, $city, $district, $state)
+    {
+        
+    }
 
     public static function delete($id){}
 

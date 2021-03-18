@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\GeoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +18,15 @@ use App\Http\Controllers\Route as Router;
 |
 */
 Route::get('/', function () {
-
+    
     return response()->redirectToRoute('login');
 });
 
+// Route::get('/distance',function(){
+//     // echo response()->json(["hello"]);
+//     echo GeoController::distance(18.5204, 73.8567, 19.0760, 72.8777);
+//     exit;
+// });
 
 Route::prefix('web/api')->group(function () {
 
@@ -92,6 +98,8 @@ Route::prefix('web/api')->group(function () {
     Route::get('/banners',[Router::class,'banners'])->name("banners");
     Route::post('/banners',[Router::class,'banners_add'])->name("banners_add");
     Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
+
+   
 
 });
 

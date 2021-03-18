@@ -33,6 +33,7 @@ class AdminController extends Controller
         $admin_user=Admin::where(['username'=>$username])
             ->OrWhere(['email'=>$username])
             ->where([ 'status'=>1, 'deleted'=>0])
+            ->with("zones")
             ->first();
 
         if(!$admin_user)
@@ -48,6 +49,13 @@ class AdminController extends Controller
                         'email'=>$admin_user->email]]);
             Session::put('sessionActive', true);
             Session::put('user_role', $admin_user->role);
+            $zone = [];
+            if(!$admin_user->zones){
+                foreach($admin_user->zones as $zone){
+                    $zones[] = $zone;
+                }
+            }
+            Session::put('zones', $zones);
 
            return Helper::response(true, "Login was successfull");
         }
@@ -139,7 +147,5 @@ class AdminController extends Controller
            return Helper::response(false,"Could not update admin.");
        else
            return Helper::response(true,"Data updated successfully", ["admin"=>Admin::with("zones")->findOrFail($id)]);
-
-
    }
 }

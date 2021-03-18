@@ -9,6 +9,6 @@ class Admin extends Model
 {
     use HasFactory;
     public function zones(){
-        return $this->hasMany(AdminZone::class);
+        return $this->hasMany(AdminZone::class)->select("zone_id");
     }
 }

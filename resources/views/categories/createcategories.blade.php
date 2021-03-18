@@ -14,8 +14,7 @@
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Categories
                     </li>
-                    <li class="breadcrumb-item"><a href="Push-Notifications.html">Category Management</a></li>
-                    <li class="breadcrumb-item"><a href="#">Create Category</a></li>
+                    <li class="breadcrumb-item"><a href="#">Create</a></li>
 
 
                   </ol>
@@ -45,8 +44,8 @@
                       aria-labelledby="new-order-tab"
                     >
                       <!-- form starts -->
-                      <form action="{{route('service_add')}}" data-next="redirect" data-url="{{route('create-categories')}}" data-alert="tiny"
-                        class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue"
+                      <form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-url="{{route('create-categories')}}" data-alert="tiny"
+                        class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" data-parsley-validate
                       >
                         <div class="d-flex row">
                           <div class="col-lg-6">
@@ -76,11 +75,11 @@
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Name</label>
-                                  <input
+                                  <input name="name"
                                     type="text"
                                     id="banner_name"
                                     placeholder="Name"
-                                    class="form-control br-5"
+                                    class="form-control br-5" required
                                   />
                                   <span class="error-message"
                                     >Please enter a valid banner name</span
@@ -88,6 +87,22 @@
                                 </div>
                               </div>
 
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Quantity Type Type</label>
+                                    <select id="ban-type" required class="form-control br-5" name="inventory_quantity_type">
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\ServiceEnums::$INVENTORY_QUANTITY_TYPE as $key=>$type)
+                                        <option value="{{$type}}">{{$key}}</option>
+                                        @endforeach
+                                    </select>
+
+
+                                    <span class="error-message"
+                                    >Please enter a valid banner type</span
+                                    >
+                                </div>
+                            </div>
                               <div class="col-lg-6">
                                 <div class="form-input">
 {{--                                  <label class="phone-num-lable">Zone</label>--}}
@@ -105,12 +120,6 @@
                                   >
                                 </div>
                               </div>
-
-
-
-
-
-
 
 
                         </div>

@@ -158,7 +158,6 @@ class WebController extends Controller
 
     public function inventories()
     {
-        // return "success";
         return view('categories.inventories',[
             "inventories"=>Inventory::paginate(CommonEnums::$PAGE_LENGTH)
         ]);

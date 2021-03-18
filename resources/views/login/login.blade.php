@@ -28,7 +28,7 @@
 
 
                 <!-- Form -->
-                    <form class="px-3 login" data-alert="inline" action="{{route('admin_login')}}" method="POST" onsubmit="return false;" data-next="refresh" data-redirect-type="hard" data-url="{{route('dashboard')}}" data-parsley-validate>
+                    <form class="px-3 login" data-alert="inline" action="{{ route('admin_login') }}" method="POST" onsubmit="return false;" data-next="refresh" data-redirect-type="hard" data-url="{{route('dashboard')}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>E-mail</label>

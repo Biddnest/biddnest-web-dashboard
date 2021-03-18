@@ -20,9 +20,21 @@ export function redirectHard(url){
     location.assign(url);
 };
 
-export function tinyAlert(title, message){}
+export function tinyAlert(title, message){
+    toastr.error(message, title, {timeOut: 5000})
+}
 
-export function megaAlert(title, message){}
+export function tinySuccessAlert(title, message){
+    toastr.success(message, title, {timeOut: 5000})
+}
+
+export function megaAlert(title, message){
+    Swal.fire({
+        icon: 'error',
+        title: title,
+        text: message,
+    })
+}
 
 export function inlineAlert(elem, message){
     var alert = '<div class="alert alert-danger" role="alert">' +
@@ -43,5 +55,6 @@ export function revertFormAnim(elem, text){
     elem.removeAttr("disabled");
     elem.html(text);
 }
+
 
 

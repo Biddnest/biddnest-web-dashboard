@@ -5,7 +5,7 @@
 Logger.useDefaults();
 
 // const helper = import("./helpers.js");
-import { redirectTo,redirectHard, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
+import { redirectTo,redirectHard,tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
 // require("./helpers");
 const env = "development";
 
@@ -28,7 +28,7 @@ $("body").on('submit',"form",function() {
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
         let buttonPretext = button.html();
-        Logger.info(requestData);
+        Logger.info("Loggin request payload",requestData);
 
         $.ajax({
             url:form.attr("action"),
@@ -40,8 +40,10 @@ $("body").on('submit',"form",function() {
             },
             success: (response) =>{
 
-                Logger.info(response);
+                // console.log("Response ",response);
+                Logger.info("Response ",response);
                 if(response.status == "success"){
+                    tinySuccessAlert("Success",response.message);
                     if(form.data("next")){
                         if(form.data("next") == "redirect"){
                             if(form.data('redirect-type') == "hard")
@@ -69,7 +71,8 @@ $("body").on('submit',"form",function() {
                 }
             },
             error: (error, b, c) =>{
-                Logger.info(error.responseText, b, c);
+                Logger.info(error.responseText);
+                megaAlert("Oops","Something went wrong in server. Please try again later.");
             },
         });
         revertFormAnim(button, buttonPretext);

@@ -53,7 +53,14 @@ barba.init({
                 arrows: false
             });
         }
-      }]
+      },
+        /*{
+            namespace: 'createorders',
+            afterEnter(data) {
+                console.log("you are on create order page");
+            }
+        }*/
+    ]
 });
 
 

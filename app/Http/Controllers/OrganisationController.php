@@ -30,58 +30,114 @@ class OrganisationController extends Controller
 
     public static function add($data, $meta, $admin)
     {
-        // return json_encode($meta);
-        $imageman = new ImageManager(array('driver' => 'gd'));
+            $imageman = new ImageManager(array('driver' => 'gd'));
 
-        $organizations=new Organization;
-        $image = $data['image'];
-        $uniq = uniqid();
-        $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq,"vendors/".$uniq.$data['organization']['org_name']);
-        $organizations->email=$data['email'];
-        $organizations->phone=$data['phone']['primary'];
-        $organizations->org_name=$data['organization']['org_name'];
-        $organizations->org_type=$data['organization']['org_type'];
-        $organizations->lat =$data['address']['lat'];
-        $organizations->lng =$data['address']['lng'];
-        $organizations->zone_id =$data['zone'];
-        $organizations->pincode =$data['address']['pincode'];
-        $organizations->city =$data['address']['city'];
-        $organizations->state =$data['address']['state'];
-        $organizations->service_type =$data['service_type'];
-        // $organizations->service =json_encode($data['service']);
-        $organizations->meta =json_encode($meta);
-        $organizations->commission = $data['commission'];
-        $result_organization= $organizations->save();
+            $organizations=new Organization;
+            $image = $data['image'];
+            $uniq = uniqid();
+            $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq,"vendors/".$uniq.$data['organization']['org_name']);
+            $organizations->email=$data['email'];
+            $organizations->phone=$data['phone']['primary'];
+            $organizations->org_name=$data['organization']['org_name'];
+            $organizations->org_type=$data['organization']['org_type'];
+            $organizations->lat =$data['address']['lat'];
+            $organizations->lng =$data['address']['lng'];
+            $organizations->zone_id =$data['zone'];
+            $organizations->pincode =$data['address']['pincode'];
+            $organizations->city =$data['address']['city'];
+            $organizations->state =$data['address']['state'];
+            $organizations->service_type =$data['service_type'];
+            $organizations->meta =json_encode($meta);
+            $organizations->commission = $data['commission'];
+            $result_organization= $organizations->save();
 
-        // return $organizations->id;
-        // return json_decode($data['service'], true);
-        foreach($data['service'] as $value)
-        {
-           $service=new OrganizationService;
-           $service->organization_id=$organizations->id;
-           $service->service_id=$value;
-           $result_service= $service->save();
-        }
+            foreach($data['service'] as $value)
+            {
+            $service=new OrganizationService;
+            $service->organization_id=$organizations->id;
+            $service->service_id=$value;
+            $result_service= $service->save();
+            }
 
-        // return $result_organization;
-        $vendor = new Vendor;
-        $vendor->fname = $admin['fname'];
-        $vendor->lname = $admin['lname'];
-        $vendor->email = $admin['email'];
-        $vendor->phone = $admin['phone'];
-        $vendor->pin = null;
-        $vendor->organization_id = $organizations->id;
-        $vendor->meta = json_encode($admin['meta']);
-        $vendor->user_role = VendorEnums::$ROLES["admin"];
-        $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
-        $vendor_result = $vendor->save();
+            $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
+
+            $vendor = new Vendor;
+            $vendor->fname = $admin['fname'];
+            $vendor->lname = $admin['lname'];
+            $vendor->email = $admin['email'];
+            $vendor->phone = $admin['phone'];
+            $vendor->pin = null;
+            $vendor->organization_id = $organizations->id;
+            $vendor->meta = json_encode($admin_meta);
+            $vendor->user_role = VendorEnums::$ROLES["admin"];
+            $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+            $vendor_result = $vendor->save();
 
         if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
         
-        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
+    public static function update($data, $meta, $admin, $id)
+    {
+            $organization_exist = Organization::findOrFail($id);
+            $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
+            if(!$organization_exist && !$vendor_exist)
+                return Helper::response(false,"Incorrect Organization id.");
+
+            $imageman = new ImageManager(array('driver' => 'gd'));
+
+            $image = $data['image'];
+            $uniq = uniqid();
+            $result_organization =Organization::where(["id"=>$id])
+            ->update([ 
+                "image"=>Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq,"vendors/".$uniq.$data['organization']['org_name']),
+                "email"=>$data['email'],
+                "phone"=>$data['phone']['primary'],
+                "org_name"=>$data['organization']['org_name'],
+                "org_type"=>$data['organization']['org_type'],
+                "lat"=>$data['address']['lat'],
+                "lng"=>$data['address']['lng'],
+                "zone_id"=>$data['zone'],
+                "pincode"=>$data['address']['pincode'],
+                "city"=>$data['address']['city'],
+                "state"=>$data['address']['state'],
+                "service_type"=>$data['service_type'],
+                "meta"=>json_encode($meta),
+                "commission"=>$data['commission'] 
+            ]);
+
+            foreach($data['service'] as $value)
+            {
+                $service=OrganizationService::where("organization_id", $id)
+                ->update(["service_id"=>$value]);
+            }
+
+            $vendor_result =Vendor::where("id", $vendor_exist->id)
+            ->update([
+                "fname"=>$admin['fname'],
+                "lname"=>$admin['lname'],
+                "email"=>$admin['email'],
+                "phone"=>$admin['phone'],
+                "meta"=>$vendor_exist->meta,
+            ]);
+
+        if(!$vendor_result && !$result_organization)
+            return Helper::response(false,"Couldn't save data");
+        
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
+    }
+
+    public static function getOne($id)
+    {
+        $get_vendor=Organization::where(["id"=>$id, "deleted"=>CommonEnums::$NO])->first();
+
+        if(!$get_vendor)
+            return Helper::response(false,"Couldn't Delete branch");
+       
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
+    }
 
     public static function addBranch($data, $id)
     {
@@ -128,9 +184,9 @@ class OrganisationController extends Controller
     }
 
 
-    public static function deleteBranch($id)
+    public static function deleteBranch($id, $parent_org_id)
     {
-        $delete_branch=Organization::where("id",$id)->update(["deleted" => CommonEnums::$YES]);
+        $delete_branch=Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->update(["deleted" => CommonEnums::$YES]);
 
         // $delete_service=Organization::where("organization_id",$id)->update(["deleted" => 1]);
 
@@ -172,7 +228,12 @@ class OrganisationController extends Controller
             return Helper::response(false,"Incorrect Organization id.");
 
        
-        $meta = array("vendor_id"=>$vendor_exist->id, "branch"=>$data['branch'], "assigned_module"=>json_encode($data['assigned_module']));
+        $meta = array(["branch"=>$data['branch']]);
+
+        if(!$data['password'])
+            $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+        else
+            $password = $data['password'];
 
         $vendor = new Vendor;
         $vendor->fname = $data['fname'];
@@ -183,7 +244,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $id;
         $vendor->meta = json_encode($meta);
         $vendor->user_role = VendorEnums::$ROLES["manager"];
-        $vendor->password = password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+        $vendor->password = $password;
         $vendor_result = $vendor->save();
 
         if(!$vendor_result)
@@ -192,29 +253,14 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function getOne($id)
+    public static function deleteRole($id, $organization_id)
     {
-        $result=DB::table('organizations')->select('*')->where('id', $id)->first();
+        $delete_role=Organization::where(["id"=>$id, "organization_id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
 
-        if(!$result)
-            return Helper::response(false,"Couldn't fetche data");
-        else
-            return Helper::response(true,"Data fetched successfully", $result);
-    }
-
-    public static function update($id, $filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, $meta)
-    {
-
-        $result=DB::update(
-            'update organizations set image = ?, email=?, phone=?, org_name=?, lat=?, lng=?, zone_id=?, pincode=?, city=?, state=?, service_type=?, meta=? where id = ?',
-            [$filename, $email, $phone, $org_name, $lat, $lng, $zone, $pincode, $city, $state, $service_type, json_encode($meta), $id]
-        );
-
-
-        if(!$result)
-            return Helper::response(false,"Couldn't update data", $result);
-        else
-            return Helper::response(true,"Data updated successfully", $result);
+        if(!$delete_role)
+            return Helper::response(false,"Couldn't Delete branch");
+       
+        return Helper::response(true,"Role Deleted successfully");
     }
 
 }

@@ -61,13 +61,18 @@ Route::prefix('web/api')->group(function () {
 
     //organization API's==>updated Vendor Api's 
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
-    Route::post('/vendors/{id}/branches',[Router::class,'branch_add'])->name("add_branch_vendor");
-    Route::delete('/vendors/branch/delete',[Router::class,'branch_delete'])->name("branch_delete");
-    Route::post('/vendors/{id}/banking-details',[Router::class,'bank_add'])->name("bank_add");
-    Route::post('/vendors/{id}/roles',[Router::class,'role_add'])->name("bank_add");
-    Route::put('/vendor/{id}/manage',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
+    Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
+    Route::get('/vendors',[Router::class,'vendor_fetch'])->name("vendor_fetch");
 
-    Route::get('/organizations/{id}',[Router::class,'vendor_fetch'])->name("vendor_fetch");
+    Route::post('/vendors/branches',[Router::class,'branch_add'])->name("add_branch_vendor");
+    Route::delete('/vendors/branches',[Router::class,'branch_delete'])->name("branch_delete");
+
+    Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
+
+    Route::post('/vendors/roles',[Router::class,'role_add'])->name("bank_add");    
+    Route::post('/vendors/roles/delete',[Router::class,'role_delete'])->name("role_delete");
+
+   
     // Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 
     //zone APIs

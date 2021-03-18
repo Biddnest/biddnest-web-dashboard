@@ -282,14 +282,67 @@ class Route extends Controller
 
         $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
-        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary'], "meta"=>["vendor_id"=>null, "branch"=>null, "assigned_module"=>null]);        
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);        
        
         return OrganisationController::add($request->all(), $meta, $admin);
     }
 
-    public function branch_add(Request $request, $id)
+    public function vendor_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'image'=>'required|string',
+            'fname' => 'required|string', 
+            'lname' => 'required|string',
+            'email' => 'required|string',          
+
+            'phone.primary'=>'required|min:10|max:10',
+            'phone.secondory'=>'nullable|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string', 
+            'organization.gstin' => 'required|string|min:15|max:15',
+            'organization.description' =>'required|string',
+
+            'address.address' => 'required|string', 
+            'address.lat' => 'required|numeric', 
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string', 
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service_type' =>'required|string',
+            'service.*' =>'required',
+            'commission' =>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
+
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);        
+       
+        return OrganisationController::update($request->all(), $meta, $admin, $request->id);
+    }
+
+    public function vendor_fetch(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::getOne($request->id);
+    }
+
+    public function branch_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
             'phone.primary'=>'required|min:10|max:10',
 
             'organization.org_name' => 'required|string',
@@ -311,26 +364,28 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::addBranch($request->all(), $id);
+        return OrganisationController::addBranch($request->all(), $request->id);
 
     }
 
     public function branch_delete(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'id'=>'required'
+            'id'=>'required',
+            'parent_org_id'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::deleteBranch($request->id);
+        return OrganisationController::deleteBranch($request->id, $request->parent_org_id);
 
     }
 
-    public function bank_add(Request $request, $id)
+    public function bank_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'id' =>'required',
             'acc_no'=>'required',
             'banck_name'=>'required|string',
             'holder_name'=>'required|string',
@@ -346,209 +401,67 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         
-        return OrganisationController::addBank($request->all(), $id);
+        return OrganisationController::addBank($request->all(), $request->id);
     }
 
-    public function role_add(Request $request, $id)
+    public function role_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'id' =>'required',
             'fname' => 'required|string', 
             'lname' => 'required|string',
             'email' => 'required|string',        
-            'phone'=>'required|min:10|max:10',
-            'assigned_module.*' => 'required|string', 
-            'branch' => 'required'
+            'phone'=>'required|min:10|max:10', 
+            'branch' => 'required',
+            'password'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::addNewRole($request->all(), $id);
+        return OrganisationController::addNewRole($request->all(), $request->id);
     }
 
-    public function vendor_fetch($id)
-    {
-        return AdminController::vendorFetch($id);
-    }
 
-    public function vendor_edit(Request $request, $id)
+    public function role_delete(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'fname' => 'required', 'email' => 'required',
-            'lname' => 'required', 'phone' => 'required',
-            'org_name' => 'required', 'gstin' => 'required',
-            'add_line1' => 'required', 'add_line2' => 'required',
-            'lat' => 'required', 'lng' => 'required',
-            'zone' => 'required', 'state' => 'required',
-            'city' => 'required', 'pincode' => 'required'
+            'id'=>'required',
+            'organization_id'=>'required'
         ]);
-
-        $filename="";
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename=time().'.'.$extension;
-            $file->move('organization',$filename);
-        }
-
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone2, "gender"=>$request->gender, "gstin_no"=>$request->gstin, "org_description"=>$request->description, "address_line_1"=>$request->add_line1,"address_line_2"=>$request->add_line2);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::vendorEdit($id, $filename, $request->email, $request->phone, $request->org_name, $request->lat, $request->lng, $request->zone, $request->pincode, $request->city, $request->state, $request->service_type, $meta);
-    }
 
-    public function vendor_delete($id)
-    {
-        return AdminController::vendorDelete($id);
-    }
-
-    public function vendors_kyc()
-    {
-        return AdminController::kycList();
-    }
-
-    public function vendor_add_kyc(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'account_no' => 'required',
-            'bank' => 'required', 'name' => 'required',
-            'ifsc' => 'required', 'branch' => 'required'
-        ]);
-
-        $filename_bidnest_agreement="";
-        if($request->hasfile('bidnest_agreement')){
-            $file=$request->file('bidnest_agreement');
-            $extension=$file->getClientOriginalExtension();
-            $filename_bidnest_agreement=time().'.'.$extension;
-            $file->move('bidnest_agreement',$filename_bidnest_agreement);
-        }
-
-        $filename_adhaar_card="";
-        if($request->hasfile('adhaar_card')){
-            $file=$request->file('adhaar_card');
-            $extension=$file->getClientOriginalExtension();
-            $filename_adhaar_card=time().'.'.$extension;
-            $file->move('adhaar_card',$filename_adhaar_card);
-        }
-
-        $filename_pan_card="";
-        if($request->hasfile('pan_card')){
-            $file=$request->file('pan_card');
-            $extension=$file->getClientOriginalExtension();
-            $filename_pan_card=time().'.'.$extension;
-            $file->move('pan_card',$filename_pan_card);
-        }
-
-        $filename_gst_certificate="";
-        if($request->hasfile('gst_certificate')){
-            $file=$request->file('gst_certificate');
-            $extension=$file->getClientOriginalExtension();
-            $filename_gst_certificate=time().'.'.$extension;
-            $file->move('gst_certificate',$filename_gst_certificate);
-        }
-
-
-        $company_reg_certificate="";
-        if($request->hasfile('company_reg_certificate')){
-            $file=$request->file('company_reg_certificate');
-            $extension=$file->getClientOriginalExtension();
-            $company_reg_certificate=time().'.'.$extension;
-            $file->move('company_reg_certificate',$company_reg_certificate);
-        }
-
-        $banking_details = array("account_no"=>$request->account_no, "bank"=>$request->bank, "name"=>$request->name, "ifsc"=>$request->ifsc, "branch"=>$request->branch);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::vendorAddKyc($filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details);
-    }
-
-    public function vendor_edit_kyc(Request $request, $id)
-    {
-        $validation = Validator::make($request->all(),[
-            'account_no' => 'required',
-            'bank' => 'required', 'name' => 'required',
-            'ifsc' => 'required', 'branch' => 'required'
-        ]);
-
-        $filename_bidnest_agreement="";
-        if($request->hasfile('bidnest_agreement')){
-            $file=$request->file('bidnest_agreement');
-            $extension=$file->getClientOriginalExtension();
-            $filename_bidnest_agreement=time().'.'.$extension;
-            $file->move('bidnest_agreement',$filename_bidnest_agreement);
-        }
-
-        $filename_adhaar_card="";
-        if($request->hasfile('adhaar_card')){
-            $file=$request->file('adhaar_card');
-            $extension=$file->getClientOriginalExtension();
-            $filename_adhaar_card=time().'.'.$extension;
-            $file->move('adhaar_card',$filename_adhaar_card);
-        }
-
-        $filename_pan_card="";
-        if($request->hasfile('pan_card')){
-            $file=$request->file('pan_card');
-            $extension=$file->getClientOriginalExtension();
-            $filename_pan_card=time().'.'.$extension;
-            $file->move('pan_card',$filename_pan_card);
-        }
-
-        $filename_gst_certificate="";
-        if($request->hasfile('gst_certificate')){
-            $file=$request->file('gst_certificate');
-            $extension=$file->getClientOriginalExtension();
-            $filename_gst_certificate=time().'.'.$extension;
-            $file->move('gst_certificate',$filename_gst_certificate);
-        }
-
-
-        $company_reg_certificate="";
-        if($request->hasfile('company_reg_certificate')){
-            $file=$request->file('company_reg_certificate');
-            $extension=$file->getClientOriginalExtension();
-            $company_reg_certificate=time().'.'.$extension;
-            $file->move('company_reg_certificate',$company_reg_certificate);
-        }
-
-        $banking_details = array("account_no"=>$request->account_no, "bank"=>$request->bank, "name"=>$request->name, "ifsc"=>$request->ifsc, "branch"=>$request->branch);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return AdminController::vendorEditKyc($id, $filename_bidnest_agreement, $filename_adhaar_card, $filename_pan_card, $filename_gst_certificate, $company_reg_certificate, $banking_details);
-    }
-
-    public function vendor_fetch_kyc($id)
-    {
-        return AdminController::kycFetch($id);
-    }
-
-    public function vendor_delete_kyc($id)
-    {
-        return AdminController::kycDelete($id);
-    }
-
-    public function vendors_list()
-    {
-        return AdminController::vendorList();
-    }
-
-    public function vendors_get_record($id)
-    {
-        return AdminController::vendorsGetRecord($id);
-    }
-
-    public function vendors_delete_record($id)
-    {
-        return AdminController::vendorsDeleteRecord($id);
+        return OrganisationController::deleteRole($request->id, $request->organization_id);
     }
 
 
+   
+    // public function vendor_fetch_kyc($id)
+    // {
+    //     return AdminController::kycFetch($id);
+    // }
+
+    // public function vendor_delete_kyc($id)
+    // {
+    //     return AdminController::kycDelete($id);
+    // }
+
+    // public function vendors_list()
+    // {
+    //     return AdminController::vendorList();
+    // }
+
+    // public function vendors_get_record($id)
+    // {
+    //     return AdminController::vendorsGetRecord($id);
+    // }
+
+    // public function vendors_delete_record($id)
+    // {
+    //     return AdminController::vendorsDeleteRecord($id);
+    // }
 
 
     public function vendor_login(Request $request)

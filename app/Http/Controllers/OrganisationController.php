@@ -255,7 +255,7 @@ class OrganisationController extends Controller
 
     public static function deleteRole($id, $organization_id)
     {
-        $delete_role=Organization::where(["id"=>$id, "organization_id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
+        $delete_role=Vendor::where(["id"=>$id, "organization_id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
 
         if(!$delete_role)
             return Helper::response(false,"Couldn't Delete branch");

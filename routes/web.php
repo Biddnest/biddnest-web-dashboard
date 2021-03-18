@@ -70,7 +70,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
 
     Route::post('/vendors/roles',[Router::class,'role_add'])->name("bank_add");    
-    Route::post('/vendors/roles/delete',[Router::class,'role_delete'])->name("role_delete");
+    Route::delete('/vendors/roles/delete',[Router::class,'role_delete'])->name("role_delete");
 
    
     // Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");

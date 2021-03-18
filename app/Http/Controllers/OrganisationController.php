@@ -264,7 +264,7 @@ class OrganisationController extends Controller
         }
         else
         {
-            $exist = Org_kyc::where(["id"=>$id, "organization_id"=>$organization_id])->first();
+            $exist = Org_kyc::where(["id"=>$bank_id, "organization_id"=>$id])->first();
             if(!$exist)
                 return Helper::response(false,"Invalide or incorrect Organization id or Bank id ");
 

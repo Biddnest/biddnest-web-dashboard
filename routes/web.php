@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WebController;
-use App\Http\Controllers\GeoController;
+use App\Http\Controllers\BidController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +22,11 @@ Route::get('/', function () {
     return response()->redirectToRoute('login');
 });
 
-// Route::get('/distance',function(){
-//     // echo response()->json(["hello"]);
-//     echo GeoController::distance(18.5204, 73.8567, 19.0760, 72.8777);
-//     exit;
-// });
+Route::get('/distance',function(){
+    // echo response()->json(["hello"]);
+    echo BidController::getbookings();
+    exit;
+});
 
 Route::prefix('web/api')->group(function () {
 

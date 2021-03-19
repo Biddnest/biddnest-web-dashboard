@@ -19,7 +19,4 @@ class Bid extends Model
         return $this->hasOne(Organization::class);
     }
 
-    public function bookings(){
-        return $this->hasMany(Bid::class,Booking::class,'organization_id','id','id','booking_id');
-    }
 }

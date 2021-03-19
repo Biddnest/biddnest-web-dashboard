@@ -37,7 +37,7 @@ class Organization extends Model
 
     public function bid()
     {
-        return $this->hasOne(Bid::class);
+        return $this->hasMany(Bid::class);
     }
 
 }

@@ -197,7 +197,7 @@ class BookingsController extends Controller
         $complete_time = Carbon::now()->addMinutes($timming);
 
         $meta = json_decode($exist['meta'], true);
-        $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
+        $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i");
     
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])
@@ -314,5 +314,16 @@ class BookingsController extends Controller
         }
 
         return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
+    }
+
+    public static function getfinalquote($public_booking_id, $user_id)
+    {
+        $exist= Booking::where(["user_id"=>$user_id,
+                                "public_booking_id"=>$public_booking_id])
+                                ->where("status", BookingEnums::$STATUS['payment_pending'])->first();
+        if(!$exist)
+            return Helper::response(false,"Order is not Exist");
+
+            return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 }

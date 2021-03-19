@@ -19,6 +19,7 @@ class CreateBidInventoryTable extends Migration
             $table->foreign("booking_inventory_id")->references('id')->on("booking_inventories");
             $table->unsignedBigInteger("bid_id")->index('bid_id');
             $table->foreign("bid_id")->references('id')->on("bid");
+            $table->double("amount");
             $table->timestamps();
         });
     }

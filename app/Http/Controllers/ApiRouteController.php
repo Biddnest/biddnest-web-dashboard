@@ -269,6 +269,19 @@ class ApiRouteController extends Controller
             return BookingsController::getBookingByPublicIdForApp($request->id);
     }
 
+    public function reschedul(Request $request)
+    {        
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+            'movement_dates.*' =>'required|date'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return BookingsController::reschedulBooking($request->public_booking_id, $request->movement_dates, $request->token_payload->id);
+    }
+
     public function getBookingHistoryPast(Request $request)
     {
         return BookingsController::bookingHistoryPast($request->token_payload->id);
@@ -286,17 +299,6 @@ class ApiRouteController extends Controller
     }
 
 
-    public function reschedul(Request $request)
-    {        
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required|string',
-            'movement_dates.*' =>'required|date'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
-        return BookingsController::reschedulBooking($request->public_booking_id, $request->movement_dates, $request->token_payload->id);
-    }
+   
 
 }

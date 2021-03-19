@@ -264,6 +264,8 @@ class BookingsController extends Controller
         $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
                                 "user_id"=>$user_id])
                                 ->whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+                                ->with('movement_dates')
+                                ->with('inventories')->with('status_history')->with('service')
                                 ->get();
 
         if(!$bookingorder)
@@ -271,21 +273,23 @@ class BookingsController extends Controller
             return Helper::response(false,"No Booking Found");
         }
                                                                 
-        return Helper::response(true,"Data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('service')->where("user_id", $user_id)->get()]);
+        return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
     }
 
     public static function bookingHistoryLive($user_id)
     {
         $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
                                 "user_id"=>$user_id])
-                                ->whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->get();
+                                ->whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->with('movement_dates')
+                                ->with('inventories')->with('status_history')->with('service')
+                                ->get();
 
         if(!$bookingorder)
         {
             return Helper::response(false,"No Booking Found");
         }
                                                                 
-        return Helper::response(true,"Data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('service')->where("user_id", $user_id)->get()]);
+        return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
     }
 
     public static function reschedulBooking($public_booking_id, $dates, $user_id)

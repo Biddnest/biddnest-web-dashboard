@@ -49,7 +49,9 @@ Route::prefix('vendors')->group(function () {
     Route::delete('/inventory-price',[VendorApiRouter::class,'deleteInventoryprices']);
 
     
-    
+    //Biding API's
+    Route::get('/bidlist',[VendorApiRouter::class,'getBidList']);
+    Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

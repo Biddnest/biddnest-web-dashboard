@@ -11,6 +11,10 @@ use App\Helper;
 
 class VendorApiRouteController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware(VerifyJwtToken::class)->except(['config','login','verifyLoginOtp']);
+    }
     
     public function addPrice(Request $request)
     { 
@@ -70,5 +74,31 @@ class VendorApiRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
         return InventoryController::deletePrice($request->id);
+    }
+
+
+    /*bid API */
+    public function getBidList(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'org_id' => 'required|integer'
+        ]);        
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VendorUserController::getBidList($request->org_id);
+    }
+    public function addBookmark(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'bid_id' => 'required|integer',
+            'vendor_id' =>'required|integer',
+        ]);        
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+       
+        return VendorUserController::addBookmark($request->id);
     }
 }

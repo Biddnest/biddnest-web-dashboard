@@ -39,7 +39,7 @@ class BidController extends Controller
             {
                 $bid = new Bid;
                 $bid->booking_id=$booking_id;
-                $bid->org_id=$vendor['id'];
+                $bid->organization_id=$vendor['id'];
                 $bid->bid_type=BidEnums::$BID_TYPE['bid'];
                 $bid->status=BidEnums::$STATUS['active'];
                 $bid_result = $bid->save();

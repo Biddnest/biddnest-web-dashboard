@@ -17,8 +17,8 @@ class CreateBidTable extends Migration
             $table->id();
             $table->unsignedBigInteger("booking_id")->index('booking_id');
             $table->foreign("booking_id")->references('id')->on("bookings");
-            $table->unsignedBigInteger("org_id")->index('org_id');
-            $table->foreign("org_id")->references('id')->on("organizations");
+            $table->unsignedBigInteger("organization_id")->index('organization_id');
+            $table->foreign("organization_id")->references('id')->on("organizations");
             $table->tinyInteger("bid_type")->default(0);
             $table->tinyInteger("status")->default(0);
             $table->unsignedBigInteger("vendor_id")->index('vendor_id')->nullable();

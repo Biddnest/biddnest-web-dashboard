@@ -11,6 +11,10 @@ use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Bid;
+use App\Models\BidInventory;
+use App\Enums\BidEnums;
+
 class VendorUserController extends Controller
 {
     public function __construct(){
@@ -35,6 +39,18 @@ class VendorUserController extends Controller
 
     public function logout(){}
 
+    public static function getBidList($id)
+    {
+        $exist_bid = Bid::where("organization_id", $id)
+                            ->get();
+        return Helper::response(true,"Show data successfully",["bidlist"=>Organization::with('bid')->where("id", $id)->get()]);
+    }
 
+    public static function addBookmark($data)
+    {
+        return $exist_bid = Vendor::where(['id'=>$data['bid_id']])
+                            ->where(['status'=>BidEnums::$STATUS['active']])
+                            ->first();
+    }
 
 }

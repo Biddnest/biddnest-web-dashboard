@@ -297,14 +297,14 @@ class BookingsController extends Controller
 
         MovementDates::where("booking_id",$exist->id)->delete();
 
-        foreach($dates["movement_dates"] as $dates)
+        foreach($dates as $value)
         {
             $movementdates=new MovementDates;
                 $movementdates->booking_id = $exist->id;
-                $movementdates->date = $dates;
+                $movementdates->date = $value;
                 $result_date=$movementdates->save();
         }
 
-        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 }

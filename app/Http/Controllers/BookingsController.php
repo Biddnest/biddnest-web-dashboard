@@ -213,6 +213,10 @@ class BookingsController extends Controller
         {
             return Helper::response(false,"Couldn't save data");
         }
+        $booking_id = $exist->id;
+        dispatch(function() use($booking_id){
+            BidController::addvendors($booking_id);
+          })->afterResponse();
                 
          return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }

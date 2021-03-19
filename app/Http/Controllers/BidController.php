@@ -28,7 +28,7 @@ class BidController extends Controller
         try {
             $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
 
-            $update_status = Booking::where("id", $booking_id)->update("status", BookingEnums::$STATUS['biding']);
+            $update_status = Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
 
             foreach($vendorlist as $vendor)
             {
@@ -39,7 +39,6 @@ class BidController extends Controller
                 $bid->status=BidEnums::$STATUS['active'];
                 $bid_result = $bid->save();
             }
-
             return true;
 
         } catch (\Exception $e) {

@@ -30,6 +30,11 @@ class BidController extends Controller
 
             $update_status = Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
 
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $booking_id;
+            $bookingstatus->status=BookingEnums::$STATUS['biding'];
+            $result_status = $bookingstatus->save();
+
             foreach($vendorlist as $vendor)
             {
                 $bid = new Bid;

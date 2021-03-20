@@ -17,10 +17,6 @@ class Organization extends Model
         return $this->hasMany(Vendor::class);
     }
 
-    public function bookings(){
-        return $this->hasMany(Bookings::class);
-    }
-
     public function InventoryPrice(){
         return $this->hasMany(InventoryPrice::class);
     }
@@ -38,4 +34,10 @@ class Organization extends Model
     {
         return $this->hasOne(Org_kyc::class);
     }
+
+    public function bid()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
 }

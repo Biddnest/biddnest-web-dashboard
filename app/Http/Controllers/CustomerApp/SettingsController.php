@@ -11,6 +11,7 @@ use App\Enums\VendorEnums;
 use App\Enums\CommonEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\BookingEnums;
+use App\Enums\BidEnums;
 use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
@@ -65,6 +66,9 @@ class SettingsController extends Controller
                 "booking"=>[
                     "status"=>BookingEnums::$STATUS,
                     "booking_type"=>BookingEnums::$BOOKING_TYPE
+                ],
+                "bid"=>[
+                    "status"=>BidEnums::$STATUS
                 ]
             ]
         ]);

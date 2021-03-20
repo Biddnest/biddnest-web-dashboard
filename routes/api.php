@@ -31,7 +31,11 @@ Route::prefix('v1')->group(function () {
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
         Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
+        Route::get('/finalquote',[ApiRouter::class,'finalquote']);
         
+        Route::post('/reschedul',[ApiRouter::class,'reschedul']);
+        Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
+        Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
     });
 });
 
@@ -46,7 +50,12 @@ Route::prefix('vendors')->group(function () {
     Route::delete('/inventory-price',[VendorApiRouter::class,'deleteInventoryprices']);
 
     
-    
+    //Biding API's
+    Route::get('/bidlist',[VendorApiRouter::class,'getBidList']);
+    Route::put('/bookmark',[VendorApiRouter::class,'addBookmark']);
+    Route::get('/bookmark',[VendorApiRouter::class,'getBookmark']);
+    Route::put('/bidsubmit',[VendorApiRouter::class,'addbid']);
+    Route::put('/reject',[VendorApiRouter::class,'reject']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

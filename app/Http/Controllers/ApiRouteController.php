@@ -304,6 +304,18 @@ class ApiRouteController extends Controller
             return BookingsController::getfinalquote($request->public_booking_id, $request->token_payload->id);
     }
 
+    public function paymentDetails(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return BookingsController::getPaymentDetails($request->public_booking_id, $request->token_payload->id);
+    }
+
 
 
     public static function config(Request $request){

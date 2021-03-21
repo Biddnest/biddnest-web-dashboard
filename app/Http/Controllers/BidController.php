@@ -100,6 +100,8 @@ class BidController extends Controller
         $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
+                            
+
         $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
 
@@ -109,6 +111,11 @@ class BidController extends Controller
                                             "final_quote"=>$min_amount,
                                             "status"=>BookingEnums::$STATUS['payment_pending']
                                         ]);
+
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $book_id;
+        $bookingstatus->status=BookingEnums::$STATUS['payment_pending'];
+        $result_status = $bookingstatus->save();
         
         return true;
     }

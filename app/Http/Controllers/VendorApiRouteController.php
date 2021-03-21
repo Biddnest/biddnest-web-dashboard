@@ -15,67 +15,18 @@ class VendorApiRouteController extends Controller
     public function __construct(){
         $this->middleware(VerifyJwtToken::class)->except(['config','login','verifyLoginOtp']);
     }
-    
-    public function addPrice(Request $request)
-    { 
-        $validation = Validator::make($request->all(),[
-            'inventory_id'=>"required|int",
-            // 'organization_id'=>"required|int",
-            'service_type'=>"required|int",
-            'price.*.size' => 'required|string',
-            'price.*.material' => 'required|string',
-            'price.*.price.economics' => 'nullable',
-            'price.*.price.premium' => 'nullable'
-        ]);
 
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return InventoryController::addPrice($request->all());
-    }
-    public function getInventoryprices(Request $request)
+    public function loginForApp(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'inventory_id' => 'required|integer'
+            'username' => 'required|string',
+            'password' =>'required'
         ]);
-        
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return InventoryController::getByInventory($request->inventory_id);
+            return VendorUserController::loginForApp($request->username, $request->password);
     }
-
-    public function updateInventoryprices(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'price_id' => 'required|integer',
-            'inventory_id'=>"required|int",
-            // 'organization_id'=>"required|int",
-            'service_type'=>"required|int",
-            'size' => 'required|string',
-            'material' => 'required|string',
-            'price.*.price.economics' => 'nullable',
-            'price.*.price.premium' => 'nullable'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return InventoryController::updatePrice($request->all());
-    }
-
-    public function deleteInventoryprices(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer'
-        ]);        
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-        return InventoryController::deletePrice($request->id);
-    }
-
 
     /*bid API */
     public function getBidList(Request $request)
@@ -154,4 +105,7 @@ class VendorApiRouteController extends Controller
        
         return VendorUserController::submitbid($request->all());
     }
+
+
+
 }

@@ -328,4 +328,20 @@ class BookingsController extends Controller
 
             return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
+
+    public static function getPaymentDetails($public_booking_id, $user_id)
+    {
+        $final_quote= Booking::where(["user_id"=>$user_id,
+                                "public_booking_id"=>$public_booking_id])
+                                ->where("status", BookingEnums::$STATUS['payment_pending'])->pluck('final_quote')[0];
+        if(!$final_quote)
+            return Helper::response(false,"Order is not Exist");
+
+        $tax = Settings::where("key", "tax")->pluck('value')[0];
+        $surge_charge = Settings::where("key", "surge_charge")->pluck('value')[0];
+
+        $garnd_total = $final_quote + $tax + $surge_charge;
+
+        return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_tatal"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$garnd_total]]);
+    }
 }

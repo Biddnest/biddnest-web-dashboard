@@ -407,4 +407,22 @@ class BookingsController extends Controller
 
         return Helper::response(true,"updated data successfully",["bid"=>Bid::FindOrFail($exist_bid['id'])]);
     }
+
+    public static function addBookmark($id, $org_id, $vendor_id)
+    {
+        $exist_bid = Bid::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
+                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+
+        $result = Bid::where(['id'=>$exist_bid['id']])
+                        ->update(["bookmarked"=>CommonEnums::$YES, "vendor_id"=>$vendor_id]);
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Add to Bookmark");
+
+        return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $exist_bid['id'])->first()]);
+    }
 }

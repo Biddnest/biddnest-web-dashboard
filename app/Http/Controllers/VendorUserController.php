@@ -87,51 +87,5 @@ class VendorUserController extends Controller
 }
 
     public function logout(){}
-
-   
-   
-
-    public static function getBookmark($id)
-    {
-        $exist_bid = Bid::where(['organization_id'=>$id, 'bookmarked'=>CommonEnums::$YES])->get();
-
-        if(!$exist_bid)
-            return Helper::response(false,"Couldn't show to Bookmark");
-
-        return Helper::response(true,"Show data successfully",["bookmark"=>$exist_bid]);
-    }
-
-
-    public static function submitbid($data)
-    {
-        $exist_bid = Bid::where("organization_id", $data['org_id'])
-                            ->where("id", $data['bid_id'])
-                            ->where(["status"=>BidEnums::$STATUS['active']])
-                            ->first();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
-
-        foreach($data['inventory'] as $key)
-        {
-            $inventory_price = new BidInventory;
-            $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
-            $inventory_price->bid_id= $data['bid_id'];
-            $inventory_price->amount=$key['amount'];
-            $inventory_result = $inventory_price->save();
-        }
-
-        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moaving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$data['man_power']['min'], "max_man_power"=>$data['man_power']['max']];
-
-        $submit_bid = Bid::where(["organization_id"=>$data['org_id'], "id"=>$data['bid_id'],"status"=>BidEnums::$STATUS['active']])->update([
-            "vendor_id"=>$data['vendor_id'],
-            "bid_amount"=>$data['bid_amount'],
-            "meta"=>json_encode($meta),
-            "status"=>BidEnums::$STATUS['bid_submitted']
-        ]);
-
-        if(!$submit_bid)
-            return Helper::response(false,"Couldn't Submit Quotaion");
-
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
-    }
+  
 }

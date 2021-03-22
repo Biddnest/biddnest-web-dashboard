@@ -44,25 +44,23 @@ class VendorApiRouteController extends Controller
     public function addBookmark(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'bid_id' => 'required|integer',
-            'org_id' =>'required|integer',
-            'vendor_id' =>'required|integer',
+            'public_booking_id' => 'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::addBookmark($request->all());
+        return VendorUserController::addBookmark($request->public_booking_id, $request->token_payload->organization_id, $request->token_payload->vendor_id);
     }
 
     public function getBookingById(Request $request)
     {
-    //     $validation = Validator::make($request->all(),[
-    //         'org_id' => 'required|integer'
-    //     ]);
+        //     $validation = Validator::make($request->all(),[
+        //         'org_id' => 'required|integer'
+        //     ]);
 
-    //     if($validation->fails())
-    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
+        //     if($validation->fails())
+        //         return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return BookingsController::getByIdForVendorApp($request);
     }
@@ -70,7 +68,7 @@ class VendorApiRouteController extends Controller
     public function reject(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required|integer'
+            'public_booking_id' => 'required'
         ]);
 
         if($validation->fails())
@@ -82,9 +80,7 @@ class VendorApiRouteController extends Controller
     public function addBid(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'bid_id' => 'required|integer',
-            'org_id' =>'required|integer',
-            'vendor_id' =>'required|integer',
+            'public_booking_id' => 'required',
 
             'inventory.*.booking_inventory_id'=>'required|integer',
             'inventory.*.amount'=>'required',
@@ -101,7 +97,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::submitbid($request->all());
+        return BidController::submitBid($request->all(), $request->token_payload->organization_id, $request->token_payload->id);
     }
 
 

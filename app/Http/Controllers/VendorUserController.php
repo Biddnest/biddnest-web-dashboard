@@ -88,4 +88,31 @@ class VendorUserController extends Controller
 
     public function logout(){}
   
+    public static function resetPin($pin, $password, $id)
+    {
+        $vendor_user=Vendor::where(['id'=>$id])->first();
+
+        if(password_verify($password, $vendor_user->password))
+        {
+            $create_pin = Vendor::where("id", $id)->update(["pin"=>password_hash($pin, PASSWORD_DEFAULT)]);
+        }
+        else
+        {
+            return Helper::response(false, "Incorrect password entered.");
+        }
+
+        return Helper::response(true, "Pin has been set successfully.");
+    }
+
+    public static function checkPin($id)
+    {
+        $vendor_user=Vendor::where('id', $id)->first();
+
+        if(!$vendor_user['pin'])
+            $set = false;
+        else
+            $set = true;
+
+        return Helper::response(true, "Here is the Pin status.", ["pin"=>['set'=>$set]]);             
+    }
 }

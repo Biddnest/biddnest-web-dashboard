@@ -11,6 +11,9 @@ use App\Models\Booking;
 use App\Models\BookingStatus;
 use App\Models\Organization;
 use App\Models\Bid;
+use App\Models\BidInventory;
+use App\Models\InventoryPrice;
+use App\Models\Inventory;
 use App\Models\Settings;
 use App\Helper;
 use App\Enums\CommonEnums;
@@ -54,7 +57,7 @@ class BidController extends Controller
 
     public static function getbookings()
     {
-        $current_time = Carbon::now()->format("Y-m-d H:i");
+        $current_time = Carbon::now()->format("Y-m-d H:i:s");
 
         $booking = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
                             ->where("bid_result_at", "<=", "$current_time") ->get();
@@ -84,11 +87,11 @@ class BidController extends Controller
             $complete_time = Carbon::now()->addMinutes($timming);
 
             $meta = json_decode($order['meta'], true);
-            $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i");
+            $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
 
             $addrebidtime = Booking::where(["user_id"=>$order->user_id,
                                             "public_booking_id"=>$order->public_booking_id])
-                                            ->update(["status"=>BookingEnums::$STATUS['rebiding'], "meta" => json_encode($meta), "bid_result_at"=>$complete_time->format("Y-m-d H:i")]);
+                                            ->update(["status"=>BookingEnums::$STATUS['rebiding'], "meta" => json_encode($meta), "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")]);
             $update_bid_type = Bid::where("booking_id",$book_id)->update("bid_type", BidEnums::$BID_TYPE['rebid']);
 
             return true;
@@ -138,7 +141,7 @@ class BidController extends Controller
             $inventory_result = $inventory_price->save();
         }
 
-        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moaving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$data['man_power']['min'], "max_man_power"=>$data['man_power']['max']];
+        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$data['man_power']['min'], "max_man_power"=>$data['man_power']['max']];
 
         $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id'],"status"=>BidEnums::$STATUS['active']])->update([
             "vendor_id"=>$vendor_id,
@@ -152,31 +155,35 @@ class BidController extends Controller
 
         return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
     }
-    public function getPriceList($public_booking_id, $organization_id){
 
-        $booking = Bid::where(["booking_id",Booking::where("public_booking_id")->pluck("id")[0]])->with("inventories")->first();
+    public static function getPriceList($public_booking_id, $organization_id){
+
+        $booking = Bid::whereIn("booking_id", Booking::where("public_booking_id", $public_booking_id)->pluck("id"))->with("booking_inventories")->with('booking')->first();
         if(!$booking)
-            return false;
+            return Helper::response(false,"Invalied Booking Id");
 
         $price_list = [];
         $total = 0;
-        $price_type = $booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium" ;
-        if($booking->booking_inventory){
-            foreach($booking->inventories as $booking_inventory){
+        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium" ;
+        if($booking->booking_inventories){
+            foreach($booking->booking_inventories as $booking_inventory){
+                $list_item = [];
                 $inv = InventoryPrice::where([
                     "inventory_id"=>$booking_inventory["inventory_id"],
                     "material"=>$booking_inventory["material"],
                     "size"=>$booking_inventory["size"],
-                    "organizaton_id"=>$organization_id
+                    "organization_id"=>$organization_id
                 ])->get();
 
-                $price_list[]["bid_inventory_id"] = $booking_inventory["inventory_id"];
-                $price_list[]["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
-                $price_list[]["material"] = $booking_inventory["material"];
-                $price_list[]["size"] = $booking_inventory["size"];
-                $price_list[]["price"] = $inv ? $inv[$price_type] : 0.00;
+                $list_item["bid_inventory_id"] = $booking_inventory["inventory_id"];
+                $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
+                $list_item["material"] = $booking_inventory["material"];
+                $list_item["size"] = $booking_inventory["size"];
+                $list_item["price"] = sizeof($inv) > 0 ? $inv->$price_type : 0.00;
 
-                $total += $inv ? $inv[$price_type] : 0.00;
+                array_push($price_list, $list_item);
+
+                $total += sizeof($inv) > 0 ? $inv->$price_type : 0.00;
 
             }
         }

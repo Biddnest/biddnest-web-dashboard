@@ -200,14 +200,14 @@ class BookingsController extends Controller
         $complete_time = Carbon::now()->addMinutes($timming);
 
         $meta = json_decode($exist['meta'], true);
-        $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i");
+        $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
 
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])
                                             ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
                                             "status"=>BookingEnums::$STATUS['placed'],
                                              "meta" => json_encode($meta),
-                                             "bid_result_at"=>$complete_time->format("Y-m-d H:i")]);
+                                             "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")]);
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $exist->id;

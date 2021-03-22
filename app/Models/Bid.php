@@ -19,4 +19,15 @@ class Bid extends Model
         return $this->belongsTo(Organization::class);
     }
 
+    public function inventories()
+    {
+        return $this->hasMany(BidInventory::class);
+    }
+
+    public function booking_inventories()
+    {
+        return $this->hasManyThrough(BookingInventory::class, Booking::class, 'id','booking_id', 'booking_id', 'id');
+    }
+
+
 }

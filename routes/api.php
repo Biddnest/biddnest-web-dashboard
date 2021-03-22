@@ -41,19 +41,18 @@ Route::prefix('v1')->group(function () {
         Route::get('/payment-details',[ApiRouter::class,'paymentDetails']);
     });
 
-    Route::prefix('vendor')->group(function () {
-        /* vendor login API for App */
-        Route::prefix('auth')->group(function () {
-            Route::post('/login',[VendorApiRouter::class,'loginForApp']);
-        });
-    });
-
 });
 
 
 Route::prefix('vendors')->group(function () {
 
-    Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
+    Route::prefix('auth')->group(function () {
+        Route::post('/login',[VendorApiRouter::class,'loginForApp']);
+    });
+
+    
+    Route::post('/pin/reset',[VendorApiRouter::class,'resetPin']);
+    Route::get('/pin/status',[VendorApiRouter::class,'checkPin']);
 
     //Biding API's
     Route::prefix('bookings')->group(function () {
@@ -68,6 +67,11 @@ Route::prefix('vendors')->group(function () {
 
         Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
     });
+
+    Route::prefix('bid')->group(function () {
+        Route::get('/price-list',[VendorApiRouter::class,'getPriceList']);
+    });
+
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");
     Route::post('/vendors/add/kyc',[Router::class,'vendor_add_kyc'])->name("vendor_add_kyc");

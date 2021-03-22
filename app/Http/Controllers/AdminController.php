@@ -39,9 +39,6 @@ class AdminController extends Controller
         if(!$admin_user)
             return Helper::response(false,"Incorrect username or password");
 
-        // return password_verify($password, $admin_user->password) ? Helper::response(true, "Login was successfull", ["token"=>Helper::generateAuthToken(["email"=>$admin_user->email,"password"=>$password]),"expiry"=>CarbonImmutable::now()->add(365, 'day')]) : Helper::response(false, "password is incorrect");
-
-
         if(password_verify($password, $admin_user->password))
         {
            Session::put(["account"=>['id'=>$admin_user->id,
@@ -50,12 +47,13 @@ class AdminController extends Controller
             Session::put('sessionActive', true);
             Session::put('user_role', $admin_user->role);
             $zone = [];
-            if(!$admin_user->zones){
+            if($admin_user->zones){
+                Session::put("zones",$admin_user->zones);
                 foreach($admin_user->zones as $zone){
                     $zones[] = $zone;
                 }
             }
-            Session::put('zones', $zones);
+            Session::put('admin_zones', $zones);
 
            return Helper::response(true, "Login was successfull");
         }

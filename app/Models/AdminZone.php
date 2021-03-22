@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminZone extends Model
 {
-    protected $table = ["admin_zone_map"];
+    protected $table = "admin_zone_map";
     use HasFactory;
 }

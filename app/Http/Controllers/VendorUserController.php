@@ -89,23 +89,7 @@ class VendorUserController extends Controller
     public function logout(){}
 
    
-    public static function addBookmark($data)
-    {
-        $exist_bid = Bid::where("organization_id", $data['org_id'])
-                            ->where("id", $data['bid_id'])
-                            ->where(["status"=>BidEnums::$STATUS['active']])
-                            ->get();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
-
-        $result = Bid::where(['id'=>$data['bid_id']])
-                        ->update(["bookmarked"=>CommonEnums::$YES, "vendor_id"=>$data['vendor_id']]);
-
-        if(!$result)
-            return Helper::response(false,"Couldn't Add to Bookmark");
-
-        return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $data['bid_id'])->first()]);
-    }
+   
 
     public static function getBookmark($id)
     {
@@ -117,25 +101,6 @@ class VendorUserController extends Controller
         return Helper::response(true,"Show data successfully",["bookmark"=>$exist_bid]);
     }
 
-    public static function reject($bid_id, $org_id, $vendor_id)
-    {
-        $exist_bid = Bid::where("organization_id", $org_id)
-                            ->where("id", $bid_id)
-                            ->where(["status"=>BidEnums::$STATUS['active']])
-                            ->first();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
-
-        if($exist_bid['bookmarked'] == CommonEnums::$YES)
-            $bookmark = Bid::where(['id'=>$exist_bid['id']])->update(["bookmarked"=>CommonEnums::$NO]);
-
-        $reject = Bid::where(['id'=>$exist_bid['id']])->update(["status"=>BidEnums::$STATUS['rejected'], "vendor_id"=>$vendor_id]);
-
-        if(!$reject)
-            return Helper::response(false,"Couldn't Reject");
-
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::FindOrFail($exist_bid['id'])]);
-    }
 
     public static function submitbid($data)
     {

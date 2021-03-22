@@ -60,11 +60,11 @@ Route::prefix('vendors')->group(function () {
 
     Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
 
-    Route::get('/bookmark',[VendorApiRouter::class,'getBookmark']);
+    Route::get('/bookings/{id}/details',[VendorApiRouter::class,'getBookingById']);
 
     Route::post('/bid',[VendorApiRouter::class,'addBid']);
 
-    Route::post('/reject',[VendorApiRouter::class,'reject']);
+    Route::post('bookings/reject',[VendorApiRouter::class,'reject']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

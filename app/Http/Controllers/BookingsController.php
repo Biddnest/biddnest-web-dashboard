@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\BookingStatus;
 use App\Models\Settings;
 use App\Models\Bid;
+use App\Models\Organization;
 use App\Helper;
 use App\Sms;
 use App\Http\Middleware\VerifyJwtToken;
@@ -376,4 +377,34 @@ class BookingsController extends Controller
         ]]);
     }
 
+    public static function getByIdForVendorApp(Request $request)
+    {
+        $organization_id = $request->token_payload->organization_id;
+        $booking = Booking::where(["public_booking_id"=>$request->id])->with('inventories')->with(['bid'=>function($bid) use($request){
+            $bid->where("organization_id", $request->token_payload->organization_id)
+            ->whereNotIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
+        }])->first();
+
+        return Helper::response(true,"Show data successfully",["booking"=>$booking]);       
+    }
+
+    public static function reject($id, $org_id)
+    {
+        $exist_bid = Bid::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
+                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+
+        if($exist_bid['bookmarked'] == CommonEnums::$YES)
+            $bookmark = Bid::where(['id'=>$exist_bid['id']])->update(["bookmarked"=>CommonEnums::$NO]);
+
+        $reject = Bid::where(['id'=>$exist_bid['id']])->update(["status"=>BidEnums::$STATUS['rejected'], "vendor_id"=>$vendor_id]);
+
+        if(!$reject)
+            return Helper::response(false,"Couldn't Reject");
+
+        return Helper::response(true,"updated data successfully",["bid"=>Bid::FindOrFail($exist_bid['id'])]);
+    }
 }

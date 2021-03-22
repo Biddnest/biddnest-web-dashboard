@@ -55,30 +55,28 @@ class VendorApiRouteController extends Controller
         return VendorUserController::addBookmark($request->all());
     }
 
-    public function getBookmark(Request $request)
+    public function getBookingById(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'org_id' => 'required|integer'
-        ]);
+    //     $validation = Validator::make($request->all(),[
+    //         'org_id' => 'required|integer'
+    //     ]);
 
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+    //     if($validation->fails())
+    //         return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::getBookmark($request->org_id);
+        return BookingsController::getByIdForVendorApp($request);
     }
 
     public function reject(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'bid_id' => 'required|integer',
-            'org_id' =>'required|integer',
-            'vendor_id' =>'required|integer',
+            'public_booking_id' => 'required|integer'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::reject($request->bid_id, $request->org_id, $request->vendor_id);
+        return BookingsController::reject($request->public_booking_id, $request->token_payload->organization_id);
     }
 
     public function addBid(Request $request)

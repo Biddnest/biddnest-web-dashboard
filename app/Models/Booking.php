@@ -34,4 +34,14 @@ class Booking extends Model
     public function status_history(){
         return $this->hasMany(BookingStatus::class);
     }
+
+    public function bid()
+    {
+        return $this->hasOne(Bid::class);
+    }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
 }

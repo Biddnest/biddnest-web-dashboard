@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Route as Router;
+use App\Http\Controllers\VendorController as VendorRouter;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,11 +23,11 @@ Route::get('/', function () {
     return response()->redirectToRoute('login');
 });
 
-Route::get('/distance',function(){
-    // echo response()->json(["hello"]);
-    echo BidController::getbookings();
-    exit;
-});
+// Route::get('/distance',function(){
+//     // echo response()->json(["hello"]);
+//     echo BidController::getbookings();
+//     exit;
+// });
 
 Route::prefix('web/api')->group(function () {
 
@@ -103,6 +104,12 @@ Route::prefix('web/api')->group(function () {
 
 });
 
+Route::prefix('vendors')->group(function () {
+    Route::post('/inventory-price',[VendorRouter::class,'addPrice']);
+    Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices']);
+    Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices']);
+    Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices']);
+});
 
 Route::prefix('admin')->group(function () {
         Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {

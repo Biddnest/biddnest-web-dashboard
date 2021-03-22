@@ -56,16 +56,17 @@ class BidController extends Controller
     {
         $current_time = Carbon::now()->format("Y-m-d H:i");
         
-        $booking = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->get();
+        $booking = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+                            ->where("bid_result_at", "<=", "$current_time") ->get();
 
         foreach($booking as $bid)
         {   
-            $meta = json_decode($bid['meta'], true);
-            $bid_end_time = $meta['timings']['bid_result'];
-            if($bid_end_time == $current_time)
-            {
+            // $meta = json_decode($bid['meta'], true);
+            // $bid_end_time = $meta['timings']['bid_result'];
+            // if($bid_end_time == $current_time)
+            // {
                $bid_end = Self::updateStatus($bid['id']);
-            }
+            // }
         }
 
         return true;
@@ -75,7 +76,7 @@ class BidController extends Controller
     {
         $min_amount = Bid::where("booking_id", $book_id)->min('bid_amount');       
 
-        if(!$min_amount)
+        if(!$min_amount || $min_amount >= 2)
         {
             $order = Booking::where("id", $book_id)->first();
 
@@ -87,7 +88,7 @@ class BidController extends Controller
 
             $addrebidtime = Booking::where(["user_id"=>$order->user_id,
                                             "public_booking_id"=>$order->public_booking_id])
-                                            ->update(["status"=>BookingEnums::$STATUS['rebiding'], "meta" => json_encode($meta)]);
+                                            ->update(["status"=>BookingEnums::$STATUS['rebiding'], "meta" => json_encode($meta), "bid_result_at"=>$complete_time->format("Y-m-d H:i")]);
             $update_bid_type = Bid::where("booking_id",$book_id)->update("bid_type", BidEnums::$BID_TYPE['rebid']);
 
             return true;
@@ -99,6 +100,8 @@ class BidController extends Controller
         $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
+                            
+
         $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
 
@@ -108,6 +111,11 @@ class BidController extends Controller
                                             "final_quote"=>$min_amount,
                                             "status"=>BookingEnums::$STATUS['payment_pending']
                                         ]);
+
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $book_id;
+        $bookingstatus->status=BookingEnums::$STATUS['payment_pending'];
+        $result_status = $bookingstatus->save();
         
         return true;
     }

@@ -57,11 +57,17 @@ class VendorUserController extends Controller
 
     public static function loginForApp($username, $password)
 {
-    $vendor_user=Vendor::where(['username'=>$username])
-        ->OrWhere(['email'=>$username])
-        ->where([ 'status'=>1, 'deleted'=>0])
-        ->with("organization")
-        ->first();
+    // $vendor_user=Vendor::where(['username'=>$username])
+    //     ->OrWhere(['email'=>$username])
+    //     ->where([ 'status'=>1, 'deleted'=>0])
+    //     ->with("organization")
+    //     ->first();
+
+    $vendor_user=Vendor::where(['email'=>$username])
+    ->where([ 'status'=>1, 'deleted'=>0])
+    ->with("organization")
+    ->first();
+
 
     if(!$vendor_user)
         return Helper::response(false,"Incorrect username or password");

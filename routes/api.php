@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiRouteController as ApiRouter;
 use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
+use App\Http\Controllers\VendorController as VendorRouter;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -36,19 +37,23 @@ Route::prefix('v1')->group(function () {
         Route::post('/reschedul',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
+
+        Route::get('/payment-details',[ApiRouter::class,'paymentDetails']);
     });
+
+    Route::prefix('vendor')->group(function () {
+        /* vendor login API for App */
+        Route::prefix('auth')->group(function () {
+            Route::post('/login',[VendorApiRouter::class,'loginForApp']);
+        }); 
+    });
+
 });
 
 
 Route::prefix('vendors')->group(function () {
 
     Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
-
-    Route::post('/inventory-price',[VendorApiRouter::class,'addPrice']);
-    Route::get('/inventory-price',[VendorApiRouter::class,'getInventoryprices']);
-    Route::put('/inventory-price',[VendorApiRouter::class,'updateInventoryprices']);
-    Route::delete('/inventory-price',[VendorApiRouter::class,'deleteInventoryprices']);
-
     
     //Biding API's
     Route::get('/bidlist',[VendorApiRouter::class,'getBidList']);

@@ -202,7 +202,9 @@ class BookingsController extends Controller
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])
                                             ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
-                                            "status"=>BookingEnums::$STATUS['placed'], "meta" => json_encode($meta)]);
+                                            "status"=>BookingEnums::$STATUS['placed'],
+                                             "meta" => json_encode($meta),
+                                             "bid_result_at"=>$complete_time->format("Y-m-d H:i")]);
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $exist->id;
@@ -325,5 +327,21 @@ class BookingsController extends Controller
             return Helper::response(false,"Order is not Exist");
 
             return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
+    }
+
+    public static function getPaymentDetails($public_booking_id, $user_id)
+    {
+        $final_quote= Booking::where(["user_id"=>$user_id,
+                                "public_booking_id"=>$public_booking_id])
+                                ->where("status", BookingEnums::$STATUS['payment_pending'])->pluck('final_quote')[0];
+        if(!$final_quote)
+            return Helper::response(false,"Order is not Exist");
+
+        $tax = Settings::where("key", "tax")->pluck('value')[0];
+        $surge_charge = Settings::where("key", "surge_charge")->pluck('value')[0];
+
+        $garnd_total = $final_quote + $tax + $surge_charge;
+
+        return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_tatal"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$garnd_total]]);
     }
 }

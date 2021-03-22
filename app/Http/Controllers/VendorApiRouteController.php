@@ -29,16 +29,16 @@ class VendorApiRouteController extends Controller
     }
 
     /*bid API */
-    public function getBidList(Request $request)
+    public function getBookingsforApp(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'org_id' => 'required|integer'
-        ]);
+        // $validation = Validator::make($request->all(),[
+        //     // 'type'=> 'required|string'
+        // ]);
 
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        // if($validation->fails())
+        //     return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::getBidList($request->org_id);
+        return BookingsController::getBookingsForVendorApp($request);
     }
 
     public function addBookmark(Request $request)
@@ -81,7 +81,7 @@ class VendorApiRouteController extends Controller
         return VendorUserController::reject($request->bid_id, $request->org_id, $request->vendor_id);
     }
 
-    public function addbid(Request $request)
+    public function addBid(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'bid_id' => 'required|integer',

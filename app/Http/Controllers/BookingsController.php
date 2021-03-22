@@ -15,6 +15,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\BookingStatus;
 use App\Models\Settings;
+use App\Models\Bid;
 use App\Helper;
 use App\Sms;
 use App\Http\Middleware\VerifyJwtToken;
@@ -22,6 +23,7 @@ use App\StringFormatter;
 use Intervention\Image\ImageManager;
 use App\Enums\CommonEnums;
 use App\Enums\BookingEnums;
+use App\Enums\BidEnums;
 use App\Enums\ServiceEnums;
 use Carbon\CarbonImmutable;
 use Carbon\Carbon;
@@ -344,4 +346,34 @@ class BookingsController extends Controller
 
         return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_tatal"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$garnd_total]]);
     }
+
+    public static function getBookingsForVendorApp(Request $request)
+    {
+        // $limit=CommonEnums::$PAGE_LENGTH;
+        // $offset=0;
+        $bid_id = Bid::where("organization_id", $request->token_payload->organization_id);
+
+        switch($request->type)
+        {
+            case "live":
+                $bid_id->where("status", BidEnums::$STATUS['active']);
+                break;
+
+            case "scheduled":
+                $bid_id->where("status", BidEnums::$STATUS['won']);
+                break;
+            
+            case "scheduled":
+                $bid_id->whereIn("bookmarked", CommonEnums::$YES);
+                break;
+        }
+
+        
+        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->pluck('booking_id'))->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return Helper::response(true,"Show data successfully",["bookings"=>$bookings->items(), "paging"=>[
+            "current_page"=>$bookings->currentPage(), "total_pages"=>$bookings->lastPage(), "next_page"=>$bookings->nextPageUrl(), "previous_page"=>$bookings->previousPageUrl()
+        ]]);
+    }
+
 }

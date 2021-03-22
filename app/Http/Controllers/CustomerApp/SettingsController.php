@@ -65,7 +65,8 @@ class SettingsController extends Controller
                 ],
                 "booking"=>[
                     "status"=>BookingEnums::$STATUS,
-                    "booking_type"=>BookingEnums::$BOOKING_TYPE
+                    "booking_type"=>BookingEnums::$BOOKING_TYPE,
+                    "fetch_type"=>BookingEnums::$BOOKING_FETCH_TYPE
                 ],
                 "bid"=>[
                     "status"=>BidEnums::$STATUS

@@ -56,13 +56,13 @@ Route::prefix('vendors')->group(function () {
     Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
 
     //Biding API's
-    Route::get('/bidlist',[VendorApiRouter::class,'getBidList']);
+    Route::get('/bookings/{type}',[VendorApiRouter::class,'getBookingsforApp']);
 
     Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
 
     Route::get('/bookmark',[VendorApiRouter::class,'getBookmark']);
 
-    Route::post('/bid',[VendorApiRouter::class,'addbid']);
+    Route::post('/bid',[VendorApiRouter::class,'addBid']);
 
     Route::post('/reject',[VendorApiRouter::class,'reject']);
 

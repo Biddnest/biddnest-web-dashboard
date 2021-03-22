@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BookingInventory;
-use App\Models\Inventory;
-use App\Models\InventoryPrice;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -123,6 +120,38 @@ class BidController extends Controller
         return true;
     }
 
+    public static function submitBid($data, $org_id, $vendor_id)
+    {
+        $exist_bid = Bid::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
+                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+
+        foreach($data['inventory'] as $key)
+        {
+            $inventory_price = new BidInventory;
+            $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
+            $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
+            $inventory_price->amount=$key['amount'];
+            $inventory_result = $inventory_price->save();
+        }
+
+        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moaving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$data['man_power']['min'], "max_man_power"=>$data['man_power']['max']];
+
+        $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id'],"status"=>BidEnums::$STATUS['active']])->update([
+            "vendor_id"=>$vendor_id,
+            "bid_amount"=>$data['bid_amount'],
+            "meta"=>json_encode($meta),
+            "status"=>BidEnums::$STATUS['bid_submitted']
+        ]);
+
+        if(!$submit_bid)
+            return Helper::response(false,"Couldn't Submit Quotaion");
+
+        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+    }
     public function getPriceList($public_booking_id, $organization_id){
 
         $booking = Bid::where(["booking_id",Booking::where("public_booking_id")->pluck("id")[0]])->with("inventories")->first();
@@ -133,21 +162,21 @@ class BidController extends Controller
         $total = 0;
         $price_type = $booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium" ;
         if($booking->booking_inventory){
-        foreach($booking->inventories as $booking_inventory){
-            $inv = InventoryPrice::where([
-                "inventory_id"=>$booking_inventory["inventory_id"],
-                "material"=>$booking_inventory["material"],
-                "size"=>$booking_inventory["size"],
-                "organizaton_id"=>$organization_id
-            ])->get();
+            foreach($booking->inventories as $booking_inventory){
+                $inv = InventoryPrice::where([
+                    "inventory_id"=>$booking_inventory["inventory_id"],
+                    "material"=>$booking_inventory["material"],
+                    "size"=>$booking_inventory["size"],
+                    "organizaton_id"=>$organization_id
+                ])->get();
 
-            $price_list[]["bid_inventory_id"] = $booking_inventory["inventory_id"];
-            $price_list[]["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
-            $price_list[]["material"] = $booking_inventory["material"];
-            $price_list[]["size"] = $booking_inventory["size"];
-            $price_list[]["price"] = $inv ? $inv[$price_type] : 0.00;
+                $price_list[]["bid_inventory_id"] = $booking_inventory["inventory_id"];
+                $price_list[]["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
+                $price_list[]["material"] = $booking_inventory["material"];
+                $price_list[]["size"] = $booking_inventory["size"];
+                $price_list[]["price"] = $inv ? $inv[$price_type] : 0.00;
 
-            $total += $inv ? $inv[$price_type] : 0.00;
+                $total += $inv ? $inv[$price_type] : 0.00;
 
             }
         }

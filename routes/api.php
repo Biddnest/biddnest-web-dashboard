@@ -56,16 +56,17 @@ Route::prefix('vendors')->group(function () {
     Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
 
     //Biding API's
-    Route::get('/bookings/{type}',[VendorApiRouter::class,'getBookingsforApp']);
+    Route::prefix('bookings')->group(function () {
+        Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
 
-    Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
+        Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
 
-    Route::get('/bookmark',[VendorApiRouter::class,'getBookmark']);
+        Route::get('/details',[VendorApiRouter::class,'getBookingById']);
 
-    Route::post('/bid',[VendorApiRouter::class,'addBid']);
+        Route::post('/submit',[VendorApiRouter::class,'addBid']);
 
-    Route::post('/reject',[VendorApiRouter::class,'reject']);
-
+        Route::post('/reject',[VendorApiRouter::class,'reject']);
+    });
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");
     Route::post('/vendors/add/kyc',[Router::class,'vendor_add_kyc'])->name("vendor_add_kyc");

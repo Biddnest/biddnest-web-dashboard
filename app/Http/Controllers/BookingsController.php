@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\BookingStatus;
 use App\Models\Settings;
 use App\Models\Bid;
+use App\Models\Organization;
 use App\Helper;
 use App\Sms;
 use App\Http\Middleware\VerifyJwtToken;
@@ -30,7 +31,7 @@ use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
-   
+
     public static function createEnquiry($data, $user_id)
     {
         if(App::environment('production'))
@@ -40,7 +41,7 @@ class BookingsController extends Controller
                                     ->where("status","!=",BookingEnums::$STATUS["cancelled"])
                                     ->whereBetween("created_at", [Carbon::now()->subMinutes(30),Carbon::now()])
                                     ->get();
-            
+
             if($exsist){
                 return  Helper::response(false,"You have pending order");
             }
@@ -95,25 +96,25 @@ class BookingsController extends Controller
         {
             $images[]= Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".uniqid().$key,"bookings/".$booking_id);
         }
-        
 
-        
-       
+
+
+
         $cost_structure=[];
         foreach(Settings::get() as $setting)
         {
             switch($setting['key']){
-                case "tax": 
+                case "tax":
                     $cost_structure['tax']=$setting['value'];
                     break;
-                            
+
                 case "surge_charge":
                     $cost_structure['surge_charge']=$setting['value'];
                     break;
-                            
+
                 case "buffer_amount":
                     $cost_structure['buffer_amount']=$setting['value'];
-                    break;                    
+                    break;
             }
         }
 
@@ -121,7 +122,7 @@ class BookingsController extends Controller
             $economic_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
              $economic_price += $economic_price*($cost_structure["tax"]/100);
 
-            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type);  
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type);
             $primium_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price*($cost_structure["tax"]/100);
         }
@@ -140,7 +141,7 @@ class BookingsController extends Controller
                                     "timings"=>null,
                                     "distance"=>$distance]);
         $booking->status=BookingEnums::$STATUS['enquiry'];
-        $result=$booking->save(); 
+        $result=$booking->save();
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $booking->id;
@@ -164,12 +165,12 @@ class BookingsController extends Controller
             $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
             $bookinginventory->material = $items["material"];
             $bookinginventory->size = $items["size"];
-            $bookinginventory->quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min"=>$items['quantity']['min'], "max"=>$items['quantity']['max']]);   
+            $bookinginventory->quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min"=>$items['quantity']['min'], "max"=>$items['quantity']['max']]);
             $bookinginventory->quantity_type = $inventory_quantity_type;
             $result_items=$bookinginventory->save();
-        }       
+        }
 
-       
+
         if(!$result && !$result_date && !$result_items && !$result_status)
         {
             DB::rollBack();
@@ -182,7 +183,7 @@ class BookingsController extends Controller
 
     public static function confirmBooking($public_booking_id, $service_type, $user_id)
     {
-        
+
         $exist= Booking::where(["user_id"=>$user_id,
                                 "public_booking_id"=>$public_booking_id])->first();
         if(!$exist){
@@ -200,7 +201,7 @@ class BookingsController extends Controller
 
         $meta = json_decode($exist['meta'], true);
         $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i");
-    
+
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])
                                             ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
@@ -221,7 +222,7 @@ class BookingsController extends Controller
         dispatch(function() use($booking_id){
             BidController::addvendors($booking_id);
           })->afterResponse();
-                
+
          return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
@@ -250,7 +251,7 @@ class BookingsController extends Controller
         {
             return Helper::response(false,"Couldn't save data");
         }
-                
+
          return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
@@ -263,7 +264,7 @@ class BookingsController extends Controller
         {
             return Helper::response(false,"Couldn't Find data");
         }
-                                        
+
         return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('vendor')->with('service')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
@@ -280,7 +281,7 @@ class BookingsController extends Controller
         {
             return Helper::response(false,"No Booking Found");
         }
-                                                                
+
         return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
     }
 
@@ -296,7 +297,7 @@ class BookingsController extends Controller
         {
             return Helper::response(false,"No Booking Found");
         }
-                                                                
+
         return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
     }
 
@@ -362,13 +363,13 @@ class BookingsController extends Controller
             case "scheduled":
                 $bid_id->where("status", BidEnums::$STATUS['won']);
                 break;
-            
+
             case "scheduled":
                 $bid_id->whereIn("bookmarked", CommonEnums::$YES);
                 break;
         }
 
-        
+
         $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->pluck('booking_id'))->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true,"Show data successfully",["bookings"=>$bookings->items(), "paging"=>[
@@ -376,4 +377,52 @@ class BookingsController extends Controller
         ]]);
     }
 
+    public static function getByIdForVendorApp(Request $request)
+    {
+        $organization_id = $request->token_payload->organization_id;
+        $booking = Booking::where(["public_booking_id"=>$request->public_booking_id])->with(['bid'=>function($bid) use($request){
+            $bid->where("organization_id", $request->token_payload->organization_id)
+            ->whereNotIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
+        }])->first();
+
+        return Helper::response(true,"Show data successfully",["booking"=>$booking]);
+    }
+
+    public static function reject($id, $org_id)
+    {
+        $exist_bid = Bid::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
+                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+
+        if($exist_bid['bookmarked'] == CommonEnums::$YES)
+            $bookmark = Bid::where(['id'=>$exist_bid['id']])->update(["bookmarked"=>CommonEnums::$NO]);
+
+        $reject = Bid::where(['id'=>$exist_bid['id']])->update(["status"=>BidEnums::$STATUS['rejected'], "vendor_id"=>$vendor_id]);
+
+        if(!$reject)
+            return Helper::response(false,"Couldn't Reject");
+
+        return Helper::response(true,"updated data successfully",["bid"=>Bid::FindOrFail($exist_bid['id'])]);
+    }
+
+    public static function addBookmark($id, $org_id, $vendor_id)
+    {
+        $exist_bid = Bid::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
+                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+
+        $result = Bid::where(['id'=>$exist_bid['id']])
+                        ->update(["bookmarked"=>CommonEnums::$YES, "vendor_id"=>$vendor_id]);
+
+        if(!$result)
+            return Helper::response(false,"Couldn't Add to Bookmark");
+
+        return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $exist_bid['id'])->first()]);
+    }
 }

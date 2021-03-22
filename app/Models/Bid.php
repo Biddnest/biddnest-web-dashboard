@@ -12,11 +12,11 @@ class Bid extends Model
     protected $hidden = ['created_at','updated_at'];
 
     public function booking(){
-        return $this->hasOne(Booking::class);
+        return $this->belongsTo(Booking::class);
     }
 
     public function organization(){
-        return $this->hasOne(Organization::class);
+        return $this->belongsTo(Organization::class);
     }
 
 }

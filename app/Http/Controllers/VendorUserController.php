@@ -75,7 +75,7 @@ class VendorUserController extends Controller
 
     if(password_verify($password, $vendor_user->password))
     {
-        $jwt_token = Helper::generateAuthToken(["email"=>$vendor_user->email,"id"=>$vendor_user->id]);
+        $jwt_token = Helper::generateAuthToken(["email"=>$vendor_user->email,"id"=>$vendor_user->id, "organization_id"=>$vendor_user->organization->id]);
         return Helper::response(true, "Login was successfull",["vendor"=>$vendor_user,
             "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
         ]);
@@ -88,13 +88,7 @@ class VendorUserController extends Controller
 
     public function logout(){}
 
-    public static function getBidList($id)
-    {
-        $exist_bid = Bid::where("organization_id", $id)
-                            ->get();
-        return Helper::response(true,"Show data successfully",["bidlist"=>$exist_bid]);
-    }
-
+   
     public static function addBookmark($data)
     {
         $exist_bid = Bid::where("organization_id", $data['org_id'])

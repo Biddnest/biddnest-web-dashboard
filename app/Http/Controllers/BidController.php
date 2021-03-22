@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookingInventory;
+use App\Models\Inventory;
+use App\Models\InventoryPrice;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -55,12 +58,12 @@ class BidController extends Controller
     public static function getbookings()
     {
         $current_time = Carbon::now()->format("Y-m-d H:i");
-        
+
         $booking = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
                             ->where("bid_result_at", "<=", "$current_time") ->get();
 
         foreach($booking as $bid)
-        {   
+        {
             // $meta = json_decode($bid['meta'], true);
             // $bid_end_time = $meta['timings']['bid_result'];
             // if($bid_end_time == $current_time)
@@ -74,7 +77,7 @@ class BidController extends Controller
 
     public static function updateStatus($book_id)
     {
-        $min_amount = Bid::where("booking_id", $book_id)->min('bid_amount');       
+        $min_amount = Bid::where("booking_id", $book_id)->min('bid_amount');
 
         if(!$min_amount || $min_amount >= 2)
         {
@@ -82,7 +85,7 @@ class BidController extends Controller
 
             $timming = Settings::where("key", "rebid_time")->pluck('value')[0];
             $complete_time = Carbon::now()->addMinutes($timming);
-    
+
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i");
 
@@ -93,14 +96,14 @@ class BidController extends Controller
 
             return true;
         }
- 
+
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
         $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
-                            
+
 
         $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
@@ -116,7 +119,41 @@ class BidController extends Controller
         $bookingstatus->booking_id = $book_id;
         $bookingstatus->status=BookingEnums::$STATUS['payment_pending'];
         $result_status = $bookingstatus->save();
-        
+
         return true;
+    }
+
+    public function getPriceList($public_booking_id, $organization_id){
+
+        $booking = Bid::where(["booking_id",Booking::where("public_booking_id")->pluck("id")[0]])->with("inventories")->first();
+        if(!$booking)
+            return false;
+
+        $price_list = [];
+        $total = 0;
+        $price_type = $booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium" ;
+        if($booking->booking_inventory){
+        foreach($booking->inventories as $booking_inventory){
+            $inv = InventoryPrice::where([
+                "inventory_id"=>$booking_inventory["inventory_id"],
+                "material"=>$booking_inventory["material"],
+                "size"=>$booking_inventory["size"],
+                "organizaton_id"=>$organization_id
+            ])->get();
+
+            $price_list[]["bid_inventory_id"] = $booking_inventory["inventory_id"];
+            $price_list[]["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
+            $price_list[]["material"] = $booking_inventory["material"];
+            $price_list[]["size"] = $booking_inventory["size"];
+            $price_list[]["price"] = $inv ? $inv[$price_type] : 0.00;
+
+            $total += $inv ? $inv[$price_type] : 0.00;
+
+            }
+        }
+        return Helper::response(true,"Here is the pricelist",["price_list"=>[
+            "inventories" => $price_list,
+            "total"=>$total
+        ]]);
     }
 }

@@ -173,6 +173,6 @@ class VendorUserController extends Controller
         if(!$submit_bid)
             return Helper::response(false,"Couldn't Submit Quotaion");
 
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::FindOrFail($exist_bid['id'])]);
+        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
     }
 }

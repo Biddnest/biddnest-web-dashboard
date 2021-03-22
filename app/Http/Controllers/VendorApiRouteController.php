@@ -13,7 +13,7 @@ class VendorApiRouteController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['config','login','verifyLoginOtp']);
+        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp']);
     }
 
     public function loginForApp(Request $request)
@@ -33,7 +33,7 @@ class VendorApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'org_id' => 'required|integer'
-        ]);        
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
@@ -47,11 +47,11 @@ class VendorApiRouteController extends Controller
             'bid_id' => 'required|integer',
             'org_id' =>'required|integer',
             'vendor_id' =>'required|integer',
-        ]);        
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-       
+
         return VendorUserController::addBookmark($request->all());
     }
 
@@ -59,7 +59,7 @@ class VendorApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'org_id' => 'required|integer'
-        ]);        
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
@@ -73,11 +73,11 @@ class VendorApiRouteController extends Controller
             'bid_id' => 'required|integer',
             'org_id' =>'required|integer',
             'vendor_id' =>'required|integer',
-        ]);        
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-       
+
         return VendorUserController::reject($request->bid_id, $request->org_id, $request->vendor_id);
     }
 
@@ -93,16 +93,16 @@ class VendorApiRouteController extends Controller
 
             'bid_amount'=>'required',
             'type_of_movement'=>'required|string',
-            'moaving_date'=>'required',
+            'moving_date'=>'required',
             'vehicle_type'=>'required|string',
 
             'man_power.min'=>'required|integer',
             'man_power.max'=>'required|integer'
-        ]);        
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-       
+
         return VendorUserController::submitbid($request->all());
     }
 

@@ -33,7 +33,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
         Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);
-        
+
         Route::post('/reschedul',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
@@ -45,7 +45,7 @@ Route::prefix('v1')->group(function () {
         /* vendor login API for App */
         Route::prefix('auth')->group(function () {
             Route::post('/login',[VendorApiRouter::class,'loginForApp']);
-        }); 
+        });
     });
 
 });
@@ -54,13 +54,17 @@ Route::prefix('v1')->group(function () {
 Route::prefix('vendors')->group(function () {
 
     Route::post('/vendor/login',[Router::class,'vendor_login'])->name("vendor_login");
-    
+
     //Biding API's
     Route::get('/bidlist',[VendorApiRouter::class,'getBidList']);
-    Route::put('/bookmark',[VendorApiRouter::class,'addBookmark']);
+
+    Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
+
     Route::get('/bookmark',[VendorApiRouter::class,'getBookmark']);
-    Route::put('/bidsubmit',[VendorApiRouter::class,'addbid']);
-    Route::put('/reject',[VendorApiRouter::class,'reject']);
+
+    Route::post('/bid',[VendorApiRouter::class,'addbid']);
+
+    Route::post('/reject',[VendorApiRouter::class,'reject']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

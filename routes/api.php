@@ -57,7 +57,6 @@ Route::prefix('vendors')->group(function () {
 
     //Biding API's
     Route::prefix('bookings')->group(function () {
-        Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
 
         Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
 
@@ -66,6 +65,8 @@ Route::prefix('vendors')->group(function () {
         Route::post('/submit',[VendorApiRouter::class,'addBid']);
 
         Route::post('/reject',[VendorApiRouter::class,'reject']);
+
+        Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
     });
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

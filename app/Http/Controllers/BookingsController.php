@@ -380,7 +380,7 @@ class BookingsController extends Controller
     public static function getByIdForVendorApp(Request $request)
     {
         $organization_id = $request->token_payload->organization_id;
-        $booking = Booking::where(["public_booking_id"=>$request->public_booking_id])->with(['bid'=>function($bid) use($request){
+        $booking = Booking::where(["public_booking_id"=>$request->public_booking_id])->with('inventories')->with(['bid'=>function($bid) use($request){
             $bid->where("organization_id", $request->token_payload->organization_id)
             ->whereNotIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
         }])->first();

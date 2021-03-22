@@ -55,12 +55,12 @@ class VendorApiRouteController extends Controller
 
     public function getBookingById(Request $request)
     {
-        //     $validation = Validator::make($request->all(),[
-        //         'org_id' => 'required|integer'
-        //     ]);
+            $validation = Validator::make($request->all(),[
+                'public_booking_id' => 'required'
+            ]);
 
-        //     if($validation->fails())
-        //         return Helper::response(false,"validation failed", $validation->errors(), 400);
+            if($validation->fails())
+                return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return BookingsController::getByIdForVendorApp($request);
     }

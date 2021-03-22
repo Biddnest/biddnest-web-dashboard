@@ -61,7 +61,7 @@ Route::prefix('vendors')->group(function () {
 
         Route::post('/bookmark',[VendorApiRouter::class,'addBookmark']);
 
-        Route::get('/{id}/details',[VendorApiRouter::class,'getBookingById']);
+        Route::get('/details',[VendorApiRouter::class,'getBookingById']);
 
         Route::post('/submit',[VendorApiRouter::class,'addBid']);
 

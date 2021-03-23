@@ -38,8 +38,14 @@ Route::prefix('v1')->group(function () {
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
 
-        Route::get('/payment-details',[ApiRouter::class,'paymentDetails']);
+        
+        Route::prefix('payment')->group(function () {
+            Route::get('/summary',[ApiRouter::class,'paymentDetails']);
+            Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
+        });
     });
+
+    
 
 });
 

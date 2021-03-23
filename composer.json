@@ -17,7 +17,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "htmlmin/htmlmin": "^8.0",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "razorpay/razorpay": "^2.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

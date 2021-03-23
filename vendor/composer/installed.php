@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'e32458edadd5585155db8b1fc00ce23aff9aac91',
+    'reference' => '8347a68c40919e076604a96e4383d181b5b69a7f',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -545,7 +545,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'e32458edadd5585155db8b1fc00ce23aff9aac91',
+      'reference' => '8347a68c40919e076604a96e4383d181b5b69a7f',
     ),
     'laravel/sail' => 
     array (
@@ -927,12 +927,30 @@
       ),
       'reference' => 'cd4032040a750077205918c86049aa0f43d22947',
     ),
+    'razorpay/razorpay' => 
+    array (
+      'pretty_version' => '2.5.0',
+      'version' => '2.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '96c0167176cf53e3da15640622e9b993a3450ec7',
+    ),
     'rhumsaa/uuid' => 
     array (
       'replaced' => 
       array (
         0 => '4.1.1',
       ),
+    ),
+    'rmccue/requests' => 
+    array (
+      'pretty_version' => 'v1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '87932f52ffad70504d93f04f15690cf16a089546',
     ),
     'sebastian/cli-parser' => 
     array (

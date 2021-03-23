@@ -47,11 +47,11 @@ class CouponController extends Controller
     $coupon->valid_to = date("Y-m-d", strtotime($data['valid_to']));
     $coupon->status = CouponEnums::$STATUS['active'];
     if(!$coupon->save())
-        return false;
+        return Helper::response(false, "couldn't save");
 
     if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']){
         if(count($data['organizations']) > 0){
-            foreach ($data['organizations'] as $organization) {
+            foreach($data['organizations'] as $organization) {
                 $coupon_organizaton = new CouponOrganization;
                 $coupon_organizaton->organization_id = $organization;
                 $coupon_organizaton->coupon_id = $coupon->id;
@@ -62,27 +62,27 @@ class CouponController extends Controller
 
     if($data['zone_scope']== CouponEnums::$ZONE_SCOPE['custom']){
         if(count($data['zones']) > 0){
-            foreach ($data['zones'] as $zone) {
-                $coupon_zone = new CouponZone();
+            foreach($data['zones'] as $zone) {
+                $coupon_zone = new CouponZone;
                 $coupon_zone->zone_id = $zone;
-                $coupon_zone->coupon_id = $zone->id;
+                $coupon_zone->coupon_id = $coupon->id;
                 $coupon_zone->save();
             }
     }
     }
 
-    if($data['user_scope']== CouponEnums::$ZONE_SCOPE['custom']){
+    if($data['user_scope']== CouponEnums::$USER_SCOPE['custom']){
         if(count($data['users']) > 0){
-            foreach ($data['users'] as $zone) {
-                $coupon_zone = new CouponUser();
-                $coupon_zone->user_id = $zone;
-                $coupon_zone->coupon_id = $zone->id;
-                $coupon_zone->save();
+            foreach($data['users'] as $user) {
+                $coupon_user = new CouponUser;
+                $coupon_user->user_id = $user;
+                $coupon_user->coupon_id = $coupon->id;
+                $coupon_user->save();
             }
     }
     }
 
-    return Helper::response(true, "Coupon Added Successfully", ["zone"=>Coupon::with('users')->with('organizations')->with('zones')->findorFail($coupon->id)]);
+    return Helper::response(true, "Coupon Added Successfully", ["coupon"=>Coupon::with('users')->with('organizations')->with('zones')->findorFail($coupon->id)]);
 
 
    }
@@ -151,6 +151,8 @@ class CouponController extends Controller
        }
 
        $discount_amount = $coupon->discount_type == CouponEnums::$DISCOUNT_TYPE['fixed'] ? number_format($coupon->discount_amount,2) :  number_format($booking->final_quote * ($coupon->discount_amount / 100),2);
+
+       $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
 
        return Helper::response(true, "This coupon is valid",["coupon"=>["discount"=>$discount_amount]]);
    }

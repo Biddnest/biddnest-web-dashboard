@@ -100,7 +100,7 @@ class VendorApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required',
-
+            'pin' =>'required|integer',
             'inventory.*.booking_inventory_id'=>'required|integer',
             'inventory.*.amount'=>'required',
 

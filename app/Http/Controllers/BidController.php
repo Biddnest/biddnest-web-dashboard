@@ -125,6 +125,11 @@ class BidController extends Controller
 
     public static function submitBid($data, $org_id, $vendor_id)
     {
+        $vendor = Vendor::where("id", $vendor_id)->first();
+
+        if(!password_verify($data['pin'], $vendor->pin))
+            return Helper::response(false,"Incorrect Pin entered");
+
         $exist_bid = Bid::where("organization_id", $org_id)
                             ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
                             ->where(["status"=>BidEnums::$STATUS['active']])

@@ -94,7 +94,7 @@ class CouponController extends Controller
        if(!$coupon || $coupon->status == CouponEnums::$STATUS['inactive'])
            return Helper::response(false, "Coupon code doesn't exist."); //invalid coupon code
 
-       $booking = Booking::where('public_booking_id',$public_booking_id)->first();
+       $booking = Booking::where('public_booking_id',$public_booking_id)->with("organization")->first();
 
        if(Carbon::now()->format("Y-m-d") >= $coupon->valid_from && Carbon::now()->format("Y-m-d") <= $coupon->valid_to)
            return Helper::response(false, "This coupon is not yet active or has expired.");
@@ -118,14 +118,40 @@ class CouponController extends Controller
            return Helper::response(false, "You have exceeded the maximum usage for this coupon.");
 
        if($coupon_code->zone_scope == CouponEnums::$ZONE_SCOPE['custom']){
-//           foreach ($coupon_code->)
+           $coupon_valid = false;
+           foreach ($coupon->zone as $zone){
+               if($zone->id == $booking->organization->id){
+                   $coupon_valid = true;
+               }
+           }
+           if(!$coupon_valid)
+               return Helper::response(false, "This coupon is not valid in your city.");
        }
 
+       if($coupon_code->organization_scope == CouponEnums::$ORGANIZATION_SCOPE['custom']){
+           $coupon_valid = false;
+           foreach ($coupon->organizations as $org){
+               if($org->id == $booking->organization_id){
+                   $coupon_valid = true;
+               }
+           }
+           if(!$coupon_valid)
+               return Helper::response(false, "This coupon is not applicable o on this vendor.");
+       }
 
+       if($coupon_code->user_scope == CouponEnums::$USER_SCOPE['custom']){
+           $coupon_valid = false;
+           foreach ($coupon->users as $user){
+               if($user->id == $booking->user_id){
+                   $coupon_valid = true;
+               }
+           }
+           if(!$coupon_valid)
+               return Helper::response(false, "This coupon is not applicable for you.");
+       }
 
+       $discount_amount = $coupon->discount_type == CouponEnums::$DISCOUNT_TYPE['fixed'] ? number_format($coupon->discount_amount,2) :  number_format($booking->final_quote * ($coupon->discount_amount / 100),2);
 
-
-
-
+       return Helper::response(true, "This coupon is valid",["coupon"=>["discount"=>$discount_amount]]);
    }
 }

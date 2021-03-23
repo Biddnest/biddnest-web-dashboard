@@ -197,20 +197,17 @@ class BookingsController extends Controller
         $booking_type= $service_type==0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
 
         $timming = Settings::where("key", "bid_time")->pluck('value')[0];
-        $complete_time = Carbon::now()->addMinutes($timming)->format("Y-m-d H:i");
+        $complete_time = Carbon::now()->addMinutes($timming);
 
         $meta = json_decode($exist['meta'], true);
-        $meta['timings']['bid_result'] = $complete_time;
+        $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
 
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
                                             "public_booking_id"=>$exist->public_booking_id])
-                                            ->update([
-                                            "final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],
-                                            "booking_type"=>$booking_type,
+                                            ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
                                             "status"=>BookingEnums::$STATUS['placed'],
-                                            "meta" => json_encode($meta),
-                                            "bid_result_at"=>$complete_time
-                                            ]);
+                                             "meta" => json_encode($meta),
+                                             "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")]);
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $exist->id;

@@ -28,6 +28,25 @@ class VendorApiRouteController extends Controller
             return VendorUserController::loginForApp($request->username, $request->password);
     }
 
+    public function resetPin(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'pin' => 'required|digits:4',
+            'password' =>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return VendorUserController::resetPin($request->pin, $request->password, $request->token_payload->id);
+
+    }
+
+    public function checkPin(Request $request)
+    {       
+        return VendorUserController::checkPin($request->token_payload->id);
+    }
+
     /*bid API */
     public function getBookingsforApp(Request $request)
     {
@@ -50,7 +69,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::addBookmark($request->public_booking_id, $request->token_payload->organization_id, $request->token_payload->vendor_id);
+        return BookingsController::addBookmark($request->public_booking_id, $request->token_payload->organization_id, $request->token_payload->id);
     }
 
     public function getBookingById(Request $request)
@@ -100,6 +119,16 @@ class VendorApiRouteController extends Controller
         return BidController::submitBid($request->all(), $request->token_payload->organization_id, $request->token_payload->id);
     }
 
+    public function getPriceList(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required'
+        ]);
 
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BidController::getPriceList($request->public_booking_id, $request->token_payload->organization_id);
+    }
 
 }

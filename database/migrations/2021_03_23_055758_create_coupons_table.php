@@ -24,12 +24,13 @@ class CreateCouponsTable extends Migration
             $table->double("max_discount_amount",10,2);
             $table->double("min_order_amount",10,2);
             $table->tinyInteger("deduction_source"); //enum 0/1
-            $table->unsignedBigInteger("organization_id");
+//            $table->unsignedBigInteger("organization_id");
             $table->integer("max_usage");
             $table->integer("max_usage_per_user");
             $table->integer("usage");
-            $table->tinyInteger("scope"); //0 all //1 specific organization
-            $table->tinyInteger("eligibility_type"); //0 all //1 specific users //2 specific new users
+            $table->tinyInteger("organization_scope"); //0 all //1 specific organization
+            $table->tinyInteger("zone_scope"); //0 all //1 specific organization
+            $table->tinyInteger("user_scope"); //0 all //1 specific users //2 specific new users
             $table->date("valid_from");
             $table->date("valid_to");
             $table->tinyInteger("status")->default(1);

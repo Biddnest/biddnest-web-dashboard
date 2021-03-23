@@ -343,9 +343,9 @@ class BookingsController extends Controller
         $tax = Settings::where("key", "tax")->pluck('value')[0];
         $surge_charge = Settings::where("key", "surge_charge")->pluck('value')[0];
 
-        $garnd_total = $final_quote + $tax + $surge_charge;
+        $grand_total = $final_quote + $tax + $surge_charge;
 
-        return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_tatal"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$garnd_total]]);
+        return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_total"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$grand_total]]);
     }
 
     public static function getBookingsForVendorApp(Request $request)

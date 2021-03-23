@@ -15,13 +15,19 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index('user_id');
-            $table->foreign("user_id")->references('id')->on("users");
+            $table->string("public_transaction_id")->unique();
+
             $table->unsignedBigInteger('booking_id')->index('booking_id');
             $table->foreign("booking_id")->references('id')->on("bookings");
-            $table->string('payment_id');
+
+            $table->string('rzp_order_id')->unique();
+            $table->string('rzp_payment_id')->unique();
+
             $table->double('amount', 10,2);
-            $table->tinyInteger('status')->default('1');
+
+            $table->text("meta");
+
+            $table->tinyInteger('status')->default('0');
             $table->timestamps();
         });
     }

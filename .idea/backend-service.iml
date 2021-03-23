@@ -127,6 +127,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/fabian-tomischka/php-avatar-generator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mrclay/minify" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/htmlmin/htmlmin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/rmccue/requests" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/razorpay/razorpay" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

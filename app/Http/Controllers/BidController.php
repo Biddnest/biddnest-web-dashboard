@@ -15,6 +15,7 @@ use App\Models\BidInventory;
 use App\Models\InventoryPrice;
 use App\Models\Inventory;
 use App\Models\Settings;
+use App\Models\Vendor;
 use App\Helper;
 use App\Enums\CommonEnums;
 use App\Enums\BookingEnums;

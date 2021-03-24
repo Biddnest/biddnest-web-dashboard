@@ -19,7 +19,7 @@ class CouponController extends Controller
 {
    public function __construct(){}
 
-   public static function add($data){   
+   public static function add($data){
     /*$name,$desc, $code, $type, $discount_type, $discount_amount, $max_discount, $min_order_value, $deduction_source, $orgnization_id, $max_usage, $max_usage_user, $scope, $eligibiity_type, $valid_from, $valid_to*/
     $exist = Coupon::where("code",strtoupper($data['code']))->first();
 
@@ -155,7 +155,7 @@ class CouponController extends Controller
 
        $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
 
-       return ["coupon"=>["discount"=>$discount_amount]];
+       return ["coupon"=>["discount"=>number_format($discount_amount,2)]];
 
         // return $discount_amount;
    }

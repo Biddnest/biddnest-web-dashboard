@@ -19,36 +19,31 @@ class PaymentController extends Controller
 
     public static function intiatePayment($public_booking_id, $coupon_code)
     {
-        $booking_exist = Booking::where(["public_booking_id"=>$public_booking_id, "status"=>BookingEnums::$STATUS['payment_pending']])->first();
+        $booking_exist = Booking::where(["public_booking_id"=>$public_booking_id, "status"=>BookingEnums::$STATUS['payment_pending']])->with('payment')->first();
 
         if(!$booking_exist)
             return Helper::response(false,"Order is not Exist Or not in Payment State");
 
-        $coupon_valid =CouponController::checkIfValid($public_booking_id, $coupon_code);
-        // $coupon_valid = $coupon_valid->all();
-        $sub_amount = $booking_exist->final_quote;
-        
+        if(!$booking_exist->payment)
+            return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
+
+        $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
+
         if(!is_array($coupon_valid))
-        {
-            $coupon_valid = 0;
-            return Helper::response(false, $coupon_valid); 
-        }
-        
-        $discount_amount = $sub_amount-$coupon_valid['coupon']['discount'];
-        $grand_total = $discount_amount + Settings::where("key", "surge_charge")->pluck('value')[0];
-        $grand_total +=$grand_total * Settings::where("key", "tax")->pluck('value')[0]/100;
+            $coupon_valid = 0; return Helper::response(false, $coupon_valid);
+
+            /*tax is always taken as percentage*/
+        $grand_total = number_format(($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'],2);
+        $tax = number_format($grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100),2);
+        $grand_total += $tax;
 
         $meta =['public_booking_id'=>$public_booking_id];
 
         $createorder = self::createOrder($meta, $grand_total);
-
         $exist_payment = Payment::where(['booking_id'=>$booking_exist['id']])->first();
 
-        if($exist_payment)
-        {
             $payment_result = Payment::where('id', $exist_payment->id)
                 ->update([
-                    // 'public_transaction_id'=>$createorder['receipt'],
                     'other_charges'=>Settings::where("key", "surge_charge")->pluck('value')[0],
                     'discount_amount'=>$coupon_valid['coupon']['discount'],
                     'coupon_code' => $coupon_code,
@@ -58,31 +53,16 @@ class PaymentController extends Controller
                     'grand_total'=>$grand_total,
                     'meta'=>json_encode($meta)
                 ]);
-        }
-        else{
-            // return $createorder['receipt'];
-            $payment = new Payment;
-            $payment->public_transaction_id = $createorder['receipt'];
-            $payment->booking_id = $booking_exist['id'];
-            $payment->other_charges = Settings::where("key", "surge_charge")->pluck('value')[0];
-            $payment->discount_amount = $coupon_valid['coupon']['discount'];
-            $payment->coupon_code = $coupon_code;
-            $payment->tax = Settings::where("key", "tax")->pluck('value')[0];
-            $payment->sub_total= $sub_amount;
-            $payment->rzp_order_id = $createorder['id'];
-            $payment->grand_total = $grand_total;
-            $payment->meta = json_encode($meta);
-            $payment_result = $payment->save();
-        }
+
 
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");
-            
+
         return Helper::response(true, "Payment save successfully", ['payment'=>['grand_total'=>$grand_total, 'currency'=>"INR",'rzp_order_id'=>$createorder['id']]]);
     }
 
     private static function createOrder($meta, $amount)
-    {      
+    {
         $receipt = Uuid::uuid4();
         // $receipt = 1234;
         // $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
@@ -94,12 +74,12 @@ class PaymentController extends Controller
             'amount' => $amount*100,
             'currency' => 'INR',
             'notes'=>$meta
-        ]]); 
+        ]]);
         return json_decode($response->getBody(), true);
     }
 
     public static function webhook($order_id)
     {
-        
+
     }
 }

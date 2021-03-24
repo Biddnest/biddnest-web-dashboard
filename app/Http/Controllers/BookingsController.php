@@ -334,19 +334,21 @@ class BookingsController extends Controller
 
     public static function getPaymentDetails($public_booking_id)
     {
-        $final_quote= Booking::where("public_booking_id", $public_booking_id)
-                                ->where("status", BookingEnums::$STATUS['payment_pending'])->pluck('final_quote')[0];
-        if(!$final_quote)
+        $booking = Booking::where("public_booking_id", $public_booking_id)
+                                ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
+        if(!$booking)
             return Helper::response(false,"Order is not Exist");
 
-        $tax = Settings::where("key", "tax")->pluck('value')[0]/100;
-        $surge_charge = Settings::where("key", "surge_charge")->pluck('value')[0];
+        if(!$booking->payment)
+            return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
-        $grand_total = $final_quote + $surge_charge;
-
-        $grand_total +=$grand_total * $tax;
-
-        return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_total"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$grand_total]]);
+        $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
+        return Helper::response(true,"Get payment data successfully",["payment_details"=>[
+            "sub_total"=>$booking->payment->subtotal,
+            "tax(".$tax_percentage."%)"=>$booking->payment->tax,
+            "surge_charge"=>$booking->payment->other_charges,
+            "grand_total" => $booking->payment->grand_total
+        ]]);
     }
 
     public static function getBookingsForVendorApp(Request $request)

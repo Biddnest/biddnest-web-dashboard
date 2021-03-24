@@ -58,17 +58,25 @@ class BidController extends Controller
 
     }
 
-    public static function getbookings()
+    public static function getbookings($booking_id = Null)
     {
         $current_time = Carbon::now()->format("Y-m-d H:i:s");
 
-        $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
-                            ->where("bid_result_at", "<=", "$current_time")->get();
+        if($booking_id)
+        {
+            $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->where("bid_result_at", "<=", "$current_time")->get();
+        }
+        else
+        {
+            $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->where("bid_result_at", "<=", "$current_time")->where("id", $booking_id)->get();
+        }
+        
 
         foreach($bookings as $booking)
         {
             $bid_end = self::updateStatus($booking['id']);
-
 
             /*tax is always taken as percentage*/
             $sub_total = number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
@@ -85,7 +93,6 @@ class BidController extends Controller
             $payment->sub_total= $sub_total;
             $payment->grand_total = $grand_total;
             $payment_result = $payment->save();
-
         }
 
         return true;
@@ -95,7 +102,9 @@ class BidController extends Controller
     {
         $min_amount = Bid::where("booking_id", $book_id)->min('bid_amount');
 
-        if(!$min_amount || $min_amount >= 2)
+        $tie_amount = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->count();
+
+        if(!$min_amount || $tie_amount >= 2)
         {
             $order = Booking::where("id", $book_id)->first();
 
@@ -212,10 +221,5 @@ class BidController extends Controller
             "inventories" => $price_list,
             "total"=>$total
         ]]);
-    }
-
-    public static function end_bid($id)
-    {
-        
     }
 }

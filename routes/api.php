@@ -44,6 +44,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
+            Route::post('/webhook',[ApiRouter::class, 'webhook']);
         });
     });
 

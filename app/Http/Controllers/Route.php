@@ -190,7 +190,6 @@ class Route extends Controller
     }
 
     /*Inventories*/
-
     public function inventories()
     {
         return AdminController::inventories();
@@ -510,7 +509,6 @@ class Route extends Controller
     }
 
     /*Vendor login*/
-
     public function vendor_login(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -523,9 +521,7 @@ class Route extends Controller
             return VendorController::login($request->email, $request->password);
     }
 
-
      /*Sliders And Banners*/
-
      public function sliders()
      {
         return SliderController::get();
@@ -618,7 +614,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         
-        return BidController::end_bid($request->booking_id);
+        return BidController::getbookings($request->booking_id);
 
      }
 

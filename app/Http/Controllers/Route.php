@@ -609,6 +609,17 @@ class Route extends Controller
         return CouponController::add($request->all());
      }
 
-     
+     public function end_bid(Request $request)
+     {
+        $validation = Validator::make($request->all(),[
+            'booking_id'=> 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return BidController::end_bid($request->booking_id);
+
+     }
 
 }

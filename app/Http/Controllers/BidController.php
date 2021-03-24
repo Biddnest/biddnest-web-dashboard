@@ -213,4 +213,9 @@ class BidController extends Controller
             "total"=>$total
         ]]);
     }
+
+    public static function end_bid($id)
+    {
+        
+    }
 }

@@ -12,5 +12,5 @@ use Fabito\AvatarGenerator\Avatar;
 
 class TicketEnums
 {
-    public static $TYPE = ["complaint"=>0, "service_request"=>1];
+    public static $TYPE = ["complaint"=>0, "service_request"=>1, "order_cancellation"=>2, "order_rescheduled"=>3];
 }

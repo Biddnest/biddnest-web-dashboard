@@ -388,7 +388,7 @@ class BookingsController extends Controller
         return Helper::response(true,"Show data successfully",["booking"=>$booking]);
     }
 
-    public static function reject($id, $org_id)
+    public static function reject($id, $org_id, $vendor_id)
     {
         $exist_bid = Bid::where("organization_id", $org_id)
                             ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])

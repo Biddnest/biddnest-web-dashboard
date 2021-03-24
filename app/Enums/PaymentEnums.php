@@ -5,7 +5,7 @@
 namespace App\Enums;
 class PaymentEnums{
 
-    public static $STATUS = ["pending"=>0,"failed"=>2, "completed"=>1];
+    public static $STATUS = ["pending"=>0,"failed"=>2, "completed"=>1, "refund_initiated"=>3, "refunded"=>4];
 
 }
 

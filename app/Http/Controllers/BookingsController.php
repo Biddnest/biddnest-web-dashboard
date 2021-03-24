@@ -265,7 +265,7 @@ class BookingsController extends Controller
             return Helper::response(false,"Couldn't Find data");
         }
 
-        return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('vendor')->with('service')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('vendor')->with('service')->with('payment')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
     public static function bookingHistoryPast($user_id)
@@ -343,7 +343,7 @@ class BookingsController extends Controller
         $surge_charge = Settings::where("key", "surge_charge")->pluck('value')[0];
 
         $grand_total = $final_quote + $surge_charge;
-        
+
         $grand_total +=$grand_total * $tax;
 
         return Helper::response(true,"Get payment data successfully",["payment_details"=>["sub_total"=>$final_quote, "tax"=>$tax, "surge_charge"=>$surge_charge, "grand_total"=>$grand_total]]);

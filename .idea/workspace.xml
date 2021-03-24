@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +206,7 @@
       <workItem from="1615786767049" duration="39902000" />
       <workItem from="1616132711040" duration="4276000" />
       <workItem from="1616390215775" duration="10522000" />
-      <workItem from="1616482283351" duration="18321000" />
+      <workItem from="1616482283351" duration="19124000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1614851085109</created>
@@ -291,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616589166467</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
+      <created>1616589285796</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616589285796</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

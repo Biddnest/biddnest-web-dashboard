@@ -70,6 +70,12 @@ class SettingsController extends Controller
                 ],
                 "bid"=>[
                     "status"=>BidEnums::$STATUS
+                ],
+                "payment"=>[
+                    'razorpay'=>[
+                        "rzp_id"=>Settings::where("key", "razor_key")->pluck('value')[0],
+                        "rzp_secret"=>Settings::where("key", "razor_secret")->pluck('value')[0]
+                    ]
                 ]
             ]
         ]);

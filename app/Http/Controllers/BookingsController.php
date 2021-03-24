@@ -426,4 +426,14 @@ class BookingsController extends Controller
 
         return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $exist_bid['id'])->first()]);
     }
+
+    public static function assignDriver($id, $org_id, $vendor_id)
+    {
+        $exist_bid = Booking::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
+                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+    }
 }

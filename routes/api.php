@@ -74,6 +74,8 @@ Route::prefix('vendors/v1')->group(function () {
         Route::post('/reject',[VendorApiRouter::class,'reject']);
 
         Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
+
+        Route::get('/driver',[VendorApiRouter::class,'assignDriver']);
     });
 
     Route::prefix('bid')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -23,6 +24,7 @@ use App\Enums\BidEnums;
 
 use Carbon\CarbonImmutable;
 use Carbon\Carbon;
+use Ramsey\Uuid\Uuid;
 
 
 class BidController extends Controller
@@ -60,17 +62,30 @@ class BidController extends Controller
     {
         $current_time = Carbon::now()->format("Y-m-d H:i:s");
 
-        $booking = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
-                            ->where("bid_result_at", "<=", "$current_time") ->get();
+        $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+                            ->where("bid_result_at", "<=", "$current_time")->get();
 
-        foreach($booking as $bid)
+        foreach($bookings as $booking)
         {
-            // $meta = json_decode($bid['meta'], true);
-            // $bid_end_time = $meta['timings']['bid_result'];
-            // if($bid_end_time == $current_time)
-            // {
-               $bid_end = Self::updateStatus($bid['id']);
-            // }
+            $bid_end = self::updateStatus($booking['id']);
+
+
+            /*tax is always taken as percentage*/
+            $sub_total = number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
+            $other_charges= number_format(Settings::where("key", "surge_charge")->pluck('value')[0],2);
+            $tax = (number_format(Settings::where("key", "tax")->pluck('value')[0],2)/100) * ($sub_total + $other_charges);
+
+            $grand_total = number_format($sub_total+$other_charges+$tax,2);
+
+            $payment = new Payment;
+            $payment->public_transaction_id = Uuid::uuid4();
+            $payment->booking_id = $booking['id'];
+            $payment->other_charges = $other_charges;
+            $payment->tax = $tax;
+            $payment->sub_total= $sub_total;
+            $payment->grand_total = $grand_total;
+            $payment_result = $payment->save();
+
         }
 
         return true;

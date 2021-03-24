@@ -230,11 +230,12 @@ class InventoryController extends Controller
     {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
-            $maxprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
+            $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
                                                 "size"=>$item['size'],
                                                 "material"=>$item['material']])->min('price_premium');
-            $quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
-           $finalprice += $maxprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+
+            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
+           $finalprice += $minprice ? $minprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
         }
 
         return $finalprice;

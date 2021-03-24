@@ -39,7 +39,7 @@ class PaymentController extends Controller
 
         $meta =['public_booking_id'=>$public_booking_id];
 
-        $createorder = self::createOrder($meta, $grand_total);
+        $createorder = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total);
         $exist_payment = Payment::where(['booking_id'=>$booking_exist['id']])->first();
 
             $payment_result = Payment::where('id', $exist_payment->id)
@@ -47,7 +47,7 @@ class PaymentController extends Controller
                     'other_charges'=>Settings::where("key", "surge_charge")->pluck('value')[0],
                     'discount_amount'=>$coupon_valid['coupon']['discount'],
                     'coupon_code' => $coupon_code,
-                    'tax'=>Settings::where("key", "tax")->pluck('value')[0],
+                    'tax'=> $tax,
                     'sub_total'=>$sub_amount,
                     'rzp_order_id'=>$createorder['id'],
                     'grand_total'=>$grand_total,
@@ -61,12 +61,8 @@ class PaymentController extends Controller
         return Helper::response(true, "Payment save successfully", ['payment'=>['grand_total'=>$grand_total, 'currency'=>"INR",'rzp_order_id'=>$createorder['id']]]);
     }
 
-    private static function createOrder($meta, $amount)
+    private static function createOrder($receipt, $meta, $amount)
     {
-        $receipt = Uuid::uuid4();
-        // $receipt = 1234;
-        // $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
-
         $client = new client();
         $request_url = 'https://api.razorpay.com/v1/orders/';
         $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]], 'json'=>[

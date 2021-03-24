@@ -12,6 +12,7 @@ use App\Enums\BookingEnums;
 use App\Enums\PaymentEnums;
 use App\Models\Settings;
 use Ramsey\Uuid\Uuid;
+use \GuzzleHttp\Client;
 
 class PaymentController extends Controller
 {
@@ -34,8 +35,8 @@ class PaymentController extends Controller
         }
         
         $discount_amount = $sub_amount-$coupon_valid['coupon']['discount'];
-
-        $grand_total = $discount_amount + Settings::where("key", "surge_charge")->pluck('value')[0] + Settings::where("key", "tax")->pluck('value')[0];
+        $grand_total = $discount_amount + Settings::where("key", "surge_charge")->pluck('value')[0];
+        $grand_total +=$grand_total * Settings::where("key", "tax")->pluck('value')[0]/100;
 
         $meta =['public_booking_id'=>$public_booking_id];
 
@@ -47,9 +48,10 @@ class PaymentController extends Controller
         {
             $payment_result = Payment::where('id', $exist_payment->id)
                 ->update([
-                    'public_transaction_id'=>$createorder['receipt'],
+                    // 'public_transaction_id'=>$createorder['receipt'],
                     'other_charges'=>Settings::where("key", "surge_charge")->pluck('value')[0],
-                    'discount_amount'=>$coupon_valid,
+                    'discount_amount'=>$coupon_valid['coupon']['discount'],
+                    'coupon_code' => $coupon_code,
                     'tax'=>Settings::where("key", "tax")->pluck('value')[0],
                     'sub_total'=>$sub_amount,
                     'rzp_order_id'=>$createorder['id'],
@@ -58,12 +60,13 @@ class PaymentController extends Controller
                 ]);
         }
         else{
-
+            // return $createorder['receipt'];
             $payment = new Payment;
             $payment->public_transaction_id = $createorder['receipt'];
-            $payment->booking_id = $booking_exist->id;
+            $payment->booking_id = $booking_exist['id'];
             $payment->other_charges = Settings::where("key", "surge_charge")->pluck('value')[0];
-            $payment->discount_amount = $coupon_valid;
+            $payment->discount_amount = $coupon_valid['coupon']['discount'];
+            $payment->coupon_code = $coupon_code;
             $payment->tax = Settings::where("key", "tax")->pluck('value')[0];
             $payment->sub_total= $sub_amount;
             $payment->rzp_order_id = $createorder['id'];
@@ -75,24 +78,24 @@ class PaymentController extends Controller
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");
             
-        return Helper::response(true, "Payment save successfully", ['payment'=>['rzp_order_id'=>$createorder['receipt']]]);
+        return Helper::response(true, "Payment save successfully", ['payment'=>['grand_total'=>$grand_total, 'currency'=>"INR",'rzp_order_id'=>$createorder['id']]]);
     }
-
 
     private static function createOrder($meta, $amount)
     {      
         $receipt = Uuid::uuid4();
-        
-        $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
-        
-        $order = $api->order->create([
-            'receipt' => $receipt,
-            'amount' => $amount,
-            'currency' => 'INR',
-            'note' => json_encode($meta)
-        ]);
+        // $receipt = 1234;
+        // $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
 
-        return $order;
+        $client = new client();
+        $request_url = 'https://api.razorpay.com/v1/orders/';
+        $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]], 'json'=>[
+            'receipt' => $receipt,
+            'amount' => $amount*100,
+            'currency' => 'INR',
+            'notes'=>$meta
+        ]]); 
+        return json_decode($response->getBody(), true);
     }
 
     public static function webhook($order_id)

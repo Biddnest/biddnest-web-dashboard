@@ -332,10 +332,9 @@ class BookingsController extends Controller
             return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 
-    public static function getPaymentDetails($public_booking_id, $user_id)
+    public static function getPaymentDetails($public_booking_id)
     {
-        $final_quote= Booking::where(["user_id"=>$user_id,
-                                "public_booking_id"=>$public_booking_id])
+        $final_quote= Booking::where("public_booking_id", $public_booking_id)
                                 ->where("status", BookingEnums::$STATUS['payment_pending'])->pluck('final_quote')[0];
         if(!$final_quote)
             return Helper::response(false,"Order is not Exist");

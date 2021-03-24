@@ -11,7 +11,7 @@ use App\Helper;
 use App\Enums\BookingEnums;
 use App\Enums\PaymentEnums;
 use App\Models\Settings;
-use ramsey\uuid\uuid;
+use Ramsey\Uuid\Uuid;
 
 class PaymentController extends Controller
 {
@@ -24,15 +24,16 @@ class PaymentController extends Controller
             return Helper::response(false,"Order is not Exist Or not in Payment State");
 
         $coupon_valid =CouponController::checkIfValid($public_booking_id, $coupon_code);
+        // $coupon_valid = $coupon_valid->all();
         $sub_amount = $booking_exist->final_quote;
         
-        if(!$coupon_valid)
+        if(!is_array($coupon_valid))
         {
             $coupon_valid = 0;
-            return Helper::response(false, "Coupon code is not valid"); 
+            return Helper::response(false, $coupon_valid); 
         }
         
-        $discount_amount = $sub_amount-$coupon_valid;
+        $discount_amount = $sub_amount-$coupon_valid['coupon']['discount'];
 
         $grand_total = $discount_amount + Settings::where("key", "surge_charge")->pluck('value')[0] + Settings::where("key", "tax")->pluck('value')[0];
 

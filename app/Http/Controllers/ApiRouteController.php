@@ -314,7 +314,24 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::getPaymentDetails($request->public_booking_id, $request->token_payload->id);
+            return BookingsController::getPaymentDetails($request->public_booking_id);
+    }
+
+    public function verifyCoupon(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'coupon_code' =>'string'            
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        $valid= CouponController::checkIfValid($request->coupon_code);
+
+        if(is_array($valid))
+            return Helper::response(true,"valid Coupon", $valid);
+        else
+            return Helper::response(false,$valid);
     }
 
     public function intiatePayment(Request $request)
@@ -327,7 +344,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         
-        return BookingsController::intiatePayment($request->public_booking_id, $request->coupon_code);
+        return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
     }
 
     public function webhook(Request $request)

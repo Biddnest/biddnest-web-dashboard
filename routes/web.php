@@ -100,7 +100,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/banners',[Router::class,'banners_add'])->name("banners_add");
     Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
 
-   
+    Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
 
 });
 

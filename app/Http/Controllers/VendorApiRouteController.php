@@ -93,14 +93,14 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return BookingsController::reject($request->public_booking_id, $request->token_payload->organization_id);
+        return BookingsController::reject($request->public_booking_id, $request->token_payload->organization_id, $request->token_payload->id);
     }
 
     public function addBid(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required',
-
+            'pin' =>'required|integer',
             'inventory.*.booking_inventory_id'=>'required|integer',
             'inventory.*.amount'=>'required',
 

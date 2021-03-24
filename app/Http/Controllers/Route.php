@@ -579,6 +579,35 @@ class Route extends Controller
         return SliderController::deleteBanner($id);
      }
 
+     public function coupon_add(Request $request)
+     {
+        $validation = Validator::make($request->all(),[
+            'name'=>'required|string',
+            'desc'=>'required|string',
+            'code'=>'required|string',
+            'type'=>'required|integer',
+            'discount_type'=>'required|integer',
+            'discount_amount'=>'required',
+            'max_discount_amount'=>'required',
+            'min_order_amount'=>'required',
+            'deduction_source'=>'required|integer',
+            'max_usage'=>'required|integer',
+            'max_usage_per_user'=>'required|integer',
+            'organization_scope'=>'required|integer',
+            'zone_scope'=>'required|integer',
+            'user_scope'=>'required|integer',
+            'valid_from'=>'required',
+            'valid_to'=>'required',
+            'organizations.*'=>'required',
+            'zones.*'=>'required',
+            'users.*'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return CouponController::add($request->all());
+     }
 
      
 

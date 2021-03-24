@@ -332,10 +332,9 @@ class BookingsController extends Controller
             return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 
-    public static function getPaymentDetails($public_booking_id, $user_id)
+    public static function getPaymentDetails($public_booking_id)
     {
-        $final_quote= Booking::where(["user_id"=>$user_id,
-                                "public_booking_id"=>$public_booking_id])
+        $final_quote= Booking::where("public_booking_id", $public_booking_id)
                                 ->where("status", BookingEnums::$STATUS['payment_pending'])->pluck('final_quote')[0];
         if(!$final_quote)
             return Helper::response(false,"Order is not Exist");
@@ -364,13 +363,13 @@ class BookingsController extends Controller
                 $bid_id->where("status", BidEnums::$STATUS['won']);
                 break;
 
-            case "scheduled":
-                $bid_id->whereIn("bookmarked", CommonEnums::$YES);
+            case "bookmarked":
+                $bid_id->where("bookmarked", CommonEnums::$YES);
                 break;
         }
 
 
-        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->pluck('booking_id'))->paginate(CommonEnums::$PAGE_LENGTH);
+        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->pluck('booking_id'))->with('bid')->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true,"Show data successfully",["bookings"=>$bookings->items(), "paging"=>[
             "current_page"=>$bookings->currentPage(), "total_pages"=>$bookings->lastPage(), "next_page"=>$bookings->nextPageUrl(), "previous_page"=>$bookings->previousPageUrl()
@@ -382,13 +381,13 @@ class BookingsController extends Controller
         $organization_id = $request->token_payload->organization_id;
         $booking = Booking::where(["public_booking_id"=>$request->public_booking_id])->with('inventories')->with(['bid'=>function($bid) use($request){
             $bid->where("organization_id", $request->token_payload->organization_id)
-            ->whereNotIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
+            ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
         }])->first();
 
         return Helper::response(true,"Show data successfully",["booking"=>$booking]);
     }
 
-    public static function reject($id, $org_id)
+    public static function reject($id, $org_id, $vendor_id)
     {
         $exist_bid = Bid::where("organization_id", $org_id)
                             ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])

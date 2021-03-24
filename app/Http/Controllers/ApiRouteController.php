@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Middleware\VerifyJwtToken;
 use App\StringFormatter;
+use Razorpay\Api\Api;
 
 
 /**
@@ -313,10 +314,43 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::getPaymentDetails($request->public_booking_id, $request->token_payload->id);
+            return BookingsController::getPaymentDetails($request->public_booking_id);
     }
 
+    public function verifyCoupon(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'coupon_code' =>'string'            
+        ]);
 
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        $valid= CouponController::checkIfValid($request->coupon_code);
+
+        if(is_array($valid))
+            return Helper::response(true,"valid Coupon", $valid);
+        else
+            return Helper::response(false,$valid);
+    }
+
+    public function intiatePayment(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+            'coupon_code' =>'string'            
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        
+        return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
+    }
+
+    public function webhook(Request $request)
+    {
+
+    }
 
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();

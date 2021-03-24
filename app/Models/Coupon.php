@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
+    protected $hidden = ['created_at','updated_at','deleted'];
     use HasFactory;
 
     public function zones(){
@@ -14,7 +15,7 @@ class Coupon extends Model
     }
 
     public function organizations(){
-        return $this->hasManyThrough(Organization::class, CouponZone::class,"organization_id","id","id","coupon_id");
+        return $this->hasManyThrough(Organization::class, CouponOrganization::class,"organization_id","id","id","coupon_id");
     }
 
     public function users(){

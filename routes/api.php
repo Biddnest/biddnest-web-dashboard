@@ -26,6 +26,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/inventories',[ApiRouter::class,'getInventories']);
     Route::get('/inventories/all',[ApiRouter::class,'getAllInventories']);
 
+    Route::post('/coupon/verify',[ApiRouter::class,'verifyCoupon']);
+
     //bookings APIs
     Route::prefix('bookings')->group(function () {
         Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
@@ -38,13 +40,19 @@ Route::prefix('v1')->group(function () {
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
 
-        Route::get('/payment-details',[ApiRouter::class,'paymentDetails']);
+        
+        Route::prefix('payment')->group(function () {
+            Route::get('/summary',[ApiRouter::class,'paymentDetails']);
+            Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
+        });
     });
+
+    
 
 });
 
 
-Route::prefix('vendors')->group(function () {
+Route::prefix('vendors/v1')->group(function () {
 
     Route::prefix('auth')->group(function () {
         Route::post('/login',[VendorApiRouter::class,'loginForApp']);

@@ -27,10 +27,15 @@ class PaymentController extends Controller
         if(!$booking_exist->payment)
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
-        $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
-
-        if(!is_array($coupon_valid))
-            $coupon_valid = 0; return Helper::response(false, $coupon_valid);
+        if($coupon_code && trim($coupon_code) != "") {
+            $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
+            if (!is_array($coupon_valid))
+                $coupon_valid = 0.00;
+            return Helper::response(false, $coupon_valid);
+        }
+        else{
+            $coupon_valid = 0.00;
+        }
 
             /*tax is always taken as percentage*/
         $grand_total = number_format(($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'],2);
@@ -54,7 +59,6 @@ class PaymentController extends Controller
                     'meta'=>json_encode($meta)
                 ]);
 
-
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");
 
@@ -74,8 +78,40 @@ class PaymentController extends Controller
         return json_decode($response->getBody(), true);
     }
 
-    public static function webhook($order_id)
+    public static function webhook(Request $request)
     {
+        // $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
+        // $api->utility->verifyWebhookSignature($request->getContent(), $request->header('X-Razorpay-Signature'), Settings::where("key", "razor_webhook_secret")->pluck('value')[0]);
+        $body = $request->all();
+        if($body['entity'] == 'event' && ($body['event']=='payment.captured' || $body['event']=='payment.authorized'))
+        {
+            $order_id_exist = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])->first();
 
+            $update_webhook = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
+            ->update([
+                'rzp_payment_id'=>$body['payload']['payment']['entity']['id'],
+                'status'=> PaymentEnums::$STATUS['completed']
+            ]);
+
+            $confirmestimate = Booking::where(["id"=>$order_id_exist->booking_id])
+                                ->update(["status"=>BookingEnums::$STATUS['awaiting_pickup']]);
+
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $order_id_exist->booking_id;
+            $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
+            $result_status = $bookingstatus->save();
+
+            return Helper::response(true, "Payment successfull"); 
+        }  
+        else
+        {
+            $update_webhook = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
+            ->update([
+                'rzp_payment_id'=>$body['payload']['payment']['entity']['id'],
+                'status'=> PaymentEnums::$STATUS['failed']
+            ]);
+
+            return Helper::response(true, "Payment failed"); 
+        }        
     }
 }

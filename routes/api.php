@@ -39,16 +39,13 @@ Route::prefix('v1')->group(function () {
         Route::post('/reschedul',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
-
         
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
             Route::post('/webhook',[ApiRouter::class, 'webhook']);
         });
-    });
-
-    
+    });   
 
 });
 

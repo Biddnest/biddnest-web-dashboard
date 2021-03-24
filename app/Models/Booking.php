@@ -11,7 +11,7 @@ class Booking extends Model
     use HasFactory;
     protected $hidden = ['created_at','updated_at','deleted'];
 
-    public function vendor(){
+    public function organization(){
         return $this->belongsTo(Organization::class);
     }
 
@@ -48,5 +48,15 @@ class Booking extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class);
+    }
+
+    public function driver()
+    {
+        return $this->hasOneThrough(Vendor::class, BookingDriver::class, 'booking_id', 'id', 'id', 'driver_id');
+    }    
+
+    public function vehicle()
+    {
+        return $this->hasOneThrough(vehicle::class, BookingDriver::class, 'vehicle_id', 'id', 'id', 'driver_id');
     }
 }

@@ -134,13 +134,15 @@ class VendorApiRouteController extends Controller
     public function assignDriver(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required'
+            'public_booking_id' => 'required',
+            'driver_id' => 'required|integer',
+            'vehicle_id' => 'required|integer'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-            return BookingsController::assignDriver($request->public_booking_id, $request->token_payload->organization_id, $request->token_payload->id);
+            return BookingsController::assignDriver($request->public_booking_id, $request->driver_id, $request->vehicle_id);
     }
 
 }

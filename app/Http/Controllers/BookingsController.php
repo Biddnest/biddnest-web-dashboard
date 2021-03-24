@@ -430,13 +430,23 @@ class BookingsController extends Controller
         return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $exist_bid['id'])->first()]);
     }
 
-    public static function assignDriver($id, $org_id, $vendor_id)
+    public static function assignDriver($booking_id, $driver_id, $vehicle_id)
     {
-        $exist_bid = Booking::where("organization_id", $org_id)
-                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
-                            ->where(["status"=>BidEnums::$STATUS['active']])
+        $assign_driver = Booking::where("booking_id", $id)
+                            ->where(["status"=>BookingEnums::$STATUS['awaiting_pickup']])
                             ->first();
-        if(!$exist_bid)
+        if(!$assign_driver)
             return Helper::response(false,"Not in active state");
+
+        $save_driver = new BookingDriver;
+        $save_driver->booking_id = $assign_driver['id'];
+        $save_driver->driver_id = $driver_id;
+        $save_driver->vehicle_id = $vehicle_id;
+        $result_driver = $save_driver->save();
+
+        if(!$result_driver)
+            return Helper::response(false,"couldn't sanve");
+        
+        return Helper::response(true,"sanve successfully");
     }
 }

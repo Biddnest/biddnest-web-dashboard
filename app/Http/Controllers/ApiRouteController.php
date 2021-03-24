@@ -330,6 +330,11 @@ class ApiRouteController extends Controller
         return BookingsController::intiatePayment($request->public_booking_id, $request->coupon_code);
     }
 
+    public function webhook(Request $request)
+    {
+
+    }
+
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();
     }

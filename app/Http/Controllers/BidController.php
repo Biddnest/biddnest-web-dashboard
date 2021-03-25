@@ -60,6 +60,7 @@ class BidController extends Controller
 
     public static function getbookings($public_booking_id = Null)
     {
+
         $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
 
         if(!$public_booking_id)
@@ -75,15 +76,16 @@ class BidController extends Controller
             // return $bookings;
         }
 
-
+        $id =[];
         foreach($bookings as $booking)
         {
             $bid_end = self::updateStatus($booking['id']);
 
             /*tax is always taken as percentage*/
-            $sub_total = number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
-            $other_charges= number_format(Settings::where("key", "surge_charge")->pluck('value')[0],2);
-            $tax = number_format(Settings::where("key", "tax")->pluck('value')[0]/100, 2) * ($sub_total + $other_charges);
+            $sub_total = (double) number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
+            $other_charges= (double) number_format(Settings::where("key", "surge_charge")->pluck('value')[0],2);
+            $tax_percentage =(double) number_format(Settings::where("key", "tax")->pluck('value')[0], 2);
+            $tax = (double) number_format(($tax_percentage/100), 2) * ($sub_total + $other_charges);
 
             $grand_total = number_format($sub_total+$other_charges+$tax,2);
 
@@ -95,12 +97,14 @@ class BidController extends Controller
             $payment->sub_total= $sub_total;
             $payment->grand_total = $grand_total;
             $payment_result = $payment->save();
-        }
 
-        return true;
+            $id[]=$booking['id'];
+        }
+        
+        return ['total_bookings'=> count($bookings), 'booking_id'=>$id];
     }
 
-    public static function updateStatus($book_id)
+    private static function updateStatus($book_id)
     {
         $min_amount = Bid::where("booking_id", $book_id)
                         ->where("status", BidEnums::$STATUS['bid_submitted'])
@@ -115,7 +119,7 @@ class BidController extends Controller
             $order = Booking::where("id", $book_id)->first();
 
             $timming = Settings::where("key", "rebid_time")->pluck('value')[0];
-            $complete_time = Carbon::now()->addMinutes($timming);
+            $complete_time = Carbon::now()->addMinutes($timming)->roundMinutes();
 
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");

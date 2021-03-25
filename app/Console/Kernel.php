@@ -25,10 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->call(function () {
-            BidController::getbookings();
-        })->everyMinute();
+        $schedule->command('bid:end all')->everyMinute();
+        // $schedule->call(function () {
+        //     BidController::getbookings();
+        // })->everyMinute();
     }
 
     /**

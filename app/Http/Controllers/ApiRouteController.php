@@ -336,7 +336,7 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            'coupon_code' =>'string'            
+            'coupon_code' =>'nullable|string'            
         ]);
 
         if($validation->fails())

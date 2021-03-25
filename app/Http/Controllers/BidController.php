@@ -82,12 +82,11 @@ class BidController extends Controller
             $bid_end = self::updateStatus($booking['id']);
 
             /*tax is always taken as percentage*/
-            $sub_total = (double) number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
-            $other_charges= (double) number_format(Settings::where("key", "surge_charge")->pluck('value')[0],2);
-            $tax_percentage =(double) number_format(Settings::where("key", "tax")->pluck('value')[0], 2);
-            $tax = (double) number_format(($tax_percentage/100), 2) * ($sub_total + $other_charges);
-
-            $grand_total = number_format($sub_total+$other_charges+$tax,2);
+            $sub_total = (float) Booking::where("id",$booking["id"])->pluck("final_quote")[0];
+            $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+            $tax_percentage =(float) Settings::where("key", "tax")->pluck('value')[0];
+            $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
+            $grand_total = (float) $sub_total+$other_charges+$tax;
 
             $payment = new Payment;
             $payment->public_transaction_id = Uuid::uuid4();

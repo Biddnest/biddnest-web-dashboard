@@ -62,7 +62,7 @@ class BidController extends Controller
     {
         $current_time = Carbon::now()->format("Y-m-d H:i:s");
 
-        if(!$booking_id)
+        if(!$public_booking_id)
         {
             $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
             ->where("bid_result_at", "<=", "$current_time")->get();

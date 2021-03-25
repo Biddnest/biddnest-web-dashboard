@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -28,6 +29,7 @@ use App\Enums\BidEnums;
 use App\Enums\ServiceEnums;
 use Carbon\CarbonImmutable;
 use Carbon\Carbon;
+use PHPUnit\TextUI\Help;
 
 class BookingsController extends Controller
 {
@@ -446,7 +448,52 @@ class BookingsController extends Controller
 
         if(!$result_driver)
             return Helper::response(false,"couldn't sanve");
-        
+
         return Helper::response(true,"sanve successfully");
+    }
+
+    public static function startTrip($public_booking_id, $organization_id, $pin){
+        $booking = Booking::where([
+            "public_booking_id"=>$public_booking_id,
+            "organization_id"=>$organization_id
+        ])->first();
+
+        if(!$booking)
+            return Helper::response(false, "Invalid Order id");
+        $meta = json_decode($booking->meta,true);
+        if($meta['start_pin'] == $pin){
+            $meta["end_pin"] = Helper::generateOTP(4);
+
+            Booking::where("public_booking_id",$public_booking_id)->update([
+                "status"=>BookingEnums::$STATUS['in_transit'],
+                "meta"=>$meta
+            ]);
+            return Helper::response(true, "Your trip Has been started.");
+        }
+        else{
+            return Helper::response(false, "You have entered a wrong pin");
+        }
+
+    }
+
+    public static function endTrip($public_booking_id, $organization_id, $pin){
+        $booking = Booking::where([
+            "public_booking_id"=>$public_booking_id,
+            "organization_id"=>$organization_id
+        ])->first();
+
+        if(!$booking)
+            return Helper::response(false, "Invalid Order id");
+        $meta = json_decode($booking->meta,true);
+        if($meta['end_pin'] == $pin){
+
+            Booking::where("public_booking_id",$public_booking_id)->update([
+                "status"=>BookingEnums::$STATUS['completed']
+            ]);
+            return Helper::response(true, "Your order has been completed.");
+        }
+        else{
+            return Helper::response(false, "You have entered a wrong pin");
+        }
     }
 }

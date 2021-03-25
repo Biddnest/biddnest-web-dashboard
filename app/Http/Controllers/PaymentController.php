@@ -28,23 +28,26 @@ class PaymentController extends Controller
         if(!$booking_exist->payment)
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
+        $discount_value = 0.00;
         if($coupon_code && trim($coupon_code) != "") {
             $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
             if (!is_array($coupon_valid))
-            { $coupon_valid = 0.00; return Helper::response(false, $coupon_valid); }
-        }
+            { $discount_value = 0.00; return Helper::response(false, $coupon_valid); }
         else{
-            $coupon_valid = 0.00;
+            $discount_value = $coupon_valid['coupon']['discount'];
+        }
         }
 
+        $discount_value = 1.67;
+
             /*tax is always taken as percentage*/
-        $grand_total = (double) number_format(($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'],2);
-        $tax = (double) number_format($grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100),2);
+        $grand_total = (float) $booking_exist->payment->sub_total + (float)$booking_exist->payment->other_charges - (float)$discount_value;
+        $tax = $grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100);
         $grand_total += $tax;
 
 
         $meta =['public_booking_id'=>$public_booking_id];
-
+        $grand_total = (float) number_format($grand_total, 2);
         if($grand_total < 1.00)
             return Helper::response(false, "Minimum transaction value is one. Could'nt proceed with payment. Contact Admin.");
 
@@ -53,7 +56,7 @@ class PaymentController extends Controller
 
             $payment_result = Payment::where('id', $exist_payment->id)
                 ->update([
-                    'discount_amount'=>$coupon_valid['coupon']['discount'],
+                    'discount_amount'=>$discount_value,
                     'coupon_code' => $coupon_code,
                     'tax'=> $tax,
                     'rzp_order_id'=>$createorder['id'],

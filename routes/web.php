@@ -21,14 +21,12 @@ use App\Http\Controllers\VendorController as VendorRouter;
 |
 */
 Route::get('/', function () {
-    
+
     return response()->redirectToRoute('login');
 });
 
-Route::get('/distance',function(){
-    // echo response()->json(["hello"]);
-    echo Carbon::now()->addMinutes(5)->format('Y-m-d H:i:s');
-    exit;
+Route::get('/debug',function(){
+    abort(500);
 });
 
 
@@ -67,7 +65,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/inventories/{id}',[Router::class,'inventories_get'])->name("inventories_get");
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
-    //organization API's==>updated Vendor Api's 
+    //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
     Route::get('/vendors',[Router::class,'vendor_fetch'])->name("vendor_fetch");
@@ -79,11 +77,11 @@ Route::prefix('web/api')->group(function () {
     Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
     Route::put('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_edit");
 
-    Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add"); 
-    Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");    
+    Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add");
+    Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
     Route::delete('/vendors/roles/delete',[Router::class,'role_delete'])->name("role_delete");
 
-   
+
     // Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 
     //zone APIs

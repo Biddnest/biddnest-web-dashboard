@@ -264,7 +264,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::getBookingByPublicIdForApp($request->id);
+            return BookingsController::getBookingByPublicIdForApp($request->id,$request->token_payload->id);
     }
 
     public function reschedul(Request $request)

@@ -204,6 +204,7 @@ class BookingsController extends Controller
         $complete_time = Carbon::now()->addMinutes($timing)->roundMinutes()->format("Y-m-d H:i:s");
 
         $meta = json_decode($exist['meta'], true);
+        $meta = json_decode($exist['meta'], true);
         $meta['timings']['bid_result']= $complete_time;
 
         $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
@@ -262,15 +263,25 @@ class BookingsController extends Controller
 
     public static function getBookingByPublicIdForApp($public_booking_id)
     {
-        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
-                                "public_booking_id"=>$public_booking_id])->first();
+        $booking=Booking::with('movement_dates')
+            ->with('inventories')
+            ->with('status_history')
+            ->with('organization')
+            ->with('service')
+            ->with('payment')
+            ->with('driver')
+            ->with('vehicle')
+            ->where("public_booking_id", $public_booking_id)
+            ->where("deleted",CommonEnums::$NO)
+            ->first();
 
-        if(!$bookingorder)
+
+        if(!$booking)
         {
             return Helper::response(false,"Couldn't Find data");
         }
 
-        return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('organization')->with('service')->with('payment')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true,"data fetched successfully",["booking"=>$booking]);
     }
 
     public static function bookingHistoryPast($user_id)
@@ -350,7 +361,7 @@ class BookingsController extends Controller
 
         $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
         return Helper::response(true,"Get payment data successfully",["payment_details"=>[
-            "sub_total"=>$booking->payment->subtotal,
+            "sub_total"=>$booking->payment->sub_total,
             "tax(".$tax_percentage."%)"=>$booking->payment->tax,
             "surge_charge"=>$booking->payment->other_charges,
             "grand_total" => $booking->payment->grand_total
@@ -451,7 +462,7 @@ class BookingsController extends Controller
 
         if(!$result_driver)
             return Helper::response(false,"couldn't sanve");
-        
+
         return Helper::response(true,"save successfully");
     }
 

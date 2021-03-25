@@ -127,7 +127,7 @@ class ApiRouteController extends Controller
             'lat' => 'required',
             'lng' => 'required'
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
@@ -140,7 +140,7 @@ class ApiRouteController extends Controller
             'lat' => 'required',
             'lng' => 'required'
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
@@ -152,7 +152,7 @@ class ApiRouteController extends Controller
         $validation = Validator::make($request->all(),[
             'service_id' => 'required|integer'
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
@@ -164,13 +164,13 @@ class ApiRouteController extends Controller
         $validation = Validator::make($request->all(),[
             'subservice_id' => 'required|integer'
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return InventoryController::getBySubserviceForApp($request->subservice_id);
     }
-    
+
     public function getAllInventories()
     {
         return InventoryController::getInventoriesForApp();
@@ -220,7 +220,7 @@ class ApiRouteController extends Controller
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',
             ]);
-        
+
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
@@ -260,7 +260,7 @@ class ApiRouteController extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|string'
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
@@ -268,7 +268,7 @@ class ApiRouteController extends Controller
     }
 
     public function reschedul(Request $request)
-    {        
+    {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
             'movement_dates.*' =>'required|date'
@@ -276,7 +276,7 @@ class ApiRouteController extends Controller
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         return BookingsController::reschedulBooking($request->public_booking_id, $request->movement_dates, $request->token_payload->id);
     }
 
@@ -318,12 +318,12 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            'coupon_code' =>'string'            
+            'coupon_code' =>'string'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         $valid= CouponController::checkIfValid($request->public_booking_id, $request->coupon_code);
 
         if(is_array($valid))
@@ -336,17 +336,17 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            'coupon_code' =>'nullable|string'            
+            'coupon_code' =>'string|nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
     }
 
     public function webhook(Request $request)
-    {        
+    {
         return PaymentController::webhook($request->all());
     }
 
@@ -355,6 +355,6 @@ class ApiRouteController extends Controller
     }
 
 
-   
+
 
 }

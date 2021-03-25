@@ -100,7 +100,7 @@ class BidController extends Controller
 
             $id[]=$booking['id'];
         }
-        
+
         return ['total_bookings'=> count($bookings), 'booking_id'=>$id];
     }
 
@@ -138,6 +138,7 @@ class BidController extends Controller
             return true;
         }
 
+        $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
@@ -154,6 +155,7 @@ class BidController extends Controller
         $booking_update_status = Booking::where("id", $book_id)
                                         ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
                                         ->update([
+                                            "organization_id"=>$won_org_id,
                                             "final_quote"=>$min_amount,
                                             "status"=>BookingEnums::$STATUS['payment_pending']
                                         ]);

@@ -38,8 +38,8 @@ class PaymentController extends Controller
         }
 
             /*tax is always taken as percentage*/
-        $grand_total = (double) number_format(($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'],2);
-        $tax = (double) number_format($grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100),2);
+        $grand_total = (double) ($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'];
+        $tax = (double) $grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100);
         $grand_total += $tax;
 
 

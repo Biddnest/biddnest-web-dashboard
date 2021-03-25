@@ -146,7 +146,6 @@ class ApiRouteController extends Controller
         else
             return ServiceController::getForApp($request->lat, $request->lng);
     }
-    
 
     public function getSubServices(Request $request)
     {
@@ -160,7 +159,6 @@ class ApiRouteController extends Controller
             return SubServiceController::getSubservicesForApp($request->service_id);
     }
 
-    
     public function getInventories(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -177,7 +175,6 @@ class ApiRouteController extends Controller
     {
         return InventoryController::getInventoriesForApp();
     }
-    
 
     public function createEnquiry(Request $request)
     {
@@ -349,8 +346,8 @@ class ApiRouteController extends Controller
     }
 
     public function webhook(Request $request)
-    {
-
+    {        
+        return PaymentController::webhook($request->all());
     }
 
     public static function config(Request $request){

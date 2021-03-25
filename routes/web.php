@@ -102,6 +102,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
 
+    Route::post('/endbid',[Router::class,'end_bid'])->name("end_bid");
+
 });
 
 Route::prefix('vendors')->group(function () {

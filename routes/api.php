@@ -39,15 +39,13 @@ Route::prefix('v1')->group(function () {
         Route::post('/reschedul',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
-
         
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
+            Route::post('/webhook',[ApiRouter::class, 'webhook']);
         });
-    });
-
-    
+    });   
 
 });
 
@@ -74,6 +72,8 @@ Route::prefix('vendors/v1')->group(function () {
         Route::post('/reject',[VendorApiRouter::class,'reject']);
 
         Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
+
+        Route::get('/driver',[VendorApiRouter::class,'assignDriver']);
     });
 
     Route::prefix('bid')->group(function () {

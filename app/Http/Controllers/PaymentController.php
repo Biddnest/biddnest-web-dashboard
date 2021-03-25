@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use App\Models\Booking;
@@ -101,8 +102,14 @@ class PaymentController extends Controller
             $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
             $result_status = $bookingstatus->save();
 
-            return Helper::response(true, "Payment successfull"); 
-        }  
+            if($order_id_exist->coupon_code)
+                    Coupon::where('code',$order_id_exist->coupon_code)->update([
+                        "usage"=>Coupon::where("code", $order_id_exist->coupon_code)->pluck("usage")[0] + 1
+                        ]);
+
+
+            return Helper::response(true, "Payment successfull");
+        }
         else
         {
             $update_webhook = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
@@ -111,7 +118,7 @@ class PaymentController extends Controller
                 'status'=> PaymentEnums::$STATUS['failed']
             ]);
 
-            return Helper::response(true, "Payment failed"); 
-        }        
+            return Helper::response(true, "Payment failed");
+        }
     }
 }

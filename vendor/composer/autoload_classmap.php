@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\BidEnd' => $baseDir . '/app/Console/Commands/BidEnd.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Enums\\AdminEnums' => $baseDir . '/app/Enums/AdminEnums.php',
     'App\\Enums\\AppEnums' => $baseDir . '/app/Enums/AppEnums.php',
@@ -75,6 +76,7 @@ return array(
     'App\\Models\\CouponOrganization' => $baseDir . '/app/Models/CouponOrganization.php',
     'App\\Models\\CouponUser' => $baseDir . '/app/Models/CouponUser.php',
     'App\\Models\\CouponZone' => $baseDir . '/app/Models/CouponZone.php',
+    'App\\Models\\CronLog' => $baseDir . '/app/Models/CronLog.php',
     'App\\Models\\Inventory' => $baseDir . '/app/Models/Inventory.php',
     'App\\Models\\InventoryPrice' => $baseDir . '/app/Models/InventoryPrice.php',
     'App\\Models\\MovementDates' => $baseDir . '/app/Models/MovementDates.php',
@@ -844,6 +846,7 @@ return array(
     'Egulias\\EmailValidator\\Warning\\QuotedString' => $vendorDir . '/egulias/email-validator/src/Warning/QuotedString.php',
     'Egulias\\EmailValidator\\Warning\\TLD' => $vendorDir . '/egulias/email-validator/src/Warning/TLD.php',
     'Egulias\\EmailValidator\\Warning\\Warning' => $vendorDir . '/egulias/email-validator/src/Warning/Warning.php',
+    'Fabito\\AvatarGenerator\\Avatar' => $vendorDir . '/fabian-tomischka/php-avatar-generator/src/Fabito/AvatarGenerator/Avatar.php',
     'Facade\\FlareClient\\Api' => $vendorDir . '/facade/flare-client-php/src/Api.php',
     'Facade\\FlareClient\\Concerns\\HasContext' => $vendorDir . '/facade/flare-client-php/src/Concerns/HasContext.php',
     'Facade\\FlareClient\\Concerns\\UsesTime' => $vendorDir . '/facade/flare-client-php/src/Concerns/UsesTime.php',

@@ -37,7 +37,7 @@ Route::prefix('v1')->group(function () {
         Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);
 
-        Route::post('/reschedul',[ApiRouter::class,'reschedul']);
+        Route::post('/reschedule',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
 
@@ -47,6 +47,8 @@ Route::prefix('v1')->group(function () {
             Route::post('/webhook',[PaymentController::class, 'webhook']);
         });
     });
+
+    Route::get("/page/{slug}",[ApiRouter::class, 'getPage']);
 
 });
 

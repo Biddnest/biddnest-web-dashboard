@@ -345,13 +345,12 @@ class ApiRouteController extends Controller
         return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
     }
 
-    public function webhook(Request $request)
-    {
-        return PaymentController::webhook($request->all());
-    }
-
     public static function config(Request $request){
         return CustomerApp\SettingsController::getSettings();
+    }
+
+    public static function getPage(Request $request){
+        return PageController::get($request->slug);
     }
 
 

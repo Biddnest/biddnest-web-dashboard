@@ -603,6 +603,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\BidEnd' => __DIR__ . '/../..' . '/app/Console/Commands/BidEnd.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Enums\\AdminEnums' => __DIR__ . '/../..' . '/app/Enums/AdminEnums.php',
         'App\\Enums\\AppEnums' => __DIR__ . '/../..' . '/app/Enums/AppEnums.php',
@@ -672,6 +673,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\CouponOrganization' => __DIR__ . '/../..' . '/app/Models/CouponOrganization.php',
         'App\\Models\\CouponUser' => __DIR__ . '/../..' . '/app/Models/CouponUser.php',
         'App\\Models\\CouponZone' => __DIR__ . '/../..' . '/app/Models/CouponZone.php',
+        'App\\Models\\CronLog' => __DIR__ . '/../..' . '/app/Models/CronLog.php',
         'App\\Models\\Inventory' => __DIR__ . '/../..' . '/app/Models/Inventory.php',
         'App\\Models\\InventoryPrice' => __DIR__ . '/../..' . '/app/Models/InventoryPrice.php',
         'App\\Models\\MovementDates' => __DIR__ . '/../..' . '/app/Models/MovementDates.php',
@@ -1441,6 +1443,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'Fabito\\AvatarGenerator\\Avatar' => __DIR__ . '/..' . '/fabian-tomischka/php-avatar-generator/src/Fabito/AvatarGenerator/Avatar.php',
         'Facade\\FlareClient\\Api' => __DIR__ . '/..' . '/facade/flare-client-php/src/Api.php',
         'Facade\\FlareClient\\Concerns\\HasContext' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/HasContext.php',
         'Facade\\FlareClient\\Concerns\\UsesTime' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/UsesTime.php',

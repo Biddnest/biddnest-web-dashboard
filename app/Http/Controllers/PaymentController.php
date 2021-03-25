@@ -18,7 +18,7 @@ use \GuzzleHttp\Client;
 class PaymentController extends Controller
 {
 
-    public static function intiatePayment($public_booking_id, $coupon_code)
+    public static function intiatePayment($public_booking_id, $coupon_code = null)
     {
         $booking_exist = Booking::where(["public_booking_id"=>$public_booking_id, "status"=>BookingEnums::$STATUS['payment_pending']])->with('payment')->first();
 
@@ -31,30 +31,31 @@ class PaymentController extends Controller
         if($coupon_code && trim($coupon_code) != "") {
             $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
             if (!is_array($coupon_valid))
-                $coupon_valid = 0.00;
-            return Helper::response(false, $coupon_valid);
+            { $coupon_valid = 0.00; return Helper::response(false, $coupon_valid); }
         }
         else{
             $coupon_valid = 0.00;
         }
 
             /*tax is always taken as percentage*/
-        $grand_total = number_format(($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'],2);
-        $tax = number_format($grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100),2);
+        $grand_total = (double) number_format(($booking_exist->payment->sub_total + $booking_exist->payment->other_charges) - $coupon_valid['coupon']['discount'],2);
+        $tax = (double) number_format($grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100),2);
         $grand_total += $tax;
 
+
         $meta =['public_booking_id'=>$public_booking_id];
+
+        if($grand_total < 1.00)
+            return Helper::response(false, "Minimum transaction value is one. Could'nt proceed with payment. Contact Admin.");
 
         $createorder = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total);
         $exist_payment = Payment::where(['booking_id'=>$booking_exist['id']])->first();
 
             $payment_result = Payment::where('id', $exist_payment->id)
                 ->update([
-//                    'other_charges'=>Settings::where("key", "surge_charge")->pluck('value')[0],
                     'discount_amount'=>$coupon_valid['coupon']['discount'],
                     'coupon_code' => $coupon_code,
                     'tax'=> $tax,
-//                    'sub_total'=>$sub_amount,
                     'rzp_order_id'=>$createorder['id'],
                     'grand_total'=>$grand_total,
                     'meta'=>json_encode($meta)
@@ -81,8 +82,6 @@ class PaymentController extends Controller
 
     public static function webhook(Request $request)
     {
-        // $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
-        // $api->utility->verifyWebhookSignature($request->getContent(), $request->header('X-Razorpay-Signature'), Settings::where("key", "razor_webhook_secret")->pluck('value')[0]);
         $body = $request->all();
         if($body['entity'] == 'event' && ($body['event']=='payment.captured' || $body['event']=='payment.authorized'))
         {

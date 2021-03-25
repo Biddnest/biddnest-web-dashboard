@@ -95,7 +95,7 @@ class CouponController extends Controller
        if(!$coupon || $coupon->status == CouponEnums::$STATUS['inactive'])
            return "Coupon code doesn't exist."; //invalid coupon code
 
-       $booking = Booking::where('public_booking_id',$public_booking_id)->with("vendor")->first();
+       $booking = Booking::where('public_booking_id',$public_booking_id)->with("organization")->first();
 
        if(Carbon::now()->format("Y-m-d") <= $coupon->valid_from && Carbon::now()->format("Y-m-d") >= $coupon->valid_to)
            return "This coupon is not yet active or has expired.";
@@ -155,7 +155,7 @@ class CouponController extends Controller
 
        $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
 
-       return ["coupon"=>["discount"=>number_format($discount_amount,2)]];
+       return (array) ["coupon"=>["discount"=>number_format($discount_amount,2)]];
 
         // return $discount_amount;
    }

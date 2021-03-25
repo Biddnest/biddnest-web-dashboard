@@ -5,6 +5,8 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\BidController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Carbon\CarbonImmutable;
+use Carbon\Carbon;
 
 use App\Http\Controllers\Route as Router;
 use App\Http\Controllers\VendorController as VendorRouter;
@@ -23,11 +25,12 @@ Route::get('/', function () {
     return response()->redirectToRoute('login');
 });
 
-// Route::get('/distance',function(){
-//     // echo response()->json(["hello"]);
-//     echo BidController::getbookings();
-//     exit;
-// });
+Route::get('/distance',function(){
+    // echo response()->json(["hello"]);
+    echo Carbon::now()->addMinutes(5)->format('Y-m-d H:i:s');
+    exit;
+});
+
 
 Route::prefix('web/api')->group(function () {
 

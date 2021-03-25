@@ -102,7 +102,8 @@ class BidController extends Controller
 
     public static function updateStatus($book_id)
     {
-        $min_amount = Bid::where("booking_id", $book_id)->min('bid_amount');
+        $min_amount = Bid::where("booking_id", $book_id)
+                            ->where("status", BidEnums::$STATUS['bid_submitted'])->min('bid_amount');
 
         $tie_amount = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->count();
 

@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Models\BookingStatus;
 use App\Helper;
 use App\Enums\BookingEnums;
 use App\Enums\PaymentEnums;
+
 use App\Models\Settings;
 use Ramsey\Uuid\Uuid;
 use \GuzzleHttp\Client;
@@ -38,8 +40,6 @@ class PaymentController extends Controller
         }
         }
 
-        $discount_value = 1.67;
-
             /*tax is always taken as percentage*/
         $grand_total = (float) $booking_exist->payment->sub_total + (float)$booking_exist->payment->other_charges - (float)$discount_value;
         $tax = $grand_total * (Settings::where("key", "tax")->pluck('value')[0]/100);
@@ -47,7 +47,7 @@ class PaymentController extends Controller
 
 
         $meta =['public_booking_id'=>$public_booking_id];
-        $grand_total = (float) number_format($grand_total, 2);
+        $grand_total = (float) $grand_total;
         if($grand_total < 1.00)
             return Helper::response(false, "Minimum transaction value is one. Could'nt proceed with payment. Contact Admin.");
 

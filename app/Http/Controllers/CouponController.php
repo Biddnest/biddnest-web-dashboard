@@ -97,6 +97,9 @@ class CouponController extends Controller
 
        $booking = Booking::where('public_booking_id',$public_booking_id)->with("organization")->first();
 
+       if(!$booking)
+           return "Invalid Booking id"; //invalid coupon code
+
        if(Carbon::now()->format("Y-m-d") <= $coupon->valid_from && Carbon::now()->format("Y-m-d") >= $coupon->valid_to)
            return "This coupon is not yet active or has expired.";
 
@@ -113,7 +116,6 @@ class CouponController extends Controller
 
        if($coupon->max_usage_per_user <= $usage_by_current_user)
            return "You have exceeded the maximum usage for this coupon.";
-
 
        if($coupon->min_order_amount >= $booking->final_quote)
            return "You have exceeded the maximum amount for this coupon.";

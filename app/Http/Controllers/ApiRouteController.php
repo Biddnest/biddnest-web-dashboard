@@ -353,7 +353,11 @@ class ApiRouteController extends Controller
         return PageController::get($request->slug);
     }
 
+    public static function faqCategories(Request $request){
+        return FaqController::getCategories();
+    }
 
-
-
+    public static function faqByCategory(Request $request){
+        return FaqController::getByCategory($request->category);
+    }
 }

@@ -58,33 +58,35 @@ class BidController extends Controller
 
     }
 
-    public static function getbookings($booking_id = Null)
+    public static function getbookings($public_booking_id = Null)
     {
         $current_time = Carbon::now()->format("Y-m-d H:i:s");
 
-        if($booking_id)
+        if(!$public_booking_id)
         {
             $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
             ->where("bid_result_at", "<=", "$current_time")->get();
+            // return $bookings;
         }
         else
         {
             $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
-            ->where("bid_result_at", "<=", "$current_time")->where("id", $booking_id)->get();
+            ->where("bid_result_at", "<=", "$current_time")->where("public_booking_id", $public_booking_id)->get();
+            // return $bookings;
         }
         
 
         foreach($bookings as $booking)
         {
             $bid_end = self::updateStatus($booking['id']);
-
+            
             /*tax is always taken as percentage*/
             $sub_total = number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
             $other_charges= number_format(Settings::where("key", "surge_charge")->pluck('value')[0],2);
-            $tax = (number_format(Settings::where("key", "tax")->pluck('value')[0],2)/100) * ($sub_total + $other_charges);
+            $tax = number_format(Settings::where("key", "tax")->pluck('value')[0]/100, 2) * ($sub_total + $other_charges);
 
             $grand_total = number_format($sub_total+$other_charges+$tax,2);
-
+            
             $payment = new Payment;
             $payment->public_transaction_id = Uuid::uuid4();
             $payment->booking_id = $booking['id'];
@@ -117,7 +119,7 @@ class BidController extends Controller
             $addrebidtime = Booking::where(["user_id"=>$order->user_id,
                                             "public_booking_id"=>$order->public_booking_id])
                                             ->update(["status"=>BookingEnums::$STATUS['rebiding'], "meta" => json_encode($meta), "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")]);
-            $update_bid_type = Bid::where("booking_id",$book_id)->update("bid_type", BidEnums::$BID_TYPE['rebid']);
+            $update_bid_type = Bid::where("booking_id",$book_id)->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
 
             return true;
         }

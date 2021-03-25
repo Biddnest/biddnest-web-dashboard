@@ -608,13 +608,13 @@ class Route extends Controller
      public function end_bid(Request $request)
      {
         $validation = Validator::make($request->all(),[
-            'booking_id'=> 'required'
+            'public_booking_id'=> 'string'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         
-        return BidController::getbookings($request->booking_id);
+        return BidController::getbookings($request->public_booking_id);
 
      }
 

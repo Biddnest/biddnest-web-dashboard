@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -18,6 +17,7 @@ use App\Models\BookingStatus;
 use App\Models\Settings;
 use App\Models\Bid;
 use App\Models\Organization;
+use App\Models\Vehicle;
 use App\Helper;
 use App\Sms;
 use App\Http\Middleware\VerifyJwtToken;
@@ -27,9 +27,9 @@ use App\Enums\CommonEnums;
 use App\Enums\BookingEnums;
 use App\Enums\BidEnums;
 use App\Enums\ServiceEnums;
+use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Carbon\Carbon;
-use PHPUnit\TextUI\Help;
 
 class BookingsController extends Controller
 {
@@ -267,7 +267,7 @@ class BookingsController extends Controller
             return Helper::response(false,"Couldn't Find data");
         }
 
-        return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('vendor')->with('service')->with('payment')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true,"data fetched successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->with('organization')->with('service')->with('payment')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
     public static function bookingHistoryPast($user_id)
@@ -434,7 +434,7 @@ class BookingsController extends Controller
 
     public static function assignDriver($booking_id, $driver_id, $vehicle_id)
     {
-        $assign_driver = Booking::where("booking_id", $id)
+        $assign_driver = Booking::where("public_booking_id", $booking_id)
                             ->where(["status"=>BookingEnums::$STATUS['awaiting_pickup']])
                             ->first();
         if(!$assign_driver)
@@ -450,6 +450,21 @@ class BookingsController extends Controller
             return Helper::response(false,"couldn't sanve");
 
         return Helper::response(true,"sanve successfully");
+    }
+
+    public static function getDriver($organization_id)
+    {
+        $get_driver = Vendor::where("organization_id", $organization_id)
+                            ->where(["user_role"=>VendorEnums::$ROLES['driver']])
+                            ->get();
+
+        $get_vehicle = Vehicle::where("organization_id", $organization_id)
+                            ->get();
+
+        if(!$get_driver || !get_vehicle)
+            return Helper::response(false,"Driver or vehicle data not available");
+
+        return Helper::response(false,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicle'=>$get_vehicle]);
     }
 
     public static function startTrip($public_booking_id, $organization_id, $pin){
@@ -496,4 +511,5 @@ class BookingsController extends Controller
             return Helper::response(false, "You have entered a wrong pin");
         }
     }
+
 }

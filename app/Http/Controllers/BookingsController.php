@@ -18,6 +18,8 @@ use App\Models\Settings;
 use App\Models\Bid;
 use App\Models\Organization;
 use App\Models\Vehicle;
+use App\Models\Vendor;
+use App\Models\BookingDriver;
 use App\Helper;
 use App\Sms;
 use App\Http\Middleware\VerifyJwtToken;
@@ -433,9 +435,9 @@ class BookingsController extends Controller
         return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $exist_bid['id'])->first()]);
     }
 
-    public static function assignDriver($booking_id, $driver_id, $vehicle_id)
+    public static function assignDriver($public_booking_id, $driver_id, $vehicle_id)
     {
-        $assign_driver = Booking::where("public_booking_id", $booking_id)
+        $assign_driver = Booking::where("public_booking_id", $public_booking_id)
                             ->where(["status"=>BookingEnums::$STATUS['awaiting_pickup']])
                             ->first();
         if(!$assign_driver)
@@ -449,8 +451,8 @@ class BookingsController extends Controller
 
         if(!$result_driver)
             return Helper::response(false,"couldn't sanve");
-
-        return Helper::response(true,"sanve successfully");
+        
+        return Helper::response(true,"save successfully");
     }
 
     public static function getDriver($organization_id)
@@ -462,7 +464,7 @@ class BookingsController extends Controller
         $get_vehicle = Vehicle::where("organization_id", $organization_id)
                             ->get();
 
-        if(!$get_driver || !get_vehicle)
+        if(!$get_driver || !$get_vehicle)
             return Helper::response(false,"Driver or vehicle data not available");
 
         return Helper::response(false,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicle'=>$get_vehicle]);
@@ -471,7 +473,8 @@ class BookingsController extends Controller
     public static function startTrip($public_booking_id, $organization_id, $pin){
         $booking = Booking::where([
             "public_booking_id"=>$public_booking_id,
-            "organization_id"=>$organization_id
+            "organization_id"=>$organization_id,
+            "status"=>BookingEnums::$STATUS['awaiting_pickup']
         ])->first();
 
         if(!$booking)
@@ -484,6 +487,12 @@ class BookingsController extends Controller
                 "status"=>BookingEnums::$STATUS['in_transit'],
                 "meta"=>$meta
             ]);
+
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $booking->id;
+            $bookingstatus->status=BookingEnums::$STATUS['in_transit'];
+            $result_status = $bookingstatus->save();
+
             return Helper::response(true, "Your trip Has been started.");
         }
         else{
@@ -495,7 +504,8 @@ class BookingsController extends Controller
     public static function endTrip($public_booking_id, $organization_id, $pin){
         $booking = Booking::where([
             "public_booking_id"=>$public_booking_id,
-            "organization_id"=>$organization_id
+            "organization_id"=>$organization_id,
+            "status"=>BookingEnums::$STATUS['in_transit']
         ])->first();
 
         if(!$booking)
@@ -506,6 +516,12 @@ class BookingsController extends Controller
             Booking::where("public_booking_id",$public_booking_id)->update([
                 "status"=>BookingEnums::$STATUS['completed']
             ]);
+
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $booking->id;
+            $bookingstatus->status=BookingEnums::$STATUS['completed'];
+            $result_status = $bookingstatus->save();
+
             return Helper::response(true, "Your order has been completed.");
         }
         else{

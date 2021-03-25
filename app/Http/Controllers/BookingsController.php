@@ -472,7 +472,8 @@ class BookingsController extends Controller
     public static function startTrip($public_booking_id, $organization_id, $pin){
         $booking = Booking::where([
             "public_booking_id"=>$public_booking_id,
-            "organization_id"=>$organization_id
+            "organization_id"=>$organization_id,
+            "status"=>BookingEnums::$STATUS['awaiting_pickup']
         ])->first();
 
         if(!$booking)
@@ -485,6 +486,12 @@ class BookingsController extends Controller
                 "status"=>BookingEnums::$STATUS['in_transit'],
                 "meta"=>$meta
             ]);
+
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $booking->id;
+            $bookingstatus->status=BookingEnums::$STATUS['in_transit'];
+            $result_status = $bookingstatus->save();
+
             return Helper::response(true, "Your trip Has been started.");
         }
         else{
@@ -496,7 +503,8 @@ class BookingsController extends Controller
     public static function endTrip($public_booking_id, $organization_id, $pin){
         $booking = Booking::where([
             "public_booking_id"=>$public_booking_id,
-            "organization_id"=>$organization_id
+            "organization_id"=>$organization_id,
+            "status"=>BookingEnums::$STATUS['in_transit']
         ])->first();
 
         if(!$booking)
@@ -507,6 +515,12 @@ class BookingsController extends Controller
             Booking::where("public_booking_id",$public_booking_id)->update([
                 "status"=>BookingEnums::$STATUS['completed']
             ]);
+
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $booking->id;
+            $bookingstatus->status=BookingEnums::$STATUS['completed'];
+            $result_status = $bookingstatus->save();
+
             return Helper::response(true, "Your order has been completed.");
         }
         else{

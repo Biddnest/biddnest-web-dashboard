@@ -58,7 +58,7 @@ class BidController extends Controller
 
     }
 
-    public static function getbookings($booking_id = Null)
+    public static function getbookings($public_booking_id = Null)
     {
         $current_time = Carbon::now()->format("Y-m-d H:i:s");
 
@@ -71,7 +71,7 @@ class BidController extends Controller
         else
         {
             $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
-            ->where("bid_result_at", "<=", "$current_time")->where("id", $booking_id)->get();
+            ->where("bid_result_at", "<=", "$current_time")->where("public_booking_id", $public_booking_id)->get();
             // return $bookings;
         }
         

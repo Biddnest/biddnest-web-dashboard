@@ -39,13 +39,13 @@ Route::prefix('v1')->group(function () {
         Route::post('/reschedul',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
-        
+
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
             Route::post('/webhook',[ApiRouter::class, 'webhook']);
         });
-    });   
+    });
 
 });
 
@@ -56,7 +56,7 @@ Route::prefix('vendors/v1')->group(function () {
         Route::post('/login',[VendorApiRouter::class,'loginForApp']);
     });
 
-    
+
     Route::post('/pin/reset',[VendorApiRouter::class,'resetPin']);
     Route::get('/pin/status',[VendorApiRouter::class,'checkPin']);
 
@@ -76,6 +76,11 @@ Route::prefix('vendors/v1')->group(function () {
         Route::post('/driver',[VendorApiRouter::class,'assignDriver']);
 
         Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);
+
+//        Route::get('/tour/start',[VendorApiRouter::class,'getDriver']);
+
+        Route::post('/trip/start',[VendorApiRouter::class,'startTrip']);
+        Route::post('/trip/end',[VendorApiRouter::class,'endTrip']);
 
     });
 

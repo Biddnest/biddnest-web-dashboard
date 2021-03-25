@@ -467,5 +467,51 @@ class BookingsController extends Controller
             return Helper::response(false,"Driver or vehicle data not available");
 
         return Helper::response(false,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicle'=>$get_vehicle]);
-    } 
+    }
+
+    public static function startTrip($public_booking_id, $organization_id, $pin){
+        $booking = Booking::where([
+            "public_booking_id"=>$public_booking_id,
+            "organization_id"=>$organization_id
+        ])->first();
+
+        if(!$booking)
+            return Helper::response(false, "Invalid Order id");
+        $meta = json_decode($booking->meta,true);
+        if($meta['start_pin'] == $pin){
+            $meta["end_pin"] = Helper::generateOTP(4);
+
+            Booking::where("public_booking_id",$public_booking_id)->update([
+                "status"=>BookingEnums::$STATUS['in_transit'],
+                "meta"=>$meta
+            ]);
+            return Helper::response(true, "Your trip Has been started.");
+        }
+        else{
+            return Helper::response(false, "You have entered a wrong pin");
+        }
+
+    }
+
+    public static function endTrip($public_booking_id, $organization_id, $pin){
+        $booking = Booking::where([
+            "public_booking_id"=>$public_booking_id,
+            "organization_id"=>$organization_id
+        ])->first();
+
+        if(!$booking)
+            return Helper::response(false, "Invalid Order id");
+        $meta = json_decode($booking->meta,true);
+        if($meta['end_pin'] == $pin){
+
+            Booking::where("public_booking_id",$public_booking_id)->update([
+                "status"=>BookingEnums::$STATUS['completed']
+            ]);
+            return Helper::response(true, "Your order has been completed.");
+        }
+        else{
+            return Helper::response(false, "You have entered a wrong pin");
+        }
+    }
+
 }

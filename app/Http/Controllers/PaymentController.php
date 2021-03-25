@@ -50,11 +50,11 @@ class PaymentController extends Controller
 
             $payment_result = Payment::where('id', $exist_payment->id)
                 ->update([
-                    'other_charges'=>Settings::where("key", "surge_charge")->pluck('value')[0],
+//                    'other_charges'=>Settings::where("key", "surge_charge")->pluck('value')[0],
                     'discount_amount'=>$coupon_valid['coupon']['discount'],
                     'coupon_code' => $coupon_code,
                     'tax'=> $tax,
-                    'sub_total'=>$sub_amount,
+//                    'sub_total'=>$sub_amount,
                     'rzp_order_id'=>$createorder['id'],
                     'grand_total'=>$grand_total,
                     'meta'=>json_encode($meta)
@@ -88,14 +88,20 @@ class PaymentController extends Controller
         {
             $order_id_exist = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])->first();
 
-            $update_webhook = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
+            Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
             ->update([
                 'rzp_payment_id'=>$body['payload']['payment']['entity']['id'],
                 'status'=> PaymentEnums::$STATUS['completed']
             ]);
 
-            $confirmestimate = Booking::where(["id"=>$order_id_exist->booking_id])
-                                ->update(["status"=>BookingEnums::$STATUS['awaiting_pickup']]);
+            $meta = json_decode(Booking::where("id",$order_id_exist->booking_id)->pluck("meta")[0],true);
+            $meta["start_pin"] = Helper::generateOTP(4);
+
+            Booking::where(["id"=>$order_id_exist->booking_id])
+                                ->update([
+                                    "status"=>BookingEnums::$STATUS['awaiting_pickup'],
+                                    "meta"=>$meta
+                                ]);
 
             $bookingstatus = new BookingStatus;
             $bookingstatus->booking_id = $order_id_exist->booking_id;
@@ -106,6 +112,7 @@ class PaymentController extends Controller
                     Coupon::where('code',$order_id_exist->coupon_code)->update([
                         "usage"=>Coupon::where("code", $order_id_exist->coupon_code)->pluck("usage")[0] + 1
                         ]);
+
 
 
             return Helper::response(true, "Payment successfull");

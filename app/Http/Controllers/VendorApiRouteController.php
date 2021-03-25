@@ -37,13 +37,13 @@ class VendorApiRouteController extends Controller
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         return VendorUserController::resetPin($request->pin, $request->password, $request->token_payload->id);
 
     }
 
     public function checkPin(Request $request)
-    {       
+    {
         return VendorUserController::checkPin($request->token_payload->id);
     }
 
@@ -148,5 +148,27 @@ class VendorApiRouteController extends Controller
     public function getDriver(Request $request)
     {
         return BookingsController::getDriver($request->token_payload->organization_id);
+    }
+
+    public function startTrip(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' => 'required|integer',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::startTrip($request->public_booking_id, $request->token_payload->organization_id, $request->pin);
+    }
+
+    public function endTrip(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' => 'required|integer',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::endTrip($request->public_booking_id, $request->token_payload->organization_id, $request->pin);
     }
 }

@@ -60,7 +60,7 @@ class BidController extends Controller
 
     public static function getbookings($public_booking_id = Null)
     {
-        $current_time = Carbon::now()->format("Y-m-d H:i:s");
+        $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
 
         if(!$public_booking_id)
         {
@@ -74,19 +74,19 @@ class BidController extends Controller
             ->where("bid_result_at", "<=", "$current_time")->where("public_booking_id", $public_booking_id)->get();
             // return $bookings;
         }
-        
+
 
         foreach($bookings as $booking)
         {
             $bid_end = self::updateStatus($booking['id']);
-            
+
             /*tax is always taken as percentage*/
             $sub_total = number_format(Booking::where("id",$booking["id"])->pluck("final_quote")[0],2);
             $other_charges= number_format(Settings::where("key", "surge_charge")->pluck('value')[0],2);
             $tax = number_format(Settings::where("key", "tax")->pluck('value')[0]/100, 2) * ($sub_total + $other_charges);
 
             $grand_total = number_format($sub_total+$other_charges+$tax,2);
-            
+
             $payment = new Payment;
             $payment->public_transaction_id = Uuid::uuid4();
             $payment->booking_id = $booking['id'];
@@ -102,11 +102,15 @@ class BidController extends Controller
 
     public static function updateStatus($book_id)
     {
-        $min_amount = Bid::where("booking_id", $book_id)->min('bid_amount');
+        $min_amount = Bid::where("booking_id", $book_id)
+                        ->where("status", BidEnums::$STATUS['bid_submitted'])
+                        ->min('bid_amount');
 
-        $tie_amount = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->count();
+        $low_quoted_vendors = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
+            ->where("status", BidEnums::$STATUS['bid_submitted'])
+            ->count();
 
-        if(!$min_amount || $tie_amount >= 2)
+        if(!$min_amount || $low_quoted_vendors >= 2)
         {
             $order = Booking::where("id", $book_id)->first();
 
@@ -118,8 +122,14 @@ class BidController extends Controller
 
             $addrebidtime = Booking::where(["user_id"=>$order->user_id,
                                             "public_booking_id"=>$order->public_booking_id])
-                                            ->update(["status"=>BookingEnums::$STATUS['rebiding'], "meta" => json_encode($meta), "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")]);
-            $update_bid_type = Bid::where("booking_id",$book_id)->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
+                                            ->update([
+                                                "status"=>BookingEnums::$STATUS['rebiding'],
+                                                "meta" => json_encode($meta),
+                                                "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")
+                                            ]);
+
+            $update_bid_type = Bid::where("booking_id",$book_id)
+                                ->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
 
             return true;
         }
@@ -127,7 +137,9 @@ class BidController extends Controller
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
-        $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
+        $lost_vendor = Bid::where([
+            "booking_id"=>$book_id,
+            "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
 

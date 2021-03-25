@@ -15,7 +15,7 @@ class CreateCroneLogTable extends Migration
     {
         Schema::create('crone_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('output');
+            $table->text('output');
             $table->timestamps();
         });
     }

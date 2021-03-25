@@ -77,7 +77,6 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);
 
-        Route::get('/tour/start',[VendorApiRouter::class,'getDriver']);
     });
 
     Route::prefix('bid')->group(function () {

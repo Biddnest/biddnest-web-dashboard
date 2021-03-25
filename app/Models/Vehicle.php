@@ -11,4 +11,8 @@ class Vehicle extends Model
     use HasFactory;
     protected $hidden = ['created_at','updated_at'];
 
+    // public function bookingdriver()
+    // {
+    //     return $this->morphMany(BookingDriver::class, 'driver');
+    // }
 }

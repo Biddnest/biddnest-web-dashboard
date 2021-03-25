@@ -272,7 +272,7 @@ class BookingsController extends Controller
             ->with('driver')
             ->with('vehicle')
             ->where("public_booking_id", $public_booking_id)
-            -where("deleted",CommonEnums::$NO)
+            ->where("deleted",CommonEnums::$NO)
             ->first();
 
 

@@ -73,7 +73,11 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
 
-        Route::get('/driver',[VendorApiRouter::class,'assignDriver']);
+        Route::post('/driver',[VendorApiRouter::class,'assignDriver']);
+
+        Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);
+
+        Route::get('/tour/start',[VendorApiRouter::class,'getDriver']);
     });
 
     Route::prefix('bid')->group(function () {

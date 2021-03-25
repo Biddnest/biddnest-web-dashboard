@@ -104,6 +104,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
+    Route::post('/endbid-one',[Router::class,'end_bid_one'])->name("end_bid_one");
+
 });
 
 Route::prefix('vendors')->group(function () {

@@ -145,4 +145,8 @@ class VendorApiRouteController extends Controller
             return BookingsController::assignDriver($request->public_booking_id, $request->driver_id, $request->vehicle_id);
     }
 
+    public function getDriver(Request $request)
+    {
+        return BookingsController::getDriver($request->token_payload->organization_id);
+    }
 }

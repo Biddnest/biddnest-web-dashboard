@@ -48,6 +48,7 @@ Route::prefix('v1')->group(function () {
         });
         Route::prefix('request')->group(function () {
             Route::post('/reschedule',[ApiRouter::class,'createRescheduleTicket']);
+            Route::post('/canceled',[ApiRouter::class,'createCancellationTicket']);
         });
     });
 

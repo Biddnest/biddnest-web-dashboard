@@ -19,10 +19,10 @@ class CreateTicketTable extends Migration
             $table->string("heading");
             $table->text("desc");
             $table->unsignedBigInteger('order_id')->index('order_id')->nullable();
-            $table->foreign('order_id')->references('id')->on('users');
+            $table->foreign('order_id')->references('id')->on('bookings');
 
             $table->unsignedBigInteger('user_id')->index('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('bookings');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('vendor_id')->index('vendor_id')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors');

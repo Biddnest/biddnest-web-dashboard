@@ -61,8 +61,8 @@ class TicketController extends Controller
 
         $ticket = new Ticket;
         $ticket->user_id = $sender_id;
-        $ticket->heading = $heading;
-        $ticket->desc = $desc;
+        $ticket->heading = $title;
+        $ticket->desc = $body;
         $ticket->order_id = $booking['id'];
         $ticket->type = $ticket_type;
         $ticket->meta = json_encode($meta);

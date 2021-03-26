@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiRouteController as ApiRouter;
 use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
 use App\Http\Controllers\VendorController as VendorRouter;
+use App\Http\Controllers\PaymentController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -43,7 +44,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
-            Route::post('/webhook',[ApiRouter::class, 'webhook']);
+            Route::post('/webhook',[PaymentController::class, 'webhook']);
         });
     });
 

@@ -19,6 +19,6 @@ class TicketEnums
         user.name
         vendor.name
     */
-    public static $TEMPLATES = ["order_reschedule"=>["title_template"=>"Request for order reschedule {{booking.id}}{{user.name}}", "body_template"=>"I want like to reshedule my  urrent order"],
-                                "order_cancellation"=>["title_template"=>"Request for order cancel {{booking.id}}{{user.name}}", "body_template"=>"I want like to cancel my  urrent order"]];
+    public static $TEMPLATES = ["order_reschedule"=>["title_template"=>"Request for order reschedule {{booking.id}}{{user.name}}", "body_template"=>"I want like to reshedule my current order"],
+                                "order_cancellation"=>["title_template"=>"Request for order cancel {{booking.id}}{{user.name}}", "body_template"=>"I want like to cancel my current order"]];
 }

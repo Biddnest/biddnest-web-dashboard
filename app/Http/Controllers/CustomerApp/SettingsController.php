@@ -12,6 +12,8 @@ use App\Enums\CommonEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\BookingEnums;
 use App\Enums\BidEnums;
+use App\Enums\FaqEnums;
+use App\Enums\ReviewEnums;
 use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
@@ -76,6 +78,12 @@ class SettingsController extends Controller
                         "rzp_id"=>Settings::where("key", "razor_key")->pluck('value')[0],
                         "rzp_secret"=>Settings::where("key", "razor_secret")->pluck('value')[0]
                     ]
+                ],
+                "faq"=>[
+                    "category"=>FaqEnums::$CATEGORY_POOL
+                ],
+                "review"=>[
+                    "question"=>ReviewEnums::$QUESTIONS
                 ]
             ]
         ]);

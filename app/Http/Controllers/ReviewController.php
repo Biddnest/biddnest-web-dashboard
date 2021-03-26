@@ -19,9 +19,10 @@ class ReviewController extends Controller
         $rateings =[];
         foreach($ratings as $rateing)
         {
-            $rateings[]= $rateing;
+            $rateings['question']= $rateing['question'];
+            $rateings['rating']= $rateing['rating'];
         }
-
+        return $rateings;
         if(!$review_exist)
         {
             $review = new Review;

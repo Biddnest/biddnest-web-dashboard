@@ -394,13 +394,28 @@ class ApiRouteController extends Controller
             'public_booking_id' => 'required|string',
             'reason' => 'required|string',
             'desc' => 'required|string',
-            'movement_dates.*' =>'requird'           
+            'movement_dates.*' =>'requird'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create($request->token_payload->id, $request->public_booking_id, $request->reason, $request->desc, $request->movement_dates, $request->ticket_type);
+        return TicketController::create($request->token_payload->id, $request->ticket_type,  $request->heading, $request->desc,  ["public_booking_id"=>$request->public_booking_id]);
+    }
+
+    public function createCancellationTicket(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+            'reason' => 'required|string',
+            'desc' => 'required|string',
+            'movement_dates.*' =>'requird'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create($request->token_payload->id, $request->ticket_type,  $request->heading, $request->desc,  ["public_booking_id"=>$request->public_booking_id]);
     }
 
 }

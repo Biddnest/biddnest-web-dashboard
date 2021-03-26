@@ -82,20 +82,7 @@ class BidController extends Controller
             $bid_end = self::updateStatus($booking['id']);
 
             /*tax is always taken as percentage*/
-            $sub_total = (float) Booking::where("id",$booking["id"])->pluck("final_quote")[0];
-            $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
-            $tax_percentage =(float) Settings::where("key", "tax")->pluck('value')[0];
-            $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
-            $grand_total = (float) $sub_total+$other_charges+$tax;
 
-            $payment = new Payment;
-            $payment->public_transaction_id = Uuid::uuid4();
-            $payment->booking_id = $booking['id'];
-            $payment->other_charges = $other_charges;
-            $payment->tax = $tax;
-            $payment->sub_total= $sub_total;
-            $payment->grand_total = $grand_total;
-            $payment_result = $payment->save();
 
             $id[]=$booking['id'];
         }
@@ -158,6 +145,21 @@ class BidController extends Controller
                                             "final_quote"=>$min_amount,
                                             "status"=>BookingEnums::$STATUS['payment_pending']
                                         ]);
+
+        $sub_total = (float) $min_amount;
+        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+        $tax_percentage = (float) Settings::where("key", "tax")->pluck('value')[0];
+        $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
+        $grand_total = (float) $sub_total+$other_charges+$tax;
+
+        $payment = new Payment;
+        $payment->public_transaction_id = Uuid::uuid4();
+        $payment->booking_id = $book_id;
+        $payment->other_charges = $other_charges;
+        $payment->tax = $tax;
+        $payment->sub_total= $sub_total;
+        $payment->grand_total = $grand_total;
+        $payment_result = $payment->save();
 
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $book_id;

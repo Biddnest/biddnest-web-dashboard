@@ -60,6 +60,7 @@ Route::prefix('v1')->group(function () {
 
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
     Route::get("/tickets",[ApiRouter::class, 'getTickets']);
+    Route::post("/tickets/create",[ApiRouter::class, 'createTickets']);
 
 });
 

@@ -11,7 +11,7 @@ use App\Enums\TicketEnums;
 
 class TicketController extends Controller
 {
-    public static function create($sender_id, $ticket_type, $meta, $heading=null, $desc=null)
+    public static function create($sender_id, $ticket_type, $meta, $heading=null, $body=null)
     {
         switch ($ticket_type) {
             case TicketEnums::$TYPE['order_reschedule']:
@@ -32,7 +32,14 @@ class TicketController extends Controller
                     $body = str_replace("{{booking.id}}", "", $body);
                     $body = str_replace("{{user.name}}", "", $body);
                 }
-                break;
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->order_id = $booking['id'];
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+            break;
 
             case TicketEnums::$TYPE['order_cancellation']:
                 $title = TicketEnums::$TEMPLATES['order_cancellation']['title_template'];
@@ -53,19 +60,30 @@ class TicketController extends Controller
                     $body = str_replace("{{user.name}}", "", $body);
 
                 }
-                    break;
-            default:
-                $title = "";
-                $desc = "";
-        }
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->order_id = $booking['id'];
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+            break;
 
-        $ticket = new Ticket;
-        $ticket->user_id = $sender_id;
-        $ticket->heading = $title;
-        $ticket->desc = $body;
-        $ticket->order_id = $booking['id'];
-        $ticket->type = $ticket_type;
-        $ticket->meta = json_encode($meta);
+            case TicketEnums::$TYPE['complaint']:
+                        $title = $heading;
+                        $body = $body;
+                        $ticket = new Ticket;
+                        $ticket->user_id = $sender_id;
+                        $ticket->heading = $title;
+                        $ticket->desc = $body;
+                        $ticket->type = $ticket_type;
+                        $ticket->meta = json_encode($meta);
+            break;
+            
+            default:
+                    $title = "";
+                    $desc = "";
+        }
 
         if(!$ticket->save())
             return Helper::response(false, "Could'nt create ticket.");
@@ -104,11 +122,11 @@ class TicketController extends Controller
         {
             $tickets = Ticket::with('booking')->with(['vendor'=>function ($org){
                 $org->with('organization');
-            }])->with('user')->get();
+            }])->with('user')->orderBy('id', 'DESC')->get();
         }
         else
         {
-            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)->with('booking')->get();
+            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)->with('booking')->orderBy('id', 'DESC')->get();
         }
 
         if(!$tickets)

@@ -84,7 +84,10 @@ class SettingsController extends Controller
                 ],
                 "review"=>[
                     "question"=>ReviewEnums::$QUESTIONS
-                ]
+                ]               
+            ],
+            "contact_us"=>[
+                "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
             ]
         ]);
     }

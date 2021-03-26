@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $table = "ticket";
-    protected $hidden = ['created_at','updated_at','deleted'];
+    protected $hidden = ['user_id','vendor_id','updated_at','deleted'];
     use HasFactory;
 
     public function booking(){

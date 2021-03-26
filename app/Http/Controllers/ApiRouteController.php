@@ -345,15 +345,15 @@ class ApiRouteController extends Controller
         return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
     }
 
-    public static function config(Request $request){
+    public function config(Request $request){
         return CustomerApp\SettingsController::getSettings();
     }
 
-    public static function getPage(Request $request){
+    public function getPage(Request $request){
         return PageController::get($request->slug);
     }
 
-    public static function addReview(Request $request)
+    public function addReview(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
@@ -368,15 +368,15 @@ class ApiRouteController extends Controller
         return ReviewController::add($request->token_payload->id,$request->public_booking_id, $request->review, $request->suggestion);
     }
 
-    public static function faqCategories(Request $request){
+    public function faqCategories(Request $request){
         return FaqController::getCategories();
     }
 
-    public static function faqByCategory(Request $request){
+    public function faqByCategory(Request $request){
         return FaqController::getByCategory($request->category);
     }
 
-    public static function addNotificationUserPlayer(Request $request){
+    public function addNotificationUserPlayer(Request $request){
         $validation = Validator::make($request->all(),[
             'player_id' => 'required|string'
         ]);
@@ -387,4 +387,20 @@ class ApiRouteController extends Controller
 
         return NotificationController::saveCustomerPlayer($request->player_id, $request->token_payload->id);
     }
+
+    public function createRescheduleTicket(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+            'reason' => 'required|string',
+            'desc' => 'required|string',
+            'movement_dates.*' =>'requird'           
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create($request->token_payload->id, $request->public_booking_id, $request->reason, $request->desc, $request->movement_dates, $request->ticket_type);
+    }
+
 }

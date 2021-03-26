@@ -9,5 +9,5 @@ class BookingStatus extends Model
 {
     protected $table = "booking_status";
     use HasFactory;
-    protected $hidden = ['id','created_at','updated_at'];
+    protected $hidden = ['id','updated_at'];
 }

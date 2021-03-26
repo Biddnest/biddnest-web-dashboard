@@ -139,8 +139,9 @@ class TicketController extends Controller
         }
         else
         {
-            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)->with('booking')
-                                ->whereNotIn('type', TicketEnums::$TEMPLATES['call_back'])->orderBy('id', 'DESC')->get();
+            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)
+                                ->whereNotIn('type', TicketEnums::$TEMPLATES['call_back'])->with('booking')
+                                ->orderBy('id', 'DESC')->get();
         }
 
         if(!$tickets)

@@ -12,7 +12,7 @@ use Fabito\AvatarGenerator\Avatar;
 
 class TicketEnums
 {
-    public static $TYPE = ["complaint"=>0, "service_request"=>1, "order_cancellation"=>2, "order_reschedule"=>3];
+    public static $TYPE = ["complaint"=>0, "service_request"=>1, "order_cancellation"=>2, "order_reschedule"=>3, "call_back"=>4];
 
     /*
         booking.id
@@ -20,5 +20,6 @@ class TicketEnums
         vendor.name
     */
     public static $TEMPLATES = ["order_reschedule"=>["title_template"=>"Request for order reschedule {{booking.id}}{{user.name}}", "body_template"=>"I want like to reshedule my current order"],
-                                "order_cancellation"=>["title_template"=>"Request for order cancel {{booking.id}}{{user.name}}", "body_template"=>"I want like to cancel my current order"]];
+                                "order_cancellation"=>["title_template"=>"Request for order cancel {{booking.id}}{{user.name}}", "body_template"=>"I want like to cancel my current order"],
+                                "call_back"=>["title_template"=>"Request for call back {{user.name}}", "body_template"=>"I would like to talk to Executive"]];
 }

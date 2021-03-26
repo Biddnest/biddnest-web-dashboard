@@ -41,6 +41,8 @@ Route::prefix('v1')->group(function () {
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
 
+        Route::get('/recent',[ApiRouter::class,'getRecentBooking']);
+
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
@@ -59,9 +61,11 @@ Route::prefix('v1')->group(function () {
     Route::get("/faq/categories/{category}",[ApiRouter::class, 'getPage']);
 
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
+
     Route::get("/tickets",[ApiRouter::class, 'getTickets']);
     Route::post("/tickets/create",[ApiRouter::class, 'createTickets']);
 
+    Route::post("/tickets/callback",[ApiRouter::class, 'callBack']);
 });
 
 

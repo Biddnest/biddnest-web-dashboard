@@ -437,4 +437,13 @@ class ApiRouteController extends Controller
         return TicketController::create($request->token_payload->id, 0, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
 
+    public function getRecentBooking(Request $request)
+    {
+        return BookingsController::getRecentBooking($request->token_payload->id);
+    }
+
+    public function callBack(Request $request)
+    {
+        return TicketController::create($request->token_payload->id, 4, []);
+    }
 }

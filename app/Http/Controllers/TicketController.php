@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Helper;
 use App\Models\Ticket;
 use App\Models\Booking;
+use App\Models\User;
 use App\Enums\TicketEnums;
+
 
 class TicketController extends Controller
 {
@@ -79,6 +81,17 @@ class TicketController extends Controller
                         $ticket->type = $ticket_type;
                         $ticket->meta = json_encode($meta);
             break;
+
+            case TicketEnums::$TYPE['call_back']:
+                $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+                $body = TicketEnums::$TEMPLATES['call_back']['body_template'];
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+            break;
             
             default:
                     $title = "";
@@ -126,7 +139,8 @@ class TicketController extends Controller
         }
         else
         {
-            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)->with('booking')->orderBy('id', 'DESC')->get();
+            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)->with('booking')
+                                ->whereNotIn('type', TicketEnums::$TEMPLATES['call_back'])->orderBy('id', 'DESC')->get();
         }
 
         if(!$tickets)
@@ -134,4 +148,5 @@ class TicketController extends Controller
 
         return Helper::response(true, "Ticket raised",["ticket"=>$tickets]);
     }
+
 }

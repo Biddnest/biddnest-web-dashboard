@@ -12,43 +12,29 @@ use App\Enums\BookingEnums;
 
 class ReviewController extends Controller
 {
-    public static function add($user_id, $public_booking_id, $ratings, $suggestion)
+    public static function add($user_id, $public_booking_id, $review, $suggestion)
     {
-        return Booking::where(['public_booking_id'=>$public_booking_id, 'user_id'=>$user_id])->where(['status'=>BookingEnums::$STATUS['completed']])->pluck('id');
-
         $review_exist = Review::where('user_id', $user_id)
                         ->where(['booking_id'=>Booking::where(['public_booking_id'=>$public_booking_id, 'user_id'=>$user_id])
-                        ->where(['status'=>BookingEnums::$STATUS['completed']])->pluck('id')[0]])->first();
+                            ->where(['status'=>BookingEnums::$STATUS['completed']])->pluck('id')[0]])
+                        ->first();
+        if($review_exist)
+            return Helper::response(false, "review already exist");
 
-        $rateings =[];
-        foreach($ratings as $rateing)
-        {
-            $rateings['question']= $rateing['question'];
-            $rateings['rating']= $rateing['rating'];
-        }
-        return $rateings;
+
         if(!$review_exist)
         {
-            $review = new Review;
-            $review->user_id =$user_id;
-            $review->booking_id =Booking::where('public_booking_id', $public_booking_id)->pluck('id')[0];
-            $review->desc =$suggestion;
-            $review->ratings =json_encode($rateings);
-            $review_result =$review->save();
-        }
-        else
-        {
-            $review_result = Review::where('user_id', $user_id)
-                            ->where(['booking_id'=>Booking::where('public_booking_id', $public_booking_id)->pluck('id')[0]])
-                            ->update([
-                                'desc'=>$suggestion,
-                                'ratings'=>json_encode($rateings)
-                            ]);
+            $reviews = new Review;
+            $reviews->user_id =$user_id;
+            $reviews->booking_id =Booking::where('public_booking_id', $public_booking_id)->pluck('id')[0];
+            $reviews->desc =$suggestion;
+            $reviews->ratings =json_encode($review);
+            $review_result =$reviews->save();
         }
 
         if(!$review_result)
-            return Helper::responce(false, "couldn't add review");
+            return Helper::response(false, "couldn't add review");
         
-        return Helper::responce(true, "Review added successfully");
+        return Helper::response(true, "Review added successfully", ['review'=>Review::findOrFail($reviews->id)]);
     }
 }

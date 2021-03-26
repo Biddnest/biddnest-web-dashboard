@@ -365,7 +365,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ReviewController::add($request->token_payload->id,$request->public_booking_id, $request->ratings, $request->suggestion);
+        return ReviewController::add($request->token_payload->id,$request->public_booking_id, $request->review, $request->suggestion);
     }
 
     public static function faqCategories(Request $request){

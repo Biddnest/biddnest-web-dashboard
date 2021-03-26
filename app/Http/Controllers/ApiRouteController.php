@@ -375,4 +375,16 @@ class ApiRouteController extends Controller
     public static function faqByCategory(Request $request){
         return FaqController::getByCategory($request->category);
     }
+
+    public static function addNotificationUserPlayer(Request $request){
+        $validation = Validator::make($request->all(),[
+            'player_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+
+        return NotificationController::saveCustomerPlayer($request->player_id, $request->token_payload->id);
+    }
 }

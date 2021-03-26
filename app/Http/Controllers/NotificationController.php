@@ -52,8 +52,16 @@ class NotificationController extends Controller
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
     }
 
-    public static function send(){
-        
+    public static function send($title, $desc, $time = null){
+        if(!$time){
+            OneSignal::sendNotificationToAll(
+                "Some Message",
+                $url = null,
+                $data = null,
+                $buttons = null,
+                $schedule = null
+            );
+        }
     }
 
 }

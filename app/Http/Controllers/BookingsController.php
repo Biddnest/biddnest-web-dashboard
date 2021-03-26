@@ -269,6 +269,11 @@ class BookingsController extends Controller
             ->with('organization')
             ->with('service')
             ->with('payment')
+            ->with(['movement_specifications'=>function ($movement_specifications) use($public_booking_id){
+                $movement_specifications->where('booking_id', Booking::where(['public_booking_id'=>$public_booking_id])->pluck('id')[0])
+                            ->where('status', BidEnums::$STATUS['won']);
+            }                  
+            ])
             ->with('driver')
             ->with('vehicle')
             ->where("public_booking_id", $public_booking_id)

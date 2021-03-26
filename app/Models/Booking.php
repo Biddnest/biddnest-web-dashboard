@@ -35,9 +35,9 @@ class Booking extends Model
         return $this->hasMany(BookingStatus::class);
     }
 
-    public function bid()
+    public function movement_specifications()
     {
-        return $this->hasOne(Bid::class);
+        return $this->hasOne(Bid::class)->select(['meta']);
     }
 
     public function bids()
@@ -57,7 +57,7 @@ class Booking extends Model
 
     public function vehicle()
     {
-        return $this->hasOneThrough(Vehicle::class, BookingDriver::class, 'vehicle_id', 'id', 'id', 'driver_id');
+        return $this->hasOneThrough(Vehicle::class, BookingDriver::class, 'vehicle_id', 'id', 'id', 'vehicle_id');
     }
 
     // public function bookingdriver()

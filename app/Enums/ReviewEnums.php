@@ -5,5 +5,10 @@ use http\Env\Request;
 
 
 class ReviewEnums{
-    public static $QUESTIONS =["How did you like our Service?", "How did you like our Driver?", "How did you like our Experience?", "Do you have any Suggestions?"];
+    public static $QUESTIONS =[
+                                ['type'=>"rating",'question'=>"How did you like our Service?"],
+                                ['type'=>"rating", 'question'=>"How did you like our Driver?"],
+                                ['type'=>"rating", 'question'=>"How did you like our Experience?"], 
+                                ['type'=>"text", 'question'=>"Do you have any Suggestions?"]
+                            ];
 }

@@ -353,6 +353,18 @@ class ApiRouteController extends Controller
         return PageController::get($request->slug);
     }
 
+    public static function addReview(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+            'rating.*' =>'nullable',
+            'suggestion'=>'nullable'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return ReviewController::add($request->token_payload->id,$request->public_booking_id, $request->ratings, $request->suggestion);
     public static function faqCategories(Request $request){
         return FaqController::getCategories();
     }

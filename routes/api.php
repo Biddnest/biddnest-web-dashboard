@@ -49,6 +49,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get("/page/{slug}",[ApiRouter::class, 'getPage']);
+    Route::post("/review",[ApiRouter::class, 'addReview']);
 
     Route::get("/faq/categories",[ApiRouter::class, 'getPage']);
     Route::get("/faq/categories/{category}",[ApiRouter::class, 'getPage']);

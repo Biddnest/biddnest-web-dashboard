@@ -272,20 +272,20 @@ class BookingsController extends Controller
             ->with(['movement_specifications'=>function ($movement_specifications) use($public_booking_id){
                  $movement_specifications->where('booking_id', Booking::where(['public_booking_id'=>$public_booking_id])->pluck('id')[0])
                             ->where('status', BidEnums::$STATUS['won']);
-            }                  
+            }
             ])
             ->with('driver')
             ->with('vehicle')
             ->with('review')
             ->where("public_booking_id", $public_booking_id)
-            ->where("user_id", $user_id)
+//            ->where("user_id", $user_id)
             ->where("deleted",CommonEnums::$NO)
             ->first();
 
 
         if(!$booking)
         {
-            return Helper::response(false,"Couldn't Find data");
+            return Helper::response(false,"Invalid Booking id");
         }
 
         return Helper::response(true,"data fetched successfully",["booking"=>$booking]);

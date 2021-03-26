@@ -12,7 +12,7 @@ class Ticket extends Model
     use HasFactory;
 
     public function booking(){
-        return $this->belongsTo(booking::class);
+        return $this->belongsTo(Booking::class);
     }
 
     public function vendor(){

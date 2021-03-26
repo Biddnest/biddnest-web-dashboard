@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Helper;
 use App\Models\Ticket;
 use App\Models\Booking;
+use App\Models\User;
 use App\Enums\TicketEnums;
+
 
 class TicketController extends Controller
 {
-    public static function create($sender_id, $ticket_type, $heading, $desc, $meta)
+    public static function create($sender_id, $ticket_type, $meta, $heading=null, $body=null)
     {
         switch ($ticket_type) {
             case TicketEnums::$TYPE['order_reschedule']:
@@ -32,7 +34,14 @@ class TicketController extends Controller
                     $body = str_replace("{{booking.id}}", "", $body);
                     $body = str_replace("{{user.name}}", "", $body);
                 }
-                break;
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->order_id = $booking['id'];
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+            break;
 
             case TicketEnums::$TYPE['order_cancellation']:
                 $title = TicketEnums::$TEMPLATES['order_cancellation']['title_template'];
@@ -53,19 +62,41 @@ class TicketController extends Controller
                     $body = str_replace("{{user.name}}", "", $body);
 
                 }
-                    break;
-            default:
-                $title = "";
-                $desc = "";
-        }
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->order_id = $booking['id'];
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+            break;
 
-        $ticket = new Ticket;
-        $ticket->user_id = $sender_id;
-        $ticket->heading = $heading;
-        $ticket->desc = $desc;
-        $ticket->order_id = $meta['public_booking_id'];
-        $ticket->type = $ticket_type;
-        $ticket->meta = json_encode($meta);
+            case TicketEnums::$TYPE['complaint']:
+                        $title = $heading;
+                        $body = $body;
+                        $ticket = new Ticket;
+                        $ticket->user_id = $sender_id;
+                        $ticket->heading = $title;
+                        $ticket->desc = $body;
+                        $ticket->type = $ticket_type;
+                        $ticket->meta = json_encode($meta);
+            break;
+
+            case TicketEnums::$TYPE['call_back']:
+                $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+                $body = TicketEnums::$TEMPLATES['call_back']['body_template'];
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+            break;
+            
+            default:
+                    $title = "";
+                    $desc = "";
+        }
 
         if(!$ticket->save())
             return Helper::response(false, "Could'nt create ticket.");
@@ -96,6 +127,27 @@ class TicketController extends Controller
             $template = str_replace();
             }
         }
+    }
+
+    public static function get($sender_id = null)
+    {
+        if(!$sender_id)
+        {
+            $tickets = Ticket::with('booking')->with(['vendor'=>function ($org){
+                $org->with('organization');
+            }])->with('user')->orderBy('id', 'DESC')->get();
+        }
+        else
+        {
+            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)
+                                ->whereNotIn('type', TicketEnums::$TEMPLATES['call_back'])->with('booking')
+                                ->orderBy('id', 'DESC')->get();
+        }
+
+        if(!$tickets)
+            return Helper::response(false, "Could'nt get ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>$tickets]);
     }
 
 }

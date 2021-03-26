@@ -547,4 +547,14 @@ class BookingsController extends Controller
         }
     }
 
+    public static function getRecentBooking($user_id)
+    {
+        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO, "user_id"=>$user_id])
+        ->whereNotIn("status",[BookingEnums::$STATUS["enquiry"],BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->orderBy('id', 'DESC')->first();
+
+        if(!$bookingorder)
+            return Helper::response(false,"No Booking Found");
+
+        return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
+    }
 }

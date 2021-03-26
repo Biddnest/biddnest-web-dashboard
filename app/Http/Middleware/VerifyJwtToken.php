@@ -34,7 +34,7 @@ class VerifyJwtToken
                         return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
                 }else{
                     if(isset($data->payload->organization_id))
-                        return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>$data])->setStatusCode(401);
+                        return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
                 }
                 $request->token_payload = $data->payload;
                 return $next($request);

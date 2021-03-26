@@ -35,9 +35,9 @@ class Booking extends Model
         return $this->hasMany(BookingStatus::class);
     }
 
-    public function bid()
+    public function movement_specifications()
     {
-        return $this->hasOne(Bid::class);
+        return $this->hasOne(Bid::class)->select(['meta']);
     }
 
     public function bids()

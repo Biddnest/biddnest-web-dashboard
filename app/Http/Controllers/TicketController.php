@@ -11,7 +11,7 @@ use App\Enums\TicketEnums;
 
 class TicketController extends Controller
 {
-    public static function create($sender_id, $ticket_type, $heading, $desc, $meta)
+    public static function create($sender_id, $ticket_type, $meta, $heading=null, $desc=null)
     {
         switch ($ticket_type) {
             case TicketEnums::$TYPE['order_reschedule']:
@@ -98,4 +98,22 @@ class TicketController extends Controller
         }
     }
 
+    public static function get($sender_id = null)
+    {
+        if(!$sender_id)
+        {
+            $tickets = Ticket::with('booking')->with(['vendor'=>function ($org){
+                $org->with('organization');
+            }])->with('user')->get();
+        }
+        else
+        {
+            $tickets = Ticket::where('user_id', $sender_id)->orWhere('vendor_id', $sender_id)->with('booking')->get();
+        }
+
+        if(!$tickets)
+            return Helper::response(false, "Could'nt get ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>$tickets]);
+    }
 }

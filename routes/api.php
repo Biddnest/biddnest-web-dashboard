@@ -59,6 +59,7 @@ Route::prefix('v1')->group(function () {
     Route::get("/faq/categories/{category}",[ApiRouter::class, 'getPage']);
 
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
+    Route::get("/tickets",[ApiRouter::class, 'getTickets']);
 
 });
 

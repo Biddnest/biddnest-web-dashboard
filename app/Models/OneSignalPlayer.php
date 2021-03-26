@@ -9,5 +9,5 @@ class OneSignalPlayer extends Model
 {
     use HasFactory;
 
-    protected $table = ["onesignal_players"];
+    protected $table = "onesignal_players";
 }

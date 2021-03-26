@@ -385,6 +385,6 @@ class ApiRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
 
-        return NotificationController::saveCustomerPlayer($request->player_id, $request->token_payload->id);
+            return NotificationController::saveCustomerPlayer($request->player_id, $request->token_payload->id);
     }
 }

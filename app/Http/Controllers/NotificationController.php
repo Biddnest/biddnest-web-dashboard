@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    public function createNotification($for, $id, $title, $message){}
+    public static function createNotification($for, $id, $title, $message){}
 
-    public function saveCustomerPlayer($player_id, $user_id){
+    public static function saveCustomerPlayer($player_id, $user_id){
         $player = OneSignalPlayer::where("user_id",$user_id)->pluck("player_id");
 
         if(!in_array($player, $player_id)){
@@ -28,7 +28,7 @@ class NotificationController extends Controller
 
     }
 
-    public function saveVendorPlayer($player_id, $vendor_id){
+    public static function saveVendorPlayer($player_id, $vendor_id){
         $player = OneSignalPlayer::where("vendor_id",$vendor_id)->pluck("player_id");
 
         if(!in_array($player, $player_id)){

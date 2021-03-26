@@ -60,6 +60,11 @@ class Booking extends Model
         return $this->hasOneThrough(Vehicle::class, BookingDriver::class, 'vehicle_id', 'id', 'id', 'vehicle_id');
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
+
     // public function bookingdriver()
     // {
     //     return $this->morphMany(BookingDriver::class, 'driver');

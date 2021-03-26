@@ -276,6 +276,7 @@ class BookingsController extends Controller
             ])
             ->with('driver')
             ->with('vehicle')
+            ->with('review')
             ->where("public_booking_id", $public_booking_id)
             ->where("user_id", $user_id)
             ->where("deleted",CommonEnums::$NO)

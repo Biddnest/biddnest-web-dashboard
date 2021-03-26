@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Psy\Exception\FatalErrorException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -31,10 +32,22 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function register()
+    /*public function register()
     {
         $this->reportable(function (Throwable $e) {
             //
         });
-    }
+    }*/
+
+    /*public function register($request, Throwable $e)
+    {
+//        $this->renderable(function (Exception $e, $request) {
+            return response()->json([
+                "status"=>"error",
+                'type' => get_class($e),
+                'message' => $e->getMessage()
+            ])->setStatusCode(500);
+//        });
+
+    }*/
 }

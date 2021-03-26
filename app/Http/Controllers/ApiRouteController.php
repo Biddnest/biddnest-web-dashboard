@@ -264,7 +264,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::getBookingByPublicIdForApp($request->id);
+            return BookingsController::getBookingByPublicIdForApp($request->id,$request->token_payload->id);
     }
 
     public function reschedul(Request $request)
@@ -365,8 +365,11 @@ class ApiRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return ReviewController::add($request->token_payload->id,$request->public_booking_id, $request->ratings, $request->suggestion);
+    public static function faqCategories(Request $request){
+        return FaqController::getCategories();
     }
 
-
-
+    public static function faqByCategory(Request $request){
+        return FaqController::getByCategory($request->category);
+    }
 }

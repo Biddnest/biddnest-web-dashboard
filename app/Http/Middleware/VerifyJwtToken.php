@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Firebase\JWT\JWT;
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use App\Helper;
 
@@ -26,9 +27,18 @@ class VerifyJwtToken
             return response()->json(["status"=>"fail", "message"=>"Authorization headers are missing.","data"=>null])->setStatusCode(401);
 
         try {
-            if ($data = JWT::decode($request->bearerToken(), config('jwt.secret'),['HS256']))
+            if ($data = JWT::decode($request->bearerToken(), config('jwt.secret'),['HS256'])){
+                if(strpos($request->path(), "vendor") !== false)
+                {
+                    if(!isset($data->payload->organization_id))
+                        return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
+                }else{
+                    if(isset($data->payload->organization_id))
+                        return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>$data])->setStatusCode(401);
+                }
                 $request->token_payload = $data->payload;
                 return $next($request);
+            }
         } catch (\Exception $e) {
             return response()->json(["status"=>"fail", "message"=>"You are not authorized to access this application.","data"=>["error"=>$e->getMessage()]])->setStatusCode(401);
         }

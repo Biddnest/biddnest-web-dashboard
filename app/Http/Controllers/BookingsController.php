@@ -261,7 +261,7 @@ class BookingsController extends Controller
          return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
-    public static function getBookingByPublicIdForApp($public_booking_id)
+    public static function getBookingByPublicIdForApp($public_booking_id, $user_id)
     {
         $booking=Booking::with('movement_dates')
             ->with('inventories')
@@ -272,6 +272,7 @@ class BookingsController extends Controller
             ->with('driver')
             ->with('vehicle')
             ->where("public_booking_id", $public_booking_id)
+            ->where("user_id", $user_id)
             ->where("deleted",CommonEnums::$NO)
             ->first();
 

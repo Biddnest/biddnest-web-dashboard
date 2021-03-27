@@ -47,6 +47,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
             Route::post('/webhook',[PaymentController::class, 'webhook']);
+            Route::post('/status/complete',[ApiRouter::class, 'statusComplete']);
         });
         Route::prefix('request')->group(function () {
             Route::post('/reschedule',[ApiRouter::class,'createRescheduleTicket']);
@@ -56,6 +57,8 @@ Route::prefix('v1')->group(function () {
 
     Route::get("/page/{slug}",[ApiRouter::class, 'getPage']);
     Route::post("/review",[ApiRouter::class, 'addReview']);
+
+    Route::get("/contact-us",[ApiRouter::class, 'contactUs']);
 
     Route::get("/faq/categories",[ApiRouter::class, 'getPage']);
     Route::get("/faq/categories/{category}",[ApiRouter::class, 'getPage']);

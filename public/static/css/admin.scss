@@ -3527,7 +3527,8 @@ input[type=submit].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  // padding: 0.25rem 1.5rem;
+  padding: 8px 10px !important;
   clear: both;
   font-weight: 400;
   color: #3a3b45;
@@ -3542,6 +3543,7 @@ input[type=submit].btn-block {
   color: #2e2f37;
   text-decoration: none;
   background-color: #f8f9fc;
+  border :none !important;
 }
 
 .dropdown-item.active,
@@ -4953,7 +4955,7 @@ input[type=submit].btn-block {
 
 .card-footer {
   padding: 0.75rem 1.25rem;
-  background-color: #f8f9fc;
+  background-color: #eee0fd !important;
   border-top: 1px solid #e3e6f0;
 }
 

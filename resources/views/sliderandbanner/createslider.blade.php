@@ -6,7 +6,7 @@
             <div class="d-flex flex-row justify-content-between">
               <h3 class="heading1 p-4">Create Slider & Banners</h3>
             </div>
-            
+
             <!-- Dashboard cards -->
             <div class="d-flex  flex-row justify-content-between">
               <div class="page-head text-left p-5 pt-0 pb-0">
@@ -16,14 +16,14 @@
                     </li>
                     <li class="breadcrumb-item"><a href="sliders-banners.html"> Manage Sliders</a></li>
                     <li class="breadcrumb-item"><a href="#"> Create-Sliders</a></li>
-                    
-                   
+
+
                   </ol>
                 </nav>
-              
-              
+
+
               </div>
-        
+
           </div>
             <div
               class="d-flex flex-row justify-content-center Dashboard-lcards"
@@ -45,7 +45,7 @@
                       aria-labelledby="new-order-tab"
                     >
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue">
+                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('service_add')}}" data-next="redirect" data-url="{{route('slider')}}" data-alert="mega" method="POST">
                         <!-- <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
@@ -75,7 +75,7 @@
                                     <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"
                                       data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary"
                                       data-on="Active" data-off="Inactive" id="switch">
-          
+
                                   </div>
                                 </div>
                                 <span class="error-message"
@@ -159,7 +159,7 @@
                                 <option>Banner 2</option>
                                 <option>Banner 3</option>
                               </select>
-                              
+
 
                               <span class="error-message"
                                 >Please enter a valid banner type</span
@@ -174,7 +174,7 @@
                                 <option>position 2</option>
                                 <option>position 3</option>
                               </select>
-                              
+
 
                               <span class="error-message"
                                 >Please enter a valid banner type</span
@@ -189,7 +189,7 @@
                                 <option>Web 2</option>
                                 <option>Platform 3</option>
                               </select>
-                              
+
                               <span class="error-message"
                                 >Please select valid platform</span
                               >
@@ -203,7 +203,7 @@
                                 <option>300 X 140 Px</option>
                                 <option>400 X 140 Px</option>
                               </select>
-                              
+
                               <span class="error-message"
                                 >Please enter valid Size</span
                               >
@@ -216,14 +216,14 @@
                                 <option>Universal</option>
                                 <option>Zone</option>
                               </select>
-                              
+
                               <span class="error-message"
                                 >Please enter valid TYpe</span
                               >
                             </div>
                           </div>
                         </div>
-                        <div class="accordion" id="comments">
+                        <div class="" id="comments">
                           <div
                             class="d-flex justify-content-between flex-row p-10 py-0"
                             style="border-top: 1px solid #70707040"

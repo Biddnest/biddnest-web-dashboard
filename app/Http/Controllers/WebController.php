@@ -68,15 +68,27 @@ class WebController extends Controller
 
     public function ordersBookingsLive()
     {
+        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+            ->with('service')
+            ->with('organization')
+            ->orderBy("id","DESC")
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+
         return view('order.ordersbookings_live',[
-            "bookings" => Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->with('service')->with('organization')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH)
+            "bookings" => $bookings
         ]);
     }
 
     public function ordersBookingsPast()
     {
+       $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+                ->with("service")
+            ->with('organization')
+            ->orderBy("id","DESC")
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+
         return view('order.ordersbookings_past',[
-            "bookings" => Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH)
+            "bookings" => $bookings
         ]);
     }
 

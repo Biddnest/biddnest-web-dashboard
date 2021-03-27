@@ -12,11 +12,11 @@ use Fabito\AvatarGenerator\Avatar;
 
 class FaqEnums
 {
-    public static $CATEGORY_POOL = [["name"=>"Delivery", "value"=>"delivery","image"=>""],
-                                    ["name"=>"Packaging", "value"=>"packaging","image"=>""],
-                                    ["name"=>"Vendor", "value"=>"organization","image"=>""],
-                                    ["name"=>"Bidding", "value"=>"bidding","image"=>""],
-                                    ["name"=>"How It works", "value"=>"bidding","image"=>""],
-                                    ["name"=>"Payment", "value"=>"payment","image"=>""],
+    public static $CATEGORY_POOL = [["name"=>"Delivery", "value"=>"delivery","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/delivery.svg"],
+                                    ["name"=>"Packaging", "value"=>"packaging","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/packaging.svg"],
+                                    ["name"=>"Vendor", "value"=>"organization","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/vendor.svg"],
+                                    ["name"=>"Bidding", "value"=>"bidding","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/bidding.svg"],
+                                    ["name"=>"Safety", "value"=>"safety","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/safety.svg"],
+                                    ["name"=>"Payment", "value"=>"payment","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/payment.svg"],
                                     ];
 }

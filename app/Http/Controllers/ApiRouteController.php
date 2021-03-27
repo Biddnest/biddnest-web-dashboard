@@ -451,14 +451,13 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[  
             'public_booking_id' => 'required|string',          
-            'payment_id' => 'required|string',
-            'order_id' => 'required|string'
+            'payment_id' => 'required|string'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return PaymentController::statusComplete($request->token_payload->id, $request->public_booking_id, $request->payment_id, $request->order_id);
+        return PaymentController::statusComplete($request->token_payload->id, $request->public_booking_id, $request->payment_id);
     }
 
     public function contactUs(Request $request)

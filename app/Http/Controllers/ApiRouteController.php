@@ -446,4 +446,23 @@ class ApiRouteController extends Controller
     {
         return TicketController::create($request->token_payload->id, 4, []);
     }
+
+    public function statusComplete(Request $request)
+    {
+        $validation = Validator::make($request->all(),[  
+            'public_booking_id' => 'required|string',          
+            'payment_id' => 'required|string',
+            'order_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PaymentController::statusComplete($request->token_payload->id, $request->public_booking_id, $request->payment_id, $request->order_id);
+    }
+
+    public function contactUs(Request $request)
+    {
+        return PageController::contactUs();
+    }
 }

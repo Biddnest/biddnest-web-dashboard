@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiRouteController as ApiRouter;
 use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
 use App\Http\Controllers\VendorController as VendorRouter;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PageController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -47,6 +48,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
             Route::post('/webhook',[PaymentController::class, 'webhook']);
+            Route::post('/status/complete',[ApiRouter::class, 'statusComplete']);
         });
         Route::prefix('request')->group(function () {
             Route::post('/reschedule',[ApiRouter::class,'createRescheduleTicket']);
@@ -57,8 +59,10 @@ Route::prefix('v1')->group(function () {
     Route::get("/page/{slug}",[ApiRouter::class, 'getPage']);
     Route::post("/review",[ApiRouter::class, 'addReview']);
 
-    Route::get("/faq/categories",[ApiRouter::class, 'getPage']);
-    Route::get("/faq/categories/{category}",[ApiRouter::class, 'getPage']);
+    Route::get("/contact-us",[ApiRouter::class, 'contactUs']);
+
+    Route::get("/faq/categories",[ApiRouter::class, 'faqCategories']);
+    Route::get("/faq/categories/{category}",[ApiRouter::class, 'faqByCategory']);
 
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\Page;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -15,5 +16,12 @@ class PageController extends Controller
 
     public static function get($slug){
         return Helper::response(true, "Here is the data",["page"=> Page::where("slug",$slug)->first()]);
+    }
+
+    public static function contactUs()
+    {
+        $contact = json_decode(Settings::where("key", "contact_details")->pluck('value')[0], true);
+
+        return Helper::response(true, "Contact details dispaly successfully.", ["details"=>$contact]);
     }
 }

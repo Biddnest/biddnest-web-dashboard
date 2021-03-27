@@ -12,7 +12,7 @@ use App\Models\BookingStatus;
 use App\Helper;
 use App\Enums\BookingEnums;
 use App\Enums\PaymentEnums;
-
+use App\Enums\CommonEnums;
 use App\Models\Settings;
 use Ramsey\Uuid\Uuid;
 use \GuzzleHttp\Client;
@@ -78,7 +78,8 @@ class PaymentController extends Controller
             'receipt' => $receipt,
             'amount' => $amount*100,
             'currency' => 'INR',
-            'notes'=>$meta
+            'notes'=>$meta,
+            'payment_capture'=>CommonEnums::$YES
         ]]);
         return json_decode($response->getBody(), true);
     }
@@ -131,17 +132,26 @@ class PaymentController extends Controller
         }
     }
 
-    public static function statusComplete($user_id, $public_booking_id, $payment_id, $order_id)
+    public static function statusComplete($user_id, $public_booking_id, $payment_id)
     {
         $booking_exist = Booking::where(["public_booking_id"=>$public_booking_id, 'user_id'=>$user_id])->with('payment')->first();
 
         if(!$booking_exist)
             return Helper::response(false, "Booking is not exist");
 
+        $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
+
+        $payment_data = $api->payment->fetch($payment_id);
+
+        if($payment_data['error_code'])
+            return Helper::response(false, "Payment does not exist");
+        
+        $order_id = $payment_data['order_id'];
+
         $order_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])->first();
 
         if(!$order_exist)
-            return Helper::response(false, "Payment order is not exist");
+            return Helper::response(false, "Payment order is not exist");        
         
         $payment_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])
                                 ->update([
@@ -149,10 +159,10 @@ class PaymentController extends Controller
                                     'status'=> PaymentEnums::$STATUS['completed']
                                 ]);
 
-        $meta = json_decode(Booking::where("id",$order_id_exist->booking_id)->pluck("meta")[0],true);
+        $meta = json_decode(Booking::where("id",$order_exist->booking_id)->pluck("meta")[0],true);
         $meta["start_pin"] = Helper::generateOTP(4);
                     
-        Booking::where(["id"=>$order_id_exist->booking_id])
+        Booking::where(["id"=>$order_exist->booking_id])
                 ->update([
                     "status"=>BookingEnums::$STATUS['awaiting_pickup'],
                     "meta"=>$meta
@@ -164,7 +174,7 @@ class PaymentController extends Controller
         $result_status = $bookingstatus->save();
 
         if($order_exist->coupon_code)
-                    Coupon::where('code',$order_exist->coupon_code)->update([
+            Coupon::where('code',$order_exist->coupon_code)->update([
                         "usage"=>Coupon::where("code", $order_exist->coupon_code)->pluck("usage")[0] + 1
                         ]);
 

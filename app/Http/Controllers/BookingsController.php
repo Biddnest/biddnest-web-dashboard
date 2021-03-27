@@ -263,7 +263,10 @@ class BookingsController extends Controller
 
     public static function getBookingByPublicIdForApp($public_booking_id, $user_id)
     {
-        $booking=Booking::with('movement_dates')
+        $booking=Booking::where("public_booking_id", $public_booking_id)
+//            ->where("user_id", $user_id)
+            ->where("deleted",CommonEnums::$NO)
+            ->with('movement_dates')
             ->with('inventories')
             ->with('status_history')
             ->with('organization')
@@ -277,11 +280,7 @@ class BookingsController extends Controller
             ->with('driver')
             ->with('vehicle')
             ->with('review')
-            ->where("public_booking_id", $public_booking_id)
-//            ->where("user_id", $user_id)
-            ->where("deleted",CommonEnums::$NO)
             ->first();
-
 
         if(!$booking)
         {

@@ -578,4 +578,17 @@ class BookingsController extends Controller
 
         return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
     }
+
+    public static function statusChange($booking_id, $status)
+    {
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $booking_id;
+        $bookingstatus->status=$status;
+        $result_status = $bookingstatus->save();
+
+        if(!$result_status)
+            return Helper::response(false,"couldn'd change status");
+
+        return true;
+    }
 }

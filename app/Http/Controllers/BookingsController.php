@@ -372,7 +372,7 @@ class BookingsController extends Controller
 
         if($discount_amount > 0.00){
             $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
-            $tax =  $grand_total * ($booking->payment->tax/100);
+            $tax =  $grand_total * ($tax_percentage/100);
             $grand_total += $tax;
         }
 

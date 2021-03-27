@@ -212,14 +212,7 @@
       <workItem from="1616132711040" duration="4276000" />
       <workItem from="1616390215775" duration="10522000" />
       <workItem from="1616482283351" duration="26760000" />
-      <workItem from="1616737175235" duration="21526000" />
-    </task>
-    <task id="LOCAL-00003" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616414981731</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1616414981731</updated>
+      <workItem from="1616737175235" duration="22020000" />
     </task>
     <task id="LOCAL-00004" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1616415153063</created>
@@ -557,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616845758129</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
+      <created>1616849094683</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1616849094683</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

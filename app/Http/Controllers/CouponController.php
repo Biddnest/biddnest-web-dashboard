@@ -158,11 +158,12 @@ class CouponController extends Controller
 
        $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
 
+       $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
+
        $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
-       $tax =  $grand_total * ($booking->payment->tax/100);
+       $tax =  $grand_total * ($tax_percentage/100);
        $grand_total += $tax;
 
-       $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
 
        return (array) ["coupon"=>["discount"=>number_format($discount_amount,2)], "payment_details"=>[
            "sub_total" => $booking->payment->sub_total,

@@ -369,8 +369,8 @@ class BookingsController extends Controller
         return Helper::response(true,"Get payment data successfully",["payment_details"=>[
             "sub_total"=>$booking->payment->sub_total,
             "surge_charge"=>$booking->payment->other_charges,
-            "tax(".$tax_percentage."%)"=>$booking->payment->tax,
             "discount"=>0.00,
+            "tax(".$tax_percentage."%)"=>$booking->payment->tax,
             "grand_total" => $booking->payment->grand_total
         ]]);
     }

@@ -355,7 +355,7 @@ class BookingsController extends Controller
             return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 
-    public static function getPaymentDetails($public_booking_id)
+    public static function getPaymentDetails($public_booking_id, $discount_amount = 0.00)
     {
         $booking = Booking::where("public_booking_id", $public_booking_id)
                                 ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
@@ -366,13 +366,26 @@ class BookingsController extends Controller
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
+
+        $tax = $booking->payment->tax;
+        $grand_total = $booking->payment->grand_total;
+
+        if($discount_amount > 0.00){
+            $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
+            $tax =  $grand_total * ($booking->payment->tax/100);
+            $grand_total += $tax;
+        }
+
+
+
         return Helper::response(true,"Get payment data successfully",["payment_details"=>[
-            "sub_total"=>$booking->payment->sub_total,
+            "sub_total" => $booking->payment->sub_total,
             "surge_charge"=>$booking->payment->other_charges,
-            "discount"=>0.00,
-            "tax(".$tax_percentage."%)"=>$booking->payment->tax,
-            "grand_total" => $booking->payment->grand_total
+            "discount"=>$discount_amount,
+            "tax(".$tax_percentage."%)"=>$tax,
+            "grand_total" => $grand_total
         ]]);
+
     }
 
     public static function getBookingsForVendorApp(Request $request)

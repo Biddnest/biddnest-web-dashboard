@@ -18,9 +18,9 @@ class PageController extends Controller
         return Helper::response(true, "Here is the data",["page"=> Page::where("slug",$slug)->first()]);
     }
 
-    public static function contact()
+    public static function contactUs()
     {
-        $contact = Settings::where("key", "bid_time")->pluck('value')[0];
+        return $contact = Settings::where("key", "contact_details")->pluck('value')[0]['contact_no'];
 
         return Helper::response(true, "Contact details dispaly successfully.", ["contact_no"=>$contact]);
     }

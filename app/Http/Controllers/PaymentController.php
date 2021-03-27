@@ -83,7 +83,7 @@ class PaymentController extends Controller
         return json_decode($response->getBody(), true);
     }
 
-    public static function webhook(Request $request)
+    public function webhook(Request $request)
     {
         $body = $request->all();
         if($body['entity'] == 'event' && ($body['event']=='payment.captured' || $body['event']=='payment.authorized'))

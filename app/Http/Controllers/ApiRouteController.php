@@ -463,6 +463,6 @@ class ApiRouteController extends Controller
 
     public function contactUs(Request $request)
     {
-        return PageController::contact();
+        return PageController::contactUs();
     }
 }

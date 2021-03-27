@@ -72,7 +72,7 @@ class BidController extends Controller
         else
         {
             $bookings = Booking::whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
-            ->where("bid_result_at", "<=", "$current_time")->where("public_booking_id", $public_booking_id)->get();
+            ->where("public_booking_id", $public_booking_id)->get();
             // return $bookings;
         }
 

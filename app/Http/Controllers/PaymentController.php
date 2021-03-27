@@ -105,11 +105,14 @@ class PaymentController extends Controller
                                     "status"=>BookingEnums::$STATUS['awaiting_pickup'],
                                     "meta"=>$meta
                                 ]);
-
-            $bookingstatus = new BookingStatus;
-            $bookingstatus->booking_id = $order_id_exist->booking_id;
-            $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
-            $result_status = $bookingstatus->save();
+            $status=BookingStatus::where(['booking_id'=>$order_id_exist->booking_id, 'status'=>BookingEnums::$STATUS['awaiting_pickup']])->first();
+            if(!$status)
+            {
+                $bookingstatus = new BookingStatus;
+                $bookingstatus->booking_id = $order_id_exist->booking_id;
+                $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
+                $result_status = $bookingstatus->save();
+            }
 
             if($order_id_exist->coupon_code)
                     Coupon::where('code',$order_id_exist->coupon_code)->update([

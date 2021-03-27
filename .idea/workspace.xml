@@ -209,7 +209,7 @@
       <workItem from="1616132711040" duration="4276000" />
       <workItem from="1616390215775" duration="10522000" />
       <workItem from="1616482283351" duration="26760000" />
-      <workItem from="1616737175235" duration="13652000" />
+      <workItem from="1616737175235" duration="14557000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1614851085109</created>
@@ -526,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616786442983</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
+      <created>1616825933872</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1616825933872</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

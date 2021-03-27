@@ -368,8 +368,9 @@ class BookingsController extends Controller
         $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
         return Helper::response(true,"Get payment data successfully",["payment_details"=>[
             "sub_total"=>$booking->payment->sub_total,
-            "tax(".$tax_percentage."%)"=>$booking->payment->tax,
             "surge_charge"=>$booking->payment->other_charges,
+            "tax(".$tax_percentage."%)"=>$booking->payment->tax,
+            "discount"=>0.00,
             "grand_total" => $booking->payment->grand_total
         ]]);
     }

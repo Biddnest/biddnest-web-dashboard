@@ -28,7 +28,7 @@ class Booking extends Model
     }
 
     public function service(){
-        return $this->belongsTo(Service::class)->select(['name','image']);
+        return $this->belongsTo(Service::class,"service_id");
     }
 
     public function status_history(){

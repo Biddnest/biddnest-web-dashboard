@@ -1,7 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php" />
+    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/FaqEnums.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/FaqEnums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WebController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WebController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/admin.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/admin.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/admin.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/admin.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/admin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/admin.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/code_view.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/code_view.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/cards.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/cards.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/extrasidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/extrasidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/extrasidebar.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/extrasidebar.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/maps.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/maps.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/maps.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/maps.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/progress-bar.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/progress-bar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/progress-bar.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/progress-bar.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/progress-bar.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/progress-bar.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/select2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/sidebar.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/sidebar.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/table.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/table.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/timer.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/timer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/timer.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/timer.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/timer.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/timer.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/components/timer.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/components/timer.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/font_awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/font_awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/froala_editor.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/froala_editor.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/froala_editor.pkgd.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/froala_editor.pkgd.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/intlTelInput.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/intlTelInput.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/intlTelInput.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/intlTelInput.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/login.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/login.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/login.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/login.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/master.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/master.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/master.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/master.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/css/tagify.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/css/tagify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Black.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Black.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-BlackItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-BlackItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Bold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-BoldItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-BoldItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-ExtraBold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-ExtraBold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-ExtraBoldItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-ExtraBoldItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Heavy.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Heavy.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-HeavyItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-HeavyItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Light.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Light.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-LightItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-LightItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Medium.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Medium.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-MediumItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-MediumItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-RegularItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-RegularItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-SemiBold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-SemiBold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-SemiBoldItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-SemiBoldItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-Thin.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-Thin.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-ThinItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-ThinItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-UltraLight.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-UltraLight.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/Gilroy-UltraLightItalic.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/Gilroy-UltraLightItalic.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Background.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Background1.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Background1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Backward.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Backward.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Bookings.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Bookings.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Component 148 – 2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Component 148 – 2.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Ellipse 4.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Ellipse 4.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Group 12461.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Group 12461.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Group 12618.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Group 12618.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Group 12761.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Group 12761.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Group 12762.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Group 12762.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon awesome-shuttle-van.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon awesome-shuttle-van.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon awesome-smile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon awesome-smile.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon awesome-user-friends.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon awesome-user-friends.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon feather-chevrons-left.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon feather-chevrons-left.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon ionic-ios-document.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon ionic-ios-document.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon material-attach-money.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon material-attach-money.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon material-filter-list.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon material-filter-list.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon material-payment.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon material-payment.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon material-payment.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon material-payment.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon material-settings.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon material-settings.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon material-settings.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon material-settings.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Icon metro-link.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Icon metro-link.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Menu.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Menu.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Notifications.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Notifications.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Path 12183.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Path 12183.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Path 12184.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Path 12184.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Path 12212.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Path 12212.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Path 12212.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Path 12212.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 419 (1).svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 419 (1).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 419 (2).svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 419 (2).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 419 (3).svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 419 (3).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 419.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 419.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 4960 (1).svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 4960 (1).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 4960.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 4960.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 5177.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 5177.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 5177.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 5177.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Rectangle 599.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Rectangle 599.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Search-blue.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Search-blue.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Search.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Search.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/Search1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/Search1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/big-profile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/big-profile.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/checkmark.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/checkmark.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/dashboard.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/dashboard.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/date-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/date-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/date-icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/date-icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/default-image.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/default-image.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/filter.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/filter.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/forward.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/forward.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/graph/graph-lg.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/graph/graph-lg.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/graph/graph.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/graph/graph.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/graph/graphbid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/graph/graphbid.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/invalid-cross.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/invalid-cross.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/lastweek.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/lastweek.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/list-interface-symbol.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/list-interface-symbol.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/location.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/location.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/logo-white.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/logo-white.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/logo@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/logo@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/package.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/package.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/package1 (2).svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/package1 (2).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/package1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/package1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/prize-banner-.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/prize-banner-.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/ratings.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/ratings.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/sorticon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/sorticon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/status-16-filled.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/status-16-filled.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/status-16-filled.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/status-16-filled.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/tag.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/tag.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/thisweek.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/thisweek.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/tick.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/tick.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/tick.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/tick.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/upload-image.1svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/upload-image.1svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/upload-image.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/upload-image.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/upload-ing.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/upload-ing.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/upload-ing1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/upload-ing1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/users.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/users.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/valid-tick.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/valid-tick.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/violet_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/violet_logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/_variables.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/_variables.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/_variables.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/_variables.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/abstracts/_helper.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/abstracts/_helper.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/master.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/master.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/pages X/_dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/pages X/_dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/pages X/_dashboard.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/pages X/_dashboard.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/scss/pages X/_dashboard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/scss/pages X/_dashboard.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/ordersbookings_live.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/ordersbookings_live.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/ordersbookings_past.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/ordersbookings_past.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sliderandbanner/createslider.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sliderandbanner/createslider.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -157,13 +300,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Enums" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public/misc" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/storage/app/public/misc" />
+      <recent name="$PROJECT_DIR$/public/static" />
       <recent name="$PROJECT_DIR$/app/Enums" />
       <recent name="$PROJECT_DIR$/resources/fonts" />
     </key>
@@ -206,7 +351,7 @@
       <workItem from="1616132711040" duration="4276000" />
       <workItem from="1616390215775" duration="10522000" />
       <workItem from="1616482283351" duration="26760000" />
-      <workItem from="1616737175235" duration="14661000" />
+      <workItem from="1616737175235" duration="19804000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1614851085109</created>
@@ -537,7 +682,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616829733123</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
+      <created>1616829930286</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1616829930286</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

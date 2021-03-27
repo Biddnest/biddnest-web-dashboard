@@ -90,6 +90,7 @@
                                         @endif
                                     </td>
                                     <td class="">
+
                                         @switch($booking->status)
                                             @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                             <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
@@ -99,11 +100,11 @@
                                             <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
                                             @break
 
-                                            @case(\App\Enums\BookingEnums::$STATUS['bidding'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['biding'])
                                             <span class="status-badge green-bg  text-center td-padding">Bidding</span>
                                             @break
 
-                                            @case(\App\Enums\BookingEnums::$STATUS['rebidding'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
                                             <span class="status-badge grey-bg  text-center td-padding">Rebidding</span>
                                             @break
 

@@ -14,7 +14,7 @@ class FaqEnums
 {
     public static $CATEGORY_POOL = [["name"=>"Delivery", "value"=>"delivery","image"=>""],
                                     ["name"=>"Packaging", "value"=>"packaging","image"=>""],
-                                    ["name"=>"Vendor", "value"=>"vendor","image"=>""],
+                                    ["name"=>"Vendor", "value"=>"organization","image"=>""],
                                     ["name"=>"Bidding", "value"=>"bidding","image"=>""],
                                     ["name"=>"How It works", "value"=>"bidding","image"=>""],
                                     ["name"=>"Payment", "value"=>"payment","image"=>""],

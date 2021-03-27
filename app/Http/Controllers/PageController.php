@@ -20,8 +20,8 @@ class PageController extends Controller
 
     public static function contactUs()
     {
-        return $contact = Settings::where("key", "contact_details")->pluck('value')[0]['contact_no'];
+        $contact = Settings::where("key", "contact_details")->pluck('value')[0];
 
-        return Helper::response(true, "Contact details dispaly successfully.", ["contact_no"=>$contact]);
+        return Helper::response(true, "Contact details dispaly successfully.", ["details"=>$contact]);
     }
 }

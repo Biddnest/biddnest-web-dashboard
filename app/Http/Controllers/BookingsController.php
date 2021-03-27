@@ -480,7 +480,15 @@ class BookingsController extends Controller
         $save_driver->vehicle_id = $vehicle_id;
         $result_driver = $save_driver->save();
 
-        if(!$result_driver)
+        $assign_driver_status = Booking::where(['public_booking_id'=>$public_booking_id, 'id'=>$assign_driver['id']])
+                            ->update(["status"=>BookingEnums::$STATUS['driver_assigned']]);
+
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $assign_driver->id;
+        $bookingstatus->status=BookingEnums::$STATUS['driver_assigned'];
+        $result_status = $bookingstatus->save();
+
+        if(!$result_driver && !$assign_driver_status)
             return Helper::response(false,"couldn't sanve");
 
         return Helper::response(true,"save successfully");
@@ -505,7 +513,7 @@ class BookingsController extends Controller
         $booking = Booking::where([
             "public_booking_id"=>$public_booking_id,
             "organization_id"=>$organization_id,
-            "status"=>BookingEnums::$STATUS['awaiting_pickup']
+            "status"=>BookingEnums::$STATUS['driver_assigned']
         ])->first();
 
         if(!$booking)

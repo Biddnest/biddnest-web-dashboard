@@ -14,7 +14,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">Categories
           </li>
-          <li class="breadcrumb-item"><a href="category-management.html">Category Management</a></li>
+          <li class="breadcrumb-item"><a href="{{route('categories')}}">Category Management</a></li>
             <li class="breadcrumb-item"><a href="#">Create Category</a></li>
         </ol>
       </nav>
@@ -32,8 +32,7 @@
           <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                     aria-labelledby="new-order-tab">
             <!-- form starts -->
-            <form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-url="{{route('categories')}}" data-alert="tiny" class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" data-parsley-validate
-                      >
+            <form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('categories')}}" data-alert="tiny" onsubmit="return false;"  class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" data-parsley-validate>
               <div class="d-flex row pt-4">
                 <div class="col-lg-6 ">
                   <p class="img-label">Image</p>
@@ -41,7 +40,7 @@
                       <img src="{{asset('static/images/upload-image.svg')}}" alt="" />
                       <div class="ml-1">
                         <div class="file-upload">
-                          <input type="file" class="base-holder" name="image" id="image" required/>
+                          <input type="file" class="base-holder" name="image" id="image"/>
                           <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                             UPLOAD IMAGE
                           </button>
@@ -66,7 +65,7 @@
                   <div class="col-lg-6">
                     <div class="form-input">
                       <label class="full-name">Service Name</label>
-                      <input type="text" id="name" name="name" placeholder="Name" class="form-control br-5"/>
+                      <input type="text" required id="banner_name" name="name" placeholder="Name" class="form-control br-5" />
                       <span class="error-message">Please enter a valid banner name</span>
                     </div>
                   </div>
@@ -94,7 +93,7 @@
                         </button></a>
                     </div>
                     <div class="w-50 text-right">
-                      <a class="white-text p-10"><button class="btn theme-bg white-text w-30 br-5">
+                      <a class="white-text p-10"><button type="submit" class="btn theme-bg white-text w-30 br-5">
                                 Save
                               </button></a>
                     </div>
@@ -108,5 +107,7 @@
     </div>
   </div>
 </div>
+
+
 
 @endsection

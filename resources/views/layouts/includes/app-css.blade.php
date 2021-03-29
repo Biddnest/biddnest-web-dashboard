@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
         <!-- Custom css -->
 
-        <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" />
+        <!-- <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" /> -->
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <!-- text area editor -->
@@ -48,6 +48,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('static/css/jquery.tagsinput.min.css')}}" />
 
     <style>
             .nav-collapse .li{
@@ -436,5 +438,20 @@
                 overflow: hidden;
             }
 
+            #addr1  .btn-1 {
+                border-radius: 5px;
+                padding: 4px 10px;
+                text-transform: uppercase;
+                font-weight: 500;
+                letter-spacing: 1px;
+                background-color: #FDC403;
+                margin: 0px 0px !important;
+                font-size: 12px;
+            }
+            
+            .Dashboard-lcards .table tr :first-child{
+                /* padding-left: 10px !important; */
+                text-align: left;
+            }
         </style>
 

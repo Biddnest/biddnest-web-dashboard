@@ -12,4 +12,6 @@ use Fabito\AvatarGenerator\Avatar;
 
 class InventoryEnums{
     public static $SIZE = ["small"=>1, "medium"=>2, "large"=>3];
+
+    public static $CATEGORY = ["electronics", "furniture", "applience", "electricle", "automobile"];
 }

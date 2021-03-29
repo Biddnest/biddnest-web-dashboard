@@ -152,7 +152,24 @@
                                 <select id="ban-type" class="form-control br-5">
                                     <option value=""> -Select- </option>
                                     @foreach(\App\Enums\SliderEnum::$ZONE as $zone_type=>$value)
-                                        <option value="{{$zone_type}}">{{$platform}}</option>
+                                        <option value="{{$zone_type}}">{{$zone_type}}</option>
+                                    @endforeach
+                                </select>
+
+                              <span class="error-message"
+                                >Please enter valid Phone number</span
+                              >
+                            </div>
+                          </div>
+
+
+                            <div class="col-lg-6">
+                            <div class="form-input">
+                              <label class="phone-num-lable">Zones</label>
+                                <select id="ban-type" class="form-control br-5">
+                                    <option value=""> -Select- </option>
+                                    @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                        <option value="{{$zone->id}}">{{$zone->name}}</option>
                                     @endforeach
                                 </select>
 

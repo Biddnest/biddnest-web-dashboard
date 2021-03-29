@@ -47,6 +47,7 @@ class AdminController extends Controller
             Session::put('sessionActive', true);
             Session::put('user_role', $admin_user->role);
             $zone = [];
+
             if($admin_user->zones){
                 Session::put("zones",$admin_user->zones);
                 foreach($admin_user->zones as $zone){

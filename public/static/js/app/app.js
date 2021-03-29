@@ -44,10 +44,10 @@ $("body").on('submit',"form",function() {
                 Logger.info("Response ",response);
                 if(response.status == "success"){
                     tinySuccessAlert("Success",response.message);
-                    if(form.data("next")){
+                    if(form.data("next")){ //   data-next="redirect"
                         if(form.data("next") == "redirect"){
                             if(form.data('redirect-type') == "hard")
-                                redirectHard(form.data("url"));
+                                redirectHard(form.data("url")); // data-url="google.com"
                             else
                                 redirectTo(form.data("url"));
                         }

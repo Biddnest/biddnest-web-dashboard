@@ -35,7 +35,7 @@ class OrganisationController extends Controller
             $organizations=new Organization;
             $image = $data['image'];
             $uniq = uniqid();
-            $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq,"vendors/".$uniq.$data['organization']['org_name']);
+            $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
             $organizations->email=$data['email'];
             $organizations->phone=$data['phone']['primary'];
             $organizations->org_name=$data['organization']['org_name'];
@@ -92,7 +92,7 @@ class OrganisationController extends Controller
             $uniq = uniqid();
             $result_organization =Organization::where(["id"=>$id])
             ->update([ 
-                "image"=>Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq,"vendors/".$uniq.$data['organization']['org_name']),
+                "image"=>Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']),
                 "email"=>$data['email'],
                 "phone"=>$data['phone']['primary'],
                 "org_name"=>$data['organization']['org_name'],

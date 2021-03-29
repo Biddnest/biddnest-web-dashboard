@@ -178,8 +178,7 @@
                                               class="btn theme-br theme-text w-30 white-bg br-5"
                                           >
                                               Cancel
-                                          </button></a
-                                      >
+                                          </button></a>
                                   </div>
                                   <div class="w-50 text-right">
                                       <a class="white-text p-10"

@@ -38,7 +38,7 @@ class CouponController extends Controller
     $coupon->max_discount_amount = $data['max_discount_amount'];
     $coupon->min_order_amount = $data['min_order_amount'];
     $coupon->deduction_source = in_array($data['deduction_source'], CouponEnums::$DEDUCTION_SOURCE) ? $data['deduction_source'] : null;
-//    $coupon->organization_id = $data['organization_id'];
+    //    $coupon->organization_id = $data['organization_id'];
     $coupon->max_usage = $data['max_usage'];
     $coupon->max_usage_per_user = $data['max_usage_per_user'];
     $coupon->usage = 0; //initially set to zero

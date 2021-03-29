@@ -19,7 +19,7 @@ class CreateReviewTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('booking_id')->index('booking_id');
             $table->foreign('booking_id')->references('id')->on('bookings');           
-            $table->text("desc");
+            $table->text("desc")->nullable();
             $table->text("ratings");
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

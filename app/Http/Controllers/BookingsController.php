@@ -19,6 +19,7 @@ use App\Models\Bid;
 use App\Models\Organization;
 use App\Models\Vehicle;
 use App\Models\Vendor;
+use App\Models\Payment;
 use App\Models\BookingDriver;
 use App\Helper;
 use App\Sms;
@@ -147,10 +148,12 @@ class BookingsController extends Controller
         $booking->status=BookingEnums::$STATUS['enquiry'];
         $result=$booking->save();
 
-        $bookingstatus = new BookingStatus;
-        $bookingstatus->booking_id = $booking->id;
-        $bookingstatus->status=BookingEnums::$STATUS['enquiry'];
-        $result_status = $bookingstatus->save();
+        // $bookingstatus = new BookingStatus;
+        // $bookingstatus->booking_id = $booking->id;
+        // $bookingstatus->status=BookingEnums::$STATUS['enquiry'];
+        // $result_status = $bookingstatus->save();
+
+        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
         foreach($data["movement_dates"] as $dates)
         {
@@ -215,10 +218,12 @@ class BookingsController extends Controller
                                              "bid_result_at"=>$complete_time
                                             ]);
 
-        $bookingstatus = new BookingStatus;
-        $bookingstatus->booking_id = $exist->id;
-        $bookingstatus->status=BookingEnums::$STATUS['placed'];
-        $result_status = $bookingstatus->save();
+        // $bookingstatus = new BookingStatus;
+        // $bookingstatus->booking_id = $exist->id;
+        // $bookingstatus->status=BookingEnums::$STATUS['placed'];
+        // $result_status = $bookingstatus->save();
+
+        $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['placed']);
 
         if(!$confirmestimate && !$result_status)
         {
@@ -248,10 +253,12 @@ class BookingsController extends Controller
         "public_booking_id"=>$exist->public_booking_id])
         ->update(["status"=>BookingEnums::$STATUS['cancelled'], "cancelled_meta"=>json_encode(["reason"=>$reason, "desc"=>$desc], true)]);
 
-        $bookingstatus = new BookingStatus;
-        $bookingstatus->booking_id = $exist->id;
-        $bookingstatus->status=BookingEnums::$STATUS['cancelled'];
-        $result_status = $bookingstatus->save();
+        // $bookingstatus = new BookingStatus;
+        // $bookingstatus->booking_id = $exist->id;
+        // $bookingstatus->status=BookingEnums::$STATUS['cancelled'];
+        // $result_status = $bookingstatus->save();
+
+        $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
 
         if(!$cancelbooking && !$result_status)
         {
@@ -264,8 +271,8 @@ class BookingsController extends Controller
     public static function getBookingByPublicIdForApp($public_booking_id, $user_id)
     {
         $booking=Booking::where("public_booking_id", $public_booking_id)
-//            ->where("user_id", $user_id)
-            ->where("deleted",CommonEnums::$NO)
+        //            ->where("user_id", $user_id)
+            ->where("deleted",CommonEnums::$NO)->orderBy('id', 'DESC')
             ->with('movement_dates')
             ->with('inventories')
             ->with('status_history')
@@ -295,6 +302,7 @@ class BookingsController extends Controller
         $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
                                 "user_id"=>$user_id])
                                 ->whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+                                ->orderBy('id', 'DESC')
                                 ->with('movement_dates')
                                 ->with('inventories')->with('status_history')->with('service')
                                 ->get();
@@ -312,6 +320,7 @@ class BookingsController extends Controller
         $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
                                 "user_id"=>$user_id])
                                 ->whereNotIn("status",[BookingEnums::$STATUS["enquiry"],BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+                                ->orderBy('id', 'DESC')
                                 ->with('movement_dates')
                                 ->with('inventories')->with('status_history')->with('service')
                                 ->get();
@@ -366,6 +375,13 @@ class BookingsController extends Controller
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
+        
+        Payment::where('booking_id', $booking->id)
+            ->update(['discount_amount'=>0.00, 'coupon_code'=>null, 'tax'=>($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100), 
+            'grand_total'=>($booking->final_quote + $booking->payment->other_charges) + (($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100))]);
+
+        $booking_disc = Booking::where("public_booking_id", $public_booking_id)
+            ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
 
         $tax = $booking->payment->tax;
         $grand_total = $booking->payment->grand_total;
@@ -376,11 +392,9 @@ class BookingsController extends Controller
             $grand_total += $tax;
         }
 
-
-
         return Helper::response(true,"Get payment data successfully",["payment_details"=>[
-            "sub_total" => $booking->payment->sub_total,
-            "surge_charge"=>$booking->payment->other_charges,
+            "sub_total" => $booking_disc->payment->sub_total,
+            "surge_charge"=>$booking_disc->payment->other_charges,
             "discount"=>$discount_amount,
             "tax(".$tax_percentage."%)"=>$tax,
             "grand_total" => $grand_total
@@ -480,7 +494,17 @@ class BookingsController extends Controller
         $save_driver->vehicle_id = $vehicle_id;
         $result_driver = $save_driver->save();
 
-        if(!$result_driver)
+        $assign_driver_status = Booking::where(['public_booking_id'=>$public_booking_id, 'id'=>$assign_driver['id']])
+                            ->update(["status"=>BookingEnums::$STATUS['driver_assigned']]);
+
+        // $bookingstatus = new BookingStatus;
+        // $bookingstatus->booking_id = $assign_driver->id;
+        // $bookingstatus->status=BookingEnums::$STATUS['driver_assigned'];
+        // $result_status = $bookingstatus->save();
+
+        $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['driver_assigned']);
+
+        if(!$result_driver && !$assign_driver_status)
             return Helper::response(false,"couldn't sanve");
 
         return Helper::response(true,"save successfully");
@@ -505,7 +529,7 @@ class BookingsController extends Controller
         $booking = Booking::where([
             "public_booking_id"=>$public_booking_id,
             "organization_id"=>$organization_id,
-            "status"=>BookingEnums::$STATUS['awaiting_pickup']
+            "status"=>BookingEnums::$STATUS['driver_assigned']
         ])->first();
 
         if(!$booking)
@@ -519,10 +543,12 @@ class BookingsController extends Controller
                 "meta"=>$meta
             ]);
 
-            $bookingstatus = new BookingStatus;
-            $bookingstatus->booking_id = $booking->id;
-            $bookingstatus->status=BookingEnums::$STATUS['in_transit'];
-            $result_status = $bookingstatus->save();
+            // $bookingstatus = new BookingStatus;
+            // $bookingstatus->booking_id = $booking->id;
+            // $bookingstatus->status=BookingEnums::$STATUS['in_transit'];
+            // $result_status = $bookingstatus->save();
+
+            $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
 
             return Helper::response(true, "Your trip Has been started.");
         }
@@ -548,10 +574,12 @@ class BookingsController extends Controller
                 "status"=>BookingEnums::$STATUS['completed']
             ]);
 
-            $bookingstatus = new BookingStatus;
-            $bookingstatus->booking_id = $booking->id;
-            $bookingstatus->status=BookingEnums::$STATUS['completed'];
-            $result_status = $bookingstatus->save();
+            // $bookingstatus = new BookingStatus;
+            // $bookingstatus->booking_id = $booking->id;
+            // $bookingstatus->status=BookingEnums::$STATUS['completed'];
+            // $result_status = $bookingstatus->save();
+
+            $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['completed']);
 
             return Helper::response(true, "Your order has been completed.");
         }
@@ -569,5 +597,18 @@ class BookingsController extends Controller
             return Helper::response(false,"No Booking Found");
 
         return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
+    }
+
+    public static function statusChange($booking_id, $status)
+    {
+        $bookingstatus = new BookingStatus;
+        $bookingstatus->booking_id = $booking_id;
+        $bookingstatus->status=$status;
+        $result_status = $bookingstatus->save();
+
+        if(!$result_status)
+            return Helper::response(false,"couldn'd change status");
+
+        return true;
     }
 }

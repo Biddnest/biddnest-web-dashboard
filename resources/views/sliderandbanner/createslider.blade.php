@@ -39,17 +39,18 @@
                       role="tabpanel"
                       aria-labelledby="new-order-tab"
                     >
+
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('service_add')}}" data-next="redirect" data-url="{{route('slider')}}" data-alert="mega" method="POST">
+                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('service_add')}}" data-next="redirect" data-url="{{route('slider')}}" data-alert="mega" method="POST" data-parsley-validate>
                         <div class="d-flex row p-20">
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Name</label>
                                     <input
                                         type="text"
-                                        id="url"
+                                        id="url" required
                                         autocomplete="off"
-                                        placeholder="https://example.com"
+                                        placeholder="Diwali"
                                         class="form-control br-5"
                                     />
                                     <span class="error-message"
@@ -61,7 +62,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Type</label>
-                                    <select id="ban-type" class="form-control br-5">
+                                    <select required id="ban-type" class="form-control br-5">
                                         <option value=""> -Select- </option>
                                         <option value="promo"> Promo </option>
                                         <option value="sales"> Sales </option>
@@ -79,7 +80,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Size</label>
-                                    <select id="ban-type" class="form-control br-5">
+                                    <select id="ban-type" class="form-control br-5" required>
                                         <option value=""> -Select- </option>
                                         @foreach(\App\Enums\SliderEnum::$SIZE as $size=>$value)
                                         <option value="{{$value}}">{{$size}} {{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][0]}}x{{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][1]}}</option>
@@ -96,7 +97,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">POSITION</label>
-                                    <select id="ban-type" class="form-control br-5">
+                                    <select id="ban-type" class="form-control br-5" required>
                                         <option value=""> -Select- </option>
                                         @foreach(\App\Enums\SliderEnum::$POSITION as $position=>$value)
                                         <option value="{{$value}}">{{$position}}</option>
@@ -113,7 +114,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Platform</label>
-                                    <select id="ban-type" class="form-control br-5">
+                                    <select id="ban-type" class="form-control br-5" required>
                                         <option value=""> -Select- </option>
                                         @foreach(\App\Enums\SliderEnum::$PLATFORM as $platform=>$value)
                                         <option value="{{$value}}">{{$platform}}</option>
@@ -149,7 +150,7 @@
                           <div class="col-lg-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Zone Availabiity</label>
-                                <select id="ban-type" class="form-control br-5">
+                                <select id="ban-type" class="form-control br-5" required>
                                     <option value=""> -Select- </option>
                                     @foreach(\App\Enums\SliderEnum::$ZONE as $zone_type=>$value)
                                         <option value="{{$zone_type}}">{{$zone_type}}</option>
@@ -166,7 +167,7 @@
                             <div class="col-lg-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Zones</label>
-                                <select id="ban-type" class="form-control br-5">
+                                <select id="ban-type" class="form-control br-5" name="zones[]">
                                     <option value=""> -Select- </option>
                                     @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
                                         <option value="{{$zone->id}}">{{$zone->name}}</option>
@@ -178,10 +179,7 @@
                               >
                             </div>
                           </div>
-
                         </div>
-
-
                       <div class="row">
 
                           <div class="col-md-12" id="comments">

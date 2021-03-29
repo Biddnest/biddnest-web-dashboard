@@ -36,8 +36,7 @@
                     >
                       <!-- form starts -->
             <form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-url="{{route('create-categories')}}" data-alert="tiny"
-                        class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" data-parsley-validate
-                      >
+                        class="form-new-order pt-4 mt-3" data-parsley-validate >
               <div class="row">
                 <div class="col-lg-6">
                   <p class="img-label">Photo</p>
@@ -59,7 +58,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+
                 <div class="row p-20">
                   <div class="col-lg-6">
                     <div class="form-input">
@@ -70,16 +69,13 @@
                                     placeholder="Name"
                                     class="form-control br-5" required
                                   />
-                                  <span class="error-message"
-                                    >Please enter a valid banner name</span
-                                  >
                       </div>
                     </div>
-                  </div>
+
                     <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Quantity Type</label>
-                                    <select required class="form-control br-5" name="inventory_quantity_type">
+                                    <select class="form-control br-5" name="inventory_quantity_type:number"  required>
                                         <option value="">--Select--</option>
                                         @foreach(\App\Enums\ServiceEnums::$INVENTORY_QUANTITY_TYPE as $key=>$type)
                                         <option value="{{$type}}">{{$key}}</option>
@@ -94,7 +90,6 @@
                       </div>
 
                     </div>
-                </div>
                     <div class="" id="comments">
                       <div
                             class="d-flex justify-content-between flex-row p-10 py-0"

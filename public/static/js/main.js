@@ -81,7 +81,7 @@ $(document).ready(function(){
         });
     });
 
-    const loader = document.querySelector('.loader');  
+    const loader = document.querySelector('.loader');
     $('[name=email]').keyup(function(){
 
         if($('form').valid()){
@@ -89,7 +89,7 @@ $(document).ready(function(){
         }else{
             $(this).parent().removeClass().addClass('notvalid');
         }
-    
+
     });
 
     $("#switch").click(function(){
@@ -97,14 +97,14 @@ $(document).ready(function(){
             $(".phone-num-lable").html("Friend's Phone Number");
             $('.full-name').html("Friend's Full Name");
             $('.email-label').html("Friend's Email")
-     
+
         } else {
             $(".phone-num-lable").html("Phone Number")
             $('.full-name').html("Full Name");
             $('.email-label').html("Email")
         }
     });
-    
+
     // Toggle divs
     $(".reject").click(function(){
         // alert('wle')
@@ -112,7 +112,7 @@ $(document).ready(function(){
         $('.order-cards').toggle();
         $('.reject-btn').html('Submit')
     });
-  
+
     $(".card-price").click(function(){
         $('.order-cards').toggle();
         $('.reject-btn').toggle();
@@ -155,17 +155,17 @@ $(document).ready(function(){
 
     $("#switch").change(function () {
         $(".toggle-input").toggleClass('diplay-none');
-       
+
     });
 
     $("#backbtn").click(function () {
-       
+
        $('.rejection-message').addClass("diplay-none");
        $('.order-cards').removeClass("diplay-none");
-      
+
 
     });
-   
+
     $("#economy").change(function(){
         if($("#economy").is(":checked")){
             $(".eco").addClass("blue-bg")
@@ -175,7 +175,7 @@ $(document).ready(function(){
         }else{
             $(".eco").removeClass("blue-bg")
             $('.eco-card').removeClass("border-white")
-        }  
+        }
     });
     $("#premium").change(function(){
         if($("#premium").is(":checked")){
@@ -202,10 +202,10 @@ $(document).ready(function(){
        <option>sku123456</option>
        </select>
          </div>
-        
-         
 
-       
+
+
+
        </th><td class='text-center'> <div class="select">
          <select class="form-control">
        <option>2</option>
@@ -218,28 +218,28 @@ $(document).ready(function(){
        <option>Small</option>
        <option>Large</option>
        <option>Medium</option>
-     
+
        </select>
          </div></td> <td> <button class=" btn btn-1 theme-bg white-text " >
             Add </button> </td>`);
 
         $('#items').append('<tr id="addr'+(i+1)+'"></tr>');
-        i++; 
+        i++;
     });
 
 
     $(".eco").click(function(){
-   
+
         $("#economy").prop("checked", true);
         $(".eco").addClass("blue-bg")
           $(".pre").removeClass("blue-bg")
           $('.eco-card').addClass("border-white")
           $('.pre-card').removeClass("border-white")
-      
-    
+
+
       });
       $(".pre").click(function(){
-     
+
        $("#premium").prop("checked", true);
        $(".pre").addClass("blue-bg");
           $(".eco").removeClass("blue-bg")
@@ -247,7 +247,7 @@ $(document).ready(function(){
           $('.pre-card').addClass("border-white")
      });
 
-     $("[name=tags]").tagify();
+     $(".tags").tagify();
      $(".reject").click(function () {
        $(".rejection-message").toggle();
        $(".order-cards").toggle();
@@ -316,7 +316,7 @@ $('#frommap').locationpicker();
     };
     reader.onerror = function (error) {
         console.log('Error: ', error);
-    };  
+    };
 }
 const MAX_2_MB = 2000000;
 $(function() {
@@ -359,4 +359,4 @@ tinymce.init({
 
 
 
-    
+

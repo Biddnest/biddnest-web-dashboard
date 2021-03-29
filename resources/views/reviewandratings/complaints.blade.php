@@ -22,10 +22,7 @@
                                     <li class="breadcrumb-item"><a href="{{route('service-requests')}}">Services</a></li>
                                 </ol>
                             </nav>
-
-
                         </div>
-
                     </div>
 
 
@@ -42,8 +39,6 @@
                             <p>CREATE COMPLAINT</p>
                             <h1>2,300</h1>
                         </div>
-
-
                     </div>
                     <!-- Dashboard cards -->
 

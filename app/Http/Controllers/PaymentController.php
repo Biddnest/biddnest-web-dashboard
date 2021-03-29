@@ -16,6 +16,7 @@ use App\Enums\CommonEnums;
 use App\Models\Settings;
 use Ramsey\Uuid\Uuid;
 use \GuzzleHttp\Client;
+use App\Http\Controllers\BookingsController;
 
 class PaymentController extends Controller
 {
@@ -35,9 +36,9 @@ class PaymentController extends Controller
             $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
             if (!is_array($coupon_valid))
             { $discount_value = 0.00; return Helper::response(false, $coupon_valid); }
-        else{
-            $discount_value = $coupon_valid['coupon']['discount'];
-        }
+            else{
+                $discount_value = $coupon_valid['coupon']['discount'];
+            }
         }
 
             /*tax is always taken as percentage*/
@@ -51,18 +52,22 @@ class PaymentController extends Controller
         if($grand_total < 1.00)
             return Helper::response(false, "Minimum transaction value is one. Could'nt proceed with payment. Contact Admin.");
 
-        $createorder = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total);
-        $exist_payment = Payment::where(['booking_id'=>$booking_exist['id']])->first();
+        // $exist_payment = Payment::where(['booking_id'=>$booking_exist['id']])->first();
+        if($booking_exist->payment->grand_total == $grand_total)
+            $order_id = $booking_exist->payment->rzp_order_id;
+        else
+            $order_id = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total)['id'];
+        
 
-            $payment_result = Payment::where('id', $exist_payment->id)
-                ->update([
+        $payment_result = Payment::where('id', $booking_exist->payment->id)
+            ->update([
                     'discount_amount'=>$discount_value,
                     'coupon_code' => $coupon_code,
                     'tax'=> $tax,
-                    'rzp_order_id'=>$createorder['id'],
+                    'rzp_order_id'=>$order_id ,
                     'grand_total'=>$grand_total,
                     'meta'=>json_encode($meta)
-                ]);
+            ]);
 
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");
@@ -108,10 +113,12 @@ class PaymentController extends Controller
             $status=BookingStatus::where(['booking_id'=>$order_id_exist->booking_id, 'status'=>BookingEnums::$STATUS['awaiting_pickup']])->first();
             if(!$status)
             {
-                $bookingstatus = new BookingStatus;
-                $bookingstatus->booking_id = $order_id_exist->booking_id;
-                $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
-                $result_status = $bookingstatus->save();
+                // $bookingstatus = new BookingStatus;
+                // $bookingstatus->booking_id = $order_id_exist->booking_id;
+                // $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
+                // $result_status = $bookingstatus->save();
+
+                $result_status = BookingsController::statusChange($order_id_exist->booking_id, BookingEnums::$STATUS['awaiting_pickup']);
             }
 
             if($order_id_exist->coupon_code)
@@ -149,7 +156,7 @@ class PaymentController extends Controller
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");
         
-        $order_id = $payment_data['order_id'];
+        return $order_id = $payment_data['order_id'];
 
         $order_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])->first();
 
@@ -171,10 +178,12 @@ class PaymentController extends Controller
                     "meta"=>$meta
                 ]);
 
-        $bookingstatus = new BookingStatus;
-        $bookingstatus->booking_id = $order_exist->booking_id;
-        $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
-        $result_status = $bookingstatus->save();
+        // $bookingstatus = new BookingStatus;
+        // $bookingstatus->booking_id = $order_exist->booking_id;
+        // $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
+        // $result_status = $bookingstatus->save();
+
+        $result_status = BookingsController::statusChange($order_exist->booking_id, BookingEnums::$STATUS['awaiting_pickup']);
 
         if($order_exist->coupon_code)
             Coupon::where('code',$order_exist->coupon_code)->update([

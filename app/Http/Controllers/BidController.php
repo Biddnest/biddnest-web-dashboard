@@ -25,6 +25,7 @@ use App\Enums\BidEnums;
 use Carbon\CarbonImmutable;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
+use App\Http\Controllers\BookingsController;
 
 
 class BidController extends Controller
@@ -36,10 +37,12 @@ class BidController extends Controller
 
             $update_status = Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
 
-            $bookingstatus = new BookingStatus;
-            $bookingstatus->booking_id = $booking_id;
-            $bookingstatus->status=BookingEnums::$STATUS['biding'];
-            $result_status = $bookingstatus->save();
+            // $bookingstatus = new BookingStatus;
+            // $bookingstatus->booking_id = $booking_id;
+            // $bookingstatus->status=BookingEnums::$STATUS['biding'];
+            // $result_status = $bookingstatus->save();
+
+            $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['biding']);
 
             foreach($vendorlist as $vendor)
             {
@@ -120,6 +123,8 @@ class BidController extends Controller
 
             $update_bid_type = Bid::where("booking_id",$book_id)
                                 ->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
+            
+            $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 
             return true;
         }
@@ -161,10 +166,12 @@ class BidController extends Controller
         $payment->grand_total = $grand_total;
         $payment_result = $payment->save();
 
-        $bookingstatus = new BookingStatus;
-        $bookingstatus->booking_id = $book_id;
-        $bookingstatus->status=BookingEnums::$STATUS['payment_pending'];
-        $result_status = $bookingstatus->save();
+        // $bookingstatus = new BookingStatus;
+        // $bookingstatus->booking_id = $book_id;
+        // $bookingstatus->status=BookingEnums::$STATUS['payment_pending'];
+        // $result_status = $bookingstatus->save();
+
+        $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['payment_pending']);
 
         return true;
     }

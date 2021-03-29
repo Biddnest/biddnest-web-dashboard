@@ -436,18 +436,5 @@
                 overflow: hidden;
             }
 
-            .btn-image{
-                margin: 20px 0;
-                border-radius: 5px;
-                font-size: 12px;
-                padding: 10px 20px;
-                font-weight: 700;
-                text-transform: uppercase;
-                font-weight: 500;
-                letter-spacing: 1px;
-                background-color: #FDC403;
-                color: #fff;
-                cursor: pointer;
-            }
         </style>
 

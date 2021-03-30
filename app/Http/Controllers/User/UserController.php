@@ -106,7 +106,7 @@ class UserController extends Controller
      * @param $ref_code
      * @return \Illuminate\Http\JsonResponse|object
      */
-    public static function signupUser($id, $fname, $lname, $email, $gender, $ref_code){
+    public static function signupUser($id, $fname, $lname, $email, $gender, $refby_code){
         $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action",null,401);
@@ -122,14 +122,14 @@ class UserController extends Controller
             return Helper::response(false, "The email id $email is already linked to another account.",);
 
             $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
-
+        $ref_code = strtoupper($fname.uniqid());
         User::where("id",$id)->update([
             'fname'=>$fname,
             'lname'=>$lname,
             'email'=>$email,
             'gender'=>$gender,
             'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
-            'meta'=>json_encode(["refferal_code"=>$ref_code]),
+            'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
             "status"=>1
         ]);
 

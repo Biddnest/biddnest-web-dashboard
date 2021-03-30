@@ -38,7 +38,7 @@ class TicketController extends Controller
                 $ticket->user_id = $sender_id;
                 $ticket->heading = $title;
                 $ticket->desc = $body;
-                $ticket->order_id = $booking['id'];
+                $ticket->booking_id = $booking['id'];
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
             break;
@@ -66,7 +66,7 @@ class TicketController extends Controller
                 $ticket->user_id = $sender_id;
                 $ticket->heading = $title;
                 $ticket->desc = $body;
-                $ticket->order_id = $booking['id'];
+                $ticket->booking_id = $booking['id'];
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
             break;

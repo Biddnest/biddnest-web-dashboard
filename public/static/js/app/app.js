@@ -99,3 +99,13 @@ $("body").on('input', "input[type=file]", function(event) {
     };
     reader.readAsDataURL(file);
 });
+
+$("body").on('change', ".field-toggle", function(event) {
+    if ($(this).val() == $(this).data("value")) {
+        $($(this).data("target")).removeClass("hidden");
+        $($(this).data("target")).find(".form-control").attr("required", "required");
+    } else {
+        $($(this).data("target")).addClass("hidden");
+        $($(this).data("target")).find(".form-control").removeAttr("required");
+    }
+});

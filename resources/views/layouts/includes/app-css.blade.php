@@ -453,5 +453,9 @@
                 /* padding-left: 10px !important; */
                 text-align: left;
             }
+
+            .hidden{
+                display: none;
+            }
         </style>
 

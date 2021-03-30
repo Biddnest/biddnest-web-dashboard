@@ -51,7 +51,7 @@ class AdminController extends Controller
             if($admin_user->zones){
                 Session::put("zones",$admin_user->zones);
                 foreach($admin_user->zones as $zone){
-                    $zones[] = $zone;
+                    $zones[] = $zone->id;
                 }
             }
             Session::put('admin_zones', $zones);

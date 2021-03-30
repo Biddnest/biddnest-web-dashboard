@@ -10,6 +10,7 @@ use App\Models\Inventory;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
+use App\Models\Organization;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -192,7 +193,8 @@ class WebController extends Controller
 
     public function createCoupons()
     {
-        return view('coupons.createcoupons');
+        //return Organization::whereIn('zone_id', Session::get('admin_zones'))->get();
+        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->get()]);
     }
 
     public function detailsCoupons()

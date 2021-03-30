@@ -152,7 +152,7 @@ class PaymentController extends Controller
         
         $api = new Razorpay(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
 
-        return $payment_data = $api->fetch($payment_id);
+        $payment_data = $api->fetch($payment_id);
 
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");

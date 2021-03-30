@@ -254,12 +254,22 @@
             <div class="form-input">
               <label>User Scope</label>
               <div>
-                <select class="form-control br-5" name="user_scope" required>
+                <select class="form-control br-5 field-toggle" data-value="1" data-target=".user" name="user_scope" required>
                   <option value="">--Select--</option>
                     @foreach(\App\Enums\CouponEnums::$USER_SCOPE as $key=>$type)
                       <option value="{{$type}}">{{$key}}</option>
                     @endforeach
                 </select>
+              </div> 
+            </div>
+          </div>
+
+          <div class="col-sm-6 user hidden" >
+            <div class="form-input">
+              <label>Select Orgnization</label>
+              <div>
+                <input type="text"  class="form-control searchuser field-toggle" name="users">
+                
               </div> 
             </div>
           </div>

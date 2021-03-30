@@ -193,7 +193,6 @@ class WebController extends Controller
 
     public function createCoupons()
     {
-        //return Organization::whereIn('zone_id', Session::get('admin_zones'))->get();
         return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->get()]);
     }
 

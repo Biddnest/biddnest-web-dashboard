@@ -205,4 +205,9 @@ class UserController extends Controller
             return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
+    public static function search($query)
+    {        
+        $users = User::whereLike("fname", '%'.$query.'%')->whereLike("lname", '%'.$query.'%')->whereLike("phone", '%'.$query.'%')->whereLike("email", '%'.$query.'%')->get();
+        return Helper::response(true,"Data fetched successfully", ["users"=>$users]);
+    }
 }

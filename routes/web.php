@@ -105,6 +105,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
+    Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
+
 });
 
 Route::prefix('vendors')->group(function () {

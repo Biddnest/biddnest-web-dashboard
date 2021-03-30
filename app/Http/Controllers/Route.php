@@ -618,4 +618,8 @@ class Route extends Controller
 
      }
 
+     public function searchUser(Request $request)
+     {
+         return UserController::search($request->query);
+     }
 }

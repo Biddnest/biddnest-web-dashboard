@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Fixed Payment Bug">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" afterDir="false" />
-    </list>
+    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Fixed Payment Bug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -212,14 +210,7 @@
       <workItem from="1616482283351" duration="26760000" />
       <workItem from="1616737175235" duration="23153000" />
       <workItem from="1616961300379" duration="3152000" />
-      <workItem from="1616965011868" duration="7752000" />
-    </task>
-    <task id="LOCAL-00014" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616590475722</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1616590475722</updated>
+      <workItem from="1616965011868" duration="7977000" />
     </task>
     <task id="LOCAL-00015" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1616651778030</created>
@@ -557,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617086333327</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Fixed Payment Bug">
+      <created>1617086899890</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1617086899890</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

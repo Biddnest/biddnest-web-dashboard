@@ -156,7 +156,7 @@ class PaymentController extends Controller
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");
 
-        return $order_id = $payment_data['order_id'];
+        $order_id = $payment_data['order_id'];
 
         $order_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])->first();
 
@@ -185,11 +185,12 @@ class PaymentController extends Controller
 
         $result_status = BookingsController::statusChange($order_exist->booking_id, BookingEnums::$STATUS['awaiting_pickup']);
 
-        if($order_exist->coupon_code)
-            Coupon::where('code',$order_exist->coupon_code)->update([
-                        "usage"=>Coupon::where("code", $order_exist->coupon_code)->pluck("usage")[0] + 1
-                        ]);
+        if($order_exist->coupon_code) {
+            Coupon::where('code', $order_exist->coupon_code)->update([
+                "usage" => Coupon::where("code", $order_exist->coupon_code)->pluck("usage")[0] + 1
+            ]);
+        }
 
-        return Helper::response(true, "Payment successfull");
+        return Helper::response(true, "Payment successful");
     }
 }

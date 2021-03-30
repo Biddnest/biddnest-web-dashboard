@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Create Slider fixed">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/categories/createcategories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/createcategories.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sliderandbanner/createslider.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sliderandbanner/createslider.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Fixed Payment Bug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -214,35 +210,7 @@
       <workItem from="1616482283351" duration="26760000" />
       <workItem from="1616737175235" duration="23153000" />
       <workItem from="1616961300379" duration="3152000" />
-      <workItem from="1616965011868" duration="5016000" />
-    </task>
-    <task id="LOCAL-00011" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616497603667</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1616497603667</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616589166466</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1616589166467</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616589285796</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1616589285796</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616590475722</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1616590475722</updated>
+      <workItem from="1616965011868" duration="7977000" />
     </task>
     <task id="LOCAL-00015" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1616651778030</created>
@@ -559,7 +527,35 @@
       <option name="project" value="LOCAL" />
       <updated>1617016447065</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Create Slider fixed">
+      <created>1617027574858</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1617027574858</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Create Slider fixed">
+      <created>1617027599596</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1617027599596</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Fixed Payment Bug">
+      <created>1617086333327</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1617086333327</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Fixed Payment Bug">
+      <created>1617086899890</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1617086899890</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,7 +577,8 @@
     <MESSAGE value="Pulling changes" />
     <MESSAGE value="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php" />
     <MESSAGE value="Create Slider fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Slider fixed" />
+    <MESSAGE value="Fixed Payment Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Payment Bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

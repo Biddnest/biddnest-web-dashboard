@@ -375,12 +375,12 @@ class BookingsController extends Controller
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
-        
+
         Payment::where('booking_id', $booking->id)
-            ->update(['discount_amount'=>0.00, 'coupon_code'=>null, 'tax'=>($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100), 
+            ->update(['discount_amount'=>0.00, 'coupon_code'=>null, 'tax'=>($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100),
             'grand_total'=>($booking->final_quote + $booking->payment->other_charges) + (($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100))]);
 
-        $booking_disc = Booking::where("public_booking_id", $public_booking_id)
+        $booking = Booking::where("public_booking_id", $public_booking_id)
             ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
 
         $tax = $booking->payment->tax;
@@ -393,8 +393,8 @@ class BookingsController extends Controller
         }
 
         return Helper::response(true,"Get payment data successfully",["payment_details"=>[
-            "sub_total" => $booking_disc->payment->sub_total,
-            "surge_charge"=>$booking_disc->payment->other_charges,
+            "sub_total" => $booking->payment->sub_total,
+            "surge_charge"=>$booking->payment->other_charges,
             "discount"=>$discount_amount,
             "tax(".$tax_percentage."%)"=>$tax,
             "grand_total" => $grand_total

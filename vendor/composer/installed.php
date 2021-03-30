@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '41342514324d357e0dfed44ea3a169d9fdd0dfc2',
+    'reference' => '19cc35d61ab007d7344bfc280f271980550ef779',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -522,6 +522,15 @@
       ),
       'reference' => 'abbf18d5ab8367f96b3205ca3c89fb2fa598c69e',
     ),
+    'ircmaxell/security-lib' => 
+    array (
+      'pretty_version' => 'v1.1.0',
+      'version' => '1.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f3db6de12c20c9bcd1aa3db4353a1bbe0e44e1b5',
+    ),
     'kitloong/laravel-migrations-generator' => 
     array (
       'pretty_version' => '4.4.2',
@@ -554,7 +563,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '41342514324d357e0dfed44ea3a169d9fdd0dfc2',
+      'reference' => '19cc35d61ab007d7344bfc280f271980550ef779',
     ),
     'laravel/sail' => 
     array (
@@ -692,6 +701,33 @@
       array (
       ),
       'reference' => '943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5',
+    ),
+    'paragonie/random-lib' => 
+    array (
+      'pretty_version' => 'v2.0.1',
+      'version' => '2.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f0ca6a2859b22f7caea9c343e63ffb3ce9b2ffa7',
+    ),
+    'paragonie/random_compat' => 
+    array (
+      'pretty_version' => 'v2.0.19',
+      'version' => '2.0.19.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '446fc9faa5c2a9ddf65eb7121c0af7e857295241',
+    ),
+    'paragonie/sodium_compat' => 
+    array (
+      'pretty_version' => 'v1.14.0',
+      'version' => '1.14.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a1cfe0b21faf9c0b61ac0c6188c4af7fd6fd0db3',
     ),
     'phar-io/manifest' => 
     array (
@@ -908,6 +944,15 @@
       array (
       ),
       'reference' => '6f990c19f91729de8b31e639d6e204ea59f19cf3',
+    ),
+    'pugx/shortid-php' => 
+    array (
+      'pretty_version' => 'v0.7.0',
+      'version' => '0.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cfc6a5ece8014ed95f317b2be44c632338089b82',
     ),
     'ralouphie/getallheaders' => 
     array (

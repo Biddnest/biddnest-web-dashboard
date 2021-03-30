@@ -17,6 +17,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
@@ -24,6 +25,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
@@ -114,6 +116,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
+            'PUGX\\Shortid\\' => 13,
         ),
         'O' => 
         array (
@@ -411,6 +414,10 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
+        'PUGX\\Shortid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pugx/shortid-php/src',
+        ),
         'Opis\\Closure\\' => 
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
@@ -596,11 +603,22 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'SecurityLib' => 
+            array (
+                0 => __DIR__ . '/..' . '/ircmaxell/security-lib/lib',
+            ),
+        ),
         'R' => 
         array (
             'Requests' => 
             array (
                 0 => __DIR__ . '/..' . '/rmccue/requests/library',
+            ),
+            'RandomLib' => 
+            array (
+                0 => __DIR__ . '/..' . '/paragonie/random-lib/lib',
             ),
         ),
         'M' => 
@@ -654,6 +672,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Http\\Controllers\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/SliderController.php',
         'App\\Http\\Controllers\\SubServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubServiceController.php',
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
+        'App\\Http\\Controllers\\TicketController' => __DIR__ . '/../..' . '/app/Http/Controllers/TicketController.php',
         'App\\Http\\Controllers\\User\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/UserController.php',
         'App\\Http\\Controllers\\VendorApiRouteController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorApiRouteController.php',
         'App\\Http\\Controllers\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorController.php',
@@ -710,6 +729,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\Subservice' => __DIR__ . '/../..' . '/app/Models/Subservice.php',
         'App\\Models\\SubserviceInventory' => __DIR__ . '/../..' . '/app/Models/SubserviceInventory.php',
         'App\\Models\\Test' => __DIR__ . '/../..' . '/app/Models/Test.php',
+        'App\\Models\\Ticket' => __DIR__ . '/../..' . '/app/Models/Ticket.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Vehicle' => __DIR__ . '/../..' . '/app/Models/Vehicle.php',
         'App\\Models\\Vendor' => __DIR__ . '/../..' . '/app/Models/Vendor.php',
@@ -1465,7 +1485,6 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
-        'Fabito\\AvatarGenerator\\Avatar' => __DIR__ . '/..' . '/fabian-tomischka/php-avatar-generator/src/Fabito/AvatarGenerator/Avatar.php',
         'Facade\\FlareClient\\Api' => __DIR__ . '/..' . '/facade/flare-client-php/src/Api.php',
         'Facade\\FlareClient\\Concerns\\HasContext' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/HasContext.php',
         'Facade\\FlareClient\\Concerns\\UsesTime' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/UsesTime.php',
@@ -4279,6 +4298,8 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'PHPUnit\\Util\\Xml\\SuccessfulSchemaDetectionResult' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/SuccessfulSchemaDetectionResult.php',
         'PHPUnit\\Util\\Xml\\ValidationResult' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/ValidationResult.php',
         'PHPUnit\\Util\\Xml\\Validator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Validator.php',
+        'PUGX\\Shortid\\Factory' => __DIR__ . '/..' . '/pugx/shortid-php/src/Factory.php',
+        'PUGX\\Shortid\\Shortid' => __DIR__ . '/..' . '/pugx/shortid-php/src/Shortid.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
@@ -4987,6 +5008,26 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'RandomLib\\AbstractMcryptMixer' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/AbstractMcryptMixer.php',
+        'RandomLib\\AbstractMixer' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/AbstractMixer.php',
+        'RandomLib\\AbstractSource' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/AbstractSource.php',
+        'RandomLib\\Factory' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Factory.php',
+        'RandomLib\\Generator' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Generator.php',
+        'RandomLib\\Mixer' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Mixer.php',
+        'RandomLib\\Mixer\\Hash' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Mixer/Hash.php',
+        'RandomLib\\Mixer\\McryptRijndael128' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Mixer/McryptRijndael128.php',
+        'RandomLib\\Mixer\\SodiumMixer' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Mixer/SodiumMixer.php',
+        'RandomLib\\Mixer\\XorMixer' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Mixer/XorMixer.php',
+        'RandomLib\\Source' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source.php',
+        'RandomLib\\Source\\CAPICOM' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/CAPICOM.php',
+        'RandomLib\\Source\\MTRand' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/MTRand.php',
+        'RandomLib\\Source\\MicroTime' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/MicroTime.php',
+        'RandomLib\\Source\\OpenSSL' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/OpenSSL.php',
+        'RandomLib\\Source\\Rand' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/Rand.php',
+        'RandomLib\\Source\\RandomBytes' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/RandomBytes.php',
+        'RandomLib\\Source\\Sodium' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/Sodium.php',
+        'RandomLib\\Source\\URandom' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/URandom.php',
+        'RandomLib\\Source\\UniqID' => __DIR__ . '/..' . '/paragonie/random-lib/lib/RandomLib/Source/UniqID.php',
         'Razorpay\\Api\\Addon' => __DIR__ . '/..' . '/razorpay/razorpay/src/Addon.php',
         'Razorpay\\Api\\Api' => __DIR__ . '/..' . '/razorpay/razorpay/src/Api.php',
         'Razorpay\\Api\\ArrayableInterface' => __DIR__ . '/..' . '/razorpay/razorpay/src/ArrayableInterface.php',
@@ -5271,6 +5312,16 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'SecurityLib\\AbstractFactory' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/AbstractFactory.php',
+        'SecurityLib\\BaseConverter' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BaseConverter.php',
+        'SecurityLib\\BigMath' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BigMath.php',
+        'SecurityLib\\BigMath\\BCMath' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BigMath/BCMath.php',
+        'SecurityLib\\BigMath\\GMP' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BigMath/GMP.php',
+        'SecurityLib\\BigMath\\PHPMath' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BigMath/PHPMath.php',
+        'SecurityLib\\Enum' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Enum.php',
+        'SecurityLib\\Hash' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Hash.php',
+        'SecurityLib\\Strength' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Strength.php',
+        'SecurityLib\\Util' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Util.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Bridge\\PsrHttpMessage\\ArgumentValueResolver\\PsrServerRequestResolver' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/ArgumentValueResolver/PsrServerRequestResolver.php',
         'Symfony\\Bridge\\PsrHttpMessage\\EventListener\\PsrResponseListener' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/EventListener/PsrResponseListener.php',

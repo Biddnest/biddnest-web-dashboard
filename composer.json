@@ -19,6 +19,7 @@
         "htmlmin/htmlmin": "^8.0",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "pugx/shortid-php": "^0.7.0",
         "ramsey/uuid": "^4.1",
         "razorpay/razorpay": "^2.5"
     },

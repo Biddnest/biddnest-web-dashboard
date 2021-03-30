@@ -44,8 +44,8 @@ class Razorpay
         return $this->url = "https://api.razorpay.com/v1/payments/";
     }
 
-    public function fetch($id){
-        $response = $this->client->request('GET', $this->url.$payment_id, ['auth' => [$this->key, $this->secret]]);
-        return json_decode($response,true);
+    public function fetch($payment_id){
+        $response =$this->client->request('GET', self::payment().$payment_id, ['auth' => [$this->key, $this->secret]]);
+        return json_decode($response->getBody(), true);
     }
 }

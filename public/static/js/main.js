@@ -1,6 +1,3 @@
-
-
-
 var input = document.querySelector("#phone");
 window.intlTelInput(input, {
     initialCountry: "in",
@@ -14,13 +11,13 @@ window.intlTelInput(input, {
 
 var input = document.querySelector("#phone1");
 window.intlTelInput(input, {
-            initialCountry: "in",
-            separateDialCode: true,
-            autoPlaceholder: "9739912345",
+    initialCountry: "in",
+    separateDialCode: true,
+    autoPlaceholder: "9739912345",
 
-            // iti.setCountry("");
+    // iti.setCountry("");
 
-            // any initialisation options go here
+    // any initialisation options go here
 });
 
 var input = document.querySelector("#phonefriend");
@@ -50,13 +47,13 @@ window.intlTelInput(input, {
 //create vendor onboard ===============
 var input = document.querySelector("#input-blue");
 window.intlTelInput(input, {
-            initialCountry: "in",
-            separateDialCode: true,
-            autoPlaceholder: "9739912345",
+    initialCountry: "in",
+    separateDialCode: true,
+    autoPlaceholder: "9739912345",
 
-            // iti.setCountry("");
+    // iti.setCountry("");
 
-            // any initialisation options go here
+    // any initialisation options go here
 });
 
 var input = document.querySelector("#Employee");
@@ -71,28 +68,29 @@ window.intlTelInput(input, {
 });
 
 
-$(document).ready(function(){
-
+$(document).ready(function() {
+    $('#tags').tagsInput();
+    return false;
     $(function() {
-        $( 'ul.menu li' ).on( 'click', function() {
-            $( this ).parent().find( 'li.active-menu-item' ).addClass('b-purple' ).removeClass( 'active-menu-item' );
-            $( this ).removeClass( ' li.b-purple' );
-            $( this ).addClass( 'li.active-menu-item' );
+        $('ul.menu li').on('click', function() {
+            $(this).parent().find('li.active-menu-item').addClass('b-purple').removeClass('active-menu-item');
+            $(this).removeClass(' li.b-purple');
+            $(this).addClass('li.active-menu-item');
         });
     });
 
     const loader = document.querySelector('.loader');
-    $('[name=email]').keyup(function(){
+    $('[name=email]').keyup(function() {
 
-        if($('form').valid()){
+        if ($('form').valid()) {
             $(this).parent().removeClass().addClass('isvalid');
-        }else{
+        } else {
             $(this).parent().removeClass().addClass('notvalid');
         }
 
     });
 
-    $("#switch").click(function(){
+    $("#switch").click(function() {
         if ($("#switch").prop('checked')) {
             $(".phone-num-lable").html("Friend's Phone Number");
             $('.full-name').html("Friend's Full Name");
@@ -106,94 +104,94 @@ $(document).ready(function(){
     });
 
     // Toggle divs
-    $(".reject").click(function(){
+    $(".reject").click(function() {
         // alert('wle')
         $('.rejection-message').toggle();
         $('.order-cards').toggle();
         $('.reject-btn').html('Submit')
     });
 
-    $(".card-price").click(function(){
+    $(".card-price").click(function() {
         $('.order-cards').toggle();
         $('.reject-btn').toggle();
         $('.Order-sucess').toggleClass('diplay-none')
     });
 
-    $(".step-1").click(function(){
+    $(".step-1").click(function() {
         $('.sub-total').removeClass('diplay-none');
         $('.payment-status').addClass('diplay-none');
         $('.paid-status').addClass('diplay-none')
         $('.payment-suscessful').addClass('diplay-none');
     });
 
-    $(".step-2").click(function(){
+    $(".step-2").click(function() {
         $('.sub-total').addClass('diplay-none');
         $('.payment-status').removeClass('diplay-none');
         $('.payment-suscessful').addClass('diplay-none');
     });
 
-    $(".step-3").click(function(){
+    $(".step-3").click(function() {
         $('.payment-suscessful').removeClass('diplay-none');
         $('.payment-status').addClass('diplay-none');
     });
 
-    $(".q-viewmore").click(function(){
+    $(".q-viewmore").click(function() {
         $('.quotation-main').toggleClass('diplay-none');
         $('.view-more').toggleClass('diplay-none');
     });
 
-    $(".assign-btn").click(function(){
+    $(".assign-btn").click(function() {
         $('.bidlist-table').toggleClass('diplay-none');
         $('.assign-manul-table').toggleClass('diplay-none');
     });
 
-    $(".back-btn").click(function(){
+    $(".back-btn").click(function() {
         $('.assign-manul-table').toggleClass('diplay-none');
         $('.bidlist-table').toggleClass('diplay-none');
     });
 
 
-    $("#switch").change(function () {
+    $("#switch").change(function() {
         $(".toggle-input").toggleClass('diplay-none');
 
     });
 
-    $("#backbtn").click(function () {
+    $("#backbtn").click(function() {
 
-       $('.rejection-message').addClass("diplay-none");
-       $('.order-cards').removeClass("diplay-none");
+        $('.rejection-message').addClass("diplay-none");
+        $('.order-cards').removeClass("diplay-none");
 
 
     });
 
-    $("#economy").change(function(){
-        if($("#economy").is(":checked")){
+    $("#economy").change(function() {
+        if ($("#economy").is(":checked")) {
             $(".eco").addClass("blue-bg")
             $(".pre").removeClass("blue-bg")
             $('.eco-card').addClass("border-white")
             $('.pre-card').removeClass("border-white")
-        }else{
+        } else {
             $(".eco").removeClass("blue-bg")
             $('.eco-card').removeClass("border-white")
         }
     });
-    $("#premium").change(function(){
-        if($("#premium").is(":checked")){
-        $(".pre").addClass("blue-bg");
-        $(".eco").removeClass("blue-bg")
-        $('.eco-card').removeClass("border-white")
-        $('.pre-card').addClass("border-white")
-        }else{
-        $(".pre").removeClass("blue-bg")
-        $('.pre-card').removeClass("border-white")
+    $("#premium").change(function() {
+        if ($("#premium").is(":checked")) {
+            $(".pre").addClass("blue-bg");
+            $(".eco").removeClass("blue-bg")
+            $('.eco-card').removeClass("border-white")
+            $('.pre-card').addClass("border-white")
+        } else {
+            $(".pre").removeClass("blue-bg")
+            $('.pre-card').removeClass("border-white")
         }
     })
 
 
-    var i=1;
-    $("#addnew-btn").click(function(){
+    var i = 1;
+    $("#addnew-btn").click(function() {
 
-     $('#addr'+i).html(`<th scope='row'>
+        $('#addr' + i).html(`<th scope='row'>
        <div class="select">
          <select class="form-control" id="table-select">
        <option>sku123456</option>
@@ -223,78 +221,78 @@ $(document).ready(function(){
          </div></td> <td> <button class=" btn btn-1 theme-bg white-text " >
             Add </button> </td>`);
 
-        $('#items').append('<tr id="addr'+(i+1)+'"></tr>');
+        $('#items').append('<tr id="addr' + (i + 1) + '"></tr>');
         i++;
     });
 
 
-    $(".eco").click(function(){
+    $(".eco").click(function() {
 
         $("#economy").prop("checked", true);
         $(".eco").addClass("blue-bg")
-          $(".pre").removeClass("blue-bg")
-          $('.eco-card').addClass("border-white")
-          $('.pre-card').removeClass("border-white")
+        $(".pre").removeClass("blue-bg")
+        $('.eco-card').addClass("border-white")
+        $('.pre-card').removeClass("border-white")
 
 
-      });
-      $(".pre").click(function(){
+    });
+    $(".pre").click(function() {
 
-       $("#premium").prop("checked", true);
-       $(".pre").addClass("blue-bg");
-          $(".eco").removeClass("blue-bg")
-          $('.eco-card').removeClass("border-white")
-          $('.pre-card').addClass("border-white")
-     });
+        $("#premium").prop("checked", true);
+        $(".pre").addClass("blue-bg");
+        $(".eco").removeClass("blue-bg")
+        $('.eco-card').removeClass("border-white")
+        $('.pre-card').addClass("border-white")
+    });
 
-     $(".tags").tagify();
-     $(".reject").click(function () {
-       $(".rejection-message").toggle();
-       $(".order-cards").toggle();
-       $(".reject-btn").html("Submit");
-     });
 
-     $(".collapse-form").click(function(){
+    $(".reject").click(function() {
+        $(".rejection-message").toggle();
+        $(".order-cards").toggle();
+        $(".reject-btn").html("Submit");
+    });
+
+    $(".collapse-form").click(function() {
         $(this).toggleClass("form-open");
         $(this).toggleClass("form-close");
-      });
+    });
 
-      $('.js-example-basic-multiple').select2();
+    // $('.js-example-basic-multiple').select2();
 
-      $('.slick-container').slick({
-            arrows: false
-        });
-        $('.slick-container-2').slick({
-            arrows: false
-        });
-        $('.slick-container-3').slick({
-            arrows: false
-        });
-        $('.slick-container-4').slick({
-            arrows: false
-        });
-        $('.slick-container-5').slick({
-            arrows: false
-        });
-        $('.slick-container-6').slick({
-            arrows: false
-        });
+    // $('.slick-container').slick({
+    //     arrows: false
+    // });
+    // $('.slick-container-2').slick({
+    //     arrows: false
+    // });
+    // $('.slick-container-3').slick({
+    //     arrows: false
+    // });
+    // $('.slick-container-4').slick({
+    //     arrows: false
+    // });
+    // $('.slick-container-5').slick({
+    //     arrows: false
+    // });
+    // $('.slick-container-6').slick({
+    //     arrows: false
+    // });
 
 
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-        console.log(acc.length);
-        for (i = 0; i <= acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    console.log(acc.length);
+    for (i = 0; i <= acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
                 panel.style.display = "none";
-                } else {
+            } else {
                 panel.style.display = "block";
-                }
-            });
-        }
+            }
+        });
+    }
 
 
 });
@@ -304,32 +302,32 @@ $('#frommap').locationpicker();
 
 ('.dateselect').datepicker({
     format: 'mm/dd/yyyy',
-  });
+});
 
 
-  // create vendor onboard====
-  function getBase64(file) {
+// create vendor onboard====
+function getBase64(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function () {
+    reader.onload = function() {
         console.log(reader.result);
     };
-    reader.onerror = function (error) {
+    reader.onerror = function(error) {
         console.log('Error: ', error);
     };
 }
 const MAX_2_MB = 2000000;
 $(function() {
-    $("#aadhar-upload").change(function (e){
+    $("#aadhar-upload").change(function(e) {
         var selectedFile = e.target.files[0]
         console.log('hello megha', getBase64(selectedFile))
         var reader = new FileReader();
         reader.readAsDataURL(selectedFile);
 
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             $('#aadhar-preview').attr('src', e.target.result);
             $('#upload-btn').html('Remove Image')
-            $('#upload-btn').css('background-color', 'red' )
+            $('#upload-btn').css('background-color', 'red')
 
         }
 
@@ -342,21 +340,17 @@ $(function() {
 });
 
 
-$(function () {
+$(function() {
     $("table tbody").sortable();
 });
 var div = $('.cursor-pointer');
-div.mousedown(function () {
+div.mousedown(function() {
     $(this).css("background-color", "#F1F9FF;");
 });
-div.mouseup(function () {
+div.mouseup(function() {
     $(this).css("background-color", "#FFFFFF");
 });
 
 tinymce.init({
     selector: '#mytextarea'
-    });
-
-
-
-
+});

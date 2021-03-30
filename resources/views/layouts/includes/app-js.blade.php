@@ -36,17 +36,19 @@ crossorigin="anonymous"></script>
 
 <script src="{{ asset('static/js/intlTelInput.js') }}"></script>
 
-<script src="{{ asset('static/js/live-order-chart.js') }}"></script>
-<script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script>
+<!-- <script src="{{ asset('static/js/live-order-chart.js') }}"></script>
+<script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script> -->
 
-<script src="{{ asset('static/js/userZone.js') }}"></script>
+<!-- <script src="{{ asset('static/js/userZone.js') }}"></script> -->
 
-<script src="{{ asset('static/js/timer.js') }}"></script>
-<script src="{{ asset('static/js/progress-bar.js') }}"></script>
+<!-- <script src="{{ asset('static/js/timer.js') }}"></script> -->
+<!-- <script src="{{ asset('static/js/progress-bar.js') }}"></script> -->
 
 
-  <script src="{{ asset('static/js/maps.js') }}"></script>
-  <script src="{{ asset('static/js/select.js') }}"></script>
+  <!-- <script src="{{ asset('static/js/maps.js') }}"></script>
+  <script src="{{ asset('static/js/select.js') }}"></script> -->
+
+  <script src="{{ asset('static/js/jquery.tagsinput.min.js')}}"></script>
 
 
   <script src="{{ asset('static/js/froala_editor.min.js')}}"></script>
@@ -69,5 +71,4 @@ crossorigin="anonymous"></script>
     const IMAGE_PLACEHOLDER = '{{asset('static/images/upload-image.svg')}}';
 </script>
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
-
 

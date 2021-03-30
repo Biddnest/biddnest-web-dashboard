@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Razorpay;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use App\Models\Booking;
@@ -149,9 +150,9 @@ class PaymentController extends Controller
         if(!$booking_exist)
             return Helper::response(false, "Booking is not exist");
 
-        $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
+        $api = new Razorpay(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
 
-        return $payment_data = $api->payment->fetch((string) $payment_id);
+        return $payment_data = $api->payment->fetch($payment_id);
 
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");
@@ -194,5 +195,5 @@ class PaymentController extends Controller
         return Helper::response(true, "Payment successful");
     }
 
-    
+
 }

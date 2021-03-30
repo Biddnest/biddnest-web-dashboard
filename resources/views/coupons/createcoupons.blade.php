@@ -49,7 +49,7 @@
           <div class="form-input">
             <label class="coupon-name">Coupon Name</label>
             <span class="">
-              <input type="text" id="coupon-name" placeholder="Sundayhub001"  class="form-control">
+              <input type="text" id="coupon-name" name="name" placeholder="Sundayhub001"  class="form-control" required>
              <span class="error-message">Please enter  valid </span>
             </span>
            
@@ -60,12 +60,14 @@
         <div class="col-sm-6">
           <div class="form-input">
             <label class="email-label">Coupon Type</label>
-            <span class="">
-              <input type="text"  placeholder="discount" id="E-mail" class="form-control">
-             <span class="error-message">Please enter  valid Email</span>
-            </span>
-           
-             
+            <div>
+              <select class="form-control br-5" name="category"  required>
+                <option value="">--Select--</option>
+                  @foreach(\App\Enums\CouponEnums::$COUPON_TYPE as $key=>$type)
+                    <option value="{{$type}}">{{$key}}</option>
+                   @endforeach
+              </select>
+            </div>          
          </div>
           
         </div>
@@ -73,7 +75,7 @@
             <div class="form-input">
               <label class="coupon-code">Coupon Code</label>
               <span class="">
-                <input type="text"  placeholder="Sundayhub001" id="coupon-code" class="form-control">
+                <input type="text" name="code" placeholder="Sundayhub001" id="coupon-code" class="form-control" required style="text-transform:uppercase">
                <span class="error-message">Please enter  valid </span>
               </span>
              
@@ -83,13 +85,15 @@
           </div>
           <div class="col-sm-6">
             <div class="form-input">
-              <label class="coupon-id">Coupon Value</label>
-              <span class="">
-                <input type="text"  placeholder="C123456" id="coupon-id" class="form-control">
-               <span class="error-message">Please enter  valid </span>
-              </span>
-             
-               
+              <label class="coupon-id">Discount Type</label>
+              <div>
+              <select class="form-control br-5" name="category"  required>
+                <option value="">--Select--</option>
+                  @foreach(\App\Enums\CouponEnums::$DISCOUNT_TYPE as $key=>$type)
+                    <option value="{{$type}}">{{$key}}</option>
+                   @endforeach
+              </select>
+            </div>            
            </div>
             
           </div>

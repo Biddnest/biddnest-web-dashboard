@@ -18,6 +18,7 @@ use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
+use PUGX\Shortid\Shortid;
 
 class UserController extends Controller
 {
@@ -122,7 +123,10 @@ class UserController extends Controller
             return Helper::response(false, "The email id $email is already linked to another account.",);
 
             $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
-        $ref_code = strtoupper($fname.uniqid());
+
+        $short_id = Shortid::generate(6, null, true);
+        $ref_code = strtoupper(substr($fname,0,3).$short_id);
+
         User::where("id",$id)->update([
             'fname'=>$fname,
             'lname'=>$lname,
@@ -132,7 +136,6 @@ class UserController extends Controller
             'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
             "status"=>1
         ]);
-
 
         return Helper::response(true, "User has been signed up",[
             "user"=>User::select(self::$publicData)->findOrFail($user->id)

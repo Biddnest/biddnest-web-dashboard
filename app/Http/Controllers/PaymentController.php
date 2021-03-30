@@ -151,7 +151,7 @@ class PaymentController extends Controller
 
         $api = new Api(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
 
-        $payment_data = $api->payment->fetch($payment_id);
+        return $payment_data = $api->payment->fetch((string) $payment_id);
 
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");
@@ -193,4 +193,6 @@ class PaymentController extends Controller
 
         return Helper::response(true, "Payment successful");
     }
+
+    
 }

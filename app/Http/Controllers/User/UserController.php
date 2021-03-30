@@ -18,7 +18,6 @@ use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
-use PUGX\shortid-php;
 
 class UserController extends Controller
 {

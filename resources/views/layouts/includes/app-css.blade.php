@@ -45,13 +45,13 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.css" integrity="sha512-gX6K9e/4ewXjtn8Q/oePzgIxs2KPrksR4S2NNMYLxenvF7n7eNon9XbqQxb+5jcqYBVCcncIxqF6fXJYgQtoAg==" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css" integrity="sha512-MMojOrCQrqLg4Iarid2YMYyZ7pzjPeXKRvhW9nZqLo6kPBBTuvNET9DBVWptAo/Q20Fy11EIHM5ig4WlIrJfQw==" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
 
         <link rel="stylesheet" type="text/css" href="{{ asset('static/css/jquery.tagsinput.min.css')}}" />
 
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
             .nav-collapse .li{
                 list-style-type: none !important;
@@ -76,7 +76,7 @@
             .ml-48{
                 margin-left: 48px ;
             }
-            
+
             .vendor-switch2.toggle-group.toggle-on.btn-xs {
                 background-color: #2E0789 !important;
                 padding: 12px !important;
@@ -429,7 +429,7 @@
             }
 
             .accordion:hover {
-                background-color: #ad8cf9; 
+                background-color: #ad8cf9;
             }
 
             .panel {
@@ -449,7 +449,7 @@
                 margin: 0px 0px !important;
                 font-size: 12px;
             }
-            
+
             .Dashboard-lcards .table tr :first-child{
                 /* padding-left: 10px !important; */
                 text-align: left;
@@ -457,6 +457,36 @@
 
             .hidden{
                 display: none;
+            }
+
+            .input-suggestion-wrapper{
+                background: #fff;
+                position: absolute;
+                width: 90%;
+                height: auto;
+                bottom: -92%;
+                left: 5%;
+                padding: 10px;
+                z-index: 999;
+                /*border: 1px solid;*/
+                box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            }
+            .input-suggestion-wrapper:hover {
+                box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            }
+
+            .select2-container{
+                width: 100% !important;
+            }
+            .select2-search__field{
+                width: 100% !important;
+            }
+            .select2-container--default .select2-selection--multiple{
+                border: 2px solid #DFE6EC;
+                font-size: 14px;
+                min-height: 34px;
+                border-radius: 5px;
             }
         </style>
 

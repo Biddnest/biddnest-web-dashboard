@@ -198,16 +198,27 @@ class UserController extends Controller
             ->where('to_date','>=', $date)->orderBy('order');
         }])->get();
 
-       
+
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
         else
             return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
-    public static function search($query)
-    {        
-        $users = User::whereLike("fname", '%'.$query.'%')->whereLike("lname", '%'.$query.'%')->whereLike("phone", '%'.$query.'%')->whereLike("email", '%'.$query.'%')->get();
-        return Helper::response(true,"Data fetched successfully", ["users"=>$users]);
+    public static function search(Request $request)
+    {
+//        return $request;
+//        $query = $request->all()['query'];
+        $query = $request->q;
+
+        if(empty($query))
+            return Helper::response(true,"Data fetched successfully", ["users"=>[]]);
+//        return $query;
+        $users = User::where("fname","LIKE", $query.'%')
+//            ->orWhere("lname","LIKE", '%'.$query.'%')
+//            ->orWhere("phone","LIKE", '%'.$query.'%')
+//            ->orWhere("email", "LIKE",'%'.$query.'%')
+            ->paginate(5);
+        return Helper::response(true,"Data fetched successfully", ["users"=>$users->items()]);
     }
 }

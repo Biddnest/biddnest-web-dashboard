@@ -1,3 +1,4 @@
+/*
 var input = document.querySelector("#phone");
 window.intlTelInput(input, {
     initialCountry: "in",
@@ -41,7 +42,9 @@ window.intlTelInput(input, {
 
     // any initialisation options go here
 });
+*/
 
+/*
 
 
 //create vendor onboard ===============
@@ -67,24 +70,98 @@ window.intlTelInput(input, {
     // any initialisation options go here
 });
 
+*/
 
 $(document).ready(function() {
-    $('#tags').tagsInput();
+    // $('#coupon-source').tagsInput();
+
+    $(".select-box").select2({
+        tags:false,
+        multiple:true,
+        closeOnSelect: false,
+        // debug: true,
+        // allowClear: true,
+        placeholder: 'Search here',
+        minimumResultsForSearch: 1,
+        // minimumInputLength: 3,
+    });
+    $(".searchuser").select2({
+        multiple:true,
+        tags:false,
+        minimumResultsForSearch:1,
+        minimumInputLength: 3,
+        closeOnSelect: false,
+        debug:true,
+        placeholder: 'Search for users',
+        // allowClear: true,
+        ajax: {
+            url: API_SEARCH_USERS,
+            method: "GET",
+            data: function (params) {
+
+                var query = {
+                    q: params.term,
+                    page: params.page || 1
+                }
+
+                // Query parameters will be ?search=[term]&type=public
+                return query;
+            },
+            error: (a,b,c) => {
+                Logger.error(a.responseText,b,c);
+            },
+
+            processResults: function (data) {
+
+                // Transforms the top-level key of the response object from 'items' to 'results'
+                var output = [];
+                for(var i =0; i<data.data.users.length; i++){
+                    output.push({id: data.data.users[i].id,
+                        text: data.data.users[i].fname+" "+ data.data.users[i].lname +" - "+data.data.users[i].email })
+                }
+
+
+                return {
+                    results: output
+                };
+            }
+
+        }
+    });
+
+/*
 
     $('.searchuser').selectize({
         valueField: 'id',
         labelField: 'fname',
-        searchField: 'sname',
+        // searchField: 'sname',
         create: false,
         render: {
             option: function(user, escape) {
-                return '<div>' +
-                    '<span class="title">' +
-                    '<span class="name">' + escape(user.fname) + ' ' + escape(user.lname) + '</span>' +
-                    '<span class="by">' + escape(user.phone) + '</span>' +
-                    '</span>' +
-                    '<span class="description">' + escape(user.email) + '</span>' +
-                    '</div>';
+
+                return '<div class="profile-section">\n' +
+                    '                                    <figure>\n' +
+                    '                                        <img src="'+escape(user.image)+'" alt="" width="80%">\n' +
+                    '                                    </figure>\n' +
+                    '                                    <div class="profile-details-side-pop">\n' +
+                    '                                        <ul>\n' +
+                    '                                            <li>\n' +
+                    '                                                <h1>'+escape(user.fname)+' '+escape(user.lname)+'</h1>\n' +
+                    '                                                <i class="fa fa-pencil pr-1 mr-1 " style="color: #3BA3FB;" aria-hidden="true"></i>\n' +
+                    '                                            </li>\n' +
+                    '                                            <li>\n' +
+                    '                                                <h2>'+escape(user.email)+'</h2>\n' +
+                    '                                                <a href="#">\n' +
+                    '                                                    <i class="fa fa-star-o pr-1 mr-1" aria-hidden="true"></i>\n' +
+                    '                                                </a>\n' +
+                    '                                            </li>\n' +
+                    '                                            <li>\n' +
+                    '                                                <p>'+escape(user.phone)+'</p>\n' +
+                    '\n' +
+                    '                                            </li>\n' +
+                    '                                        </ul>\n' +
+                    '                                    </div>\n' +
+                    '                                </div>';
             }
         },
 
@@ -93,22 +170,25 @@ $(document).ready(function() {
             $.ajax({
                 url: API_SEARCH_USERS + '?query=' + encodeURIComponent(query),
                 type: 'GET',
+                beforeSend: function(){console.log("calling");},
                 error: function() {
                     callback();
                 },
                 success: function(res) {
-                    callback(res.repositories);
+                    console.log(res.data.users);
+                    callback(res.data.users);
                 }
             });
         }
     });
 
+*/
 
 
 
 
 
-    // return false;
+    return false;
     // $(function() {
     //     $('ul.menu li').on('click', function() {
     //         $(this).parent().find('li.active-menu-item').addClass('b-purple').removeClass('active-menu-item');

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\User\UserController;
 use App\Models\Inventory;
 use App\StringFormatter;
 use Illuminate\Support\Facades\Validator;
@@ -278,24 +279,24 @@ class Route extends Controller
     {
         $validation = Validator::make($request->all(),[
             'image'=>'required|string',
-            'fname' => 'required|string', 
+            'fname' => 'required|string',
             'lname' => 'required|string',
-            'email' => 'required|string',          
+            'email' => 'required|string',
 
             'phone.primary'=>'required|min:10|max:10',
             'phone.secondory'=>'nullable|min:10|max:10',
 
             'organization.org_name' => 'required|string',
-            'organization.org_type' => 'required|string', 
+            'organization.org_type' => 'required|string',
             'organization.gstin' => 'required|string|min:15|max:15',
             'organization.description' =>'required|string',
 
-            'address.address' => 'required|string', 
-            'address.lat' => 'required|numeric', 
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric',
             'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
-            'address.city' => 'required|string', 
+            'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
             'service_type' =>'required|string',
@@ -308,8 +309,8 @@ class Route extends Controller
 
         $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
-        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);        
-       
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);
+
         return OrganisationController::add($request->all(), $meta, $admin);
     }
 
@@ -318,24 +319,24 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id'=>'required',
             'image'=>'required|string',
-            'fname' => 'required|string', 
+            'fname' => 'required|string',
             'lname' => 'required|string',
-            'email' => 'required|string',          
+            'email' => 'required|string',
 
             'phone.primary'=>'required|min:10|max:10',
             'phone.secondory'=>'nullable|min:10|max:10',
 
             'organization.org_name' => 'required|string',
-            'organization.org_type' => 'required|string', 
+            'organization.org_type' => 'required|string',
             'organization.gstin' => 'required|string|min:15|max:15',
             'organization.description' =>'required|string',
 
-            'address.address' => 'required|string', 
-            'address.lat' => 'required|numeric', 
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric',
             'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
-            'address.city' => 'required|string', 
+            'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
             'service_type' =>'required|string',
@@ -348,8 +349,8 @@ class Route extends Controller
 
         $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
-        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);        
-       
+        $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);
+
         return OrganisationController::update($request->all(), $meta, $admin, $request->id);
     }
 
@@ -372,15 +373,15 @@ class Route extends Controller
             'phone.primary'=>'required|min:10|max:10',
 
             'organization.org_name' => 'required|string',
-            'organization.org_type' => 'required|string', 
+            'organization.org_type' => 'required|string',
             'organization.description' =>'required|string',
- 
+
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric', 
+            'address.lat' => 'required|numeric',
             'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
-            'address.city' => 'required|string', 
+            'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
             'service.*' =>'required|integer',
@@ -401,15 +402,15 @@ class Route extends Controller
             'phone.primary'=>'required|min:10|max:10',
 
             'organization.org_name' => 'required|string',
-            'organization.org_type' => 'required|string', 
+            'organization.org_type' => 'required|string',
             'organization.description' =>'required|string',
- 
+
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric', 
+            'address.lat' => 'required|numeric',
             'address.lng' => 'required|numeric',
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
-            'address.city' => 'required|string', 
+            'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
             'service.*' =>'required|integer',
@@ -448,15 +449,15 @@ class Route extends Controller
             'ifcscode'=>'required|string',
             'branch_name'=>'required|string',
             'doc.aadhar_card' => 'required|string',
-            'doc.gst_certificate' => 'required|string', 
+            'doc.gst_certificate' => 'required|string',
             'doc.biddnest_agreement' =>'required|string',
             'doc.pan_card' =>'required|string',
             'doc.company_registration_certificate' =>'required|string',
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         return OrganisationController::addBank($request->all(), $request->id, $request->bank_id);
     }
 
@@ -464,10 +465,10 @@ class Route extends Controller
     {
         $validation = Validator::make($request->all(),[
             'id' =>'required',
-            'fname' => 'required|string', 
+            'fname' => 'required|string',
             'lname' => 'required|string',
-            'email' => 'required|string',        
-            'phone'=>'required|min:10|max:10', 
+            'email' => 'required|string',
+            'phone'=>'required|min:10|max:10',
             'branch' => 'required'
         ]);
 
@@ -482,10 +483,10 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' =>'required',
             'role_id'=>'required',
-            'fname' => 'required|string', 
+            'fname' => 'required|string',
             'lname' => 'required|string',
-            'email' => 'required|string',        
-            'phone'=>'required|min:10|max:10', 
+            'email' => 'required|string',
+            'phone'=>'required|min:10|max:10',
             'branch' => 'required'
         ]);
 
@@ -601,7 +602,7 @@ class Route extends Controller
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         return CouponController::add($request->all());
      }
 
@@ -613,13 +614,14 @@ class Route extends Controller
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        
+
         return BidController::getbookings($request->public_booking_id);
 
      }
 
      public function searchUser(Request $request)
      {
-         return UserController::search($request->query);
+//         return $request->query;
+         return UserController::search($request);
      }
 }

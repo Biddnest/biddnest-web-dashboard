@@ -16,7 +16,6 @@ use App\Enums\SliderEnum;
 
 class SliderController extends Controller
 {
-
     public static function get()
     {
         $result=Slider::where(['status'=> 1, 'deleted'=>0])->with("banners")->get();
@@ -136,4 +135,5 @@ class SliderController extends Controller
         else
             return Helper::response(true,"Data Deleted successfully");
     }
+
 }

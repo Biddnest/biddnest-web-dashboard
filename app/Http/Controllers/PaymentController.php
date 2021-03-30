@@ -57,7 +57,7 @@ class PaymentController extends Controller
             $order_id = $booking_exist->payment->rzp_order_id;
         else
             $order_id = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total)['id'];
-        
+
 
         $payment_result = Payment::where('id', $booking_exist->payment->id)
             ->update([
@@ -72,7 +72,7 @@ class PaymentController extends Controller
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");
 
-        return Helper::response(true, "Payment save successfully", ['payment'=>['grand_total'=>$grand_total, 'currency'=>"INR",'rzp_order_id'=>$createorder['id'], 'auto_captured'=>1]]);
+        return Helper::response(true, "Payment save successfully", ['payment'=>['grand_total'=>$grand_total, 'currency'=>"INR",'rzp_order_id'=>$order_id, 'auto_captured'=>1]]);
     }
 
     private static function createOrder($receipt, $meta, $amount)
@@ -155,14 +155,14 @@ class PaymentController extends Controller
 
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");
-        
+
         return $order_id = $payment_data['order_id'];
 
         $order_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])->first();
 
         if(!$order_exist)
-            return Helper::response(false, "Payment order is not exist");        
-        
+            return Helper::response(false, "Payment order is not exist");
+
         $payment_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])
                                 ->update([
                                     'rzp_payment_id'=>$payment_id,
@@ -171,7 +171,7 @@ class PaymentController extends Controller
 
         $meta = json_decode(Booking::where("id",$order_exist->booking_id)->pluck("meta")[0],true);
         $meta["start_pin"] = Helper::generateOTP(4);
-                    
+
         Booking::where(["id"=>$order_exist->booking_id])
                 ->update([
                     "status"=>BookingEnums::$STATUS['awaiting_pickup'],

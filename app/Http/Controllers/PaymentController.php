@@ -54,7 +54,7 @@ class PaymentController extends Controller
             return Helper::response(false, "Minimum transaction value is one. Could'nt proceed with payment. Contact Admin.");
 
         // $exist_payment = Payment::where(['booking_id'=>$booking_exist['id']])->first();
-        if($booking_exist->payment->grand_total == $grand_total &&  $booking_exist->payment->rzp_order_id == null)
+        if($booking_exist->payment->grand_total == $grand_total &&  $booking_exist->payment->rzp_order_id !== null)
             $order_id = $booking_exist->payment->rzp_order_id;
         else
             $order_id = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total)['id'];
@@ -152,7 +152,7 @@ class PaymentController extends Controller
         
         $api = new Razorpay(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
 
-        $payment_data = $api->fetch($payment_id);
+        return $payment_data = $api->fetch($payment_id);
 
         if($payment_data['error_code'])
             return Helper::response(false, "Payment does not exist");

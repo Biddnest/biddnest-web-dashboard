@@ -212,7 +212,7 @@
             <div class="form-input">
               <label>Select Zones</label>
               <div>
-                <select class="form-control br-5 field-toggle select-box" name="zones[]">
+                <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
 
                     @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
                       <option value="{{$zone->id}}">{{$zone->name}}</option>

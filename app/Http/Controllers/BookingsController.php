@@ -424,7 +424,9 @@ class BookingsController extends Controller
         }
 
 
-        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->pluck('booking_id'))->with('bid')->paginate(CommonEnums::$PAGE_LENGTH);
+        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->pluck('booking_id'))->with(['bid'=> function($bid) use($request){
+            $bid->where("organization_id",$request->token_payload->organization_id);
+        }])->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true,"Show data successfully",["bookings"=>$bookings->items(), "paging"=>[
             "current_page"=>$bookings->currentPage(), "total_pages"=>$bookings->lastPage(), "next_page"=>$bookings->nextPageUrl(), "previous_page"=>$bookings->previousPageUrl()

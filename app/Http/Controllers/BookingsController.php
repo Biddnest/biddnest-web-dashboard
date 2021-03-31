@@ -534,7 +534,7 @@ class BookingsController extends Controller
         if(!$get_driver || !$get_vehicle)
             return Helper::response(false,"Driver or vehicle data not available");
 
-        return Helper::response(false,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicle'=>$get_vehicle]);
+        return Helper::response(true,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicle'=>$get_vehicle]);
     }
 
     public static function startTrip($public_booking_id, $organization_id, $pin){

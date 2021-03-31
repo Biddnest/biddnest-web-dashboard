@@ -526,15 +526,15 @@ class BookingsController extends Controller
     {
         $get_driver = Vendor::where("organization_id", $organization_id)
                             ->where(["user_role"=>VendorEnums::$ROLES['driver']])
-                            ->first();
+                            ->get();
 
         $get_vehicle = Vehicle::where("organization_id", $organization_id)
-                            ->first();
+                            ->get();
 
         if(!$get_driver || !$get_vehicle)
             return Helper::response(false,"Driver or vehicle data not available");
 
-        return Helper::response(true,"Data fetched successfully", ['driver'=>$get_driver, 'vehicle'=>$get_vehicle]);
+        return Helper::response(true,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicles'=>$get_vehicle]);
     }
 
     public static function startTrip($public_booking_id, $organization_id, $pin){

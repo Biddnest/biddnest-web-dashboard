@@ -524,7 +524,7 @@ class BookingsController extends Controller
 
     public static function getDriver($organization_id)
     {
-        $get_driver = Vendor::select(["id","fname","lname"])
+        $get_driver = Vendor::select(["id","fname","lname","phone"])
                             ->where("organization_id", $organization_id)
                             ->where(["user_role"=>VendorEnums::$ROLES['driver']])
                             ->get();

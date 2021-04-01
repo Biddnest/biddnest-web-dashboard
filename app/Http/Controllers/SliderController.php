@@ -68,6 +68,37 @@ class SliderController extends Controller
 
     }
 
+    public static function edit($id, $name, $type, $position, $platform, $size, $from_date, $to_date, $zone_scope,$zones)
+    {
+        $slider=Slider::where('id', $id)
+        ->update([
+            'name'=>$name,
+            'type'=>$type,
+            'position'=>$position,
+            'platform' => $platform,
+            'size' => $size,
+            'from_date' => $from_date,
+            'to_date' => $to_date,
+            'zone_scope' => $zone_scope,
+        ]);
+
+        if($zone_scope == SliderEnum::$ZONE['custom']){
+            SliderZone::where("slider_id", $id)->delete();
+            foreach($zones as $zone){
+                $slider_zone = new SliderZone;
+                $slider_zone->slider_id = $id;
+                $slider_zone->zone_id = $zone;
+                $slider_zone->save();
+            }
+        }
+
+        if(!$slider)
+            return Helper::response(false,"Couldn't save data");
+
+            return Helper::response(true,"Slider has been updated.", ['slider'=>Slider::findOrFail($id)]);
+
+    }
+
     public static function delete($id)
     {
         $delete_slider=Slider::where("id",$id)->update(["deleted" => 1]);

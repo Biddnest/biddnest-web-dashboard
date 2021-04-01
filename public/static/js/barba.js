@@ -37,20 +37,76 @@ barba.init({
             $('.slick-container').slick({
                 arrows: false
             });
-            $('.slick-container-2').slick({
-                arrows: false
+        }
+      },{
+        namespace: 'createslider',
+        afterEnter(data) {
+            $(".select-box").select2({
+                tags: false,
+                multiple: true,
+                closeOnSelect: false,
+                // debug: true,
+                // allowClear: true,
+                placeholder: 'Type here',
+                minimumResultsForSearch: 1,
+                // minimumInputLength: 3,
             });
-            $('.slick-container-3').slick({
-                arrows: false
+
+            $(".select-box2").select2({
+                tags: true,
+                multiple: true,
+                closeOnSelect: false,
+                // debug: true,
+                // allowClear: true,
+                placeholder: 'Search here',
+                minimumResultsForSearch: 1,
+                // minimumInputLength: 3,
             });
-            $('.slick-container-4').slick({
-                arrows: false
-            });
-            $('.slick-container-5').slick({
-                arrows: false
-            });
-            $('.slick-container-6').slick({
-                arrows: false
+
+            $(".searchuser").select2({
+                multiple: true,
+                tags: false,
+                minimumResultsForSearch: 1,
+                minimumInputLength: 3,
+                closeOnSelect: false,
+                debug: true,
+                placeholder: 'Search for users',
+                // allowClear: true,
+                ajax: {
+                    url: API_SEARCH_USERS,
+                    method: "GET",
+                    data: function(params) {
+
+                        var query = {
+                            q: params.term,
+                            page: params.page || 1
+                        }
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    },
+                    error: (a, b, c) => {
+                        Logger.error(a.responseText, b, c);
+                    },
+
+                    processResults: function(data) {
+
+                        // Transforms the top-level key of the response object from 'items' to 'results'
+                        var output = [];
+                        for (var i = 0; i < data.data.users.length; i++) {
+                            output.push({
+                                id: data.data.users[i].id,
+                                text: data.data.users[i].fname + " " + data.data.users[i].lname + " - " + data.data.users[i].email
+                            })
+                        }
+
+
+                        return {
+                            results: output
+                        };
+                    }
+
+                }
             });
         }
       },

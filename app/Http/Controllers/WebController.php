@@ -238,9 +238,10 @@ class WebController extends Controller
 
     public function editSlider(Request $request)
     {
-        // return Slider::with('zones')->findOrFail($request->id);
+//        return Slider::with('zones')->findOrFail($request->id);
         return view('sliderandbanner.createslider', ['id'=>$request->id,
-        'slider'=>Slider::with('zones')->findOrFail($request->id)]);
+        'slider'=>Slider::with('zones')->findOrFail($request->id)]
+        );
     }
 
     public function manageBanner(Request $request)

@@ -14,8 +14,8 @@ class Helper
 {
     public static function response($status, $message, $data=null, $http_code=200){
         $stat =$status ? "success" : "fail";
-        if($status === true)
-            $message = Inspiring::quote();
+        /*if($status === true)
+            $message = Inspiring::quote();*/
 
         return response()->json(["status" => $stat, "message"=>ucwords($message), "data"=>$data])->setStatusCode($http_code);
     }

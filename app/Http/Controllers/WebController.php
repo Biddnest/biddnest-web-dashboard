@@ -235,6 +235,12 @@ class WebController extends Controller
         return view('sliderandbanner.createslider');
     }
 
+    public function editSlider(Request $request)
+    {
+        // return Slider::with('zones')->findOrFail($request->id);
+        return view('sliderandbanner.createslider', ['id'=>$request->id, 
+        'slider'=>Slider::with('zones')->findOrFail($request->id)]);
+    }
 
     public function pushNotification()
     {
@@ -351,4 +357,6 @@ class WebController extends Controller
     {
         return view('vendor.onboarduserrole');
     }
+
+    
 }

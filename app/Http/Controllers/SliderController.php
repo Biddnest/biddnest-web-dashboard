@@ -64,7 +64,7 @@ class SliderController extends Controller
         if(!$result)
             return Helper::response(false,"Couldn't save data");
         else
-            return Helper::response(true,"save data successfully");
+            return Helper::response(true,"save data successfully", ['slider'=>Slider::findOrFail($slider->id)]);
 
     }
 

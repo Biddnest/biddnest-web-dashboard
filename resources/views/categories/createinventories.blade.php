@@ -100,13 +100,17 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Material</label>
-                                <input
+                                <!-- <input
                                     type="text"
                                     placeholder="Polycarbonate, Wood, Iron"
                                     id="tags"
                                     class="form-control tags"
                                     name="material[]"
-                                  />
+                                  /> -->
+
+                                <select class="form-control select-box2" name="material[]" multiple>
+
+                                </select>
                                 <span class="error-message"
                                     >Please enter valid Phone number</span
                                   >
@@ -115,13 +119,16 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Size</label>
-                                <input
+                                <!-- <input
                                     type="text"
                                     placeholder="6ft x 3ft x, 4ft x 3ft x, 2ft x 2ft x"
                                     id="areas"
                                     class="form-control tags"
                                     name="size[]"
-                                  />
+                                  /> -->
+                                <select class="form-control select-box2" name="size[]" multiple>
+
+                                </select>
     
                                 <span class="error-message"
                                     >Please enter valid Phone number</span

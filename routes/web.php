@@ -188,6 +188,8 @@ Route::prefix('admin')->group(function () {
         Route::prefix('slider')->group(function () {
             Route::get('/',[WebController::class,'slider'])->name("slider");
             Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
+            Route::get('/{id}/banner', [WebController::class, 'manageBanner'])->name("create-banner");
+            Route::get('/{id}', [WebController::class, 'editSlider'])->name("edit-slider");
 
             Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
             Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");

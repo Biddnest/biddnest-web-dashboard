@@ -12,4 +12,9 @@ class Slider extends Model
     public function banners(){
         return $this->hasMany(Banners::class);
     }
+
+    public function zones()
+    {
+        return $this->hasManyThrough(Zone::class, SliderZone::class, 'slider_id', 'id', 'id', 'zone_id');
+    }
 }

@@ -55,7 +55,7 @@
                                             placeholder="Diwali"
                                             class="form-control br-5"
                                             name="name"
-                                            value="{{$slider->name}}"
+                                            value="{{$slider->name ?? ""}}"
                                         />
                                         <span class="error-message"
                                         >Please enter a valid URL</span
@@ -69,7 +69,7 @@
                                         <select required id="ban-type" class="form-control br-5" name="type">
                                             <option value=""> -Select- </option>
                                             @foreach(\App\Enums\SliderEnum::$TYPE as $key=>$type)
-                                                <option value="{{$type}}" @if($type == $slider->type) selected @endif>{{$key}}</option>
+                                                <option value="{{$type}}" @if($type == ($slider->type ?? "")) selected @endif>{{$key}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message"
@@ -84,7 +84,7 @@
                                         <select id="ban-type" class="form-control br-5" required name="size">
                                             <option value=""> -Select- </option>
                                             @foreach(\App\Enums\SliderEnum::$SIZE as $size=>$value)
-                                            <option value="{{$value}}"  @if($value == $slider->size) selected @endif>{{$size}} {{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][0]}}x{{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][1]}}</option>
+                                            <option value="{{$value}}"  @if($value == ($slider->size ?? "")) selected @endif>{{$size}} {{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][0]}}x{{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][1]}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message"
@@ -99,7 +99,7 @@
                                         <select id="ban-type" class="form-control br-5" required name="position">
                                             <option value=""> -Select- </option>
                                             @foreach(\App\Enums\SliderEnum::$POSITION as $position=>$value)
-                                            <option value="{{$value}}"  @if($value == $slider->position) selected @endif>{{$position}}</option>
+                                            <option value="{{$value}}"  @if($value == $slider->position ?? '') selected @endif>{{$position}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message"
@@ -114,7 +114,7 @@
                                         <select id="ban-type" class="form-control br-5" required name="platform">
                                             <option value=""> -Select- </option>
                                             @foreach(\App\Enums\SliderEnum::$PLATFORM as $platform=>$value)
-                                            <option value="{{$value}}"  @if($value == $slider->platform) selected @endif>{{$platform}}</option>
+                                            <option value="{{$value}}"  @if($value == $slider->platform ?? '') selected @endif>{{$platform}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message"
@@ -126,7 +126,7 @@
                                 <div class="col-lg-6">
                                   <div class="form-input">
                                     <label class="full-name">From date</label>
-                                    <input type="date" name="from_date" value="{{$slider->from_date}}" class="dateselect form-control br-5" required="required"/>
+                                    <input type="date" name="from_date" value="{{$slider->from_date ?? ''}}" class="dateselect form-control br-5" required="required"/>
                                     <span class="error-message">please enter valid date</span>
                                   </div>
                                 </div>
@@ -134,7 +134,7 @@
                                 <div class="col-lg-6">
                                   <div class="form-input">
                                     <label class="full-name">To date</label>
-                                    <input type="date" name="to_date" value="{{$slider->to_date}}" class="dateselect form-control br-5" required="required" />
+                                    <input type="date" name="to_date" value="{{$slider->to_date ?? ''}}" class="dateselect form-control br-5" required="required" />
                                     <span class="error-message">please enter valid date</span>
                                   </div>
                                 </div>
@@ -145,7 +145,7 @@
                                       <select id="ban-type" class="form-control field-toggle br-5" required name="zone_scope" data-value="{{\App\Enums\SliderEnum::$ZONE['custom']}}" data-target=".zones_list">
                                           <option value=""> -Select- </option>
                                           @foreach(\App\Enums\SliderEnum::$ZONE as $zone_type=>$value)
-                                              <option value="{{$value}}"  @if($value == $slider->zone_scope) selected @endif>{{$zone_type}}</option>
+                                              <option value="{{$value}}"  @if($value == $slider->zone_scope ?? '') selected @endif>{{$zone_type}}</option>
                                           @endforeach
                                       </select>
                                     <span class="error-message">Please enter valid Phone number</span>

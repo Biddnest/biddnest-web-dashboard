@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createslider">
             <div class="d-flex flex-row justify-content-between">
-              <h3 class="heading1 p-4">Create Slider & Banners</h3>
+              <h3 class="heading1 p-4">Manage Banners</h3>
             </div>
 
             <!-- Dashboard cards -->
@@ -14,12 +14,12 @@
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Sliders & Banners</li>
                     <li class="breadcrumb-item"><a href="sliders-banners.html"> Manage Sliders</a></li>
-                    <li class="breadcrumb-item"><a href="#"> Create-Sliders</a></li>
+                    <li class="breadcrumb-item"><a href="#"> Manage Banner</a></li>
                   </ol>
                 </nav>
               </div>
             </div>
-            
+
             <div class="d-flex flex-row justify-content-center Dashboard-lcards">
               <div class="col-lg-10">
                 <div class="card h-auto p-0 pt-10">
@@ -35,85 +35,106 @@
                               </ul>
                           </h3>
                       </div>
-                      <div class="tab-content" id="myTabContent">
-                      
-                        <div class="tab-pane fade show active margin-topneg-15" id="past" role="tabpanel" aria-labelledby="past-tab">
-                          <!-- form starts -->
-                          <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider" action="{{route('banners_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>':id'])}}" data-alert="mega" method="POST" data-parsley-validate>
-                            <div class="d-flex row p-20">
-                                <div class="col-lg-6">
-                                    <p class="img-label">Image</p>
-                                    <div class="upload-section p-20 pt-0">
-                                        <img class="upload-preview"
-                                                src="{{asset('static/images/upload-image.svg')}}"
-                                                alt=""
-                                            />
-                                        <div class="ml-1">
-                                            <div class="file-upload">
-                                                <input type="file" />
-                                                <input type="hidden" class="base-holder" name="image" value="" required />
-                                                    <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
-                                                        UPLOAD IMAGE
-                                                    </button>
-                                            </div>
-                                            <p class="text-black">Max File size: 1MB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                   
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-input">
-                                        <label class="full-name">Banner Name</label>
-                                        <input
-                                            type="text"
-                                            id="name" required
-                                            autocomplete="off"
-                                            placeholder="Diwali"
-                                            class="form-control br-5"
-                                            name="name"
-                                        />
-                                        <span class="error-message"
-                                        >Please enter a valid URL</span
-                                        >
-                                    </div>
-                                </div>
+                                  <div class="tab-content" id="myTabContent">
 
-                                <div class="col-lg-6">
-                                    <div class="form-input">
-                                        <label class="full-name">Url</label>
-                                        <input
-                                            type="url"
-                                            id="url" required
-                                            autocomplete="off"
-                                            placeholder="Diwali.com"
-                                            class="form-control br-5"
-                                            name="url"
-                                        />
-                                        <span class="error-message"
-                                        >Please enter a valid URL</span
-                                        >
-                                    </div>
-                                </div>
+                                      <div class="tab-pane fade show active margin-topneg-15" id="past" role="tabpanel" aria-labelledby="past-tab">
+                                          <!-- form starts -->
+                                          <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider"  action="{{route('banners_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
 
-                                <div class="col-lg-6">
-                                  <div class="form-input">
-                                    <label class="full-name">From date</label>
-                                    <input type="date" name="from_date" class="dateselect form-control br-5" required="required"/>
-                                    <span class="error-message">please enter valid date</span>
-                                  </div>
-                                </div>
+                                              <input type="hidden" value="{{$id}}" name="id" />
 
-                                <div class="col-lg-6">
-                                  <div class="form-input">
-                                    <label class="full-name">To date</label>
-                                    <input type="date" name="to_date" class="dateselect form-control br-5" required="required" />
-                                    <span class="error-message">please enter valid date</span>
-                                  </div>
-                                </div>
+                                              <div id="banners-add">
+                                              @foreach($banners as $banner)
+                                                  <div class="d-flex row p-20 banner-form-wrapper relative">
+                                                      <span class="closer" data-parent=".banner-form-wrapper">
+                Remove
+            </span>
+                                                      <div class="col-lg-6">
+                                                          <p class="img-label">Image</p>
+                                                          <div class="upload-section p-20 pt-0">
+                                                              <img class="upload-preview"
+                                                                   src="{{$banner->image}}"
+                                                                   alt=""
+                                                              />
+                                                              <div class="ml-1">
+                                                                  <div class="file-upload">
+                                                                      <input type="file" />
+                                                                      <input type="hidden" class="base-holder" name="banners[][image]" value="{{$banner->image}}" required />
+                                                                      <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                                                          UPLOAD IMAGE
+                                                                      </button>
+                                                                  </div>
+                                                                  <p class="text-black">Max File size: 1MB</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-lg-6"></div>
+                                                      <div class="col-lg-6">
+                                                          <div class="form-input">
+                                                              <label class="full-name">Banner Name</label>
+                                                              <input
+                                                                  type="text"
+                                                                  id="name" required
+                                                                  autocomplete="off"
+                                                                  placeholder="Diwali"
+                                                                  class="form-control br-5"
+                                                                  name="banners[][name]"
+                                                                  value="{{$banner->name}}"
+                                                              />
+                                                              <span class="error-message"
+                                                              >Please enter a valid URL</span
+                                                              >
+                                                          </div>
+                                                      </div>
 
-                            </div>
+                                                      <div class="col-lg-6">
+                                                          <div class="form-input">
+                                                              <label class="full-name">Url</label>
+                                                              <input
+                                                                  type="url"
+                                                                  id="url"
+                                                                  autocomplete="off"
+                                                                  placeholder="Diwali.com"
+                                                                  class="form-control br-5"
+                                                                  name="banners[][url]"
+                                                                  value="{{$banner->url}}"
+                                                              />
+                                                              <span class="error-message"
+                                                              >Please enter a valid URL</span
+                                                              >
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-lg-6">
+                                                          <div class="form-input">
+                                                              <label class="full-name">From date</label>
+                                                              <input type="date" name="banners[][date][from]" class="dateselect form-control br-5" required="required" value="{{$banner->from_date}}"/>
+                                                              <span class="error-message">please enter valid date</span>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-lg-6">
+                                                          <div class="form-input">
+                                                              <label class="full-name">To date</label>
+                                                              <input type="date" name="banners[][date][to]" class="dateselect form-control br-5" required="required" value="{{$banner->to_date}}" />
+                                                              <span class="error-message">please enter valid date</span>
+                                                          </div>
+                                                      </div>
+
+                                                  </div>
+                                              @endforeach
+                                                </div>
+
+
+                                                      @if(count($banners) == 0)
+                                              <div class="row hide-on-data">
+                                                  <div class="col-md-12 text-center p-20">
+                                                          <p class="font14"><i>. You dont have any banners here. <br />Add a banner to get started.</i></p>
+                                                  </div></div>
+                                                      @endif
+                                              <div class="row"><div class="col-md-12 text-center p-20">
+                                                      <button type="button" class="btn theme-bg white-text repeater" data-content="#banner-form" data-container="#banners-add">Add Banner</button>
+                                                  </div></div>
 
                             <div class="row">
                               <div class="col-md-12" id="comments">
@@ -143,5 +164,84 @@
               </div>
             </div>
 </div>
+
+    <script type="text/html" id="banner-form">
+
+        <div class="d-flex row p-20 banner-form-wrapper relative">
+            <span class="closer" data-parent=".banner-form-wrapper">
+                Remove
+            </span>
+            <div class="col-lg-6">
+                <p class="img-label">Image</p>
+                <div class="upload-section p-20 pt-0">
+                    <img class="upload-preview"
+                         src="{{asset('static/images/upload-image.svg')}}"
+                         alt=""
+                    />
+                    <div class="ml-1">
+                        <div class="file-upload">
+                            <input type="file" />
+                            <input type="hidden" class="base-holder" name="banners[][image]" value="" required />
+                            <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                UPLOAD IMAGE
+                            </button>
+                        </div>
+                        <p class="text-black">Max File size: 1MB</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">Banner Name</label>
+                    <input
+                        type="text"
+                        id="name" required
+                        autocomplete="off"
+                        placeholder="Diwali"
+                        class="form-control br-5"
+                        name="banners[][name]"
+                    />
+                    <span class="error-message"
+                    >Please enter a valid URL</span
+                    >
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">Url</label>
+                    <input
+                        type="url"
+                        id="url" required
+                        autocomplete="off"
+                        placeholder="Diwali.com"
+                        class="form-control br-5"
+                        name="banners[][url]"
+                    />
+                    <span class="error-message"
+                    >Please enter a valid URL</span
+                    >
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">From date</label>
+                    <input type="date" name="banners[][date][from]" class="dateselect form-control br-5" required="required" value="{{$slider->from_date}}" />
+                    <span class="error-message">please enter valid date</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">To date</label>
+                    <input type="date" name="banners[][date][to]" class="dateselect form-control br-5" required="required" value="{{$slider->to_date}}" />
+                    <span class="error-message">please enter valid date</span>
+                </div>
+            </div>
+        </div>
+
+    </script>
 
 @endsection

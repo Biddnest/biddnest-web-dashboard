@@ -41,6 +41,9 @@
                         <div class="tab-pane fade show active margin-topneg-15" id="live" role="tabpanel" aria-labelledby="live-tab">
                           <!-- form starts -->
                           <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider" action="{{route('sliders_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>':id'])}}" data-alert="mega" method="POST" data-parsley-validate>
+                              @if(isset($slider))
+                                  <input type="hidden" value="{{$id}}" name="id" />
+                              @endif
                             <div class="d-flex row p-20">
                                 <div class="col-lg-6">
                                     <div class="form-input">
@@ -155,7 +158,7 @@
                                       <select id="ban-type" class="form-control br-5 select-box" name="zones[]" multiple @if($slider->zone_scope == \App\Enums\SliderEnum::$ZONE['custom']) required @endif>
                                           @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
 
-                                              <option value="{{$zone->id}}" 
+                                              <option value="{{$zone->id}}"
                                                 @foreach($slider->zones as $zone)
                                                   @if($zone == $zone->zone_id) selected @endif
                                                 @endforeach>{{$zone->name}}</option>

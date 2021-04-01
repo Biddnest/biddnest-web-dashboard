@@ -488,5 +488,22 @@
                 min-height: 34px;
                 border-radius: 5px;
             }
+
+            .closer i{
+                /*font-size: 14px;*/
+                /*transform: translateY(-50%);*/
+            }
+            .closer{
+                position: absolute;
+                right: 30px;
+                top: 10px;
+                border-radius: 50%;
+                display:block;
+                padding: 5px;
+                overflow: hidden;
+                cursor: pointer !important;
+                z-index: 99;
+                /*background: #cecece;*/
+            }
         </style>
 

@@ -115,3 +115,14 @@ $("body").on('change', ".field-toggle", function(event) {
         $($(this).data("target")).find(".form-control").removeAttr("required");
     }
 });
+
+
+$("body").on('click', ".repeater", function(event) {
+    $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
+    $(".hide-on-data").fadeOut(100);
+});
+
+$("body").on('click', ".closer", function(event) {
+    $(this).closest($(this).data("parent")).fadeOut(100).remove();
+});
+

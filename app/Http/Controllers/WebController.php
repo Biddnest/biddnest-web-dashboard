@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\ServiceEnums;
+use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Inventory;
@@ -238,8 +239,18 @@ class WebController extends Controller
     public function editSlider(Request $request)
     {
         // return Slider::with('zones')->findOrFail($request->id);
-        return view('sliderandbanner.createslider', ['id'=>$request->id, 
+        return view('sliderandbanner.createslider', ['id'=>$request->id,
         'slider'=>Slider::with('zones')->findOrFail($request->id)]);
+    }
+
+    public function manageBanner(Request $request)
+    {
+        // return Slider::with('zones')->findOrFail($request->id);
+        return view('sliderandbanner.createbanner', [
+         'id'=>$request->id,
+         'banners'=>Banners::where("slider_id",$request->id)->get(),
+         'slider'=>Slider::findOrFail($request->id)
+        ]);
     }
 
     public function pushNotification()
@@ -358,5 +369,5 @@ class WebController extends Controller
         return view('vendor.onboarduserrole');
     }
 
-    
+
 }

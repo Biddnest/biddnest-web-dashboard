@@ -41,7 +41,7 @@
 
 </div>
 
-<form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-url="{{route('create-categories')}}" data-alert="tiny"
+<form action="{{route('coupon_add')}}" method= "POST" data-next="redirect" data-url="{{route('coupons')}}" data-alert="tiny"
        class="create-coupons" data-parsley-validate>
     <div class="d-flex  row  p-20" >
 
@@ -60,7 +60,7 @@
             <div class="form-input">
               <label>Coupon Description</label>
               <span class="">
-                <textarea  id="" class="form-control " rows="" cols="" placeholder="hello" style="margin: 0 20px 0 0;">
+                <textarea  required class="form-control" rows="" cols="" placeholder="hello" name="desc" style="margin: 0 20px 0 0;">
 
                   </textarea>
                <span class="error-message">Please enter  valid</span>
@@ -145,7 +145,7 @@
             <div class="form-input">
               <label class="max-discount">Max Discount Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" id="max-discount" class="form-control">
+                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" class="form-control">
                 <span class="error-message">Please enter  valid </span>
               </span>
             </div>
@@ -154,7 +154,7 @@
             <div class="form-input">
               <label class="min-order">Mini Order Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" id="min-order" class="form-control">
+                <input type="number"  placeholder="5000" id="min-order" name="min_order_amount" class="form-control">
                <span class="error-message">Please enter  valid </span>
               </span>
             </div>
@@ -242,7 +242,6 @@
               <label>Select Organization</label>
               <div>
                 <select class="form-control br-5 select-box" name="orgnizations[]" multiple>
-{{--                    <option></option>--}}
                     @foreach($organizations as $org)
                       <option value="{{$org->id}}">{{$org->org_name}}</option>
                     @endforeach
@@ -269,35 +268,10 @@
             <div class="form-input">
               <label>Select Users</label>
               <div>
-{{--                <input type="text"  >--}}
                   <select class="form-control searchuser" name="users[]" multiple>
 
                   </select>
-               {{-- <div class="input-suggestion-wrapper">
-                    <div class="profile-section">
-                        <figure>
-                            <img src="https://admin-biddnest.dev.diginnovators.com/assets/images/big-profile.svg" alt="" width="80%">
-                        </figure>
-                        <div class="profile-details-side-pop">
-                            <ul>
-                                <li>
-                                    <h1>David Jerome</h1>
-                                    <i class="fa fa-pencil pr-1 mr-1 " style="color: #3BA3FB;" aria-hidden="true"></i>
-                                </li>
-                                <li>
-                                    <h2>davidjerome@ymail.com</h2>
-                                    <a href="#">
-                                        <i class="fa fa-star-o pr-1 mr-1" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <p>+91-9739823457</p>
 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>--}}
               </div>
             </div>
           </div>

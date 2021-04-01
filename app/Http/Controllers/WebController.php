@@ -6,6 +6,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\ServiceEnums;
 use App\Models\Booking;
+use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Service;
 use App\Models\Slider;
@@ -188,7 +189,10 @@ class WebController extends Controller
 
     public function coupons()
     {
-        return view('coupons.coupons');
+        $coupons = Coupon::orderBy('id','DESC')->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('coupons.coupons',[
+            "coupons"=>$coupons
+        ]);
     }
 
     public function createCoupons()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SlideBanner;
+use App\Models\SliderZone;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
@@ -28,7 +29,9 @@ class SliderController extends Controller
 
     public static function getByZone($zones)
     {
-        $result=Slider::where(['status'=> 1, 'deleted'=>0])->andWhereIn("zone_id",$zones)->with("banners")->get();
+        $result=Slider::where(['status'=> 1, 'deleted'=>0])
+//            ->andWhereIn("zone_id",$zones)
+            ->with("banners")->get();
 
         if(!$result)
             return Helper::response(false,"Couldn't fetche data");
@@ -36,7 +39,7 @@ class SliderController extends Controller
             return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
-    public static function add($name, $type, $position, $platform, $size, $from_date, $to_date, $zone_specific)
+    public static function add($name, $type, $position, $platform, $size, $from_date, $to_date, $zone_scope,$zones)
     {
         $slider=new Slider;
         $slider->name = $name;
@@ -46,8 +49,17 @@ class SliderController extends Controller
         $slider->size = $size;
         $slider->from_date = $from_date;
         $slider->to_date = $to_date;
-        $slider->zone_specific = $zone_specific;
+        $slider->zone_scope = $zone_scope;
         $result= $slider->save();
+
+        if($zone_scope == SliderEnum::$ZONE['custom']){
+            foreach($zones as $zone){
+                $slider_zone = new SliderZone;
+                $slider_zone->slider_id = $slider->id;
+                $slider_zone->zone_id = $zone;
+                $slider_zone->save();
+            }
+        }
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");

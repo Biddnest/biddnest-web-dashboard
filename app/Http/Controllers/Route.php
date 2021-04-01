@@ -7,6 +7,7 @@ use App\StringFormatter;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Helper;
+use phpDocumentor\Reflection\Types\Nullable;
 use Session;
 use App\Http\Middleware\VerifyJwtToken;
 
@@ -534,13 +535,19 @@ class Route extends Controller
             'name' => 'required|string', 'type' => 'required',
             'position' => 'required', 'platform' => 'required',
             'size' => 'required', 'from_date' => 'required',
-            'to_date' => 'required', 'zone_specific' => 'required'
+            'to_date' => 'required', 'zone_scope' => 'required',
+            'zones'=>"nullable"
         ]);
+
+         $formatedRequest = StringFormatter::format($request->all(),[
+             'to_date' => 'date',
+             'from_date' => 'date',
+         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return SliderController::add($request->name, $request->type, $request->position, $request->platform, $request->size, $request->from_date, $request->to_date, $request->zone_specific);
+            return SliderController::add($request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
      }
 
      public function sliders_delete($id)

@@ -163,16 +163,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public/misc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Enums" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Enums" />
       <recent name="$PROJECT_DIR$/storage/app/public/misc" />
       <recent name="$PROJECT_DIR$/public/static" />
-      <recent name="$PROJECT_DIR$/app/Enums" />
       <recent name="$PROJECT_DIR$/resources/fonts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -217,7 +217,8 @@
       <workItem from="1616737175235" duration="23153000" />
       <workItem from="1616961300379" duration="3152000" />
       <workItem from="1616965011868" duration="10061000" />
-      <workItem from="1617097384817" duration="13003000" />
+      <workItem from="1617097384817" duration="18221000" />
+      <workItem from="1617256266953" duration="107000" />
     </task>
     <task id="LOCAL-00016" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1616652269533</created>
@@ -594,6 +595,11 @@
           <url>file://$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php</url>
           <line>1</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/coupons/coupons.blade.php</url>
+          <line>138</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/NotificationController.php</url>

@@ -12,7 +12,7 @@ use Fabito\AvatarGenerator\Avatar;
 
 class SliderEnum
 {
-    public static $ZONE = ["universal"=>1, "zone"=>2];
+    public static $ZONE = ["all"=>1, "custom"=>2];
     public static $STATUS = ["active"=>1, "suspended"=>2];
 
     public static $POSITION = ["main"=>1, "secondary"=>2];
@@ -24,5 +24,7 @@ class SliderEnum
         ];
 
     public static $PLATFORM = ["app"=>0, "web"=>1];
+
+    public static $TYPE = ["promo"=>0,"info"=>1];
 
 }

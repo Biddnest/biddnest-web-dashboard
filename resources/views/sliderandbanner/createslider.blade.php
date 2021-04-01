@@ -41,7 +41,7 @@
                     >
 
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('service_add')}}" data-next="redirect" data-url="{{route('slider')}}" data-alert="mega" method="POST" data-parsley-validate>
+                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('sliders_add')}}" data-next="redirect" data-url="{{route('slider')}}" data-alert="mega" method="POST" data-parsley-validate>
                         <div class="d-flex row p-20">
                             <div class="col-lg-6">
                                 <div class="form-input">
@@ -52,6 +52,7 @@
                                         autocomplete="off"
                                         placeholder="Diwali"
                                         class="form-control br-5"
+                                        name="name"
                                     />
                                     <span class="error-message"
                                     >Please enter a valid URL</span
@@ -62,11 +63,11 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Type</label>
-                                    <select required id="ban-type" class="form-control br-5">
+                                    <select required id="ban-type" class="form-control br-5" name="type">
                                         <option value=""> -Select- </option>
-                                        <option value="promo"> Promo </option>
-                                        <option value="sales"> Sales </option>
-                                        <option value="other"> Other </option>
+                                        @foreach(\App\Enums\SliderEnum::$TYPE as $key=>$type)
+                                            <option value="{{$type}}">{{$key}}</option>
+                                        @endforeach
 
                                     </select>
 
@@ -80,7 +81,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Size</label>
-                                    <select id="ban-type" class="form-control br-5" required>
+                                    <select id="ban-type" class="form-control br-5" required name="size">
                                         <option value=""> -Select- </option>
                                         @foreach(\App\Enums\SliderEnum::$SIZE as $size=>$value)
                                         <option value="{{$value}}">{{$size}} {{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][0]}}x{{App\Enums\SliderEnum::$BANNER_DIMENSIONS[$size][1]}}</option>
@@ -97,7 +98,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">POSITION</label>
-                                    <select id="ban-type" class="form-control br-5" required>
+                                    <select id="ban-type" class="form-control br-5" required name="position">
                                         <option value=""> -Select- </option>
                                         @foreach(\App\Enums\SliderEnum::$POSITION as $position=>$value)
                                         <option value="{{$value}}">{{$position}}</option>
@@ -114,7 +115,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Platform</label>
-                                    <select id="ban-type" class="form-control br-5" required>
+                                    <select id="ban-type" class="form-control br-5" required name="platform">
                                         <option value=""> -Select- </option>
                                         @foreach(\App\Enums\SliderEnum::$PLATFORM as $platform=>$value)
                                         <option value="{{$value}}">{{$platform}}</option>
@@ -150,10 +151,10 @@
                           <div class="col-lg-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Zone Availabiity</label>
-                                <select id="ban-type" class="form-control br-5" required>
+                                <select id="ban-type" class="form-control field-toggle br-5" required name="zone_scope" data-value="{{\App\Enums\SliderEnum::$ZONE['custom']}}" data-target=".zones_list">
                                     <option value=""> -Select- </option>
                                     @foreach(\App\Enums\SliderEnum::$ZONE as $zone_type=>$value)
-                                        <option value="{{$zone_type}}">{{$zone_type}}</option>
+                                        <option value="{{$value}}">{{$zone_type}}</option>
                                     @endforeach
                                 </select>
 
@@ -164,11 +165,10 @@
                           </div>
 
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 zones_list hidden">
                             <div class="form-input">
                               <label class="phone-num-lable">Zones</label>
-                                <select id="ban-type" class="form-control br-5" name="zones[]">
-                                    <option value=""> -Select- </option>
+                                <select id="ban-type" class="form-control br-5 select-box" name="zones[]" multiple>
                                     @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
                                         <option value="{{$zone->id}}">{{$zone->name}}</option>
                                     @endforeach

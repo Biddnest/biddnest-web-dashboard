@@ -238,8 +238,6 @@ class WebController extends Controller
 
     public function editSlider(Request $request)
     {
-//        return Illuminate\Support\Facades\Session::get('zones');
-//        return Slider::with('zones')->findOrFail($request->id);
         return view('sliderandbanner.createslider', ['id'=>$request->id,
         'slider'=>Slider::with('zones')->findOrFail($request->id)]
         );

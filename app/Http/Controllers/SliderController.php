@@ -149,7 +149,7 @@ class SliderController extends Controller
         SlideBanner::where("slider_id",$data["id"])->delete();
 
         foreach($data['banners'] as $banner) {
-            $banner_file_name = "banner-".$banner['name']."-".uniqid().".png";
+            $banner_file_name = "banner_".uniqid().".png";
             $banners=new Banners;
             $banners->slider_id= $data['id'];
             $banners->image = filter_var($banner['image'], FILTER_VALIDATE_URL) ? $banner['image'] :Helper::saveFile($image->make($banner['image'])->resize($width,$height)->encode('png', 75),$banner_file_name,"slide-banners");

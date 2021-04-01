@@ -153,17 +153,20 @@
 
                                 <div class="col-lg-6 zones_list @if(($slider->zone_scope ?? '') != \App\Enums\SliderEnum::$ZONE['custom']) hidden @endif">
                                   <div class="form-input">
-                                    <label class="phone-num-lable">Zones</label>
+                                    <label class="phone-num-lable">Select Zones</label>
                                       <select  class="form-control br-5 select-box" name="zones[]" multiple @if(($slider->zone_scope ?? '') == \App\Enums\SliderEnum::$ZONE['custom']) required @endif>
                                           @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                          @if(isset($slider))
+
                                               <option value="{{$zone->id}}"
+                                                      @if(isset($slider))
                                                 @foreach($slider->zones as $slider_zone)
                                                   @if($zone->id == $slider_zone->id) selected @endif
-                                                @endforeach>
+                                                @endforeach
+                                                  @endif
+                                                      >
                                                   {{$zone->name}}
                                               </option>
-                                              @endif
+
                                           @endforeach
                                       </select>
                                   </div>

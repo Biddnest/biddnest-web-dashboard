@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     public static function getReport($organization_id)
     {
-        return $bid_won = Bid::where(["organization_id"=>$organization_id, "status"=>BidEnums::$STATUS['won']])->count();
+        $bid_won = Bid::where(["organization_id"=>$organization_id, "status"=>BidEnums::$STATUS['won']])->count();
         $bid_lost = Bid::where(["organization_id"=>$organization_id, "status"=>BidEnums::$STATUS['lost']])->count();
         $bid_participated = Bid::where(["organization_id"=>$organization_id, "status"=>BidEnums::$STATUS['bid_submitted']])->count();
 

@@ -430,7 +430,11 @@ class BookingsController extends Controller
             ->with('movement_dates')
             ->with(['bid'=> function($bid) use($request){
             $bid->where("organization_id",$request->token_payload->organization_id);
-        }])->paginate(CommonEnums::$PAGE_LENGTH);
+        }]);
+
+
+
+        $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true,"Show data successfully",["bookings"=>$bookings->items(), "paging"=>[
             "current_page"=>$bookings->currentPage(), "total_pages"=>$bookings->lastPage(), "next_page"=>$bookings->nextPageUrl(), "previous_page"=>$bookings->previousPageUrl()

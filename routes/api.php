@@ -104,7 +104,7 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::post('/distance',[VendorApiRouter::class,'getDistance']);
 
-//        Route::get('/tour/start',[VendorApiRouter::class,'getDriver']);
+        Route::get('/bid/position',[VendorApiRouter::class,'getposition']);
 
         Route::post('/trip/start',[VendorApiRouter::class,'startTrip']);
         Route::post('/trip/end',[VendorApiRouter::class,'endTrip']);
@@ -123,6 +123,7 @@ Route::prefix('vendors/v1')->group(function () {
 
     Route::post("/tickets/create",[VendorApiRouter::class, 'createTickets']);
 
+    Route::get("/page/{slug}",[VendorApiRouter::class, 'getPage']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

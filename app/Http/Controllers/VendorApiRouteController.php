@@ -230,4 +230,8 @@ class VendorApiRouteController extends Controller
 
         return NotificationController::saveVendorPlayer($request->player_id, $request->token_payload->id);
     }
+
+    public function getPage(Request $request){
+        return PageController::get($request->slug);
+    }
 }

@@ -13,7 +13,7 @@ class VendorApiRouteController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp']);
+//        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp']);
     }
 
     public function loginForApp(Request $request)
@@ -174,6 +174,7 @@ class VendorApiRouteController extends Controller
 
     public function getReport(Request $request)
     {
-        return ReportController::getReport($request->token_payload->organization_id, $request->token_payload->id);
+        return "df";
+        return ReportController::getReport($request->token_payload->organization_id);
     }
 }

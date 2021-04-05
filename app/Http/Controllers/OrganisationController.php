@@ -75,7 +75,7 @@ class OrganisationController extends Controller
 
         if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
-        
+
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
@@ -91,7 +91,7 @@ class OrganisationController extends Controller
             $image = $data['image'];
             $uniq = uniqid();
             $result_organization =Organization::where(["id"=>$id])
-            ->update([ 
+            ->update([
                 "image"=>Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']),
                 "email"=>$data['email'],
                 "phone"=>$data['phone']['primary'],
@@ -105,7 +105,7 @@ class OrganisationController extends Controller
                 "state"=>$data['address']['state'],
                 "service_type"=>$data['service_type'],
                 "meta"=>json_encode($meta),
-                "commission"=>$data['commission'] 
+                "commission"=>$data['commission']
             ]);
 
             foreach($data['service'] as $value)
@@ -125,7 +125,7 @@ class OrganisationController extends Controller
 
         if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
-        
+
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
@@ -135,7 +135,7 @@ class OrganisationController extends Controller
 
         if(!$get_vendor)
             return Helper::response(false,"Couldn't Delete branch");
-       
+
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
@@ -144,7 +144,7 @@ class OrganisationController extends Controller
         $exist = Organization::findOrFail($id);
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
-        
+
         $meta = json_decode($exist['meta'], true);
         $meta['org_description']= $data['organization']['org_type'];
         $meta['address']= $data['address']['address'];
@@ -167,7 +167,7 @@ class OrganisationController extends Controller
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
         $result_organization= $organizations->save();
-        
+
         foreach($data['service'] as $value)
         {
            $service=new OrganizationService;
@@ -178,8 +178,8 @@ class OrganisationController extends Controller
 
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
-            
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);        
+
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
     public static function getBranch($id, $parent_org_id)
@@ -187,9 +187,9 @@ class OrganisationController extends Controller
         $exist = Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->first();
         if(!$exist)
             return Helper::response(false,"Invalide Data");
-        
+
         return Organization::with('branch')->with('services')->findOrFail($id);
-        
+
     }
 
     public static function updateBranch($data, $id, $parent_org_id)
@@ -216,8 +216,8 @@ class OrganisationController extends Controller
             "state"=>$data['address']['state'],
             "service_type"=>$data['service_type'],
             "meta" =>json_encode($meta)
-        ]);        
-        
+        ]);
+
         foreach($data['service'] as $value)
         {
             $result_service=OrganizationService::where("organization_id", $id)
@@ -226,8 +226,8 @@ class OrganisationController extends Controller
 
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
-            
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);        
+
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
     public static function deleteBranch($id, $parent_org_id)
@@ -238,7 +238,7 @@ class OrganisationController extends Controller
 
         if(!$delete_branch)
             return Helper::response(false,"Couldn't Delete branch");
-       
+
         return Helper::response(true,"Branch Deleted successfully");
     }
 
@@ -279,12 +279,12 @@ class OrganisationController extends Controller
                 "company_reg_certificate"=>Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
                 "bidnest_agreement"=>Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
                 "banking_details"=>$meta
-            ]);    
+            ]);
         }
 
         if(!$result_bank)
             return Helper::response(false,"Couldn't save data");
-        
+
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
     }
 
@@ -293,9 +293,9 @@ class OrganisationController extends Controller
         $exist = Org_kyc::where(["id"=>$id, "organization_id"=>$organization_id])->first();
         if(!$exist)
             return Helper::response(false,"Invalide Data");
-        
+
         return $getbranch = Org_kyc::findOrFail($id);
-        
+
     }
 
     public static function addNewRole($data, $id)
@@ -305,7 +305,7 @@ class OrganisationController extends Controller
         if(!$organization_exist && !$vendor_exist)
             return Helper::response(false,"Incorrect Organization id.");
 
-       
+
         $meta = array(["branch"=>$data['branch']]);
 
         if(!$data['password'])
@@ -327,7 +327,7 @@ class OrganisationController extends Controller
 
         if(!$vendor_result)
             return Helper::response(false,"Couldn't save data");
-        
+
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
@@ -336,9 +336,9 @@ class OrganisationController extends Controller
         $exist =Vendor::where(["id"=>$id, "organization_id"=>$organization_id])->first();
         if(!$exist)
             return Helper::response(false,"Invalide Data");
-        
+
         return Vendor::findOrFail($id);
-        
+
     }
 
     public static function editNewRole($data, $id, $role_id)
@@ -363,21 +363,26 @@ class OrganisationController extends Controller
             "meta"=>$meta,
             "password"=>$password
         ]);
-        
+
         if(!$vendor_result)
             return Helper::response(false,"Couldn't save data");
-        
+
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
     public static function deleteRole($id, $organization_id)
     {
         $delete_role=Vendor::where(["id"=>$id, "organization_id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
- 
+
         if(!$delete_role)
             return Helper::response(false,"Couldn't Delete branch");
-       
+
         return Helper::response(true,"Role Deleted successfully");
+    }
+
+    public static function getBranches($id){
+        $branches = Organization::where("parent_org_id",$id)->orWhere("id",$id)->get();
+        return Helper::response(true,"Here are the branches",["branches"=>$branches]);
     }
 
 }

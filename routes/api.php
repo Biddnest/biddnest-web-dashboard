@@ -79,6 +79,7 @@ Route::prefix('vendors/v1')->group(function () {
         Route::post('/login',[VendorApiRouter::class,'loginForApp']);
     });
 
+    Route::get("/user/{type}",[VendorApiRouter::class, 'getUser']);
 
     Route::post('/pin/reset',[VendorApiRouter::class,'resetPin']);
     Route::get('/pin/status',[VendorApiRouter::class,'checkPin']);
@@ -118,6 +119,8 @@ Route::prefix('vendors/v1')->group(function () {
     });
 
     Route::post("/tickets/create",[VendorApiRouter::class, 'createTickets']);
+
+
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");
     Route::post('/vendors/add/kyc',[Router::class,'vendor_add_kyc'])->name("vendor_add_kyc");

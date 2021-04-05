@@ -7,7 +7,7 @@ use App\Helper;
 use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\Organization;
-use App\VendorEnums;
+use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -87,7 +87,7 @@ class VendorUserController extends Controller
 }
 
     public function logout(){}
-  
+
     public static function resetPin($pin, $password, $id)
     {
         $vendor_user=Vendor::where(['id'=>$id])->first();
@@ -113,6 +113,31 @@ class VendorUserController extends Controller
         else
             $set = true;
 
-        return Helper::response(true, "Here is the Pin status.", ["pin"=>['set'=>$set]]);             
+        return Helper::response(true, "Here is the Pin status.", ["pin"=>['set'=>$set]]);
+    }
+
+    public static function getUser($organization_id, $type)
+    {
+        $user_id = Vendor::where("organization_id", $organization_id);
+
+        switch ($type) {
+            case "admin":
+                $user_id->where("user_role", VendorEnums::$ROLES['admin']);
+                break;
+
+            case "manager":
+                $user_id->where("user_role", VendorEnums::$ROLES['manager']);
+                break;
+
+            case "driver":
+                $user_id->where("user_role", VendorEnums::$ROLES['driver']);
+                break;
+        }
+
+        $users = $user_id->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
+            "current_page" => $users->currentPage(), "total_pages" => $users->lastPage(), "next_page" => $users->nextPageUrl(), "previous_page" => $users->previousPageUrl()
+        ]]);
     }
 }

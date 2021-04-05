@@ -204,4 +204,9 @@ class VendorApiRouteController extends Controller
 
         return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category], $request->heading, $request->desc);
     }
+
+    public function getUser(Request $request)
+    {
+        return VendorUserController::getUser($request->token_payload->organization_id, $request->type);
+    }
 }

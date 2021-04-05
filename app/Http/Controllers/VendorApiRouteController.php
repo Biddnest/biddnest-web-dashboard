@@ -171,4 +171,9 @@ class VendorApiRouteController extends Controller
 
         return BookingsController::endTrip($request->public_booking_id, $request->token_payload->organization_id, $request->pin);
     }
+
+    public function getReport(Request $request)
+    {
+        return ReportController::getReport($request->token_payload->organization_id, $request->token_payload->id);
+    }
 }

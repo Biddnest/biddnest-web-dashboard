@@ -498,11 +498,16 @@ class BookingsController extends Controller
 
     public static function assignDriver($public_booking_id, $driver_id, $vehicle_id)
     {
-        $assign_driver = Booking::where("public_booking_id", $public_booking_id)
-            ->where(["status" => BookingEnums::$STATUS['driver_assigned']])
-            ->first();
+
+        $assign_driver = Booking::where("public_booking_id", $public_booking_id)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->first();
+
         if (!$assign_driver)
             return Helper::response(false, "Not in active state");
+
+        $get_driver = BookingDriver::where("booking_id", $assign_driver['id'])->first();
+
+        if($get_driver)
+            BookingDriver::where("id", $get_driver['id'])->delete();
 
         $save_driver = new BookingDriver;
         $save_driver->booking_id = $assign_driver['id'];

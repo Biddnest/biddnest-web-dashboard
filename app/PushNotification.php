@@ -11,6 +11,9 @@ class PushNotification
 
     public static function sendToUsers($user_type = "user", $title, $desc, $players, $data, $url=null){
 
+        if(!count($players)<1)
+            return Helper::response(false, "No players registered yet.")
+
         switch($user_type){
             case "user":
                 $credentials =self::$user_app_creds;
@@ -29,6 +32,7 @@ class PushNotification
             'Content-Type' => 'application/json'
         ]]);
 
+//        return $players;
         $response = $client->request('POST', 'notifications', [
             'auth'=>[$credentials[0],$credentials[1]],
             'json' => [

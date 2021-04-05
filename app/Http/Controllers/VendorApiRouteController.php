@@ -176,4 +176,18 @@ class VendorApiRouteController extends Controller
     {
         return ReportController::getReport($request->token_payload->organization_id);
     }
+
+    public function getDistance(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'source.lat' => 'required',
+            'source.lng' => 'required',
+            'destination.lat' => 'required',
+            'destination.lng' => 'required'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng']);
+    }
 }

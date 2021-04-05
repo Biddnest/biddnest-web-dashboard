@@ -100,6 +100,8 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);
 
+        Route::post('/distance',[VendorApiRouter::class,'getDistance']);
+
 //        Route::get('/tour/start',[VendorApiRouter::class,'getDriver']);
 
         Route::post('/trip/start',[VendorApiRouter::class,'startTrip']);

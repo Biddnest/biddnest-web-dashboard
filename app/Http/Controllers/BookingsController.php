@@ -217,11 +217,13 @@ class BookingsController extends Controller
             return Helper::response(false, "Couldn't save data");
         }
         $booking_id = $exist->id;
-        dispatch(function () use ($booking_id) {
+        dispatch(function () use ($booking_id, $user_id,$complete_time) {
+            NotificationController::sendTo("user",User::where("id",$user_id)->pluck("id"), "Your booking has been confirmed.","We are get the best price you. You will be notified by ".$complete_time->format("H:i A"));
             BidController::addvendors($booking_id);
         })->afterResponse();
 
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+
     }
 
     public static function cancelBooking($public_booking_id, $reason, $desc, $user_id)

@@ -92,7 +92,18 @@ class TicketController extends Controller
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
             break;
-            
+
+            case TicketEnums::$TYPE['service_request']:
+                $title = $heading;
+                $body = $body;
+                $ticket = new Ticket;
+                $ticket->vendor_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
             default:
                     $title = "";
                     $desc = "";

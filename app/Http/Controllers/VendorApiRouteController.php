@@ -190,4 +190,18 @@ class VendorApiRouteController extends Controller
 
         return GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng']);
     }
+
+    public function createTickets(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category' => 'required|string',
+            'heading' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category], $request->heading, $request->desc);
+    }
 }

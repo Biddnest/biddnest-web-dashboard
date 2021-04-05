@@ -134,7 +134,7 @@ class VendorUserController extends Controller
                 break;
         }
 
-        $users = $user_id->paginate(CommonEnums::$PAGE_LENGTH);
+        $users = $user_id->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
             "current_page" => $users->currentPage(), "total_pages" => $users->lastPage(), "next_page" => $users->nextPageUrl(), "previous_page" => $users->previousPageUrl()

@@ -209,4 +209,8 @@ class VendorApiRouteController extends Controller
     {
         return VendorUserController::getUser($request->token_payload->organization_id, $request->type);
     }
+
+    public function config(Request $request){
+        return VendorApp\SettingsController::getSettings();
+    }
 }

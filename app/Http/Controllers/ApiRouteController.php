@@ -24,7 +24,7 @@ class ApiRouteController extends Controller
      * ApiRouteController constructor.
      */
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['config','login','verifyLoginOtp']);
+        $this->middleware(VerifyJwtToken::class)->except(['config','login','verifyLoginOtp','vendorConfig']);
     }
 
     /**
@@ -425,8 +425,8 @@ class ApiRouteController extends Controller
 
     public function createTickets(Request $request)
     {
-        $validation = Validator::make($request->all(),[  
-            'public_booking_id' => 'nullable|string',          
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'nullable|string',
             'heading' => 'required|string',
             'desc' => 'required|string'
         ]);
@@ -449,8 +449,8 @@ class ApiRouteController extends Controller
 
     public function statusComplete(Request $request)
     {
-        $validation = Validator::make($request->all(),[  
-            'public_booking_id' => 'required|string',          
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
             'payment_id' => 'required|string'
         ]);
 

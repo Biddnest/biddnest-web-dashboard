@@ -118,8 +118,17 @@ class VendorUserController extends Controller
 
     public static function getUser($organization_id, $type)
     {
-        $user_id = Vendor::where("organization_id", $organization_id)
-                    ->orWhere('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
+
+        $org = Organization::find($organization_id);
+
+        if(!$org)
+            return Helper::response(false, "Invalid organization id.");
+
+        if(!$org->parent_org_id)
+            $user_id = Vendor::where("organization_id", $organization_id)
+                ->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
+        else
+            $user_id = Vendor::where("organization_id", $organization_id);
 
         switch ($type) {
             case "admin":

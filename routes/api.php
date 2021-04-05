@@ -74,6 +74,7 @@ Route::prefix('v1')->group(function () {
 
 
 Route::prefix('vendors/v1')->group(function () {
+    Route::get("/configuration",[VendorApiRouter::class, 'config']);
 
     Route::prefix('auth')->group(function () {
         Route::post('/login',[VendorApiRouter::class,'loginForApp']);

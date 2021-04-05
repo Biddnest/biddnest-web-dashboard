@@ -48,6 +48,7 @@ class VendorApiRouteController extends Controller
     }
 
     /*bid API */
+
     public function getBookingsforApp(Request $request)
     {
         // $validation = Validator::make($request->all(),[
@@ -241,5 +242,22 @@ class VendorApiRouteController extends Controller
 
     public function getPage(Request $request){
         return PageController::get($request->slug);
+    }
+
+    public function updateOrganization(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'organization_name' => 'required|string',
+            'organization_desc' => 'required|string',
+            'secondory_cont_no' => 'nullable|min:10|max:10',
+            'gstin_no' => 'required|string|min:15|max:15'
+        ]);
+
+        //        print_r($request->token_data_id);exit;
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+
+        return VendorUserController::updateOrganization($request->token_payload->id, $request->token_payload->organization_id, $request->organization_name, $request->organization_desc, $request->secondory_cont_no, $request->gstin_no);
+
     }
 }

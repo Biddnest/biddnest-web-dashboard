@@ -429,7 +429,7 @@ class BookingsController extends Controller
             $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
 
         if (isset($request->status))
-            $bookings->where('status', $request->status);
+            $bookings->orWhere('status', $request->status);
 
         if (isset($request->service_id))
             $bookings->where('service_id', $request->service_id);

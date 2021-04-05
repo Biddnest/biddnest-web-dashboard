@@ -120,12 +120,14 @@ class VendorUserController extends Controller
     {
         $org = Organization::find($organization_id);
 
-        if(!org)
+        if(!$org)
             return Helper::response(false, "Invalid organization id.");
 
         if(!$org->parent_org_id)
-            $user_id = Vendor::where("organization_id", $organization_id)
-                ->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
+            $user_id = Vendor::where(function($query) use($organization_id){
+                $query->where("organization_id", $organization_id);
+                $query->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
+            });
         else
             $user_id = Vendor::where("organization_id", $organization_id);
 

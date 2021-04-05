@@ -217,8 +217,14 @@ class BookingsController extends Controller
             return Helper::response(false, "Couldn't save data");
         }
         $booking_id = $exist->id;
-        dispatch(function () use ($booking_id, $user_id,$complete_time) {
-            NotificationController::sendTo("user",User::where("id",$user_id)->pluck("id"), "Your booking has been confirmed.","We are get the best price you. You will be notified by ".$complete_time->format("H:i A"));
+
+        dispatch(function () use ($booking_id, $user_id,$complete_time, $public_booking_id) {
+
+            NotificationController::sendTo("user",User::where("id", $user_id)->pluck("id"), "Your booking has been confirmed.","We are get the best price you. You will be notified by ".$complete_time->format("H:i A"),[
+                "type"=>NotificationEnums::class,
+                "public_booking_id"=>$public_booking_id
+            ]);
+
             BidController::addvendors($booking_id);
         })->afterResponse();
 

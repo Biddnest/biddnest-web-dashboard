@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CustomerApp;
 
 
 use App\Enums\AppEnums;
+use App\Enums\NotificationEnums;
 use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\MailEnums;
@@ -84,7 +85,8 @@ class SettingsController extends Controller
                 ],
                 "review"=>[
                     "question"=>ReviewEnums::$QUESTIONS
-                ]               
+                ],
+                "notification"=>NotificationEnums::$TYPE
             ],
             "contact_us"=>[
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]

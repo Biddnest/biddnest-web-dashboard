@@ -119,6 +119,8 @@ Route::prefix('vendors/v1')->group(function () {
         Route::get('/',[VendorApiRouter::class,'getReport']);
     });
 
+    Route::post("/notification/player",[VendorApiRouter::class, 'addNotificationVendorPlayer']);
+
     Route::post("/tickets/create",[VendorApiRouter::class, 'createTickets']);
 
 

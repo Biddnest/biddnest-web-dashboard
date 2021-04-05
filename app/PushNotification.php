@@ -1,0 +1,57 @@
+<?php
+
+namespace App;
+use Craftsys\Msg91\Facade\Msg91;
+
+use App\Helper;
+use phpDocumentor\Reflection\Types\Self_;
+
+class PushNotification
+{
+    private static $user_app_creds = ["6b33862a-ec91-44bd-bf29-1c8ae35317d1", "MjlhNjhlZWQtNzE3ZS00YjNjLTg5NzQtOTY0ZDIxYjg1ZDIy"];
+    private static $vendor_app_creds = ["42d0f367-a40c-41e2-a9e3-95d62e38ad99", "NTkyMTU3ODUtMWM3OS00N2YyLTgzMWItOTZhMjNlY2E4ODFk"];
+
+    public static function sendToUsers($user_type = "user", $title, $desc, $players, $data, $url=null){
+
+        switch($user_type){
+            case "user":
+                $credentials =self::$user_app_creds;
+                break;
+            case "vendor":
+                $credentials = self::$vendor_app_creds;
+                break;
+
+            default:
+                return false;
+                break;
+        }
+
+        $client = new GuzzleHttp\Client(['base_uri' => 'https://onesignal.com/api/v1/','headers' => [
+            'Authorization'=> 'Basic '.$credentials[0],
+            'Content-Type' => 'application/json'
+        ]]);
+
+        return $response = $client->request('POST', 'notifications', [
+            'auth'=>[$credentials[0],$credentials[1]],
+            'json' => [
+                'app_id'=>$credentials[0],
+                'contents' => [
+                    'en' => $title
+                ],
+                'heading'=>[
+                    'en'=>$title
+                ],
+                'subtitle'=>[
+                    'en'=>$desc
+                ],
+                "data"=>$data,
+                'url'=>$url,
+                'include_player_ids'=>$players
+            ],
+        ]);
+
+    }
+
+
+
+}

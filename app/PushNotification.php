@@ -1,10 +1,8 @@
 <?php
 
 namespace App;
-use Craftsys\Msg91\Facade\Msg91;
-
 use App\Helper;
-use phpDocumentor\Reflection\Types\Self_;
+use \GuzzleHttp\Client;
 
 class PushNotification
 {
@@ -26,12 +24,12 @@ class PushNotification
                 break;
         }
 
-        $client = new GuzzleHttp\Client(['base_uri' => 'https://onesignal.com/api/v1/','headers' => [
+        $client = new Client(['base_uri' => 'https://onesignal.com/api/v1/','headers' => [
             'Authorization'=> 'Basic '.$credentials[0],
             'Content-Type' => 'application/json'
         ]]);
 
-        return $response = $client->request('POST', 'notifications', [
+        $response = $client->request('POST', 'notifications', [
             'auth'=>[$credentials[0],$credentials[1]],
             'json' => [
                 'app_id'=>$credentials[0],
@@ -49,6 +47,8 @@ class PushNotification
                 'include_player_ids'=>$players
             ],
         ]);
+
+        return Helper::response(true,"Push sent",["response"=>$response]);
 
     }
 

@@ -116,23 +116,28 @@ class VendorUserController extends Controller
         return Helper::response(true, "Here is the Pin status.", ["pin"=>['set'=>$set]]);
     }
 
-    public static function getUser($organization_id, $type)
+    public static function getUser(Request $request)
     {
-
-        $org = Organization::find($organization_id);
+        $org = Organization::find($request->token_payload->organization_id);
 
         if(!$org)
             return Helper::response(false, "Invalid organization id.");
 
-        if(!$org->parent_org_id)
-            $user_id = Vendor::where(function($query) use($organization_id){
-                $query->where("organization_id", $organization_id);
-                $query->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
-            });
-        else
-            $user_id = Vendor::where("organization_id", $organization_id);
-
-        switch ($type) {
+        if (isset($request->branch)) {
+            $user_id = Vendor::where('organization_id', Organization::where("id", $request->branch)->pluck("id"));
+        }
+        else {
+            if (!$org->parent_org_id) {
+                $organization_id = $request->token_payload->organization_id;
+                $user_id = Vendor::where(function ($query) use ($organization_id) {
+                    $query->where("organization_id", $organization_id);
+                    $query->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
+                });
+            }
+            else
+                $user_id = Vendor::where("organization_id", $request->token_payload->organization_id);
+        }
+        switch ($request->type) {
             case "admin":
                 $user_id->where("user_role", VendorEnums::$ROLES['admin']);
                 break;
@@ -146,11 +151,23 @@ class VendorUserController extends Controller
                 break;
         }
 
+        if (isset($request->status))
+            $user_id->where('status',$request->status);
+
 
         $users = $user_id->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
             "current_page" => $users->currentPage(), "total_pages" => $users->lastPage(), "next_page" => $users->nextPageUrl(), "previous_page" => $users->previousPageUrl()
         ]]);
+    }
+
+    public static function updateStatus(Request $request)
+    {
+         $update_status = Vendor::where('id',$request->id)->update(["status"=>$request->status]);
+         if(!$update_status)
+             return Helper::response(false, "failed to updated status");
+
+         return Helper::response(true, "status updated successfully");
     }
 }

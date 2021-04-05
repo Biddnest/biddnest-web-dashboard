@@ -207,7 +207,12 @@ class VendorApiRouteController extends Controller
 
     public function getUser(Request $request)
     {
-        return VendorUserController::getUser($request->token_payload->organization_id, $request->type);
+        return VendorUserController::getUser($request);
+    }
+
+    public function statusUpdate(Request $request)
+    {
+        return VendorUserController::updateStatus($request);
     }
 
     public function config(Request $request){
@@ -224,5 +229,9 @@ class VendorApiRouteController extends Controller
 
 
         return NotificationController::saveVendorPlayer($request->player_id, $request->token_payload->id);
+    }
+
+    public function getPage(Request $request){
+        return PageController::get($request->slug);
     }
 }

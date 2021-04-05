@@ -489,21 +489,26 @@
                 border-radius: 5px;
             }
 
-            .closer i{
-                /*font-size: 14px;*/
-                /*transform: translateY(-50%);*/
+
+
+
+            body.dragging, body.dragging * {
+                cursor: move !important;
             }
-            .closer{
+
+            .dragger {
+                cursor: move !important;
+            }
+
+            .dragged {
                 position: absolute;
-                right: 30px;
-                top: 10px;
-                border-radius: 50%;
-                display:block;
-                padding: 5px;
-                overflow: hidden;
-                cursor: pointer !important;
-                z-index: 99;
-                /*background: #cecece;*/
+                opacity: 0.5;
+                z-index: 2000;
+            }
+            .ui-sortable-placeholder{
+                border-radius: 5px;
+                border: 3px dashed #c0c0c0;
+                visibility: visible !important;
             }
         </style>
 

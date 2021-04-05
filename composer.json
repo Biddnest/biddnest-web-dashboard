@@ -21,7 +21,8 @@
         "laravel/tinker": "^2.5",
         "pugx/shortid-php": "^0.7.0",
         "ramsey/uuid": "^4.1",
-        "razorpay/razorpay": "^2.5"
+        "razorpay/razorpay": "^2.5",
+        "workerman/phpsocket.io": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

@@ -123,6 +123,9 @@ $("body").on('click', ".repeater", function(event) {
 });
 
 $("body").on('click', ".closer", function(event) {
-    $(this).closest($(this).data("parent")).fadeOut(100).remove();
+    if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
+        $(this).closest($(this).data("parent")).fadeOut(100).remove();
+    }
+    return false;
 });
 

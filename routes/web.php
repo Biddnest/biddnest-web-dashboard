@@ -231,5 +231,9 @@ Route::prefix('admin')->group(function () {
 
     });
 
+
 });
+    Route::get('/debug/socket',function (){
+        return view("debug.socket");
+    });
 

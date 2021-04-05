@@ -136,6 +136,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/sodium_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pugx/shortid-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ircmaxell/security-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/workerman/channel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/workerman/phpsocket.io" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/workerman/workerman" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

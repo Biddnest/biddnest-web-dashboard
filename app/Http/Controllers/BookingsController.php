@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
@@ -39,114 +38,106 @@ class BookingsController extends Controller
 
     public static function createEnquiry($data, $user_id)
     {
-        if(App::environment('production'))
-        {
-            $exsist = Booking::where(["user_id"=>$user_id,
-                                    "deleted"=>CommonEnums::$NO])
-                                    ->where("status","!=",BookingEnums::$STATUS["cancelled"])
-                                    ->whereBetween("created_at", [Carbon::now()->subMinutes(30),Carbon::now()])
-                                    ->get();
+        if (App::environment('production')) {
+            $exsist = Booking::where(["user_id" => $user_id,
+                "deleted" => CommonEnums::$NO])
+                ->where("status", "!=", BookingEnums::$STATUS["cancelled"])
+                ->whereBetween("created_at", [Carbon::now()->subMinutes(30), Carbon::now()])
+                ->get();
 
-            if($exsist){
-                return  Helper::response(false,"You have pending order");
+            if ($exsist) {
+                return Helper::response(false, "You have pending order");
             }
         }
         DB::beginTransaction();
 
-        $inventory_quantity_type = Service::where("id",$data['service_id'])->pluck('inventory_quantity_type')[0];
-        if($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]){
+        $inventory_quantity_type = Service::where("id", $data['service_id'])->pluck('inventory_quantity_type')[0];
+        if ($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]) {
             DB::rollBack();
-            return Helper::response(false,"Unkown Service Type, Couldn't Proceed");
+            return Helper::response(false, "Unkown Service Type, Couldn't Proceed");
         }
 
-        $booking=new Booking;
-        $booking_id = "BD".uniqid();
-        $booking->public_booking_id= strtoupper($booking_id);
-        $booking->user_id=(int)$user_id ;
-        $booking->service_id=$data['service_id'];
-        $booking->source_lat=$data['source']['lat'];
-        $booking->source_lng=$data['source']['lng'];
-        $booking->source_meta=json_encode(["geocode"=>$data['source']['meta']['geocode'],
-                                            "floor"=>$data['source']['meta']['floor'],
-                                            "address"=>$data['source']['meta']['address'],
-                                            "city"=>$data['source']['meta']['city'],
-                                            "state"=>$data['source']['meta']['state'],
-                                            "pincode"=>$data['source']['meta']['pincode'],
-                                            "lift"=>$data['source']['meta']['lift']]);
-        $booking->destination_lat=$data['destination']['lat'];
-        $booking->destination_lng=$data['destination']['lng'];
-        $booking->destination_meta=json_encode(["geocode"=>$data['destination']['meta']['geocode'],
-                                            "floor"=>$data['destination']['meta']['floor'],
-                                            "address"=>$data['destination']['meta']['address'],
-                                            "city"=>$data['destination']['meta']['city'],
-                                            "state"=>$data['destination']['meta']['state'],
-                                            "pincode"=>$data['destination']['meta']['pincode'],
-                                            "lift"=>$data['destination']['meta']['lift']]);
-        if($data['meta']['self_booking']===true)
-        {
+        $booking = new Booking;
+        $booking_id = "BD" . uniqid();
+        $booking->public_booking_id = strtoupper($booking_id);
+        $booking->user_id = (int)$user_id;
+        $booking->service_id = $data['service_id'];
+        $booking->source_lat = $data['source']['lat'];
+        $booking->source_lng = $data['source']['lng'];
+        $booking->source_meta = json_encode(["geocode" => $data['source']['meta']['geocode'],
+            "floor" => $data['source']['meta']['floor'],
+            "address" => $data['source']['meta']['address'],
+            "city" => $data['source']['meta']['city'],
+            "state" => $data['source']['meta']['state'],
+            "pincode" => $data['source']['meta']['pincode'],
+            "lift" => $data['source']['meta']['lift']]);
+        $booking->destination_lat = $data['destination']['lat'];
+        $booking->destination_lng = $data['destination']['lng'];
+        $booking->destination_meta = json_encode(["geocode" => $data['destination']['meta']['geocode'],
+            "floor" => $data['destination']['meta']['floor'],
+            "address" => $data['destination']['meta']['address'],
+            "city" => $data['destination']['meta']['city'],
+            "state" => $data['destination']['meta']['state'],
+            "pincode" => $data['destination']['meta']['pincode'],
+            "lift" => $data['destination']['meta']['lift']]);
+        if ($data['meta']['self_booking'] === true) {
             $user = User::findOrfail($user_id);
-            $booking->contact_details=json_encode(["name"=> $user['fname'].' '.$user['lname'],
-                                                    "phone"=> $user['phone'],
-                                                    'email'=>$user['email']]);
-        }
-        else{
-            $booking->contact_details=json_encode(["name"=> $data['contact_details']['name'],
-                                                    "phone"=>$data['contact_details']['phone'],
-                                                    'email'=>$data['contact_details']['email']]);
+            $booking->contact_details = json_encode(["name" => $user['fname'] . ' ' . $user['lname'],
+                "phone" => $user['phone'],
+                'email' => $user['email']]);
+        } else {
+            $booking->contact_details = json_encode(["name" => $data['contact_details']['name'],
+                "phone" => $data['contact_details']['phone'],
+                'email' => $data['contact_details']['email']]);
         }
 
-        $images=[];
+        $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        foreach( $data['meta']['images'] as $key=>$image)
-        {
-            $images[]= Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".uniqid().$key.".png","bookings/".$booking_id);
+        foreach ($data['meta']['images'] as $key => $image) {
+            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
         }
 
 
-
-
-        $cost_structure=[];
-        foreach(Settings::get() as $setting)
-        {
-            switch($setting['key']){
+        $cost_structure = [];
+        foreach (Settings::get() as $setting) {
+            switch ($setting['key']) {
                 case "tax":
-                    $cost_structure['tax']=$setting['value'];
+                    $cost_structure['tax'] = $setting['value'];
                     break;
 
                 case "surge_charge":
-                    $cost_structure['surge_charge']=$setting['value'];
+                    $cost_structure['surge_charge'] = $setting['value'];
                     break;
 
                 case "buffer_amount":
-                    $cost_structure['buffer_amount']=$setting['value'];
+                    $cost_structure['buffer_amount'] = $setting['value'];
                     break;
             }
         }
 
-        try{
+        try {
             $economic_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-             $economic_price += $economic_price*($cost_structure["tax"]/100);
+            $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
             $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type);
             $primium_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-            $primium_price += $primium_price*($cost_structure["tax"]/100);
-        }
-        catch(Exception $e){
+            $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+        } catch (Exception $e) {
             DB::rollBack();
-            return Helper::response(false,"Couldn't save data",["error"=>$e->getMessage()]);
+            return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
         }
 
-        $estimate_quote =json_encode(["economic"=>$economic_price, "premium"=>$primium_price]);
-        $booking->quote_estimate=$estimate_quote;
-        $distance=GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
-        $booking->meta=json_encode(["self_booking"=>$data['meta']['self_booking'],
-                                    "subcategory"=>$data['meta']['subcategory'],
-                                    "customer"=>json_encode(["remarks"=>$data['meta']['customer']['remarks']]),
-                                    "images"=>$images,
-                                    "timings"=>null,
-                                    "distance"=>$distance]);
-        $booking->status=BookingEnums::$STATUS['enquiry'];
-        $result=$booking->save();
+        $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
+        $booking->quote_estimate = $estimate_quote;
+        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
+            "subcategory" => $data['meta']['subcategory'],
+            "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
+            "images" => $images,
+            "timings" => null,
+            "distance" => $distance]);
+        $booking->status = BookingEnums::$STATUS['enquiry'];
+        $result = $booking->save();
 
         // $bookingstatus = new BookingStatus;
         // $bookingstatus->booking_id = $booking->id;
@@ -155,68 +146,65 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
-        foreach($data["movement_dates"] as $dates)
-        {
-            $movementdates=new MovementDates;
+        foreach ($data["movement_dates"] as $dates) {
+            $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
             $movementdates->date = $dates;
-            $result_date=$movementdates->save();
+            $result_date = $movementdates->save();
         }
 
 
-        foreach($data["inventory_items"] as $items)
-        {
-            $bookinginventory=new BookingInventory;
+        foreach ($data["inventory_items"] as $items) {
+            $bookinginventory = new BookingInventory;
             $bookinginventory->booking_id = $booking->id;
             $bookinginventory->inventory_id = $items["inventory_id"];
             $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
             $bookinginventory->material = $items["material"];
             $bookinginventory->size = $items["size"];
-            $bookinginventory->quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min"=>$items['quantity']['min'], "max"=>$items['quantity']['max']]);
+            $bookinginventory->quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
             $bookinginventory->quantity_type = $inventory_quantity_type;
-            $result_items=$bookinginventory->save();
+            $result_items = $bookinginventory->save();
         }
 
 
-        if(!$result || !$result_date || !$result_items || !$result_status)
-        {
+        if (!$result || !$result_date || !$result_items || !$result_status) {
             DB::rollBack();
-            return Helper::response(false,"Couldn't save data");
+            return Helper::response(false, "Couldn't save data");
         }
 
         DB::commit();
-        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
     public static function confirmBooking($public_booking_id, $service_type, $user_id)
     {
 
-        $exist= Booking::where(["user_id"=>$user_id,
-                                "public_booking_id"=>$public_booking_id])->first();
-        if(!$exist){
-            return Helper::response(false,"Order is not Exist");
+        $exist = Booking::where(["user_id" => $user_id,
+            "public_booking_id" => $public_booking_id])->first();
+        if (!$exist) {
+            return Helper::response(false, "Order is not Exist");
         }
 
-        if($exist['status']!=BookingEnums::$STATUS['enquiry']){
-            return Helper::response(false,"This order is not in Enquiry Status");
+        if ($exist['status'] != BookingEnums::$STATUS['enquiry']) {
+            return Helper::response(false, "This order is not in Enquiry Status");
         }
 
-        $booking_type= $service_type==0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
+        $booking_type = $service_type == 0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
 
         $timing = Settings::where("key", "bid_time")->pluck('value')[0];
         $complete_time = Carbon::now()->addMinutes($timing)->roundMinutes()->format("Y-m-d H:i:s");
 
         $meta = json_decode($exist['meta'], true);
         $meta = json_decode($exist['meta'], true);
-        $meta['timings']['bid_result']= $complete_time;
+        $meta['timings']['bid_result'] = $complete_time;
 
-        $confirmestimate = Booking::where(["user_id"=>$exist->user_id,
-                                            "public_booking_id"=>$exist->public_booking_id])
-                                            ->update(["final_estimated_quote"=>json_decode($exist['quote_estimate'], true)[$service_type],"booking_type"=>$booking_type,
-                                            "status"=>BookingEnums::$STATUS['placed'],
-                                             "meta" => json_encode($meta),
-                                             "bid_result_at"=>$complete_time
-                                            ]);
+        $confirmestimate = Booking::where(["user_id" => $exist->user_id,
+            "public_booking_id" => $exist->public_booking_id])
+            ->update(["final_estimated_quote" => json_decode($exist['quote_estimate'], true)[$service_type], "booking_type" => $booking_type,
+                "status" => BookingEnums::$STATUS['placed'],
+                "meta" => json_encode($meta),
+                "bid_result_at" => $complete_time
+            ]);
 
         // $bookingstatus = new BookingStatus;
         // $bookingstatus->booking_id = $exist->id;
@@ -225,33 +213,32 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['placed']);
 
-        if(!$confirmestimate && !$result_status)
-        {
-            return Helper::response(false,"Couldn't save data");
+        if (!$confirmestimate && !$result_status) {
+            return Helper::response(false, "Couldn't save data");
         }
         $booking_id = $exist->id;
-        dispatch(function() use($booking_id){
+        dispatch(function () use ($booking_id) {
             BidController::addvendors($booking_id);
-          })->afterResponse();
+        })->afterResponse();
 
-         return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
     public static function cancelBooking($public_booking_id, $reason, $desc, $user_id)
     {
-        $exist= Booking::where(["user_id"=>$user_id,
-                                "public_booking_id"=>$public_booking_id])->first();
-        if(!$exist){
-            return Helper::response(false,"Order is not Exist");
+        $exist = Booking::where(["user_id" => $user_id,
+            "public_booking_id" => $public_booking_id])->first();
+        if (!$exist) {
+            return Helper::response(false, "Order is not Exist");
         }
 
-        if($exist['status']==BookingEnums::$STATUS['cancelled']){
-            return Helper::response(false,"This order is already cancelled");
+        if ($exist['status'] == BookingEnums::$STATUS['cancelled']) {
+            return Helper::response(false, "This order is already cancelled");
         }
 
-        $cancelbooking = Booking::where(["user_id"=>$exist->user_id,
-        "public_booking_id"=>$exist->public_booking_id])
-        ->update(["status"=>BookingEnums::$STATUS['cancelled'], "cancelled_meta"=>json_encode(["reason"=>$reason, "desc"=>$desc], true)]);
+        $cancelbooking = Booking::where(["user_id" => $exist->user_id,
+            "public_booking_id" => $exist->public_booking_id])
+            ->update(["status" => BookingEnums::$STATUS['cancelled'], "cancelled_meta" => json_encode(["reason" => $reason, "desc" => $desc], true)]);
 
         // $bookingstatus = new BookingStatus;
         // $bookingstatus->booking_id = $exist->id;
@@ -260,28 +247,27 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
 
-        if(!$cancelbooking && !$result_status)
-        {
-            return Helper::response(false,"Couldn't save data");
+        if (!$cancelbooking && !$result_status) {
+            return Helper::response(false, "Couldn't save data");
         }
 
-         return Helper::response(true,"updated data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
     public static function getBookingByPublicIdForApp($public_booking_id, $user_id)
     {
-        $booking=Booking::where("public_booking_id", $public_booking_id)
-        //            ->where("user_id", $user_id)
-            ->where("deleted",CommonEnums::$NO)->orderBy('id', 'DESC')
+        $booking = Booking::where("public_booking_id", $public_booking_id)
+            //            ->where("user_id", $user_id)
+            ->where("deleted", CommonEnums::$NO)->orderBy('id', 'DESC')
             ->with('movement_dates')
             ->with('inventories')
             ->with('status_history')
             ->with('organization')
             ->with('service')
             ->with('payment')
-            ->with(['movement_specifications'=>function ($movement_specifications) use($public_booking_id){
-                 $movement_specifications->where('booking_id', Booking::where(['public_booking_id'=>$public_booking_id])->pluck('id')[0])
-                            ->where('status', BidEnums::$STATUS['won']);
+            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+                $movement_specifications->where('booking_id', Booking::where(['public_booking_id' => $public_booking_id])->pluck('id')[0])
+                    ->where('status', BidEnums::$STATUS['won']);
             }
             ])
             ->with('driver')
@@ -289,96 +275,92 @@ class BookingsController extends Controller
             ->with('review')
             ->first();
 
-        if(!$booking)
-        {
-            return Helper::response(false,"Invalid Booking id");
+        if (!$booking) {
+            return Helper::response(false, "Invalid Booking id");
         }
 
-        return Helper::response(true,"data fetched successfully",["booking"=>$booking]);
+        return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
     }
 
     public static function bookingHistoryPast($user_id)
     {
-        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
-                                "user_id"=>$user_id])
-                                ->whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-                                ->orderBy('id', 'DESC')
-                                ->with('movement_dates')
-                                ->with('inventories')->with('status_history')->with('service')
-                                ->get();
+        $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
+            "user_id" => $user_id])
+            ->whereIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->orderBy('id', 'DESC')
+            ->with('movement_dates')
+            ->with('inventories')->with('status_history')->with('service')
+            ->get();
 
-        if(!$bookingorder)
-        {
-            return Helper::response(false,"No Booking Found");
+        if (!$bookingorder) {
+            return Helper::response(false, "No Booking Found");
         }
 
-        return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
+        return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
     public static function bookingHistoryLive($user_id)
     {
-        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO,
-                                "user_id"=>$user_id])
-                                ->whereNotIn("status",[BookingEnums::$STATUS["enquiry"],BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-                                ->orderBy('id', 'DESC')
-                                ->with('movement_dates')
-                                ->with('inventories')->with('status_history')->with('service')
-                                ->get();
+        $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
+            "user_id" => $user_id])
+            ->whereNotIn("status", [BookingEnums::$STATUS["enquiry"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->orderBy('id', 'DESC')
+            ->with('movement_dates')
+            ->with('inventories')->with('status_history')->with('service')
+            ->get();
 
-        if(!$bookingorder)
-        {
-            return Helper::response(false,"No Booking Found");
+        if (!$bookingorder) {
+            return Helper::response(false, "No Booking Found");
         }
 
-        return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
+        return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
     public static function reschedulBooking($public_booking_id, $dates, $user_id)
     {
-        $exist= Booking::where(["user_id"=>$user_id,
-                                "public_booking_id"=>$public_booking_id])->first();
-        if(!$exist)
-            return Helper::response(false,"Order is not Exist");
+        $exist = Booking::where(["user_id" => $user_id,
+            "public_booking_id" => $public_booking_id])->first();
+        if (!$exist)
+            return Helper::response(false, "Order is not Exist");
 
-        MovementDates::where("booking_id",$exist->id)->delete();
+        MovementDates::where("booking_id", $exist->id)->delete();
 
-        foreach($dates as $value)
-        {
-            $movementdates=new MovementDates;
-                $movementdates->booking_id = $exist->id;
-                $movementdates->date = $value;
-                $result_date=$movementdates->save();
+        foreach ($dates as $value) {
+            $movementdates = new MovementDates;
+            $movementdates->booking_id = $exist->id;
+            $movementdates->date = $value;
+            $result_date = $movementdates->save();
         }
 
-        return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
+        return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 
     public static function getfinalquote($public_booking_id, $user_id)
     {
-        $exist= Booking::where(["user_id"=>$user_id,
-                                "public_booking_id"=>$public_booking_id])
-                                ->where("status", BookingEnums::$STATUS['payment_pending'])->first();
-        if(!$exist)
-            return Helper::response(false,"Order is not Exist");
+        $exist = Booking::where(["user_id" => $user_id,
+            "public_booking_id" => $public_booking_id])
+            ->where("status", BookingEnums::$STATUS['payment_pending'])->first();
+        if (!$exist)
+            return Helper::response(false, "Order is not Exist");
 
-            return Helper::response(true,"save data successfully",["booking"=>Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
+        return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 
     public static function getPaymentDetails($public_booking_id, $discount_amount = 0.00)
     {
         $booking = Booking::where("public_booking_id", $public_booking_id)
-                                ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
-        if(!$booking)
-            return Helper::response(false,"Order is not Exist");
+            ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
+        if (!$booking)
+            return Helper::response(false, "Order is not Exist");
 
-        if(!$booking->payment)
+        if (!$booking->payment)
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
 
         Payment::where('booking_id', $booking->id)
-            ->update(['discount_amount'=>0.00, 'coupon_code'=>null, 'tax'=>($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100),
-            'grand_total'=>($booking->final_quote + $booking->payment->other_charges) + (($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage/100))]);
+            ->update(['discount_amount' => 0.00, 'coupon_code' => null, 'tax' => ($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage / 100),
+                'grand_total' => ($booking->final_quote + $booking->payment->other_charges) + (($booking->final_quote + $booking->payment->other_charges) * ($tax_percentage / 100))]);
 
         $booking = Booking::where("public_booking_id", $public_booking_id)
             ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
@@ -386,17 +368,17 @@ class BookingsController extends Controller
         $tax = $booking->payment->tax;
         $grand_total = $booking->payment->grand_total;
 
-        if($discount_amount > 0.00){
+        if ($discount_amount > 0.00) {
             $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
-            $tax =  $grand_total * ($tax_percentage/100);
+            $tax = $grand_total * ($tax_percentage / 100);
             $grand_total += $tax;
         }
 
-        return Helper::response(true,"Get payment data successfully",["payment_details"=>[
+        return Helper::response(true, "Get payment data successfully", ["payment_details" => [
             "sub_total" => $booking->payment->sub_total,
-            "surge_charge"=>$booking->payment->other_charges,
-            "discount"=>$discount_amount,
-            "tax(".$tax_percentage."%)"=>$tax,
+            "surge_charge" => $booking->payment->other_charges,
+            "discount" => $discount_amount,
+            "tax(" . $tax_percentage . "%)" => $tax,
             "grand_total" => $grand_total
         ]]);
 
@@ -408,8 +390,7 @@ class BookingsController extends Controller
         // $offset=0;
         $bid_id = Bid::where("organization_id", $request->token_payload->organization_id);
 
-        switch($request->type)
-        {
+        switch ($request->type) {
             case "live":
                 $bid_id->where("status", BidEnums::$STATUS['active']);
                 break;
@@ -427,7 +408,7 @@ class BookingsController extends Controller
                 break;
 
             case "past":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=> function($booking){
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking' => function ($booking) {
                     $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
@@ -438,77 +419,88 @@ class BookingsController extends Controller
             ->pluck('booking_id'))
             ->with('service')
             ->with('movement_dates')
-            ->with(['bid'=> function($bid) use($request){
-            $bid->where("organization_id",$request->token_payload->organization_id);
-        }])->paginate(CommonEnums::$PAGE_LENGTH);
+            ->with(['bid' => function ($bid) use ($request) {
+                $bid->where("organization_id", $request->token_payload->organization_id);
+            }]);
 
-        return Helper::response(true,"Show data successfully",["bookings"=>$bookings->items(), "paging"=>[
-            "current_page"=>$bookings->currentPage(), "total_pages"=>$bookings->lastPage(), "next_page"=>$bookings->nextPageUrl(), "previous_page"=>$bookings->previousPageUrl()
+        if (isset($request->from) && isset($request->to))
+            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
+
+        if (isset($request->status))
+            $bookings->where('status', $request->status);
+
+        if (isset($request->service_id))
+            $bookings->where('service_id', $request->service_id);
+
+        $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
+            "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()
         ]]);
     }
 
     public static function getByIdForVendorApp(Request $request)
     {
         $organization_id = $request->token_payload->organization_id;
-        $booking = Booking::where(["public_booking_id"=>$request->public_booking_id])
+        $booking = Booking::where(["public_booking_id" => $request->public_booking_id])
             ->with('inventories')
             ->with('service')
             ->with('movement_dates')
             ->with('driver')
             ->with('vehicle')
-            ->with(['bid'=>function($bid) use($request){
-            $bid->where("organization_id", $request->token_payload->organization_id)
-            ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
-        }])->first();
+            ->with(['bid' => function ($bid) use ($request) {
+                $bid->where("organization_id", $request->token_payload->organization_id)
+                    ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
+            }])->first();
 
-        return Helper::response(true,"Show data successfully",["booking"=>$booking]);
+        return Helper::response(true, "Show data successfully", ["booking" => $booking]);
     }
 
     public static function reject($id, $org_id, $vendor_id)
     {
         $exist_bid = Bid::where("organization_id", $org_id)
-                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
-                            ->where(["status"=>BidEnums::$STATUS['active']])
-                            ->first();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
+            ->where("booking_id", Booking::where(['public_booking_id' => $id])->pluck('id')[0])
+            ->where(["status" => BidEnums::$STATUS['active']])
+            ->first();
+        if (!$exist_bid)
+            return Helper::response(false, "Not in active state");
 
-        if($exist_bid['bookmarked'] == CommonEnums::$YES)
-            $bookmark = Bid::where(['id'=>$exist_bid['id']])->update(["bookmarked"=>CommonEnums::$NO]);
+        if ($exist_bid['bookmarked'] == CommonEnums::$YES)
+            $bookmark = Bid::where(['id' => $exist_bid['id']])->update(["bookmarked" => CommonEnums::$NO]);
 
-        $reject = Bid::where(['id'=>$exist_bid['id']])->update(["status"=>BidEnums::$STATUS['rejected'], "vendor_id"=>$vendor_id]);
+        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "vendor_id" => $vendor_id]);
 
-        if(!$reject)
-            return Helper::response(false,"Couldn't Reject");
+        if (!$reject)
+            return Helper::response(false, "Couldn't Reject");
 
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::FindOrFail($exist_bid['id'])]);
+        return Helper::response(true, "updated data successfully", ["bid" => Bid::FindOrFail($exist_bid['id'])]);
     }
 
     public static function addBookmark($id, $org_id, $vendor_id)
     {
         $exist_bid = Bid::where("organization_id", $org_id)
-                            ->where("booking_id", Booking::where(['public_booking_id'=>$id])->pluck('id')[0])
-                            ->where(["status"=>BidEnums::$STATUS['active']])
-                            ->first();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
+            ->where("booking_id", Booking::where(['public_booking_id' => $id])->pluck('id')[0])
+            ->where(["status" => BidEnums::$STATUS['active']])
+            ->first();
+        if (!$exist_bid)
+            return Helper::response(false, "Not in active state");
 
-        $result = Bid::where(['id'=>$exist_bid['id']])
-                        ->update(["bookmarked"=>CommonEnums::$YES, "vendor_id"=>$vendor_id]);
+        $result = Bid::where(['id' => $exist_bid['id']])
+            ->update(["bookmarked" => CommonEnums::$YES, "vendor_id" => $vendor_id]);
 
-        if(!$result)
-            return Helper::response(false,"Couldn't Add to Bookmark");
+        if (!$result)
+            return Helper::response(false, "Couldn't Add to Bookmark");
 
-        return Helper::response(true,"updated data successfully",["bookmark"=>Bid::where("id", $exist_bid['id'])->first()]);
+        return Helper::response(true, "updated data successfully", ["bookmark" => Bid::where("id", $exist_bid['id'])->first()]);
     }
 
     public static function assignDriver($public_booking_id, $driver_id, $vehicle_id)
     {
         $assign_driver = Booking::where("public_booking_id", $public_booking_id)
-                            ->where(["status"=>BookingEnums::$STATUS['driver_assigned']])
-                            ->first();
-        if(!$assign_driver)
-            return Helper::response(false,"Not in active state");
+            ->where(["status" => BookingEnums::$STATUS['driver_assigned']])
+            ->first();
+        if (!$assign_driver)
+            return Helper::response(false, "Not in active state");
 
         $save_driver = new BookingDriver;
         $save_driver->booking_id = $assign_driver['id'];
@@ -516,8 +508,8 @@ class BookingsController extends Controller
         $save_driver->vehicle_id = $vehicle_id;
         $result_driver = $save_driver->save();
 
-        $assign_driver_status = Booking::where(['public_booking_id'=>$public_booking_id, 'id'=>$assign_driver['id']])
-                            ->update(["status"=>BookingEnums::$STATUS['awaiting_pickup']]);
+        $assign_driver_status = Booking::where(['public_booking_id' => $public_booking_id, 'id' => $assign_driver['id']])
+            ->update(["status" => BookingEnums::$STATUS['awaiting_pickup']]);
 
         // $bookingstatus = new BookingStatus;
         // $bookingstatus->booking_id = $assign_driver->id;
@@ -526,44 +518,45 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['awaiting_pickup']);
 
-        if(!$result_driver && !$assign_driver_status)
-            return Helper::response(false,"couldn't sanve");
+        if (!$result_driver && !$assign_driver_status)
+            return Helper::response(false, "couldn't sanve");
 
-        return Helper::response(true,"save successfully");
+        return Helper::response(true, "save successfully");
     }
 
     public static function getDriver($organization_id)
     {
-        $get_driver = Vendor::select(["id","fname","lname","phone"])
-                            ->where("organization_id", $organization_id)
-                            ->where(["user_role"=>VendorEnums::$ROLES['driver']])
-                            ->get();
+        $get_driver = Vendor::select(["id", "fname", "lname", "phone"])
+            ->where("organization_id", $organization_id)
+            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->get();
 
-        $get_vehicle = Vehicle::select(["id","name","vehicle_type","number"])->where("organization_id", $organization_id)
-                            ->get();
+        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
+            ->get();
 
-        if(!$get_driver || !$get_vehicle)
-            return Helper::response(false,"Driver or vehicle data not available");
+        if (!$get_driver || !$get_vehicle)
+            return Helper::response(false, "Driver or vehicle data not available");
 
-        return Helper::response(true,"Data fetched successfully", ['drivers'=>$get_driver, 'vehicles'=>$get_vehicle]);
+        return Helper::response(true, "Data fetched successfully", ['drivers' => $get_driver, 'vehicles' => $get_vehicle]);
     }
 
-    public static function startTrip($public_booking_id, $organization_id, $pin){
+    public static function startTrip($public_booking_id, $organization_id, $pin)
+    {
         $booking = Booking::where([
-            "public_booking_id"=>$public_booking_id,
-            "organization_id"=>$organization_id,
-            "status"=>BookingEnums::$STATUS['awaiting_pickup']
+            "public_booking_id" => $public_booking_id,
+            "organization_id" => $organization_id,
+            "status" => BookingEnums::$STATUS['awaiting_pickup']
         ])->first();
 
-        if(!$booking)
+        if (!$booking)
             return Helper::response(false, "Invalid Order id");
-        $meta = json_decode($booking->meta,true);
-        if($meta['start_pin'] == $pin){
+        $meta = json_decode($booking->meta, true);
+        if ($meta['start_pin'] == $pin) {
             $meta["end_pin"] = Helper::generateOTP(4);
 
-            Booking::where("public_booking_id",$public_booking_id)->update([
-                "status"=>BookingEnums::$STATUS['in_transit'],
-                "meta"=>$meta
+            Booking::where("public_booking_id", $public_booking_id)->update([
+                "status" => BookingEnums::$STATUS['in_transit'],
+                "meta" => $meta
             ]);
 
             // $bookingstatus = new BookingStatus;
@@ -574,27 +567,27 @@ class BookingsController extends Controller
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
 
             return Helper::response(true, "Your trip Has been started.");
-        }
-        else{
+        } else {
             return Helper::response(false, "You have entered a wrong pin");
         }
 
     }
 
-    public static function endTrip($public_booking_id, $organization_id, $pin){
+    public static function endTrip($public_booking_id, $organization_id, $pin)
+    {
         $booking = Booking::where([
-            "public_booking_id"=>$public_booking_id,
-            "organization_id"=>$organization_id,
-            "status"=>BookingEnums::$STATUS['in_transit']
+            "public_booking_id" => $public_booking_id,
+            "organization_id" => $organization_id,
+            "status" => BookingEnums::$STATUS['in_transit']
         ])->first();
 
-        if(!$booking)
+        if (!$booking)
             return Helper::response(false, "Invalid Order id");
-        $meta = json_decode($booking->meta,true);
-        if($meta['end_pin'] == $pin){
+        $meta = json_decode($booking->meta, true);
+        if ($meta['end_pin'] == $pin) {
 
-            Booking::where("public_booking_id",$public_booking_id)->update([
-                "status"=>BookingEnums::$STATUS['completed']
+            Booking::where("public_booking_id", $public_booking_id)->update([
+                "status" => BookingEnums::$STATUS['completed']
             ]);
 
             // $bookingstatus = new BookingStatus;
@@ -605,32 +598,31 @@ class BookingsController extends Controller
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['completed']);
 
             return Helper::response(true, "Your order has been completed.");
-        }
-        else{
+        } else {
             return Helper::response(false, "You have entered a wrong pin");
         }
     }
 
     public static function getRecentBooking($user_id)
     {
-        $bookingorder= Booking::where(["deleted"=>CommonEnums::$NO, "user_id"=>$user_id])
-        ->whereNotIn("status",[BookingEnums::$STATUS["enquiry"],BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->with('driver')->orderBy('id', 'DESC')->first();
+        $bookingorder = Booking::where(["deleted" => CommonEnums::$NO, "user_id" => $user_id])
+            ->whereNotIn("status", [BookingEnums::$STATUS["enquiry"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])->with('driver')->orderBy('id', 'DESC')->first();
 
-        if(!$bookingorder)
-            return Helper::response(false,"No Booking Found");
+        if (!$bookingorder)
+            return Helper::response(false, "No Booking Found");
 
-        return Helper::response(true,"Data fetched successfully",["booking"=>$bookingorder]);
+        return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
     public static function statusChange($booking_id, $status)
     {
         $bookingstatus = new BookingStatus;
         $bookingstatus->booking_id = $booking_id;
-        $bookingstatus->status=$status;
+        $bookingstatus->status = $status;
         $result_status = $bookingstatus->save();
 
-        if(!$result_status)
-            return Helper::response(false,"couldn'd change status");
+        if (!$result_status)
+            return Helper::response(false, "couldn'd change status");
 
         return true;
     }

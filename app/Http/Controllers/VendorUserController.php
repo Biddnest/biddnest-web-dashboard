@@ -118,8 +118,8 @@ class VendorUserController extends Controller
 
     public static function getUser($organization_id, $type)
     {
-        $user_id = Vendor::where("organization_id", $organization_id);
-
+        $user_id = Vendor::where("organization_id", $organization_id)
+                    ->orWhereIn('organization_id', Organization::where("parent_org_id",$organization_id)->pluck("id"));
         switch ($type) {
             case "admin":
                 $user_id->where("user_role", VendorEnums::$ROLES['admin']);

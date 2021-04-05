@@ -39,8 +39,8 @@ class NotificationController extends Controller
 
         if (!$player) {
             $player = new OneSignalPlayer;
-            $player->user_id = vendor_id;
-            $player->vendor_id = null;
+            $player->user_id = null;
+            $player->vendor_id = $vendor_id;
             $player->player_id = $player_id;
 
             if (!$player->save())
@@ -50,18 +50,6 @@ class NotificationController extends Controller
         }
 
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
-    }
-
-    public static function send($title, $desc, $time = null){
-        if(!$time){
-            OneSignal::sendNotificationToAll(
-                "Some Message",
-                $url = null,
-                $data = null,
-                $buttons = null,
-                $schedule = null
-            );
-        }
     }
 
 }

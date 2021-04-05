@@ -219,4 +219,15 @@ class VendorApiRouteController extends Controller
         return VendorApp\SettingsController::getSettings();
     }
 
+    public function addNotificationVendorPlayer(Request $request){
+        $validation = Validator::make($request->all(),[
+            'player_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+
+        return NotificationController::saveVendorPlayer($request->player_id, $request->token_payload->id);
+    }
 }

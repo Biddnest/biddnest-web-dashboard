@@ -170,4 +170,6 @@ class VendorUserController extends Controller
 
          return Helper::response(true, "status updated successfully");
     }
+
+
 }

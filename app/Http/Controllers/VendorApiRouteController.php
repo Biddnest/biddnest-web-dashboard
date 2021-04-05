@@ -231,6 +231,14 @@ class VendorApiRouteController extends Controller
         return NotificationController::saveVendorPlayer($request->player_id, $request->token_payload->id);
     }
 
+    public function faqCategories(Request $request){
+        return FaqController::getCategories();
+    }
+
+    public function faqByCategory(Request $request){
+        return FaqController::getByCategory($request->category);
+    }
+
     public function getPage(Request $request){
         return PageController::get($request->slug);
     }

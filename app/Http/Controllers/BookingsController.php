@@ -453,7 +453,7 @@ class BookingsController extends Controller
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id)
                     ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
-            }])->first();
+            }])->with('user')->first();
 
         return Helper::response(true, "Show data successfully", ["booking" => $booking]);
     }

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\BidController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Carbon\CarbonImmutable;
@@ -235,5 +237,12 @@ Route::prefix('admin')->group(function () {
 });
     Route::get('/debug/socket',function (){
         return view("debug.socket");
+    });
+
+    Route::get('/debug/push',function (){
+        return NotificationController::sendTo("user",[201], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
+            "type"=>NotificationEnums::class,
+            "public_booking_id"=>"BD606B1F463E184"
+        ]);
     });
 

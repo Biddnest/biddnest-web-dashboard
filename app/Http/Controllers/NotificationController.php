@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\OneSignalPlayer;
+use App\PushNotification;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -51,5 +52,19 @@ class NotificationController extends Controller
 
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
     }
+
+    public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url){
+
+        $players=[];
+        foreach($user_id as $user){
+           if($type == "user")
+            $players[] = OneSignalPlayer::where("user_id",$user)->pluck("player_id")[0];
+        else
+            $players[] = OneSignalPlayer::where("vendor_id",$user)->pluck("player_id")[0];
+        }
+
+        return PushNotification::sendToUsers("$type", $title, $desc, $players, $data,$url);
+    }
+
 
 }

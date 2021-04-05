@@ -43,12 +43,10 @@
 
                                               <input type="hidden" value="{{$id}}" name="id" />
 
-                                              <div id="banners-add">
+                                              <div id="banners-add" class="sortable">
                                               @foreach($banners as $banner)
-                                                  <div class="d-flex row p-20 banner-form-wrapper relative">
-                                                      <span class="closer" data-parent=".banner-form-wrapper">
-                Remove
-            </span>
+                                                 <div> <div class="d-flex row p-20 banner-form-wrapper relative">
+
                                                       <div class="col-lg-6">
                                                           <p class="img-label">Image</p>
                                                           <div class="upload-section p-20 pt-0">
@@ -68,7 +66,11 @@
                                                               </div>
                                                           </div>
                                                       </div>
-                                                      <div class="col-lg-6"></div>
+                                                      <div class="col-lg-6 text-right">
+
+                                                          <a href="#0" class="btn bg-danger closer text-white" data-parent=".banner-form-wrapper">Delete</a>
+                                                          <a class="btn bg-primary dragger text-white" style="cursor: move;">Drag & Reorder</a>
+                                                      </div>
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">Banner Name</label>
@@ -121,7 +123,7 @@
                                                           </div>
                                                       </div>
 
-                                                  </div>
+                                                     </div> </div>
                                               @endforeach
                                                 </div>
 

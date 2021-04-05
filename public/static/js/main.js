@@ -72,8 +72,14 @@ window.intlTelInput(input, {
 
 */
 
+$("div.sortable").sortable({
+    handle: '.dragger',
+});
+
 $(document).ready(function() {
     // $('#coupon-source').tagsInput();
+
+
 
     $(".select-box").select2({
         tags: false,

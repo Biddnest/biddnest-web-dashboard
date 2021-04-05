@@ -57,6 +57,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         ),
         'W' => 
         array (
+            'Workerman\\' => 10,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
             'Way\\Generators\\' => 15,
@@ -117,6 +118,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
             'PUGX\\Shortid\\' => 13,
+            'PHPSocketIO\\' => 12,
         ),
         'O' => 
         array (
@@ -192,6 +194,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         array (
             'Cron\\' => 5,
             'Craftsys\\Msg91\\' => 15,
+            'Channel\\' => 8,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -225,6 +228,10 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
+        ),
+        'Workerman\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/workerman',
         ),
         'Whoops\\' => 
         array (
@@ -418,6 +425,10 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         array (
             0 => __DIR__ . '/..' . '/pugx/shortid-php/src',
         ),
+        'PHPSocketIO\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/phpsocket.io/src',
+        ),
         'Opis\\Closure\\' => 
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
@@ -576,6 +587,10 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
             0 => __DIR__ . '/..' . '/craftsys/msg91-laravel/src',
             1 => __DIR__ . '/..' . '/craftsys/msg91-php/src',
         ),
+        'Channel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/channel/src',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -726,6 +741,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
         'App\\Models\\SlideBanner' => __DIR__ . '/../..' . '/app/Models/SlideBanner.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
+        'App\\Models\\SliderZone' => __DIR__ . '/../..' . '/app/Models/SliderZone.php',
         'App\\Models\\Subservice' => __DIR__ . '/../..' . '/app/Models/Subservice.php',
         'App\\Models\\SubserviceInventory' => __DIR__ . '/../..' . '/app/Models/SubserviceInventory.php',
         'App\\Models\\Test' => __DIR__ . '/../..' . '/app/Models/Test.php',
@@ -739,6 +755,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Providers\\SocketServerProvider' => __DIR__ . '/../..' . '/app/Providers/SocketServerProvider.php',
         'App\\Razorpay' => __DIR__ . '/../..' . '/app/Razorpay.php',
         'App\\Sms' => __DIR__ . '/../..' . '/app/Sms.php',
         'App\\StringFormatter' => __DIR__ . '/../..' . '/app/StringFormatter.php',
@@ -877,6 +894,9 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Channel\\Client' => __DIR__ . '/..' . '/workerman/channel/src/Client.php',
+        'Channel\\Queue' => __DIR__ . '/..' . '/workerman/channel/src/Queue.php',
+        'Channel\\Server' => __DIR__ . '/..' . '/workerman/channel/src/Server.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Craftsys\\Msg91\\Client' => __DIR__ . '/..' . '/craftsys/msg91-php/src/Client.php',
         'Craftsys\\Msg91\\Config' => __DIR__ . '/..' . '/craftsys/msg91-php/src/Config.php',
@@ -3953,6 +3973,30 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Opis\\Closure\\SecurityProvider' => __DIR__ . '/..' . '/opis/closure/src/SecurityProvider.php',
         'Opis\\Closure\\SelfReference' => __DIR__ . '/..' . '/opis/closure/src/SelfReference.php',
         'Opis\\Closure\\SerializableClosure' => __DIR__ . '/..' . '/opis/closure/src/SerializableClosure.php',
+        'PHPSocketIO\\ChannelAdapter' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/ChannelAdapter.php',
+        'PHPSocketIO\\Client' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Client.php',
+        'PHPSocketIO\\Debug' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Debug.php',
+        'PHPSocketIO\\DefaultAdapter' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/DefaultAdapter.php',
+        'PHPSocketIO\\Engine\\Engine' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Engine.php',
+        'PHPSocketIO\\Engine\\Parser' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Parser.php',
+        'PHPSocketIO\\Engine\\Protocols\\Http\\Request' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Protocols/Http/Request.php',
+        'PHPSocketIO\\Engine\\Protocols\\Http\\Response' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Protocols/Http/Response.php',
+        'PHPSocketIO\\Engine\\Protocols\\SocketIO' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Protocols/SocketIO.php',
+        'PHPSocketIO\\Engine\\Protocols\\WebSocket' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Protocols/WebSocket.php',
+        'PHPSocketIO\\Engine\\Protocols\\WebSocket\\RFC6455' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Protocols/WebSocket/RFC6455.php',
+        'PHPSocketIO\\Engine\\Socket' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Socket.php',
+        'PHPSocketIO\\Engine\\Transport' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Transport.php',
+        'PHPSocketIO\\Engine\\Transports\\Polling' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Transports/Polling.php',
+        'PHPSocketIO\\Engine\\Transports\\PollingJsonp' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Transports/PollingJsonp.php',
+        'PHPSocketIO\\Engine\\Transports\\PollingXHR' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Transports/PollingXHR.php',
+        'PHPSocketIO\\Engine\\Transports\\WebSocket' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Engine/Transports/WebSocket.php',
+        'PHPSocketIO\\Event\\Emitter' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Event/Emitter.php',
+        'PHPSocketIO\\Nsp' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Nsp.php',
+        'PHPSocketIO\\Parser\\Decoder' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Parser/Decoder.php',
+        'PHPSocketIO\\Parser\\Encoder' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Parser/Encoder.php',
+        'PHPSocketIO\\Parser\\Parser' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Parser/Parser.php',
+        'PHPSocketIO\\Socket' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/Socket.php',
+        'PHPSocketIO\\SocketIO' => __DIR__ . '/..' . '/workerman/phpsocket.io/src/SocketIO.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\ActualValueIsNotAnObjectException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Exception/ActualValueIsNotAnObjectException.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
@@ -6133,6 +6177,38 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Workerman\\Autoloader' => __DIR__ . '/..' . '/workerman/workerman/Autoloader.php',
+        'Workerman\\Connection\\AsyncTcpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/AsyncTcpConnection.php',
+        'Workerman\\Connection\\AsyncUdpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/AsyncUdpConnection.php',
+        'Workerman\\Connection\\ConnectionInterface' => __DIR__ . '/..' . '/workerman/workerman/Connection/ConnectionInterface.php',
+        'Workerman\\Connection\\TcpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/TcpConnection.php',
+        'Workerman\\Connection\\UdpConnection' => __DIR__ . '/..' . '/workerman/workerman/Connection/UdpConnection.php',
+        'Workerman\\Events\\Ev' => __DIR__ . '/..' . '/workerman/workerman/Events/Ev.php',
+        'Workerman\\Events\\Event' => __DIR__ . '/..' . '/workerman/workerman/Events/Event.php',
+        'Workerman\\Events\\EventInterface' => __DIR__ . '/..' . '/workerman/workerman/Events/EventInterface.php',
+        'Workerman\\Events\\Libevent' => __DIR__ . '/..' . '/workerman/workerman/Events/Libevent.php',
+        'Workerman\\Events\\React\\Base' => __DIR__ . '/..' . '/workerman/workerman/Events/React/Base.php',
+        'Workerman\\Events\\React\\ExtEventLoop' => __DIR__ . '/..' . '/workerman/workerman/Events/React/ExtEventLoop.php',
+        'Workerman\\Events\\React\\ExtLibEventLoop' => __DIR__ . '/..' . '/workerman/workerman/Events/React/ExtLibEventLoop.php',
+        'Workerman\\Events\\React\\StreamSelectLoop' => __DIR__ . '/..' . '/workerman/workerman/Events/React/StreamSelectLoop.php',
+        'Workerman\\Events\\Select' => __DIR__ . '/..' . '/workerman/workerman/Events/Select.php',
+        'Workerman\\Events\\Swoole' => __DIR__ . '/..' . '/workerman/workerman/Events/Swoole.php',
+        'Workerman\\Lib\\Timer' => __DIR__ . '/..' . '/workerman/workerman/Lib/Timer.php',
+        'Workerman\\Protocols\\Frame' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Frame.php',
+        'Workerman\\Protocols\\Http' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http.php',
+        'Workerman\\Protocols\\Http\\Chunk' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/Chunk.php',
+        'Workerman\\Protocols\\Http\\Request' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/Request.php',
+        'Workerman\\Protocols\\Http\\Response' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/Response.php',
+        'Workerman\\Protocols\\Http\\ServerSentEvents' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/ServerSentEvents.php',
+        'Workerman\\Protocols\\Http\\Session' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/Session.php',
+        'Workerman\\Protocols\\Http\\Session\\FileSessionHandler' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/Session/FileSessionHandler.php',
+        'Workerman\\Protocols\\Http\\Session\\RedisSessionHandler' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Http/Session/RedisSessionHandler.php',
+        'Workerman\\Protocols\\ProtocolInterface' => __DIR__ . '/..' . '/workerman/workerman/Protocols/ProtocolInterface.php',
+        'Workerman\\Protocols\\Text' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Text.php',
+        'Workerman\\Protocols\\Websocket' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Websocket.php',
+        'Workerman\\Protocols\\Ws' => __DIR__ . '/..' . '/workerman/workerman/Protocols/Ws.php',
+        'Workerman\\Timer' => __DIR__ . '/..' . '/workerman/workerman/Timer.php',
+        'Workerman\\Worker' => __DIR__ . '/..' . '/workerman/workerman/Worker.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'Xethron\\MigrationsGenerator\\Syntax\\AddForeignKeysToTable' => __DIR__ . '/..' . '/kitloong/laravel-migrations-generator/src/Xethron/MigrationsGenerator/Syntax/AddForeignKeysToTable.php',
         'Xethron\\MigrationsGenerator\\Syntax\\AddToTable' => __DIR__ . '/..' . '/kitloong/laravel-migrations-generator/src/Xethron/MigrationsGenerator/Syntax/AddToTable.php',

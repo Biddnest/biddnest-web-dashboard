@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         NotificationChannels\OneSignal\OneSignalServiceProvider::class,
+//        App\Providers\SocketServerProvider::class
 
     ],
 

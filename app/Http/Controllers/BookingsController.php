@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEnums;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -218,14 +219,15 @@ class BookingsController extends Controller
         }
         $booking_id = $exist->id;
 
-        dispatch(function () use ($booking_id, $user_id,$complete_time, $public_booking_id) {
+        NotificationController::sendTo("user",[$user_id], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
+            "type"=>NotificationEnums::$TYPE['booking'],
+            "public_booking_id"=>$public_booking_id
+        ]);
 
-            NotificationController::sendTo("user",User::where("id", $user_id)->pluck("id"), "Your booking has been confirmed.","We are get the best price you. You will be notified by ".$complete_time->format("H:i A"),[
-                "type"=>NotificationEnums::class,
-                "public_booking_id"=>$public_booking_id
-            ]);
+        dispatch(function() use($booking_id, $user_id,$complete_time, $public_booking_id) {
 
             BidController::addvendors($booking_id);
+
         })->afterResponse();
 
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);

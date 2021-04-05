@@ -118,6 +118,7 @@ class VendorUserController extends Controller
 
     public static function getUser($organization_id, $type)
     {
+
         $org = Organization::find($organization_id);
 
         if(!$org)
@@ -144,6 +145,7 @@ class VendorUserController extends Controller
                 $user_id->where("user_role", VendorEnums::$ROLES['driver']);
                 break;
         }
+
 
         $users = $user_id->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
 

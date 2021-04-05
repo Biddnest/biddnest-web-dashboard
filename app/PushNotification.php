@@ -12,7 +12,7 @@ class PushNotification
     public static function sendToUsers($user_type = "user", $title, $desc, $players, $data, $url=null){
 
         if(count($players)<1)
-            return Helper::response(false, "No players registered yet.")
+            return Helper::response(false, "No players registered yet.");
 
         switch($user_type){
             case "user":

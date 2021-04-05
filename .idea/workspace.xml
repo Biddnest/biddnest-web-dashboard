@@ -169,6 +169,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Enums" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="copyright" />
@@ -224,9 +225,14 @@
       <workItem from="1616961300379" duration="3152000" />
       <workItem from="1616965011868" duration="10061000" />
       <workItem from="1617097384817" duration="18221000" />
+<<<<<<< HEAD
       <workItem from="1617256266953" duration="12089000" />
       <workItem from="1617391682318" duration="5377000" />
       <workItem from="1617601578617" duration="805000" />
+=======
+      <workItem from="1617256266953" duration="11687000" />
+      <workItem from="1617601610166" duration="3616000" />
+>>>>>>> bbb964a0a8e33b705851ff8aa5f86bff0bca11e6
     </task>
     <task id="LOCAL-00016" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
       <created>1616652269533</created>
@@ -606,7 +612,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/coupons/coupons.blade.php</url>
-          <line>138</line>
+          <line>139</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">

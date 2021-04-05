@@ -421,6 +421,16 @@ class BookingsController extends Controller
             case "bookmarked":
                 $bid_id->where("bookmarked", CommonEnums::$YES);
                 break;
+
+            case "participated":
+                $bid_id->where("status", BidEnums::$STATUS['bid_submitted']);
+                break;
+
+            case "past":
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=> function($booking){
+                    $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                }]);
+                break;
         }
 
 

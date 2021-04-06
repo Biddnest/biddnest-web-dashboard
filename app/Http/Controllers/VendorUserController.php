@@ -163,7 +163,7 @@ class VendorUserController extends Controller
                 $hash = password_hash($new_password, PASSWORD_BCRYPT);
                 Vendor::where("id",$vendor['id'])->update(['password'=>$hash]);
 
-                return Helper::response(false, "Password updated successfully");
+                return Helper::response(true, "Password updated successfully");
             }
             else
             {
@@ -177,14 +177,18 @@ class VendorUserController extends Controller
 
     }
 
-    public static function changePassword($vendor_id, $new_password, $confirm_password)
+    public static function changePassword($vendor_id, $current_password, $new_password, $confirm_password)
     {
+        $exist = Vendor::find($vendor_id);
+        if(!password_verify($current_password, $exist->password))
+            return Helper::response(false, "Incorrect Password entered");
+
         if($new_password == $confirm_password)
         {
             $hash = password_hash($new_password, PASSWORD_BCRYPT);
             Vendor::where("id",$vendor_id)->update(['password'=>$hash]);
 
-            return Helper::response(false, "Password updated successfully");
+            return Helper::response(true, "Password updated successfully");
         }
         else
         {

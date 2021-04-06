@@ -89,6 +89,7 @@ class VendorApiRouteController extends Controller
     public function changePassword(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'current_password' => 'required',
             'new_password' => 'required',
             'confirm_password' => 'required'
         ]);
@@ -96,7 +97,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return VendorUserController::changePassword($request->token_payload->id, $request->new_password, $request->confirm_password);
+            return VendorUserController::changePassword($request->token_payload->id, $request->current_password, $request->new_password, $request->confirm_password);
     }
     /*bid API */
 

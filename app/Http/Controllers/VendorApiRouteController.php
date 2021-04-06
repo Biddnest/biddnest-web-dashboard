@@ -13,7 +13,7 @@ class VendorApiRouteController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp']);
+        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp','phoneVerification','verifyOtp','resetPassword']);
     }
 
     public function loginForApp(Request $request)

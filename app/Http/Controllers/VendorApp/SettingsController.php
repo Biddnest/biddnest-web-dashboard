@@ -85,9 +85,8 @@ class SettingsController extends Controller
                 "review"=>[
                     "question"=>ReviewEnums::$QUESTIONS
                 ],
-
                 "payout"=>[
-                    "status"=>PayoutEnums::$QUESTIONS
+                    "status"=>PayoutEnums::$STATUS
                 ]
             ],
             "contact_us"=>[

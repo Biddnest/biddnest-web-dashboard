@@ -17,6 +17,8 @@ use App\Models\Bid;
 use App\Models\BidInventory;
 use App\Enums\BidEnums;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 
 class VendorUserController extends Controller
 {

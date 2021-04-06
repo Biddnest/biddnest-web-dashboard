@@ -27,7 +27,7 @@ class Organization extends Model
 
     public function services()
     {
-        return $this->hasMany(OrganizationService::class);
+        return $this->hasManyThrough(Service::class, OrganizationService::class, 'service_id', 'id','id', 'organization_id');
     }
 
     public function bank()

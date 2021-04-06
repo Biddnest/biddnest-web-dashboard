@@ -74,7 +74,7 @@ class VendorApiRouteController extends Controller
     public function resetPassword(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'phone' => 'required|string|min:10',
+            'phone' => 'required|min:10',
             'otp' => 'required|numeric',
             'new_password' => 'required',
             'confirm_password' => 'required'

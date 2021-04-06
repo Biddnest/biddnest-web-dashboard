@@ -50,12 +50,12 @@ class VendorApiRouteController extends Controller
     public function phoneVerification(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'phone' => 'required|string|min:10'
+            'phone' => 'required|min:10'
         ]);
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return VendorController::phoneVerification($request->phone);
+
+        return VendorUserController::phoneVerification($request->phone);
     }
 
     public function verifyOtp(Request $request)
@@ -68,7 +68,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return VendorController::verifyOtp($request->phone, $request->otp);
+            return VendorUserController::verifyOtp($request->phone, $request->otp);
     }
 
     public function resetPassword(Request $request)
@@ -83,7 +83,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return VendorController::resetPassword($request->phone, $request->otp, $request->new_password, $request->confirm_password);
+            return VendorUserController::resetPassword($request->phone, $request->otp, $request->new_password, $request->confirm_password);
     }
 
     public function changePassword(Request $request)

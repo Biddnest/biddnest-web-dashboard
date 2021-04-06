@@ -298,7 +298,7 @@ class VendorUserController extends Controller
             if (!$update)
                 return Helper::response(false, "Couldn't update data");
 
-            return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
+            return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
         }
     }
 
@@ -329,7 +329,7 @@ class VendorUserController extends Controller
             if (!$update)
                 return Helper::response(false, "Couldn't update data");
 
-            return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
+            return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
         }
     }
 
@@ -369,7 +369,7 @@ class VendorUserController extends Controller
             if (!$update && !$result_service)
                 return Helper::response(false, "Couldn't update data");
 
-            return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
+            return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
         }
     }
 
@@ -391,6 +391,6 @@ class VendorUserController extends Controller
         if (!$update)
             return Helper::response(false, "Couldn't update data");
 
-        return Helper::response(true, "updated data successfully", ["orgnization" => Vendor::findOrFail($vendor_id)]);
+        return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
     }
 }

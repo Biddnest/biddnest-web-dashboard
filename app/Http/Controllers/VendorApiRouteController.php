@@ -61,7 +61,7 @@ class VendorApiRouteController extends Controller
     public function verifyOtp(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'phone' => 'required|string|min:10',
+            'phone' => 'required|min:10',
             'otp' => 'required|numeric'
         ]);
 

@@ -1,17 +1,17 @@
 <?php
 /*
- * Copyright (c) 2021. This Project is built and maintained by Diginnovators Private Limited.
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
 namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Http\Controllers\User\UserController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Middleware\VerifyJwtToken;
 use App\StringFormatter;
-use Razorpay\Api\Api;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 /**
@@ -29,7 +29,7 @@ class ApiRouteController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public function login(Request $request)
     {
@@ -45,7 +45,7 @@ class ApiRouteController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public function verifyLoginOtp(Request $request)
     {
@@ -63,7 +63,7 @@ class ApiRouteController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public function signupUser(Request $request)
     {
@@ -92,7 +92,7 @@ class ApiRouteController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public function updateProfile(Request $request)
     {
@@ -476,6 +476,6 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng']);
+        return Helper::response(true, "Here is the distance", ["distance" => GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng'])]);
     }
 }

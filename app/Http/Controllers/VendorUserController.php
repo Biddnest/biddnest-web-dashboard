@@ -393,11 +393,11 @@ class VendorUserController extends Controller
             $avatar_file_name = $fname."-".$lname."-".$exist->id.".png";
             $updateColumns["image"] = Helper::saveFile($image->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
         }
-        else
-        {
-            $avatar_file_name = $fname."-".$lname."-".$exist->id.uniqid().".png";
-            $updateColumns["image"] = Helper::saveFile(Helper::generateAvatar(strtoupper($fname)." ".strtoupper($lname)),$avatar_file_name,"avatars");
-        }
+//        else
+//        {
+//            $avatar_file_name = $fname."-".$lname."-".$exist->id.uniqid().".png";
+//            $updateColumns["image"] = Helper::saveFile(Helper::generateAvatar(strtoupper($fname)." ".strtoupper($lname)),$avatar_file_name,"avatars");
+//        }
         $update = Vendor::where("id",$vendor_id)->update($updateColumns);
 
         if (!$update)

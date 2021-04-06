@@ -7,11 +7,12 @@ use App\Helper;
 use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\Organization;
+use App\Models\OrganizationService;
 use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Sms;
 use App\Models\Bid;
 use App\Models\BidInventory;
 use App\Enums\BidEnums;
@@ -48,43 +49,144 @@ class VendorUserController extends Controller
         Session::put('organization', $vendor_user->organization->id);
 
         return Helper::response(true, "Login was successfull");
-    }
-    else{
-        return Helper::response(false, "password is incorrect");
-    }
+        }
+        else{
+            return Helper::response(false, "password is incorrect");
+        }
 
-}
+    }
 
     public static function loginForApp($username, $password)
-{
-    // $vendor_user=Vendor::where(['username'=>$username])
-    //     ->OrWhere(['email'=>$username])
-    //     ->where([ 'status'=>1, 'deleted'=>0])
-    //     ->with("organization")
-    //     ->first();
-
-    $vendor_user=Vendor::where(['email'=>$username])
-    ->where([ 'status'=>1, 'deleted'=>0])
-    ->with("organization")
-    ->first();
-
-
-    if(!$vendor_user)
-        return Helper::response(false,"Incorrect username or password");
-
-
-    if(password_verify($password, $vendor_user->password))
     {
-        $jwt_token = Helper::generateAuthToken(["email"=>$vendor_user->email,"id"=>$vendor_user->id, "organization_id"=>$vendor_user->organization->id]);
-        return Helper::response(true, "Login was successfull",["vendor"=>$vendor_user,
-            "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
-        ]);
+        // $vendor_user=Vendor::where(['username'=>$username])
+        //     ->OrWhere(['email'=>$username])
+        //     ->where([ 'status'=>1, 'deleted'=>0])
+        //     ->with("organization")
+        //     ->first();
+
+        $vendor_user=Vendor::where(['email'=>$username])
+        ->where([ 'status'=>1, 'deleted'=>0])
+        ->with("organization")
+        ->first();
+
+
+        if(!$vendor_user)
+            return Helper::response(false,"Incorrect username or password");
+
+
+        if(password_verify($password, $vendor_user->password))
+        {
+            $jwt_token = Helper::generateAuthToken(["email"=>$vendor_user->email,"id"=>$vendor_user->id, "organization_id"=>$vendor_user->organization->id]);
+            return Helper::response(true, "Login was successfull",["vendor"=>$vendor_user,
+                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+            ]);
+        }
+        else{
+            return Helper::response(false, "Incorrect password entered.");
+        }
+
     }
-    else{
-        return Helper::response(false, "Incorrect password entered.");
+    public static function phoneVerification($phone)
+    {
+        $user = Vendor::where(['phone'=>$phone])
+            ->where([ 'deleted'=>0])
+            ->first();
+
+        $otp = Helper::generateOTP(6);
+        $newvendor =Vendor::where(['phone'=>$phone])
+            ->update([
+                'verf_code'=>$otp
+            ]);
+
+        dispatch(function() use($phone, $otp){
+            Sms::sendOtp($phone, $otp);
+        })->afterResponse();
+        $data['otp'] = $otp;
+
+        return Helper::response(true, "Otp has been sent to the phone.", $data);
     }
 
-}
+    public static function verifyOtp($phone, $otp)
+    {
+        $vendor = Vendor::where("phone",$phone)->where(['deleted'=>0])->first();
+        if(!$vendor)
+            return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
+
+        if($vendor->verf_code == null){
+            return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
+        }
+        else if($vendor->verf_code == $otp) {
+            Vendor::where("phone",$phone)->update(["otp_verified"=>1]);
+
+            $jwt_token = Helper::generateAuthToken(["phone"=>$vendor->phone,"id"=>$vendor->id]);
+
+            $data = null;
+            if($vendor->fname){
+                $data = $vendor;
+            }
+
+            return Helper::response(true, "Otp has been verified",[
+                "user"=>$data,
+                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+            ]);
+
+        }else {
+            return Helper::response(false, "Incorrect otp provided");
+        }
+    }
+
+    public static function resetPassword($phone, $otp, $new_password, $confirm_password)
+    {
+        $vendor = Vendor::where("phone",$phone)->where(['deleted'=>0])->first();
+        if(!$vendor)
+            return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
+
+        if($vendor->verf_code == null){
+            return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
+        }
+        else if($vendor->verf_code == $otp) {
+            Vendor::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
+
+            $jwt_token = Helper::generateAuthToken(["phone"=>$vendor->phone,"id"=>$vendor->id]);
+
+            $data = null;
+            if($vendor->fname){
+                $data = $vendor;
+            }
+
+            if($new_password == $confirm_password)
+            {
+                $hash = password_hash($new_password, PASSWORD_BCRYPT);
+                Vendor::where("id",$vendor['id'])->update(['password'=>$hash]);
+
+                return Helper::response(false, "Password updated successfully");
+            }
+            else
+            {
+                return Helper::response(false, "Password not match with Confirm password");
+            }
+        }
+        else {
+            return Helper::response(false, "Incorrect otp provided");
+        }
+
+
+    }
+
+    public static function changePassword($vendor_id, $new_password, $confirm_password)
+    {
+        if($new_password == $confirm_password)
+        {
+            $hash = password_hash($new_password, PASSWORD_BCRYPT);
+            Vendor::where("id",$vendor_id)->update(['password'=>$hash]);
+
+            return Helper::response(false, "Password updated successfully");
+        }
+        else
+        {
+            return Helper::response(false, "Password not match with Confirm password");
+        }
+    }
 
     public function logout(){}
 
@@ -229,5 +331,66 @@ class VendorUserController extends Controller
 
             return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
         }
+    }
+
+    public static function updateDetails($vendor_id, $orgnization_id, $services, $commission, $status, $service_type, $vendor_status)
+    {
+        $vendor_role = Vendor::where('id', $vendor_id)->pluck('user_role')[0];
+
+        if($vendor_role == VendorEnums::$ROLES['admin'])
+        {
+            $exist = Organization::where('id', $orgnization_id)->first();
+
+            if (!$exist)
+                return Helper::response(false, "organization is not Exist");
+
+            $update = Organization::where('id', $orgnization_id)
+                ->update([
+                    'commission'=> $commission,
+                    'status'=> $status,
+                    'service_type'=> $service_type,
+                    'verification_status'=>$vendor_status
+                ]);
+
+            $exist_services = OrganizationService::where('organization_id', $orgnization_id)->get();
+            foreach ($exist_services as $service)
+            {
+                OrganizationService::where('id', $service['id'])->delete();
+            }
+
+            foreach($services as $value)
+            {
+                $service=new OrganizationService;
+                $service->organization_id=$orgnization_id;
+                $service->service_id=$value;
+                $result_service= $service->save();
+            }
+
+            if (!$update && !$result_service)
+                return Helper::response(false, "Couldn't update data");
+
+            return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
+        }
+    }
+
+    public static function updateProfile($vendor_id, $fname, $lname, $email, $phone)
+    {
+        $exist = Vendor::where('id', $vendor_id)->first();
+
+        if (!$exist)
+            return Helper::response(false, "Vendor is not Exist");
+
+        $update = Vendor::where('id', $vendor_id)
+            ->update([
+                'fname'=> $fname,
+                'lname'=> $lname,
+                'email'=> $email,
+                'phone'=>$phone
+            ]);
+
+        if (!$update)
+            return Helper::response(false, "Couldn't update data");
+
+        return Helper::response(true, "updated data successfully", ["orgnization" => Vendor::findOrFail($vendor_id)]);
     }
 }

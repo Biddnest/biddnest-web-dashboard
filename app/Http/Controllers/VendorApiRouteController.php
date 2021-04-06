@@ -13,7 +13,7 @@ class VendorApiRouteController extends Controller
 {
 
     public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp']);
+        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp','phoneVerification','verifyOtp','resetPassword']);
     }
 
     public function loginForApp(Request $request)
@@ -47,6 +47,57 @@ class VendorApiRouteController extends Controller
         return VendorUserController::checkPin($request->token_payload->id);
     }
 
+    public function phoneVerification(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|min:10'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VendorUserController::phoneVerification($request->phone);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|min:10',
+            'otp' => 'required|numeric'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::verifyOtp($request->phone, $request->otp);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|min:10',
+            'otp' => 'required|numeric',
+            'new_password' => 'required',
+            'confirm_password' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::resetPassword($request->phone, $request->otp, $request->new_password, $request->confirm_password);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'new_password' => 'required',
+            'confirm_password' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::changePassword($request->token_payload->id, $request->new_password, $request->confirm_password);
+    }
     /*bid API */
 
     public function getBookingsforApp(Request $request)
@@ -267,7 +318,7 @@ class VendorApiRouteController extends Controller
     public function updateDetails(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'services' => 'required|integer',
+            'services.*' => 'required|integer',
             'commission' => 'required',
             'status' => 'required|integer',
             'service_type' => 'required|string',
@@ -278,6 +329,23 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
 
-        return VendorUserController::updateLocation($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->landmark, $request->city, $request->state, $request->pincode);
+        return VendorUserController::updateDetails($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->status, $request->service_type, $request->vendor_status);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required',
+            'phone' => 'required|min:10|max:10'
+        ]);
+
+        //        print_r($request->token_data_id);exit;
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+
+        return VendorUserController::updateProfile($request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
+    }
+
 }

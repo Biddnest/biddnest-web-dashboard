@@ -267,7 +267,7 @@ class VendorApiRouteController extends Controller
     public function updateDetails(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'services' => 'required|integer',
+            'services.*' => 'required|integer',
             'commission' => 'required',
             'status' => 'required|integer',
             'service_type' => 'required|string',
@@ -278,6 +278,6 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
 
-        return VendorUserController::updateLocation($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->landmark, $request->city, $request->state, $request->pincode);
+        return VendorUserController::updateDetails($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->status, $request->service_type, $request->vendor_status);
     }
 }

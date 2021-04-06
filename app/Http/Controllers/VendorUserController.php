@@ -7,6 +7,7 @@ use App\Helper;
 use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\Organization;
+use App\Models\OrganizationService;
 use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
@@ -228,6 +229,46 @@ class VendorUserController extends Controller
                 return Helper::response(false, "Couldn't update data");
 
             return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
+        }
+    }
+
+    public static function updateDetails($vendor_id, $orgnization_id, $services, $commission, $status, $service_type, $vendor_status)
+    {
+        $vendor_role = Vendor::where('id', $vendor_id)->pluck('user_role')[0];
+
+        if($vendor_role == VendorEnums::$ROLES['admin'])
+        {
+            $exist = Organization::where('id', $orgnization_id)->first();
+
+            if (!$exist)
+                return Helper::response(false, "organization is not Exist");
+
+            $update = Organization::where('id', $orgnization_id)
+                ->update([
+                    'commission'=> $commission,
+                    'status'=> $status,
+                    'service_type'=> $service_type,
+                    'verification_status'=>$vendor_status
+                ]);
+
+            $exist_services = OrganizationService::where('organization_id', $orgnization_id)->get();
+            foreach ($exist_services as $service)
+            {
+                OrganizationService::where('id', $service['id'])->delete();
+            }
+
+            foreach ($services as $services)
+            {
+               $add = new OrganizationService();
+               $add->organization_id = $orgnization_id;
+               $add->service_id = $services;
+               $result = $add->save();
+            }
+
+            if (!$update && !$result)
+                return Helper::response(false, "Couldn't update data");
+
+            return Helper::response(true, "updated data successfully", ["orgnization" => Organization::where('id', $orgnization_id)->with(services)->first()]);
         }
     }
 }

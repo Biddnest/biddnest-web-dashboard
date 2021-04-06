@@ -17,6 +17,8 @@ use App\Models\Bid;
 use App\Models\BidInventory;
 use App\Enums\BidEnums;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 
 class VendorUserController extends Controller
 {
@@ -66,8 +68,10 @@ class VendorUserController extends Controller
 
         $vendor_user=Vendor::where(['email'=>$username])
         ->where([ 'status'=>1, 'deleted'=>0])
-        ->with("organization")
-        ->first();
+        ->with(["organization" => function ($query){
+              $query->with('services');
+        }])
+            ->first();
 
 
         if(!$vendor_user)
@@ -159,7 +163,7 @@ class VendorUserController extends Controller
                 $hash = password_hash($new_password, PASSWORD_BCRYPT);
                 Vendor::where("id",$vendor['id'])->update(['password'=>$hash]);
 
-                return Helper::response(false, "Password updated successfully");
+                return Helper::response(true, "Password updated successfully");
             }
             else
             {
@@ -173,14 +177,18 @@ class VendorUserController extends Controller
 
     }
 
-    public static function changePassword($vendor_id, $new_password, $confirm_password)
+    public static function changePassword($vendor_id, $current_password, $new_password, $confirm_password)
     {
+        $exist = Vendor::find($vendor_id);
+        if(!password_verify($current_password, $exist->password))
+            return Helper::response(false, "Incorrect Password entered");
+
         if($new_password == $confirm_password)
         {
             $hash = password_hash($new_password, PASSWORD_BCRYPT);
             Vendor::where("id",$vendor_id)->update(['password'=>$hash]);
 
-            return Helper::response(false, "Password updated successfully");
+            return Helper::response(true, "Password updated successfully");
         }
         else
         {
@@ -373,20 +381,31 @@ class VendorUserController extends Controller
         }
     }
 
-    public static function updateProfile($vendor_id, $fname, $lname, $email, $phone)
+    public static function updateProfile($image, $vendor_id, $fname, $lname, $email, $phone)
     {
         $exist = Vendor::where('id', $vendor_id)->first();
 
         if (!$exist)
             return Helper::response(false, "Vendor is not Exist");
+        $updateColumns = [
+            'fname'=> ucwords(strtolower($fname)),
+            'lname'=> ucwords(strtolower($lname)),
+            'email'=> strtolower($email),
+            'phone'=>$phone
+        ];
 
-        $update = Vendor::where('id', $vendor_id)
-            ->update([
-                'fname'=> $fname,
-                'lname'=> $lname,
-                'email'=> $email,
-                'phone'=>$phone
-            ]);
+        if($image){
+            $image = new ImageManager(array('driver' => 'imagick'));
+            $image->configure(array('driver' => 'gd'));
+            $avatar_file_name = $fname."-".$lname."-".$exist->id.".png";
+            $updateColumns["image"] = Helper::saveFile($image->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
+        }
+//        else
+//        {
+//            $avatar_file_name = $fname."-".$lname."-".$exist->id.uniqid().".png";
+//            $updateColumns["image"] = Helper::saveFile(Helper::generateAvatar(strtoupper($fname)." ".strtoupper($lname)),$avatar_file_name,"avatars");
+//        }
+        $update = Vendor::where("id",$vendor_id)->update($updateColumns);
 
         if (!$update)
             return Helper::response(false, "Couldn't update data");

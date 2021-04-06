@@ -89,6 +89,7 @@ class VendorApiRouteController extends Controller
     public function changePassword(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'current_password' => 'required',
             'new_password' => 'required',
             'confirm_password' => 'required'
         ]);
@@ -96,7 +97,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return VendorUserController::changePassword($request->token_payload->id, $request->new_password, $request->confirm_password);
+            return VendorUserController::changePassword($request->token_payload->id, $request->current_password, $request->new_password, $request->confirm_password);
     }
     /*bid API */
 
@@ -318,23 +319,22 @@ class VendorApiRouteController extends Controller
     public function updateDetails(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'services.*' => 'required|integer',
             'commission' => 'required',
             'status' => 'required|integer',
-            'service_type' => 'required|string',
-            'vendor_status' => 'required|integer'
+            'service_type' => 'required|string'
         ]);
 
         //        print_r($request->token_data_id);exit;
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
 
-        return VendorUserController::updateDetails($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->status, $request->service_type, $request->vendor_status);
+        return VendorUserController::updateDetails($request->token_payload->id, $request->token_payload->organization_id, $request->commission, $request->status, $request->service_type, $request->vendor_status);
     }
 
     public function updateProfile(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'image' => 'nullable|string',
             'fname' => 'required|string',
             'lname' => 'required|string',
             'email' => 'required',
@@ -345,7 +345,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
 
-        return VendorUserController::updateProfile($request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
+        return VendorUserController::updateProfile($request->image, $request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
     }
 
 }

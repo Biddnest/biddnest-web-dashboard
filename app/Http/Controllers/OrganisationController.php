@@ -62,11 +62,13 @@ class OrganisationController extends Controller
             $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
 
             $vendor = new Vendor;
-            $vendor->fname = $admin['fname'];
-            $vendor->lname = $admin['lname'];
-            $vendor->email = $admin['email'];
+            $vendor->fname = ucwords(strtolower($admin['fname']));
+            $vendor->lname = ucwords(strtolower($admin['lname']));
+            $vendor->email = strtolower($admin['email']);
             $vendor->phone = $admin['phone'];
             $vendor->pin = null;
+            $avatar_file_name = $admin['fname']."-".$admin['lname']."-".uniqid().".png";
+            $vendor->image = Helper::saveFile(Helper::generateAvatar(strtoupper($admin['fname'])." ".strtoupper($admin['lname'])),$avatar_file_name,"avatars");
             $vendor->organization_id = $organizations->id;
             $vendor->meta = json_encode($admin_meta);
             $vendor->user_role = VendorEnums::$ROLES["admin"];

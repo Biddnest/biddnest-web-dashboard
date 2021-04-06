@@ -13,6 +13,7 @@ use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\VendorEnums;
+use App\Enums\PayoutEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Settings;
@@ -83,6 +84,10 @@ class SettingsController extends Controller
                 ],
                 "review"=>[
                     "question"=>ReviewEnums::$QUESTIONS
+                ],
+
+                "payout"=>[
+                    "status"=>PayoutEnums::$QUESTIONS
                 ]
             ],
             "contact_us"=>[

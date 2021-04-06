@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
-    protected $hidden = ['commission','remarks','created_at','updated_at','deleted'];
+    protected $hidden = ['created_at','updated_at','deleted'];
 
     use HasFactory;
 

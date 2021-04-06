@@ -19,9 +19,8 @@ class CreatePayoutTable extends Migration
             $table->unsignedBigInteger("organization_id")->index("organization_id");
             $table->foreign("organization_id")->references('id')->on("organizations");
             $table->decimal("amount", 10,2);
-            $table->decimal("sub_total", 10, 2);
             $table->decimal("commission", 10,2);
-            $table->integer("commission_per");
+            $table->integer("commission_percentage");
             $table->decimal("final_payout", 10,2);
             $table->timestamp("dispatch_at");
             $table->string("rzp_payout_id");
@@ -32,9 +31,9 @@ class CreatePayoutTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('vendors', function (Blueprint $table) {
-            $table->string('image')->after('organization_id');
-        });
+//        Schema::table('vendors', function (Blueprint $table) {
+//            $table->string('image')->after('organization_id');
+//        });
     }
 
     /**

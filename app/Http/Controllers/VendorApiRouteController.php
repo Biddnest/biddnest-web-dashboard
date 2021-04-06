@@ -47,6 +47,57 @@ class VendorApiRouteController extends Controller
         return VendorUserController::checkPin($request->token_payload->id);
     }
 
+    public function phoneVerification(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|string|min:10'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorController::phoneVerification($request->phone);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|string|min:10',
+            'otp' => 'required|numeric'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorController::verifyOtp($request->phone, $request->otp);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|string|min:10',
+            'otp' => 'required|numeric',
+            'new_password' => 'required',
+            'confirm_password' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorController::resetPassword($request->phone, $request->otp, $request->new_password, $request->confirm_password);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'new_password' => 'required',
+            'confirm_password' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::changePassword($request->token_payload->id, $request->new_password, $request->confirm_password);
+    }
     /*bid API */
 
     public function getBookingsforApp(Request $request)

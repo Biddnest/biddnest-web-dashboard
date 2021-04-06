@@ -87,6 +87,21 @@ class VendorUserController extends Controller
 
 }
 
+    public static function changePassword($vendor_id, $new_password, $confirm_password)
+    {
+        if($new_password == $confirm_password)
+        {
+            $hash = password_hash($new_password, PASSWORD_BCRYPT);
+            Vendor::where("id",$vendor_id)->update(['password'=>$hash]);
+
+            return Helper::response(false, "Password updated successfully");
+        }
+        else
+        {
+            return Helper::response(false, "Password not match with Confirm password");
+        }
+    }
+
     public function logout(){}
 
     public static function resetPin($pin, $password, $id)

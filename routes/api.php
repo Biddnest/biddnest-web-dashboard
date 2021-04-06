@@ -128,11 +128,11 @@ Route::prefix('vendors/v1')->group(function () {
     Route::get("/faq/categories",[VendorApiRouter::class, 'faqCategories']);
     Route::get("/faq/categories/{category}",[VendorApiRouter::class, 'faqByCategory']);
 
-    Route::post("/organization/update",[VendorApiRouter::class, 'updateOrganization']);
-    Route::post("/location/update",[VendorApiRouter::class, 'updateLocation']);
-    Route::post("/details/update",[VendorApiRouter::class, 'updateDetails']);
+    Route::put("/organization/update",[VendorApiRouter::class, 'updateOrganization']);
+    Route::put("/location/update",[VendorApiRouter::class, 'updateLocation']);
+    Route::put("/details/update",[VendorApiRouter::class, 'updateDetails']);
 
-    Route::post("/profile/update",[VendorApiRouter::class, 'updateProfile']);
+    Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

@@ -154,15 +154,12 @@ class VendorUserController extends Controller
                 $data = $vendor;
             }
 
-            return Helper::response(true, "Otp has been verified",[
-                "user"=>$data,
-                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
-            ]);
-
             if($new_password == $confirm_password)
             {
                 $hash = password_hash($new_password, PASSWORD_BCRYPT);
                 Vendor::where("id",$vendor['id'])->update(['password'=>$hash]);
+
+                return Helper::response(false, "Password updated successfully");
             }
             else
             {

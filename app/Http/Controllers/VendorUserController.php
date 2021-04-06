@@ -68,8 +68,10 @@ class VendorUserController extends Controller
 
         $vendor_user=Vendor::where(['email'=>$username])
         ->where([ 'status'=>1, 'deleted'=>0])
-        ->with("organization")
-        ->first();
+        ->with(["organization" => function () use ($public_booking_id) {
+               with('services');
+        }])
+            ->first();
 
 
         if(!$vendor_user)
@@ -387,6 +389,7 @@ class VendorUserController extends Controller
             'email'=> strtolower($email),
             'phone'=>$phone
         ];
+
         if($image){
             $image = new ImageManager(array('driver' => 'imagick'));
             $image->configure(array('driver' => 'gd'));

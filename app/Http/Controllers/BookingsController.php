@@ -1,38 +1,35 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
+
 namespace App\Http\Controllers;
 
-use App\Enums\NotificationEnums;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use App\Models\Booking;
-use App\Models\MovementDates;
-use App\Models\BookingInventory;
-use App\Models\Inventory;
-use App\Models\Service;
-use App\Models\User;
-use App\Models\BookingStatus;
-use App\Models\Settings;
-use App\Models\Bid;
-use App\Models\Organization;
-use App\Models\Vehicle;
-use App\Models\Vendor;
-use App\Models\Payment;
-use App\Models\BookingDriver;
-use App\Helper;
-use App\Sms;
-use App\Http\Middleware\VerifyJwtToken;
-use App\StringFormatter;
-use Intervention\Image\ImageManager;
-use App\Enums\CommonEnums;
-use App\Enums\BookingEnums;
 use App\Enums\BidEnums;
+use App\Enums\BookingEnums;
+use App\Enums\CommonEnums;
+use App\Enums\NotificationEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
-use Carbon\CarbonImmutable;
+use App\Helper;
+use App\Models\Bid;
+use App\Models\Booking;
+use App\Models\BookingDriver;
+use App\Models\BookingInventory;
+use App\Models\BookingStatus;
+use App\Models\Inventory;
+use App\Models\MovementDates;
+use App\Models\Payment;
+use App\Models\Service;
+use App\Models\Settings;
+use App\Models\User;
+use App\Models\Vehicle;
+use App\Models\Vendor;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManager;
 
 class BookingsController extends Controller
 {
@@ -265,6 +262,15 @@ class BookingsController extends Controller
             return Helper::response(false, "Couldn't save data");
         }
 
+        dispatch(function () use ($exist) {
+
+            NotificationController::sendTo("user", [$exist->user_id], "Your booking has been cancelled.", "You may place another request anytime.", [
+                "type" => NotificationEnums::$TYPE['general'],
+                "public_booking_id" => $exist->public_booking_id
+            ]);
+
+        })->afterResponse();
+
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
@@ -345,6 +351,15 @@ class BookingsController extends Controller
             $movementdates->date = $value;
             $result_date = $movementdates->save();
         }
+
+        dispatch(function () use ($exist) {
+
+            NotificationController::sendTo("user", [$exist->user_id], "Your booking has been rescheduled.", "If you haven't requested this, contact our support.", [
+                "type" => NotificationEnums::$TYPE['general'],
+                "public_booking_id" => $exist->public_booking_id
+            ]);
+
+        })->afterResponse();
 
         return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
@@ -539,6 +554,15 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['awaiting_pickup']);
 
+        dispatch(function () use ($assign_driver) {
+
+            NotificationController::sendTo("user", [$assign_driver->user_id], "Driver has been assigned for your movement.", "Tap to view details.", [
+                "type" => NotificationEnums::$TYPE['booking'],
+                "public_booking_id" => $assign_driver->public_booking_id
+            ]);
+
+        })->afterResponse();
+
         if (!$result_driver && !$assign_driver_status)
             return Helper::response(false, "couldn't sanve");
 
@@ -587,6 +611,15 @@ class BookingsController extends Controller
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
 
+            dispatch(function () use ($booking) {
+
+                NotificationController::sendTo("user", [$booking->user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
+                    "type" => NotificationEnums::$TYPE['booking'],
+                    "public_booking_id" => $booking->public_booking_id
+                ]);
+
+            })->afterResponse();
+
             return Helper::response(true, "Your trip Has been started.");
         } else {
             return Helper::response(false, "You have entered a wrong pin");
@@ -618,6 +651,14 @@ class BookingsController extends Controller
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['completed']);
 
+            dispatch(function () use ($booking) {
+
+                NotificationController::sendTo("user", [$booking->user_id], "Your booking has been completed.", "Thankyou for choosing Biddnest.", [
+                    "type" => NotificationEnums::$TYPE['booking'],
+                    "public_booking_id" => $booking->public_booking_id
+                ]);
+
+            })->afterResponse();
             return Helper::response(true, "Your order has been completed.");
         } else {
             return Helper::response(false, "You have entered a wrong pin");

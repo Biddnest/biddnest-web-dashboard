@@ -1,43 +1,44 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Coupon;
-use App\Razorpay;
-use Illuminate\Http\Request;
-use Razorpay\Api\Api;
-use App\Models\Booking;
-use App\Models\Payment;
-use App\Models\BookingStatus;
-use App\Helper;
 use App\Enums\BookingEnums;
-use App\Enums\PaymentEnums;
 use App\Enums\CommonEnums;
+use App\Enums\NotificationEnums;
+use App\Enums\PaymentEnums;
+use App\Helper;
+use App\Models\Booking;
+use App\Models\BookingStatus;
+use App\Models\Coupon;
+use App\Models\Payment;
 use App\Models\Settings;
-use Ramsey\Uuid\Uuid;
-use \GuzzleHttp\Client;
-use App\Http\Controllers\BookingsController;
+use App\Razorpay;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
 
     public static function intiatePayment($public_booking_id, $coupon_code = null)
     {
-        $booking_exist = Booking::where(["public_booking_id"=>$public_booking_id, "status"=>BookingEnums::$STATUS['payment_pending']])->with('payment')->first();
+        $booking_exist = Booking::where(["public_booking_id" => $public_booking_id, "status" => BookingEnums::$STATUS['payment_pending']])->with('payment')->first();
 
-        if(!$booking_exist)
-            return Helper::response(false,"Order is not Exist Or not in Payment State");
+        if (!$booking_exist)
+            return Helper::response(false, "Order is not Exist Or not in Payment State");
 
-        if(!$booking_exist->payment)
+        if (!$booking_exist->payment)
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $discount_value = 0.00;
-        if($coupon_code && trim($coupon_code) != "") {
+        if ($coupon_code && trim($coupon_code) != "") {
             $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
-            if (!is_array($coupon_valid))
-            { $discount_value = 0.00; return Helper::response(false, $coupon_valid); }
-            else{
+            if (!is_array($coupon_valid)) {
+                $discount_value = 0.00;
+                return Helper::response(false, $coupon_valid);
+            } else {
                 $discount_value = $coupon_valid['coupon']['discount'];
             }
         }
@@ -128,7 +129,15 @@ class PaymentController extends Controller
                         ]);
 
 
+            dispatch(function () use ($order_id_exist) {
 
+                $booking = Booking::find($order_id_exist->booking_id);
+                NotificationController::sendTo("user", [$booking->user_id], "We have received your payment for booking id " . $booking->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
+                    "type" => NotificationEnums::$TYPE['booking'],
+                    "public_booking_id" => $booking->public_booking_id
+                ]);
+
+            })->afterResponse();
             return Helper::response(true, "Payment successfull");
         }
         else
@@ -149,7 +158,7 @@ class PaymentController extends Controller
 
         if(!$booking_exist)
             return Helper::response(false, "Booking is not exist");
-        
+
         $api = new Razorpay(Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]);
 
         $payment_data = $api->fetch($payment_id);

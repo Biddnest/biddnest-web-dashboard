@@ -257,15 +257,23 @@ class VendorUserController extends Controller
                 OrganizationService::where('id', $service['id'])->delete();
             }
 
-            foreach ($services as $services)
+//            foreach ($services as $services)
+//            {
+//               $add = new OrganizationService();
+//               $add->organization_id = $orgnization_id;
+//               $add->service_id = $services;
+//               $result = $add->save();
+//            }
+
+            foreach($services as $value)
             {
-               $add = new OrganizationService();
-               $add->organization_id = $orgnization_id;
-               $add->service_id = $services;
-               $result = $add->save();
+                $service=new OrganizationService;
+                $service->organization_id=$orgnization_id;
+                $service->service_id=$value;
+                $result_service= $service->save();
             }
 
-            if (!$update && !$result)
+            if (!$update && !$result_service)
                 return Helper::response(false, "Couldn't update data");
 
             return Helper::response(true, "updated data successfully", ["orgnization" => Organization::where('id', $orgnization_id)->with(services)->first()]);

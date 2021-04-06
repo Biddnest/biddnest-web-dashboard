@@ -267,7 +267,7 @@ class VendorApiRouteController extends Controller
     public function updateDetails(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'services' => 'required',
+            'services.*' => 'required|integer',
             'commission' => 'required',
             'status' => 'required|integer',
             'service_type' => 'required|string',

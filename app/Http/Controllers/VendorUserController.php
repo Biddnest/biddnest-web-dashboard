@@ -382,9 +382,9 @@ class VendorUserController extends Controller
         if (!$exist)
             return Helper::response(false, "Vendor is not Exist");
         $updateColumns = [
-            'fname'=> $fname,
-            'lname'=> $lname,
-            'email'=> $email,
+            'fname'=> ucwords(strtolower($fname)),
+            'lname'=> ucwords(strtolower($lname)),
+            'email'=> strtolower($email),
             'phone'=>$phone
         ];
         if($image){
@@ -396,7 +396,7 @@ class VendorUserController extends Controller
         else
         {
             $avatar_file_name = $fname."-".$lname."-".$exist->id.uniqid().".png";
-            $updateColumns["image"] = Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars");
+            $updateColumns["image"] = Helper::saveFile(Helper::generateAvatar(strtoupper($fname)." ".strtoupper($lname)),$avatar_file_name,"avatars");
         }
         $update = Vendor::where("id",$vendor_id)->update($updateColumns);
 

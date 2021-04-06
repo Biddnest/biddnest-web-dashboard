@@ -271,4 +271,25 @@ class VendorUserController extends Controller
             return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
         }
     }
+
+    public static function updateProfile($vendor_id, $fname, $lname, $email, $phone)
+    {
+        $exist = Vendor::where('id', $vendor_id)->first();
+
+        if (!$exist)
+            return Helper::response(false, "Vendor is not Exist");
+
+        $update = Vendor::where('id', $vendor_id)
+            ->update([
+                'fname'=> $fname,
+                'lname'=> $lname,
+                'email'=> $email,
+                'phone'=>$phone
+            ]);
+
+        if (!$update)
+            return Helper::response(false, "Couldn't update data");
+
+        return Helper::response(true, "updated data successfully", ["orgnization" => Vendor::findOrFail($vendor_id)]);
+    }
 }

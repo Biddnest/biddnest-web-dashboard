@@ -280,4 +280,21 @@ class VendorApiRouteController extends Controller
 
         return VendorUserController::updateDetails($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->status, $request->service_type, $request->vendor_status);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required',
+            'phone' => 'required|min:10|max:10'
+        ]);
+
+        //        print_r($request->token_data_id);exit;
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+
+        return VendorUserController::updateProfile($request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
+    }
+
 }

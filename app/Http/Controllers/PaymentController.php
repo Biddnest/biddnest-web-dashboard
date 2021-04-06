@@ -115,11 +115,6 @@ class PaymentController extends Controller
             $status=BookingStatus::where(['booking_id'=>$order_id_exist->booking_id, 'status'=>BookingEnums::$STATUS['driver_assigned']])->first();
             if(!$status)
             {
-                // $bookingstatus = new BookingStatus;
-                // $bookingstatus->booking_id = $order_id_exist->booking_id;
-                // $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
-                // $result_status = $bookingstatus->save();
-
                 $result_status = BookingsController::statusChange($order_id_exist->booking_id, BookingEnums::$STATUS['awaiting_pickup']);
             }
 

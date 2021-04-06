@@ -1,11 +1,13 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
 namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Models\OneSignalPlayer;
 use App\PushNotification;
-use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
@@ -19,6 +21,9 @@ class NotificationController extends Controller
         $player = OneSignalPlayer::where("user_id", $user_id)->where("player_id", $player_id)->first();
 
         if (!$player) {
+
+            OneSignalPlayer::where('player_id', $player_id)->where("vendor_id", null)->delete();
+
             $player = new OneSignalPlayer;
             $player->user_id = $user_id;
             $player->vendor_id = null;
@@ -36,7 +41,9 @@ class NotificationController extends Controller
 
     public static function saveVendorPlayer($player_id, $vendor_id)
     {
-        $player = OneSignalPlayer::where("user_id", $vendor_id)->where("player_id", $player_id)->first();
+        $player = OneSignalPlayer::where("vendor_id", $vendor_id)->where("player_id", $player_id)->first();
+
+        OneSignalPlayer::where('player_id', $player_id)->where("user_id", null)->delete();
 
         if (!$player) {
             $player = new OneSignalPlayer;

@@ -31,9 +31,9 @@ class CreatePayoutTable extends Migration
             $table->timestamps();
         });
 
-//        Schema::table('vendors', function (Blueprint $table) {
-//            $table->string('image')->after('organization_id');
-//        });
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->string('image')->after('organization_id');
+        });
     }
 
     /**

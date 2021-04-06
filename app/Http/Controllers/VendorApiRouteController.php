@@ -335,6 +335,7 @@ class VendorApiRouteController extends Controller
     public function updateProfile(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'image' => 'required|string',
             'fname' => 'required|string',
             'lname' => 'required|string',
             'email' => 'required',
@@ -345,7 +346,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
 
-        return VendorUserController::updateProfile($request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
+        return VendorUserController::updateProfile($request->image, $request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
     }
 
 }

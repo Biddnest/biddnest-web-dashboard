@@ -68,8 +68,8 @@ class VendorUserController extends Controller
 
         $vendor_user=Vendor::where(['email'=>$username])
         ->where([ 'status'=>1, 'deleted'=>0])
-        ->with(["organization" => function () use ($public_booking_id) {
-               with('services');
+        ->with(["organization" => function ($query){
+              $query->with('services');
         }])
             ->first();
 

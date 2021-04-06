@@ -335,7 +335,7 @@ class VendorApiRouteController extends Controller
     public function updateProfile(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'image' => 'required|string',
+            'image' => 'nullable|string',
             'fname' => 'required|string',
             'lname' => 'required|string',
             'email' => 'required',

@@ -15,6 +15,7 @@ use App\Enums\BookingEnums;
 use App\Enums\BidEnums;
 use App\Enums\FaqEnums;
 use App\Enums\ReviewEnums;
+use App\Enums\PayoutEnums;
 use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
@@ -85,6 +86,9 @@ class SettingsController extends Controller
                 ],
                 "review"=>[
                     "question"=>ReviewEnums::$QUESTIONS
+                ],
+                "payout"=>[
+                    "status"=>PayoutEnums::$QUESTIONS
                 ],
                 "notification"=>NotificationEnums::$TYPE
             ],

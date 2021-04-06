@@ -199,4 +199,35 @@ class VendorUserController extends Controller
             return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
         }
     }
+
+    public static function updateLocation($vendor_id, $orgnization_id, $address_line1, $address_line2, $landmark, $city, $state, $pincode)
+    {
+        $vendor_role = Vendor::where('id', $vendor_id)->pluck('user_role')[0];
+
+        if($vendor_role == VendorEnums::$ROLES['admin'])
+        {
+            $exist = Organization::where('id', $orgnization_id)->first();
+
+            if (!$exist)
+                return Helper::response(false, "organization is not Exist");
+
+            $meta = json_decode($exist['meta'], true);
+            $meta['address_line_1'] = $address_line1;
+            $meta['address_line_2'] = $address_line2;
+            $meta['landmark'] = $landmark;
+
+            $update = Organization::where('id', $orgnization_id)
+                ->update([
+                    'city'=> $city,
+                    'state'=> $state,
+                    'pincode'=> $pincode,
+                    'meta'=>json_encode($meta)
+                ]);
+
+            if (!$update)
+                return Helper::response(false, "Couldn't update data");
+
+            return Helper::response(true, "updated data successfully", ["orgnization" => Organization::findOrFail($orgnization_id)]);
+        }
+    }
 }

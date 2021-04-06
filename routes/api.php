@@ -38,6 +38,8 @@ Route::prefix('v1')->group(function () {
         Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);
 
+        Route::post('/distance',[ApiRouter::class,'getDistance']);
+
         // Route::post('/reschedule',[ApiRouter::class,'reschedul']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
@@ -102,8 +104,6 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);
 
-        Route::post('/distance',[VendorApiRouter::class,'getDistance']);
-
         Route::get('/bid/position',[VendorApiRouter::class,'getposition']);
 
         Route::post('/trip/start',[VendorApiRouter::class,'startTrip']);
@@ -129,6 +129,8 @@ Route::prefix('vendors/v1')->group(function () {
     Route::get("/faq/categories/{category}",[VendorApiRouter::class, 'faqByCategory']);
 
     Route::post("/organization/update",[VendorApiRouter::class, 'updateOrganization']);
+    Route::post("/location/update",[VendorApiRouter::class, 'updateLocation']);
+    Route::post("/details/update",[VendorApiRouter::class, 'updateDetails']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

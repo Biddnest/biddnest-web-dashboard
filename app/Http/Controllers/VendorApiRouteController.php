@@ -178,20 +178,6 @@ class VendorApiRouteController extends Controller
         return ReportController::getReport($request->token_payload->organization_id);
     }
 
-    public function getDistance(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'source.lat' => 'required',
-            'source.lng' => 'required',
-            'destination.lat' => 'required',
-            'destination.lng' => 'required'
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng']);
-    }
-
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -258,6 +244,40 @@ class VendorApiRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
 
         return VendorUserController::updateOrganization($request->token_payload->id, $request->token_payload->organization_id, $request->organization_name, $request->organization_desc, $request->secondory_cont_no, $request->gstin_no);
+    }
 
+    public function updateLocation(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'address_line1' => 'required|string',
+            'address_line2' => 'required|string',
+            'landmark' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'pincode'=> 'required|min:6|max:6'
+        ]);
+
+        //        print_r($request->token_data_id);exit;
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+
+        return VendorUserController::updateLocation($request->token_payload->id, $request->token_payload->organization_id, $request->address_line1, $request->address_line2, $request->landmark, $request->city, $request->state, $request->pincode);
+    }
+
+    public function updateDetails(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'services' => 'required|integer',
+            'commission' => 'required',
+            'status' => 'required|integer',
+            'service_type' => 'required|string',
+            'vendor_status' => 'required|integer'
+        ]);
+
+        //        print_r($request->token_data_id);exit;
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+
+        return VendorUserController::updateLocation($request->token_payload->id, $request->token_payload->organization_id, $request->services, $request->commission, $request->landmark, $request->city, $request->state, $request->pincode);
     }
 }

@@ -373,7 +373,7 @@ class VendorUserController extends Controller
         }
     }
 
-    public static function updateProfile($vendor_id, $fname, $lname, $email, $phone)
+    public static function updateProfile($image, $vendor_id, $fname, $lname, $email, $phone)
     {
         $exist = Vendor::where('id', $vendor_id)->first();
 
@@ -387,6 +387,14 @@ class VendorUserController extends Controller
                 'email'=> $email,
                 'phone'=>$phone
             ]);
+        $vendor = Vendor::where('id', $vendor_id)->first();
+        if($image){
+            $image = new ImageManager(array('driver' => 'imagick'));
+            $image->configure(array('driver' => 'gd'));
+            $avatar_file_name = $vendor->fname."-".$vendor->lname."-".$vendor->id.".png";
+            $updateColumns["image"] = Helper::saveFile($image->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
+        }
+        $update = Vendor::where("id",$vendor_id)->update($updateColumns);
 
         if (!$update)
             return Helper::response(false, "Couldn't update data");

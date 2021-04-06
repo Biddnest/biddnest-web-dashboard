@@ -29,6 +29,14 @@ class PayoutController extends Controller
     {
         $payouts = Payout::where("organization_id", $request->token_payload->organization_id)->paginate(CommonEnums::$PAGE_LENGTH);
 
+        if (isset($request->from) && isset($request->to))
+            $payouts->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
+
+        if (isset($request->status))
+            $payouts->orWhere('status', $request->status);
+
+        $bookings = $payouts->paginate(CommonEnums::$PAGE_LENGTH);
+
         return Helper::response(true, "Show data successfully", ["payouts" => $payouts->items(), "paging" => [
             "current_page" => $payouts->currentPage(), "total_pages" => $payouts->lastPage(), "next_page" => $payouts->nextPageUrl(), "previous_page" => $payouts->previousPageUrl()
         ]]);

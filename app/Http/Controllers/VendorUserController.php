@@ -395,10 +395,9 @@ class VendorUserController extends Controller
         ];
 
         if($image){
-            $image = new ImageManager(array('driver' => 'imagick'));
-            $image->configure(array('driver' => 'gd'));
+            $image_man = new ImageManager(array('driver' => 'gd'));
             $avatar_file_name = $fname."-".$lname."-".$exist->id.".png";
-            $updateColumns["image"] = Helper::saveFile($image->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
+            $updateColumns["image"] = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
         }
 //        else
 //        {

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Payout extends Model
 {
     use HasFactory;
+    protected $table = "payout";
 }

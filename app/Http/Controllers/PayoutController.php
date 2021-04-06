@@ -27,7 +27,10 @@ class PayoutController extends Controller
     public static function getByOrganization(Request $request)
     {
         $payouts = Payout::where("organization_id", $request->token_payload->organization_id)->paginate(CommonEnums::$PAGE_LENGTH);
-        return [true, "Here are the payouts", ["payouts" => $payouts]];
+
+        return Helper::response(true, "Show data successfully", ["payouts" => $payouts->items(), "paging" => [
+            "current_page" => $payouts->currentPage(), "total_pages" => $payouts->lastPage(), "next_page" => $payouts->nextPageUrl(), "previous_page" => $payouts->previousPageUrl()
+        ]]);
     }
 
 

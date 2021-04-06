@@ -33,7 +33,7 @@ class PayoutController extends Controller
             $payouts->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
 
         if (isset($request->status))
-            $payouts->orWhere('status', $request->status);
+            $payouts->where('status', $request->status);
 
 //        $payouts = $payouts->paginate(CommonEnums::$PAGE_LENGTH);
 

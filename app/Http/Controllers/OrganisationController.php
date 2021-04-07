@@ -186,11 +186,11 @@ class OrganisationController extends Controller
 
     public static function getBranch($id)
     {
-        $exist = Organization::where("id", $id)->orWhere("parent_org_id", $id)->first();
-        if(!$exist)
-            return Helper::response(false,"Invalide Data");
+        $branches = Organization::where("id", $id)->orWhere("parent_org_id", $id)->first();
+        if(!$branches)
+            return Helper::response(false,"Invalide Branch Organization");
 
-        return Helper::response(true, "Here are the available coupons", ['branch'=>Organization::with('branch')->findOrFail($id)]);
+        return Helper::response(true, "Here are the available coupons", ['branches'=>$branches]);
     }
 
     public static function updateBranch($data, $id, $parent_org_id)

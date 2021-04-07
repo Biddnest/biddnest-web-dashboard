@@ -487,6 +487,6 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return CouponController::getAvailableCouponsForBooking($request->public_booking_id, $request->token_payload->id);
+        return CouponController::getAvailableCouponsForBooking($request->public_booking_id);
     }
 }

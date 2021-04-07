@@ -486,7 +486,7 @@ class BookingsController extends Controller
                     ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
             }])->with('user')->first();
         if($booking->bid->status == BidEnums::$STATUS['lost'])
-            $booking->bid->rank =self::getposition($request->token_payload->id, $request->public_booking_id);
+            $booking->bid->statistics = self::getposition($request->token_payload->id, $request->public_booking_id);
 
         return Helper::response(true, "Show data successfully", ["booking" => $booking]);
     }
@@ -699,12 +699,41 @@ class BookingsController extends Controller
         if (!$exist_booking)
             return Helper::response(false, "Booking is not Exist");
 
-        $bid_records = Bid::where('booking_id', $exist_booking['id'])->where('status', BidEnums::$STATUS['lost'])->orderBy('bid_amount', 'ASC')->get();
+        $data = [];
 
-        foreach($bid_records as $key=>$value)
-        {
-            if($value['vendor_id'] == $vendor_id)
-                return $key+1;
+        /*{
+            "amount",
+            "position"
+        }*/
+
+        $current_key = true;
+        $bid_records = Bid::where('booking_id', $exist_booking['id'])->where('status', BidEnums::$STATUS['lost'])->orderBy('bid_amount', 'ASC')->get();
+        foreach ($bid_records as $key => $value) {
+            if ($value['vendor_id'] == $vendor_id) {
+                $current_key = $key;
+                break;
+            }
         }
+
+        $x = [];
+        $y = [];
+        for ($i = $key; $i >= $i - 3; $i--) {
+
+            if ($i >= 0) {
+                $x[] = $i + 1;
+                $y[] = $bid_records[$i]['bid_amount'];
+                array_push($data, [
+                    "amount" => $bid_records[$i]['bid_amount'],
+                    "position" => $i + 1,
+                ]);
+            } else
+                break;
+        }
+
+        $data = array_reverse($data);
+        $x = array_reverse($x);
+        $y = array_reverse($y);
+        return ["rank" => $current_key + 1, "data" => $data, "axis" => ["x" => $x, "y" => $y]];
+
     }
 }

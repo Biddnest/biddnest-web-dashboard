@@ -95,6 +95,10 @@ class SettingsController extends Controller
             ],
             "categories"=>[
                 "categories"=>Service::select(['id', 'name'])->get()
+            ],
+            "onesignal"=>[
+                "vendor_app_creds"=>Settings::where("key", "onesignal_vendor_app_creds
+")->pluck('value')[0]
             ]
         ]);
     }

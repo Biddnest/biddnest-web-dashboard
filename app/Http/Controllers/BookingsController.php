@@ -723,8 +723,8 @@ class BookingsController extends Controller
             }
         }
 
-        $x = [0];
-        $y = [0];
+        $x = [];
+        $y = [];
         for ($i = $key; $i >= $i - 3; $i--) {
 
             if ($i >= 0) {
@@ -738,6 +738,8 @@ class BookingsController extends Controller
                 break;
         }
 
+        array_push($x, 0);
+        array_push($y, 0);
         $data = array_reverse($data);
         $x = array_reverse($x);
         $y = array_reverse($y);

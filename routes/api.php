@@ -143,7 +143,7 @@ Route::prefix('vendors/v1')->group(function () {
     Route::put("/location/update",[VendorApiRouter::class, 'updateLocation']);
     Route::put("/details/update",[VendorApiRouter::class, 'updateDetails']);
 
-    Route::post("/profile/update",[VendorApiRouter::class, 'updateProfile']);
+    Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
 
     //org_kyc API's
     /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");

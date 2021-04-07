@@ -8,6 +8,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\FaqEnums;
 use App\Enums\MailEnums;
+use App\Enums\NotificationEnums;
 use App\Enums\ReviewEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
@@ -88,6 +89,9 @@ class SettingsController extends Controller
                 ],
                 "payout"=>[
                     "status"=>PayoutEnums::$STATUS
+                ],
+                "notification"=>[
+                    "type"=>NotificationEnums::$TYPE
                 ]
             ],
             "contact_us"=>[

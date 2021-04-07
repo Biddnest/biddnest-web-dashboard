@@ -86,7 +86,9 @@ class SettingsController extends Controller
                 "review"=>[
                     "question"=>ReviewEnums::$QUESTIONS
                 ],
-                "notification"=>NotificationEnums::$TYPE
+                "notification"=>[
+                    "type"=>NotificationEnums::$TYPE
+                ]
             ],
             "contact_us"=>[
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]

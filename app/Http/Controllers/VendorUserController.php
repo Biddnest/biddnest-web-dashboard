@@ -399,16 +399,19 @@ class VendorUserController extends Controller
             $avatar_file_name = $fname."-".$lname."-".$exist->id.".png";
             $updateColumns["image"] = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
         }
-//        else
-//        {
-//            $avatar_file_name = $fname."-".$lname."-".$exist->id.uniqid().".png";
-//            $updateColumns["image"] = Helper::saveFile(Helper::generateAvatar(strtoupper($fname)." ".strtoupper($lname)),$avatar_file_name,"avatars");
-//        }
+
         $update = Vendor::where("id",$vendor_id)->update($updateColumns);
 
         if (!$update)
             return Helper::response(false, "Couldn't update data");
 
         return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
+    }
+
+    public static function getBranch($organization_id)
+    {
+        $branch = Organization::Where('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id")[0])->get();
+
+        return Helper::response(true, "Show data successfully", ["branch" => $branch]);
     }
 }

@@ -348,6 +348,11 @@ class VendorApiRouteController extends Controller
         return VendorUserController::updateProfile($request->image, $request->token_payload->id, $request->fname, $request->lname, $request->email, $request->phone);
     }
 
+    public function getBranch(Request $request)
+    {
+        return VendorUserController::getBranch($request->token_payload->organization_id);
+    }
+
     public function getPayout(Request $request)
     {
         return PayoutController::getByOrganization($request);

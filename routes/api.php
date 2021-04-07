@@ -89,6 +89,7 @@ Route::prefix('vendors/v1')->group(function () {
 
     Route::get("/user/{type}",[VendorApiRouter::class, 'getUser']);
     Route::get("/user",[VendorApiRouter::class, 'statusUpdate']);
+    Route::get("/branch",[VendorApiRouter::class, 'getBranch']);
     Route::post('/pin/reset',[VendorApiRouter::class,'resetPin']);
     Route::get('/pin/status',[VendorApiRouter::class,'checkPin']);
 

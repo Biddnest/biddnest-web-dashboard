@@ -699,7 +699,7 @@ class BookingsController extends Controller
         if (!$exist_booking)
             return Helper::response(false, "Booking is not Exist");
 
-        $bid_records = Bid::where('booking_id', $exist_booking['id'])->orderBy('bid_amount', 'ASC')->get();
+        $bid_records = Bid::where('booking_id', $exist_booking['id'])->where('status', BidEnums::$STATUS['lost'])->orderBy('bid_amount', 'ASC')->get();
 
         foreach($bid_records as $key=>$value)
         {

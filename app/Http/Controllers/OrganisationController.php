@@ -188,7 +188,7 @@ class OrganisationController extends Controller
     {
         $branches = Organization::where("id", $id)->orWhere("parent_org_id", $id)->first();
         if(!$branches)
-            return Helper::response(false,"Invilid Branch Organization");
+            return Helper::response(false,"Invalid Branch Organization");
 
         return Helper::response(true, "Here are the available coupons", ['branches'=>$branches]);
     }

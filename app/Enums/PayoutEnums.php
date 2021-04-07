@@ -4,10 +4,9 @@
  */
 
 namespace App\Enums;
-use http\Env\Request;
 
 
 class PayoutEnums{
-    public static $STATUS =["scheduled"=>0, "processing"=>1, "transferred"=>2, "suspended"=>3, "canceled"=>4];
+    public static $STATUS = ["scheduled" => 0, "processing" => 1, "transferred" => 2, "suspended" => 3, "cancelled" => 4];
 
 }

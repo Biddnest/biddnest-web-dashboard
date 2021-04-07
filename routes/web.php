@@ -224,7 +224,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/details',[WebController::class,'detailsUsers'])->name("details-users");
         });
 
-        Route::prefix('sidebar')->group(function(){
+        Route::prefix('sidebar')->group(function () {
             /*sample route below*/
 //            Route::get('/customer',[WebController::class,'users'])->name("sidebar_users");
         });
@@ -233,14 +233,22 @@ Route::prefix('admin')->group(function () {
 
 
 });
-    Route::get('/debug/socket',function (){
-        return view("debug.socket");
-    });
+Route::get('/debug/socket', function () {
+    return view("debug.socket");
+});
 
-    Route::get('/debug/push',function () {
-        return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-            "type" => NotificationEnums::$TYPE['link'],
-            "url" => "https://google.com"
-        ], "https://google.com");
-    });
+Route::get('/debug/push/booking', function () {
+    return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+        "type" => NotificationEnums::$TYPE['booking'],
+        "public_booking_id" => "BD606AD99B49C69"
+    ], null);
+});
+Route::get('/debug/push/url', function () {
+    return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+        "type" => NotificationEnums::$TYPE['link'],
+        "url" => "https://google.com"
+    ], null);
+
+
+});
 

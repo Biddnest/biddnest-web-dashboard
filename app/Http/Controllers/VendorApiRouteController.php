@@ -350,7 +350,7 @@ class VendorApiRouteController extends Controller
 
     public function getBranch(Request $request)
     {
-        return VendorUserController::getBranch($request->token_payload->organization_id);
+        return OrganisationController::getBranch($request->token_payload->organization_id);
     }
 
     public function getPayout(Request $request)

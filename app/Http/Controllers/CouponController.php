@@ -177,17 +177,17 @@ class CouponController extends Controller
        // return $discount_amount;
    }
 
-    public static function getAvailableCouponsForBooking($public_booking_id, $user_id)
+    public static function getAvailableCouponsForBooking($public_booking_id)
     {
         $coupons = [];
 
         $allCoupons = Coupon::where("status", CouponEnums::$STATUS['active'])->get();
-
-        foreach ($allCoupons as $coupon) {
-            if (is_array(self::checkIfValid($public_booking_id, $coupon['code'])))
-                array_push($coupons, $coupon);
+        if(count($allCoupons) > 0) {
+            foreach ($allCoupons as $coupon) {
+                if (is_array(self::checkIfValid($public_booking_id, $coupon['code'])))
+                    array_push($coupons, $coupon);
+            }
         }
-
         return Helper::response(true, "Here are the available coupons", ["coupons" => $coupons]);
 
     }

@@ -738,7 +738,7 @@ class BookingsController extends Controller
                 break;
         }
 
-        array_push($x, 0);
+//        array_push($x, 0);
         array_push($y, 0);
         $data = array_reverse($data);
         $x = array_reverse($x);

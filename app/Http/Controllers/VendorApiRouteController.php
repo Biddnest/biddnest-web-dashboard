@@ -9,7 +9,7 @@ use App\Http\Middleware\VerifyJwtToken;
 use App\StringFormatter;
 use App\Helper;
 
-class VendorApiRouteController extends Controller
+class getBookingsforAppVendorApiRouteController extends Controller
 {
 
     public function __construct(){

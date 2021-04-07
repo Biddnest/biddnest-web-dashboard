@@ -17,6 +17,7 @@ use App\Enums\PayoutEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Settings;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -91,6 +92,9 @@ class SettingsController extends Controller
             ],
             "contact_us"=>[
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
+            ],
+            "categories"=>[
+                "categories"=>Service::get()
             ]
         ]);
     }

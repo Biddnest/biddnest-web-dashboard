@@ -50,7 +50,9 @@ class PushNotification
                 ],
                 "data" => $data,
                 'url' => $url,
+                'android_sound' => "notification",
                 'include_player_ids' => $players,
+                'android_channel_id' => "d3e26d45-acec-4baf-99e9-e3e2bd38d06c",
 //                'include_external_user_ids'=>$players
             ],
         ]);

@@ -513,6 +513,7 @@ class BookingsController extends Controller
 
     public static function addBookmark($id, $org_id, $vendor_id)
     {
+
         $exist_bid = Bid::where("organization_id", $org_id)
             ->where("booking_id", Booking::where(['public_booking_id' => $id])->pluck('id')[0])
             ->where(["status" => BidEnums::$STATUS['active']])
@@ -520,13 +521,20 @@ class BookingsController extends Controller
         if (!$exist_bid)
             return Helper::response(false, "Not in active state");
 
+
+        if ($exist_bid->bookmarked == CommonEnums::$YES)
+            $bookmarked = CommonEnums::$NO;
+        else
+            $bookmarked = CommonEnums::$YES;
+
+
         $result = Bid::where(['id' => $exist_bid['id']])
-            ->update(["bookmarked" => CommonEnums::$YES, "vendor_id" => $vendor_id]);
+            ->update(["bookmarked" => $bookmarked, "vendor_id" => $vendor_id]);
 
         if (!$result)
             return Helper::response(false, "Couldn't Add to Bookmark");
 
-        return Helper::response(true, "updated data successfully", ["bookmark" => Bid::where("id", $exist_bid['id'])->first()]);
+        return Helper::response(true, "Book mark status changed to $bookmarked", ["bookmark" => Bid::where("id", $exist_bid['id'])->first()]);
     }
 
     public static function assignDriver($public_booking_id, $driver_id, $vehicle_id)
@@ -715,7 +723,7 @@ class BookingsController extends Controller
             }
         }
 
-        $x = [];
+        $x = [0];
         $y = [0];
         for ($i = $key; $i >= $i - 3; $i--) {
 

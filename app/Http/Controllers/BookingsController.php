@@ -444,7 +444,7 @@ class BookingsController extends Controller
         }
 
 
-        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')
+        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')->orderBy('id', 'DESC')
             ->pluck('booking_id'))
             ->with('user')
             ->with('status_history')
@@ -452,7 +452,7 @@ class BookingsController extends Controller
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);
-            }])->orderBy('id', 'DESC');;
+            }]);
 
         if (isset($request->from) && isset($request->to))
             $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));

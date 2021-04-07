@@ -22,7 +22,7 @@ class NotificationController extends Controller
 
         if (!$player) {
 
-            OneSignalPlayer::where('player_id', $player_id)->where("vendor_id", null)->delete();
+            OneSignalPlayer::where('player_id', $player_id)->where("vendor_id", null)->where("user_id", "!=", $user_id)->delete();
 
             $player = new OneSignalPlayer;
             $player->user_id = $user_id;
@@ -43,7 +43,10 @@ class NotificationController extends Controller
     {
         $player = OneSignalPlayer::where("vendor_id", $vendor_id)->where("player_id", $player_id)->first();
 
-        OneSignalPlayer::where('player_id', $player_id)->where("user_id", null)->delete();
+        OneSignalPlayer::where('player_id', $player_id)
+            ->where("user_id", null)
+            ->where("vendor_id", "!=", $vendor_id)
+            ->delete();
 
         if (!$player) {
             $player = new OneSignalPlayer;
@@ -63,11 +66,19 @@ class NotificationController extends Controller
     public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url = null){
 
         $players=[];
-        foreach($user_id as $user){
-           if($type == "user")
-            $players[] = OneSignalPlayer::where("user_id",$user)->pluck("player_id")[0];
-        else
-            $players[] = OneSignalPlayer::where("vendor_id",$user)->pluck("player_id")[0];
+        foreach($user_id as $user) {
+//            $players[] = (string) $user;
+            if ($type == "user") {
+                $pids = OneSignalPlayer::where("user_id", $user)->pluck("player_id");
+                foreach ($pids as $pid) {
+                    $players[] = $pid;
+                }
+            } else {
+                $pids = OneSignalPlayer::where("vendor_id", $user)->pluck("player_id");
+                foreach ($pids as $pid) {
+                    $players[] = $pid;
+                }
+            }
         }
 
         return PushNotification::sendToUsers("$type", $title, $desc, $players, $data,$url);

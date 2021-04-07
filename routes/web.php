@@ -1,17 +1,15 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
-use App\Http\Controllers\AdminController;
+use App\Enums\NotificationEnums;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\WebController;
-use App\Http\Controllers\BidController;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Carbon\CarbonImmutable;
-use Carbon\Carbon;
-
 use App\Http\Controllers\Route as Router;
 use App\Http\Controllers\VendorController as VendorRouter;
+use App\Http\Controllers\WebController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -239,10 +237,10 @@ Route::prefix('admin')->group(function () {
         return view("debug.socket");
     });
 
-    Route::get('/debug/push',function (){
-        return NotificationController::sendTo("user",[201], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
-            "type"=>NotificationEnums::class,
-            "public_booking_id"=>"BD606B1F463E184"
-        ]);
+    Route::get('/debug/push',function () {
+        return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+            "type" => NotificationEnums::$TYPE['link'],
+            "url" => "https://google.com"
+        ], "https://google.com");
     });
 

@@ -1,8 +1,10 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
 namespace App;
-use App\Helper;
-use \GuzzleHttp\Client;
+use GuzzleHttp\Client;
 
 class PushNotification
 {
@@ -32,7 +34,7 @@ class PushNotification
             'Content-Type' => 'application/json'
         ]]);
 
-//        return $players;
+        return $players;
         $response = $client->request('POST', 'notifications', [
             'auth'=>[$credentials[0],$credentials[1]],
             'json' => [
@@ -40,15 +42,16 @@ class PushNotification
                 'contents' => [
                     'en' => $title
                 ],
-                'heading'=>[
-                    'en'=>$title
+                'heading' => [
+                    'en' => $title
                 ],
-                'subtitle'=>[
-                    'en'=>$desc
+                'subtitle' => [
+                    'en' => $desc
                 ],
-                "data"=>$data,
-                'url'=>$url,
-                'include_player_ids'=>$players
+                "data" => $data,
+                'url' => $url,
+                'include_player_ids' => $players,
+//                'include_external_user_ids'=>$players
             ],
         ]);
 

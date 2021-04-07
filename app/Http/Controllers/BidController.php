@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEnums;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
@@ -36,12 +37,12 @@ class BidController extends Controller
             $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
 
             $update_status = Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
-
+            $vendor_ids = [];
             // $bookingstatus = new BookingStatus;
             // $bookingstatus->booking_id = $booking_id;
             // $bookingstatus->status=BookingEnums::$STATUS['biding'];
             // $result_status = $bookingstatus->save();
-
+            $public_booking_id = Booking::where('id', $booking_id)->pluck('public_booking_id')[0];
             $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['biding']);
 
             foreach($vendorlist as $vendor)
@@ -52,7 +53,14 @@ class BidController extends Controller
                 $bid->bid_type=BidEnums::$BID_TYPE['bid'];
                 $bid->status=BidEnums::$STATUS['active'];
                 $bid_result = $bid->save();
+                $vendor_ids[] = $vendor['id'];
             }
+
+            NotificationController::sendTo("vendor", [$vendor_ids], "New booking request received.", "Tap to respond.", [
+                    "type" => NotificationEnums::$TYPE['booking'],
+                    "public_booking_id" =>$public_booking_id
+            ]);
+
             return true;
 
         } catch (\Exception $e) {
@@ -123,25 +131,41 @@ class BidController extends Controller
 
             $update_bid_type = Bid::where("booking_id",$book_id)
                                 ->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
-            
+
             $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 
             return true;
         }
+        $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 
-        $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
+        $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("vendor_id")[0];
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
+        NotificationController::sendTo("vendor", [$won_org_id], "You won the bidded booking.", "Tap to respond.", [
+            "type" => NotificationEnums::$TYPE['booking'],
+            "public_booking_id" =>$public_booking_id
+        ]);
+
+        $lost_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];
         $lost_vendor = Bid::where([
             "booking_id"=>$book_id,
             "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
+        NotificationController::sendTo("vendor", [$lost_org_id], "You lost the bidde booking.", "Tap to respond.", [
+            "type" => NotificationEnums::$TYPE['booking'],
+            "public_booking_id" =>$public_booking_id
+        ]);
 
-
+        $expire_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['active']])->pluck("vendor_id")[0];
         $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
+        NotificationController::sendTo("vendor", [$expire_org_id], "You have recieved bookings are expire.", "Tap to respond.", [
+            "type" => NotificationEnums::$TYPE['booking'],
+            "public_booking_id" =>$public_booking_id
+        ]);
+
 
         $booking_update_status = Booking::where("id", $book_id)
                                         ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])

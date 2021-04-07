@@ -34,7 +34,7 @@ class PushNotification
             'Content-Type' => 'application/json'
         ]]);
 
-        return $players;
+//        return $players;
         $response = $client->request('POST', 'notifications', [
             'auth'=>[$credentials[0],$credentials[1]],
             'json' => [

@@ -486,7 +486,7 @@ class BookingsController extends Controller
                     ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
             }])->with('user')->first();
 
-        return Helper::response(true, "Show data successfully", ["booking" => $booking, 'rank'=>self::getposition($request->token_payload->id, $request->public_booking_id)]);
+        return Helper::response(true, "Show data successfully", ["booking" => $booking, "rank"=>self::getposition($request->token_payload->id, $request->public_booking_id)]);
     }
 
     public static function reject($id, $org_id, $vendor_id)

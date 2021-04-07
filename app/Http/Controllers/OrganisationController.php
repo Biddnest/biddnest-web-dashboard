@@ -184,9 +184,9 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
-    public static function getBranch($id, $parent_org_id)
+    public static function getBranch($id)
     {
-        $exist = Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->first();
+        $exist = Organization::where("id", $id)->orWhere("parent_org_id", $id)->first();
         if(!$exist)
             return Helper::response(false,"Invalide Data");
 

@@ -408,10 +408,4 @@ class VendorUserController extends Controller
         return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
     }
 
-    public static function getBranch($organization_id)
-    {
-        $branch = Organization::Where('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id")[0])->get();
-
-        return Helper::response(true, "Show data successfully", ["branch" => $branch]);
-    }
 }

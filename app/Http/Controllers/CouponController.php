@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
 namespace App\Http\Controllers;
 
@@ -12,9 +15,7 @@ use App\Models\CouponUser;
 use App\Models\CouponZone;
 use App\Models\Payment;
 use App\Models\Settings;
-use App\Models\Zone;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
@@ -165,14 +166,29 @@ class CouponController extends Controller
        $grand_total += $tax;
 
 
-       return (array) ["coupon"=>["discount"=>number_format($discount_amount,2)], "payment_details"=>[
+       return (array)["coupon" => ["discount" => number_format($discount_amount, 2)], "payment_details" => [
            "sub_total" => $booking->payment->sub_total,
-           "surge_charge"=>$booking->payment->other_charges,
-           "discount"=>$discount_amount,
-           "tax(".$tax_percentage."%)"=>$tax,
+           "surge_charge" => $booking->payment->other_charges,
+           "discount" => $discount_amount,
+           "tax(" . $tax_percentage . "%)" => $tax,
            "grand_total" => $grand_total
        ]];
 
-        // return $discount_amount;
+       // return $discount_amount;
    }
+
+    public static function getAvailableCouponsUserApp($public_booking_id, $user_id)
+    {
+        $coupons = [];
+
+        $allCoupons = Coupon::where("status", CouponEnums::$STATUS['active'])->get();
+
+        foreach ($allCoupons as $coupon) {
+            if (is_array(self::checkIfValid($public_booking_id, $coupon['code'])))
+                array_push($coupons, $coupon);
+        }
+
+        return Helper::response(true, "Here are the available coupons", ["coupons" => $coupons]);
+
+    }
 }

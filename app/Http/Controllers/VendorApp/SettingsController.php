@@ -73,7 +73,8 @@ class SettingsController extends Controller
                     "fetch_type"=>BookingEnums::$BOOKING_FETCH_TYPE
                 ],
                 "bid"=>[
-                    "status"=>BidEnums::$STATUS
+                    "status"=>BidEnums::$STATUS,
+                    "type"=>BidEnums::$BID_TYPE
                 ],
                 "payment"=>[
                     'razorpay'=>[

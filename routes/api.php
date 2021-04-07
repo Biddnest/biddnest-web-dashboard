@@ -29,6 +29,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/inventories/all',[ApiRouter::class,'getAllInventories']);
 
     Route::post('/coupon/verify',[ApiRouter::class,'verifyCoupon']);
+    Route::get('/coupon/get',[ApiRouter::class,'getCouponsForBooking']);
 
     //bookings APIs
     Route::prefix('bookings')->group(function () {

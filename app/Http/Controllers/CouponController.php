@@ -177,7 +177,7 @@ class CouponController extends Controller
        // return $discount_amount;
    }
 
-    public static function getAvailableCouponsUserApp($public_booking_id, $user_id)
+    public static function getAvailableCouponsForBooking($public_booking_id, $user_id)
     {
         $coupons = [];
 

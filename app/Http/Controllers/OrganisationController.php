@@ -190,8 +190,7 @@ class OrganisationController extends Controller
         if(!$exist)
             return Helper::response(false,"Invalide Data");
 
-        return Organization::with('branch')->with('services')->findOrFail($id);
-
+        return Helper::response(true, "Here are the available coupons", ['branch'=>Organization::with('branch')->findOrFail($id)]);
     }
 
     public static function updateBranch($data, $id, $parent_org_id)

@@ -478,4 +478,15 @@ class ApiRouteController extends Controller
 
         return Helper::response(true, "Here is the distance", ["distance" => GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng'])]);
     }
+
+    public function getCouponsForBooking(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return CouponController::getAvailableCouponsForBooking($request->public_booking_id, $request->token_payload->id);
+    }
 }

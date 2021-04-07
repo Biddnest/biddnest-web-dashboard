@@ -716,7 +716,7 @@ class BookingsController extends Controller
         }
 
         $x = [];
-        $y = [];
+        $y = [0];
         for ($i = $key; $i >= $i - 3; $i--) {
 
             if ($i >= 0) {

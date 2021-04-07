@@ -94,7 +94,7 @@ class SettingsController extends Controller
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
             ],
             "categories"=>[
-                "categories"=>Service::get()
+                "categories"=>Service::select(['id', 'name'])->get()
             ]
         ]);
     }

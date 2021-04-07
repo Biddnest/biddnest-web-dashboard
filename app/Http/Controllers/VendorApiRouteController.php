@@ -358,4 +358,15 @@ class VendorApiRouteController extends Controller
         return PayoutController::getByOrganization($request);
     }
 
+    public function getposition(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
+
+        return BookingsController::getposition($request->token_payload->id, $request->public_booking_id);
+    }
+
 }

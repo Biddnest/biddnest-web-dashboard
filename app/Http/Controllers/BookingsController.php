@@ -447,14 +447,14 @@ class BookingsController extends Controller
 
 
         $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')
-            ->pluck('booking_id'))
+            ->pluck('booking_id'))->orderBy('id', 'DESC')
             ->with('user')
             ->with('status_history')
             ->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);
-            }])->orderBy('id', 'DESC');
+            }]);
 
         if (isset($request->from) && isset($request->to))
             $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
@@ -689,5 +689,23 @@ class BookingsController extends Controller
             return Helper::response(false, "couldn'd change status");
 
         return true;
+    }
+
+    public static function getposition($vendor_id, $public_booking_id)
+    {
+        $exist_booking = Booking::where('public_booking_id', $public_booking_id)->first();
+        if (!$exist_booking)
+            return Helper::response(false, "Booking is not Exist");
+
+        $bid_records = Bid::where('booking_id', $exist_booking['id'])->orderBy('bid_amount', 'DESC')->get();
+        $i=1;
+        foreach($bid_records as $value)
+        {
+            if($value['vendor_id'] == $vendor_id)
+            {
+                return $i;
+            }
+            $i++;
+        }
     }
 }

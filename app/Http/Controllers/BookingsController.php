@@ -433,7 +433,7 @@ class BookingsController extends Controller
                 break;
 
             case "participated":
-                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']]);
+                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->whereNotIN("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 break;
 
             case "past":
@@ -452,7 +452,7 @@ class BookingsController extends Controller
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);
-            }]);
+            }])->orderBy('id', 'DESC');;
 
         if (isset($request->from) && isset($request->to))
             $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));

@@ -138,7 +138,7 @@ class BidController extends Controller
         }
         $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 
-        $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
+        $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("vendor_id")[0];
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
@@ -147,7 +147,7 @@ class BidController extends Controller
             "public_booking_id" =>$public_booking_id
         ]);
 
-        $lost_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("organization_id")[0];
+        $lost_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];
         $lost_vendor = Bid::where([
             "booking_id"=>$book_id,
             "status"=>BidEnums::$STATUS['bid_submitted']])
@@ -158,7 +158,7 @@ class BidController extends Controller
             "public_booking_id" =>$public_booking_id
         ]);
 
-        $expire_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['active']])->pluck("organization_id")[0];
+        $expire_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['active']])->pluck("vendor_id")[0];
         $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
         NotificationController::sendTo("vendor", [$expire_org_id], "You have recieved bookings are expire.", "Tap to respond.", [

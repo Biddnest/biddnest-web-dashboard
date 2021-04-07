@@ -426,7 +426,7 @@ class BookingsController extends Controller
 
             case "scheduled":
                 $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking' => function ($booking) {
-                    $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                    $booking->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
 
@@ -436,7 +436,7 @@ class BookingsController extends Controller
 
             case "participated":
                 $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->with(['booking' => function ($booking) {
-                    $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                    $booking->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
 

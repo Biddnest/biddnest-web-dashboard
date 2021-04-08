@@ -251,6 +251,5 @@ Route::get('/debug/push/url', function () {
         "url" => "https://google.com"
     ], null);
 
-
 });
 

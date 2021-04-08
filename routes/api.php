@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
         Route::post("/login", [ApiRouter::class, 'login']);
         Route::post("/login/verify-otp", [ApiRouter::class, 'verifyLoginOtp']);
         Route::post("/signup", [ApiRouter::class, 'signupUser']);
-        Route::post("/verify", [ApiRouter::class, 'verifyAuth']);
+        Route::get("/verify", [ApiRouter::class, 'verifyAuth']);
 
     });
     Route::get("/configuration",[ApiRouter::class, 'config']);

@@ -481,12 +481,17 @@ class ApiRouteController extends Controller
 
     public function getCouponsForBooking(Request $request)
     {
-        $validation = Validator::make($request->all(),[
+        $validation = Validator::make($request->all(), [
             'public_booking_id' => 'required'
         ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        if ($validation->fails())
+            return Helper::response(false, "validation failed", $validation->errors(), 400);
 
         return CouponController::getAvailableCouponsForBooking($request->public_booking_id);
+    }
+
+    public function verifyAuth(Request $request)
+    {
+        return CouponController::verifyAuth($request->public_booking_id);
     }
 }

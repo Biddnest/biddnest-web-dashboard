@@ -204,11 +204,6 @@ class BookingsController extends Controller
                 "bid_result_at" => $complete_time
             ]);
 
-        // $bookingstatus = new BookingStatus;
-        // $bookingstatus->booking_id = $exist->id;
-        // $bookingstatus->status=BookingEnums::$STATUS['placed'];
-        // $result_status = $bookingstatus->save();
-
         $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['placed']);
 
         if (!$confirmestimate && !$result_status) {
@@ -216,19 +211,13 @@ class BookingsController extends Controller
         }
         $booking_id = $exist->id;
 
-        NotificationController::sendTo("user",[$user_id], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
-            "type"=>NotificationEnums::$TYPE['booking'],
-            "public_booking_id"=>$public_booking_id
-        ]);
-
         dispatch(function() use($booking_id, $user_id,$complete_time, $public_booking_id) {
-
-            NotificationController::sendTo("user",[$user_id], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
-                "type"=>NotificationEnums::$TYPE['booking'],
-                "public_booking_id"=>$public_booking_id
-            ]);
             BidController::addvendors($booking_id);
-
+            NotificationController::sendTo("user", [$user_id], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+                "type" => NotificationEnums::$TYPE['booking'],
+                "public_booking_id" => $public_booking_id,
+                "booking_status" => BookingEnums::$STATUS['biding']
+            ]);
         })->afterResponse();
 
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
@@ -266,7 +255,8 @@ class BookingsController extends Controller
 
             NotificationController::sendTo("user", [$exist->user_id], "Your booking has been cancelled.", "You may place another request anytime.", [
                 "type" => NotificationEnums::$TYPE['general'],
-                "public_booking_id" => $exist->public_booking_id
+                "public_booking_id" => $exist->public_booking_id,
+                "booking_status" => BookingEnums::$STATUS['cancelled']
             ]);
 
         })->afterResponse();
@@ -570,7 +560,8 @@ class BookingsController extends Controller
 
             NotificationController::sendTo("user", [$assign_driver->user_id], "Driver has been assigned for your movement.", "Tap to view details.", [
                 "type" => NotificationEnums::$TYPE['booking'],
-                "public_booking_id" => $assign_driver->public_booking_id
+                "public_booking_id" => $assign_driver->public_booking_id,
+                "booking_status" => BookingEnums::$STATUS['driver_assigned']
             ]);
 
         })->afterResponse();
@@ -738,8 +729,6 @@ class BookingsController extends Controller
                 break;
         }
 
-//        array_push($x, 0);
-//        array_push($y, 0);
         $data = array_reverse($data);
         $x = array_reverse($x);
         $y = array_reverse($y);

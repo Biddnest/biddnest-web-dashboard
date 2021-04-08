@@ -5,19 +5,18 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Helper;
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\SlideBanner;
-use App\Models\Slider;
-use App\Models\Banners;
-use App\Sms;
-use Carbon\CarbonImmutable;
-use Illuminate\Http\Request;
-use Intervention\Image\Image;
-use Intervention\Image\ImageManager;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
+use App\Enums\UserEnums;
+use App\Helper;
+use App\Http\Controllers\Controller;
+use App\Models\Slider;
+use App\Models\User;
+use App\Sms;
+use Carbon\CarbonImmutable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
 use PUGX\Shortid\Shortid;
 
 class UserController extends Controller
@@ -29,7 +28,7 @@ class UserController extends Controller
 
     /**
      * @param $phone
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function login($phone)
     {
@@ -45,10 +44,9 @@ class UserController extends Controller
             $newuser->status = 0;
             $newuser->save();
             $data = ["new"=>true];
-        }
-        else{
+        } else{
             User::where("phone",$phone)
-                  ->update(["verf_code"=>$otp]);
+                ->update(["verf_code"=>$otp]);
 
             if(($user->otp_verified === 0 || $user->status === 0))
                 $data = ["new"=>true];
@@ -58,7 +56,7 @@ class UserController extends Controller
         }
 
         dispatch(function() use($phone, $otp){
-          Sms::sendOtp($phone, $otp);
+            Sms::sendOtp($phone, $otp);
         })->afterResponse();
         $data['otp'] = $otp;
 
@@ -68,17 +66,16 @@ class UserController extends Controller
     /**
      * @param $phone
      * @param $otp
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function verifyLoginOtp($phone, $otp){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
-                return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
+            return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
 
         if($user->verf_code == null){
             return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
-        }
-        else if($user->verf_code == $otp) {
+        } else if($user->verf_code == $otp) {
             User::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
@@ -105,7 +102,7 @@ class UserController extends Controller
      * @param $email
      * @param $gender
      * @param $ref_code
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function signupUser($id, $fname, $lname, $email, $gender, $refby_code){
         $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
@@ -122,7 +119,7 @@ class UserController extends Controller
         if($emailExists)
             return Helper::response(false, "The email id $email is already linked to another account.",);
 
-            $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
+        $avatar_file_name = $fname."-".$lname."-".$user->id.".png";
 
         $short_id = Shortid::generate(6, null, true);
         $ref_code = strtoupper(substr($fname,0,3).$short_id);
@@ -150,7 +147,7 @@ class UserController extends Controller
      * @param $gender
      * @param $dob
      * @param $avatar
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar){
         $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
@@ -188,15 +185,15 @@ class UserController extends Controller
 
     public static function getAppSliders($lat, $lng)
     {
-       $date = date('Y-m-d');
+        $date = date('Y-m-d');
         $result=Slider::where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
-        ->where('from_date','<=', $date)
-        ->where('to_date','>=', $date)
-        ->where('platform', SliderEnum::$PLATFORM['app'])->with(["banners"=> function($banner) use($date){
-            $banner->where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
             ->where('from_date','<=', $date)
-            ->where('to_date','>=', $date)->orderBy('order');
-        }])->get();
+            ->where('to_date','>=', $date)
+            ->where('platform', SliderEnum::$PLATFORM['app'])->with(["banners"=> function($banner) use($date){
+                $banner->where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+                    ->where('from_date','<=', $date)
+                    ->where('to_date','>=', $date)->orderBy('order');
+            }])->get();
 
 
         if(!$result)
@@ -211,14 +208,21 @@ class UserController extends Controller
 //        $query = $request->all()['query'];
         $query = $request->q;
 
-        if(empty($query))
-            return Helper::response(true,"Data fetched successfully", ["users"=>[]]);
+        if (empty($query))
+            return Helper::response(true, "Data fetched successfully", ["users" => []]);
 //        return $query;
-        $users = User::where("fname","LIKE", $query.'%')
-//            ->orWhere("lname","LIKE", '%'.$query.'%')
-//            ->orWhere("phone","LIKE", '%'.$query.'%')
-//            ->orWhere("email", "LIKE",'%'.$query.'%')
-            ->paginate(5);
-        return Helper::response(true,"Data fetched successfully", ["users"=>$users->items()]);
+        $users = User::where("fname", "LIKE", $query . '%')->paginate(5);
+        return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
+    }
+
+    public static function verifyAuth($id)
+    {
+        $user = User::find($id);
+        if ($user->status == UserEnums::$STATUS['active'])
+            return Helper::response(true, "User authenticated successfully");
+        elseif ($user->status == UserEnums::$STATUS['suspended'])
+            return Helper::response(false, "You are suspended from using this application. Please contact the support.", null, 401);
+        else
+            return Helper::response(false, "Something went wrong in server. Please contact support.", null, 401);
     }
 }

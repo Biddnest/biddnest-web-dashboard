@@ -3,6 +3,7 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
+use App\Enums\BookingEnums;
 use App\Enums\NotificationEnums;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Route as Router;
@@ -238,17 +239,17 @@ Route::get('/debug/socket', function () {
 });
 
 Route::get('/debug/push/booking', function () {
-    return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+    return NotificationController::sendTo("user", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
         "type" => NotificationEnums::$TYPE['booking'],
-        "public_booking_id" => "BD606AD99B49C69"
+        "public_booking_id" => "BD606AD99B49C69",
+        "booking_status" => BookingEnums::$STATUS['biding']
     ], null);
 });
 Route::get('/debug/push/url', function () {
-    return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+    return NotificationController::sendTo("user", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
         "type" => NotificationEnums::$TYPE['link'],
         "url" => "https://google.com"
     ], null);
-
 
 });
 

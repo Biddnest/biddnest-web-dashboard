@@ -1,12 +1,13 @@
 <?php
+/*
+ * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
+ */
 
+use App\Http\Controllers\ApiRouteController as ApiRouter;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiRouteController as ApiRouter;
-use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
-use App\Http\Controllers\VendorController as VendorRouter;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PageController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -17,6 +18,8 @@ Route::prefix('v1')->group(function () {
         Route::post("/login", [ApiRouter::class, 'login']);
         Route::post("/login/verify-otp", [ApiRouter::class, 'verifyLoginOtp']);
         Route::post("/signup", [ApiRouter::class, 'signupUser']);
+        Route::get("/verify", [ApiRouter::class, 'verifyAuth']);
+
     });
     Route::get("/configuration",[ApiRouter::class, 'config']);
 

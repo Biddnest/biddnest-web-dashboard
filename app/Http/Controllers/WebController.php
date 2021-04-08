@@ -124,7 +124,7 @@ class WebController extends Controller
         $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"]])
             ->with(['vendor'=> function ($query) {
             $query->where(["status"=>VendorEnums::$STATUS["active"], "user_role"=>VendorEnums::$ROLES['admin']]);
-        }])->orderBy("id","DESC")
+        }])
             ->paginate(CommonEnums::$PAGE_LENGTH);
         $count_vendors = Organization::where("status", CommonEnums::$YES)->count();
         $count_verified_vendors = Organization::where("status", CommonEnums::$YES)->count();
@@ -144,7 +144,12 @@ class WebController extends Controller
 
     public function leadVendors()
     {
-        return view('vendor.lead');
+        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"]])
+            ->with(['vendor'=> function ($query) {
+                $query->where(["status"=>VendorEnums::$STATUS["lead"], "user_role"=>VendorEnums::$ROLES['admin']]);
+            }])->with('zone')
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('vendor.lead',['leads'=>$leads]);
     }
 
     public function pendingVendors()
@@ -154,7 +159,12 @@ class WebController extends Controller
 
     public function verifiedVendors()
     {
-        return view('vendor.verified');
+        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES])
+            ->with(['vendor'=> function ($query) {
+                $query->where(["user_role"=>VendorEnums::$ROLES['admin']]);
+            }])->with('zone')
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('vendor.verified',['vendors'=>$vendors]);
     }
 
     public function categories()

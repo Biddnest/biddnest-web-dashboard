@@ -40,6 +40,11 @@ class Organization extends Model
         return $this->hasMany(Bid::class);
     }
 
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class, );
+    }
+
     public function vendor(){
         return $this->hasOne(Vendor::class);
     }

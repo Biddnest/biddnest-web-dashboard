@@ -133,11 +133,11 @@
                                                             onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                                             <td scope="row">
 {{--                                                                @if(isset($vendor->vendor))--}}
-                                                                {{$vendor->vendor->fname ?? "NA"}} {{$vendor->vendor->lname ?? ""}}
+                                                                {{ucfirst(trans($vendor->vendor->fname)) ?? "NA"}} {{ucfirst(trans($vendor->vendor->lname)) ?? ""}}
 {{--                                                                @endif--}}
                                                             </td>
-                                                            <td>{{$vendor->org_name}} {{$vendor->org_type}}</td>
-                                                            <td>{{$vendor->city}}</td>
+                                                            <td>{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
+                                                            <td>{{ucfirst(trans($vendor->city))}}</td>
                                                             <td>@switch($vendor->status)
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['active'])
                                                                     <span class="status-badge green-bg text-center">Active</span>

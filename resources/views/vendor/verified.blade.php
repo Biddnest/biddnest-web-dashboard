@@ -20,16 +20,16 @@
                                         <li class="breadcrumb-item active" aria-current="page">Vendor Management</li>
                                       <li class="breadcrumb-item"><a href="#"> Verified Vendors
                                     </a></li>
-                                      
+
                                     </ol>
                                   </nav>
-                                
-                                
-                                </div>
-                          
-                            </div>  
 
-                          
+
+                                </div>
+
+                            </div>
+
+
                             <!-- Dashboard cards -->
 
 
@@ -46,7 +46,7 @@
                                                       </button>
                                                     </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <!-- <div class="all-vender-details"> -->
                                             <table class="table text-left p-10 theme-text th-no-border">
                                                 <thead class="secondg-bg  p-0">
@@ -60,74 +60,33 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mtop-20 text-left">
+                                                @foreach($vendors as $vendor)
                                                     <tr class="tb-border cursor-pointer" >
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
+                                                        <td scope="row">{{ucfirst(trans($vendor->vendor->fname)) ?? "NA"}} {{ucfirst(trans($vendor->vendor->lname)) ?? ""}}</td>
+                                                        <td>{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
+                                                        <td>{{$vendor->email}}</td>
+                                                        <td class="">+91-{{$vendor->phone}}</td>
+                                                        <td>{{ucfirst(trans($vendor->service_type))}}</td>
                                                         <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
                                                     </tr>
-                                                    <tr class="tb-border cursor-pointer">
-                                                        <td scope="row">Tuka Ram</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer" >
-                                                        <td scope="row">Soham Hans</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer" >
-                                                        <td scope="row">Mithila Shekhar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer">
-                                                        <td scope="row">Shrikirshna Mohan</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer" >
-                                                        <td scope="row">Ram Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-
-                                                    <tr class="tb-border cursor-pointer" >
-                                                        <td scope="row">Sanjay Subramanyan</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>mohankumar@ymail.com</td>
-                                                        <td class="">+91-873546576</td>
-                                                        <td>Economic</td>                                                     
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
+                                                @endforeach
                                                 </tbody>
 
                                             </table>
                                             <div class="pagination">
                                                 <ul>
                                                     <li class="p-1">Page</li>
-                                                    <li class="digit">1</li>
+                                                    <li class="digit">{{$vendors->currentPage()}}</li>
                                                     <li class="label">of</li>
-                                                    <li class="digit">20</li>
-                                                    <li class="button"><a href="#"><img src="{{asset('static/images/Backward.svg')}}"></a></li>
-                                                    <li class="button"><a href="#"><img src="{{asset('static/images/forward.svg')}}"></a></li>
+                                                    <li class="digit">{{$vendors->lastPage()}}</li>
+                                                    @if(!$vendors->onFirstPage())
+                                                        <li class="button"><a href="{{$vendors->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                        </li>
+                                                    @endif
+                                                    @if($vendors->currentPage() != $vendors->lastPage())
+                                                        <li class="button"><a href="{{$vendors->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                        </li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         <!-- </div> -->

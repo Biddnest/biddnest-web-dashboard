@@ -24,7 +24,7 @@
           </div>
 
           <div class="d-flex  flex-row text-left ml-120">
-            <!-- <a href="booking-orders.html" class="text-decoration-none"> 
+            <!-- <a href="booking-orders.html" class="text-decoration-none">
            <h3 class="page-subhead text-left p-4 f-20 theme-text">
             <i class="p-1"> <img src="assets/images/Icon feather-chevrons-left.svg" alt="" srcset=""></i> Back to Bookings & Orders</h3></a> -->
 
@@ -75,8 +75,8 @@
 
                       </div>
 
-                      <div class="accordion" id="customer-details">
-                      
+                      <div class="" id="customer-details">
+
 
 
                         <div class="d-flex  row  p-20">
@@ -136,7 +136,7 @@
                           </span>
 
 
-                   
+
                         </div>
 
                       </div>
@@ -176,7 +176,7 @@
 
 
                       </div>
-                      <div class="accordion" id="delivery-details">
+                      <div class="" id="delivery-details">
                         <div class="d-flex  row  p-20">
 
                           <div class="col-sm-6">
@@ -255,7 +255,7 @@
                                       <input type="checkbox" id="Lift1">
                                       <span class="checkmark"></span>
                                     </label>
-  
+
                                     <label class="form-check-box" for="Lift1">Do you have lift</label>
                                     <span class="error-message">Please enter valid</span>
 
@@ -344,7 +344,7 @@
                                       <input type="checkbox" id="Lift2">
                                       <span class="checkmark"></span>
                                     </label>
-  
+
                                     <label class="form-check-box" for="Lift2">Do you have lift</label>
                                     <span class="error-message">Please enter valid</span>
 
@@ -400,7 +400,7 @@
 
 
                       </div>
-                      <div class="accordion" id="requirments">
+                      <div class="" id="requirments">
                         <div class="d-flex  row p-20">
 
                           <div class="col-sm-6">
@@ -415,7 +415,7 @@
                               <span class="error-message">Please enter  valid</span>
                               </span>
 
-                        
+
                             </div>
 
                           </div>
@@ -441,7 +441,7 @@
                               Inventory
                             </div>
                             <table class="table text-center p-10 theme-text tb-border2" id="items" >
-                         
+
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
                                     <th scope="col">Item Name</th>
@@ -450,8 +450,8 @@
                                     <th scope="col">Actions</th>
                                   </tr>
                                 </thead>
-                         
-                           
+
+
                               <tbody class="mtop-20 f-13">
                                 <tr class="">
                                   <th scope="row">Bike</th>
@@ -509,7 +509,7 @@
                         <div> Comments</div>
 
                       </div>
-                      <div class="accordion" id="comments">
+                      <div class="" id="comments">
                         <div class="d-flex  flex-row  p-10 border-bottom">
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
@@ -544,13 +544,13 @@
                   </div>
                   <div class="tab-pane fade  pt-20  border-top" id="past" role="tabpanel" aria-labelledby="past-tab">
                     <form class="quation-form">
-                      <div class="p-0  border-top-2 order-cards"> 
+                      <div class="p-0  border-top-2 order-cards">
                           <div class="d-flex justify-content-center f-14 theme-text text-center ">
                               Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
                            </div>
-                          
+
                            <div class="d-flex flex-row justify-content-around f-14 theme-text text-center p-10 quotation">
-              
+
                                <div class="flex-column justify-content-center test">
                                 <div class="card m-20  card-price eco cursor-pointer"  >
                                   <div class="p-60 f-32 border-cicle eco-card" >
@@ -561,74 +561,74 @@
                                 </div>
                                 <div class="radio-group">
                                   <div class="form-input radio-item ">
-                                    
-                                    <input type="radio" id="economy" name="economy-premium" 
+
+                                    <input type="radio" id="economy" name="economy-premium"
                                     class="radio-button__input cursor-pointer">
                                    <label class="" for="economy"></label>
-                                    
+
                                  </div>
                                 </div>
-                                 
-                                  
+
+
                                </div>
-                             
-                             
+
+
                               <div class="felx-column">
-                               
+
                                 <div class="card m-20 card-price pre  cursor-pointer ">
                                   <div class="p-60 f-32  border-cicle pre-card  " >
                                     <div>₹ 3,300</div>
                                     <div class="f-14 p-1">Base price</div>
-                                   
+
                                    </div>
                                    <div class="p-10 f-18">  Premium</div>
                                 </div>
-                               
+
                                 <div class="radio-group">
                                   <div class="form-input radio-item ">
-                                    
-                                    <input type="radio" id="premium" name="economy-premium" 
+
+                                    <input type="radio" id="premium" name="economy-premium"
                                     class="radio-button__input ">
                                    <label class="" for="premium"></label>
-                                    
+
                                  </div>
                                 </div>
-                                     
+
                               </div>
-                    
+
                            </div>
-                           
+
                       </div>
                   <!-- Resaosn for rejaction -->
                   <div class="d-flex  justify-content-center">
                     <div class="w-50  f-14 theme-text text-left diplay-none  rejection-message">
                       <div ><h4 class="heading">Reason For Rejection</h4></div>
                       <div class="form-input">
-                       
+
                         <span class="">
                           <textarea  placeholder="Need to Include bike" id="" class="form-control" rows="4" cols="50">
-                           
+
                             </textarea>
                          <span class="error-message">Please enter  valid</span>
                         </span>
-                       
-                         
+
+
                      </div>
                      </div>
                   </div>
-              
+
                   <!-- Order successfull -->
                   <div class="border-bottom-2 Order-sucess diplay-none">
-                   
+
                       <div class="d-flex justify-content-center p-60 ">
                         <i class=""> <img src="{{asset('static/images/checkmark.svg')}}" alt="" srcset="" class=""></i>
                       </div>
-              
-                      
-                    
+
+
+
                     <h3 class="theme-text text-center">Order Placed successfully</h3>
                   </div>
-                  
+
                 </form>
                      <!-- Buttons -->
                      <div class="d-flex justify-content-between flex-row p-8">

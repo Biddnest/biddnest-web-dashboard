@@ -196,8 +196,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">Banner Name</label>
-                    <input
-                        type="text"
+                    <input type="text"
                         id="name" required
                         autocomplete="off"
                         placeholder="Diwali"

@@ -195,6 +195,7 @@ class WebController extends Controller
 
     public function createCategories()
     {
+
         return view('categories.createcategories');
     }
 
@@ -207,7 +208,9 @@ class WebController extends Controller
 
     public function createSubcateories()
     {
-        return view('categories.createsubcateories');
+        $categories = Service::get();
+        $inventory = Inventory::get();
+        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory]);
     }
 
     public function inventories()

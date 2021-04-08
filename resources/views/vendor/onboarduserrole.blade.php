@@ -84,7 +84,7 @@
                         <div class="form-input">
                             <label class="full-name">Employee First Name</label>
                             <span class="">
-                                        <input type="text" id="fullname" placeholder="David" value="David"
+                                        <input type="text" id="fullname" placeholder="First Name" value=""
                                                class="form-control">
                                         <span class="error-message">Please enter valid
                                             First Name</span>
@@ -95,7 +95,7 @@
                         <div class="form-input">
                             <label class="full-name">Employee Last Name</label>
                             <span class="">
-                                        <input type="text" id="fullname" placeholder="Jerome" value=""
+                                        <input type="text" id="fullname" placeholder="Last Name" value=""
                                                class="form-control">
                                         <span class="error-message">Please enter valid
                                             Last Name</span>
@@ -116,27 +116,24 @@
                     <div class="col-lg-6">
                         <div class="form-input">
                             <label class="full-name">Role Type</label>
-                            <span class="">
-                                        <select id="" class="form-control">
-                                            <option>Junior Engineer</option>
-                                            <option>Senior Engineer</option>
-                                        </select>
-                                        <span class="error-message">Please enter valid
-                                            Service</span>
-                                    </span>
+                            <select id="role" name="role" class="form-control">
+                                <option value="">--Select--</option>
+                                @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$type)
+                                    <option value="{{$type}}">{{$key}}</option>
+                                @endforeach
+                            </select>
+                            <span class="error-message">Please enter valid Service</span>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-input">
-                            <label class="full-name">Vendor ID</label>
-                            <span class="">
-                                        <input type="text" id="fullname" placeholder="V1234567" value=""
-                                               class="form-control">
-                                        <span class="error-message">Please enter valid
-                                            Vendor ID</span>
-                                    </span>
-                        </div>
-                    </div>
+
+{{--                    <div class="col-lg-6">--}}
+{{--                        <div class="form-input">--}}
+{{--                            <label class="full-name">Vendor ID</label>--}}
+{{--                            <input type="text" id="fullname" placeholder="V1234567" value=""--}}
+{{--                                               class="form-control">--}}
+{{--                            <span class="error-message">Please enter valid Vendor ID</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="col-lg-6">
                         <div class="form-input">
                             <label class="full-name">Branch</label>
@@ -150,22 +147,22 @@
                                     </span>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-input">
-                            <label class="full-name">Organization ID</label>
-                            <span class="">
-                                        <input type="text" id="fullname" placeholder="O123456" value="ORG123456"
-                                               class="form-control">
-                                        <span class="error-message">Please enter valid
-                                            Organization ID</span>
-                                    </span>
-                        </div>
-                    </div>
+{{--                    <div class="col-lg-6">--}}
+{{--                        <div class="form-input">--}}
+{{--                            <label class="full-name">Organization ID</label>--}}
+{{--                            <span class="">--}}
+{{--                                        <input type="text" id="fullname" placeholder="O123456" value="ORG123456"--}}
+{{--                                               class="form-control">--}}
+{{--                                        <span class="error-message">Please enter valid--}}
+{{--                                            Organization ID</span>--}}
+{{--                                    </span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="col-lg-6">
                         <div class="form-input">
                             <label class="full-name">Email ID</label>
                             <span class="">
-                                        <input type="email" id="fullname" placeholder="abc@email.com" value="davidjerome@mail.com"
+                                        <input type="email" id="fullname" placeholder="role@email.com" value=""
                                                class="form-control">
                                         <span class="error-message">Please enter valid
                                             Email</span>

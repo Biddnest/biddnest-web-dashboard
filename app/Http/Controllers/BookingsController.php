@@ -223,10 +223,10 @@ class BookingsController extends Controller
 
         dispatch(function() use($booking_id, $user_id,$complete_time, $public_booking_id) {
 
-            NotificationController::sendTo("user",[$user_id], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
-                "type"=>NotificationEnums::$TYPE['booking'],
-                "public_booking_id"=>$public_booking_id
-            ]);
+//            NotificationController::sendTo("user",[$user_id], "Your booking has been confirmed.","We are get the best price you. You will be notified soon.",[
+//                "type"=>NotificationEnums::$TYPE['booking'],
+//                "public_booking_id"=>$public_booking_id
+//            ]);
             BidController::addvendors($booking_id);
 
         })->afterResponse();

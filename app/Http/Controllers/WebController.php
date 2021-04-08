@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\ServiceEnums;
+use App\Enums\VendorEnums;
+use App\Enums\OrganizationEnums;
 use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\Coupon;
@@ -13,6 +15,7 @@ use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
 use App\Models\Organization;
+use App\Models\Vendor;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -69,7 +72,7 @@ class WebController extends Controller
         return view('general_settings');
     }
 
-    public function ordersBookingsLive()
+    public function ordersBookingsLive(Request $request)
     {
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
             ->with('service')
@@ -82,7 +85,7 @@ class WebController extends Controller
         ]);
     }
 
-    public function ordersBookingsPast()
+    public function ordersBookingsPast(Request $request)
     {
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
                 ->with("service")
@@ -104,7 +107,7 @@ class WebController extends Controller
     {
         return view('order.createorder');
     }
-    public function customers()
+    public function customers(Request $request)
     {
         return view('customer.customer',[
             "users"=>User::orderBy("id","DESC")->paginate(15)
@@ -116,9 +119,17 @@ class WebController extends Controller
         return view('customer.createcustomer');
     }
 
-    public function vendors()
+    public function vendors(Request $request)
     {
-        return view('vendor.vendor');
+        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"]])
+            ->with(['vendor'=> function ($query) {
+            $query->where(["status"=>VendorEnums::$STATUS["active"], "user_role"=>VendorEnums::$ROLES['admin']]);
+        }])->orderBy("id","DESC")
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+        $count_vendors = Organization::where("status", CommonEnums::$YES)->count();
+        $count_verified_vendors = Organization::where("status", CommonEnums::$YES)->count();
+        $count_unverifide_vendors = Organization::where("status", CommonEnums::$YES)->count();
+        return view('vendor.vendor',['vendors'=>$vendors, 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
     }
 
     public function createOnboardVendors()

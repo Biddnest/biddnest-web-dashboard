@@ -17,36 +17,36 @@
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">Vendor Management</li>
                                       <li class="breadcrumb-item"><a href="#"> Manage Vendor</a></li>
-                                      
+
                                     </ol>
                                   </nav>
-                                
-                                
+
+
                                 </div>
-                          
+
                             </div>
 
                             <div class="vender-all-details">
-                                <div class="simple-card">
+                                <div class="simple-card" style="width: 30%;">
                                     <p>TOTAL VENDORS</p>
-                                    <h1>3,459</h1>
+                                    <h1>{{ $vendors_count }}</h1>
                                 </div>
-                                <div class="simple-card">
+                                <div class="simple-card" style="width: 30%;">
                                     <p>UNVERIFIED VENDORS</p>
-                                    <h1>865</h1>
+                                    <h1>{{$unverifide_vendors}}</h1>
                                 </div>
-                                <div class="simple-card">
+                                <div class="simple-card" style="width: 30%;">
                                     <p> VERIFIED VENDORS</p>
-                                    <h1>2,594</h1>
+                                    <h1>{{$verifide_vendors}}</h1>
                                 </div>
-                                <div class="simple-card">
-                                    <p> ECONOMIC VENDORS</p>
-                                    <h1>2,594</h1>
-                                </div>
-                                <div class="simple-card">
-                                    <p> PREMIUM VENDORS</p>
-                                    <h1>2,248</h1>
-                                </div>
+{{--                                <div class="simple-card">--}}
+{{--                                    <p> ECONOMIC VENDORS</p>--}}
+{{--                                    <h1>2,594</h1>--}}
+{{--                                </div>--}}
+{{--                                <div class="simple-card">--}}
+{{--                                    <p> PREMIUM VENDORS</p>--}}
+{{--                                    <h1>2,248</h1>--}}
+{{--                                </div>--}}
                             </div>
                             <!-- Dashboard cards -->
 
@@ -60,7 +60,7 @@
                                                 <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                                             </a> -->
 
-                                            
+
                                                 <div class="col-sm-8 p-3 ">
                                                     <h3 class="f-18 pl-8 title">All Vendors</h3 >
 
@@ -112,7 +112,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -128,88 +128,59 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mtop-20">
-                                                    <tr class="tb-border cursor-pointer"
-                                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>Bengaluru</td>
-                                                        <td class="">
-                                                            <div class="status-badge light-bg light-bg">In Process</div>
-                                                        </td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer"
-                                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>Bengaluru</td>
-                                                        <td class="">
-                                                            <div class="status-badge light-bg light-bg">In Process</div>
-                                                        </td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer"
-                                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>Bengaluru</td>
-                                                        <td class="">
-                                                            <div class="status-badge light-bg light-bg">In Process</div>
-                                                        </td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer"
-                                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>Bengaluru</td>
-                                                        <td class="">
-                                                            <div class="status-badge light-bg light-bg">In Process</div>
-                                                        </td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer"
-                                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>Bengaluru</td>
-                                                        <td class="">
-                                                            <div class="status-badge light-bg light-bg">In Process</div>
-                                                        </td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
-                                                    <tr class="tb-border cursor-pointer"
-                                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>
-                                                        <td>Bengaluru</td>
-                                                        <td class="">
-                                                            <div class="status-badge light-bg light-bg">In Process</div>
-                                                        </td>
-                                                        <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                                    </tr>
+                                                    @foreach($vendors as $vendor)
+                                                        <tr class="tb-border cursor-pointer"
+                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                                            <td scope="row">
+{{--                                                                @if(isset($vendor->vendor))--}}
+                                                                {{$vendor->vendor->fname ?? "NA"}} {{$vendor->vendor->lname ?? ""}}
+{{--                                                                @endif--}}
+                                                            </td>
+                                                            <td>{{$vendor->org_name}} {{$vendor->org_type}}</td>
+                                                            <td>{{$vendor->city}}</td>
+                                                            <td>@switch($vendor->status)
+                                                                    @case(\App\Enums\OrganizationEnums::$STATUS['active'])
+                                                                    <span class="status-badge green-bg text-center">Active</span>
+                                                                    @break
+
+                                                                    @case(\App\Enums\OrganizationEnums::$STATUS['suspended'])
+                                                                    <span class="status-badge red-bg text-center"> Suspended</span>
+                                                                    @break
+                                                                    @case(\App\Enums\OrganizationEnums::$STATUS['lead'])
+                                                                    <span class="status-badge red-bg text-center"> Lead</span>
+                                                                    @break
+
+                                                                    @default
+                                                                    <span class="status-badge info-bg text-center">Unknown</span>
+                                                                @endswitch
+                                                            </td>
+
+                                                            <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
+                                                                    class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
 
                                             </table>
                                             <div class="pagination">
                                                 <ul>
                                                     <li class="p-1">Page</li>
-                                                    <li class="digit">1</li>
+                                                    <li class="digit">{{$vendors->currentPage()}}</li>
                                                     <li class="label">of</li>
-                                                    <li class="digit">20</li>
-                                                    <li class="button"><a href="#"><img src="{{ asset('static/images/Backward.svg')}}"></a></li>
-                                                    <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a></li>
+                                                    <li class="digit">{{$vendors->lastPage()}}</li>
+                                                    @if(!$vendors->onFirstPage())
+                                                        <li class="button"><a href="{{$vendors->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                        </li>
+                                                    @endif
+                                                    @if($vendors->currentPage() != $vendors->lastPage())
+                                                        <li class="button"><a href="{{$vendors->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                        </li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                     </div>
                                 </div>
-                               
+
 
                                     <!-- <div class="text-right p-20" style="float: right;">
                                         <nav aria-label="Page navigation example border-none">
@@ -231,7 +202,7 @@
                                             </ul>
                                         </nav>
                                     </div> -->
-                                
+
 
                             </div>
 

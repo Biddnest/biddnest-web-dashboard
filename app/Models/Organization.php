@@ -40,4 +40,8 @@ class Organization extends Model
         return $this->hasMany(Bid::class);
     }
 
+    public function vendor(){
+        return $this->hasOne(Vendor::class);
+    }
+
 }

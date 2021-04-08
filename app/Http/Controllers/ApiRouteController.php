@@ -492,6 +492,6 @@ class ApiRouteController extends Controller
 
     public function verifyAuth(Request $request)
     {
-        return CouponController::verifyAuth($request->request_payload->id);
+        return UserController::verifyAuth($request->request_payload->id);
     }
 }

@@ -136,6 +136,24 @@ class WebController extends Controller
     {
         return view('vendor.createvendor');
     }
+    public function onbaordEdit()
+    {
+        return view('vendor.editonboard');
+    }
+    public function onbaordBranch()
+    {
+        return view('vendor.onboardbranch');
+    }
+    public function onbaordUserRole()
+    {
+        return view('vendor.onboarduserrole');
+    }
+
+    public function onbaordBank()
+    {
+        return view('vendor.onboardbank');
+    }
+
 
     public function vendorsDetails()
     {
@@ -369,26 +387,5 @@ class WebController extends Controller
     {
         return view('vendor.onboardvendor');
     }
-
-    public function onbaordEditr()
-    {
-        return view('vendor.editonboard');
-    }
-
-    public function onbaordBranch()
-    {
-        return view('vendor.onboardaddbranch');
-    }
-
-    public function onbaordBank()
-    {
-        return view('vendor.onboardbank');
-    }
-
-    public function onbaordUserRole()
-    {
-        return view('vendor.onboarduserrole');
-    }
-
 
 }

@@ -489,9 +489,6 @@
                 border-radius: 5px;
             }
 
-
-
-
             body.dragging, body.dragging * {
                 cursor: move !important;
             }
@@ -509,6 +506,45 @@
                 border-radius: 5px;
                 border: 3px dashed #c0c0c0;
                 visibility: visible !important;
+            }
+            /*.modal-backdrop{*/
+            /*    display: none !important;*/
+            /*}*/
+            /*.modal{*/
+            /*    z-index: 999;*/
+            /*    margin-top: 15%;*/
+            /*}*/
+            .fullscreen-modal-body .modal-header::before{
+                display: none;
+            }
+            .fullscreen-modal-body .modal-header .modal-title{
+                font-weight: bold;
+                font-size: 18px;
+                text-align: left !important;
+            }
+            .fullscreen-modal-body .modal-header .close{
+                position: absolute;
+                right: 20px;
+                top:10px;
+            }
+            .fullscreen-modal-body{
+                background-color: #FFFFFF;
+                border-radius:5px;
+                position: relative;
+            }
+            .fullscreen-modal{
+                z-index: 999;
+                display: none;
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-left: 20%;
+                width: 80%;
+                min-height: 100%;
+                background-color: rgba(0,0,0,0.4);
+                padding: 5% 10%;
+                overflow-y: scroll;
+                /*background-color: #000000;*/
             }
         </style>
 

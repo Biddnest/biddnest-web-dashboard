@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Main Content -->
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createVendor">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createuserRole">
     <div class="d-flex  flex-row justify-content-between p-10">
         <h3 class="heading1 ml-4 pl-2">Onboard Vendor</h3>
     </div>
@@ -28,192 +28,172 @@
                 <div class="card-head right text-left border-bottom-2 p-10 pt-10 pb-0">
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link p-15" id="new-order-tab" data-toggle="tab"
-                                                    href="#order" role="tab" aria-controls="home"
-                                                    aria-selected="true">Onboard Vendor</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#past"
-                                                    role="tab" aria-controls="profile" aria-selected="false">Add Branch</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#past"
-                                                    role="tab" aria-controls="profile" aria-selected="false">Vendor
-                                                    Banking Details</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link active p-15" id="quotation" data-toggle="tab"
-                                                    href="#vendor-role" role="tab" aria-controls="profile"
-                                                    aria-selected="false">Vendor Roles</a>
-                                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors")}}">Edite Onboard Vendor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors")}}">Add Branch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors")}}"
+                                >Vendor Banking Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active p-15" id="quotation" href="#">Vendor Roles</a>
+                            </li>
                         </ul>
                     </h3>
                 </div>
-                
                 <div class="tab-content" id="myTabContent">
-                                        <form class="form-new-order onboard-vendor-form input-text-blue">
-                                            <div class="row p-20 pb-0">
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Employee First Name</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="David"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Employee First Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Employee Last Name </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Jerome"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Employee Last Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Role Type</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Manager</option>
-                                                                <option>Manager 2</option>
-                                                                <option>Manager 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Role Type</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Modules under this role </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter Modules here" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Modules under this role</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="phone-num-lable">Primary Contact Number</label>
-                                                        <span class="">
-                                                            <input type="tel" id="phone1" placeholder="9876543210"
-                                                                class=" form-control form-control-tel">
-                                                            <span class="error-message">Please enter valid
-                                                                Contact number</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Branch</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Delhi</option>
-                                                                <option>Mumbai</option>
-                                                                <option>Pune</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Role Type</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Vendor ID </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="V123456" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Vendor ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Email ID </label>
-                                                        <span class="">
-                                                            <input type="email" id="fullname" placeholder="abc@email.com" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Email ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Organization ID </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="O1234456" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Organization ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Password</label>
-                                                        <span class="">
-                                                            <input type="password" id="fullname" placeholder="Password" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Organization ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name ">Status</label>
-                                                   <div class="">
-                                                        <div class="d-flex justify-content-start   margin-topneg-20 white-text vendor-switch2">
-                                                        <input type="checkbox" checked data-toggle="toggle"
-                                                        data-size="xs" data-width="100" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
-                                                                                                           </div>
-                                                   </div>
-                                                            
-                                     
+                    <!-- form starts -->
+                    <div class="tab-pane">
 
-                                                          
-                                                      
-
-
-
-                                                    </div>
-                                                   
-                                                </div>
-                                                <div class="col-sm-6 mtop-20">
-                                                    <a class="white-text p-10" data-toggle="modal"
-                                                        data-target="#add-new-role">
-                                                        <button class="btn theme-bg white-text float-right">Add New Role</button></a>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex  justify-content-between flex-row  p-10 py-0"
-                                                style="border-top: 1px solid #70707040;">
-                                                <div class="w-50"><a class="white-text p-10" href="#"><button
-                                                            class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
-                                                </div>
-                                                <div class="w-50 text-right">
-                                                    <a class="white-text p-10" href="#"><button
-                                                            class="btn theme-br theme-text w-30 white-bg">Back</button></a>
-                                                    <a class="white-text p-10"><button
-                                                            class="btn theme-bg white-text w-30">Save</button></a>
-                                                </div>
-                                            </div>
-                                        </form> 
+                    </div>
+                    <div class="d-flex  justify-content-between flex-row  p-10 py-0"
+                         style="border-top: 1px solid #70707040;">
+                        <div class="w-50"> </div>
+                        <div class="w-50 text-right">
+                            <a class="white-text p-10 modal-toggle" data-target="#add-role">
+                                <button class="btn theme-bg white-text w-30">Add Branch</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+
+@section('modal')
+
+<div class="fullscreen-modal" id="add-role">
+    <div class="fullscreen-modal-body" role="document">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Role</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="#" method="POST">
+            <div class="modal-body" style="padding: 10px 9px;">
+
+                <div class="d-flex row p-20 pt-0 pb-0">
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Employee First Name</label>
+                            <span class="">
+                                        <input type="text" id="fullname" placeholder="David" value="David"
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            First Name</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Employee Last Name</label>
+                            <span class="">
+                                        <input type="text" id="fullname" placeholder="Jerome" value=""
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            Last Name</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="phone-num-lable">Employee Contact Number</label>
+                            <span class="">
+                                        <input type="tel" id="Employee" placeholder="9876543210" value=""
+                                               class=" form-control form-control-tel">
+                                        <span class="error-message">Please enter valid
+                                            Phone number</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Role Type</label>
+                            <span class="">
+                                        <select id="" class="form-control">
+                                            <option>Junior Engineer</option>
+                                            <option>Senior Engineer</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid
+                                            Service</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Vendor ID</label>
+                            <span class="">
+                                        <input type="text" id="fullname" placeholder="V1234567" value=""
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            Vendor ID</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Branch</label>
+                            <span class="">
+                                        <select id="" class="form-control">
+                                            <option>Delhi</option>
+                                            <option>Mumbai</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid
+                                            Branch</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Organization ID</label>
+                            <span class="">
+                                        <input type="text" id="fullname" placeholder="O123456" value="ORG123456"
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            Organization ID</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Email ID</label>
+                            <span class="">
+                                        <input type="email" id="fullname" placeholder="abc@email.com" value="davidjerome@mail.com"
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            Email</span>
+                                    </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-input">
+                            <label class="full-name">Password</label>
+                            <span class="">
+                                        <input type="password" id="fullname" placeholder="Enter Password" value=""
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            Password</span>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer p-15 " style="padding: 0px 5px;">
+                <div class="w-50" style="text-align: left !important;"><a class="white-text p-10" href="#" data-dismiss="modal"
+                                                                          aria-label="Close"><button
+                            class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+                <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
+                                                aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

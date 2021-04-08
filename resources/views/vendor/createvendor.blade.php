@@ -43,27 +43,21 @@
                                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
-                                                    href="#order" role="tab" aria-controls="home"
-                                                    aria-selected="true">Onboard Vendor</a>
+                                                   href="#order" role="tab" aria-controls="home"
+                                                   aria-selected="true">Onboard Vendor</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#past"
-                                                    role="tab" aria-controls="profile" aria-selected="false">Vendor
-                                                    Banking Details</a>
+                                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors")}}">Add Branch</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" data-toggle="tab"
-                                                    href="#vendor-role" role="tab" aria-controls="profile"
-                                                    aria-selected="false">Vendor Roles</a>
+                                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors")}}"
+                                                  >Vendor Banking Details</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors")}}">Vendor Roles</a>
                                             </li>
                                         </ul>
-
                                     </h3>
-
-
-
-
-
                                 </div>
                                 <div class="tab-content" id="myTabContent">
 
@@ -385,7 +379,7 @@
                                                             branch?</label>
                                                         <span class="">
 
-                                                        
+
                                                             <div
                                                                 class="d-flex justify-content-start   margin-topneg-15 white-text">
                                                                 <input type="checkbox" checked data-toggle="toggle"
@@ -402,18 +396,8 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <span class="">
-                                                            <a class="white-text" data-toggle="modal"
-                                                                data-target="#for-friend"><button
-                                                                    class="btn theme-bg white-text  my-0">Add
-                                                                    Branch</button></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
                                             </div>
-                                            <div class="accordion" id="comments">
+                                            <div id="comments">
                                                 <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                                     style="border-top: 1px solid #70707040;">
                                                     <div class="w-50"><a class="white-text p-10" href="#"><button
@@ -428,333 +412,8 @@
 
                                         </form>
 
-                                        <!-- Tab-1 form -->
-                                    </div>
-                                    <div class="tab-pane fade " id="past" role="tabpanel" aria-labelledby="past-tab">
-                                        <form class="form-new-order onboard-vendor-form input-text-blue">
-                                            <div class="row p-20">
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Account Number </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="BANK123456"
-                                                                value="6231248590" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Account Number</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Bank Name </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="ICICI Bank"
-                                                                value="ICICI Bank" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Bank Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Account Holder Name </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="David Jerome"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Account Holder Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">IFSC Code </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="ICI0012145"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                IFSC Code</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Branch Name </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Indiranagar"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Branch Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p class="img-label">Aadhaar Card</p>
-                                                    <div class="upload-section p-20 pt-0">
-                                                        <img  src="{{asset('static/images/upload-ing.svg')}}" alt="">
-                                                        <div class="ml-1">
-                                                            <div class="file-upload cursor-pointer">
-                                                                <input id="aadhar-upload" type="file" class="cursor-pointer" >
-                                                                <!-- <img id="aadhar-preview" class="uploaded-img-preview" src="#" /> -->
-                                                                <button id="upload-btn"
-                                                                    class="btn theme-bg white-text my-0 cursor-pointer">UPLOAD
-                                                                    FILE</button>
-                                                            </div>
-
-
-                                                            <p id="file-aadhar">Max File size: 2MB</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4">
-                                                    <p class="img-label">GST Certificate</p>
-                                                    <div class="upload-section p-20 pt-0">
-                                                        <img src="{{asset('static/images/upload-ing.svg')}}" alt="">
-                                                        <div class="ml-1">
-                                                            <div class="file-upload">
-                                                                <input type="file">
-                                                                <button class="btn theme-bg white-text my-0">UPLOAD
-                                                                    FILE</button>
-                                                            </div>
-
-
-                                                            <p>Max File size: 2MB</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4">
-                                                    <p class="img-label">Agreement with Biddnest</p>
-                                                    <div class="upload-section p-20 pt-0">
-                                                        <img src="{{asset('static/images/upload-ing.svg')}}" alt="">
-                                                        <div class="ml-1">
-                                                            <div class="file-upload">
-                                                                <input type="file">
-                                                                <button class="btn theme-bg white-text my-0">UPLOAD
-                                                                    FILE</button>
-                                                            </div>
-
-
-                                                            <p>Max File size: 2MB</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <p class="img-label">PAN Card</p>
-                                                    <div class="upload-section p-20 pt-0">
-                                                        <img src="{{asset('static/images/upload-ing.svg')}}" alt="">
-                                                        <div class="ml-1">
-                                                            <div class="file-upload">
-                                                                <input type="file">
-                                                                <button class="btn theme-bg white-text my-0">UPLOAD
-                                                                    FILE</button>
-                                                            </div>
-
-
-                                                            <p>Max File size: 2MB</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <p class="img-label">Company Registration Certificate</p>
-                                                    <div class="upload-section p-20 pt-0">
-                                                        <img src="{{asset('static/images/upload-ing.svg')}}" alt="">
-                                                        <div class="ml-1">
-                                                            <div class="file-upload">
-                                                                <input type="file">
-                                                                <button class="btn theme-bg white-text my-0">UPLOAD
-                                                                    FILE</button>
-                                                            </div>
-
-
-                                                            <p>Max File size: 2MB</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex  justify-content-between flex-row  p-10 py-0"
-                                                style="border-top: 1px solid #70707040;">
-                                                <div class="w-50"><a class="white-text p-10" href="#"><button
-                                                            class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
-                                                </div>
-                                                <div class="w-50 text-right">
-                                                    <a class="white-text p-10" href="#"><button
-                                                            class="btn theme-br theme-text w-30 white-bg">Back</button></a>
-                                                    <a class="white-text p-10"><button
-                                                            class="btn theme-bg white-text w-30">Next</button></a>
-                                                </div>
-                                            </div>
-                                        </form>
-
                                     </div>
 
-                                    <!--  -->
-                                    <div class="tab-pane fade" id="vendor-role" role="tabpanel"
-                                        aria-labelledby="past-tab">
-                                        <form class="form-new-order onboard-vendor-form input-text-blue">
-                                            <div class="row p-20 pb-0">
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Employee First Name</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="David"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Employee First Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Employee Last Name </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Jerome"
-                                                                value="" class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Employee Last Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Role Type</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Manager</option>
-                                                                <option>Manager 2</option>
-                                                                <option>Manager 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Role Type</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Modules under this role </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter Modules here" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Modules under this role</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="phone-num-lable">Primary Contact Number</label>
-                                                        <span class="">
-                                                            <input type="tel" id="phone1" placeholder="9876543210"
-                                                                class=" form-control form-control-tel">
-                                                            <span class="error-message">Please enter valid
-                                                                Contact number</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Branch</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Delhi</option>
-                                                                <option>Mumbai</option>
-                                                                <option>Pune</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Role Type</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Vendor ID </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="V123456" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Vendor ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Email ID </label>
-                                                        <span class="">
-                                                            <input type="email" id="fullname" placeholder="abc@email.com" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Email ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Organization ID </label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="O1234456" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Organization ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Password</label>
-                                                        <span class="">
-                                                            <input type="password" id="fullname" placeholder="Password" value=""
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Organization ID</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name ">Status</label>
-                                                   <div class="">
-                     <div class="d-flex justify-content-start   margin-topneg-20 white-text vendor-switch2">
-                                                        <input type="checkbox" checked data-toggle="toggle"
-                                                        data-size="xs" data-width="100" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
-                                                                                                           </div>
-                                                   </div>
-                                                            
-                                     
-
-                                                          
-                                                      
-
-
-
-                                                    </div>
-                                                   
-                                                </div>
-                                                <div class="col-sm-6 mtop-20">
-                                                    <a class="white-text p-10" data-toggle="modal"
-                                                        data-target="#add-new-role">
-                <button class="btn theme-bg white-text float-right">Add New Role</button></a>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex  justify-content-between flex-row  p-10 py-0"
-                                                style="border-top: 1px solid #70707040;">
-                                                <div class="w-50"><a class="white-text p-10" href="#"><button
-                                                            class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
-                                                </div>
-                                                <div class="w-50 text-right">
-                                                    <a class="white-text p-10" href="#"><button
-                                                            class="btn theme-br theme-text w-30 white-bg">Back</button></a>
-                                                    <a class="white-text p-10"><button
-                                                            class="btn theme-bg white-text w-30">Save</button></a>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
 
                             </div>

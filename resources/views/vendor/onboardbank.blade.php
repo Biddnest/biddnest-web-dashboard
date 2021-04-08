@@ -28,29 +28,23 @@
                 <div class="card-head right text-left border-bottom-2 p-10 pt-10 pb-0">
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link p-15" id="new-order-tab" data-toggle="tab"
-                                                    href="#order" role="tab" aria-controls="home"
-                                                    aria-selected="true">Onboard Vendor</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#branch"
-                                                    role="tab" aria-controls="profile" aria-selected="false">Add Branch</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link active p-15" id="quotation" data-toggle="tab" href="#past"
-                                                    role="tab" aria-controls="profile" aria-selected="false">Vendor
-                                                    Banking Details</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" data-toggle="tab"
-                                                    href="#vendor-role" role="tab" aria-controls="profile"
-                                                    aria-selected="false">Vendor Roles</a>
-                                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors")}}">Edite Onboard Vendor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors")}}">Add Branch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active p-15" id="quotation" href="#"
+                                >Vendor Banking Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors")}}">Vendor Roles</a>
+                            </li>
                         </ul>
                     </h3>
                 </div>
-            
+
                 <div class="tab-content" id="myTabContent">
                                         <form class="form-new-order onboard-vendor-form input-text-blue">
                                             <div class="row p-20">
@@ -214,7 +208,7 @@
 
                 </div>
             </div>
-           
+
         </div>
     </div>
 </div>

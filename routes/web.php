@@ -238,13 +238,13 @@ Route::get('/debug/socket', function () {
 });
 
 Route::get('/debug/push/booking', function () {
-    return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+    return NotificationController::sendTo("vendor", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
         "type" => NotificationEnums::$TYPE['booking'],
         "public_booking_id" => "BD606AD99B49C69"
     ], null);
 });
 Route::get('/debug/push/url', function () {
-    return NotificationController::sendTo("vendor", [2], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+    return NotificationController::sendTo("vendor", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
         "type" => NotificationEnums::$TYPE['link'],
         "url" => "https://google.com"
     ], null);

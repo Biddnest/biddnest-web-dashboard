@@ -220,16 +220,19 @@ class OrganisationController extends Controller
             "meta" =>json_encode($meta)
         ]);
 
+        OrganizationService::where("organization_id", $id)->delete();
         foreach($data['service'] as $value)
         {
-            $result_service=OrganizationService::where("organization_id", $id)
-            ->update(["service_id"=>$value]);
+            $service=new OrganizationService;
+            $service->organization_id=$id;
+            $service->service_id =$value;
+           $result_service = $service->save();
         }
 
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
+        return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
     public static function deleteBranch($id, $parent_org_id)

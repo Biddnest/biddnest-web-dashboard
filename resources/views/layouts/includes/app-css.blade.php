@@ -599,8 +599,7 @@
                 /*border: 1px solid #000;*/
             }
             .branch-wrapper{
-                margin: 5% 0 10% 0;
-
+                margin: 2% 0 2% 0;
             }
         </style>
 

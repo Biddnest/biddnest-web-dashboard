@@ -274,7 +274,26 @@ class VendorUserController extends Controller
 
     public static function updateStatus(Request $request)
     {
-         $update_status = Vendor::where('id',$request->id)->update(["status"=>$request->status]);
+        if($request->id == $request->token_payload->id)
+            return Helper::response(false, "You can not disable yourself.");
+
+        $vendor = Vendor::find($request->id);
+        $status = 0;
+        switch($vendor->status){
+            case VendorEnums::$STATUS['active']:
+                $status = VendorEnums::$STATUS['inactive'];
+                break;
+
+            case VendorEnums::$STATUS['inactive']:
+                $status = VendorEnums::$STATUS['active'];
+                break;
+
+            default:
+                return Helper::response([false, "This user is supended. Please use the vendor panel to enable."]);
+                break;
+        }
+
+         $update_status = Vendor::where('id',$request->id)->update(["status"=>$status]);
          if(!$update_status)
              return Helper::response(false, "failed to updated status");
 

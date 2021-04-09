@@ -408,4 +408,15 @@ class VendorUserController extends Controller
         return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
     }
 
+    public static function verifyAuth($id)
+    {
+        $user = Vendor::find($id);
+        if ($user->status == VendorEnums::$STATUS['active'])
+            return Helper::response(true, "User authenticated successfully");
+        elseif ($user->status == VendorEnums::$STATUS['suspended'])
+            return Helper::response(false, "You are suspended from using this application. Please contact your organization admin.", null, 401);
+        else
+            return Helper::response(false, "Something went wrong in server. Please contact your organization admin.", null, 401);
+    }
+
 }

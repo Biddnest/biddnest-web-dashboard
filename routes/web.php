@@ -149,13 +149,12 @@ Route::prefix('admin')->group(function () {
         Route::prefix('vendors')->group(function () {
             Route::get('/',[WebController::class,'vendors'])->name("vendors");
             Route::get('/details',[WebController::class,'vendorsDetails'])->name("vendor-details");
-            Route::get('/create',[WebController::class,'createOnboardVendors'])->name("create-vendors");
             Route::get('/lead',[WebController::class,'leadVendors'])->name("lead-vendors");
             Route::get('/pending',[WebController::class,'pendingVendors'])->name("pending-vendors");
             Route::get('/verified',[WebController::class,'verifiedVendors'])->name("verified-vendors");
 
 
-            Route::get('/onboard',[WebController::class,'onbaordVendor'])->name("onboard-vendors");
+            Route::get('/onboard',[WebController::class,'createOnboardVendors'])->name("create-vendors");
             Route::get('/onboard/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
             Route::get('/onboard/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
             Route::get('/onboard/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");

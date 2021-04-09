@@ -75,6 +75,7 @@ class WebController extends Controller
     public function ordersBookingsLive(Request $request)
     {
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+            ->orWhere("deleted", CommonEnums::$NO)
             ->with('service')
             ->with('organization')
             ->orderBy("id","DESC")
@@ -88,6 +89,7 @@ class WebController extends Controller
     public function ordersBookingsPast(Request $request)
     {
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+           ->orWhere("deleted", CommonEnums::$NO)
                 ->with("service")
             ->with('organization')
             ->orderBy("id","DESC")
@@ -121,28 +123,32 @@ class WebController extends Controller
 
     public function vendors(Request $request)
     {
-        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"]])
+        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO])
             ->with(['vendor'=> function ($query) {
-            $query->where(["status"=>VendorEnums::$STATUS["active"], "user_role"=>VendorEnums::$ROLES['admin']]);
+            $query->where(["status"=>VendorEnums::$STATUS["active"], "user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
         }])
             ->paginate(CommonEnums::$PAGE_LENGTH);
-        $count_vendors = Organization::where("status", CommonEnums::$YES)->count();
-        $count_verified_vendors = Organization::where("status", CommonEnums::$YES)->count();
-        $count_unverifide_vendors = Organization::where("status", CommonEnums::$YES)->count();
+        $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
+        $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
+        $count_unverifide_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         return view('vendor.vendor',['vendors'=>$vendors, 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
     }
 
     public function createOnboardVendors()
     {
-        return view('vendor.createvendor');
+        $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor.createvendor', ['services'=>$services]);
     }
     public function onbaordEdit()
     {
         return view('vendor.editonboard');
     }
-    public function onbaordBranch()
+    public function onbaordBranch(Request $request)
     {
-        return view('vendor.onboardbranch');
+        $branch = Organization::where(["parent_org_id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('services')->get();
+        $organization = Organization::where(["id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->first();
+        $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor.onboardbranch', ['id'=>$request->id, 'services'=>$services, 'branches'=>$branch, 'organization'=>$organization]);
     }
     public function onbaordUserRole()
     {
@@ -157,14 +163,15 @@ class WebController extends Controller
 
     public function vendorsDetails()
     {
+
         return view('vendor.vendordetails');
     }
 
     public function leadVendors()
     {
-        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"]])
+        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO])
             ->with(['vendor'=> function ($query) {
-                $query->where(["status"=>VendorEnums::$STATUS["lead"], "user_role"=>VendorEnums::$ROLES['admin']]);
+                $query->where(["status"=>VendorEnums::$STATUS["lead"], "user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
             }])->with('zone')
             ->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor.lead',['leads'=>$leads]);
@@ -177,9 +184,9 @@ class WebController extends Controller
 
     public function verifiedVendors()
     {
-        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES])
+        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
             ->with(['vendor'=> function ($query) {
-                $query->where(["user_role"=>VendorEnums::$ROLES['admin']]);
+                $query->where(["user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
             }])->with('zone')
             ->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor.verified',['vendors'=>$vendors]);
@@ -188,7 +195,7 @@ class WebController extends Controller
     public function categories()
     {
         return view('categories.categories',[
-            "categories"=>Service::paginate(CommonEnums::$PAGE_LENGTH),
+            "categories"=>Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
             "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
         ]);
     }
@@ -202,21 +209,21 @@ class WebController extends Controller
     public function subcateories()
     {
         return view('categories.subcateories',[
-            "subcategories"=>Subservice::paginate(CommonEnums::$PAGE_LENGTH)
+            "subcategories"=>Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
     public function createSubcateories()
     {
-        $categories = Service::get();
-        $inventory = Inventory::get();
+        $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory]);
     }
 
     public function inventories()
     {
         return view('categories.inventories',[
-            "inventories"=>Inventory::paginate(CommonEnums::$PAGE_LENGTH)
+            "inventories"=>Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -232,7 +239,7 @@ class WebController extends Controller
 
     public function coupons()
     {
-        $coupons = Coupon::orderBy('id','DESC')->paginate(CommonEnums::$PAGE_LENGTH);
+        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->paginate(CommonEnums::$PAGE_LENGTH);
         return view('coupons.coupons',[
             "coupons"=>$coupons
         ]);
@@ -240,7 +247,7 @@ class WebController extends Controller
 
     public function createCoupons()
     {
-        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->get()]);
+        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get()]);
     }
 
     public function detailsCoupons()
@@ -251,7 +258,7 @@ class WebController extends Controller
     public function zones()
     {
         return view('zones.zones',[
-            "zones"=>Zone::paginate(CommonEnums::$PAGE_LENGTH)
+            "zones"=>Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -269,7 +276,7 @@ class WebController extends Controller
     public function slider()
     {
         return view('sliderandbanner.slider',[
-            "sliders"=>Slider::with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
+            "sliders"=>Slider::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -384,11 +391,6 @@ class WebController extends Controller
     public function detailsUsers()
     {
         return view('users.detailseusers');
-    }
-
-    public function onbaordVendor()
-    {
-        return view('vendor.onboardvendor');
     }
 
 }

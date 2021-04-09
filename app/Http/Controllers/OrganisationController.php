@@ -67,8 +67,9 @@ class OrganisationController extends Controller
             $vendor->email = strtolower($admin['email']);
             $vendor->phone = $admin['phone'];
             $vendor->pin = null;
-            $avatar_file_name = $admin['fname']."-".$admin['lname']."-".uniqid().".png";
-            $vendor->image = Helper::saveFile(Helper::generateAvatar(strtoupper($admin['fname'])." ".strtoupper($admin['lname'])),$avatar_file_name,"avatars");
+            $image_man = new ImageManager(array('driver' => 'gd'));
+            $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
+            $vendor->image = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
             $vendor->organization_id = $organizations->id;
             $vendor->meta = json_encode($admin_meta);
             $vendor->user_role = VendorEnums::$ROLES["admin"];
@@ -78,7 +79,7 @@ class OrganisationController extends Controller
         if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
 
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
+        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
     }
 
     public static function update($data, $meta, $admin, $id)
@@ -219,16 +220,19 @@ class OrganisationController extends Controller
             "meta" =>json_encode($meta)
         ]);
 
+        OrganizationService::where("organization_id", $id)->delete();
         foreach($data['service'] as $value)
         {
-            $result_service=OrganizationService::where("organization_id", $id)
-            ->update(["service_id"=>$value]);
+            $service=new OrganizationService;
+            $service->organization_id=$id;
+            $service->service_id =$value;
+           $result_service = $service->save();
         }
 
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
+        return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
     public static function deleteBranch($id, $parent_org_id)

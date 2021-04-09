@@ -47,14 +47,14 @@
                                                    aria-selected="true">Onboard Vendor</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors")}}">Add Branch</a>
+                                                <a class="nav-link p-15 disabled" id="quotation" href="#">Add Branch</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors")}}"
+                                                <a class="nav-link p-15 disabled" id="quotation" href="#"
                                                   >Vendor Banking Details</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors")}}">Vendor Roles</a>
+                                                <a class="nav-link p-15 disabled" id="quotation" href="#">Vendor Roles</a>
                                             </li>
                                         </ul>
                                     </h3>
@@ -64,72 +64,57 @@
                                     <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                                         aria-labelledby="new-order-tab">
                                         <!-- form starts -->
-                                        <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue">
-
-                                            <p class="img-label">Image</p>
-                                            <div class="upload-section p-20 pt-0">
-                                                <img src="{{asset('static/images/upload-image.svg')}}" alt="">
-                                                <div class="ml-1">
-                                                    <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
-
-                                                    <div class="file-upload">
-                                                        <input type="file">
-                                                        <button class="btn theme-bg white-text my-0">UPLOAD
-                                                            IMAGE</button>
-                                                    </div>
-
-
-                                                    <p>Max File size: 1MB</p>
-                                                </div>
-                                            </div>
-
+                                        <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_onvoard_vendor')}}" method="POST" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>':id'])}}" data-alert="mega" data-parsley-validate>
 
                                             <div class="d-flex row p-20">
                                                 <div class="col-lg-6">
+                                                    <p class="img-label">Image</p>
+                                                    <div class="upload-section p-20 pt-0">
+                                                        <img class="upload-preview"
+                                                             src="{{asset('static/images/upload-image.svg')}}"
+                                                             alt=""
+                                                        />
+                                                        <div class="ml-1">
+                                                            <div class="file-upload">
+                                                                <input type="file" />
+                                                                <input type="hidden" class="base-holder" name="image" value="" required />
+                                                                <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                                                    UPLOAD IMAGE
+                                                                </button>
+                                                            </div>
+                                                            <p class="text-black">Max File size: 1MB</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                </div>
+                                                <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Authorizer First Name</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="David"
-                                                                class="form-control">
+                                                            <input type="text" id="fullname" placeholder="First Name"
+                                                                class="form-control" name="fname" required>
                                                             <span class="error-message">Please enter valid
                                                                 First Name</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Authorizer Last Name</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Jerome"
-                                                                class="form-control">
+                                                            <input type="text" id="fullname" placeholder="Last Name"
+                                                                class="form-control" name="lname" required>
                                                             <span class="error-message">Please enter valid
-                                                                First Name</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Vendor Role</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Vendor role"
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Vendor Role</span>
-                                                        </span>
+                                                                Last Name</span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Email ID</label>
-                                                        <span class="">
-                                                            <input type="email" id="fullname" placeholder="abc@email.com"
-                                                                class="form-control">
+                                                            <input type="email" id="email" placeholder="abc@email.com"
+                                                                class="form-control" name="email">
                                                             <span class="error-message">Please enter valid
                                                                 Email ID</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -137,12 +122,10 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="phone-num-lable">Primary Contact Number</label>
-                                                        <span class="">
                                                             <input type="tel" id="phone" placeholder="9876543210"
-                                                                class=" form-control form-control-tel">
+                                                                class=" form-control form-control-tel" name="phone[primary]" required>
                                                             <span class="error-message">Please enter valid
                                                                 Phone number</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -150,39 +133,20 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="phone-num-lable">Secondary Contact Number</label>
-                                                        <span class="">
                                                             <input type="tel" id="phone-pop-up" placeholder="9876543210"
-                                                                class=" form-control form-control-tel">
+                                                                class=" form-control form-control-tel" name="phone[secondory]">
                                                             <span class="error-message">Please enter valid
                                                                 Phone number</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="phone-num-lable">Gender</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Female</option>
-                                                                <option>Male</option>
-                                                                <option>Other</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Organization Name</label>
-                                                        <span class="">
                                                             <input type="text" id="fullname" placeholder="Wayne Pvt Ltd"
-                                                                class="form-control">
+                                                                class="form-control" name="organization[org_name]" required>
                                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -190,27 +154,20 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="phone-num-lable">Organisation Type</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>type 1</option>
-                                                                <option>type 2</option>
-                                                                <option>type 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
-                                                        </span>
+                                                        <input type="text" id="fullname" placeholder="Pvt Ltd"
+                                                               class="form-control" name="organization[org_type]" required>
+                                                        <span class="error-message">Please enter valid
+                                                                Organization Type</span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">GSTIN Number of Organisation</label>
-                                                        <span class="">
                                                             <input type="text" id="fullname" placeholder="GST12355464"
-                                                                class="form-control">
+                                                                class="form-control" name="organization[gstin]" maxlength="15" minlength="15">
                                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -218,181 +175,167 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-input">
                                                         <label class="full-name">Organization Description</label>
-                                                        <span class="">
-                                                            <textarea placeholder="Need to Include bike"
-                                                                style="resize: none;" id="" class="form-control "
-                                                                rows="4" cols="50" spellcheck="false">
+                                                            <textarea placeholder="Add Organization Description"
+                                                                 id="" class="form-control"
+                                                                rows="4" cols="50" spellcheck="false" name="organization[description]" required>
                                                                           </textarea>
                                                             <span class="error-message">Please enter valid
                                                                 Description</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
-                                                        <label class="full-name">Address Line 1</label>
-                                                        <span class="">
+                                                        <label class="full-name">Address</label>
                                                             <input type="text" id="fullname" placeholder="Enter address here"
-                                                                class="form-control">
+                                                                class="form-control" name="address[address]" required>
                                                             <span class="error-message">Please enter valid
                                                                 Address Line</span>
-                                                        </span>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
-                                                        <label class="full-name">Address Line 2</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter Address here"
-                                                                class="form-control">
+                                                        <label class="full-name">Landmark</label>
+                                                            <input type="text" id="fullname" placeholder="Enter Landmark here"
+                                                                   class="form-control" name="address[landmark]" required>
                                                             <span class="error-message">Please enter valid
-                                                                Address Line</span>
-                                                        </span>
+                                                                Landmark</span>
                                                     </div>
                                                 </div>
-
-
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Lattitude</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Lattitude"
-                                                                class="form-control">
+                                                            <input type="text" id="fullname" placeholder="13.0332428"
+                                                                class="form-control" name="address[lat]" required>
                                                             <span class="error-message">Please enter valid
                                                                 Lattitude</span>
-                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Longitude</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Longitude"
-                                                                class="form-control">
+                                                            <input type="text" id="fullname" placeholder="80.0477609"
+                                                                class="form-control" name="address[lng]" required>
                                                             <span class="error-message">Please enter valid
                                                                 Longitude</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
-
-
-                                                <div class="col-lg-6">
-                                                    <div class="form-input">
-                                                        <label class="full-name">Landmark</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter Landmark here"
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Landmark</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Zone</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Bengaluru Urban"
-                                                                class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Zone</span>
-                                                        </span>
+                                                        <select  class="form-control br-5" name="zone" required>
+                                                            <option value="">--Select--</option>
+                                                            @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                                <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="error-message">Please enter valid Zone</span>
                                                     </div>
                                                 </div>
-
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">State</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>State 1</option>
-                                                                <option>State 2</option>
-                                                                <option>State 3</option>
+                                                            <select id="state" class="form-control" name="address[state]">
+                                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                                <option value="Assam">Assam</option>
+                                                                <option value="Bihar">Bihar</option>
+                                                                <option value="Chandigarh">Chandigarh</option>
+                                                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                                                <option value="Daman and Diu">Daman and Diu</option>
+                                                                <option value="Delhi">Delhi</option>
+                                                                <option value="Lakshadweep">Lakshadweep</option>
+                                                                <option value="Puducherry">Puducherry</option>
+                                                                <option value="Goa">Goa</option>
+                                                                <option value="Gujarat">Gujarat</option>
+                                                                <option value="Haryana">Haryana</option>
+                                                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                                                <option value="Jharkhand">Jharkhand</option>
+                                                                <option value="Karnataka" selected>Karnataka</option>
+                                                                <option value="Kerala">Kerala</option>
+                                                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                                <option value="Maharashtra">Maharashtra</option>
+                                                                <option value="Manipur">Manipur</option>
+                                                                <option value="Meghalaya">Meghalaya</option>
+                                                                <option value="Mizoram">Mizoram</option>
+                                                                <option value="Nagaland">Nagaland</option>
+                                                                <option value="Odisha">Odisha</option>
+                                                                <option value="Punjab">Punjab</option>
+                                                                <option value="Rajasthan">Rajasthan</option>
+                                                                <option value="Sikkim">Sikkim</option>
+                                                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                                                <option value="Telangana">Telangana</option>
+                                                                <option value="Tripura">Tripura</option>
+                                                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                                <option value="Uttarakhand">Uttarakhand</option>
+                                                                <option value="West Bengal">West Bengal</option>
                                                             </select>
                                                             <span class="error-message">Please enter valid
                                                                 Landmark</span>
-                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">City</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="Bengaluru"
-                                                                class="form-control">
+                                                            <input type="text" id="city-name" placeholder="Bengaluru"
+                                                                class="form-control" name="address[city]" required>
                                                             <span class="error-message">Please enter valid
-                                                                Zone</span>
-                                                        </span>
+                                                                City</span>
                                                     </div>
                                                 </div>
-
-
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Pincode</label>
-                                                        <span class="">
-                                                            <input type="text" id="fullname" placeholder="530000"
-                                                                class="form-control">
+                                                            <input type="text" id="pincode" placeholder="530000"
+                                                                class="form-control" name="address[pincode]" required>
                                                             <span class="error-message">Please enter valid
                                                                 Pincode</span>
-                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Service</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Service 1</option>
-                                                                <option>Service 2</option>
-                                                                <option>Service 3</option>
+                                                            <select id="" class="form-control select-box" name="service[]" multiple required>
+                                                                <option value=""> -Select- </option>
+                                                                @foreach($services as $service=>$value)
+                                                                    <option value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
+                                                                @endforeach
                                                             </select>
                                                             <span class="error-message">Please enter valid
                                                                 Service</span>
-                                                        </span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">Service Type</label>
-                                                        <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Service 1</option>
-                                                                <option>Service 2</option>
-                                                                <option>Service 3</option>
+                                                            <select id="" class="form-control" name="service_type" required>
+                                                                <option value=""> -Select- </option>
+                                                        @foreach(\App\Enums\OrganizationEnums::$SERVICES as $service_type=>$value)
+                                                                    <option value="{{$value}}">{{ucfirst(trans($service_type))}}</option>
+                                                                @endforeach
                                                             </select>
                                                             <span class="error-message">Please enter valid
-                                                                Service</span>
-                                                        </span>
+                                                                Service Type</span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
-                                                        <label class="full-name">Do you have a subsidiary
-                                                            branch?</label>
-                                                        <span class="">
-
-
-                                                            <div
-                                                                class="d-flex justify-content-start   margin-topneg-15 white-text">
-                                                                <input type="checkbox" checked data-toggle="toggle"
-                                                                    data-size="xs" data-width="100" data-height="30"
-                                                                    data-onstyle="outline-primary"
-                                                                    data-offstyle="outline-secondary" data-on="YES"
-                                                                    data-off="NO" id="">
-                                                            </div>
-
-
+                                                        <label class="full-name">Commission</label>
+                                                            <input type="number" id="commission" placeholder="Commission"
+                                                                   class="form-control" name="commission" required>
                                                             <span class="error-message">Please enter valid
-                                                                Service</span>
-                                                        </span>
+                                                                Pincode</span>
                                                     </div>
                                                 </div>
 

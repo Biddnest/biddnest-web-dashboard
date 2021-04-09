@@ -44,10 +44,39 @@
                         </ul>
                     </h3>
                 </div>
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content " id="myTabContent">
                         <!-- form starts -->
-                    <div class="tab-pane">
+                    <div class="tab-pane show" style="min-height: 50vh">
+                        <div class="branch-wrapper">
+                            <div class="branch-snip d-flex flex-row justify-content-around">
+                                <div class="data-group">
+                                    <h6>Branch Name</h6>
+                                    <p>Bengaluru</p>
+                                </div>
+                                <div class="data-group">
+                                    <h6>Address</h6>
+                                    <p>5th floor, Whitefield, Bengaluru 560066</p>
+                                </div>
+                                <div class="data-group">
+                                    <h6>Phone</h6>
+                                    <p>9843326118</p>
+                                </div>
+                                <div class="data-group">
+                                    <h6>City</h6>
+                                    <p>Bengaluru</p>
+                                </div>
+                                <div class="data-group">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <div>
+                                            <a href="#"><i class="icon dripicons-pencil"></i></a>
+                                            <a href="#"><i class="icon dripicons-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+
+                        </div>
                     </div>
                     <div class="d-flex  justify-content-between flex-row  p-10 py-0"
                                                 style="border-top: 1px solid #70707040;">

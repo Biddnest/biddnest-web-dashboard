@@ -546,5 +546,61 @@
                 overflow-y: scroll;
                 /*background-color: #000000;*/
             }
+
+            .branch-wrapper .branch-snip .data-group > div{
+                margin-top: 30%;
+            }
+            .branch-wrapper .branch-snip .data-group a{
+                /*display: inline-block;*/
+                margin: 5px;
+                padding: 10px 11px;
+                border-radius: 50%;
+                background: #f2f2f2;
+            }
+            .branch-wrapper .branch-snip .data-group h6{
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+            .branch-wrapper .branch-snip .data-group p{
+                font-size: 14px;
+                /*font-family: "Gilroy", sans-serif;*/
+                /*font-weight: 600;*/
+            }
+            .branch-wrapper .branch-snip .data-group{
+                /*border-right: 1px solid #f2f2f2;*/
+                padding: 0 10px;
+                margin: 0;
+                position: relative;
+                max-width: 20%;
+            }
+
+            .branch-wrapper .branch-snip .data-group:last-child::after{ display: none;}
+            .branch-wrapper .branch-snip .data-group::after{
+                width: 1px;
+                position: absolute;
+                height: 70%;
+                right: -15px;
+                top: 15%;
+                content: "";
+                display: block;
+                background: #c0c0c0;
+
+            }
+            .branch-wrapper .branch-snip{
+                position: relative;
+                border-radius: 2px;
+                border: 2px solid #f2f2f2;
+                margin: 0 20px 0 20px;
+                padding: 10px 0px 15px 0px;
+            }
+            .branch-wrapper *{
+                /*border: 1px solid #000;*/
+            }
+            .branch-wrapper{
+                margin: 5% 0 10% 0;
+
+            }
         </style>
 

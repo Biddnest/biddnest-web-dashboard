@@ -84,10 +84,10 @@ class OrganisationController extends Controller
 
     public static function update($data, $meta, $admin, $id)
     {
-            $organization_exist = Organization::findOrFail($id);
+//            $organization_exist = Organization::findOrFail($id);
             $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
-            if(!$organization_exist && !$vendor_exist)
-                return Helper::response(false,"Incorrect Organization id.");
+            if(!$vendor_exist)
+                return Helper::response(false,"Incorrect Vendor id.");
 
             $imageman = new ImageManager(array('driver' => 'gd'));
 
@@ -111,10 +111,13 @@ class OrganisationController extends Controller
                 "commission"=>$data['commission']
             ]);
 
+            OrganizationService::where("organization_id", $id)->delete();
             foreach($data['service'] as $value)
             {
-                $service=OrganizationService::where("organization_id", $id)
-                ->update(["service_id"=>$value]);
+                $service=new OrganizationService;
+                $service->organization_id=$id;
+                $service->service_id =$value;
+                $result_service = $service->save();
             }
 
             $vendor_result =Vendor::where("id", $vendor_exist->id)
@@ -126,10 +129,10 @@ class OrganisationController extends Controller
                 "meta"=>$vendor_exist->meta,
             ]);
 
-        if(!$vendor_result && !$result_organization)
-            return Helper::response(false,"Couldn't save data");
+        if(!$vendor_result || !$result_organization)
+            return Helper::response(false,"Couldn't update data");
 
-        return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
+        return Helper::response(true,"update data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
     public static function getOne($id)

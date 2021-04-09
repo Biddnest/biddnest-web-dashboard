@@ -139,9 +139,11 @@ class WebController extends Controller
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.createvendor', ['services'=>$services]);
     }
-    public function onbaordEdit()
+    public function onbaordEdit(Request  $request)
     {
-        return view('vendor.editonboard');
+        $organization = Organization::where(["id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }
     public function onbaordBranch(Request $request)
     {

@@ -17,10 +17,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Onboard Vendor</li>
                     </ol>
                 </nav>
-
-
             </div>
-
         </div>
         <div class="d-flex  flex-row text-left ml-120">
             <!-- <a href="vendor-management.html" class="text-decoration-none">
@@ -32,12 +29,9 @@
 
         </div>
         <!-- Dashboard cards -->
-
-
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-lg-10">
                 <div class="card  h-auto p-0 pt-10 ">
-
                     <div class="card-head right text-left border-bottom-2 p-10 pt-10 pb-0">
                         <h3 class="f-18 mb-0">
                             <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
@@ -47,89 +41,65 @@
                                        aria-selected="true">Edite Onboard Vendor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors")}}">Add Branch</a>
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Add Branch</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors")}}"
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
                                     >Vendor Banking Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors")}}">Vendor Roles</a>
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Vendor Roles</a>
                                 </li>
                             </ul>
                         </h3>
                     </div>
                     <div class="tab-content" id="myTabContent">
-
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                              aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue">
-
-                                <p class="img-label">Image</p>
-                                <div class="upload-section p-20 pt-0">
-                                    <img src="{{asset('static/images/upload-image.svg')}}" alt="">
-                                    <div class="ml-1">
-                                        <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
-
-                                        <div class="file-upload">
-                                            <input type="file">
-                                            <button class="btn theme-bg white-text my-0">UPLOAD
-                                                IMAGE</button>
-                                        </div>
-
-
-                                        <p>Max File size: 1MB</p>
-                                    </div>
-                                </div>
-
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" data-parsley-validate>
 
                                 <div class="d-flex row p-20">
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Authorizer First Name</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="David"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                First Name</span>
-                                                        </span>
+                                            <p class="img-label">Image</p>
+                                            <div class="upload-section p-20 pt-0">
+                                                <img src="{{$organization->image}}" alt="">
+                                                <div class="ml-1">
+                                                    <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
+                                                    <div class="file-upload">
+                                                        <input type="file">
+                                                        <input type="hidden" class="base-holder" name="image" value="{{$organization->image}}" required />
+                                                        <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button>
+                                                    </div>
+                                                    <p>Max File size: 1MB</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
+                                    <div class="col-lg-6">
+                                        <input type="hidden" name="id" value="{{$id}}">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Authorizer First Name</label>
+                                            <input type="text" id="fullname" name="fname" placeholder="David" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_fname'])) ?? ''}}" class="form-control" required>
+                                            <span class="error-message">Please enter valid First Name</span>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer Last Name</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Jerome"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                First Name</span>
-                                                        </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Vendor Role</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Vendor role"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Vendor Role</span>
-                                                        </span>
+                                            <input type="text" id="fullname" name="lname" placeholder="Jerome" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_lname'])) ?? ''}}" class="form-control" required>
+                                            <span class="error-message">Please enter valid Last Name</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Email ID</label>
-                                            <span class="">
-                                                            <input type="email" id="fullname" placeholder="abc@email.com"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Email ID</span>
-                                                        </span>
+                                            <input type="email" id="fullname" name="email" placeholder="abc@email.com" value="{{$organization->email}}" class="form-control" required>
+                                            <span class="error-message">Please enter valid Email ID</span>
                                         </div>
                                     </div>
 
@@ -137,12 +107,8 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Primary Contact Number</label>
-                                            <span class="">
-                                                            <input type="tel" id="phone" placeholder="9876543210"
-                                                                   class=" form-control form-control-tel">
-                                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
-                                                        </span>
+                                            <input type="tel" id="phone" placeholder="9876543210" name="phone[primary]" value="{{$organization->phone}}" class=" form-control" maxlength="10" minlength="10" required>
+                                            <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
 
@@ -150,67 +116,34 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Secondary Contact Number</label>
-                                            <span class="">
-                                                            <input type="tel" id="phone-pop-up" placeholder="9876543210"
-                                                                   class=" form-control form-control-tel">
-                                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
-                                                        </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="phone-num-lable">Gender</label>
-                                            <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Female</option>
-                                                                <option>Male</option>
-                                                                <option>Other</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
-                                                        </span>
+                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control" name="phone[secondory]" maxlength="10" minlength="10" required>
+                                            <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Organization Name</span>
-                                                        </span>
+                                            <input type="text" id="fullname" value="{{ucfirst(trans($organization->org_name))}}" placeholder="Wayne Pvt Ltd" class="form-control" name="organization[org_name]" required>
+                                            <span class="error-message">Please enter valid Organization Name</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Organisation Type</label>
-                                            <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>type 1</option>
-                                                                <option>type 2</option>
-                                                                <option>type 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
-                                                        </span>
+                                            <input type="text" id="fullname" placeholder="Pvt Ltd"
+                                                   class="form-control" name="organization[org_type]" value="{{$organization->org_type}}" required>
+                                            <span class="error-message">Please enter valid
+                                                                Organization Type</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">GSTIN Number of Organisation</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="GST12355464"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Organization Name</span>
-                                                        </span>
+                                            <input type="text" id="fullname" value="{{json_decode($organization->meta, true)['gstin_no'] ?? ''}}" placeholder="GST12355464" class="form-control" name="organization[gstin]" maxlength="15" minlength="15" required>
+                                            <span class="error-message">Please enter valid GST Name</span>
                                         </div>
                                     </div>
 
@@ -218,183 +151,153 @@
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Organization Description</label>
-                                            <span class="">
-                                                            <textarea placeholder="Need to Include bike"
-                                                                      style="resize: none;" id="" class="form-control "
-                                                                      rows="4" cols="50" spellcheck="false">
-                                                                          </textarea>
-                                                            <span class="error-message">Please enter valid
-                                                                Description</span>
-                                                        </span>
+                                            <textarea placeholder="Need to Include bike" style="resize: none;" id="" class="form-control " rows="4" cols="50" spellcheck="false" name="organization[description]" required>{{json_decode($organization->meta, true)['org_description'] ?? ''}}</textarea>
+                                            <span class="error-message">Please enter valid Description</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Address Line 1</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter address here"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Address Line</span>
-                                                        </span>
+                                            <label class="full-name">Address</label>
+                                            <input type="text" id="fullname" value="{{json_decode($organization->meta, true)['address'] ?? ''}}" placeholder="Enter address here" class="form-control" name="address[address]" required>
+                                            <span class="error-message">Please enter valid Address Line</span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Address Line 2</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter Address here"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Address Line</span>
-                                                        </span>
-                                        </div>
-                                    </div>
-
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Lattitude</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Lattitude"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Lattitude</span>
-                                                        </span>
+                                            <input type="text" id="fullname" value="{{$organization->lat}}" placeholder="Lattitude" class="form-control" name="address[lat]" required>
+                                            <span class="error-message">Please enter valid Lattitude</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Longitude</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Longitude"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Longitude</span>
-                                                        </span>
+                                            <input type="text" id="fullname" value="{{$organization->lng}}" placeholder="Longitude" class="form-control" name="address[lng]" required>
+                                            <span class="error-message">Please enter valid Longitude</span>
                                         </div>
                                     </div>
-
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Landmark</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Enter Landmark here"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Landmark</span>
-                                                        </span>
+                                            <input type="text" id="fullname" value="{{json_decode($organization->meta, true)['landmark'] ?? ''}}" placeholder="Enter Landmark here" class="form-control" name="address[landmark]" required>
+                                            <span class="error-message">Please enter valid Landmark</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Zone</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Bengaluru Urban"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Zone</span>
-                                                        </span>
+                                            <select  class="form-control br-5" name="zone" required>
+                                                <option value="">--Select--</option>
+                                                @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                    <option value="{{$zone->id}}" @if($zone->id == ($organization->zone_id ?? '')) selected @endif>{{$zone->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid Zone</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">State</label>
-                                            <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>State 1</option>
-                                                                <option>State 2</option>
-                                                                <option>State 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Landmark</span>
-                                                        </span>
+                                            <select id="" class="form-control" name="address[state]" required>
+                                                <option value="Andhra Pradesh" @if("Andhra Pradesh" == ($organization->state ?? '')) selected @endif>Andhra Pradesh</option>
+                                                <option value="Andaman and Nicobar Islands" @if("Andaman and Nicobar Islands" == ($organization->state ?? '')) selected @endif>Andaman and Nicobar Islands
+                                                </option>
+                                                <option value="Arunachal Pradesh" @if("Arunachal Pradesh" == ($organization->state ?? '')) selected @endif>Arunachal Pradesh</option>
+                                                <option value="Assam" @if("Assam" == ($organization->state ?? '')) selected @endif>Assam</option>
+                                                <option value="Bihar" @if("Bihar" == ($organization->state ?? '')) selected @endif>Bihar</option>
+                                                <option value="Chandigarh" @if("Chandigarh" == ($organization->state ?? '')) selected @endif>Chandigarh</option>
+                                                <option value="Chhattisgarh" @if("Chhattisgarh" == ($organization->state ?? '')) selected @endif>Chhattisgarh</option>
+                                                <option value="Dadar and Nagar Haveli" @if("Dadar and Nagar Haveli" == ($organization->state ?? '')) selected @endif>Dadar and Nagar Haveli</option>
+                                                <option value="Daman and Diu" @if("Daman and Diu" == ($organization->state ?? '')) selected @endif>Daman and Diu</option>
+                                                <option value="Delhi" @if("Delhi" == ($organization->state ?? '')) selected @endif>Delhi</option>
+                                                <option value="Lakshadweep" @if("Lakshadweep" == ($organization->state ?? '')) selected @endif>Lakshadweep</option>
+                                                <option value="Puducherry" @if("Puducherry" == ($organization->state ?? '')) selected @endif>Puducherry</option>
+                                                <option value="Goa" @if("Goa" == ($organization->state ?? '')) selected @endif>Goa</option>
+                                                <option value="Gujarat" @if("Gujarat" == ($organization->state ?? '')) selected @endif>Gujarat</option>
+                                                <option value="Haryana" @if("Haryana" == ($organization->state ?? '')) selected @endif>Haryana</option>
+                                                <option value="Himachal Pradesh" @if("Himachal Pradesh" == ($organization->state ?? '')) selected @endif>Himachal Pradesh</option>
+                                                <option value="Jammu and Kashmir" @if("Jammu and Kashmir" == ($organization->state ?? '')) selected @endif>Jammu and Kashmir</option>
+                                                <option value="Jharkhand" @if("Jharkhand" == ($organization->state ?? '')) selected @endif>Jharkhand</option>
+                                                <option value="Karnataka" @if("Karnataka" == ($organization->state ?? '')) selected @endif>Karnataka</option>
+                                                <option value="Kerala" @if("Kerala" == ($organization->state ?? '')) selected @endif>Kerala</option>
+                                                <option value="Madhya Pradesh" @if("Madhya Pradesh" == ($organization->state ?? '')) selected @endif>Madhya Pradesh</option>
+                                                <option value="Maharashtra" @if("Maharashtra" == ($organization->state ?? '')) selected @endif>Maharashtra</option>
+                                                <option value="Manipur" @if("Manipur" == ($organization->state ?? '')) selected @endif>Manipur</option>
+                                                <option value="Meghalaya" @if("Meghalaya" == ($organization->state ?? '')) selected @endif>Meghalaya</option>
+                                                <option value="Mizoram" @if("Mizoram" == ($organization->state ?? '')) selected @endif>Mizoram</option>
+                                                <option value="Nagaland" @if("Nagaland" == ($organization->state ?? '')) selected @endif>Nagaland</option>
+                                                <option value="Odisha" @if("Odisha" == ($organization->state ?? '')) selected @endif>Odisha</option>
+                                                <option value="Punjab" @if("Punjab" == ($organization->state ?? '')) selected @endif>Punjab</option>
+                                                <option value="Rajasthan" @if("Rajasthan" == ($organization->state ?? '')) selected @endif>Rajasthan</option>
+                                                <option value="Sikkim" @if("Sikkim" == ($organization->state ?? '')) selected @endif>Sikkim</option>
+                                                <option value="Tamil Nadu" @if("Tamil Nadu" == ($organization->state ?? '')) selected @endif>Tamil Nadu</option>
+                                                <option value="Telangana" @if("Telangana" == ($organization->state ?? '')) selected @endif>Telangana</option>
+                                                <option value="Tripura" @if("Tripura" == ($organization->state ?? '')) selected @endif>Tripura</option>
+                                                <option value="Uttar Pradesh" @if("Uttar Pradesh" == ($organization->state ?? '')) selected @endif>Uttar Pradesh</option>
+                                                <option value="Uttarakhand" @if("Uttarakhand" == ($organization->state ?? '')) selected @endif>Uttarakhand</option>
+                                                <option value="West Bengal" @if("West Bengal" == ($organization->state ?? '')) selected @endif>West Bengal</option>
+                                            </select>
+                                            <span class="error-message">Please enter valid Landmark</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">City</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="Bengaluru"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Zone</span>
-                                                        </span>
+                                            <input type="text" id="fullname" placeholder="Bengaluru" value="{{ucfirst(trans($organization->city))}}" class="form-control" name="address[city]" required>
+                                            <span class="error-message">Please enter valid Zone</span>
                                         </div>
                                     </div>
-
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Pincode</label>
-                                            <span class="">
-                                                            <input type="text" id="fullname" placeholder="530000"
-                                                                   class="form-control">
-                                                            <span class="error-message">Please enter valid
-                                                                Pincode</span>
-                                                        </span>
+                                            <input type="text" id="fullname" value="{{$organization->pincode}}" placeholder="530000" class="form-control" name="address[pincode]" maxlength="6" minlength="6" required>
+                                            <span class="error-message">Please enter valid Pincode</span>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Service</label>
-                                            <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Service 1</option>
-                                                                <option>Service 2</option>
-                                                                <option>Service 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Service</span>
-                                                        </span>
+                                            <select id="" class="form-control select-box" name="service[]" multiple required>
+                                                <option value=""> -Select- </option>
+                                                @foreach($services as $service)
+                                                    <option value="{{$service->id}}"
+                                                            @foreach($organization->services as $org_service)
+                                                            @if($service->id == $org_service->id) selected                                                                 @endif
+                                                        @endforeach>{{ucfirst(trans($service->name))}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid Service</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Service Type</label>
-                                            <span class="">
-                                                            <select id="" class="form-control">
-                                                                <option>Service 1</option>
-                                                                <option>Service 2</option>
-                                                                <option>Service 3</option>
-                                                            </select>
-                                                            <span class="error-message">Please enter valid
-                                                                Service</span>
-                                                        </span>
+                                            <select id="" class="form-control" name="service_type" required>
+                                                <option value=""> -Select- </option>
+                                                @foreach(\App\Enums\OrganizationEnums::$SERVICES as $service_type=>$value)
+                                                    <option value="{{$value}}" @if($value == ($organization->service_type ?? '')) selected @endif>{{ucfirst(trans($service_type))}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid Service</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Do you have a subsidiary
-                                                branch?</label>
-                                            <span class="">
-
-
-                                                            <div
-                                                                class="d-flex justify-content-start   margin-topneg-15 white-text">
-                                                                <input type="checkbox" checked data-toggle="toggle"
-                                                                       data-size="xs" data-width="100" data-height="30"
-                                                                       data-onstyle="outline-primary"
-                                                                       data-offstyle="outline-secondary" data-on="YES"
-                                                                       data-off="NO" id="">
-                                                            </div>
-
-
-                                                            <span class="error-message">Please enter valid
-                                                                Service</span>
-                                                        </span>
+                                            <label class="full-name">Commission</label>
+                                            <input type="text" id="commission" value="{{$organization->commission}}" placeholder="Commission" class="form-control" name="commission" required>
+                                            <span class="error-message">Please enter valid
+                                                                Commission</span>
                                         </div>
                                     </div>
+
 
                                 </div>
                                 <div id="comments">
@@ -404,12 +307,10 @@
                                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                         </div>
                                         <div class="w-50 text-right"><a class="white-text p-10"><button
-                                                    class="btn theme-bg white-text w-30">Next</button></a>
+                                                    class="btn theme-bg white-text w-30">Update</button></a>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </form>
 
                         </div>

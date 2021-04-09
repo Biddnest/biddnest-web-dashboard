@@ -52,6 +52,12 @@ $("body").on('submit', "form", function() {
                                 redirectTo(url);
                                 return false;
                             }
+                            if (form.hasClass("onboard-vendor-form")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.organization.id);
+                                redirectTo(url);
+                                return false;
+                            }
                             if (form.data('redirect-type') == "hard")
                                 redirectHard(form.data("url")); // data-url="google.com"
                             else

@@ -155,10 +155,10 @@ Route::prefix('admin')->group(function () {
 
 
             Route::get('/onboard',[WebController::class,'createOnboardVendors'])->name("create-vendors");
-            Route::get('/onboard/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
-            Route::get('/onboard/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
-            Route::get('/onboard/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
-            Route::get('/onboard/role',[WebController::class,'onbaordUserRole'])->name("onboard-userrole-vendors");
+            Route::get('/{id}/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
+            Route::get('/{id}/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
+            Route::get('/{id}/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
+            Route::get('/{id}/role',[WebController::class,'onbaordUserRole'])->name("onboard-userrole-vendors");
         });
 
         Route::prefix('categories')->group(function () {

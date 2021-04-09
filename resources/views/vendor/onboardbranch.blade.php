@@ -31,17 +31,17 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors")}}">Edite Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edite Onboard Vendor</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active p-15" id="quotation" href="#">Add Branch</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors")}}"
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
                                 >Vendor Banking Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors")}}">Vendor Roles</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Vendor Roles</a>
                             </li>
                         </ul>
                     </h3>
@@ -106,7 +106,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
                 <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="id" value="{{$id}}">
                     <div class="d-flex row">
@@ -314,7 +314,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_branch_vendor')}}" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
                     <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="parent_org_id" value="{{$id}}">
                         <input type="hidden" name="id" value="{{$branch->id}}">
@@ -341,7 +341,7 @@
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Contact Number</label>
                                     <input type="tel" id="input-blue" placeholder="9876543210" value="{{$branch->phone}}"
-                                           class=" form-control form-control-tel" name="phone[primary]" required>
+                                           class=" form-control" name="phone[primary]" required>
                                     <span class="error-message">Please enter valid
                                             Phone number</span>
                                 </div>
@@ -490,8 +490,8 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Commision</label>
-                                    <input type="text" id="fullname" placeholder="560097" value="{{$branch->commission}}%"
-                                           class="form-control" readonly>
+                                    <input type="number" id="fullname" placeholder="560097" value="{{$branch->commission}}%"
+                                           class="form-control" name="commission" required maxlength="2">
                                 </div>
                             </div>
                             <div class="col-lg-12">

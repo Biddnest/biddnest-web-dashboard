@@ -123,7 +123,7 @@
                                                     <div class="form-input">
                                                         <label class="phone-num-lable">Primary Contact Number</label>
                                                             <input type="tel" id="phone" placeholder="9876543210"
-                                                                class=" form-control form-control-tel" name="phone[primary]" required>
+                                                                class=" form-control" name="phone[primary]" maxlength="10" aria-valuemax="10" required>
                                                             <span class="error-message">Please enter valid
                                                                 Phone number</span>
                                                     </div>
@@ -134,7 +134,7 @@
                                                     <div class="form-input">
                                                         <label class="phone-num-lable">Secondary Contact Number</label>
                                                             <input type="tel" id="phone-pop-up" placeholder="9876543210"
-                                                                class=" form-control form-control-tel" name="phone[secondory]">
+                                                                class=" form-control" name="phone[secondory]" maxlength="10" minlength="10">
                                                             <span class="error-message">Please enter valid
                                                                 Phone number</span>
                                                     </div>
@@ -296,7 +296,7 @@
                                                     <div class="form-input">
                                                         <label class="full-name">Pincode</label>
                                                             <input type="text" id="pincode" placeholder="530000"
-                                                                class="form-control" name="address[pincode]" required>
+                                                                class="form-control" name="address[pincode]" maxlength="6" minlength="6" required>
                                                             <span class="error-message">Please enter valid
                                                                 Pincode</span>
                                                     </div>
@@ -335,7 +335,7 @@
                                                             <input type="number" id="commission" placeholder="Commission"
                                                                    class="form-control" name="commission" required>
                                                             <span class="error-message">Please enter valid
-                                                                Pincode</span>
+                                                                Commission</span>
                                                     </div>
                                                 </div>
 

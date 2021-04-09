@@ -274,7 +274,26 @@ class VendorUserController extends Controller
 
     public static function updateStatus(Request $request)
     {
-         $update_status = Vendor::where('id',$request->id)->update(["status"=>$request->status]);
+        if($request->id == $request->token_payload->id)
+            return Helper::response(false, "You can not disable yourself.");
+
+        $vendor = Vendor::find($request->id);
+        $status = 0;
+        switch($vendor->status){
+            case VendorEnums::$STATUS['active']:
+                $status = VendorEnums::$STATUS['inactive'];
+                break;
+
+            case VendorEnums::$STATUS['inactive']:
+                $status = VendorEnums::$STATUS['active'];
+                break;
+
+            default:
+                return Helper::response([false, "This user is supended. Please use the vendor panel to enable."]);
+                break;
+        }
+
+         $update_status = Vendor::where('id',$request->id)->update(["status"=>$status]);
          if(!$update_status)
              return Helper::response(false, "failed to updated status");
 
@@ -406,6 +425,17 @@ class VendorUserController extends Controller
             return Helper::response(false, "Couldn't update data");
 
         return Helper::response(true, "updated data successfully", ["vendor" => Vendor::where('id', $vendor_id)->with('organization')->first()]);
+    }
+
+    public static function verifyAuth($id)
+    {
+        $user = Vendor::find($id);
+        if ($user->status == VendorEnums::$STATUS['active'])
+            return Helper::response(true, "User authenticated successfully");
+        elseif ($user->status == VendorEnums::$STATUS['suspended'])
+            return Helper::response(false, "You are suspended from using this application. Please contact your organization admin.", null, 401);
+        else
+            return Helper::response(false, "Something went wrong in server. Please contact your organization admin.", null, 401);
     }
 
 }

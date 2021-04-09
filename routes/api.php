@@ -80,6 +80,7 @@ Route::prefix('v1')->group(function () {
 
 
 Route::prefix('vendors/v1')->group(function () {
+
     Route::get("/configuration",[VendorApiRouter::class, 'config']);
 
     Route::prefix('auth')->group(function () {
@@ -87,6 +88,7 @@ Route::prefix('vendors/v1')->group(function () {
         Route::post("/verification/phone", [VendorApiRouter::class, 'phoneVerification']);
         Route::post("/verification/otp", [VendorApiRouter::class, 'verifyOtp']);
         Route::post("/reset-password", [VendorApiRouter::class, 'resetPassword']);
+        Route::get("/verify", [VendorApiRouter::class, 'verifyAuth']);
     });
 
     Route::post("/change-password", [VendorApiRouter::class, 'changePassword']);

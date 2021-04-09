@@ -13,6 +13,6 @@ use Fabito\AvatarGenerator\Avatar;
 class VendorEnums
 {
     public static $ROLES = ["admin"=>1, "manager"=>2, "driver"=>3];
-    public static $STATUS = ["lead"=>0, "active"=>1, "suspended"=>2];
+    public static $STATUS = ["inactive"=>0, "active"=>1, "suspended"=>2, "lead"=>3];
     public static $VERIFICATION = ['pending'=>0, "approved"=>1, "rejected"=>2, "incomplete"=>3];
 }

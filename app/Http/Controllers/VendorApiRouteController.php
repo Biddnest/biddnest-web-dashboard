@@ -369,4 +369,9 @@ class VendorApiRouteController extends Controller
         return BookingsController::getposition($request->token_payload->id, $request->public_booking_id);
     }
 
+    public function verifyAuth(Request $request)
+    {
+        return VendorUserController::verifyAuth($request->token_payload->id);
+    }
+
 }

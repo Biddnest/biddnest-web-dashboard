@@ -126,7 +126,7 @@ class OrganisationController extends Controller
                 $result_service = $service->save();
             }
 
-            $vendor_result =Vendor::where("id", $vendor_exist->id)
+            $vendor_result =Vendor::where(["id"=>$vendor_exist->id, "organization_id"=>$id])
             ->update([
                 "fname"=>$admin['fname'],
                 "lname"=>$admin['lname'],
@@ -258,21 +258,23 @@ class OrganisationController extends Controller
 
     public static function addBank($data, $id, $bank_id)
     {
+        $exist = Organization::findOrFail($id);
         if(!$bank_id)
         {
-            $exist = Organization::findOrFail($id);
             if(!$exist)
                 return Helper::response(false,"Incorrect Organization id.");
 
-            $imageman = new ImageManager(array('driver' => 'gd'));
-            $meta =["account_no"=>$data['acc_no'],"banck_name"=>$data['banck_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+//            $imageman = new ImageManager(array('driver' => 'gd'));
+
+
+            $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
             $bank = new Org_kyc;
             $bank->organization_id = $id;
-            $bank->aadhar_card =Helper::saveFile($imageman->make($data['doc']['aadhar_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-            $bank->pan_card =Helper::saveFile($imageman->make($data['doc']['pan_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-            $bank->gst_certificate =Helper::saveFile($imageman->make($data['doc']['gst_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-            $bank->company_reg_certificate =Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
-            $bank->bidnest_agreement =Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']);
+            $bank->aadhar_card =Helper::saveFile(base64_decode($data['doc']['aadhar_card']),"BD".uniqid().explode('/', mime_content_type($data['doc']['aadhar_card']))[1],"vendors/bank/".$id.$exist['org_name']);
+            $bank->pan_card =Helper::saveFile(base64_decode($data['doc']['pan_card']),"BD".uniqid().explode('/', mime_content_type($data['doc']['pan_card']))[1],"vendors/bank/".$id.$exist['org_name']);
+            $bank->gst_certificate =Helper::saveFile(base64_decode($data['doc']['gst_certificate']),"BD".uniqid().explode('/', mime_content_type($data['doc']['gst_certificate']))[1],"vendors/bank/".$id.$exist['org_name']);
+            $bank->company_reg_certificate =Helper::saveFile(base64_decode($data['doc']['company_registration_certificate']),"BD".uniqid().explode('/', mime_content_type($data['doc']['company_registration_certificate']))[1],"vendors/bank/".$id.$exist['org_name']);
+            $bank->bidnest_agreement =Helper::saveFile(base64_decode($data['doc']['biddnest_agreement']),"BD".uniqid().explode('/', mime_content_type($data['doc']['biddnest_agreement']))[1],"vendors/bank/".$id.$exist['org_name']);
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
         }
@@ -282,18 +284,34 @@ class OrganisationController extends Controller
             if(!$exist)
                 return Helper::response(false,"Invalide or incorrect Organization id or Bank id ");
 
-            $imageman = new ImageManager(array('driver' => 'gd'));
-            $meta =["account_no"=>$data['acc_no'],"banck_name"=>$data['banck_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+            $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+
+            $update_data = ["banking_details"=>$meta];
+
+            $aadhar_card = $data['doc']['aadhar_card'];
+            $pan_card = $data['doc']['pan_card'];
+            $gst_certificate = $data['doc']['pan_card'];
+            $company_reg_certificate = $data['doc']['gst_certificate'];
+            $bidnest_agreement = $data['doc']['biddnest_agreement'];
+
+            if(filter_var($aadhar_card, FILTER_VALIDATE_URL) !== FALSE)
+                $update_data["aadhar_card"] = Helper::saveFile(base64_decode($aadhar_card),"BD".uniqid().explode('/', mime_content_type($aadhar_card))[1],"vendors/bank/".$id.$exist['org_name']);
+
+            if(filter_var($pan_card, FILTER_VALIDATE_URL) !== FALSE)
+                $update_data["pan_card"] = Helper::saveFile(base64_decode($pan_card),"BD".uniqid().explode('/', mime_content_type($pan_card))[1],"vendors/bank/".$id.$exist['org_name']);
+
+            if(filter_var($gst_certificate, FILTER_VALIDATE_URL) !== FALSE)
+                $update_data["gst_certificate"] = Helper::saveFile(base64_decode($gst_certificate),"BD".uniqid().explode('/', mime_content_type($gst_certificate))[1],"vendors/bank/".$id.$exist['org_name']);
+
+            if(filter_var($company_reg_certificate, FILTER_VALIDATE_URL) !== FALSE)
+                $update_data["company_reg_certificate"] = Helper::saveFile(base64_decode($company_reg_certificate),"BD".uniqid().explode('/', mime_content_type($company_reg_certificate))[1],"vendors/bank/".$id.$exist['org_name']);
+
+            if(filter_var($bidnest_agreement, FILTER_VALIDATE_URL) !== FALSE)
+                $update_data["bidnest_agreement"] = Helper::saveFile(base64_decode($bidnest_agreement),"BD".uniqid().explode('/', mime_content_type($bidnest_agreement))[1],"vendors/bank/".$id.$exist['org_name']);
 
             $result_bank= Org_kyc::where("id", $bank_id)
-            ->update([
-                "aadhar_card"=>Helper::saveFile($imageman->make($data['doc']['aadhar_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
-                "pan_card"=>Helper::saveFile($imageman->make($data['doc']['pan_card'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
-                "gst_certificate"=>Helper::saveFile($imageman->make($data['doc']['gst_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
-                "company_reg_certificate"=>Helper::saveFile($imageman->make($data['doc']['company_registration_certificate'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
-                "bidnest_agreement"=>Helper::saveFile($imageman->make($data['doc']['biddnest_agreement'])->encode('png', 75),"BD".uniqid(),"vendors/bank/".$id.$exist['org_name']),
-                "banking_details"=>$meta
-            ]);
+                ->update($update_data);
+
         }
 
         if(!$result_bank)

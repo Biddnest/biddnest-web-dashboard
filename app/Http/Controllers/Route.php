@@ -340,7 +340,7 @@ class Route extends Controller
             'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
             'zone' => 'required|integer',
-            'service_type' =>'required|string',
+            'service_type' =>'required',
             'service.*' =>'required',
             'commission' =>'required'
         ]);
@@ -445,7 +445,7 @@ class Route extends Controller
             'bank_id'=>'nullable',
             'id' =>'required',
             'acc_no'=>'required',
-            'banck_name'=>'required|string',
+            'bank_name'=>'required|string',
             'holder_name'=>'required|string',
             'ifcscode'=>'required|string',
             'branch_name'=>'required|string',

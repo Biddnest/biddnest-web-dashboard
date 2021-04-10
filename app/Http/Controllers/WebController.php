@@ -11,6 +11,7 @@ use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Inventory;
+use App\Models\Org_kyc;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
@@ -157,9 +158,10 @@ class WebController extends Controller
         return view('vendor.onboarduserrole');
     }
 
-    public function onbaordBank()
+    public function onbaordBank(Request $request)
     {
-        return view('vendor.onboardbank');
+        $bank=Org_kyc::where("organization_id", $request->id)->first();
+        return view('vendor.onboardbank', ['bank'=>$bank, 'id'=>$request->id]);
     }
 
 

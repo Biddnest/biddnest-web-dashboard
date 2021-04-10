@@ -93,7 +93,7 @@
                                     List
                                 </div>
 
-                                <table class="table text-center p-10 theme-text tb-border2" id="items">
+                                <table class="table text-center p-10 theme-text tb-border2" id="itms">
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
                                     <tr class="">
                                         <th scope="col  " class="text-left">Item Name</th>
@@ -109,10 +109,10 @@
 
 
                                     </thead>
-                                    <tbody class="mtop-20 f-13 ">
-                                    <tr class="">
+                                    <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
+                                    <tr class="inventoty-snip">
                                         <th scope="row" class="text-left">
-                                            <select class="form-control br-5 inventory-select" name="name">
+                                            <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
                                                 <option value="">--Select--</option>
                                                 @foreach($inventories as $inventory)
                                                     <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -121,22 +121,22 @@
                                         </th>
 
                                         <td class="">
-                                            <select class="form-control br-5" name="material" id="material">
+                                            <select class="form-control br-5 material" name="inventory[][material]" required>
+                                                <option value="">--Choose Inventory First--</option>
                                             </select>
                                         </td>
 
                                         <td class="">
-                                            <select class="form-control br-5" name="size" id="size" required>
-
+                                            <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+                                                <option value="">--Choose Inventory First--</option>
                                             </select>
                                         </td>
 
                                         <td class="" style="width: 20%;">
-                                            <input class="form-control br-5" type="number" name="quantity" required>
+                                            <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
                                         </td>
 
-                                        <td> <i class="fa fa-pencil p-1 cursor-pointer" aria-hidden="true"></i>
-
+                                        <td>
                                             <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
                                         </td>
                                     </tr>
@@ -145,9 +145,9 @@
                                 </table>
                             </div>
                             <div class="col-sm-12 mtop-20 w-30">
-                                <a class="float-right btn theme-bg white-text "  id="addnew-btn" >
+                                <a class="float-right btn theme-bg white-text repeater" data-content="#add-inventory-row" data-container="#add-inventory-wrapper"  id="addnew-btn" >
                                     <i class="fa fa-plus  m-1" aria-hidden="true"></i>
-                                    Add New Item</a>
+                                    Add Inventory</a>
 
                             </div>
                         </div>
@@ -177,10 +177,37 @@
     </div>
 </div>
 
-<script type="text/html" id="banner-form">
+<script type="text/html" id="add-inventory-row">
+    <tr class="inventoty-snip">
+        <th scope="row" class="text-left">
+            <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
+                <option value="">--Select--</option>
+                @foreach($inventories as $inventory)
+                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                @endforeach
+            </select>
+        </th>
 
+        <td class="">
+            <select class="form-control br-5 material" name="inventory[][material]" required>
+                <option value="">--Choose Inventory First--</option>
+            </select>
+        </td>
 
+        <td class="">
+            <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+                <option value="">--Choose Inventory First--</option>
+            </select>
+        </td>
 
+        <td class="" style="width: 20%;">
+            <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
+        </td>
+
+        <td>
+            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
+        </td>
+    </tr>
 </script>
 
 @endsection

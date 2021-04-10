@@ -148,15 +148,17 @@ $("body").on('click', ".fullscreen-modal-body .close", function(event) {
 $("body").on('change', ".inventory-select", function(event) {
     console.log("change");
     var id=$(this).val();
-    $("#material").html('<option value="">--Select--</option>');
-    $("#size").html('<option value="">--Select--</option>');
+
+    $(this).closest(".inventory-snip").find(".material").html('<option value="">--Select--</option>');
+    $(this).closest(".inventory-snip").find(".size").html('<option value="">--Select--</option>');
+
     var materal=$("#inventory_"+id).data("material");
     var size=$("#inventory_"+id).data("size");
     materal.map((value)=>{
-        $("#material").append('<option value="'+value+'">'+value+'</option>')
+        $(this).closest(".inventory-snip").find(".material").append('<option value="'+value+'">'+value+'</option>')
     });
     size.map((value)=>{
-        $("#size").append('<option value="'+value+'">'+value+'</option>')
+        $(this).closest(".inventory-snip").find(".size").append('<option value="'+value+'">'+value+'</option>')
     });
     return false;
 });

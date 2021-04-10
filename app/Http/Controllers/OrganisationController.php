@@ -93,9 +93,9 @@ class OrganisationController extends Controller
 
             $image = $data['image'];
             $uniq = uniqid();
-            $result_organization =Organization::where(["id"=>$id])
-            ->update([
-                "image"=>Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']),
+
+            $update_data = [
+
                 "email"=>$data['email'],
                 "phone"=>$data['phone']['primary'],
                 "org_name"=>$data['organization']['org_name'],
@@ -109,7 +109,13 @@ class OrganisationController extends Controller
                 "service_type"=>$data['service_type'],
                 "meta"=>json_encode($meta),
                 "commission"=>$data['commission']
-            ]);
+            ];
+
+        if(!filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']);
+
+            $result_organization =Organization::where(["id"=>$id])
+            ->update($update_data);
 
             OrganizationService::where("organization_id", $id)->delete();
             foreach($data['service'] as $value)

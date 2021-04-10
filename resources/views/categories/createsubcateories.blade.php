@@ -36,10 +36,11 @@
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
                             <div class="upload-section p-20 pt-0">
-                              <img src="{{asset('static/images/upload-image.svg')}}" alt=""/>
+                              <img class="upload-preview" src="{{asset('static/images/upload-image.svg')}}" alt=""/>
                               <div class="ml-1">
                                 <div class="file-upload">
                                   <input type="file" />
+                                    <input type="hidden" class="base-holder" name="image" value="" required />
                                   <button class="btn theme-bg white-text my-0">
                                     UPLOAD IMAGE
                                   </button>
@@ -121,7 +122,7 @@
                                         </th>
 
                                         <td class="">
-                                            <select class="form-control br-5 material" name="inventory[][material]" required>
+                                            <select class="form-control br-5 material" name="inventory[][material]" id="material" required>
                                                 <option value="">--Choose Inventory First--</option>
                                             </select>
                                         </td>
@@ -137,7 +138,7 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
+                                            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i>
                                         </td>
                                     </tr>
 
@@ -189,7 +190,7 @@
         </th>
 
         <td class="">
-            <select class="form-control br-5 material" name="inventory[][material]" required>
+            <select class="form-control br-5 material" name="inventory[][material]" id="material" required>
                 <option value="">--Choose Inventory First--</option>
             </select>
         </td>

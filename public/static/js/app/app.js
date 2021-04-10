@@ -107,9 +107,19 @@ $("body").on('input', "input[type=file]", function(event) {
     reader.onloadend = () => {
         $(this).closest('.upload-section').find(".upload-preview").attr("src", reader.result);
         $(this).parent().find(".base-holder").val(reader.result);
-        $(this).parent().find(".btn").html("UPLOAD ANOTHER");
+        $(this).parent().find(".btn").html("CHANGE");
     };
     reader.readAsDataURL(file);
+
+    var fullPath = $(this).val();
+    if (fullPath) {
+        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+        var filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(1);
+        }
+        $(this).closest(".upload-section").find(".file-name").html(filename);
+    }
 });
 
 $("body").on('change', ".field-toggle", function(event) {

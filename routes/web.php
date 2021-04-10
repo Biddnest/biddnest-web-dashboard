@@ -76,7 +76,7 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/vendors/branches',[Router::class,'branch_delete'])->name("branch_delete");
 
     Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
-    Route::put('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_edit");
+//    Route::put('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_edit");
 
     Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add");
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");

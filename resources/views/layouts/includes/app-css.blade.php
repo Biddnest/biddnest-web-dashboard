@@ -412,7 +412,7 @@
                 padding: 0px !important;
             }
             .upload-preview{
-                max-height: 70px;
+                max-width: 70px;
             }
 
             .accordion {

@@ -258,9 +258,9 @@ class OrganisationController extends Controller
 
     public static function addBank($data, $id, $bank_id)
     {
+        $exist = Organization::findOrFail($id);
         if(!$bank_id)
         {
-            $exist = Organization::findOrFail($id);
             if(!$exist)
                 return Helper::response(false,"Incorrect Organization id.");
 
@@ -294,19 +294,19 @@ class OrganisationController extends Controller
             $company_reg_certificate = $data['doc']['gst_certificate'];
             $bidnest_agreement = $data['doc']['biddnest_agreement'];
 
-            if(!filter_var($aadhar_card, FILTER_VALIDATE_URL) === FALSE)
+            if(filter_var($aadhar_card, FILTER_VALIDATE_URL) !== FALSE)
                 $update_data["aadhar_card"] = Helper::saveFile(base64_decode($aadhar_card),"BD".uniqid().explode('/', mime_content_type($aadhar_card))[1],"vendors/bank/".$id.$exist['org_name']);
 
-            if(!filter_var($pan_card, FILTER_VALIDATE_URL) === FALSE)
+            if(filter_var($pan_card, FILTER_VALIDATE_URL) !== FALSE)
                 $update_data["pan_card"] = Helper::saveFile(base64_decode($pan_card),"BD".uniqid().explode('/', mime_content_type($pan_card))[1],"vendors/bank/".$id.$exist['org_name']);
 
-            if(!filter_var($gst_certificate, FILTER_VALIDATE_URL) === FALSE)
+            if(filter_var($gst_certificate, FILTER_VALIDATE_URL) !== FALSE)
                 $update_data["gst_certificate"] = Helper::saveFile(base64_decode($gst_certificate),"BD".uniqid().explode('/', mime_content_type($gst_certificate))[1],"vendors/bank/".$id.$exist['org_name']);
 
-            if(!filter_var($company_reg_certificate, FILTER_VALIDATE_URL) === FALSE)
+            if(filter_var($company_reg_certificate, FILTER_VALIDATE_URL) !== FALSE)
                 $update_data["company_reg_certificate"] = Helper::saveFile(base64_decode($company_reg_certificate),"BD".uniqid().explode('/', mime_content_type($company_reg_certificate))[1],"vendors/bank/".$id.$exist['org_name']);
 
-            if(!filter_var($bidnest_agreement, FILTER_VALIDATE_URL) === FALSE)
+            if(filter_var($bidnest_agreement, FILTER_VALIDATE_URL) !== FALSE)
                 $update_data["bidnest_agreement"] = Helper::saveFile(base64_decode($bidnest_agreement),"BD".uniqid().explode('/', mime_content_type($bidnest_agreement))[1],"vendors/bank/".$id.$exist['org_name']);
 
             $result_bank= Org_kyc::where("id", $bank_id)

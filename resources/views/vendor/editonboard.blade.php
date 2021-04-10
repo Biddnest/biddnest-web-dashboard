@@ -306,8 +306,9 @@
                                         <div class="w-50"><a class="white-text p-10" href="#"><button
                                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                         </div>
-                                        <div class="w-50 text-right"><a class="white-text p-10"><button
-                                                    class="btn theme-bg white-text w-30">Update</button></a>
+                                        <div class="w-50 text-right"><button
+                                                    class="btn theme-bg white-text w-30">Update</button>
+
                                         </div>
                                     </div>
                                 </div>

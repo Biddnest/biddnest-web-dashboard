@@ -153,9 +153,9 @@ class WebController extends Controller
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.onboardbranch', ['id'=>$request->id, 'services'=>$services, 'branches'=>$branch, 'organization'=>$organization]);
     }
-    public function onbaordUserRole()
+    public function onbaordUserRole(Request $request)
     {
-        return view('vendor.onboarduserrole');
+        return view('vendor.onboarduserrole', ['id'=>$request->id]);
     }
 
     public function onbaordBank(Request $request)

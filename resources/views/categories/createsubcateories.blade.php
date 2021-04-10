@@ -138,7 +138,7 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i>
+                                            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
                                         </td>
                                     </tr>
 

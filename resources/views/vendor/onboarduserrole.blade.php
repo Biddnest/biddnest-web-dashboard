@@ -48,8 +48,8 @@
                     <!-- form starts -->
                     <div class="tab-pane show">
 
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="row" style="padding: 20px 25px;">
+                            <div class="col-md-4 p-0 m-0">
                                 <div class="user-profile-snip">
 
                                     <img src="{{asset('static/images/upload-image.svg')}}" class="profile-img" />
@@ -58,14 +58,14 @@
                                         <span>Admin</span>
                                         <span>amith@gmail.com</span>
                                         <span>+91 9843326118</span>
-                                    </div>
                                     <div class="action">
                                         <a class="modal-toggle inline-icon-button" data-target="#user_"><i class="icon dripicons-pencil"></i></a>
                                         <a href="#" class="inline-icon-button"><i class="icon dripicons-trash"></i></a>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-0 m-0">
                                 <div class="user-profile-snip">
 
                                     <img src="{{asset('static/images/upload-image.svg')}}" class="profile-img" />
@@ -74,14 +74,14 @@
                                         <span>Admin</span>
                                         <span>amith@gmail.com</span>
                                         <span>+91 9843326118</span>
-                                    </div>
                                     <div class="action">
                                         <a class="modal-toggle inline-icon-button" data-target="#user_"><i class="icon dripicons-pencil"></i></a>
                                         <a href="#" class="inline-icon-button"><i class="icon dripicons-trash"></i></a>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 p-0 m-0">
                                 <div class="user-profile-snip">
 
                                     <img src="{{asset('static/images/upload-image.svg')}}" class="profile-img" />
@@ -90,10 +90,10 @@
                                         <span>Admin</span>
                                         <span>amith@gmail.com</span>
                                         <span>+91 9843326118</span>
-                                    </div>
                                     <div class="action">
                                         <a class="modal-toggle inline-icon-button" data-target="#user_"><i class="icon dripicons-pencil"></i></a>
                                         <a href="#" class="inline-icon-button"><i class="icon dripicons-trash"></i></a>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

@@ -602,8 +602,60 @@
                 margin: 2% 0 2% 0;
             }
 
+            .user-profile-snip .profile-meta{
+                background: #f8f8f8;
+                padding: 10px 0;
+                padding-top: 30px;
+                margin-top: -30px;
+                font-size: 14px;
+            }
+
+            .user-profile-snip .profile-img{
+                border-radius: 50%;
+                /*max-width: 100px;*/
+            }
+            .user-profile-snip:last-child{
+                /*margin-right: 20px;*/
+            }
+            .user-profile-snip:first-child{
+                /*margin-left: 20px;*/
+            }
             .user-profile-snip{
-                    margin: 20px;
+                    margin: 10px !important;
+                /*padding: 0 !important;*/
+                text-align: center;
+                font-family: "Gilroy", sans-serif;
+            }
+            .user-profile-snip .action{
+                padding: 10px 0;
+            }
+            .user-profile-snip h5{
+                font-weight: 700;
+                font-size: 16px;
+            }
+            .user-profile-snip span{
+                font-family: "Roboto",sans-serif;
+                /*font-weight: 500;*/
+                    display: block;
+                padding: 3px 0;
+            }
+
+            .inline-icon-button i{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-40%) !important;
+            }
+            .inline-icon-button{
+                cursor: pointer;
+                margin: 5px;
+                height: 30px;
+                width: 30px;
+                position: relative;
+                /*padding: 10px 10px;*/
+                display: inline-block;
+                border-radius: 50%;
+                background: #f2f2f2;
             }
         </style>
 

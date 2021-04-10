@@ -122,7 +122,7 @@
                                         </th>
 
                                         <td class="">
-                                            <select class="form-control br-5 material" name="inventory[][material]" id="material" required>
+                                            <select class="form-control br-5 material" name="inventory[][material]" required>
                                                 <option value="">--Choose Inventory First--</option>
                                             </select>
                                         </td>
@@ -190,7 +190,7 @@
         </th>
 
         <td class="">
-            <select class="form-control br-5 material" name="inventory[][material]" id="material" required>
+            <select class="form-control br-5 material" name="inventory[][material]" required>
                 <option value="">--Choose Inventory First--</option>
             </select>
         </td>

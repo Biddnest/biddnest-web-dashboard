@@ -29,13 +29,13 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors")}}">Edite Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",["id"=>$id ?? ""])}}">Edit Onboard Vendor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors")}}">Add Branch</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id ?? ""])}}">Add Branch</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors")}}"
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors",["id"=>$id ?? ""])}}"
                                 >Vendor Banking Details</a>
                             </li>
                             <li class="nav-item">
@@ -46,7 +46,58 @@
                 </div>
                 <div class="tab-content" id="myTabContent">
                     <!-- form starts -->
-                    <div class="tab-pane">
+                    <div class="tab-pane show">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="user-profile-snip">
+
+                                    <img src="{{asset('static/images/upload-image.svg')}}" class="profile-img" />
+                                    <div class="profile-meta">
+                                        <h5>David Malan</h5>
+                                        <span>Admin</span>
+                                        <span>amith@gmail.com</span>
+                                        <span>+91 9843326118</span>
+                                    </div>
+                                    <div class="action">
+                                        <a class="modal-toggle inline-icon-button" data-target="#user_"><i class="icon dripicons-pencil"></i></a>
+                                        <a href="#" class="inline-icon-button"><i class="icon dripicons-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="user-profile-snip">
+
+                                    <img src="{{asset('static/images/upload-image.svg')}}" class="profile-img" />
+                                    <div class="profile-meta">
+                                        <h5>David Malan</h5>
+                                        <span>Admin</span>
+                                        <span>amith@gmail.com</span>
+                                        <span>+91 9843326118</span>
+                                    </div>
+                                    <div class="action">
+                                        <a class="modal-toggle inline-icon-button" data-target="#user_"><i class="icon dripicons-pencil"></i></a>
+                                        <a href="#" class="inline-icon-button"><i class="icon dripicons-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="user-profile-snip">
+
+                                    <img src="{{asset('static/images/upload-image.svg')}}" class="profile-img" />
+                                    <div class="profile-meta">
+                                        <h5>David Malan</h5>
+                                        <span>Admin</span>
+                                        <span>amith@gmail.com</span>
+                                        <span>+91 9843326118</span>
+                                    </div>
+                                    <div class="action">
+                                        <a class="modal-toggle inline-icon-button" data-target="#user_"><i class="icon dripicons-pencil"></i></a>
+                                        <a href="#" class="inline-icon-button"><i class="icon dripicons-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="d-flex  justify-content-between flex-row  p-10 py-0"

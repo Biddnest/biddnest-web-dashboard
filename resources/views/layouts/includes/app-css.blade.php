@@ -601,5 +601,9 @@
             .branch-wrapper{
                 margin: 2% 0 2% 0;
             }
+
+            .user-profile-snip{
+                    margin: 20px;
+            }
         </style>
 

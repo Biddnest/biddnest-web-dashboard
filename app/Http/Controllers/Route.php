@@ -470,7 +470,9 @@ class Route extends Controller
             'lname' => 'required|string',
             'email' => 'required|string',
             'phone'=>'required|min:10|max:10',
-            'branch' => 'required'
+            'branch' => 'required',
+            'role'=>'required',
+            'image'=>'required'
         ]);
 
         if($validation->fails())
@@ -488,7 +490,9 @@ class Route extends Controller
             'lname' => 'required|string',
             'email' => 'required|string',
             'phone'=>'required|min:10|max:10',
-            'branch' => 'required'
+            'branch' => 'required',
+            'role'=>'required',
+            'image'=>'required'
         ]);
 
         if($validation->fails())
@@ -500,14 +504,13 @@ class Route extends Controller
     public function role_delete(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'id'=>'required',
-            'organization_id'=>'required'
+            'id'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::deleteRole($request->id, $request->organization_id);
+        return OrganisationController::deleteRole($request->id);
     }
 
     /*Vendor login*/

@@ -155,7 +155,10 @@ class WebController extends Controller
     }
     public function onbaordUserRole(Request $request)
     {
-        return view('vendor.onboarduserrole',["id"=>$request->id]);
+        $roles =Organization::where(["parent_org_id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", $request->id)->pluck("id");
+        $users = Vendor::whereIn("organization_id", $roles)->get();
+        $branch = Organization::where(["parent_org_id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", $request->id)->get();
+        return view('vendor.onboarduserrole',['id'=>$request->id, 'roles'=>$users, 'branches'=>$branch]);
     }
 
     public function onbaordBank(Request $request)

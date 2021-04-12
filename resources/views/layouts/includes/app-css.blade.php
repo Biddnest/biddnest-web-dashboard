@@ -612,7 +612,8 @@
 
             .user-profile-snip .profile-img{
                 border-radius: 50%;
-                /*max-width: 100px;*/
+                max-width: 100px;
+                max-height: 100px;
             }
             .user-profile-snip:last-child{
                 /*margin-right: 20px;*/

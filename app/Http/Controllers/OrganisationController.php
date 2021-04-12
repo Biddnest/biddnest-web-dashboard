@@ -111,7 +111,7 @@ class OrganisationController extends Controller
                 "commission"=>$data['commission']
             ];
 
-        if(!filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']);
 
             $result_organization =Organization::where(["id"=>$id])
@@ -332,6 +332,7 @@ class OrganisationController extends Controller
 
     public static function addNewRole($data, $id)
     {
+        $imageman = new ImageManager(array('driver' => 'gd'));
         $organization_exist = Organization::findOrFail($id);
         $vendor_exist = Vendor::where("organization_id", $id)->first();
         if(!$organization_exist && !$vendor_exist)
@@ -346,14 +347,17 @@ class OrganisationController extends Controller
             $password = $data['password'];
 
         $vendor = new Vendor;
+        $image =$data['image'];
+        $uniq = uniqid();
+        $vendor->image =Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['fname']);
         $vendor->fname = $data['fname'];
         $vendor->lname = $data['lname'];
         $vendor->email = $data['email'];
         $vendor->phone = $data['phone'];
         $vendor->pin = null;
-        $vendor->organization_id = $id;
+        $vendor->organization_id = $data['branch'];
         $vendor->meta = json_encode($meta);
-        $vendor->user_role = VendorEnums::$ROLES["manager"];
+        $vendor->user_role = $data['role'];
         $vendor->password = $password;
         $vendor_result = $vendor->save();
 
@@ -375,36 +379,47 @@ class OrganisationController extends Controller
 
     public static function editNewRole($data, $id, $role_id)
     {
-        $exist =Vendor::where(["id"=>$role_id, "organization_id"=>$id])->first();
+        $exist =Vendor::where(["id"=>$role_id])->first();
         if(!$exist)
             return Helper::response(false,"Incorrect Role or Organization id");
 
         $meta = array(["branch"=>$data['branch']]);
+        $imageman = new ImageManager(array('driver' => 'gd'));
+
+        $image = $data['image'];
+        $uniq = uniqid();
 
         if(!$data['password'])
-            $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+            $password=$exist['password'];
         else
-            $password = $exist['password'];
+            $password = $data['password'];
 
-        $vendor_result = Vendor::where(["id"=>$role_id, "organization_id"=>$id])
-        ->update([
+        $update_data =[
             "fname"=>$data['fname'],
             "lname"=>$data['lname'],
             "email"=>$data['email'],
             "phone"=>$data['phone'],
             "meta"=>$meta,
-            "password"=>$password
-        ]);
+            "password"=>$password,
+            "user_role"=>$data['role'],
+            "organization_id"=>$data['branch']
+        ];
+
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['fname']);
+
+        $vendor_result = Vendor::where(["id"=>$role_id])
+        ->update($update_data);
 
         if(!$vendor_result)
-            return Helper::response(false,"Couldn't save data");
+            return Helper::response(false,"Couldn't Update data");
 
-        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
+        return Helper::response(true,"Update data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function deleteRole($id, $organization_id)
+    public static function deleteRole($id)
     {
-        $delete_role=Vendor::where(["id"=>$id, "organization_id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
+        $delete_role=Vendor::where(["id"=>$id])->update(["deleted" => CommonEnums::$YES]);
 
         if(!$delete_role)
             return Helper::response(false,"Couldn't Delete branch");

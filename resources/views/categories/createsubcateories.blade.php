@@ -138,7 +138,7 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
+                                            <a href="#" class="closer"> <i class="fa fa-remove p-1 cursor-pointer" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
 
@@ -206,7 +206,7 @@
         </td>
 
         <td>
-            <i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
+            <a href="#" class="closer"> <i class="fa fa-remove p-1 cursor-pointer" aria-hidden="true"></i></a>
         </td>
     </tr>
 </script>

@@ -69,7 +69,7 @@ Route::prefix('web/api')->group(function () {
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
-    Route::delete('/vendors',[Router::class,'vendor_delete'])->name("vendor_delete");
+    Route::delete('/vendors/{organization_id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 
     Route::post('/vendors/branches',[Router::class,'branch_add'])->name("add_branch_vendor");
     Route::put('/vendors/branches',[Router::class,'branch_edit'])->name("edit_branch_vendor");

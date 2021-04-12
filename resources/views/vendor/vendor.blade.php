@@ -129,16 +129,17 @@
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                     @foreach($vendors as $vendor)
-                                                        <tr class="tb-border cursor-pointer"
-                                                            onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                            <td scope="row">
-{{--                                                                @if(isset($vendor->vendor))--}}
-                                                                {{ucfirst(trans($vendor->vendor->fname)) ?? "NA"}} {{ucfirst(trans($vendor->vendor->lname)) ?? ""}}
-{{--                                                                @endif--}}
+                                                        <tr class="tb-border cursor-pointer">
+                                                            <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                                                @if(isset($vendor->vendor))
+                                                                {{ucfirst(trans($vendor->vendor->fname))}} {{ucfirst(trans($vendor->vendor->lname))}}
+                                                                @else
+                                                                    {{"NA"}}
+                                                                @endif
                                                             </td>
-                                                            <td>{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
-                                                            <td>{{ucfirst(trans($vendor->city))}}</td>
-                                                            <td>@switch($vendor->status)
+                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
+                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->city))}}</td>
+                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">@switch($vendor->status)
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['active'])
                                                                     <span class="status-badge green-bg text-center">Active</span>
                                                                     @break
@@ -155,8 +156,9 @@
                                                                 @endswitch
                                                             </td>
 
-                                                            <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                                    class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                            <td> <a href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                                <a href="#" class="delete" data-parent="tb-border" data-url="{{route('vendor_delete',['organization_id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

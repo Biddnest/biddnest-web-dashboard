@@ -72,8 +72,8 @@
                                         <div class="data-group">
                                             <div class="d-flex flex-column justify-content-center">
                                                 <div>
-                                                    <a class="modal-toggle" data-target="#branch_{{$value->id}}"><i class="icon dripicons-pencil"></i></a>
-                                                    <a href="#" class="delete" data-parent=".col-md-4" data-url="{{route('delete_branch', ["parent_id"=>$id, "organization_id"=>$value->id])}}"><i class="icon dripicons-trash"></i></a>
+                                                    <a href="#" class="modal-toggle inline-icon-button" data-target="#branch_{{$value->id}}"><i class="icon dripicons-pencil"></i></a>
+                                                    <a href="#" class="delete inline-icon-button" data-parent=".branch-wrapper" data-url="{{route('delete_branch', ["parent_id"=>$id, "organization_id"=>$value->id])}}"><i class="icon dripicons-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>

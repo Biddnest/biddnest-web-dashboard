@@ -41,7 +41,7 @@
                                 <div class="file-upload">
                                   <input type="file" />
                                     <input type="hidden" class="base-holder" name="image" value="" required />
-                                  <button class="btn theme-bg white-text my-0">
+                                  <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                     UPLOAD IMAGE
                                   </button>
                                 </div>
@@ -76,12 +76,13 @@
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="phone-num-lable">Category Name</label>
-                                    <select class="form-control br-5 field-toggle select-box" name="category[]" multiple>
+                                    <select class="form-control br-5 field-toggle" name="category">
+                                        <option value="">--Select--</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
-                                  <span class="error-message">Please enter valid Phone number</span>
+                                  <span class="error-message">Please enter valid Service</span>
                                 </div>
                               </div>
                               <div class="col-sm-12   border-top-pop mtop-20">

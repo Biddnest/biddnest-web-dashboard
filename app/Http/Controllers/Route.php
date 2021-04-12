@@ -124,14 +124,17 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'name' => 'required',
             'image' => 'required',
-            'service_id'=>'required|integer',
-            'inventories'=>'required|nullable'
+            'category'=>'required|integer',
+            'inventories.*.name'=>'required',
+            'inventories.*.material'=>'required',
+            'inventories.*.size'=>'required',
+            'inventories.*.quantity'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return SubServiceController::add($request->service_id,ucwords($request->name), $request->image, $request->inventories);
+            return SubServiceController::add($request->all());
     }
 
     public function subservice(Request $request)

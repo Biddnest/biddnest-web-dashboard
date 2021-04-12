@@ -20,39 +20,38 @@ class SubServiceController extends Controller
     {
     }
 
-    public static function add($service_id, $name,$image, $inventories)
+    public static function add($data)
     {
 
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));
 
-        $image_name = "subservice".$name."-".uniqid().".png";
+        $image_name = "subservice".$data['name']."-".uniqid().".png";
         $subservice=new Subservice();
-        $subservice->name=$name;
+        $subservice->name=$data['name'];
         // $subservice->service_id=$service_id;
-        $subservice->image = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices");
+        $subservice->image = Helper::saveFile($imageman->make($data['image'])->resize(100,100)->encode('png', 75),$image_name,"subservices");
         $result= $subservice->save();
 
         $service=new ServiceSubservice;
-        $service->service_id = $service_id;
+        $service->service_id = $data['category'];
         $service->subservice_id = $subservice->id;
         $service_result = $service->save();
 
 
-        if($inventories) {
-            foreach ($inventories as $inventory) {
-                DB::table("subservices_inventories_maps")->insert([
-                    "subservice_id" => $subservice->id,
-                    "inventory_id" => $inventory["id"],
-                    "size" => $inventory["size"],
-                    "material" => $inventory["material"],
-                    "quantity" => $inventory["quantity"]
-                ]);
+        if($data['inventories']) {
+            foreach ($data['inventories'] as $filds) {
+                $inventory =new SubserviceInventory();
+                $inventory->subservice_id=$subservice->id;
+                $inventory->inventory_id=$filds["name"];
+                $inventory->size=$filds['size'];
+                $inventory->material=$filds['material'];
+                $inventory->quantity=$filds['quantity'];
+                $inventory_result=$inventory->save();
             }
         }
 
-
-        if(!$result && !$service_result)
+        if(!$result && !$service_result && !$inventory_result)
             return Helper::response(false,"Couldn't save data");
         else
             return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->with("inventories")->findOrFail($subservice->id)]);
@@ -121,7 +120,7 @@ class SubServiceController extends Controller
         ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
         ->whereIn("id", ServiceSubservice::where('service_id', $id)->pluck('subservice_id'))
         ->get();
-        
+
         if(!$subservice)
             return Helper::response(false,"Records not exist");
         else

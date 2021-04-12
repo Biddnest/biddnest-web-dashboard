@@ -7,7 +7,7 @@ use App\Models\Inventory;
 use App\Models\Service;
 use App\Models\Subservice;
 use App\Models\ServiceSubservice;
-
+use App\Models\SubserviceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
@@ -37,7 +37,6 @@ class SubServiceController extends Controller
         $service->service_id = $data['category'];
         $service->subservice_id = $subservice->id;
         $service_result = $service->save();
-
 
         if($data['inventories']) {
             foreach ($data['inventories'] as $filds) {

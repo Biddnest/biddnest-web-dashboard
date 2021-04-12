@@ -425,6 +425,7 @@ class ApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'category'=>'required',
             'public_booking_id' => 'nullable|string',
             'heading' => 'required|string',
             'desc' => 'required|string'
@@ -433,7 +434,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create($request->token_payload->id, 0, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::createForUserApp($request->token_payload->id, $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
 
     public function getRecentBooking(Request $request)

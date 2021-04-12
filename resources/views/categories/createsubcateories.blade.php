@@ -114,7 +114,7 @@
                                     <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                     <tr class="inventory-snip">
                                         <th scope="row" class="text-left">
-                                            <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
+                                            <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                 <option value="">--Select--</option>
                                                 @foreach($inventories as $inventory)
                                                     <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -123,19 +123,19 @@
                                         </th>
 
                                         <td class="">
-                                            <select class="form-control br-5 material" name="inventory[][material]" required>
+                                            <select class="form-control br-5 material" name="inventories[][material]" required>
                                                 <option value="">--Choose Inventory First--</option>
                                             </select>
                                         </td>
 
                                         <td class="">
-                                            <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+                                            <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
                                                 <option value="">--Choose Inventory First--</option>
                                             </select>
                                         </td>
 
                                         <td class="" style="width: 20%;">
-                                            <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
+                                            <input class="form-control br-5" type="number" name="inventories[][quantity]" required>
                                         </td>
 
                                         <td>

@@ -145,6 +145,13 @@ $("body").on('click', ".closer", function(event) {
     return false;
 });
 
+$("body").on('click', ".remove", function(event) {
+    if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
+        $(this).closest("inventoty-snip").fadeOut(100).remove();
+    }
+    return false;
+});
+
 $("body").on('click', ".delete", function(event) {
     if(megaAlert("Delete", 'Are sure want to remove this?')) {
         $(this).closest($(this).data("parent")).fadeOut(100).remove();

@@ -63,8 +63,8 @@
                                                         <td class="">{{ucfirst(trans($lead->zone->name))}}</td>
                                                         <td>
                                                             <i class="fa fa-check-circle"></i>
-                                                             <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
-                                                            <i class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
+                                                            <a href="{{route('onboard-edit-vendors', ["id"=>$lead->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                            <a href="#" class="delete" data-parent="tb-border" data-url="{{route('vendor_delete',['organization_id'=>$lead->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

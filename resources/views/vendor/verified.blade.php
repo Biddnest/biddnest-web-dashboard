@@ -67,7 +67,11 @@
                                                         <td>{{$vendor->email}}</td>
                                                         <td class="">+91-{{$vendor->phone}}</td>
                                                         <td>{{ucfirst(trans($vendor->service_type))}}</td>
-                                                        <td> <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i><i class="fa fa-trash p-1" aria-hidden="true"></i></i></td>
+                                                        <td>
+                                                            <a href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                            <a href="#" class="delete" data-parent="tb-border" data-url="{{route('vendor_delete',['organization_id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>

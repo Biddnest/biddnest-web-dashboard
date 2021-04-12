@@ -504,13 +504,14 @@ class Route extends Controller
     public function role_delete(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'id'=>'required'
+            'organization_id'=>'required',
+            'vendor_id'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::deleteRole($request->id);
+        return OrganisationController::deleteRole($request->vendor_id, $request->organization_id);
     }
 
     /*Vendor login*/

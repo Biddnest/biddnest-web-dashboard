@@ -349,7 +349,7 @@ class OrganisationController extends Controller
         $vendor = new Vendor;
         $image =$data['image'];
         $uniq = uniqid();
-        $vendor->image =Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['fname']);
+        $vendor->image =Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['fname']);
         $vendor->fname = $data['fname'];
         $vendor->lname = $data['lname'];
         $vendor->email = $data['email'];
@@ -406,7 +406,7 @@ class OrganisationController extends Controller
         ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['fname']);
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['fname']);
 
         $vendor_result = Vendor::where(["id"=>$role_id])
         ->update($update_data);

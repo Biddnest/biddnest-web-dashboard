@@ -1,6 +1,20 @@
 /*
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
+$.delete = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
+        type = type || callback,
+            callback = data,
+            data = {}
+    }
+    return $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: callback,
+        data: data,
+        contentType: type
+    });
+}
 
 Logger.useDefaults();
 
@@ -145,20 +159,6 @@ $("body").on('click', ".closer", function(event) {
     return false;
 });
 
-$("body").on('click', ".remove", function(event) {
-    if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
-        $(this).closest("inventoty-snip").fadeOut(100).remove();
-    }
-    return false;
-});
-
-$("body").on('click', ".delete", function(event) {
-    if(megaAlert("Delete", 'Are sure want to remove this?')) {
-        $(this).closest($(this).data("parent")).fadeOut(100).remove();
-    }
-    return false;
-});
-
 $("body").on('click', ".modal-toggle", function(event) {
     console.log("sda");
     $($(this).data("target")).fadeIn(100).show();
@@ -169,6 +169,7 @@ $("body").on('click', ".fullscreen-modal-body .close", function(event) {
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
     return false;
 });
+
 
 $("body").on('change', ".inventory-select", function(event) {
     console.log("change");
@@ -188,5 +189,19 @@ $("body").on('change', ".inventory-select", function(event) {
     return false;
 });
 
+$("body").on('click', ".delete", function(event) {
+    if(confirm('Are sure want to delete this? ')) {
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        $.delete($(this).data("url"), {}, function (response){
+            if(response.status == "success")
+            {
+                tinyAlert("Deleted Successfully", "This user has been removed.");
+                $(this).closest($(this).data("parent")).fadeOut(100).remove();
+            }
+
+        });
+    }
+    return false;
+});
 
 

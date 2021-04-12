@@ -658,5 +658,8 @@
                 border-radius: 50%;
                 background: #f2f2f2;
             }
+            .inventory-snip:first-child .closer{
+                display: none;
+            }
         </style>
 

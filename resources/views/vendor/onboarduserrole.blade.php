@@ -73,7 +73,7 @@
                                             <span>+91 {{$role->phone}}</span>
                                             <div class="action">
                                                 <a class="modal-toggle inline-icon-button" data-target="#role_{{$role->id}}"><i class="icon dripicons-pencil"></i></a>
-                                                <a href="#" class="delete inline-icon-button"><i class="icon dripicons-trash"></i></a>
+{{--                                                <a href="#" class="delete inline-icon-button" data-parent=".col-md-4" data-url="{{route(role_delete, ["organization_id"=>$id, "vendor_id"=>$role->id])}}"><i class="icon dripicons-trash"></i></a>--}}
                                             </div>
                                         </div>
                                     </div>

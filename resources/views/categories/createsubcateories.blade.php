@@ -31,7 +31,7 @@
                 <div class="" id="">
                     <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue">
+                      <form class="form-new-order pt-4 mt-3 input-text-blue" >
                         <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
@@ -111,7 +111,7 @@
 
                                     </thead>
                                     <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
-                                    <tr class="inventoty-snip">
+                                    <tr class="inventory-snip">
                                         <th scope="row" class="text-left">
                                             <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
                                                 <option value="">--Select--</option>
@@ -138,7 +138,7 @@
                                         </td>
 
                                         <td>
-                                            <a href="#" class="closer"> <i class="fa fa-remove p-1 cursor-pointer" aria-hidden="true"></i></a>
+                                            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
                                         </td>
                                     </tr>
 
@@ -179,7 +179,7 @@
 </div>
 
 <script type="text/html" id="add-inventory-row">
-    <tr class="inventoty-snip">
+    <tr class="inventory-snip">
         <th scope="row" class="text-left">
             <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
                 <option value="">--Select--</option>
@@ -206,7 +206,7 @@
         </td>
 
         <td>
-            <a href="#" class="closer"> <i class="fa fa-remove p-1 cursor-pointer" aria-hidden="true"></i></a>
+            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
         </td>
     </tr>
 </script>

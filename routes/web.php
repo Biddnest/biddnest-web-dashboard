@@ -79,7 +79,7 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add");
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
-    Route::delete('/vendors/roles',[Router::class,'role_delete'])->name("role_delete");
+    Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("role_delete");
 
 
     // Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");

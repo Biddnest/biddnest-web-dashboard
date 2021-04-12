@@ -428,14 +428,14 @@ class Route extends Controller
     public function branch_delete(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'id'=>'required',
-            'parent_org_id'=>'required'
+            'organization_id'=>'required',
+            'parent_id'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::deleteBranch($request->id, $request->parent_org_id);
+        return OrganisationController::deleteBranch($request->organization_id, $request->parent_id);
 
     }
 
@@ -503,15 +503,7 @@ class Route extends Controller
 
     public function role_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'organization_id'=>'required',
-            'vendor_id'=>'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return OrganisationController::deleteRole($request->vendor_id, $request->organization_id);
+       return OrganisationController::deleteRole($request->vendor_id, $request->organization_id);
     }
 
     /*Vendor login*/

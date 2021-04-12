@@ -244,11 +244,9 @@ class OrganisationController extends Controller
         return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
-    public static function deleteBranch($id, $parent_org_id)
+    public static function deleteBranch($organization_id, $parent_id)
     {
-        $delete_branch=Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->update(["deleted" => CommonEnums::$YES]);
-
-        // $delete_service=Organization::where("organization_id",$id)->update(["deleted" => 1]);
+        $delete_branch=Organization::where(["id"=>$organization_id, "parent_org_id"=>$parent_id])->update(["deleted" => CommonEnums::$YES]);
 
         if(!$delete_branch)
             return Helper::response(false,"Couldn't Delete branch");
@@ -417,9 +415,9 @@ class OrganisationController extends Controller
         return Helper::response(true,"Update data successfully", ["Orgnization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function deleteRole($id)
+    public static function deleteRole($vendor_id, $organization_id)
     {
-        $delete_role=Vendor::where(["id"=>$id])->update(["deleted" => CommonEnums::$YES]);
+        $delete_role=Vendor::where(["id"=>$vendor_id, "organization_id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
 
         if(!$delete_role)
             return Helper::response(false,"Couldn't Delete branch");

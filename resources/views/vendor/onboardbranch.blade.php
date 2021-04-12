@@ -73,7 +73,7 @@
                                             <div class="d-flex flex-column justify-content-center">
                                                 <div>
                                                     <a class="modal-toggle" data-target="#branch_{{$value->id}}"><i class="icon dripicons-pencil"></i></a>
-                                                    <a href="#"><i class="icon dripicons-trash"></i></a>
+                                                    <a href="#" class="delete" data-parent=".col-md-4" data-url="{{route('delete_branch', ["parent_id"=>$id, "organization_id"=>$value->id])}}"><i class="icon dripicons-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>

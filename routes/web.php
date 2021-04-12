@@ -73,13 +73,13 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/vendors/branches',[Router::class,'branch_add'])->name("add_branch_vendor");
     Route::put('/vendors/branches',[Router::class,'branch_edit'])->name("edit_branch_vendor");
-    Route::delete('/vendors/branches',[Router::class,'branch_delete'])->name("branch_delete");
+    Route::delete('/vendors/{parent_id}/branches/{organization_id}',[Router::class,'branch_delete'])->name("delete_branch");
 
     Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
 
     Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add");
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
-    Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("role_delete");
+    Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("delete-role");
 
 
     // Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");

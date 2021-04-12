@@ -64,7 +64,8 @@ class BookingsController extends Controller
         $booking->source_lng = $data['source']['lng'];
         $booking->source_meta = json_encode(["geocode" => $data['source']['meta']['geocode'],
             "floor" => $data['source']['meta']['floor'],
-            "address" => $data['source']['meta']['address'],
+            "address_line1" => $data['source']['meta']['address_line1'],
+            "address_line2" => $data['source']['meta']['address_line2'],
             "city" => $data['source']['meta']['city'],
             "state" => $data['source']['meta']['state'],
             "pincode" => $data['source']['meta']['pincode'],
@@ -73,7 +74,8 @@ class BookingsController extends Controller
         $booking->destination_lng = $data['destination']['lng'];
         $booking->destination_meta = json_encode(["geocode" => $data['destination']['meta']['geocode'],
             "floor" => $data['destination']['meta']['floor'],
-            "address" => $data['destination']['meta']['address'],
+            "address_line1" => $data['destination']['meta']['address_line1'],
+            "address_line2" => $data['destination']['meta']['address_line2'],
             "city" => $data['destination']['meta']['city'],
             "state" => $data['destination']['meta']['state'],
             "pincode" => $data['destination']['meta']['pincode'],

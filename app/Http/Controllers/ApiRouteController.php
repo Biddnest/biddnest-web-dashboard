@@ -72,8 +72,7 @@ class ApiRouteController extends Controller
             'fname' => 'required|string|max:50',
             'lname' => 'required|string|max:50',
             'email' => 'required|email|max:50',
-            'gender' => 'required|string|max:6',
-            'referral_code' => 'required|string',
+            'gender' => 'required|string|max:6'
         ]);
 
         $formatedRequest = StringFormatter::format($request->all(),[
@@ -186,7 +185,8 @@ class ApiRouteController extends Controller
 
             'source.meta.geocode' => 'nullable|string',
             'source.meta.floor' => 'required|integer',
-            'source.meta.address' => 'required|string',
+            'source.meta.address_line1' => 'required|string',
+            'source.meta.address_line2' => 'required|string',
             'source.meta.city' => 'required|string',
             'source.meta.state' => 'required|string',
             'source.meta.pincode' => 'required|min:6|max:6',
@@ -197,7 +197,8 @@ class ApiRouteController extends Controller
 
             'destination.meta.geocode' => 'nullable|string',
             'destination.meta.floor' => 'required|integer',
-            'destination.meta.address' => 'required|string',
+            'destination.meta.address_line1' => 'required|string',
+            'destination.meta.address_line2' => 'required|string',
             'destination.meta.city' => 'required|string',
             'destination.meta.state' => 'required|string',
             'destination.meta.pincode' => 'required|min:6|max:6',
@@ -207,7 +208,6 @@ class ApiRouteController extends Controller
             'contact_details.name'  => 'nullable|string',
             'contact_details.phone'  => 'nullable|min:10|max:10',
             'contact_details.email'  => 'nullable|string',
-
 
             'meta.self_booking' => 'required|boolean',
             'meta.subcategory' => 'nullable|string',
@@ -220,7 +220,6 @@ class ApiRouteController extends Controller
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',
             ]);
-
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);

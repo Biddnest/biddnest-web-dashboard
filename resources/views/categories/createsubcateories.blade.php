@@ -31,7 +31,7 @@
                 <div class="" id="">
                     <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 input-text-blue" >
+                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('sub_service_add')}}" method= "POST" data-next="redirect" data-url="{{route('subcateories')}}" data-alert="tiny" data-parsley-validate>
                         <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
@@ -57,7 +57,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Name</label>
-                                  <input type="text" id="banner_name" placeholder="Name" class="form-control br-5"/>
+                                  <input type="text" id="banner_name" placeholder="Name" name="name" class="form-control br-5"/>
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
                             </div>

@@ -83,15 +83,20 @@ class SubServiceController extends Controller
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices");
 
-        $update_data = [
-            "name"=>$name,
-            "service_id"=>$service_id ];
+        $update_data = ["name"=>$name];
         $subservice=Subservice::where("id", $id)->update($update_data);
 
-        if(!$subservice)
-            return Helper::response(false,"Couldn't save data");
+        ServiceSubservice::where('service_id', $service_id)->delete();
+
+        $service=new ServiceSubservice;
+        $service->service_id = $service_id;
+        $service->subservice_id = $subservice->id;
+        $service_result = $service->save();
+
+        if(!$subservice && !$service_result)
+            return Helper::response(false,"Couldn't Update data");
         else
-            return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
+            return Helper::response(true,"Update data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
     }
 
     public static function getOne($id)

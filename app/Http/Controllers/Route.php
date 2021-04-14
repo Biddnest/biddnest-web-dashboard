@@ -110,9 +110,6 @@ class Route extends Controller
 
     public function service_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer'
-        ]);
         return ServiceController::delete($request->id);
     }
 
@@ -182,13 +179,6 @@ class Route extends Controller
 
     public function subservice_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
         return SubServiceController::delete($request->id);
     }
 
@@ -261,12 +251,6 @@ class Route extends Controller
 
     public function inventories_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer',
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
         return InventoryController::delete($request->id);
     }
 

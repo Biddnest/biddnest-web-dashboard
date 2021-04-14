@@ -177,7 +177,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ServiceController::update($request->id, $request->category, ucwords($request->name), $request->image);
+        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image);
     }
 
     public function subservice_delete(Request $request)

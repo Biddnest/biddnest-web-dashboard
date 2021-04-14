@@ -90,7 +90,7 @@ class SubServiceController extends Controller
 
         $service=new ServiceSubservice;
         $service->service_id = $service_id;
-        $service->subservice_id = $subservice->id;
+        $service->subservice_id = $id;
         $service_result = $service->save();
 
         if(!$subservice && !$service_result)

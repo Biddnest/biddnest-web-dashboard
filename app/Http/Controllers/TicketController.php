@@ -269,13 +269,16 @@ class TicketController extends Controller
     {
         $ticket_exist = Ticket::where(['id'=>$ticket_id, 'user_id'=>$sender_id])->first();
 
-        if($ticket_exist->status ===  TicketEnums::$STATUS['rejected'])
+        if(!$ticket_exist)
+            return Helper::response(false, "Ticket doesn't exist");
+
+        if($ticket_exist->status ==  TicketEnums::$STATUS['rejected'])
             return Helper::response(false, "Ticket is Rejected");
 
-        if($ticket_exist->status ===  TicketEnums::$STATUS['closed'])
+        if($ticket_exist->status ==  TicketEnums::$STATUS['closed'])
             return Helper::response(false, "Ticket is closed");
 
-        if($ticket_exist->status ===  TicketEnums::$STATUS['resolved'])
+        if($ticket_exist->status ==  TicketEnums::$STATUS['resolved'])
             return Helper::response(false, "Ticket is resolved");
 
         $add_chat = new TicketReply();

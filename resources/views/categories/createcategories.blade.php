@@ -35,7 +35,7 @@
                       aria-labelledby="new-order-tab"
                     >
                       <!-- form starts -->
-            <form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-url="{{route('create-categories')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" data-parsley-validate >
+            <form action="{{route('service_add')}}" method= "POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('categories')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" data-parsley-validate >
               <div class="row">
                 <div class="col-lg-6">
                   <p class="img-label">Photo</p>

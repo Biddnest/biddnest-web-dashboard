@@ -447,6 +447,31 @@ class ApiRouteController extends Controller
         return TicketController::create($request->token_payload->id, 4, []);
     }
 
+    public function addReply(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::addReplyFromUser($request->token_payload->id, $request->ticket_id, $request->reply);
+    }
+
+    public function getDetails(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::getOneForUserApp($request->token_payload->id, $request->ticket_id);
+    }
+
     public function statusComplete(Request $request)
     {
         $validation = Validator::make($request->all(),[

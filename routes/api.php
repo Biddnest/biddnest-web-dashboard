@@ -76,6 +76,8 @@ Route::prefix('v1')->group(function () {
     Route::post("/tickets/create",[ApiRouter::class, 'createTickets']);
 
     Route::post("/tickets/callback",[ApiRouter::class, 'callBack']);
+    Route::post("/tickets/chat",[ApiRouter::class, 'addReply']);
+    Route::get("/tickets/details",[ApiRouter::class, 'getDetails']);
 });
 
 

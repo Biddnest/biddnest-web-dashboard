@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\TicketReply;
 use Illuminate\Http\Request;
 use App\Helper;
 use App\Models\Ticket;
@@ -264,4 +265,37 @@ class TicketController extends Controller
         return Helper::response(true, "Ticket raised",["ticket"=>$tickets]);
     }
 
+    public static function addReplyFromUser($sender_id, $ticket_id, $reply)
+    {
+        $ticket_exist = Ticket::where(['id'=>$ticket_id, 'user_id'=>$sender_id])->first();
+
+        if($ticket_exist->status ===  TicketEnums::$STATUS['rejected'])
+            return Helper::response(false, "Ticket is Rejected");
+
+        if($ticket_exist->status ===  TicketEnums::$STATUS['closed'])
+            return Helper::response(false, "Ticket is closed");
+
+        if($ticket_exist->status ===  TicketEnums::$STATUS['resolved'])
+            return Helper::response(false, "Ticket is resolved");
+
+        $add_chat = new TicketReply();
+        $add_chat->ticket_id = $ticket_id;
+        $add_chat->user_id = $sender_id;
+        $add_chat->chat =$reply;
+        $chat_result = $add_chat->save();
+
+        if(!$chat_result)
+            return Helper::response(false, "couldn't send Massage, Please try again");
+
+        return Helper::response(true, "added chat Successfully", ['ticket'=>Ticket::where('id', $ticket_id)->with('reply')]);
+    }
+
+    public static function getOneForUserApp($sender_id, $ticket_id)
+    {
+        $tickets = Ticket::where(['id'=>$ticket_id, 'user_id'=>$sender_id])->with(['reply'=> function($query) {
+            $query->with('agent');
+        }])->get();
+
+        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets]);
+    }
 }

@@ -111,12 +111,12 @@ class SubServiceController extends Controller
 
     public static function delete($id)
     {
-        $result=Service::where("id",$id)->update(["deleted"=>1]);
+        $result=Subservice::where("id",$id)->update(["deleted"=>1]);
 
         if(!$result)
-            return Helper::response(false,"Couldn't Delete data $result");
+            return Helper::response(false,"Couldn't Delete Sub-Services");
         else
-            return Helper::response(true,"Service deleted successfully");
+            return Helper::response(true,"Sub-Services deleted successfully");
     }
 
     public static function getSubservicesForApp($id)

@@ -55,7 +55,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/sub-services',[Router::class,'subservice_add'])->name("sub_service_add");
     Route::put('/sub-services',[Router::class,'subservice_edit'])->name("sub_service_edit");
     Route::get('/sub-services',[Router::class,'subservice_get'])->name("sub_service_get");
-    Route::delete('/sub-services',[Router::class,'subservice_delete'])->name("sub_service_delete");
+    Route::delete('/sub-services/{id}',[Router::class,'subservice_delete'])->name("sub_service_delete");
 
     //inventory APIs
     Route::get('/inventories',[Router::class,'inventories'])->name("inventories");

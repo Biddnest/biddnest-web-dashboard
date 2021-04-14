@@ -63,13 +63,11 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($subcategories as $subcategory)
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row"> <img class="defau  lt-image"
-                                                        src="{{$subcategory->image}}" alt=""></td>
-                                                <td>{{$subcategory->name}}</td>
+                                            <tr class="tb-border cursor-pointer sub_{{$subcategory->id}}">
+                                                <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"> <img class="defau  lt-image" src="{{$subcategory->image}}" alt=""></td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$subcategory->name}}</td>
 
-                                                <td class="">
+                                                <td class="" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                                     @switch($subcategory->status)
                                                         @case(\App\Enums\CommonEnums::$YES)
                                                         <span class="status-badge green-bg">Enabled</span>
@@ -84,8 +82,10 @@
                                                     @endswitch
                                                 </td>
 
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
+                                                <td>
+                                                    <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete" data-parent=".sub_{{$subcategory->id}}" data-confirm="Are you sure, you want delete this Sub-Category permenently? You won't be able to undo this." data-url="{{route('sub_service_delete',['id'=>$subcategory->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

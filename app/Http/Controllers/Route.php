@@ -189,7 +189,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return AdminController::serviceDelete($request->id);
+        return SubServiceController::delete($request->id);
     }
 
     /*Inventories*/

@@ -29,7 +29,7 @@
                             <div class="vender-all-details">
                                 <div class="simple-card" style="width: 30%;">
                                     <p>TOTAL VENDORS</p>
-                                    <h1>{{ $vendors_count }}</h1>
+                                    <h1>{{$vendors_count }}</h1>
                                 </div>
                                 <div class="simple-card" style="width: 30%;">
                                     <p>UNVERIFIED VENDORS</p>

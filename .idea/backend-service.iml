@@ -129,8 +129,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/htmlmin/htmlmin" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/rmccue/requests" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/razorpay/razorpay" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/berkayk/onesignal-laravel" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/psr-http-message-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random-lib" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/sodium_compat" />

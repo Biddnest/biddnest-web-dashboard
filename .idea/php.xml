@@ -124,8 +124,6 @@
       <path value="$PROJECT_DIR$/vendor/htmlmin/htmlmin" />
       <path value="$PROJECT_DIR$/vendor/rmccue/requests" />
       <path value="$PROJECT_DIR$/vendor/razorpay/razorpay" />
-      <path value="$PROJECT_DIR$/vendor/berkayk/onesignal-laravel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random-lib" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />

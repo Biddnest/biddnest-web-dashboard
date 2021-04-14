@@ -82,8 +82,6 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("delete-role");
 
 
-    // Route::delete('/organizations/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
-
     //zone APIs
     Route::get('/zones',[Router::class,'zones'])->name("zones");
     Route::post('/zones',[Router::class,'zones_add'])->name("zones_add");

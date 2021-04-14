@@ -370,6 +370,18 @@ class Route extends Controller
         return OrganisationController::getOne($request->id);
     }
 
+    public function vendor_delete(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'organization_id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::delete($request->organization_id);
+    }
+
     public function branch_add(Request $request)
     {
         $validation = Validator::make($request->all(),[

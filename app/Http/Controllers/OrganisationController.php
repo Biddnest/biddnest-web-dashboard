@@ -141,6 +141,16 @@ class OrganisationController extends Controller
         return Helper::response(true,"update data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
+    public static function delete($organization_id)
+    {
+        $delete_branch=Organization::where(["id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
+
+        if(!$delete_branch)
+            return Helper::response(false,"Couldn't Delete branch");
+
+        return Helper::response(true,"Branch Deleted successfully");
+    }
+
     public static function getOne($id)
     {
         $get_vendor=Organization::where(["id"=>$id, "deleted"=>CommonEnums::$NO])->first();

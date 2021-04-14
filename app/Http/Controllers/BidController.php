@@ -121,7 +121,7 @@ class BidController extends Controller
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
 
-            Booking::where(["user_id"=>$order->user_id,
+            $addrebidtime = Booking::where(["user_id"=>$order->user_id,
                                             "public_booking_id"=>$order->public_booking_id])
                                             ->update([
                                                 "status"=>BookingEnums::$STATUS['rebiding'],
@@ -129,32 +129,31 @@ class BidController extends Controller
                                                 "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")
                                             ]);
 
-            Bid::where("booking_id",$book_id)
+            $update_bid_type = Bid::where("booking_id",$book_id)
                                 ->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
 
-            BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
+            $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 
             return true;
         }
         $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("vendor_id")[0];
-        Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
+        $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
-        $lost_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];
-        Bid::where([
+
+        $lost_vendor = Bid::where([
             "booking_id"=>$book_id,
             "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
-        $expire_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['active']])->pluck("vendor_id")[0];
-        Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
+        $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
 
 
 
-       Booking::where("id", $book_id)
+        $booking_update_status = Booking::where("id", $book_id)
                                         ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
                                         ->update([
                                             "organization_id"=>$won_org_id,
@@ -175,10 +174,9 @@ class BidController extends Controller
         $payment->tax = $tax;
         $payment->sub_total= $sub_total;
         $payment->grand_total = $grand_total;
-        $payment->save();
+        $payment_result = $payment->save();
 
-
-        BookingsController::statusChange($book_id, BookingEnums::$STATUS['payment_pending']);
+        $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['payment_pending']);
 
         return true;
     }

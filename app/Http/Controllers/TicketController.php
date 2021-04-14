@@ -295,8 +295,8 @@ class TicketController extends Controller
 
     public static function getOneForUserApp($sender_id, $ticket_id)
     {
-        $tickets = Ticket::where(['id'=>$ticket_id, 'user_id'=>$sender_id])->with(['reply'=> function($query) {
-            $query->with('agent');
+        $tickets = Ticket::where(['id'=>$ticket_id])->with(['reply'=> function($query) {
+           $query->with('admin');
         }])->get();
 
         return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets]);

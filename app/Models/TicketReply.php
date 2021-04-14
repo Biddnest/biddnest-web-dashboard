@@ -23,7 +23,7 @@ class TicketReply extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function agent(){
+    public function admin(){
         return $this->belongsTo(Admin::class);
     }
 }

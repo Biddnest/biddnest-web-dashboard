@@ -287,6 +287,9 @@ class BookingsController extends Controller
             ->with('driver')
             ->with('vehicle')
             ->with('review')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
             ->first();
 
         if (!$booking) {

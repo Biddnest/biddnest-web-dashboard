@@ -195,11 +195,15 @@ class UserController extends Controller
                     ->where('to_date','>=', $date)->orderBy('order');
             }])->get();
 
+        foreach ($result as $slide_key=>$slide)
+        {
+            foreach ($slide->banners as $banner_key=>$banner)
+            {
+                $result[$slide_key]['banners'][$banner_key]['banner_size']=$slide['size'];
+            }
+        }
 
-        if(!$result)
-            return Helper::response(false,"Couldn't fetche data");
-        else
-            return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
+        return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
     public static function search(Request $request)

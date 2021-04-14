@@ -289,6 +289,11 @@ class OrganisationController extends Controller
             $result_bank = $bank->save();
 
             Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+
+            if(!$result_bank)
+                return Helper::response(false,"Couldn't save data");
+
+            return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
         }
         else
         {
@@ -324,12 +329,13 @@ class OrganisationController extends Controller
             $result_bank= Org_kyc::where("id", $bank_id)
                 ->update($update_data);
 
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+
+            if(!$result_bank)
+                return Helper::response(false,"Couldn't Update data");
+
+            return Helper::response(true,"Update data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
         }
-
-        if(!$result_bank)
-            return Helper::response(false,"Couldn't save data");
-
-        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
     }
 
     public static function getBank($id, $organization_id)

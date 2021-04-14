@@ -62,7 +62,7 @@ class Booking extends Model
 
     public function vehicle()
     {
-        return $this->hasOneThrough(Vehicle::class, BookingDriver::class, 'vehicle_id', 'id', 'id', 'vehicle_id');
+        return $this->hasOneThrough(Vehicle::class, BookingDriver::class, 'booking_id', 'id', 'id', 'vehicle_id');
     }
 
     public function review()

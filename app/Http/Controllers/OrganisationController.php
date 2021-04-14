@@ -189,6 +189,7 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
+        $organizations->verification_status = $exist['verification_status'];
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value)
@@ -287,7 +288,7 @@ class OrganisationController extends Controller
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
 
-            Organization::where("id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
         }
         else
         {

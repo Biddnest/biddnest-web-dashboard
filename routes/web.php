@@ -163,7 +163,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/inventories',[WebController::class,'inventories'])->name("inventories");
             Route::get('/inventories/create',[WebController::class,'createInventories'])->name("create-inventories");
             Route::get('/inventories/details',[WebController::class,'detailsInventories'])->name("details-inventories");
-            Route::get('/inventories/services/edit',[WebController::class,'editServices'])->name("edit-services");
+            Route::get('/inventories/{id}/edit',[WebController::class,'createInventories'])->name("edit-services");
         });
 
         Route::prefix('coupons')->group(function () {

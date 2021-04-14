@@ -232,9 +232,10 @@ class WebController extends Controller
         ]);
     }
 
-    public function createInventories()
+    public function createInventories(Request $request)
     {
-        return view('categories.createinventories');
+        $inventory = Inventory::where('id', $request->id)->first();
+        return view('categories.createinventories', ['inventory'=>$inventory]);
     }
 
     public function detailsInventories()

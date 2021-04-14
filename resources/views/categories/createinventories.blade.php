@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title') Inventory @endsection
 @section('content')
-    
+
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createinventories">
     <div class="d-flex flex-row justify-content-between">
         <h3 class="page-head f-20 p-4">Categories & Subcategories</h3>
     </div>
-            
+
     <!-- Dashboard cards -->
     <div class="d-flex  flex-row justify-content-between">
         <div class="page-head  p-1 mt-2 pb-0">
@@ -36,20 +36,23 @@
                       aria-labelledby="new-order-tab"
                     >
                       <!-- form starts -->
-                    <form action="{{route('inventories_add')}}" method= "POST" data-next="redirect" data-url="{{route('inventories')}}" data-alert="tiny"
+                    <form action="@if(!$inventory){{route('inventories_add')}}@else{{route('inventories_edit')}}@endif" method="@if(!$inventory){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('inventories')}}" data-alert="tiny"
                         class="form-new-order pt-4 mt-3" data-parsley-validate >
                         <div class="d-flex row pt-3">
+                            @if($inventory)
+                                <input type="hidden" name="id" value="{{$inventory->id}}">
+                            @endif
                             <div class="col-lg-6">
                                 <p class="img-label">Photo</p>
                                     <div class="upload-section p-20 pt-0">
                                     <img class="upload-preview"
-                                                src="{{asset('static/images/upload-image.svg')}}"
+                                                src="@if(!$inventory){{asset('static/images/upload-image.svg')}}@else{{$inventory->image}}@endif"
                                                 alt=""
                                             />
                                     <div class="ml-1">
                                         <div class="file-upload">
                                         <input type="file" />
-                                        <input type="hidden" class="base-holder" name="image" value="" required />
+                                        <input type="hidden" class="base-holder" name="image" value="@if($inventory){{$inventory->image}}@endif" required />
                                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                     UPLOAD IMAGE
                                                 </button>
@@ -58,18 +61,18 @@
                                     </div>
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-lg-6">
                                     <p class="img-label">Icon</p>
                                     <div class="upload-section p-20 pt-0">
                                         <img class="upload-preview"
-                                                src="{{asset('static/images/upload-image.svg')}}"
+                                                src="@if(!$inventory){{asset('static/images/upload-image.svg')}}@else{{$inventory->icon}}@endif"
                                                 alt=""
                                             />
                                         <div class="ml-1">
                                             <div class="file-upload">
                                                 <input type="file" />
-                                                <input type="hidden" class="base-holder" name="icon" value="" required />
+                                                <input type="hidden" class="base-holder" name="icon" value="@if($inventory){{$inventory->icon}}@endif" required />
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
@@ -90,7 +93,8 @@
                                     id="banner_name"
                                     name="name"
                                     placeholder="Name"
-                                    class="form-control br-5"
+                                    value="@if($inventory){{$inventory->name}}@endif"
+                                    class="form-control br-5" required
                                   />
                                 <span class="error-message"
                                     >Please enter a valid banner name</span
@@ -100,38 +104,27 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Material</label>
-                                <!-- <input
-                                    type="text"
-                                    placeholder="Polycarbonate, Wood, Iron"
-                                    id="tags"
-                                    class="form-control tags"
-                                    name="material[]"
-                                  /> -->
-
-                                <select class="form-control select-box2" name="material[]" multiple>
-
+                                <select class="form-control select-box2" name="material[]" multiple required>
+                                        @foreach(json_decode($inventory->material) as $material)
+                                            <option value="{{$material}}" selected>{{$material}}</option>
+                                        @endforeach
                                 </select>
                                 <span class="error-message"
-                                    >Please enter valid Phone number</span
+                                    >Please enter valid Material</span
                                   >
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Size</label>
-                                <!-- <input
-                                    type="text"
-                                    placeholder="6ft x 3ft x, 4ft x 3ft x, 2ft x 2ft x"
-                                    id="areas"
-                                    class="form-control tags"
-                                    name="size[]"
-                                  /> -->
-                                <select class="form-control select-box2" name="size[]" multiple>
-
+                                <select class="form-control select-box2" name="size[]" multiple required>
+                                    @foreach(json_decode($inventory->size) as $size)
+                                        <option value="{{$size}}" selected>{{$size}}</option>
+                                    @endforeach
                                 </select>
-    
+
                                 <span class="error-message"
-                                    >Please enter valid Phone number</span
+                                    >Please enter valid Size</span
                                   >
                             </div>
                         </div>
@@ -143,13 +136,15 @@
                                     <select class="form-control br-5" name="category"  required>
                                         <option value="">--Select--</option>
                                         @foreach(\App\Enums\InventoryEnums::$CATEGORY as $type)
-                                            <option value="{{$type}}">{{$type}}</option>
+                                            <option value="{{$type}}"
+                                                    @if($inventory && ($inventory->category == $type)) selected @endif
+                                            >{{ucfirst(trans($type))}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
-                      
+
                     </div>
                     <div class="mt-5">
                         <div

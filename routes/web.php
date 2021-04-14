@@ -46,7 +46,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/services',[Router::class,'service_add'])->name("service_add");
     Route::put('/services',[Router::class,'service_edit'])->name("service_edit");
     Route::get('/services',[Router::class,'service_get'])->name("service_get");
-    Route::delete('/services',[Router::class,'service_delete'])->name("service_delete");
+    Route::delete('/services/{id}',[Router::class,'service_delete'])->name("service_delete");
 
     Route::get('/services/{id}/sub-services',[Router::class,'subservice_get_by_service'])->name("sub_service_get_by_service");
 
@@ -154,7 +154,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('categories')->group(function () {
             Route::get('/',[WebController::class,'categories'])->name("categories");
             Route::get('/create',[WebController::class,'createCategories'])->name("create-categories");
-            Route::get('/{id}/edite',[WebController::class,'createCategories'])->name("edite-categories");
+            Route::get('/{id}/edit',[WebController::class,'createCategories'])->name("edite-categories");
 
             Route::get('/subcateories',[WebController::class,'subcateories'])->name("subcateories");
             Route::get('/subcateories/create',[WebController::class,'createSubcateories'])->name("create-subcateories");

@@ -104,8 +104,8 @@
                                                        Add</div>
                                                 </td>
 
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
+                                                <td> <a href="{{route('edite-categories', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
+                                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

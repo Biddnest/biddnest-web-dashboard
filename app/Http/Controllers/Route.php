@@ -96,16 +96,16 @@ class Route extends Controller
     public function service_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'name' => 'required|srting',
-            'image' => 'required|srting',
+            'name' => 'required',
+            'image' => 'required',
             'id' => 'required|integer',
             'inventory_quantity_type' =>'required|integer'
         ]);
 
         if($validation->fails())
           return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return ServiceController::update($request->id, ucwords($request->name), $request->image);
+
+        return ServiceController::update($request->id, ucwords($request->name), $request->image, $request->inventory_quantity_type);
     }
 
     public function service_delete(Request $request)
@@ -113,7 +113,7 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer'
         ]);
-        return AdminController::serviceDelete($request->id);
+        return ServiceController::serviceDelete($request->id);
     }
 
     /*Subservices*/

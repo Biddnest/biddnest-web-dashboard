@@ -27,7 +27,7 @@ class CreateTicketTable extends Migration
             $table->unsignedBigInteger('vendor_id')->index('vendor_id')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors');
             $table->text("meta");
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->tinyInteger('deleted')->default(0);
         });

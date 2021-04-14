@@ -158,6 +158,7 @@ Route::prefix('admin')->group(function () {
 
             Route::get('/subcateories',[WebController::class,'subcateories'])->name("subcateories");
             Route::get('/subcateories/create',[WebController::class,'createSubcateories'])->name("create-subcateories");
+            Route::get('/subcateories/{id}/edit',[WebController::class,'createSubcateories'])->name("edit-subcateories");
 
             Route::get('/inventories',[WebController::class,'inventories'])->name("inventories");
             Route::get('/inventories/create',[WebController::class,'createInventories'])->name("create-inventories");

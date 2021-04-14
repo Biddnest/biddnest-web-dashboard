@@ -217,8 +217,9 @@ class WebController extends Controller
         ]);
     }
 
-    public function createSubcateories()
+    public function createSubcateories(Request $request)
     {
+        return $sub_category = Subservice::where('id', $request->id)->with('inventorymap')->first();
         $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory]);

@@ -41,9 +41,9 @@
                                 <div class="file-upload">
                                   <input type="file" />
                                     <input type="hidden" class="base-holder" name="image" value="" required />
-                                  <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
-                                    UPLOAD IMAGE
-                                  </button>
+                                    <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                        UPLOAD IMAGE
+                                    </button>
                                 </div>
                                 <p>Max File size: 1MB</p>
                               </div>
@@ -61,18 +61,18 @@
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                  <label class="phone-num-lable">Zone</label>
-                                    <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
+{{--                            <div class="col-lg-6">--}}
+{{--                                <div class="form-input">--}}
+{{--                                  <label class="phone-num-lable">Zone</label>--}}
+{{--                                    <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>--}}
 
-                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
-                                        @endforeach
-                                    </select>
-                                  <span class="error-message">Please enter valid Phone number</span>
-                                </div>
-                              </div>
+{{--                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)--}}
+{{--                                            <option value="{{$zone->id}}">{{$zone->name}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                  <span class="error-message">Please enter valid Phone number</span>--}}
+{{--                                </div>--}}
+{{--                              </div>--}}
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="phone-num-lable">Category Name</label>

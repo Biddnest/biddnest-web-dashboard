@@ -121,7 +121,7 @@ class BidController extends Controller
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
 
-            $addrebidtime = Booking::where(["user_id"=>$order->user_id,
+            Booking::where(["user_id"=>$order->user_id,
                                             "public_booking_id"=>$order->public_booking_id])
                                             ->update([
                                                 "status"=>BookingEnums::$STATUS['rebiding'],
@@ -129,46 +129,32 @@ class BidController extends Controller
                                                 "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")
                                             ]);
 
-            $update_bid_type = Bid::where("booking_id",$book_id)
+            Bid::where("booking_id",$book_id)
                                 ->update(["bid_type"=>BidEnums::$BID_TYPE['rebid']]);
 
-            $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
+            BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 
             return true;
         }
         $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("vendor_id")[0];
-        $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
+        Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
-//        NotificationController::sendTo("vendor", [$won_org_id], "You won the bidded booking.", "Tap to respond.", [
-//            "type" => NotificationEnums::$TYPE['booking'],
-//            "public_booking_id" =>$public_booking_id
-//        ]);
-
         $lost_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];
-        $lost_vendor = Bid::where([
+        Bid::where([
             "booking_id"=>$book_id,
             "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
-//        NotificationController::sendTo("vendor", [$lost_org_id], "You lost the bidde booking.", "Tap to respond.", [
-//            "type" => NotificationEnums::$TYPE['booking'],
-//            "public_booking_id" =>$public_booking_id
-//        ]);
-
         $expire_org_id = Bid::where(["booking_id"=>$book_id,  "status"=>BidEnums::$STATUS['active']])->pluck("vendor_id")[0];
-        $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
+        Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
                             ->update(["status"=>BidEnums::$STATUS['expired']]);
 
-//        NotificationController::sendTo("vendor", [$expire_org_id], "You have recieved bookings are expire.", "Tap to respond.", [
-//            "type" => NotificationEnums::$TYPE['booking'],
-//            "public_booking_id" =>$public_booking_id
-//        ]);
 
 
-        $booking_update_status = Booking::where("id", $book_id)
+       Booking::where("id", $book_id)
                                         ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
                                         ->update([
                                             "organization_id"=>$won_org_id,
@@ -189,14 +175,10 @@ class BidController extends Controller
         $payment->tax = $tax;
         $payment->sub_total= $sub_total;
         $payment->grand_total = $grand_total;
-        $payment_result = $payment->save();
+        $payment->save();
 
-        // $bookingstatus = new BookingStatus;
-        // $bookingstatus->booking_id = $book_id;
-        // $bookingstatus->status=BookingEnums::$STATUS['payment_pending'];
-        // $result_status = $bookingstatus->save();
 
-        $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['payment_pending']);
+        BookingsController::statusChange($book_id, BookingEnums::$STATUS['payment_pending']);
 
         return true;
     }

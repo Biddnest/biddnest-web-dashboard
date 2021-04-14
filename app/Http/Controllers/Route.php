@@ -113,7 +113,7 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer'
         ]);
-        return ServiceController::serviceDelete($request->id);
+        return ServiceController::delete($request->id);
     }
 
     /*Subservices*/

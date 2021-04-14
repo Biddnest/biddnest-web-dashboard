@@ -12,5 +12,9 @@ class Subservice extends Model
 
     public function inventories(){
        return $this->hasManyThrough(Inventory::class,SubserviceInventory::class,'subservice_id','id','id','inventory_id');
-}
+    }
+
+    public function inventorymap(){
+        return $this->hasMany(SubserviceInventory::class);
+    }
 }

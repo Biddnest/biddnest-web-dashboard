@@ -65,7 +65,6 @@ class Route extends Controller
             return AdminController::resetPassword($request->password, $request->bearer);
     }
 
-
     /*Services*/
     public function service_add(Request $request)
     {
@@ -116,7 +115,6 @@ class Route extends Controller
         ]);
         return AdminController::serviceDelete($request->id);
     }
-
 
     /*Subservices*/
     public function subservice_add(Request $request)
@@ -277,7 +275,6 @@ class Route extends Controller
     //     return AdminController::vendorsList();
     // }
 
-
     /*Organization and Vendor*/
     public function vendor_add(Request $request)
     {
@@ -372,14 +369,7 @@ class Route extends Controller
 
     public function vendor_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'organization_id'=>'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return OrganisationController::delete($request->organization_id);
+        return OrganisationController::delete($request->id);
     }
 
     public function branch_add(Request $request)

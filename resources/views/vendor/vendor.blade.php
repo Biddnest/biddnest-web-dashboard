@@ -2,7 +2,7 @@
 @section('title') Vendor Management @endsection
 @section('content')
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="vendor">
-                            <div class="d-flex  flex-row justify-content-between vertical-center">
+        <div class="d-flex  flex-row justify-content-between vertical-center">
                                 <h3 class="page-head text-left p-4 f-20 theme-text">Vendor Management</h3>
                                 <div class="mr-20">
                                    <a href="{{ route('create-vendors')}}">
@@ -11,7 +11,7 @@
                                    </a>
                                 </div>
                             </div>
-                            <div class="d-flex  flex-row justify-content-between">
+        <div class="d-flex  flex-row justify-content-between">
                                 <div class="page-head text-left  pt-0 pb-0 p-2">
                                   <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -25,8 +25,7 @@
                                 </div>
 
                             </div>
-
-                            <div class="vender-all-details">
+        <div class="vender-all-details">
                                 <div class="simple-card" style="width: 30%;">
                                     <p>TOTAL VENDORS</p>
                                     <h1>{{$vendors_count }}</h1>
@@ -48,10 +47,8 @@
 {{--                                    <h1>2,248</h1>--}}
 {{--                                </div>--}}
                             </div>
-                            <!-- Dashboard cards -->
-
-
-                            <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
+        <!-- Dashboard cards -->
+        <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
                                 <div class="col-lg-12">
                                     <div class="card  h-auto p-0  pt-10">
                                         <div class="header-wrap">
@@ -59,8 +56,6 @@
                                             <a href="#">
                                                 <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                                             </a> -->
-
-
                                                 <div class="col-sm-8 p-3 ">
                                                     <h3 class="f-18 pl-8 title">All Vendors</h3 >
 
@@ -72,7 +67,6 @@
 
                                                     </a>
                                                     <div class="dropdown-menu ">
-
                                                         <a class="dropdown-item border-top-bottom" href="#">
                                                             <div class="form-check f-14">
                                                                 <input class="form-check-input" type="checkbox" value="" id="city">
@@ -99,9 +93,6 @@
                                                                 </label>
                                                             </div>
                                                         </a>
-
-
-
                                                     </div>
                                                 </div>
                                                 <div class="card-head  pt-2  left col-sm-3">
@@ -112,7 +103,6 @@
                                                         </button>
                                                     </div>
                                                 </div>
-
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -129,7 +119,7 @@
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                     @foreach($vendors as $vendor)
-                                                        <tr class="tb-border cursor-pointer">
+                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}}">
                                                             <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                                                 @if(isset($vendor->vendor))
                                                                 {{ucfirst(trans($vendor->vendor->fname))}} {{ucfirst(trans($vendor->vendor->lname))}}
@@ -155,14 +145,12 @@
                                                                     <span class="status-badge info-bg text-center">Unknown</span>
                                                                 @endswitch
                                                             </td>
-
                                                             <td> <a href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                                                <a href="#" class="delete" data-parent="tb-border" data-url="{{route('vendor_delete',['organization_id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                                <a href="#" class="delete" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
-
                                             </table>
                                             <div class="pagination">
                                                 <ul>
@@ -182,7 +170,6 @@
                                             </div>
                                     </div>
                                 </div>
-
 
                                     <!-- <div class="text-right p-20" style="float: right;">
                                         <nav aria-label="Page navigation example border-none">
@@ -204,13 +191,7 @@
                                             </ul>
                                         </nav>
                                     </div> -->
-
-
                             </div>
-
-
-
-
+                            </div>
     </div>
-
 @endsection

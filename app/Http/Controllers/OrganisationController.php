@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrganizationEnums;
 use App\Helper;
 use App\Models\Organization;
 use App\Models\Vendor;
@@ -141,14 +142,14 @@ class OrganisationController extends Controller
         return Helper::response(true,"update data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function delete($organization_id)
+    public static function delete($id)
     {
-        $delete_branch=Organization::where(["id"=>$organization_id])->update(["deleted" => CommonEnums::$YES]);
+        $delete_vendor=Organization::where(["id"=>$id])->orWhere("parent_org_id", $id)->update(["deleted" => CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['suspended']]);
 
-        if(!$delete_branch)
-            return Helper::response(false,"Couldn't Delete branch");
+        if(!$delete_vendor)
+            return Helper::response(false,"Couldn't Delete Organization");
 
-        return Helper::response(true,"Branch Deleted successfully");
+        return Helper::response(true,"Organization Deleted successfully");
     }
 
     public static function getOne($id)
@@ -285,6 +286,8 @@ class OrganisationController extends Controller
             $bank->bidnest_agreement =Helper::saveFile(base64_decode($data['doc']['biddnest_agreement']),"BD".uniqid().explode('/', mime_content_type($data['doc']['biddnest_agreement']))[1],"vendors/bank/".$id.$exist['org_name']);
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
+
+            Organization::where("id", $id)->update(["verification_status"=>CommonEnums::$YES]);
         }
         else
         {

@@ -30,7 +30,6 @@ Route::get('/debug',function(){
     abort(500);
 });
 
-
 Route::prefix('web/api')->group(function () {
 
     Route::prefix('auth')->group(function () {
@@ -51,7 +50,6 @@ Route::prefix('web/api')->group(function () {
 
     Route::get('/services/{id}/sub-services',[Router::class,'subservice_get_by_service'])->name("sub_service_get_by_service");
 
-
     //sub-services APIs
     Route::get('/sub-services',[Router::class,'subservice'])->name("sub_service");
     Route::post('/sub-services',[Router::class,'subservice_add'])->name("sub_service_add");
@@ -69,7 +67,7 @@ Route::prefix('web/api')->group(function () {
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
-    Route::delete('/vendors/{organization_id}',[Router::class,'vendor_delete'])->name("vendor_delete");
+    Route::delete('/vendors/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 
     Route::post('/vendors/branches',[Router::class,'branch_add'])->name("add_branch_vendor");
     Route::put('/vendors/branches',[Router::class,'branch_edit'])->name("edit_branch_vendor");
@@ -81,14 +79,12 @@ Route::prefix('web/api')->group(function () {
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
     Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("delete-role");
 
-
     //zone APIs
     Route::get('/zones',[Router::class,'zones'])->name("zones");
     Route::post('/zones',[Router::class,'zones_add'])->name("zones_add");
     Route::put('/zones',[Router::class,'zones_edit'])->name("zones_edit");
     Route::get('/zones/{id}',[Router::class,'zones_get'])->name("zones_get");
     Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
-
 
     //Sliders and Banners API
     Route::get('/sliders',[Router::class,'sliders'])->name("sliders");
@@ -105,7 +101,6 @@ Route::prefix('web/api')->group(function () {
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
-
 });
 
 Route::prefix('vendors')->group(function () {
@@ -129,7 +124,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/settings',[WebController::class,'settings'])->name("settings");
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
 
-
         //booking and orders
         Route::prefix('booking')->group(function () {
             Route::get('/',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
@@ -149,7 +143,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/lead',[WebController::class,'leadVendors'])->name("lead-vendors");
             Route::get('/pending',[WebController::class,'pendingVendors'])->name("pending-vendors");
             Route::get('/verified',[WebController::class,'verifiedVendors'])->name("verified-vendors");
-
 
             Route::get('/onboard',[WebController::class,'createOnboardVendors'])->name("create-vendors");
             Route::get('/{id}/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");

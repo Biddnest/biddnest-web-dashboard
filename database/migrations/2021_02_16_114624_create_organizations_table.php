@@ -28,7 +28,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('state', 50);
             $table->boolean('service_economic');
             $table->boolean('service_premium');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->text('meta');
             $table->integer('verification_status')->default(0);
             $table->text('remarks')->nullable();

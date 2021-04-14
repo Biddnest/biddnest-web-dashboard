@@ -190,13 +190,19 @@ $("body").on('change', ".inventory-select", function(event) {
 });
 
 $("body").on('click', ".delete", function(event) {
-    if(confirm('Are sure want to delete this? ')) {
+    if(confirm($(this).data('confirm'))) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
+            // console.log(response);
             if(response.status == "success")
             {
-                tinyAlert("Deleted Successfully", "This user has been removed.");
-                $(this).closest($(this).data("parent")).fadeOut(100).remove();
+                tinySuccessAlert("Deleted Successfully", response.message);
+                target.hide();
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
             }
 
         });

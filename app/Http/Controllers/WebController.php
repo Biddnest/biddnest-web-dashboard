@@ -124,10 +124,8 @@ class WebController extends Controller
 
     public function vendors(Request $request)
     {
-        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])
-            ->with(['admin'=> function ($query) {
-            $query->where(["status"=>VendorEnums::$STATUS["active"], "user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
-        }])
+        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
+            ->with('admin')
             ->paginate(CommonEnums::$PAGE_LENGTH);
         $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->count();
@@ -178,12 +176,10 @@ class WebController extends Controller
 
     public function leadVendors()
     {
-        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO])
-            ->with(['vendor'=> function ($query) {
-                $query->where(["status"=>VendorEnums::$STATUS["lead"], "user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
-            }])->with('zone')
+        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
+            ->with('admin')->with('zone')
             ->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('vendor.lead',['leads'=>$leads]);
+        return view('vendor.lead',['vendors'=>$leads]);
     }
 
     public function pendingVendors()
@@ -193,11 +189,10 @@ class WebController extends Controller
 
     public function verifiedVendors()
     {
-        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
-            ->with(['vendor'=> function ($query) {
-                $query->where(["user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
-            }])->with('zone')
+        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
+            ->with('admin')->with('zone')
             ->paginate(CommonEnums::$PAGE_LENGTH);
+
         return view('vendor.verified',['vendors'=>$vendors]);
     }
 

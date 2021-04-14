@@ -13,7 +13,7 @@ use Fabito\AvatarGenerator\Avatar;
 class TicketEnums
 {
     public static $TYPE = ["complaint"=>0, "service_request"=>1, "order_cancellation"=>2, "order_reschedule"=>3, "call_back"=>4];
-
+    public static $STATUS = ["open"=>0, "rejected"=>1, "resolved"=>2, "closed"=>3];
     /*
         booking.id
         user.name

@@ -112,7 +112,7 @@
                                                     <tr>
                                                         <th scope="col" style="width: 132px;">Vendor Name</th>
                                                         <th scope="col">Org Name</th>
-                                                        <th scope="col">City</th>
+                                                        <th scope="col">Zone</th>
                                                         <th scope="col">Status</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
@@ -128,7 +128,7 @@
                                                                 @endif
                                                             </td>
                                                             <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
-                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->city))}}</td>
+                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->zone->name))}}</td>
                                                             <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">@switch($vendor->status)
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['active'])
                                                                     <span class="status-badge green-bg text-center">Active</span>

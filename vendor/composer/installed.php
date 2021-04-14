@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '655b3fed380d6c20d3d963a9829d5d3bb0882a83',
+    'reference' => '6ec410edb20ce1a64f579587b9d489d82924c5a9',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -28,15 +28,6 @@
       array (
       ),
       'reference' => 'cae0a8d1cb89b0f0522f65e60465e16d738e069b',
-    ),
-    'berkayk/onesignal-laravel' => 
-    array (
-      'pretty_version' => 'v1.0.6',
-      'version' => '1.0.6.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4d9fd6c3d3b7a544bf648596bf460abbf17b7202',
     ),
     'brick/math' => 
     array (
@@ -563,7 +554,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '655b3fed380d6c20d3d963a9829d5d3bb0882a83',
+      'reference' => '6ec410edb20ce1a64f579587b9d489d82924c5a9',
     ),
     'laravel/sail' => 
     array (
@@ -1363,15 +1354,6 @@
       array (
       ),
       'reference' => '313a38f09c77fbcdc1d223e57d368cea76a2fd2f',
-    ),
-    'symfony/psr-http-message-bridge' => 
-    array (
-      'pretty_version' => 'v2.1.0',
-      'version' => '2.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '81db2d4ae86e9f0049828d9343a72b9523884e5d',
     ),
     'symfony/routing' => 
     array (

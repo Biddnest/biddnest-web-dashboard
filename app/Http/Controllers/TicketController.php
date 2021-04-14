@@ -218,6 +218,7 @@ class TicketController extends Controller
         return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
 
     }
+
     public function fillVars($template, $data, $initialKey = "booking"){
 
         $template_explode = explode(" ",$template);

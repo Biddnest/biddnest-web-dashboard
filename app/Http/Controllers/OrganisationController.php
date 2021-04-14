@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrganizationEnums;
 use App\Helper;
 use App\Models\Organization;
 use App\Models\Vendor;
@@ -141,6 +142,16 @@ class OrganisationController extends Controller
         return Helper::response(true,"update data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
+    public static function delete($id)
+    {
+        $delete_vendor=Organization::where(["id"=>$id])->orWhere("parent_org_id", $id)->update(["deleted" => CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['suspended']]);
+
+        if(!$delete_vendor)
+            return Helper::response(false,"Couldn't Delete Organization");
+
+        return Helper::response(true,"Organization Deleted successfully");
+    }
+
     public static function getOne($id)
     {
         $get_vendor=Organization::where(["id"=>$id, "deleted"=>CommonEnums::$NO])->first();
@@ -178,6 +189,7 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
+        $organizations->verification_status = $exist['verification_status'];
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value)
@@ -275,6 +287,13 @@ class OrganisationController extends Controller
             $bank->bidnest_agreement =Helper::saveFile(base64_decode($data['doc']['biddnest_agreement']),"BD".uniqid().explode('/', mime_content_type($data['doc']['biddnest_agreement']))[1],"vendors/bank/".$id.$exist['org_name']);
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
+
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+
+            if(!$result_bank)
+                return Helper::response(false,"Couldn't save data");
+
+            return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
         }
         else
         {
@@ -310,12 +329,13 @@ class OrganisationController extends Controller
             $result_bank= Org_kyc::where("id", $bank_id)
                 ->update($update_data);
 
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+
+            if(!$result_bank)
+                return Helper::response(false,"Couldn't Update data");
+
+            return Helper::response(true,"Update data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
         }
-
-        if(!$result_bank)
-            return Helper::response(false,"Couldn't save data");
-
-        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
     }
 
     public static function getBank($id, $organization_id)

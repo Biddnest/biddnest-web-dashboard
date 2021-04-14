@@ -67,7 +67,6 @@ class WebController extends Controller
         return view('system_settings');
     }
 
-
     public function settings()
     {
         return view('general_settings');
@@ -110,6 +109,7 @@ class WebController extends Controller
     {
         return view('order.createorder');
     }
+
     public function customers(Request $request)
     {
         return view('customer.customer',[
@@ -124,14 +124,14 @@ class WebController extends Controller
 
     public function vendors(Request $request)
     {
-        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO])
-            ->with(['vendor'=> function ($query) {
+        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])
+            ->with(['admin'=> function ($query) {
             $query->where(["status"=>VendorEnums::$STATUS["active"], "user_role"=>VendorEnums::$ROLES['admin'], "deleted"=>CommonEnums::$NO]);
         }])
             ->paginate(CommonEnums::$PAGE_LENGTH);
         $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
-        $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
-        $count_unverifide_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
+        $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->count();
+        $count_unverifide_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$NO])->count();
         return view('vendor.vendor',['vendors'=>$vendors, 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
     }
 
@@ -140,19 +140,22 @@ class WebController extends Controller
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.createvendor', ['services'=>$services]);
     }
+
     public function onbaordEdit(Request  $request)
     {
         $organization = Organization::where(["id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('services')->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }
+
     public function onbaordBranch(Request $request)
     {
-        $branch = Organization::where(["parent_org_id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('services')->get();
-        $organization = Organization::where(["id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->first();
+        $branch = Organization::where(["parent_org_id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->get();
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.onboardbranch', ['id'=>$request->id, 'services'=>$services, 'branches'=>$branch, 'organization'=>$organization]);
     }
+
     public function onbaordUserRole(Request $request)
     {
         $roles =Organization::where(["parent_org_id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", $request->id)->pluck("id");
@@ -166,7 +169,6 @@ class WebController extends Controller
         $bank=Org_kyc::where("organization_id", $request->id)->first();
         return view('vendor.onboardbank', ['bank'=>$bank, 'id'=>$request->id]);
     }
-
 
     public function vendorsDetails()
     {
@@ -279,7 +281,6 @@ class WebController extends Controller
         return view('zones.detailszones');
     }
 
-
     public function slider()
     {
         return view('sliderandbanner.slider',[
@@ -368,7 +369,6 @@ class WebController extends Controller
     {
         return view('reviewandratings.createservice');
     }
-
 
     public function vendorPayout()
     {

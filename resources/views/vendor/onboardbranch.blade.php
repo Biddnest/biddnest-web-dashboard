@@ -50,8 +50,14 @@
                         <!-- form starts -->
                         <div class="w-100">
                             <div class="tab-pane show" style="min-height: 50vh">
+                                @if(count($branches) == 0)
+                                    <div class="row hide-on-data">
+                                        <div class="col-md-12 text-center p-20">
+                                            <p class="font14"><i>. You dont have any Branches here. <br />Add a Barnches to get started.</i></p>
+                                        </div></div>
+                                @endif
                                 @foreach($branches as $branch=>$value)
-                                <div class="branch-wrapper">
+                                <div class="branch-wrapper barnch_{{$value->id}}">
                                     <div class="branch-snip d-flex flex-row justify-content-around">
                                         <div class="data-group">
                                             <h6>Branch Name</h6>
@@ -73,7 +79,7 @@
                                             <div class="d-flex flex-column justify-content-center">
                                                 <div>
                                                     <a href="#" class="modal-toggle inline-icon-button" data-target="#branch_{{$value->id}}"><i class="icon dripicons-pencil"></i></a>
-                                                    <a href="#" class="delete inline-icon-button" data-parent=".branch-wrapper" data-url="{{route('delete_branch', ["parent_id"=>$id, "organization_id"=>$value->id])}}"><i class="icon dripicons-trash"></i></a>
+                                                    <a href="#" class="delete inline-icon-button" data-parent=".barnch_{{$value->id}}" data-confirm="Are you sure, you want delete this Barnch permenently? You won't be able to undo this."  data-url="{{route('delete_branch', ["parent_id"=>$id, "organization_id"=>$value->id])}}"><i class="icon dripicons-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +121,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
                 <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="id" value="{{$id}}">
                     <div class="d-flex row">

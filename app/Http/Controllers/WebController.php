@@ -204,10 +204,10 @@ class WebController extends Controller
         ]);
     }
 
-    public function createCategories()
+    public function createCategories(Request $request)
     {
-
-        return view('categories.createcategories');
+        $category = Service::where('id', $request->id)->first();
+        return view('categories.createcategories', ['category'=>$category]);
     }
 
     public function subcateories()

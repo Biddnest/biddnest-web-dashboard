@@ -463,13 +463,13 @@ class ApiRouteController extends Controller
     public function getDetails(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'ticket_id'=>'required'
+            'id'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::getOneForUserApp($request->token_payload->id, $request->ticket_id);
+        return TicketController::getOneForUserApp($request->token_payload->id, $request->id);
     }
 
     public function statusComplete(Request $request)

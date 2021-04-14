@@ -281,7 +281,7 @@ class TicketController extends Controller
         if($ticket_exist->status ==  TicketEnums::$STATUS['resolved'])
             return Helper::response(false, "Ticket is resolved");
 
-        $add_chat = new TicketReply();
+        $add_chat = new TicketReply;
         $add_chat->ticket_id = $ticket_id;
         $add_chat->user_id = $sender_id;
         $add_chat->chat =$reply;

@@ -170,14 +170,14 @@ class Route extends Controller
             'name' => 'required',
             'image' => 'required',
             'id' => 'required|integer',
-            'service_id'=>'required|integer'
+            'category'=>'required|integer'
 
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return ServiceController::update($request->id, $request->service_id, ucwords($request->name), $request->image);
+
+        return ServiceController::update($request->id, $request->category, ucwords($request->name), $request->image);
     }
 
     public function subservice_delete(Request $request)

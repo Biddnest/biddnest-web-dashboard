@@ -26,7 +26,7 @@ class AddImageToServicesTable extends Migration
     public function down()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->string('image')->default(null)->nullable()->change();
+            $table->text('image')->default(null)->nullable()->change();
             $table->foreign('zone_id')->references('id')->on('zones')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }

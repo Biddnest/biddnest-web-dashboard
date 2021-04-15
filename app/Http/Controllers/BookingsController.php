@@ -443,9 +443,10 @@ class BookingsController extends Controller
         }
 
 
-        $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))->orderBy('id', 'DESC')
+        $bookings = Booking::whereIn("id", $bid_id
+            ->pluck('booking_id'))->orderBy('id', 'DESC')
             ->with('user')
-            ->with('status_history')
+            //->with('status_history')
             ->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {

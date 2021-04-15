@@ -445,9 +445,11 @@ class BookingsController extends Controller
 
         $bookings = Booking::whereIn("id", $bid_id
             ->pluck('booking_id'))->orderBy('id', 'DESC')
-            ->with('user')
-            //->with('status_history')
-            ->with('service')
+            ->with('user');
+            if($request->type == "participated" || $request->type == "past")
+                $bookings->with('status_history');
+
+        $bookings->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);

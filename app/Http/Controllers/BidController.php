@@ -193,6 +193,12 @@ class BidController extends Controller
         if(!$exist_bid)
             return Helper::response(false,"Not in active state");
 
+        $startTime = Carbon::now();
+        $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
+        $totalDuration = $finishTime->diffInSeconds($startTime);
+        if($totalDuration <= 3 || $startTime >= $finishTime)
+            return Helper::response(false,"Bidding has been closed for this booking");
+
         foreach($data['inventory'] as $key)
         {
             $inventory_price = new BidInventory;

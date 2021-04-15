@@ -52,86 +52,88 @@
                     <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
                         <table class="table text-center p-0   theme-text  ">
                             <thead class="secondg-bg  p-0 f-14">
-                                <tr>
-                                    <th scope="col">Order ID</th>
-                                    <th scope="col">From</th>
-                                    <th scope="col">To</th>
-                                    <th scope="col">Service Type</th>
-                                    <th scope="col">Assigned Vendor</th>
-                                    <th scope="col">Order Status</th>
-                                    <th scope="col">Operations</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">From</th>
+                                <th scope="col">To</th>
+                                <th scope="col">Service Type</th>
+                                {{--                                <th scope="col">Assigned Vendor</th>--}}
+                                <th scope="col">Order Status</th>
+                                <th scope="col">Operations</th>
+                            </tr>
                             </thead>
                             <tbody class="mtop-20  f-13">
                             @foreach($bookings as $booking)
-                            <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
                                     <td scope="row">{{$booking->public_booking_id}}</td>
-                                        <td>{{json_decode($booking->source_meta, true)['city']}}</td>
-                                        <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                        <td>
-                                            @switch($booking->service_type)
-                                                @case(\App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
-                                                {{$booking->service->name}} - Economic
-                                                @break
+                                    <td>{{json_decode($booking->source_meta, true)['city']}}</td>
+                                    <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                    <td>
+                                        @switch($booking->service_type)
+                                            @case(\App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
+                                            {{$booking->service->name}} - Economic
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$BOOKING_TYPE['premium'])
-                                                {{$booking->service->name}} - Premium
-                                                @break
+                                            @case(\App\Enums\BookingEnums::$BOOKING_TYPE['premium'])
+                                            {{$booking->service->name}} - Premium
+                                            @break
 
-                                                @default
-                                                {{$booking->service->name}} - Unknown
-                                            @endswitch
-                                        </td>
-                                        <td>
-                                            @if($booking->organization_id)
-                                                {{$booking->organization->name}}
-                                            @else
+                                            @default
+                                            {{$booking->service->name}} - Unknown
+                                        @endswitch
+                                    </td>
+                                    {{--<td>
+                                        @if($booking->organization_id)
+                                            {{$booking->organization->name}}
+                                        @else
                                             Not Assigned
-                                            @endif
-                                        </td>
-                                        <td class="">
-                                            @switch($booking->status)
-                                                @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                        @endif
+                                    </td>--}}
+                                    <td class="">
+
+                                        @switch($booking->status)
+                                            @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                             <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['placed'])
                                             <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['biding'])
                                             <span class="status-badge green-bg  text-center td-padding">Bidding</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
                                             <span class="status-badge grey-bg  text-center td-padding">Rebidding</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
                                             <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                             <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
                                             <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['completed'])
                                             <span class="status-badge green-bg  text-center td-padding">Completed</span>
-                                                @break
+                                            @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                            @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                             <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
-                                                @break
-                                            @endswitch
-                                        </td>
+                                            @break
+                                        @endswitch
+                                    </td>
 
-                                        <td> <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
-                                            <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
-                                        </td>
+                                    <td class="no-toggle">
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -158,6 +160,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection

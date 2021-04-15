@@ -89,11 +89,11 @@ class WebController extends Controller
     public function ordersBookingsPast(Request $request)
     {
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-           ->orWhere("deleted", CommonEnums::$NO)
-                ->with("service")
-            ->with('organization')
-            ->orderBy("id","DESC")
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+           ->where("deleted", CommonEnums::$NO)
+           ->with("service")
+           ->with('organization')
+           ->orderBy("id","DESC")
+           ->paginate(CommonEnums::$PAGE_LENGTH);
 
         return view('order.ordersbookings_past',[
             "bookings" => $bookings
@@ -393,6 +393,20 @@ class WebController extends Controller
     public function detailsUsers()
     {
         return view('users.detailseusers');
+    }
+
+    public function sidebar_booking(Request $request){
+        return view('sidebar.orderbooking',[
+            "booking"=>Booking::where('id',$request->id)
+                ->with('organization')
+                ->with('payment')
+                ->with('status_history')
+                ->with('inventories')
+                ->with('user')
+                ->with('vehicle')
+                ->with('driver')
+                ->first()
+        ]);
     }
 
 }

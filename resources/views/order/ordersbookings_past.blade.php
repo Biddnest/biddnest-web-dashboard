@@ -57,14 +57,14 @@
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <th scope="col">Service Type</th>
-                                <th scope="col">Assigned Vendor</th>
+{{--                                <th scope="col">Assigned Vendor</th>--}}
                                 <th scope="col">Order Status</th>
                                 <th scope="col">Operations</th>
                             </tr>
                             </thead>
                             <tbody class="mtop-20  f-13">
                             @foreach($bookings as $booking)
-                                <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
                                     <td scope="row">{{$booking->public_booking_id}}</td>
                                     <td>{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
@@ -82,13 +82,13 @@
                                             {{$booking->service->name}} - Unknown
                                         @endswitch
                                     </td>
-                                    <td>
+                                    {{--<td>
                                         @if($booking->organization_id)
                                             {{$booking->organization->name}}
                                         @else
                                             Not Assigned
                                         @endif
-                                    </td>
+                                    </td>--}}
                                     <td class="">
 
                                         @switch($booking->status)
@@ -130,8 +130,9 @@
                                         @endswitch
                                     </td>
 
-                                    <td> <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
-                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                    <td class="no-toggle">
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

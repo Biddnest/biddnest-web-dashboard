@@ -647,6 +647,12 @@
                 top: 50%;
                 transform: translate(-50%,-40%) !important;
             }
+            /*table .inline-icon-button{
+                display: inline !important;
+                padding: 10px 15px;
+                margin: 2px;
+            }*/
+
             .inline-icon-button{
                 cursor: pointer;
                 margin: 5px;
@@ -660,6 +666,88 @@
             }
             .inventory-snip:first-child .closer{
                 display: none;
+            }
+
+            .pop-up-preloader{
+                background: rgba(255,255,255,0.3);
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                text-align: center;
+            }
+            .circular {
+                -webkit-animation: rotate 2s linear infinite;
+                animation: rotate 2s linear infinite;
+                height: 50px;
+                left: 45%;
+                position: absolute;
+                top: 25%;
+                /*transform: translate(-50%,-50%);*/
+                width: 50px;
+            }
+
+            .path {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+                -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+                animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+                stroke-linecap: round;
+                stroke: #2E0789;
+            }
+
+            @-webkit-keyframes rotate {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes rotate {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            @-webkit-keyframes dash {
+                0% {
+                    stroke-dasharray: 1, 200;
+                    stroke-dashoffset: 0;
+                }
+                50% {
+                    stroke-dasharray: 89, 200;
+                    stroke-dashoffset: -35;
+                }
+                100% {
+                    stroke-dasharray: 89, 200;
+                    stroke-dashoffset: -124;
+                }
+            }
+            @keyframes dash {
+                0% {
+                    stroke-dasharray: 1, 200;
+                    stroke-dashoffset: 0;
+                }
+                50% {
+                    stroke-dasharray: 89, 200;
+                    stroke-dashoffset: -35;
+                }
+                100% {
+                    stroke-dasharray: 89, 200;
+                    stroke-dashoffset: -124;
+                }
+            }
+
+            .modal-header {
+                padding: 0;
+            }
+
+            .modal-header h3.f-14{
+                margin-top: 0;
+                margin-bottom: 8px;
+            }
+
+            .Dashboard-lcards .table td, .Dashboard-lcards .table th {
+                vertical-align: middle;
             }
         </style>
 

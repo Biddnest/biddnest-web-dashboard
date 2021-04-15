@@ -128,7 +128,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('booking')->group(function () {
             Route::get('/',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
             Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
-            Route::get('/details',[WebController::class,'orderDetails'])->name("order-details");
+            Route::get('/{id}/details',[WebController::class,'orderDetails'])->name("order-details");
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
         });
 
@@ -221,11 +221,17 @@ Route::prefix('admin')->group(function () {
 
     });
 
+    Route::prefix('sidebar')->group(function(){
+        Route::get('/booking/{id}',[WebController::class,'sidebar_booking'])->name('sidebar.booking');
+    });
+
 
 });
 Route::get('/debug/socket', function () {
     return view("debug.socket");
 });
+
+
 
 Route::get('/debug/push/booking', function () {
     return NotificationController::sendTo("user", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [

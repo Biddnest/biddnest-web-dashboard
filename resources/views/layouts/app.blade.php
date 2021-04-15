@@ -151,7 +151,9 @@
                     </footer>
                 </div>
             </div>
-            <div class="side-bar-pop-up"></div>
+            <div class="side-bar-pop-up">
+
+            </div>
             @yield('modal')
         </main>
 

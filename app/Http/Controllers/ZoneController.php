@@ -36,7 +36,7 @@ class ZoneController extends Controller
 
     public static function update($id, $name, $lat, $lng, $city, $district, $state, $area)
     {
-        $exist =Zone::where('id', $id)->first();
+        $exist =Zone::where(['id'=>$id, "deleted"=>CommonEnums::$NO])->first();
         if(!$exist)
             return Helper::response(false, "zone not exist");
 
@@ -59,7 +59,7 @@ class ZoneController extends Controller
 
     public static function delete($id)
     {
-        $exist =Zone::where('id', $id)->first();
+        $exist =Zone::where(['id'=>$id, "deleted"=>CommonEnums::$NO])->first();
         if(!$exist)
             return Helper::response(false, "zone not exist");
 

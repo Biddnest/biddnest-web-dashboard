@@ -422,7 +422,7 @@ class BookingsController extends Controller
                 break;
 
             case "scheduled":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=>function ($query) {
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=>function($query) {
                     $query->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
@@ -436,12 +436,11 @@ class BookingsController extends Controller
                 break;
 
             case "past":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking' => function ($booking) {
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=> function($booking) {
                     $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
         }
-
 
         $bookings = Booking::whereIn("id", $bid_id
             ->pluck('booking_id'))->orderBy('id', 'DESC')
@@ -715,7 +714,7 @@ class BookingsController extends Controller
         }*/
 
         $current_key = true;
-        $bid_records = Bid::where('booking_id', $exist_booking['id'])->where('status', BidEnums::$STATUS['lost'])->orderBy('bid_amount', 'ASC')->get();
+        $bid_records = Bid::where('booking_id', $exist_booking['id'])->whereIn('status', [BidEnums::$STATUS['lost'], BidEnums::$STATUS['won']])->orderBy('bid_amount', 'ASC')->get();
         foreach ($bid_records as $key => $value) {
             if ($value['vendor_id'] == $vendor_id) {
                 $current_key = $key;

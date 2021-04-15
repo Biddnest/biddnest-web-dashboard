@@ -178,6 +178,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('zones')->group(function () {
             Route::get('/',[WebController::class,'zones'])->name("zones");
             Route::get('/create',[WebController::class,'createZones'])->name("create-zones");
+            Route::get('/{id}/edit',[WebController::class,'createZones'])->name("edit-zones");
             Route::get('/details',[WebController::class,'detailsZones'])->name("details-zones");
         });
 

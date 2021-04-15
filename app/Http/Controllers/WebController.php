@@ -278,9 +278,10 @@ class WebController extends Controller
         ]);
     }
 
-    public function createZones()
+    public function createZones(Request $request)
     {
-        return view('zones.createzones');
+        $zone = Zone::where('id',$request->id)->first();
+        return view('zones.createzones', ['zones'=>$zone]);
     }
 
     public function detailsZones()

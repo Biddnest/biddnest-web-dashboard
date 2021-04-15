@@ -119,13 +119,12 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($zones as $zone)
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">{{$zone->name}}</td>
-                                                <td>{{$zone->city}}</td>
-                                                <td>{{$zone->district}}</td>
-                                                <td>{{$zone->state}}</td>
-                                                <td>
+                                            <tr class="tb-border cursor-pointer zone_{{$zone->id}}">
+                                                <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->name}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->city}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->district}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->state}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                                                     @switch($zone->status)
                                                         @case(\App\Enums\CommonEnums::$YES)
                                                             <span class="status-badge green-bg text-center">Active</span>
@@ -135,8 +134,9 @@
                                                         @break
                                                     @endswitch
                                                 </td>
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                                <td>
+                                                    <a href="{{route('edit-zones', ['id'=>$zone->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete" data-parent=".zone_{{$zone->id}}" data-confirm="Are you sure, you want delete this Zone permenently? You won't be able to undo this." data-url="{{route('zones_delete',['id'=>$zone->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -146,13 +146,17 @@
                                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>
-                                            <li class="digit">1</li>
+                                            <li class="digit">{{$zones->currentPage()}}</li>
                                             <li class="label">of</li>
-                                            <li class="digit">20</li>
-                                            <li class="button"><a href="#"><img src="{{ asset('static/images/Backward.svg')}}"></a>
-                                            </li>
-                                            <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a>
-                                            </li>
+                                            <li class="digit">{{$zones->lastPage()}}</li>
+                                            @if(!$zones->onFirstPage())
+                                                <li class="button"><a href="{{$zones->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                            @if($zones->currentPage() != $zones->lastPage())
+                                                <li class="button"><a href="{{$zones->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

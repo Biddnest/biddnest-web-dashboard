@@ -31,15 +31,15 @@
     <div class="vender-all-details">
                                 <div class="simple-card min-width-30">
                                     <p>TOTAL NO OF COUPONS</p>
-                                    <h1>456</h1>
+                                    <h1>{{$total_coupons}}</h1>
                                 </div>
                                 <div class="simple-card min-width-30">
                                     <p>ACTIVE COUPONS</p>
-                                    <h1>3,459</h1>
+                                    <h1>{{$active_coupons}}</h1>
                                 </div>
                                 <div class="simple-card min-width-30">
                                     <p>INACTIVE COUPONS</p>
-                                    <h1>2,300</h1>
+                                    <h1>{{$inactive_coupons}}</h1>
                                 </div>
 
 
@@ -52,35 +52,33 @@
             <div class="card  h-auto p-0 pt-10">
                 <div class="header-wrap">
                     <div class="col-sm-8 p-3 ">
-                                        <h3 class="f-18">Coupons & Offers </h3>
-
+                        <h3 class="f-18">Coupons & Offers </h3>
                     </div>
 
                     <div class="header-wrap p-0 col-sm-1" >
                         <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i><img src="{{asset('static/images/filter.svg')}}" alt="" srcset="" ></i>
-
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item border-top-bottom" href="#">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="date">
                                     <label class="form-check-label" for="date">
-                                                                                           Date
+                                        Date
                                     </label>
                             </div></a>
                             <a class="dropdown-item border-top-bottom" href="#">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="zone">
                                     <label class="form-check-label" for="zone">
-                                                                Zone
+                                        Zone
                                     </label>
                             </div></a>
                             <a class="dropdown-item border-top-bottom" href="#">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="city">
                                     <label class="form-check-label" for="city">
-                                                                                City
+                                        City
                                     </label>
                                 </div>
                             </a>
@@ -88,7 +86,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="couponName">
                                     <label class="form-check-label" for="couponName">
-                                                                            Coupon Name
+                                        Coupon Name
                                     </label>
                                 </div>
                             </a>
@@ -96,7 +94,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="couponType">
                                     <label class="form-check-label" for="couponType">
-                                                                        Coupon Type
+                                        Coupon Type
                                     </label>
                                 </div>
                             </a>
@@ -104,16 +102,15 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="status">
                                     <label class="form-check-label" for="status">
-                                                                    Status
+                                        Status
                                     </label>
                                 </div>
                             </a>
                         </div>
-
                     </div>
 
                     <div class="card-head  pt-2  left col-sm-3">
-                                        <div class="search">
+                        <div class="search">
                                            <input type="text" class="searchTerm" placeholder="Search...">
                                            <button type="submit" class="searchButton">
                                              <i class="fa fa-search"></i>
@@ -121,8 +118,8 @@
                                         </div>
                     </div>
                 </div>
-                    <div class="all-vender-details">
-                                            <table class="table text-center p-0 theme-text mb-0 primary-table">
+                <div class="all-vender-details">
+                    <table class="table text-center p-0 theme-text mb-0 primary-table">
                                                 <thead class="secondg-bg  p-0">
                                                     <tr>
                                                         <th scope="col">Coupon  Name</th>
@@ -197,7 +194,7 @@
                                                 @endforeach
 
                                             </table>
-                        <div class="pagination">
+                    <div class="pagination">
                             <ul>
                                 <li class="p-1">Page</li>
                                 <li class="digit">{{$coupons->currentPage()}}</li>
@@ -213,16 +210,10 @@
                                 @endif
                             </ul>
                         </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-
-
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

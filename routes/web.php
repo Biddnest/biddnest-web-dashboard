@@ -169,6 +169,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('coupons')->group(function () {
             Route::get('/',[WebController::class,'coupons'])->name("coupons");
             Route::get('/create',[WebController::class,'createCoupons'])->name("create-coupons");
+            Route::get('/{id}/edit',[WebController::class,'createCoupons'])->name("edit-coupons");
             Route::get('/details',[WebController::class,'detailsCoupons'])->name("details-coupons");
         });
 

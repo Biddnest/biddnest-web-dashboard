@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\CouponEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
 use App\Enums\OrganizationEnums;
@@ -245,15 +246,21 @@ class WebController extends Controller
 
     public function coupons()
     {
-        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('coupons.coupons',[
-            "coupons"=>$coupons
-        ]);
+        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->orWhere("zone_scope", CouponEnums::$ZONE_SCOPE['all'])
+            ->with(['zones'=>function($query){
+                $query->whereIn("zone_id", Session::get("admin_zones"));
+            }])
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+        $total_coupons = Coupon::where(["deleted"=>CommonEnums::$NO])->count();
+        $active_coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
+        $inactive_coupons = Coupon::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
+        return view('coupons.coupons',["coupons"=>$coupons, 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
     }
 
-    public function createCoupons()
+    public function createCoupons(Request $request)
     {
-        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get()]);
+            return $coupons = Coupon::where(["id"=>$request->id])->with('zones')->with('organizations')->with('users')->first();
+        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get(), 'coupons'=>$coupons]);
     }
 
     public function detailsCoupons()

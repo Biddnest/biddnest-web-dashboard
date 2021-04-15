@@ -46,7 +46,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/services',[Router::class,'service_add'])->name("service_add");
     Route::put('/services',[Router::class,'service_edit'])->name("service_edit");
     Route::get('/services',[Router::class,'service_get'])->name("service_get");
-    Route::delete('/services',[Router::class,'service_delete'])->name("service_delete");
+    Route::delete('/services/{id}',[Router::class,'service_delete'])->name("service_delete");
 
     Route::get('/services/{id}/sub-services',[Router::class,'subservice_get_by_service'])->name("sub_service_get_by_service");
 
@@ -55,7 +55,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/sub-services',[Router::class,'subservice_add'])->name("sub_service_add");
     Route::put('/sub-services',[Router::class,'subservice_edit'])->name("sub_service_edit");
     Route::get('/sub-services',[Router::class,'subservice_get'])->name("sub_service_get");
-    Route::delete('/sub-services',[Router::class,'subservice_delete'])->name("sub_service_delete");
+    Route::delete('/sub-services/{id}',[Router::class,'subservice_delete'])->name("sub_service_delete");
 
     //inventory APIs
     Route::get('/inventories',[Router::class,'inventories'])->name("inventories");
@@ -97,6 +97,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
 
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
+    Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
+    Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
@@ -154,25 +156,29 @@ Route::prefix('admin')->group(function () {
         Route::prefix('categories')->group(function () {
             Route::get('/',[WebController::class,'categories'])->name("categories");
             Route::get('/create',[WebController::class,'createCategories'])->name("create-categories");
+            Route::get('/{id}/edit',[WebController::class,'createCategories'])->name("edite-categories");
 
             Route::get('/subcateories',[WebController::class,'subcateories'])->name("subcateories");
             Route::get('/subcateories/create',[WebController::class,'createSubcateories'])->name("create-subcateories");
+            Route::get('/subcateories/{id}/edit',[WebController::class,'createSubcateories'])->name("edit-subcateories");
 
             Route::get('/inventories',[WebController::class,'inventories'])->name("inventories");
             Route::get('/inventories/create',[WebController::class,'createInventories'])->name("create-inventories");
             Route::get('/inventories/details',[WebController::class,'detailsInventories'])->name("details-inventories");
-            Route::get('/inventories/services/edit',[WebController::class,'editServices'])->name("edit-services");
+            Route::get('/inventories/{id}/edit',[WebController::class,'createInventories'])->name("edit-services");
         });
 
         Route::prefix('coupons')->group(function () {
             Route::get('/',[WebController::class,'coupons'])->name("coupons");
             Route::get('/create',[WebController::class,'createCoupons'])->name("create-coupons");
+            Route::get('/{id}/edit',[WebController::class,'createCoupons'])->name("edit-coupons");
             Route::get('/details',[WebController::class,'detailsCoupons'])->name("details-coupons");
         });
 
         Route::prefix('zones')->group(function () {
             Route::get('/',[WebController::class,'zones'])->name("zones");
             Route::get('/create',[WebController::class,'createZones'])->name("create-zones");
+            Route::get('/{id}/edit',[WebController::class,'createZones'])->name("edit-zones");
             Route::get('/details',[WebController::class,'detailsZones'])->name("details-zones");
         });
 

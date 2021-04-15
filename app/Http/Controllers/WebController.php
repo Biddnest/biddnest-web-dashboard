@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\CouponEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
 use App\Enums\OrganizationEnums;
@@ -204,10 +205,10 @@ class WebController extends Controller
         ]);
     }
 
-    public function createCategories()
+    public function createCategories(Request $request)
     {
-
-        return view('categories.createcategories');
+        $category = Service::where('id', $request->id)->first();
+        return view('categories.createcategories', ['category'=>$category]);
     }
 
     public function subcateories()
@@ -217,11 +218,14 @@ class WebController extends Controller
         ]);
     }
 
-    public function createSubcateories()
+    public function createSubcateories(Request $request)
     {
+        $sub_category = Subservice::where('id', $request->id)->with('services')->with(['inventorymap'=>function($query){
+            $query->with('meta');
+        }])->first();
         $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory]);
+        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category]);
     }
 
     public function inventories()
@@ -231,9 +235,10 @@ class WebController extends Controller
         ]);
     }
 
-    public function createInventories()
+    public function createInventories(Request $request)
     {
-        return view('categories.createinventories');
+        $inventory = Inventory::where('id', $request->id)->first();
+        return view('categories.createinventories', ['inventory'=>$inventory]);
     }
 
     public function detailsInventories()
@@ -243,15 +248,21 @@ class WebController extends Controller
 
     public function coupons()
     {
-        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('coupons.coupons',[
-            "coupons"=>$coupons
-        ]);
+        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->orWhere("zone_scope", CouponEnums::$ZONE_SCOPE['all'])
+            ->with(['zones'=>function($query){
+                $query->whereIn("zone_id", Session::get("admin_zones"));
+            }])
+            ->paginate(CommonEnums::$PAGE_LENGTH);
+        $total_coupons = Coupon::where(["deleted"=>CommonEnums::$NO])->count();
+        $active_coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
+        $inactive_coupons = Coupon::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
+        return view('coupons.coupons',["coupons"=>$coupons, 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
     }
 
-    public function createCoupons()
+    public function createCoupons(Request $request)
     {
-        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get()]);
+        $coupons = Coupon::where(["id"=>$request->id])->with('zones')->with('organizations')->with('users')->first();
+        return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get(), 'coupons'=>$coupons]);
     }
 
     public function detailsCoupons()
@@ -261,14 +272,18 @@ class WebController extends Controller
 
     public function zones()
     {
+        $total = Zone::where(["deleted"=>CommonEnums::$NO])->count();
+        $active = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
+        $inactive = Zone::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
         return view('zones.zones',[
-            "zones"=>Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "zones"=>Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
         ]);
     }
 
-    public function createZones()
+    public function createZones(Request $request)
     {
-        return view('zones.createzones');
+        $zone = Zone::where('id',$request->id)->first();
+        return view('zones.createzones', ['zones'=>$zone]);
     }
 
     public function detailsZones()

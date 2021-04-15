@@ -31,15 +31,15 @@
     <div class="vender-all-details">
                                 <div class="simple-card min-width-30">
                                     <p>TOTAL NO OF COUPONS</p>
-                                    <h1>456</h1>
+                                    <h1>{{$total_coupons}}</h1>
                                 </div>
                                 <div class="simple-card min-width-30">
                                     <p>ACTIVE COUPONS</p>
-                                    <h1>3,459</h1>
+                                    <h1>{{$active_coupons}}</h1>
                                 </div>
                                 <div class="simple-card min-width-30">
                                     <p>INACTIVE COUPONS</p>
-                                    <h1>2,300</h1>
+                                    <h1>{{$inactive_coupons}}</h1>
                                 </div>
 
 
@@ -52,35 +52,33 @@
             <div class="card  h-auto p-0 pt-10">
                 <div class="header-wrap">
                     <div class="col-sm-8 p-3 ">
-                                        <h3 class="f-18">Coupons & Offers </h3>
-
+                        <h3 class="f-18">Coupons & Offers </h3>
                     </div>
 
                     <div class="header-wrap p-0 col-sm-1" >
                         <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i><img src="{{asset('static/images/filter.svg')}}" alt="" srcset="" ></i>
-
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item border-top-bottom" href="#">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="date">
                                     <label class="form-check-label" for="date">
-                                                                                           Date
+                                        Date
                                     </label>
                             </div></a>
                             <a class="dropdown-item border-top-bottom" href="#">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="zone">
                                     <label class="form-check-label" for="zone">
-                                                                Zone
+                                        Zone
                                     </label>
                             </div></a>
                             <a class="dropdown-item border-top-bottom" href="#">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="city">
                                     <label class="form-check-label" for="city">
-                                                                                City
+                                        City
                                     </label>
                                 </div>
                             </a>
@@ -88,7 +86,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="couponName">
                                     <label class="form-check-label" for="couponName">
-                                                                            Coupon Name
+                                        Coupon Name
                                     </label>
                                 </div>
                             </a>
@@ -96,7 +94,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="couponType">
                                     <label class="form-check-label" for="couponType">
-                                                                        Coupon Type
+                                        Coupon Type
                                     </label>
                                 </div>
                             </a>
@@ -104,16 +102,15 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="status">
                                     <label class="form-check-label" for="status">
-                                                                    Status
+                                        Status
                                     </label>
                                 </div>
                             </a>
                         </div>
-
                     </div>
 
                     <div class="card-head  pt-2  left col-sm-3">
-                                        <div class="search">
+                        <div class="search">
                                            <input type="text" class="searchTerm" placeholder="Search...">
                                            <button type="submit" class="searchButton">
                                              <i class="fa fa-search"></i>
@@ -121,9 +118,9 @@
                                         </div>
                     </div>
                 </div>
-                    <div class="all-vender-details">
-                                            <table class="table text-center p-0 theme-text mb-0 primary-table">
-                                                <thead class="secondg-bg  p-0">
+                <div class="all-vender-details">
+                    <table class="table text-center p-0 theme-text mb-0 primary-table">
+                        <thead class="secondg-bg  p-0">
                                                     <tr>
                                                         <th scope="col">Coupon  Name</th>
                                                         <th scope="col">Coupon Type</th>
@@ -134,70 +131,68 @@
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="mtop-20 f-13">
-                                                @foreach($coupons as $coupon)
-                                                    <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">{{$coupon->name}}</td>
-                                                        <td>
-                                                            @switch($coupon->type)
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                Fixed
-                                                                @break
+                        <tbody class="mtop-20 f-13">
+                            @foreach($coupons as $coupon)
+                                <tr class="tb-border cursor-pointer coup_{{$coupon->id}}">
+                                    <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$coupon->name}}</td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        @switch($coupon->type)
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                Fixed
+                                            @break
 
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                Percentage
-                                                                @break
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                Percentage
+                                            @break
 
-                                                                @default
-                                                                Unknown
-                                                            @endswitch
-                                                        </td>
-                                                        <td>
-                                                            @switch($coupon->type)
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                &#8377; {{$coupon->discount_amount}}
-                                                                @break
+                                            @default
+                                                Unknown
+                                        @endswitch
+                                    </td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        @switch($coupon->type)
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                &#8377; {{$coupon->discount_amount}}
+                                            @break
 
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                {{$coupon->discount_amount}}%
-                                                                @break
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                {{$coupon->discount_amount}}%
+                                            @break
 
-                                                                @default
-                                                                Unknown
-                                                            @endswitch
-                                                        </td></td>
-                                                        <td>
-                                                           <div class="d-flex justify-content-center vertical-center">
-
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
-                                                              </div>
-                                                           </div>
-
-                                                            </td>
-                                                        <td>{{$coupon->desc}}</td>
-                                                        <td class="">
-                                                            @switch($coupon->status)
-                                                                @case(\App\Enums\CouponEnums::$STATUS['active'])
-                                                                <span class="status-badge green-bg  text-center td-padding">Active</span>
-                                                                @break
-               @case(\App\Enums\CouponEnums::$STATUS['inactive'])
-                                                                <span class="status-badge red-bg  text-center td-padding">Inactive</span>
-                                                                @break
-               @case(\App\Enums\CouponEnums::$STATUS['expired'])
-                                                                <span class="status-badge info-bg  text-center td-padding">Expired</span>
-                                                                @break
-
-                                                            @endswitch
-
-
-                                                        </td><td><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                </tbody>
-                                                @endforeach
-
-                                            </table>
-                        <div class="pagination">
+                                            @default
+                                                Unknown
+                                        @endswitch
+                                    </td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        <div class="d-flex justify-content-center vertical-center">
+                                            <div class="progress">
+                                                <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$coupon->desc}}</td>
+                                    <td class="" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        @switch($coupon->status)
+                                            @case(\App\Enums\CouponEnums::$STATUS['active'])
+                                                <span class="status-badge green-bg  text-center td-padding">Active</span>
+                                            @break
+                                            @case(\App\Enums\CouponEnums::$STATUS['inactive'])
+                                                <span class="status-badge red-bg  text-center td-padding">Inactive</span>
+                                            @break
+                                            @case(\App\Enums\CouponEnums::$STATUS['expired'])
+                                                <span class="status-badge info-bg  text-center td-padding">Expired</span>
+                                            @break
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                        <a href="{{route('edit-coupons', ['id'=>$coupon->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a href="#" class="delete" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permenently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="pagination">
                             <ul>
                                 <li class="p-1">Page</li>
                                 <li class="digit">{{$coupons->currentPage()}}</li>
@@ -213,16 +208,10 @@
                                 @endif
                             </ul>
                         </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-
-
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

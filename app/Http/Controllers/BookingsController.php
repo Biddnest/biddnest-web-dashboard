@@ -287,6 +287,9 @@ class BookingsController extends Controller
             ->with('driver')
             ->with('vehicle')
             ->with('review')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
             ->first();
 
         if (!$booking) {
@@ -418,11 +421,11 @@ class BookingsController extends Controller
                 $bid_id->where("status", BidEnums::$STATUS['active']);
                 break;
 
-            case "scheduled":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking' => function ($booking) {
-                    $booking->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+            /*case "scheduled":
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=>function($query) {
+                    $query->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
-                break;
+                break;*/
 
             case "bookmarked":
                 $bid_id->where("bookmarked", CommonEnums::$YES);
@@ -432,19 +435,26 @@ class BookingsController extends Controller
                 $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']]);
                 break;
 
-            case "past":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking' => function ($booking) {
-                    $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+            /*case "past":
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=>function($query){
+                    $query->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
-                break;
+                break;*/
         }
 
-
-        $bookings = Booking::whereIn("id", $bid_id->distinct('booking_id')
+        $bookings = Booking::whereIn("id", $bid_id
             ->pluck('booking_id'))->orderBy('id', 'DESC')
-            ->with('user')
-            ->with('status_history')
-            ->with('service')
+            ->with('user');
+            if($request->type == "participated" || $request->type == "past")
+                $bookings->with('status_history');
+
+            if($request->type == "past")
+                $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+
+            if($request->type == "scheduled")
+                $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+
+        $bookings->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);
@@ -710,7 +720,7 @@ class BookingsController extends Controller
         }*/
 
         $current_key = true;
-        $bid_records = Bid::where('booking_id', $exist_booking['id'])->where('status', BidEnums::$STATUS['lost'])->orderBy('bid_amount', 'ASC')->get();
+        $bid_records = Bid::where('booking_id', $exist_booking['id'])->whereIn('status', [BidEnums::$STATUS['lost'], BidEnums::$STATUS['won']])->orderBy('bid_amount', 'ASC')->get();
         foreach ($bid_records as $key => $value) {
             if ($value['vendor_id'] == $vendor_id) {
                 $current_key = $key;

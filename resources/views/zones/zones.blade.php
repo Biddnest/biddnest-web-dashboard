@@ -33,15 +33,15 @@
                     <div class="vender-all-details flex-row">
                         <div class="simple-card min-width-30">
                             <p>TOTAL NO OF ZONES</p>
-                            <h1>456</h1>
+                            <h1>{{$total}}</h1>
                         </div>
                         <div class="simple-card min-width-30">
                             <p>ACTIVE ZONES</p>
-                            <h1>3,459</h1>
+                            <h1>{{$active}}</h1>
                         </div>
                         <div class="simple-card min-width-30">
                             <p>INACTIVE ZONES</p>
-                            <h1>2,300</h1>
+                            <h1>{{$inactive}}</h1>
                         </div>
 
 
@@ -55,7 +55,7 @@
                                 <div class="header-wrap">
                                     <div class="col-sm-8 p-3 ">
                                         <h3 class="f-18 title">Zone Management </h3>
-                                
+
                                     </div>
 
                                     <div class="header-wrap p-0 col-sm-1">
@@ -114,263 +114,49 @@
                                                 <th scope="col">District</th>
                                                 <th scope="col">State</th>
                                                 <th scope="col">Status</th>
-
                                                 <th scope="col">Operations</th>
                                             </tr>
                                         </thead>
                                         <tbody class="mtop-20 f-13">
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                     </div> -->
-
+                                        @foreach($zones as $zone)
+                                            <tr class="tb-border cursor-pointer zone_{{$zone->id}}">
+                                                <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->name}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->city}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->district}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->state}}</td>
+                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                                    @switch($zone->status)
+                                                        @case(\App\Enums\CommonEnums::$YES)
+                                                            <span class="status-badge green-bg text-center">Active</span>
+                                                        @break
+                                                        @case(\App\Enums\CommonEnums::$NO)
+                                                            <span class="status-badge red-bg text-center">Inactive</span>
+                                                        @break
+                                                    @endswitch
                                                 </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
                                                 <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                             
-                                                            </div>  -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
+                                                    <a href="{{route('edit-zones', ['id'=>$zone->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete" data-parent=".zone_{{$zone->id}}" data-confirm="Are you sure, you want delete this Zone permenently? You won't be able to undo this." data-url="{{route('zones_delete',['id'=>$zone->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                 </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                             </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                           </div>   -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-
-
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                             
-                                     </div> -->
-
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                                 
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                             
-                                                </div>             -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                             </div> -->
-
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                </div>              -->
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                <td scope="row">Whitefield</td>
-                                                <td>Bengaluru</td>
-                                                <td>Bengaluru Urban</td>
-
-                                                <td>Karnataka</td>
-                                                <td>
-                                                    <!-- <div class="d-flex justify-content-center">
-                         <p class="font-inactive f-12 zone-status">Inactive</p>  
-                                     <label class="switch-small ml-5" onchange="
-                         $('.zone-status').toggleClass('font-inactive')">
-                                      <input type="checkbox" id="switch">
-                                        <span class="slider"></span>
-                                     </label>
-                                     <p class="ml-5 zone-status f-12">   Active</p>
-                                                             </div> -->
-
-                                                    <input type="checkbox" checked data-toggle="toggle" data-size="xs"
-                                                        data-width="110" data-height="35" data-onstyle="outline-primary"
-                                                        data-offstyle="outline-secondary" data-on="Active"
-                                                        data-off="Inactive" id="">
-
-                                                </td>
-
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                                            </tr>
+                                        @endforeach
                                         </tbody>
 
                                     </table>
                                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>
-                                            <li class="digit">1</li>
+                                            <li class="digit">{{$zones->currentPage()}}</li>
                                             <li class="label">of</li>
-                                            <li class="digit">20</li>
-                                            <li class="button"><a href="#"><img src="{{ asset('static/images/Backward.svg')}}"></a>
-                                            </li>
-                                            <li class="button"><a href="#"><img src="{{ asset('static/images/forward.svg')}}"></a>
-                                            </li>
+                                            <li class="digit">{{$zones->lastPage()}}</li>
+                                            @if(!$zones->onFirstPage())
+                                                <li class="button"><a href="{{$zones->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                                </li>
+                                            @endif
+                                            @if($zones->currentPage() != $zones->lastPage())
+                                                <li class="button"><a href="{{$zones->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

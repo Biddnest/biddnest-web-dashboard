@@ -51,19 +51,20 @@ class ServiceController extends Controller
             return Helper::response(false,"Incorrect Service Id");
 
         $image_name = "subservice".$name."-".$id.".png";
+        $imageman = new ImageManager(array('driver' => 'gd'));
 
-        $imageman = new ImageManager(array('driver' => 'imagick'));
-        $imageman->configure(array('driver' => 'gd'));
-        $service=Service::where("id", $id)->update([
-            "name"=>$name,
-            "inventory_quantity_type"=>$inventory_quantity_type,
-            "image"=>Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services")
-        ]);
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services");
+
+
+        $update_data=  ["name"=>$name,
+            "inventory_quantity_type"=>$inventory_quantity_type];
+        $service=Service::where("id", $id)->update($update_data);
 
         if(!$service)
-            return Helper::response(false,"Couldn't save data");
+            return Helper::response(false,"Couldn't Update data");
         else
-            return Helper::response(true,"Save data successfully",["service"=>Service::select(self::$public_data)->findOrFail($id)]);
+            return Helper::response(true,"Update data successfully",["service"=>Service::select(self::$public_data)->findOrFail($id)]);
     }
 
     public static function getOne($id)

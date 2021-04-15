@@ -25,61 +25,61 @@
             <div class="card h-auto p-0 p-10">
                 <div class="card-head right text-left border-bottom-2 p-8">
                     <h3 class="f-18 mb-4 theme-text">
-                      Create Subcategory
+                        @if(!$subcategory) Create Subcategory @else Edit Subcategory @endif
                     </h3>
                 </div>
                 <div class="" id="">
                     <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('sub_service_add')}}" method= "POST" data-next="redirect" data-url="{{route('subcateories')}}" data-alert="tiny" data-parsley-validate>
+                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="@if(!$subcategory){{route('sub_service_add')}}@else{{route('sub_service_edit')}}@endif" method= "@if(isset($subcategory)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('subcateories')}}" data-alert="tiny" data-parsley-validate>
                         <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
                             <div class="upload-section p-20 pt-0">
-                              <img class="upload-preview" src="{{asset('static/images/upload-image.svg')}}" alt=""/>
+                              <img class="upload-preview" src="@if(isset($subcategory)){{$subcategory->image}}@else{{asset('static/images/upload-image.svg')}}@endif" alt=""/>
                               <div class="ml-1">
                                 <div class="file-upload">
                                   <input type="file" />
-                                    <input type="hidden" class="base-holder" name="image" value="" required />
-                                  <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
-                                    UPLOAD IMAGE
-                                  </button>
+                                    <input type="hidden" class="base-holder" name="image" value="@if(isset($subcategory)){{$subcategory->image}}@endif" required />
+                                    <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                        UPLOAD IMAGE
+                                    </button>
                                 </div>
                                 <p>Max File size: 1MB</p>
                               </div>
                             </div>
                           </div>
                           <div class="col-lg-6">
-
+                              <input type="hidden" value="@if($subcategory){{$subcategory->id}}@endif" name="id" />
                           </div>
                         </div>
                         <div class="d-flex row p-20">
                             <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Name</label>
-                                  <input type="text" id="banner_name" placeholder="Name" name="name" class="form-control br-5"/>
+                                  <input type="text" id="banner_name" placeholder="Name" name="name" value="@if(isset($subcategory)){{$subcategory->name}}@endif" class="form-control br-5"/>
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                  <label class="phone-num-lable">Zone</label>
-                                    <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
+{{--                            <div class="col-lg-6">--}}
+{{--                                <div class="form-input">--}}
+{{--                                  <label class="phone-num-lable">Zone</label>--}}
+{{--                                    <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>--}}
 
-                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
-                                        @endforeach
-                                    </select>
-                                  <span class="error-message">Please enter valid Phone number</span>
-                                </div>
-                              </div>
+{{--                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)--}}
+{{--                                            <option value="{{$zone->id}}">{{$zone->name}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                  <span class="error-message">Please enter valid Phone number</span>--}}
+{{--                                </div>--}}
+{{--                              </div>--}}
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="phone-num-lable">Category Name</label>
                                     <select class="form-control br-5 field-toggle" name="category">
                                         <option value="">--Select--</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}" @if(isset($subcategory) && $category->id == $subcategory->services->id) selected @endif>{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                   <span class="error-message">Please enter valid Service</span>
@@ -112,37 +112,44 @@
 
                                     </thead>
                                     <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
-                                    <tr class="inventory-snip">
-                                        <th scope="row" class="text-left">
-                                            <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
-                                                <option value="">--Select--</option>
-                                                @foreach($inventories as $inventory)
-                                                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </th>
+                                    @foreach($subcategory->inventorymap as $inventory_key)
+                                        <tr class="inventory-snip">
+                                            <td scope="row" class="text-left">
+                                                <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                                    <option value="">--Select--</option>
+                                                    @foreach($inventories as $inventory)
+                                                        <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" @if(isset($subcategory) && ($inventory->id == $inventory_key->inventory_id)) data-materials="{{$inventory_key->material}}" data-sizes="{{$inventory_key->size}}" selected @endif>{{$inventory->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
 
-                                        <td class="">
-                                            <select class="form-control br-5 material" name="inventories[][material]" required>
-                                                <option value="">--Choose Inventory First--</option>
-                                            </select>
-                                        </td>
+                                            <td class="">
+                                                <select class="form-control br-5 material" name="inventories[][material]" required>
+                                                    <option value="">--Choose Inventory First--</option>
+                                                    @foreach(json_decode($inventory_key->meta->material, true) as $material)
+                                                        <option value="{{$material}}"  @if($inventory_key->material == $material) selected @endif>{{$material}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
 
-                                        <td class="">
-                                            <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
-                                                <option value="">--Choose Inventory First--</option>
-                                            </select>
-                                        </td>
+                                            <td class="">
+                                                <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
+                                                    <option value="">--Choose Inventory First--</option>
+                                                    @foreach(json_decode($inventory_key->meta->size, true) as $size)
+                                                        <option value="{{$size}}"  @if($inventory_key->size == $size) selected @endif>{{$size}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
 
-                                        <td class="" style="width: 20%;">
-                                            <input class="form-control br-5" type="number" name="inventories[][quantity]" required>
-                                        </td>
+                                            <td class="" style="width: 20%;">
+                                                <input class="form-control br-5" type="number" name="inventories[][quantity]" value="{{$inventory_key->quantity}}" required>
+                                            </td>
 
-                                        <td>
-                                            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                                        </td>
-                                    </tr>
-
+                                            <td>
+                                                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -165,7 +172,7 @@
                             <div class="w-50 text-right">
                               <a class="white-text p-10">
                                   <button class="btn theme-bg white-text w-30 br-5">
-                                    Save
+                                      @if(!$subcategory) Save @else Update @endif
                                   </button>
                               </a>
                             </div>

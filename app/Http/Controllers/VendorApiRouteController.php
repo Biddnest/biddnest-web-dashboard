@@ -206,7 +206,7 @@ class VendorApiRouteController extends Controller
     public function startTrip(Request $request){
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required',
-            'pin' => 'required|integer',
+            'pin' => 'required',
         ]);
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
@@ -233,7 +233,7 @@ class VendorApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'category' => 'required|string',
+            'category' => 'required',
             'heading' => 'required|string',
             'desc' => 'required|string'
         ]);

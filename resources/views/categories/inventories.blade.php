@@ -66,7 +66,7 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($inventories as $inventory)
-                                            <tr class="tb-border cursor-pointer"
+                                            <tr class="tb-border cursor-pointer inv_{{$inventory->id}}"
                                                 >
                                                 <td scope="row"> <img class="default-image"
                                                         src="{{$inventory->image}}" alt=""></td>
@@ -95,8 +95,10 @@
                                                         <span class="status-badge info-bg">Unknown</span>
                                                     @endswitch
                                                 </td>
-                                                <td> <i onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');" class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                                <td>
+                                                    <a href="{{route('edit-services', ['id'=>$inventory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete" data-parent=".inv_{{$inventory->id}}" data-confirm="Are you sure, you want delete this Inventory permenently? You won't be able to undo this." data-url="{{route('inventories_delete',['id'=>$inventory->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

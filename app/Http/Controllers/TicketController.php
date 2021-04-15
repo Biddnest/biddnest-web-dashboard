@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\TicketReply;
 use Illuminate\Http\Request;
 use App\Helper;
 use App\Models\Ticket;
 use App\Models\Booking;
 use App\Models\User;
 use App\Enums\TicketEnums;
+use App\Models\TicketReply;
 
 
 class TicketController extends Controller
@@ -290,15 +290,15 @@ class TicketController extends Controller
         if(!$chat_result)
             return Helper::response(false, "couldn't send Massage, Please try again");
 
-        return Helper::response(true, "added chat Successfully", ['ticket'=>Ticket::where('id', $ticket_id)->with('reply')]);
+        return Helper::response(true, "added chat Successfully", ['reply'=>TicketReply::findOrFail($add_chat->id)]);
     }
 
     public static function getOneForUserApp($sender_id, $ticket_id)
     {
-        $tickets = Ticket::where(['id'=>$ticket_id, 'user_id'=>$sender_id])->with(['reply'=> function($query) {
-            $query->with('agent');
+        $tickets = Ticket::where(['id'=>$ticket_id])->with(['reply'=> function($query) {
+           $query->with('admin');
         }])->get();
 
-        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets]);
+        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
     }
 }

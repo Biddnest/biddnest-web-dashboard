@@ -67,7 +67,7 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($categories as $category)
-                                            <tr class="tb-border cursor-pointer">                                                <td scope="row"> <img class="default-image"
+                                            <tr class="tb-border cursor-pointer cat_{{$category->id}}">                                                <td scope="row"> <img class="default-image"
                                                         src="{{$category->image}}" alt=""></td>
                                                 <td>{{$category->name}}</td>
                                                 <td>
@@ -104,8 +104,9 @@
                                                        Add</div>
                                                 </td>
 
-                                                <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
-                                                        class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
+                                                <td> <a href="{{route('coupon_edit', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete" data-parent=".cat_{{$category->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('service_delete',['id'=>$category->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

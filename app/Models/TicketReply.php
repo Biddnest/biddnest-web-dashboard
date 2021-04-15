@@ -5,27 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class TicketReply extends Model
 {
-    protected $table = "ticket";
-    protected $hidden = ['user_id','vendor_id','updated_at','deleted'];
+    protected $table = "ticket_reply";
+    protected $hidden = ['id', 'status', 'ticket_id', 'vendor_id','updated_at','deleted'];
     use HasFactory;
-
-    public function booking(){
-        return $this->belongsTo(Booking::class);
-    }
 
     public function vendor(){
         return $this->belongsTo(Vendor::class);
+    }
+
+    public function ticket(){
+        return $this->belongsTo(Ticket::class);
     }
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function reply()
-    {
-        return $this->hasMany(TicketReply::class);
+    public function admin(){
+        return $this->belongsTo(Admin::class);
     }
-
 }

@@ -96,24 +96,21 @@ class Route extends Controller
     public function service_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'name' => 'required|srting',
-            'image' => 'required|srting',
+            'name' => 'required',
+            'image' => 'required',
             'id' => 'required|integer',
             'inventory_quantity_type' =>'required|integer'
         ]);
 
         if($validation->fails())
           return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return ServiceController::update($request->id, ucwords($request->name), $request->image);
+
+        return ServiceController::update($request->id, ucwords($request->name), $request->image, $request->inventory_quantity_type);
     }
 
     public function service_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer'
-        ]);
-        return AdminController::serviceDelete($request->id);
+        return ServiceController::delete($request->id);
     }
 
     /*Subservices*/
@@ -170,26 +167,19 @@ class Route extends Controller
             'name' => 'required',
             'image' => 'required',
             'id' => 'required|integer',
-            'service_id'=>'required|integer'
+            'category'=>'required|integer'
 
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return ServiceController::update($request->id, $request->service_id, ucwords($request->name), $request->image);
+
+        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image);
     }
 
     public function subservice_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return AdminController::serviceDelete($request->id);
+        return SubServiceController::delete($request->id);
     }
 
     /*Inventories*/
@@ -261,12 +251,6 @@ class Route extends Controller
 
     public function inventories_delete(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required|integer',
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
         return InventoryController::delete($request->id);
     }
 
@@ -590,7 +574,6 @@ class Route extends Controller
             'banners.*.name' => 'required|string',
             'banners.*.date.from' => 'required|date',
             'banners.*.date.to' => 'required|date',
-            //            'banners.*.order' => 'required|int',
             "banners.*.url" => 'required|url',
             "banners.*.image" => 'required|string'
         ]);
@@ -634,6 +617,84 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return CouponController::add($request->all());
+     }
+
+     public function coupon_edit(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'id'=>'required',
+             'name'=>'required|string',
+             'desc'=>'required|string',
+             'code'=>'required|string',
+             'type'=>'required|integer',
+             'discount_type'=>'required|integer',
+             'discount_amount'=>'required',
+             'max_discount_amount'=>'required',
+             'min_order_amount'=>'required',
+             'deduction_source'=>'required|integer',
+             'max_usage'=>'required|integer',
+             'max_usage_per_user'=>'required|integer',
+             'organization_scope'=>'required|integer',
+             'zone_scope'=>'required|integer',
+             'user_scope'=>'required|integer',
+             'valid_from'=>'required',
+             'valid_to'=>'required',
+             'organizations.*'=>'required',
+             'zones.*'=>'required',
+             'users.*'=>'required'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return CouponController::update($request->all(), $request->id);
+     }
+
+     public function coupon_delete(Request $request)
+     {
+         return CouponController::delete($request->id);
+     }
+
+     public function zones_add(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'name'=>'required|string',
+             'lat'=>'required|numeric',
+             'lng'=>'required|numeric',
+             'city'=>'required|string',
+             'district'=>'required|string',
+             'state'=>'required|string',
+             'area'=>'required'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return ZoneController::add($request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
+     }
+
+     public function zones_edit(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'id'=>'required',
+             'name'=>'required|string',
+             'lat'=>'required|numeric',
+             'lng'=>'required|numeric',
+             'city'=>'required|string',
+             'district'=>'required|string',
+             'state'=>'required|string',
+             'area'=>'required'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
+     }
+
+     public function zones_delete(Request $request)
+     {
+         return ZoneController::delete($request->id);
      }
 
      public function end_bid(Request $request)

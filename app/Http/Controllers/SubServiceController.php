@@ -77,20 +77,26 @@ class SubServiceController extends Controller
 
     public static function update($id, $service_id, $name, $image)
     {
-
-        $imageman = new ImageManager(array('driver' => 'imagick'));
-        $imageman->configure(array('driver' => 'gd'));
+        $imageman = new ImageManager(array('driver' => 'gd'));
         $image_name = "subservice".$name."-".$id.".png";
-        $subservice=Subservice::where("id", $id)->update([
-            "name"=>$name,
-            "service_id"=>$service_id,
-        "image"=>Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices")
-        ]);
 
-        if(!$subservice)
-            return Helper::response(false,"Couldn't save data");
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices");
+
+        $update_data = ["name"=>$name];
+        $subservice=Subservice::where("id", $id)->update($update_data);
+
+        ServiceSubservice::where('service_id', $service_id)->delete();
+
+        $service=new ServiceSubservice;
+        $service->service_id = $service_id;
+        $service->subservice_id = $id;
+        $service_result = $service->save();
+
+        if(!$subservice && !$service_result)
+            return Helper::response(false,"Couldn't Update data");
         else
-            return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
+            return Helper::response(true,"Update data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
     }
 
     public static function getOne($id)
@@ -105,12 +111,12 @@ class SubServiceController extends Controller
 
     public static function delete($id)
     {
-        $result=Service::where("id",$id)->update(["deleted"=>1]);
+        $result=Subservice::where("id",$id)->update(["deleted"=>1]);
 
         if(!$result)
-            return Helper::response(false,"Couldn't Delete data $result");
+            return Helper::response(false,"Couldn't Delete Sub-Services");
         else
-            return Helper::response(true,"Service deleted successfully");
+            return Helper::response(true,"Sub-Services deleted successfully");
     }
 
     public static function getSubservicesForApp($id)

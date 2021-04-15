@@ -60,17 +60,22 @@ class InventoryController extends Controller
     {
         $image_name = "inventory-image-".$name."-".uniqid().".png";
         $icon_name = "inventory-icon-".$name."-".uniqid().".png";
-        $imageman = new ImageManager(array('driver' => 'imagick'));
-        $imageman->configure(array('driver' => 'gd'));
+        $imageman = new ImageManager(array('driver' => 'gd'));
 
-        $result = Inventory::where("id",$id)->update([
-        "name"=>$name,
-        "size"=>$size,
-        "material"=>$material,
-        "category"=>$category,
-        "image"=>Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 75),$image_name,"inventories"),
-        "icon"=>Helper::saveFile($imageman->make($icon)->resize(100,100)->encode('png', 75),$icon_name,"inventories")
-        ]);
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 75),$image_name,"inventories");
+
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["icon"] = Helper::saveFile($imageman->make($icon)->resize(100,100)->encode('png', 75),$icon_name,"inventories");
+
+        $update_data = [
+            "name"=>$name,
+            "size"=>$size,
+            "material"=>$material,
+            "category"=>$category
+        ];
+
+        $result = Inventory::where("id",$id)->update($update_data);
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
@@ -104,9 +109,9 @@ class InventoryController extends Controller
         $result=Inventory::where("id",$id)->update(["deleted"=>1]);
 
         if(!$result)
-            return Helper::response(false,"Couldn't Delete data");
+            return Helper::response(false,"Couldn't Delete Inventory");
         else
-            return Helper::response(true,"Data Deleted successfully");
+            return Helper::response(true,"Inventory Deleted successfully");
     }
 
     //route controller => ApiRouteController
@@ -155,7 +160,6 @@ class InventoryController extends Controller
         else
             return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
     }
-
 
     public static function getByInventory($id)
     {
@@ -208,7 +212,6 @@ class InventoryController extends Controller
         else
             return Helper::response(true,"Service deleted successfully");
     }
-
 
     public static function getEconomicPrice($data, $inventory_quantity_type)
     {

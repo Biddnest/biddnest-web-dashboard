@@ -180,6 +180,7 @@ $("body").on('change', ".inventory-select", function(event) {
 
     var materal=$("#inventory_"+id).data("material");
     var size=$("#inventory_"+id).data("size");
+
     materal.map((value)=>{
         $(this).closest(".inventory-snip").find(".material").append('<option value="'+value+'">'+value+'</option>')
     });

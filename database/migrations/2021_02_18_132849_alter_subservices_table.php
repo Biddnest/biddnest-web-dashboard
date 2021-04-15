@@ -15,7 +15,7 @@ class AlterSubservicesTable extends Migration
     {
         Schema::table('subservices', function (Blueprint $table) {
             // $table->dropColumn('service_id');
-            $table->string('image')->default(null)->nullable();
+            $table->text('image')->default(null)->nullable();
         });
     }
 

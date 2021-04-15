@@ -436,8 +436,8 @@ class BookingsController extends Controller
                 break;
 
             case "past":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=> function($booking) {
-                    $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=>function($query){
+                    $query->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
         }

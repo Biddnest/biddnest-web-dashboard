@@ -33,10 +33,11 @@
                 </h3>
             </div>
 
-            <form action="{{route('coupon_add')}}" method= "POST" data-next="redirect" data-url="{{route('coupons')}}" data-alert="tiny" class="create-coupons" data-parsley-validate>
+            <form action="@if($coupons){{route('coupon_edit')}}@else{{route('coupon_add')}}@endif" method="@if(isset($coupons)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('coupons')}}" data-alert="tiny" class="create-coupons" data-parsley-validate>
     <div class="d-flex  row  p-20" >
-
-
+        @if($coupons)
+            <input type="hidden" name="id" value="{{$coupons->id}}">
+        @endif
         <div class="col-sm-6">
           <div class="form-input">
             <label class="coupon-name">Coupon Name</label>
@@ -206,7 +207,7 @@
                 <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
 
                     @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                      <option value="{{$zone->id}}" @if($coupons && ($coupons->zones->id == $type)) selected @endif>{{$zone->name}}</option>
+                      <option value="{{$zone->id}}" @foreach($coupons->zones as $zones)  @if($zones->id == $zone->id) selected @endif @endforeach>{{ucfirst(trans($zone->name))}}</option>
                     @endforeach
                 </select>
               </div>
@@ -221,7 +222,7 @@
                 <select class="form-control br-5 field-toggle" data-value="1" data-target=".orgnization" name="organization_scope" required>
                   <option value="">--Select--</option>
                     @foreach(\App\Enums\CouponEnums::$ORGANIZATION_SCOPE as $key=>$type)
-                      <option value="{{$type}}">{{$key}}</option>
+                      <option value="{{$type}}" @if($coupons && ($coupons->organization_scope == $type)) selected @endif>{{ucfirst(trans($key))}}</option>
                     @endforeach
                 </select>
               </div>
@@ -234,7 +235,7 @@
               <div>
                 <select class="form-control br-5 select-box" name="orgnizations[]" multiple>
                     @foreach($organizations as $org)
-                      <option value="{{$org->id}}">{{$org->org_name}}</option>
+                      <option value="{{$org->id}}" @foreach($coupons->organizations as $organizations)  @if($organizations->id == $org->id) selected @endif @endforeach>{{ucfirst(trans($org->org_name))}}</option>
                     @endforeach
                 </select>
               </div>
@@ -248,7 +249,7 @@
                 <select class="form-control br-5 field-toggle" data-value="1" data-target=".user" name="user_scope" required>
                   <option value="">--Select--</option>
                     @foreach(\App\Enums\CouponEnums::$USER_SCOPE as $key=>$type)
-                      <option value="{{$type}}">{{$key}}</option>
+                      <option value="{{$type}}" @if($coupons && ($coupons->user_scope == $type)) selected @endif>{{ucfirst(trans($key))}}</option>
                     @endforeach
                 </select>
               </div>
@@ -260,7 +261,9 @@
               <label>Select Users</label>
               <div>
                   <select class="form-control searchuser" name="users[]" multiple>
-
+                      @foreach($coupons->users as $user)
+                          <option value="{{$user->id}}" selected>{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</option>
+                      @endforeach
                   </select>
 
               </div>

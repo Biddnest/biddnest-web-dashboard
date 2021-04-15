@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Enums\PaymentEnums;
 use App\Helper;
@@ -60,7 +61,7 @@ class CouponController extends Controller
                 $coupon_organizaton->coupon_id = $coupon->id;
                 $coupon_organizaton->save();
             }
-    }
+        }
     }
 
     if($data['zone_scope']== CouponEnums::$ZONE_SCOPE['custom']){
@@ -71,7 +72,7 @@ class CouponController extends Controller
                 $coupon_zone->coupon_id = $coupon->id;
                 $coupon_zone->save();
             }
-    }
+        }
     }
 
     if($data['user_scope']== CouponEnums::$USER_SCOPE['custom']){
@@ -82,12 +83,94 @@ class CouponController extends Controller
                 $coupon_user->coupon_id = $coupon->id;
                 $coupon_user->save();
             }
-    }
+        }
     }
 
     return Helper::response(true, "Coupon Added Successfully", ["coupon"=>Coupon::with('users')->with('organizations')->with('zones')->findorFail($coupon->id)]);
 
 
+   }
+
+   public static function update($data, $id)
+   {
+       $exist_coupon=Coupon::where("id", $id)->first();
+       if(!$exist_coupon)
+           return Helper::response(false, "Coupon doesn't exist");
+
+       $coupon_update =Coupon::where("id", $exist_coupon->id)
+           ->update([
+               "name"=>$data['name'],
+               "desc"=>$data['desc'],
+               "code"=>strtoupper($data['code']),
+               "coupon_type"=>$data['type'] == CouponEnums::$COUPON_TYPE['discount'] ? CouponEnums::$COUPON_TYPE['discount'] : 0,
+               "discount_type"=>in_array($data['discount_type'], CouponEnums::$DISCOUNT_TYPE) ? $data['discount_type'] : null,
+               "discount_amount"=>$data['discount_amount'],
+               "max_discount_amount"=>$data['max_discount_amount'],
+               "min_order_amount"=>$data['min_order_amount'],
+               "deduction_source"=>in_array($data['deduction_source'], CouponEnums::$DEDUCTION_SOURCE) ? $data['deduction_source'] : null,
+               "max_usage"=>$data['max_usage'],
+               "max_usage_per_user"=>$data['max_usage_per_user'],
+               "organization_scope"=>in_array($data['organization_scope'], CouponEnums::$ORGANIZATION_SCOPE) ? $data['organization_scope'] : null,
+               "zone_scope"=>in_array($data['zone_scope'], CouponEnums::$ZONE_SCOPE) ? $data['zone_scope'] : null,
+               "user_scope"=>in_array($data['user_scope'], CouponEnums::$USER_SCOPE) ? $data['user_scope'] : null,
+               "valid_from"=>date("Y-m-d", strtotime($data['valid_from'])),
+               "valid_to"=>date("Y-m-d", strtotime($data['valid_to']))
+           ]);
+
+       if(!$coupon_update)
+           return Helper::response(false, "couldn't Update");
+
+       if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']) {
+           if (count($data['organizations']) > 0) {
+               CouponOrganization::where("coupon_id", $exist_coupon->id)->dalete();
+               foreach ($data['organizations'] as $organization) {
+                   $coupon_organizaton = new CouponOrganization;
+                   $coupon_organizaton->organization_id = $organization;
+                   $coupon_organizaton->coupon_id = $exist_coupon->id;
+                   $coupon_organizaton->save();
+               }
+           }
+       }
+
+       if($data['zone_scope']== CouponEnums::$ZONE_SCOPE['custom']){
+           if(count($data['zones']) > 0){
+               CouponZone::where("coupon_id", $exist_coupon->id)->dalete();
+               foreach($data['zones'] as $zone) {
+                   $coupon_zone = new CouponZone;
+                   $coupon_zone->zone_id = $zone;
+                   $coupon_zone->coupon_id = $exist_coupon->id;
+                   $coupon_zone->save();
+               }
+           }
+       }
+
+       if($data['user_scope']== CouponEnums::$USER_SCOPE['custom']){
+           if(count($data['users']) > 0){
+               CouponUser::where("coupon_id", $exist_coupon->id)->dalete();
+               foreach($data['users'] as $user) {
+                   $coupon_user = new CouponUser;
+                   $coupon_user->user_id = $user;
+                   $coupon_user->coupon_id = $exist_coupon->id;
+                   $coupon_user->save();
+               }
+           }
+       }
+       return Helper::response(true, "Coupon Updated Successfully", ["coupon"=>Coupon::with('users')->with('organizations')->with('zones')->findorFail($data['id'])]);
+   }
+
+   public static function delete($id)
+   {
+       $exist_coupon=Coupon::where("id", $id)->first();
+       if(!$exist_coupon)
+           return Helper::response(false, "Coupon doesn't exist");
+
+       $coupon_delete =Coupon::where("id", $exist_coupon->id)
+           ->update(["deleted"=>CommonEnums::$YES]);
+
+       if(!$coupon_delete)
+           return Helper::response(false, "couldn't Update");
+
+       return Helper::response(true, "Coupon Deleted Successfully");
    }
 
    public static function checkIfValid($public_booking_id, $coupon_code){

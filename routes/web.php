@@ -97,6 +97,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
 
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
+    Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
+    Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 

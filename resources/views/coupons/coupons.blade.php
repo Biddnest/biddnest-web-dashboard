@@ -120,7 +120,7 @@
                 </div>
                 <div class="all-vender-details">
                     <table class="table text-center p-0 theme-text mb-0 primary-table">
-                                                <thead class="secondg-bg  p-0">
+                        <thead class="secondg-bg  p-0">
                                                     <tr>
                                                         <th scope="col">Coupon  Name</th>
                                                         <th scope="col">Coupon Type</th>
@@ -131,69 +131,67 @@
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="mtop-20 f-13">
-                                                @foreach($coupons as $coupon)
-                                                    <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                                        <td scope="row">{{$coupon->name}}</td>
-                                                        <td>
-                                                            @switch($coupon->type)
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                Fixed
-                                                                @break
+                        <tbody class="mtop-20 f-13">
+                            @foreach($coupons as $coupon)
+                                <tr class="tb-border cursor-pointer coup_{{$coupon->id}}">
+                                    <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$coupon->name}}</td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        @switch($coupon->type)
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                Fixed
+                                            @break
 
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                Percentage
-                                                                @break
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                Percentage
+                                            @break
 
-                                                                @default
-                                                                Unknown
-                                                            @endswitch
-                                                        </td>
-                                                        <td>
-                                                            @switch($coupon->type)
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                &#8377; {{$coupon->discount_amount}}
-                                                                @break
+                                            @default
+                                                Unknown
+                                        @endswitch
+                                    </td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        @switch($coupon->type)
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                &#8377; {{$coupon->discount_amount}}
+                                            @break
 
-                                                                @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                                {{$coupon->discount_amount}}%
-                                                                @break
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                                {{$coupon->discount_amount}}%
+                                            @break
 
-                                                                @default
-                                                                Unknown
-                                                            @endswitch
-                                                        </td></td>
-                                                        <td>
-                                                           <div class="d-flex justify-content-center vertical-center">
-
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
-                                                              </div>
-                                                           </div>
-
-                                                            </td>
-                                                        <td>{{$coupon->desc}}</td>
-                                                        <td class="">
-                                                            @switch($coupon->status)
-                                                                @case(\App\Enums\CouponEnums::$STATUS['active'])
-                                                                <span class="status-badge green-bg  text-center td-padding">Active</span>
-                                                                @break
-               @case(\App\Enums\CouponEnums::$STATUS['inactive'])
-                                                                <span class="status-badge red-bg  text-center td-padding">Inactive</span>
-                                                                @break
-               @case(\App\Enums\CouponEnums::$STATUS['expired'])
-                                                                <span class="status-badge info-bg  text-center td-padding">Expired</span>
-                                                                @break
-
-                                                            @endswitch
-
-
-                                                        </td><td><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i class="icon dripicons-trash p-1" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                </tbody>
-                                                @endforeach
-
-                                            </table>
+                                            @default
+                                                Unknown
+                                        @endswitch
+                                    </td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        <div class="d-flex justify-content-center vertical-center">
+                                            <div class="progress">
+                                                <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$coupon->desc}}</td>
+                                    <td class="" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        @switch($coupon->status)
+                                            @case(\App\Enums\CouponEnums::$STATUS['active'])
+                                                <span class="status-badge green-bg  text-center td-padding">Active</span>
+                                            @break
+                                            @case(\App\Enums\CouponEnums::$STATUS['inactive'])
+                                                <span class="status-badge red-bg  text-center td-padding">Inactive</span>
+                                            @break
+                                            @case(\App\Enums\CouponEnums::$STATUS['expired'])
+                                                <span class="status-badge info-bg  text-center td-padding">Expired</span>
+                                            @break
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                        <a href="{{route('edit-coupons', ['id'=>$coupon->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a href="#" class="delete" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permenently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                     <div class="pagination">
                             <ul>
                                 <li class="p-1">Page</li>

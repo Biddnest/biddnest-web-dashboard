@@ -426,7 +426,6 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'category'=>'required',
-            'public_booking_id' => 'nullable|string',
             'heading' => 'required|string',
             'desc' => 'required|string'
         ]);

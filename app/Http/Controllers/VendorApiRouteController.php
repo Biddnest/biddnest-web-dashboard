@@ -233,7 +233,7 @@ class VendorApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'category' => 'required|string',
+            'category' => 'required',
             'heading' => 'required|string',
             'desc' => 'required|string'
         ]);

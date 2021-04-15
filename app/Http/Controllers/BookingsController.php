@@ -422,8 +422,8 @@ class BookingsController extends Controller
                 break;
 
             case "scheduled":
-                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking' => function ($booking) {
-                    $booking->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                $bid_id->where("status", BidEnums::$STATUS['won'])->with(['booking'=>function ($query) {
+                    $query->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 }]);
                 break;
 

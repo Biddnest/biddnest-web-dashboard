@@ -119,17 +119,17 @@
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                     @foreach($vendors as $vendor)
-                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}}">
-                                                            <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>75]) }}">
+                                                            <td scope="row">
                                                                 @if(isset($vendor->vendor))
                                                                 {{ucfirst(trans($vendor->vendor->fname))}} {{ucfirst(trans($vendor->vendor->lname))}}
                                                                 @else
                                                                     {{"NA"}}
                                                                 @endif
                                                             </td>
-                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
-                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->zone->name))}}</td>
-                                                            <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">@switch($vendor->status)
+                                                            <td >{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
+                                                            <td  >{{ucfirst(trans($vendor->zone->name))}}</td>
+                                                            <td >@switch($vendor->status)
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['active'])
                                                                     <span class="status-badge green-bg text-center">Active</span>
                                                                     @break

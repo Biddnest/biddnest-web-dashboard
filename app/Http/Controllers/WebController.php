@@ -137,6 +137,8 @@ class WebController extends Controller
     public function sidebar_vendors(Request $request)
     {
         $vendor = Organization::where("id", $request->id)->with('vendor')->first();
+        return view('sidebar.vendors', ['organization'=>$vendor]);
+
     }
 
     public function vendorsDetails()

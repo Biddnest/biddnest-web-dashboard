@@ -105,9 +105,11 @@
                             <div class="form-input">
                                 <label class="phone-num-lable">Material</label>
                                 <select class="form-control select-box2" name="material[]" multiple required>
+                                    @if($inventory && $inventory->material)
                                         @foreach(json_decode($inventory->material) as $material)
                                             <option value="{{$material}}" selected>{{$material}}</option>
                                         @endforeach
+                                    @endif
                                 </select>
                                 <span class="error-message"
                                     >Please enter valid Material</span
@@ -118,9 +120,11 @@
                             <div class="form-input">
                                 <label class="phone-num-lable">Size</label>
                                 <select class="form-control select-box2" name="size[]" multiple required>
-                                    @foreach(json_decode($inventory->size) as $size)
-                                        <option value="{{$size}}" selected>{{$size}}</option>
-                                    @endforeach
+                                    @if($inventory && $inventory->size)
+                                        @foreach(json_decode($inventory->size) as $size)
+                                            <option value="{{$size}}" selected>{{$size}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
 
                                 <span class="error-message"

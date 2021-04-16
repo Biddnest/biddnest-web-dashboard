@@ -502,7 +502,7 @@ class BookingsController extends Controller
         $bookings->with('service')
             ->with('movement_dates')
             ->with(['driver'=>function($query) use($request){
-                $query->where('id', $request->token_oayload->id);
+                $query->where('id', $request->token_payload->id);
             }])
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);

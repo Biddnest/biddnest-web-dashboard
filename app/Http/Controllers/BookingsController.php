@@ -474,53 +474,41 @@ class BookingsController extends Controller
 
     public static function getBookingsForDriverApp(Request $request)
     {
-        $bid_id = Bid::where("organization_id", $request->token_payload->organization_id);
+        $booking = Booking::whereIn('id', BookingDriver::where('driver_id', $request->token_payload->id)->pluck('booking_id'));
 
         switch ($request->type) {
             case "scheduled":
-                $bid_id->where("status", BidEnums::$STATUS['won']);
+                $booking->whereIn("status", [BookingEnums::$STATUS['awaiting_pickup'], BookingEnums::$STATUS['in_transit']]);
                 break;
 
             case "past":
-                $bid_id->where("status", BidEnums::$STATUS['won']);
+                $booking->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
                 break;
         }
 
-        $bookings = Booking::whereIn("id", $bid_id
-            ->pluck('booking_id'))->orderBy('id', 'DESC')
-            ->with('user');
 
-        if($request->type == "past")
-            $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+        if (isset($request->from) && isset($request->to))
+            $booking->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
 
-        if($request->type == "scheduled")
-            $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+        if (isset($request->status))
+            $booking->orWhere('status', $request->status);
 
-        if($request->type == "past")
-            $bookings->with('status_history');
+        if (isset($request->service_id))
+            $booking->where('service_id', $request->service_id);
 
-        $bookings->with('service')
+        $booking->orderBy('id', 'DESC')
+            ->with('user')
+            ->with('status_history')
+            ->with('service')
             ->with('movement_dates')
-            ->with(['driver'=>function($query) use($request){
-                $query->where('id', $request->token_payload->id);
-            }])
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id);
             }]);
 
-        if (isset($request->from) && isset($request->to))
-            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
+        $booking = $booking->paginate(CommonEnums::$PAGE_LENGTH);
 
-        if (isset($request->status))
-            $bookings->orWhere('status', $request->status);
-
-        if (isset($request->service_id))
-            $bookings->where('service_id', $request->service_id);
-
-        $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
-
-        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
-            "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()
+        return Helper::response(true, "Show data successfully", ["bookings" => $booking->items(), "paging" => [
+            "current_page" => $booking->currentPage(), "total_pages" => $booking->lastPage(), "next_page" => $booking->nextPageUrl(), "previous_page" => $booking->previousPageUrl()
         ]]);
     }
 
@@ -598,9 +586,6 @@ class BookingsController extends Controller
             return Helper::response(false, "Not in active state");
 
         $get_driver = BookingDriver::where("booking_id", $assign_driver['id'])->first();
-
-        if($get_driver)
-            BookingDriver::where("id", $get_driver['id'])->delete();
 
         $save_driver = new BookingDriver;
         $save_driver->booking_id = $assign_driver['id'];

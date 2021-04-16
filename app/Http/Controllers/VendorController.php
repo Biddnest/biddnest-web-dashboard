@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\VendorEnums;
 use App\Http\Controllers\Controller;
+use App\Models\Vehicle;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\StringFormatter;
@@ -11,7 +14,7 @@ use App\Helper;
 class VendorController extends Controller
 {
     public function addPrice(Request $request)
-    { 
+    {
         $validation = Validator::make($request->all(),[
             'inventory_id'=>"required|int",
             // 'organization_id'=>"required|int",
@@ -32,7 +35,7 @@ class VendorController extends Controller
         $validation = Validator::make($request->all(),[
             'inventory_id' => 'required|integer'
         ]);
-        
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
@@ -62,11 +65,35 @@ class VendorController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'id' => 'required|integer'
-        ]);        
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
         return InventoryController::deletePrice($request->id);
+    }
+
+    public static function getDrivers($organization_id)
+    {
+        $get_driver = Vendor::select(["id", "fname", "lname", "phone"])
+            ->where("organization_id", $organization_id)
+            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->get();
+
+        if (!$get_driver)
+            return Helper::response(false, "Driver or vehicle data not available");
+
+        return Helper::response(true, "Data fetched successfully", ['drivers' => $get_driver]);
+    }
+
+    public static function getVehicles($organization_id)
+    {
+        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
+            ->get();
+
+        if (!$get_vehicle)
+            return Helper::response(false, "Driver or vehicle data not available");
+
+        return Helper::response(true, "Data fetched successfully", ['vehicles' => $get_vehicle]);
     }
 }

@@ -619,21 +619,6 @@ class BookingsController extends Controller
         return Helper::response(true, "save successfully");
     }
 
-    public static function getDriver($organization_id)
-    {
-        $get_driver = Vendor::select(["id", "fname", "lname", "phone"])
-            ->where("organization_id", $organization_id)
-            ->where(["user_role" => VendorEnums::$ROLES['driver']])
-            ->get();
-
-        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
-            ->get();
-
-        if (!$get_driver || !$get_vehicle)
-            return Helper::response(false, "Driver or vehicle data not available");
-
-        return Helper::response(true, "Data fetched successfully", ['drivers' => $get_driver, 'vehicles' => $get_vehicle]);
-    }
 
     public static function startTrip($public_booking_id, $organization_id, $pin)
     {

@@ -116,8 +116,6 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::post('/driver',[VendorApiRouter::class,'assignDriver']);
 
-        Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);
-
         Route::get('/bid/position',[VendorApiRouter::class,'getposition']);
 
         Route::post('/trip/start',[VendorApiRouter::class,'startTrip']);
@@ -138,6 +136,10 @@ Route::prefix('vendors/v1')->group(function () {
     Route::prefix('payouts')->group(function () {
         Route::get('/',[VendorApiRouter::class,'getPayout']);
     });
+
+    Route::get('/drivers',[VendorApiRouter::class,'getDrivers']);
+
+    Route::get('/vehicles',[VendorApiRouter::class,'getVehicles']);
 
     Route::post("/notification/player",[VendorApiRouter::class, 'addNotificationVendorPlayer']);
 

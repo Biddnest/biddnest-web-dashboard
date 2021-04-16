@@ -156,7 +156,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('categories')->group(function () {
             Route::get('/',[WebController::class,'categories'])->name("categories");
             Route::get('/create',[WebController::class,'createCategories'])->name("create-categories");
-            Route::get('/{id}/edit',[WebController::class,'createCategories'])->name("edite-categories");
+            Route::get('/{id}/edit',[WebController::class,'createCategories'])->name("edit-categories");
 
             Route::get('/subcateories',[WebController::class,'subcateories'])->name("subcateories");
             Route::get('/subcateories/create',[WebController::class,'createSubcateories'])->name("create-subcateories");

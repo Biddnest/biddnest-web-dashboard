@@ -114,6 +114,8 @@ Route::prefix('vendors/v1')->group(function () {
 
         Route::get('/{type}',[VendorApiRouter::class,'getBookingsforApp']);
 
+        Route::get('/driver/{type}',[VendorApiRouter::class,'getBookingsForDriverApp']);
+
         Route::post('/driver',[VendorApiRouter::class,'assignDriver']);
 
         Route::get('/driver/get',[VendorApiRouter::class,'getDriver']);

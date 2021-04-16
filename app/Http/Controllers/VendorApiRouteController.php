@@ -113,6 +113,11 @@ class VendorApiRouteController extends Controller
         return BookingsController::getBookingsForVendorApp($request);
     }
 
+    public function getBookingsForDriverApp(Request $request)
+    {
+        return BookingsController::getBookingsForDriverApp($request);
+    }
+
     public function addBookmark(Request $request)
     {
         $validation = Validator::make($request->all(),[

@@ -476,6 +476,67 @@ class BookingsController extends Controller
         ]]);
     }
 
+    public static function getBookingsForDriverApp(Request $request)
+    {
+        $bid_id = Bid::where("organization_id", $request->token_payload->organization_id);
+
+        switch ($request->type) {
+            case "live":
+                $bid_id->where("status", BidEnums::$STATUS['active']);
+                break;
+
+            case "scheduled":
+                $bid_id->where("status", BidEnums::$STATUS['won']);
+                break;
+
+            case "bookmarked":
+                $bid_id->where("bookmarked", CommonEnums::$YES);
+                break;
+
+            case "participated":
+                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']]);
+                break;
+
+            case "past":
+                $bid_id->where("status", BidEnums::$STATUS['won']);
+                break;
+        }
+
+        $bookings = Booking::whereIn("id", $bid_id
+            ->pluck('booking_id'))->orderBy('id', 'DESC')
+            ->with('user');
+
+        if($request->type == "past")
+            $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+
+        if($request->type == "scheduled")
+            $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+
+        if($request->type == "participated" || $request->type == "past")
+            $bookings->with('status_history');
+
+        $bookings->with('service')
+            ->with('movement_dates')
+            ->with(['bid' => function ($bid) use ($request) {
+                $bid->where("organization_id", $request->token_payload->organization_id);
+            }]);
+
+        if (isset($request->from) && isset($request->to))
+            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
+
+        if (isset($request->status))
+            $bookings->orWhere('status', $request->status);
+
+        if (isset($request->service_id))
+            $bookings->where('service_id', $request->service_id);
+
+        $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
+            "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()
+        ]]);
+    }
+
     public static function getByIdForVendorApp(Request $request)
     {
         $organization_id = $request->token_payload->organization_id;

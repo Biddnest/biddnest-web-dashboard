@@ -205,12 +205,12 @@ class VendorApiRouteController extends Controller
 
     public function getDrivers(Request $request)
     {
-        return VendorController::getDriver($request->token_payload->organization_id);
+        return VendorController::getDrivers($request->token_payload->organization_id);
     }
 
     public function getVehicles(Request $request)
     {
-        return VendorController::getVehicle($request->token_payload->organization_id);
+        return VendorController::getVehicles($request->token_payload->organization_id);
     }
 
     public function startTrip(Request $request){

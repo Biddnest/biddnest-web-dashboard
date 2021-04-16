@@ -173,6 +173,21 @@ class CouponController extends Controller
        return Helper::response(true, "Coupon Deleted Successfully");
    }
 
+   public static function getAvailableCouponsForBooking($public_booking_id)
+    {
+        $coupons = [];
+
+        $allCoupons = Coupon::where("status", CouponEnums::$STATUS['active'])->get();
+        if(count($allCoupons) > 0) {
+            foreach ($allCoupons as $coupon) {
+                if (is_array(self::checkIfValid($public_booking_id, $coupon['code'])))
+                    array_push($coupons, $coupon);
+            }
+        }
+        return Helper::response(true, "Here are the available coupons", ["coupons" => $coupons]);
+
+    }
+
    public static function checkIfValid($public_booking_id, $coupon_code){
 
        $coupon = Coupon::where("code",$coupon_code)->with('users')->with('organizations')->with('zones')->first();
@@ -260,18 +275,5 @@ class CouponController extends Controller
        // return $discount_amount;
    }
 
-    public static function getAvailableCouponsForBooking($public_booking_id)
-    {
-        $coupons = [];
 
-        $allCoupons = Coupon::where("status", CouponEnums::$STATUS['active'])->get();
-        if(count($allCoupons) > 0) {
-            foreach ($allCoupons as $coupon) {
-                if (is_array(self::checkIfValid($public_booking_id, $coupon['code'])))
-                    array_push($coupons, $coupon);
-            }
-        }
-        return Helper::response(true, "Here are the available coupons", ["coupons" => $coupons]);
-
-    }
 }

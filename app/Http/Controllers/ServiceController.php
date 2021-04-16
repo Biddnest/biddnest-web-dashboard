@@ -50,15 +50,15 @@ class ServiceController extends Controller
         if(!$service_exist)
             return Helper::response(false,"Incorrect Service Id");
 
-        $image_name = "subservice".$name."-".$id.".png";
+        $image_name = "service".$name."-".$id.".png";
         $imageman = new ImageManager(array('driver' => 'gd'));
-
-        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services");
-
 
         $update_data=  ["name"=>$name,
             "inventory_quantity_type"=>$inventory_quantity_type];
+
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services");
+
         $service=Service::where("id", $id)->update($update_data);
 
         if(!$service)

@@ -207,7 +207,7 @@
                 <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
 
                     @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                      <option value="{{$zone->id}}" @foreach($coupons->zones as $zones)  @if($zones->id == $zone->id) selected @endif @endforeach>{{ucfirst(trans($zone->name))}}</option>
+                      <option value="{{$zone->id}}" @if($coupons) @foreach($coupons->zones as $zones)  @if($zones->id == $zone->id) selected @endif @endforeach @endif>{{ucfirst(trans($zone->name))}}</option>
                     @endforeach
                 </select>
               </div>
@@ -235,7 +235,7 @@
               <div>
                 <select class="form-control br-5 select-box" name="orgnizations[]" multiple>
                     @foreach($organizations as $org)
-                      <option value="{{$org->id}}" @foreach($coupons->organizations as $organizations)  @if($organizations->id == $org->id) selected @endif @endforeach>{{ucfirst(trans($org->org_name))}}</option>
+                      <option value="{{$org->id}}" @if($coupons) @foreach($coupons->organizations as $organizations)  @if($organizations->id == $org->id) selected @endif @endforeach @endif>{{ucfirst(trans($org->org_name))}}</option>
                     @endforeach
                 </select>
               </div>
@@ -261,9 +261,11 @@
               <label>Select Users</label>
               <div>
                   <select class="form-control searchuser" name="users[]" multiple>
-                      @foreach($coupons->users as $user)
-                          <option value="{{$user->id}}" selected>{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</option>
-                      @endforeach
+                      @if($coupons)
+                          @foreach($coupons->users as $user)
+                              <option value="{{$user->id}}" selected>{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</option>
+                          @endforeach
+                      @endif
                   </select>
 
               </div>

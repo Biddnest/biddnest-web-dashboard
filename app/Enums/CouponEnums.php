@@ -11,7 +11,7 @@ class CouponEnums{
 //    public static $SCOPE = ["all"=>0,"custom"=>1];
     public static $DEDUCTION_SOURCE = ["admin"=>0,"vendor"=>1];
     public static $USER_SCOPE = ["all"=>0,"custom"=>1];
-    public static $STATUS = ["active"=>0,"inactive"=>1, "expired"=>2];
+    public static $STATUS = ["active"=>1,"inactive"=>0, "expired"=>2];
 
 }
 

@@ -323,7 +323,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        $valid= CouponController::checkIfValid($request->public_booking_id, $request->coupon_code);
+         $valid= CouponController::checkIfValid($request->public_booking_id, $request->coupon_code);
 
         if(is_array($valid))
             return Helper::response(true,"valid Coupon", $valid);

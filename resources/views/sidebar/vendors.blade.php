@@ -1,7 +1,7 @@
 <div class="modal-header pb-0 border-none">
     <h3 class="f-14">
         <ul class="nav nav-tabs pt-20 p-0" id="myTab" role="tablist">
-            <li class="nav-item" style="margin-left: -16px; margin-right: 40px;">
+            <li class="nav-item" style="margin-right: 40px;">
                 <a class="nav-link active pl-4 p-15" id="new-order-tab" data-toggle="tab" href="#vendor" role="tab"
                    aria-controls="home" aria-selected="true">Vendor Details</a>
             </li>

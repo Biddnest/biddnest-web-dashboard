@@ -749,5 +749,10 @@
             .Dashboard-lcards .table td, .Dashboard-lcards .table th {
                 vertical-align: middle;
             }
+
+            .modal-header .close {
+                padding: 1rem;
+                margin: -1rem 0rem -1rem auto;
+            }
         </style>
 

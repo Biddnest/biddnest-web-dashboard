@@ -9,6 +9,7 @@ use App\Enums\CommonEnums;
 use App\Enums\FaqEnums;
 use App\Enums\MailEnums;
 use App\Enums\NotificationEnums;
+use App\Enums\OrganizationEnums;
 use App\Enums\ReviewEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
@@ -70,7 +71,8 @@ class SettingsController extends Controller
                 "booking"=>[
                     "status"=>BookingEnums::$STATUS,
                     "booking_type"=>BookingEnums::$BOOKING_TYPE,
-                    "fetch_type"=>BookingEnums::$BOOKING_FETCH_TYPE
+                    "fetch_type"=>BookingEnums::$BOOKING_FETCH_TYPE,
+                    "service_type"=>OrganizationEnums::$SERVICES
                 ],
                 "bid"=>[
                     "status"=>BidEnums::$STATUS,

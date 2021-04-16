@@ -53,7 +53,7 @@ class ServiceController extends Controller
         $image_name = "subservice".$name."-".$id.".png";
         $imageman = new ImageManager(array('driver' => 'gd'));
 
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
             $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"services");
 
 

@@ -112,7 +112,8 @@
 
                                     </thead>
                                     <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
-                                    @foreach($subcategory->inventorymap as $inventory_key)
+                                       @if($subcategory->inventorymap)
+                                        @foreach($subcategory->inventorymap as $inventory_key)
                                         <tr class="inventory-snip">
                                             <td scope="row" class="text-left">
                                                 <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
@@ -150,6 +151,45 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                       @else
+                                           <tr class="inventory-snip">
+                                               <td scope="row" class="text-left">
+                                                   <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                                       <option value="">--Select--</option>
+                                                       @foreach($inventories as $inventory)
+                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" @if(isset($subcategory) && ($inventory->id == $inventory_key->inventory_id)) data-materials="{{$inventory_key->material}}" data-sizes="{{$inventory_key->size}}" selected @endif>{{$inventory->name}}</option>
+                                                       @endforeach
+                                                   </select>
+                                               </td>
+
+                                               <td class="">
+                                                   <select class="form-control br-5 material" name="inventories[][material]" required>
+                                                       <option value="">--Choose Inventory First--</option>
+                                                       @foreach(json_decode($inventory_key->meta->material, true) as $material)
+                                                           <option value="{{$material}}"  @if($inventory_key->material == $material) selected @endif>{{$material}}</option>
+                                                       @endforeach
+                                                   </select>
+                                               </td>
+
+                                               <td class="">
+                                                   <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
+                                                       <option value="">--Choose Inventory First--</option>
+                                                       @foreach(json_decode($inventory_key->meta->size, true) as $size)
+                                                           <option value="{{$size}}"  @if($inventory_key->size == $size) selected @endif>{{$size}}</option>
+                                                       @endforeach
+                                                   </select>
+                                               </td>
+
+                                               <td class="" style="width: 20%;">
+                                                   <input class="form-control br-5" type="number" name="inventories[][quantity]" value="{{$inventory_key->quantity}}" required>
+                                               </td>
+
+                                               <td>
+                                                   <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                                               </td>
+                                           </tr>
+                                       @endif
+
                                     </tbody>
                                 </table>
                             </div>

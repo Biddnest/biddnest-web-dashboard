@@ -362,7 +362,7 @@ class OrganisationController extends Controller
         if(!$data['password'])
             $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         else
-            $password = $data['password'];
+            $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
         $vendor = new Vendor;
         $image =$data['image'];
@@ -410,7 +410,7 @@ class OrganisationController extends Controller
         if(!$data['password'])
             $password=$exist['password'];
         else
-            $password = $data['password'];
+            $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
         $update_data =[
             "fname"=>$data['fname'],

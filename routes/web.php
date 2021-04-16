@@ -229,6 +229,7 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('sidebar')->group(function(){
         Route::get('/booking/{id}',[WebController::class,'sidebar_booking'])->name('sidebar.booking');
+        Route::get('/vendors/{id}',[WebController::class,'sidebar_vendors'])->name('sidebar.vendors');
     });
 
 

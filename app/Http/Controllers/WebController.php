@@ -134,6 +134,17 @@ class WebController extends Controller
         return view('vendor.vendor',['vendors'=>$vendors, 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
     }
 
+    public function sidebar_vendors(Request $request)
+    {
+        $vendor = Organization::where("id", $request->id)->with('vendor')->first();
+    }
+
+    public function vendorsDetails()
+    {
+
+        return view('vendor.vendordetails');
+    }
+
     public function createOnboardVendors()
     {
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
@@ -167,12 +178,6 @@ class WebController extends Controller
     {
         $bank=Org_kyc::where("organization_id", $request->id)->first();
         return view('vendor.onboardbank', ['bank'=>$bank, 'id'=>$request->id]);
-    }
-
-    public function vendorsDetails()
-    {
-
-        return view('vendor.vendordetails');
     }
 
     public function leadVendors()

@@ -109,10 +109,10 @@ class PaymentController extends Controller
 
             Booking::where(["id"=>$order_id_exist->booking_id])
                                 ->update([
-                                    "status"=>BookingEnums::$STATUS['driver_assigned'],
+                                    "status"=>BookingEnums::$STATUS['pending_driver_assign'],
                                     "meta"=>$meta
                                 ]);
-            $status=BookingStatus::where(['booking_id'=>$order_id_exist->booking_id, 'status'=>BookingEnums::$STATUS['driver_assigned']])->first();
+            $status=BookingStatus::where(['booking_id'=>$order_id_exist->booking_id, 'status'=>BookingEnums::$STATUS['pending_driver_assign']])->first();
             if(!$status)
             {
                 $result_status = BookingsController::statusChange($order_id_exist->booking_id, BookingEnums::$STATUS['awaiting_pickup']);
@@ -179,7 +179,7 @@ class PaymentController extends Controller
 
         Booking::where(["id"=>$order_exist->booking_id])
                 ->update([
-                    "status"=>BookingEnums::$STATUS['driver_assigned'],
+                    "status"=>BookingEnums::$STATUS['pending_driver_assign'],
                     "meta"=>$meta
                 ]);
 
@@ -188,7 +188,7 @@ class PaymentController extends Controller
         // $bookingstatus->status=BookingEnums::$STATUS['awaiting_pickup'];
         // $result_status = $bookingstatus->save();
 
-        $result_status = BookingsController::statusChange($order_exist->booking_id, BookingEnums::$STATUS['driver_assigned']);
+        $result_status = BookingsController::statusChange($order_exist->booking_id, BookingEnums::$STATUS['pending_driver_assign']);
 
         if($order_exist->coupon_code) {
             Coupon::where('code', $order_exist->coupon_code)->update([

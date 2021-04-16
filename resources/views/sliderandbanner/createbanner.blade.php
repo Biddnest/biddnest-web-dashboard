@@ -57,7 +57,7 @@
                                                               <div class="ml-1">
                                                                   <div class="file-upload">
                                                                       <input type="file" />
-                                                                      <input type="hidden" class="base-holder" name="image" value="{{$banner->image}}" required />
+                                                                      <input type="hidden" class="base-holder" name="banners[][image]" value="{{$banner->image}}" required />
                                                                       <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                                           UPLOAD IMAGE
                                                                       </button>
@@ -170,9 +170,6 @@
     <script type="text/html" id="banner-form">
 
         <div class="d-flex row p-20 banner-form-wrapper relative">
-            <span class="closer" data-parent=".banner-form-wrapper">
-                Remove
-            </span>
             <div class="col-lg-6">
                 <p class="img-label">Image</p>
                 <div class="upload-section p-20 pt-0">
@@ -191,6 +188,11 @@
                         <p class="text-black">Max File size: 1MB</p>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-6 text-right">
+
+                <a href="#0" class="btn bg-danger closer text-white" data-parent=".banner-form-wrapper">Delete</a>
+                <a class="btn bg-primary dragger text-white" style="cursor: move;">Drag & Reorder</a>
             </div>
 
             <div class="col-lg-6">

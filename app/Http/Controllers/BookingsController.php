@@ -598,7 +598,7 @@ class BookingsController extends Controller
 
         // $bookingstatus = new BookingStatus;
         // $bookingstatus->booking_id = $assign_driver->id;
-        // $bookingstatus->status=BookingEnums::$STATUS['driver_assigned'];
+        // $bookingstatus->status=BookingEnums::$STATUS['pending_driver_assign'];
         // $result_status = $bookingstatus->save();
 
         $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['awaiting_pickup']);
@@ -608,7 +608,7 @@ class BookingsController extends Controller
             NotificationController::sendTo("user", [$assign_driver->user_id], "Driver has been assigned for your movement.", "Tap to view details.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $assign_driver->public_booking_id,
-                "booking_status" => BookingEnums::$STATUS['driver_assigned']
+                "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
             ]);
 
         })->afterResponse();

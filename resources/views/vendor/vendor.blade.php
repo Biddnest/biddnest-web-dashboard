@@ -119,7 +119,7 @@
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                     @foreach($vendors as $vendor)
-                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>75]) }}">
+                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>$vendor->id]) }}">
                                                             <td scope="row">
                                                                 @if(isset($vendor->vendor))
                                                                 {{ucfirst(trans($vendor->vendor->fname))}} {{ucfirst(trans($vendor->vendor->lname))}}

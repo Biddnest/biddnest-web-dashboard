@@ -13,6 +13,7 @@ use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Org_kyc;
+use App\Models\Payout;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
@@ -136,15 +137,21 @@ class WebController extends Controller
 
     public function sidebar_vendors(Request $request)
     {
-        $vendor = Organization::where("id", $request->id)->with('vendor')->first();
-        return view('sidebar.vendors', ['organization'=>$vendor]);
-
+        $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')->first();
+        $branch = Organization::where("parent_org_id", $request->id)->count();
+        $payouts = Payout::where("organization_id", $request->id)->get();
+        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts]);
     }
 
-    public function vendorsDetails()
+    public function vendorsDetails(Request $request)
     {
-
-        return view('vendor.vendordetails');
+        $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')
+            ->with(['vendors'=>function($query){
+                $query->where('user_role', VendorEnums::$ROLES['driver']);
+            }])->first();
+        $branch = Organization::where("parent_org_id", $request->id)->count();
+        $payouts = Payout::where("organization_id", $request->id)->get();
+        return view('vendor.vendordetails', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts]);
     }
 
     public function createOnboardVendors()
@@ -264,6 +271,12 @@ class WebController extends Controller
         $active_coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $inactive_coupons = Coupon::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
         return view('coupons.coupons',["coupons"=>$coupons, 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
+    }
+
+    public function sidebar_coupons(Request $request)
+    {
+        $coupons = Coupon::where(["id"=>$request->id])->with('zones')->with('payment')->first();
+        return view('sidebar.coupons', ['coupons'=>$coupons]);
     }
 
     public function createCoupons(Request $request)

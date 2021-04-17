@@ -21,4 +21,9 @@ class Coupon extends Model
     public function users(){
         return $this->hasManyThrough(User::class, CouponUser::class,"user_id","id","id","coupon_id");
     }
+
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

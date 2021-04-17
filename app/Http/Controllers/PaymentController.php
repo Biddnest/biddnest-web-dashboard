@@ -65,6 +65,7 @@ class PaymentController extends Controller
             ->update([
                     'discount_amount'=>$discount_value,
                     'coupon_code' => $coupon_code,
+                    'coupon_id' => Coupon::where("code", $coupon_code)->pluck('id')[0],
                     'tax'=> $tax,
                     'rzp_order_id'=>$order_id ,
                     'grand_total'=>$grand_total,

@@ -141,7 +141,7 @@ Route::prefix('admin')->group(function () {
 
         Route::prefix('vendors')->group(function () {
             Route::get('/',[WebController::class,'vendors'])->name("vendors");
-            Route::get('/details',[WebController::class,'vendorsDetails'])->name("vendor-details");
+            Route::get('/{id}/details',[WebController::class,'vendorsDetails'])->name("vendor-details");
             Route::get('/lead',[WebController::class,'leadVendors'])->name("lead-vendors");
             Route::get('/pending',[WebController::class,'pendingVendors'])->name("pending-vendors");
             Route::get('/verified',[WebController::class,'verifiedVendors'])->name("verified-vendors");
@@ -230,6 +230,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('sidebar')->group(function(){
         Route::get('/booking/{id}',[WebController::class,'sidebar_booking'])->name('sidebar.booking');
         Route::get('/vendors/{id}',[WebController::class,'sidebar_vendors'])->name('sidebar.vendors');
+        Route::get('/coupons/{id}',[WebController::class,'sidebar_coupons'])->name('sidebar.coupon');
     });
 
 

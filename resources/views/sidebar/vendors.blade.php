@@ -26,9 +26,9 @@
                 <div class="col-lg-6 align-items-center">
                     <h1 class="f-14  bold">Vendor Name</h1>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">Mohan Kumar</h1>
-                    <i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i>
+                <div class="col-lg-6 d-flex justify-content-between align-items-center edit">
+                    <h1 class="side-popup-content">{{ucfirst(trans($organization->admin->fname))}} {{ucfirst(trans($organization->admin->lname))}}</h1>
+                    <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i></a>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                     <h1 class="f-14  bold">Org Name</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">Wayne Pvt Ltd</h1>
+                    <h1 class="side-popup-content">{{ucfirst(trans($organization->org_name))}} {{ucfirst(trans($organization->org_type))}}</h1>
 
 
                 </div>
@@ -47,7 +47,7 @@
                     <h1 class="f-14  bold">Phone Number</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">+91 - 9725364758</h1>
+                    <h1 class="side-popup-content">+91 - {{$organization->phone}}</h1>
                 </div>
             </div>
             <div class="row d-flex pb-3 pl-3">
@@ -55,7 +55,7 @@
                     <h1 class="f-14  bold">Alt. Phone Number</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">+91 - 9725364798</h1>
+                    <h1 class="side-popup-content">+91 - {{json_decode($organization->meta, true)['secondory_phone']}}</h1>
                 </div>
             </div>
             <div class="row d-flex pb-3 pl-3">
@@ -63,7 +63,7 @@
                     <h1 class="f-14  bold">City</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">Bengaluru</h1>
+                    <h1 class="side-popup-content">{{$organization->city}}</h1>
                 </div>
             </div>
             <div class="row d-flex pb-3 pl-3">
@@ -71,7 +71,11 @@
                     <h1 class="f-14  bold">Status</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <div class="status-badge light-bg">In Process</div>
+                    @foreach(\App\Enums\OrganizationEnums::$STATUS as $key=>$status)
+                        @if($status == $organization->status)
+                            <div class="status-badge light-bg">{{ucfirst(trans($key))}}</div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="row d-flex pb-4 pl-3">
@@ -79,7 +83,7 @@
                     <h1 class="f-14  bold">Zone</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">Bengaluru Urban</h1>
+                    <h1 class="side-popup-content">{{ucfirst(trans($organization->zone->name))}}</h1>
                 </div>
             </div>
             <div class="row pb-3 pl-3">
@@ -87,14 +91,14 @@
                     <h1 class="f-14  bold">Vendor Revenue Trend</h1>
                 </div>
                 <div class="mt-3 ml-3">
-                    <img src="assets/images/graph/graph.svg" alt="">
+                    <img src="{{asset('static/images/graph/graph.svg')}}" alt="">
                 </div>
             </div>
 
 
             <div class="d-flex justify-content-center p-20">
                 <div class="">
-                    <a class="white-text p-10" href="vendor-details.html">
+                    <a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}">
                         <button class="btn theme-bg white-text my-0" style="width: 127px;
                                     border-radius: 6px;">View More</button>
                     </a>
@@ -112,9 +116,13 @@
                 <div class="col-lg-6 align-items-center">
                     <h1 class="f-14  bold">Service Type</h1>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">Economic</h1>
-                    <i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i>
+                <div class="col-lg-6 d-flex justify-content-between align-items-center edit">
+                    @foreach(\App\Enums\OrganizationEnums::$SERVICES as $key=>$services)
+                        @if($organization->service_type == $services)
+                            <h1 class="side-popup-content">{{ucfirst(trans($key))}}</h1>
+                        @endif
+                    @endforeach
+                    <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i></a>
                 </div>
             </div>
 
@@ -123,7 +131,11 @@
                     <h1 class="f-14  bold">Services Provided</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">Residential</h1>
+                    <h1 class="side-popup-content">
+                        @foreach($organization->services as $services)
+                            {{ucfirst(trans($services->name))}},
+                        @endforeach
+                    </h1>
 
 
                 </div>
@@ -133,7 +145,7 @@
                     <h1 class="f-14  bold">Alt. Phone Number</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">+91 - 9725364798</h1>
+                    <h1 class="side-popup-content">+91 - {{json_decode($organization->meta, true)['secondory_phone']}}</h1>
                 </div>
             </div>
             <div class="row d-flex pb-3 pl-3">
@@ -141,7 +153,7 @@
                     <h1 class="f-14  bold">No of branches</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">2</h1>
+                    <h1 class="side-popup-content">{{$branch}}</h1>
                 </div>
             </div>
 
@@ -163,42 +175,32 @@
                 </tr>
                 </thead>
                 <tbody class="mtop-20">
-                <tr class="cursor-pointer">
-                    <td scope="row" class="text-left">
-                        <p style="text-decoration: underline;margin: 0;">P12345</p>
-                    </td>
-                    <td class="">
-                        <div class="status-badge green-bg">Completed</div>
-                    </td>
-                    <td class="text-center">23 Dec 20</td>
-
-                </tr>
-                <tr class="cursor-pointer">
-                    <td scope="row" class="text-left">
-                        <p style="text-decoration: underline;margin: 0;" >P12346</p>
-                    </td>
-                    <td class="">
-                        <div class="status-badge ">Pending</div>
-                    </td>
-                    <td class="text-center">23 Dec 20</td>
-
-                </tr>
-                <tr class="cursor-pointer" style="border-bottom: 1px solid #dee2e6;">
-                    <td scope="row" class="text-left">
-                        <p style="text-decoration: underline;margin: 0;">P12347</p>
-                    </td>
-                    <td class="">
-                        <div class="status-badge light-bg">Processing</div>
-                    </td>
-                    <td class="text-center">26 Dec 20</td>
-                </tr>
-
+                    @if(!$payouts)
+                        <tr class="cursor-pointer">
+                            <p style="text-decoration: underline;margin: 0;"> There is no any Payout Added</p>
+                        </tr>
+                    @endif
+                    @foreach($payouts as $payout)
+                        <tr class="cursor-pointer">
+                            <td scope="row" class="text-left">
+                                <p style="text-decoration: underline;margin: 0;">{{$payout->public_payout_id}}</p>
+                            </td>
+                            <td class="">
+                                @foreach(\App\Enums\PayoutEnums::$STATUS as $key=>$status)
+                                    @if($status == $payout->status)
+                                        <div class="status-badge green-bg">{{ucfirst(trans($key))}}</div>
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td class="text-center">{{date('d M y', strtotime($payout->dispatch_at))}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 
             <div class="d-flex   justify-content-center p-20">
 
-                <div class=""><a class="white-text p-10" href="vendor-details.html">
+                <div class=""><a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}">
                         <button class="btn theme-bg white-text my-0" style="width: 127px;
                                 border-radius: 6px;">View More</button>
                     </a></div>

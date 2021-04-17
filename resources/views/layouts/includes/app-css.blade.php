@@ -754,5 +754,11 @@
                 padding: 1rem;
                 margin: -1rem 0rem -1rem auto;
             }
+            .modal-body{
+                margin-bottom: 50px;
+            }
+            .edit{
+                padding-right: 25px;
+            }
         </style>
 

@@ -4,49 +4,41 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="cupons">
      <div class="d-flex  flex-row justify-content-between vertical-center">
-                                <h3 class="page-head text-left p-4 f-20 theme-text">Coupons & offers </h3>
-                                <div class="mr-20">
-                                    <a href="{{route('create-coupons')}}">
-                                        <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
-                                            aria-hidden="true"></i>CREATE NEW</button>
-                                    </a>
-
-                                </div>
+         <h3 class="page-head text-left p-4 f-20 theme-text">Coupons & offers </h3>
+         <div class="mr-20">
+             <a href="{{route('create-coupons')}}">
+                 <button class="btn theme-bg white-text">
+                     <i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE NEW
+                 </button>
+             </a>
+         </div>
     </div>
     <div class="d-flex  flex-row justify-content-between">
-                                <div class="page-head text-left  pt-0 pb-0 p-2">
-                                  <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page">Coupons & offers</li>
-                                      <li class="breadcrumb-item"><a href="#"> Manage Coupons</a></li>
-
-                                    </ol>
-                                  </nav>
-
-
-                                </div>
-
+        <div class="page-head text-left  pt-0 pb-0 p-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Coupons & offers</li>
+                    <li class="breadcrumb-item"><a href="#"> Manage Coupons</a></li>
+                </ol>
+            </nav>
+        </div>
     </div>
 
     <div class="vender-all-details">
-                                <div class="simple-card min-width-30">
-                                    <p>TOTAL NO OF COUPONS</p>
-                                    <h1>{{$total_coupons}}</h1>
-                                </div>
-                                <div class="simple-card min-width-30">
-                                    <p>ACTIVE COUPONS</p>
-                                    <h1>{{$active_coupons}}</h1>
-                                </div>
-                                <div class="simple-card min-width-30">
-                                    <p>INACTIVE COUPONS</p>
-                                    <h1>{{$inactive_coupons}}</h1>
-                                </div>
-
-
+        <div class="simple-card min-width-30">
+            <p>TOTAL NO OF COUPONS</p>
+            <h1>{{$total_coupons}}</h1>
+        </div>
+        <div class="simple-card min-width-30">
+            <p>ACTIVE COUPONS</p>
+            <h1>{{$active_coupons}}</h1>
+        </div>
+        <div class="simple-card min-width-30">
+            <p>INACTIVE COUPONS</p>
+            <h1>{{$inactive_coupons}}</h1>
+        </div>
     </div>
-                            <!-- Dashboard cards -->
-
-
+    <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
         <div class="col-sm-12">
             <div class="card  h-auto p-0 pt-10">
@@ -133,9 +125,9 @@
                                                 </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($coupons as $coupon)
-                                <tr class="tb-border cursor-pointer coup_{{$coupon->id}}">
-                                    <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$coupon->name}}</td>
-                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                <tr class="tb-border cursor-pointer coup_{{$coupon->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.coupon',['id'=>$coupon->id]) }}">
+                                    <td scope="row">{{$coupon->name}}</td>
+                                    <td>
                                         @switch($coupon->type)
                                             @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
                                                 Fixed
@@ -149,7 +141,7 @@
                                                 Unknown
                                         @endswitch
                                     </td>
-                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <td>
                                         @switch($coupon->type)
                                             @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
                                                 &#8377; {{$coupon->discount_amount}}
@@ -163,15 +155,15 @@
                                                 Unknown
                                         @endswitch
                                     </td>
-                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <td>
                                         <div class="d-flex justify-content-center vertical-center">
                                             <div class="progress">
                                                 <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$coupon->desc}}</td>
-                                    <td class="" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <td >{{$coupon->desc}}</td>
+                                    <td >
                                         @switch($coupon->status)
                                             @case(\App\Enums\CouponEnums::$STATUS['active'])
                                                 <span class="status-badge green-bg  text-center td-padding">Active</span>

@@ -14,6 +14,7 @@ use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Org_kyc;
 use App\Models\Payout;
+use App\Models\Review;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
@@ -114,8 +115,11 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
+        $total_user =User::where("deleted", CommonEnums::$NO)->count();
+        $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
+        $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
         return view('customer.customer',[
-            "users"=>User::orderBy("id","DESC")->paginate(15)
+            "users"=>User::orderBy("id","DESC")->paginate(15), "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user
         ]);
     }
 
@@ -372,7 +376,13 @@ class WebController extends Controller
 
     public function review()
     {
-        return view('reviewandratings.review');
+        $review=Review::where("deleted", CommonEnums::$NO)->with(['Booking'=>function($query){
+            $query->with('organization');
+        }])->with('user')->orderBy("id","DESC")->paginate(15);
+        $total_review=Review::where("deleted", CommonEnums::$NO)->count();
+        $active_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
+        $inactive_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
+        return view('reviewandratings.review', ['review'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
     }
 
     public function createReview()

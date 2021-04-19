@@ -33,7 +33,7 @@ class PaymentController extends Controller
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $discount_value = 0.00;
-        /*if (($coupon_code && trim($coupon_code)) != "") {
+        if ($coupon_code && trim($coupon_code) != "") {
             $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
             if (!is_array($coupon_valid)) {
                 $discount_value = 0.00;
@@ -41,7 +41,7 @@ class PaymentController extends Controller
             } else {
                 $discount_value = $coupon_valid['coupon']['discount'];
             }
-        }*/
+        }
 
             /*tax is always taken as percentage*/
         $grand_total = (float) $booking_exist->payment->sub_total + (float)$booking_exist->payment->other_charges - (float)$discount_value;
@@ -60,17 +60,20 @@ class PaymentController extends Controller
         else
             $order_id = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total)['id'];
 
+        $update_data =[
+            'discount_amount'=>$discount_value,
+            'coupon_code' => $coupon_code,
+            'tax'=> $tax,
+            'rzp_order_id'=>$order_id ,
+            'grand_total'=>$grand_total,
+            'meta'=>json_encode($meta)
+        ];
+
+        if($coupon_code && trim($coupon_code) != "")
+            $update_data['coupon_id'] = Coupon::where("code", $coupon_code)->pluck('id')[0]
 
         $payment_result = Payment::where('id', $booking_exist->payment->id)
-            ->update([
-                    'discount_amount'=>$discount_value,
-                    'coupon_code' => $coupon_code,
-                    'coupon_id' => Coupon::where("code", $coupon_code)->pluck('id')[0],
-                    'tax'=> $tax,
-                    'rzp_order_id'=>$order_id ,
-                    'grand_total'=>$grand_total,
-                    'meta'=>json_encode($meta)
-            ]);
+            ->update($update_data);
 
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");

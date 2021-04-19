@@ -41,7 +41,7 @@
                                                  <a href="{{route('edit-testimonials', ['id'=>$testimonial->id])}}">
                                                      <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i>
                                                  </a>
-                                                 <a href="#" class="delete" data-parent=".test_{{$testimonial->id}}" data-confirm="Are you sure, you want delete this Testimonial permenently? You won't be able to undo this." data-url="{{route('testimonial_delete',['id'=>$testimonial->id])}}">
+                                                 <a href="#" class="delete" data-parent=".test_{{$testimonial->id}}" data-confirm="Are you sure, you want delete this Testimonial permanently? You won't be able to undo this." data-url="{{route('testimonial_delete',['id'=>$testimonial->id])}}">
                                                      <i class="fa fa-trash p-1" aria-hidden="true"></i>
                                                  </a>
                                              </div>

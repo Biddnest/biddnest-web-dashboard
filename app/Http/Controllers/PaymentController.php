@@ -33,7 +33,7 @@ class PaymentController extends Controller
             return Helper::response(false, "Payment data not found in database. This is a critical error. Please contact the admin.");
 
         $discount_value = 0.00;
-        if (($coupon_code && trim($coupon_code)) != "") {
+        /*if (($coupon_code && trim($coupon_code)) != "") {
             $coupon_valid = CouponController::checkIfValid($public_booking_id, $coupon_code);
             if (!is_array($coupon_valid)) {
                 $discount_value = 0.00;
@@ -41,7 +41,7 @@ class PaymentController extends Controller
             } else {
                 $discount_value = $coupon_valid['coupon']['discount'];
             }
-        }
+        }*/
 
             /*tax is always taken as percentage*/
         $grand_total = (float) $booking_exist->payment->sub_total + (float)$booking_exist->payment->other_charges - (float)$discount_value;

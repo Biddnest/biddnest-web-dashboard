@@ -103,7 +103,23 @@
     {{--                                <td>Payment for BLR movers</td>--}}
                                     <td>{{$payout->organization_id}}</td>
                                     <td>
-                                        <div class="status-badge green-bg">Completed</div>
+                                        @switch($payout->status)
+                                            @case(\App\Enums\PayoutEnums::$STATUS['scheduled'])
+                                            <span class="status-badge green-bg">Scheduled</span>
+                                            @break
+
+                                            @case(\App\Enums\PayoutEnums::$STATUS['suspended'])
+                                            <span class="status-badge red-bg">Suspended</span>
+                                            @break
+
+                                            @case(\App\Enums\PayoutEnums::$STATUS['transferred'])
+                                            <span class="status-badge green-bg">Transferred</span>
+                                            @break
+
+                                            @case(\App\Enums\PayoutEnums::$STATUS['processing'])
+                                            <span class="status-badge green-bg">Processing</span>
+                                            @break
+                                        @endswitch
                                     </td>
                                     <td>{{date('d M y', strtotime($payout->dispatch_at))}}</td>
                                     <td>{{$payout->commission_percentage}}%</td>

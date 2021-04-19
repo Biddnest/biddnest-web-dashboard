@@ -184,16 +184,19 @@ Route::prefix('admin')->group(function () {
 
         Route::prefix('slider')->group(function () {
             Route::get('/',[WebController::class,'slider'])->name("slider");
+            Route::get('/testimonials',[WebController::class,'testimonials'])->name("testimonials");
+            Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
+
             Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
             Route::get('/{id}/banner', [WebController::class, 'manageBanner'])->name("create-banner");
             Route::get('/{id}', [WebController::class, 'editSlider'])->name("edit-slider");
 
-            Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
+
             Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
             Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
             Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
 
-            Route::get('/testimonials',[WebController::class,'testimonials'])->name("testimonials");
+
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
         });
 

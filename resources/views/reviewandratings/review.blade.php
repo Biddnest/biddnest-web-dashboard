@@ -103,8 +103,8 @@
                             @foreach($reviews as $review)
                                 <tr class="tb-border cursor-pointer">
                                     <td scope="row">{{$review->booking->public_booking_id}}</td>
-                                    <td>{{$review->user->fname}} {{$review->user->lname}}</td>
-                                    <td>{{$review->booking->organization->org_name}} {{$review->booking->organization->org_type}}</td>
+                                    <td>{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</td>
+                                    <td>{{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}</td>
                                     <td>{{$review->desc}}</td>
                                     <td class="">
                                         <div class="status-badge light-bg">

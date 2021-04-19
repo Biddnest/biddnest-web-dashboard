@@ -7,8 +7,10 @@ use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
+use App\Enums\TicketEnums;
 use App\Enums\VendorEnums;
 use App\Enums\OrganizationEnums;
+use App\Models\Admin;
 use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\Coupon;
@@ -20,6 +22,8 @@ use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
 use App\Models\Organization;
+use App\Models\Testimonials;
+use App\Models\Ticket;
 use App\Models\Vendor;
 use App\Models\Zone;
 use Illuminate\Http\Request;
@@ -367,7 +371,8 @@ class WebController extends Controller
 
     public function testimonials()
     {
-        return view('sliderandbanner.testimonials');
+        $testimonials=Testimonials::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('sliderandbanner.testimonials', ['testimonials'=>$testimonials]);
     }
 
     public function createTestimonials()
@@ -379,7 +384,7 @@ class WebController extends Controller
     {
         $review=Review::where("deleted", CommonEnums::$NO)->with(['Booking'=>function($query){
             $query->with('organization');
-        }])->with('user')->orderBy("id","DESC")->paginate(15);
+        }])->with('user')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
         $total_review=Review::where("deleted", CommonEnums::$NO)->count();
         $active_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
@@ -393,7 +398,10 @@ class WebController extends Controller
 
     public function complaints()
     {
-        return view('reviewandratings.complaints');
+        $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->with('user')->with('booking')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        $resolved_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['resolved']])->count();
+        $open_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['open']])->count();
+        return view('reviewandratings.complaints', ['complaints'=>$complaints, 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
     }
 
     public function createComplaints()
@@ -403,7 +411,8 @@ class WebController extends Controller
 
     public function serviceRequests()
     {
-        return view('reviewandratings.servicerequests');
+        $service=Ticket::where("type", TicketEnums::$TYPE['service_request'])->with('vendor')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('reviewandratings.servicerequests', ['services'=>$service]);
     }
 
     public function createService()
@@ -431,7 +440,8 @@ class WebController extends Controller
 
     public function users()
     {
-        return view('users.users');
+        $users=Admin::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->with('zones')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('users.users', ['users'=>$users]);
     }
 
     public function createUsers()

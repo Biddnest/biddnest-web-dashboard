@@ -715,4 +715,44 @@ class Route extends Controller
 //         return $request->query;
          return UserController::search($request);
      }
+
+     public function testimonial_add(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'name'=>'required|string',
+             'designation'=>'required|string',
+             'image'=>'required',
+             'heading'=>'required|string',
+             'desc'=>'required|string'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc);
+     }
+
+    public function testimonial_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required|string',
+            'designation'=>'required|string',
+            'image'=>'required',
+            'heading'=>'required|string',
+            'desc'=>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TestimonialController::update($request->id, $request->name, $request->designation, $request->image, $request->heading, $request->desc);
+    }
+
+    public function testimonial_delete(Request $request)
+    {
+        return TestimonialController::deletedelete($request->id);
+    }
+
+
 }

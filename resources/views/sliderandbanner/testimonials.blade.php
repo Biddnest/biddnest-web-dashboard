@@ -28,7 +28,7 @@
              <div class="card h-auto p-0 pt-10">
                  <div class="row p-3 no-gutters d-flex">
                      @foreach($testimonials as $testimonial)
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 test_{{$testimonial->id}}">
                              <div class="card testimonials-card">
                                  <div class="card-horizontal">
                                      <figure class="mt-4 w-80">
@@ -36,10 +36,14 @@
                                      </figure>
                                      <div class="card-body pl-2">
                                          <div class="d-flex justify-content-between">
-                                             <h4 class="card-title f-18 theme-text">“{{$testimonial->ratings}}”</h4>
+                                             <h4 class="card-title f-18 theme-text">“{{$testimonial->heading}}”</h4>
                                              <div class="theme-text">
-                                                 <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i>
-                                                 <i class="fa fa-trash p-1" aria-hidden="true"></i></i>
+                                                 <a href="{{route('edit-testimonials', ['id'=>$testimonial->id])}}">
+                                                     <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i>
+                                                 </a>
+                                                 <a href="#" class="delete" data-parent=".test_{{$testimonial->id}}" data-confirm="Are you sure, you want delete this Testimonial permenently? You won't be able to undo this." data-url="{{route('testimonial_delete',['id'=>$testimonial->id])}}">
+                                                     <i class="fa fa-trash p-1" aria-hidden="true"></i>
+                                                 </a>
                                              </div>
                                          </div>
                                          <p class="card-text theme-text f-12">

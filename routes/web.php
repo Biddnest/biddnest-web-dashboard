@@ -100,6 +100,10 @@ Route::prefix('web/api')->group(function () {
     Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
     Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
 
+    Route::post('/testimonial',[Router::class,'testimonial_add'])->name("testimonial_add");
+    Route::put('/testimonial',[Router::class,'testimonial_edit'])->name("testimonial_edit");
+    Route::delete('/testimonial/{id}',[Router::class,'testimonial_delete'])->name("testimonial_delete");
+
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
@@ -198,6 +202,7 @@ Route::prefix('admin')->group(function () {
 
 
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
+            Route::get('/testimonials/{id}/edit',[WebController::class,'createTestimonials'])->name("edit-testimonials");
         });
 
         Route::prefix('review')->group(function () {

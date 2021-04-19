@@ -375,9 +375,10 @@ class WebController extends Controller
         return view('sliderandbanner.testimonials', ['testimonials'=>$testimonials]);
     }
 
-    public function createTestimonials()
+    public function createTestimonials(Request $request)
     {
-        return view('sliderandbanner.createtestimonials');
+        $testimonials=Testimonials::where("id", $request->id)->first();
+        return view('sliderandbanner.createtestimonials', ['testimonials'=>$testimonials]);
     }
 
     public function review()
@@ -391,7 +392,7 @@ class WebController extends Controller
         return view('reviewandratings.review', ['reviews'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
     }
 
-    public function createReview()
+    public function createReview(Request $request)
     {
         return view('reviewandratings.createreview');
     }

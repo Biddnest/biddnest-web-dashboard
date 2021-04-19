@@ -97,32 +97,34 @@
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-13">
-                            <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                <td scope="row">{{$payout->public_payout_id}}</td>
-{{--                                <td>Payment for BLR movers</td>--}}
-                                <td>{{$payout->organization_id}}</td>
-                                <td>
-                                    <div class="status-badge green-bg">Completed</div>
-                                </td>
-                                <td>{{date('d M y', strtotime($payout->dispatch_at))}}</td>
-                                <td>{{$payout->commission_percentage}}%</td>
-                                <td class="">₹{{$payout->commission_percentage}}
-                                </td><td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
-                            </tr>
+                            @foreach($payouts as $payout)
+                                <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <td scope="row">{{$payout->public_payout_id}}</td>
+    {{--                                <td>Payment for BLR movers</td>--}}
+                                    <td>{{$payout->organization_id}}</td>
+                                    <td>
+                                        <div class="status-badge green-bg">Completed</div>
+                                    </td>
+                                    <td>{{date('d M y', strtotime($payout->dispatch_at))}}</td>
+                                    <td>{{$payout->commission_percentage}}%</td>
+                                    <td class="">₹{{$payout->commission_percentage}}
+                                    </td><td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>
-                            <li class="digit">{{$payout->currentPage()}}</li>
+                            <li class="digit">{{$payouts->currentPage()}}</li>
                             <li class="label">of</li>
-                            <li class="digit">{{$payout->lastPage()}}</li>
-                            @if(!$payout->onFirstPage())
-                                <li class="button"><a href="{{$payout->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                            <li class="digit">{{$payouts->lastPage()}}</li>
+                            @if(!$payouts->onFirstPage())
+                                <li class="button"><a href="{{$payouts->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
                                 </li>
                             @endif
-                            @if($payout->currentPage() != $payout->lastPage())
-                                <li class="button"><a href="{{$payout->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                            @if($payouts->currentPage() != $payouts->lastPage())
+                                <li class="button"><a href="{{$payouts->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
                                 </li>
                             @endif
                         </ul>

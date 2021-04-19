@@ -379,11 +379,11 @@ class WebController extends Controller
     {
         $review=Review::where("deleted", CommonEnums::$NO)->with(['Booking'=>function($query){
             $query->with('organization');
-        }])->with('user')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        }])->with('user')->orderBy("id","DESC")->paginate(15);
         $total_review=Review::where("deleted", CommonEnums::$NO)->count();
         $active_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
-        return view('reviewandratings.review', ['review'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
+        return view('reviewandratings.review', ['reviews'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
     }
 
     public function createReview()
@@ -413,10 +413,10 @@ class WebController extends Controller
 
     public function vendorPayout()
     {
-        $payout =Payout::paginate(CommonEnums::$PAGE_LENGTH);
+        $payout =Payout::orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
         $scheduled_payout =Payout::where(["status"=>PayoutEnums::$STATUS['scheduled']])->count();
         $failed_payout =Payout::where(["status"=>PayoutEnums::$STATUS['suspended']])->count();
-        return view('vendorpayout.payout', ['payout'=>$payout, 'total_count'=>count($payout), 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
+        return view('vendorpayout.payout', ['payouts'=>$payout, 'total_count'=>count($payout), 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
     }
 
     public function createVendorPayout()

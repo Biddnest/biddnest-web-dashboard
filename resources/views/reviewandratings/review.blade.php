@@ -100,7 +100,7 @@
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
-                            @foreach($review as $review)
+                            @foreach($reviews as $review)
                                 <tr class="tb-border cursor-pointer">
                                     <td scope="row">{{$review->booking->public_booking_id}}</td>
                                     <td>{{$review->user->fname}} {{$review->user->lname}}</td>
@@ -147,15 +147,15 @@
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>
-                            <li class="digit">{{$review->currentPage()}}</li>
+                            <li class="digit">{{$reviews->currentPage()}}</li>
                             <li class="label">of</li>
-                            <li class="digit">{{$review->lastPage()}}</li>
-                            @if(!$review->onFirstPage())
-                                <li class="button"><a href="{{$review->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                            <li class="digit">{{$reviews->lastPage()}}</li>
+                            @if(!$reviews->onFirstPage())
+                                <li class="button"><a href="{{$reviews->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
                                 </li>
                             @endif
-                            @if($review->currentPage() != $review->lastPage())
-                                <li class="button"><a href="{{$review->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                            @if($reviews->currentPage() != $reviews->lastPage())
+                                <li class="button"><a href="{{$reviews->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
                                 </li>
                             @endif
                         </ul>

@@ -188,7 +188,7 @@ class BidController extends Controller
 
         $exist_bid = Bid::where("organization_id", $org_id)
                             ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
-                            ->where(["status"=>BidEnums::$STATUS['active']])
+                            ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
                             ->first();
         if(!$exist_bid)
             return Helper::response(false,"Not in active state");
@@ -210,7 +210,9 @@ class BidController extends Controller
 
         $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$data['man_power']['min'], "max_man_power"=>$data['man_power']['max']];
 
-        $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id'],"status"=>BidEnums::$STATUS['active']])->update([
+        $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id']])
+            ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
+            ->update([
             "vendor_id"=>$vendor_id,
             "bid_amount"=>$data['bid_amount'],
             "meta"=>json_encode($meta),

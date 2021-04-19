@@ -106,6 +106,10 @@
                                             <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
                                             @break
 
+                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                            <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
+                                            @break
+
                                             @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                             <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
                                             @break
@@ -419,6 +423,11 @@
                                                     <td class="text-center">Vendor Confirmed</td>
                                                     <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                <td class="text-center">Pendign Driver Assign</td>
+                                                <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                     <td class="text-center">Awaiting Pickup</td>

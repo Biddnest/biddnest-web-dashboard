@@ -112,6 +112,10 @@
                                             <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
                                             @break
 
+                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                            <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
+                                            @break
+
                                             @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                             <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
                                             @break

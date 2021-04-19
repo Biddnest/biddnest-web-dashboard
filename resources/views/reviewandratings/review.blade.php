@@ -116,11 +116,23 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
+                                        @php $ratings = 0; @endphp
+                                        @foreach(json_decode($review->ratings, true) as $rating)
+                                            @php $ratings += $rating['rating']; @endphp
+                                        @endforeach
+                                        @php $ratings = number_format($ratings/count(json_decode($review->ratings, true)), 2); @endphp
+                                        @for($star=$ratings; $star > 0; $star--)
+                                            @if($star < 1)
+                                                <i class="fa fa-star-half-o checked bg-yellow" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
+                                            @endif
+                                        @endfor
+                                        @php $blank_star = floor(5 - $ratings); @endphp
+
+                                        @for($star_o=$blank_star; $star_o >= 1; $star_o--)
+                                            <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
+                                        @endfor
                                     </td>
                                     <td>
                                         <a href="{{route('create-review')}}">
@@ -135,11 +147,17 @@
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>
-                            <li class="digit">1</li>
+                            <li class="digit">{{$review->currentPage()}}</li>
                             <li class="label">of</li>
-                            <li class="digit">20</li>
-                            <li class="button"><a href="#"><img src="{{asset('static/images/Backward.svg')}}"></a></li>
-                            <li class="button"><a href="#"><img src="{{asset('static/images/forward.svg')}}"></a></li>
+                            <li class="digit">{{$review->lastPage()}}</li>
+                            @if(!$review->onFirstPage())
+                                <li class="button"><a href="{{$review->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                </li>
+                            @endif
+                            @if($review->currentPage() != $review->lastPage())
+                                <li class="button"><a href="{{$review->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

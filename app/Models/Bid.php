@@ -28,4 +28,9 @@ class Bid extends Model
     {
         return $this->hasManyThrough(BookingInventory::class, Booking::class, 'id','booking_id', 'booking_id', 'id');
     }
+
+    public function vendor()
+    {
+        return $this->hasOne(Vendor::class);
+    }
 }

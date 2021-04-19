@@ -70,7 +70,7 @@ class PaymentController extends Controller
         ];
 
         if($coupon_code && trim($coupon_code) != "")
-            $update_data['coupon_id'] = Coupon::where("code", $coupon_code)->pluck('id')[0]
+            $update_data['coupon_id'] = Coupon::where("code", $coupon_code)->pluck('id')[0];
 
         $payment_result = Payment::where('id', $booking_exist->payment->id)
             ->update($update_data);

@@ -212,8 +212,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
             Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");
 
-            Route::get('/service-requests',[WebController::class,'serviceRequests'])->name("service-requests");
-            Route::get('/service-requests/create',[WebController::class,'createService'])->name("create-service");
+            Route::get('/tickets',[WebController::class,'serviceRequests'])->name("service-requests");
+            Route::get('/tickets/create',[WebController::class,'createService'])->name("create-service");
         });
 
         Route::prefix('payout')->group(function () {

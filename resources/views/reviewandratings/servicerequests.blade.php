@@ -106,6 +106,7 @@
                             <tr>
                                 <th scope="col">Service ID</th>
                                 <th scope="col">Vendor ID</th>
+                                <th scope="col">User ID</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Created by</th>
                                 <th scope="col">Description</th>
@@ -118,6 +119,7 @@
                                 <tr class="tb-border cursor-pointer">
                                     <td scope="row">{{$servic->id}}</td>
                                     <td>{{$servic->vendor_id}}</td>
+                                    <td>{{$servic->user_id}}</td>
                                     <td>{{date('d M y', strtotime($servic->created_at))}}</td>
                                     <td>@if($servic->vendor){{ucfirst(trans(json_decode($servic->vendor, true)['fname']))}} {{ucfirst(trans(json_decode($servic->vendor, true)['lname']))}}@endif</td>
                                     <td>{{ Illuminate\Support\Str::limit($servic->desc, 20) }}</td>

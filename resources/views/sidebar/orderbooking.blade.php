@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="theme-text f-14">
-                                       {{$booking->organization->name ?? 'Not Assigned'}}
+                                       {{$booking->organization->org_name ?? 'Not Assigned'}}
                                     </div>
                                 </div>
                                 <div class="col-sm-1">
@@ -218,7 +218,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="theme-text f-14">
-                                        {{$booking->driver->name ?? 'Not Assigned'}}
+                                        {{$booking->driver->fname ?? 'Not'}} {{$booking->driver->lname ?? 'Assigned'}}
                                     </div>
                                 </div>
 
@@ -394,34 +394,40 @@
                                     <tbody class="mtop-20">
 
                                     @foreach($booking->status_history as $status)
+
                                         <tr class="tb-border  cursor-pointer">
 
 
 
-                                            @switch($booking->status)
+                                            @switch($status->status)
                                                     @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                     <td class="text-center">Enquiry</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['placed'])
                                                     <td class="text-center">Placed</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['biding'])
                                                     <td class="text-center">Bidding</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
                                                     <td class="text-center">Rebidding</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                                    <td class="text-center">Vendor Confirmed</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class="text-center">Pending User Confirmation</td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                    <td class="text-center">Pending Driver Assign</td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                 @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
@@ -431,22 +437,22 @@
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                     <td class="text-center">Awaiting Pickup</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
                                                     <td class="text-center">In transit</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['completed'])
                                                     <td class="text-center">Delivered</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                                     <td class="text-center">Cancelled</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
                                                 @endswitch
                                         </tr>

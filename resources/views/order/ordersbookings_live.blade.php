@@ -112,9 +112,9 @@
                                             <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
                                             @break
 
-                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                    @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
                                             <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
-                                            @break
+                                    @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                             <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
@@ -135,8 +135,8 @@
                                     </td>
 
                                     <td class="no-toggle">
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell; right: 10px"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

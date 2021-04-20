@@ -494,9 +494,10 @@ class WebController extends Controller
         return view('users.users', ['users'=>$users]);
     }
 
-    public function createUsers()
+    public function createUsers(Request $request)
     {
-        return view('users.createusers');
+        $user=Admin::where("id", $request->id)->with('zones')->first();
+        return view('users.createusers', ['users'=>$user]);
     }
 
     public function detailsUsers()

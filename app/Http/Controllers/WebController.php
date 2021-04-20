@@ -355,16 +355,16 @@ class WebController extends Controller
         return view('zones.createzones', ['zones'=>$zone]);
     }
 
-    public function detailsZones()
-    {
-        return view('zones.detailszones');
-    }
-
     public function slider()
     {
         return view('sliderandbanner.slider',[
             "sliders"=>Slider::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
+    }
+
+    public function sidebar_slider(Request $request)
+    {
+
     }
 
     public function createSlider()

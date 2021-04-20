@@ -103,8 +103,26 @@ class WebController extends Controller
         ]);
     }
 
-    public function orderDetails()
+    public function orderDetailsCustomer(Request $request)
     {
+        $booking = Booking::with('customer','vendor')->find($request->id);
+        return view('order.orderdetails');
+    }
+
+    public function orderDetailsVendor(Request $request)
+    {
+        $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
+        return view('order.orderdetails');
+    }
+    public function orderDetailsPayment(Request $request)
+    {
+        $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
+        return view('order.orderdetails');
+    }
+
+    public function orderDetailsReview(Request $request)
+    {
+        $booking = Booking::with('review')->find($request->id);
         return view('order.orderdetails');
     }
 

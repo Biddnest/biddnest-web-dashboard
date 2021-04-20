@@ -453,7 +453,7 @@ class BookingsController extends Controller
         $bookings->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
-                $bid->where("organization_id", $request->token_payload->organization_id);
+                $bid->where("organization_id", $request->token_payload->organization_id)->with('vendor');
             }]);
 
         if (isset($request->from) && isset($request->to))

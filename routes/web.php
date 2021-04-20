@@ -79,6 +79,9 @@ Route::prefix('web/api')->group(function () {
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
     Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("delete-role");
 
+    Route::post('/customer',[Router::class,'customer_add'])->name("customer_add");
+    Route::put('/customer',[Router::class,'customer_edit'])->name("customer_edit");
+
     //zone APIs
     Route::get('/zones',[Router::class,'zones'])->name("zones");
     Route::post('/zones',[Router::class,'zones_add'])->name("zones_add");
@@ -99,6 +102,10 @@ Route::prefix('web/api')->group(function () {
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
     Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
     Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
+
+    Route::post('/testimonial',[Router::class,'testimonial_add'])->name("testimonial_add");
+    Route::put('/testimonial',[Router::class,'testimonial_edit'])->name("testimonial_edit");
+    Route::delete('/testimonial/{id}',[Router::class,'testimonial_delete'])->name("testimonial_delete");
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
@@ -137,6 +144,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('customers')->group(function () {
             Route::get('/',[WebController::class,'customers'])->name("customers");
             Route::get('/create',[WebController::class,'createCustomers'])->name("create-customers");
+            Route::get('/{id}/edit',[WebController::class,'createCustomers'])->name("edit-customers");
         });
 
         Route::prefix('vendors')->group(function () {
@@ -184,17 +192,21 @@ Route::prefix('admin')->group(function () {
 
         Route::prefix('slider')->group(function () {
             Route::get('/',[WebController::class,'slider'])->name("slider");
+            Route::get('/testimonials',[WebController::class,'testimonials'])->name("testimonials");
+            Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
+
             Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
             Route::get('/{id}/banner', [WebController::class, 'manageBanner'])->name("create-banner");
             Route::get('/{id}', [WebController::class, 'editSlider'])->name("edit-slider");
 
-            Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
+
             Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
             Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
             Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
 
-            Route::get('/testimonials',[WebController::class,'testimonials'])->name("testimonials");
+
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
+            Route::get('/testimonials/{id}/edit',[WebController::class,'createTestimonials'])->name("edit-testimonials");
         });
 
         Route::prefix('review')->group(function () {
@@ -204,8 +216,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
             Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");
 
-            Route::get('/service-requests',[WebController::class,'serviceRequests'])->name("service-requests");
-            Route::get('/service-requests/create',[WebController::class,'createService'])->name("create-service");
+            Route::get('/tickets',[WebController::class,'serviceRequests'])->name("service-requests");
+            Route::get('/tickets/create',[WebController::class,'createService'])->name("create-service");
         });
 
         Route::prefix('payout')->group(function () {
@@ -231,6 +243,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/booking/{id}',[WebController::class,'sidebar_booking'])->name('sidebar.booking');
         Route::get('/vendors/{id}',[WebController::class,'sidebar_vendors'])->name('sidebar.vendors');
         Route::get('/coupons/{id}',[WebController::class,'sidebar_coupons'])->name('sidebar.coupon');
+        Route::get('/customer/{id}',[WebController::class,'sidebar_customer'])->name('sidebar.customer');
+        Route::get('/subcateories/{id}',[WebController::class,'sidebar_subcategory'])->name('sidebar.subcategory');
     });
 
 

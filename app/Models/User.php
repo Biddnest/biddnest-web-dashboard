@@ -12,6 +12,6 @@ class User extends Model
     use HasFactory;
 
     public function bookings(){
-        return $this->hasMany(Bookings::class);
+        return $this->hasMany(Booking::class);
     }
 }

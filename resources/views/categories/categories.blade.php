@@ -69,7 +69,7 @@
                                         @foreach($categories as $category)
                                             <tr class="tb-border cursor-pointer cat_{{$category->id}}">                                                <td scope="row"> <img class="default-image"
                                                         src="{{$category->image}}" alt=""></td>
-                                                <td>{{$category->name}}</td>
+                                                <td>{{ucfirst(trans($category->name))}}</td>
                                                 <td>
                                                     @switch($category->inventory_quantity_type)
                                                         @case($inventory_quantity_type['fixed'])

@@ -227,7 +227,7 @@ class VendorApiRouteController extends Controller
     public function endTrip(Request $request){
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required',
-            'pin' => 'required|integer',
+            'pin' => 'required',
         ]);
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);

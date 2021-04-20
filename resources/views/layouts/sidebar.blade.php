@@ -130,8 +130,7 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                             </li>
                             <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Service
-                                    Requests</a></li>
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Tickets</a></li>
                         </ul>
                         <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"
                             aria-controls="Payout"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-wallet"></i></span> </span> Vendors Payout</a>

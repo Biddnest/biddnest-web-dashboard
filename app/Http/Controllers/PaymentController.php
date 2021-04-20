@@ -60,17 +60,20 @@ class PaymentController extends Controller
         else
             $order_id = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total)['id'];
 
+        $update_data =[
+            'discount_amount'=>$discount_value,
+            'coupon_code' => $coupon_code,
+            'tax'=> $tax,
+            'rzp_order_id'=>$order_id ,
+            'grand_total'=>$grand_total,
+            'meta'=>json_encode($meta)
+        ];
+
+        if($coupon_code && trim($coupon_code) != "")
+            $update_data['coupon_id'] = Coupon::where("code", $coupon_code)->pluck('id')[0];
 
         $payment_result = Payment::where('id', $booking_exist->payment->id)
-            ->update([
-                    'discount_amount'=>$discount_value,
-                    'coupon_code' => $coupon_code,
-                    'coupon_id' => Coupon::where("code", $coupon_code)->pluck('id')[0],
-                    'tax'=> $tax,
-                    'rzp_order_id'=>$order_id ,
-                    'grand_total'=>$grand_total,
-                    'meta'=>json_encode($meta)
-            ]);
+            ->update($update_data);
 
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");

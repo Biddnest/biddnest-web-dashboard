@@ -100,11 +100,11 @@
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
-                            @foreach($review as $review)
+                            @foreach($reviews as $review)
                                 <tr class="tb-border cursor-pointer">
                                     <td scope="row">{{$review->booking->public_booking_id}}</td>
-                                    <td>{{$review->user->fname}} {{$review->user->lname}}</td>
-                                    <td>{{$review->booking->organization->org_name}} {{$review->booking->organization->org_type}}</td>
+                                    <td>{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</td>
+                                    <td>{{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}</td>
                                     <td>{{$review->desc}}</td>
                                     <td class="">
                                         <div class="status-badge light-bg">
@@ -116,11 +116,23 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
+                                        @php $ratings = 0; @endphp
+                                        @foreach(json_decode($review->ratings, true) as $rating)
+                                            @php $ratings += $rating['rating']; @endphp
+                                        @endforeach
+                                        @php $ratings = number_format($ratings/count(json_decode($review->ratings, true)), 2); @endphp
+                                        @for($star=$ratings; $star > 0; $star--)
+                                            @if($star < 1)
+                                                <i class="fa fa-star-half-o checked bg-yellow" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
+                                            @endif
+                                        @endfor
+                                        @php $blank_star = floor(5 - $ratings); @endphp
+
+                                        @for($star_o=$blank_star; $star_o >= 1; $star_o--)
+                                            <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
+                                        @endfor
                                     </td>
                                     <td>
                                         <a href="{{route('create-review')}}">
@@ -135,11 +147,17 @@
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>
-                            <li class="digit">1</li>
+                            <li class="digit">{{$reviews->currentPage()}}</li>
                             <li class="label">of</li>
-                            <li class="digit">20</li>
-                            <li class="button"><a href="#"><img src="{{asset('static/images/Backward.svg')}}"></a></li>
-                            <li class="button"><a href="#"><img src="{{asset('static/images/forward.svg')}}"></a></li>
+                            <li class="digit">{{$reviews->lastPage()}}</li>
+                            @if(!$reviews->onFirstPage())
+                                <li class="button"><a href="{{$reviews->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                </li>
+                            @endif
+                            @if($reviews->currentPage() != $reviews->lastPage())
+                                <li class="button"><a href="{{$reviews->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

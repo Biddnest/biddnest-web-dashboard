@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
+use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
+use App\Enums\TicketEnums;
+use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
 use App\Enums\OrganizationEnums;
+use App\Models\Admin;
 use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\Coupon;
@@ -19,6 +23,8 @@ use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Subservice;
 use App\Models\Organization;
+use App\Models\Testimonials;
+use App\Models\Ticket;
 use App\Models\Vendor;
 use App\Models\Zone;
 use Illuminate\Http\Request;
@@ -133,17 +139,32 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
+        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']])->orderBy("id","DESC")->paginate(15);
         $total_user =User::where("deleted", CommonEnums::$NO)->count();
         $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
-        $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
+        $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['suspended']])->count();
+        $pending_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['verification_pending']])->count();
         return view('customer.customer',[
-            "users"=>User::orderBy("id","DESC")->paginate(15), "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user
+            "users"=>$user, "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
         ]);
     }
 
-    public function createCustomers()
+    public function createCustomers(Request $request)
     {
-        return view('customer.createcustomer');
+        $user =User::where("id", $request->id)->first();
+        return view('customer.createcustomer', ["users"=>$user]);
+    }
+
+    public function sidebar_customer(Request $request)
+    {
+        $user =User::where("id", $request->id)->with(['bookings'=>function($query){
+            $query->with(['payment'=>function($coupon){
+                $coupon->with('coupon');
+            }]);
+        }])->first();
+        $count_orders=Booking::where("user_id", $request->id)->count();
+        $status_orders=Booking::where("user_id", $request->id)->orderBy("id","DESC")->limit(1)->pluck('status');
+        return view('sidebar.customer', ["users"=>$user, "count_orders"=>$count_orders, "status_orders"=>$status_orders]);
     }
 
     public function vendors(Request $request)
@@ -262,6 +283,12 @@ class WebController extends Controller
         $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category]);
+    }
+
+    public function sidebar_subcategory(Request $request)
+    {
+        return $subcategory=Subservice::where("id", $request->id)->with('services')->with('inventories')->first();
+        return view('sidebar.subcategory', ['subcategory'=>$subcategory]);
     }
 
     public function inventories()
@@ -384,33 +411,38 @@ class WebController extends Controller
 
     public function testimonials()
     {
-        return view('sliderandbanner.testimonials');
+        $testimonials=Testimonials::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('sliderandbanner.testimonials', ['testimonials'=>$testimonials]);
     }
 
-    public function createTestimonials()
+    public function createTestimonials(Request $request)
     {
-        return view('sliderandbanner.createtestimonials');
+        $testimonials=Testimonials::where("id", $request->id)->first();
+        return view('sliderandbanner.createtestimonials', ['testimonials'=>$testimonials]);
     }
 
     public function review()
     {
         $review=Review::where("deleted", CommonEnums::$NO)->with(['Booking'=>function($query){
             $query->with('organization');
-        }])->with('user')->orderBy("id","DESC")->paginate(15);
+        }])->with('user')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
         $total_review=Review::where("deleted", CommonEnums::$NO)->count();
         $active_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
-        return view('reviewandratings.review', ['review'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
+        return view('reviewandratings.review', ['reviews'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
     }
 
-    public function createReview()
+    public function createReview(Request $request)
     {
         return view('reviewandratings.createreview');
     }
 
     public function complaints()
     {
-        return view('reviewandratings.complaints');
+        $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->with('user')->with('booking')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        $resolved_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['resolved']])->count();
+        $open_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['open']])->count();
+        return view('reviewandratings.complaints', ['complaints'=>$complaints, 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
     }
 
     public function createComplaints()
@@ -420,7 +452,8 @@ class WebController extends Controller
 
     public function serviceRequests()
     {
-        return view('reviewandratings.servicerequests');
+        $service=Ticket::whereNotIn("type", [TicketEnums::$TYPE['complaint']])->with('vendor')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('reviewandratings.servicerequests', ['services'=>$service]);
     }
 
     public function createService()
@@ -430,7 +463,10 @@ class WebController extends Controller
 
     public function vendorPayout()
     {
-        return view('vendorpayout.payout');
+        $payout =Payout::orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        $scheduled_payout =Payout::where(["status"=>PayoutEnums::$STATUS['scheduled']])->count();
+        $failed_payout =Payout::where(["status"=>PayoutEnums::$STATUS['suspended']])->count();
+        return view('vendorpayout.payout', ['payouts'=>$payout, 'total_count'=>count($payout), 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
     }
 
     public function createVendorPayout()
@@ -445,7 +481,8 @@ class WebController extends Controller
 
     public function users()
     {
-        return view('users.users');
+        $users=Admin::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->with('zones')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('users.users', ['users'=>$users]);
     }
 
     public function createUsers()

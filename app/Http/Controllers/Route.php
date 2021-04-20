@@ -715,4 +715,79 @@ class Route extends Controller
 //         return $request->query;
          return UserController::search($request);
      }
+
+     public function testimonial_add(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'name'=>'required|string',
+             'designation'=>'required|string',
+             'image'=>'required',
+             'heading'=>'required|string',
+             'desc'=>'required|string'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc);
+     }
+
+    public function testimonial_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required|string',
+            'designation'=>'required|string',
+            'image'=>'required',
+            'heading'=>'required|string',
+            'desc'=>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TestimonialController::update($request->id, $request->name, $request->designation, $request->image, $request->heading, $request->desc);
+    }
+
+    public function testimonial_delete(Request $request)
+    {
+        return TestimonialController::delete($request->id);
+    }
+
+    public function customer_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'phone'=>'required|string',
+            'email'=>'required',
+            'gender'=>'required|string',
+            'dob'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::add($request->fname, $request->lname, $request->phone, $request->email, $request->gender, $request->dob, $request->image);
+    }
+
+    public function customer_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'phone'=>'required|string',
+            'email'=>'required',
+            'gender'=>'required|string',
+            'dob'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone);
+    }
 }

@@ -430,6 +430,11 @@
                                                     <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
                                                     @break
 
+                                                @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                <td class="text-center">Pendign Driver Assign</td>
+                                                <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
+                                                @break
+
                                                     @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                     <td class="text-center">Awaiting Pickup</td>
                                                     <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>

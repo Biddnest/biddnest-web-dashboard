@@ -11,17 +11,17 @@
                         <div class="col-lg-12 ">
                             <div class="profile-section">
                                 <figure>
-                                    <img src="assets/images/big-profile.svg" alt="">
+                                    <img src="{{$subcategory->image}}" alt="">
                                 </figure>
                                 <div class="profile-details-side-pop">
                                     <ul>
                                         <li>
-                                            <h1>Cupboards</h1>
+                                            <h1>{{ucfirst(trans($subcategory->name))}}</h1>
                                             <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;"
                                             aria-hidden="true"></i>
                                         </li>
                                         <li>
-                                            <h2>Polycarbonate</h2>
+                                            <h2>{{ucfirst(trans($subcategory->services->name))}}</h2>
                                             <label class="switch mb-0" style="transform: scale(0.7);">
                                                 <input type="checkbox" id="switch">
                                                 <span class="slider"></span>

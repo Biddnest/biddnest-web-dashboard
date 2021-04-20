@@ -751,7 +751,7 @@ class Route extends Controller
 
     public function testimonial_delete(Request $request)
     {
-        return TestimonialController::deletedelete($request->id);
+        return TestimonialController::delete($request->id);
     }
 
 

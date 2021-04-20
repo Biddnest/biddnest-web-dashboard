@@ -269,7 +269,7 @@ class WebController extends Controller
 
     public function sidebar_subcategory(Request $request)
     {
-        return $subcategory=Subservice::where("id", $request->id)->with('services')->with('inventories')->first();
+        $subcategory=Subservice::where("id", $request->id)->with('services')->with('inventories')->first();
         return view('sidebar.subcategory', ['subcategory'=>$subcategory]);
     }
 

@@ -364,7 +364,8 @@ class WebController extends Controller
 
     public function sidebar_slider(Request $request)
     {
-
+        $slider = Slider::where(["id"=>$request->id])->with('banners')->with('zones')->first();
+        return view('sidebar.slider', ['sliders'=>$slider]);
     }
 
     public function createSlider()

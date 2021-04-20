@@ -1,25 +1,33 @@
 <div class="modal-header pb-0">
-                    <h3 class=" p-2 f-18"> Sliders and Banners</h3>
-
-                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                        <i class="fa fa-times theme-text" aria-hidden="true"></i>
-                    </button>
+    <h3 class=" p-2 f-18"> Sliders and Banners</h3>
+    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+        <i class="fa fa-times theme-text" aria-hidden="true"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row d-flex  pb-4 pl-3">
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-center">
+                <img class="p-2" onclick="$('.slick-container_{{$sliders->id}}').slick('slickPrev')"
+                     src="{{asset('static/images/Backward.svg')}}">
+                <div class="slick-container slick-container_{{$sliders->id}}">
+                    @foreach($sliders->banners as $banner)
+                        <img class="slick-image" src="{{$banner->image}}" alt="">
+                    @endforeach
                 </div>
-                <div class="modal-body">
-                    <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-12 ">
-                            <div class="profile-section">
-                                <figure>
-                                    <img src="assets/images/big-profile.svg" alt="">
-                                </figure>
-                                <div class="profile-details-side-pop">
-                                    <ul class="p-3">
-                                        <li>
-                                            <h1>New Year Sale</h1>
-                                            <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;"
-                                                aria-hidden="true"></i>
-                                        </li>
+                <img class="p-2" onclick="$('.slick-container_{{$sliders->id}}').slick('slickNext')"
+                     src="{{asset('static/images/forward.svg')}}">
+            </div>
+        </div>
+        <div class="col-lg-12 ">
+            <div class="profile-section">
+
+                <div class="profile-details-side-pop">
+                    <ul class="p-3">
+                        <li>
+                            <h1>New Year Sale</h1>
+                            <i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;" aria-hidden="true"></i>
+                        </li>
                                         <li>
                                             <h2>Banner Type: <span>Sale</span></h2>
                                             <label class="switch mb-0" style="transform: scale(0.7);">

@@ -2,7 +2,8 @@
 /*
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
-
+http_response_code(500);
+exit();
 use App\Http\Controllers\ApiRouteController as ApiRouter;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 
 Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {

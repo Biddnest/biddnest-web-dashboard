@@ -3,7 +3,7 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 http_response_code(500);
-die();
+();
 use App\Http\Controllers\ApiRouteController as ApiRouter;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VendorApiRouteController as VendorApiRouter;

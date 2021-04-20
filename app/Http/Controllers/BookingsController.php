@@ -70,7 +70,8 @@ class BookingsController extends Controller
             "city" => $data['source']['meta']['city'],
             "state" => $data['source']['meta']['state'],
             "pincode" => $data['source']['meta']['pincode'],
-            "lift" => $data['source']['meta']['lift']]);
+            "lift" => $data['source']['meta']['lift'],
+            "shared_service" => $data['source']['meta']['shared_service']]);
         $booking->destination_lat = $data['destination']['lat'];
         $booking->destination_lng = $data['destination']['lng'];
         $booking->destination_meta = json_encode(["geocode" => $data['destination']['meta']['geocode'],

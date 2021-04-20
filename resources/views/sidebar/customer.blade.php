@@ -76,7 +76,7 @@
                                     <h1 class="side-popup-content">{{$count_orders}}</h1>
                                 </div>
                             </div>
-                            @if(!isset($status_orders))
+                            @if(empty($status_orders))
                                 <div class="row d-flex pb-4 pl-3">
                                     <div class="col-lg-6 align-items-center">
                                         <h1 class="side-popup-heading">Status</h1>

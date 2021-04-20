@@ -295,7 +295,7 @@ class WebController extends Controller
 
     public function sidebar_subcategory(Request $request)
     {
-        return $subcategory=Subservice::where("id", $request->id)->with('services')->with('inventories')->first();
+        $subcategory=Subservice::where("id", $request->id)->with('services')->with('inventories')->first();
         return view('sidebar.subcategory', ['subcategory'=>$subcategory]);
     }
 
@@ -363,16 +363,16 @@ class WebController extends Controller
         return view('zones.createzones', ['zones'=>$zone]);
     }
 
-    public function detailsZones()
-    {
-        return view('zones.detailszones');
-    }
-
     public function slider()
     {
         return view('sliderandbanner.slider',[
             "sliders"=>Slider::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
+    }
+
+    public function sidebar_slider(Request $request)
+    {
+
     }
 
     public function createSlider()

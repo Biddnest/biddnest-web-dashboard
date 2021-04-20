@@ -19,6 +19,10 @@ class Payment extends Model
     public function booking(){
         return $this->belongsTo(Booking::class);
     }
+
+    public function coupon(){
+        return $this->belongsTo(Coupon::class);
+    }
 }
 
 

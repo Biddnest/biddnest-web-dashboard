@@ -754,5 +754,40 @@ class Route extends Controller
         return TestimonialController::delete($request->id);
     }
 
+    public function customer_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'phone'=>'required|string',
+            'email'=>'required',
+            'gender'=>'required|string',
+            'dob'=>'required',
+            'image'=>'required'
+        ]);
 
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::add($request->fname, $request->lname, $request->phone, $request->email, $request->gender, $request->dob, $request->image);
+    }
+
+    public function customer_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'phone'=>'required|string',
+            'email'=>'required',
+            'gender'=>'required|string',
+            'dob'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone);
+    }
 }

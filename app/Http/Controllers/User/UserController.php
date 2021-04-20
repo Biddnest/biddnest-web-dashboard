@@ -149,7 +149,7 @@ class UserController extends Controller
      * @param $avatar
      * @return JsonResponse|object
      */
-    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar){
+    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar, $phone=null){
         $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
@@ -161,7 +161,10 @@ class UserController extends Controller
         if($emailExists)
             return Helper::response(false, "The email id $email is already linked to another account.");
 
-        $updateColumns = [
+        if($phone)
+            $updateColumns["phone"] =$phone;
+
+            $updateColumns = [
             'fname'=>$fname,
             'lname'=>$lname,
             'email'=>$email,
@@ -169,10 +172,10 @@ class UserController extends Controller
             'dob'=>$dob,
         ];
         if($avatar){
-            $image = new ImageManager(array('driver' => 'imagick'));
-            $image->configure(array('driver' => 'gd'));
+            $image_man = new ImageManager(array('driver' => 'gd'));
             $avatar_file_name = $user->fname."-".$user->lname."-".$user->id.".png";
-            $updateColumns["avatar"] = Helper::saveFile($image->make($avatar)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
+            if(filter_var($avatar, FILTER_VALIDATE_URL) === FALSE)
+                $updateColumns["avatar"] = Helper::saveFile($image_man->make($avatar)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
         }
 
         User::where("id",$id)->update($updateColumns);
@@ -228,5 +231,26 @@ class UserController extends Controller
             return Helper::response(false, "You are suspended from using this application. Please contact the support.", null, 401);
         else
             return Helper::response(false, "Something went wrong in server. Please contact support.", null, 401);
+    }
+
+    public static function add($fname, $lname, $phone, $email, $gender, $dob, $avatar)
+    {
+        $image_man = new ImageManager(array('driver' => 'gd'));
+        $uniq = uniqid();
+
+        $user = new User;
+        $user->fname=$fname;
+        $user->lname=$lname;
+        $user->email=$email;
+        $user->phone=$phone;
+        $user->gender=$gender;
+        $user->avatar=Helper::saveFile($image_man->make($avatar)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","Customer");
+        $user->dob=$dob;
+        $save_result = $user->save();
+
+        if(!$save_result)
+            return Helper::response(false,"Couldn't save Testimonials");
+
+        return Helper::response(true,"save Testimonials successfully", ["customer"=>User::findOrFail($user->id)]);
     }
 }

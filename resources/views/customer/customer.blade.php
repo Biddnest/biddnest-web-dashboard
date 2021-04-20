@@ -37,10 +37,10 @@
             <p> INACTIVE CUSTOMERS</p>
             <h1>{{$inactive_user}}</h1>
         </div>
-                        {{--<div class="simple-card w-24">
-                            <p> FAVOURITE CUSTOMERS</p>
-                            <h1>3,459</h1>
-                        </div>--}}
+        <div class="simple-card w-24">
+            <p> SIGNUP PENDING CUSTOMERS</p>
+            <h1>{{$pending_user}}</h1>
+        </div>
     </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -102,18 +102,18 @@
                                                 <th scope="col">Customer Name</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Email</th>
+                                                <th scope="col">Favourite</th>
                                                 <th scope="col" style="text-align: center;">Status</th>
                                                 <th scope="col" style="text-align: center;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20">
                                            @foreach($users as $user)
-                                            <tr class="tb-border cursor-pointer"
-                                                onclick="/*$('.side-bar-pop-up').toggleClass('display-pop-up');*/">
+                                            <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.customer',['id'=>$user->id]) }}">
                                                 <td scope="row">{{$user->fname}} {{$user->lname}}</td>
                                                 <td>{{$user->phone}}</td>
                                                 <td>{{$user->email}}</td>
-
+                                                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
                                                 <td class="" style="text-align: center;">
                                                     @if($user->status == 0)
                                                         <div class="status-badge red-bg text-center">Pending Signup</div>
@@ -122,9 +122,9 @@
                                                     @endif
                                                 </td>
 
-                                                <td style="text-align: center;"> <i class="fa fa-pencil p-1 mr-3"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                                <td style="text-align: center;">
+                                                    <a href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                                    <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                                 </td>
                                             </tr>
                                            @endforeach

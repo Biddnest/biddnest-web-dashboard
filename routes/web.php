@@ -79,6 +79,9 @@ Route::prefix('web/api')->group(function () {
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
     Route::delete('/vendors/{organization_id}/roles/{vendor_id}',[Router::class,'role_delete'])->name("delete-role");
 
+    Route::post('/customer',[Router::class,'customer_add'])->name("customer_add");
+    Route::put('/customer',[Router::class,'customer_edit'])->name("customer_edit");
+
     //zone APIs
     Route::get('/zones',[Router::class,'zones'])->name("zones");
     Route::post('/zones',[Router::class,'zones_add'])->name("zones_add");
@@ -141,6 +144,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('customers')->group(function () {
             Route::get('/',[WebController::class,'customers'])->name("customers");
             Route::get('/create',[WebController::class,'createCustomers'])->name("create-customers");
+            Route::get('/{id}/edit',[WebController::class,'createCustomers'])->name("edit-customers");
         });
 
         Route::prefix('vendors')->group(function () {
@@ -239,6 +243,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/booking/{id}',[WebController::class,'sidebar_booking'])->name('sidebar.booking');
         Route::get('/vendors/{id}',[WebController::class,'sidebar_vendors'])->name('sidebar.vendors');
         Route::get('/coupons/{id}',[WebController::class,'sidebar_coupons'])->name('sidebar.coupon');
+        Route::get('/customer/{id}',[WebController::class,'sidebar_customer'])->name('sidebar.customer');
+        Route::get('/subcateories/{id}',[WebController::class,'sidebar_subcategory'])->name('sidebar.subcategory');
     });
 
 

@@ -13,7 +13,7 @@
                  <ol class="breadcrumb">
                      <li class="breadcrumb-item active" aria-current="page">Sliders & Banners</li>
                      <li class="breadcrumb-item"><a href="testimonials.html"> Testimonials</a></li>
-                     <li class="breadcrumb-item"><a href="#"> Create Testimonials</a></li>
+                     <li class="breadcrumb-item"><a href="#"> @if(!$testimonials) Create @else Edit @endif Testimonials</a></li>
                  </ol>
              </nav>
          </div>
@@ -24,7 +24,7 @@
              <div class="card h-auto p-0 pt-10">
                  <div class="card-head right text-left border-bottom-2 p-10 pt-20 pb-0">
                      <h3 class="f-18 mb-4 pl-2 theme-text">
-                         Create Testimonials
+                         @if(!$testimonials) Create @else Edit @endif Testimonials
                      </h3>
                  </div>
                  <form action="@if(!$testimonials){{route('testimonial_add')}}@else{{route('testimonial_edit')}}@endif" method="@if(isset($testimonials)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('testimonials')}}" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" data-parsley-validate >

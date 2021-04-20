@@ -8,6 +8,7 @@ use App\Enums\CouponEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\TicketEnums;
+use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
 use App\Enums\OrganizationEnums;
 use App\Models\Admin;
@@ -120,17 +121,32 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
+        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']])->orderBy("id","DESC")->paginate(15);
         $total_user =User::where("deleted", CommonEnums::$NO)->count();
         $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
-        $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
+        $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['suspended']])->count();
+        $pending_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['verification_pending']])->count();
         return view('customer.customer',[
-            "users"=>User::orderBy("id","DESC")->paginate(15), "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user
+            "users"=>$user, "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
         ]);
     }
 
-    public function createCustomers()
+    public function createCustomers(Request $request)
     {
-        return view('customer.createcustomer');
+        $user =User::where("id", $request->id)->first();
+        return view('customer.createcustomer', ["users"=>$user]);
+    }
+
+    public function sidebar_customer(Request $request)
+    {
+        $user =User::where("id", $request->id)->with(['bookings'=>function($query){
+            $query->with(['payment'=>function($coupon){
+                $coupon->with('coupon');
+            }]);
+        }])->first();
+        $count_orders=Booking::where("user_id", $request->id)->count();
+        $status_orders=Booking::where("user_id", $request->id)->orderBy("id","DESC")->limit(1)->pluck('status');
+        return view('sidebar.customer', ["users"=>$user, "count_orders"=>$count_orders, "status_orders"=>$status_orders]);
     }
 
     public function vendors(Request $request)
@@ -249,6 +265,12 @@ class WebController extends Controller
         $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category]);
+    }
+
+    public function sidebar_subcategory(Request $request)
+    {
+        return $subcategory=Subservice::where("id", $request->id)->with('services')->with('inventories')->first();
+        return view('sidebar.subcategory', ['subcategory'=>$subcategory]);
     }
 
     public function inventories()

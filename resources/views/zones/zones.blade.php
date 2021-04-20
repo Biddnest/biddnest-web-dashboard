@@ -119,12 +119,12 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($zones as $zone)
-                                            <tr class="tb-border cursor-pointer zone_{{$zone->id}}">
-                                                <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->name}}</td>
-                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->city}}</td>
-                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->district}}</td>
-                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{$zone->state}}</td>
-                                                <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                            <tr class="tb-border zone_{{$zone->id}}">
+                                                <td scope="row" >{{$zone->name}}</td>
+                                                <td >{{$zone->city}}</td>
+                                                <td >{{$zone->district}}</td>
+                                                <td>{{$zone->state}}</td>
+                                                <td>
                                                     @switch($zone->status)
                                                         @case(\App\Enums\CommonEnums::$YES)
                                                             <span class="status-badge green-bg text-center">Active</span>

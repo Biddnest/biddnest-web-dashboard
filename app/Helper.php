@@ -12,7 +12,7 @@ use Illuminate\Foundation\Inspiring;
 
 class Helper
 {
-    public static function response($status, $message, $data=null, $http_code=200){
+    public static function response($status, $message, $data=null, $http_code=500){
         $stat =$status ? "success" : "fail";
         /*if($status === true)
             $message = Inspiring::quote();*/

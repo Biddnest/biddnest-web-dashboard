@@ -518,4 +518,9 @@ class ApiRouteController extends Controller
     {
         return UserController::verifyAuth($request->token_payload->id);
     }
+
+    public function getZones(Request $request)
+    {
+        return ZoneController::get();
+    }
 }

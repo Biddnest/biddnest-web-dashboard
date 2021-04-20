@@ -110,15 +110,15 @@
                                            @foreach($users as $user)
                                             <tr class="tb-border cursor-pointer"
                                                 onclick="/*$('.side-bar-pop-up').toggleClass('display-pop-up');*/">
-                                                <td scope="row">{{ ucfirst(trans($user->fname)) }} {{ ucfirst(trans($user->lname)) }}</td>
+                                                <td scope="row">{{$user->fname}} {{$user->lname}}</td>
                                                 <td>{{$user->phone}}</td>
                                                 <td>{{$user->email}}</td>
 
                                                 <td class="" style="text-align: center;">
                                                     @if($user->status == 0)
-                                                        <div class="status-badge red-bg">Pending Signup</div>
+                                                        <div class="status-badge red-bg text-center">Pending Signup</div>
                                                     @else
-                                                        <div class="status-badge green-bg">Active</div>
+                                                        <div class="status-badge green-bg text-center">Active</div>
                                                     @endif
                                                 </td>
 

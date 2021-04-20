@@ -34,6 +34,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/coupon/verify',[ApiRouter::class,'verifyCoupon']);
     Route::get('/coupon/get',[ApiRouter::class,'getCouponsForBooking']);
 
+    Route::get('/zone',[ApiRouter::class,'getZones']);
     //bookings APIs
     Route::prefix('bookings')->group(function () {
         Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
@@ -49,6 +50,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
 
         Route::get('/recent',[ApiRouter::class,'getRecentBooking']);
+
 
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);

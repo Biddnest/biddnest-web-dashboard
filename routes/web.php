@@ -187,7 +187,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/',[WebController::class,'zones'])->name("zones");
             Route::get('/create',[WebController::class,'createZones'])->name("create-zones");
             Route::get('/{id}/edit',[WebController::class,'createZones'])->name("edit-zones");
-            Route::get('/details',[WebController::class,'detailsZones'])->name("details-zones");
         });
 
         Route::prefix('slider')->group(function () {
@@ -245,6 +244,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/coupons/{id}',[WebController::class,'sidebar_coupons'])->name('sidebar.coupon');
         Route::get('/customer/{id}',[WebController::class,'sidebar_customer'])->name('sidebar.customer');
         Route::get('/subcateories/{id}',[WebController::class,'sidebar_subcategory'])->name('sidebar.subcategory');
+        Route::get('/slider/{id}',[WebController::class,'sidebar_slider'])->name('sidebar.slider');
     });
 
 

@@ -28,7 +28,7 @@ class CreateBookings extends Migration
             $table->string("movement_type");
             $table->string("source_lat");
             $table->string("source_lng");
-            $table->text("source_meta")->default(json_encode(["geocode"=>null, "floor"=>null, "address"=>null, "city"=>null, "state"=>null, "pincode"=>null, "lift"=>null, "shared_service"=>"false"]));
+            $table->text("source_meta")->default(json_encode(["geocode"=>null, "floor"=>null, "address"=>null, "city"=>null, "state"=>null, "pincode"=>null, "lift"=>null, "shared_service"=>false]));
             $table->string("destination_lat");
             $table->string("destination_lng");
             $table->string("destination_meta")->default(json_encode(["geocode"=>null, "floor"=>null, "address"=>null, "city"=>null, "state"=>null, "pincode"=>null, "lift"=>null]));

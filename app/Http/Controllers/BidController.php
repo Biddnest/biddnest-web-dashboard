@@ -121,8 +121,8 @@ class BidController extends Controller
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
 
-            $addrebidtime = Booking::where(["user_id"=>$order['user_id'],
-                                            "public_booking_id"=>$order['public_booking_id']])
+            $addrebidtime = Booking::where(["user_id"=>$order->user_id,
+                                            "public_booking_id"=>$order->public_booking_id])
                                             ->update([
                                                 "status"=>BookingEnums::$STATUS['rebiding'],
                                                 "meta" => json_encode($meta),

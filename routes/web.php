@@ -107,6 +107,8 @@ Route::prefix('web/api')->group(function () {
     Route::put('/testimonial',[Router::class,'testimonial_edit'])->name("testimonial_edit");
     Route::delete('/testimonial/{id}',[Router::class,'testimonial_delete'])->name("testimonial_delete");
 
+    Route::post('/user',[Router::class,'user_add'])->name("user_add");
+
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");

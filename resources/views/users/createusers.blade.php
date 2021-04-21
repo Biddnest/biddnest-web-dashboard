@@ -109,163 +109,158 @@
                                             @endforeach
                                         </select>
                                         <span class="error-message">Please enter valid</span>
-                                    </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Manager Name</label>
-                                    <input type="text" id="fullname" placeholder="0016" class="form-control">
-                                    <span class="error-message">Please enter valid</span>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Manager Name</label>
+                                        <input type="text" id="fullname" placeholder="0016" class="form-control">
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="phone-num-lable">Phone Number</label>
-                                    <span class="">
-                                        <input type="tel" id="phone"
-                                            placeholder="987654321"
-                                            class=" form-control form-control-tel">
-                                        <span class="error-message">Please enter valid
-                                            Phone number</span>
-                                    </span>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Phone Number</label>
+                                            <input type="tel" id="phone"
+                                                placeholder="987654321"
+                                                class=" form-control form-control-tel">
+                                            <span class="error-message">Please enter valid
+                                                Phone number</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="phone-num-lable">Alternate Phone Number</label>
-                                    <span class="">
-                                        <input type="tel" id="phone-1"
-                                            placeholder="987654321"
-                                            class=" form-control form-control-tel">
-                                        <span class="error-message">Please enter valid
-                                            Phone number</span>
-                                    </span>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Alternate Phone Number</label>
+                                            <input type="tel" id="phone-1"
+                                                placeholder="987654321"
+                                                class=" form-control form-control-tel">
+                                            <span class="error-message">Please enter valid
+                                                Phone number</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Email ID</label>
-                                    <input type="email" id="email" placeholder="0016" class="form-control">
-                                    <span class="error-message">Please enter valid</span>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Email ID</label>
+                                        <input type="email" id="email" placeholder="0016" class="form-control">
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="phone-num-lable">Gender</label>
-                                    <select  id="" class="form-control">
-                                        <option >Female</option>
-                                        <option>Male</option>
-                                        <option>Other</option>
-                                    </select>
-                                    <span class="error-message">Please enter valid Phone number</span>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Gender</label>
+                                        <select  id="" class="form-control">
+                                            <option >Female</option>
+                                            <option>Male</option>
+                                            <option>Other</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid Phone number</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Educational Details</label>
-                                    <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control">
-                                    <span class="error-message">Please enter valid</span>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Educational Details</label>
+                                        <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control">
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Date of Birth</label>
-                                    <input type="text" class="dateselect form-control br-5" required="required"  placeholder="15/02/2021"/>
-                                    <span class="error-message">Please enter valid</span>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">PAN Card Number</label>
-                                    <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control">
-                                    <span class="error-message">Please enter valid</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Aadhar Card Number</label>
-                                    <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control">
-                                    <span class="error-message">Please enter valid</span>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Address Line 1</label>
-                                    <input type="text" id="fullname" placeholder="" class="form-control">
-                                    <span class="error-message">Please enter validAddress Line</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Address Line 2</label>
-                                    <input type="text" id="fullname" placeholder="" class="form-control">
-                                    <span class="error-message">Please enter valid Address Line</span>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">State</label>
-                                    <select  id="" class="form-control">
-                                        <option >State 1</option>
-                                        <option>State 2</option>
-                                        <option>State 3</option>
-                                    </select>
-                                    <span class="error-message">Please enter valid Landmark</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">City</label>
-                                    <input type="text" id="fullname" placeholder="" class="form-control">
-                                    <span class="error-message">Please enter valid Zone</span>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Pincode</label>
-                                    <input type="text" id="fullname" placeholder="" class="form-control">
-                                    <span class="error-message">Please enter valid Pincode</span>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Date of Joining</label>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Date of Birth</label>
                                         <input type="text" class="dateselect form-control br-5" required="required"  placeholder="15/02/2021"/>
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">PAN Card Number</label>
+                                        <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control">
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Aadhar Card Number</label>
+                                        <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control">
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Address Line 1</label>
+                                        <input type="text" id="fullname" placeholder="" class="form-control">
+                                        <span class="error-message">Please enter validAddress Line</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Address Line 2</label>
+                                        <input type="text" id="fullname" placeholder="" class="form-control">
+                                        <span class="error-message">Please enter valid Address Line</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">State</label>
+                                        <select  id="" class="form-control">
+                                            <option >State 1</option>
+                                            <option>State 2</option>
+                                            <option>State 3</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid Landmark</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">City</label>
+                                        <input type="text" id="fullname" placeholder="" class="form-control">
+                                        <span class="error-message">Please enter valid Zone</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Pincode</label>
+                                        <input type="text" id="fullname" placeholder="" class="form-control">
                                         <span class="error-message">Please enter valid Pincode</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Date of Joining</label>
+                                            <input type="text" class="dateselect form-control br-5" required="required"  placeholder="15/02/2021"/>
+                                            <span class="error-message">Please enter valid Pincode</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Date of Relieving</label>
+                                            <input type="text" class="dateselect form-control br-5" required="required"  placeholder="15/02/2021"/>
+                                            <span class="error-message">Please enter valid Pincode</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-input">
-                                    <label class="full-name">Date of Relieving</label>
-                                        <input type="text" class="dateselect form-control br-5" required="required"  placeholder="15/02/2021"/>
-                                        <span class="error-message">Please enter valid Pincode</span>
+                            <div class="" id="comments">
+                                <div class="d-flex  justify-content-between flex-row ml-20 p-10 py-0 " style="border-top: 1px solid #70707040;">
+                                    <div class="w-50">
+                                        <a class="white-text p-10" href="#">
+                                            <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                                        </a>
+                                    </div>
+                                    <div class="w-50 text-right">
+                                        <a class="white-text p-10">
+                                            <button class="btn theme-bg white-text w-30">Next</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="" id="comments">
-                            <div class="d-flex  justify-content-between flex-row ml-20 p-10 py-0 " style="border-top: 1px solid #70707040;">
-                                <div class="w-50">
-                                    <a class="white-text p-10" href="#">
-                                        <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
-                                    </a>
-                                </div>
-                                <div class="w-50 text-right">
-                                    <a class="white-text p-10">
-                                        <button class="btn theme-bg white-text w-30">Next</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
                 </div>
 

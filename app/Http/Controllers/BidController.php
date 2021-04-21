@@ -90,7 +90,7 @@ class BidController extends Controller
         $id =[];
         foreach($bookings as $booking)
         {
-            $bid_end = self::updateStatus($booking['id']);
+//            $bid_end = self::updateStatus($booking['id']);
 
             /*tax is always taken as percentage*/
 
@@ -129,7 +129,7 @@ class BidController extends Controller
                                                 "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")
                                             ]);
 
-            Bid::where("booking_id", $book_id)->whereNotIn("status", [BidEnums::$STATUS['rejected'],BidEnums::$STATUS['won'],BidEnums::$STATUS['lost'],BidEnums::$STATUS['expired']])
+            Bid::where("booking_id", $book_id)->whereNotIn("status", [BidEnums::$STATUS['rejected']])
                                 ->update([
                                     "bid_type"=>BidEnums::$BID_TYPE['rebid'],
                                     "status"=>BidEnums::$STATUS['active']

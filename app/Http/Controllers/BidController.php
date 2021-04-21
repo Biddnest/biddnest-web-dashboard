@@ -129,7 +129,7 @@ class BidController extends Controller
                                                 "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")
                                             ]);
 
-            $update_bid_type = Bid::where("booking_id",$book_id)->whereNotIn("status", BidEnums::$STATUS['rejected'])
+            $update_bid_type = Bid::where("booking_id",$book_id)->whereNotIn("status", [BidEnums::$STATUS['rejected']])
                                 ->update([
                                     "bid_type"=>BidEnums::$BID_TYPE['rebid'],
                                     "status"=>BidEnums::$STATUS['active']

@@ -90,7 +90,7 @@ class BidController extends Controller
         $id =[];
         foreach($bookings as $booking)
         {
-//            $bid_end = self::updateStatus($booking['id']);
+            $bid_end = self::updateStatus($booking['id']);
 
             /*tax is always taken as percentage*/
 

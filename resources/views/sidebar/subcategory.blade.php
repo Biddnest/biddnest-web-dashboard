@@ -1,5 +1,5 @@
 <div class="modal-header pb-0">
-                    <h3 class="theme-text p-2 mb-2 f-14"> Sub-category Details</h3>
+                    <h3 class=" p-2 f-18"> Sub-category Details</h3>
 
                     <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
                         onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">

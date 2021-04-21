@@ -109,28 +109,36 @@ class WebController extends Controller
         ]);
     }
 
+    /*start order details subpages*/
+
     public function orderDetailsCustomer(Request $request)
     {
-        $booking = Booking::with('customer','vendor')->find($request->id);
-        return view('order.orderdetails');
+        return $booking = Booking::with(['status_history'=>function($query){
+            $query->distinct('status')->get();
+        }])->find($request->id);
+        return view('order.orderdetails_customer',[
+            "booking" => $booking
+        ]);
     }
 
     public function orderDetailsVendor(Request $request)
     {
         $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
-        return view('order.orderdetails');
+        return view('order.orderdetails_vendor');
     }
     public function orderDetailsPayment(Request $request)
     {
         $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
-        return view('order.orderdetails');
+        return view('order.orderdetails_payment');
     }
 
     public function orderDetailsReview(Request $request)
     {
         $booking = Booking::with('review')->find($request->id);
-        return view('order.orderdetails');
+        return view('order.orderdetails_review');
     }
+
+    /*end order details subpages*/
 
     public function createOrder()
     {
@@ -364,7 +372,8 @@ class WebController extends Controller
 
     public function sidebar_slider(Request $request)
     {
-
+        $slider = Slider::where(["id"=>$request->id])->with('banners')->with('zones')->first();
+        return view('sidebar.slider', ['sliders'=>$slider]);
     }
 
     public function createSlider()
@@ -485,9 +494,10 @@ class WebController extends Controller
         return view('users.users', ['users'=>$users]);
     }
 
-    public function createUsers()
+    public function createUsers(Request $request)
     {
-        return view('users.createusers');
+        $user=Admin::where("id", $request->id)->with('zones')->first();
+        return view('users.createusers', ['users'=>$user]);
     }
 
     public function detailsUsers()

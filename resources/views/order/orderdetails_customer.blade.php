@@ -22,44 +22,57 @@
 
               <!-- Dashboard cards -->
 
+    <div class="row">
 
+        <div class="col-md-12" style="padding: 0px 40px; border: none;">
+            <div class="card" style="border:none;">
+
+                <div class="card-body" style="padding: 20px;">
+
+                    <hr class="dash-line">
+                    <div class="steps-container">
+                        @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
+                        <div class="steps-status ">
+                            <div class="step-dot">
+                                @foreach($booking->status_history as $status_history)
+                                @if($status_history->status == $status)
+                                    <img src="{{ asset('static/images/tick.png')}}" />
+{{--                                 @else--}}
+{{--                                        <div class="child-dot"></div>--}}
+                                 @endif
+                                @endforeach
+                            </div>
+                            <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
               <div class="d-flex flex-row  Dashboard-lcards  justify-content-center">
                 <div class="col">
-                    <!-- <div class="d-flex  flex-row text-left">
-                        <a href="booking-orders.html" class="text-decoration-none">
-                            <h3 class="page-subhead text-left p-4 f-20 theme-text">
-                            <i class="p-1"> <img src="assets/images/Icon feather-chevrons-left.svg" alt="" srcset=""></i> Back to Bookings & Orders</h3></a>
-
-                    </div> -->
-                  <div class="card  h-auto p-0 pt-10 " >
-
-                      <div class="card-head right text-center  pb-0 p-05">
-                        <h3 class="f-18">
-                          <ul class="nav nav-tabs  justify-content-around p-0 flex-row" id="myTab" role="tablist">
+                  <div class="card  h-auto p-0 " >
+                      <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
+                        <h3 class="f-18" style="margin-top: 0;">
+                          <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist">
                             <li class="nav-item ">
-                              <a class="nav-link active p-15" id="customer-details-tab" data-toggle="tab" href="#customer-details" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
+                              <a class="nav-link active p-15" id="customer-details-tab" data-toggle="tab" href="#customer-details" role="tab" aria-controls="home" aria-selected="true">Customer</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="#vendor-details" role="tab" aria-controls="profile" aria-selected="false">Vendor Details</a>
+                              <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="#vendor-details" role="tab" aria-controls="profile" aria-selected="false">Vendor</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="#quotation" role="tab" aria-controls="profile" aria-selected="false">Quotations</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link p-15" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link p-15" id="order-status-tab" data-toggle="tab" href="#order-status" role="tab" aria-controls="profile" aria-selected="false">Order Status</a>
+                              <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="#quotation" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link p-15" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
                             </li>
-                            <li class="nav-item">
-                              <a class="nav-link p-15" id="complaints-tab" data-toggle="tab" href="#complaints" role="tab" aria-controls="profile" aria-selected="false">Complaints</a>
-                            </li>
+
                           </ul>
                         </h3>
-
                       </div>
                       <div class="tab-content border-top margin-topneg-7" id="myTabContent">
 
@@ -673,7 +686,7 @@
                           <div class="p-15  border-top-2">
 
                             <div class="d-flex p-10">
-                              <!-- <ul class="steps">
+                              {{--<ul class="steps">
                                 <li class="step step--incomplete step--active">
                                   <span class="step__icon"></span>
 
@@ -695,43 +708,11 @@
 
                                 </li>
 
-                              </ul> -->
+                              </ul>--}}
 
 
-                              <hr class="dash-line">
                                                                   </hr>
-                              <div class="steps-container">
-                                <div class="steps-status ">
-                                    <div class="step-dot">
-                                      <img src="{{ asset('static/images/tick.png')}}" />
-                                    </div>
-                                    <p class="step-title">Bidding</p>
-                                </div>
-                                <div class="steps-status ">
-                                    <div class="step-dot">
-                                        <img src="{{ asset('static/images/tick.png')}}" />
-                                    </div>
-                                    <p class="step-title">Scheduled</p>
-                                </div>
-                                <div class="steps-status">
-                                    <div class="step-dot">
-                                      <img src="{{ asset('static/images/tick.png')}}" />
-                                    </div>
-                                    <p class="step-title">Driver Assigned</p>
-                                </div>
-                                <div class="steps-status">
-                                    <div class="step-dot">
-                                      <div class="child-dot"></div>
-                                    </div>
-                                    <p class="step-title">In Transit</p>
-                                </div>
-                                <div class="steps-status">
-                                    <div class="step-dot">
-                                        <div class="child-dot"></div>
-                                    </div>
-                                    <p class="step-title">Canceled/Complete</p>
-                                </div>
-                            </div>
+
                             </div>
                           </div>
                           <div class="d-flex  border-bottom pb-0">

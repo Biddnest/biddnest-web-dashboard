@@ -129,11 +129,11 @@ class BidController extends Controller
                                                 "bid_result_at"=>$complete_time->format("Y-m-d H:i:s")
                                             ]);
 
-            /*Bid::where("booking_id", $book_id)->orWhere("status", '!=', BidEnums::$STATUS['rejected'])
+            Bid::where("booking_id", $book_id)->whereNotIn("status", [BidEnums::$STATUS['rejected'],BidEnums::$STATUS['won'],BidEnums::$STATUS['lost'],BidEnums::$STATUS['expired']])
                                 ->update([
                                     "bid_type"=>BidEnums::$BID_TYPE['rebid'],
                                     "status"=>BidEnums::$STATUS['active']
-                                    ]);*/
+                                    ]);
 
             $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 

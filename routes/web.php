@@ -108,6 +108,9 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/testimonial/{id}',[Router::class,'testimonial_delete'])->name("testimonial_delete");
 
     Route::post('/user',[Router::class,'user_add'])->name("user_add");
+    Route::put('/user',[Router::class,'user_edit'])->name("user_edit");
+    Route::put('/bank',[Router::class,'bank_edit'])->name("bank_edit");
+    Route::delete('/delete/{id}',[Router::class,'user_delete'])->name("user_delete");
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
@@ -235,7 +238,9 @@ Route::prefix('admin')->group(function () {
         Route::prefix('users')->group(function () {
             Route::get('/',[WebController::class,'users'])->name("users");
             Route::get('/create',[WebController::class,'createUsers'])->name("create-users");
-            Route::get('/details',[WebController::class,'detailsUsers'])->name("details-users");
+            Route::get('/{id}/edit',[WebController::class,'createUsers'])->name("edit-users");
+            Route::get('/{id}/bank',[WebController::class,'createBank'])->name("create-bank");
+            Route::get('/details/{id}',[WebController::class,'details_user'])->name('details_user');
         });
 
         Route::prefix('sidebar')->group(function () {
@@ -252,6 +257,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/customer/{id}',[WebController::class,'sidebar_customer'])->name('sidebar.customer');
         Route::get('/subcateories/{id}',[WebController::class,'sidebar_subcategory'])->name('sidebar.subcategory');
         Route::get('/slider/{id}',[WebController::class,'sidebar_slider'])->name('sidebar.slider');
+        Route::get('/user/{id}',[WebController::class,'sidebar_user'])->name('sidebar.user');
     });
 
 

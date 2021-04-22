@@ -299,6 +299,6 @@ class TicketController extends Controller
            $query->with('admin');
         }])->get();
 
-        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
+        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets]);
     }
 }

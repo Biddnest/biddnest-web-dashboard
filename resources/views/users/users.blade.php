@@ -98,7 +98,7 @@
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($users as $user)
-                                <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                <tr class="tb-border cursor-pointer user_{{$user->id}}">
                                     <td scope="row">{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>@foreach($user->zones as $zone)
@@ -113,8 +113,8 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
-                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
+                                        <a href="{{route('edit-users', ["id"=>$user->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a href="#" class="delete" data-parent=".user_{{$user->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('user_delete',['id'=>$user->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

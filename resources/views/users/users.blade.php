@@ -98,7 +98,7 @@
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($users as $user)
-                                <tr class="tb-border cursor-pointer user_{{$user->id}}">
+                                <tr class="tb-border cursor-pointer user_{{$user->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.user',['id'=>$user->id]) }}">
                                     <td scope="row">{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>@foreach($user->zones as $zone)

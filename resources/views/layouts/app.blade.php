@@ -129,7 +129,7 @@
 
                                     <div class="dropdown">
                                         <ul>
-                                            <li><a href="{{route('details-users')}}">My Profile</a></li>
+                                            <li><a href="{{route('details_user', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">My Profile</a></li>
                                             <li><a href="{{route('reset-password')}}">Change Password</a></li>
                                             <li><a href="{{route('settings')}}">System Settings</a></li>
                                             <li><a href="#0" onclick="location.assign('{{route('logout')}}')">Logout</a></li>

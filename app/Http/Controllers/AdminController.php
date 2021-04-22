@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
+use App\Enums\CouponEnums;
 use App\Models\AdminZone;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -19,6 +21,7 @@ use App\Sms;
 
 
 use  App\Jobs\SendOtp;
+use Intervention\Image\ImageManager;
 
 
 class AdminController extends Controller
@@ -120,31 +123,129 @@ class AdminController extends Controller
             return Helper::response(true,"Data fetched successfully", $result);
     }
 
-   public static function update($id, $fname, $lname, $email, $phone, $role, $zones){
+    public static function add($data)
+    {
+        $image_man = new ImageManager(array('driver' => 'gd'));
+        $uniq = uniqid();
 
-       $exist= Admin::findOrFail($id);
+        $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2']]);
+
+        $admin =new Admin;
+        $admin->image=Helper::saveFile($image_man->make($data['image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$data['fname']);
+        $admin->fname=$data['fname'];
+        $admin->lname=$data['lname'];
+        $admin->username=$data['username'];
+        $admin->password=password_hash($data['password'], PASSWORD_DEFAULT);
+        $admin->role=$data['role'];
+        $admin->phone=$data['phone'];
+        $admin->email=$data['email'];
+        $admin->dob=$data['dob'];
+        $admin->state=$data['state'];
+        $admin->city=$data['city'];
+        $admin->pincode=$data['pincode'];
+        $admin->date_of_joining=$data['joinig_date'];
+        $admin->meta=$meta;
+        $admin_result=$admin->save();
+
+        foreach($data['zone'] as $zone){
+            $zones = new AdminZone;
+            $zones->admin_id =$admin->id;
+            $zones->zone_id = $zone;
+            $zones->save();
+        }
+
+        if(!$admin_result)
+            return Helper::response(false,"Couldn't save data");
+
+        return Helper::response(true,"save data successfully", ["admin"=>Admin::with('zones')->findOrFail($admin->id)]);
+    }
+
+   public static function update($data){
+
+       $exist= Admin::findOrFail($data['id']);
        if(!$exist){
-           return Helper::response(false,"Order is not Exist");
+           return Helper::response(false,"User is not Exist");
        }
 
-        $update = Admin::where("id",$id)->update([
-            "fname"=>$fname,
-            "lname"=>$lname,
-            "email"=>$email,
-            "phone"=>$phone,
-            "role"=>$role
-        ]);
+       $image_man = new ImageManager(array('driver' => 'gd'));
+       $uniq = uniqid();
 
-        foreach($zones as $zone){
-            $zone = new AdminZone;
-            $zone->admin_id = $id;
-            $zone->zone_id = $zone;
-            $zone->save();
+       $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2']]);
+
+       $update_data =[
+            "fname"=>$data['fname'],
+           "lname"=>$data['lname'],
+           "username"=>$data['username'],
+           "role"=>$data['role'],
+           "phone"=>$data['phone'],
+           "email"=>$data['email'],
+           "dob"=>$data['dob'],
+           "state"=>$data['state'],
+           "city"=>$data['city'],
+           "pincode"=>$data['pincode'],
+           "date_of_joining"=>$data['joinig_date'],
+           "meta"=>$meta
+       ];
+
+       if(filter_var($data['image'], FILTER_VALIDATE_URL) === FALSE)
+           $update_data["image"]=Helper::saveFile($image_man->make($data['image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$data['fname']);
+
+        $update = Admin::where("id", $data['id'])->update($update_data);
+
+        foreach($data['zone'] as $zone){
+            AdminZone::where("admin_id", $data['id'])->delete();
+            $zones = new AdminZone;
+            $zones->admin_id = $data['id'];
+            $zones->zone_id = $zone;
+            $zones->save();
         }
 
        if(!$update)
-           return Helper::response(false,"Could not update admin.");
+           return Helper::response(false,"Could not update user.");
        else
-           return Helper::response(true,"Data updated successfully", ["admin"=>Admin::with("zones")->findOrFail($id)]);
+           return Helper::response(true,"Data updated successfully", ["admin"=>Admin::with("zones")->findOrFail($data['id'])]);
    }
+
+   public static function addBank($data)
+   {
+       $exist= Admin::findOrFail($data['id']);
+       if(!$exist){
+           return Helper::response(false,"User is not Exist");
+       }
+
+       $image_man = new ImageManager(array('driver' => 'gd'));
+       $uniq = uniqid();
+
+       if(filter_var($data['aadhar_image'], FILTER_VALIDATE_URL) === FALSE)
+           $update_data["aadhar_img"]=Helper::saveFile($image_man->make($data['aadhar_image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$exist['fname']);
+
+       if(filter_var($data['pan_image'], FILTER_VALIDATE_URL) === FALSE)
+           $update_data["pan_img"]=Helper::saveFile($image_man->make($data['pan_image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$exist['fname']);
+
+       $update_data["bank_meta"] =json_encode(["acc_no" => $data['acc_no'], "bank_name" => $data['bank_name'], "holder_name"=>$data['holder_name'], "ifsc"=>$data['ifsc'], "branch_name"=>$data['branch_name']]);
+
+       $update = Admin::where("id",$data['id'])->update($update_data);
+
+       if(!$update)
+           return Helper::response(false,"Could not update user.");
+       else
+           return Helper::response(true,"Data updated successfully", ["admin"=>Admin::with("zones")->findOrFail($data['id'])]);
+   }
+
+    public static function delete($id)
+    {
+        $exist= Admin::findOrFail($id);
+        if(!$exist){
+            return Helper::response(false,"User is not Exist");
+        }
+
+        $update = Admin::where("id",$id)->update([
+            "deleted"=>CommonEnums::$YES
+        ]);
+
+        if(!$update)
+            return Helper::response(false,"Could not Delete user.");
+
+        return Helper::response(true,"Data Deleted successfully");
+    }
 }

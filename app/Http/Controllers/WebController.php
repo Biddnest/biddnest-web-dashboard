@@ -494,10 +494,22 @@ class WebController extends Controller
         return view('users.users', ['users'=>$users]);
     }
 
+    public function sidebar_user(Request $request)
+    {
+        $user=Admin::where("id", $request->id)->with('zones')->first();
+        return view('sidebar.users', ['users'=>$user]);
+    }
+
     public function createUsers(Request $request)
     {
         $user=Admin::where("id", $request->id)->with('zones')->first();
         return view('users.createusers', ['users'=>$user]);
+    }
+
+    public function createBank(Request $request)
+    {
+        $user=Admin::where("id", $request->id)->with('zones')->first();
+        return view('users.userbank', ['users'=>$user]);
     }
 
     public function detailsUsers()

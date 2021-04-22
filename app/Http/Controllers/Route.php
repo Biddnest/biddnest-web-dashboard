@@ -790,4 +790,92 @@ class Route extends Controller
 
         return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone);
     }
+
+    public function user_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'image'=>'required',
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'username'=>'required',
+            'password'=>'required',
+            'role'=>'required',
+            'zone'=>'required',
+            'phone'=>'required',
+            'email'=>'required',
+            'dob'=>'required',
+            'state'=>'required',
+            'city'=>'required',
+            'pincode'=>'required',
+            'joinig_date'=>'required',
+            'meta.manager_name'=>'required|string',
+            'meta.alt_phone'=>'required',
+            'meta.gender'=>'required',
+            'meta.pan_no'=>'required',
+            'meta.adhar_no'=>'required',
+            'meta.address_line1'=>'required',
+            'meta.address_line2'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return AdminController::add($request->all());
+    }
+
+    public function user_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'image'=>'required',
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'username'=>'required',
+            'role'=>'required',
+            'zone'=>'required',
+            'phone'=>'required',
+            'email'=>'required',
+            'dob'=>'required',
+            'state'=>'required',
+            'city'=>'required',
+            'pincode'=>'required',
+            'joinig_date'=>'required',
+            'meta.manager_name'=>'required|string',
+            'meta.alt_phone'=>'required',
+            'meta.gender'=>'required',
+            'meta.pan_no'=>'required',
+            'meta.adhar_no'=>'required',
+            'meta.address_line1'=>'required',
+            'meta.address_line2'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return AdminController::update($request->all());
+    }
+
+    public function bank_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'acc_no'=>'required',
+            'bank_name'=>'required|string',
+            'holder_name'=>'required|string',
+            'ifsc'=>'required',
+            'branch_name'=>'required|string',
+            'aadhar_image'=>'required',
+            'pan_image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return AdminController::addBank($request->all());
+    }
+
+    public function user_delete(Request $request)
+    {
+        return AdminController::delete($request->id);
+    }
 }

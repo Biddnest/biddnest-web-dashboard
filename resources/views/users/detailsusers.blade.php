@@ -27,7 +27,7 @@
                             </ul>
                         </h3>
                         <div class="eidt-icon margin-r-20 vertical-center p-10">
-                            <i class="fa fa-pencil p-1 cursor-pointer theme-text" aria-hidden="true"></i>
+                            <a href="{{route('edit-users', ["id"=>$users->id])}}"><i class="fa fa-pencil p-1 cursor-pointer theme-text" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -40,17 +40,14 @@
                                 <div class="theme-text f-14 bold p-10">
                                     <div class="d-flex justify-content-between">
                                         <figure class="">
-                                            <img src="{{asset('static/images/big-profile.svg')}}" alt="">
+                                            <img src="{{$users->image}}" alt="">
                                         </figure>
                                         <div class="profile-details">
-                                            <p class="profile-name">David jerome</p>
-                                            <p class="profile-id">davidjerome@gamil.com</p>
-                                            <p class="profile-num">987456123</p>
+                                            <p class="profile-name">{{ucfirst(trans($users->fname))}} {{ucfirst(trans($users->lname))}}</p>
+                                            <p class="profile-id">d{{$users->email}}</p>
+                                            <p class="profile-num">{{$users->phone}}</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="theme-text f-14 bold p-10">
-                                    Employee ID
                                 </div>
                                 <div class="theme-text f-14 bold p-10">
                                     Employee Role
@@ -63,9 +60,6 @@
                                 </div>
                                 <div class="theme-text f-14 bold p-10">
                                     Gender
-                                </div>
-                                <div class="theme-text f-14 bold p-10">
-                                    Educational Details
                                 </div>
                                 <div class="theme-text f-14 bold p-10">
                                     Date of Birth
@@ -89,41 +83,40 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="theme-text f-14 p-10">
-                                    davidjerome
+                                    @foreach(\App\Enums\AdminEnums::$ROLES as $roles=>$key)
+                                        @if($key == $users->role)
+                                            <div class="status-badge">{{$roles}}</div>
+                                        @endif
+                                    @endforeach
                                 </div>
-                                <div class="theme-text f-14 p-10">
-                                    <div class="status-badge">Super Admin</div>
-                                </div>
                               <div class="theme-text f-14 p-10">
-                                Rohan Kumar
+                                  {{ucfirst(trans(json_decode($users->meta, true)['manager_name']))}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                +91 9783546271
+                                +91 {{json_decode($users->meta, true)['alt_phone']}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                Male
-                              </div>
-                              <div class="theme-text f-14 p-10">
-                                Master of Business Administration
+                                  {{ucfirst(trans(json_decode($users->meta, true)['gender']))}}
                               </div>
                               <div class="theme-text f-14 p-10 ">
-                                30 / 07 / 1995
+                                  {{date('d M y', strtotime($users->dob))}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                AXKPVXXXX
+                                  {{json_decode($users->meta, true)['pan_no']}}
                               </div>
                               <div class="theme-text f-14 p-10 ">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+                                  {{json_decode($users->meta, true)['address_line1']}} {{json_decode($users->meta, true)['address_line2']}}
                               </div>
                             </div>
 
                         </div>
 
-                        <div class="border-top-3">
+                        {{--<div class="border-top-3">
                             <div class="d-flex justify-content-between">
                                 <div class="w-100">
-        {{--                            <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Back</button></a>--}}
+        --}}{{--                            <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Back</button></a>--}}{{--
                                 </div>
                                 <div class="w-100 margin-r-20">
                                     <div class="d-flex justify-content-end">
@@ -134,7 +127,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>--}}
 
                     </div>
                     <div class="tab-pane fade   " id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
@@ -157,38 +150,29 @@
                               <div class="theme-text f-14 bold p-10">
                                 Branch Name
                               </div>
-                              <div class="theme-text f-14 bold p-10">
-                                Government ID proof
-                              </div>
                             </div>
 
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
-
-                    <div class="theme-text f-14 p-10">
-                      63217485796
-                      </div>
-                      <div class="theme-text f-14 p-10">
-                        ICICI Bank
-                      </div>
-                      <div class="theme-text f-14 p-10">
-                        David Jerome
-                      </div>
-                      <div class="theme-text f-14 p-10">
-                        ICI00001234
-                      </div>
-                      <div class="theme-text f-14 p-10">
-                        Indiranagar
-                      </div>
-                      <div class="theme-text f-14 p-10">
-                        PancardDoc.pdf
-                      </div>
-
-
+                                <div class="theme-text f-14 p-10">
+                                    {{json_decode($users->bank_meta, true)['acc_no']}}
+                              </div>
+                              <div class="theme-text f-14 p-10">
+                                  {{json_decode($users->bank_meta, true)['bank_name']}}
+                              </div>
+                              <div class="theme-text f-14 p-10">
+                                  {{json_decode($users->bank_meta, true)['holder_name']}}
+                              </div>
+                              <div class="theme-text f-14 p-10">
+                                  {{json_decode($users->bank_meta, true)['ifsc']}}
+                              </div>
+                              <div class="theme-text f-14 p-10">
+                                  {{json_decode($users->bank_meta, true)['branch_name']}}
+                              </div>
 
                   </div>
 
                         </div>
-                        <div class="border-top-3">
+                        {{--<div class="border-top-3">
                                 <div class="d-flex justify-content-start">
                                     <div class="w-50">
                                         <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
@@ -196,13 +180,13 @@
                                     <div class="w-50 margin-r-20">
                                         <div class="d-flex justify-content-end">
                                          <button  class="btn theme-text white-bg theme-br w-30 mr-20">Back</button>
-                    {{--                        <button  class="btn white-text theme-bg w-30" >Next</button>--}}
+                    --}}{{--                        <button  class="btn white-text theme-bg w-30" >Next</button>--}}{{--
                                         </div>
 
                                     </div>
                                 </div>
 
-                        </div>
+                        </div>--}}
 
                     </div>
 

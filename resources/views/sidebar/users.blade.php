@@ -32,7 +32,7 @@
                             </div>
                             <div class="profile-switch">
                                 <div class="theme-text f-14 p-05">
-                                    <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i>
+                                    <a href="{{route('edit-users', ["id"=>$users->id])}}"><i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i></a>
                                 </div>
                                 <label class="switch-small">
                                     <input type="checkbox" id="switch">
@@ -135,13 +135,13 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="d-flex   justify-content-center p-10">
+            <div class="d-flex   justify-content-center p-10">
                 <div class="">
-                    <a class="white-text p-10" href="{{route('details_user')}}">
+                    <a class="white-text p-10" href="{{route('details_user', ['id'=>$users->id])}}">
                         <button class="btn theme-bg white-text">View More</button>
                     </a>
                 </div>
-            </div>--}}
+            </div>
         </div>
         <div class="tab-pane fade  " id="Banking" role="tabpanel" aria-labelledby="zone-insight-tab">
             <div class="d-flex  row  p-10">
@@ -205,13 +205,13 @@
                 </div>
             </div>
 
-            {{--<div class="d-flex   justify-content-center p-10">
+            <div class="d-flex   justify-content-center p-10">
                 <div class="">
-                    <a class="white-text p-10" href="{{route('details_user')}}">
+                    <a class="white-text p-10" href="{{route('details_user', ['id'=>$users->id])}}">
                         <button class="btn theme-bg white-text">View More</button>
                     </a>
                 </div>
-            </div>--}}
+            </div>
         </div>
     </div>
 </div>

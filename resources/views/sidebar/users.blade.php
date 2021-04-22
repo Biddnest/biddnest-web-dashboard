@@ -23,12 +23,12 @@
                     <div class="theme-text f-14 bold">
                         <div class="d-flex justify-content-around ">
                             <figure>
-                                <img src="assets/images/big-profile.svg" alt="">
+                                <img src="{{$users->image}}" alt="">
                             </figure>
                             <div class="profile-details">
-                                <p class="profile-name">David jerome</p>
-                                <p class="profile-id">davidjerome@gamil.com</p>
-                                <p class="profile-num">987456123</p>
+                                <p class="profile-name">{{ucfirst(trans($users->fname))}} {{ucfirst(trans($users->lname))}}</p>
+                                <p class="profile-id">{{$users->email}}</p>
+                                <p class="profile-num">{{$users->phone}}</p>
                             </div>
                             <div class="profile-switch">
                                 <div class="theme-text f-14 p-05">
@@ -43,18 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex  row  p-10">
-                <div class="col-sm-6">
-                    <div class="theme-text f-14 bold">
-                        Employee ID
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="theme-text f-14 d-flex justify-content-between">
-                        davidjerome
-                    </div>
-                </div>
-            </div>
+
             <div class="d-flex  row  p-10">
                 <div class="col-sm-6">
                     <div class="theme-text f-14 bold">
@@ -63,7 +52,11 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        <div class="status-badge"> Super Admin</div>
+                        @foreach(\App\Enums\AdminEnums::$ROLES as $roles=>$key)
+                            @if($key == $users->role)
+                                <div class="status-badge">{{$roles}}</div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -76,7 +69,7 @@
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
                         <div class="d-flex vertical-center">
-                            Rohan Kumar
+                            {{ucfirst(trans(json_decode($users->meta, true)['manager_name']))}}
                         </div>
                     </div>
                 </div>
@@ -89,7 +82,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        +91 9783546271
+                        +91 {{json_decode($users->meta, true)['alt_phone']}}
                     </div>
                 </div>
             </div>
@@ -101,19 +94,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        Male
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex  row  p-10">
-                <div class="col-sm-6">
-                    <div class="theme-text f-14 bold">
-                        Educational Details
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="theme-text f-14">
-                        Master of Business Administration
+                        {{ucfirst(trans(json_decode($users->meta, true)['gender']))}}
                     </div>
                 </div>
             </div>
@@ -125,7 +106,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        30 / 07 / 1995
+                        {{date('d M y', strtotime($users->dob))}}
                     </div>
                 </div>
             </div>
@@ -138,7 +119,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        AXKPVXXXX
+                        {{json_decode($users->meta, true)['pan_no']}}
                     </div>
                 </div>
             </div>
@@ -150,17 +131,17 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitro
+                        {{json_decode($users->meta, true)['address_line1']}} {{json_decode($users->meta, true)['address_line2']}}
                     </div>
                 </div>
             </div>
-            <div class="d-flex   justify-content-center p-10">
+            {{--<div class="d-flex   justify-content-center p-10">
                 <div class="">
                     <a class="white-text p-10" href="{{route('details_user')}}">
                         <button class="btn theme-bg white-text">View More</button>
                     </a>
                 </div>
-            </div>
+            </div>--}}
         </div>
         <div class="tab-pane fade  " id="Banking" role="tabpanel" aria-labelledby="zone-insight-tab">
             <div class="d-flex  row  p-10">
@@ -171,7 +152,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="theme-text f-14">
-                        63217485796
+                        {{json_decode($users->bank_meta, true)['acc_no']}}
                     </div>
                 </div>
             </div>
@@ -183,7 +164,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        ICICI
+                        {{json_decode($users->bank_meta, true)['bank_name']}}
                     </div>
                 </div>
             </div>
@@ -195,7 +176,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        David Jerome
+                        {{json_decode($users->bank_meta, true)['holder_name']}}
                     </div>
                 </div>
             </div>
@@ -207,7 +188,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        ICI00001234
+                        {{json_decode($users->bank_meta, true)['ifsc']}}
                     </div>
                 </div>
             </div>
@@ -219,29 +200,18 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        Indiranagar
+                        {{json_decode($users->bank_meta, true)['branch_name']}}
                     </div>
                 </div>
             </div>
-            <div class="d-flex  row  p-10">
-                <div class="col-sm-6">
-                    <div class="theme-text f-14 bold">
-                        Government ID proof
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="theme-text f-14">
-                        PancardDoc.pdf
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex   justify-content-center p-10">
+
+            {{--<div class="d-flex   justify-content-center p-10">
                 <div class="">
                     <a class="white-text p-10" href="{{route('details_user')}}">
                         <button class="btn theme-bg white-text">View More</button>
                     </a>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
 </div>

@@ -240,7 +240,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createUsers'])->name("create-users");
             Route::get('/{id}/edit',[WebController::class,'createUsers'])->name("edit-users");
             Route::get('/{id}/bank',[WebController::class,'createBank'])->name("create-bank");
-            Route::get('/details',[WebController::class,'detailsUsers'])->name("details-users");
+            Route::get('/details/{id}',[WebController::class,'details_user'])->name('details_user');
         });
 
         Route::prefix('sidebar')->group(function () {

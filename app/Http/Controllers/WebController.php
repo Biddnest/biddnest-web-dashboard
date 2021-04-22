@@ -500,6 +500,12 @@ class WebController extends Controller
         return view('sidebar.users', ['users'=>$user]);
     }
 
+    public function details_user(Request $request)
+    {
+        $user=Admin::where("id", $request->id)->with('zones')->first();
+        return view('users.detailsusers', ['users'=>$user]);
+    }
+
     public function createUsers(Request $request)
     {
         $user=Admin::where("id", $request->id)->with('zones')->first();

@@ -156,7 +156,7 @@
             </div>
             <div class="d-flex   justify-content-center p-10">
                 <div class="">
-                    <a class="white-text p-10" href="{{route('details-users')}}">
+                    <a class="white-text p-10" href="{{route('details_user')}}">
                         <button class="btn theme-bg white-text">View More</button>
                     </a>
                 </div>
@@ -237,7 +237,7 @@
             </div>
             <div class="d-flex   justify-content-center p-10">
                 <div class="">
-                    <a class="white-text p-10" href="{{route('details-users')}}">
+                    <a class="white-text p-10" href="{{route('details_user')}}">
                         <button class="btn theme-bg white-text">View More</button>
                     </a>
                 </div>

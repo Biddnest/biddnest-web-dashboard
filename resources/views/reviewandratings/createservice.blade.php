@@ -12,12 +12,12 @@
                                     <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="service-requests.html">Service Requests</a></li>
                                         <li class="breadcrumb-item active" aria-current="page"> Create Service</li>
-                                    
-                                    
+
+
                                     </ol>
                                 </nav>
-                                
-                                
+
+
                                 </div>
                               <!-- <div class="d-flex flex-row text-left ml-120">
                                   <a href="categories-subcategories.html" class="text-decoration-none">
@@ -52,7 +52,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-6">
                                                 <div class="form-input">
                                                     <label class="full-name"> Created By</label>
@@ -80,7 +80,7 @@
                                                   <label class="full-name">Created At</label>
                                                   <input
                                                     type="text"
-                                                    class="dateselect form-control br-5"
+                                                    class=" form-control br-5"
                                                     required="required"
                                                   />
                                                   <span class="error-message"
@@ -88,9 +88,9 @@
                                                   >
                                                 </div>
                                               </div>
-                                          
-                                       
-                                           
+
+
+
                                             <div class="col-lg-6">
                                                 <div class="form-input">
                                                     <label class="full-name">Category ID</label>
@@ -102,7 +102,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                              
+
                                             <div class="col-lg-6">
                                                 <div class="form-input">
                                                     <label class="full-name">Item ID</label>
@@ -125,7 +125,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                           
+
                                             <div class="col-lg-6">
                                                 <div class="form-input">
                                                   <label class="full-name">Status</label>
@@ -134,13 +134,13 @@
                                                     <option></option>
                                                     <option></option>
                                                   </select>
-                                                  
-                    
+
+
                                                   <span class="error-message"
                                                     >Please enter a valid banner type</span
                                                   >
                                                 </div>
-                                              </div>  
+                                              </div>
                                               <div class="col-lg-12">
                                                 <div class="form-group theme-text">
                                                     <label class="pt-4">Description</label>
@@ -150,7 +150,7 @@
                                                     <span class="error-message">Please enter valid
                                                         Description</span>
                                                 </div>
-                                            </div>                                                                              
+                                            </div>
                                         </div>
                                         <div class="accordion" id="comments">
                                             <div class="d-flex justify-content-between flex-row p-10 py-0"

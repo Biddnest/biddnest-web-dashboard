@@ -52,7 +52,7 @@
                           <div class="col-sm-4 pr-0">
                             <div class="form-input ">
                               <label class="full-name">Schedule</label>
-                              <input type="text" class="dateselect form-control br-5" required="required" />
+                              <input type="text" class="form-control br-5" required="required" />
                               <span class="error-message">please enter valid date</span>
                             </div>
                           </div>
@@ -65,7 +65,7 @@
                           <div class="mt-4 f-20 pt-2 pl-2 pr-0">:</div>
 
                           <div class="col-sm-2  mt-4 pt-3 pr-0 pl-2">
-                            
+
                             <div class="form-input">
                               <input type="text" class=" form-control br-5" required="required" placeholder="25" />
 

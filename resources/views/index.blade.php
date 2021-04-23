@@ -21,33 +21,33 @@
     <div class="vender-all-details dashboard-cards flex-row">
         <div class="simple-card">
             <p>ORDER</p>
-            <h1>3,459</h1>
+            <h1>{{$count_orders}}</h1>
         </div>
         <div class="simple-card">
             <p>VENDORS</p>
-            <h1>865</h1>
+            <h1>{{$count_vendors}}</h1>
         </div>
         <div class="simple-card">
             <p>USERS</p>
-            <h1>2,594</h1>
+            <h1>{{$count_users}}</h1>
         </div>
         <div class="simple-card">
             <p>ZONES</p>
-            <h1>2,594</h1>
+            <h1>{{$count_zones}}</h1>
         </div>
         <div class="simple-card">
             <p>LIVE ORDERS</p>
-            <h1>2,248</h1>
+            <h1>{{$count_live_orders}}</h1>
         </div>
-        <div class="simple-card">
+        {{--<div class="simple-card">
             <p>SALES</p>
             <h1>2,248</h1>
-        </div>
+        </div>--}}
     </div>
     <!--  dashboard Columns -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards">
         <div class="col-sm-8 p-0">
-            <div class="card p-10">
+            <div class="card p-10" style="height: 322px !important;">
                 <div class="d-flex flex-row justify-content-between">
                     <div class="p-10 card-head right text-left">
                         <h3 class="f-18">Recent Orders</h3>
@@ -93,27 +93,66 @@
                         </tr>
                     </thead>
                     <tbody class="mtop-20">
-                        <tr class="tb-border cursor-pointer " onclick="$('#dashboard').toggleClass('display-pop-up');">
-                            <th scope="row" style="text-decoration: underline;"> SKU123456</th>
-                            <td class=""><span class=" text-center status-badge ">Awaiting Pickup
-                                                </span></td>
-                            <td class="text-center">0:03:02</td>
-                            <td class="text-center">₹2,300</td>
-                        </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('#dashboard').toggleClass('display-pop-up');"  >
-                            <th scope="row" style="text-decoration: underline;">SKU123456</th>
-                            <td class=""><span class=" text-center status-badge light-bg">Bidding</span>
-                            </td>
-                            <td>0:03:02</td>
-                            <td>₹2,300</td>
-                        </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('#dashboard').toggleClass('display-pop-up');"             >
-                            <th scope="row"  style="text-decoration: underline;">SKU123456</th>
-                            <td class=""><span class="  text-center status-badge red-bg ">Bounce Order</span>
-                            </td>
-                            <td>0:03:02</td>
-                            <td>₹2,300</td>
-                        </tr>
+                        @foreach($bookings as $booking)
+                            <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
+                                <th scope="row" style="text-decoration: underline;">{{$booking->public_booking_id}}</th>
+                                <td class="">
+                                    @switch($booking->status)
+                                        @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                            <span class=" text-center status-badge ">Enquiry</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                        <span class=" text-center status-badge ">Placed</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                        <span class=" text-center status-badge light-bg">Biding</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                        <span class=" text-center status-badge light-bg">Rebiding</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                        <span class=" text-center status-badge red-bg">Payment Pending</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                        <span class=" text-center status-badge ">Pending Driver Assign</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                        <span class=" text-center status-badge red-bg">Awaiting Pickup</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                        <span class=" text-center status-badge ">In Transit</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                        <span class=" text-center status-badge green-bg">Completed</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                        <span class=" text-center status-badge red-bg">Cancelled</span>
+                                        @break;
+                                    @endswitch
+                                </td>
+                                <td class="text-center">
+                                    @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
+                                         @php
+                                             $time1 = date("h:i:s", strtotime($booking->bid_result_at));
+                                            $timediff =\Carbon\Carbon::now()->diffInMinutes($time1);
+                                         @endphp
+                                        {{date("h:i:s", strtotime($timediff))}}
+                                    @else
+                                        Bidding Done
+                                    @endif
+                                </td>
+                                <td class="text-center">₹ @if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

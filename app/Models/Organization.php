@@ -54,4 +54,8 @@ class Organization extends Model
         return $this->hasOne(Vendor::class);
     }
 
+    public function booking(){
+        return $this->hasMany(Booking::class);
+    }
+
 }

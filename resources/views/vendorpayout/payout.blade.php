@@ -98,33 +98,37 @@
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($payouts as $payout)
-                                <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.payout',['id'=>$payout->id]) }}">
                                     <td scope="row">{{$payout->public_payout_id}}</td>
     {{--                                <td>Payment for BLR movers</td>--}}
                                     <td>{{$payout->organization_id}}</td>
                                     <td>
                                         @switch($payout->status)
                                             @case(\App\Enums\PayoutEnums::$STATUS['scheduled'])
-                                            <span class="status-badge green-bg">Scheduled</span>
+                                            <span class="status-badge green-bg text-center">Scheduled</span>
                                             @break
 
                                             @case(\App\Enums\PayoutEnums::$STATUS['suspended'])
-                                            <span class="status-badge red-bg">Suspended</span>
+                                            <span class="status-badge red-bg text-center">Suspended</span>
                                             @break
 
                                             @case(\App\Enums\PayoutEnums::$STATUS['transferred'])
-                                            <span class="status-badge green-bg">Transferred</span>
+                                            <span class="status-badge green-bg text-center">Transferred</span>
                                             @break
 
                                             @case(\App\Enums\PayoutEnums::$STATUS['processing'])
-                                            <span class="status-badge green-bg">Processing</span>
+                                            <span class="status-badge green-bg text-center">Processing</span>
                                             @break
                                         @endswitch
                                     </td>
                                     <td>{{date('d M y', strtotime($payout->dispatch_at))}}</td>
                                     <td>{{$payout->commission_percentage}}%</td>
                                     <td class="">₹{{$payout->commission_percentage}}
-                                    </td><td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('edit-payout', ['id'=>$payout->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                        <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

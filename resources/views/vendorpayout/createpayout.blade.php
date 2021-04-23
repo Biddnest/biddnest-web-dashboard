@@ -62,7 +62,7 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="coupon-id">Number Of Orders</label>
-                                <input type="number"  placeholder="10" id="coupon-id" name="no_of_orders" value="@if($payout){{json_decode($payout->meta)['total_bookings']}}@endif" class="form-control" @if($payout) readonly @endif required>
+                                <input type="number"  placeholder="10" id="coupon-id" name="no_of_orders" value="@if($payout){{json_decode($payout->meta, true)['total_bookings']}}@endif" class="form-control" @if($payout) readonly @endif required>
                                 <span class="error-message">Please enter  valid </span>
                             </div>
                         </div>

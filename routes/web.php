@@ -262,6 +262,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/subcateories/{id}',[WebController::class,'sidebar_subcategory'])->name('sidebar.subcategory');
         Route::get('/slider/{id}',[WebController::class,'sidebar_slider'])->name('sidebar.slider');
         Route::get('/user/{id}',[WebController::class,'sidebar_user'])->name('sidebar.user');
+        Route::get('/payout/{id}',[WebController::class,'sidebar_payout'])->name('sidebar.payout');
     });
 
 

@@ -46,7 +46,7 @@
                             <div class="form-input" >
                                 <label class="start-date">Payout date</label>
                                 <div id="my-modal">
-                                    <input type="datetime-local" id="dateselect" name="payout_date" value="@if($payout){{$payout->dispatch_at}}@endif" class="form-control br-5" required="required" placeholder="23/Dec/2020" @if($payout) readonly @endif />
+                                    <input type="datetime-local" id="dateselect" name="payout_date" value="@if($payout){{date('d/m/Y h:i A', strtotime($payout->dispatch_at))}}@endif" class="form-control br-5" required="required" placeholder="23/Dec/2020" />
                                     <span class="error-message">please enter valid date</span>
                                 </div>
                             </div>

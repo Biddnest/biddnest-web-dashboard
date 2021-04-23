@@ -68,7 +68,13 @@ class WebController extends Controller
     //index.php
     public function dashboard()
     {
-        return view('index');
+        $count_orders =Booking::where(['deleted'=>CommonEnums::$NO])->count();
+        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
+        $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
+        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->count();
+        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
+        $booking=Booking::where(['deleted'=>CommonEnums::$NO])->orderBy("updated_at","DESC")->limit(5)->get();
+        return view('index', ['count_orders'=>$count_orders, 'count_vendors'=>$count_vendors, 'count_users'=>$count_users, 'count_zones'=>$count_zones, 'count_live_orders'=>$count_live_orders, 'bookings'=>$booking]);
     }
 
     public function apiSettings()
@@ -476,6 +482,14 @@ class WebController extends Controller
         $scheduled_payout =Payout::where(["status"=>PayoutEnums::$STATUS['scheduled']])->count();
         $failed_payout =Payout::where(["status"=>PayoutEnums::$STATUS['suspended']])->count();
         return view('vendorpayout.payout', ['payouts'=>$payout, 'total_count'=>count($payout), 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
+    }
+
+    public function sidebar_payout(Request $request)
+    {
+        $payout=Payout::where("id", $request->id)->with(['organization'=>function($query){
+            $query->with('booking');
+        }])->first();
+        return view('sidebar.payout', ['payout'=>$payout]);
     }
 
     public function createVendorPayout(Request $request)

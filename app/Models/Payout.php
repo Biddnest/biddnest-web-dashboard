@@ -9,4 +9,9 @@ class Payout extends Model
 {
     use HasFactory;
     protected $table = "payout";
+
+    public function organization(){
+        return $this->belongsTo(Organization::class);
+    }
 }
+

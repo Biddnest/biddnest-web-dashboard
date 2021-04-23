@@ -478,9 +478,11 @@ class WebController extends Controller
         return view('vendorpayout.payout', ['payouts'=>$payout, 'total_count'=>count($payout), 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
     }
 
-    public function createVendorPayout()
+    public function createVendorPayout(Request $request)
     {
-        return view('vendorpayout.createpayout');
+        $organizations =Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $payout =Payout::where('id', $request->id)->first();
+        return view('vendorpayout.createpayout', ['payout'=>$payout, 'organizations'=>$organizations]);
     }
 
     public function detailsVendorPayout()

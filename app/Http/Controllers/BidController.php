@@ -111,7 +111,7 @@ class BidController extends Controller
             ->where("status", BidEnums::$STATUS['bid_submitted'])
             ->count();
 
-        if(!$min_amount || $low_quoted_vendors > 1)
+        if(!$min_amount || ($low_quoted_vendors >= 2))
         {
             $order = Booking::where("id", $book_id)->first();
 

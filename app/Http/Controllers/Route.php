@@ -878,4 +878,44 @@ class Route extends Controller
     {
         return AdminController::delete($request->id);
     }
+
+    public function payout_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'orgnizations'=>'required',
+            'payout_date'=>'required',
+            'amount'=>'required',
+            'no_of_orders'=>'required',
+            'commission'=>'required',
+            'commission_amount'=>'required',
+            'status'=>'required',
+            'payout_amount'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PayoutController::add($request->all());
+    }
+
+    public function payout_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'orgnizations'=>'required',
+            'payout_date'=>'required',
+            'amount'=>'required',
+            'no_of_orders'=>'required',
+            'commission'=>'required',
+            'commission_amount'=>'required',
+            'status'=>'required',
+            'payout_amount'=>'required',
+            'desc'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PayoutController::update($request->all());
+    }
 }

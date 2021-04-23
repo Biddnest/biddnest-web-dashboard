@@ -252,3 +252,26 @@ $("body").on('click', ".category-sidebar-toggle td:not(:nth-last-child(-n+2))", 
 });
 
 
+$("body").on('change', ".vendor-select", function(event) {
+    var id=$(this).val();
+    var commision=$("#org_"+id).data("comission");
+    if(commision > 0)
+    {
+        document.getElementById("commission").value = commision;
+    }
+    return false;
+});
+
+$("body").on('keyup', "#amount", function(event) {
+    var id=$(this).val();
+
+    var org_id = document.getElementById("orgnizations").value;
+    var commision=$("#org_"+org_id).data("comission");
+    var discount = (id * commision)/ 100;
+    var afterDiscount =id - discount;
+    document.getElementById("payout_amount").value = afterDiscount;
+    document.getElementById("commission_amount").value = discount;
+    return false;
+});
+
+

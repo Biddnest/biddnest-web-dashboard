@@ -125,7 +125,7 @@
                                 <div class="col-lg-6">
                                   <div class="form-input">
                                     <label class="full-name">From date</label>
-                                    <input type="date" name="from_date" value="{{$slider->from_date ?? ''}}" class="dateselect form-control br-5" required="required"/>
+                                    <input type="date" name="from_date" value="{{$slider->from_date ?? ''}}" class=" form-control br-5" required="required"/>
                                     <span class="error-message">please enter valid date</span>
                                   </div>
                                 </div>
@@ -133,7 +133,7 @@
                                 <div class="col-lg-6">
                                   <div class="form-input">
                                     <label class="full-name">To date</label>
-                                    <input type="date" name="to_date" value="{{$slider->to_date ?? ''}}" class="dateselect form-control br-5" required="required" />
+                                    <input type="date" name="to_date" value="{{$slider->to_date ?? ''}}" class=" form-control br-5" required="required" />
                                     <span class="error-message">please enter valid date</span>
                                   </div>
                                 </div>

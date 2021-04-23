@@ -146,19 +146,10 @@ class BidController extends Controller
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
-        NotificationController::sendTo("vendor", [$won_vendor_id], "Hurray!, You won a Bid.", "Tap to respond.", [
-            "type" => NotificationEnums::$TYPE['booking'],
-            "public_booking_id" =>$public_booking_id
-        ]);
 
         $lost_vendor_id =Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];
         $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
-
-        NotificationController::sendTo("vendor", [$lost_vendor_id], "Oops!, You Lost a Bid.", "Tap to respond.", [
-            "type" => NotificationEnums::$TYPE['booking'],
-            "public_booking_id" =>$public_booking_id
-        ]);
 
 
         $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])

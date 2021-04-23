@@ -23,8 +23,8 @@ class CreatePayoutTable extends Migration
             $table->integer("commission_percentage");
             $table->decimal("final_payout", 10,2);
             $table->timestamp("dispatch_at");
-            $table->string("rzp_payout_id");
-            $table->string("bank_transaction_id");
+            $table->string("rzp_payout_id")->nullable();
+            $table->string("bank_transaction_id")->nullable();
             $table->text("meta")->default(json_encode(["total_bookings"=>"", "from_date"=>"", " to_date"=>"", "affected_bookings"=>""]));
             $table->string("remarks")->nullable();
             $table->tinyInteger("status")->default(0);

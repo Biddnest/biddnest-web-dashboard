@@ -112,6 +112,9 @@ Route::prefix('web/api')->group(function () {
     Route::put('/bank',[Router::class,'bank_edit'])->name("bank_edit");
     Route::delete('/delete/{id}',[Router::class,'user_delete'])->name("user_delete");
 
+    Route::post('/payout',[Router::class,'payout_add'])->name("payout_add");
+    Route::put('/payout',[Router::class,'payout_edit'])->name("payout_edit");
+
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
@@ -232,6 +235,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('payout')->group(function () {
             Route::get('/',[WebController::class,'vendorPayout'])->name("vendor-payout");
             Route::get('/create',[WebController::class,'createVendorPayout'])->name("create-payout");
+            Route::get('/{id}/edit',[WebController::class,'createVendorPayout'])->name("edit-payout");
             Route::get('/details',[WebController::class,'detailsVendorPayout'])->name("payout-details");
         });
 

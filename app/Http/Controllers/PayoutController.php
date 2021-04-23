@@ -6,6 +6,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CommonEnums;
+use App\Models\Organization;
 use App\Models\Payout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,5 +43,55 @@ class PayoutController extends Controller
         ]]);
     }
 
+    public static function add($data)
+    {
+        $commision = Organization::where('id', $data['orgnizations'])->pluck('commission')[0];
+        $meta =json_encode(["total_bookings"=>$data['no_of_orders'], "from_date"=>null, "to_date"=>null, "affected_bookings"=>null]);
+        $payout_id = "BDPAYOUT-".uniqid();
 
+        $payout =new Payout;
+        $payout->public_payout_id=strtoupper($payout_id);
+        $payout->organization_id=$data['orgnizations'];
+        $payout->amount=$data['amount'];
+        $payout->commission=$data['commission_amount'];
+        $payout->commission_percentage=$commision;
+        $payout->final_payout=$data['payout_amount'];
+        $payout->dispatch_at=$data['payout_date'];
+        $payout->meta=$meta;
+        $payout->status=$data['status'];
+        $payout->remarks=$data['desc'];
+        $save_result =$payout->save();
+
+        if(!$save_result)
+            return Helper::response(false, "couldn't add record");
+
+        return Helper::response(true, "add record successfully", ['payout'=>Payout::findOrFail($payout->id)]);
+    }
+
+    public static function update($data)
+    {
+        $payout_exist =Payout::where('id', $data['id'])->first();
+        if(!$payout_exist)
+            return Helper::response(false, "Data doesn't exist");
+
+        $commision = Organization::where('id', $data['orgnizations'])->pluck('commission')[0];
+        $meta =json_encode(["total_bookings"=>$data['no_of_orders'], "from_date"=>null, "to_date"=>null, "affected_bookings"=>null]);
+
+        $update_result =Payout::where('id', $data['id'])->update([
+            "organization_id"=>$data['orgnizations'],
+            "amount"=>$data['amount'],
+            "commission"=>$data['commission_amount'],
+            "commission_percentage"=>$commision,
+            "final_payout"=>$data['payout_amount'],
+            "dispatch_at"=>$data['payout_date'],
+            "meta"=>$meta,
+            "status"=>$data['status'],
+            "remarks"=>$data['desc']
+        ]);
+
+        if(!$update_result)
+            return Helper::response(false, "couldn't update record");
+
+        return Helper::response(true, "Updated record successfully", ['payout'=>Payout::findOrFail($data['id'])]);
+    }
 }

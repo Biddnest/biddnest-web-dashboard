@@ -33,7 +33,7 @@
                 </h3>
             </div>
 
-            <form action="@if($coupons){{route('coupon_edit')}}@else{{route('coupon_add')}}@endif" method="@if(isset($coupons)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('coupons')}}" data-alert="tiny" class="create-coupons" data-parsley-validate>
+            <form action="@if($coupons){{route('coupon_edit')}}@else{{route('coupon_add')}}@endif" method="@if(isset($coupons)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('coupons')}}" data-alert="tiny" class="create-coupons" id="myForm" data-parsley-validate>
     <div class="d-flex  row  p-20" >
         @if($coupons)
             <input type="hidden" name="id" value="{{$coupons->id}}">
@@ -273,7 +273,7 @@
           </div>
       </div>
       <div class="d-flex  justify-content-between flex-row ml-20 p-10 border-top " >
-        <div class="w-50"><a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+        <div class="w-50"><a class="white-text p-10 cancel" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
         <div class="w-50 text-right"><button class="btn theme-bg white-text w-30" type="submit">Save</button></div>
        </div>
 </form>

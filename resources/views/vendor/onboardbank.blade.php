@@ -52,35 +52,35 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Account Number </label>
-                                    <input type="text" id="fullname" placeholder="BANK123456" value="@if($bank) {{ json_decode($bank->banking_details, true)['account_no']}}@endif" name="acc_no" class="form-control">
+                                    <input type="text" id="fullname" placeholder="BANK123456" value="@if($bank) {{ json_decode($bank->banking_details, true)['account_no']}}@endif" name="acc_no" class="form-control" required>
                                     <span class="error-message">Please enter valid Account Number</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Bank Name </label>
-                                    <input type="text" id="fullname" placeholder="ICICI Bank" value="@if($bank) {{json_decode($bank->banking_details, true)['bank_name']}}@endif" name="bank_name" class="form-control">
+                                    <input type="text" id="fullname" placeholder="ICICI Bank" value="@if($bank) {{json_decode($bank->banking_details, true)['bank_name']}}@endif" name="bank_name" class="form-control" required>
                                     <span class="error-message">Please enter valid Bank Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Account Holder Name </label>
-                                    <input type="text" id="fullname" placeholder="David Jerome" value="@if($bank) {{json_decode($bank->banking_details, true)['holder_name']}}@endif" name="holder_name" class="form-control">
+                                    <input type="text" id="fullname" placeholder="David Jerome" value="@if($bank) {{json_decode($bank->banking_details, true)['holder_name']}}@endif" name="holder_name" class="form-control" required>
                                     <span class="error-message">Please enter valid Account Holder Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">IFSC Code </label>
-                                    <input type="text" id="fullname" placeholder="ICI0012145" value="@if($bank) {{json_decode($bank->banking_details, true)['ifcscode']}}@endif" name="ifcscode" class="form-control">
+                                    <input type="text" id="fullname" placeholder="ICI0012145" value="@if($bank) {{json_decode($bank->banking_details, true)['ifcscode']}}@endif" name="ifcscode" class="form-control" required>
                                     <span class="error-message">Please enter valid IFSC Code</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Branch Name </label>
-                                    <input type="text" id="fullname" placeholder="Indiranagar" value="@if($bank) {{json_decode($bank->banking_details, true)['branch_name']}}@endif" name="branch_name" class="form-control">
+                                    <input type="text" id="fullname" placeholder="Indiranagar" value="@if($bank) {{json_decode($bank->banking_details, true)['branch_name']}}@endif" name="branch_name" class="form-control" required>
                                     <span class="error-message">Please enter valid Branch Name</span>
                                 </div>
                             </div>

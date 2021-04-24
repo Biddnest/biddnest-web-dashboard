@@ -19,4 +19,6 @@ class FaqEnums
                                     ["name"=>"Safety", "value"=>"safety","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/safety.svg"],
                                     ["name"=>"Payment", "value"=>"payment","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/payment.svg"],
                                     ];
+
+    public static $TYPE = ["delivery", "packaging", "organization", "bidding", "safety", "payment"];
 }

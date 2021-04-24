@@ -918,4 +918,52 @@ class Route extends Controller
 
         return PayoutController::update($request->all());
     }
+
+    public function page_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name'=>'required',
+            'slug'=>'required',
+            'contents'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PageController::add($request->name, $request->slug, $request->contents);
+    }
+
+    public function page_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required',
+            'slug'=>'required',
+            'contents'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PageController::updatePage($request->id, $request->name, $request->slug, $request->contents);
+    }
+
+    public function page_delete(Request $request)
+    {
+        return PageController::delete($request->id);
+    }
+
+    public function faq_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category'=>'required',
+            'ques'=>'required',
+            'answer'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return FaqController::add($request->ques, $request->answer, $request->category);
+    }
 }

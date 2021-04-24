@@ -26,7 +26,7 @@
                             </h3>
                         </header>
                         <div class="form-wrapper">
-                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" data-parsley-validate >
+                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate >
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <p class="img-label">Image</p>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="d-flex  justify-content-between flex-row ml-20 p-10 py-0 " style="border-top: 1px solid #70707040;margin-top: 70px;">
                                     <div class="w-50">
-                                        <a class="white-text p-10" href="#">
+                                        <a class="white-text p-10 cancel" href="#">
                                             <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                                         </a>
                                     </div>
@@ -116,7 +116,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </form>F
+                            </form>
                         </div>
                     </div>
                 </div>

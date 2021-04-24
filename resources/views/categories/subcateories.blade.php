@@ -54,7 +54,7 @@
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($subcategories as $subcategory)
-                                <tr class="tb-border cursor-pointer sub_{{$subcategory->id}} category-sidebar-toggle" data-sidebar="{{ route('sidebar.subcategory',['id'=>$subcategory->id]) }}"">
+                                <tr class="tb-border cursor-pointer sub_{{$subcategory->id}} category-sidebar-toggle" data-sidebar="{{ route('sidebar.subcategory',['id'=>$subcategory->id]) }}">
                                     <td scope="row"> <img class="defau  lt-image" src="{{$subcategory->image}}" alt=""></td>
                                     <td>{{$subcategory->name}}</td>
                                     <td>

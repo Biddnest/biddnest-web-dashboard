@@ -274,4 +274,7 @@ $("body").on('keyup', "#amount", function(event) {
     return false;
 });
 
-
+$("body").on('click', ".cancel", function(event) {
+    document.getElementById("newForm").reset();
+    return false;
+});

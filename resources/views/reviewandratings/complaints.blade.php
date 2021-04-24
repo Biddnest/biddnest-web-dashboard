@@ -136,16 +136,15 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td scope="row">{{$complaint->heading}}</td>
+                                    <td scope="row">{{Illuminate\Support\Str::limit($complaint->heading, 30)}}</td>
                                     <td>
                                         @if($complaint->user)
                                             {{ucfirst(trans($complaint->user->fname))}} {{ucfirst(trans($complaint->user->lname))}}
                                         @else
                                             {{ucfirst(trans($complaint->vendor->fname))}} {{ucfirst(trans($complaint->vendor->lname))}}
+                                        @endif
                                     </td>
                                     <td>{{date('d M y', strtotime($complaint->created_at))}}</td>
-{{--                                    <td>{{$complaint->user->fname}} {{$complaint->user->lname}}</td>--}}
-                                    <td>{{Illuminate\Support\Str::limit($complaint->desc, 10)}}</td>
                                     <td>
                                         @switch($complaint->status)
                                             @case(\App\Enums\TicketEnums::$STATUS['open'])

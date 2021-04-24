@@ -467,7 +467,7 @@ class WebController extends Controller
 
     public function serviceRequests()
     {
-        $service=Ticket::whereNotIn("type", [TicketEnums::$TYPE['complaint']])->with('vendor')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        $service=Ticket::whereNotIn("type", [TicketEnums::$TYPE['complaint']])->with('user')->with('vendor')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
         return view('reviewandratings.servicerequests', ['services'=>$service]);
     }
 

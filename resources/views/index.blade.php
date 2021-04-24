@@ -88,7 +88,7 @@
                         <tr>
                             <th scope="col">Order ID</th>
                             <th scope="col">Order Status</th>
-                            <th scope="col">Time Left</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Order Amount</th>
                         </tr>
                     </thead>
@@ -141,11 +141,7 @@
                                 </td>
                                 <td class="text-center">
                                     @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
-                                         @php
-                                             $time1 = date("h:i:s", strtotime($booking->bid_result_at));
-                                            $timediff =\Carbon\Carbon::now()->diffInMinutes($time1);
-                                         @endphp
-                                        {{date("h:i:s", strtotime($timediff))}}
+                                        {{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}
                                     @else
                                         Bidding Done
                                     @endif

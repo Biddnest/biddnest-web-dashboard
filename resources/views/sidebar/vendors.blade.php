@@ -192,7 +192,7 @@
                     @endforeach
                 </tbody>
             </table>
-            @if(count($payouts->inventories)== 0)
+            @if(count($payouts)== 0)
                 <div class="row hide-on-data">
                     <div class="col-md-12 text-center p-20">
                         <p class="font14"><i>.This Vendor don't have any Payouts here..</i></p>

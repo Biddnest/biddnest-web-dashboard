@@ -142,19 +142,19 @@
                                     <td>
                                         @switch($complaint->status)
                                             @case(\App\Enums\TicketEnums::$STATUS['open'])
-                                            <span class="status-badge green-bg">Open</span>
+                                            <span class="status-badge green-bg text-center">Open</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['rejected'])
-                                            <span class="status-badge red-bg">Rejected</span>
+                                            <span class="status-badge red-bg text-center">Rejected</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['resolved'])
-                                            <span class="status-badge green-bg">Resolved</span>
+                                            <span class="status-badge green-bg text-center">Resolved</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['closed'])
-                                            <span class="status-badge red-bg">Closed</span>
+                                            <span class="status-badge red-bg text-center">Closed</span>
                                             @break
                                         @endswitch
                                     </td>

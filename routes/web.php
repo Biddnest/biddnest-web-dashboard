@@ -118,6 +118,12 @@ Route::prefix('web/api')->group(function () {
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
+
+    Route::post('/pages',[Router::class,'page_add'])->name("page_add");
+    Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");
+    Route::delete('/pages/{id}',[Router::class,'page_delete'])->name("page_delete");
+
+    Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
 });
 
 Route::prefix('vendors')->group(function () {
@@ -138,8 +144,15 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
+
         Route::get('/settings',[WebController::class,'settings'])->name("settings");
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
+
+        Route::get('/pages',[WebController::class,'pages'])->name("pages");
+        Route::get('/pages/create',[WebController::class,'createpages'])->name("pages_create");
+        Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
+
+        Route::get('/faq',[WebController::class,'faq'])->name("faq");
 
         //booking and orders
         Route::prefix('booking')->group(function () {
@@ -245,11 +258,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/edit',[WebController::class,'createUsers'])->name("edit-users");
             Route::get('/{id}/bank',[WebController::class,'createBank'])->name("create-bank");
             Route::get('/details/{id}',[WebController::class,'details_user'])->name('details_user');
-        });
-
-        Route::prefix('sidebar')->group(function () {
-            /*sample route below*/
-//            Route::get('/customer',[WebController::class,'users'])->name("sidebar_users");
         });
 
     });

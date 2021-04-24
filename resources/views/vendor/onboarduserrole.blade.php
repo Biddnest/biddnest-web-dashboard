@@ -9,7 +9,7 @@
             <h3 class="page-head text-left p-4 f-20 theme-text">Onboard Vendor</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="vendor-management.html"> Vendors Management</a>
+                    <li class="breadcrumb-item"><a href="{{route('vendors')}}"> Vendors Management</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Onboard Vendor</li>
                 </ol>

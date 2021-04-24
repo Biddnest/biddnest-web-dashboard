@@ -12,7 +12,7 @@
             <div class="page-head text-left p-4 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="vendor-management.html"> Vendors Management</a>
+                        <li class="breadcrumb-item"><a href="{{route('vendors')}}"> Vendors Management</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Onboard Vendor</li>
                     </ol>
@@ -57,7 +57,7 @@
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                              aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" data-parsley-validate>
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
 
                                 <div class="d-flex row p-20">
                                     <div class="col-lg-6">
@@ -203,6 +203,7 @@
                                         <div class="form-input">
                                             <label class="full-name">State</label>
                                             <select id="" class="form-control" name="address[state]" required>
+                                                <option value="">--Select--</option>
                                                 <option value="Andhra Pradesh" @if("Andhra Pradesh" == ($organization->state ?? '')) selected @endif>Andhra Pradesh</option>
                                                 <option value="Andaman and Nicobar Islands" @if("Andaman and Nicobar Islands" == ($organization->state ?? '')) selected @endif>Andaman and Nicobar Islands
                                                 </option>
@@ -303,7 +304,7 @@
                                 <div id="comments">
                                     <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                          style="border-top: 1px solid #70707040;">
-                                        <div class="w-50"><a class="white-text p-10" href="#"><button
+                                        <div class="w-50"><a class="white-text p-10 cancel" href="#"><button
                                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                         </div>
                                         <div class="w-50 text-right"><button

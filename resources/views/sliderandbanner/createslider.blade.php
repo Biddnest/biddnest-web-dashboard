@@ -40,7 +40,7 @@
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active margin-topneg-15" role="tabpanel" aria-labelledby="live-tab">
                           <!-- form starts -->
-                              <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider" action="@if(isset($slider)) {{route('sliders_edit')}} @else{{route('sliders_add')}}@endif" data-next="redirect" data-url="{{route('create-banner', ['id'=>':id'])}}" data-alert="mega" method="@if(isset($slider)){{"PUT"}}@else{{"POST"}}@endif" data-parsley-validate>
+                              <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider" action="@if(isset($slider)) {{route('sliders_edit')}} @else{{route('sliders_add')}}@endif" data-next="redirect" data-url="{{route('create-banner', ['id'=>':id'])}}" data-alert="mega" method="@if(isset($slider)){{"PUT"}}@else{{"POST"}}@endif" id="myFormF" data-parsley-validate>
                               @if(isset($slider))
                                   <input type="hidden" value="{{$id}}" name="id" />
                               @endif
@@ -177,7 +177,7 @@
                               <div class="col-md-12" id="comments">
                                   <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                                     <div class="w-50">
-                                            <a class="white-text p-10" href="#">
+                                            <a class="white-text p-10 cancel" href="#">
                                               <button class="btn theme-br theme-text w-30 white-bg br-5">
                                                     Cancel
                                               </button>

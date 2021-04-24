@@ -12,7 +12,7 @@
                         <div class="page-head text-left p-4 pt-0 pb-0">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="vendor-management.html"> Vendors Management</a>
+                                    <li class="breadcrumb-item"><a href="{{route('vendors')}}"> Vendors Management</a>
                                     </li>
                                     <li class="breadcrumb-item active" aria-current="page">Onboard Vendor</li>
                                 </ol>
@@ -64,7 +64,7 @@
                                     <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                                         aria-labelledby="new-order-tab">
                                         <!-- form starts -->
-                                        <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_onvoard_vendor')}}" method="POST" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>':id'])}}" data-alert="mega" data-parsley-validate>
+                                        <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_onvoard_vendor')}}" method="POST" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate>
 
                                             <div class="d-flex row p-20">
                                                 <div class="col-lg-6">
@@ -112,7 +112,7 @@
                                                     <div class="form-input">
                                                         <label class="full-name">Email ID</label>
                                                             <input type="email" id="email" placeholder="abc@email.com"
-                                                                class="form-control" name="email">
+                                                                class="form-control" name="email" required>
                                                             <span class="error-message">Please enter valid
                                                                 Email ID</span>
                                                     </div>
@@ -134,7 +134,7 @@
                                                     <div class="form-input">
                                                         <label class="phone-num-lable">Secondary Contact Number</label>
                                                             <input type="tel" id="phone-pop-up" placeholder="9876543210"
-                                                                class=" form-control" name="phone[secondory]" maxlength="10" minlength="10">
+                                                                class=" form-control" name="phone[secondory]" maxlength="10" minlength="10" required>
                                                             <span class="error-message">Please enter valid
                                                                 Phone number</span>
                                                     </div>
@@ -165,7 +165,7 @@
                                                     <div class="form-input">
                                                         <label class="full-name">GSTIN Number of Organisation</label>
                                                             <input type="text" id="fullname" placeholder="GST12355464"
-                                                                class="form-control" name="organization[gstin]" maxlength="15" minlength="15">
+                                                                class="form-control" name="organization[gstin]" maxlength="15" minlength="15" required>
                                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
                                                     </div>
@@ -240,7 +240,8 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-input">
                                                         <label class="full-name">State</label>
-                                                            <select id="state" class="form-control" name="address[state]">
+                                                            <select id="state" class="form-control" name="address[state]" required>
+                                                                <option value="">--Select--</option>
                                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                                 <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -259,7 +260,7 @@
                                                                 <option value="Himachal Pradesh">Himachal Pradesh</option>
                                                                 <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                                                 <option value="Jharkhand">Jharkhand</option>
-                                                                <option value="Karnataka" selected>Karnataka</option>
+                                                                <option value="Karnataka">Karnataka</option>
                                                                 <option value="Kerala">Kerala</option>
                                                                 <option value="Madhya Pradesh">Madhya Pradesh</option>
                                                                 <option value="Maharashtra">Maharashtra</option>
@@ -343,7 +344,7 @@
                                             <div id="comments">
                                                 <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                                     style="border-top: 1px solid #70707040;">
-                                                    <div class="w-50"><a class="white-text p-10" href="#"><button
+                                                    <div class="w-50"><a class="white-text p-10 cancel" href="#"><button
                                                                 class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                                     </div>
                                                     <div class="w-50 text-right"><a class="white-text p-10"><button

@@ -25,7 +25,7 @@
                         @if($payout) Edit @else Create @endif Payout
                     </h3>
                 </div>
-                <form action="@if($payout){{route('payout_edit')}}@else{{route('payout_add')}}@endif" method="@if(isset($payout)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor-payout')}}" data-alert="tiny" class="create-coupon" data-parsley-validate>
+                <form action="@if($payout){{route('payout_edit')}}@else{{route('payout_add')}}@endif" method="@if(isset($payout)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor-payout')}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate>
                     <div class="d-flex pl-4 pr-4 row  p-20" >
                         @if($payout)
                             <input type="hidden" name="id" value="{{$payout->id}}">
@@ -33,7 +33,7 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label>Vendor Name</label>
-                                <select class="form-control br-5 vendor-select" name="orgnizations" id="orgnizations" @if($payout) readonly @endif>
+                                <select class="form-control br-5 vendor-select" name="orgnizations" id="orgnizations" @if($payout) readonly @endif required>
                                     <option value="">--Select--</option>
                                     @foreach($organizations as $org)
                                         <option id="org_{{$org->id}}" value="{{$org->id}}" data-comission="{{$org->commission}}" @if($payout && ($payout->organization_id == $org->id)) selected @endif>{{ucfirst(trans($org->org_name))}} {{$org->org_type}}</option>
@@ -69,7 +69,7 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="coupon-id">Commission Rate</label>
-                                <input type="number" placeholder="10%" id="commission" value="@if($payout){{$payout->commission_percentage}}@endif" name="commission" class="form-control commission" required readonly>
+                                <input type="number" placeholder="10%" id="commission" value="@if($payout){{$payout->commission_percentage}}@endif" name="commission" class="form-control commission" readonly>
                                 <input type="hidden" placeholder="10%" id="commission_amount" value="@if($payout){{$payout->commission}}@endif" name="commission_amount" class="form-control">
                                 <span class="error-message">Please enter  valid </span>
                             </div>
@@ -104,14 +104,14 @@
                         <div class="col-sm-12">
                             <div class="form-input">
                                 <label>Description</label>
-                                <textarea id="" class = "form-control" rows = "4" name="desc" placeholder ="Right Description" required>@if($payout){{$payout->remarks}}@endif</textarea>
+                                <textarea id="" class = "form-control" rows = "4" name="desc" placeholder ="Write Description" required>@if($payout){{$payout->remarks}}@endif</textarea>
                                 <span class="error-message">Please enter Description</span>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex  justify-content-between flex-row  p-10 border-top " >
                         <div class="w-50">
-                            <a class="white-text p-10" href="#">
+                            <a class="white-text p-10 cancel" href="#">
                                 <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                             </a>
                         </div>

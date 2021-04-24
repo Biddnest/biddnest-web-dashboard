@@ -19,6 +19,7 @@ class CreatePagesTable extends Migration
             $table->string("slug");
             $table->longText("content");
             $table->timestamps();
+            $table->tinyInteger("deleted")->default(0);
         });
     }
 

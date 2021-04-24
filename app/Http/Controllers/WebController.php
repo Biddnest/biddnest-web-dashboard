@@ -17,6 +17,7 @@ use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Org_kyc;
+use App\Models\Page;
 use App\Models\Payout;
 use App\Models\Review;
 use App\Models\Service;
@@ -82,9 +83,21 @@ class WebController extends Controller
         return view('system_settings');
     }
 
-    public function settings()
+    public function faq()
     {
-        return view('general_settings');
+        return view('system_setting.faq');
+    }
+
+    public function pages()
+    {
+        $pages=Page::where('deleted', CommonEnums::$NO)->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('system_setting.pages', ['pages'=>$pages]);
+    }
+
+    public function createpages(Request $request)
+    {
+        $pages=Page::where('id', $request->id)->first();
+        return view('system_setting.createpage', ['pages'=>$pages]);
     }
 
     public function ordersBookingsLive(Request $request)

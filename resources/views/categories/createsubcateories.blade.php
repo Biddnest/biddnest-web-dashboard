@@ -31,7 +31,7 @@
                 <div class="" id="">
                     <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                       <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="@if(!$subcategory){{route('sub_service_add')}}@else{{route('sub_service_edit')}}@endif" method= "@if(isset($subcategory)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('subcateories')}}" data-alert="tiny" data-parsley-validate>
+                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="@if(!$subcategory){{route('sub_service_add')}}@else{{route('sub_service_edit')}}@endif" method= "@if(isset($subcategory)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('subcateories')}}" data-alert="tiny" id="myForm" data-parsley-validate>
                         <div class="d-flex row">
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
@@ -57,7 +57,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Name</label>
-                                  <input type="text" id="banner_name" placeholder="Name" name="name" value="@if(isset($subcategory)){{$subcategory->name}}@endif" class="form-control br-5"/>
+                                  <input type="text" id="banner_name" placeholder="Name" name="name" value="@if(isset($subcategory)){{$subcategory->name}}@endif" class="form-control br-5" required/>
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="phone-num-lable">Category Name</label>
-                                    <select class="form-control br-5 field-toggle" name="category">
+                                    <select class="form-control br-5 field-toggle" name="category" required>
                                         <option value="">--Select--</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" @if(isset($subcategory)) @if(isset($subcategory->services) && ($category->id == $subcategory->services->id)) selected @endif @endif>{{$category->name}}</option>
@@ -199,7 +199,7 @@
                         <div>
                           <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                             <div class="w-50">
-                              <a class="white-text p-10" href="#">
+                              <a class="white-text p-10 cancel" href="#">
                                   <button class="btn theme-br theme-text w-30 white-bg br-5">
                                     Cancel
                                   </button>

@@ -24,7 +24,7 @@ class SettingController extends Controller
 
     public static function update_api($data)
     {
-        $api_settings=Settings::whereNotIn('id', [12])->pluck('id');
+        $api_settings=Settings::whereNotIn('key', ["contact_details"])->pluck('id');
 
         foreach ($api_settings as $key)
         {

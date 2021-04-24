@@ -81,7 +81,7 @@ class WebController extends Controller
 
     public function apiSettings()
     {
-        $setting =Settings::whereNotIn('id', [12])->get();
+        $setting =Settings::whereNotIn('key', ["contact_details"])->get();
         return view('system_setting.all_setting', ['settings'=>$setting]);
     }
 
@@ -92,7 +92,7 @@ class WebController extends Controller
 
     public function contact_us()
     {
-        $contact_us =Settings::where('id', 12)->pluck('value')[0];
+        $contact_us =Settings::where('key', ["contact_details"])->pluck('value')[0];
         return view('system_setting.contact_us', ['contact_us'=>json_decode($contact_us, true)]);
     }
 

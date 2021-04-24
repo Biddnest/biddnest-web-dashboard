@@ -152,6 +152,13 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
+                                            @if(count($vendors)== 0)
+                                                <div class="row hide-on-data">
+                                                    <div class="col-md-12 text-center p-20">
+                                                        <p class="font14"><i>. You don't have any Vendors here.</i></p>
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div class="pagination">
                                                 <ul>
                                                     <li class="p-1">Page</li>

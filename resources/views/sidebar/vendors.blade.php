@@ -175,11 +175,6 @@
                 </tr>
                 </thead>
                 <tbody class="mtop-20">
-                    @if(!$payouts)
-                        <tr class="cursor-pointer">
-                            <p style="text-decoration: underline;margin: 0;"> There is no any Payout Added</p>
-                        </tr>
-                    @endif
                     @foreach($payouts as $payout)
                         <tr class="cursor-pointer">
                             <td scope="row" class="text-left">
@@ -197,7 +192,13 @@
                     @endforeach
                 </tbody>
             </table>
-
+            @if(count($payouts->inventories)== 0)
+                <div class="row hide-on-data">
+                    <div class="col-md-12 text-center p-20">
+                        <p class="font14"><i>.This Vendor don't have any Payouts here..</i></p>
+                    </div>
+                </div>
+            @endif
             <div class="d-flex   justify-content-center p-20">
 
                 <div class=""><a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}">

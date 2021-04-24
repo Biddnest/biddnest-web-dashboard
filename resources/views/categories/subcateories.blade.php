@@ -58,7 +58,7 @@
                                     <td scope="row"> <img class="defau  lt-image" src="{{$subcategory->image}}" alt=""></td>
                                     <td>{{$subcategory->name}}</td>
                                     <td>
-                                        @switch($subcategory->status)
+                                       {{-- @switch($subcategory->status)
                                             @case(\App\Enums\CommonEnums::$YES)
                                                 <span class="status-badge green-bg text-center">Enabled</span>
                                             @break
@@ -69,7 +69,8 @@
 
                                             @default
                                                 <span class="status-badge info-bg text-center">Unknown</span>
-                                        @endswitch
+                                        @endswitch--}}
+                                        <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}">
                                     </td>
                                     <td class="">
                                         <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}">

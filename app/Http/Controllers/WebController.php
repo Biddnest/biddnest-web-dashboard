@@ -292,7 +292,7 @@ class WebController extends Controller
     public function categories()
     {
         return view('categories.categories',[
-            "categories"=>Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
+            "categories"=>Service::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
             "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
         ]);
     }
@@ -306,7 +306,7 @@ class WebController extends Controller
     public function subcateories()
     {
         return view('categories.subcateories',[
-            "subcategories"=>Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "subcategories"=>Subservice::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -329,7 +329,7 @@ class WebController extends Controller
     public function inventories()
     {
         return view('categories.inventories',[
-            "inventories"=>Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "inventories"=>Inventory::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -380,7 +380,7 @@ class WebController extends Controller
         $active = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $inactive = Zone::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
         return view('zones.zones',[
-            "zones"=>Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
+            "zones"=>Zone::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
         ]);
     }
 
@@ -393,7 +393,7 @@ class WebController extends Controller
     public function slider()
     {
         return view('sliderandbanner.slider',[
-            "sliders"=>Slider::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
+            "sliders"=>Slider::where(["deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 

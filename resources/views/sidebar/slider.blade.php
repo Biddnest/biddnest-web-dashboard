@@ -34,7 +34,7 @@
                                 {{date('d M y', strtotime($sliders->from_date))}} To {{date('d M y', strtotime($sliders->to_date))}}
                                 </span></h2>
                             <label class="switch mb-0" style="transform: scale(0.7);">
-                                <input type="checkbox" class="mt-2" id="switch" />
+                                <input type="checkbox" id="switch" {{($sliders->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer mt-2" data-url="{{route('slider_status_update',['id'=>$sliders->id])}}">
                                 <span class="slider"></span>
                             </label>
                         </li>

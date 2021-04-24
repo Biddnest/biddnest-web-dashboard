@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Models\SlideBanner;
 use App\Models\SliderZone;
 use Illuminate\Support\Facades\DB;
@@ -177,6 +178,31 @@ class SliderController extends Controller
             return Helper::response(false,"Couldn't Delete data $result");
         else
             return Helper::response(true,"Data Deleted successfully");
+    }
+
+    public static function statusUpdate($id)
+    {
+        $slider = Slider::find($id);
+
+        switch($slider->status){
+            case CommonEnums::$YES:
+                $status = CommonEnums::$NO;
+                break;
+
+            case CommonEnums::$NO:
+                $status = CommonEnums::$YES;
+                break;
+
+            default:
+                return Helper::response([false, "This user is supended. Please use the vendor panel to enable."]);
+                break;
+        }
+
+        $update_status = Slider::where('id',$id)->update(["status"=>$status]);
+        if(!$update_status)
+            return Helper::response(false, "failed to updated status");
+
+        return Helper::response(true, "status updated successfully");
     }
 
 }

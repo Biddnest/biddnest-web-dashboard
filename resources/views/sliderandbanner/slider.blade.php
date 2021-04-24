@@ -108,9 +108,9 @@
                                         <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"
                                                             class="span2">
                                             @if($slider->status == 0)
-                                                <div class="status-badge red-bg">Inactive</div>
+                                                <div class="status-badge red-bg text-center">Inactive</div>
                                             @else
-                                                <div class="status-badge green-bg">Active</div>
+                                                <div class="status-badge green-bg text-center">Active</div>
                                             @endif
                                         </td>
                                         <td class="span1"

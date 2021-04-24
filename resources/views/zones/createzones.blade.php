@@ -115,7 +115,7 @@
                         <div class="form-input">
                             <label class="areas">Areas</label>
                             <select class="form-control select-box2" name="area[]" multiple required>
-                                @foreach(json_decode($zones->area) as $area)
+                                @foreach(json_decode($zones->area, true) as $area)
                                     <option value="{{$area}}" selected>{{$area}}</option>
                                 @endforeach
                             </select>

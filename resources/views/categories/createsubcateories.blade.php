@@ -79,7 +79,7 @@
                                     <select class="form-control br-5 field-toggle" name="category">
                                         <option value="">--Select--</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" @if(isset($subcategory) && $category->id == $subcategory->services->id) selected @endif>{{$category->name}}</option>
+                                            <option value="{{$category->id}}" @if(isset($subcategory)) @if(isset($subcategory->services) && ($category->id == $subcategory->services->id)) selected @endif @endif>{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                   <span class="error-message">Please enter valid Service</span>

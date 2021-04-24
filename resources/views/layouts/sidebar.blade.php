@@ -121,16 +121,17 @@
                         <li class="menu-item"><a class="regular-nav"> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-pie"></i></span> </span> Reports</a></li>
 
                         <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
-                            aria-controls="Reviews"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
+                            aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
                         </li>
-                        <ul class="sub-menu" id="reviews">
-                            <li class="sub-menu-item"><a href="{{route('review')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
-                                        aria-hidden="true"></i>Reviews</a></li>
+                        <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
+                            aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
+                        </li>
+                        <ul class="sub-menu" id="ticket">
                             <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                             </li>
                             <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Tickets</a></li>
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
                         </ul>
                         <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"
                             aria-controls="Payout"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-wallet"></i></span> </span> Vendors Payout</a>

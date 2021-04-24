@@ -124,6 +124,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/pages/{id}',[Router::class,'page_delete'])->name("page_delete");
 
     Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
+    Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
+    Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
 });
 
 Route::prefix('vendors')->group(function () {
@@ -145,7 +147,6 @@ Route::prefix('admin')->group(function () {
     Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
 
-        Route::get('/settings',[WebController::class,'settings'])->name("settings");
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
 
         Route::get('/pages',[WebController::class,'pages'])->name("pages");
@@ -153,6 +154,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
 
         Route::get('/faq',[WebController::class,'faq'])->name("faq");
+        Route::get('/contact-us',[WebController::class,'contact_us'])->name("contact_us");
 
         //booking and orders
         Route::prefix('booking')->group(function () {

@@ -67,7 +67,8 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($categories as $category)
-                                            <tr class="tb-border cursor-pointer cat_{{$category->id}}">                                                <td scope="row"> <img class="default-image"
+                                            <tr class="tb-border cursor-pointer cat_{{$category->id}}">
+                                                <td scope="row"> <img class="default-image"
                                                         src="{{$category->image}}" alt=""></td>
                                                 <td>{{ucfirst(trans($category->name))}}</td>
                                                 <td>
@@ -110,8 +111,14 @@
                                             </tr>
                                         @endforeach
                                         </tbody>
-
                                     </table>
+                                    @if(count($categories)== 0)
+                                        <div class="row hide-on-data">
+                                            <div class="col-md-12 text-center p-20">
+                                                <p class="font14"><i>. You don't have any Category here.</i></p>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>

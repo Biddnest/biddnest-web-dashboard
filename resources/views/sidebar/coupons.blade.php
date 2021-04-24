@@ -127,6 +127,13 @@
                     @endforeach
                 </tbody>
             </table>
+            @if(count($coupons->payment)== 0)
+                <div class="row hide-on-data">
+                    <div class="col-md-12 text-center p-20">
+                        <p class="font14"><i>. This Coupon is not used.</i></p>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

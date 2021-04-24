@@ -49,6 +49,12 @@
                     <!-- form starts -->
                     <div class="tab-pane show">
                         <div class="row" style="padding: 20px 25px;">
+                            @if(count($roles) == 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. You dont have any User roles here. <br />Add a Users to get started.</i></p>
+                                    </div></div>
+                            @endif
                             @foreach($roles as $role)
                                     <div class="col-md-4 p-0 m-0 role_{{$role->id}}">
                                     <div class="user-profile-snip">

@@ -132,6 +132,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @if(count($sliders)== 0)
+                            <div class="row hide-on-data">
+                                <div class="col-md-12 text-center p-20">
+                                    <p class="font14"><i>. You don't have any Sliders here.</i></p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

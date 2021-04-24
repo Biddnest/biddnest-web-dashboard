@@ -23,6 +23,7 @@
                                         <ul>
                                             <li><a href="{{route('pages')}}">General Pages</a></li>
                                             <li><a href="{{route('faq')}}">FAQ</a></li>
+                                            <li><a href="{{route('contact_us')}}">Contact-Us</a></li>
                                             <li><a href="{{route('api-settings')}}">API Settings</a></li>
 
                                         </ul>

@@ -966,4 +966,23 @@ class Route extends Controller
 
         return FaqController::add($request->ques, $request->answer, $request->category);
     }
+
+    public function contact_us(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone'=>'required',
+            'email'=>'required',
+            'address'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return SettingController::update_contact($request->phone, $request->email, $request->address);
+    }
+
+    public function api_settings_update(Request $request)
+    {
+       return SettingController::update_api($request->all());
+    }
 }

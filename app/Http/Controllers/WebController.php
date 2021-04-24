@@ -21,6 +21,7 @@ use App\Models\Page;
 use App\Models\Payout;
 use App\Models\Review;
 use App\Models\Service;
+use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\Subservice;
 use App\Models\Organization;
@@ -80,12 +81,19 @@ class WebController extends Controller
 
     public function apiSettings()
     {
-        return view('system_settings');
+        $setting =Settings::whereNotIn('key', ["contact_details"])->get();
+        return view('system_setting.all_setting', ['settings'=>$setting]);
     }
 
     public function faq()
     {
         return view('system_setting.faq');
+    }
+
+    public function contact_us()
+    {
+        $contact_us =Settings::where('key', ["contact_details"])->pluck('value')[0];
+        return view('system_setting.contact_us', ['contact_us'=>json_decode($contact_us, true)]);
     }
 
     public function pages()

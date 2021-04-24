@@ -104,25 +104,33 @@
                     <table class="table text-left p-0 theme-text mb-0 primary-table">
                         <thead class="secondg-bg  p-0">
                             <tr>
-                                <th scope="col">Service ID</th>
-                                <th scope="col">Vendor ID</th>
-                                <th scope="col">User ID</th>
-                                <th scope="col">Created At</th>
-                                <th scope="col">Created by</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Operations</th>
+                                <th scope="col" style="width: 2%;">Service Type</th>
+                                <th scope="col" style="width: 8%;">Title</th>
+                                <th scope="col" style="width: 15%;">Created By</th>
+                                <th scope="col" style="width: 20%;">Created At</th>
+                                <th scope="col" style="width: 10%;">Status</th>
+                                <th scope="col" style="width: 5%;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
                             @foreach($services as $servic)
                                 <tr class="tb-border cursor-pointer">
-                                    <td scope="row">{{$servic->id}}</td>
-                                    <td>{{$servic->vendor_id}}</td>
-                                    <td>{{$servic->user_id}}</td>
+                                    <td>
+                                        @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
+                                            @if($key == $servic->type)
+                                                {{ucfirst(trans($type))}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td scope="row">{{Illuminate\Support\Str::limit($servic->heading, 30)}}</td>
+                                    <td>
+                                        @if($servic->vendor)
+                                            {{ucfirst(trans($servic->vendor->fname))}} {{ucfirst(trans($servic->vendor->lname))}}
+                                        @else
+                                            {{ucfirst(trans($servic->user->fname))}} {{ucfirst(trans($servic->user->lname))}}
+                                        @endif
+                                    </td>
                                     <td>{{date('d M y', strtotime($servic->created_at))}}</td>
-                                    <td>@if($servic->vendor){{ucfirst(trans(json_decode($servic->vendor, true)['fname']))}} {{ucfirst(trans(json_decode($servic->vendor, true)['lname']))}}@endif</td>
-                                    <td>{{ Illuminate\Support\Str::limit($servic->desc, 20) }}</td>
                                     <td class="">
                                         @switch($servic->status)
                                             @case(\App\Enums\TicketEnums::$STATUS['open'])

@@ -107,7 +107,7 @@
                                     <td>{{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}</td>
                                     <td>{{$review->desc}}</td>
                                     <td class="">
-                                        <div class="status-badge light-bg">
+                                        <div class="status-badge light-bg text-center">
                                             @if(\App\Enums\ReviewEnums::$STATUS['active'] == $review->status)
                                                 Active
                                             @else

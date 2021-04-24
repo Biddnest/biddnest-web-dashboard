@@ -118,43 +118,49 @@
                     <table class="table text-left p-0  mb-0">
                         <thead class="secondg-bg  p-0">
                             <tr>
-                                <th scope="col" style="width: 2%;">Complaints ID </th>
-                                <th scope="col" style="width: 8%;">Order ID</th>
-                                <th scope="col" style="width: 15%;">Customer Name</th>
-                                <th scope="col" style="width: 20%;">Complaint Type</th>
-                                <th scope="col" style="width: 10%;">Created At</th>
-{{--                                <th scope="col" style="width: 10%;">Created By</th>--}}
-                                <th scope="col" style="width: 25%;">Description</th>
+                                <th scope="col" style="width: 2%;">Complaint Type</th>
+                                <th scope="col" style="width: 8%;">Title</th>
+                                <th scope="col" style="width: 15%;">Created By</th>
+                                <th scope="col" style="width: 20%;">Created At</th>
                                 <th scope="col" style="width: 10%;">Status</th>
                                 <th scope="col" style="width: 5%;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($complaints as $complaint)
-                                <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                    <td scope="row">{{$complaint->id}}</td>
-                                    <td>@if($complaint->booking){{$complaint->booking->public_booking_id}}@endif</td>
-                                    <td>{{ucfirst(trans($complaint->user->fname))}} {{ucfirst(trans($complaint->user->lname))}}</td>
-                                    <td >{{Illuminate\Support\Str::limit($complaint->heading, 10)}}</td>
+                                <tr class="tb-border cursor-pointer">
+                                    <td>
+                                        @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
+                                            @if($key == $complaint->type)
+                                                {{ucfirst(trans($type))}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td scope="row">{{Illuminate\Support\Str::limit($complaint->heading, 30)}}</td>
+                                    <td>
+                                        @if($complaint->user)
+                                            {{ucfirst(trans($complaint->user->fname))}} {{ucfirst(trans($complaint->user->lname))}}
+                                        @else
+                                            {{ucfirst(trans($complaint->vendor->fname))}} {{ucfirst(trans($complaint->vendor->lname))}}
+                                        @endif
+                                    </td>
                                     <td>{{date('d M y', strtotime($complaint->created_at))}}</td>
-{{--                                    <td>{{$complaint->user->fname}} {{$complaint->user->lname}}</td>--}}
-                                    <td>{{Illuminate\Support\Str::limit($complaint->desc, 10)}}</td>
                                     <td>
                                         @switch($complaint->status)
                                             @case(\App\Enums\TicketEnums::$STATUS['open'])
-                                            <span class="status-badge green-bg">Open</span>
+                                            <span class="status-badge green-bg text-center">Open</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['rejected'])
-                                            <span class="status-badge red-bg">Rejected</span>
+                                            <span class="status-badge red-bg text-center">Rejected</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['resolved'])
-                                            <span class="status-badge green-bg">Resolved</span>
+                                            <span class="status-badge green-bg text-center">Resolved</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['closed'])
-                                            <span class="status-badge red-bg">Closed</span>
+                                            <span class="status-badge red-bg text-center">Closed</span>
                                             @break
                                         @endswitch
                                     </td>

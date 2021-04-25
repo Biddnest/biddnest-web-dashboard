@@ -27,6 +27,7 @@ use App\Models\Subservice;
 use App\Models\Organization;
 use App\Models\Testimonials;
 use App\Models\Ticket;
+use App\Models\TicketReply;
 use App\Models\Vendor;
 use App\Models\Zone;
 use Illuminate\Http\Request;
@@ -481,9 +482,11 @@ class WebController extends Controller
         return view('reviewandratings.complaints', ['complaints'=>$complaints, 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
     }
 
-    public function createComplaints()
+    public function reply(Request $request)
     {
-        return view('reviewandratings.createcomplaints');
+        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies]);
     }
 
     public function serviceRequests()

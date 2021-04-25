@@ -1015,4 +1015,17 @@ class Route extends Controller
     {
        return SettingController::update_api($request->all());
     }
+
+    public function reply_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketReplyController::addReplyFromAdmin($request->token_payload->id, $request->ticket_id, $request->reply);
+    }
 }

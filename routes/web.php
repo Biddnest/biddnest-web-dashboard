@@ -132,6 +132,8 @@ Route::prefix('web/api')->group(function () {
     Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
     Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
+
+    Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
 });
 
 Route::prefix('vendors')->group(function () {
@@ -237,7 +239,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
             Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
 
-
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
             Route::get('/testimonials/{id}/edit',[WebController::class,'createTestimonials'])->name("edit-testimonials");
         });
@@ -245,6 +246,8 @@ Route::prefix('admin')->group(function () {
         Route::prefix('review')->group(function () {
             Route::get('/',[WebController::class,'review'])->name("review");
             Route::get('/create',[WebController::class,'createReview'])->name("create-review");
+
+            Route::get('/{id}/reply',[WebController::class,'reply'])->name("reply");
 
             Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
             Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");

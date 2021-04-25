@@ -165,8 +165,8 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
-                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
+                                        <a href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                     </td>
                                 </tr>
                             @endforeach

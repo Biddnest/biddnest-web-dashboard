@@ -23,7 +23,7 @@
          <div class="col-lg-10">
              <div class="card h-auto p-0 pt-10">
                  <div class="card-head right text-left border-bottom-2 p-10 pt-20 pb-0">
-                     <h3 class="f-18 mb-4 pl-2 theme-text">
+                     <h3 class="f-18 mb-4 pl-2 theme-text mt-0">
                          @if(!$testimonials) Create @else Edit @endif Testimonials
                      </h3>
                  </div>
@@ -34,7 +34,7 @@
                          @endif
                          <div class="col-lg-6">
                              <p class="img-label">Image</p>
-                             <div class="upload-section p-20 pt-0">
+                             <div class="upload-section p-20 pt-0 pl-0">
                                  <img class="upload-preview" src="@if(!$testimonials){{asset('static/images/upload-image.svg')}}@else{{$testimonials->image}}@endif" alt=""/>
                                  <div class="ml-1">
                                      <div class="file-upload">
@@ -44,12 +44,12 @@
                                              UPLOAD IMAGE
                                          </button>
                                      </div>
-                                     <p>Max File size: 1MB</p>
+                                     <p class="pl-2">Max File size: 1MB</p>
                                  </div>
                              </div>
                          </div>
                      </div>
-                     <div class="d-flex row p-20">
+                     <div class="d-flex row p-20 pt-0">
                          <div class="col-lg-6">
                              <div class="form-input">
                                  <label class="customer-name">Constomer Name</label>

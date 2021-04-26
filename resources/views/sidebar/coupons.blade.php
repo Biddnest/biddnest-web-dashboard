@@ -1,4 +1,4 @@
-<div class="modal-header pb-0 border-none">
+<div class="modal-header pb-0 pt-1 border-none">
     <div class="theme-text heading f-18">
                 <a class="nav-link active pl-4 p-15" id="new-order-tab">Coupon Details</a>
     </div>
@@ -23,7 +23,7 @@
                         {{$coupons->code}}
                     </div>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-1 pl-0">
                     <div class="theme-text f-14">
                         <a href="{{route('edit-coupons', ["id"=>$coupons->id])}}"><i class="icon dripicons-pencil p-1 cursor-pointer "  aria-hidden="true"></i></a>
                     </div>

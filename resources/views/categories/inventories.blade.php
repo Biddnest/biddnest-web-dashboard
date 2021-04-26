@@ -34,7 +34,7 @@
                         <div class="col-sm-12" style="padding-right: 0px;">
                             <div class="card h-auto p-0 pt-10">
                                 <div class="header-wrap" style="padding: 5px 20px;">
-                                    <h3 class="f-18">Inventory List</h3>
+                                    <h3 class="f-18 pl-4">Inventory List</h3>
                                     <div class="p-10 card-head left col-sm-3">
                                         <!-- <div class="">
                                             <form class="form-inline  input-group search-bar">

@@ -1,5 +1,5 @@
 <div class="modal-header pb-0">
-                    <h3 class=" p-2 f-18"> Sub-category Details</h3>
+                    <h3 class=" p-2  pt-3 f-18 mt-0 "> Sub-category Details</h3>
 
                     <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
                         onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
@@ -8,12 +8,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="row d-flex  pb-4 pl-3">
-                        <div class="col-lg-12 ">
+                        <div class="col-lg-12 pl-0 ">
                             <div class="profile-section">
                                 <figure>
                                     <img src="{{$subcategory->image}}" alt="">
                                 </figure>
-                                <div class="profile-details-side-pop">
+                                <div class="profile-details-side-pop ml-0">
                                     <ul>
                                         <li>
                                             <h1>{{ucfirst(trans($subcategory->name))}}</h1>
@@ -36,13 +36,13 @@
                     </div>
                     @if(isset($subcategory->inventories))
                         <div class="d-flex  row  p-10 border-top-pop">
-                            <div class="col-sm-6">
-                                <div class="theme-text f-14 bold">
+                            <div class="col-sm-6  pl-0">
+                                <div class="theme-text f-14 bold ">
                                     Inventory List
                                 </div>
                             </div>
                         </div>
-                        <table class="table text-center p-10 theme-text">
+                        <table class="table text-left p-10 theme-text">
                             <thead class="secondg-bg  p-0">
                             <tr>
                                 <th scope="col">Item Name</th>

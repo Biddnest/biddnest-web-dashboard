@@ -138,10 +138,9 @@ class WebController extends Controller
         ]);
     }
 
-    /*start order details subpages*/
-
     public function orderDetailsCustomer(Request $request)
     {
+
         $booking = Booking::with('status_history')->findOrFail($request->id);
 
         $hist = [];
@@ -153,12 +152,40 @@ class WebController extends Controller
 
         $booking->status_ids = $hist;
 
-            return view('order.orderdetails_customer',[
+        return view('order.orderdetails_customer',[
             "booking" => $booking
         ]);
     }
 
+    public function orderDetailsPayment(Request $request)
+    {
+        $booking = Booking::with(['status_history'=>function($query){
+            $query->distinct('status')->get();
+        }])->find($request->id);
+        return view('order.orderdetails_payment',[
+            "booking" => $booking
+        ]);
+    }
     public function orderDetailsVendor(Request $request)
+    {
+        $booking = Booking::with(['status_history'=>function($query){
+            $query->distinct('status')->get();
+        }])->find($request->id);
+        return view('order.orderdetails_vendor',[
+            "booking" => $booking
+        ]);
+    }
+    public function orderDetailsReview(Request $request)
+    {
+        $booking = Booking::with(['status_history'=>function($query){
+            $query->distinct('status')->get();
+        }])->find($request->id);
+        return view('order.orderdetails_review',[
+            "booking" => $booking
+        ]);
+    }
+
+    /*public function orderDetailsVendor(Request $request)
     {
         $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
         return view('order.orderdetails_vendor');
@@ -173,7 +200,7 @@ class WebController extends Controller
     {
         $booking = Booking::with('review')->find($request->id);
         return view('order.orderdetails_review');
-    }
+    }*/
 
     /*end order details subpages*/
 

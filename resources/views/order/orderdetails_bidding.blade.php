@@ -19,7 +19,36 @@
             </div>
 
         </div>
+        <div class="row">
 
+            <div class="col-md-12" style="padding: 0px 40px; border: none;">
+                <div class="card" style="border:none;">
+
+                    <div class="card-body" style="padding: 20px;">
+
+                        <hr class="dash-line">
+                        <div class="steps-container">
+                            @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
+                                <div class="steps-status " style="width: 10%; text-align: center;">
+                                    <div class="step-dot">
+                                        {{--                                @foreach($booking->status_ids as $status_history)--}}
+                                        @if(in_array($status, $booking->status_ids))
+                                            <img src="{{ asset('static/images/tick.png')}}" />
+                                        @else
+                                            <div class="child-dot"></div>
+                                        @endif
+                                        {{--                                @endforeach--}}
+                                    </div>
+                                    <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
         <!-- Dashboard cards -->
 
 

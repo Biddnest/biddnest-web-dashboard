@@ -49,6 +49,9 @@
                                     @endswitch
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            <h4 class="name" style="font-size: 16px !important; margin-top: 5px !important; margin-bottom: 0px !important; font-weight: 600 !important;">{{$tickets->desc}}</h4>
+                        </div>
                     </div>
                     <div class="card testimonials-card bootstrap snippets bootdey" style="border-radius: 5px !important; margin-left: 30px; margin-right: 30px;">
                         <div class="chat" style="overflow: hidden; outline: none; overflow-y: scroll;" tabindex="5001">

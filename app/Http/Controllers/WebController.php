@@ -14,6 +14,7 @@ use App\Enums\OrganizationEnums;
 use App\Models\Admin;
 use App\Models\Banners;
 use App\Models\Booking;
+use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Org_kyc;
@@ -119,10 +120,18 @@ class WebController extends Controller
 
     public function orderDetailsCustomer(Request $request)
     {
-        return $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
-        return view('order.orderdetails_customer',[
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
+            return view('order.orderdetails_customer',[
             "booking" => $booking
         ]);
     }

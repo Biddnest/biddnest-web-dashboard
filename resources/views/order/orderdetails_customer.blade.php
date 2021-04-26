@@ -32,15 +32,15 @@
                     <hr class="dash-line">
                     <div class="steps-container">
                         @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
-                        <div class="steps-status ">
+                        <div class="steps-status " style="width: 10%; text-align: center;">
                             <div class="step-dot">
-                                @foreach($booking->status_history as $status_history)
-                                @if($status_history->status == $status)
+{{--                                @foreach($booking->status_ids as $status_history)--}}
+                                @if(in_array($status, $booking->status_ids))
                                     <img src="{{ asset('static/images/tick.png')}}" />
-{{--                                 @else--}}
-{{--                                        <div class="child-dot"></div>--}}
+                                 @else
+                                        <div class="child-dot"></div>
                                  @endif
-                                @endforeach
+{{--                                @endforeach--}}
                             </div>
                             <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
                         </div>

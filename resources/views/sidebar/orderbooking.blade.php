@@ -165,6 +165,13 @@
 
                                 </tbody>
                             </table>
+                            @if(count($booking->inventories)== 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. This Booking don't have any Inventories.</i></p>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="d-flex   justify-content-center p-10">
                                 <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
                             </div>
@@ -460,6 +467,13 @@
 
                                     </tbody>
                                 </table>
+                                @if(count($booking->status_history)== 0)
+                                    <div class="row hide-on-data">
+                                        <div class="col-md-12 text-center p-20">
+                                            <p class="font14"><i>. This Booking don't have any History.</i></p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
 
 

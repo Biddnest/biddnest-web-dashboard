@@ -120,7 +120,13 @@
                     @endforeach
                 </tbody>
             </table>
-
+            @if(count($payout->organization->booking)== 0)
+                <div class="row hide-on-data">
+                    <div class="col-md-12 text-center p-20">
+                        <p class="font14"><i>. There is no records.</i></p>
+                    </div>
+                </div>
+            @endif
            {{-- <div class="d-flex   justify-content-center p-10">
                 <div class="">
                     <a class="white-text p-10" href="{{route('payout-details')}}"><button

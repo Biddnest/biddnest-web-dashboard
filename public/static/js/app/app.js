@@ -16,6 +16,21 @@ $.delete = function(url, data, callback, type){
     });
 }
 
+$.update = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
+        type = type || callback,
+            callback = data,
+            data = {}
+    }
+    return $.ajax({
+        url: url,
+        type: 'PUT',
+        success: callback,
+        data: data,
+        contentType: type
+    });
+}
+
 Logger.useDefaults();
 
 // const helper = import("./helpers.js");
@@ -274,4 +289,26 @@ $("body").on('keyup', "#amount", function(event) {
     return false;
 });
 
+$("body").on('click', ".cancel", function(event) {
+    document.getElementById("newForm").reset();
+    return false;
+});
 
+$("body").on('change', ".change_status", function(event) {
+
+        var target =  $(this).closest($(this).data("parent"));
+        $.update($(this).data("url"), {}, function (response){
+            console.log(response);
+            if(response.status == "success")
+            {
+                tinySuccessAlert("Status changed Successfully", response.message);
+                target.hide();
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    return false;
+});

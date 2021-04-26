@@ -39,7 +39,7 @@
 
                                       <div class="tab-pane fade show active margin-topneg-15" id="past" role="tabpanel" aria-labelledby="past-tab">
                                           <!-- form starts -->
-                                          <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider"  action="{{route('banners_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
+                                          <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider"  action="{{route('banners_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>$id])}}" data-alert="mega" method="POST" id="myForm" data-parsley-validate>
 
                                               <input type="hidden" value="{{$id}}" name="id" />
 
@@ -142,7 +142,7 @@
                               <div class="col-md-12" id="comments">
                                   <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                                     <div class="w-50">
-                                            <a class="white-text p-10" href="#">
+                                            <a class="white-text p-10 cancel" href="#">
                                               <button class="btn theme-br theme-text w-30 white-bg br-5">
                                                     Cancel
                                               </button>

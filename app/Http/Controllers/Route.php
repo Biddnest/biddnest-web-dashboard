@@ -108,6 +108,11 @@ class Route extends Controller
         return ServiceController::update($request->id, ucwords($request->name), $request->image, $request->inventory_quantity_type);
     }
 
+    public function status_update(Request $request)
+    {
+        return ServiceController::statusUpdate($request->id);
+    }
+
     public function service_delete(Request $request)
     {
         return ServiceController::delete($request->id);
@@ -147,6 +152,11 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return SubServiceController::getOne($request->id);
+    }
+
+    public function subservice_status_update(Request $request)
+    {
+        return SubServiceController::statusUpdate($request->id);
     }
 
     public function subservice_get_by_service(Request $request)
@@ -235,6 +245,11 @@ class Route extends Controller
         ]);
 
         return InventoryController::update($request->id, $formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
+    }
+
+    public function inventory_status_update(Request $request)
+    {
+        return InventoryController::statusUpdate($request->id);
     }
 
     public function inventories_get(Request $request)
@@ -557,6 +572,11 @@ class Route extends Controller
             return SliderController::edit($request->id, $request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
      }
 
+    public function slider_status_update(Request $request)
+    {
+        return SliderController::statusUpdate($request->id);
+    }
+
      public function sliders_delete($id)
      {
         return SliderController::delete($id);
@@ -691,6 +711,11 @@ class Route extends Controller
 
          return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
      }
+
+    public function zone_status_update(Request $request)
+    {
+        return ZoneController::statusUpdate($request->id);
+    }
 
      public function zones_delete(Request $request)
      {
@@ -855,6 +880,11 @@ class Route extends Controller
         return AdminController::update($request->all());
     }
 
+    public function user_status_update(Request $request)
+    {
+        return AdminController::statusUpdate($request->id);
+    }
+
     public function bank_edit(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -917,5 +947,85 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return PayoutController::update($request->all());
+    }
+
+    public function page_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name'=>'required',
+            'slug'=>'required',
+            'contents'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PageController::add($request->name, $request->slug, $request->contents);
+    }
+
+    public function page_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required',
+            'slug'=>'required',
+            'contents'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PageController::updatePage($request->id, $request->name, $request->slug, $request->contents);
+    }
+
+    public function page_delete(Request $request)
+    {
+        return PageController::delete($request->id);
+    }
+
+    public function faq_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category'=>'required',
+            'ques'=>'required',
+            'answer'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return FaqController::add($request->ques, $request->answer, $request->category);
+    }
+
+    public function contact_us(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone'=>'required',
+            'email'=>'required',
+            'address'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return SettingController::update_contact($request->phone, $request->email, $request->address);
+    }
+
+    public function api_settings_update(Request $request)
+    {
+       return SettingController::update_api($request->all());
+    }
+
+    public function reply_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketReplyController::addReplyFromAdmin(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
     }
 }

@@ -30,7 +30,7 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                       <!-- form starts -->
-            <form action="@if(!$category){{route('service_add')}}@else{{route('service_edit')}}@endif" method="@if(isset($category)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('categories')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" data-parsley-validate >
+            <form action="@if(!$category){{route('service_add')}}@else{{route('service_edit')}}@endif" method="@if(isset($category)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('categories')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
                 <div class="row">
                       @if($category)
                         <input type="hidden" name="id" value="{{$category->id}}">
@@ -78,8 +78,8 @@
                 <div class="" id="comments">
                     <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                         <div class="w-50">
-                          <a class="white-text p-10" href="#">
-                              <button class="btn theme-br theme-text w-30 white-bg br-5">
+                          <a class="white-text p-10 cancel" href="#">
+                              <button type="button" class="btn theme-br theme-text w-30 white-bg br-5">
                                   Cancel
                               </button>
                           </a>

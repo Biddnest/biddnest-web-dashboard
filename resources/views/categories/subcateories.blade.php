@@ -54,11 +54,11 @@
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($subcategories as $subcategory)
-                                <tr class="tb-border cursor-pointer sub_{{$subcategory->id}} category-sidebar-toggle" data-sidebar="{{ route('sidebar.subcategory',['id'=>$subcategory->id]) }}"">
+                                <tr class="tb-border cursor-pointer sub_{{$subcategory->id}} category-sidebar-toggle" data-sidebar="{{ route('sidebar.subcategory',['id'=>$subcategory->id]) }}">
                                     <td scope="row"> <img class="defau  lt-image" src="{{$subcategory->image}}" alt=""></td>
                                     <td>{{$subcategory->name}}</td>
                                     <td>
-                                        @switch($subcategory->status)
+                                       {{-- @switch($subcategory->status)
                                             @case(\App\Enums\CommonEnums::$YES)
                                                 <span class="status-badge green-bg text-center">Enabled</span>
                                             @break
@@ -69,7 +69,8 @@
 
                                             @default
                                                 <span class="status-badge info-bg text-center">Unknown</span>
-                                        @endswitch
+                                        @endswitch--}}
+                                        <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}">
                                     </td>
                                     <td class="">
                                         <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}">
@@ -87,7 +88,14 @@
                             @endforeach
                         </tbody>
 
-                                    </table>
+                    </table>
+                    @if(count($subcategories)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You don't have any Sub-Categories here.</i></p>
+                            </div>
+                        </div>
+                    @endif
                                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>

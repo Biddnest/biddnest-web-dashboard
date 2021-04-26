@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TicketReply extends Model
 {
     protected $table = "ticket_reply";
-    protected $hidden = ['id', 'status', 'ticket_id', 'vendor_id','updated_at','deleted'];
+    protected $hidden = ['id', 'status', 'updated_at','deleted'];
     use HasFactory;
 
     public function vendor(){

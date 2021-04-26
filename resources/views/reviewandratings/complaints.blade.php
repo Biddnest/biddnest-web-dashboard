@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="complainnts">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="complaints">
     <div class="d-flex  flex-row justify-content-between vertical-center">
         <h3 class="page-head text-left p-4 f-20 theme-text">Complaints</h3>
         <div class="mr-20">
@@ -165,13 +165,20 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
-                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i></i>
+                                        <a href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    @if(count($complaints)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You don't have any Complaints here.</i></p>
+                            </div>
+                        </div>
+                    @endif
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>

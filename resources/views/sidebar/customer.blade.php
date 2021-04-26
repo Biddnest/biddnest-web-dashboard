@@ -30,9 +30,6 @@
                                 </li>
                                 <li>
                                     <h2>{{$users->email}}</h2>
-                                    <a href="#">
-                                        <i class="fa fa-star-o pr-1 mr-1" aria-hidden="true"></i>
-                                    </a>
                                 </li>
                                 <li>
                                     <p>+91-{{$users->phone}}</p>
@@ -141,7 +138,13 @@
                                 @endif
                                 </tbody>
                             </table>
-
+                            @if(count($users->bookings)== 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. This Customer don't have any orders.</i></p>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="d-flex row pt-3 p-20">
                                 <div class="col-lg-6">
                                     <div class="theme-text f-14 bold">
@@ -180,7 +183,13 @@
                                     @endif
                                 </tbody>
                             </table>
-
+                            @if(count($users->bookings)== 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. This Customer don't have used any Coupons.</i></p>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="d-flex   justify-content-center p-20">
 
                                 <!-- <div class=""><a class="white-text p-10" href="#">

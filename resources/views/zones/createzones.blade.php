@@ -27,7 +27,7 @@
                 </h3>
             </div>
             <form action="@if(!$zones){{route('zones_add')}}@else{{route('zones_edit')}}@endif" method="@if(!$zones){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('zones')}}" data-alert="tiny"
-                  class="form-new-order pt-4 mt-3" data-parsley-validate >
+                  class="form-new-order pt-4 mt-3" id="myForm" data-parsley-validate >
                 <div class="d-flex  row  m-20  p-20" >
                     @if($zones)
                         <input type="hidden" value="{{$zones->id}}" name="id">
@@ -49,28 +49,28 @@
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="zoneName">Zone Name</label>
-                            <input type="text"  placeholder="Whitefield" id="zoneName" name="name" value="@if($zones){{$zones->name}}@endif" class="form-control">
+                            <input type="text"  placeholder="Whitefield" id="zoneName" name="name" value="@if($zones){{$zones->name}}@endif" class="form-control" required>
                             <span class="error-message">Please enter valid Zone</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="city">City</label>
-                            <input type="text"  placeholder="Bengaluru" id="city" name="city" value="@if($zones){{$zones->city}}@endif" class="form-control">
+                            <input type="text"  placeholder="Bengaluru" id="city" name="city" value="@if($zones){{$zones->city}}@endif" class="form-control" required>
                             <span class="error-message">Please enter  valid </span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="district">District</label>
-                            <input type="text"  placeholder="Bengaluru" id="district" name="district" value="@if($zones){{$zones->district}}@endif" class="form-control">
+                            <input type="text"  placeholder="Bengaluru" id="district" name="district" value="@if($zones){{$zones->district}}@endif" class="form-control" required>
                             <span class="error-message">Please enter  valid </span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="state">State</label>
-                            <select id="state" class="form-control" name="state">
+                            <select id="state" class="form-control" name="state" required>
                                 <option value="">--select--</option>
                                 <option value="Andhra Pradesh" @if($zones && ($zones->state == "Andhra Pradesh")) selected @endif>Andhra Pradesh</option>
                                 <option value="Andaman and Nicobar Islands" @if($zones && ($zones->state == "Andaman and Nicobar Islands")) selected @endif>Andaman and Nicobar Islands</option>
@@ -115,7 +115,7 @@
                         <div class="form-input">
                             <label class="areas">Areas</label>
                             <select class="form-control select-box2" name="area[]" multiple required>
-                                @foreach(json_decode($zones->area) as $area)
+                                @foreach(json_decode($zones->area, true) as $area)
                                     <option value="{{$area}}" selected>{{$area}}</option>
                                 @endforeach
                             </select>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="d-flex    w-100 p-10 border-top margin-r-20 justify-content-between ">
                     <div class="w-50 ">
-                        <a class="white-text p-10" href="#">
+                        <a class="white-text p-10 cancel" href="#">
                             <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                         </a>
                     </div>

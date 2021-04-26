@@ -35,4 +35,18 @@ class TicketReplyController extends Controller
 
         return Helper::response(true, "added chat Successfully", ['ticket'=>Ticket::where('id', $ticket_id)->with('reply')]);
     }
+
+    public static function addReplyFromAdmin($sender_id, $ticket_id, $chat)
+    {
+        $add_chat = new TicketReply();
+        $add_chat->ticket_id = $ticket_id;
+        $add_chat->admin_id = $sender_id;
+        $add_chat->chat =$chat;
+        $chat_result = $add_chat->save();
+
+        if(!$chat_result)
+            return Helper::response(false, "couldn't send Massage, Please try again");
+
+        return Helper::response(true, "added chat Successfully", ['ticket'=>Ticket::where('id', $ticket_id)->with('reply')]);
+    }
 }

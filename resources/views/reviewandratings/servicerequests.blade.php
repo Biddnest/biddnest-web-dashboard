@@ -134,30 +134,37 @@
                                     <td class="">
                                         @switch($servic->status)
                                             @case(\App\Enums\TicketEnums::$STATUS['open'])
-                                            <span class="status-badge green-bg">Open</span>
+                                            <span class="status-badge green-bg text-center">Open</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['rejected'])
-                                            <span class="status-badge red-bg">Rejected</span>
+                                            <span class="status-badge red-bg text-center">Rejected</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['resolved'])
-                                            <span class="status-badge green-bg">Resolved</span>
+                                            <span class="status-badge green-bg text-center">Resolved</span>
                                             @break
 
                                             @case(\App\Enums\TicketEnums::$STATUS['closed'])
-                                            <span class="status-badge red-bg">Closed</span>
+                                            <span class="status-badge red-bg text-center">Closed</span>
                                             @break
                                         @endswitch
                                     </td>
                                     <td>
-                                        <i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i>
-                                        <i class="fa fa-trash p-1" aria-hidden="true"></i>
+                                        <a href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    @if(count($services)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You don't have any Tickets raised here.</i></p>
+                            </div>
+                        </div>
+                    @endif
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>

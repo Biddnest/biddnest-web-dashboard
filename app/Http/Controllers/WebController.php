@@ -18,14 +18,17 @@ use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Org_kyc;
+use App\Models\Page;
 use App\Models\Payout;
 use App\Models\Review;
 use App\Models\Service;
+use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\Subservice;
 use App\Models\Organization;
 use App\Models\Testimonials;
 use App\Models\Ticket;
+use App\Models\TicketReply;
 use App\Models\Vendor;
 use App\Models\Zone;
 use Illuminate\Http\Request;
@@ -80,12 +83,31 @@ class WebController extends Controller
 
     public function apiSettings()
     {
-        return view('system_settings');
+        $setting =Settings::whereNotIn('key', ["contact_details"])->get();
+        return view('system_setting.all_setting', ['settings'=>$setting]);
     }
 
-    public function settings()
+    public function faq()
     {
-        return view('general_settings');
+        return view('system_setting.faq');
+    }
+
+    public function contact_us()
+    {
+        $contact_us =Settings::where('key', ["contact_details"])->pluck('value')[0];
+        return view('system_setting.contact_us', ['contact_us'=>json_decode($contact_us, true)]);
+    }
+
+    public function pages()
+    {
+        $pages=Page::where('deleted', CommonEnums::$NO)->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('system_setting.pages', ['pages'=>$pages]);
+    }
+
+    public function createpages(Request $request)
+    {
+        $pages=Page::where('id', $request->id)->first();
+        return view('system_setting.createpage', ['pages'=>$pages]);
     }
 
     public function ordersBookingsLive(Request $request)
@@ -280,7 +302,7 @@ class WebController extends Controller
     public function categories()
     {
         return view('categories.categories',[
-            "categories"=>Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
+            "categories"=>Service::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
             "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
         ]);
     }
@@ -294,7 +316,7 @@ class WebController extends Controller
     public function subcateories()
     {
         return view('categories.subcateories',[
-            "subcategories"=>Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "subcategories"=>Subservice::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -317,7 +339,7 @@ class WebController extends Controller
     public function inventories()
     {
         return view('categories.inventories',[
-            "inventories"=>Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "inventories"=>Inventory::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -368,7 +390,7 @@ class WebController extends Controller
         $active = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $inactive = Zone::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
         return view('zones.zones',[
-            "zones"=>Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
+            "zones"=>Zone::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
         ]);
     }
 
@@ -381,7 +403,7 @@ class WebController extends Controller
     public function slider()
     {
         return view('sliderandbanner.slider',[
-            "sliders"=>Slider::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
+            "sliders"=>Slider::where(["deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -469,9 +491,11 @@ class WebController extends Controller
         return view('reviewandratings.complaints', ['complaints'=>$complaints, 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
     }
 
-    public function createComplaints()
+    public function reply(Request $request)
     {
-        return view('reviewandratings.createcomplaints');
+        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies]);
     }
 
     public function serviceRequests()

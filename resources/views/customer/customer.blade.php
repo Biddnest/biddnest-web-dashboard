@@ -102,7 +102,6 @@
                                                 <th scope="col">Customer Name</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Favourite</th>
                                                 <th scope="col" style="text-align: center;">Status</th>
                                                 <th scope="col" style="text-align: center;">Operations</th>
                             </tr>
@@ -113,7 +112,6 @@
                                                 <td scope="row">{{$user->fname}} {{$user->lname}}</td>
                                                 <td>{{$user->phone}}</td>
                                                 <td>{{$user->email}}</td>
-                                                <td><i class="fa fa-star-o" aria-hidden="true"></i></td>
                                                 <td class="" style="text-align: center;">
                                                     @if($user->status == 0)
                                                         <div class="status-badge red-bg text-center">Pending Signup</div>
@@ -130,6 +128,13 @@
                                            @endforeach
                         </tbody>
                     </table>
+                    @if(count($users)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You don't have any Customer Added here.</i></p>
+                            </div>
+                        </div>
+                    @endif
                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>

@@ -48,6 +48,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
+        <link rel="stylesheet" href="{{ asset('static/css/chat.css')}}" />
 
         <link rel="stylesheet" type="text/css" href="{{ asset('static/css/jquery.tagsinput.min.css')}}" />
 
@@ -760,5 +761,6 @@
             .edit{
                 padding-right: 25px;
             }
+
         </style>
 

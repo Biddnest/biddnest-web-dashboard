@@ -10,7 +10,7 @@
             <h3 class="page-head text-left p-4 f-20 theme-text">Onboard Vendor</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="vendor-management.html"> Vendors Management</a>
+                    <li class="breadcrumb-item"><a href="{{route('vendors')}}"> Vendors Management</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Onboard Vendor</li>
                 </ol>
@@ -121,7 +121,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" id="myForm" data-parsley-validate>
                 <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="id" value="{{$id}}">
                     <div class="d-flex row">
@@ -214,6 +214,7 @@
                             <div class="form-input">
                                 <label>State</label>
                                         <select id="" class="form-control" name="address[state]" required>
+                                            <option value="">--Select--</option>
                                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                                             <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
                                             </option>
@@ -259,7 +260,7 @@
                             <div class="form-input">
                                 <label class="full-name">Pincode</label>
                                         <input type="text" id="fullname" placeholder="560097" value=""
-                                               class="form-control" name="address[pincode]">
+                                               class="form-control" name="address[pincode]" required>
                                         <span class="error-message">Please enter valid
                                             Pincode</span>
                             </div>
@@ -310,7 +311,7 @@
                     </div>
                 </div>
                 <div class="modal-footer p-15 " style="padding: 0px 5px;">
-                    <div class="w-50" style="text-align: left !important;"><a class="white-text p-10" href="#" data-dismiss="modal"
+                    <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
                                          aria-label="Close"><button
                                 class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
                     <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
@@ -329,7 +330,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
                     <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="parent_org_id" value="{{$id}}">
                         <input type="hidden" name="id" value="{{$branch->id}}">
@@ -423,6 +424,7 @@
                                 <div class="form-input">
                                     <label>State</label>
                                     <select id="" class="form-control" name="address[state]" required>
+                                        <option value="">--Select--</option>
                                         <option value="Andhra Pradesh" @if("Andhra Pradesh" == ($branch->state ?? '')) selected @endif>Andhra Pradesh</option>
                                         <option value="Andaman and Nicobar Islands" @if("Andaman and Nicobar Islands" == ($branch->state ?? '')) selected @endif>Andaman and Nicobar Islands
                                         </option>
@@ -468,7 +470,7 @@
                                 <div class="form-input">
                                     <label class="full-name">Pincode</label>
                                     <input type="text" id="fullname" placeholder="560097" value="{{$branch->pincode}}"
-                                           class="form-control" name="address[pincode]">
+                                           class="form-control" name="address[pincode]" required>
                                     <span class="error-message">Please enter valid
                                             Pincode</span>
                                 </div>
@@ -522,7 +524,7 @@
                         </div>
                     </div>
                     <div class="modal-footer p-15 " style="padding: 0px 5px;">
-                        <div class="w-50" style="text-align: left !important;"><a class="white-text p-10" href="#" data-dismiss="modal"
+                        <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
                                                                                   aria-label="Close"><button
                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
                         <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"

@@ -82,7 +82,7 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    @switch($inventory->status)
+                                                   {{-- @switch($inventory->status)
                                                         @case(\App\Enums\CommonEnums::$YES)
                                                         <span class="status-badge green-bg">Enabled</span>
                                                         @break
@@ -93,7 +93,8 @@
 
                                                         @default
                                                         <span class="status-badge info-bg">Unknown</span>
-                                                    @endswitch
+                                                    @endswitch--}}
+                                                    <input type="checkbox" {{($inventory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('inventory_status_update',['id'=>$inventory->id])}}">
                                                 </td>
                                                 <td>
                                                     <a href="{{route('edit-services', ['id'=>$inventory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
@@ -104,6 +105,13 @@
                                         </tbody>
 
                                     </table>
+                                    @if(count($inventories)== 0)
+                                        <div class="row hide-on-data">
+                                            <div class="col-md-12 text-center p-20">
+                                                <p class="font14"><i>. You don't have any Inventories here.</i></p>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>

@@ -45,6 +45,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/services',[Router::class,'service'])->name("service");
     Route::post('/services',[Router::class,'service_add'])->name("service_add");
     Route::put('/services',[Router::class,'service_edit'])->name("service_edit");
+    Route::put('/services/{id}',[Router::class,'status_update'])->name("status_update");
     Route::get('/services',[Router::class,'service_get'])->name("service_get");
     Route::delete('/services/{id}',[Router::class,'service_delete'])->name("service_delete");
 
@@ -54,6 +55,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/sub-services',[Router::class,'subservice'])->name("sub_service");
     Route::post('/sub-services',[Router::class,'subservice_add'])->name("sub_service_add");
     Route::put('/sub-services',[Router::class,'subservice_edit'])->name("sub_service_edit");
+    Route::put('/sub-services/{id}',[Router::class,'subservice_status_update'])->name("sub_service_status_update");
     Route::get('/sub-services',[Router::class,'subservice_get'])->name("sub_service_get");
     Route::delete('/sub-services/{id}',[Router::class,'subservice_delete'])->name("sub_service_delete");
 
@@ -61,6 +63,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/inventories',[Router::class,'inventories'])->name("inventories");
     Route::post('/inventories',[Router::class,'inventories_add'])->name("inventories_add");
     Route::put('/inventories',[Router::class,'inventories_edit'])->name("inventories_edit");
+    Route::put('/inventories/{id}',[Router::class,'inventory_status_update'])->name("inventory_status_update");
     Route::get('/inventories/{id}',[Router::class,'inventories_get'])->name("inventories_get");
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
@@ -86,6 +89,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/zones',[Router::class,'zones'])->name("zones");
     Route::post('/zones',[Router::class,'zones_add'])->name("zones_add");
     Route::put('/zones',[Router::class,'zones_edit'])->name("zones_edit");
+    Route::put('/zones/{id}',[Router::class,'zone_status_update'])->name("zone_status_update");
     Route::get('/zones/{id}',[Router::class,'zones_get'])->name("zones_get");
     Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
 
@@ -93,6 +97,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('/sliders',[Router::class,'sliders'])->name("sliders");
     Route::post('/sliders',[Router::class,'sliders_add'])->name("sliders_add");
     Route::put('/sliders',[Router::class,'sliders_edit'])->name("sliders_edit");
+    Route::put('/sliders/{id}',[Router::class,'slider_status_update'])->name("slider_status_update");
     Route::delete('/sliders/{id}',[Router::class,'sliders_delete'])->name("sliders_delete");
 
     Route::get('/banners',[Router::class,'banners'])->name("banners");
@@ -109,6 +114,7 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/user',[Router::class,'user_add'])->name("user_add");
     Route::put('/user',[Router::class,'user_edit'])->name("user_edit");
+    Route::put('/user/{id}',[Router::class,'user_status_update'])->name("user_status_update");
     Route::put('/bank',[Router::class,'bank_edit'])->name("bank_edit");
     Route::delete('/delete/{id}',[Router::class,'user_delete'])->name("user_delete");
 
@@ -118,6 +124,16 @@ Route::prefix('web/api')->group(function () {
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
+
+    Route::post('/pages',[Router::class,'page_add'])->name("page_add");
+    Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");
+    Route::delete('/pages/{id}',[Router::class,'page_delete'])->name("page_delete");
+
+    Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
+    Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
+    Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
+
+    Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
 });
 
 Route::prefix('vendors')->group(function () {
@@ -138,8 +154,15 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
-        Route::get('/settings',[WebController::class,'settings'])->name("settings");
+
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
+
+        Route::get('/pages',[WebController::class,'pages'])->name("pages");
+        Route::get('/pages/create',[WebController::class,'createpages'])->name("pages_create");
+        Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
+
+        Route::get('/faq',[WebController::class,'faq'])->name("faq");
+        Route::get('/contact-us',[WebController::class,'contact_us'])->name("contact_us");
 
         //booking and orders
         Route::prefix('booking')->group(function () {
@@ -216,7 +239,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
             Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
 
-
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
             Route::get('/testimonials/{id}/edit',[WebController::class,'createTestimonials'])->name("edit-testimonials");
         });
@@ -224,6 +246,8 @@ Route::prefix('admin')->group(function () {
         Route::prefix('review')->group(function () {
             Route::get('/',[WebController::class,'review'])->name("review");
             Route::get('/create',[WebController::class,'createReview'])->name("create-review");
+
+            Route::get('/{id}/reply',[WebController::class,'reply'])->name("reply");
 
             Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
             Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");
@@ -245,11 +269,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/edit',[WebController::class,'createUsers'])->name("edit-users");
             Route::get('/{id}/bank',[WebController::class,'createBank'])->name("create-bank");
             Route::get('/details/{id}',[WebController::class,'details_user'])->name('details_user');
-        });
-
-        Route::prefix('sidebar')->group(function () {
-            /*sample route below*/
-//            Route::get('/customer',[WebController::class,'users'])->name("sidebar_users");
         });
 
     });

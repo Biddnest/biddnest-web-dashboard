@@ -11,7 +11,7 @@
         <div class="page-head text-left p-4 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="vendor-management.html"> Vendors Management</a>
+                    <li class="breadcrumb-item"><a href="{{route('vendors')}}"> Vendors Management</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Onboard Vendor</li>
                 </ol>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="tab-content" id="myTabContent">
                         <!-- form starts -->
-                        <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue">
+                        <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" id="myForm">
                             <p class="img-label">Image</p>
                             <div class="upload-section p-20 pt-0">
                                 <img src="{{asset('static/images/upload-image.svg')}}" alt="">
@@ -352,19 +352,19 @@
                                 </div>
                             </div>
 
-                           
+
                                 <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                                     style="border-top: 1px solid #70707040;">
-                                    <div class="w-50"><a class="white-text p-10" href="#"><button
+                                    <div class="w-50"><a class="white-text p-10 cancel" href="#"><button
                                                                 class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                     </div>
                                     <div class="w-50 text-right"><a class="white-text p-10"><button
                                                                 class="btn theme-bg white-text w-30">Next</button></a>
                                     </div>
                                 </div>
-                        
+
                         </form>
-                         
+
                 </div>
             </div>
         </div>

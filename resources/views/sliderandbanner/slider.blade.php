@@ -108,9 +108,9 @@
                                         <td onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"
                                                             class="span2">
                                             @if($slider->status == 0)
-                                                <div class="status-badge red-bg">Inactive</div>
+                                                <div class="status-badge red-bg text-center">Inactive</div>
                                             @else
-                                                <div class="status-badge green-bg">Active</div>
+                                                <div class="status-badge green-bg text-center">Active</div>
                                             @endif
                                         </td>
                                         <td class="span1"
@@ -132,6 +132,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @if(count($sliders)== 0)
+                            <div class="row hide-on-data">
+                                <div class="col-md-12 text-center p-20">
+                                    <p class="font14"><i>. You don't have any Sliders here.</i></p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -125,14 +125,15 @@
                                                 <td >{{$zone->district}}</td>
                                                 <td>{{$zone->state}}</td>
                                                 <td>
-                                                    @switch($zone->status)
+                                                   {{-- @switch($zone->status)
                                                         @case(\App\Enums\CommonEnums::$YES)
                                                             <span class="status-badge green-bg text-center">Active</span>
                                                         @break
                                                         @case(\App\Enums\CommonEnums::$NO)
                                                             <span class="status-badge red-bg text-center">Inactive</span>
                                                         @break
-                                                    @endswitch
+                                                    @endswitch--}}
+                                                    <input type="checkbox" {{($zone->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('zone_status_update',['id'=>$zone->id])}}">
                                                 </td>
                                                 <td>
                                                     <a href="{{route('edit-zones', ['id'=>$zone->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
@@ -143,6 +144,13 @@
                                         </tbody>
 
                                     </table>
+                                    @if(count($zones)== 0)
+                                        <div class="row hide-on-data">
+                                            <div class="col-md-12 text-center p-20">
+                                                <p class="font14"><i>. You don't have any Zones added here.</i></p>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="pagination">
                                         <ul>
                                             <li class="p-1">Page</li>

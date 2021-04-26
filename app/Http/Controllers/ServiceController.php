@@ -96,4 +96,29 @@ class ServiceController extends Controller
         else
             return Helper::response(true,"Data displayed successfully", ['services'=>$service]);
     }
+
+    public static function statusUpdate($id)
+    {
+        $service = Service::find($id);
+
+        switch($service->status){
+            case CommonEnums::$YES:
+                $status = CommonEnums::$NO;
+                break;
+
+            case CommonEnums::$NO:
+                $status = CommonEnums::$YES;
+                break;
+
+            default:
+                return Helper::response([false, "This user is supended. Please use the vendor panel to enable."]);
+                break;
+        }
+
+        $update_status = Service::where('id',$id)->update(["status"=>$status]);
+        if(!$update_status)
+            return Helper::response(false, "failed to updated status");
+
+        return Helper::response(true, "status updated successfully");
+    }
 }

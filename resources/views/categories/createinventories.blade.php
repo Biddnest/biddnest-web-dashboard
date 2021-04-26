@@ -37,7 +37,7 @@
                     >
                       <!-- form starts -->
                     <form action="@if(!$inventory){{route('inventories_add')}}@else{{route('inventories_edit')}}@endif" method="@if(!$inventory){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('inventories')}}" data-alert="tiny"
-                        class="form-new-order pt-4 mt-3" data-parsley-validate >
+                        class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
                         <div class="d-flex row pt-3">
                             @if($inventory)
                                 <input type="hidden" name="id" value="{{$inventory->id}}">
@@ -156,7 +156,7 @@
                             style="border-top: 1px solid #70707040"
                           >
                             <div class="w-50">
-                              <a class="white-text p-10" href="#"
+                              <a class="white-text p-10 cancel" href="#"
                                 ><button
                                   class="btn theme-br theme-text w-30 white-bg br-5"
                                 >

@@ -167,27 +167,80 @@ class WebController extends Controller
 
     public function orderDetailsPayment(Request $request)
     {
-        $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('order.orderdetails_payment',[
             "booking" => $booking
         ]);
     }
     public function orderDetailsVendor(Request $request)
     {
-        $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('order.orderdetails_vendor',[
+            "booking" => $booking
+        ]);
+    }
+    public function orderDetailsQuotation(Request $request)
+    {
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('order.orderdetails_quotation',[
+            "booking" => $booking
+        ]);
+    }
+    public function orderDetailsBidding(Request $request)
+    {
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('order.orderdetails_bidding',[
             "booking" => $booking
         ]);
     }
     public function orderDetailsReview(Request $request)
     {
-        $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('order.orderdetails_review',[
             "booking" => $booking
         ]);

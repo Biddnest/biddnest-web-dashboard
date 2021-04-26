@@ -1,8 +1,8 @@
-<div class="modal-header">
+<div class="modal-header pb-0  pt-1">
     <div class="theme-text heading f-18">
         <a class="nav-link active pl-4 p-15" id="new-order-tab">Vendor Payout</a>
     </div>
-    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+    <button type="button" class="close theme-text  mt-4 p-0" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <!-- <span aria-hidden="true" >&times;</span> -->
         <i class="fa fa-times theme-text" aria-hidden="true"></i>
     </button>

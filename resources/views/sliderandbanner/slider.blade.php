@@ -30,9 +30,9 @@
                 <div class="card h-auto p-0 pt-10">
                     <div class="header-wrap">
                         <div class="col-sm-8 p-3 ">
-                            <h3 class="f-18 title">Sliders & Banners </h3>
+                            <h3 class="f-18 ml-2 mt-4">Sliders & Banners </h3>
                         </div>
-                        <div class="header-wrap p-0 col-sm-1">
+                        <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -28px;">
                             <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
                                 <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
@@ -64,7 +64,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-head  pt-2  left col-sm-3">
+                        <div class="card-head  left col-sm-3">
                             <div class="search">
                                 <input type="text" class="searchTerm" placeholder="Search...">
                                 <button type="submit" class="searchButton">

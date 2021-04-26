@@ -118,7 +118,7 @@
                             </div>
 
                           </div>
-                          <div class="col-sm-6">
+                          <div class="col-sm-6 ">
                             <div class="d-flex  flex-row small-switch mtop-20">
                               <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"
                                 data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary"
@@ -250,13 +250,13 @@
                                 </div>
                               </div>
                               <div class="col-sm-6">
-                                <div class="form-inputs">
-                                    <label class="container">
+                                <div class="form-inputs ">
+                                    <label class="container" style="margin-top: 36px;">
                                       <input type="checkbox" id="Lift1">
                                       <span class="checkmark"></span>
                                     </label>
 
-                                    <label class="form-check-box" for="Lift1">Do you have lift</label>
+                                    <label class="form-check-box mb-0" style="margin-top: 1px;" for="Lift1">Do you have lift</label>
                                     <span class="error-message">Please enter valid</span>
 
 
@@ -340,12 +340,12 @@
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-inputs">
-                                    <label class="container">
+                                    <label class="container " style="margin-top: 36px;">
                                       <input type="checkbox" id="Lift2">
                                       <span class="checkmark"></span>
                                     </label>
 
-                                    <label class="form-check-box" for="Lift2">Do you have lift</label>
+                                    <label class="form-check-box"   style="margin-top: 1px;" for="Lift2">Do you have lift</label>
                                     <span class="error-message">Please enter valid</span>
 
 
@@ -374,12 +374,12 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="form-inputs">
-                                <label class="container">
+                                <label class="container"  style="margin-top: 36px;">
                                   <input type="checkbox" id="need1">
                                   <span class="checkmark"></span>
                                 </label>
 
-                                <label class="form-check-box" for="need1">Need dedicated movement</label>
+                                <label class="form-check-box" for="need1"  style="margin-top: 1px;">Need dedicated movement</label>
                                 <span class="error-message">Please enter valid</span>
 
 
@@ -526,7 +526,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="d-flex  justify-content-between flex-row ml-20 p-10 ">
+                        <div class="d-flex  justify-content-between flex-row  p-10 ">
                           <div class="w-50"><a class="white-text p-10" href="#"><button
                                 class="btn  w-30 white-text">Cancel</button></a></div>
                           <div class="w-50 text-right"><a class="white-text p-10" data-toggle="modal"

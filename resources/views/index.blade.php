@@ -47,10 +47,10 @@
     <!--  dashboard Columns -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards">
         <div class="col-sm-8 p-0">
-            <div class="card p-10" style="height: 322px !important;">
+            <div class="card p-10" style="">
                 <div class="d-flex flex-row justify-content-between">
                     <div class="p-10 card-head right text-left">
-                        <h3 class="f-18">Recent Orders</h3>
+                        <h3 class="f-18 mt-0">Recent Orders</h3>
                     </div>
                     <div class="p-10 card-head left">
                         <a><i><img src="{{asset('static/images/filter.svg') }}" alt="" srcset=""></i>
@@ -156,7 +156,7 @@
          <div class="col-sm-4 p-0">
             <div class="d-flex card ">
                 <div class="p-10 ">
-                    <h3 class="f-18">Live Orders Distribution</h3>
+                    <h3 class="f-18 mt-0">Live Orders Distribution</h3>
                 </div>
                 <div class="canvas-con">
                     <div class="total-user">Orders</div>
@@ -172,7 +172,7 @@
             <div class="col-sm-8 h-auto p-0">
                 <div class="d-flex  card ">
                     <div class="p-10 d-flex justify-content-between ">
-                        <h3 class="f-18">Revenue Trend</h3>
+                        <h3 class="f-18 mt-0">Revenue Trend</h3>
                         <div class="d-flex ">
                             <div class="d-felx flex-column ml-20">
                                 <div class="dropdown">
@@ -198,7 +198,7 @@
             <div class="col-sm-4 p-0">
                 <div class="d-flex justify-content-between  card ">
                     <div class="p-10 card-head">
-                        <h3 class="f-18">Users by Zones</h3>
+                        <h3 class="f-18 mt-0">Users by Zones</h3>
                     </div>
                     <!-- <div id="myzonechart" class="chart--container"> -->
                 </div>

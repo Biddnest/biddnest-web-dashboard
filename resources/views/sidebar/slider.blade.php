@@ -1,11 +1,11 @@
-<div class="modal-header pb-0">
+<div class="modal-header pb-0 pt-0">
     <h3 class=" p-2 f-18"> Sliders and Banners</h3>
-    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+    <button type="button" class="close theme-text mt-2 pt-3" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <i class="fa fa-times theme-text" aria-hidden="true"></i>
     </button>
 </div>
 <div class="modal-body">
-    <div class="row d-flex  pb-4 pl-3">
+    <div class="row d-flex  pb-4 pl-3 ">
         {{--<div class="col-lg-12">
             <div class="profile-section span3">
                 <div class="d-flex justify-content-center">
@@ -21,10 +21,10 @@
                 </div>
             </div>
         </div>--}}
-        <div class="col-lg-12 ">
+        <div class="col-lg-12  pl-0 ">
             <div class="profile-section">
                 <div class="profile-details-side-pop">
-                    <ul class="p-3">
+                    <ul class="">
                         <li>
                             <h1>{{$sliders->name}}</h1>
                             <a href="{{route('edit-slider', ['id'=>$sliders->id])}}"><i class="icon dripicons-pencil pr-1 mr-1 " style="color: #3BA3FB;" aria-hidden="true"></i></a>

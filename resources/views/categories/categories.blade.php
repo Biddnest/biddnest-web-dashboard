@@ -38,7 +38,7 @@
                 <div class="card h-auto p-0 pt-10">
                     <div class="header-wrap" style="padding: 5px 20px;">
                         <header>
-                            <h3 class="f-18">
+                            <h3 class="f-18 ml-4" >
                                 Category
                             </h3>
                         </header>

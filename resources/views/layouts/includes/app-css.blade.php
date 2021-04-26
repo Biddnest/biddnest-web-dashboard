@@ -64,7 +64,7 @@
                 width: 100%;
             }
             #myTab{
-                margin-left: -4px;
+                /* margin-left: -4px; */
             }
 
             main .menu-sidebar {
@@ -216,9 +216,9 @@
                 border: none;
                 border-top: 2px dashed #C0E2FD;
                 height: 0px;
-                margin-left: 6px;
+                margin-left: 52px;
                 margin-top: 20px;
-                width: 90%;
+                width: 88%;
             }
 
             .steps-container {
@@ -739,7 +739,7 @@
             }
 
             .modal-header {
-                padding: 0;
+                padding: 15px 10px;
             }
 
             .modal-header h3.f-14{
@@ -752,7 +752,7 @@
             }
 
             .modal-header .close {
-                padding: 1rem;
+                padding: 15px 10px;
                 margin: -1rem 0rem -1rem auto;
             }
             .modal-body{

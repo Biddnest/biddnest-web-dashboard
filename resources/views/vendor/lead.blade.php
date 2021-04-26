@@ -31,9 +31,9 @@
                                 <div class="col-lg-12">
                                     <div class="card  h-auto p-0 pt-10">
                                         <div class="header-wrap ">
-                                            <h3 class="f-18  pl-1">Leads</h3>
-                                            <div class="p-1 card-head left col-sm-3">
-                                                <div class="search">
+                                            <h3 class="f-18  pl-4">Leads</h3>
+                                            <div class="p-1 card-head left col-sm-3 pr-3">
+                                                <div class="search ">
                                                    <input type="text" class="searchTerm" placeholder="Search...">
                                                    <button type="submit" class="searchButton">
                                                      <i class="fa fa-search"></i>

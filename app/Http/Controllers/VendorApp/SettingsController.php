@@ -101,7 +101,7 @@ class SettingsController extends Controller
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
             ],
             "categories"=>[
-                "categories"=>Service::select(['id', 'name'])->get()
+                "categories"=>Service::select(['id', 'name'])->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get()
             ],
             "onesignal"=>[
                 "vendor_app_creds"=>json_decode(Settings::where("key", "onesignal_vendor_app_creds")->pluck('value'), true)

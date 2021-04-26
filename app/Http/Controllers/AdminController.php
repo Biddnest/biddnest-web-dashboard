@@ -205,13 +205,25 @@ class AdminController extends Controller
 
         $update = Admin::where("id", $data['id'])->update($update_data);
 
-        foreach($data['zone'] as $zone){
-            AdminZone::where("admin_id", $data['id'])->delete();
-            $zones = new AdminZone;
-            $zones->admin_id = $data['id'];
-            $zones->zone_id = $zone;
-            $zones->save();
-        }
+        AdminZone::where('admin_id',$data['id'])->delete();
+
+       if($data['role'] == AdminEnums::$ROLES['admin']){
+           foreach(Zone::pluck('id') as $zone){
+               $zones = new AdminZone;
+               $zones->admin_id =$data['id'];
+               $zones->zone_id = $zone;
+               $zones->save();
+           }
+       } elseif($data['role'] == AdminEnums::$ROLES['zone_admin']){
+           if(count($data['zone'] > 0)) {
+               foreach ($data['zone'] as $zone) {
+                   $zones = new AdminZone;
+                   $zones->admin_id = $data['id'];
+                   $zones->zone_id = $zone;
+                   $zones->save();
+               }
+           }
+       }
 
        if(!$update)
            return Helper::response(false,"Could not update user.");

@@ -124,11 +124,14 @@
                                             <option value="">--Select--</option>
                                             @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
                                                 <option value="{{$zone->id}}"
-                                                    @if($users && $users->zone_id)
-                                                        @foreach($users->zone_id as $zone_id)
-                                                            @if($zone_id == $zone->id) selected @endif
+
+                                                        @if($users && $users->zones)
+                                                        @foreach($users->zones as $admin_zones)
+                                                            @if($admin_zones->id == $zone->id) selected @endif
                                                         @endforeach
-                                                    @endif>{{$zone->name}}</option>
+                                                    @endif
+
+                                                >{{$zone->name}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message">Please enter Zone</span>

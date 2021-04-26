@@ -141,7 +141,9 @@ class WebController extends Controller
     public function orderDetailsCustomer(Request $request)
     {
 
-        $booking = Booking::with('status_history')->findOrFail($request->id);
+        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+        $query->limit(1)->orderBy("id","DESC");
+    }])->with('inventories')->with('driver')->with('organization')->findOrFail($request->id);
 
         $hist = [];
 

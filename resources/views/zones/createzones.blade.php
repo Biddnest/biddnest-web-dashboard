@@ -119,7 +119,7 @@
                                 @isset($zones)
                                     @foreach(json_decode($zones->area, true) as $area)
                                     <option value="{{$area}}" selected>{{$area}}</option>
-                                @endforeach
+                                    @endforeach
                                 @endisset
 
                             </select>

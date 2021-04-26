@@ -72,12 +72,20 @@ class WebController extends Controller
     //index.php
     public function dashboard()
     {
-        $count_orders =Booking::where('deleted', CommonEnums::$NO)->count();
-        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = [Session::get('admin_zones')];
+
+
+        $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone)->count();
+        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
-        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->count();
-        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
-        $booking=Booking::where(['deleted'=>CommonEnums::$NO])->orderBy("updated_at","DESC")->limit(5)->get();
+        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
+        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone)->count();
+
+
+        $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(5)->get();
         return view('index', ['count_orders'=>$count_orders, 'count_vendors'=>$count_vendors, 'count_users'=>$count_users, 'count_zones'=>$count_zones, 'count_live_orders'=>$count_live_orders, 'bookings'=>$booking]);
     }
 
@@ -159,27 +167,80 @@ class WebController extends Controller
 
     public function orderDetailsPayment(Request $request)
     {
-        $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('order.orderdetails_payment',[
             "booking" => $booking
         ]);
     }
     public function orderDetailsVendor(Request $request)
     {
-        $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('order.orderdetails_vendor',[
+            "booking" => $booking
+        ]);
+    }
+    public function orderDetailsQuotation(Request $request)
+    {
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('order.orderdetails_quotation',[
+            "booking" => $booking
+        ]);
+    }
+    public function orderDetailsBidding(Request $request)
+    {
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('order.orderdetails_bidding',[
             "booking" => $booking
         ]);
     }
     public function orderDetailsReview(Request $request)
     {
-        $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('order.orderdetails_review',[
             "booking" => $booking
         ]);
@@ -611,6 +672,21 @@ class WebController extends Controller
                 ->with('driver')
                 ->first()
         ]);
+    }
+
+    public function switchToZone(Request $request){
+
+        if(isset($request->zone)) {
+         if(in_array($request->zone, Session::get('admin_zones')))
+            Session::put('active_zone', $request->zone);
+        }
+        else{
+            if(Session::get('active_zone'))
+                Session::forget('active_zone');
+        }
+
+        return back();
+
     }
 
 }

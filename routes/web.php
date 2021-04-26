@@ -151,6 +151,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-password");
         });
             Route::get("/logout", [WebController::class, 'logout'])->name('logout');
+            Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 
     Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
@@ -172,7 +173,9 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");
             Route::get('/{id}/details/vendor',[WebController::class,'orderDetailsVendor'])->name("order-details-vendor");
-            Route::get('/{id}/details/review ',[WebController::class,'orderDetailsReview'])->name("order-details-review");
+            Route::get('/{id}/details/quotation',[WebController::class,'orderDetailsQuotation'])->name("order-details-quotation");
+            Route::get('/{id}/details/bidding',[WebController::class,'orderDetailsBidding'])->name("order-details-bidding");
+            Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
         });

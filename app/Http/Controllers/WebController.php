@@ -75,8 +75,9 @@ class WebController extends Controller
         if(Session::get('active_zone'))
             $zone = [Session::get('active_zone')];
         else
-            $zone = [Session::get('admin_zones')];
+            $zone = Session::get('admin_zones');
 
+//        return $zone;
 
         $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone)->count();
         $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
@@ -646,6 +647,7 @@ class WebController extends Controller
     public function createUsers(Request $request)
     {
         $user=Admin::where("id", $request->id)->with('zones')->first();
+
         return view('users.createusers', ['users'=>$user]);
     }
 

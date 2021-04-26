@@ -21,10 +21,11 @@
 
                                     <div class="dropdown settings" style="height: auto;">
                                         <ul>
-                                            <li><a href="#0" onclick="location.assign('{{ route('switch-zone') }}')">All Zones</a></li>
+                                            <li style="cursor: pointer;" onclick="location.assign('{{ route('switch-zone') }}')"><a>All Zones @if(!\Illuminate\Support\Facades\Session::get('active_zone')) (Showing Now) @endif</a></li>
 
                                             @foreach(\Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                <li><a href="#0" onclick="location.assign('{{ route('switch-zone') }}?zone={{$zone->id}}');">{{$zone->name}}</a></li>
+                                                <li style="cursor: pointer;" onclick="location.assign('{{ route('switch-zone') }}?zone={{$zone->id}}');"><a >{{$zone->name}}
+                                                    @if(\Illuminate\Support\Facades\Session::get('active_zone') && \Illuminate\Support\Facades\Session::get('active_zone') == $zone->id) (selected) @endif</a></li>
                                             @endforeach
 
                                         </ul>

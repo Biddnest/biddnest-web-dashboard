@@ -24,7 +24,7 @@
         <div class="col-sm-10">
             <div class="card h-auto p-0 p-10">
                 <div class="card-head right text-left border-bottom-2 p-8">
-                    <h3 class="f-18 mb-4 pl-3 theme-text">
+                    <h3 class="f-18 mt-3 mb-3 pl-3 theme-text">
                       Create Subcategory
                     </h3>
                 </div>
@@ -44,7 +44,7 @@
                             @endif
                             <div class="col-lg-6">
                                 <p class="img-label">Photo</p>
-                                    <div class="upload-section p-20 pt-0">
+                                    <div class="upload-section  pt-0" style="padding-left: 20px;">
                                     <img class="upload-preview"
                                                 src="@if(!$inventory){{asset('static/images/upload-image.svg')}}@else{{$inventory->image}}@endif"
                                                 alt=""
@@ -57,14 +57,14 @@
                                                     UPLOAD IMAGE
                                                 </button>
                                         </div>
-                                        <p class="text-black">Max File size: 1MB</p>
+                                        <p class="text-black pl-2">Max File size: 1MB</p>
                                     </div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <p class="img-label">Icon</p>
-                                    <div class="upload-section p-20 pt-0">
+                                    <p class="img-label pl-3">Icon</p>
+                                    <div class="upload-section  pt-0" style="margin: 0px 0px 0px -10px !important; padding-left:20px"  >
                                         <img class="upload-preview"
                                                 src="@if(!$inventory){{asset('static/images/upload-image.svg')}}@else{{$inventory->icon}}@endif"
                                                 alt=""
@@ -77,7 +77,7 @@
                                                         UPLOAD IMAGE
                                                     </button>
                                             </div>
-                                            <p class="text-black">Max File size: 1MB</p>
+                                            <p class="text-black pl-2">Max File size: 1MB</p>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Size</label>
-                                <select class="form-control select-box2" name="size[]" multiple required>
+                                <select class="form-control select-box2" style="width: 0.75em !important;" name="size[]" multiple required>
                                     @if($inventory && $inventory->size)
                                         @foreach(json_decode($inventory->size) as $size)
                                             <option value="{{$size}}" selected>{{$size}}</option>

@@ -22,12 +22,12 @@
     <div class="col-sm-10">
         <div class="card  h-auto p-0 pt-10 ">
             <div class="card-head right text-left border-bottom-2 p-10 pt-20">
-                <h3 class="f-18 theme-text pl-2 ml-1">
+                <h3 class="f-18 theme-text pl-2 ml-1 mt-1 mb-2">
                     @if(!$zones) Create @else Edit @endif Zone
                 </h3>
             </div>
             <form action="@if(!$zones){{route('zones_add')}}@else{{route('zones_edit')}}@endif" method="@if(!$zones){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('zones')}}" data-alert="tiny"
-                  class="form-new-order pt-4 mt-3" id="myForm" data-parsley-validate >
+                  class="form-new-order" id="myForm" data-parsley-validate >
                 <div class="d-flex  row  m-20  p-20" >
                     @if($zones)
                         <input type="hidden" value="{{$zones->id}}" name="id">

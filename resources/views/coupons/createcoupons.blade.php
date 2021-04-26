@@ -28,7 +28,7 @@
     <div class="col-sm-10">
         <div class="card  h-auto p-0 pt-10 ">
             <div class="card-head right text-left border-bottom-2 p-10 pt-20">
-                <h3 class="f-18 theme-text">
+                <h3 class="f-18 theme-text mt-1 ml-3">
                     @if($coupons) Edit Coupon @else Create New Coupon @endif
                 </h3>
             </div>
@@ -52,9 +52,14 @@
             <div class="form-input">
               <label>Coupon Description</label>
               <span class="">
-                <textarea  required class="form-control" rows="" cols="" placeholder="hello" name="desc" style="margin: 0 20px 0 0;">
+              <textarea class = "form-control" rows = "2" placeholder = "desc" required>
+              @if($coupons){{$coupons->desc}}@endif
+
+              </textarea>
+
+                <!-- <textarea  required class="form-control" rows="" cols="" placeholder="hello" name="desc" style="margin: 0 20px 0 0;">
                     @if($coupons){{$coupons->desc}}@endif
-                </textarea>
+                </textarea> -->
                <span class="error-message">Please enter  valid</span>
               </span>
             </div>
@@ -272,9 +277,9 @@
             </div>
           </div>
       </div>
-      <div class="d-flex  justify-content-between flex-row ml-20 p-10 border-top " >
+      <div class="d-flex  justify-content-between flex-row  p-10 border-top " >
         <div class="w-50"><a class="white-text p-10 cancel" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
-        <div class="w-50 text-right"><button class="btn theme-bg white-text w-30" type="submit">Save</button></div>
+        <div class="w-50 text-right"><button class="btn theme-bg white-text w-30 mr-4" type="submit">Save</button></div>
        </div>
 </form>
 

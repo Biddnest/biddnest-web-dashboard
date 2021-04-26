@@ -39,7 +39,7 @@
                             <div class="card  h-auto p-0 pt-10 ">
 
                                 <div class="card-head right text-left border-bottom-2 p-10 pt-10 pb-0">
-                                    <h3 class="f-18 mb-0">
+                                    <h3 class="f-18 mb-0 mt-0">
                                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
@@ -175,10 +175,12 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-input">
                                                         <label class="full-name">Organization Description</label>
-                                                            <textarea placeholder="Add Organization Description"
+                                                        <textarea class = "form-control" rows = "4" placeholder="Add Organization Description"   id="" spellcheck="false" name="organization[description]" required ></textarea>
+
+                                                            <!-- <textarea placeholder="Add Organization Description"
                                                                  id="" class="form-control"
                                                                 rows="4" cols="50" spellcheck="false" name="organization[description]" required>
-                                                                          </textarea>
+                                                                          </textarea> -->
                                                             <span class="error-message">Please enter valid
                                                                 Description</span>
                                                     </div>

@@ -25,7 +25,7 @@
                 <div class="card-head right text-center   ptop-5">
                     <div class="d-flex justify-content-between">
                         <h3>
-                            <ul class="nav nav-tabs pt-20 justify-content-start p-0 flex-row f-18" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs pt-20 justify-content-start p-0 flex-row f-18" id="myTab" styele ="margin-left: 0px;" role="tablist">
                                 <li class="nav-item ">
                                     <a class="nav-link active p-15" id="customer-details-tab" data-toggle="tab" href="#customer-details" role="tab" aria-controls="home" aria-selected="true">Vendor Details</a>
                                 </li>
@@ -34,7 +34,7 @@
                                 </li>
                             </ul>
                         </h3>
-                        <div class="eidt-icon margin-r-20 vertical-center p-10">
+                        <div class="eidt-icon margin-r-20 vertical-center p-10" style="margin-top: 15px;">
                             <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="fa fa-pencil p-1 cursor-pointer theme-text" aria-hidden="true"></i></a>
                         </div>
                     </div>
@@ -99,10 +99,10 @@
                                         @endforeach
                                     </span>
                                 </div>
-                                <div class="theme-text f-12 p-20 pb-0 margin-topneg-10">
+                                <div class="theme-text f-12 p-20 pb-0">
                                   <p class="">{{json_decode($organization->meta, true)['org_description']}}</p>
                                 </div>
-                                <div class="theme-text f-14 p-20 margin-topneg-15 ">
+                                <div class="theme-text f-14 p-20 ">
                                     {{$organization->state}}
                                 </div>
                                 <div class="theme-text f-14 p-20 ">
@@ -140,7 +140,7 @@
                     </div>
                     <div class="tab-pane fade   " id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
 
-                        <div class="d-flex  row  p-15">
+                        <div class="d-flex  row  p-15 pb-0">
 
                             <div class="col-sm-4  secondg-bg margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 bold p-20">

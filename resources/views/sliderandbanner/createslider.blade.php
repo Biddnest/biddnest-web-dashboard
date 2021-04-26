@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createslider">
             <div class="d-flex flex-row justify-content-between">
-              <h3 class="heading1 p-4">@if(isset($slider)) Edit @else Create @endif Slider</h3>
+              <h3 class="heading1 " style="margin-left: 4rem;">@if(isset($slider)) Edit @else Create @endif Slider</h3>
             </div>
 
             <!-- Dashboard cards -->
@@ -24,8 +24,8 @@
               <div class="col-lg-10">
                 <div class="card h-auto p-0 pt-10">
                       <div class=" card-head right text-left border-bottom-2 p-10  pb-0">
-                          <h3 class=" f-18 pb-0 mb-4 theme-text" style="margin-top: 0px !important;">
-                              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                          <h3 class=" f-18 pb-0 mb-0 theme-text" style="margin-top: 0px !important;">
+                              <ul class="nav nav-tabs pb-0 mb-0" id="myTab" role="tablist">
                                   <li class="nav-item">
                                       <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">@if(isset($slider)) Edit @else Create @endif  Slider</a>
                                   </li>
@@ -40,7 +40,7 @@
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active margin-topneg-15" role="tabpanel" aria-labelledby="live-tab">
                           <!-- form starts -->
-                              <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider" action="@if(isset($slider)) {{route('sliders_edit')}} @else{{route('sliders_add')}}@endif" data-next="redirect" data-url="{{route('create-banner', ['id'=>':id'])}}" data-alert="mega" method="@if(isset($slider)){{"PUT"}}@else{{"POST"}}@endif" id="myFormF" data-parsley-validate>
+                              <form class="form-new-order mt-1 onboard-vendor-form input-text-blue add-slider" action="@if(isset($slider)) {{route('sliders_edit')}} @else{{route('sliders_add')}}@endif" data-next="redirect" data-url="{{route('create-banner', ['id'=>':id'])}}" data-alert="mega" method="@if(isset($slider)){{"PUT"}}@else{{"POST"}}@endif" id="myFormF" data-parsley-validate>
                               @if(isset($slider))
                                   <input type="hidden" value="{{$id}}" name="id" />
                               @endif

@@ -59,7 +59,6 @@ class BookingsController extends Controller
         $booking_id = "BD" . uniqid();
         $booking->public_booking_id = strtoupper($booking_id);
         $booking->user_id = (int)$user_id;
-        $booking->zone_id = GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
         $booking->service_id = $data['service_id'];
         $booking->source_lat = $data['source']['lat'];
         $booking->source_lng = $data['source']['lng'];

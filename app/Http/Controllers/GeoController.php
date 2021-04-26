@@ -29,4 +29,5 @@ class GeoController extends Controller
     }
 
     public function getZones($lat, $lng){}
+
 }

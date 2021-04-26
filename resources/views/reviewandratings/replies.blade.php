@@ -4,7 +4,7 @@
 @section('content')
 
 
-    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="review">
+    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="reply">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head theme-text text-left p-4 f-20">
                 @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)

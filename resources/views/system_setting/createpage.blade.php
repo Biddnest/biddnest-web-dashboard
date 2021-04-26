@@ -46,7 +46,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Slug</label>
-                                            <input name="slug" type="text" id="banner_name" placeholder="Slug" value="@if($pages){{ucfirst(trans($pages->slug))}}@endif" class="form-control br-5" required/>
+                                            <input name="slug" type="text" id="banner_name" placeholder="Slug" value="@if($pages){{$pages->slug}}@endif" class="form-control br-5" required/>
                                         </div>
                                     </div>
 

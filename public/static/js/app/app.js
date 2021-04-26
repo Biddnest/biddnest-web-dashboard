@@ -312,3 +312,10 @@ $("body").on('change', ".change_status", function(event) {
         });
     return false;
 });
+
+$("body").on('input', ".table-search", function(event) {
+    var query = $(this).val();
+    if(query.length >= 3){
+        redirectTo($(this).data('url')+"?search="+query);
+    }
+});

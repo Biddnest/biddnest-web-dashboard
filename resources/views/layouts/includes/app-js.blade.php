@@ -73,7 +73,13 @@ crossorigin="anonymous"></script>
 <script>
     const IMAGE_PLACEHOLDER = '{{asset('static/images/upload-image.svg')}}';
     const API_SEARCH_USERS = '{{route('search_user')}}';
+
+    @if (\Illuminate\Support\Facades\Session::has('redirect'))
+    toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000})
+    @endif
+
 </script>
+
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 
 

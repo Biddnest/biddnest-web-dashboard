@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="complainnts">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="complaints">
     <div class="d-flex  flex-row justify-content-between vertical-center">
         <h3 class="page-head text-left p-4 f-20 theme-text">Complaints</h3>
         <div class="mr-20">

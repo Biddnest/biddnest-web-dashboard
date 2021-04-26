@@ -151,6 +151,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-password");
         });
             Route::get("/logout", [WebController::class, 'logout'])->name('logout');
+            Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 
     Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");

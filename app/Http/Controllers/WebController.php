@@ -72,12 +72,20 @@ class WebController extends Controller
     //index.php
     public function dashboard()
     {
-        $count_orders =Booking::where('deleted', CommonEnums::$NO)->count();
-        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = [Session::get('admin_zones')];
+
+
+        $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone)->count();
+        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
-        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->count();
-        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
-        $booking=Booking::where(['deleted'=>CommonEnums::$NO])->orderBy("updated_at","DESC")->limit(5)->get();
+        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
+        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone)->count();
+
+
+        $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(5)->get();
         return view('index', ['count_orders'=>$count_orders, 'count_vendors'=>$count_vendors, 'count_users'=>$count_users, 'count_zones'=>$count_zones, 'count_live_orders'=>$count_live_orders, 'bookings'=>$booking]);
     }
 
@@ -611,6 +619,21 @@ class WebController extends Controller
                 ->with('driver')
                 ->first()
         ]);
+    }
+
+    public function switchToZone(Request $request){
+
+        if(isset($request->zone)) {
+         if(in_array($request->zone, Session::get('admin_zones')))
+            Session::put('active_zone', $request->zone);
+        }
+        else{
+            if(Session::get('active_zone'))
+                Session::forget('active_zone');
+        }
+
+        return back();
+
     }
 
 }

@@ -14,6 +14,7 @@ use App\Enums\OrganizationEnums;
 use App\Models\Admin;
 use App\Models\Banners;
 use App\Models\Booking;
+use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\Inventory;
 use App\Models\Org_kyc;
@@ -137,13 +138,20 @@ class WebController extends Controller
         ]);
     }
 
-    /*start order details subpages*/
-
     public function orderDetailsCustomer(Request $request)
     {
-         $booking = Booking::with(['status_history'=>function($query){
-            $query->distinct('status')->get();
-        }])->find($request->id);
+
+        $booking = Booking::with('status_history')->findOrFail($request->id);
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
         return view('order.orderdetails_customer',[
             "booking" => $booking
         ]);
@@ -151,7 +159,7 @@ class WebController extends Controller
 
     public function orderDetailsPayment(Request $request)
     {
-         $booking = Booking::with(['status_history'=>function($query){
+        $booking = Booking::with(['status_history'=>function($query){
             $query->distinct('status')->get();
         }])->find($request->id);
         return view('order.orderdetails_payment',[
@@ -160,7 +168,7 @@ class WebController extends Controller
     }
     public function orderDetailsVendor(Request $request)
     {
-         $booking = Booking::with(['status_history'=>function($query){
+        $booking = Booking::with(['status_history'=>function($query){
             $query->distinct('status')->get();
         }])->find($request->id);
         return view('order.orderdetails_vendor',[
@@ -169,7 +177,7 @@ class WebController extends Controller
     }
     public function orderDetailsReview(Request $request)
     {
-         $booking = Booking::with(['status_history'=>function($query){
+        $booking = Booking::with(['status_history'=>function($query){
             $query->distinct('status')->get();
         }])->find($request->id);
         return view('order.orderdetails_review',[

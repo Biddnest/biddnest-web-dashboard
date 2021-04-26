@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use App\Models\Settings;
 
@@ -28,6 +29,29 @@ class GeoController extends Controller
         return number_format($kms, 2);
     }
 
-    public function getZones($lat, $lng){}
+    public static function displacement($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo)
+    {
+        $theta = $latitudeFrom - $longitudeTo;
+        $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) +  cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $kms = $dist * 60 * 1.1515 * 1.609344;
+        return number_format($kms, 2);
+    }
+
+    public static function getNearestZone($lat, $lng){
+        $zone = 0;
+        $distance = 10000;
+
+        foreach (Zone::all() as $zone){
+            $tempDis  = self::displacement($lat, $lng, $zone['lat'],$zone['lng']);
+            $zone = $tempDis < $distance ? $zone->id : 0;
+        }
+        return $zone;
+    }
+
+    public function getZones($lat, $lng){
+
+    }
 
 }

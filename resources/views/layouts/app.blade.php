@@ -17,6 +17,19 @@
                         </form>
                         <div class="col-6">
                             <ul class="header-controls d-flex flex-row justify-content-end">
+                                <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-web "height="15"></i></span> </a>
+
+                                    <div class="dropdown settings" style="height: auto;">
+                                        <ul>
+                                            <li><a href="#0" onclick="location.assign('{{ route('switch-zone') }}')">All Zones</a></li>
+
+                                            @foreach(\Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                <li><a href="#0" onclick="location.assign('{{ route('switch-zone') }}?zone={{$zone->id}}');">{{$zone->name}}</a></li>
+                                            @endforeach
+
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-toggles "height="15"></i></span> </a>
 
                                     <div class="dropdown settings" style="height: auto;">

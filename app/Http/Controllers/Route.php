@@ -1026,6 +1026,6 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketReplyController::addReplyFromAdmin($request->token_payload->id, $request->ticket_id, $request->reply);
+        return TicketReplyController::addReplyFromAdmin(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
     }
 }

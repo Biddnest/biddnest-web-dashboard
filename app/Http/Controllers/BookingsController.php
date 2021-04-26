@@ -59,7 +59,6 @@ class BookingsController extends Controller
         $booking_id = "BD" . uniqid();
         $booking->public_booking_id = strtoupper($booking_id);
         $booking->user_id = (int)$user_id;
-        $booking->zone_id = GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
         $booking->service_id = $data['service_id'];
         $booking->source_lat = $data['source']['lat'];
         $booking->source_lng = $data['source']['lng'];
@@ -467,9 +466,9 @@ class BookingsController extends Controller
         if (isset($request->service_id))
             $bookings->where('service_id', $request->service_id);
 
-       $bookings->paginate(CommonEnums::$PAGE_LENGTH);
+//        $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
 
-        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
+        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH), "paging" => [
             "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()
         ]]);
     }

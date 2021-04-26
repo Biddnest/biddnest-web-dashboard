@@ -72,12 +72,19 @@ class WebController extends Controller
     //index.php
     public function dashboard()
     {
-        $count_orders =Booking::where('deleted', CommonEnums::$NO)->count();
-        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone)->count();
+        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
-        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->count();
-        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
-        $booking=Booking::where(['deleted'=>CommonEnums::$NO])->orderBy("updated_at","DESC")->limit(5)->get();
+        $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
+        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone)->count();
+
+
+        $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(5)->get();
         return view('index', ['count_orders'=>$count_orders, 'count_vendors'=>$count_vendors, 'count_users'=>$count_users, 'count_zones'=>$count_zones, 'count_live_orders'=>$count_live_orders, 'bookings'=>$booking]);
     }
 
@@ -112,15 +119,25 @@ class WebController extends Controller
 
     public function ordersBookingsLive(Request $request)
     {
+
+
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
             ->orWhere("deleted", CommonEnums::$NO)
             ->with('service')
             ->with('organization')
-            ->orderBy("id","DESC")
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+            ->orderBy("id","DESC");
+
+        if(isset($request->search)){
+            $bookings->where(function ($query) use($request){
+                return $query->where('public_booking_id','like',"$request->search%")
+                ->orWhere('source_meta','LIKE',"%$request->search%")
+                ->orWhere('destination_meta','LIKE',"%$request->search%");
+            });
+        }
+
 
         return view('order.ordersbookings_live',[
-            "bookings" => $bookings
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -640,6 +657,7 @@ class WebController extends Controller
     public function createUsers(Request $request)
     {
         $user=Admin::where("id", $request->id)->with('zones')->first();
+
         return view('users.createusers', ['users'=>$user]);
     }
 
@@ -655,8 +673,15 @@ class WebController extends Controller
     }
 
     public function sidebar_booking(Request $request){
+
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
         return view('sidebar.orderbooking',[
             "booking"=>Booking::where('id',$request->id)
+                ->whereIn("zone_id",$zone)
                 ->with('organization')
                 ->with('payment')
                 ->with('status_history')
@@ -664,8 +689,24 @@ class WebController extends Controller
                 ->with('user')
                 ->with('vehicle')
                 ->with('driver')
-                ->first()
+                ->findOrFail()
         ]);
+    }
+
+    public function switchToZone(Request $request){
+
+        if(isset($request->zone)) {
+         if(in_array($request->zone, Session::get('admin_zones')))
+            Session::put('active_zone', $request->zone);
+        }
+        else{
+            if(Session::get('active_zone'))
+                Session::forget('active_zone');
+        }
+
+        Session::flash('redirect','Zone has been toggled');
+        return back();
+
     }
 
 }

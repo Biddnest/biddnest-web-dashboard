@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Enums\AdminEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Models\AdminZone;
+use App\Models\Zone;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
@@ -147,11 +149,22 @@ class AdminController extends Controller
         $admin->meta=$meta;
         $admin_result=$admin->save();
 
-        foreach($data['zone'] as $zone){
-            $zones = new AdminZone;
-            $zones->admin_id =$admin->id;
-            $zones->zone_id = $zone;
-            $zones->save();
+        if($data['role'] == AdminEnums::$ROLES['admin']){
+            foreach(Zone::pluck('id') as $zone){
+                $zones = new AdminZone;
+                $zones->admin_id =$admin->id;
+                $zones->zone_id = $zone;
+                $zones->save();
+            }
+            } elseif($data['role'] == AdminEnums::$ROLES['zone_admin']){
+            if(count($data['zone'] > 0)) {
+                foreach ($data['zone'] as $zone) {
+                    $zones = new AdminZone;
+                    $zones->admin_id = $admin->id;
+                    $zones->zone_id = $zone;
+                    $zones->save();
+                }
+            }
         }
 
         if(!$admin_result)
@@ -192,13 +205,25 @@ class AdminController extends Controller
 
         $update = Admin::where("id", $data['id'])->update($update_data);
 
-        foreach($data['zone'] as $zone){
-            AdminZone::where("admin_id", $data['id'])->delete();
-            $zones = new AdminZone;
-            $zones->admin_id = $data['id'];
-            $zones->zone_id = $zone;
-            $zones->save();
-        }
+        AdminZone::where('admin_id',$data['id'])->delete();
+
+       if($data['role'] == AdminEnums::$ROLES['admin']){
+           foreach(Zone::pluck('id') as $zone){
+               $zones = new AdminZone;
+               $zones->admin_id =$data['id'];
+               $zones->zone_id = $zone;
+               $zones->save();
+           }
+       } elseif($data['role'] == AdminEnums::$ROLES['zone_admin']){
+           if(count($data['zone'] > 0)) {
+               foreach ($data['zone'] as $zone) {
+                   $zones = new AdminZone;
+                   $zones->admin_id = $data['id'];
+                   $zones->zone_id = $zone;
+                   $zones->save();
+               }
+           }
+       }
 
        if(!$update)
            return Helper::response(false,"Could not update user.");

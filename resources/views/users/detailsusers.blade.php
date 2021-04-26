@@ -92,7 +92,7 @@
                                     @endforeach
                                 </div>
                               <div class="theme-text f-14 p-10">
-                                  {{ucfirst(trans(json_decode($users->meta, true)['manager_name']))}}
+                                  @if(json_decode($users->meta, true)['manager_name']){{ucfirst(trans(json_decode($users->meta, true)['manager_name']))}}@endif
                               </div>
                               <div class="theme-text f-14 p-10">
                                 +91 {{json_decode($users->meta, true)['alt_phone']}}

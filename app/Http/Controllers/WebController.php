@@ -689,7 +689,7 @@ class WebController extends Controller
                 ->with('user')
                 ->with('vehicle')
                 ->with('driver')
-                ->findOrFail()
+                ->first()
         ]);
     }
 

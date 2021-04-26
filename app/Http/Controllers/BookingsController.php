@@ -467,7 +467,7 @@ class BookingsController extends Controller
         if (isset($request->service_id))
             $bookings->where('service_id', $request->service_id);
 
-        $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
+       $bookings->paginate(CommonEnums::$PAGE_LENGTH);
 
         return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
             "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()

@@ -5,16 +5,16 @@
     <!-- Main Content -->
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createpages">
         <div class="d-flex flex-row justify-content-between">
-            <h3 class="heading1 p-4">Create Page</h3>
+            <h3 class="heading1 p-4">@if(!$pages) Create @else Edit @endif Page</h3>
         </div>
         <!-- Dashboard cards -->
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left p-5 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">General Settings
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('pages')}}">General Pages</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Create</a></li>
+                        <li class="breadcrumb-item">@if(!$pages) Create @else Edit @endif</li>
                     </ol>
                 </nav>
             </div>
@@ -63,7 +63,7 @@
                                 <div class="" id="comments">
                                     <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                                         <div class="w-50">
-                                            <a class="white-text p-10 cancel" href="#">
+                                            <a class="white-text p-10 cancel" href="{{route('dashboard')}}">
                                                 <button type="button" class="btn theme-br theme-text w-30 white-bg br-5">
                                                     Cancel
                                                 </button>

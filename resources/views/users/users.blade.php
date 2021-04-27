@@ -22,63 +22,63 @@
                         <h3 class="f-18 pl-2 title">User Roles</h3>
                     </div>
                     <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
-                        <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="date">
-                                    <label class="form-check-label" for="date">
-                                        Date
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="zone">
-                                    <label class="form-check-label" for="zone">
-                                        Zone
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="city">
-                                    <label class="form-check-label" for="city">
-                                        City
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="couponName">
-                                    <label class="form-check-label" for="couponName">
-                                        Coupon Name
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="couponType">
-                                    <label class="form-check-label" for="couponType">
-                                        Coupon Type
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="status">
-                                    <label class="form-check-label" for="status">
-                                        Status
-                                    </label>
-                                </div>
-                            </a>
-                        </div>
+                        {{-- <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+                         </a>
+                         <div class="dropdown-menu">
+                             <a class="dropdown-item border-top-bottom" href="#">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" value="" id="date">
+                                     <label class="form-check-label" for="date">
+                                         Date
+                                     </label>
+                                 </div>
+                             </a>
+                             <a class="dropdown-item border-top-bottom" href="#">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" value="" id="zone">
+                                     <label class="form-check-label" for="zone">
+                                         Zone
+                                     </label>
+                                 </div>
+                             </a>
+                             <a class="dropdown-item border-top-bottom" href="#">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" value="" id="city">
+                                     <label class="form-check-label" for="city">
+                                         City
+                                     </label>
+                                 </div>
+                             </a>
+                             <a class="dropdown-item border-top-bottom" href="#">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" value="" id="couponName">
+                                     <label class="form-check-label" for="couponName">
+                                         Coupon Name
+                                     </label>
+                                 </div>
+                             </a>
+                             <a class="dropdown-item border-top-bottom" href="#">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" value="" id="couponType">
+                                     <label class="form-check-label" for="couponType">
+                                         Coupon Type
+                                     </label>
+                                 </div>
+                             </a>
+                             <a class="dropdown-item border-top-bottom" href="#">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" value="" id="status">
+                                     <label class="form-check-label" for="status">
+                                         Status
+                                     </label>
+                                 </div>
+                             </a>
+                         </div>--}}
                     </div>
                     <div class="card-head  pt-2  left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('users')}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>

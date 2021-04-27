@@ -64,13 +64,13 @@
                                         <div class="form-input">
                                             <p class="img-label">Image</p>
                                             <div class="upload-section p-20 pt-0">
-                                                <img src="{{$organization->image}}" alt="">
+                                                <img class="upload-preview" src="{{$organization->image}}" alt="">
                                                 <div class="ml-1">
                                                     <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
                                                     <div class="file-upload">
                                                         <input type="file">
                                                         <input type="hidden" class="base-holder" name="image" value="{{$organization->image}}" required />
-                                                        <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button>
+                                                        <button type="button" class="btn theme-bg white-text my-0" data-action="upload">UPLOAD IMAGE</button>
                                                     </div>
                                                     <p>Max File size: 1MB</p>
                                                 </div>

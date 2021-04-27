@@ -53,6 +53,8 @@
 
                     </div>
                     <div class="col-sm-1 -mr-4 pt-4 pl-8 " style="">
+                    </div>
+                    {{--<div class="col-sm-1 -mr-4 pt-4 pl-8 " style="">
                         <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                         </a>
@@ -85,10 +87,10 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="card-head  pt-3  left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('customers')}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>

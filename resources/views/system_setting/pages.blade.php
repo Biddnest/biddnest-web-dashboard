@@ -28,7 +28,7 @@
                 <div class="card h-auto p-0 pt-10">
                     <div class="header-wrap" style="padding: 5px 20px;">
                         <header>
-                            <h3 class="f-18">
+                            <h3 class="f-18 title">
                                 Pages
                             </h3>
                         </header>
@@ -37,9 +37,9 @@
                         <table class="table text-center p-0 theme-text mb-0 primary-table">
                             <thead class="secondg-bg p-0">
                             <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Slug</th>
-                                <th scope="col">Operation</th>
+                                <th scope="col thead">Title</th>
+                                <th scope="col thead">Slug</th>
+                                <th scope="col thead">Operations</th>
                             </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">
@@ -60,7 +60,7 @@
                             <ul>
                                 <li class="p-1">Page</li>
                                 <li class="digit">{{$pages->currentPage()}}</li>
-                                <li class="label">of</li>
+                                <li class="label" style="font-size: 14px;">of</li>
                                 <li class="digit">{{$pages->lastPage()}}</li>
                                 @if(!$pages->onFirstPage())
                                     <li class="button"><a href="{{$pages->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>

@@ -34,7 +34,7 @@
                     </header>
                     <div class="p-10 card-head left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('subcateories')}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -48,7 +48,7 @@
                                 <th scope="col">Image</th>
                                 <th scope="col"> Name</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Add Category</th>
+{{--                                <th scope="col">Add Category</th>--}}
                                 <th scope="col">Operation</th>
                             </tr>
                         </thead>
@@ -72,14 +72,14 @@
                                         @endswitch--}}
                                         <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}">
                                     </td>
-                                    <td class="">
+                                    {{--<td class="">
                                         <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}">
                                             <div class="status-badge #FEF6E0 text-center">
                                                 <i class="fa fa-plus p-1" aria-hidden="true"></i>
                                                 Add
                                             </div>
                                         </a>
-                                    </td>
+                                    </td>--}}
                                     <td>
                                         <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         <a href="#" class="delete" data-parent=".sub_{{$subcategory->id}}" data-confirm="Are you sure, you want delete this Sub-Category permenently? You won't be able to undo this." data-url="{{route('sub_service_delete', ['id'=>$subcategory->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>

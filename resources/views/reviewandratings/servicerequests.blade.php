@@ -31,7 +31,7 @@
                         <h3 class="f-18 ml-2 mt-3 ">Service Requests </h3>
                     </div>
                     <div class="header-wrap p-0 col-sm-1 " style="display: flex; justify-content: flex-end;  margin-right: -18px;">
-                        <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                         </a>
                         <div class="dropdown-menu f-14">
@@ -89,11 +89,11 @@
                                 </div>
                             </a>
 
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="card-head  left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('service-requests')}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>

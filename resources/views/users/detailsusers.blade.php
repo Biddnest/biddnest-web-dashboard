@@ -5,7 +5,7 @@
  <!-- Main Content -->
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="usersandroles">
     <div class="d-flex  flex-row justify-content-between">
-        <h3 class="page-head text-left p-4">Order Details</h3>
+        <h3 class="page-head text-left p-4">User Details</h3>
     </div>
 
     <!-- Dashboard cards -->
@@ -75,11 +75,11 @@
                             <div class="col-sm-7 white-bg  margin-topneg-15  pt-10">
 
                                 <div class="theme-text f-14 p-10">
-                                    <p class="theme-text">Status</p>
+{{--                                    <p class="theme-text">Status</p>--}}
                                     <div class="form-input">
 
                                         <div class="d-flex justify-content-start vertical-center theme-text margin-topneg-15">
-                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="80" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
+{{--                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="80" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">--}}
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +133,13 @@
                     <div class="tab-pane fade   " id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
 
                         <div class="d-flex  row p-15 pb-0 " >
-
+                        @if(!json_decode($users->bank_meta, true)['acc_no'])
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. Bank Details not available.</i></p>
+                                    </div>
+                                </div>
+                        @elseif($users->bank_meta)
                             <div class="col-sm-4 secondg-bg  margin-topneg-15 pt-10">
                               <div class="theme-text f-14 bold p-10">
                                 Account Number
@@ -154,21 +160,27 @@
 
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-10">
-                                    {{json_decode($users->bank_meta, true)['acc_no']}}
+                                    {{json_decode($users->bank_meta, true)['acc_no'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['bank_name']}}
+                                  {{json_decode($users->bank_meta, true)['bank_name'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['holder_name']}}
+                                  {{json_decode($users->bank_meta, true)['holder_name'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['ifsc']}}
+                                  {{json_decode($users->bank_meta, true)['ifsc'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['branch_name']}}
+                                  {{json_decode($users->bank_meta, true)['branch_name'] ?? ''}}
                               </div>
-
+                                @else
+                                    <div class="row hide-on-data">
+                                        <div class="col-md-12 text-center p-20">
+                                            <p class="font14"><i>. Bank Details not available.</i></p>
+                                        </div>
+                                    </div>
+                                @endif
                   </div>
 
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AdminEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
@@ -12,10 +13,12 @@ use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
 use App\Enums\OrganizationEnums;
 use App\Models\Admin;
+use App\Models\AdminZone;
 use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\BookingStatus;
 use App\Models\Coupon;
+use App\Models\CouponZone;
 use App\Models\Inventory;
 use App\Models\Notification;
 use App\Models\Org_kyc;
@@ -25,6 +28,7 @@ use App\Models\Review;
 use App\Models\Service;
 use App\Models\Settings;
 use App\Models\Slider;
+use App\Models\SliderZone;
 use App\Models\Subservice;
 use App\Models\Organization;
 use App\Models\Testimonials;
@@ -123,17 +127,18 @@ class WebController extends Controller
 
     public function ordersBookingsLive(Request $request)
     {
-
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
 
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-            ->orWhere("deleted", CommonEnums::$NO);
+            ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
 
         if(isset($request->search)){
-            $bookings->oWhere(function ($query) use($request){
-               $query->where('public_booking_id', 'like', "$request->search%")
-                ->orWhere('source_meta', 'like', "%$request->search%")
-                ->orWhere('destination_meta', 'like', "%$request->search%");
-            });
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
         }
 
         $bookings->with('service')
@@ -147,15 +152,18 @@ class WebController extends Controller
 
     public function ordersBookingsPast(Request $request)
     {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-           ->where("deleted", CommonEnums::$NO);
+           ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
 
         if(isset($request->search)){
-            $bookings->orWhere(function ($query) use($request){
-                $query->where('public_booking_id', 'like', "$request->search%")
-                    ->orWhere('source_meta', 'like', "%$request->search%")
-                    ->orWhere('destination_meta', 'like', "%$request->search%");
-            });
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
         }
 
         $bookings->with("service")
@@ -281,23 +289,6 @@ class WebController extends Controller
         ]);
     }
 
-    /*public function orderDetailsVendor(Request $request)
-    {
-        $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
-        return view('order.orderdetails_vendor');
-    }
-    public function orderDetailsPayment(Request $request)
-    {
-        $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
-        return view('order.orderdetails_payment');
-    }
-
-    public function orderDetailsReview(Request $request)
-    {
-        $booking = Booking::with('review')->find($request->id);
-        return view('order.orderdetails_review');
-    }*/
-
     /*end order details subpages*/
 
     public function createOrder()
@@ -307,13 +298,19 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
-        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']])->orderBy("id","DESC")->paginate(15);
+        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']]);
+            if(isset($request->search)){
+                $user=$user->where('fname', 'like', "%".$request->search."%")
+                    ->orWhere('lname', 'like', "%".$request->search."%")
+                    ->orWhere('phone', 'like', $request->search."%");
+            }
+        $user->orderBy("id","DESC");
         $total_user =User::where("deleted", CommonEnums::$NO)->count();
         $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['suspended']])->count();
         $pending_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['verification_pending']])->count();
         return view('customer.customer',[
-            "users"=>$user, "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
+            "users"=>$user->paginate(15), "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
         ]);
     }
 
@@ -337,13 +334,24 @@ class WebController extends Controller
 
     public function vendors(Request $request)
     {
-        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
-            ->with('admin')
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+
+        if(isset($request->search)){
+            $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
+        }
+
+        $vendors->with('admin');
+
+
         $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->count();
         $count_unverifide_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$NO])->count();
-        return view('vendor.vendor',['vendors'=>$vendors, 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
+        return view('vendor.vendor',['vendors'=>$vendors ->paginate(CommonEnums::$PAGE_LENGTH), 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
     }
 
     public function sidebar_vendors(Request $request)
@@ -373,7 +381,7 @@ class WebController extends Controller
 
     public function onbaordEdit(Request  $request)
     {
-        $organization = Organization::where(["id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }
@@ -402,10 +410,18 @@ class WebController extends Controller
 
     public function leadVendors()
     {
-        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
-            ->with('admin')->with('zone')
-            ->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('vendor.lead',['vendors'=>$leads]);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+            if(isset($request->search)){
+                $leads=$leads->where('org_name', 'like', "%".$request->search."%");
+            }
+
+        $leads->with('admin')->with('zone');
+        return view('vendor.lead',['vendors'=>$leads->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function pendingVendors()
@@ -415,17 +431,30 @@ class WebController extends Controller
 
     public function verifiedVendors()
     {
-        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
-            ->with('admin')->with('zone')
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
 
-        return view('vendor.verified',['vendors'=>$vendors]);
+        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+            if(isset($request->search)){
+                $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
+            }
+
+        $vendors->with('admin')->with('zone');
+
+        return view('vendor.verified',['vendors'=>$vendors->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
-    public function categories()
+    public function categories(Request $request)
     {
+        $category =Service::where(["deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $category=$category->where('name', 'like', "%".$request->search."%");
+        }
+
         return view('categories.categories',[
-            "categories"=>Service::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
+            "categories"=>$category->paginate(CommonEnums::$PAGE_LENGTH),
             "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
         ]);
     }
@@ -436,10 +465,13 @@ class WebController extends Controller
         return view('categories.createcategories', ['category'=>$category]);
     }
 
-    public function subcateories()
-    {
+    public function subcateories(Request $request)
+    {   $subcategories=Subservice::where(["deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $subcategories=$subcategories->where('name', 'like', "%".$request->search."%");
+        }
         return view('categories.subcateories',[
-            "subcategories"=>Subservice::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "subcategories"=>$subcategories->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -459,10 +491,14 @@ class WebController extends Controller
         return view('sidebar.subcategory', ['subcategory'=>$subcategory]);
     }
 
-    public function inventories()
+    public function inventories(Request $request)
     {
+        $inventories=Inventory::where(["deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $inventories=$inventories->where('name', 'like', "%".$request->search."%");
+        }
         return view('categories.inventories',[
-            "inventories"=>Inventory::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "inventories"=>$inventories->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -477,17 +513,36 @@ class WebController extends Controller
         return view('categories.detailsinventories');
     }
 
-    public function coupons()
+    public function coupons(Request $request)
     {
-        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->orWhere("zone_scope", CouponEnums::$ZONE_SCOPE['all'])
-            ->with(['zones'=>function($query){
-                $query->whereIn("zone_id", Session::get("admin_zones"));
-            }])
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
+        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+            $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
+        {
+            $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'));
+
+            if(!Session::get('active_zone'))
+                $coupons->orWhereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
+        }
+
+
+        if(isset($request->search)){
+            $coupons=$coupons->where('name', 'like', "%".$request->search."%");
+        }
+
+        $coupons->with('zones')->orderBy('id','DESC');
+
         $total_coupons = Coupon::where(["deleted"=>CommonEnums::$NO])->count();
         $active_coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $inactive_coupons = Coupon::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
-        return view('coupons.coupons',["coupons"=>$coupons, 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
+        return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH), 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
     }
 
     public function sidebar_coupons(Request $request)
@@ -507,13 +562,22 @@ class WebController extends Controller
         return view('coupons.detailscoupons');
     }
 
-    public function zones()
+    public function zones(Request $request)
     {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $zones =Zone::where(["deleted"=>CommonEnums::$NO])->whereIn('id', $zone);
+        if(isset($request->search)){
+            $zones=$zones->where('name', 'like', "%".$request->search."%");
+        }
         $total = Zone::where(["deleted"=>CommonEnums::$NO])->count();
         $active = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $inactive = Zone::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
         return view('zones.zones',[
-            "zones"=>Zone::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
+            "zones"=>$zones->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
         ]);
     }
 
@@ -523,10 +587,22 @@ class WebController extends Controller
         return view('zones.createzones', ['zones'=>$zone]);
     }
 
-    public function slider()
+    public function slider(Request $request)
     {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $slider=Slider::where(["deleted"=>CommonEnums::$NO])->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
+
+        if(isset($request->search)){
+            $slider=$slider->where('name', 'like', "%".$request->search."%");
+        }
+
+        $slider->with('banners');
         return view('sliderandbanner.slider',[
-            "sliders"=>Slider::where(["deleted"=>CommonEnums::$NO])->with('banners')->paginate(CommonEnums::$PAGE_LENGTH)
+            "sliders"=>$slider->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -591,15 +667,25 @@ class WebController extends Controller
         return view('sliderandbanner.createtestimonials', ['testimonials'=>$testimonials]);
     }
 
-    public function review()
+    public function review(Request $request)
     {
-        $review=Review::where("deleted", CommonEnums::$NO)->with(['Booking'=>function($query){
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where("deleted", CommonEnums::$NO);
+
+        if(isset($request->search)){
+            $review=$review->where('desc', 'like', "%".$request->search."%");
+        }
+        $review->with(['Booking'=>function($query){
             $query->with('organization');
-        }])->with('user')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        }])->with('user')->orderBy("id","DESC");
         $total_review=Review::where("deleted", CommonEnums::$NO)->count();
         $active_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_review=Review::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
-        return view('reviewandratings.review', ['reviews'=>$review, 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
+        return view('reviewandratings.review', ['reviews'=>$review->paginate(CommonEnums::$PAGE_LENGTH), 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
     }
 
     public function createReview(Request $request)
@@ -607,12 +693,23 @@ class WebController extends Controller
         return view('reviewandratings.createreview');
     }
 
-    public function complaints()
+    public function complaints(Request $request)
     {
-        $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->with('user')->with('vendor')->with('booking')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->orWhereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'));
+
+        if(isset($request->search)){
+            $complaints=$complaints->where('heading', 'like', "%".$request->search."%");
+        }
+
+            $complaints->with('user')->with('vendor')->with('booking')->orderBy("id","DESC");
         $resolved_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['resolved']])->count();
         $open_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['open']])->count();
-        return view('reviewandratings.complaints', ['complaints'=>$complaints, 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
+        return view('reviewandratings.complaints', ['complaints'=>$complaints->paginate(CommonEnums::$PAGE_LENGTH), 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
     }
 
     public function reply(Request $request)
@@ -622,10 +719,14 @@ class WebController extends Controller
         return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies]);
     }
 
-    public function serviceRequests()
+    public function serviceRequests(Request $request)
     {
-        $service=Ticket::whereNotIn("type", [TicketEnums::$TYPE['complaint']])->with('user')->with('vendor')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('reviewandratings.servicerequests', ['services'=>$service]);
+        $service=Ticket::whereNotIn("type", [TicketEnums::$TYPE['complaint']]);
+        if(isset($request->search)){
+            $service=$service->where('heading', 'like', "%".$request->search."%");
+        }
+            $service->with('user')->with('vendor')->orderBy("id","DESC");
+        return view('reviewandratings.servicerequests', ['services'=>$service->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function createService()
@@ -633,12 +734,22 @@ class WebController extends Controller
         return view('reviewandratings.createservice');
     }
 
-    public function vendorPayout()
+    public function vendorPayout(Request $request)
     {
-        $payout =Payout::orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $payout =Payout::whereIn('organization_id', Organization::whereIn("zone_id", $zone)->pluck('id'));
+        if(isset($request->search)){
+            $payout=$payout->where('public_payout_id', 'like', "%".$request->search."%");
+        }
+        $payout->orderBy("id","DESC");
+        $payout_total =Payout::count();
         $scheduled_payout =Payout::where(["status"=>PayoutEnums::$STATUS['scheduled']])->count();
         $failed_payout =Payout::where(["status"=>PayoutEnums::$STATUS['suspended']])->count();
-        return view('vendorpayout.payout', ['payouts'=>$payout, 'total_count'=>count($payout), 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
+        return view('vendorpayout.payout', ['payouts'=>$payout->paginate(CommonEnums::$PAGE_LENGTH), 'total_count'=>$payout_total, 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
     }
 
     public function sidebar_payout(Request $request)
@@ -661,10 +772,19 @@ class WebController extends Controller
         return view('vendorpayout.detailspayout');
     }
 
-    public function users()
+    public function users(Request $request)
     {
-        $users=Admin::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->with('zones')->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('users.users', ['users'=>$users]);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $users=Admin::whereIn('id', AdminZone::whereIn("zone_id", $zone)->pluck('admin_id'))->where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES]);
+        if(isset($request->search)){
+            $users=$users->where('fname', 'like', "%".$request->search."%");
+        }
+        $users->with('zones')->orderBy("id","DESC");
+        return view('users.users', ['users'=>$users->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function sidebar_user(Request $request)

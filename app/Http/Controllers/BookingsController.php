@@ -503,7 +503,7 @@ class BookingsController extends Controller
             ->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($request) {
-                $bid->where("organization_id", $request->token_payload->organization_id);
+                $bid->where("organization_id", $request->token_payload->organization_id)->with('vendor');
             }]);
 
         $booking = $booking->paginate(CommonEnums::$PAGE_LENGTH);

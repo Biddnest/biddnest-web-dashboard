@@ -34,7 +34,7 @@
                                             <h3 class="f-18  pl-4">Leads</h3>
                                             <div class="p-1 card-head left col-sm-3 pr-3">
                                                 <div class="search ">
-                                                   <input type="text" class="searchTerm" placeholder="Search...">
+                                                    <input type="text" class="searchTerm table-search" data-url="{{route('lead-vendors')}}" placeholder="Search...">
                                                    <button type="submit" class="searchButton">
                                                      <i class="fa fa-search"></i>
                                                   </button>
@@ -47,39 +47,26 @@
                                                 <tr>
                                                     <th scope="col" style="width: 132px;">Vendor Name</th>
                                                     <th scope="col">Org Name</th>
+                                                    <th scope="col">Phone</th>
+                                                    <th scope="col">City</th>
                                                     <th scope="col">Zone</th>
-                                                    <th scope="col">Status</th>
                                                     <th scope="col">Operations</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                 @foreach($vendors as $vendor)
-                                                    <tr class="tb-border cursor-pointer org_{{$vendor->id}}">
-                                                        <td scope="row" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                                    <tr class="tb-border cursor-pointer org_{{$vendor->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>$vendor->id]) }}">
+                                                        <td scope="row">
                                                             @if(isset($vendor->vendor))
                                                                 {{ucfirst(trans($vendor->vendor->fname))}} {{ucfirst(trans($vendor->vendor->lname))}}
                                                             @else
                                                                 {{"NA"}}
                                                             @endif
                                                         </td>
-                                                        <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
-                                                        <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">{{ucfirst(trans($vendor->zone->name))}}</td>
-                                                        <td  onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">@switch($vendor->status)
-                                                                @case(\App\Enums\OrganizationEnums::$STATUS['active'])
-                                                                <span class="status-badge green-bg text-center">Active</span>
-                                                                @break
-
-                                                                @case(\App\Enums\OrganizationEnums::$STATUS['suspended'])
-                                                                <span class="status-badge red-bg text-center"> Suspended</span>
-                                                                @break
-                                                                @case(\App\Enums\OrganizationEnums::$STATUS['lead'])
-                                                                <span class="status-badge red-bg text-center"> Lead</span>
-                                                                @break
-
-                                                                @default
-                                                                <span class="status-badge info-bg text-center">Unknown</span>
-                                                            @endswitch
-                                                        </td>
+                                                        <td >{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
+                                                        <td >{{$vendor->phone}}</td>
+                                                        <td >{{ucfirst(trans($vendor->city))}}</td>
+                                                        <td >{{ucfirst(trans($vendor->zone->name))}}</td>
                                                         <td> <a href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                                             <a href="#" class="delete" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                         </td>

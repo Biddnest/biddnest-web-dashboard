@@ -253,6 +253,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createReview'])->name("create-review");
 
             Route::get('/{id}/reply',[WebController::class,'reply'])->name("reply");
+            Route::get('/{id}/change-status',[WebController::class,'changeStatus'])->name("change_status");
 
             Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
             Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");

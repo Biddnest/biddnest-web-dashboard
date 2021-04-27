@@ -115,19 +115,18 @@ class OrganisationController extends Controller
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']);
 
-            $result_organization =Organization::where(["id"=>$id])
-            ->update($update_data);
+        $result_organization =Organization::where(["id"=>$id])->update($update_data);
 
-            OrganizationService::where("organization_id", $id)->delete();
-            foreach($data['service'] as $value)
-            {
+        OrganizationService::where("organization_id", $id)->delete();
+        foreach($data['service'] as $value)
+        {
                 $service=new OrganizationService;
                 $service->organization_id=$id;
                 $service->service_id =$value;
                 $result_service = $service->save();
-            }
+        }
 
-            $vendor_result =Vendor::where(["id"=>$vendor_exist->id, "organization_id"=>$id])
+        $vendor_result =Vendor::where(["id"=>$vendor_exist->id, "organization_id"=>$id])
             ->update([
                 "fname"=>$admin['fname'],
                 "lname"=>$admin['lname'],

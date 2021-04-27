@@ -35,12 +35,12 @@
                         </li>
                         <!-- vendor sublink -->
                         <ul class="sub-menu vendor" id="vendors">
-                            <li class="sub-menu-item"><a href="{{route('create-vendors')}}"><i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> New Create
-                                    Vendor</a></li>
                             <li class="sub-menu-item"><a href="{{route('vendors')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor
                                     Management</a></li>
+                            <li class="sub-menu-item"><a href="{{route('create-vendors')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> New Create
+                                    Vendor</a></li>
                             <li class="sub-menu-item"> <a href="{{route('lead-vendors')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>
                                     Leads</a></li>

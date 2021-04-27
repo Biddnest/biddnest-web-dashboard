@@ -34,9 +34,10 @@ class BidController extends Controller
     public static function addvendors($booking_id)
     {
         try {
-            $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+            $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
+                            ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
-            $update_status = Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
+            Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
             $vendor_ids = [];
             // $bookingstatus = new BookingStatus;
             // $bookingstatus->booking_id = $booking_id;

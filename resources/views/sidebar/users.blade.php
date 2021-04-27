@@ -144,6 +144,7 @@
             </div>
         </div>
         <div class="tab-pane fade  " id="Banking" role="tabpanel" aria-labelledby="zone-insight-tab">
+            @if($users->bank_meta)
             <div class="d-flex  row  p-10">
                 <div class="col-sm-6">
                     <div class="theme-text f-14 bold">
@@ -152,7 +153,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['acc_no']}}
+                        {{json_decode($users->bank_meta, true)['acc_no'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -164,7 +165,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['bank_name']}}
+                        {{json_decode($users->bank_meta, true)['bank_name'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -176,7 +177,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['holder_name']}}
+                        {{json_decode($users->bank_meta, true)['holder_name'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -188,7 +189,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['ifsc']}}
+                        {{json_decode($users->bank_meta, true)['ifsc'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -200,10 +201,17 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['branch_name']}}
+                        {{json_decode($users->bank_meta, true)['branch_name'] ?? ''}}
                     </div>
                 </div>
             </div>
+            @else
+                <div class="row hide-on-data">
+                    <div class="col-md-12 text-center p-20">
+                        <p class="font14"><i>. Bank Details not availablt.</i></p>
+                    </div>
+                </div>
+            @endif
 
             <div class="d-flex   justify-content-center p-10">
                 <div class="">

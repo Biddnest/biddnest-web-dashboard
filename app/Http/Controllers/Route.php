@@ -1029,8 +1029,8 @@ class Route extends Controller
         return TicketReplyController::addReplyFromAdmin(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
     }
 
-    public function changeStatus(Request $request)
-    {
-        return TicketReplyController::changeStatus($request->all());
-    }
+
+    /*vendor routes*/
+
+
 }

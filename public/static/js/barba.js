@@ -38,6 +38,11 @@ barba.init({
                 arrows: false
             });
         }
+      }, {
+        namespace: 'dashboard',
+        afterEnter(data) {
+            loadRevenueChart();
+        }
       },{
         namespace: 'createslider',
         afterEnter(data) {
@@ -133,3 +138,4 @@ barba.hooks.after((data) => {
 });
 
 changeMenu();
+loadRevenueChart();

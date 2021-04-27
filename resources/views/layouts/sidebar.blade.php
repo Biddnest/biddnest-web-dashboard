@@ -8,11 +8,16 @@
                 <br>
                 <div class="nav-links">
                     <ul class="menu p-1">
+                        @if(\App\Helper::is('admin'))
                         <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('dashboard')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> </span> Dashboard</a>
                         </li>
+                        @endif
+
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
                         <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
                             aria-expanded="false" aria-controls="Booking"> <a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span> </span> Booking & Orders </a>
                         </li>
+
                         <ul class="sub-menu booking" id="booking">
                             <li class="sub-menu-item  "><a href="{{route('orders-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
@@ -46,6 +51,7 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Verified
                                     Vendors</a></li>
                         </ul>
+                            @endif
                         <li class="menu-item" data-toggle="" href="#Customer" role="button" aria-expanded="false"
                             aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user"></i></span> </span>Customer Management</a>
                         </li>
@@ -60,6 +66,7 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Customer
                                     Details</a></li> -->
                         </ul>
+                            @if(\App\Helper::is('admin'))
                         <li class="menu-item" data-toggle="" href="#Categories" role="button" aria-expanded="false"
                             aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories & Subcategories</a>
                         </li>
@@ -75,6 +82,9 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Inventory</a>
                             </li>
                         </ul>
+
+                            @endif
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
                         <li class="menu-item" data-toggle="" href="#Coupons" role="button" aria-expanded="false"
                             aria-controls="Coupons"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-ticket"></i></span> </span></i> Coupons & Offers</a>
                         </li>
@@ -89,6 +99,9 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Coupons</a>
                             </li> -->
                         </ul>
+                            @endif
+
+                            @if(\App\Helper::is('admin'))
                         <li class="menu-item" data-toggle="" href="#Zone" role="button" aria-expanded="false"
                             aria-controls="Zone"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-location "></i></span> </span> Zone Managment</a>
                         </li>
@@ -102,9 +115,13 @@
                             <!-- <li class="sub-menu-item"> <a href="edit-zones.html"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Zone</a></li> -->
                         </ul>
-                        <li class="menu-item" data-toggle="" href="#Sliders" role="button" aria-expanded="false"
+                            @endif
+
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                            <li class="menu-item" data-toggle="" href="#Sliders" role="button" aria-expanded="false"
                             aria-controls="Sliders"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-photo-group"></i></span> </span> Sliders & Banners</a>
                         </li>
+
                         <!-- sublinks -->
                         <ul class="sub-menu" id="Sliders">
                             <li class="sub-menu-item"><a href="{{route('slider')}}"> <i
@@ -118,12 +135,15 @@
                             </li>
 
                         </ul>
-                        <li class="menu-item"><a class="regular-nav"> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-pie"></i></span> </span> Reports</a></li>
+                            @endif
+
+                        <li class="menu-item hidden"><a class="regular-nav"> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-pie"></i></span> </span> Reports</a></li>
 
                         <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
                             aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
                         </li>
-                        <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
+
+                            <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
                             aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
                         </li>
                         <ul class="sub-menu" id="ticket">
@@ -133,6 +153,8 @@
                             <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
                         </ul>
+
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
                         <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"
                             aria-controls="Payout"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-wallet"></i></span> </span> Vendors Payout</a>
                         </li>
@@ -148,6 +170,9 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Payout</a>
                             </li> -->
                         </ul>
+                            @endif
+
+                            @if(\App\Helper::is('admin'))
                         <li class="menu-item" data-toggle="" href="#Users" role="button" aria-expanded="false"
                             aria-controls=" Users"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user-group"></i></span> </span> Users & Roles</a>
                         </li>
@@ -163,6 +188,7 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit-users</a>
                             </li> -->
                         </ul>
+                        @endif
                     </ul>
                 </div>
             </div>

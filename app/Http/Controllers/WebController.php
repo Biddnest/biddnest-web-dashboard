@@ -83,9 +83,12 @@ class WebController extends Controller
             $zone = Session::get('admin_zones');
 
         $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone)->count();
+
         $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
+
         $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
+
         $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone)->count();
 
 

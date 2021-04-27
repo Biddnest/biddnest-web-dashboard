@@ -74,9 +74,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
                                 </li>
-                               {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
-                                </li>--}}
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>

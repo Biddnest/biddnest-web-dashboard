@@ -711,7 +711,7 @@ class WebController extends Controller
                 ->with('user')
                 ->with('vehicle')
                 ->with('driver')
-                ->get()
+                ->first()
         ]);
     }
 

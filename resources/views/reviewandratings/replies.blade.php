@@ -17,7 +17,7 @@
                 <div class="form-input">
                     <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_status', ['id'=>$tickets->id])}}" required>
                         @foreach(\App\Enums\TicketEnums::$STATUS as $key=>$status)
-                            <option value="{{$status}}" @if($tickets && ($tickets->status==$status)) Selected @endif >{{ucwords($key)}}</option>
+                            <option value="{{$status}}" data-value="{{$status}}" @if($tickets && ($tickets->status==$status)) Selected @endif >{{ucwords($key)}}</option>
                         @endforeach
                     </select>
                     <span class="error-message">Please enter valid</span>

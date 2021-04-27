@@ -31,6 +31,7 @@ $.update = function(url, data, callback, type){
     });
 }
 
+
 Logger.useDefaults();
 
 // const helper = import("./helpers.js");

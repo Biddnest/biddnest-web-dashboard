@@ -17,6 +17,7 @@
                         </form>
                         <div class="col-6">
                             <ul class="header-controls d-flex flex-row justify-content-end">
+                                @if(\App\Helper::is("admin") || \App\Helper::is('zone_admin'))
                                 <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-web "height="15"></i></span> </a>
 
                                     <div class="dropdown settings" style="height: auto;">
@@ -31,7 +32,10 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-toggles "height="15"></i></span> </a>
+                                @endif
+
+                                    @if(\App\Helper::is("admin") || \App\Helper::is('zone_admin'))
+                                    <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-toggles "height="15"></i></span> </a>
 
                                     <div class="dropdown settings" style="height: auto;">
                                         <ul>
@@ -43,6 +47,7 @@
                                         </ul>
                                     </div>
                                 </li>
+                                    @endif
                                 {{--<li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
                                     <div class="dropdown">
                                         <ul>
@@ -175,5 +180,8 @@
 
         @include('layouts.includes.app-js')
         @yield('scripts')
+
+
+
     </body>
 </html>

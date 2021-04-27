@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="23" viewBox="0 0 21 23">
+  <defs>
+    <clipPath id="clip-Active_8">
+      <rect width="21" height="23"/>
+    </clipPath>
+  </defs>
+  <g id="Active_8" data-name="Active 8" clip-path="url(#clip-Active_8)">
+    <g id="icons_Q2" data-name="icons Q2" transform="translate(-1.387 -0.886)">
+      <path id="Path_13198" data-name="Path 13198" d="M23.789,19.2l-2.326-5.875A.749.749,0,0,0,20.4,12.9l-3.036,1.617a.355.355,0,0,1-.434-.039l-3.588-4.219A.789.789,0,0,0,12,10.806v9.463H23.04a.828.828,0,0,0,.749-1.065Z" transform="translate(-4.846 -3.651)" fill="#fff"/>
+      <path id="Path_13199" data-name="Path 13199" d="M18.983,18.194H5.577V4.789A.789.789,0,0,0,4,4.789V19.771H18.983a.789.789,0,0,0,0-1.577Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>

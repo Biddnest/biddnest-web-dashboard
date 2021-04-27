@@ -8,16 +8,16 @@
                     <div class="d-flex  flex-row justify-content-between">
                         <h3 class="page-head text-left p-4 f-20">Push Notification & Messages</h3>
                         <div class="mr-20 create-notification">
-                        
+
                             <button class="btn theme-bg white-text dropdown-toggle"><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New </button>
                             <div class="dropdown">
                                 <ul>
                                     <li><a href="{{route('create-push-notification')}}">Push Notification</a></li>
-                                    <li><a href="{{route('create-mail-notification')}}">Mail</a></li>
-                                 
+{{--                                    <li><a href="{{route('create-mail-notification')}}">Mail</a></li>--}}
+
                                 </ul>
                             </div>
-                     
+
                         </div>
                     </div>
                     <div class="d-flex  flex-row justify-content-between">
@@ -26,13 +26,13 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">Push Notification & Messages</li>
                               <li class="breadcrumb-item"><a href="#">Notifications</a></li>
-                              
+
                             </ol>
                           </nav>
-                        
-                        
+
+
                         </div>
-                  
+
                     </div>
 
                     <!-- Dashboard cards -->
@@ -49,16 +49,16 @@
                                             <li class="nav-item">
                                                 <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Push Notifications</a>
                                             </li>
-                                            <li class="nav-item">
+                                            {{--<li class="nav-item">
                                                 <a class="nav-link p-15" id="past-tab" href="{{ route('mail-notification')}}" >Mails</a>
-                                            </li>
+                                            </li>--}}
 
                                         </ul>
-                                      </h3> 
-                                          
-                                       
+                                      </h3>
+
+
                                     </div>
-                              
+
                                 </div>
                                 <!-- Table -->
 
@@ -89,7 +89,7 @@
                                                     </td>
                                                     <td>
                                                         http://app.wayne.com/move
-                                                        
+
                                                     </td>
                                                     <td> <a href="edit-notification.html"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true">  </i>   </a>       <i
                                                             class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
@@ -104,7 +104,7 @@
                                                     </td>
                                                     <td>
                                                         http://app.wayne.com/move
-                                                        
+
                                                     </td>
                                                     <td> <a href="edit-notification.html"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true">  </i>   </a> <i
                                                             class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
@@ -120,7 +120,7 @@
                                                 </td>
                                                 <td>
                                                     http://app.wayne.com/move
-                                                    
+
                                                 </td>
                                                 <td> <a href="edit-notification.html"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true">  </i>   </a> <i
                                                         class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
@@ -136,14 +136,14 @@
                                             </td>
                                             <td>
                                                 http://app.wayne.com/move
-                                                
+
                                             </td>
                                             <td> <a href="edit-notification.html"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true">  </i>   </a> <i
                                                     class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                         </tr>
-                                     
+
                                             </tbody>
-    
+
                                         </table>
 
                                         <div class="pagination">
@@ -157,12 +157,12 @@
                                             </ul>
                                         </div>
 
-                                       
 
-                                   
+
+
                                     </div>
-                                    
-                                    
+
+
                                     <!--  -->
                                 </div>
 

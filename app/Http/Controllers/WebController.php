@@ -84,7 +84,7 @@ class WebController extends Controller
         $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone)->count();
 
 
-        $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(5)->get();
+        $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(3)->get();
         return view('index', ['count_orders'=>$count_orders, 'count_vendors'=>$count_vendors, 'count_users'=>$count_users, 'count_zones'=>$count_zones, 'count_live_orders'=>$count_live_orders, 'bookings'=>$booking]);
     }
 
@@ -122,19 +122,19 @@ class WebController extends Controller
 
 
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-            ->orWhere("deleted", CommonEnums::$NO)
-            ->with('service')
-            ->with('organization')
-            ->orderBy("id","DESC");
+            ->orWhere("deleted", CommonEnums::$NO);
 
         if(isset($request->search)){
             $bookings->where(function ($query) use($request){
-                return $query->where('public_booking_id','like',"$request->search%")
-                ->orWhere('source_meta','LIKE',"%$request->search%")
-                ->orWhere('destination_meta','LIKE',"%$request->search%");
+               $query->where('public_booking_id', 'like', "$request->search%")
+                ->orWhere('source_meta', 'like', "%$request->search%")
+                ->orWhere('destination_meta', 'like', "%$request->search%");
             });
         }
 
+        $bookings->with('service')
+            ->with('organization')
+            ->orderBy("id","DESC");
 
         return view('order.ordersbookings_live',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
@@ -144,14 +144,22 @@ class WebController extends Controller
     public function ordersBookingsPast(Request $request)
     {
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-           ->where("deleted", CommonEnums::$NO)
-           ->with("service")
+           ->where("deleted", CommonEnums::$NO);
+
+        if(isset($request->search)){
+            $bookings->where(function ($query) use($request){
+                $query->where('public_booking_id', 'like', "$request->search%")
+                    ->orWhere('source_meta', 'like', "%$request->search%")
+                    ->orWhere('destination_meta', 'like', "%$request->search%");
+            });
+        }
+
+        $bookings->with("service")
            ->with('organization')
-           ->orderBy("id","DESC")
-           ->paginate(CommonEnums::$PAGE_LENGTH);
+           ->orderBy("id","DESC");
 
         return view('order.ordersbookings_past',[
-            "bookings" => $bookings
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -194,7 +202,11 @@ class WebController extends Controller
     }
     public function orderDetailsVendor(Request $request)
     {
-        $booking = Booking::with('status_history')->findOrFail($request->id);
+        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+            $query->limit(1)->orderBy("id","DESC");
+        }])->with('inventories')->with('driver')->with('vehicle')->with('organization')->with(['payment'=>function($q){
+            $q->with('coupon');
+        }])->findOrFail($request->id);
 
         $hist = [];
 
@@ -210,7 +222,11 @@ class WebController extends Controller
     }
     public function orderDetailsQuotation(Request $request)
     {
-        $booking = Booking::with('status_history')->findOrFail($request->id);
+        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+            $query->limit(1)->orderBy("id","DESC");
+        }])->with('inventories')->with('driver')->with('vehicle')->with('organization')->with(['payment'=>function($q){
+            $q->with('coupon');
+        }])->findOrFail($request->id);
 
         $hist = [];
 
@@ -242,7 +258,11 @@ class WebController extends Controller
     }
     public function orderDetailsReview(Request $request)
     {
-        $booking = Booking::with('status_history')->findOrFail($request->id);
+        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+            $query->limit(1)->orderBy("id","DESC");
+        }])->with('inventories')->with('user')->with('driver')->with('vehicle')->with('organization')->with(['payment'=>function($q){
+            $q->with('coupon');
+        }])->with('review')->findOrFail($request->id);
 
         $hist = [];
 
@@ -689,7 +709,7 @@ class WebController extends Controller
                 ->with('user')
                 ->with('vehicle')
                 ->with('driver')
-                ->findOrFail()
+                ->get()
         ]);
     }
 

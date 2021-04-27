@@ -60,9 +60,9 @@
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
                             </li>
-                            <li class="nav-item">
+                           {{-- <li class="nav-item">
                                 <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
-                            </li>
+                            </li>--}}
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                             </li>
@@ -145,9 +145,9 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex  mtop-5">
+                           {{-- <div class="d-flex  mtop-5">
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
-                            </div>
+                            </div>--}}
                         </div>
 
                         <div class="d-flex  row  p-15 pt-0 ">
@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="w-100 margin-r-20">
                                     <div class="d-flex justify-content-end">
-                                        <a href="{{route('order-details-vendor', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg w-30">Next</button></a>
+                                        <a class="white-text p-10" href="{{route('order-details-vendor', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg">Next</button></a>
                                     </div>
                                 </div>
                             </div>

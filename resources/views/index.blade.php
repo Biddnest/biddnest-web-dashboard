@@ -49,10 +49,10 @@
         <div class="col-sm-8 p-0">
             <div class="card p-10" style="height: 322px !important;">
                 <div class="d-flex flex-row justify-content-between">
-                    <div class="p-10 card-head right text-left">
+                    <div class=" card-head right text-left">
                         <h3 class="f-18">Recent Orders</h3>
                     </div>
-                    <div class="p-10 card-head left">
+                    {{--<div class="p-10 card-head left">
                         <a><i><img src="{{asset('static/images/filter.svg') }}" alt="" srcset=""></i>
                         <div class="dropdown-menu">
                             <a class="dropdown-item border-top-bottom" href="#">
@@ -81,7 +81,7 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
                 <table class="table text-center p-0">
                     <thead class="secondg-bg border-none p-0">

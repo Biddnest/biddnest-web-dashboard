@@ -74,9 +74,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
                                 </li>
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
@@ -91,66 +91,85 @@
                       <div class="tab-content border-top margin-topneg-7" id="myTabContent">
 
                       <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+                          @if(!$booking->review)
+                              <div class="row hide-on-data">
+                                  <div class="col-md-12 text-center p-20">
+                                      <p class="font14"><i>. Review is not submitted by Customer.</i></p>
+                                  </div>
+                              </div>
+                          @else
+                            <div class="d-flex  row p-15 pb-0" >
 
-
-
-                        <div class="d-flex  row p-15 pb-0" >
-
-                          <div class="col-sm-4  secondg-bg margin-topneg-15 pt-10 ">
-                            <div class="theme-text f-14 bold p-15">
-                              Order ID
-                            </div>
-                            <div class="theme-text f-14 bold p-15">
-                              Customer Name
-                            </div>
-                            <div class="theme-text f-14 bold p-15">
-                              Vender Name
-                            </div>
-                            <div class="theme-text f-14 bold p-15">
-                              Review Description
-                            </div>
-                            <div class="theme-text f-14 bold p-15">
-                              Status
-                            </div>
-                            <div class="theme-text f-14 bold p-15">
-                              Ratings
-                            </div>
-
-
-
-                          </div>
-
-                          <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
-
-                              <div class="theme-text f-14 p-15">
-                                SKU1234456
-                                </div>
-                                <div class="theme-text f-14 p-15">
-                                  Dhanush Rao
-                                </div>
-                                <div class="theme-text f-14 p-15">
-                                  Pradeep
-                                </div>
-                                <div class="theme-text f-14 p-15">
-                                  The Best
-                                </div>
-                                <div class="theme-text f-14  text-center status-badge mtop-20">
-                                  Completed
-                                </div>
-                                <div class="theme-text f-14 p-15 mt-2">
-                                  <i> <img src="{{ asset('static/images/ratings.svg')}}" alt="" srcset=""> </i>
+                                <div class="col-sm-4  secondg-bg margin-topneg-15 pt-10 ">
+                                    <div class="theme-text f-14 bold p-15">
+                                      Order ID
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15">
+                                      Customer Name
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15">
+                                      Vender Name
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15">
+                                      Review Description
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15">
+                                      Status
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15">
+                                      Ratings
+                                    </div>
                                 </div>
 
+                                <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
+                                    <div class="theme-text f-14 p-15">
+                                      {{$booking->public_booking_id}}
+                                    </div>
+                                    <div class="theme-text f-14 p-15">
+                                      {{ucfirst(trans($booking->user->fname))}} {{ucfirst(trans($booking->user->lname))}}
+                                    </div>
+                                    <div class="theme-text f-14 p-15">
+                                        @if($booking->organization){{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}} @endif
+                                    </div>
+                                    <div class="theme-text f-14 p-15">
+                                      {{$booking->review->desc}}
+                                    </div>
+                                    <div class="theme-text f-14  text-center status-badge mtop-20">
+                                      @foreach(\App\Enums\BookingEnums::$STATUS as $status=>$key)
+                                          @if($key == $booking->$status)
+                                            {{ucfirst(trans($status))}}
+                                          @endif
+                                      @endforeach
+                                    </div>
+                                    <div class="theme-text f-14 p-15 mt-2">
+                                        @php $ratings = 0; @endphp
+                                        @foreach(json_decode($booking->review->ratings, true) as $rating)
+                                            @php $ratings += $rating['rating']; @endphp
+                                        @endforeach
+                                        @php $ratings = number_format($ratings/count(json_decode($booking->review->ratings, true)), 2); @endphp
+                                        @for($star=$ratings; $star > 0; $star--)
+                                            @if($star < 1)
+                                                <i class="fa fa-star-half-o checked bg-yellow" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-star checked bg-yellow" aria-hidden="true"></i>
+                                            @endif
+                                        @endfor
+                                        @php $blank_star = floor(5 - $ratings); @endphp
 
-                            </div>
+                                        @for($star_o=$blank_star; $star_o >= 1; $star_o--)
+                                            <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                </div>
 
-                            <div class="d-flex  mtop-5">
+                           {{-- <div class="d-flex  mtop-5">
                               <i class="icon dripicons-pencil p-1 cursor-pointer theme-text" aria-hidden="true"></i> <a href="#" class="ml-1">Edit</a>
+                            </div>--}}
+
+
                             </div>
-
-
-                        </div>
+                          @endif
 
                         <div class="border-top-3">
                           <div class="d-flex justify-content-start">

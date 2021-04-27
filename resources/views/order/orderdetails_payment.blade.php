@@ -74,9 +74,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
                                 </li>
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
@@ -91,7 +91,13 @@
                       <div class="tab-content border-top margin-topneg-7" id="myTabContent">
 
                       <div class="tab-pane fade show active" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-
+                          @if(!$booking->payment)
+                              <div class="row hide-on-data">
+                                  <div class="col-md-12 text-center p-20">
+                                      <p class="font14"><i>. Payment Pending From Customer.</i></p>
+                                  </div>
+                              </div>
+                          @else
                           <div class="d-flex  row p-15 pb-0 " >
 
                               <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
@@ -105,7 +111,7 @@
                                       Buffer Amount
                                   </div>
                                   <div class="theme-text f-14 bold p-15">
-                                      Sub Total - 1
+                                      Grand Total - 1
                                   </div>
                                   <div class="theme-text f-14 bold p-15">
                                       Commission
@@ -119,27 +125,29 @@
                               <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
                                   <div class="theme-text f-14 p-15">
-
+                                    <br>
                                   </div>
                                   <div class="theme-text f-14 p-15">
-                                      ₹ 5200
+                                      ₹{{$booking->payment->sub_total}}
                                   </div>
                                   <div class="theme-text f-14 p-15">
-                                      ₹ 520
+                                      ₹{{$booking->payment->other_charges}}
                                   </div>
                                   <div class="theme-text f-14 p-15">
-                                      ₹ 5720
+                                      ₹{{$booking->payment->grand_total}}
                                   </div>
                                   <div class="theme-text f-14 p-15">
-                                      ₹ 1144
+                                      @php $commision_amount = ($booking->organization->commission/100)* $booking->payment->grand_total; @endphp
+                                      ₹ {{$commision_amount}}
                                   </div>
                                   <div class="theme-text f-14 p-15">
-                                      ₹ 6,864
+                                      ₹{{$booking->payment->grand_total + $commision_amount}}
                                   </div>
 
                               </div>
 
                           </div>
+                      @endif
 
                   <!-- Buttons -->
                       <div class="border-top-3">

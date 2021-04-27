@@ -13,7 +13,7 @@
                     @endif
                 @endforeach
             </h3>
-            <div class="col-sm-2 p-3 " style="margin-right: 20px;">
+            <div class="col-sm-2 p-3 " style="margin-right: 20px; margin-top: 10px;">
                 <div class="form-input">
                     <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_status', ['id'=>$tickets->id])}}" required>
                         @foreach(\App\Enums\TicketEnums::$STATUS as $key=>$status)

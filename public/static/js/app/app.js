@@ -316,8 +316,7 @@ $("body").on('change', ".change_status", function(event) {
 
 $("body").on('change', ".reply_status", function(event) {
 
-    var data = document.getElementById("status").value;
-    $.update($(this).data("url"), data, function (response){
+    $.update($(this).data("url"), $(this).data("value"), function (response){
         console.log(response);
         if(response.status == "success")
         {

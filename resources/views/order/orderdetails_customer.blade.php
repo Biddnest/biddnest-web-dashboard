@@ -175,6 +175,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @if(count($booking->inventories)== 0)
+                            <div class="row hide-on-data">
+                                <div class="col-md-12 text-center p-20">
+                                    <p class="font14"><i>. You don't have any Inventories here.</i></p>
+                                </div>
+                            </div>
+                        @endif
                         <div class="border-top-3">
                             <div class="d-flex justify-content-between">
                                 <div class="w-100">

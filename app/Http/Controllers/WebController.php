@@ -17,6 +17,7 @@ use App\Models\Booking;
 use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\Inventory;
+use App\Models\Notification;
 use App\Models\Org_kyc;
 use App\Models\Page;
 use App\Models\Payout;
@@ -556,7 +557,8 @@ class WebController extends Controller
 
     public function pushNotification()
     {
-        return view('sliderandbanner.pushnotification');
+        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('sliderandbanner.pushnotification', ['notifications'=>$notification]);
     }
 
     public function createPushNotification()

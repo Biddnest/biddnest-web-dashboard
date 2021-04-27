@@ -74,9 +74,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
                                 </li>
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
@@ -91,8 +91,14 @@
                       <div class="tab-content border-top margin-topneg-7" id="myTabContent">
 
                       <div class="tab-pane fade  show active" id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
-                        <div class="d-flex  row p-15 pb-0 " >
-
+                        @if(!$booking->organization)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. No any vendore won bid yet, Vendor not assigned.</i></p>
+                                    </div>
+                                </div>
+                        @else
+                              <div class="d-flex  row p-15 pb-0 " >
                           <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
                             <div class="theme-text f-14 bold p-15">
                               Assigned Vendor
@@ -110,7 +116,7 @@
                               Commission Amount
                             </div>
                             <div class="theme-text f-14 bold p-15">
-                              Discount From Vendor
+                              Discount
                             </div>
 
 
@@ -120,43 +126,43 @@
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
                               <div class="theme-text f-14 p-15">
-                                  Wayne Pvt Ltd
+                                  {{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                  KA03 B 1165
+                                    @if($booking->vehicle){{ucfirst(trans($booking->vehicle->name))}} {{ucfirst(trans($booking->vehicle->number))}} @endif
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                  Abhi Ram
+                                    @if($booking->driver){{ucfirst(trans($booking->driver->fname))}} {{ucfirst(trans($booking->driver->lname))}} @endif
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                  +91 - 9725364758
+                                  +91 -  @if($booking->driver){{ucfirst(trans($booking->driver->phone))}} @endif
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                  ₹ 2,300
+                                    @if($booking->payment) ₹{{ucfirst(trans($booking->payment->grand_total))}}@else Payment Pending @endif
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                  30% Off
+                                    @if($booking->payment)@if($booking->payment->coupon)@if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed'])₹@endif{{ucfirst(trans($booking->payment->coupon->discount_amount))}} @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['percentage'])% Off @endif @else Coupon not Applied @endif @else Payment Pending @endif
                                 </div>
-
-
 
                             </div>
 
-                          <div class="d-flex flex-row  mtop-5">
-                            <i class="icon dripicons-pencil p-1 cursor-pointer theme-text " aria-hidden="true"></i> <a href="#" class="ml-1 text-decoration-none primary-text">Edit</a>
-                          </div>
+
+                         {{-- <div class="d-flex flex-row  mtop-5">
+                            <i class="icon dripicons-pencil p-1 cursor-pointer theme-text " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
+                          </div>--}}
+                        @endif
 
 
                         </div>
                             <div class="border-top-3">
                               <div class="d-flex justify-content-start">
                                   <div class="w-50">
-                                      <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
+{{--                                      <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>--}}
                                   </div>
                                   <div class="w-50 margin-r-20">
                                       <div class="d-flex justify-content-end">
-                                      <button  class="btn theme-text white-bg theme-br w-30 mr-20">Back</button>
-                                          <button  class="btn white-text theme-bg w-30" >Next</button>
+                                          <a  href="{{route('order-details', ['id'=>$booking->id])}}"><button  class="btn theme-text white-bg theme-br mr-20">Back</button></a>
+                                          <a href="{{route('order-details-quotation', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg" >Next</button></a>
                                       </div>
 
                                   </div>

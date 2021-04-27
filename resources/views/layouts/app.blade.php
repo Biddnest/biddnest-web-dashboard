@@ -43,7 +43,7 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
+                                {{--<li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
                                     <div class="dropdown">
                                         <ul>
                                             <li><a href="#">
@@ -106,7 +106,7 @@
                                         </ul>
                                     </div>
 
-                                </li>
+                                </li>--}}
                                 <li class="account-settings">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         width="15.071" height="15.071" viewBox="0 0 9.071 9.071">

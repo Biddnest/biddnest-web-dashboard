@@ -134,6 +134,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
 
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
+
 });
 
 Route::prefix('vendors')->group(function () {

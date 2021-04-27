@@ -40,7 +40,7 @@
                     </div>
                     <div class="p-1 card-head left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('orders-booking')}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -142,6 +142,13 @@
                             @endforeach
                             </tbody>
                         </table>
+                        @if(count($bookings)== 0)
+                            <div class="row hide-on-data">
+                                <div class="col-md-12 text-center p-20">
+                                    <p class="font14"><i>. You don't have any Live Orders here.</i></p>
+                                </div>
+                            </div>
+                        @endif
                         <div class="pagination">
                             <ul>
                                 <li class="p-1">Page</li>

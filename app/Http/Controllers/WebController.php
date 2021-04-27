@@ -125,7 +125,7 @@ class WebController extends Controller
             ->orWhere("deleted", CommonEnums::$NO);
 
         if(isset($request->search)){
-            $bookings->where(function ($query) use($request){
+            $bookings->oWhere(function ($query) use($request){
                $query->where('public_booking_id', 'like', "$request->search%")
                 ->orWhere('source_meta', 'like', "%$request->search%")
                 ->orWhere('destination_meta', 'like', "%$request->search%");
@@ -147,7 +147,7 @@ class WebController extends Controller
            ->where("deleted", CommonEnums::$NO);
 
         if(isset($request->search)){
-            $bookings->where(function ($query) use($request){
+            $bookings->orWhere(function ($query) use($request){
                 $query->where('public_booking_id', 'like', "$request->search%")
                     ->orWhere('source_meta', 'like', "%$request->search%")
                     ->orWhere('destination_meta', 'like', "%$request->search%");

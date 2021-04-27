@@ -52,7 +52,7 @@
                     <div class="p-10 card-head right text-left">
                         <h3 class="f-18 mt-0">Recent Orders</h3>
                     </div>
-                    <div class="p-10 card-head left">
+                    {{--<div class="p-10 card-head left">
                         <a><i><img src="{{asset('static/images/filter.svg') }}" alt="" srcset=""></i>
                         <div class="dropdown-menu">
                             <a class="dropdown-item border-top-bottom" href="#">
@@ -81,7 +81,7 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
                 <table class="table text-center p-0">
                     <thead class="secondg-bg border-none p-0">

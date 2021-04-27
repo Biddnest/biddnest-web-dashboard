@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="78" height="54" viewBox="0 0 78 54">
+  <defs>
+    <clipPath id="clip-Artboard_1">
+      <rect width="78" height="54"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard – 1" clip-path="url(#clip-Artboard_1)">
+    <rect width="78" height="54" fill="#fff"/>
+    <g id="Group_14181" data-name="Group 14181" transform="translate(-1164.5 -184)">
+      <circle id="Ellipse_450" data-name="Ellipse 450" cx="22.5" cy="22.5" r="22.5" transform="translate(1181.5 189)" fill="#f2e6ff"/>
+      <g id="box" transform="translate(1192.5 199)">
+        <g id="Group_12788" data-name="Group 12788">
+          <g id="Group_12787" data-name="Group 12787">
+            <path id="Path_12297" data-name="Path 12297" d="M39.092,15.592V6.341L28.109,0,17.126,6.341V19.023l10.983,6.341,2.922-1.687a5.709,5.709,0,1,0,8.061-8.085ZM28.109,1.721l8.748,5.051-3.629,2.1L24.48,3.816Zm-.745,21.493-8.748-5.051V8.062l8.748,5.051Zm-8-16.442,3.629-2.1,8.748,5.051-3.629,2.1Zm9.493,16.442v-10.1L37.6,8.062v6.484a5.71,5.71,0,0,0-7.472,7.932Zm6.259.694a4.222,4.222,0,1,1,4.222-4.222A4.227,4.227,0,0,1,35.113,23.908Z" transform="translate(-17.126)" fill="#49039b"/>
+          </g>
+        </g>
+        <g id="Group_12790" data-name="Group 12790" transform="translate(16.076 18.358)">
+          <g id="Group_12789" data-name="Group 12789">
+            <path id="Path_12298" data-name="Path 12298" d="M327.034,353.212l-2.181,2.193-.977-.967-.937.946,1.921,1.9,3.118-3.135Z" transform="translate(-322.94 -353.212)" fill="#49039b"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

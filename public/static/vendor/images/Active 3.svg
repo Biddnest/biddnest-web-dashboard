@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="18" viewBox="0 0 21 18">
+  <defs>
+    <clipPath id="clip-Active_3">
+      <rect width="21" height="18"/>
+    </clipPath>
+  </defs>
+  <g id="Active_3" data-name="Active 3" clip-path="url(#clip-Active_3)">
+    <path id="Icon_ionic-md-list-box" data-name="Icon ionic-md-list-box" d="M18.833,4.5H6.167A1.667,1.667,0,0,0,4.5,6.167V18.833A1.667,1.667,0,0,0,6.167,20.5H18.833A1.667,1.667,0,0,0,20.5,18.833V6.167A1.667,1.667,0,0,0,18.833,4.5ZM14.5,17.167H7.833v-2H14.5ZM17.167,13.5H7.833v-2h9.333Zm0-3.667H7.833v-2h9.333Z" transform="translate(-1.5 -3.5)" fill="#fff"/>
+  </g>
+</svg>

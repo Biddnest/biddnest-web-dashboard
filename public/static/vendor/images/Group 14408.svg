@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="593.235" height="260.402" viewBox="0 0 593.235 260.402">
+  <g id="Group_14408" data-name="Group 14408" transform="translate(-549.139 -456.584)">
+    <g id="Group_14407" data-name="Group 14407">
+      <text id="_0" data-name="0" transform="translate(576.984 686.254)" fill="#3b4b58" font-size="13" font-family="ArialMT, Arial"><tspan x="-7.23" y="0">0</tspan></text>
+      <text id="_250" data-name="250" transform="translate(576.139 643.301)" fill="#3b4b58" font-size="12" font-family="ArialMT, Arial"><tspan x="-26.695" y="0">1000</tspan></text>
+      <text id="_250-2" data-name="250" transform="translate(576.139 601.348)" fill="#3b4b58" font-size="12" font-family="ArialMT, Arial"><tspan x="-26.695" y="0">2000</tspan></text>
+      <text id="_250-3" data-name="250" transform="translate(576.139 560.561)" fill="#3b4b58" font-size="12" font-family="ArialMT, Arial"><tspan x="-26.695" y="0">3000</tspan></text>
+      <text id="_500" data-name="500" transform="translate(576.139 518.607)" fill="#3b4b58" font-size="12" font-family="ArialMT, Arial"><tspan x="-26.695" y="0">4000</tspan></text>
+      <text id="_500-2" data-name="500" transform="translate(576.139 476.654)" fill="#3b4b58" font-size="12" font-family="ArialMT, Arial"><tspan x="-26.695" y="0">5000</tspan></text>
+      <g id="Group_12695" data-name="Group 12695" transform="translate(661.492 598.568)">
+        <text id="M" transform="translate(13.51 115.418)" fill="#3b4b58" font-size="14" font-family="ArialMT, Arial"><tspan x="-3.893" y="0">1</tspan></text>
+        <rect id="Rectangle_5027" data-name="Rectangle 5027" width="24" height="93" rx="2" transform="translate(-0.493)" fill="#0f0c75" opacity="0.4"/>
+      </g>
+      <g id="Group_12694" data-name="Group 12694" transform="translate(773.971 557.568)">
+        <text id="T" transform="translate(12.787 156.418)" fill="#3b4b58" font-size="14" font-family="ArialMT, Arial"><tspan x="-3.893" y="0">2</tspan></text>
+        <rect id="Rectangle_5028" data-name="Rectangle 5028" width="24" height="134" rx="2" transform="translate(0.03)" fill="#0f0c75" opacity="0.5"/>
+      </g>
+      <g id="Group_12693" data-name="Group 12693" transform="translate(885.555 515.568)">
+        <text id="W" transform="translate(13.108 198.418)" fill="#3b4b58" font-size="14" font-family="ArialMT, Arial"><tspan x="-3.893" y="0">3</tspan></text>
+        <rect id="Rectangle_5029" data-name="Rectangle 5029" width="24" height="176" rx="2" transform="translate(0.445)" fill="#0f0c75" opacity="0.6"/>
+      </g>
+      <rect id="Rectangle_5030" data-name="Rectangle 5030" width="24" height="176" rx="2" transform="translate(998 515.568)" fill="#0f0c75"/>
+      <g id="Group_12691" data-name="Group 12691" transform="translate(1108.565 473.568)">
+        <text id="F" transform="translate(13.792 240.418)" fill="#3b4b58" font-size="14" font-family="ArialMT, Arial"><tspan x="-3.893" y="0">5</tspan></text>
+        <rect id="Rectangle_5031" data-name="Rectangle 5031" width="24" height="218" rx="2" transform="translate(0.435)" fill="#0f0c75" opacity="0.7"/>
+      </g>
+      <line id="Line_12" data-name="Line 12" x2="549.794" transform="translate(592.58 691.068)" fill="none" stroke="#3b4b58" stroke-width="1"/>
+      <line id="Line_13" data-name="Line 13" y1="234.486" transform="translate(592.58 456.584)" fill="none" stroke="#3b4b58" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

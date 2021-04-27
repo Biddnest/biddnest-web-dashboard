@@ -1,11 +1,13 @@
 <?php
 
 namespace App;
+use App\Enums\AdminEnums;
 use Carbon\CarbonImmutable;
 use Faker\Provider\File;
 use \Firebase\JWT\JWT;
 use http\Env\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Fabito\AvatarGenerator\Avatar;
 use Illuminate\Foundation\Inspiring;
@@ -48,6 +50,29 @@ class Helper
         $generator = new Avatar();
         return $generator->name($name)->font("../resources/fonts/Gilroy-Medium.ttf")->backgroundColor('#FFBC1E')->size(100)->toPng();
 
+    }
+
+    public static function is($role){
+
+        switch($role){
+
+            case "admin":
+                if(Session::get('user_role') === AdminEnums::$ROLES['admin'])
+                    return true;
+            break;
+
+            case "zone_admin":
+                if(Session::get('user_role') === AdminEnums::$ROLES['zone_admin'])
+                    return true;
+            break;
+
+            case "marketing":
+                if(Session::get('user_role') === AdminEnums::$ROLES['marketing'])
+                    return true;
+            break;
+
+            }
+            return false;
     }
 
 }

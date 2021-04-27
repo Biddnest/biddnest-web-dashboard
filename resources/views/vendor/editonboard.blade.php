@@ -64,7 +64,7 @@
                                         <div class="form-input">
                                             <p class="img-label">Image</p>
                                             <div class="upload-section p-20 pt-0">
-                                                <img src="{{$organization->image}}" alt="">
+                                                <img class="upload-preview" src="{{$organization->image}}" alt="">
                                                 <div class="ml-1">
                                                     <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
                                                     <div class="file-upload">

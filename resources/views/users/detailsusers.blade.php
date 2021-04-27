@@ -5,7 +5,7 @@
  <!-- Main Content -->
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="usersandroles">
     <div class="d-flex  flex-row justify-content-between">
-        <h3 class="page-head text-left p-4">Order Details</h3>
+        <h3 class="page-head text-left p-4">User Details</h3>
     </div>
 
     <!-- Dashboard cards -->

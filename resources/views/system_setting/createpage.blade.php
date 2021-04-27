@@ -5,7 +5,7 @@
     <!-- Main Content -->
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createpages">
         <div class="d-flex flex-row justify-content-between">
-            <h3 class="heading1 p-4">Create Page</h3>
+            <h3 class="heading1 p-4">@if(!$pages) Create @else Edit @endif Page</h3>
         </div>
         <!-- Dashboard cards -->
         <div class="d-flex  flex-row justify-content-between">
@@ -14,7 +14,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">General Settings
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Create</a></li>
+                        <li class="breadcrumb-item"><a href="#">@if(!$pages) Create @else Edit @endif</a></li>
                     </ol>
                 </nav>
             </div>

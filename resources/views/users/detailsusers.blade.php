@@ -75,7 +75,7 @@
                             <div class="col-sm-7 white-bg  margin-topneg-15  pt-10">
 
                                 <div class="theme-text f-14 p-10">
-                                    <p class="theme-text">Status</p>
+{{--                                    <p class="theme-text">Status</p>--}}
                                     <div class="form-input">
 
                                         <div class="d-flex justify-content-start vertical-center theme-text margin-topneg-15">

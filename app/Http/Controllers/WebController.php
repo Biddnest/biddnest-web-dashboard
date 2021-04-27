@@ -397,10 +397,18 @@ class WebController extends Controller
 
     public function leadVendors()
     {
-        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
-            ->with('admin')->with('zone')
-            ->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('vendor.lead',['vendors'=>$leads]);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+            if(isset($request->search)){
+                $leads=$leads->where('org_name', 'like', "%".$request->search."%");
+            }
+
+        $leads->with('admin')->with('zone');
+        return view('vendor.lead',['vendors'=>$leads->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function pendingVendors()
@@ -410,11 +418,19 @@ class WebController extends Controller
 
     public function verifiedVendors()
     {
-        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
-            ->with('admin')->with('zone')
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
 
-        return view('vendor.verified',['vendors'=>$vendors]);
+        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+            if(isset($request->search)){
+                $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
+            }
+
+        $vendors->with('admin')->with('zone');
+
+        return view('vendor.verified',['vendors'=>$vendors->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function categories()

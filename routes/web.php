@@ -135,6 +135,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
 
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
+    Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
 
 });
 
@@ -253,7 +254,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createReview'])->name("create-review");
 
             Route::get('/{id}/reply',[WebController::class,'reply'])->name("reply");
-            Route::get('/{id}/change-status',[WebController::class,'changeStatus'])->name("change_status");
 
             Route::get('/complaints',[WebController::class,'complaints'])->name("complaints");
             Route::get('/complaints/create',[WebController::class,'createComplaints'])->name("create-complaint");

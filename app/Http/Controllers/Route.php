@@ -1029,8 +1029,18 @@ class Route extends Controller
         return TicketReplyController::addReplyFromAdmin(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
     }
 
+    public function changeStatus(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'data'=>'required'
+        ]);
 
-    /*vendor routes*/
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketReplyController::changeStatus($request->id, $request->data);
+    }
 
 
 }

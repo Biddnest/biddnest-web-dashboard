@@ -31,6 +31,7 @@ $.update = function(url, data, callback, type){
     });
 }
 
+
 Logger.useDefaults();
 
 // const helper = import("./helpers.js");
@@ -310,6 +311,24 @@ $("body").on('change', ".change_status", function(event) {
             }
 
         });
+    return false;
+});
+
+$("body").on('change', ".reply_status", function(event) {
+
+    var data = document.getElementById("status").value;
+    $.update($(this).data("url"), data, function (response){
+        console.log(response);
+        if(response.status == "success")
+        {
+            tinySuccessAlert("Status changed Successfully", response.message);
+        }
+        else
+        {
+            tinyAlert("Failed", response.message);
+        }
+
+    });
     return false;
 });
 

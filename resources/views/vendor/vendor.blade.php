@@ -60,7 +60,7 @@
                                                     <h3 class="f-18 pl-8 title " style="margin-bottom: 0px !important;">All Vendors</h3 >
 
                                                 </div>
-                                                <div class="col-sm-1" style="margin-right: -11%;">
+                                                {{--<div class="col-sm-1" style="margin-right: -11%;">
                                                     <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
                                                         <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
@@ -94,10 +94,10 @@
                                                             </div>
                                                         </a>
                                                     </div>
-                                                </div>
+                                                </div>--}}
                                                 <div class="card-head  pt-2  left col-sm-3" style="padding: 8px 20px;">
                                                     <div class="search">
-                                                        <input type="text" class="searchTerm" placeholder="Search...">
+                                                        <input type="text" class="searchTerm table-search" data-url="{{route('vendors')}}" placeholder="Search...">
                                                         <button type="submit" class="searchButton">
                                                             <i class="fa fa-search"></i>
                                                         </button>
@@ -151,7 +151,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            @if(count($vendors)== 0)
+                                            @if($vendors_count == 0)
                                                 <div class="row hide-on-data">
                                                     <div class="col-md-12 text-center p-20">
                                                         <p class="font14"><i>. You don't have any Vendors here.</i></p>
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
                                 </div>
-                               
+
 
                                     <!-- <div class="text-right p-20" style="float: right;">
                                         <nav aria-label="Page navigation example border-none">

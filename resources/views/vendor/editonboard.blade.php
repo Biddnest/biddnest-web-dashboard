@@ -70,7 +70,7 @@
                                                     <div class="file-upload">
                                                         <input type="file">
                                                         <input type="hidden" class="base-holder" name="image" value="{{$organization->image}}" required />
-                                                        <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button>
+                                                        <button type="button" class="btn theme-bg white-text my-0">UPLOAD IMAGE</button>
                                                     </div>
                                                     <p>Max File size: 1MB</p>
                                                 </div>

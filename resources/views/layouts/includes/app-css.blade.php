@@ -763,7 +763,10 @@
             .edit{
                 padding-right: 25px;
             }
-
+            .thead{
+                font-weight: revert;
+                font-size: 16px;
+            }
 
         </style>
 

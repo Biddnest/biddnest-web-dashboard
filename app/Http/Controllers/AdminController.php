@@ -157,7 +157,7 @@ class AdminController extends Controller
                 $zones->save();
             }
             } elseif($data['role'] == AdminEnums::$ROLES['zone_admin']){
-            if(count($data['zone'] > 0)) {
+            if(count($data['zone'])> 0) {
                 foreach ($data['zone'] as $zone) {
                     $zones = new AdminZone;
                     $zones->admin_id = $admin->id;

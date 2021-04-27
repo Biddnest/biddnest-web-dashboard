@@ -107,20 +107,20 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Employee Role</label>
-                                        <select id="role" name="role" class="form-control" required>
+                                        <select id="role" name="role" class="form-control field-toggle" data-value="2" data-target=".zones" required>
                                             <option value="">--Select--</option>
                                             @foreach(\App\Enums\AdminEnums::$ROLES as $key=>$role)
-                                                <option value="{{$role}}" @if($users && ($users->role==$role)) Selected @endif >{{ucfirst(trans($key))}}</option>
+                                                <option value="{{$role}}" @if($users && ($users->role==$role)) Selected @endif >{{ucwords(str_replace('_', ' ',$key))}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 zones hidden">
                                     <div class="form-input">
                                         <label class="full-name">Zone</label>
-                                        <select id="role" name="zone[]" class="form-control select-box" multiple required>
+                                        <select id="role" name="zone[]" class="form-control select-box" multiple>
                                             <option value="">--Select--</option>
                                             @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
                                                 <option value="{{$zone->id}}"

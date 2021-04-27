@@ -120,17 +120,18 @@ class WebController extends Controller
 
     public function ordersBookingsLive(Request $request)
     {
-
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
 
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-            ->orWhere("deleted", CommonEnums::$NO);
+            ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
 
         if(isset($request->search)){
-            $bookings->orWhere(function ($query) use($request){
-               $query->where('public_booking_id', 'like', "$request->search%")
-                ->orWhere('source_meta', 'like', "%$request->search%")
-                ->orWhere('destination_meta', 'like', "%$request->search%");
-            });
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
         }
 
         $bookings->with('service')
@@ -144,15 +145,18 @@ class WebController extends Controller
 
     public function ordersBookingsPast(Request $request)
     {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-           ->where("deleted", CommonEnums::$NO);
+           ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
 
         if(isset($request->search)){
-            $bookings->orWhere(function ($query) use($request){
-                $query->where('public_booking_id', 'like', "$request->search%")
-                    ->orWhere('source_meta', 'like', "%$request->search%")
-                    ->orWhere('destination_meta', 'like', "%$request->search%");
-            });
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
         }
 
         $bookings->with("service")
@@ -278,23 +282,6 @@ class WebController extends Controller
         ]);
     }
 
-    /*public function orderDetailsVendor(Request $request)
-    {
-        $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
-        return view('order.orderdetails_vendor');
-    }
-    public function orderDetailsPayment(Request $request)
-    {
-        $booking = Booking::with('vendor','vehicle','driver')->find($request->id);
-        return view('order.orderdetails_payment');
-    }
-
-    public function orderDetailsReview(Request $request)
-    {
-        $booking = Booking::with('review')->find($request->id);
-        return view('order.orderdetails_review');
-    }*/
-
     /*end order details subpages*/
 
     public function createOrder()
@@ -334,13 +321,27 @@ class WebController extends Controller
 
     public function vendors(Request $request)
     {
-        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", Session::get("admin_zones"))
-            ->with('admin')
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+
+        if(isset($request->search)){
+            $vendors=$vendors->where('org_name', 'like', "%".$request->search."%")
+                ->with(['admin'=>function($query) use($request) {
+                    $query->where('fname', 'like', "%".$request->search."%");
+            }]);
+        }
+        else{
+            $vendors->with('admin');
+        }
+
         $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->count();
         $count_unverifide_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$NO])->count();
-        return view('vendor.vendor',['vendors'=>$vendors, 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
+        return view('vendor.vendor',['vendors'=>$vendors ->paginate(CommonEnums::$PAGE_LENGTH), 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
     }
 
     public function sidebar_vendors(Request $request)

@@ -133,7 +133,7 @@
                     <div class="tab-pane fade   " id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
 
                         <div class="d-flex  row p-15 pb-0 " >
-
+                        @if($users->bank_meta)
                             <div class="col-sm-4 secondg-bg  margin-topneg-15 pt-10">
                               <div class="theme-text f-14 bold p-10">
                                 Account Number
@@ -168,7 +168,13 @@
                               <div class="theme-text f-14 p-10">
                                   {{json_decode($users->bank_meta, true)['branch_name']}}
                               </div>
-
+                                @else
+                                    <div class="row hide-on-data">
+                                        <div class="col-md-12 text-center p-20">
+                                            <p class="font14"><i>. Bank Details not availablt.</i></p>
+                                        </div>
+                                    </div>
+                                @endif
                   </div>
 
                         </div>

@@ -378,7 +378,7 @@ class WebController extends Controller
 
     public function onbaordEdit(Request  $request)
     {
-        $organization = Organization::where(["id"=>$request->id, "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }

@@ -79,7 +79,7 @@
                                     <div class="form-input">
 
                                         <div class="d-flex justify-content-start vertical-center theme-text margin-topneg-15">
-                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="80" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
+{{--                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="80" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">--}}
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +133,13 @@
                     <div class="tab-pane fade   " id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
 
                         <div class="d-flex  row p-15 pb-0 " >
-                        @if($users->bank_meta)
+                        @if(!json_decode($users->bank_meta, true)['acc_no'])
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. Bank Details not available.</i></p>
+                                    </div>
+                                </div>
+                        @elseif($users->bank_meta)
                             <div class="col-sm-4 secondg-bg  margin-topneg-15 pt-10">
                               <div class="theme-text f-14 bold p-10">
                                 Account Number
@@ -171,7 +177,7 @@
                                 @else
                                     <div class="row hide-on-data">
                                         <div class="col-md-12 text-center p-20">
-                                            <p class="font14"><i>. Bank Details not availablt.</i></p>
+                                            <p class="font14"><i>. Bank Details not available.</i></p>
                                         </div>
                                     </div>
                                 @endif

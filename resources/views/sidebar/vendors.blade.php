@@ -1,7 +1,7 @@
 <div class="modal-header pb-0 border-none">
     <h3 class="f-14">
         <ul class="nav nav-tabs pt-20 p-0" id="myTab" role="tablist">
-            <li class="nav-item" style="margin-right: 40px;">
+            <li class="nav-item" style="margin-right: 0px;">
                 <a class="nav-link active pl-4 p-15" id="new-order-tab" data-toggle="tab" href="#vendor" role="tab"
                    aria-controls="home" aria-selected="true">Vendor Details</a>
             </li>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center edit">
                     <h1 class="side-popup-content">{{ucfirst(trans($organization->admin->fname))}} {{ucfirst(trans($organization->admin->lname))}}</h1>
-                    <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i></a>
+                    <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" style="margin-right: 12px;" aria-hidden="true"></i></a>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
                             <h1 class="side-popup-content">{{ucfirst(trans($key))}}</h1>
                         @endif
                     @endforeach
-                    <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" aria-hidden="true"></i></a>
+                    <a href="{{route('onboard-edit-vendors', ["id"=>$organization->id])}}"><i class="icon dripicons-pencil pl-1 cursor-pointer theme-text" style="margin-right: 12px;" aria-hidden="true"></i></a>
                 </div>
             </div>
 
@@ -166,9 +166,9 @@
                 </div>
             </div>
             <table class="table text-center p-10 theme-text th-no-border">
-                <thead class="secondg-bg p-0" >
+                <thead class="secondg-bg p-0"  >
                 <tr>
-                    <th scope="col" class="text-left">Payout ID</th>
+                    <th scope="col" class="text-left" style="width :134px">Payout ID</th>
                     <th scope="col">Status</th>
                     <th scope="col">Payout Date</th>
 

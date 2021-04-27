@@ -37,7 +37,7 @@
                       @endif
                     <div class="col-lg-6">
                         <p class="img-label">Photo</p>
-                        <div class="upload-section p-20 pt-0">
+                        <div class="upload-section p-20 pb-2 pt-3">
                           <img class="upload-preview" src="@if(!$category){{asset('static/images/upload-image.svg')}}@else{{$category->image}}@endif" alt=""/>
                           <div class="ml-1">
                             <div class="file-upload">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="row p-20">
+                <div class="row pt-0 p-20">
                     <div class="col-lg-6">
                         <div class="form-input">
                           <label class="full-name">Name</label>

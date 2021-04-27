@@ -24,7 +24,7 @@
         <div class="col-sm-10">
             <div class="card h-auto p-0 p-10">
                 <div class="card-head right text-left border-bottom-2 p-8">
-                    <h3 class="f-18 mb-4 theme-text">
+                    <h3 class="f-18 mb-3 mt-3  theme-text">
                         @if(!$subcategory) Create Subcategory @else Edit Subcategory @endif
                     </h3>
                 </div>

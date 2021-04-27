@@ -21,7 +21,7 @@
         <div class="col-sm-10">
             <div class="card  h-auto p-0 pt-10 ">
                 <div class="card-head right text-left border-bottom-2 pl-3 ml-1 p-10 pt-20">
-                    <h3 class="f-18 theme-text">
+                    <h3 class="f-18 mt-1 theme-text">
                         @if($payout) Edit @else Create @endif Payout
                     </h3>
                 </div>

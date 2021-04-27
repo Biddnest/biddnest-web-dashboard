@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg">
             <div class="d-flex flex-row justify-content-between">
-              <h3 class="page-head text-left p-4 f-18">Create Mail</h3>
+              <h3 class="page-head text-left p-4 pb-0 f-18">Create Mail</h3>
             </div>
             
             <!-- Dashboard cards -->
@@ -31,7 +31,7 @@
                 <div class="card h-auto p-0 pt-10">
                   <div
                     class="card-head right text-left border-bottom-2 p-10  pb-0">
-                    <h3 class="f-18 mb-4 pl-3 theme-text">
+                    <h3 class="f-18 mb-4 mt-3 pl-3 theme-text">
                         Create Mail
                     </h3>
                   </div>
@@ -128,7 +128,7 @@
                               </div>
                              
                         </div>
-                        <div class="accordion" id="comments">
+                        <div class="accordion bg-white pl-0 pr-0" id="comments">
                           <div
                             class="d-flex justify-content-between flex-row p-10 py-0"
                             style="border-top: 1px solid #70707040"

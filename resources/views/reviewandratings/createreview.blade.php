@@ -36,7 +36,7 @@
                             <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
                                 <div class="col-lg-10">
                                     <div class="card h-auto p-0 pt-10">
-                                        <div class="card-head right text-left border-bottom-2 p-10 pt-20 pb-0">
+                                        <div class="card-head right text-left border-bottom-2 p-10 pt-0 pb-0">
                                             <h3 class="f-18 mb-4 pl-2 ml-1 theme-text">
                                                 Create Review for Customer
                                             </h3>
@@ -118,7 +118,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="accordion" id="comments">
+                                        <div class="accordion bg-white pl-0 pr-0" id="comments">
                                             <div class="d-flex justify-content-between flex-row p-10 py-0"
                                                 style="border-top: 1px solid #70707040">
                                                 <div class="w-50">

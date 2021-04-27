@@ -44,15 +44,15 @@
     </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
-        <div class="col-lg-12">
+        <div class="col-lg-12 pr-0 pl-0">
             <div class="card  h-auto p-0 pt-10">
 
                 <div class="row no-gutters">
                     <div class="col-sm-8 p-3 ">
-                        <h3 class="f-18 pl-8 title">Customers</h3 >
+                        <h3 class="f-18 pl-8 title" >Customers</h3 >
 
                     </div>
-                    <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
+                    <div class="col-sm-1 -mr-4 pt-4 pl-8 " style="">
                         <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                         </a>
@@ -86,7 +86,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="card-head  pt-2  left col-sm-3">
+                    <div class="card-head  pt-3  left col-sm-3">
                         <div class="search">
                             <input type="text" class="searchTerm" placeholder="Search...">
                             <button type="submit" class="searchButton">

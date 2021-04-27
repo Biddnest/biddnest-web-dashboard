@@ -329,14 +329,11 @@ class WebController extends Controller
         $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
 
         if(isset($request->search)){
-            $vendors=$vendors->where('org_name', 'like', "%".$request->search."%")
-                ->with(['admin'=>function($query) use($request) {
-                    $query->where('fname', 'like', "%".$request->search."%");
-            }]);
+            $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
         }
-        else{
-            $vendors->with('admin');
-        }
+
+        $vendors->with('admin');
+
 
         $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->count();

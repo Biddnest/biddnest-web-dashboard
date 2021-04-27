@@ -47,8 +47,9 @@
                                                 <tr>
                                                     <th scope="col" style="width: 132px;">Vendor Name</th>
                                                     <th scope="col">Org Name</th>
+                                                    <th scope="col">Phone</th>
+                                                    <th scope="col">City</th>
                                                     <th scope="col">Zone</th>
-                                                    <th scope="col">Status</th>
                                                     <th scope="col">Operations</th>
                                                 </tr>
                                                 </thead>
@@ -63,23 +64,9 @@
                                                             @endif
                                                         </td>
                                                         <td >{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
+                                                        <td >{{$vendor->phone}}</td>
+                                                        <td >{{ucfirst(trans($vendor->city))}}</td>
                                                         <td >{{ucfirst(trans($vendor->zone->name))}}</td>
-                                                        <td  >@switch($vendor->status)
-                                                                @case(\App\Enums\OrganizationEnums::$STATUS['active'])
-                                                                <span class="status-badge green-bg text-center">Active</span>
-                                                                @break
-
-                                                                @case(\App\Enums\OrganizationEnums::$STATUS['suspended'])
-                                                                <span class="status-badge red-bg text-center"> Suspended</span>
-                                                                @break
-                                                                @case(\App\Enums\OrganizationEnums::$STATUS['lead'])
-                                                                <span class="status-badge red-bg text-center"> Lead</span>
-                                                                @break
-
-                                                                @default
-                                                                <span class="status-badge info-bg text-center">Unknown</span>
-                                                            @endswitch
-                                                        </td>
                                                         <td> <a href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                                             <a href="#" class="delete" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                         </td>

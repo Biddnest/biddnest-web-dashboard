@@ -154,19 +154,19 @@
 
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-10">
-                                    {{json_decode($users->bank_meta, true)['acc_no']}}
+                                    {{json_decode($users->bank_meta, true)['acc_no'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['bank_name']}}
+                                  {{json_decode($users->bank_meta, true)['bank_name'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['holder_name']}}
+                                  {{json_decode($users->bank_meta, true)['holder_name'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['ifsc']}}
+                                  {{json_decode($users->bank_meta, true)['ifsc'] ?? ''}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->bank_meta, true)['branch_name']}}
+                                  {{json_decode($users->bank_meta, true)['branch_name'] ?? ''}}
                               </div>
                                 @else
                                     <div class="row hide-on-data">

@@ -153,7 +153,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['acc_no']}}
+                        {{json_decode($users->bank_meta, true)['acc_no'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['bank_name']}}
+                        {{json_decode($users->bank_meta, true)['bank_name'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['holder_name']}}
+                        {{json_decode($users->bank_meta, true)['holder_name'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['ifsc']}}
+                        {{json_decode($users->bank_meta, true)['ifsc'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->bank_meta, true)['branch_name']}}
+                        {{json_decode($users->bank_meta, true)['branch_name'] ?? ''}}
                     </div>
                 </div>
             </div>

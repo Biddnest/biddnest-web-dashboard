@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AdminEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
@@ -291,13 +292,19 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
-        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']])->orderBy("id","DESC")->paginate(15);
+        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']]);
+            if(isset($request->search)){
+                $user=$user->where('fname', 'like', "%".$request->search."%")
+                    ->orWhere('lname', 'like', "%".$request->search."%")
+                    ->orWhere('phone', 'like', $request->search."%");
+            }
+        $user->orderBy("id","DESC");
         $total_user =User::where("deleted", CommonEnums::$NO)->count();
         $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['suspended']])->count();
         $pending_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['verification_pending']])->count();
         return view('customer.customer',[
-            "users"=>$user, "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
+            "users"=>$user->paginate(15), "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
         ]);
     }
 
@@ -433,10 +440,15 @@ class WebController extends Controller
         return view('vendor.verified',['vendors'=>$vendors->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
-    public function categories()
+    public function categories(Request $request)
     {
+        $category =Service::where(["deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $category=$category->where('name', 'like', "%".$request->search."%");
+        }
+
         return view('categories.categories',[
-            "categories"=>Service::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH),
+            "categories"=>$category->paginate(CommonEnums::$PAGE_LENGTH),
             "inventory_quantity_type"=>ServiceEnums::$INVENTORY_QUANTITY_TYPE
         ]);
     }
@@ -447,10 +459,13 @@ class WebController extends Controller
         return view('categories.createcategories', ['category'=>$category]);
     }
 
-    public function subcateories()
-    {
+    public function subcateories(Request $request)
+    {   $subcategories=Subservice::where(["deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $subcategories=$subcategories->where('name', 'like', "%".$request->search."%");
+        }
         return view('categories.subcateories',[
-            "subcategories"=>Subservice::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "subcategories"=>$subcategories->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -470,10 +485,14 @@ class WebController extends Controller
         return view('sidebar.subcategory', ['subcategory'=>$subcategory]);
     }
 
-    public function inventories()
+    public function inventories(Request $request)
     {
+        $inventories=Inventory::where(["deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $inventories=$inventories->where('name', 'like', "%".$request->search."%");
+        }
         return view('categories.inventories',[
-            "inventories"=>Inventory::where(["deleted"=>CommonEnums::$NO])->paginate(CommonEnums::$PAGE_LENGTH)
+            "inventories"=>$inventories->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
 
@@ -488,17 +507,31 @@ class WebController extends Controller
         return view('categories.detailsinventories');
     }
 
-    public function coupons()
+    public function coupons(Request $request)
     {
-        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orderBy('id','DESC')->orWhere("zone_scope", CouponEnums::$ZONE_SCOPE['all'])
-            ->with(['zones'=>function($query){
-                $query->whereIn("zone_id", Session::get("admin_zones"));
-            }])
-            ->paginate(CommonEnums::$PAGE_LENGTH);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
+        if(isset($request->search)){
+            $coupons=$coupons->where('name', 'like', "%".$request->search."%");
+        }
+        if(Session::user_role == AdminEnums::$ROLES['admin']){
+            $coupons->orWhere("zone_scope", CouponEnums::$ZONE_SCOPE['all']);
+        }
+        else{
+            $coupons->with(['zones'=>function($query) use($zone){
+                $query->whereIn("zone_id", $zone);
+            }]);
+        }
+        $coupons->orderBy('id','DESC');
+
         $total_coupons = Coupon::where(["deleted"=>CommonEnums::$NO])->count();
         $active_coupons = Coupon::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->count();
         $inactive_coupons = Coupon::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->count();
-        return view('coupons.coupons',["coupons"=>$coupons, 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
+        return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH), 'total_coupons'=>$total_coupons, 'active_coupons'=>$active_coupons, 'inactive_coupons'=>$inactive_coupons]);
     }
 
     public function sidebar_coupons(Request $request)

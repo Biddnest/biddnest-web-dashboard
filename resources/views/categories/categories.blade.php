@@ -45,7 +45,7 @@
 
                         <div class="p-10 card-head left col-sm-3">
                             <div class="search">
-                                <input type="text" class="searchTerm" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('categories')}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>

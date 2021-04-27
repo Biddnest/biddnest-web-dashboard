@@ -45,7 +45,7 @@
                                             </form>
                                         </div> -->
                                         <div class="search">
-                                            <input type="text" class="searchTerm" placeholder="Search...">
+                                            <input type="text" class="searchTerm table-search" data-url="{{route('inventories')}}" placeholder="Search...">
                                             <button type="submit" class="searchButton">
                                               <i class="fa fa-search"></i>
                                            </button>

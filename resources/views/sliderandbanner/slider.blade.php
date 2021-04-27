@@ -33,7 +33,7 @@
                             <h3 class="f-18 ml-2 mt-4">Sliders & Banners </h3>
                         </div>
                         <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -28px;">
-                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
+                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
                                 <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                             </a>
@@ -62,11 +62,11 @@
                                         </label>
                                     </div>
                                 </a>
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="card-head  left col-sm-3">
                             <div class="search">
-                                <input type="text" class="searchTerm" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('slider')}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>

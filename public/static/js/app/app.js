@@ -319,3 +319,5 @@ $("body").on('input', ".table-search", function(event) {
         redirectTo($(this).data('url')+"?search="+query);
     }
 });
+
+

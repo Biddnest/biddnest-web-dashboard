@@ -165,8 +165,8 @@
                     <!-- footer -->
                     <footer class="text-center b-purple">
                         <hr>
-                        @php $year = date("Y"); @endphp
-                        <p>Copyright © {{ $year }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
+
+                        <p>Copyright © {{ date("Y") }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
                                                                             target="_blank">BIDNEST</a>.</p>
                     </footer>
                 </div>

@@ -69,8 +69,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
     Route::post('/booking',[Router::class,'booking_add'])->name("add_booking");
-    Route::put('/confirm',[Router::class,'booking_confirm'])->name("add_confirm");
-    Route::put('/reject',[Router::class,'booking_reject'])->name("add_reject");
+    Route::put('/confirm',[Router::class,'booking_confirm'])->name("order_confirm");
+    Route::put('/reject',[Router::class,'booking_reject'])->name("order_reject");
 
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");

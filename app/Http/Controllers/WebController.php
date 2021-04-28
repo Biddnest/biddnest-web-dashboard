@@ -306,7 +306,9 @@ class WebController extends Controller
     }
     public function rejectOrder(Request $request)
     {
-        return view('order.reject');
+        $booking =Booking::where('id', $request->id)->first();
+        $reason=Settings::where('key', "cancellation_reason_options")->pluck('value')[0];
+        return view('order.reject', ['booking'=>$booking, 'reasons'=>$reason]);
     }
 
     public function customers(Request $request)

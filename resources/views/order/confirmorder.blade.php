@@ -42,9 +42,9 @@
                     </div>
                     <div class="tab-content  margin-topneg-15" id="myTabContent">
                         <div class="tab-pane fade show active  pt-20  border-top" id="past" role="tabpanel" aria-labelledby="past-tab">
-                            <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_confirm')}}" method="PUT" data-next="redirect" data-url="{{route('orders-booking')}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
-                                <input name="id" value="{{$booking->id}}">
-                                <input name="public_booking_id" value="{{$booking->public_booking_id}}">
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('order_confirm')}}" method="PUT" data-next="redirect" data-url="{{route('orders-booking')}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
+                                <input type="hidden" name="id" value="{{$booking->user_id}}">
+                                <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                 <div class="p-0  border-top-2 order-cards">
                                     <div class="d-flex justify-content-center f-14 theme-text text-center ">
                                         Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
@@ -60,7 +60,7 @@
                                             </div>
                                             <div class="radio-group">
                                                 <div class="form-input radio-item ">
-                                                    <input type="radio" id="economy" value="0" name="service_type" class="radio-button__input cursor-pointer">
+                                                    <input type="radio" id="economy" value="economic" name="service_type" class="radio-button__input cursor-pointer">
                                                     <label class="" for="economy"></label>
                                                 </div>
                                             </div>
@@ -75,24 +75,23 @@
                                             </div>
                                             <div class="radio-group">
                                                 <div class="form-input radio-item ">
-                                                    <input type="radio" id="premium" value="1" name="service_type" class="radio-button__input ">
+                                                    <input type="radio" id="premium" value="premium" name="service_type" class="radio-button__input ">
                                                     <label class="" for="premium"></label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                             <!-- Buttons -->
                             <div class="d-flex justify-content-between flex-row p-8">
                                 <div class="w-50">
-{{--                                    <a class="white-text p-1 " href="{{route('reject-order')}}"><button class="btn theme-br theme-text w-30 white-bg" id="backbtn">Back</button></a>--}}
                                 </div>
                                 <div class="w-50 text-right">
-                                    <a class="white-text p-1 " href="{{route('reject-order',['id'=>$booking->id])}}"><button class="btn   w-30  reject btn theme-br white-bg">REJECT</button> </a>
+                                    <a class="white-text p-1 " href="{{route('reject-order', ['id'=>$booking->id])}}"><button type="button" class="btn w-30  reject btn theme-br white-bg">REJECT</button> </a>
                                     <a class="white-text p-1 reject" href="#"><button class="btn theme-bg white-text w-30 reject-btn">Accept</button> </a>
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <!--  -->
                     </div>

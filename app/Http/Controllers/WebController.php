@@ -178,7 +178,12 @@ class WebController extends Controller
     public function orderDetailsCustomer(Request $request)
     {
 
-        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $booking = Booking::whereIn("zone_id", $zone)->with(['status_history'])->with(['status_hist'=>function($query){
         $query->limit(1)->orderBy("id","DESC");
     }])->with('inventories')->with('driver')->with('organization')->findOrFail($request->id);
 
@@ -198,7 +203,12 @@ class WebController extends Controller
 
     public function orderDetailsPayment(Request $request)
     {
-        $booking = Booking::with('status_history')->findOrFail($request->id);
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $booking = Booking::whereIn("zone_id", $zone)->with('status_history')->findOrFail($request->id);
 
         $hist = [];
 
@@ -214,7 +224,11 @@ class WebController extends Controller
     }
     public function orderDetailsVendor(Request $request)
     {
-        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+        $booking = Booking::whereIn("zone_id", $zone)->with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
         }])->with('inventories')->with('driver')->with('vehicle')->with('organization')->with(['payment'=>function($q){
             $q->with('coupon');
@@ -234,7 +248,11 @@ class WebController extends Controller
     }
     public function orderDetailsQuotation(Request $request)
     {
-        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+        $booking = Booking::whereIn("zone_id", $zone)->with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
         }])->with('inventories')->with('driver')->with('vehicle')->with('organization')->with(['payment'=>function($q){
             $q->with('coupon');
@@ -254,8 +272,14 @@ class WebController extends Controller
     }
     public function orderDetailsBidding(Request $request)
     {
-        $booking = Booking::with('status_history')->with(['biddings'=>function($bid){
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $booking = Booking::whereIn("zone_id", $zone)->with('status_history')->with(['biddings'=>function($bid){
             $bid->orderBy('updated_at')->orderBy('status')->with('organization');
+
         }])->findOrFail($request->id);
 
         $hist = [];
@@ -272,7 +296,12 @@ class WebController extends Controller
     }
     public function orderDetailsReview(Request $request)
     {
-        $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $booking = Booking::whereIn("zone_id", $zone)->with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
         }])->with('inventories')->with('user')->with('driver')->with('vehicle')->with('organization')->with(['payment'=>function($q){
             $q->with('coupon');

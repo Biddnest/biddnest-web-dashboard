@@ -2,7 +2,7 @@
 @section('title') Orders And Bookings @endsection
 @section('content')
 
-    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails">
+    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails_bidding">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4">Order Details</h3>
 
@@ -101,20 +101,13 @@
 
                                         <div class="text-center ">
                                             <h3 class="f-18 theme-text bold p-10">Time Left</h3>
-
-                                            <h1 class="timer"></h1>
-
+                                            <h1 class="timer" data-time="{{$booking->bid_result_at}}"></h1>
                                         </div>
-
                                     </div>
                                     <div class="col-sm-7 p-10">
-
-
                                         <div class=" text-center border-left-blue">
                                             <h3 class="text-center f-18 theme-text bold p-10">Quotation statitics</h3>
-
                                             <img src="{{asset('static/images/graph/graphbid.svg')}}" alt="" srcset="">
-
                                         </div>
                                     </div>
 
@@ -198,23 +191,16 @@
                                                 @endforeach
                                                 </tbody>
                                             </table>
-
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="assign-manul-table  diplay-none border-pop">
-
                                     <div class="d-flex  row  p-10">
-
-
-
                                         <div class="col-sm-12">
                                             <div class="d-flex  p-10  justify-content-between ">
                                                 <div class="vertical-center">
                                                     <div class="theme-text f-18 bold">
-                                                        Venders Bid List
+                                                        Vendor Bid List
                                                     </div>
 
                                                 </div>
@@ -323,9 +309,11 @@
 
 
     </div>
+{{--
 
     <script type="application/javascript">
-        var BID_END_TIME = "{{$booking->bid_end_at}}";
+        var BID_END_TIME = "{{$booking->bid_result_at}}";
     </script>
+--}}
 
 @endsection

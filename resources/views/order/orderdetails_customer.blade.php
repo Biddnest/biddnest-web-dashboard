@@ -137,6 +137,50 @@
                                     &#8377;{{$booking->final_quote}}
                                 </div>
 
+                                <div class="theme-text f-14 p-15">
+                                    @switch($booking->status)
+                                        @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                        <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                        <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                        <span class="status-badge green-bg  text-center td-padding">Bidding</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                        <span class="status-badge grey-bg  text-center td-padding">Rebidding</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                        <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                        <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                        <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                        <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                        <span class="status-badge green-bg  text-center td-padding">Completed</span>
+                                        @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                        <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
+                                        @break
+                                    @endswitch
+                                </div>
+
 
 
                            {{-- <div class="d-flex  mtop-5">

@@ -49,9 +49,7 @@
                     <!-- form starts -->
                     <form class="form-new-order" autocomplete="off">
                       <div
-                        class="d-flex flex-row p-10  secondg-bg heading"
-                         href="#customer-details" role="button" aria-expanded="false"
-                        aria-controls="customer-details">
+                        class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>
                       <div class="" id="customer-details">
@@ -114,15 +112,14 @@
                         </div>
                       </div>
 
-                      <div class="d-flex flex-row p-10  secondg-bg heading" href="#delivery-details" role="button" aria-expanded="false"
-                        aria-controls="delivery-details">
+                      <div class="d-flex flex-row p-10  secondg-bg heading" >
                         <div> Delivery Details</div>
                       </div>
                       <div class="" id="delivery-details">
                         <div class="d-flex  row  p-20">
                           <div class="col-sm-6">
                             <div class="form-input">
-                              <label>From Address </label>
+                              <label>Search Address </label>
                               <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control">
                               <span class="error-message">Please enter valid</span>
                             </div>
@@ -154,18 +151,26 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="Benguluru" id="" class="form-control" name="source[meta][city]" required>
-                                    <input type="text"  id="" class="form-control" name="source[meta][state]">
+                                    <input type="text" placeholder="Benguluru" id="source-city" class="form-control" name="source[meta][city]" required>
+                                    <span class="error-message">Please enter valid</span>
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-input">
+                                  <label>From State</label>
+                                    <input type="text" placeholder="Karnataka" id="source-state" class="form-control" name="source[meta][state]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="530000" id="" class="form-control" name="source[meta][pincode]" required>
+                                  <input type="text" placeholder="530000" id="source-pin" class="form-control" name="source[meta][pincode]" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
+                                <div class="col-sm-6">
+                                </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Floor</label>
@@ -192,7 +197,7 @@
                           <div class="d-flex  row  p-20">
                             <div class="col-sm-6">
                                 <div class="form-input">
-                                <label>To  Address</label>
+                                <label>Search  Address</label>
                                 <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="dest-autocomplete" class="form-control">
                                     <input type="hidden"  name="destination[lat]" id="dest-lat" class="form-control" required>
                                     <input type="hidden"  name="destination[lng]" id="dest-lng" class="form-control" required>
@@ -223,17 +228,26 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="Chennai" id="" name="destination[meta][city]" class="form-control">
+                                  <input type="text" placeholder="Chennai" id="dest-city" name="destination[meta][city]" class="form-control">
+                                  <span class="error-message">Please enter valid</span>
+                                </div>
+                              </div>
+                                <div class="col-sm-6">
+                                <div class="form-input">
+                                  <label>To State</label>
+                                    <input type="text" placeholder="Chennai" id="dest-state" name="destination[meta][state]" class="form-control">
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" id="" class="form-control">
+                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" id="dest-pin" class="form-control">
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
+                                <div class="col-sm-6">
+                                </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
@@ -262,7 +276,7 @@
                             <div class="form-input" >
                               <label class="start-date">Start date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" class="dateselect form-control br-5" required="required" placeholder="15/02/2021" />
+                                <input type="text" id="dateselect" name="movement_dates[]" class="form-control br-5 date" required="required" placeholder="15 Jan" />
                                 <span class="error-message">please enter valid date</span>
                               </div>
                             </div>
@@ -270,7 +284,10 @@
                           <div class="col-sm-6">
                             <div class="form-inputs">
                                 <label class="container"  style="margin-top: 36px;">
-                                  <input type="checkbox" id="need1">
+                                    <input type="hidden" value="0" name="source[meta][shared_service]" id="m_type">
+                                    <input type="checkbox" name="select_letter" value="1" id="movemnt"
+                                           onchange="document.getElementById('m_type').value = this.checked ? true : false">
+                                    <span class="checkmark"></span>
                                   <span class="checkmark"></span>
                                 </label>
                                 <label class="form-check-box" for="need1"  style="margin-top: 1px;">Need dedicated movement</label>
@@ -279,7 +296,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="d-flex flex-row p-10  secondg-bg heading" href="#requirments" role="button" aria-expanded="false" aria-controls="requirments">
+                      <div class="d-flex flex-row p-10  secondg-bg heading" >
                         <div>Requirements</div>
                       </div>
                       <div class="" id="requirments">
@@ -287,10 +304,12 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                             <label>Category</label>
-                                <select  id="" class="form-control">
-                                  <option >  Residential</option>
-                                  <option>  Commercial</option>
-                                  <option>  Office</option>
+                                <select  id="" name="service_id" class="form-control category-select" >
+                                    <option value="">--select--</option>
+                                 @foreach($categories as $category)
+
+                                        <option id="sub_{{$category->id}}" value="{{$category->id}}" data-subcategory='{{$category->subservices}}'>{{$category->name}}</option>
+                                    @endforeach
                                   </select>
                               <span class="error-message">Please enter  valid</span>
                             </div>
@@ -298,11 +317,8 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>Room Selection</label>
-                                <select id="" class="form-control">
-                                  <option> 2 BHK</option>
-                                  <option> 3 BHK</option>
-                                  <option> 1 BHK</option>
-                                  <option> Villa</option>
+                                <select id="meta[subcategory]" class="form-control subservices">
+
                                 </select>
                                 <span class="error-message">Please enter valid</span>
                             </div>
@@ -315,51 +331,52 @@
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
                                     <th scope="col">Item Name</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Size</th>
+                                      <th scope="col">Material</th>
+                                        <th scope="col">Size</th>
+                                      <th scope="col">Quantity</th>
                                     <th scope="col">Actions</th>
                                   </tr>
                                 </thead>
-                                <tbody class="mtop-20 f-13">
-                                    <tr class="">
-                                      <th scope="row">Bike</th>
+                                <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
+                                <tr class="inventory-snip">
+                                    <td scope="row" class="text-left">
+                                        <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                            <option value="">--Select--</option>
+                                            @foreach($inventories as $inventory)
+                                                <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
 
-                                      <td class="text-center">02</td>
-                                      <td class=""><span class="light-bg text-center status-badge">Large</span></td>
-                                      <td> <i class="icon dripicons-pencil  p-1 cursor-pointer" aria-hidden="true"></i>
+                                    <td class="">
+                                        <select class="form-control br-5 material" name="inventories[][material]" required>
+                                            <option value="">--Choose Inventory First--</option>
 
-                                        <i class="icon dripicons-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
-                                      </td>
-                                    </tr>
-                                    <tr class="">
-                                      <th scope="row">Cupboard</th>
+                                        </select>
+                                    </td>
 
-                                      <td>04</td>
-                                      <td class=""><span class="  text-center status-badge">Medium</span>
-                                      </td>
-                                      <td> <i class="icon dripicons-pencil  p-1 cursor-pointer" aria-hidden="true"></i>
+                                    <td class="">
+                                        <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
+                                            <option value="">--Choose Inventory First--</option>
 
-                                        <i class="icon dripicons-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
-                                      </td>
-                                    </tr>
-                                    <tr class="">
-                                      <th scope="row">Table</th>
+                                        </select>
+                                    </td>
 
-                                      <td>03</td>
-                                      <td class=""><span class="info-bg  text-center status-badge">Small</span></td>
-                                      <td> <i class="icon dripicons-pencil  p-1 cursor-pointer" aria-hidden="true"></i>
+                                    <td class="" style="width: 20%;">
+                                        <input class="form-control br-5" type="number" name="inventories[][quantity]" required>
+                                    </td>
 
-                                        <i class="icon dripicons-trash p-1 cursor-pointer" aria-hidden="true"></i></i>
-                                      </td>
-                                    </tr>
-                                    <tr id='addr1'></tr>
+                                    <td>
+                                        <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                           </div>
                           <div class="col-sm-12 mtop-20 w-30">
-                            <a class="float-right btn theme-bg white-text "  id="addnew-btn" >
-                              <i class="fa fa-plus  m-1" aria-hidden="true"></i>
-                              Add New Item</a>
+                              <a class="float-right btn theme-bg white-text repeater" data-content="#add-inventory-row" data-container="#add-inventory-wrapper"  id="addnew-btn" >
+                                  <i class="fa fa-plus  m-1" aria-hidden="true"></i>
+                                  Add New Item</a>
                           </div>
                         </div>
                       </div>
@@ -400,4 +417,37 @@
 
     </div>
 </div>
+
+<script type="text/html" id="add-inventory-row">
+    <tr class="inventory-snip">
+        <th scope="row" class="text-left">
+            <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
+                <option value="">--Select--</option>
+                @foreach($inventories as $inventory)
+                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                @endforeach
+            </select>
+        </th>
+
+        <td class="">
+            <select class="form-control br-5 material" name="inventory[][material]" required>
+                <option value="">--Choose Inventory First--</option>
+            </select>
+        </td>
+
+        <td class="">
+            <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+                <option value="">--Choose Inventory First--</option>
+            </select>
+        </td>
+
+        <td class="" style="width: 20%;">
+            <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
+        </td>
+
+        <td>
+            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+        </td>
+    </tr>
+</script>
 @endsection

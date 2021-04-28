@@ -1099,7 +1099,7 @@ class Route extends Controller
             'meta.self_booking' => 'required|boolean',
             'meta.subcategory' => 'nullable|string',
 
-            'movement_dates.*' =>'required|date',
+            'movement_dates' =>'required',
 
             'inventory_items.*.inventory_id' =>'required|integer',
             'inventory_items.*.material' =>'required|string',

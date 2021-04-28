@@ -5,14 +5,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
+use App\Enums\NotificationEnums;
 use App\Helper;
+use App\Models\Notification;
 use App\Models\OneSignalPlayer;
+use App\Models\Vendor;
 use App\PushNotification;
 
 class NotificationController extends Controller
 {
-    public static function createNotification($for, $id, $title, $message)
+    public static function createNotification($title, $for, $desc, $admin=null, $user=null, $vendor=null)
     {
+        $notification =new Notification;
+        if($vendor != null)
+        {
+            $vendors =Vendor::where(['organization_id'=>$vendor, 'deleted'=>CommonEnums::$NO])->pluck('id');
+            foreach ($vendors as $org_vendor)
+            {
+                $notification->title=$title;
+                $notification->for=$for;
+                $notification->desc=$desc;
+                $notification->vendor_id=$org_vendor;
+                $push_notification = $notification->save();
+            }
+            NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
+        }
+        else{
+            $$notification->title=$title;
+            $notification->for=$for;
+            $notification->desc=$desc;
+           /* if($admin != null)
+            {
+                $notification->admin_id=$admin;
+                NotificationController::sendTo("admin", [$admin], $title, $desc, []);
+            }*/
+
+            if($user != null)
+            {
+                $notification->user_id=$user;
+                NotificationController::sendTo("user", [$user], $title, $desc, []);
+            }
+
+
+            $push_notification = $notification->save();
+        }
+
+        if (!$push_notification)
+            return Helper::response(false, "Notification could not be added");
+
+        return Helper::response(true, "Notification added successfully");
+
     }
 
     public static function saveCustomerPlayer($player_id, $user_id)

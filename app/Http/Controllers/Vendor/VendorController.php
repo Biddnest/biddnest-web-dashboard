@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vendor;
 use App\Enums\OrganizationEnums;
 use App\Enums\VendorEnums;
 use App\Helper;
+use App\Models\Organization;
 use App\VendorRoles;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
@@ -40,4 +41,5 @@ class VendorController extends Controller
         }
 
     }
+
 }

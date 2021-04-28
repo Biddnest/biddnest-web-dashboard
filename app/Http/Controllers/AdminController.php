@@ -298,4 +298,17 @@ class AdminController extends Controller
 
         return Helper::response(true, "status updated successfully");
     }
+
+    public static function search(Request $request)
+    {
+//        return $request;
+//        $query = $request->all()['query'];
+        $query = $request->q;
+
+        if (empty($query))
+            return Helper::response(true, "Data fetched successfully", ["users" => []]);
+//        return $query;
+        $users = Admin::where("fname", "LIKE", $query . '%')->paginate(5);
+        return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
+    }
 }

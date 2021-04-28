@@ -38,7 +38,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
                                        href="#order" role="tab" aria-controls="home"
-                                       aria-selected="true">Edite Onboard Vendor</a>
+                                       aria-selected="true">Edit Onboard Vendor</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Add Branch</a>

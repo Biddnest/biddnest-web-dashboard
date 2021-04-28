@@ -31,6 +31,7 @@ $.update = function(url, data, callback, type){
     });
 }
 
+
 Logger.useDefaults();
 
 // const helper = import("./helpers.js");
@@ -313,6 +314,24 @@ $("body").on('change', ".change_status", function(event) {
     return false;
 });
 
+$("body").on('change', ".reply_status", function(event) {
+
+    var data = $(this).val();
+    $.update($(this).data("url"), {data}, function (response){
+        console.log(response);
+        if(response.status == "success")
+        {
+            tinySuccessAlert("Status changed Successfully", response.message);
+        }
+        else
+        {
+            tinyAlert("Failed", response.message);
+        }
+
+    });
+    return false;
+});
+
 $("body").on('input', ".table-search", function(event) {
     var query = $(this).val();
     if(query.length >= 3){
@@ -320,4 +339,18 @@ $("body").on('input', ".table-search", function(event) {
     }
 });
 
+$("body").on('change', ".check-toggle", function(event) {
+console.log($(this).val());
+    if ($(this).val() == $(this).data("value")) {
+        $(this).val("0");
+        $($(this).data("target")).removeClass("hidden");
+        $($(this).data("target")).find(".form-control").attr("required", "required");
+    } else {
+        $(this).val("1");
+        $($(this).data("target")).addClass("hidden");
+        $($(this).data("target")).find(".form-control").removeAttr("required");
+    }
+});
 
+    $('#destination').locationpicker();
+    $('#sourece').locationpicker();

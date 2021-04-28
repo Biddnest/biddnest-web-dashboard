@@ -49,4 +49,16 @@ class TicketReplyController extends Controller
 
         return Helper::response(true, "added chat Successfully", ['ticket'=>Ticket::where('id', $ticket_id)->with('reply')]);
     }
+
+    public static function changeStatus($id, $status)
+    {
+        $ticket_status = Ticket::where('id', $id)->update([
+            "status"=>$status
+        ]);
+
+        if(!$ticket_status)
+            return Helper::response(false, "couldn't update status");
+
+        return Helper::response(true, "status updated Successfully");
+    }
 }

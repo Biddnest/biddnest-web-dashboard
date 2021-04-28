@@ -128,7 +128,7 @@
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($complaints as $complaint)
-                                <tr class="tb-border cursor-pointer">
+                                <tr class="tb-border">
                                     <td>
                                         @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
                                             @if($key == $complaint->type)

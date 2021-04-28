@@ -15,7 +15,7 @@ crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" integrity="sha512-bUg5gaqBVaXIJNuebamJ6uex//mjxPk8kljQTdM1SwkNrQD7pjS+PerntUSD+QRWPNJ0tq54/x4zRV8bLrLhZg==" crossorigin="anonymous"></script>
 
-  <script type="text/javascript" src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+
 
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -25,27 +25,28 @@ crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js" integrity="sha512-SdWDXwOhhVS/wWMRlwz3wZu3O5e4lm2/vKK3oD0E5slvGFg/swCYyZmts7+6si8WeJYIUsTrT3KZWWCknSopjg==" crossorigin="anonymous"></script>
 
 <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+{{--    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>--}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- jsdelivr -->
 <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
 
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+
+
+<script type="text/javascript" src='http://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
 <script src="{{ asset('static/js/locationpicker.jquery.js')}}"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
 
 <script src="{{ asset('static/js/intlTelInput.js') }}"></script>
 
-<script src="{{ asset('static/js/live-order-chart.js') }}"></script>
+{{--<script src="{{ asset('static/js/live-order-chart.js') }}"></script>--}}
 <script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script>
 
-<script src="{{ asset('static/js/userZone.js') }}"></script>
+{{--<script src="{{ asset('static/js/userZone.js') }}"></script>--}}
 
-<script src="{{ asset('static/js/timer.js') }}"></script>
+{{--<script src="{{ asset('static/js/timer.js') }}"></script>--}}
 <!-- <script src="{{ asset('static/js/progress-bar.js') }}"></script> -->
 
 
@@ -61,11 +62,11 @@ crossorigin="anonymous"></script>
 <!-- Optional JavaScript -->
 <script src="{{ asset('static/js/sidebarCollapse.js') }}"></script>
 
-<script src="{{ asset('static/js/barba.js') }}"></script>
+<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>
 
 <script src="{{ asset('static/js/jquery.logger.js') }}"></script>
 
-<script src="{{ asset('static/js/main.js') }}"></script>
+{{--<script src="{{ asset('static/js/main.js') }}"></script>--}}
 
 <script src="https://unpkg.com/js-logger/src/logger.min.js"></script>
 
@@ -85,6 +86,7 @@ crossorigin="anonymous"></script>
     @endif
 
 </script>
+
 
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 

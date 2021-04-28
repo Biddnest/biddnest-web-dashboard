@@ -30,6 +30,8 @@ function changeMenu(){
         }*/
     });
 }
+
+import {initMapPicker} from './app/initFunctions.js';
 barba.init({
     views: [{
         namespace: 'slider',
@@ -140,4 +142,7 @@ barba.hooks.after((data) => {
 
 changeMenu();
 // loadRevenueChart();
+$(document).ready(function(){
+    initMapPicker();
+});
 var editor = new FroalaEditor('.editor')

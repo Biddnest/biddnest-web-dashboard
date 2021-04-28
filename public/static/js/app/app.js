@@ -35,7 +35,7 @@ $.update = function(url, data, callback, type){
 Logger.useDefaults();
 
 // const helper = import("./helpers.js");
-import { redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
+import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
 // require("./helpers");
 const env = "development";
 
@@ -45,6 +45,8 @@ const env = "development";
 if (env != "development")
     Logger.setLevel(Logger.OFF);
 
+
+// getLocationPermission();
 
 /* AJAX Universal */
 $("body").on('submit', "form", function() {
@@ -351,6 +353,3 @@ console.log($(this).val());
         $($(this).data("target")).find(".form-control").removeAttr("required");
     }
 });
-
-    $('#destination').locationpicker();
-    $('#sourece').locationpicker();

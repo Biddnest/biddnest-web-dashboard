@@ -8,7 +8,7 @@
                 <br>
                 <div class="nav-links">
                     <ul class="menu p-1">
-                        <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('vendor.dashboard')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> </span> Dashboard</a>
+                        <li class="menu-item"><a class="regular-nav" href="{{route('vendor.dashboard')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> </span> Dashboard</a>
                         </li>
                         <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
                             aria-expanded="false" aria-controls="Booking"> <a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span> </span> Manage Bookings</a>
@@ -25,16 +25,16 @@
                                     Edit Order</a></li> -->
                         </ul>
 
-                        <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('vendor.users', ["role"=>"admin"])}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-users"></i></span> </span> Manage Users</a>
+                        <li class="menu-item"><a class="regular-nav" href="{{route('vendor.users', ["role"=>"admin"])}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-users"></i></span> </span> Manage Users</a>
                         </li>
 
-                        <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('vendor.inventory', ["category"=>"all"])}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-"></i></span> </span> Inventory Price List</a>
+                        <li class="menu-item"><a class="regular-nav" href="{{route('vendor.inventory', ["category"=>"all"])}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-"></i></span> </span> Inventory Price List</a>
                         </li>
 
-                        <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('vendor.branches', )}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-users"></i></span> </span> Branches</a>
+                        <li class="menu-item"><a class="regular-nav" href="{{route('vendor.branches', )}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-users"></i></span> </span> Branches</a>
                         </li>
 
-                        <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('vendor.vehicles', )}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-users"></i></span> </span> Vehicles</a>
+                        <li class="menu-item"><a class="regular-nav" href="{{route('vendor.vehicles', )}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-users"></i></span> </span> Vehicles</a>
                         </li>
 
                         <li class="menu-item b-purple" data-toggle="#vendors" href="#Vendors" role="button"

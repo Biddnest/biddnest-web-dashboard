@@ -206,8 +206,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    var REVENUE_DATASET ={
+<script type="text/json" id="revenue_dataset">
+    {{--{
         labels: ["21 Dec", "22 Dec", "23 Dec", "24 Dec", "25 Dec", "26 Dec", "27 Dec"],
         datasets: [{
             label: 'Last Week',
@@ -252,7 +252,7 @@
                 borderWidth: 1
             }
         ]
-    };
+    }--}}
 </script>
 
 

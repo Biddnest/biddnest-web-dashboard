@@ -31,7 +31,7 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edite Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edit Onboard Vendor</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active p-15" id="quotation" href="#">Add Branch</a>

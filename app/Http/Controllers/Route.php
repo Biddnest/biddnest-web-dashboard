@@ -1041,14 +1041,6 @@ class Route extends Controller
 
     public function changeStatus(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id'=>'required',
-            'data'=>'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
         return TicketReplyController::changeStatus($request->id, $request->data);
     }
 
@@ -1093,7 +1085,7 @@ class Route extends Controller
             'destination.meta.city' => 'required|string',
             'destination.meta.state' => 'required|string',
             'destination.meta.pincode' => 'required|min:6|max:6',
-            '.meta.lift' => 'required|boolean',
+            'destination.meta.lift' => 'required|boolean',
 
             'contact_details.name'  => 'required|string',
             'contact_details.phone'  => 'required|min:10|max:10',

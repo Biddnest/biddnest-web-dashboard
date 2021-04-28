@@ -77,7 +77,9 @@
                             </div>
                           </div>
                           <div class="col-sm-6 ">
-                              <input type="checkbox" checked data-toggle="toggle" data-size="xs"  data-off="For Others" >
+                              <input type="hidden" value="0" name="meta[self_booking]" id="slef">
+                              <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1"
+                                     onchange="document.getElementById('slef').value = this.checked ? 1 : 0">
                             {{--<div class="d-flex  flex-row small-switch mtop-20">
                               <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="110"
                                 data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary"
@@ -85,21 +87,21 @@
                             </div>--}}
                           </div>
                             <!-- Toggle -->
-                          <div class="col-sm-6 toggle-input diplay-none">
+                          <div class="col-sm-6 toggle-input hidden">
                             <div class="form-input">
                                 <label class="phone-num-">Friend's Phone Number</label>
                                 <input type="tel" id="phonefriend" placeholder="987654321" name="friend_details[phone]" class=" form-control form-control-tel">
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
-                          <div class="col-sm-6 toggle-input diplay-none">
+                          <div class="col-sm-6 toggle-input hidden">
                             <div class="form-input">
                                 <label class="full-name">Full Name</label>
                                 <input type="text" id="fullname" placeholder="David Jerome" name="friend_details[name]" class="form-control">
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
-                          <div class="col-sm-6 toggle-input diplay-none ">
+                          <div class="col-sm-6 toggle-input hidden">
                             <div class="form-input">
                                 <label class="email-label">Email</label>
                                 <input type="email" placeholder="abc@mail.com" name="friend_details[email]" id="E-mail" class="form-control">
@@ -164,7 +166,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Floor</label>
-                                  <input type="number" placeholder="3rd Floor" id="" value="0" class="form-control" required>
+                                  <input type="number" placeholder="3rd Floor" id="" value="0" name="source[meta][floor]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>

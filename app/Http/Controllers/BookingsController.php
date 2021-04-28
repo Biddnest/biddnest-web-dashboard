@@ -42,18 +42,17 @@ class BookingsController extends Controller
         if($user)
             $user_id = $user->id;
 
-        $fname = explode($request->name, " ")[0];
-        $lname = str_replace($fname, "", $request->name);
+        $fname = explode($request->contact_details['name'], " ")[0];
+        $lname = str_replace($fname, "", $request->contact_details['name']);
 
-        $newuser = UserController::directSignup(/*Pass params here*/);
+        $newuser = UserController::directSignup($request->contact_details['phone'], $fname, $lname, $request->contact_details['email']);
 
         $user_id = $newuser->id;
 
-        self::createEnquiry(/*pass parameters*/);
-
-//        return true;
+        self::createEnquiry($request->all(), $user_id);
 
     }
+
     public static function createEnquiry($data, $user_id)
     {
         if (App::environment('production')) {

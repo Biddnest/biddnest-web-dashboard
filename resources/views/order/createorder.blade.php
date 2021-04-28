@@ -39,7 +39,7 @@
                           aria-controls="home" aria-selected="true">Create New Order</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link p-15" id="quotation"  href="{{route('confirm-order')}}" >Quotations</a>
+                        <a class="nav-link p-15 disabled" id="quotation"  href="#" >Quotations</a>
                       </li>
                     </ul>
                   </h3>
@@ -119,7 +119,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>Search Address </label>
-                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control">
+                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -206,7 +206,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>To Adress line 1</label>
-                              <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][address_line1]" id="" class="form-control">
+                              <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][address_line1]" id="" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -220,28 +220,28 @@
                                 <div class="col-sm-12">
                                     <div class="form-input">
                                         <label>From Adress line 2</label>
-                                        <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control">
+                                        <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control" required>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="Chennai" id="dest-city" name="destination[meta][city]" class="form-control">
+                                  <input type="text" placeholder="Chennai" id="dest-city" name="destination[meta][city]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="Chennai" id="dest-state" name="destination[meta][state]" class="form-control">
+                                    <input type="text" placeholder="Chennai" id="dest-state" name="destination[meta][state]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" id="dest-pin" class="form-control">
+                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" id="dest-pin" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -250,7 +250,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
-                                    <input type="number" placeholder="1st floor" name="destination[meta][floor]" id="" class="form-control">
+                                    <input type="number" placeholder="1st floor" name="destination[meta][floor]" id="" class="form-control" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -303,7 +303,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                             <label>Category</label>
-                                <select  id="" name="service_id" class="form-control category-select" >
+                                <select  id="" name="service_id" class="form-control category-select" required>
                                     <option value="">--select--</option>
                                  @foreach($categories as $category)
 
@@ -400,7 +400,7 @@
                               </a>
                           </div>
                           <div class="w-50 text-right">
-                              <a class="white-text p-10" data-toggle="modal" data-target="#for-friend">
+                              <a class="white-text p-10" href="#">
                                   <button class="btn theme-bg white-text w-30">Next</button>
                               </a>
                           </div>

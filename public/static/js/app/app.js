@@ -370,5 +370,6 @@ console.log($(this).val());
 
 $('.date').datepicker({
     multidate: true,
-    format: 'd M'
+    format: 'yyyy-mm-dd',
+    'startDate': '+1d'
 });

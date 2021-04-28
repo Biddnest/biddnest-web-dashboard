@@ -1109,8 +1109,8 @@ class Route extends Controller
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return BookingsController::createEnquiryForWeb($request);
+
+        return BookingsController::createEnquiryForAdmin($request);
     }
 
     public function booking_confirm(Request $request)

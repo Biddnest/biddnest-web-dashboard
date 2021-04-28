@@ -31,7 +31,7 @@
                         <h3 class="f-18">
                             <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link p-15 disabled"  href="#">Edit Order</a>
+                                    <a class="nav-link p-15 disabled"  href="#">Create New Order</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="quotation" data-toggle="tab" href="#past" role="tab"

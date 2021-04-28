@@ -54,12 +54,6 @@ barba.init({
             initCountdown();
         }
       },
-        /*{
-            namespace: 'createorders',
-            afterEnter(data) {
-                console.log("you are on create order page");
-            }
-        }*/
     ]
 });
 
@@ -80,6 +74,7 @@ barba.hooks.after((data) => {
 
     initTextAreaEditor();
     initDatePicker();
+    initSlick();
     //keep charts at end
     initRevenueChart();
             // return false;

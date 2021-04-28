@@ -262,14 +262,14 @@ export function initTextAreaEditor(){
 
 /*Charts*/
 export function initRevenueChart(){
-    if($("#myRevenueChart").length && typeof REVENUE_DATASET !== undefined){
+    if($("#revenue_dataset").length){
         // var dataset = $("#revenue-chart-data").html();
         // console.log(dataset);
-
+var dataset = $("#revenue_dataset").text();
         var ctx = document.getElementById("myRevenueChart")
         var myChart = new Chart(ctx, {
             type: 'line',
-            data: REVENUE_DATASET,
+            data: JSON.parse(dataset),
             options: {
                 scales: {
                     yAxes: [{

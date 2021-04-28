@@ -41,13 +41,16 @@ class BookingsController extends Controller
                 ->first();
         if($user)
             $user_id = $user->id;
+        else
+        {
+            $fname = explode($request->contact_details['name'], " ")[0];
+            $lname = str_replace($fname, "", $request->contact_details['name']);
 
-        $fname = explode($request->contact_details['name'], " ")[0];
-        $lname = str_replace($fname, "", $request->contact_details['name']);
+            $newuser = UserController::directSignup($request->contact_details['phone'], $fname, $lname, $request->contact_details['email']);
 
-        $newuser = UserController::directSignup($request->contact_details['phone'], $fname, $lname, $request->contact_details['email']);
-
-        $user_id = $newuser->id;
+            $user_id = $newuser->id;
+        }
+         $request->movement_dates = explode(",", $request->movement_dates);
 
         self::createEnquiry($request->all(), $user_id);
 
@@ -115,10 +118,11 @@ class BookingsController extends Controller
 
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        foreach ($data['meta']['images'] as $key => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+        if($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+            foreach ($data['meta']['images'] as $key => $image) {
+                $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+            }
         }
-
 
         $cost_structure = [];
         foreach (Settings::get() as $setting) {

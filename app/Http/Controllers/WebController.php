@@ -295,6 +295,14 @@ class WebController extends Controller
     {
         return view('order.createorder');
     }
+    public function confirmOrder(Request $request)
+    {
+        return view('order.confirmorder');
+    }
+    public function rejectOrder(Request $request)
+    {
+        return view('order.reject');
+    }
 
     public function customers(Request $request)
     {

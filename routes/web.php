@@ -68,6 +68,8 @@ Route::prefix('web/api')->group(function () {
     Route::get('/inventories/{id}',[Router::class,'inventories_get'])->name("inventories_get");
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
+    Route::post('/booking',[Router::class,'booking_add'])->name("add_booking");
+
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
@@ -105,6 +107,8 @@ Route::prefix('web/api')->group(function () {
     Route::post('/banners',[Router::class,'banners_add'])->name("banners_add");
     Route::delete('/banners/{id}',[Router::class,'banners_delete'])->name("banners_delete");
 
+    Route::post('/notification',[Router::class,'notification_add'])->name("notification_add");
+
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
     Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
     Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
@@ -125,6 +129,8 @@ Route::prefix('web/api')->group(function () {
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
+    Route::get('vendor/search', [Router::class, 'searchVendor'])->name("search_vendor");
+    Route::get('admin/search', [Router::class, 'searchadmin'])->name("search_admin");
 
     Route::post('/pages',[Router::class,'page_add'])->name("page_add");
     Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");
@@ -150,9 +156,10 @@ Route::prefix('admin')->group(function () {
         Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
             Route::get('/login',[WebController::class,'login'])->name("login");
             Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");
-            // Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("verifyotp");
-            Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-password");
+            Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("verifyotp");
+
         });
+        Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-passwords");
             Route::get("/logout", [WebController::class, 'logout'])->name('logout');
             Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 
@@ -181,6 +188,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
+            Route::get('/confirm',[WebController::class,'confirmOrder'])->name("confirm-order");
+            Route::get('/reject',[WebController::class,'rejectOrder'])->name("reject-order");
         });
 
         Route::prefix('customers')->group(function () {

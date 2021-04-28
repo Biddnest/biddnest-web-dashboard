@@ -316,7 +316,8 @@ $("body").on('change', ".change_status", function(event) {
 
 $("body").on('change', ".reply_status", function(event) {
 
-    $.update($(this).data("url"), $(this).data("value"), function (response){
+    var data = $(this).val();
+    $.update($(this).data("url"), {data}, function (response){
         console.log(response);
         if(response.status == "success")
         {
@@ -335,6 +336,19 @@ $("body").on('input', ".table-search", function(event) {
     var query = $(this).val();
     if(query.length >= 3){
         redirectTo($(this).data('url')+"?search="+query);
+    }
+});
+
+$("body").on('change', ".check-toggle", function(event) {
+console.log($(this).val());
+    if ($(this).val() == $(this).data("value")) {
+        $(this).val("0");
+        $($(this).data("target")).removeClass("hidden");
+        $($(this).data("target")).find(".form-control").attr("required", "required");
+    } else {
+        $(this).val("1");
+        $($(this).data("target")).addClass("hidden");
+        $($(this).data("target")).find(".form-control").removeAttr("required");
     }
 });
 

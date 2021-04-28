@@ -133,9 +133,11 @@ barba.hooks.after((data) => {
     NProgress.done();
             window.scrollTo(0, 0);
             changeMenu();
+    var editor = new FroalaEditor('.editor')
             // return false;
 
 });
 
 changeMenu();
-loadRevenueChart();
+// loadRevenueChart();
+var editor = new FroalaEditor('.editor')

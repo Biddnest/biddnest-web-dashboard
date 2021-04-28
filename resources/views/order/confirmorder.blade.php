@@ -42,7 +42,9 @@
                     </div>
                     <div class="tab-content  margin-topneg-15" id="myTabContent">
                         <div class="tab-pane fade show active  pt-20  border-top" id="past" role="tabpanel" aria-labelledby="past-tab">
-                            <form class="quation-form">
+                            <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_confirm')}}" method="PUT" data-next="redirect" data-url="{{route('orders-booking')}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
+                                <input name="id" value="{{$booking->id}}">
+                                <input name="public_booking_id" value="{{$booking->public_booking_id}}">
                                 <div class="p-0  border-top-2 order-cards">
                                     <div class="d-flex justify-content-center f-14 theme-text text-center ">
                                         Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
@@ -51,14 +53,14 @@
                                         <div class="flex-column justify-content-center test">
                                             <div class="card m-20  card-price eco cursor-pointer"  >
                                                 <div class="p-60 f-32 border-cicle eco-card" >
-                                                    <div>₹ 2,300</div>
+                                                    <div>₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                     <div class="f-14 ">Base price</div>
                                                 </div>
                                                 <div class="p-10 f-18">  Economy</div>
                                             </div>
                                             <div class="radio-group">
                                                 <div class="form-input radio-item ">
-                                                    <input type="radio" id="economy" name="economy-premium" class="radio-button__input cursor-pointer">
+                                                    <input type="radio" id="economy" value="0" name="service_type" class="radio-button__input cursor-pointer">
                                                     <label class="" for="economy"></label>
                                                 </div>
                                             </div>
@@ -66,14 +68,14 @@
                                         <div class="felx-column">
                                             <div class="card m-20 card-price pre  cursor-pointer ">
                                                 <div class="p-60 f-32  border-cicle pre-card  " >
-                                                    <div>₹ 3,300</div>
+                                                    <div>₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
                                                     <div class="f-14 p-1">Base price</div>
                                                 </div>
                                                 <div class="p-10 f-18">  Premium</div>
                                             </div>
                                             <div class="radio-group">
                                                 <div class="form-input radio-item ">
-                                                    <input type="radio" id="premium" name="economy-premium" class="radio-button__input ">
+                                                    <input type="radio" id="premium" value="1" name="service_type" class="radio-button__input ">
                                                     <label class="" for="premium"></label>
                                                 </div>
                                             </div>
@@ -87,7 +89,7 @@
 {{--                                    <a class="white-text p-1 " href="{{route('reject-order')}}"><button class="btn theme-br theme-text w-30 white-bg" id="backbtn">Back</button></a>--}}
                                 </div>
                                 <div class="w-50 text-right">
-                                    <a class="white-text p-1 " href="{{route('reject-order')}}"><button class="btn   w-30  reject btn theme-br white-bg">REJECT</button> </a>
+                                    <a class="white-text p-1 " href="{{route('reject-order',['id'=>$booking->id])}}"><button class="btn   w-30  reject btn theme-br white-bg">REJECT</button> </a>
                                     <a class="white-text p-1 reject" href="#"><button class="btn theme-bg white-text w-30 reject-btn">Accept</button> </a>
                                 </div>
                             </div>

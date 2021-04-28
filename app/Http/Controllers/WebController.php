@@ -299,7 +299,8 @@ class WebController extends Controller
     }
     public function confirmOrder(Request $request)
     {
-        return view('order.confirmorder');
+        $booking =Booking::where('id', $request->id)->first();
+        return view('order.confirmorder', ['booking'=>$booking]);
     }
     public function rejectOrder(Request $request)
     {

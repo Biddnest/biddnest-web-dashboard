@@ -1110,6 +1110,19 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::createEnquiryForWeb($request->all(), $request->token_payload->id);
+            return BookingsController::createEnquiryForWeb($request);
+    }
+
+    public function booking_confirm(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_type' => 'required|string',
+            'public_booking_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->id);
     }
 }

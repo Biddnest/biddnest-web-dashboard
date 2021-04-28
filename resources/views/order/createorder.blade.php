@@ -47,9 +47,8 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                    <form class="form-new-order" autocomplete="off">
-                      <div
-                        class="d-flex flex-row p-10  secondg-bg heading">
+                      <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
+                      <div class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>
                       <div class="" id="customer-details">
@@ -340,7 +339,7 @@
                                 <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                 <tr class="inventory-snip">
                                     <td scope="row" class="text-left">
-                                        <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                        <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                                             <option value="">--Select--</option>
                                             @foreach($inventories as $inventory)
                                                 <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
@@ -349,21 +348,21 @@
                                     </td>
 
                                     <td class="">
-                                        <select class="form-control br-5 material" name="inventories[][material]" required>
+                                        <select class="form-control br-5 material" name="inventory_items[][material]" required>
                                             <option value="">--Choose Inventory First--</option>
 
                                         </select>
                                     </td>
 
                                     <td class="">
-                                        <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
+                                        <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
                                             <option value="">--Choose Inventory First--</option>
 
                                         </select>
                                     </td>
 
                                     <td class="" style="width: 20%;">
-                                        <input class="form-control br-5" type="number" name="inventories[][quantity]" required>
+                                        <input class="form-control br-5" type="number" name="inventory_items[][quantity]" required>
                                     </td>
 
                                     <td>
@@ -388,7 +387,7 @@
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
                               <label>Comments from Customers</label>
-                              <textarea placeholder="Need to Include bike" id="" class="form-control" rows="4"
+                              <textarea placeholder="Need to Include bike" id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50"></textarea>
                               <span class="error-message">Please enter valid</span>
                             </div>

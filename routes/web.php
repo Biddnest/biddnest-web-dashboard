@@ -69,6 +69,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
 
     Route::post('/booking',[Router::class,'booking_add'])->name("add_booking");
+    Route::put('/confirm',[Router::class,'booking_confirm'])->name("add_confirm");
+    Route::put('/reject',[Router::class,'booking_reject'])->name("add_reject");
 
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
@@ -188,8 +190,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
-            Route::get('/confirm',[WebController::class,'confirmOrder'])->name("confirm-order");
-            Route::get('/reject',[WebController::class,'rejectOrder'])->name("reject-order");
+            Route::get('/{id}/confirm',[WebController::class,'confirmOrder'])->name("confirm-order");
+            Route::get('/{id}/reject',[WebController::class,'rejectOrder'])->name("reject-order");
         });
 
         Route::prefix('customers')->group(function () {

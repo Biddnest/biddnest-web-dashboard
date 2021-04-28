@@ -253,6 +253,7 @@ export function initSlick(){
 }
 
 export function initTextAreaEditor(){
+    $("textarea").addClass('editor');
     if($('.editor').length) {
         var editor = new FroalaEditor('.editor');
     }

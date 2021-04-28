@@ -312,7 +312,7 @@ Route::prefix('vendor')->group(function(){
         Route::get('/reset-password',[WebController::class,'resetPassword'])->name("vendor.reset-password");
     });
 
-    Route::get('/dashboard',[VendorWebController::class,'login'])->name("vendor.dashboard");
+    Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
 
 
     Route::prefix('/booking')->middleware("redirectToDashboard")->group(function () {
@@ -336,10 +336,10 @@ Route::prefix('vendor')->group(function(){
 
 
     Route::get('/branches',[VendorWebController::class,'login'])->name("vendor.branches");
-    Route::get('/vehicles',[VendorWebController::class,'login'])->name("vendor.branches");
-    Route::get('/payouts',[VendorWebController::class,'login'])->name("vendor.branches");
-    Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.branches");
-    Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.branches");
+    Route::get('/vehicles',[VendorWebController::class,'login'])->name("vendor.vehicles");
+    Route::get('/payouts',[VendorWebController::class,'login'])->name("vendor.payouts");
+    Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.my-service-requests");
+    Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.reports");
 
 
 

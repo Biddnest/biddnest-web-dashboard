@@ -11,4 +11,8 @@ class VendorWebController extends Controller
         return view('vendor-panel.auth.login');
     }
 
+    public function dashboard()
+    {
+        return view('vendor-panel.dashboard.dashboard');
+    }
 }

@@ -34,7 +34,7 @@ crossorigin="anonymous"></script>
 
 
 
-<script type="text/javascript" src='http://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
+<script type="text/javascript" src='https://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
 <script src="{{ asset('static/js/locationpicker.jquery.js')}}"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>

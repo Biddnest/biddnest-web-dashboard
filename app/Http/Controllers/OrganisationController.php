@@ -449,4 +449,17 @@ class OrganisationController extends Controller
         return Helper::response(true,"Here are the branches",["branches"=>$branches]);
     }
 
+    public static function search(Request $request)
+    {
+//        return $request;
+//        $query = $request->all()['query'];
+        $query = $request->q;
+
+        if (empty($query))
+            return Helper::response(true, "Data fetched successfully", ["users" => []]);
+//        return $query;
+        $users = Organization::where("org_name", "LIKE", $query . '%')->paginate(5);
+        return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
+    }
+
 }

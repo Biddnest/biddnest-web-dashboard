@@ -293,7 +293,9 @@ class WebController extends Controller
 
     public function createOrder()
     {
-        return view('order.createorder');
+        $category =Service::where(['status'=>\App\Enums\CommonEnums::$YES, 'deleted'=>\App\Enums\CommonEnums::$NO])->with('subservices')->get();
+        $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('order.createorder', ['categories'=>$category, 'inventories'=>$inventory]);
     }
     public function confirmOrder(Request $request)
     {
@@ -750,10 +752,8 @@ class WebController extends Controller
             $payout=$payout->where('public_payout_id', 'like', "%".$request->search."%");
         }
         $payout->orderBy("id","DESC");
-        $payout_total =Payout::whereIn('organization_id', Organization::whereIn("zone_id", $zone))->count();
-        $scheduled_payout =Payout::whereIn('organization_id', Organization::whereIn("zone_id", $zone))->where(["status"=>PayoutEnums::$STATUS['scheduled']])->count();
-        $failed_payout =Payout::whereIn('organization_id', Organization::whereIn("zone_id", $zone))->where(["status"=>PayoutEnums::$STATUS['suspended']])->count();
-        return view('vendorpayout.payout', ['payouts'=>$payout->paginate(CommonEnums::$PAGE_LENGTH), 'total_count'=>$payout_total, 'scheduled_payout'=>$scheduled_payout, 'failed_payout'=>$failed_payout]);
+
+        return view('vendorpayout.payout', ['payouts'=>$payout->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function sidebar_payout(Request $request)

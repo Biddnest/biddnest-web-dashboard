@@ -173,7 +173,7 @@
                                 </div>
                             @endif
                             <div class="d-flex   justify-content-center p-10">
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}"><button class="btn theme-bg white-text">View More</button></a></div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="vendor">
@@ -253,7 +253,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 
@@ -370,7 +370,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex   justify-content-center p-10">
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}"><button class="btn theme-bg white-text">View More</button></a></div>
                             </div>
                         </div>
 
@@ -480,7 +480,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 

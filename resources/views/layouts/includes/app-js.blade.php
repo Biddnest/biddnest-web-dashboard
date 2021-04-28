@@ -65,8 +65,6 @@ crossorigin="anonymous"></script>
 <!-- Optional JavaScript -->
 <script src="{{ asset('static/js/sidebarCollapse.js') }}"></script>
 
-<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>
-
 <script src="{{ asset('static/js/jquery.logger.js') }}"></script>
 
 {{--<script src="{{ asset('static/js/main.js') }}"></script>--}}
@@ -93,5 +91,6 @@ crossorigin="anonymous"></script>
 
 
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
+<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>
 
 

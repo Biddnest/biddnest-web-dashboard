@@ -12,6 +12,7 @@ use App\Enums\NotificationEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
 use App\Helper;
+use App\Http\Controllers\User\UserController;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingDriver;
@@ -34,6 +35,25 @@ use Intervention\Image\ImageManager;
 class BookingsController extends Controller
 {
 
+    public static function createEnquiryForAdmin(Request $request){
+        $user = User::where("phone",$request->phone)
+                ->orWhere("email",$request->email)
+                ->first();
+        if($user)
+            $user_id = $user->id;
+
+        $fname = explode($request->name, " ")[0];
+        $lname = str_replace($fname, "", $request->name);
+
+        $newuser = UserController::directSignup(/*Pass params here*/);
+
+        $user_id = $newuser->id;
+
+        self::createEnquiry(/*pass parameters*/);
+
+//        return true;
+
+    }
     public static function createEnquiry($data, $user_id)
     {
         if (App::environment('production')) {

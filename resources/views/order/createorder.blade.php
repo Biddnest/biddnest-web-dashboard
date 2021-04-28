@@ -21,10 +21,11 @@
     </div>
 
     <div class="d-flex  flex-row text-left ml-120">
-            <!-- <a href="booking-orders.html" class="text-decoration-none">
+           <!--
+           <a href="booking-orders.html" class="text-decoration-none">
            <h3 class="page-subhead text-left p-4 f-20 theme-text">
-            <i class="p-1"> <img src="assets/images/Icon feather-chevrons-left.svg" alt="" srcset=""></i> Back to Bookings & Orders</h3></a> -->
-
+           <i class="p-1"> <img src="assets/images/Icon feather-chevrons-left.svg" alt="" srcset=""></i> Back to Bookings & Orders</h3></a>
+           -->
     </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
@@ -46,7 +47,7 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                    <form class="form-new-order">
+                    <form class="form-new-order" autocomplete="off">
                       <div
                         class="d-flex flex-row p-10  secondg-bg heading"
                          href="#customer-details" role="button" aria-expanded="false"
@@ -122,16 +123,16 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>From Address </label>
-                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="" class="form-control">
+                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control">
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>From Adress line 1</label>
-                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]" id="" class="form-control" required>
-                              <input type="text"  name="source[lat]" id="" class="form-control" required>
-                              <input type="text"  name="source[lng]" id="" class="form-control" required>
+                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]"  class="form-control" required>
+                              <input type="hidden"  name="source[lat]" id="source-lat" class="form-control" required>
+                              <input type="hidden"  name="source[lng]" id="source-lng" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -139,7 +140,7 @@
                           <div class="col-sm-6 mtop-22">
                             <!--Map -->
                             <!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="85%" height="350px" id="gmap_canvas" src="https://maps.google.com/maps?q=Benguluru%20indiranagar,svm%20complex&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://grantorrent-es.com">grantorrent</a><br><style>.mapouter{position:relative;text-align:left;height:250px;width:118%;}</style><a href="https://www.embedgooglemap.net">google map on your website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:131px;width:100%;}</style></div></div> -->
-                            <div id="sourece" style="width: 100%; height: 200px;"></div>
+                            <div style="width: 100%; height: 200px;" class="source-map-picker"></div>
                           </div>
                           <div class="col-sm-6">
                             <div class="d-flex  row justify-content-between">
@@ -192,9 +193,9 @@
                             <div class="col-sm-6">
                                 <div class="form-input">
                                 <label>To  Address</label>
-                                <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="" class="form-control">
-                                    <input type="text"  name="destination[lat]" id="" class="form-control" required>
-                                    <input type="text"  name="destination[lng]" id="" class="form-control" required>
+                                <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="dest-autocomplete" class="form-control">
+                                    <input type="hidden"  name="destination[lat]" id="dest-lat" class="form-control" required>
+                                    <input type="hidden"  name="destination[lng]" id="dest-lng" class="form-control" required>
                                 <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -208,7 +209,7 @@
                           <div class="col-sm-6 mtop-22">
                             <!--Map -->
                             <!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="85%" height="auto" id="gmap_canvas" src="https://maps.google.com/maps?q=Benguluru%20indiranagar,svm%20complex&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://grantorrent-es.com">grantorrent</a><br><style>.mapouter{position:relative;text-align:left;height:131px;width:118%;}</style><a href="https://www.embedgooglemap.net">google map on your website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:131px;width:100%;}</style></div></div> -->
-                              <div id="destination" style="width: 100%; height: 200px;"></div>
+                              <div style="width: 100%; height: 200px;" class="dest-map-picker"></div>
                           </div>
                           <div class="col-sm-6">
                             <div class="d-flex row justify-content-between">

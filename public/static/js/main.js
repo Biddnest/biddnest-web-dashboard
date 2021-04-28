@@ -72,6 +72,8 @@ window.intlTelInput(input, {
 
 */
 
+
+
 $("div.sortable").sortable({
     handle: '.dragger',
 });
@@ -584,3 +586,5 @@ $(document).ready(function() {
 // tinymce.init({
 //     selector: '#mytextarea'
 // });
+
+

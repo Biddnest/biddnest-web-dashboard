@@ -32,9 +32,6 @@ crossorigin="anonymous"></script>
 <!-- jsdelivr -->
 <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
 
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-<script src="{{ asset('static/js/locationpicker.jquery.js')}}"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
 

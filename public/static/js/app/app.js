@@ -352,5 +352,3 @@ console.log($(this).val());
     }
 });
 
-    $('#destination').locationpicker();
-    $('#sourece').locationpicker();

@@ -254,8 +254,7 @@ class UserController extends Controller
         return Helper::response(true,"save Testimonials successfully", ["customer"=>User::findOrFail($user->id)]);
     }
 
-    public static function directSignup($phone, $fname, $lname, $email, $gender, $refby_code){
-
+    public static function directSignup($phone, $fname, $lname, $email, $gender=null, $refby_code=null){
 
         $avatar_file_name = $fname."-".$lname."-".uniqid().".png";
 
@@ -263,17 +262,11 @@ class UserController extends Controller
         $ref_code = strtoupper(substr($fname,0,3).$short_id);
 
         $user = new User;
-        /*write columsn*/
+        $user->phone=$phone;
+        $user->fname=$fname;
+        $user->lname=$lname;
+        $user->email=$email;
         $user->save();
-        /*User::where("id",$id)->update([
-            'fname'=>$fname,
-            'lname'=>$lname,
-            'email'=>$email,
-            'gender'=>$gender,
-            'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
-            'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
-            "status"=>1
-        ]);*/
 
         return $user;
     }

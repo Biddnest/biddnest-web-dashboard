@@ -368,7 +368,4 @@ console.log($(this).val());
     }
 });
 
-$('.date').datepicker({
-    multidate: true,
-    format: 'd M'
-});
+

@@ -297,3 +297,12 @@ export function initCountdown(){
     }
 
 }
+export function initDatePicker(){
+    if($(".date").length) {
+        $('.date').datepicker({
+            multidate: true,
+            format: 'yyyy-mm-dd',
+            'startDate': '+1d'
+        });
+    }
+}

@@ -39,7 +39,7 @@
                           aria-controls="home" aria-selected="true">Create New Order</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link p-15" id="quotation"  href="{{route('confirm-order')}}" >Quotations</a>
+                        <a class="nav-link p-15 disabled" id="quotation"  href="#" >Quotations</a>
                       </li>
                     </ul>
                   </h3>
@@ -47,9 +47,8 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                    <form class="form-new-order" autocomplete="off">
-                      <div
-                        class="d-flex flex-row p-10  secondg-bg heading">
+                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off" onsubmit="return false">
+                      {{--<div class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>
                       <div class="" id="customer-details">
@@ -57,21 +56,21 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Phone Number</label>
-                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" required>
+                                <input type="tel" value="9762553805" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="full-name">Full Name</label>
-                                <input type="text" id="fullname" placeholder="David Jerome" name="contact_details[name]" class="form-control" required>
+                                <input type="text" value="Dhanashri Mane" id="fullname" placeholder="David Jerome" name="contact_details[name]" class="form-control" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="email-label">Email</label>
-                                <input type="email" placeholder="abc@mail.com" name="contact_details[email]" id="E-mail" class="form-control" required>
+                                <input type="email" value="dhanashree.mane@diginnovators.com" placeholder="abc@mail.com" name="contact_details[email]" id="E-mail" class="form-control" required>
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
@@ -120,7 +119,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>Search Address </label>
-                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control">
+                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -151,21 +150,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="Benguluru" id="source-city" class="form-control" name="source[meta][city]" required>
+                                    <input type="text" placeholder="Benguluru" id="source-city" value="Pune" class="form-control" name="source[meta][city]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From State</label>
-                                    <input type="text" placeholder="Karnataka" id="source-state" class="form-control" name="source[meta][state]" required>
+                                    <input type="text" placeholder="Karnataka" id="source-state" class="form-control" value="Maharashtra" name="source[meta][state]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="530000" id="source-pin" class="form-control" name="source[meta][pincode]" required>
+                                  <input type="text" placeholder="530000" id="source-pin" value="7584585" class="form-control" name="source[meta][pincode]" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -207,7 +206,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>To Adress line 1</label>
-                              <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][address_line1]" id="" class="form-control">
+                              <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][address_line1]" id="" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -221,28 +220,28 @@
                                 <div class="col-sm-12">
                                     <div class="form-input">
                                         <label>From Adress line 2</label>
-                                        <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control">
+                                        <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control" required>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="Chennai" id="dest-city" name="destination[meta][city]" class="form-control">
+                                  <input type="text" placeholder="Chennai" id="dest-city" value="Chennai" name="destination[meta][city]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="Chennai" id="dest-state" name="destination[meta][state]" class="form-control">
+                                    <input type="text" placeholder="Chennai" id="dest-state" value="Tamil Nadu" name="destination[meta][state]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" id="dest-pin" class="form-control">
+                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" value="875895" id="dest-pin" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -251,7 +250,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
-                                    <input type="number" placeholder="1st floor" name="destination[meta][floor]" id="" class="form-control">
+                                    <input type="number" placeholder="1st floor" name="destination[meta][floor]" id="" class="form-control" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -304,7 +303,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                             <label>Category</label>
-                                <select  id="" name="service_id" class="form-control category-select" >
+                                <select  id="" name="service_id" class="form-control category-select" required>
                                     <option value="">--select--</option>
                                  @foreach($categories as $category)
 
@@ -340,7 +339,7 @@
                                 <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                 <tr class="inventory-snip">
                                     <td scope="row" class="text-left">
-                                        <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                        <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                                             <option value="">--Select--</option>
                                             @foreach($inventories as $inventory)
                                                 <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
@@ -349,21 +348,21 @@
                                     </td>
 
                                     <td class="">
-                                        <select class="form-control br-5 material" name="inventories[][material]" required>
+                                        <select class="form-control br-5 material" name="inventory_items[][material]" required>
                                             <option value="">--Choose Inventory First--</option>
 
                                         </select>
                                     </td>
 
                                     <td class="">
-                                        <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
+                                        <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
                                             <option value="">--Choose Inventory First--</option>
 
                                         </select>
                                     </td>
 
                                     <td class="" style="width: 20%;">
-                                        <input class="form-control br-5" type="number" name="inventories[][quantity]" required>
+                                        <input class="form-control br-5" type="number" name="inventory_items[][quantity]" required>
                                     </td>
 
                                     <td>
@@ -388,7 +387,7 @@
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
                               <label>Comments from Customers</label>
-                              <textarea placeholder="Need to Include bike" id="" class="form-control" rows="4"
+                              <textarea placeholder="Need to Include bike" id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50"></textarea>
                               <span class="error-message">Please enter valid</span>
                             </div>
@@ -401,12 +400,13 @@
                               </a>
                           </div>
                           <div class="w-50 text-right">
-                              <a class="white-text p-10" data-toggle="modal" data-target="#for-friend">
+                              <a class="white-text p-10" href="#">
                                   <button class="btn theme-bg white-text w-30">Next</button>
                               </a>
                           </div>
                         </div>
-                      </div>
+                      </div>--}}
+
                     </form>
                     <!-- Tab-1 form -->
                   </div>

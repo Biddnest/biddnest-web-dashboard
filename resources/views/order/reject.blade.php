@@ -45,27 +45,37 @@
                     </div>
                     <div class="tab-content  margin-topneg-15" id="myTabContent">
                         <div class="tab-pane fade show active pt-20  border-top" id="past" role="tabpanel" aria-labelledby="past-tab">
-                            <form class="quation-form">
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('order_reject')}}" method="PUT" data-next="redirect" data-url="{{route('orders-booking')}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
                                 <!-- Resaosn for rejaction -->
                                 <div class="d-flex  justify-content-center">
+                                    <input type="hidden" name="id" value="{{$booking->user_id}}">
+                                    <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                     <div class="w-50  f-14 theme-text text-left  rejection-message">
                                         <div ><h4 class="heading">Reason For Rejection</h4></div>
                                         <div class="form-input">
-                                <textarea  placeholder="Need to Include bike" id="" class="form-control" rows="4" cols="50">
-                                </textarea>
+                                            <select name="reason" class="form-control">
+                                                <option value="">--select--</option>
+                                                @foreach(json_decode($reasons, true) as $reason)
+                                                    <option value="{{$reason}}">{{$reason}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter  valid</span>
+                                        </div>
+                                        <div class="form-input">
+                                            <textarea  placeholder="Need to Include bike" name="desc" id="" class="form-control" rows="4" cols="50">
+                                            </textarea>
                                             <span class="error-message">Please enter  valid</span>
                                         </div>
                                     </div>
                                 </div>
-
-                            </form>
                             <!-- Buttons -->
                             <div class="d-flex justify-content-between flex-row p-8">
-                                <div class="w-50"> <a class=" p-1 reject" href="{{route('confirm-order')}}"><button class="btn theme-br theme-text w-30 white-bg" id="backbtn">Back</button></a></div>
+                                <div class="w-50"> <a class=" p-1 reject" href="{{route('confirm-order', ['id'=>$booking->id])}}"><button type="button" class="btn theme-br theme-text w-30 white-bg" id="backbtn">Back</button></a></div>
                                 <div class="w-50 text-right">
                                     <a class="white-text p-1 reject" href="#"><button class="btn theme-bg white-text w-30 reject-btn">Submit</button> </a>
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <!--  -->
                     </div>

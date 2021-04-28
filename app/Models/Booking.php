@@ -54,6 +54,11 @@ class Booking extends Model
         return $this->hasOne(Bid::class);
     }
 
+    public function biddings()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
     public function payment()
     {
         return $this->hasOne(Payment::class);

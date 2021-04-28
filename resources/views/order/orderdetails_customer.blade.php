@@ -80,28 +80,32 @@
                                   Order ID
                                 </div>
                                 <div class="theme-text f-14 bold p-15">
-                                  Vendor Name
+                                  Customer Name
                                 </div>
                                 <div class="theme-text f-14 bold p-15">
-                                  Vendor Details
+                                  Customer Phone
                                 </div>
                                 <div class="theme-text f-14 bold p-15">
-                                  Driver Name
+                                  Customer Email
                                 </div>
+
                                 <div class="theme-text f-14 bold p-15">
-                                  Driver Email
+                                  From Address
                                 </div>
+                                <br />
                                 <div class="theme-text f-14 bold p-15">
-                                  Timer Value
+                                  To Address
                                 </div>
+                                <br />
                                 <div class="theme-text f-14 bold p-15">
-                                  Order Status
+                                    Delivery Distance
                                 </div>
                                 <div class="theme-text f-14 bold p-15">
                                   Order Amount
                                 </div>
+
                                 <div class="theme-text f-14 bold p-15">
-                                  Address
+                                  Booking Status
                                 </div>
                             </div>
 
@@ -110,40 +114,30 @@
                                   {{$booking->public_booking_id}}
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                 @if($booking->organization){{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}} @endif
+                                 {{json_decode($booking->contact_details,true)['name'] }}
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                    @if($booking->organization){{$booking->organization->email}}@endif
+                                 {{json_decode($booking->contact_details,true)['phone'] }}
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                    @if($booking->driver){{ucfirst(trans($booking->driver->fname))}} {{ucfirst(trans($booking->driver->lname))}} @endif
+                                 {{json_decode($booking->contact_details,true)['email'] }}
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                    @if($booking->driver){{$booking->driver->email}}@endif
+                                    @php $source =  json_decode($booking->source_meta,true); @endphp
+                                    Floor: {{$source['floor']}}, {{$source['address']}}. @if($source['lift'] == 1) Lift is available.@else Lift is not available. @endif
                                 </div>
                                 <div class="theme-text f-14 p-15">
-                                    @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
-                                        {{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}
-                                    @else
-                                        Bidding Done
-                                    @endif
+                                    @php $source =  json_decode($booking->destination_meta,true); @endphp
+                                    Floor: {{$source['floor']}}, {{$source['address']}}. @if($source['lift'] == 1) Lift is available. @else Lift is not available. @endif
                                 </div>
-                                <div class="theme-text f-14 p-15 status-badge text-center  ">
-                                  @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
-                                      @foreach($booking->status_hist as $history)
-                                          @if($status == $history->$status)
-                                            {{ucfirst(trans($key))}}
-                                          @endif
-                                      @endforeach
-                                  @endforeach
+                                <div class="theme-text f-14 p-15">
+                                    {{ json_decode($booking->meta, true)['distance'] }}Kms
                                 </div>
-                                <div class="theme-text f-14 p-15 mt-2">
-                                  ₹  @if($booking->final_quote){{$booking->final_quote}}@else{{$booking->final_estimated_quote}}@endif
+                                <div class="theme-text f-14 p-15">
+                                    &#8377;{{$booking->final_quote}}
                                 </div>
-                                <div class="theme-text f-14 p-15 ">
-                                  {{json_decode($booking->source_meta, true)['address']}} To {{json_decode($booking->destination_meta, true)['address']}}
-                                </div>
-                            </div>
+
+
 
                            {{-- <div class="d-flex  mtop-5">
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>

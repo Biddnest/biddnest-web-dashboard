@@ -14,15 +14,15 @@
     <div class="vender-all-details">
         <div class="simple-card min-width-30">
             <p>TOTAL PAYOUTS</p>
-            <h1>{{$total_count}}</h1>
+            <h1>{{count($payouts)}}</h1>
         </div>
         <div class="simple-card min-width-30">
             <p>SCHEDULED PAYOUTS</p>
-            <h1>{{$scheduled_payout}}</h1>
+            <h1>{{sizeof(array_keys((array)$payouts, (string)\App\Enums\PayoutEnums::$STATUS['scheduled']))}}</h1>
         </div>
         <div class="simple-card min-width-30">
             <p>FAILED PAYOUTS</p>
-            <h1>{{$failed_payout}}</h1>
+            <h1>{{sizeof(array_keys((array)$payouts, (string)\App\Enums\PayoutEnums::$STATUS['suspended']))}}</h1>
         </div>
     </div>
     <!-- Dashboard cards -->

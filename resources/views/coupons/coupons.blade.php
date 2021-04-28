@@ -17,8 +17,8 @@
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Coupons & offers</li>
-                    <li class="breadcrumb-item"><a href="#"> Manage Coupons</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('coupons')}}">Coupons & offers</a></li>
+                    <li class="breadcrumb-item" >Manage Coupons</li>
                 </ol>
             </nav>
         </div>
@@ -27,15 +27,15 @@
     <div class="vender-all-details">
         <div class="simple-card min-width-30">
             <p>TOTAL NO OF COUPONS</p>
-            <h1>{{$total_coupons}}</h1>
+            <h1>{{count($coupons)}}</h1>
         </div>
         <div class="simple-card min-width-30">
             <p>ACTIVE COUPONS</p>
-            <h1>{{$active_coupons}}</h1>
+            <h1>{{sizeof(array_keys((array)$coupons, (string)\App\Enums\CouponEnums::$STATUS['active']))}}</h1>
         </div>
         <div class="simple-card min-width-30">
             <p>INACTIVE COUPONS</p>
-            <h1>{{$inactive_coupons}}</h1>
+            <h1>{{sizeof(array_keys((array)$coupons, (string)\App\Enums\CouponEnums::$STATUS['inactive']))}}</h1>
         </div>
     </div>
     <!-- Dashboard cards -->

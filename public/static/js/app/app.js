@@ -208,6 +208,20 @@ $("body").on('change', ".inventory-select", function(event) {
     return false;
 });
 
+$("body").on('change', ".category-select", function(event) {
+    console.log("change");
+    var id=$(this).val();
+
+    $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
+
+    var materal=$("#sub_"+id).data("subcategory");
+
+    materal.map((value)=>{
+        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
+    });
+    return false;
+});
+
 $("body").on('click', ".delete", function(event) {
     if(confirm($(this).data('confirm'))) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
@@ -352,4 +366,9 @@ console.log($(this).val());
         $($(this).data("target")).addClass("hidden");
         $($(this).data("target")).find(".form-control").removeAttr("required");
     }
+});
+
+$('.date').datepicker({
+    multidate: true,
+    format: 'd M'
 });

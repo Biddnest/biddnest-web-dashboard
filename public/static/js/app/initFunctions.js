@@ -236,9 +236,11 @@ export function initAllSelectBoxes() {
 }
 
 export function initSlick(){
-    $('.slick-container').slick({
-        arrows: false
-    });
+  if($(".slick-container").length) {
+      $('.slick-container').slick({
+          arrows: false
+      });
+  }
 }
 
 export function initTextAreaEditor(){
@@ -272,12 +274,12 @@ export function initRevenueChart(){
 }
 
 export function initCountdown(){
-    if(typeof BID_END_TIME !== undefined){
+    var BID_END_TIME = $(".timer").data("time");
         $(".timer")
             .countdown(BID_END_TIME, function(event) {
                 $(this).text(
                     event.strftime('%H:%M:%S')
                 );
             });
-    }
+
 }

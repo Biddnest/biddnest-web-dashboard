@@ -254,7 +254,9 @@ class WebController extends Controller
     }
     public function orderDetailsBidding(Request $request)
     {
-        $booking = Booking::with('status_history')->findOrFail($request->id);
+        $booking = Booking::with('status_history')->with(['biddings'=>function($bid){
+            $bid->orderBy('updated_at')->orderBy('status')->with('organization');
+        }])->findOrFail($request->id);
 
         $hist = [];
 

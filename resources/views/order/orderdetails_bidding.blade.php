@@ -102,7 +102,7 @@
                                         <div class="text-center ">
                                             <h3 class="f-18 theme-text bold p-10">Time Left</h3>
 
-                                            <div id="app"></div>
+                                            <h1 class="timer"></h1>
 
                                         </div>
 
@@ -121,9 +121,18 @@
                                 </div>
 
                                 <div class="d-flex  row  p-10 theme-text ml-20">
-                                    <h4> Top Vendor: Wayne Pvt Ltd | Total Price: ₹ 2,300</h4>
-
+                                    @if($booking->status == \App\Enums\BookingEnums::$STATUS['biding'])
+                                        <h4>Bidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("H:iA")}}</h4>
+                                    @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding'])
+                                        <h4>Rebidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("H:iA")}}</h4>
+                                    @endif
+                                    @foreach($booking->biddings as $bidding)
+                                        @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
+                                    <h4> Top Vendor: {{$bidding->organization->org_name}} | Total Price: ₹{{$bidding->bid_amount}}</h4>
+                                        @endif
+                                    @endforeach
                                 </div>
+
                                 <div class="bidlist-table  border-pop">
 
                                     <div class="d-flex  row  p-10">
@@ -148,42 +157,45 @@
                                             <table class="table text-center p-10 theme-text">
                                                 <thead class="secondg-bg  p-0">
                                                 <tr>
-                                                    <th scope="col">Vendors ID</th>
                                                     <th scope="col" >Vendors Name</th>
-                                                    <th scope="col" >  Total Qoute</th>
-                                                    <th scope="col" >Discount from Vendor</th>
-                                                    <th scope="col" >Commission Rate</th>
-
+                                                    <th scope="col">Commission %</th>
+                                                    <th scope="col">Quote</th>
+                                                    <th scope="col">Bid Status</th>
+                                                    <th scope="col">Action</th>
                                                 </tr>
                                                 </thead>
+
                                                 <tbody class="mtop-15">
+                                                @foreach($booking->biddings as $bidding)
                                                 <tr class="tb-border  cursor-pointer">
-                                                    <th scope="row">V0123456</th>
+                                                    <td  class="text-center">{{$bidding->organization->org_name ?? "Vendor Name"}}</td>
+                                                    <td class="">{{$bidding->organization->commission ?? 10}}%</td>
+                                                    <td class="">&#8377;{{$bidding->bid_amount}}</td>
+                                                    <td class="">
+                                                        @switch($bidding->status)
+                                                        @case(\App\Enums\BidEnums::$STATUS['active'])
+                                                            <span class="green-bg text-center w-100  td-padding">Yet to Submit</span>
+                                                        @break;
+                                                        @case(\App\Enums\BidEnums::$STATUS['rejected'])
+                                                            <span class="green-bg text-center w-100  td-padding">Rejected</span>
+                                                        @break;
+                                                        @case(\App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                                            <span class="green-bg text-center w-100  td-padding">Submitted</span>
+                                                        @break;
+                                                        @case(\App\Enums\BidEnums::$STATUS['lost'])
+                                                            <span class="green-bg text-center w-100  td-padding">Lost</span>
+                                                        @break;
+                                                        @case(\App\Enums\BidEnums::$STATUS['won'])
+                                                            <span class="green-bg text-center w-100  td-padding">Won</span>
+                                                        @break;
 
-                                                    <td  class="text-center">Wayne Pvt Ltd <span class=""> Re-Bid</span></td>
-                                                    <td class="">₹ 2,300</td>
-                                                    <td class="">10%</td>
-                                                    <td class="">10%</td>
+                                                        @endswitch
+
+                                                    </td>
+                                                    <td class=""><button class="btn btn-primary">Assign</button></td>
 
                                                 </tr>
-                                                <tr class="tb-border  cursor-pointer">
-                                                    <th scope="row">V0123456</th>
-
-                                                    <td  class="text-center">Wayne Pvt Ltd <span class=""> Re-Bid</span></td>
-                                                    <td class="">₹ 2,300</td>
-                                                    <td class="">10%</td>
-                                                    <td class="">10%</td>
-
-                                                </tr>
-                                                <tr class="tb-border  cursor-pointer">
-                                                    <th scope="row">V0123456</th>
-
-                                                    <td  class="text-center">Wayne Pvt Ltd <span class=""> Re-Bid</span></td>
-                                                    <td class="">₹ 2,300</td>
-                                                    <td class="">10%</td>
-                                                    <td class="">10%</td>
-
-                                                </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
 
@@ -311,5 +323,9 @@
 
 
     </div>
+
+    <script type="application/javascript">
+        var BID_END_TIME = "{{$booking->bid_end_at}}";
+    </script>
 
 @endsection

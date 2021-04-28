@@ -31,7 +31,7 @@
                   <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                     aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                      <form action="{{route('notification_add')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('push-notification')}}" data-alert="tiny" class="create-notification" id="myForm" data-parsley-validate>
+                      <form action="{{route('notification_add')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('push-notification')}}" data-alert="tiny" class="create-notification" id="myForm" data-parsley-validate style="    margin: 30px !important;">
                       <div class="d-flex row">
                         <div class="col-lg-6">
                           <div class="form-input">

@@ -406,7 +406,7 @@
                           </div>
                         </div>
                       </div>--}}
-                          <button>submit</button>
+
                     </form>
                     <!-- Tab-1 form -->
                   </div>

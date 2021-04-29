@@ -27,17 +27,18 @@
 
                     <h3 class="text-center">Forgot Password?</h3>
                 <!-- Form -->
-                    <form class="px-3 login" data-alert="inline" action="{{ route('admin_forgotpassword') }}" method="POST" onsubmit="return false;" data-next="refirect" {{--data-redirect-type="hard"--}} data-url="{{route('verifyotp')}}" data-parsley-validate>
+                    <form class="px-3 login" data-alert="inline" action="{{route('send_otp')}}" method="POST" onsubmit="return false;" data-next="redirect" data-redirect-type="hard" data-url="{{route('verifyotp')}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>Phone</label>
                         <span>
-                            <input type="phone" name="" placeholder="" tabindex="10" required class="form-control">
+                            <input type="phone" name="phone" placeholder="" tabindex="10" required class="form-control">
                             <span class="error-message">Please enter valid Phone</span>
                         </span>
 
                         </div>
-                        <a  class="btn  btn-block" href="{{ route('verifyotp') }}">SEND OTP</a>
+{{--                        <a  class="btn  btn-block" href="#">SEND OTP</a>--}}
+                        <button type="submit" class="btn btn-block">SEND OTP</button>
                     </form>
                 </div>
             </div>

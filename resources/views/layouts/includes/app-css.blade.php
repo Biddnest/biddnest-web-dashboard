@@ -809,7 +809,10 @@
                 /*width: 50px;*/
             }
 
-
+            .link-regular {
+                color: #2E0789 !important;
+                text-decoration: none !important;
+            }
 
     </style>
 

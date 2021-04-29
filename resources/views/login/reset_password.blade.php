@@ -22,9 +22,9 @@
                             </div>
                             <h3 class="text-center">Change Password</h3>
                             <!-- Form -->
-                            <form class="px-3 login">
+                                <form action="{{route('reset_password')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('login')}}" data-alert="tiny" class="form-new-order px-3 login" id="myForm" autocomplete="off" data-parsley-validate>
                             <!-- Input Box -->
-                                <input type="hidden" name="bearer" value="" required class="form-control">
+                                <input type="hidden" name="bearer" value="{{$admin->id}}" required class="form-control">
                                 <div class="form-input">
                                    <label>New Password</label>
                                     <input type="password" name="password" placeholder="New Password" tabindex="10" required class="form-control">
@@ -32,13 +32,13 @@
                                 </div>
                                 <div class="form-input isinvalid">
                                    <label>Confirm New Password</label>
-                                    <input type="password" id="password" name="" placeholder="Confirm Password" id="confirm_password" required class="form-control ">
+                                    <input type="password" id="password" name="password_confirmation" placeholder="Confirm Password" id="confirm_password" required class="form-control" data-parsley-equalto="#password" data-parsley-error-message="Password doesn't match!">
                                     <span class="error-message">Please enter the correct password</span>
                                 </div>
                                 <a href="#" class="text-decoration-none"><button type="submit" class="btn  btn-block">Submit</button></a>
-                                <div class="text-center">
+                                {{--<div class="text-center">
                                    <a class="link-regular" href="{{ route('login') }}">Login now</a>
-                                </div>
+                                </div>--}}
                             </form>
                         </div>
             </div>

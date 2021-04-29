@@ -45,12 +45,13 @@ class Route extends Controller
     public function forgot_password_verify_otp(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'phone'=>'required',
             'otp' => 'required'
         ]);
         if($validation->fails())
           return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-         return AdminController::verifyOtp($request->otp, $request->bearer);
+         return AdminController::verifyOtp($request->otp, $request->phone);
     }
 
     public function reset_password(Request $request)

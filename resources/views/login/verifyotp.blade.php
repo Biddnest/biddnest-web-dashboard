@@ -30,12 +30,12 @@
 
 
                 <!-- Form -->
-                    <form class="px-3 login" data-parsley-validate>
+                    <form class="px-3 login form-new-order verify-otp-form" data-alert="inline" action="{{ route('verify_otp') }}" method="POST" onsubmit="return false;" data-next="redirect" data-redirect-type="hard" data-url="{{route('reset-passwords',['id'=>':id'])}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>Phone</label>
                         <span>
-                            <input type="phone" name="" placeholder="Enter Registered mobile no" maxlength="6" minlength="6" tabindex="10" required class="form-control">
+                            <input type="phone" name="phone" placeholder="Enter Registered mobile no" maxlength="10" minlength="10" tabindex="10" required class="form-control">
                         </span>
 
                             <span class="error-message">Please enter valid Phone</span>

@@ -96,11 +96,11 @@ class AdminController extends Controller
      */
     public static function verifyOtp($otp, $bearer)
     {
-        $admin_user=DB::table('admins')->where(['id'=> $bearer, 'forgot_pwd'=>1])->first();
+        $admin_user=DB::table('admins')->where(['phone'=> $bearer, 'forgot_pwd'=>1])->first();
         if(!$admin_user){
             return Helper::response(false,"user not found");
         }
-        return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified") : Helper::response(false, "otp is incorrect");
+        return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified") : Helper::response(false, "otp is incorrect", ["otp"=>$admin_user]);
     }
 
     /**

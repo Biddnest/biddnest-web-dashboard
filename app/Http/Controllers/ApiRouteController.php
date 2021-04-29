@@ -224,7 +224,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::createEnquiry($request->all(), $request->token_payload->id);
+            return BookingsController::createEnquiry($request->all(), $request->token_payload->id, $request->movement_dates);
     }
 
     public function confirmBooking(Request $request)

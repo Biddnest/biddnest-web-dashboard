@@ -39,7 +39,7 @@
 
                     <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                         <!-- form starts -->
-                        <form action="@if(!$users){{route('user_add')}}@else{{route('user_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="@if(!$users){{route('create-bank', ['id'=>':id'])}}@else{{route('create-bank', ['id'=>$users->id])}}@endif" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate >
+                        <form action="@if(!$users){{route('user_add')}}@else{{route('user_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="@if(!$users){{route('create-bank', ['id'=>':id'])}}@else{{route('create-bank', ['id'=>$users->id])}}@endif" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue onboard-vendor-form" id="myForm" data-parsley-validate >
                             <div class="d-flex row p-20">
                                 <div class="col-sm-6">
                                     <p class="img-label">Image</p>

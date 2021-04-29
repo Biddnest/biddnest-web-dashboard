@@ -308,3 +308,13 @@ export function initDatePicker(){
         });
     }
 }
+
+export function initToggles(){
+    Logger.info("init toggles");
+    $("input[type=checkbox]").each(function(index){
+        Logger.info("init "+index);
+
+        $(this).attr("id", "checkbox_"+index);
+        $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
+    })
+}

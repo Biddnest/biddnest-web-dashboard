@@ -10,7 +10,7 @@
     </div>
     <div class="d-flex  flex-row justify-content-between">
         <div class="page-head text-left p-4 pt-0 pb-0">
-            <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb " style="margin-left:-10px">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Create New Order</li>
@@ -77,12 +77,13 @@
 
                             <div class="col-sm-6">
                                 <div class="form-inputs ">
-                                    <label class="container" style="margin-top: 36px;">
+                                <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
+                                    <label class="container" style="margin-top: 10px;margin-left:-30px">
                                         <input type="hidden" value="0" name="meta[self_booking]" id="slef">
                                         <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? 1 : 0">
-                                        <span class="checkmark"></span>
+                                        <!-- <span class="checkmark"></span> -->
                                     </label>
-                                    <label class="form-check-box mb-0" style="margin-top: 1px;" for="Lift1">For Youself</label>
+                                   
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                             </div>
@@ -179,13 +180,14 @@
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-inputs ">
-                                    <label class="container" style="margin-top: 36px;">
+                                <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Do you have lift</label>
+                                    <label class="container" style="margin-top: 10px; margin-left:-30px">
                                         <input type="hidden" value="0" name="source[meta][lift]" id="letter">
                                         <input type="checkbox" name="select_letter" value="1" id="Lift1"
                                                onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
-                                        <span class="checkmark"></span>
+                                        <!-- <span class="checkmark"></span> -->
                                     </label>
-                                    <label class="form-check-box mb-0" style="margin-top: 1px;" for="Lift1">Do you have lift</label>
+                                   
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -256,13 +258,14 @@
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-inputs">
-                                  <label class="container " style="margin-top: 36px;">
+                                <label class="form-check-box"   style="margin-top: 10px; margin-left:8px" for="Lift2">Do you have lift</label>
+                                  <label class="container " style="margin-top: 10px; margin-left:-30px">
                                       <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
                                       <input type="checkbox" name="select_letter" value="1" id="Lift2"
                                              onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
-                                    <span class="checkmark"></span>
+                                    <!-- <span class="checkmark"></span> -->
                                   </label>
-                                  <label class="form-check-box"   style="margin-top: 1px;" for="Lift2">Do you have lift</label>
+                                
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -283,14 +286,15 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="form-inputs">
-                                <label class="container"  style="margin-top: 36px;">
+                            <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Need dedicated movement</label>
+                                <label class="container"  style="margin-top: 10px; margin-left:-30px">
                                     <input type="hidden" value="0" name="source[meta][shared_service]" id="m_type">
                                     <input type="checkbox" name="select_letter" value="1" id="movemnt"
                                            onchange="document.getElementById('m_type').value = this.checked ? true : false">
-                                    <span class="checkmark"></span>
-                                  <span class="checkmark"></span>
+                                    <!-- <span class="checkmark"></span> -->
+                                  <!-- <span class="checkmark"></span> -->
                                 </label>
-                                <label class="form-check-box" for="need1"  style="margin-top: 1px;">Need dedicated movement</label>
+                              
                                 <span class="error-message">Please enter valid</span>
                             </div>
                           </div>

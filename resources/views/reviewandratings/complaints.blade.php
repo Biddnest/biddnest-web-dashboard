@@ -123,7 +123,7 @@
                                 <th scope="col" style="width: 15%;">Created By</th>
                                 <th scope="col" style="width: 20%;">Created At</th>
                                 <th scope="col" style="width: 10%;">Status</th>
-                                <th scope="col" style="width: 5%;">Operations</th>
+                                <th scope="col" style="width: 10%;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-13">
@@ -165,8 +165,10 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                        <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
+                        <a  class = "inline-icon-button" href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a href="#" class = "inline-icon-button">
+                                        <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

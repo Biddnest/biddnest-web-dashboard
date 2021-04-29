@@ -45,13 +45,10 @@
                             <input type="password" name="password" placeholder="Password" required class="form-control" >
                             <span class="error-message">Please enter the correct password</span>
                         </span>
-
                         </div>
-
 
                         <!-- <a type="submit" href="{{ route('dashboard') }}" class="btn btn-block">Login</a> -->
                         <button type="submit" class="btn btn-block">Login</button>
-
                         <div class="text-center">
                         <a class="link-regular" href="{{ route('forgotpassword') }}">Forgot Password?</a>
                         </div>

@@ -1,5 +1,6 @@
-        <meta charset="utf-8">
         <title>@yield('title')</title>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('static/images/favicon.svg')}}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -55,7 +56,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('static/css/jquery.tagsinput.min.css')}}" />
 
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <link rel="icon" type="image/svg+xml" href="{{ asset('static/images/favicon.svg')}}">
+{{--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/skins/content/default/content.min.css" integrity="sha512-KYlPDsJE6wqDev6smrRzaH8VwjoFV9Xj4VzyoUok3vzkVZe0g32WFiVawEiAD77EI2tSoruKNJCedUSCrk5E/Q==" crossorigin="anonymous" />--}}
 
     <style>
             .nav-collapse .li{
@@ -652,6 +653,7 @@
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%,-40%) !important;
+
             }
             /*table .inline-icon-button{
                 display: inline !important;
@@ -661,12 +663,12 @@
 
             .inline-icon-button{
                 cursor: pointer;
-                margin: 5px;
+                margin: 10px;
                 height: 30px;
                 width: 30px;
                 position: relative;
                 /*padding: 10px 10px;*/
-                display: inline-block;
+                display: table-cell;
                 border-radius: 50%;
                 background: #f2f2f2;
             }

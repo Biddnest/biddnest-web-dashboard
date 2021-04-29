@@ -16,16 +16,15 @@ export function redirectTo(url){
 
 export function redirectHard(url){
     Logger.info("redirect-hard");
-
     location.assign(url);
 };
 
 export function tinyAlert(title, message){
-    toastr.error(message, title, {timeOut: 5000})
+    toastr.error(message, title, {timeOut: 5000});
 }
 
 export function tinySuccessAlert(title, message){
-    toastr.success(message, title, {timeOut: 5000})
+    toastr.success(message, title, {timeOut: 5000});
 }
 
 export function megaAlert(title, message){

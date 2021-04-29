@@ -27,7 +27,7 @@
                                 <input type="hidden" name="bearer" value="{{$admin->id}}" required class="form-control">
                                 <div class="form-input">
                                    <label>New Password</label>
-                                    <input type="password" name="password" placeholder="New Password" tabindex="10" required class="form-control">
+                                    <input type="password" name="password" placeholder="New Password" tabindex="10" required class="form-control" id="password">
                                     <span class="error-message">Please enter the correct password</span>
                                 </div>
                                 <div class="form-input isinvalid">

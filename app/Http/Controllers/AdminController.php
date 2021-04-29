@@ -8,6 +8,8 @@ use App\Models\AdminZone;
 use App\Models\Zone;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Illuminate\Encryption\Encrypter;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
@@ -100,7 +102,10 @@ class AdminController extends Controller
         if(!$admin_user){
             return Helper::response(false,"user not found");
         }
-        return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified") : Helper::response(false, "otp is incorrect", ["otp"=>$admin_user]);
+
+        $admin_user->id = Crypt::encryptString($admin_user->id);
+
+        return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified", ["otp"=>$admin_user]) : Helper::response(false, "otp is incorrect");
     }
 
     /**

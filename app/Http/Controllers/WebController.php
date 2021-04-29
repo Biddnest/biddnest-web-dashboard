@@ -37,6 +37,8 @@ use App\Models\TicketReply;
 use App\Models\Vendor;
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Carbon\Carbon;
@@ -74,13 +76,13 @@ class WebController extends Controller
 
     public function resetPassword(Request $request)
     {
-        $admin=Admin::where('id', $request->id)->first();
+        $admin=Admin::where('id', Crypt::decryptString($request->id))->first();
         return view('login.reset_password', ['admin'=>$admin]);
     }
 
     public function Passwordreset(Request $request)
     {
-        $admin=Admin::where('id', $request->id)->first();
+        $admin=Admin::where('id', Session::get("id"))->first();
         return view('reset_password', ['admin'=>$admin]);
     }
 
@@ -122,9 +124,6 @@ class WebController extends Controller
                                        ->sum("final_quote");
         }
 
-
-
-//      return $this_week;
         $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(3)->get();
         return view('index', ['count_orders'=>$count_orders,
             'count_vendors'=>$count_vendors,
@@ -142,8 +141,9 @@ class WebController extends Controller
                     "dates"=>$this_week,
                      "sales"=>$last_week_sale
                 ],
-                    ]
-            ]
+                    ],
+                "order_distribution"=>Booking::select('status', DB::raw("count(*) AS count"))->groupBy('status')->get()
+            ],
         ]);
     }
 

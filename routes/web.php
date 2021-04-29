@@ -162,7 +162,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("verifyotp");
             Route::get('/reset-password/{id}',[WebController::class,'resetPassword'])->name("reset-passwords");
         });
-            Route::get('/reset-password/{id}',[WebController::class,'Passwordreset'])->name("password-reset");
+            Route::get('/reset-password',[WebController::class,'Passwordreset'])->name("password-reset");
             Route::get("/logout", [WebController::class, 'logout'])->name('logout');
             Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 

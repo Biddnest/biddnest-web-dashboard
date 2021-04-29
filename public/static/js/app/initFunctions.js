@@ -253,9 +253,14 @@ export function initSlick(){
 }
 
 export function initTextAreaEditor(){
-    $("textarea").addClass('editor');
-    if($('.editor').length) {
-        var editor = new FroalaEditor('.editor');
+    // $("textarea").addClass('editor');
+    if($('textarea').length) {
+        // var editor = new FroalaEditor('.editor');
+
+        $('textarea').not(".select2-search__field").tinymce({
+            height: 300
+        });
+
     }
 
 }
@@ -327,6 +332,93 @@ export function initRevenueChart(){
             }
         });
         // return false;
+    }
+}
+
+
+export function initOrderDistributionChart(){
+    // console.log("icam called");
+    if($("#my-legend-con").length){
+        Chart.pluginService.register({
+            beforeDraw: function (chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+                ctx.restore();
+                var fontSize = (height / 114).toFixed(2);
+                ctx.font = fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                var text = chart.config.options.elements.center?.text || '',
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+                ctx.fillText(text, textX, textY);
+                ctx.save();
+            }
+        });
+        var chartData = JSON.parse($("#order_dist_dataset").val());
+        var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
+        var textInside = sum.toString();
+        var myChart = new Chart(document.getElementById('mychart'), {
+            type: 'doughnut',
+            animation:{
+                animateScale:true
+            },
+            data: {
+                labels: chartData.map((item) => item.label ),
+                datasets: [{
+
+                    label: 'Visitor',
+                    data: chartData.map((item) => item.value ),
+                    backgroundColor: [
+                        "#f8c446",
+                        "#fbd64e",
+                        "#fcdf75",
+                        "#fdeaa7",
+                        "#fef6d9",
+                    ]
+                }]
+            },
+            options: {
+                cutoutPercentage: 75,
+
+                elements: {
+                    center: {
+                        text: textInside
+                    }
+                },
+                responsive: true,
+                legend: false,
+                legendCallback: function(chart) {
+
+                    var legendHtml = [];
+                    legendHtml.push('<ul>');
+                    var item = chart.data.datasets[0];
+                    for (var i=0; i < item.data.length; i++) {
+
+                        legendHtml.push('<li>');
+                        legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
+                        legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
+                        legendHtml.push('</li>');
+                    }
+
+                    legendHtml.push('</ul>');
+                    return legendHtml.join("");
+
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'label',
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var indice = tooltipItem.index;
+                            return  data.labels[indice] ;
+                        }
+                    }
+                },
+            }
+        });
+
+        $('#my-legend-con').html(myChart.generateLegend());
     }
 }
 

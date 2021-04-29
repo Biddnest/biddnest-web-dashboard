@@ -51,12 +51,6 @@ if (env != "development")
 
 /* AJAX Universal */
 $("body").on('submit', "form", function() {
-    // Logger.info("form called");
-    // console.log();
-    // var valid = $(this).parsley().validate();
-
-
-    if (true) {
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
@@ -126,20 +120,21 @@ $("body").on('submit', "form", function() {
                     else
                         megaAlert("Oops", response.message);
 
+                    revertFormAnim(button, buttonPretext);
                 } else {
                     Logger.info(response.message);
+                    revertFormAnim(button, buttonPretext);
                 }
             },
             error: (error, b, c) => {
                 Logger.info(error.responseText);
                 megaAlert("Oops", "Something went wrong in server. Please try again later.");
+                revertFormAnim(button, buttonPretext);
             },
         });
-        revertFormAnim(button, buttonPretext);
+
         return false;
-    } else {
-        //Do something here
-    }
+
 });
 
 $("body").on('click', ".file-upload button", function() {

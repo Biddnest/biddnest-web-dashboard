@@ -5,6 +5,81 @@
  <!-- Main Content -->
  <div class="main-content grey-bg" data-barba="container" data-barba-namespace="dashboard">
      <input type="hidden" value='@json($graph)' id="revenue_dataset">
+
+
+         @php $dataset = []; $final = []; @endphp
+         @foreach($graph['order_distribution'] as $od)
+         @switch($od['status'])
+         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+         @php
+             $dataset['label'] = "Enquiry";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break
+
+         {{--@case(\App\Enums\BookingEnums::$STATUS['placed'])
+         @php
+             $dataset['label'] = "Placed";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break--}}
+
+         @case(\App\Enums\BookingEnums::$STATUS['biding'])
+         @php
+             $dataset['label'] = "Biding";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break
+
+         {{--@case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+         @php
+             $dataset['label'] = "Rebiding";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break--}}
+
+         {{--@case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+         @php
+             $dataset['label'] = "Payment Pending";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break--}}
+
+         @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+         @php
+             $dataset['label'] = "Awaiting Pickup";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break
+
+         {{--@case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+         @php
+             $dataset['label'] = "In Transit";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break--}}
+
+         @case(\App\Enums\BookingEnums::$STATUS['completed'])
+         @php
+             $dataset['label'] = "Completed";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break
+
+         @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+         @php
+             $dataset['label'] = "Cancelled";
+             $dataset['value'] = $od['count'];
+         @endphp
+         @break
+         @endswitch
+         @if(count($dataset)>0) @php array_push($final, $dataset); $dataset = []; @endphp @endif
+
+         @endforeach
+
+     <input type="hidden" value='@json($final)' id="order_dist_dataset">
+
+
     <h3 class="page-head text-left p-4 f-20">Dashboard
         <i class="icon dripiconmeter"></i>
     </h3>
@@ -160,7 +235,7 @@
                     <h3 class="f-18 mt-0">Live Orders Distribution</h3>
                 </div>
                 <div class="canvas-con">
-                    <div class="total-user">Orders</div>
+{{--                    <div class="total-user">Orders</div>--}}
                         <div class="canvas-con-inner">
                             <canvas id="mychart" height="150px" width="150px" ></canvas>
                         </div>
@@ -174,22 +249,7 @@
                 <div class="d-flex  card ">
                     <div class="p-10 d-flex justify-content-between ">
                         <h3 class="f-18 mt-0">Revenue Trend</h3>
-                        <div class="d-flex ">
-                            <div class="d-felx flex-column ml-20">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle btn-dropdown mr-0 ml-10 Weekly"
-                                                    type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    Weekly
-                                    </button>
-                                    <div class="dropdown-menu bx-rev" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Monthly</a>
-                                        <a class="dropdown-item" href="#">Daily</a>
-                                        <a class="dropdown-item" href="#">Weekly</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="revenue-chart">
                         <canvas id="myRevenueChart" height="230px" width="700px"></canvas>

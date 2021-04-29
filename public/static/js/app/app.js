@@ -102,6 +102,12 @@ $("body").on('submit', "form", function() {
                                 redirectTo(url);
                                 return false;
                             }
+                            if (form.hasClass("order_create")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.booking.id);
+                                redirectTo(url);
+                                return false;
+                            }
                             if (form.data('redirect-type') == "hard")
                                 redirectHard(form.data("url")); // data-url="google.com"
                             else
@@ -231,6 +237,22 @@ $("body").on('change', ".category-select", function(event) {
     materal.map((value)=>{
         $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
     });
+
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
+        $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
+        $(this).closest(".d-flex").find(".irs").addClass("hidden");
+        $(this).closest(".d-flex").find(".range").addClass("hidden");
+        $(this).closest(".d-flex").find(".fixed").attr("required", "required");
+    }
+    if(type == 1)
+    {
+        $(this).closest(".d-flex").find(".fixed").addClass("hidden");
+        $(this).closest(".d-flex").find(".irs").removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").attr("required", "required");
+    }
     return false;
 });
 
@@ -324,39 +346,35 @@ $("body").on('click', ".cancel", function(event) {
 });
 
 $("body").on('change', ".change_status", function(event) {
-
-        var target =  $(this).closest($(this).data("parent"));
-        $.update($(this).data("url"), {}, function (response){
+    var target = $(this).closest($(this).data("parent"));
+    if(confirm('Are you sure want to change status?')) {
+        $.update($(this).data("url"), {}, function (response) {
             console.log(response);
-            if(response.status == "success")
-            {
+            if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
                 target.hide();
-            }
-            else
-            {
+            } else {
                 tinyAlert("Failed", response.message);
             }
 
         });
+    }
     return false;
 });
 
 $("body").on('change', ".reply_status", function(event) {
-
     var data = $(this).val();
-    $.update($(this).data("url"), {data}, function (response){
-        console.log(response);
-        if(response.status == "success")
-        {
-            tinySuccessAlert("Status changed Successfully", response.message);
-        }
-        else
-        {
-            tinyAlert("Failed", response.message);
-        }
+    if(confirm('Are you sure want to change status?')) {
+        $.update($(this).data("url"), {data}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Status changed Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
 
-    });
+        });
+    }
     return false;
 });
 
@@ -380,17 +398,28 @@ console.log($(this).val());
     }
 });
 
-function otp(){
-    $('#otp').keypress(function(e) {
-        var a = [];
-        var k = e.which;
+$(".custom_slider").ionRangeSlider({
+    type: $(this).data("type"),
+    min: $(this).data("min"),
+    max: $(this).data("max"),
+    from: $(this).data("from"),
+    to: $(this).data("to"),
+    skin: "round",
+    step: $(this).data("step"),
+    keyboard: true,
+    hide_min_max: true,
 
-        for (i = 48; i < 58; i++)
-            a.push(i);
+});
 
-        if (!(a.indexOf(k)>=0))
-            e.preventDefault();
-    });
-}
+var slider = $(".custom_slider_1").data("ionRangeSlider");
+slider.update({
+    min: 0,
+    max: 1000,
+    from: 0,
+    to: 1000,
+    prettify_enabled: true,
+    prettify_separator: ","
+    // etc.
+});
 
 

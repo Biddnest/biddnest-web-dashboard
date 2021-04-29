@@ -50,9 +50,9 @@ class BookingsController extends Controller
 
             $user_id = $newuser->id;
         }
-         $movement_dates = explode(",", $request->movement_dates);
+        $movement_dates = explode(",",$request->movement_dates);
 
-        self::createEnquiry($request->all(), $user_id, $movement_dates);
+        return self::createEnquiry($request->all(), $user_id, $movement_dates);
 
     }
 

@@ -33,7 +33,7 @@
           <!-- date-time picker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
         <!-- Custom css -->
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
         <!-- <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" /> -->
         <link rel="stylesheet" href="{{ asset('static/css/components/select2.css')}}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
@@ -824,6 +824,24 @@
                 margin-left: -10px !important;
             }
 
+            .irs--round .irs-handle {
+                top: 31px !important;
+                width: 12px !important;
+                height: 12px !important;
+                border: none !important;
+                cursor: pointer;
+            }
 
+            .irs--round .irs-bar {
+                background-color: #2e0789 !important;
+            }
+
+            .irs--round .irs-from, .irs--round .irs-to, .irs--round .irs-single {
+                background-color: #2e0789 !important;
+            }
+
+            .irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before {
+                border-top-color: #2e0789 !important;
+            }
     </style>
 

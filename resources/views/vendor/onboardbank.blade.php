@@ -134,9 +134,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload">
-                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg">
                                             <input type="hidden" class="base-holder" name="doc[pan_card]" value="{{$bank->pan_card ?? ''}}" required />
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->pan_card) CHANGE @else UPLOAD FILE @endif</button>
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" required/>
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>

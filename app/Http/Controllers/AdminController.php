@@ -61,7 +61,7 @@ class AdminController extends Controller
             }
             Session::put('admin_zones', $zones);
 
-           return Helper::response(true, "Login was successfull");
+           return Helper::response(true, "Login was successfully");
         }
         else{
             return Helper::response(false, "password is incorrect");

@@ -368,4 +368,16 @@ console.log($(this).val());
     }
 });
 
+function checkPasswordMatch() {
+    var password = $("#password").val();
+    var confirmPassword = $("#confirm_password").val();
+    if (password != confirmPassword)
+        $("#CheckPasswordMatch").html("Passwords does not match!");
+    else
+        $("#CheckPasswordMatch").html("Passwords match.");
+}
+$(document).ready(function () {
+    $("#confirm_password").keyup(checkPasswordMatch);
+});
+
 

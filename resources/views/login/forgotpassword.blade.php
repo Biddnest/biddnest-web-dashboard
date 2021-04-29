@@ -1,6 +1,6 @@
 
 @extends('login_layout.app')
-
+@section('title') Forgot Password @endsection
 @section('content')
 <main  data-barba="container" data-barba-namespace="forgotpassword">
 <div class="loader"></div>
@@ -13,12 +13,12 @@
             <!-- IMAGE CONTAINER END  login-graphics-->
 
             <!-- FORM CONTAINER BEGIN -->
-            <div class="col-lg-6 col-md-6">				
+            <div class="col-lg-6 col-md-6">
                 <div class="d-flex flex-column justify-content-center h-100 login-wrapper">
                     <!-- Company Logo -->
                     <div class="brand-wrapper text-center mb-3 mt-1">
                         <div class="brand-logo">
-                    
+
                             <img class="logo" src="{{ asset('static/images/violet_logo.png') }}"  width="50%"/>
                         </div>
                         <hr class="logo-seprator">
@@ -35,16 +35,16 @@
                             <input type="phone" name="" placeholder="" tabindex="10" required class="form-control">
                             <span class="error-message">Please enter valid Phone</span>
                         </span>
-                            
+
                         </div>
                         <a  class="btn  btn-block" href="{{ route('verifyotp') }}">SEND OTP</a>
                     </form>
-                </div>					
+                </div>
             </div>
             <!-- FORM CONTAINER END -->
         </div>
     </div>
- 
+
 </main>
 
 @endsection

@@ -159,15 +159,15 @@ Route::prefix('admin')->group(function () {
             Route::get('/login',[WebController::class,'login'])->name("login");
             Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");
             Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("verifyotp");
-
+            Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-passwords");
         });
-        Route::get('/reset-password',[WebController::class,'resetPassword'])->name("reset-passwords");
+            Route::get('/reset-password/{id}',[WebController::class,'Passwordreset'])->name("password-reset");
             Route::get("/logout", [WebController::class, 'logout'])->name('logout');
             Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 
     Route::middleware("checkSession")->group(function(){
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
-
+        Route::get('/my-profile/{id}',[WebController::class,'details_user'])->name('my-profile');
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
 
         Route::get('/pages',[WebController::class,'pages'])->name("pages");

@@ -71,12 +71,15 @@ barba.init({
 
 barba.hooks.before((data) => {
     NProgress.inc();
+    $(".main-content").css("opacity", 0.5);
   });
 
 barba.hooks.after((data) => {
     NProgress.done();
             window.scrollTo(0, 0);
             changeMenu();
+
+    $(".main-content").css("opacity", 1);
 
     initAllSelectBoxes();
     initCountdown();

@@ -36,6 +36,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
+import { initRangeSlider } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -186,6 +187,21 @@ $("body").on('change', ".field-toggle", function(event) {
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
     $(".hide-on-data").fadeOut(100);
+    initRangeSlider();
+    var id=$(".category-select").val();
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
+        $(".fixed").removeClass("hidden");
+        $(".range").parent().addClass("hidden");
+        $(".fixed").attr("required", "required");
+    }
+    if(type == 1)
+    {
+        $(".fixed").addClass("hidden");
+        $(".range").parent().removeClass("hidden");
+        $(".range").attr("required", "required");
+    }
 });
 
 $("body").on('click', ".closer", function(event) {
@@ -242,15 +258,13 @@ $("body").on('change', ".category-select", function(event) {
     if(type == 0)
     {
         $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
-        $(this).closest(".d-flex").find(".irs").addClass("hidden");
-        $(this).closest(".d-flex").find(".range").addClass("hidden");
+        $(this).closest(".d-flex").find(".range").parent().addClass("hidden");
         $(this).closest(".d-flex").find(".fixed").attr("required", "required");
     }
     if(type == 1)
     {
         $(this).closest(".d-flex").find(".fixed").addClass("hidden");
-        $(this).closest(".d-flex").find(".irs").removeClass("hidden");
-        $(this).closest(".d-flex").find(".range").removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").parent().removeClass("hidden");
         $(this).closest(".d-flex").find(".range").attr("required", "required");
     }
     return false;
@@ -398,28 +412,8 @@ console.log($(this).val());
     }
 });
 
-$(".custom_slider").ionRangeSlider({
-    type: $(this).data("type"),
-    min: $(this).data("min"),
-    max: $(this).data("max"),
-    from: $(this).data("from"),
-    to: $(this).data("to"),
-    skin: "round",
-    step: $(this).data("step"),
-    keyboard: true,
-    hide_min_max: true,
 
-});
 
-var slider = $(".custom_slider_1").data("ionRangeSlider");
-slider.update({
-    min: 0,
-    max: 1000,
-    from: 0,
-    to: 1000,
-    prettify_enabled: true,
-    prettify_separator: ","
-    // etc.
-});
+
 
 

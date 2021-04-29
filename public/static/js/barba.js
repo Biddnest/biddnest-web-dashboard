@@ -31,7 +31,16 @@ function changeMenu(){
     });
 }
 
-import {initCountdown, initMapPicker, initAllSelectBoxes, initSlick, initTextAreaEditor,initDatePicker, initRevenueChart} from './app/initFunctions.js';
+import {
+    initCountdown,
+    initMapPicker,
+    initAllSelectBoxes,
+    initSlick,
+    initTextAreaEditor,
+    initDatePicker,
+    initRevenueChart,
+    initToggles
+} from './app/initFunctions.js';
 barba.init({
     views: [{
         namespace: 'slider',
@@ -75,6 +84,7 @@ barba.hooks.after((data) => {
     initTextAreaEditor();
     initDatePicker();
     initSlick();
+    initToggles();
     //keep charts at end
     initRevenueChart();
             // return false;
@@ -89,6 +99,7 @@ $(document).ready(function(){
     initTextAreaEditor();
     initCountdown();
     initDatePicker();
+    initToggles();
     initRevenueChart();
 
 });

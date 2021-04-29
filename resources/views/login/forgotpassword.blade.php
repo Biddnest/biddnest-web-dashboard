@@ -22,12 +22,12 @@
                             <img class="logo" src="{{ asset('static/images/violet_logo.png') }}"  width="50%"/>
                         </div>
                         <hr class="logo-seprator">
-                        <div class="tagline text-center"> <span>Make your move simple</span></div>
+                        <div class="tagline text-center"> <span>Make your move simple!</span></div>
                     </div>
 
                     <h3 class="text-center">Forgot Password?</h3>
                 <!-- Form -->
-                    <form class="px-3 login">
+                    <form class="px-3 login" data-alert="inline" action="{{ route('admin_forgotpassword') }}" method="POST" onsubmit="return false;" data-next="refirect" {{--data-redirect-type="hard"--}} data-url="{{route('verifyotp')}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>Phone</label>

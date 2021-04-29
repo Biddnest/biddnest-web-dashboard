@@ -368,16 +368,17 @@ console.log($(this).val());
     }
 });
 
-function checkPasswordMatch() {
-    var password = $("#password").val();
-    var confirmPassword = $("#confirm_password").val();
-    if (password != confirmPassword)
-        $("#CheckPasswordMatch").html("Passwords does not match!");
-    else
-        $("#CheckPasswordMatch").html("Passwords match.");
+function otp(){
+    $('#otp').keypress(function(e) {
+        var a = [];
+        var k = e.which;
+
+        for (i = 48; i < 58; i++)
+            a.push(i);
+
+        if (!(a.indexOf(k)>=0))
+            e.preventDefault();
+    });
 }
-$(document).ready(function () {
-    $("#confirm_password").keyup(checkPasswordMatch);
-});
 
 

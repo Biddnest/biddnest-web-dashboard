@@ -115,6 +115,18 @@ class AdminController extends Controller
         return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
     }
 
+    public static function OldResetPassword($old_password, $password, $bearer)
+    {
+        $exist =Admin::where('id',$bearer)->first();
+        if(password_verify($old_password, $exist->password)) {
+            $hash = password_hash($password, PASSWORD_BCRYPT);
+            $update_password = DB::table('admins')->where('id', $bearer)->update(['password' => $hash]);
+            return !$update_password ? Helper::response(false, "Reset password failed") : Helper::response(true, "Password reset successfully");
+        }
+        else
+            return Helper::response(false, "Old Password Does not match!");
+    }
+
     public static function kycList()
     {
         $result=DB::table('org_kycs')->select('*')->where(['status'=> 1, 'deleted'=>0])->get();

@@ -26,18 +26,22 @@
                             Reset Password
                         </h3>
                     </div>
-                    <form action="{{route('reset_password')}}" method=PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('dashboard')}}" data-alert="tiny"
-                          class="form-new-order" id="myForm" data-parsley-validate style="width: 50%; align-self: center;">
+                    <form action="{{route('old_reset_password')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('login')}}" data-alert="tiny" class="form-new-order" id="myForm" autocomplete="off" data-parsley-validate style="width: 50%; align-self: center;">
                         <input type="hidden" value="{{$admin->id}}" name="bearer" required class="form-control">
                         <div class="form-input">
+                            <label>Old Password</label>
+                            <input type="password" id="old_password" name="old_password" placeholder="Old Password" tabindex="10" required class="form-control">
+                            <span class="error-message">Please enter the correct password</span>
+                        </div>
+                        <div class="form-input">
                             <label>New Password</label>
-                            <input type="password" name="password" placeholder="New Password" tabindex="10" required class="form-control">
+                            <input type="password" id="password" name="password" placeholder="New Password" tabindex="10" required class="form-control">
                             <span class="error-message">Please enter the correct password</span>
                         </div>
                         <div class="form-input isinvalid">
                             <label>Confirm New Password</label>
-                            <input type="password" name="" placeholder="Confirm Password" id="confirm_password" required class="form-control ">
-                            <div class="registrationFormAlert" style="color:green;" id="CheckPasswordMatch">
+                            <input type="password" name="password_confirmation" placeholder="Confirm Password" id="confirm_password" required class="form-control" data-parsley-equalto="#password" data-parsley-error-message="Password doesn't match!">
+
                         </div>
                         <a href="#" class="text-decoration-none"><button type="submit" class="btn  btn-block">Submit</button></a>
 

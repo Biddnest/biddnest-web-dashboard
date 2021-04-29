@@ -47,7 +47,7 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off" onsubmit="return false">
+                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate autocomplete="off" onsubmit="return false">
                       <div class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>

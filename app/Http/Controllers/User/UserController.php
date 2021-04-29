@@ -244,7 +244,7 @@ class UserController extends Controller
         $user->email=$email;
         $user->phone=$phone;
         $user->gender=$gender;
-        $user->avatar=Helper::saveFile($image_man->make($avatar)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","Customer");
+        $user->avatar=Helper::saveFile($image_man->make($avatar)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Customer");
         $user->dob=$dob;
         $save_result = $user->save();
 

@@ -813,6 +813,17 @@
                 color: #2E0789 !important;
                 text-decoration: none !important;
             }
+.Weekly{
+    display: none;
+}
+.fr-box.fr-basic .fr-element {
+
+    height: 105px;
+}
+.margin-left-10{
+    margin-left: -10px !important;
+}
+
 
     </style>
 

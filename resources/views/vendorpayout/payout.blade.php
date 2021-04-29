@@ -126,8 +126,11 @@
                                     <td class="">₹{{$payout->commission_percentage}}
                                     </td>
                                     <td>
-                                        <a href="{{route('edit-payout', ['id'=>$payout->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                        <a  class = "inline-icon-button" href="{{route('edit-payout', ['id'=>$payout->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                        <a href="#"  class = "inline-icon-button">
                                         <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
+                                        </a>
+                                       
                                     </td>
                                 </tr>
                             @endforeach

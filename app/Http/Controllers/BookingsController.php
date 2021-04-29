@@ -50,13 +50,13 @@ class BookingsController extends Controller
 
             $user_id = $newuser->id;
         }
-         $request->movement_dates = explode(",", $request->movement_dates);
+         $movement_dates = explode(",", $request->movement_dates);
 
-        self::createEnquiry($request->all(), $user_id);
+        self::createEnquiry($request->all(), $user_id, $movement_dates);
 
     }
 
-    public static function createEnquiry($data, $user_id)
+    public static function createEnquiry($data, $user_id, $movement_dates)
     {
         if (App::environment('production')) {
             $exsist = Booking::where(["user_id" => $user_id,
@@ -172,7 +172,7 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
-        foreach (explode(",", $data["movement_dates"])) as $dates) {
+        foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
             $movementdates->date = $dates;

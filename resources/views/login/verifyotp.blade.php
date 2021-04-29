@@ -35,7 +35,7 @@
                         <div class="form-input">
                         <label>Phone</label>
                         <span>
-                            <input type="phone" name="" placeholder="" tabindex="10" required class="form-control">
+                            <input type="phone" name="" placeholder="Enter Registered mobile no" maxlength="6" minlength="6" tabindex="10" required class="form-control">
                         </span>
 
                             <span class="error-message">Please enter valid Phone</span>

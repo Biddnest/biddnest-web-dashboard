@@ -31,7 +31,16 @@ function changeMenu(){
     });
 }
 
-import {initCountdown, initMapPicker, initAllSelectBoxes, initSlick, initTextAreaEditor,initDatePicker, initRevenueChart} from './app/initFunctions.js';
+import {
+    initCountdown,
+    initMapPicker,
+    initAllSelectBoxes,
+    initSlick,
+    initTextAreaEditor,
+    initDatePicker,
+    initRevenueChart,
+    initToggles
+} from './app/initFunctions.js';
 barba.init({
     views: [{
         namespace: 'slider',
@@ -54,12 +63,6 @@ barba.init({
             initCountdown();
         }
       },
-        /*{
-            namespace: 'createorders',
-            afterEnter(data) {
-                console.log("you are on create order page");
-            }
-        }*/
     ]
 });
 
@@ -80,6 +83,8 @@ barba.hooks.after((data) => {
 
     initTextAreaEditor();
     initDatePicker();
+    initSlick();
+    initToggles();
     //keep charts at end
     initRevenueChart();
             // return false;
@@ -94,6 +99,7 @@ $(document).ready(function(){
     initTextAreaEditor();
     initCountdown();
     initDatePicker();
+    initToggles();
     initRevenueChart();
 
 });

@@ -770,6 +770,46 @@
                 font-weight: revert;
                 font-size: 16px;
             }
+            label.custom-check {
+                cursor: pointer;
+                text-indent: -9999px;
+                width: 60px;
+                height: 30px;
+                background: grey;
+                display: block;
+                border-radius: 15px;
+                position: relative;
+            }
 
-        </style>
+            label.custom-check:after {
+                content: '';
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: 24px;
+                height: 24px;
+                background: #fff;
+                border-radius: 90px;
+                transition: 0.3s;
+            }
+
+            input[type=checkbox]{
+                display: none;
+            }
+            input[type=checkbox]:checked + label.custom-check {
+                background: #bada55;
+            }
+
+            input[type=checkbox]:checked + label.custom-check:after {
+                left: calc(100% - 5px);
+                transform: translateX(-100%);
+            }
+
+            label.custom-check:active:after {
+                /*width: 50px;*/
+            }
+
+
+
+    </style>
 

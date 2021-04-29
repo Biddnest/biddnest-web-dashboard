@@ -253,6 +253,7 @@ export function initSlick(){
 }
 
 export function initTextAreaEditor(){
+    $("textarea").addClass('editor');
     if($('.editor').length) {
         var editor = new FroalaEditor('.editor');
     }
@@ -261,14 +262,14 @@ export function initTextAreaEditor(){
 
 /*Charts*/
 export function initRevenueChart(){
-    if($("#myRevenueChart").length && typeof REVENUE_DATASET !== undefined){
+    if($("#revenue_dataset").length){
         // var dataset = $("#revenue-chart-data").html();
         // console.log(dataset);
-
+var dataset = $("#revenue_dataset").text();
         var ctx = document.getElementById("myRevenueChart")
         var myChart = new Chart(ctx, {
             type: 'line',
-            data: REVENUE_DATASET,
+            data: JSON.parse(dataset),
             options: {
                 scales: {
                     yAxes: [{
@@ -308,3 +309,12 @@ export function initDatePicker(){
     }
 }
 
+export function initToggles(){
+    Logger.info("init toggles");
+    $("input[type=checkbox]").each(function(index){
+        Logger.info("init "+index);
+
+        $(this).attr("id", "checkbox_"+index);
+        $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
+    })
+}

@@ -172,7 +172,7 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
-        foreach ($data["movement_dates"] as $dates) {
+        foreach (explode(",", $data["movement_dates"])) as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
             $movementdates->date = $dates;

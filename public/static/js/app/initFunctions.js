@@ -262,14 +262,58 @@ export function initTextAreaEditor(){
 
 /*Charts*/
 export function initRevenueChart(){
+    // console.log("icam called");
     if($("#revenue_dataset").length){
-        // var dataset = $("#revenue-chart-data").html();
-        // console.log(dataset);
-var dataset = $("#revenue_dataset").text();
-        var ctx = document.getElementById("myRevenueChart")
-        var myChart = new Chart(ctx, {
+        var dataset = JSON.parse($("#revenue_dataset").val());
+
+        var myChart = new Chart(document.getElementById("myRevenueChart"), {
             type: 'line',
-            data: JSON.parse(dataset),
+            data: {
+                labels: dataset.revenue.this_week.dates,
+                datasets: [{
+                    label: 'Last Week',
+                    data: dataset.revenue.last_week.sales,
+
+                    backgroundColor: [
+                        'rgba(231,230,241,0.7)',
+
+                    ],
+                    borderColor: [
+                        'rgba(45,43,135,1)',
+                        'rgba(45,43,135,1)',
+                        'rgba(45,43,135,1)',
+                        'rgba(45,43,135,1)',
+                        'rgba(45,43,135,1)',
+                        'rgba(45,43,135,1)',
+                        'rgba(45,43,135,1)',
+
+
+                    ],
+                    borderWidth: 1
+                },
+                    {
+                        label: 'This Week',
+                        data: dataset.revenue.this_week.sales,
+                        borderDash: [10,5],
+
+                        backgroundColor: [
+                            'rgba(255,252,242,0.7)',
+
+                        ],
+                        borderColor: [
+                            'rgba(248,204,72,1)',
+                            'rgba(248,204,72,1)',
+                            'rgba(248,204,72,1)',
+                            'rgba(248,204,72,1)',
+                            'rgba(248,204,72,1)',
+                            'rgba(248,204,72,1)',
+
+
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            },
             options: {
                 scales: {
                     yAxes: [{
@@ -282,8 +326,8 @@ var dataset = $("#revenue_dataset").text();
                 maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
             }
         });
+        // return false;
     }
-
 }
 
 export function initCountdown(){

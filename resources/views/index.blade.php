@@ -4,6 +4,7 @@
 
  <!-- Main Content -->
  <div class="main-content grey-bg" data-barba="container" data-barba-namespace="dashboard">
+     <input type="hidden" value='@json($graph)' id="revenue_dataset">
     <h3 class="page-head text-left p-4 f-20">Dashboard
         <i class="icon dripiconmeter"></i>
     </h3>
@@ -205,56 +206,6 @@
             </div>
         </div>
     </div>
+
 </div>
-<script type="text/json" id="revenue_dataset">
-    {{--{
-        labels: ["21 Dec", "22 Dec", "23 Dec", "24 Dec", "25 Dec", "26 Dec", "27 Dec"],
-        datasets: [{
-            label: 'Last Week',
-            data: [0, 1.5, 1, 0.5, 3, 2.5, 3.5],
-
-            backgroundColor: [
-                'rgba(231,230,241,0.7)',
-
-            ],
-            borderColor: [
-                'rgba(45,43,135,1)',
-                'rgba(45,43,135,1)',
-                'rgba(45,43,135,1)',
-                'rgba(45,43,135,1)',
-                'rgba(45,43,135,1)',
-                'rgba(45,43,135,1)',
-                'rgba(45,43,135,1)',
-
-
-            ],
-            borderWidth: 1
-        },
-            {
-                label: 'This Week',
-                data: [0, 1.2, 0.4, 2.1, 1.3, 2.3, 0],
-                borderDash: [10,5],
-
-                backgroundColor: [
-                    'rgba(255,252,242,0.7)',
-
-                ],
-                borderColor: [
-                    'rgba(248,204,72,1)',
-                    'rgba(248,204,72,1)',
-                    'rgba(248,204,72,1)',
-                    'rgba(248,204,72,1)',
-                    'rgba(248,204,72,1)',
-                    'rgba(248,204,72,1)',
-
-
-                ],
-                borderWidth: 1
-            }
-        ]
-    }--}}
-</script>
-
-
-
 @endsection

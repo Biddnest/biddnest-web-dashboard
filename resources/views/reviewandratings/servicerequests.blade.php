@@ -109,7 +109,7 @@
                                 <th scope="col" style="width: 15%;">Created By</th>
                                 <th scope="col" style="width: 20%;">Created At</th>
                                 <th scope="col" style="width: 10%;">Status</th>
-                                <th scope="col" style="width: 5%;">Operations</th>
+                                <th scope="col" style="width: 10%;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
@@ -151,8 +151,11 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a class = "inline-icon-button" href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a href="#" class = "inline-icon-button">
                                         <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
+                                        </a>
+                                      
                                     </td>
                                 </tr>
                             @endforeach

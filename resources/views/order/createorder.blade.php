@@ -10,7 +10,7 @@
     </div>
     <div class="d-flex  flex-row justify-content-between">
         <div class="page-head text-left p-4 pt-0 pb-0">
-            <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb " style="margin-left:-10px">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Create New Order</li>
@@ -47,7 +47,7 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                      <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off" onsubmit="return false">
+                      <form class="form-new-order order_create pt-4 mt-3 input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate autocomplete="off" onsubmit="return false">
                       <div class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>
@@ -77,12 +77,13 @@
 
                             <div class="col-sm-6">
                                 <div class="form-inputs ">
-                                    <label class="container" style="margin-top: 36px;">
+                                <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
+                                    <label class="container" style="margin-top: 10px;margin-left:-30px">
                                         <input type="hidden" value="0" name="meta[self_booking]" id="slef">
-                                        <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? 1 : 0">
-                                        <span class="checkmark"></span>
+                                        <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? true : false">
+                                        <!-- <span class="checkmark"></span> -->
                                     </label>
-                                    <label class="form-check-box mb-0" style="margin-top: 1px;" for="Lift1">For Youself</label>
+
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                             </div>
@@ -136,7 +137,7 @@
                           <div class="col-sm-6 mtop-22">
                             <!--Map -->
                             <!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="85%" height="350px" id="gmap_canvas" src="https://maps.google.com/maps?q=Benguluru%20indiranagar,svm%20complex&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://grantorrent-es.com">grantorrent</a><br><style>.mapouter{position:relative;text-align:left;height:250px;width:118%;}</style><a href="https://www.embedgooglemap.net">google map on your website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:131px;width:100%;}</style></div></div> -->
-                            <div style="width: 100%; height: 200px;" class="source-map-picker"></div>
+                            <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
                           </div>
                           <div class="col-sm-6">
                             <div class="d-flex  row justify-content-between">
@@ -179,13 +180,14 @@
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-inputs ">
-                                    <label class="container" style="margin-top: 36px;">
+                                <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Do you have lift</label>
+                                    <label class="container" style="margin-top: 10px; margin-left:-30px">
                                         <input type="hidden" value="0" name="source[meta][lift]" id="letter">
                                         <input type="checkbox" name="select_letter" value="1" id="Lift1"
                                                onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
-                                        <span class="checkmark"></span>
+                                        <!-- <span class="checkmark"></span> -->
                                     </label>
-                                    <label class="form-check-box mb-0" style="margin-top: 1px;" for="Lift1">Do you have lift</label>
+
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -213,7 +215,7 @@
                           <div class="col-sm-6 mtop-22">
                             <!--Map -->
                             <!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="85%" height="auto" id="gmap_canvas" src="https://maps.google.com/maps?q=Benguluru%20indiranagar,svm%20complex&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://grantorrent-es.com">grantorrent</a><br><style>.mapouter{position:relative;text-align:left;height:131px;width:118%;}</style><a href="https://www.embedgooglemap.net">google map on your website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:131px;width:100%;}</style></div></div> -->
-                              <div style="width: 100%; height: 200px;" class="dest-map-picker"></div>
+                              <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                           </div>
                           <div class="col-sm-6">
                             <div class="d-flex row justify-content-between">
@@ -256,13 +258,14 @@
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-inputs">
-                                  <label class="container " style="margin-top: 36px;">
+                                <label class="form-check-box"   style="margin-top: 10px; margin-left:8px" for="Lift2">Do you have lift</label>
+                                  <label class="container " style="margin-top: 10px; margin-left:-30px">
                                       <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
                                       <input type="checkbox" name="select_letter" value="1" id="Lift2"
                                              onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
-                                    <span class="checkmark"></span>
+                                    <!-- <span class="checkmark"></span> -->
                                   </label>
-                                  <label class="form-check-box"   style="margin-top: 1px;" for="Lift2">Do you have lift</label>
+
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -283,14 +286,15 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="form-inputs">
-                                <label class="container"  style="margin-top: 36px;">
+                            <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Need dedicated movement</label>
+                                <label class="container"  style="margin-top: 10px; margin-left:-30px">
                                     <input type="hidden" value="0" name="source[meta][shared_service]" id="m_type">
                                     <input type="checkbox" name="select_letter" value="1" id="movemnt"
                                            onchange="document.getElementById('m_type').value = this.checked ? true : false">
-                                    <span class="checkmark"></span>
-                                  <span class="checkmark"></span>
+                                    <!-- <span class="checkmark"></span> -->
+                                  <!-- <span class="checkmark"></span> -->
                                 </label>
-                                <label class="form-check-box" for="need1"  style="margin-top: 1px;">Need dedicated movement</label>
+
                                 <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -304,11 +308,11 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                             <label>Category</label>
-                                <select  id="" name="service_id" class="form-control category-select" required>
+                                <select  id="" name="service_id" class="form-control category-select" data-target=".range" required>
                                     <option value="">--select--</option>
                                  @foreach($categories as $category)
 
-                                        <option id="sub_{{$category->id}}" value="{{$category->id}}" data-subcategory='{{$category->subservices}}'>{{$category->name}}</option>
+                                        <option id="sub_{{$category->id}}" data-type="{{$category->inventory_quantity_type}}" value="{{$category->id}}" data-subcategory="{{$category->subservices}}">{{$category->name}}</option>
                                     @endforeach
                                   </select>
                               <span class="error-message">Please enter  valid</span>
@@ -338,7 +342,7 @@
                                   </tr>
                                 </thead>
                                 <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
-                                <tr class="inventory-snip">
+                                    <tr class="inventory-snip">
                                     <td scope="row" class="text-left">
                                         <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                                             <option value="">--Select--</option>
@@ -363,13 +367,17 @@
                                     </td>
 
                                     <td class="" style="width: 20%;">
-                                        <input class="form-control br-5" type="number" name="inventory_items[][quantity]" required>
+                                        <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
+                                        <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
+
                                     </td>
 
                                     <td>
                                         <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
                                     </td>
                                 </tr>
+
+
                                 </tbody>
                             </table>
                           </div>
@@ -422,7 +430,7 @@
 <script type="text/html" id="add-inventory-row">
     <tr class="inventory-snip">
         <th scope="row" class="text-left">
-            <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
+            <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                 <option value="">--Select--</option>
                 @foreach($inventories as $inventory)
                     <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -431,24 +439,27 @@
         </th>
 
         <td class="">
-            <select class="form-control br-5 material" name="inventory[][material]" required>
+            <select class="form-control br-5 material" name="inventory_items[][material]" required>
                 <option value="">--Choose Inventory First--</option>
             </select>
         </td>
 
         <td class="">
-            <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+            <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
                 <option value="">--Choose Inventory First--</option>
             </select>
         </td>
 
         <td class="" style="width: 20%;">
-            <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
+            <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" required>
+
+            <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
         </td>
 
         <td>
             <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
         </td>
     </tr>
+
 </script>
 @endsection

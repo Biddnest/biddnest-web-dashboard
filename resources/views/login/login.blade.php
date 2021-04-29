@@ -1,5 +1,5 @@
 @extends('login_layout.app')
-
+@section('title') Biddnest Amin Login @endsection
 @section('content')
 <main data-barba="container" data-barba-namespace="login">
     <div class="loader"></div>
@@ -21,7 +21,7 @@
                         <img class="logo" src="{{ asset('static/images/violet_logo.png') }}" width="50%" />
                     </div>
                     <hr class="logo-seprator">
-                <div class="tagline text-center"> <span>Make your move simple</span></div>
+                <div class="tagline text-center"> <span>Make your move simple!</span></div>
                     </div>
 
                     <h3 class="text-center">Login</h3>

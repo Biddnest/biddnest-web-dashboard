@@ -352,6 +352,22 @@ export function initDatePicker(){
         });
     }
 }
+export function initRangeSlider(){
+    if($(".custom_slider").length) {
+        $(".custom_slider").ionRangeSlider({
+            type: $(this).data("type"),
+            min: $(this).data("min"),
+            max: $(this).data("max"),
+            from: $(this).data("from"),
+            to: $(this).data("to"),
+            skin: "round",
+            step: $(this).data("step"),
+            keyboard: true,
+            hide_min_max: true,
+
+        });
+    }
+}
 
 export function initToggles(){
     Logger.info("init toggles");

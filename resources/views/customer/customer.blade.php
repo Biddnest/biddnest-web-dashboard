@@ -123,8 +123,10 @@
                                                 </td>
 
                                                 <td style="text-align: center;">
-                                                    <a href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                                    <a class ="inline-icon-button" href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                                    <a href="#" class ="inline-icon-button" >
                                                     <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                            @endforeach

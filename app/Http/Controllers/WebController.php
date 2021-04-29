@@ -72,9 +72,16 @@ class WebController extends Controller
         return view('login.verifyotp');
     }
 
-    public function resetPassword()
+    public function resetPassword(Request $request)
     {
-        return view('login.reset_password');
+        $admin=Admin::where('id', $request->id)->first();
+        return view('login.reset_password', ['admin'=>$admin]);
+    }
+
+    public function Passwordreset(Request $request)
+    {
+        $admin=Admin::where('id', $request->id)->first();
+        return view('reset_password', ['admin'=>$admin]);
     }
 
     //index.php

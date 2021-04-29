@@ -36,6 +36,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
+import { initRangeSlider } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -87,6 +88,24 @@ $("body").on('submit', "form", function() {
                             if (form.hasClass("onboard-vendor-form")) {
                                 var url = form.data('url');
                                 url = url.replace(':id', response.data.organization.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("user-form")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.admin.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("verify-otp-form")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.otp.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("order_create")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.booking.id);
                                 redirectTo(url);
                                 return false;
                             }
@@ -168,6 +187,21 @@ $("body").on('change', ".field-toggle", function(event) {
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
     $(".hide-on-data").fadeOut(100);
+    initRangeSlider();
+    var id=$(".category-select").val();
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
+        $(".fixed").removeClass("hidden");
+        $(".range").parent().addClass("hidden");
+        $(".fixed").attr("required", "required");
+    }
+    if(type == 1)
+    {
+        $(".fixed").addClass("hidden");
+        $(".range").parent().removeClass("hidden");
+        $(".range").attr("required", "required");
+    }
 });
 
 $("body").on('click', ".closer", function(event) {
@@ -219,6 +253,20 @@ $("body").on('change', ".category-select", function(event) {
     materal.map((value)=>{
         $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
     });
+
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
+        $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").parent().addClass("hidden");
+        $(this).closest(".d-flex").find(".fixed").attr("required", "required");
+    }
+    if(type == 1)
+    {
+        $(this).closest(".d-flex").find(".fixed").addClass("hidden");
+        $(this).closest(".d-flex").find(".range").parent().removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").attr("required", "required");
+    }
     return false;
 });
 
@@ -312,39 +360,35 @@ $("body").on('click', ".cancel", function(event) {
 });
 
 $("body").on('change', ".change_status", function(event) {
-
-        var target =  $(this).closest($(this).data("parent"));
-        $.update($(this).data("url"), {}, function (response){
+    var target = $(this).closest($(this).data("parent"));
+    if(confirm('Are you sure want to change status?')) {
+        $.update($(this).data("url"), {}, function (response) {
             console.log(response);
-            if(response.status == "success")
-            {
+            if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
                 target.hide();
-            }
-            else
-            {
+            } else {
                 tinyAlert("Failed", response.message);
             }
 
         });
+    }
     return false;
 });
 
 $("body").on('change', ".reply_status", function(event) {
-
     var data = $(this).val();
-    $.update($(this).data("url"), {data}, function (response){
-        console.log(response);
-        if(response.status == "success")
-        {
-            tinySuccessAlert("Status changed Successfully", response.message);
-        }
-        else
-        {
-            tinyAlert("Failed", response.message);
-        }
+    if(confirm('Are you sure want to change status?')) {
+        $.update($(this).data("url"), {data}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Status changed Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
 
-    });
+        });
+    }
     return false;
 });
 
@@ -367,5 +411,9 @@ console.log($(this).val());
         $($(this).data("target")).find(".form-control").removeAttr("required");
     }
 });
+
+
+
+
 
 

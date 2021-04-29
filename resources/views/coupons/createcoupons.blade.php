@@ -47,8 +47,21 @@
             </span>
          </div>
         </div>
-
         <div class="col-sm-6">
+          <div class="form-input">
+            <label class="email-label">Coupon Type</label>
+            <div>
+              <select class="form-control br-5" name="type"  required>
+                <option value="">--Select--</option>
+                  @foreach(\App\Enums\CouponEnums::$COUPON_TYPE as $key=>$type)
+                    <option value="{{$type}}" @if($coupons && ($coupons->coupon_type == $type)) selected @endif>{{ucfirst(trans($key))}}</option>
+                   @endforeach
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
             <div class="form-input">
               <label>Coupon Description</label>
               <span class="">
@@ -65,19 +78,7 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
-          <div class="form-input">
-            <label class="email-label">Coupon Type</label>
-            <div>
-              <select class="form-control br-5" name="type"  required>
-                <option value="">--Select--</option>
-                  @foreach(\App\Enums\CouponEnums::$COUPON_TYPE as $key=>$type)
-                    <option value="{{$type}}" @if($coupons && ($coupons->coupon_type == $type)) selected @endif>{{ucfirst(trans($key))}}</option>
-                   @endforeach
-              </select>
-            </div>
-          </div>
-        </div>
+        
 
         <div class="col-sm-6">
             <div class="form-input">

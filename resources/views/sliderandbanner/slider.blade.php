@@ -125,8 +125,8 @@
                                             {{ \Carbon\Carbon::parse($slider->created_at)->format("d M Y") }}
                                         </td>
                                         <td>
-                                            <a href="{{route('edit-slider', ['id'=>$slider->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                            <a href="#" class="delete" data-parent=".slider_{{$slider->id}}" data-confirm="Are you sure, you want delete this Slider permenently? You won't be able to undo this." data-url="{{route('sliders_delete',['id'=>$slider->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                            <a class="inline-icon-button" href="{{route('edit-slider', ['id'=>$slider->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                            <a href="#" class="delete inline-icon-button" data-parent=".slider_{{$slider->id}}" data-confirm="Are you sure, you want delete this Slider permenently? You won't be able to undo this." data-url="{{route('sliders_delete',['id'=>$slider->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

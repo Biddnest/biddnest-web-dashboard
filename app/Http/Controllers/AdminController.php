@@ -61,7 +61,7 @@ class AdminController extends Controller
             }
             Session::put('admin_zones', $zones);
 
-           return Helper::response(true, "Login was successfull");
+           return Helper::response(true, "Login was successfully");
         }
         else{
             return Helper::response(false, "password is incorrect");
@@ -96,11 +96,11 @@ class AdminController extends Controller
      */
     public static function verifyOtp($otp, $bearer)
     {
-        $admin_user=DB::table('admins')->where(['id'=> $bearer, 'forgot_pwd'=>1])->first();
+        $admin_user=DB::table('admins')->where(['phone'=> $bearer, 'forgot_pwd'=>1])->first();
         if(!$admin_user){
             return Helper::response(false,"user not found");
         }
-        return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified") : Helper::response(false, "otp is incorrect");
+        return $otp == $admin_user->otp ? Helper::response(true, "otp has been verified") : Helper::response(false, "otp is incorrect", ["otp"=>$admin_user]);
     }
 
     /**
@@ -113,6 +113,18 @@ class AdminController extends Controller
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $update_password=DB::table('admins')->where('id',$bearer)->update(['password' => $hash]);
         return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
+    }
+
+    public static function OldResetPassword($old_password, $password, $bearer)
+    {
+        $exist =Admin::where('id',$bearer)->first();
+        if(password_verify($old_password, $exist->password)) {
+            $hash = password_hash($password, PASSWORD_BCRYPT);
+            $update_password = DB::table('admins')->where('id', $bearer)->update(['password' => $hash]);
+            return !$update_password ? Helper::response(false, "Reset password failed") : Helper::response(true, "Password reset successfully");
+        }
+        else
+            return Helper::response(false, "Old Password Does not match!");
     }
 
     public static function kycList()

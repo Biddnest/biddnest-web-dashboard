@@ -38,6 +38,7 @@ import {
     initSlick,
     initTextAreaEditor,
     initDatePicker,
+    initRangeSlider,
     initRevenueChart,
     initToggles
 } from './app/initFunctions.js';
@@ -85,6 +86,7 @@ barba.hooks.after((data) => {
     initDatePicker();
     initSlick();
     initToggles();
+    initRangeSlider();
     //keep charts at end
     initRevenueChart();
             // return false;
@@ -100,6 +102,7 @@ $(document).ready(function(){
     initCountdown();
     initDatePicker();
     initToggles();
+    initRangeSlider();
     initRevenueChart();
 
 });

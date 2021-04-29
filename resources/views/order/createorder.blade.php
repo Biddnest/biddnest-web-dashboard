@@ -367,8 +367,8 @@
                                     </td>
 
                                     <td class="" style="width: 20%;">
-                                        <input class="form-control br-5 fixed hidden" type="number" name="inventory_items[][quantity]" >
-                                        <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" />
+                                        <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
+                                        <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
 
                                     </td>
 
@@ -451,8 +451,9 @@
         </td>
 
         <td class="" style="width: 20%;">
-            <input class="form-control br-5 fixed hidden" type="number" name="inventory_items[][quantity]" required>
-            <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" />
+            <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" required>
+
+            <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
         </td>
 
         <td>

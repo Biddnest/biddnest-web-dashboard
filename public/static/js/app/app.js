@@ -188,6 +188,20 @@ $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
     $(".hide-on-data").fadeOut(100);
     initRangeSlider();
+    var id=$(".category-select").val();
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
+        $(".fixed").removeClass("hidden");
+        $(".range").parent().addClass("hidden");
+        $(".fixed").attr("required", "required");
+    }
+    if(type == 1)
+    {
+        $(".fixed").addClass("hidden");
+        $(".range").parent().removeClass("hidden");
+        $(".range").attr("required", "required");
+    }
 });
 
 $("body").on('click', ".closer", function(event) {

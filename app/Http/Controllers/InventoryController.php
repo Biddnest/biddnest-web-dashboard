@@ -40,8 +40,8 @@ class InventoryController extends Controller
         $inventory->size=$size;
         $inventory->material=$material;
         $inventory->category=$category;
-        $inventory->image=Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 75),$image_name,"inventories");
-        $inventory->icon=Helper::saveFile($imageman->make($icon)->resize(100,100)->encode('png', 75),$icon_name,"inventories");
+        $inventory->image=Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 100),$image_name,"inventories");
+        $inventory->icon=Helper::saveFile($imageman->make($icon)->resize(256,256)->encode('png', 100),$icon_name,"inventories");
         $result= $inventory->save();
 
         if(!$result)
@@ -63,10 +63,10 @@ class InventoryController extends Controller
         $imageman = new ImageManager(array('driver' => 'gd'));
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 75),$image_name,"inventories");
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 100),$image_name,"inventories");
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["icon"] = Helper::saveFile($imageman->make($icon)->resize(100,100)->encode('png', 75),$icon_name,"inventories");
+            $update_data["icon"] = Helper::saveFile($imageman->make($icon)->resize(256,256)->encode('png', 100),$icon_name,"inventories");
 
         $update_data = [
             "name"=>$name,

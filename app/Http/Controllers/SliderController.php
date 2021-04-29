@@ -153,7 +153,7 @@ class SliderController extends Controller
             $banner_file_name = "banner_".uniqid().".png";
             $banners=new Banners;
             $banners->slider_id= $data['id'];
-            $banners->image = filter_var($banner['image'], FILTER_VALIDATE_URL) ? $banner['image'] :Helper::saveFile($image->make($banner['image'])->resize($width,$height)->encode('png', 75),$banner_file_name,"slide-banners");
+            $banners->image = filter_var($banner['image'], FILTER_VALIDATE_URL) ? $banner['image'] :Helper::saveFile($image->make($banner['image'])->resize($width,$height)->encode('png', 100),$banner_file_name,"slide-banners");
             $banners->name= $banner['name'];
             $banners->url= $banner['url'];
             $banners->from_date= $banner['date']['from'];

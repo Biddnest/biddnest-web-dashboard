@@ -30,7 +30,7 @@ class SubServiceController extends Controller
         $subservice=new Subservice();
         $subservice->name=$data['name'];
         // $subservice->service_id=$service_id;
-        $subservice->image = Helper::saveFile($imageman->make($data['image'])->resize(100,100)->encode('png', 75),$image_name,"subservices");
+        $subservice->image = Helper::saveFile($imageman->make($data['image'])->resize(256,256)->encode('png', 100),$image_name,"subservices");
         $result= $subservice->save();
 
         $service=new ServiceSubservice;
@@ -81,7 +81,7 @@ class SubServiceController extends Controller
         $image_name = "subservice".$name."-".$id.".png";
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),$image_name,"subservices");
+            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"subservices");
 
         $update_data = ["name"=>$name];
         $subservice=Subservice::where("id", $id)->update($update_data);

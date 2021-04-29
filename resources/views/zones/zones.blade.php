@@ -136,8 +136,8 @@
                                                     <input type="checkbox" {{($zone->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('zone_status_update',['id'=>$zone->id])}}">
                                                 </td>
                                                 <td>
-                                                    <a href="{{route('edit-zones', ['id'=>$zone->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                                    <a href="#" class="delete" data-parent=".zone_{{$zone->id}}" data-confirm="Are you sure, you want delete this Zone permenently? You won't be able to undo this." data-url="{{route('zones_delete',['id'=>$zone->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                    <a  class = "inline-icon-button"  href="{{route('edit-zones', ['id'=>$zone->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete inline-icon-button" data-parent=".zone_{{$zone->id}}" data-confirm="Are you sure, you want delete this Zone permenently? You won't be able to undo this." data-url="{{route('zones_delete',['id'=>$zone->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

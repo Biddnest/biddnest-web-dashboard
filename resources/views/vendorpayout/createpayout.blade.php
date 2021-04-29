@@ -33,7 +33,7 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label>Vendor Name</label>
-                                <select class="form-control br-5 vendor-select" name="orgnizations" id="orgnizations" @if($payout) readonly @endif required>
+                                <select class="form-control br-5 vendor-select" name="orgnizations" id="orgnizations" @if($payout) disabled @endif required>
                                     <option value="">--Select--</option>
                                     @foreach($organizations as $org)
                                         <option id="org_{{$org->id}}" value="{{$org->id}}" data-comission="{{$org->commission}}" @if($payout && ($payout->organization_id == $org->id)) selected @endif>{{ucfirst(trans($org->org_name))}} {{$org->org_type}}</option>
@@ -55,21 +55,21 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="coupon-code"> Total Amount</label>
-                                <input type="number"  placeholder="₹ 9,300" value="@if($payout){{$payout->amount}}@endif" id="amount" name="amount" class="form-control" @if($payout) readonly @endif required>
+                                <input type="number"  placeholder="₹ 9,300" value="@if($payout){{$payout->amount}}@endif" id="amount" name="amount" class="form-control" @if($payout) disabled @endif required>
                                 <span class="error-message">Please enter  valid </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="coupon-id">Number Of Orders</label>
-                                <input type="number"  placeholder="10" id="coupon-id" name="no_of_orders" value="@if($payout){{json_decode($payout->meta, true)['total_bookings']}}@endif" class="form-control" @if($payout) readonly @endif required>
+                                <input type="number"  placeholder="10" id="coupon-id" name="no_of_orders" value="@if($payout){{json_decode($payout->meta, true)['total_bookings']}}@endif" class="form-control" @if($payout) disabled @endif required>
                                 <span class="error-message">Please enter  valid </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="coupon-id">Commission Rate</label>
-                                <input type="number" placeholder="10%" id="commission" value="@if($payout){{$payout->commission_percentage}}@endif" name="commission" class="form-control commission" readonly>
+                                <input type="number" placeholder="10%" id="commission" value="@if($payout){{$payout->commission_percentage}}@endif" name="commission" class="form-control commission" disabled>
                                 <input type="hidden" placeholder="10%" id="commission_amount" value="@if($payout){{$payout->commission}}@endif" name="commission_amount" class="form-control">
                                 <span class="error-message">Please enter  valid </span>
                             </div>
@@ -96,7 +96,7 @@
                         <div class="col-sm-6">
                             <div class="form-input">
                                 <label class="min-order">Payout Amount</label>
-                                <input type="number"  placeholder="₹ 9,300" id="payout_amount" value="@if($payout){{$payout->final_payout}}@endif" name="payout_amount" class="form-control" required readonly>
+                                <input type="number"  placeholder="₹ 9,300" id="payout_amount" value="@if($payout){{$payout->final_payout}}@endif" name="payout_amount" class="form-control" required disabled>
                                 <span class="error-message">Please enter  valid </span>
                             </div>
                         </div>

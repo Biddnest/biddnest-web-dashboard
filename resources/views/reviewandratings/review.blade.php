@@ -135,10 +135,14 @@
                                         @endfor
                                     </td>
                                     <td>
-                                        <a href="{{route('create-review')}}">
+                                        <a  class = "inline-icon-button" href="{{route('create-review')}}">
                                             <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
-                                            <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                           
                                         </a>
+                                        <a href="#" class ="inline-icon-button">
+                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                        </a>
+                                      
                                     </td>
                                 </tr>
                             @endforeach

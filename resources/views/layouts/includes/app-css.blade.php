@@ -156,7 +156,7 @@
                 font-size: large;
             }
             .p-8{
-                padding: 8px 16px !important;
+                padding: 8px 16px ;
             }
             .w-38 {
                 width: 38%;
@@ -807,7 +807,16 @@
             label.custom-check:active:after {
                 /*width: 50px;*/
             }
-
+.Weekly{
+    display: none;
+}
+.fr-box.fr-basic .fr-element {
+    
+    height: 105px;
+}
+.margin-left-10{
+    margin-left: -10px !important;
+}
 
 
     </style>

@@ -125,11 +125,11 @@
                                  alt=""/>
                                 <div class="ml-1">
                                     <div class="file-upload">
-                                        <input type="file" />
                                         <input type="hidden" class="base-holder" name="image" value="" required />
                                         <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                             UPLOAD IMAGE
                                         </button>
+                                        <input type="file" required/>
                                     </div>
                                     <p class="text-black">Max File size: 1MB</p>
                                 </div>

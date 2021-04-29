@@ -64,6 +64,18 @@ class Route extends Controller
         else
             return AdminController::resetPassword($request->password, $request->bearer);
     }
+    public function old_reset_password(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'old_password'=> 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required_with:password|same:password'
+        ]);
+        if($validation->fails())
+          return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return AdminController::OldResetPassword($request->old_password, $request->password, $request->bearer);
+    }
 
     /*Services*/
     public function service_add(Request $request)

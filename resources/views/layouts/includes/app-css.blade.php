@@ -55,6 +55,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('static/css/jquery.tagsinput.min.css')}}" />
 
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link rel="icon" type="image/svg+xml" href="{{ asset('static/images/favicon.svg')}}">
 
     <style>
             .nav-collapse .li{

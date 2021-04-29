@@ -45,9 +45,9 @@
                                 <div class="ml-1">
                                     <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
                                     <div class="file-upload">
-                                        <input type="file">
                                         <button class="btn theme-bg white-text my-0">UPLOAD
                                                             IMAGE</button>
+                                        <input type="file" required/>
                                     </div>
                                     <p>Max File size: 1MB</p>
                                 </div>

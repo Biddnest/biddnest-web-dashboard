@@ -74,6 +74,12 @@ class WebController extends Controller
         return view('login.reset_password');
     }
 
+    public function Passwordreset(Request $request)
+    {
+        $admin=Admin::where('id', $request->id)->first();
+        return view('reset_password', ['admin'=>$admin]);
+    }
+
     //index.php
     public function dashboard()
     {

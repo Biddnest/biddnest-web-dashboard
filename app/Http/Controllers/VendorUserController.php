@@ -36,11 +36,15 @@ class VendorUserController extends Controller
     if(!$vendor_user)
         return Helper::response(false,"Incorrect username or password");
 
+
     // return password_verify($password, $admin_user->password) ? Helper::response(true, "Login was successfull", ["token"=>Helper::generateAuthToken(["email"=>$admin_user->email,"password"=>$password]),"expiry"=>CarbonImmutable::now()->add(365, 'day')]) : Helper::response(false, "password is incorrect");
 
 
     if(password_verify($password, $vendor_user->password))
     {
+        if($vendor_user->status != VendorEnums::$STATUS['active'])
+            return Helper::response(false, "Your Account is inactive or suspended. Please contact your organization admin.");
+
         Session::put(["account"=>['id'=>$vendor_user->id,
             'name'=>$vendor_user->fname.' '.$vendor_user->lname,
             'email'=>$vendor_user->email]]);
@@ -54,7 +58,6 @@ class VendorUserController extends Controller
         else{
             return Helper::response(false, "password is incorrect");
         }
-
     }
 
     public static function loginForApp($username, $password)

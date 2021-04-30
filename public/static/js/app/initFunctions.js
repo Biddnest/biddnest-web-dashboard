@@ -420,22 +420,22 @@ export function initOrderDistributionChart(){
     }
 }
 
-export function initCountdown(){
-<<<<<<< HEAD
-    if($(".timer").length){
+export function initCountdown() {
+
+    if ($(".timer").length) {
         var BID_END_TIME = $(".timer").data("time");
-=======
-    if(typeof BID_END_TIME !== undefined){
->>>>>>> parent of 970b2a7d (Fixed slick issue)
-        $(".timer")
-            .countdown(BID_END_TIME, function (event) {
+
+        if (typeof BID_END_TIME !== undefined) {
+
+            $(".timer").countdown(BID_END_TIME, function (event) {
                 $(this).text(
                     event.strftime('%H:%M:%S')
                 );
             });
-    }
-<<<<<<< HEAD
+        }
 
+
+    }
 }
 export function initDatePicker(){
     if($(".date").length) {
@@ -471,7 +471,5 @@ export function initToggles(){
 
         $(this).attr("id", "checkbox_"+index);
         $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
-    })
-=======
->>>>>>> parent of 970b2a7d (Fixed slick issue)
+    });
 }

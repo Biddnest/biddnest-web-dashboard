@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -45,5 +46,28 @@ class VendorWebController extends Controller
     public function dashboard()
     {
         return view('vendor-panel.dashboard.dashboard');
+    }
+
+    public function bookingType(Request $request)
+    {
+        $booking=Booking::getBookingsForVendorApp($request, true);
+        return view('vendor-panel.order.liveorders', ['booking'=>$booking, 'type'=>$request->type]);
+
+        if($request->type == "past")
+        {
+            return view('vendor-panel.order.pastorders');
+        }
+        elseif($request->type == "participated")
+        {
+            return view('vendor-panel.order.participatedorders');
+        }
+        elseif($request->type == "scheduled")
+        {
+            return view('vendor-panel.order.scheduledorders');
+        }
+        elseif($request->type == "bookmarked")
+        {
+            return view('vendor-panel.order.bookmarkedorders');
+        }
     }
 }

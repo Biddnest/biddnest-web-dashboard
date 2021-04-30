@@ -324,16 +324,13 @@ Route::prefix('vendor')->group(function(){
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");
         Route::get('/forgot-password',[VendorWebController::class,'forgotPassword'])->name("vendor.forgotpassword");
         Route::get('/reset-password/{id}',[VendorWebController::class,'resetPassword'])->name("vendor.reset-passwords");
-
         Route::get('/{phone}/verify-otp',[VendorWebController::class,'verifyOtp'])->name("vendor.verifyotp");
     });
-
     Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
 
 
-    Route::prefix('/booking')->middleware("redirectToDashboard")->group(function () {
-        Route::get('/{id}/sidebar',[VendorWebController::class,'login'])->name("vendor.booking.sidebar");
-        Route::get('/{type}',[VendorWebController::class,'login'])->name("vendor.bookings");
+    Route::prefix('/booking')->group(function () {
+        Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
     });
 
     Route::prefix('/users')->middleware("redirectToDashboard")->group(function () {

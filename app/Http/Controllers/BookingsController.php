@@ -30,6 +30,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 
 class BookingsController extends Controller
@@ -438,7 +439,12 @@ class BookingsController extends Controller
     {
         // $limit=CommonEnums::$PAGE_LENGTH;
         // $offset=0;
-        $bid_id = Bid::where("organization_id", $request->token_payload->organization_id);
+        if($web)
+            $organization_id= Session::get('organization_id');
+        else
+            $organization_id= $request->token_payload->organization_id;
+
+        $bid_id = Bid::where("organization_id", $organization_id);
 
         switch ($request->type) {
             case "live":
@@ -476,8 +482,8 @@ class BookingsController extends Controller
 
         $bookings->with('service')
             ->with('movement_dates')
-            ->with(['bid' => function ($bid) use ($request) {
-                $bid->where("organization_id", $request->token_payload->organization_id)->with('vendor');
+            ->with(['bid' => function ($bid) use ($organization_id) {
+                $bid->where("organization_id", $organization_id)->with('vendor');
             }]);
 
         if (isset($request->from) && isset($request->to))

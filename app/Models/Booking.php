@@ -9,7 +9,7 @@ class Booking extends Model
 {
     protected $table = "bookings";
     use HasFactory;
-    protected $hidden = ['created_at','updated_at','deleted'];
+    protected $hidden = ['updated_at','deleted'];
 
     public function organization(){
         return $this->belongsTo(Organization::class);

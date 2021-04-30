@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BidEnums;
+use App\Enums\BookingEnums;
+use App\Enums\CommonEnums;
+use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -50,24 +54,29 @@ class VendorWebController extends Controller
 
     public function bookingType(Request $request)
     {
-        $booking=Booking::getBookingsForVendorApp($request, true);
-        return view('vendor-panel.order.liveorders', ['booking'=>$booking, 'type'=>$request->type]);
+        $count_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->count();
+        $participated_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->count();
+        $schedul_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->count();
+        $save_booking=Bid::where(['organization_id'=>Session::get('organization_id'), 'bookmarked'=>CommonEnums::$YES])->count();
 
-        if($request->type == "past")
-        {
-            return view('vendor-panel.order.pastorders');
-        }
-        elseif($request->type == "participated")
-        {
-            return view('vendor-panel.order.participatedorders');
-        }
-        elseif($request->type == "scheduled")
-        {
-            return view('vendor-panel.order.scheduledorders');
-        }
-        elseif($request->type == "bookmarked")
-        {
-            return view('vendor-panel.order.bookmarkedorders');
-        }
+        $past_booking=Booking::whereIn('id', Bid::where(['organization_id'=>Session::get('organization_id'), 'status'=>BidEnums::$STATUS['won']])->pluck('booking_id'))->whereIn('status', [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
+
+        $booking=BookingsController::getBookingsForVendorApp($request, true);
+
+        return view('vendor-panel.order.liveorders', ['bookings'=>$booking, 'type'=>$request->type, 'count_booking'=>$count_booking, 'participated_booking'=>$participated_booking, 'schedul_booking'=>$schedul_booking, 'save_booking'=>$save_booking, 'past_booking'=>$past_booking]);
+    }
+
+    public function bookingPastType(Request $request)
+    {
+        $booking=BookingsController::getBookingsForVendorApp($request, true);
+
+        return view('vendor-panel.order.pastorders', ['bookings'=>$booking]);
+    }
+
+    public function userManagement(Request $request)
+    {
+        $user=VendorUserController::getUser($request, true);
+
+        return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type]);
     }
 }

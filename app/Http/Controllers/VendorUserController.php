@@ -237,9 +237,14 @@ class VendorUserController extends Controller
         return Helper::response(true, "Here is the Pin status.", ["pin"=>['set'=>$set]]);
     }
 
-    public static function getUser(Request $request)
+    public static function getUser(Request $request, $web=false)
     {
-        $org = Organization::find($request->token_payload->organization_id);
+        if($web)
+            $organization_id= Session::get('organization_id');
+        else
+            $organization_id= $request->token_payload->organization_id;
+
+        $org = Organization::find($organization_id);
 
         if(!$org)
             return Helper::response(false, "Invalid organization id.");
@@ -249,14 +254,14 @@ class VendorUserController extends Controller
         }
         else {
             if (!$org->parent_org_id) {
-                $organization_id = $request->token_payload->organization_id;
+                $organization_id = $organization_id;
                 $user_id = Vendor::where(function ($query) use ($organization_id) {
                     $query->where("organization_id", $organization_id);
                     $query->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
                 });
             }
             else
-                $user_id = Vendor::where("organization_id", $request->token_payload->organization_id);
+                $user_id = Vendor::where("organization_id", $organization_id);
         }
         switch ($request->type) {
             case "admin":
@@ -278,9 +283,12 @@ class VendorUserController extends Controller
 
         $users = $user_id->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
 
-        return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
+        if($web)
+            return $users;
+        else
+            return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
             "current_page" => $users->currentPage(), "total_pages" => $users->lastPage(), "next_page" => $users->nextPageUrl(), "previous_page" => $users->previousPageUrl()
-        ]]);
+            ]]);
     }
 
     public static function updateStatus(Request $request)

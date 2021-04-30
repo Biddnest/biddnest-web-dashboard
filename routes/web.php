@@ -331,7 +331,12 @@ Route::prefix('vendor')->group(function(){
 
     Route::prefix('/booking')->group(function () {
         Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
+        Route::get('/past/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
     });
+    Route::prefix('/usser')->group(function () {
+        Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
+    });
+
 
     Route::prefix('/users')->middleware("redirectToDashboard")->group(function () {
         Route::get('/create',[VendorWebController::class,'login'])->name("vendor.suer.create");

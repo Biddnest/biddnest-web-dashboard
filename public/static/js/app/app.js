@@ -81,9 +81,9 @@ $("body").on('submit', "form", function() {
                             }
                             if (form.hasClass("vendor-pass-reset")) {
                                 var url = form.data('url');
-                                Logger.info(url);
+                                // Logger.info(url);
                                 url = url.replace(':phone', response.data.vendor.phone);
-                                Logger.info(url);
+                                // Logger.info(url);
                                 redirectTo(url);
                                 return false;
                             }

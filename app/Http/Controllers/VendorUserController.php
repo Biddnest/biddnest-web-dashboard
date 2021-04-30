@@ -114,7 +114,7 @@ class VendorUserController extends Controller
 
     public static function verifyOtp($phone, $otp)
     {
-        $vendor = Vendor::where("phone",$phone)->where(['deleted'=>0])->first();
+        $vendor = Vendor::where("phone", $phone)->where(['deleted'=>CommonEnums::$NO])->first();
         if(!$vendor)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
 
@@ -122,7 +122,7 @@ class VendorUserController extends Controller
             return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
         }
         else if($vendor->verf_code == $otp) {
-            Vendor::where("phone",$phone)->update(["otp_verified"=>1]);
+            Vendor::where("phone", $phone)->update(["otp_verified"=>1]);
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$vendor->phone,"id"=>$vendor->id]);
 

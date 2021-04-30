@@ -11,8 +11,44 @@ use Illuminate\Support\Facades\Validator;
 use App\StringFormatter;
 use App\Helper;
 
-class VendorController extends Controller
+class VendorRouteController extends Controller
 {
+    public function login(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'email' => 'required|string',
+            'password' => 'required',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::login($request->email, $request->password);
+
+    }
+
+    public function forgot_password_send_otp(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|max:12|min:10',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::phoneVerification($request->phone);
+    }
+
+    public function forgot_password_verify_otp(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone'=>'required',
+            'otp' => 'required'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::verifyOtp($request->otp, $request->phone);
+    }
+
     public function addPrice(Request $request)
     {
         $validation = Validator::make($request->all(),[

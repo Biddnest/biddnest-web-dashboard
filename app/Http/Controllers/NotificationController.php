@@ -15,7 +15,7 @@ use App\PushNotification;
 
 class NotificationController extends Controller
 {
-    public static function createNotification($title, $for, $desc, $admin=null, $user=null, $vendor=null)
+    public static function createNotification($title, $for, $desc, $user=null, $vendor=null)
     {
         $notification =new Notification;
         if($vendor != null)
@@ -31,22 +31,18 @@ class NotificationController extends Controller
             }
             NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
         }
-        else{
-            $$notification->title=$title;
-            $notification->for=$for;
-            $notification->desc=$desc;
-           /* if($admin != null)
-            {
-                $notification->admin_id=$admin;
-                NotificationController::sendTo("admin", [$admin], $title, $desc, []);
-            }*/
+        else {
+            $$notification->title = $title;
+            $notification->for = $for;
+            $notification->desc = $desc;
+            /* if($admin != null)
+             {
+                 $notification->admin_id=$admin;
+                 NotificationController::sendTo("admin", [$admin], $title, $desc, []);
+             }*/
 
-            if($user != null)
-            {
-                $notification->user_id=$user;
-                NotificationController::sendTo("user", [$user], $title, $desc, []);
-            }
-
+            $notification->user_id = $user;
+            NotificationController::sendTo("user", [$user], $title, $desc, []);
 
             $push_notification = $notification->save();
         }

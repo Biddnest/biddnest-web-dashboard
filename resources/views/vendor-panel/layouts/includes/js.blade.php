@@ -157,7 +157,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 <script>
     const IMAGE_PLACEHOLDER = '{{asset('static/images/upload-image.svg')}}';
-    const API_SEARCH_USERS = '{{route('search_user')}}';
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))
     toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000})

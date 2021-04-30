@@ -28,8 +28,7 @@ class VendorUserController extends Controller
 
     public static function login($username, $password)
 {
-    $vendor_user=Vendor::where(['username'=>$username])
-        ->OrWhere(['email'=>$username])
+    $vendor_user=Vendor::where(['email'=>$username])
         ->where([ 'status'=>1, 'deleted'=>0])
         ->with("organization")
         ->first();
@@ -52,7 +51,7 @@ class VendorUserController extends Controller
         Session::put('sessionActive', true);
         Session::put('user_role', $vendor_user->user_role);
 
-        Session::put('organization', $vendor_user->organization->id);
+        Session::put('organization_id', $vendor_user->organization->id);
 
         return Helper::response(true, "Login was successfull");
         }
@@ -134,7 +133,8 @@ class VendorUserController extends Controller
 
             return Helper::response(true, "Otp has been verified",[
                 "user"=>$data,
-                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s"),
+                "otp"=>findOrFail($vendor->id)
             ]);
 
         }else {

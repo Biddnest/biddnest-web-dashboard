@@ -245,11 +245,9 @@ if($(".selectuser").length) {
 }
 
 export function initSlick(){
-  if($(".slick-container").length) {
-      $('.slick-container').slick({
-          arrows: false
-      });
-  }
+    $('.slick-container').slick({
+        arrows: false
+    });
 }
 
 export function initTextAreaEditor(){
@@ -423,8 +421,12 @@ export function initOrderDistributionChart(){
 }
 
 export function initCountdown(){
+<<<<<<< HEAD
     if($(".timer").length){
         var BID_END_TIME = $(".timer").data("time");
+=======
+    if(typeof BID_END_TIME !== undefined){
+>>>>>>> parent of 970b2a7d (Fixed slick issue)
         $(".timer")
             .countdown(BID_END_TIME, function (event) {
                 $(this).text(
@@ -432,6 +434,7 @@ export function initCountdown(){
                 );
             });
     }
+<<<<<<< HEAD
 
 }
 export function initDatePicker(){
@@ -469,4 +472,6 @@ export function initToggles(){
         $(this).attr("id", "checkbox_"+index);
         $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
     })
+=======
+>>>>>>> parent of 970b2a7d (Fixed slick issue)
 }

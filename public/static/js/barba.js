@@ -59,11 +59,6 @@ barba.init({
         afterEnter(data) {
 
         }
-      },{
-        namespace: 'orderdetails_bidding',
-        afterEnter(data) {
-            initCountdown();
-        }
       },
     ]
 });

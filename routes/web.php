@@ -7,7 +7,8 @@ use App\Enums\BookingEnums;
 use App\Enums\NotificationEnums;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Route as Router;
-use App\Http\Controllers\VendorController as VendorRouter;
+use App\Http\Controllers\VendorRouteController as VendorRouter;
+use App\Http\Controllers\VendorWebApiRouteController as VendorApiRouter;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\VendorWebController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,21 @@ Route::get('/', function () {
 
 Route::get('/debug',function(){
     abort(500);
+});
+
+Route::prefix('vendors/api')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('/login', [VendorRouter::class, 'login'])->name("api.vendor_login");
+        Route::post('/password/otp/send',[VendorRouter::class,'forgot_password_send_otp'])->name("api.vendor_send_otp");
+        Route::post('/password/otp/verify',[VendorRouter::class,'forgot_password_verify_otp'])->name("api.vendor_verify_otp");
+        Route::post('/password/reset',[VendorRouter::class,'reset_password'])->name("api.vendor_reset_password");
+
+    });
+
+    Route::post('/inventory-price',[VendorRouter::class,'addPrice']);
+    Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices']);
+    Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices']);
+    Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices']);
 });
 
 Route::prefix('web/api')->group(function () {
@@ -146,13 +162,6 @@ Route::prefix('web/api')->group(function () {
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
 
-});
-
-Route::prefix('vendors')->group(function () {
-    Route::post('/inventory-price',[VendorRouter::class,'addPrice']);
-    Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices']);
-    Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices']);
-    Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices']);
 });
 
 Route::prefix('admin')->group(function () {
@@ -308,11 +317,13 @@ Route::get('/debug/socket', function () {
     return view("debug.socket");
 });
 
+
 Route::prefix('vendor')->group(function(){
     Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");
-        Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("vendor.forgotpassword");
-        Route::get('/reset-password',[WebController::class,'resetPassword'])->name("vendor.reset-password");
+        Route::get('/forgotpassword',[VendorWebController::class,'forgotPassword'])->name("vendor.forgotpassword");
+        Route::get('/verifyotp',[WebController::class,'verifyOtp'])->name("vendor.verifyotp");
+        Route::get('/reset-password/{id}',[WebController::class,'resetPassword'])->name("vendor.reset-passwords");
     });
 
     Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");

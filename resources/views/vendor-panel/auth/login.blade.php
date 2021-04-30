@@ -20,28 +20,18 @@
             <!-- Input Box -->
             <div class="form-input">
                 <label>E-mail</label>
-                <span class="">
-                                <input type="email" name="" placeholder="error@gmail.com" tabindex="10" required class="form-control ">
-                                <span class="error-message">Please enter  valid Email</span>
-                               </span>
-
-
+                <input type="email" name="" placeholder="error@gmail.com" tabindex="10" required class="form-control ">
+                <span class="error-message">Please enter  valid Email</span>
             </div>
             <div class="form-input isinvalid">
                 <label>Password</label>
-                <span>
-                                <input type="password" name="" placeholder="Password" required class="form-control ">
-                                <span class="error-message">Please enter the correct password</span>
-                               </span>
-
+                <input type="password" name="" placeholder="Password" required class="form-control ">
+                <span class="error-message">Please enter the correct password</span>
             </div>
 
-
-            <a href="dashboard.html" class="btn btn-block">Login</a>
-
-
+            <button type="submit" class="btn btn-block">Login</button>
             <div class="text-center">
-                <a class="link-regular" href="forgotpassword.html">Forgot Password?</a>
+                <a class="link-regular" href="#">Forgot Password?</a>
             </div>
 
         </form>

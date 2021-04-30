@@ -22,9 +22,9 @@
                             </div>
                             <h3 class="text-center">Change Password</h3>
                             <!-- Form -->
-                                <form action="{{route('reset_password')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('login')}}" data-alert="tiny" class="form-new-order px-3 login" id="myForm" autocomplete="off" data-parsley-validate>
+                                <form action="{{route('api.vendor_reset_password')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.login')}}" data-alert="tiny" class="form-new-order px-3 login" id="myForm" autocomplete="off" data-parsley-validate>
                             <!-- Input Box -->
-                                <input type="hidden" name="bearer" value="{{$admin->id}}" required class="form-control">
+                                <input type="hidden" name="bearer" value="{{$vendor->id}}" required class="form-control">
                                 <div class="form-input">
                                    <label>New Password</label>
                                     <input type="password" name="password" placeholder="New Password" tabindex="10" required class="form-control" id="password">

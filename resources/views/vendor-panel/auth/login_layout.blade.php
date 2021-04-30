@@ -5,7 +5,7 @@
 
     <title>@yield('title')</title>
 
-    @include('vendor-panel.layouts.includes.css')
+    @include('vendor-panel.layouts.includes.app-css')
 </head>
 <body>
 <main>

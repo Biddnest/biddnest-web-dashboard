@@ -12,6 +12,7 @@ use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use App\Sms;
 use App\Models\Bid;
 use App\Models\BidInventory;
@@ -114,7 +115,7 @@ class VendorUserController extends Controller
 
     public static function verifyOtp($phone, $otp)
     {
-        $vendor = Vendor::where("phone",$phone)->where(['deleted'=>0])->first();
+        $vendor = Vendor::where("phone", $phone)->where(['deleted'=>CommonEnums::$NO])->first();
         if(!$vendor)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
 
@@ -122,7 +123,7 @@ class VendorUserController extends Controller
             return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
         }
         else if($vendor->verf_code == $otp) {
-            Vendor::where("phone",$phone)->update(["otp_verified"=>1]);
+            Vendor::where("phone", $phone)->update(["otp_verified"=>1]);
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$vendor->phone,"id"=>$vendor->id]);
 
@@ -130,16 +131,23 @@ class VendorUserController extends Controller
             if($vendor->fname){
                 $data = $vendor;
             }
-
+            $id = Crypt::encryptString($vendor->id);
             return Helper::response(true, "Otp has been verified",[
                 "user"=>$data,
                 "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s"),
-                "otp"=>findOrFail($vendor->id)
+                "otp"=>["id"=>$id]
             ]);
 
         }else {
             return Helper::response(false, "Incorrect otp provided");
         }
+    }
+
+    public static function passwordReset($password, $bearer)
+    {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $update_password=Vendor::where('id',$bearer)->update(['password' => $hash]);
+        return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
     }
 
     public static function resetPassword($phone, $otp, $new_password, $confirm_password)

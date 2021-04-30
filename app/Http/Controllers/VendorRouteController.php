@@ -46,7 +46,19 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return VendorUserController::verifyOtp($request->otp, $request->phone);
+            return VendorUserController::verifyOtp($request->phone, $request->otp);
+    }
+
+    public function reset_password(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'password' => 'required',
+            'password_confirmation' => 'required_with:password|same:password'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::passwordReset($request->password, $request->bearer);
     }
 
     public function addPrice(Request $request)

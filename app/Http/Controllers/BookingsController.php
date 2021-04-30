@@ -118,7 +118,7 @@ class BookingsController extends Controller
 
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        if($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+        if($data['meta']['images'] != "") { //need to remove [0]==> temp fixed
             foreach ($data['meta']['images'] as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
             }
@@ -434,7 +434,7 @@ class BookingsController extends Controller
 
     }
 
-    public static function getBookingsForVendorApp(Request $request)
+    public static function getBookingsForVendorApp(Request $request, $web=false)
     {
         // $limit=CommonEnums::$PAGE_LENGTH;
         // $offset=0;
@@ -491,7 +491,10 @@ class BookingsController extends Controller
 
         $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
 
-        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
+        if($web)
+            return $bookings;
+        else
+            return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
             "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()
         ]]);
     }

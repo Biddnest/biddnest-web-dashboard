@@ -1060,7 +1060,7 @@ class Route extends Controller
     public function notification_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'title'=>'required',
+            'name'=>'required',
             'for'=>'required',
             'desc'=>'required'
         ]);
@@ -1068,7 +1068,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return NotificationController::createNotification($request->title, $request->for, $request->desc, $request->admin, $request->user, $request->vendor);
+        return NotificationController::createNotification($request->name, $request->for, $request->desc, $request->admin, $request->user, $request->vendor);
     }
 
     public function booking_add(Request $request)

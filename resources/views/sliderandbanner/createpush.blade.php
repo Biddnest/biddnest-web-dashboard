@@ -36,7 +36,7 @@
                         <div class="col-lg-6">
                           <div class="form-input">
                             <label class="full-name">Notification Title</label>
-                            <input type="text" id="banner_name" name="title" placeholder="New Year Sale" class="form-control br-5" />
+                            <input type="text" id="name" name="name" placeholder="New Year Sale" class="form-control br-5" />
                             <span class="error-message">Please enter a valid banner name</span>
                           </div>
                         </div>

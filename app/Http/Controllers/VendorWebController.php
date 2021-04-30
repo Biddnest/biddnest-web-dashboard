@@ -8,7 +8,7 @@ class VendorWebController extends Controller
 {
     public function login()
     {
-        return view('vendor-panel.auth.login');
+        return view('vendor-panel.login.login');
     }
 
     public function dashboard()

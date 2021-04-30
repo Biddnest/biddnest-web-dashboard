@@ -50,7 +50,7 @@
                           <div class="col-lg-6">
                           <div class="form-input">
                             <label class="full-name">Notification For</label>
-                              <select id="zone" class="form-control br-5 field-toggle" name="for">
+                              <select id="zone" class="form-control br-5" name="for">
                                   <option value="">--Select--</option>
                                   <option value="1" id="1" data-value="customer">Customer</option>
                                   <option value="2" id="2" data-value="vendor">Vendor</option>

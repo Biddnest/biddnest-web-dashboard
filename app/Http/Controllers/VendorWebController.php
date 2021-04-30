@@ -31,9 +31,9 @@ class VendorWebController extends Controller
         return view('vendor-panel.login.forgotpassword');
     }
 
-    public function verifyOtp()
+    public function verifyOtp(Request $request)
     {
-        return view('vendor-panel.login.verifyotp');
+        return view('vendor-panel.login.verifyotp', ['phone'=>$request->phone]);
     }
 
     public function resetPassword(Request $request)

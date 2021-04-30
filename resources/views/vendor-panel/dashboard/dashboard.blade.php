@@ -1,7 +1,7 @@
 @extends('vendor-panel.layouts.frame')
-@section('title') Login @endsection
+@section('title') Dashboard @endsection
 @section('body')
-    <div class="main-content grey-bg">
+    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="dashboard">
         <h3 class="page-head text-left p-4 f-20">Dashboard
             <i class="icon dripiconmeter"></i>
         </h3>

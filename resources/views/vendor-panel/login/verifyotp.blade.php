@@ -23,7 +23,7 @@
                             <img class="logo" src="{{ asset('static/images/violet_logo.png') }}"  width="50%"/>
                         </div>
                         <hr class="logo-seprator">
-                <div class="tagline text-center"> <span>Make your move simple</span></div>
+                        <div class="tagline text-center"> <span>Make your move simple</span></div>
                     </div>
 
                     <h3 class="text-center">Forgot Password?</h3>
@@ -35,7 +35,7 @@
                         <div class="form-input">
                         <label>Phone</label>
                         <span>
-                            <input type="phone" name="phone" value="{{$phone}}" placeholder="Enter Registered mobile no" maxlength="10" minlength="10" tabindex="10" required readonly class="form-control">
+                            <input type="tel" name="phone" value="{{$phone}}" placeholder="Enter Registered mobile no" maxlength="10" minlength="10" tabindex="10" required readonly class="form-control">
                         </span>
 
                             <span class="error-message">Please enter valid Phone</span>

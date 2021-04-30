@@ -41,27 +41,29 @@ class WebSocket extends Command
     {
         switch ($this->argument('action')){
             case "start":
-                    $this->comment('Starting server');
+                    $this->alert('Bidsnest Socket server');
+                    $this->info('Initiating socket server');
 
                     $port = $this->option('port') ? $this->option('port') : 3000;
 
                     $io = new SocketIO($port);
 
-                $this->comment("Running on port ".$this->option('port'));
+                $this->info("Socket listener is now running on port ".$this->option('port'));
+                $this->comment('It is recommended to run this command in a daemon manager like PM2');
 
                 $io->on('connection', function ($socket) use ($io) {
                     $this->comment("Client Connected");
                     $socket->on('message', function ($msg) use ($io) {
-
                         $io->emit('chat message', $msg);
-
                         $this->comment("chat received");
-
                     });
                 });
 
                 Worker::runAll();
                 break;
+
+            case "stop":
+                Worker::stopAll();
         }
     }
 }

@@ -37,75 +37,13 @@
             <div class="card  h-auto  pt-8 p-0">
 
 
-
-                <!-- <div class="row no-gutters">
-                    <div class="col-sm-8 p-3 ">
-                        <h3 class="f-18">Past Orders </h3>
-
-                    </div>
-                    <div class="col-sm-1 -mr-4 pt-3 pl-8">
-                        <a href="#"  data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i><img class="" src="./assets/images/filter.svg" alt="" srcset=""></i>
-
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item border-top-bottom" href="#">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="total-no-orders">
-                                <label class="form-check-label" for="total-no-orders">
-                                    Total no of orders
-                                </label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item border-top-bottom" href="#">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="statu">
-                                <label class="form-check-label" for="status">
-                                    Status
-                                </label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item border-top-bottom" href="#">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="city">
-                                <label class="form-check-label" for="city">
-                                    City
-                                </label>
-                            </div>
-                        </a>
-
-
-
-                    </div>
-                    </div>
-                    <div class="card-head  pt-2  left col-sm-3">
-                        <div class="search">
-                           <input type="text" class="searchTerm" placeholder="Search...">
-                           <button type="submit" class="searchButton">
-                             <i class="fa fa-search"></i>
-                          </button>
-                        </div>
-                </div>
-                </div> -->
-
-
-
-
-
-
-
-
-
-
                 <div class="header-wrap">
                     <h3 class="f-18 ml-1 theme_text">Past Orders </h1>
 
                         <div class="header-wrap p-0 filter-dropdown ">
                             <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
-                                <i><img src="./assets/images/filter.svg" alt="" srcset=""></i>
+                                <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
 
                             </a>
                             <div class="dropdown-menu">
@@ -168,110 +106,48 @@
                         </tr>
                         </thead>
                         <tbody class="mtop-20 f-13">
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
+                            @foreach($bookings as $booking)
+                                <tr class="tb-border">
+                                    <td scope="row" class="text-left"> <a href="order-details.html">
+                                            {{$booking->public_booking_id}}</a> </td>
+                                    <td>{{json_decode($booking->source_meta, true)['city']}}</td>
+                                    <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                    <td>{{$booking->created_at->format('d M Y')}}</td>
+                                    <td>{{json_decode($booking->bid->meta, true)['moving_date']}}</td>
+                                    <td>{{$booking->final_quote}}</td>
+                                    <td class=""><span class="complete-bg  text-center td-padding">
+                                            @if($booking->status == \App\Enums\BookingEnums::$STATUS['completed'])
+                                                Completed
+                                            @elseif($booking->status ==\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                cancelled
+                                            @endif
+                                        </span></td>
 
-                            <td>Gao</td>
-                            <td>Bengaluru</td>
-                            <td>28 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg  text-center td-padding">Completed</span></td>
-
-
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Chennai</td>
-                            <td>Mumbai</td>
-                            <td>28 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg  text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Guntur</td>
-                            <td>Kolkata</td>
-                            <td>28 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Hopete</td>
-                            <td>Bengaluru</td>
-                            <td>28 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Sringeri</td>
-                            <td>Bengaluru</td>
-                            <td>28 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg  text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Mumbai</td>
-                            <td>Chennai</td>
-                            <td>27 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg  text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Kozhikode</td>
-                            <td>Bengaluru</td>
-                            <td>27 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg   text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Kovallam</td>
-                            <td>kochi</td>
-                            <td>26 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg   text-center td-padding">Completed</span></td>
-                        </tr>
-                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <td scope="row" class="text-left">SKU123456</td>
-
-                            <td>Benguluru</td>
-                            <td>Kochi</td>
-                            <td>26 Dec 2020</td>
-                            <td>28 Dec 2020</td>
-                            <td>5000</td>
-                            <td class=""><span class="complete-bg   text-center td-padding">Completed</span></td>
-                        </tr>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    @if(count($bookings)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You don't any Bookings here.</i></p>
+                            </div>
+                        </div>
+                    @endif
                     <div class="pagination">
                         <ul>
                             <li class="p-1">Page</li>
-                            <li class="digit">1</li>
+                            <li class="digit">{{$bookings->currentPage()}}</li>
                             <li class="label">of</li>
-                            <li class="digit">20</li>
-                            <li class="button"><a href="#"><img src="assets/images/Backward.svg"></a>
-                            </li>
-                            <li class="button"><a href="#"><img src="assets/images/forward.svg"></a>
-                            </li>
+                            <li class="digit">{{$bookings->lastPage()}}</li>
+                            @if(!$bookings->onFirstPage())
+                                <li class="button"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                </li>
+                            @endif
+                            @if($bookings->currentPage() != $bookings->lastPage())
+                                <li class="button"><a href="{{$bookings->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

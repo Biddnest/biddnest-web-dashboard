@@ -223,7 +223,8 @@ class BidController extends Controller
             "vendor_id"=>$vendor_id,
             "bid_amount"=>$data['bid_amount'],
             "meta"=>json_encode($meta),
-            "status"=>BidEnums::$STATUS['bid_submitted']
+            "status"=>BidEnums::$STATUS['bid_submitted'],
+            "submit_at"=>Carbon::now()
         ]);
 
         if(!$submit_bid)

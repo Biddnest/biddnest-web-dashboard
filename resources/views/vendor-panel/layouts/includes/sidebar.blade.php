@@ -17,15 +17,13 @@
                             </li>
 
                             <ul class="sub-menu booking" id="booking">
-                                <li class="sub-menu-item  "><a href="{{route('vendor.bookings', ['type'=>"live"])}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                <li class="sub-menu-item  "><a href="{{route('vendor.bookings', ['type'=>"live"])}}"><i class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                         Manage Bookings</a></li>
-                                <li class="sub-menu-item"><a href="{{route('vendor.bookings', ['type'=>"past"])}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                <li class="sub-menu-item"><a href="{{route('vendor.pastbookings', ['type'=>"past"])}}"><i class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                         Past Orders</a></li>
                             </ul>
                             <li class="menu-item b-purple" data-toggle="#roles" href="#Roles" role="button"
-                                aria-expanded="false" aria-controls="Vendors"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 2.svg')}}" alt=""></i></span> </span>Manage User  Roles</a>
+                                aria-expanded="false" aria-controls="Vendors"> <a class="" href="{{route('vendor.managerusermgt', ['type'=>"manager"])}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 2.svg')}}" alt=""></i></span> </span>Manage User  Roles</a>
 
                             </li>
                         <li class="menu-item b-purple" data-toggle="#inventory" href="#Inventory" role="button"

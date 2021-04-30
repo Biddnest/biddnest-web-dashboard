@@ -18,23 +18,23 @@
         <div class="vender-all-details">
             <div class="simple-card">
                 <p>NEW ORDERS</p>
-                <h1>3,456</h1>
+                <h1>{{$count_booking}}</h1>
             </div>
             <div class="simple-card ">
                 <p>Participated Orders</p>
-                <h1>865</h1>
+                <h1>{{$participated_booking}}</h1>
             </div>
             <div class="simple-card ">
                 <p>Scheduled Orders</p>
-                <h1>2,594</h1>
+                <h1>{{$schedul_booking}}</h1>
             </div>
             <div class="simple-card">
                 <p>Saved Orders</p>
-                <h1>2,300</h1>
+                <h1>{{$save_booking}}</h1>
             </div>
             <div class="simple-card ">
                 <p>Past Orders</p>
-                <h1>2,400</h1>
+                <h1>{{$past_booking}}</h1>
             </div>
 
 
@@ -48,20 +48,19 @@
                             <h3 class=" f-18 pb-0">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item ">
-                                        <a class="nav-link active p-15 hide-cards" id="live-tab" data-toggle="tab"
-                                           href="#live" role="tab" aria-controls="profile"
-                                           aria-selected="false">New Orders</a>
+                                        <a class="nav-link @if($type == "live") active @endif p-15"
+                                           href="{{route('vendor.bookings', ['type'=>"live"])}}" >New Orders</a>
                                     </li>
                                     <li class="nav-item ">
-                                        <a class="nav-link  p-15 hide-cards"
+                                        <a class="nav-link @if($type == "participated") active @endif p-15 hide-cards"
                                            href="{{route('vendor.bookings', ['type'=>"participated"])}}" role="tab"
                                         >Participated Orders</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link  p-15" href="{{route('vendor.bookings', ['type'=>"scheduled"])}}">Scheduled Orders</a>
+                                        <a class="nav-link @if($type == "scheduled") active @endif p-15" href="{{route('vendor.bookings', ['type'=>"scheduled"])}}">Scheduled Orders</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link  p-15" href="{{route('vendor.bookings', ['type'=>"bookmarked"])}}">Saved Orders</a>
+                                        <a class="nav-link @if($type == "bookmarked") active @endif p-15" href="{{route('vendor.bookings', ['type'=>"bookmarked"])}}">Saved Orders</a>
                                     </li>
                                 </ul>
                             </h3>
@@ -70,7 +69,7 @@
                             <div class="search">
                                 <a href="#" class="margin-r-20 pt-2" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
-                                    <i><img src="./assets/images/filter.svg" alt="" srcset=""></i>
+                                    <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
 
                                 </a>
                                 <div class="dropdown-menu" x-placement="bottom-start">
@@ -133,37 +132,36 @@
                                         @endif
                                         @if($type == "scheduled")
                                             <th scope="col">Submitted On</th>
-                                            <th scope="col"> <b>Order Status</b> <i class="fa fa-fw fa-sort"></i>
-                                            </th>
                                             <th scope="col">Your Bid</th>
                                         @endif
                                     </tr>
                                 </thead>
                                 <tbody class="mtop-20 text-left f-13">
-                                    <tr class="tb-border ">
+                                    @foreach($bookings as $booking)
+                                        <tr class="tb-border ">
                                         <td scope="row" class="text-left"> <a href="order-details.html">
-                                                SKU123456</a> </td>
-                                        <td>Gao</td>
-                                        <td>Bengaluru</td>
-                                        <td>28 Dec 2020</td>
+                                                {{$booking->public_booking_id}}</a> </td>
+                                        <td>{{json_decode($booking->source_meta, true)['city']}}</td>
+                                        <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                        <td>{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
-                                            <td>5000</td>
-                                            <td> davidjerome </td>
+                                            <td>{{$booking->bid->bid_amount}}</td>
+                                            <td>{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
                                         @endif
                                         @if($type != "scheduled")
-                                            <td><span class="timer-bg  text-center status-badge">5:00:00</span>
+                                            <td><span class="timer-bg  text-center status-badge">{{'00:'.\Carbon\Carbon::now()->diff($booking->bid_result_at)->format('%I:%S') }}</span>
                                             </td>
                                         @endif
                                         @if($type == "bookmarked")
                                             <td class="">
                                                 <i class="p-1">
-                                                    <img src="./assets/images/Icon material-remove-red-eye.svg"
+                                                    <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
                                                          alt="">
 
 
                                                 </i>
                                                 <i class="p-1"><img
-                                                        src="./assets/images/Icon ionic-md-close-circle.svg"
+                                                        src="{{asset('static/vendor/images/Icon ionic-md-close-circle.svg')}}"
                                                         alt="" data-toggle="tooltip" data-placement="top"
                                                         title="Reject"></i>
 
@@ -186,38 +184,41 @@
                                             </td>
                                         @endif
                                         @if($type == "scheduled")
-                                            <td>29 Dec 2020</td>
-                                            <td class=""><span
-                                                    class="light-bg  text-center td-padding">Scheduled</span>
-                                            </td>
-                                            <td>5000</td>
+                                            <td>{{date('d M Y', strtotime($booking->bid->submit_at))}}</td>
+                                            <td>{{$booking->bid->bid_amount}}</td>
                                         @endif
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            @if(count($bookings)== 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. You don't any Bookings here.</i></p>
+                                    </div>
+                                </div>
+                            @endif
                         <div class="pagination">
-<ul>
-<li class="p-1">Page</li>
-<li class="digit f-weight-500 white-bg">1</li>
-<li class="label pl-1 pr-0">of</li>
-<li class="digit ">20</li>
-<li class="button"><a href="#"><img src="assets/images/Backward.svg"></a>
-</li>
-<li class="button"><a href="#"><img src="assets/images/forward.svg"></a>
-</li>
-</ul>
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
+                            <ul>
+                                <li class="p-1">Page</li>
+                                <li class="digit">{{$bookings->currentPage()}}</li>
+                                <li class="label">of</li>
+                                <li class="digit">{{$bookings->lastPage()}}</li>
+                                @if(!$bookings->onFirstPage())
+                                    <li class="button"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                    </li>
+                                @endif
+                                @if($bookings->currentPage() != $bookings->lastPage())
+                                    <li class="button"><a href="{{$bookings->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

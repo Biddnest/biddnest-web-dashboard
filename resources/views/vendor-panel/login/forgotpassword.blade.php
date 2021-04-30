@@ -25,9 +25,9 @@
                         <div class="tagline text-center"> <span>Make your move simple!</span></div>
                     </div>
 
-                    <h3 class="text-center">Forgot Password?</h3>
+                    <h3 class="text-center">Forgot Password</h3>
                 <!-- Form -->
-                    <form class="px-3 login" data-alert="inline" action="{{route('api.vendor_send_otp')}}" method="POST" onsubmit="return false;" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.verifyotp')}}" data-parsley-validate>
+                    <form class="px-3 login vendor-pass-reset" data-alert="inline" action="{{route('api.vendor_send_otp')}}" method="POST" onsubmit="return false;" data-next="redirect" {{--data-redirect-type="hard"--}} data-url="{{route('vendor.verifyotp',["phone"=>":phone"])}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>Phone</label>
@@ -45,7 +45,6 @@
             <!-- FORM CONTAINER END -->
         </div>
     </div>
-
 </main>
 
 @endsection

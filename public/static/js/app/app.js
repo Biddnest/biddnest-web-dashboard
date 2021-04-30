@@ -79,6 +79,14 @@ $("body").on('submit', "form", function() {
                                 redirectTo(url);
                                 return false;
                             }
+                            if (form.hasClass("vendor-pass-reset")) {
+                                var url = form.data('url');
+                                Logger.info(url);
+                                url = url.replace(':phone', response.data.vendor.phone);
+                                Logger.info(url);
+                                redirectTo(url);
+                                return false;
+                            }
                             if (form.hasClass("onboard-vendor-form")) {
                                 var url = form.data('url');
                                 url = url.replace(':id', response.data.organization.id);

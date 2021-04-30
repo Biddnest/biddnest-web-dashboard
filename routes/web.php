@@ -320,11 +320,12 @@ Route::get('/debug/socket', function () {
 
 
 Route::prefix('vendor')->group(function(){
-    Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
+    Route::prefix('/auth')->group(function () {
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");
         Route::get('/forgot-password',[VendorWebController::class,'forgotPassword'])->name("vendor.forgotpassword");
-        Route::get('/verify-otp',[VendorWebController::class,'verifyOtp'])->name("vendor.verifyotp");
-        Route::get('/reset-password/{id}',[WebController::class,'resetPassword'])->name("vendor.reset-passwords");
+        Route::get('/reset-password/{id}',[VendorWebController::class,'resetPassword'])->name("vendor.reset-passwords");
+
+        Route::get('/{phone}/verify-otp',[VendorWebController::class,'verifyOtp'])->name("vendor.verifyotp");
     });
 
     Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");

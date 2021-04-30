@@ -107,9 +107,9 @@ class VendorUserController extends Controller
         dispatch(function() use($phone, $otp){
             Sms::sendOtp($phone, $otp);
         })->afterResponse();
-        $data['otp'] = $otp;
+//        $data['otp'] = $otp;
 
-        return Helper::response(true, "Otp has been sent to the phone.", $data);
+        return Helper::response(true, "Otp has been sent to the phone.", ["vendor"=>["phone"=>$phone]]);
     }
 
     public static function verifyOtp($phone, $otp)

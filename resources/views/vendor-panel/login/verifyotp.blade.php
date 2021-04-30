@@ -30,7 +30,7 @@
 
 
                 <!-- Form -->
-                    <form class="px-3 login form-new-order verify-otp-form" data-alert="inline" action="{{ route('verify_otp') }}" method="POST" onsubmit="return false;" data-next="redirect" data-redirect-type="hard" data-url="{{route('reset-passwords',['id'=>':id'])}}" data-parsley-validate>
+                    <form class="px-3 login form-new-order verify-otp-form" data-alert="inline" action="{{ route('api.vendor_verify_otp') }}" method="POST" onsubmit="return false;" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.reset-passwords',['id'=>':id'])}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>Phone</label>
@@ -45,14 +45,7 @@
                         <div class="form-input">
                             <label>Verify OTP</label>
                             <input class="form-control" type="number" name="otp" maxlength="6" minlength="6"/>
-                            {{--<div class="otp-input-group d-flex flex-row justify-content-between">
-                                    <input class="form-control" type="number" />
-                                    <input class="form-control" type="number" />
-                                    <input class="form-control" type="number"  />
-                                    <input class="form-control" type="number"  />
-                                    <input class="form-control" type="number"  />
-                                    <input class="form-control" type="number" />
-                            </div>--}}
+
                             <span class="error-message">Please enter valid OTP</span>
                         </div>
 

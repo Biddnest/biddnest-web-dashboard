@@ -1,5 +1,5 @@
 @extends('login_layout.app')
-@section('title') Biddnest Amin Login @endsection
+@section('title') Biddnest Vendor Login @endsection
 @section('content')
 <main data-barba="container" data-barba-namespace="login">
     <div class="loader"></div>
@@ -28,7 +28,7 @@
 
 
                 <!-- Form -->
-                    <form class="px-3 login" data-alert="inline" action="{{ route('admin_login') }}" method="POST" onsubmit="return false;" data-next="refresh" {{--data-redirect-type="hard"--}} {{--data-url="{{route('dashboard')}}"--}} data-parsley-validate>
+                    <form class="px-3 login" data-alert="inline" action="{{ route('vendor_login') }}" method="POST" onsubmit="return false;" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.dashboard')}}" data-parsley-validate>
                         <!-- Input Box -->
                         <div class="form-input">
                         <label>E-mail</label>
@@ -47,10 +47,9 @@
                         </span>
                         </div>
 
-                        <!-- <a type="submit" href="{{ route('dashboard') }}" class="btn btn-block">Login</a> -->
                         <button type="submit" class="btn btn-block">Login</button>
                         <div class="text-center">
-                        <a class="link-regular" href="{{ route('forgotpassword') }}">Forgot Password?</a>
+                            <a class="link-regular" href="{{ route('vendor.forgotpassword') }}">Forgot Password?</a>
                         </div>
 
                     </form>

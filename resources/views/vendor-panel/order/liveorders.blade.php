@@ -149,7 +149,7 @@
                                             <td>{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
                                         @endif
                                         @if($type != "scheduled")
-                                            <td><span class="timer-bg  text-center status-badge">{{'00:'.\Carbon\Carbon::now()->diff($booking->bid_result_at)->format('%I:%S') }}</span>
+                                            <td><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}"></span>
                                             </td>
                                         @endif
                                         @if($type == "bookmarked")

@@ -8,6 +8,7 @@ use App\Enums\CommonEnums;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Inventory;
+use App\Models\Ticket;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -84,6 +85,17 @@ class VendorWebController extends Controller
     public function inventoryManagement()
     {
         $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return view('vendor-panel.inventory.inventorymanagement', ['inventory'=>$inventory]);
+        return view('vendor-panel.inventory.inventorymanagement', ['inventories'=>$inventory]);
+    }
+    public function inventoryCetegory(Request $request)
+    {
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'category'=>$request->type])->get();
+        return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
+    }
+
+    public function serviceRequest(Request $request)
+    {
+        $tickets=Ticket::where(['vendor_id'=>Session::get('account')['id']])->paginate(CommonEnums::$PAGE_LENGTH);
+        return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type]);
     }
 }

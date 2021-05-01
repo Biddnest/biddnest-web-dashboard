@@ -339,6 +339,11 @@ Route::prefix('vendor')->group(function(){
     });
     Route::prefix('/inventory')->group(function () {
         Route::get('/',[VendorWebController::class,'inventoryManagement'])->name("vendor.inventorymgt");
+        Route::get('/{type}',[VendorWebController::class,'inventoryCetegory'])->name("vendor.inventorycat");
+    });
+
+    Route::prefix('/service-request')->group(function () {
+        Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
     });
 
 

@@ -43,7 +43,7 @@
                         </li>
 
                         <li class="menu-item" data-toggle="" href="#ServiceRequests" role="button" aria-expanded="false"
-                            aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 7.svg')}}" alt=""></i></span> </span>Service Requests</a>
+                            aria-controls="Customer"> <a class="" href="{{route('vendor.service_request')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 7.svg')}}" alt=""></i></span> </span>Service Requests</a>
                         </li>
 
                         <li class="menu-item" data-toggle="" href="#Reports" role="button" aria-expanded="false"

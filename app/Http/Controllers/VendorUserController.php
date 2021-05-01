@@ -291,9 +291,11 @@ class VendorUserController extends Controller
             ]]);
     }
 
-    public static function updateStatus(Request $request)
+    public static function updateStatus(Request $request, $web = false)
     {
-        if($request->id == $request->token_payload->id)
+        $bearer = $web ? Session::get('id') : $request->token_payload->id;
+
+        if($request->id == $bearer)
             return Helper::response(false, "You can not disable yourself.");
 
         $vendor = Vendor::find($request->id);

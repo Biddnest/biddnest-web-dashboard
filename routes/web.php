@@ -157,10 +157,23 @@ Route::prefix('web/api')->group(function () {
             Route::post('/password/reset',[VendorRouter::class,'reset_password'])->name("api.vendor_reset_password");
         });
 
-        Route::post('/inventory-price',[VendorRouter::class,'addPrice']);
-        Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices']);
-        Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices']);
-        Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices']);
+        Route::post('/inventory-price',[VendorRouter::class,'addPrice'])->name("api.addPrice");
+        Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices'])->name("api.getInventoryPrices");
+        Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices'])->name("api.updateInventoryPrices");
+        Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices'])->name("api.deleteInventoryPrices");
+
+        Route::post('/booking/bid',[VendorRouter::class,'addBid'])->name("api.booking.bid");
+        Route::post('/booking/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
+        Route::post('/booking/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
+        Route::post('/booking/assign-driver',[VendorRouter::class,'assignDriver'])->name("api.driver.assign");
+        Route::post('/booking/trip/start',[VendorRouter::class,'startTrip'])->name("api.trip.start");
+        Route::post('/booking/trip/end',[VendorRouter::class,'endTrip'])->name("api.trip.end");
+
+        Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
+
+        Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
+
+
     });
 
 });

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\StringFormatter;
 use App\Helper;
@@ -144,4 +145,106 @@ class VendorRouteController extends Controller
 
         return Helper::response(true, "Data fetched successfully", ['vehicles' => $get_vehicle]);
     }
+
+    public function addBid(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' =>'required|integer',
+            'inventory.*.booking_inventory_id'=>'required|integer',
+            'inventory.*.amount'=>'required',
+
+            'bid_amount'=>'required',
+            'type_of_movement'=>'required|string',
+            'moving_date'=>'required',
+            'vehicle_type'=>'required|string',
+
+            'man_power.min'=>'required|integer',
+            'man_power.max'=>'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('id'));
+    }
+
+    public function reject(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::reject($request->public_booking_id, Session::get('organization_id'), Session::get('id'));
+    }
+
+    public function addBookmark(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::addBookmark($request->public_booking_id,Session::get('organization_id'), Session::get('id'));
+    }
+
+    public function assignDriver(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'driver_id' => 'required|integer',
+            'vehicle_id' => 'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::assignDriver($request->public_booking_id, $request->driver_id, $request->vehicle_id);
+    }
+
+    public function startTrip(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' => 'required',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::startTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
+    }
+
+    public function endTrip(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' => 'required',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::endTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
+    }
+
+    public function createTickets(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category' => 'required',
+            'heading' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create(Session::get('id'), 1, ["category"=>$request->category], $request->heading, $request->desc);
+    }
+
+    public function userToggle(Request $request)
+    {
+        return VendorUserController::updateStatus($request,true);
+    }
+
 }

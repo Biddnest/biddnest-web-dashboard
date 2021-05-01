@@ -31,7 +31,7 @@
 
                         </li>
                         <li class="menu-item" data-toggle="" href="#Branches" role="button" aria-expanded="false"
-                            aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 4.svg')}}" alt=""></i></span> </span>Branches</a>
+                            aria-controls="Customer"> <a class="" href="{{route('vendor.branches')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 4.svg')}}" alt=""></i></span> </span>Branches</a>
                         </li>
 
                         <li class="menu-item" data-toggle="" href="#VehicleManagement" role="button" aria-expanded="false"

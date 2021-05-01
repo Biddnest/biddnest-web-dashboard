@@ -194,7 +194,7 @@
                             @if(count($bookings)== 0)
                                 <div class="row hide-on-data">
                                     <div class="col-md-12 text-center p-20">
-                                        <p class="font14"><i>. You don't any Bookings here.</i></p>
+                                        <p class="font14"><i>. You don't have any Bookings here.</i></p>
                                     </div>
                                 </div>
                             @endif

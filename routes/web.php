@@ -334,7 +334,7 @@ Route::prefix('vendor')->group(function(){
         Route::get('/past/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
     });
 
-    Route::prefix('/usser')->group(function () {
+    Route::prefix('/user')->group(function () {
         Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
     });
     Route::prefix('/inventory')->group(function () {
@@ -342,6 +342,7 @@ Route::prefix('vendor')->group(function(){
         Route::get('/{type}',[VendorWebController::class,'inventoryCetegory'])->name("vendor.inventorycat");
     });
 
+    Route::get('/payout',[VendorWebController::class,'payout'])->name("vendor.payout");
     Route::prefix('/service-request')->group(function () {
         Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
     });
@@ -364,7 +365,6 @@ Route::prefix('vendor')->group(function(){
 
     Route::get('/branches',[VendorWebController::class,'login'])->name("vendor.branches");
     Route::get('/vehicles',[VendorWebController::class,'login'])->name("vendor.vehicles");
-    Route::get('/payouts',[VendorWebController::class,'login'])->name("vendor.payouts");
     Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.my-service-requests");
     Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.reports");
 

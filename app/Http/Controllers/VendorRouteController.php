@@ -79,6 +79,7 @@ class VendorRouteController extends Controller
         else
             return InventoryController::addPrice($request->all());
     }
+
     public function getInventoryprices(Request $request)
     {
         $validation = Validator::make($request->all(),[

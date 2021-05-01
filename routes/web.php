@@ -333,8 +333,12 @@ Route::prefix('vendor')->group(function(){
         Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
         Route::get('/past/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
     });
+
     Route::prefix('/usser')->group(function () {
         Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
+    });
+    Route::prefix('/inventory')->group(function () {
+        Route::get('/',[VendorWebController::class,'inventoryManagement'])->name("vendor.inventorymgt");
     });
 
 

@@ -27,7 +27,7 @@
 
                             </li>
                         <li class="menu-item b-purple" data-toggle="#inventory" href="#Inventory" role="button"
-                            aria-expanded="false" aria-controls="Vendors"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 3.svg')}}" alt=""></i></span> </span>Inventory Management</a>
+                            aria-expanded="false" aria-controls="Vendors"> <a class="" href="{{route('vendor.inventorymgt')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 3.svg')}}" alt=""></i></span> </span>Inventory Management</a>
 
                         </li>
                         <li class="menu-item" data-toggle="" href="#Branches" role="button" aria-expanded="false"

@@ -7,6 +7,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Models\Bid;
 use App\Models\Booking;
+use App\Models\Inventory;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -78,5 +79,11 @@ class VendorWebController extends Controller
         $user=VendorUserController::getUser($request, true);
 
         return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type]);
+    }
+
+    public function inventoryManagement()
+    {
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return view('vendor-panel.inventory.inventorymanagement', ['inventory'=>$inventory]);
     }
 }

@@ -39,7 +39,7 @@
                         </li>
 
                         <li class="menu-item" data-toggle="" href="#VendorsPayout" role="button" aria-expanded="false"
-                            aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 6.svg')}}" alt=""></i></span> </span>Vendors Payout</a>
+                            aria-controls="Customer"> <a class=""  href="{{route('vendor.payout')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 6.svg')}}" alt=""></i></span> </span>Vendors Payout</a>
                         </li>
 
                         <li class="menu-item" data-toggle="" href="#ServiceRequests" role="button" aria-expanded="false"

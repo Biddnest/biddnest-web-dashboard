@@ -93,6 +93,12 @@ class VendorWebController extends Controller
         return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
     }
 
+    public function payout(Request $request)
+    {
+        $payout=PayoutController::getByOrganization($request, true);
+        return view('vendor-panel.payout.payout', ['payouts'=>$payout]);
+    }
+
     public function serviceRequest(Request $request)
     {
         $tickets=Ticket::where(['vendor_id'=>Session::get('account')['id']])->paginate(CommonEnums::$PAGE_LENGTH);

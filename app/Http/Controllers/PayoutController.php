@@ -11,6 +11,7 @@ use App\Models\Payout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Helper;
+use Illuminate\Support\Facades\Session;
 
 class PayoutController extends Controller
 {
@@ -26,9 +27,14 @@ class PayoutController extends Controller
 
     }
 
-    public static function getByOrganization(Request $request)
+    public static function getByOrganization(Request $request, $web=false)
     {
-        $payouts = Payout::where("organization_id", $request->token_payload->organization_id)->paginate(CommonEnums::$PAGE_LENGTH);
+        if($web)
+            $organization_id = Session::get('organization_id');
+        else
+            $organization_id = $request->token_payload->organization_id;
+
+        $payouts = Payout::where("organization_id", $organization_id)->paginate(CommonEnums::$PAGE_LENGTH);
 
         if (isset($request->from) && isset($request->to))
             $payouts->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
@@ -37,10 +43,12 @@ class PayoutController extends Controller
             $payouts->where('status', $request->status);
 
 //        $payouts = $payouts->paginate(CommonEnums::$PAGE_LENGTH);
-
-        return Helper::response(true, "Show data successfully", ["payouts" => $payouts->items(), "paging" => [
-            "current_page" => $payouts->currentPage(), "total_pages" => $payouts->lastPage(), "next_page" => $payouts->nextPageUrl(), "previous_page" => $payouts->previousPageUrl()
-        ]]);
+        if($web)
+            return $payouts;
+        else
+            return Helper::response(true, "Show data successfully", ["payouts" => $payouts->items(), "paging" => [
+                "current_page" => $payouts->currentPage(), "total_pages" => $payouts->lastPage(), "next_page" => $payouts->nextPageUrl(), "previous_page" => $payouts->previousPageUrl()
+            ]]);
     }
 
     public static function add($data)

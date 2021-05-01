@@ -189,6 +189,8 @@ class VendorApiRouteController extends Controller
         return BidController::getPriceList($request->public_booking_id, $request->token_payload->organization_id);
     }
 
+
+    /*Need org_id check in below function*/
     public function assignDriver(Request $request)
     {
         $validation = Validator::make($request->all(),[

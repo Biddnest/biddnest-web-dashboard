@@ -102,7 +102,7 @@
                                         <div class="text-center ">
                                             <h3 class="f-18 theme-text bold p-10">Time Left</h3>
 
-                                            <h1 class="timer"></h1>
+                                            <h1 class="timer" data-time="{{\Carbon\Carbon::parse($booking->bid_result_at)->format('Y-m-d h:i:s')}}"></h1>
 
                                         </div>
 

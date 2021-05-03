@@ -1,3 +1,4 @@
+{{--@php print_r($inventories); exit; @endphp--}}
 <div class="modal-header pb-0 border-none">
     <h3 class="f-18 p-10">
         Item Details
@@ -34,17 +35,27 @@
                         </tr>
                         </thead>
                         <tbody class="mtop-20 ">
-                            <tr class="tb-border">
-                            <td scope="row"> Size :Small
-                                <br>
-                                Material :Wood
-                            </td>
+{{--                        @php print_r(json_encode($inventories)); exit; @endphp--}}
+                            @foreach($inventories as $inventory)
+                                <tr class="tb-border">
+                                    <td scope="row"> Size :{{$inventory->size}}
+                                        <br>
+                                        Material :{{$inventory->material}}
+                                    </td>
 
-                            <td class="text-center">₹ 400</td>
-                            <td class="text-center">₹ 500</td>
-                        </tr>
+                                    <td class="text-center">₹ {{$inventory->price_economics}}</td>
+                                    <td class="text-center">₹ {{$inventory->price_premium}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                   {{-- @if(count($inventories->inventory_price)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You didn't add any price on this Inventory.</i></p>
+                            </div>
+                        </div>
+                    @endif--}}
                 </div>
             </div>
         </div>

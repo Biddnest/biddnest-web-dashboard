@@ -10,7 +10,7 @@
 <div class="modal-body border-top margin-topneg-7">
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active " id="details" role="tabpanel"
-             aria-labelledby="zone-tab">
+             aria-labelledby="zone-tab" style="margin-bottom: 50px;">
             <!-- form starts -->
             <div class="d-flex  row  p-8">
                 <div class="col-sm-6">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14 d-flex justify-content-between">
-                        SKU123456
+                        {{$ticket->id}}
                     </div>
                 </div>
             </div>
@@ -32,7 +32,13 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        <div class="status-badge red-bg">Complaint</div>
+                        <div class="status-badge red-bg">
+                            @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
+                                @if($ticket->type == $key)
+                                    {{ucwords($type)}}
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,7 +50,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14 d-flex justify-content-between">
-                        Item not packed
+                        {{$ticket->heading}}
                     </div>
                 </div>
             </div>
@@ -58,7 +64,7 @@
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
                         <div class="d-flex vertical-center">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod minus sapiente et dicta omnis itaque dignissimos doloribus modi totam.
+                            {{$ticket->desc}}
                         </div>
                     </div>
                 </div>
@@ -70,35 +76,54 @@
                             Replies
                         </div>
                     </div>
-                    <div class="col-sm-3 p-8">
-                        <div class="theme-text f-14 bold">
-                            <img src="./assets/images/upload-image.svg" alt="" srcset="">
-                        </div>
-                    </div>
-                    <div class="col-sm-7 p-8">
-                        <div class="theme-text f-14 bold">
-                            Customer Support
-                        </div>
-                        <span class="text-muted">2 days ago</span>
-                        <p class="p-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui accusamus laudantium alias! Maxime eius esse perspiciatis.</p>
-                    </div>
-                    <div class="col-sm-3 p-8">
-                        <div class="theme-text f-14 bold">
-                            <img src="./assets/images/upload-image.svg" alt="" srcset="">
-                        </div>
-                    </div>
+                    @foreach($replies as $reply)
+                        @if(!$reply->admin_id)
+                            <div class="col-sm-7 p-8">
+                                <div class="theme-text f-14 bold" style="float: right">
+                                    <div>@if($reply->vendor_id){{$reply->vendor->fname}} {{$reply->vendor->lname}}@endif</div>
+                                    <span class="text-muted">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</span>
+                                    <p class="p-1">{!! $reply->chat !!}</p>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-3 p-8">
+                                <div class="theme-text f-14 bold">
+                                    <img src="@if($reply->vendor_id){{$reply->vendor->image}}@else{{$reply->user->avatar}}@endif" alt="" srcset="" style="border-radius: 50px">
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-sm-3 p-8">
+                                <div class="theme-text f-14 bold">
+                                    <img src="{{$reply->admin->image}}" alt="" srcset="" style="border-radius: 50px">
+                                </div>
+                            </div>
+                            <div class="col-sm-7 p-8">
+                                <div class="theme-text f-14 bold">
+                                    <div>{{$reply->admin->fname}} {{$reply->admin->lname}}</div>
+                                    <span class="text-muted">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</span>
+                                    <p class="p-1">{!! $reply->chat !!}</p>
+                                </div>
+
+                            </div>
+                        @endif
+                    @endforeach
+
                     <div class="col-sm-9">
-                        <div class="form-input">
-                                <textarea type="text" id="fullname"
-                                          placeholder="Chandigarh"
-                                          class="form-control" rows="3"> </textarea>
-                            <button class="btn-1 btn white-bg float-right mt-1 ">Comment</button>
-                        </div>
+                        <form action="{{route('api.ticket.addreply')}}" method="POST" data-next="refresh" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate>
+                            <div class="form-input">
+                                <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
+                                    <textarea type="text" id="fullname" name="reply"
+                                              placeholder="Chandigarh"
+                                              class="form-control" rows="3" required> </textarea>
+                                <button class="btn-1 btn white-bg float-right mt-1 ">Comment</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="d-flex   justify-content-center p-10">
-                <div class=""><a class="white-text p-10" href="user-role-details.html"><button
+                <div class=""><a class="white-text p-10" href="{{route('vendor.service_sidebar.reply', ['id'=>$ticket->id])}}"><button
                             class="btn theme-bg white-text">View More</button></a></div>
             </div>
         </div>

@@ -270,4 +270,35 @@ class VendorRouteController extends Controller
         return VehicleController::delete($request->id);
     }
 
+    public function addReply(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketReplyController::addReplyFromVendor(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
+    }
+
+    public function adduser(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required|string',
+            'phone'=>'required|min:10|max:10',
+            'branch' => 'required',
+            'role'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addNewRole($request->all(), Session::get('organization_id'));
+    }
+
 }

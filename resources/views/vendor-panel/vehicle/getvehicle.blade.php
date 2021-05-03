@@ -36,35 +36,50 @@
                     <div class="card  h-auto p-0 pt-10 pb-0" >
 
                         <div class="d-flex row p-15 pb-0">
-                            <div class="col-lg-3">
-                                <div class="form-input">
-                                    <label class="">Name  of vehicle</label>
-                                    <span class="">
-                                    <input type="text" id="fullname"
-                                           placeholder="Tempo"
-                                           class="form-control">
-                                    <span class="error-message">Please enter valid
-                                        First Name</span>
-                                </span>
+                            <form action="" >
+                                <div class="col-lg-3">
+                                    <div class="form-input">
+                                        <label class="">Name  of vehicle</label>
+                                        <span class="">
+                                        <input type="text" id="fullname"
+                                               placeholder="Tempo"
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            First Name</span>
+                                    </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-input">
-                                    <label class="">Vehicle Number</label>
-                                    <span class="">
-                                    <input type="text" id="fullname"
-                                           placeholder="XXXXX"
-                                           class="form-control">
-                                    <span class="error-message">Please enter valid
-                                        First Name</span>
-                                </span>
+                                <div class="col-lg-3">
+                                    <div class="form-input">
+                                        <label class="">Vehicle Number</label>
+                                        <span class="">
+                                        <input type="text" id="fullname"
+                                               placeholder="XXXXX"
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            First Name</span>
+                                    </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 mt-3">
+                                <div class="col-lg-3">
+                                    <div class="form-input">
+                                        <label class="">Vehicle Type</label>
+                                        <span class="">
+                                        <input type="text" id="fullname"
+                                               placeholder="XXXXX"
+                                               class="form-control">
+                                        <span class="error-message">Please enter valid
+                                            First Name</span>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mt-3">
                                 <button class="btn">
                                     Save
                                 </button>
                             </div>
+                            </form>
+
                             <div class="col-sm-12">
                                 <div class="heading p-8  ">
                                     List of Vehicle

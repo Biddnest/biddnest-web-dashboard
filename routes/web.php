@@ -149,6 +149,8 @@ Route::prefix('web/api')->group(function () {
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
 
+
+    /*vendor web apis start*/
     Route::prefix('vendor')->group(function () {
         Route::prefix('auth')->group(function () {
             Route::post('/login', [VendorRouter::class, 'login'])->name("api.vendor_login");
@@ -173,8 +175,11 @@ Route::prefix('web/api')->group(function () {
 
         Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
 
-
+        Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
+        Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
     });
+    /*vendor web apis end*/
+
 
 });
 
@@ -333,14 +338,14 @@ Route::get('/debug/socket', function () {
 
 
 Route::prefix('vendor')->group(function(){
-    Route::prefix('/auth')->group(function () {
+    Route::prefix('/auth')->middleware('redirectToVendorDashboard')->group(function () {
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");
         Route::get('/forgot-password',[VendorWebController::class,'forgotPassword'])->name("vendor.forgotpassword");
         Route::get('/reset-password/{id}',[VendorWebController::class,'resetPassword'])->name("vendor.reset-passwords");
         Route::get('/{phone}/verify-otp',[VendorWebController::class,'verifyOtp'])->name("vendor.verifyotp");
     });
+    Route::middleware("checkVendorSession")->group(function(){
     Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
-
 
     Route::prefix('/booking')->group(function () {
         Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
@@ -380,11 +385,7 @@ Route::prefix('vendor')->group(function(){
     Route::get('/vehicles',[VendorWebController::class,'login'])->name("vendor.vehicles");
     Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.my-service-requests");
     Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.reports");
-
-
-
-
-
+    });
 });
 
 

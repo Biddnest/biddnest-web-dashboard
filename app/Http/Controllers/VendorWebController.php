@@ -10,6 +10,7 @@ use App\Models\Booking;
 use App\Models\Inventory;
 use App\Models\Organization;
 use App\Models\Ticket;
+use App\Models\Vehicle;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -104,6 +105,17 @@ class VendorWebController extends Controller
             $branch =Organization::where("parent_org_id", $home_branch->id)->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
 
         return view('vendor-panel.branch.getbranch', ['branches'=>$branch, 'home_branch'=>$home_branch]);
+    }
+
+    public function getVehicle(Request $request)
+    {
+        $exist_vehicle=null;
+        if($request->id)
+        {
+            $exist_vehicle=null;
+        }
+        $vehicle = Vehicle::where('organization_id', Session::get('organization_id'))->get();
+        return view('vendor-panel.vehicle.getvehicle', ['vehicles'=>$vehicle, 'exist_vehicle'=>$exist_vehicle]);
     }
 
     public function payout(Request $request)

@@ -108,6 +108,9 @@ class PaymentController extends Controller
                 'status'=> PaymentEnums::$STATUS['completed']
             ]);
 
+            if(!$order_id_exist->booking_id)
+                return Helper::response(false, "Booking id is not present. That was an error.");
+
             $meta = json_decode(Booking::where("id",$order_id_exist->booking_id)->pluck("meta")[0],true);
             $meta["start_pin"] = Helper::generateOTP(4);
 

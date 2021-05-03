@@ -224,4 +224,32 @@ class VendorRouteController extends Controller
         return VendorUserController::updateStatus($request,true);
     }
 
+    public static function addVehicle(Request $request){
+        $validation = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'type' => 'required',
+            'number' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VehicleController::add($request->name,$request->number,$request->type,Session::get('organization_id'));
+
+    }
+
+    public static function updateVehicle(Request $request){
+        $validation = Validator::make($request->all(),[
+            'id' => 'required',
+            'name' => 'required|string',
+            'type' => 'required',
+            'number' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VehicleController::update($request->id, $request->name,$request->number,$request->type,Session::get('organization_id'));
+    }
+
 }

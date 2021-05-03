@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14 d-flex justify-content-between">
-                        SKU123456
+                        {{$ticket->id}}
                     </div>
                 </div>
             </div>
@@ -32,7 +32,11 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        <div class="status-badge red-bg">Complaint</div>
+                        <div class="status-badge red-bg">
+                            @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
+                                @if()
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

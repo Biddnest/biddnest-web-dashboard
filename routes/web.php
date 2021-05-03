@@ -344,7 +344,7 @@ Route::prefix('vendor')->group(function(){
         Route::get('/reset-password/{id}',[VendorWebController::class,'resetPassword'])->name("vendor.reset-passwords");
         Route::get('/{phone}/verify-otp',[VendorWebController::class,'verifyOtp'])->name("vendor.verifyotp");
     });
-    Route::middleware("checkVendorSession")->group(function(){
+    Route::middleware("CheckVendorSession")->group(function(){
     Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
 
     Route::prefix('/booking')->group(function () {

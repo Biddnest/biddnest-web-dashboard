@@ -300,5 +300,28 @@ class VendorRouteController extends Controller
 
         return OrganisationController::addNewRole($request->all(), Session::get('organization_id'));
     }
+    public function editUser(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'role_id'=>'required',
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required|string',
+            'phone'=>'required|min:10|max:10',
+            'branch' => 'required',
+            'role'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::editNewRole($request->all(), Session::get('account')['id'], $request->role_id);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        return OrganisationController::deleteRole($request->id, Session::get('organization_id'));
+    }
 
 }

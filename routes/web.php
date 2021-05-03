@@ -177,7 +177,9 @@ Route::prefix('web/api')->group(function () {
         Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");
 
         Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
-        Route::post('/user/add',[VendorRouter::class,'adduser'])->name("api.user.add");
+        Route::post('/user/add',[VendorRouter::class,'addUser'])->name("api.user.add");
+        Route::put('/user/edit',[VendorRouter::class,'editUser'])->name("api.user.edit");
+        Route::delete('/user/{id}',[VendorRouter::class,'deleteUser'])->name("api.user.delete");
 
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
@@ -373,9 +375,9 @@ Route::prefix('vendor')->group(function(){
         });
 
         Route::prefix('/user')->group(function () {
+            Route::get('/add-role',[VendorWebController::class,'userAdd'])->name("vendor.addusermgt");
             Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
-            Route::get('/create',[VendorWebController::class,'userAdd'])->name("vendor.addusermgt");
-            Route::get('/{id}/edit',[VendorWebController::class,'userAdd'])->name("vendor.editusermgt");
+            Route::get('/{id}/edit-role',[VendorWebController::class,'userAdd'])->name("vendor.editusermgt");
             Route::get('/{id}/sidebar',[VendorWebController::class,'sidebar_userManagement'])->name("vendor.sidebar.userrole");
         });
 

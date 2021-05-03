@@ -4,14 +4,14 @@
 
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="newuserroles">
         <div class="d-flex  flex-row justify-content-between">
-            <h3 class="page-head text-left p-4 theme-text">Add New User</h3>
+            <h3 class="page-head text-left p-4 theme-text">@if($roles)Edite @else Add New @endif User</h3>
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left p-2 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('vendor.managerusermgt', ['type'=>"admin"])}}"> Users & Roles</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add New User</li>
+                        <li class="breadcrumb-item active" aria-current="page">@if($roles)Edite @else Add New @endif User</li>
                     </ol>
                 </nav>
             </div>
@@ -19,8 +19,11 @@
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-sm-10">
                 <div class="card  h-auto p-0 pt-10 ">
-                    <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_add')}}" data-next="redirect" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
+                    <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="@if($roles){{route('api.user.edit')}} @else {{route('api.user.add')}}@endif" data-next="redirect" data-url="{{route('vendor.managerusermgt', ['type'=>"admin"])}}" data-alert="mega" method="@if($roles){{"PUT"}}@else{{"POST"}}@endif" data-parsley-validate>
                         <div class="card-head right text-left  p-8 ">
+                            @if($roles)
+                                <input type="hidden" name="role_id" value="{{$roles->id}}">
+                            @endif
                             <div class="d-flex row p-15 pb-0">
                                 <div class="col-lg-6">
                                     <div class="form-input">
@@ -29,7 +32,7 @@
                                             <select  id="select-role" name="role" class="form-control" required>
                                                 <option  value="">--select--</option>
                                                @foreach(\App\Enums\VendorEnums::$ROLES as $role=>$key)
-                                                    <option  value="$key">{{ucwords($role)}}</option>
+                                                    <option  value="{{$key}}" @if($roles && ($roles->user_role == $key)) selected @endif>{{ucwords($role)}}</option>
                                                 @endforeach
                                             </select>
                                         </span>
@@ -44,7 +47,7 @@
                                     <p class="img-label">Image</p>
                                     <div class="upload-section p-20 pt-0">
                                         <img class="upload-preview"
-                                             src="{{asset('static/images/upload-image.svg')}}"
+                                             src="@if(!$roles){{asset('static/images/upload-image.svg')}}@else{{$roles->image}}@endif"
                                              alt=""/>
                                         <div class="ml-1">
                                             <div class="file-upload">
@@ -67,7 +70,7 @@
                                         <div class="form-input">
                                             <label class=""> First Name</label>
                                             <input type="text" id="fullname" name="fname"
-                                                   placeholder="David"
+                                                   placeholder="David" value="{{$roles->fname ?? ''}}"
                                                    class="form-control" required>
                                             <span class="error-message">Please enter valid
                                                 First Name</span>
@@ -78,7 +81,7 @@
                                         <div class="form-input">
                                             <label class="full-name"> Last Name</label>
                                             <input type="text" id="fullname" name="lname"
-                                                   placeholder="Jerome"
+                                                   placeholder="Jerome" value="{{$roles->lname ?? ''}}"
                                                    class="form-control" required>
                                             <span class="error-message">Please enter valid First Name</span>
                                         </div>
@@ -87,7 +90,7 @@
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>
                                             <input type="tel" id="phone"
-                                                   placeholder="987654321" name="phone"
+                                                   placeholder="987654321" name="phone" value="{{$roles->phone ?? ''}}"
                                                    class=" form-control" required>
                                             <span class="error-message">Please enter valid
                                                 Phone number</span>
@@ -96,8 +99,8 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Email ID</label>
-                                            <input type="email" id="email"
-                                                   placeholder="davidjerome@gmail.com"
+                                            <input type="email" id="email" name="email"
+                                                   placeholder="davidjerome@gmail.com" value="{{$roles->email ?? ''}}"
                                                    class="form-control">
                                             <span class="error-message">Please enter valid</span>
                                         </div>
@@ -108,12 +111,19 @@
                                             <select class="form-control" name="branch" required>
                                                 <option value="">--Select--</option>
                                                 @foreach($branches as $branch)
-                                                    <option value="{{$branch->id}}">{{$branch->city}}</option>
+                                                    <option value="{{$branch->id}}" @if ($branch->id == $roles->organization_id) selected @endif>{{$branch->city}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid
                                                 Phone number</span>
                                         </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Password</label>
+                                        <input type="password" id="fullname" placeholder="Enter Password" name="password" class="form-control">
+                                        <span class="error-message">Please enter valid Password</span>
+                                    </div>
                                 </div>
 
                             </div>

@@ -91,6 +91,7 @@ class VendorWebController extends Controller
 
         return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type]);
     }
+
     public function sidebar_userManagement(Request $request)
     {
         $user=Vendor::where('id', $request->id)->with('organization')->first();
@@ -116,6 +117,7 @@ class VendorWebController extends Controller
         }])->first();
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
+
 
     public function getBranches()
     {
@@ -163,8 +165,17 @@ class VendorWebController extends Controller
     public function serviceSidebar(Request $request)
     {
         $ticket=Ticket::where('id', $request->id)->with('reply')->first();
-        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->limit('2')->get();
-        return view('vendor-panel.tickets.servicesidebar', ['tickets'=>$ticket, 'replies'=>$replies]);
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('vendor')->latest()->take(2)->get();
+
+        return view('vendor-panel.tickets.servicesidebar', ['ticket'=>$ticket, 'replies'=>$replies]);
+    }
+
+    public function serviceSidebar_reply(Request $request)
+    {
+        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('vendor')->get();
+
+        return view('vendor-panel.tickets.reply', ['tickets'=>$ticket, 'replies'=>$replies]);
     }
 
     public function profile(Request $request)
@@ -179,5 +190,10 @@ class VendorWebController extends Controller
             $parentbranch =Organization::where("id", $user->organization->id)->first();
 
         return view('vendor-panel.dashboard.myprofile', ['user'=>$user, 'branch'=>$parentbranch]);
+    }
+
+    public function userAdd(Request $request)
+    {
+        return view('vendor-panel.user.add_user');
     }
 }

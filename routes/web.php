@@ -174,12 +174,16 @@ Route::prefix('web/api')->group(function () {
         Route::post('/booking/trip/end',[VendorRouter::class,'endTrip'])->name("api.trip.end");
 
         Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
+        Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");
 
         Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
+        Route::post('/user/add',[VendorRouter::class,'adduser'])->name("api.user.add");
 
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
         Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
+
+
     });
     /*vendor web apis end*/
 
@@ -370,6 +374,8 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/user')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
+            Route::get('/create',[VendorWebController::class,'userAdd'])->name("vendor.addusermgt");
+            Route::get('/{id}/edit',[VendorWebController::class,'userAdd'])->name("vendor.editusermgt");
             Route::get('/{id}/sidebar',[VendorWebController::class,'sidebar_userManagement'])->name("vendor.sidebar.userrole");
         });
 
@@ -394,6 +400,7 @@ Route::prefix('vendor')->group(function(){
         Route::prefix('/service-request')->group(function () {
             Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
             Route::get('/{id}/sidebar',[VendorWebController::class,'serviceSidebar'])->name("vendor.service_sidebar");
+            Route::get('/reply/{id}/detail',[VendorWebController::class,'serviceSidebar_reply'])->name("vendor.service_sidebar.reply");
         });
 
 

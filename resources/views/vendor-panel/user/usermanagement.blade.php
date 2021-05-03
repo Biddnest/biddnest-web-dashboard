@@ -5,7 +5,7 @@
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4 -ml-2 f-20">Manage User Roles</h3>
             <div class="mr-2">
-                <a href="Add-New-Users.html">
+                <a href="{{route('vendor.addusermgt')}}">
                     <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New User</button>
                 </a>
             </div>

@@ -17,8 +17,10 @@ class CheckVendorSession
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session::get('sessionActive'))
+        if(!Session::get('sessionFor') || Session::get('sessionFor') != "vendor") {
+            Session::flush();
             return response()->redirectToRoute('vendor.login');
+        }
 
         return $next($request);
     }

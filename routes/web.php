@@ -185,6 +185,9 @@ Route::prefix('web/api')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return response()->redirectToRoute('login');
+    });
         Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
             Route::get('/login',[WebController::class,'login'])->name("login");
             Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");
@@ -339,6 +342,10 @@ Route::get('/debug/socket', function () {
 
 /* Vendor page routes */
 Route::prefix('vendor')->group(function(){
+    Route::get('/', function () {
+        return response()->redirectToRoute('vendor.login');
+    });
+
     Route::prefix('/auth')->middleware('redirectToVendorDashboard')->group(function () {
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");
         Route::get('/forgot-password',[VendorWebController::class,'forgotPassword'])->name("vendor.forgotpassword");

@@ -47,21 +47,22 @@
                         <div class="card-head right text-left">
                             <h3 class=" f-18 pb-0">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item ">
-                                        <a class="nav-link @if($type == "live") active @endif p-15"
-                                           href="{{route('vendor.bookings', ['type'=>"live"])}}" >New Orders</a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link @if($type == "participated") active @endif p-15 hide-cards"
-                                           href="{{route('vendor.bookings', ['type'=>"participated"])}}" role="tab"
-                                        >Participated Orders</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($type == "scheduled") active @endif p-15" href="{{route('vendor.bookings', ['type'=>"scheduled"])}}">Scheduled Orders</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($type == "bookmarked") active @endif p-15" href="{{route('vendor.bookings', ['type'=>"bookmarked"])}}">Saved Orders</a>
-                                    </li>
+                                    @foreach(\App\Enums\BookingEnums::$BOOKING_FETCH_TYPE as $fetch_type)
+                                        <li class="nav-item ">
+                                            <a class="nav-link @if($type == $fetch_type) active @endif p-15"
+                                               href="{{route('vendor.bookings', ['type'=>$fetch_type])}}" >
+                                                @if($fetch_type == "live")
+                                                    New Orders
+                                                @elseif($fetch_type == "participated")
+                                                    Participated Orders
+                                                @elseif($fetch_type == "scheduled")
+                                                    Scheduled Orders
+                                                @elseif($fetch_type == "bookmarked")
+                                                    Saved Orders
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </h3>
                         </div>

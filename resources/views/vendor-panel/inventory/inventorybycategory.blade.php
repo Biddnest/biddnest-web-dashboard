@@ -21,8 +21,8 @@
             </div>
         </div>
 
-    <!-- Dashboard cards -->
-    <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
+        <!-- Dashboard cards -->
+        <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
         <div class="col-lg-12">
             <div class="card h-auto p-0 pt-20">
                 <div class="card-head right text-left  p-15 pt-20 pb-0 row justify-content-between d-felx">
@@ -46,7 +46,7 @@
                     <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
                         <div class="d-flex  row p-20 justify-content-between">
                             @foreach($inventories as $inventory)
-                                <div class="simple-card category-cards col-sm-2">
+                                <div class="simple-card category-cards invsidebar col-sm-2" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">
                                 <div class="card-title">{{ucfirst(trans($inventory->category))}}</div>
                                 <div class="card-body">
                                     <img src="{{$inventory->icon}}">
@@ -80,6 +80,6 @@
 
 
 
-</div>
+    </div>
 
 @endsection

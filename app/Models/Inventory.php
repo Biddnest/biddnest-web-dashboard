@@ -16,7 +16,7 @@ class Inventory extends Model
         $this->belongsToMany(Subservice::class);
     }
 
-    public function InventoryPrice(){
+    public function prices(){
         return $this->hasMany(InventoryPrice::class);
     }
 }

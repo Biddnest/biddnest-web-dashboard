@@ -34,37 +34,48 @@
 
                      </div> -->
                     <div class="card  h-auto p-0 pt-10 pb-0" >
-
-                        <div class="d-flex row p-15 pb-0">
-                            <div class="col-lg-3">
-                                <div class="form-input">
-                                    <label class="">Name  of vehicle</label>
-                                    <span class="">
-                                    <input type="text" id="fullname"
-                                           placeholder="Tempo"
-                                           class="form-control">
-                                    <span class="error-message">Please enter valid
-                                        First Name</span>
-                                </span>
+                        <form action="@if(!$exist_vehicle){{route('api.vehicle.create')}}@else{{route('api.vehicle.update')}}@endif" method="@if(isset($exist_vehicle)){{"PUT"}}@else{{"POST"}}@endif" data-next="refresh" {{--data-redirect-type="hard" data-url="{{route('vendor.vehicle')}}"--}} data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate >
+                            <div class="d-flex row p-15 pb-0">
+                                <div class="" style="padding-left: 50px;">
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-input">
-                                    <label class="">Vehicle Number</label>
-                                    <span class="">
-                                    <input type="text" id="fullname"
-                                           placeholder="XXXXX"
-                                           class="form-control">
-                                    <span class="error-message">Please enter valid
-                                        First Name</span>
-                                </span>
+                                <div class="col-lg-3">
+                                    <div class="form-input">
+                                        @if($exist_vehicle)
+                                            <input type="hidden" value="{{$exist_vehicle->id}}" name="id">
+                                        @endif
+                                        <label class="">Name of vehicle</label>
+                                        <input type="text" id="fullname" name="name"
+                                                   placeholder="Tempo" value="{{$exist_vehicle->name ?? ''}}"
+                                                   class="form-control">
+                                        <span class="error-message">Please enter valid
+                                                Vehicle Name</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 mt-3">
-                                <button class="btn">
-                                    Save
-                                </button>
-                            </div>
+                                <div class="col-lg-3">
+                                    <div class="form-input">
+                                        <label class="">Vehicle Number</label>
+                                        <input type="text" id="fullname" name="number"
+                                                   placeholder="XXXXX" value="{{$exist_vehicle->number ?? ''}}"
+                                                   class="form-control">
+                                        <span class="error-message">Please enter valid
+                                                Vehicle Number</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-input">
+                                        <label class="">Vehicle Type</label>
+                                        <input type="text" id="fullname" name="type"
+                                                   placeholder="XXXXX" value="{{$exist_vehicle->vehicle_type ?? ''}}"
+                                                   class="form-control">
+                                        <span class="error-message">Please enter valid
+                                                        Vehicle Type/span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 mt-3">
+                                    <button class="btn">
+                                        Save
+                                    </button>
+                                </div>
                             <div class="col-sm-12">
                                 <div class="heading p-8  ">
                                     List of Vehicle
@@ -83,13 +94,14 @@
                                     </thead>
                                     <tbody class="mtop-20 f-13">
                                         @foreach($vehicles as $vehicle)
-                                            <tr class="">
+                                            <tr class="vehicle_{{$vehicle->id}}">
                                                 <th scope="row">{{ucwords($vehicle->name)}}</th>
                                                 <td class="">{{strtoupper($vehicle->number)}}</td>
                                                 <td class="">{{ucwords($vehicle->vehicle_type)}}</td>
                                                 @if(\App\Helper::is("admin", true))
-                                                    <td class="text-center"> <i class="icon dripicons-pencil  p-1 cursor-pointer" aria-hidden="true"></i>
-                                                        <i class="icon dripicons-trash p-1 cursor-pointer" aria-hidden="true"></i>
+                                                    <td class="text-center">
+                                                        <a  class = "inline-icon-button"  href="{{route('vendor.edit_vehicle', ['id'=>$vehicle->id])}}"><i class="icon dripicons-pencil  p-1 cursor-pointer" aria-hidden="true"></i></a>
+                                                        <a href="#" class="delete inline-icon-button" data-parent=".vehicle_{{$vehicle->id}}" data-confirm="Are you sure, you want delete this Vehicle permenently? You won't be able to undo this." data-url="{{route('api.vehicle.delete',['id'=>$vehicle->id])}}"><i class="icon dripicons-trash p-1 cursor-pointer" aria-hidden="true"></i></a>
                                                     </td>
                                                 @endif
                                             </tr>
@@ -106,7 +118,7 @@
 
                         </div>
 
-
+                        </form>
                     </div>
 
                 </div>

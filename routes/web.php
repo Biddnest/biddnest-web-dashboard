@@ -393,6 +393,7 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/service-request')->group(function () {
             Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
+            Route::get('/{id}/sidebar',[VendorWebController::class,'serviceSidebar'])->name("vendor.service_sidebar");
         });
 
 

@@ -77,7 +77,7 @@
                             </thead>
                             <tbody class="mtop-20 f-13">
                                 @foreach($tickets as $ticket)
-                                    <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.service_sidebar',['id'=>$ticket->id]) }}">
                                         <td scope="row" class="text-left">{{$ticket->id}}</td>
                                         <td>
                                             @switch($ticket->type)

@@ -11,6 +11,7 @@ use App\Models\Inventory;
 use App\Models\Organization;
 use App\Models\Payout;
 use App\Models\Ticket;
+use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -110,7 +111,9 @@ class VendorWebController extends Controller
 
     public function inventorySidebar(Request $request)
     {
-        $inventory=Inventory::where('id', $request->id)->with('InventoryPrice')->get();
+        $inventory=Inventory::where('id', $request->id)->with(['prices'=>function($query){
+            $query->where('organization_id', Session::get('organization_id'));
+        }])->get();
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
 
@@ -155,6 +158,13 @@ class VendorWebController extends Controller
     {
         $tickets=Ticket::where(['vendor_id'=>Session::get('account')['id']])->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type]);
+    }
+
+    public function serviceSidebar(Request $request)
+    {
+        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
+        return view('vendor-panel.tickets.servicesidebar', ['tickets'=>$ticket, 'replies'=>$replies]);
     }
 
     public function profile(Request $request)

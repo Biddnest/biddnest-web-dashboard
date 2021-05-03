@@ -314,7 +314,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
 });
 
-$("body").on('click', ".sidebar", function(event) {
+$("body").on('click', ".invsidebar", function(event) {
     var $this = $(this);
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
@@ -324,10 +324,11 @@ $("body").on('click', ".sidebar", function(event) {
         '                </div>');
 
     $('.side-bar-pop-up').addClass('display-pop-up');
-    $.get($(this).parent().data("sidebar"), {}, function(response){
+    $.get($(this).data("sidebar"), {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
+
 
 });
 

@@ -50,7 +50,7 @@ class VendorUserController extends Controller
         Session::put(["account"=>['id'=>$vendor_user->id,
             'name'=>$vendor_user->fname.' '.$vendor_user->lname,
             'email'=>$vendor_user->email]]);
-        Session::put('sessionActive', true);
+        Session::put('sessionFor', "vendor");
         Session::put('user_role', $vendor_user->user_role);
 
         Session::put('organization_id', $vendor_user->organization->id);

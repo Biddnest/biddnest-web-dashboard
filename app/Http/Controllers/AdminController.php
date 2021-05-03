@@ -51,7 +51,7 @@ class AdminController extends Controller
            Session::put(["account"=>['id'=>$admin_user->id,
                         'name'=>$admin_user->fname.' '.$admin_user->lname,
                         'email'=>$admin_user->email]]);
-            Session::put('sessionActive', true);
+            Session::put('sessionFor', "admin");
             Session::put('user_role', $admin_user->role);
             $zone = [];
 

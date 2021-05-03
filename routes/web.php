@@ -177,6 +177,7 @@ Route::prefix('web/api')->group(function () {
 
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
+        Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
     });
     /*vendor web apis end*/
 
@@ -369,6 +370,7 @@ Route::prefix('vendor')->group(function(){
 
     Route::prefix('/vehicle')->group(function () {
         Route::get('/',[VendorWebController::class,'getVehicle'])->name("vendor.vehicle");
+        Route::get('/{id}',[VendorWebController::class,'getVehicle'])->name("vendor.edit_vehicle");
     });
 
     Route::prefix('/service-request')->group(function () {

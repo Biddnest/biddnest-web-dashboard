@@ -112,9 +112,9 @@ class VendorWebController extends Controller
         $exist_vehicle=null;
         if($request->id)
         {
-            $exist_vehicle=null;
+            $exist_vehicle=Vehicle::where('id', $request->id)->first();
         }
-        $vehicle = Vehicle::where('organization_id', Session::get('organization_id'))->get();
+        $vehicle = Vehicle::where(['organization_id'=>Session::get('organization_id'), 'deleted'=>CommonEnums::$NO])->get();
         return view('vendor-panel.vehicle.getvehicle', ['vehicles'=>$vehicle, 'exist_vehicle'=>$exist_vehicle]);
     }
 

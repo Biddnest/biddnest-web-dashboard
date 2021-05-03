@@ -278,7 +278,7 @@ $("body").on('click', ".delete", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
         var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
-            // console.log(response);
+            console.log(response);
             if(response.status == "success")
             {
                 tinySuccessAlert("Deleted Successfully", response.message);

@@ -184,6 +184,9 @@ Route::prefix('web/api')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return response()->redirectToRoute('login');
+    });
         Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
             Route::get('/login',[WebController::class,'login'])->name("login");
             Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");

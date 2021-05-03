@@ -362,6 +362,10 @@ Route::prefix('vendor')->group(function(){
 
     Route::get('/payout',[VendorWebController::class,'payout'])->name("vendor.payout");
 
+    Route::prefix('/vehicle')->group(function () {
+        Route::get('/',[VendorWebController::class,'getVehicle'])->name("vendor.vehicle");
+    });
+
     Route::prefix('/service-request')->group(function () {
         Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
     });

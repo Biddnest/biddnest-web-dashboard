@@ -47,21 +47,22 @@
                         <div class="card-head right text-left">
                             <h3 class=" f-18 pb-0">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item ">
-                                        <a class="nav-link @if($type == "live") active @endif p-15"
-                                           href="{{route('vendor.bookings', ['type'=>"live"])}}" >New Orders</a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link @if($type == "participated") active @endif p-15 hide-cards"
-                                           href="{{route('vendor.bookings', ['type'=>"participated"])}}" role="tab"
-                                        >Participated Orders</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($type == "scheduled") active @endif p-15" href="{{route('vendor.bookings', ['type'=>"scheduled"])}}">Scheduled Orders</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($type == "bookmarked") active @endif p-15" href="{{route('vendor.bookings', ['type'=>"bookmarked"])}}">Saved Orders</a>
-                                    </li>
+                                    @foreach(\App\Enums\BookingEnums::$BOOKING_FETCH_TYPE as $fetch_type)
+                                        <li class="nav-item ">
+                                            <a class="nav-link @if($type == $fetch_type) active @endif p-15"
+                                               href="{{route('vendor.bookings', ['type'=>$fetch_type])}}" >
+                                                @if($fetch_type == "live")
+                                                    New Orders
+                                                @elseif($fetch_type == "participated")
+                                                    Participated Orders
+                                                @elseif($fetch_type == "scheduled")
+                                                    Scheduled Orders
+                                                @elseif($fetch_type == "bookmarked")
+                                                    Saved Orders
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </h3>
                         </div>
@@ -149,7 +150,7 @@
                                             <td>{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
                                         @endif
                                         @if($type != "scheduled")
-                                            <td><span class="timer-bg  text-center status-badge">{{'00:'.\Carbon\Carbon::now()->diff($booking->bid_result_at)->format('%I:%S') }}</span>
+                                            <td><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}"></span>
                                             </td>
                                         @endif
                                         @if($type == "bookmarked")
@@ -194,7 +195,7 @@
                             @if(count($bookings)== 0)
                                 <div class="row hide-on-data">
                                     <div class="col-md-12 text-center p-20">
-                                        <p class="font14"><i>. You don't any Bookings here.</i></p>
+                                        <p class="font14"><i>. You don't have any Bookings here.</i></p>
                                     </div>
                                 </div>
                             @endif

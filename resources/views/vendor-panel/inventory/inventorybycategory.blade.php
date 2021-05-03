@@ -36,24 +36,11 @@
                     <li class="nav-item">
                         <a class="nav-link p-15" id="live-tab" href="{{route('vendor.inventorymgt')}}">All</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if($type == 'furniture') active @endif p-15" id="past-tab"  href="{{route('vendor.inventorycat', ['type'=>"furniture"])}}">Furniture</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if($type == 'electronics') active @endif  p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"electronics"])}}" >Electronics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if($type == 'electricle') active @endif p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"electricle"])}}" >Electrical</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if($type == 'applience') active @endif p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"applience"])}}">Appliances</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if($type == 'automobile') active @endif p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"automobile"])}}">Automobile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if($type == 'others') active @endif p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"others"])}}">Others</a>
-                    </li>
+                    @foreach(\App\Enums\InventoryEnums::$CATEGORY as $category)
+                        <li class="nav-item">
+                            <a class="nav-link @if($type == $category) active @endif p-15" id="past-tab"  href="{{route('vendor.inventorycat', ['type'=>$category])}}">{{ucfirst(trans($category))}}</a>
+                        </li>
+                    @endforeach
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">

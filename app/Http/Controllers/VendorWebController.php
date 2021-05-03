@@ -8,7 +8,9 @@ use App\Enums\CommonEnums;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Inventory;
+use App\Models\Organization;
 use App\Models\Ticket;
+use App\Models\Vehicle;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -91,6 +93,29 @@ class VendorWebController extends Controller
     {
         $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'category'=>$request->type])->get();
         return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
+    }
+
+    public function getBranches()
+    {
+        $home_branch =Organization::where('id', Session::get('organization_id'))->with('admin')->first();
+
+        if($home_branch->parent_org_id)
+            $branch = Organization::where('parent_org_id', $home_branch->parent_org_id)->orWhere('id', $home_branch->parent_org_id)->where('id', '!=', $home_branch->id)->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
+        else
+            $branch =Organization::where("parent_org_id", $home_branch->id)->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return view('vendor-panel.branch.getbranch', ['branches'=>$branch, 'home_branch'=>$home_branch]);
+    }
+
+    public function getVehicle(Request $request)
+    {
+        $exist_vehicle=null;
+        if($request->id)
+        {
+            $exist_vehicle=null;
+        }
+        $vehicle = Vehicle::where('organization_id', Session::get('organization_id'))->get();
+        return view('vendor-panel.vehicle.getvehicle', ['vehicles'=>$vehicle, 'exist_vehicle'=>$exist_vehicle]);
     }
 
     public function payout(Request $request)

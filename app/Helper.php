@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Enums\AdminEnums;
+use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Faker\Provider\File;
 use \Firebase\JWT\JWT;
@@ -52,26 +53,44 @@ class Helper
 
     }
 
-    public static function is($role){
+    public static function is($role, $vendor=false){
 
-        switch($role){
+        if(!$vendor) {
+            switch ($role) {
 
-            case "admin":
-                if(Session::get('user_role') === AdminEnums::$ROLES['admin'])
-                    return true;
-            break;
+                case "admin":
+                    if (Session::get('user_role') === AdminEnums::$ROLES['admin'])
+                        return true;
+                    break;
 
-            case "zone_admin":
-                if(Session::get('user_role') === AdminEnums::$ROLES['zone_admin'])
-                    return true;
-            break;
+                case "zone_admin":
+                    if (Session::get('user_role') === AdminEnums::$ROLES['zone_admin'])
+                        return true;
+                    break;
 
-            case "marketing":
-                if(Session::get('user_role') === AdminEnums::$ROLES['marketing'])
-                    return true;
-            break;
+                case "marketing":
+                    if (Session::get('user_role') === AdminEnums::$ROLES['marketing'])
+                        return true;
+                    break;
 
             }
+
+        }
+        else
+        {
+            switch ($role) {
+
+                case "admin":
+                    if (Session::get('user_role') === VendorEnums::$ROLES['admin'])
+                        return true;
+                    break;
+
+                case "manager":
+                    if (Session::get('user_role') === VendorEnums::$ROLES['zone_admin'])
+                        return true;
+                    break;
+            }
+        }
             return false;
     }
 

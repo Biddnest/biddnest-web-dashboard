@@ -59,12 +59,14 @@
                                     <th scope="col">Phone</th>
                                     <th scope="col" class="text-center">Branch</th>
                                     <th scope="col " class="text-center">Status</th>
-                                    <th scope="col" class="text-center">Actions</th>
+                                    @if(\App\Helper::is("admin", true))
+                                        <th scope="col" class="text-center">Actions</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20  f-13 text-center">
                                     @foreach($users as $user)
-                                        <tr class="tb-border  cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.sidebar.userrole',['id'=>$user->id]) }}">
                                             <td scope="row" class="text-left">{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</td>
 
                                             <td>{{$user->email}}</td>
@@ -72,15 +74,17 @@
                                             <td>{{ucfirst(trans($user->organization->city))}}</td>
 
                                             <td class="text-center">
-                                                    @if($user->status == \App\Enums\VendorEnums::$STATUS['inactive'])
-                                                        <span class="red-bg  text-center status-badge complete-bg"> Deactive</span>
-                                                    @elseif($user->status == \App\Enums\VendorEnums::$STATUS['active'])
-                                                        <span class="green-bg  text-center status-badge complete-bg"> Active</span>
-                                                    @endif
-                                                </td>
-                                            <td class="text-center"> <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
-                                                <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                                @if($user->status == \App\Enums\VendorEnums::$STATUS['inactive'])
+                                                    <span class="red-bg  text-center status-badge complete-bg"> Deactive</span>
+                                                @elseif($user->status == \App\Enums\VendorEnums::$STATUS['active'])
+                                                    <span class="green-bg  text-center status-badge complete-bg"> Active</span>
+                                                @endif
                                             </td>
+                                            @if(\App\Helper::is("admin", true))
+                                                <td class="text-center"> <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
+                                                    <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

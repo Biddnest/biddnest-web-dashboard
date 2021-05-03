@@ -130,10 +130,10 @@
 
                             <div class="dropdown">
                                 <ul>
-                                    <li><a href="my-profile.html">My Profile</a></li>
-                                    <li><a href="#">Change Password</a></li>
+                                    <li><a href="{{route('vendor.myprofile', ['id'=>\Illuminate\Support\Facades\Session::get('account')['id']])}}">My Profile</a></li>
+                                    <li><a href="{{route('vendor.password-reset' , ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">Change Password</a></li>
 
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="#0" onclick="location.assign('{{route('vendor.logout')}}')">Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -150,6 +150,9 @@
             </footer>
         </div>
         <!-- footer -->
+    </div>
+
+    <div class="side-bar-pop-up">
     </div>
 
 </main>

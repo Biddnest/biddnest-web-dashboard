@@ -46,7 +46,7 @@
                     <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
                         <div class="d-flex  row p-20 justify-content-between">
                             @foreach($inventories as $inventory)
-                                <div class="simple-card category-cards col-sm-2">
+                                <div class="simple-card category-cards col-sm-2" data-sidebar="{{route('vendor.inventory.sidebar', ['id'=>$inventory->id])}}">
                                 <div class="card-title">{{ucfirst(trans($inventory->category))}}</div>
                                 <div class="card-body">
                                     <img src="{{$inventory->icon}}">

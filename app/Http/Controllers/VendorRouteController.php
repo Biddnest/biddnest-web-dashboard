@@ -62,6 +62,19 @@ class VendorRouteController extends Controller
             return VendorUserController::passwordReset($request->password, $request->bearer);
     }
 
+    public function old_reset_password(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'old_password'=> 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required_with:password|same:password'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::changePassword($request->bearer, $request->old_password, $request->password, $request->password_confirmation);
+    }
+
     public function addPrice(Request $request)
     {
         $validation = Validator::make($request->all(),[

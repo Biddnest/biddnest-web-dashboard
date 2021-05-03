@@ -336,7 +336,7 @@ Route::get('/debug/socket', function () {
     return view("debug.socket");
 });
 
-
+/* Vendor page routes */
 Route::prefix('vendor')->group(function(){
     Route::prefix('/auth')->middleware('redirectToVendorDashboard')->group(function () {
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");

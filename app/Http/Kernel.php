@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkSession' => \App\Http\Middleware\CheckSession::class,
         'redirectToDashboard' => \App\Http\Middleware\redirectToDashboard::class,
-
+        'redirectToVendorDashboard' => \App\Http\Middleware\redirectToVendorDashboard::class,
+        'checkVendorSession' => \App\Http\Middleware\CheckVendorSession::class,
     ];
 }

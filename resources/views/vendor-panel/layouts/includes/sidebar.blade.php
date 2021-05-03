@@ -23,7 +23,7 @@
                                         Past Orders</a></li>
                             </ul>
                             <li class="menu-item b-purple" data-toggle="#roles" href="#Roles" role="button"
-                                aria-expanded="false" aria-controls="Vendors"> <a class="" href="{{route('vendor.managerusermgt', ['type'=>"manager"])}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 2.svg')}}" alt=""></i></span> </span>Manage User  Roles</a>
+                                aria-expanded="false" aria-controls="Vendors"> <a class="" href="{{route('vendor.managerusermgt', ['type'=>"admin"])}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 2.svg')}}" alt=""></i></span> </span>Manage User  Roles</a>
 
                             </li>
                         <li class="menu-item b-purple" data-toggle="#inventory" href="#Inventory" role="button"

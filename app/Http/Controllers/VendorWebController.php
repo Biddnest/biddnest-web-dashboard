@@ -9,6 +9,7 @@ use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Inventory;
 use App\Models\Organization;
+use App\Models\Payout;
 use App\Models\Ticket;
 use App\Models\Vehicle;
 use App\Models\Vendor;
@@ -32,7 +33,7 @@ class VendorWebController extends Controller
 
         Session::flush();
 //        session_unset();
-        return response()->redirectToRoute('vendor-panel.login.login');
+        return response()->redirectToRoute('vendor.login');
     }
 
     public function forgotPassword()
@@ -49,6 +50,12 @@ class VendorWebController extends Controller
     {
         $vendor=Vendor::where('id', Crypt::decryptString($request->id))->first();
         return view('vendor-panel.login.reset_password', ['vendor'=>$vendor]);
+    }
+
+    public function Passwordreset(Request $request)
+    {
+        $vendor=Vendor::where('id', Session::get("account")['id'])->first();
+        return view('vendor-panel.dashboard.reset_password', ['vendor'=>$vendor]);
     }
 
     public function dashboard()
@@ -83,16 +90,28 @@ class VendorWebController extends Controller
 
         return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type]);
     }
+    public function sidebar_userManagement(Request $request)
+    {
+        $user=Vendor::where('id', $request->id)->with('organization')->first();
+        return view('vendor-panel.user.userrole_sidebar', ['user'=>$user]);
+    }
 
     public function inventoryManagement()
     {
         $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
         return view('vendor-panel.inventory.inventorymanagement', ['inventories'=>$inventory]);
     }
+
     public function inventoryCetegory(Request $request)
     {
         $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'category'=>$request->type])->get();
         return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
+    }
+
+    public function inventorySidebar(Request $request)
+    {
+        $inventory=Inventory::where('id', $request->id)->with('InventoryPrice')->get();
+        return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
 
     public function getBranches()
@@ -112,9 +131,9 @@ class VendorWebController extends Controller
         $exist_vehicle=null;
         if($request->id)
         {
-            $exist_vehicle=null;
+            $exist_vehicle=Vehicle::where('id', $request->id)->first();
         }
-        $vehicle = Vehicle::where('organization_id', Session::get('organization_id'))->get();
+        $vehicle = Vehicle::where(['organization_id'=>Session::get('organization_id'), 'deleted'=>CommonEnums::$NO])->get();
         return view('vendor-panel.vehicle.getvehicle', ['vehicles'=>$vehicle, 'exist_vehicle'=>$exist_vehicle]);
     }
 
@@ -124,9 +143,31 @@ class VendorWebController extends Controller
         return view('vendor-panel.payout.payout', ['payouts'=>$payout]);
     }
 
+    public function payoutSidebar(Request $request)
+    {
+        $payout=Payout::where("id", $request->id)->with(['organization'=>function($query){
+            $query->with('booking');
+        }])->first();
+        return view('vendor-panel.payout.sidebar', ['payout'=>$payout]);
+    }
+
     public function serviceRequest(Request $request)
     {
         $tickets=Ticket::where(['vendor_id'=>Session::get('account')['id']])->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type]);
+    }
+
+    public function profile(Request $request)
+    {
+        $user=Vendor::where('id', $request->id)->with(['organization'=>function($query) use($request){
+            $query->with('services');
+        }])->first();
+
+        if($user->organization->parent_org_id)
+            $parentbranch = Organization::where('id', $user->organization->parent_org_id)->first();
+        else
+            $parentbranch =Organization::where("id", $user->organization->id)->first();
+
+        return view('vendor-panel.dashboard.myprofile', ['user'=>$user, 'branch'=>$parentbranch]);
     }
 }

@@ -94,7 +94,7 @@
                                 </thead>
                                 <tbody class="mtop-20 f-13">
                                     @foreach($payouts as $payout)
-                                        <tr class="tb-border cursor-pointer" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                        <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.sidebar.payout',['id'=>$payout->id]) }}">
                                             <td scope="row">{{$payout->public_payout_id}}</td>
                                             <td>{{$payout->remarks ?? ''}}</td>
                                             <td>

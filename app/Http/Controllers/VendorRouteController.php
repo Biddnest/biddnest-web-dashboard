@@ -62,6 +62,19 @@ class VendorRouteController extends Controller
             return VendorUserController::passwordReset($request->password, $request->bearer);
     }
 
+    public function old_reset_password(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'old_password'=> 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required_with:password|same:password'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return VendorUserController::changePassword($request->bearer, $request->old_password, $request->password, $request->password_confirmation);
+    }
+
     public function addPrice(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -224,7 +237,7 @@ class VendorRouteController extends Controller
         return VendorUserController::updateStatus($request,true);
     }
 
-    public static function addVehicle(Request $request){
+    public function addVehicle(Request $request){
         $validation = Validator::make($request->all(),[
             'name' => 'required|string',
             'type' => 'required',
@@ -238,7 +251,7 @@ class VendorRouteController extends Controller
 
     }
 
-    public static function updateVehicle(Request $request){
+    public function updateVehicle(Request $request){
         $validation = Validator::make($request->all(),[
             'id' => 'required',
             'name' => 'required|string',
@@ -250,6 +263,11 @@ class VendorRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return VehicleController::update($request->id, $request->name,$request->number,$request->type,Session::get('organization_id'));
+    }
+
+    public function deleteVehicle(Request $request)
+    {
+        return VehicleController::delete($request->id);
     }
 
 }

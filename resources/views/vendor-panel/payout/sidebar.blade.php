@@ -1,10 +1,11 @@
-<div class="modal-header pb-0  pt-1">
-    <div class="theme-text heading f-18">
-        <a class="nav-link active pl-4 p-15" id="new-order-tab">Vendor Payout</a>
-    </div>
-    <button type="button" class="close theme-text  mt-4 p-0" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+
+<div class="modal-header pb-0 border-none">
+    <h3 class="f-18 p-15">
+        Vendor Payout
+    </h3>
+    <button type="button" class="close theme-text margin-topneg-10" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <!-- <span aria-hidden="true" >&times;</span> -->
-        <i class="fa fa-times theme-text" aria-hidden="true"></i>
+        <i class="icon dripicons-cross theme-text" aria-hidden="true"></i>
     </button>
 </div>
 <div class="modal-body">
@@ -25,9 +26,7 @@
                     </div>
                 </div>
                 <div class="col-sm-1">
-                    <div class="theme-text f-14">
-                        <a href="{{route('edit-payout', ['id'=>$payout->id])}}"><i class="icon dripicons-pencil p-1 cursor-pointer" aria-hidden="true"></i></a>
-                    </div>
+
                 </div>
             </div>
             <div class="d-flex  row  p-10">
@@ -111,13 +110,13 @@
                 </tr>
                 </thead>
                 <tbody class="mtop-20">
-                    @foreach($payout->organization->booking as $booking)
-                        <tr class="tb-border  cursor-pointer">
-                            <th scope="row">{{$booking->public_booking_id}}</th>
-                            <td class="text-center">{{date('d M Y', strtotime($booking->created_at))}}</td>
-                            <td class="">₹{{$booking->final_quote}}</td>
-                        </tr>
-                    @endforeach
+                @foreach($payout->organization->booking as $booking)
+                    <tr class="tb-border  cursor-pointer">
+                        <th scope="row">{{$booking->public_booking_id}}</th>
+                        <td class="text-center">{{date('d M Y', strtotime($booking->created_at))}}</td>
+                        <td class="">₹{{$booking->final_quote}}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
             @if(count($payout->organization->booking)== 0)
@@ -127,12 +126,12 @@
                     </div>
                 </div>
             @endif
-           {{-- <div class="d-flex   justify-content-center p-10">
-                <div class="">
-                    <a class="white-text p-10" href="{{route('payout-details')}}"><button
-                                            class="btn theme-bg white-text">View More</button></a></div>
+            {{-- <div class="d-flex   justify-content-center p-10">
+                 <div class="">
+                     <a class="white-text p-10" href="{{route('payout-details')}}"><button
+                                             class="btn theme-bg white-text">View More</button></a></div>
 
-            </div>--}}
+             </div>--}}
         </div>
     </div>
 </div>

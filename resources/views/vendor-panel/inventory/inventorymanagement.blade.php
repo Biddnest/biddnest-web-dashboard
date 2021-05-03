@@ -60,19 +60,19 @@
                         <div class="d-flex  row p-20 justify-content-between">
                             @foreach($inventories as $inventory)
                                 <div class="simple-card category-cards col-sm-2">
-                                <div class="card-title">{{ucfirst(trans($inventory->category))}}</div>
-                                <div class="card-body">
-                                    <img src="{{$inventory->icon}}">
-                                </div>
-                                <div class="card-footer d-felx  justify-content-between">
-                                    <div class="item-name">{{ucfirst(trans($inventory->name))}}</div>
-                                    <div class="actions justify-content-between">
-                                        <i><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" srcset=""></i>
-                                        <i><img src="{{asset('static/vendor/images/Icon material-edit.svg')}}" alt="" srcset=""></i>
-                                        <i><img src="{{asset('static/vendor/images/Icon metro-bin.svg')}}" alt="" srcset=""></i>
+                                    <div class="card-title sidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">{{ucfirst(trans($inventory->category))}}</div>
+                                    <div class="card-body sidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">
+                                        <img src="{{$inventory->icon}}">
+                                    </div>
+                                    <div class="card-footer d-felx  justify-content-between">
+                                        <div class="item-name sidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">{{ucfirst(trans($inventory->name))}}</div>
+                                        <div class="actions justify-content-between">
+                                            <i><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" srcset=""></i>
+                                            <i><img src="{{asset('static/vendor/images/Icon material-edit.svg')}}" alt="" srcset=""></i>
+                                            <i><img src="{{asset('static/vendor/images/Icon metro-bin.svg')}}" alt="" srcset=""></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                             @if(count($inventories)== 0)
                                 <div class="row hide-on-data"  style="margin-left: 35%;">

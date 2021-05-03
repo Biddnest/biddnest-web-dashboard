@@ -278,7 +278,7 @@ $("body").on('click', ".delete", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
         var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
-            // console.log(response);
+            console.log(response);
             if(response.status == "success")
             {
                 tinySuccessAlert("Deleted Successfully", response.message);
@@ -299,6 +299,23 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
     // if($(this).hasClass('no-toggle'))
         // return false;
+
+    $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
+        '                    <svg class="circular" height="50" width="50">\n' +
+        '                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="6" stroke-miterlimit="10" />\n' +
+        '                    </svg>\n' +
+        '                </div>');
+
+    $('.side-bar-pop-up').addClass('display-pop-up');
+    $.get($(this).parent().data("sidebar"), {}, function(response){
+
+        $(".side-bar-pop-up").html(response);
+    });
+
+});
+
+$("body").on('click', ".sidebar", function(event) {
+    var $this = $(this);
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
         '                    <svg class="circular" height="50" width="50">\n' +

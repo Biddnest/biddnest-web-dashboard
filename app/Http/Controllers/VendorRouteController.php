@@ -123,30 +123,6 @@ class VendorRouteController extends Controller
         return InventoryController::deletePrice($request->id);
     }
 
-    public static function getDrivers($organization_id)
-    {
-        $get_driver = Vendor::select(["id", "fname", "lname", "phone"])
-            ->where("organization_id", $organization_id)
-            ->where(["user_role" => VendorEnums::$ROLES['driver']])
-            ->get();
-
-        if (!$get_driver)
-            return Helper::response(false, "Driver or vehicle data not available");
-
-        return Helper::response(true, "Data fetched successfully", ['drivers' => $get_driver]);
-    }
-
-    public static function getVehicles($organization_id)
-    {
-        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
-            ->get();
-
-        if (!$get_vehicle)
-            return Helper::response(false, "Driver or vehicle data not available");
-
-        return Helper::response(true, "Data fetched successfully", ['vehicles' => $get_vehicle]);
-    }
-
     public function addBid(Request $request){
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required',

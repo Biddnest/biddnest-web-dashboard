@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CommonEnums;
 use App\Helper;
 use App\Models\Admin;
+use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Organization;
 use App\Models\OrganizationService;
@@ -457,6 +458,31 @@ class VendorUserController extends Controller
             return Helper::response(false, "You are suspended from using this application. Please contact your organization admin.", null, 401);
         else
             return Helper::response(false, "Something went wrong in server. Please contact your organization admin.", null, 401);
+    }
+
+
+    public static function getDrivers($organization_id)
+    {
+        $get_driver = Vendor::select(["id", "fname", "lname", "phone"])
+            ->where("organization_id", $organization_id)
+            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->get();
+
+        if (!$get_driver)
+            return Helper::response(false, "Driver or vehicle data not available");
+
+        return Helper::response(true, "Data fetched successfully", ['drivers' => $get_driver]);
+    }
+
+    public static function getVehicles($organization_id)
+    {
+        $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
+            ->get();
+
+        if (!$get_vehicle)
+            return Helper::response(false, "Driver or vehicle data not available");
+
+        return Helper::response(true, "Data fetched successfully", ['vehicles' => $get_vehicle]);
     }
 
 }

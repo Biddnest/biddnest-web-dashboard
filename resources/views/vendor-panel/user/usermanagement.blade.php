@@ -29,15 +29,11 @@
                         <div class=" card-head right text-left">
                             <h3 class=" f-18 pb-0">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($role == "manager")active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>"manager"])}}" >Managers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($role == "admin")active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>"admin"])}}">Admins</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link @if($role == "driver")active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>"driver"])}}" >Drivers</a>
-                                    </li>
+                                    @foreach(\App\Enums\VendorEnums::$ROLES as $kay=>$fetch_role)
+                                        <li class="nav-item">
+                                            <a class="nav-link @if($role == $kay)active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>$kay])}}" >{{ucfirst(trans($kay))}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </h3>
                         </div>

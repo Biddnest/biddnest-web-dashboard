@@ -17,7 +17,9 @@ class redirectToVendorDashboard
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::get('sessionActive'))
+        if(Session::get('sessionFor') != "admin")
+            return response()->redirectToRoute('dashboard');
+        else if(Session::get('sessionFor') != "vendor")
             return response()->redirectToRoute('vendor.dashboard');
 
         return $next($request);

@@ -113,7 +113,7 @@ class VendorWebController extends Controller
     {
         $inventory=Inventory::where('id', $request->id)->with(['prices'=>function($query){
             $query->where('organization_id', Session::get('organization_id'));
-        }])->get();
+        }])->first();
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
 

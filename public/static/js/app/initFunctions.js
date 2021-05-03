@@ -353,68 +353,70 @@ export function initOrderDistributionChart(){
                 ctx.save();
             }
         });
-        var chartData = JSON.parse($("#order_dist_dataset").val());
-        var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
-        var textInside = sum.toString();
-        var myChart = new Chart(document.getElementById('mychart'), {
-            type: 'doughnut',
-            animation:{
-                animateScale:true
-            },
-            data: {
-                labels: chartData.map((item) => item.label ),
-                datasets: [{
-
-                    label: 'Visitor',
-                    data: chartData.map((item) => item.value ),
-                    backgroundColor: [
-                        "#f8c446",
-                        "#fbd64e",
-                        "#fcdf75",
-                        "#fdeaa7",
-                        "#fef6d9",
-                    ]
-                }]
-            },
-            options: {
-                cutoutPercentage: 75,
-
-                elements: {
-                    center: {
-                        text: textInside
-                    }
+        if($("#order_dist_dataset").length){
+            var chartData = JSON.parse($("#order_dist_dataset").val());
+            var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
+            var textInside = sum.toString();
+            var myChart = new Chart(document.getElementById('mychart'), {
+                type: 'doughnut',
+                animation:{
+                    animateScale:true
                 },
-                responsive: true,
-                legend: false,
-                legendCallback: function(chart) {
+                data: {
+                    labels: chartData.map((item) => item.label ),
+                    datasets: [{
 
-                    var legendHtml = [];
-                    legendHtml.push('<ul>');
-                    var item = chart.data.datasets[0];
-                    for (var i=0; i < item.data.length; i++) {
-
-                        legendHtml.push('<li>');
-                        legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
-                        legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
-                        legendHtml.push('</li>');
-                    }
-
-                    legendHtml.push('</ul>');
-                    return legendHtml.join("");
-
+                        label: 'Visitor',
+                        data: chartData.map((item) => item.value ),
+                        backgroundColor: [
+                            "#f8c446",
+                            "#fbd64e",
+                            "#fcdf75",
+                            "#fdeaa7",
+                            "#fef6d9",
+                        ]
+                    }]
                 },
-                tooltips: {
-                    enabled: true,
-                    mode: 'label',
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var indice = tooltipItem.index;
-                            return  data.labels[indice] ;
+                options: {
+                    cutoutPercentage: 75,
+
+                    elements: {
+                        center: {
+                            text: textInside
                         }
-                    }
-                },
-            }
-        });
+                    },
+                    responsive: true,
+                    legend: false,
+                    legendCallback: function(chart) {
+
+                        var legendHtml = [];
+                        legendHtml.push('<ul>');
+                        var item = chart.data.datasets[0];
+                        for (var i=0; i < item.data.length; i++) {
+
+                            legendHtml.push('<li>');
+                            legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
+                            legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
+                            legendHtml.push('</li>');
+                        }
+
+                        legendHtml.push('</ul>');
+                        return legendHtml.join("");
+
+                    },
+                    tooltips: {
+                        enabled: true,
+                        mode: 'label',
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var indice = tooltipItem.index;
+                                return  data.labels[indice] ;
+                            }
+                        }
+                    },
+                }
+            });
+        }
 
         $('#my-legend-con').html(myChart.generateLegend());
     }

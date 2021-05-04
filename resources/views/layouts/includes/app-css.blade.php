@@ -845,5 +845,9 @@
             .irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before {
                 border-top-color: #2e0789 !important;
             }
+
+            select {
+                -webkit-appearance: listbox !important;
+            }
     </style>
 

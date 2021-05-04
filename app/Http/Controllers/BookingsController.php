@@ -456,7 +456,7 @@ class BookingsController extends Controller
                 break;
 
             case "scheduled":
-                $bid_id->where("status", BidEnums::$STATUS['won']);
+                $bid_id->where(["status"=>BidEnums::$STATUS['won'], "vendor_id"=>$vendor_id]);
                 break;
 
             case "bookmarked":
@@ -464,7 +464,7 @@ class BookingsController extends Controller
                 break;
 
             case "participated":
-                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']]);
+                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->orWhere(["vendor_id"=>$vendor_id]);
                 break;
 
             case "past":

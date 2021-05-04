@@ -5,7 +5,7 @@
         <div class="d-flex  flex-row justify-content-between vertical-center">
             <h3 class="page-head text-left p-4 f-20 theme-text">Branches</h3>
             <div class="mr-20">
-                <a href="create-branch.html">
+                <a href="{{route('vendor.addbranch')}}">
                     <button class="btn theme-bg white-text"><i
                             class="icon dripicons-plus" height="15"></i>Add New Branch</button>
                 </a>
@@ -50,9 +50,11 @@
                         </div>
                         @if(\App\Helper::is("admin", true))
                             <div class="col-sm-4 p-1 text-right branch-icons">
-                                <i class="p-1">
-                                    <img src="{{asset('static/vendor/images/Icon material-edit.svg')}}">
-                                </i>
+                                <a href="{{route('vendor.editbranch', ['id'=>$home_branch->id])}}">
+                                    <i class="p-1">
+                                        <img src="{{asset('static/vendor/images/Icon material-edit.svg')}}">
+                                    </i>
+                                </a>
                             </div>
                         @endif
                     </div>
@@ -159,7 +161,7 @@
                                         </td>
                                         @if(\App\Helper::is("admin", true))
                                         <td>
-                                            <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
+                                            <a href="{{route('vendor.editbranch', ['id'=>$home_branch->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         </td>
                                         @endif
                                     </tr>

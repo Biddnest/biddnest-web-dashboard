@@ -10,10 +10,12 @@ use App\Models\Booking;
 use App\Models\Inventory;
 use App\Models\Organization;
 use App\Models\Payout;
+use App\Models\Service;
 use App\Models\Ticket;
 use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
@@ -197,5 +199,14 @@ class VendorWebController extends Controller
         $users = Vendor::where("id", $request->id)->first();
         $branch = Organization::where(["parent_org_id"=>Session::get('organization_id'), "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", Session::get('organization_id'))->get();
         return view('vendor-panel.user.add_user',['id'=>$request->id, 'roles'=>$users, 'branches'=>$branch]);
+    }
+
+    public function addBranch(Request $request)
+    {
+        $branch = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $zones=Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $organization = Organization::where(["id"=>Session::get('organization_id'), "deleted"=>CommonEnums::$NO])->first();
+        $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor-panel.branch.add_branch', ['id'=>Session::get('organization_id'), 'services'=>$services, 'organization'=>$organization, 'zones'=>$zones, 'branch'=>$branch]);
     }
 }

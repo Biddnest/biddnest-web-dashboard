@@ -491,13 +491,13 @@ class BookingsController extends Controller
             }]);
 
         if (isset($request->from) && isset($request->to))
-            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->orWhere('organization_id', $organization_id);
+            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->where('organization_id', $organization_id);
 
         if (isset($request->status))
-            $bookings->orWhere('status', $request->status)->orWhere('organization_id', $organization_id);
+            $bookings->orWhere('status', $request->status)->where('organization_id', $organization_id);
 
         if (isset($request->service_id))
-            $bookings->where('service_id', $request->service_id)->orWhere('organization_id', $organization_id);
+            $bookings->where('service_id', $request->service_id)->where('organization_id', $organization_id);
 
         $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
 
@@ -525,13 +525,13 @@ class BookingsController extends Controller
 
 
         if (isset($request->from) && isset($request->to))
-            $booking->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->orWhere('organization_id', $request->token_payload->organization_id);
+            $booking->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->where('organization_id', $request->token_payload->organization_id);
 
         if (isset($request->status))
-            $booking->orWhere('status', $request->status)->orWhere('organization_id', $request->token_payload->organization_id);
+            $booking->orWhere('status', $request->status)->where('organization_id', $request->token_payload->organization_id);
 
         if (isset($request->service_id))
-            $booking->where('service_id', $request->service_id)->orWhere('organization_id', $request->token_payload->organization_id);
+            $booking->where('service_id', $request->service_id)->where('organization_id', $request->token_payload->organization_id);
 
         $booking->orderBy('id', 'DESC')
             ->with('user')

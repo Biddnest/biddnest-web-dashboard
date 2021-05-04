@@ -161,27 +161,32 @@
 
 
                                                 </i>
-                                                <i class="p-1"><img
+                                                <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this."><i class="p-1"><img
                                                         src="{{asset('static/vendor/images/Icon ionic-md-close-circle.svg')}}"
                                                         alt="" data-toggle="tooltip" data-placement="top"
-                                                        title="Reject"></i>
+                                                        title="Reject"></i></a>
 
                                             </td>
                                         @endif
                                         @if($type == "live")
-                                            <td class="">
-                                                <i class=" tooltip-trigger">
+                                            <td class="cursor-pointer">
+                                                <i class="tooltip-trigger">
                                                     <img src="{{asset('static/vendor/images/acceptmark.svg')}}" alt=""
                                                          data-toggle="tooltip" data-placement="top"
                                                          title="Accept">
                                                 </i>
-                                                <i data-toggle="modal" data-target="#for-friend"><img
+                                                    <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
+                                                    <i class="tooltip-trigger"><img
                                                         src="{{asset('static/vendor/images/reject-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Reject"></i>
-                                                <i><img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
+                                                </a>
+                                                <a href="{">
+                                                    <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
+                                                    <i class="tooltip-trigger"><img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Quote Later"></i>
+                                                </a>
                                             </td>
                                         @endif
                                         @if($type == "scheduled")

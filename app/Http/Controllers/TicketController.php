@@ -220,6 +220,54 @@ class TicketController extends Controller
 
     }
 
+    public static function createForVendor($sender_id, $ticket_type, $meta, $heading=null, $body=null)
+    {
+        switch ($ticket_type) {
+            case TicketEnums::$TYPE['complaint']:
+                $title = $heading;
+                $body = $body;
+                $ticket = new Ticket;
+                $ticket->vendor_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            case TicketEnums::$TYPE['call_back']:
+                $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+                $body = TicketEnums::$TEMPLATES['call_back']['body_template'];
+                $ticket = new Ticket;
+                $ticket->vendor_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            case TicketEnums::$TYPE['service_request']:
+                $title = $heading;
+                $body = $body;
+                $ticket = new Ticket;
+                $ticket->vendor_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            default:
+                $title = "";
+                $desc = "";
+        }
+
+        if(!$ticket->save())
+            return Helper::response(false, "Could'nt create ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+
+    }
+
     public function fillVars($template, $data, $initialKey = "booking"){
 
         $template_explode = explode(" ",$template);

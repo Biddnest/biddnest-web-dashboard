@@ -167,14 +167,15 @@ Route::prefix('web/api')->group(function () {
         Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices'])->name("api.deleteInventoryPrices");
 
         Route::post('/booking/bid',[VendorRouter::class,'addBid'])->name("api.booking.bid");
-        Route::post('/booking/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
-        Route::post('/booking/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
+        Route::put('/booking/{id}/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
+        Route::put('/booking/{id}/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
         Route::post('/booking/assign-driver',[VendorRouter::class,'assignDriver'])->name("api.driver.assign");
         Route::post('/booking/trip/start',[VendorRouter::class,'startTrip'])->name("api.trip.start");
         Route::post('/booking/trip/end',[VendorRouter::class,'endTrip'])->name("api.trip.end");
 
         Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
         Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");
+        Route::post('/tickets/add',[VendorRouter::class,'addTickets'])->name("api.ticket.addticket");
 
         Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
         Route::post('/user/add',[VendorRouter::class,'addUser'])->name("api.user.add");
@@ -406,6 +407,7 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/service-request')->group(function () {
             Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
+            Route::get('/add',[VendorWebController::class,'serviceRequestAdd'])->name("vendor.service_request_add");
             Route::get('/{id}/sidebar',[VendorWebController::class,'serviceSidebar'])->name("vendor.service_sidebar");
             Route::get('/reply/{id}/detail',[VendorWebController::class,'serviceSidebar_reply'])->name("vendor.service_sidebar.reply");
         });

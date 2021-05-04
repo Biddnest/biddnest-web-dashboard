@@ -57,7 +57,8 @@
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <th scope="col">Service Type</th>
-{{--                                <th scope="col">Assigned Vendor</th>--}}
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Assigned Vendor</th>
                                 <th scope="col">Order Status</th>
                                 <th scope="col">Operations</th>
                             </tr>
@@ -82,13 +83,14 @@
                                             {{$booking->service->name}} - Unknown
                                         @endswitch
                                     </td>
-                                    {{--<td>
+                                    <td>{{$booking->created_at->format('d M Y')}}</td>
+                                    <td>
                                         @if($booking->organization_id)
                                             {{$booking->organization->name}}
                                         @else
                                             Not Assigned
                                         @endif
-                                    </td>--}}
+                                    </td>
                                     <td class="">
 
                                         @switch($booking->status)

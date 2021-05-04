@@ -201,7 +201,7 @@
                 vertical-align: baseline;
             }
             .Dashboard-lcards .table th {
-                padding: 1.75rem !important;
+                /*padding: 1.75rem !important;*/
                 border-top: none;
             }
 
@@ -668,7 +668,7 @@
                 width: 30px;
                 position: relative;
                 /*padding: 10px 10px;*/
-                display: table-cell;
+                /*display: table-cell;*/
                 border-radius: 50%;
                 background: #f2f2f2;
             }
@@ -848,6 +848,9 @@
 
             select {
                 -webkit-appearance: listbox !important;
+            }
+            .pagination ul li {
+                font-size: 14px !important;
             }
     </style>
 

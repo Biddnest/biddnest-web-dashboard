@@ -324,4 +324,63 @@ class VendorRouteController extends Controller
         return OrganisationController::deleteRole($request->id, Session::get('organization_id'));
     }
 
+
+    public function branch_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'parent_org_id'=>'required',
+            'phone.primary'=>'required|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string',
+            'organization.description' =>'required|string',
+
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string',
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addBranch($request->all(), $request->parent_org_id);
+    }
+
+    public function branch_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'parent_org_id'=>'required',
+            'phone.primary'=>'required|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string',
+            'organization.description' =>'required|string',
+
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string',
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::updateBranch($request->all(), $request->id, $request->parent_org_id);
+
+    }
+
 }

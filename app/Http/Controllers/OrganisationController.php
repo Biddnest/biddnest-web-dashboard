@@ -163,7 +163,7 @@ class OrganisationController extends Controller
 
     public static function addBranch($data, $id)
     {
-        $exist = Organization::findOrFail($id);
+       $exist = Organization::findOrFail($id);
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 

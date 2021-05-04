@@ -181,6 +181,9 @@ Route::prefix('web/api')->group(function () {
         Route::put('/user/edit',[VendorRouter::class,'editUser'])->name("api.user.edit");
         Route::delete('/user/{id}',[VendorRouter::class,'deleteUser'])->name("api.user.delete");
 
+        Route::post('/branch/add',[VendorRouter::class,'branch_add'])->name("api.branch.add");
+        Route::put('/branch/edit',[VendorRouter::class,'branch_edit'])->name("api.branch.edit");
+
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
         Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
@@ -389,6 +392,8 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/branches')->group(function () {
             Route::get('/',[VendorWebController::class,'getBranches'])->name("vendor.branches");
+            Route::get('/add-branch',[VendorWebController::class,'addBranch'])->name("vendor.addbranch");
+            Route::get('/{id}/edit-branch',[VendorWebController::class,'addBranch'])->name("vendor.editbranch");
         });
 
         Route::get('/payout',[VendorWebController::class,'payout'])->name("vendor.payout");

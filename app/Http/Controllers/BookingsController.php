@@ -448,7 +448,7 @@ class BookingsController extends Controller
             $vendor_id = $request->token_payload->id;;
         }
 
-        $bid_id = Bid::where(["organization_id"=>$organization_id, 'vendor_id'=>$vendor_id]);
+        $bid_id = Bid::where(["organization_id"=>$organization_id]);
 
         switch ($request->type) {
             case "live":

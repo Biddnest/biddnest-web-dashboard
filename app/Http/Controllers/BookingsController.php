@@ -439,12 +439,16 @@ class BookingsController extends Controller
     {
         // $limit=CommonEnums::$PAGE_LENGTH;
         // $offset=0;
-        if($web)
-            $organization_id= Session::get('organization_id');
-        else
-            $organization_id= $request->token_payload->organization_id;
+        if($web) {
+            $organization_id = Session::get('organization_id');
+            $vendor_id = Session::get('account')['id'];
+        }
+        else {
+            $organization_id = $request->token_payload->organization_id;
+            $vendor_id = $request->token_payload->id;;
+        }
 
-        $bid_id = Bid::where("organization_id", $organization_id);
+        $bid_id = Bid::where(["organization_id"=>$organization_id, 'vendor_id'=>$vendor_id]);
 
         switch ($request->type) {
             case "live":
@@ -482,8 +486,8 @@ class BookingsController extends Controller
 
         $bookings->with('service')
             ->with('movement_dates')
-            ->with(['bid' => function ($bid) use ($organization_id) {
-                $bid->where("organization_id", $organization_id)->with('vendor');
+            ->with(['bid' => function ($bid) use ($organization_id, $vendor_id) {
+                $bid->where(["organization_id"=>$organization_id, 'vendor_id'=>$vendor_id])->with('vendor');
             }]);
 
         if (isset($request->from) && isset($request->to))

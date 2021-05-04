@@ -139,8 +139,7 @@
                             </thead>
                             <tbody class="mtop-20">
                                 @foreach($branches as $branch)
-                                    <tr class="tb-border cursor-pointer"
-                                        onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <tr class="tb-border cursor-pointer">
                                         <td>{{$branch->city}} @if(!$branch->parent_org_id) (Parent Branch) @endif</td>
                                         <td>+91-{{$branch->phone}}</td>
                                         <td>{{$branch->city}}</td>
@@ -161,7 +160,7 @@
                                         </td>
                                         @if(\App\Helper::is("admin", true))
                                         <td>
-                                            <a href="{{route('vendor.editbranch', ['id'=>$home_branch->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                            <a href="{{route('vendor.editbranch', ['id'=>$branch->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         </td>
                                         @endif
                                     </tr>

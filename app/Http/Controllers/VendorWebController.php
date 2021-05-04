@@ -63,7 +63,15 @@ class VendorWebController extends Controller
 
     public function dashboard()
     {
-        return view('vendor-panel.dashboard.dashboard');
+        $count_live=Bid::where(['status'=>BidEnums::$STATUS['active'], 'organization_id'=>Session::get('organization_id')])->count();
+        $count_ongoing= Bid::where(['status'=>BidEnums::$STATUS['bid_submitted'], 'vendor_id'=>Session::get('account')['id']])->count();
+        $count_won= Bid::where(['status'=>BidEnums::$STATUS['won'], 'vendor_id'=>Session::get('account')['id']])->count();
+        $count_branch=Organization::where("id", Session::get('account')['id'])->orWhere("parent_org_id", Session::get('account')['id'])->count();
+        $count_emp=Vendor::where('organization_id', Session::get('organization_id'))->count();
+        $total_revenue =Payout::where('organization_id', Session::get('organization_id'))->sum('final_payout');
+
+        $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->latest()->limit(3)->get();
+        return view('vendor-panel.dashboard.dashboard',['count_live'=>$count_live, 'count_ongoing'=>$count_ongoing, 'count_won'=>$count_won, 'count_branch'=>$count_branch, 'count_emp'=>$count_emp, 'total_revenue'=>$total_revenue, 'booking_live'=>$booking_live]);
     }
 
     public function bookingType(Request $request)
@@ -208,5 +216,10 @@ class VendorWebController extends Controller
         $organization = Organization::where(["id"=>Session::get('organization_id'), "deleted"=>CommonEnums::$NO])->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor-panel.branch.add_branch', ['id'=>Session::get('organization_id'), 'services'=>$services, 'organization'=>$organization, 'zones'=>$zones, 'branch'=>$branch]);
+    }
+
+    public function serviceRequestAdd()
+    {
+        return view('vendor-panel.tickets.add_ticket');
     }
 }

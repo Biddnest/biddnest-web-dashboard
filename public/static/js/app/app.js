@@ -433,8 +433,31 @@ console.log($(this).val());
     }
 });
 
+$(document).ready(function () {
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $("tr").click(function () {
+    });
+});
 
 
+$("body").on('click', ".booking", function(event) {
+    var target = $(this).closest($(this).data("parent"));
+    if(confirm($(this).data('confirm'))) {
+        $.update($(this).data("url"), {}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert($(this).data('success'), response.message);
+                target.hide();
+            } else {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    }
+    return false;
+});
 
 
 

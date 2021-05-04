@@ -161,13 +161,13 @@ class VendorRouteController extends Controller
     public function reject(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required'
+            'id' => 'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return BookingsController::reject($request->public_booking_id, Session::get('organization_id'), Session::get('id'));
+        return BookingsController::reject($request->id, Session::get('organization_id'), Session::get('id'));
     }
 
     public function addBookmark(Request $request)
@@ -300,6 +300,7 @@ class VendorRouteController extends Controller
 
         return OrganisationController::addNewRole($request->all(), Session::get('organization_id'));
     }
+
     public function editUser(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -323,7 +324,6 @@ class VendorRouteController extends Controller
     {
         return OrganisationController::deleteRole($request->id, Session::get('organization_id'));
     }
-
 
     public function branch_add(Request $request)
     {
@@ -383,4 +383,17 @@ class VendorRouteController extends Controller
 
     }
 
+    public function addTickets(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category' => 'required',
+            'heading' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::createForVendor(Session::get('account')['id'], $request->category, [], $request->heading, $request->desc);
+    }
 }

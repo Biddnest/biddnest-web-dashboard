@@ -656,7 +656,6 @@ class BookingsController extends Controller
         return Helper::response(true, "save successfully");
     }
 
-
     public static function startTrip($public_booking_id, $organization_id, $pin)
     {
         $booking = Booking::where([

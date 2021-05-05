@@ -128,7 +128,6 @@ class VendorWebController extends Controller
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
 
-
     public function getBranches()
     {
         $home_branch =Organization::where('id', Session::get('organization_id'))->with('admin')->first();
@@ -221,5 +220,11 @@ class VendorWebController extends Controller
     public function serviceRequestAdd()
     {
         return view('vendor-panel.tickets.add_ticket');
+    }
+
+    public function bookingDetails(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->first();
+        return view('vendor-panel.order.details', ['booking'=>$booking]);
     }
 }

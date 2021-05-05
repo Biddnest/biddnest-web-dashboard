@@ -160,26 +160,12 @@ class VendorRouteController extends Controller
 
     public function reject(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'id' => 'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
         return BookingsController::reject($request->id, Session::get('organization_id'), Session::get('id'));
     }
 
     public function addBookmark(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::addBookmark($request->public_booking_id,Session::get('organization_id'), Session::get('id'));
+        return BookingsController::addBookmark($request->id,Session::get('organization_id'), Session::get('id'));
     }
 
     public function assignDriver(Request $request)

@@ -46,7 +46,6 @@ crossorigin="anonymous"></script>
 
 {{--<script src="{{ asset('static/js/userZone.js') }}"></script>--}}
 
-{{--<script src="{{ asset('static/js/timer.js') }}"></script>--}}
 <!-- <script src="{{ asset('static/js/progress-bar.js') }}"></script> -->
 
 
@@ -61,7 +60,7 @@ crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript -->
 
-
+<script src="{{ asset('static/vendor/js/timer.js') }}./assets/js/timer.js"></script>
 <script src="{{ asset('static/js/jquery.logger.js') }}"></script>
 
 {{--<script src="{{ asset('static/js/main.js') }}"></script>--}}

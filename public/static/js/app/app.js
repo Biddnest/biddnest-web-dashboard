@@ -441,7 +441,6 @@ $(document).ready(function () {
     });
 });
 
-
 $("body").on('click', ".bookings", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm($(this).data('confirm'))) {
@@ -460,4 +459,6 @@ $("body").on('click', ".bookings", function(event) {
 });
 
 
-
+$('.filterdate').datepicker({
+    format: 'yyyy-mm-dd'
+});

@@ -173,18 +173,22 @@
                                                     @endswitch
                                             </td>
                                             <td class="">
-                                                <i class="p-1">
-                                                    <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                         alt="">
-                                                </i>
+                                                <a href="{{route('vendor.my-bid', ['id'=>$booking->public_booking_id])}}">
+                                                    <i class="p-1">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                             alt="">
+                                                    </i>
+                                                </a>
                                             </td>
                                         @endif
                                         @if($type == "bookmarked")
                                             <td class="">
-                                                <i class="p-1">
-                                                    <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
+                                                    <i class="p-1">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
                                                          alt="">
-                                                </i>
+                                                    </i>
+                                                </a>
                                                 <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this."><i class="p-1"><img
                                                         src="{{asset('static/vendor/images/Icon ionic-md-close-circle.svg')}}"
                                                         alt="" data-toggle="tooltip" data-placement="top"
@@ -247,8 +251,28 @@
                                                 </td>
                                             <td class="">
                                                 <i class="p-1">
-                                                    <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                             alt="">
+                                                    @switch($booking->status)
+                                                        @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                        <a href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                                                                                              alt=""></a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                        <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                                                                                              alt=""></a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                        <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                                                                                              alt=""></a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                        <a href="{{route('vendor.in-transit',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                                                                                              alt=""></a>
+                                                        @break
+
+                                                    @endswitch
                                                 </i>
                                             </td>
                                         @endif

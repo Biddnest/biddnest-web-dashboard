@@ -100,9 +100,9 @@
                             <th scope="col">To</th>
                             <th scope="col">Order Date</th>
                             <th scope="col">Date of Movement</th>
-
                             <th scope="col">Amount</th>
                             <th scope="col">Order Status</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody class="mtop-20 f-13">
@@ -122,7 +122,8 @@
                                                 cancelled
                                             @endif
                                         </span></td>
-
+                                    <td><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                                                                          alt=""></a></td>
                                 </tr>
                             @endforeach
                         </tbody>

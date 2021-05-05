@@ -148,14 +148,13 @@ class VendorRouteController extends Controller
             'moving_date'=>'required',
             'vehicle_type'=>'required|string',
 
-            'man_power.min'=>'required|integer',
-            'man_power.max'=>'required|integer'
+            'man_power'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('id'));
+        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('id'), true);
     }
 
     public function reject(Request $request)
@@ -180,28 +179,6 @@ class VendorRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return BookingsController::assignDriver($request->public_booking_id, $request->driver_id, $request->vehicle_id);
-    }
-
-    public function startTrip(Request $request){
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required',
-            'pin' => 'required',
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::startTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
-    }
-
-    public function endTrip(Request $request){
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required',
-            'pin' => 'required',
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::endTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
     }
 
     public function createTickets(Request $request)
@@ -382,4 +359,5 @@ class VendorRouteController extends Controller
 
         return TicketController::createForVendor(Session::get('account')['id'], $request->category, [], $request->heading, $request->desc);
     }
+
 }

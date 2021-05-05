@@ -40,11 +40,11 @@
                             </div>
                             <div class="d-felx justify-content-center pt-4 border-top row">
                                 <div class="bid-badge mr-4">
-                                    <h4 class="step-title">₹ 4000</h4>
-                                    <p>Current Bid Price</p>
+                                    <h4 class="step-title">₹ {{$booking->final_estimated_quote}}</h4>
+                                    <p>Estimated Price</p>
                                 </div>
                                 <div class="bid-badge mr-4">
-                                    <h4 class="step-title">5:00:00</h4>
+                                    <h4 class="step-title"><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h4>
                                     <p>Time Left</p>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 @foreach($booking->movement_dates as $mdate)
-                                                    {{date("d M Y", strtotime($mdate->date))}}
+                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -191,13 +191,19 @@
 
                                 <div class="border-top">
                                     <div class="d-flex pb-2 pt-1 justify-content-end button-section">
-                                        <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
-                                            <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
+                                        @if($booking->bid->status != \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                            <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
+                                                <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
+                                            </a>
+                                        @endif
+                                        <a class="modal-toggle" data-target="#add-role">
+                                            <button class="btn theme-br theme-text">Accept</button>
                                         </a>
-                                        <button class="btn theme-br theme-text" data-toggle="modal" data-target="#for-friend">Accept</button>
-                                        <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
-                                            <button class="btn">Reject</button>
-                                        </a>
+                                        @if($booking->bid->status != \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                            <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
+                                                <button class="btn">Reject</button>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -209,4 +215,156 @@
         </div>
     </div>
 
+
+    <div class="fullscreen-modal" id="add-role" style="min-height: 155%;">
+        <div class="fullscreen-modal-body" role="document">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Your Bid</h5>
+                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="redirect" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}" data-alert="mega" method="POST" data-parsley-validate>
+                <div class="modal-body" style="padding: 10px 9px;">
+                    <div class="d-flex justify-content-center row ">
+                        <div class="col-sm-12 bid-amount">
+                            <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
+                                <div><p class="mt-2">Expected Price</p></div>
+                                <div class="col-2">
+                                    <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
+                                    <input class="form-control border-purple" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-sm-12  p-0  pb-0" >
+                                <div class="heading p-8 mtop-22">
+                                    <p class="text-muted light">
+                                        <span class="bold">Note:</span>
+                                        you can modify the old price for individual item OR you can directly set a new Total Price
+                                    </p>
+                                </div>
+                                <table class="table text-left theme-text tb-border2" id="items" >
+                                    <thead class="secondg-bg bx-shadowg p-0 f-14">
+                                        <tr class="">
+                                            <th scope="col">Item Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Size</th>
+                                            <th scope="col" style="width: 120px;">Old Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="mtop-20 f-13">
+                                        @foreach($booking->inventories as $inventory)
+                                            <tr class="">
+                                                <th scope="row">{{$inventory->name}}</th>
+                                                <td class="">
+                                                    @if($inventory->quantity_type == \App\Enums\CommonEnums::$YES)
+                                                        {{$inventory->quantity->min}}-{{$inventory->quantity->max}}
+                                                    @else
+                                                        {{$inventory->quantity}}
+                                                    @endif
+                                                </td>
+                                                <td class="">{{$inventory->size}}</td>
+                                                <td> <input class="form-control border-purple w-88" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                    <input class="form-control border-purple w-88" name="inventory[][amount]" type="text" placeholder="2000"/>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <tr id='addr1'></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
+                                <div><p class="mt-2">Total Price</p></div>
+                                <div class="col-2">
+                                    <input class="form-control border-purple" value="{{$booking->final_estimated_quote}}" type="number" name="bid_amount" placeholder="4000" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class ="col-sm-12 bid-amount-2">
+                            <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
+                                <div><p class="mt-2">Expected Price</p></div>
+                                <div class="col-2">
+                                    <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
+                                </div>
+                            </div>
+                            <div class="d-flex row p-10">
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Type of Movement</label>
+                                            <select id="" class="form-control" name="type_of_movement" required>
+                                                <option value="">--select--</option>
+                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)
+                                                    <option value="dedicated">Dedicated</option>
+                                                @else
+                                                    <option value="shared">Shared</option>
+                                                    <option value="dedicated">Dedicated</option>
+                                                @endif
+                                            </select>
+                                        <span class="error-message"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Moving Date</label>
+                                        <div>
+                                            @foreach($booking->movement_dates as $mdate)
+                                                <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                            @endforeach
+                                        </div>
+                                        <input type="text" class="form-control br-5 filterdate" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
+                                        <div class="d-felx justify-content-between">
+                                            <div class="d-flex range-input-group justify-content-between flex-row">
+                                                <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
+                                            </div>
+                                        </div>
+                                        <span class="error-message">Please enter valid </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                       <label class="full-name">Name of Vehicle</label>
+                                       <select id="" class="form-control" name="vehicle_type">
+                                            <option value="">--select--</option>
+                                            @foreach($vehicles as $vehicle)
+                                               <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>
+                                           @endforeach
+                                       </select>
+                                        <span class="error-message"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 enter-pin p-60">
+                            <div class="form-input">
+                                <h4 class="text-center bold">Enter Your Pin</h4>
+                                <input class="form-control" name="pin" type="number" maxlength="4" minlength="4" required/>
+                                <span class="error-message">Please enter valid OTP</span>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-center">Forgot Pin?</span><a class="link-regular" href="#"> Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-15 ">
+                    <div class="w-50">
+                    </div>
+                    <div class="w-50 text-right"><a class="white-text p-10" href="#"><button
+                           type="button" class="btn theme-bg white-text w-30 " id="next-btn-1" style="margin-bottom: 20px;">Next</button>
+                            <button type="button"
+                                class="btn theme-bg white-text w-30 " id="next-btn-2" style="margin-bottom: 20px;">Next</button>
+                            <button
+                                class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection

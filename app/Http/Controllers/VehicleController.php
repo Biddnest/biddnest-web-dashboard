@@ -80,7 +80,7 @@ class VehicleController extends Controller
         return Helper::response(true, "Data fetched successfully", ['drivers' => $get_driver]);
     }
 
-    public static function getVehicles($organization_id)
+    public static function getVehicles($organization_id, $web=false)
     {
         $get_vehicle = Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", $organization_id)
             ->get();
@@ -88,6 +88,9 @@ class VehicleController extends Controller
         if (!$get_vehicle)
             return Helper::response(false, "Driver or vehicle data not available");
 
-        return Helper::response(true, "Data fetched successfully", ['vehicles' => $get_vehicle]);
+        if($web)
+            return $get_vehicle;
+        else
+            return Helper::response(true, "Data fetched successfully", ['vehicles' => $get_vehicle]);
     }
 }

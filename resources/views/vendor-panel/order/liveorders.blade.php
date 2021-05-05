@@ -123,23 +123,25 @@
                                         <th scope="col">Order Date</th>
                                         @if($type == "participated")
                                             <th scope="col">Bid Amount</th>
-                                            <th scope="col">Bid Submit</th>
+                                            <th scope="col">Bid Submit By</th>
                                         @endif
                                         @if($type != "scheduled")
                                             <th scope="col">Time Left</th>
                                         @endif
-                                        @if($type == "live" || $type == "bookmarked")
-                                            <th scope="col">Actions</th>
+                                        @if($type == "participated")
+                                            <th scope="col">Bid Status</th>
                                         @endif
                                         @if($type == "scheduled")
                                             <th scope="col">Submitted On</th>
                                             <th scope="col">Your Bid</th>
+                                            <th scope="col" style="text-align: center;">Status</th>
                                         @endif
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="mtop-20 text-left f-13">
                                     @foreach($bookings as $booking)
-                                        <tr class="tb-border ">
+                                        <tr class="tb-border book_{{$booking->id}}">
                                         <td scope="row" class="text-left"> <a href="order-details.html">
                                                 {{$booking->public_booking_id}}</a> </td>
                                         <td>{{json_decode($booking->source_meta, true)['city']}}</td>
@@ -150,7 +152,31 @@
                                             <td>{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
                                         @endif
                                         @if($type != "scheduled")
-                                            <td><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}"></span>
+                                            <td><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
+                                            </td>
+                                        @endif
+                                        @if($type == "participated")
+                                            <td style="text-align: center;">
+                                                    @switch($booking->bid->status)
+                                                        @case(\App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                                            @if($booking->status == \App\Enums\BookingEnums::$STATUS['biding'])
+                                                                <span class="bg-light  text-center status-badge complete-bg">Bidding</span>
+                                                            @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding'])
+                                                                <span class="badge-light text-center status-badge complete-bg">Re-Bidding</span>
+                                                            @endif
+                                                        @break
+
+                                                        @case(\App\Enums\BidEnums::$STATUS['lost'])
+                                                            <span class="red-bg  text-center status-badge complete-bg">Lost</span>
+                                                        @break
+
+                                                    @endswitch
+                                            </td>
+                                            <td class="">
+                                                <i class="p-1">
+                                                    <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                         alt="">
+                                                </i>
                                             </td>
                                         @endif
                                         @if($type == "bookmarked")
@@ -158,8 +184,6 @@
                                                 <i class="p-1">
                                                     <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
                                                          alt="">
-
-
                                                 </i>
                                                 <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this."><i class="p-1"><img
                                                         src="{{asset('static/vendor/images/Icon ionic-md-close-circle.svg')}}"
@@ -175,23 +199,57 @@
                                                          data-toggle="tooltip" data-placement="top"
                                                          title="Accept">
                                                 </i>
-                                                    <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
+                                                    <a href="#" class="bookings inline-icon-button" data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
                                                     <i class="tooltip-trigger"><img
                                                         src="{{asset('static/vendor/images/reject-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Reject"></i>
                                                 </a>
                                                 <a href="{">
-                                                    <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
-                                                    <i class="tooltip-trigger"><img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
+                                                    <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
+                                                    <i class="tooltip-trigger">
+                                                        @if($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO)
+                                                            <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"
-                                                        title="Quote Later"></i>
+                                                        title="Quote Later">
+                                                        @else
+                                                            <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
+                                                                 data-toggle="tooltip" data-placement="top"
+                                                                 title="Quote Later">
+                                                        @endif
+                                                    </i>
                                                 </a>
                                             </td>
                                         @endif
                                         @if($type == "scheduled")
                                             <td>{{date('d M Y', strtotime($booking->bid->submit_at))}}</td>
                                             <td>{{$booking->bid->bid_amount}}</td>
+                                            <td style="text-align: center;">
+                                                    @switch($booking->status)
+                                                        @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                        <span class="grey-bg  text-center status-badge complete-bg">Customer Confirmation Pending</span>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                        <span class="badge-light  text-center status-badge complete-bg">Pending Driver Assign</span>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                        <span class="green-bg  text-center status-badge complete-bg">Awaiting Pickup</span>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                        <span class="grey-bg  text-center status-badge complete-bg">In Transit</span>
+                                                        @break
+
+                                                    @endswitch
+                                                </td>
+                                            <td class="">
+                                                <i class="p-1">
+                                                    <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                             alt="">
+                                                </i>
+                                            </td>
                                         @endif
                                     </tr>
                                     @endforeach

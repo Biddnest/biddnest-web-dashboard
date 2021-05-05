@@ -375,7 +375,7 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/booking')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
-            Route::get('/past/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
+            Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
         });
 
         Route::prefix('/user')->group(function () {

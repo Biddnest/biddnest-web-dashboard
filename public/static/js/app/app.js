@@ -442,7 +442,7 @@ $(document).ready(function () {
 });
 
 
-$("body").on('click', ".booking", function(event) {
+$("body").on('click', ".bookings", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm($(this).data('confirm'))) {
         $.update($(this).data("url"), {}, function (response) {

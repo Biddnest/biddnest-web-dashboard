@@ -128,7 +128,6 @@ class VendorWebController extends Controller
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
 
-
     public function getBranches()
     {
         $home_branch =Organization::where('id', Session::get('organization_id'))->with('admin')->first();

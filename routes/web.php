@@ -170,8 +170,6 @@ Route::prefix('web/api')->group(function () {
         Route::put('/booking/{id}/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
         Route::put('/booking/{id}/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
         Route::post('/booking/assign-driver',[VendorRouter::class,'assignDriver'])->name("api.driver.assign");
-        Route::post('/booking/trip/start',[VendorRouter::class,'startTrip'])->name("api.trip.start");
-        Route::post('/booking/trip/end',[VendorRouter::class,'endTrip'])->name("api.trip.end");
 
         Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
         Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");
@@ -188,6 +186,7 @@ Route::prefix('web/api')->group(function () {
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
         Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
+
 
 
     });
@@ -377,6 +376,12 @@ Route::prefix('vendor')->group(function(){
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
             Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
             Route::get('/{id}/details',[VendorWebController::class,'bookingDetails'])->name("vendor.detailsbookings");
+            Route::get('/{id}/my-quote',[VendorWebController::class,'myQuote'])->name("vendor.my-quote");
+            Route::get('/{id}/my-bid',[VendorWebController::class,'myBid'])->name("vendor.my-bid");
+            Route::get('/{id}/scheduled',[VendorWebController::class,'scheduleOrder'])->name("vendor.schedule-order");
+            Route::get('/{id}/driver-details',[VendorWebController::class,'driverDetails'])->name("vendor.driver-details");
+            Route::get('/{id}/in-transit',[VendorWebController::class,'intransit'])->name("vendor.in-transit");
+            Route::get('/{id}/complete',[VendorWebController::class,'completeOrder'])->name("vendor.complete-order");
         });
 
         Route::prefix('/user')->group(function () {
@@ -390,6 +395,8 @@ Route::prefix('vendor')->group(function(){
             Route::get('/',[VendorWebController::class,'inventoryManagement'])->name("vendor.inventorymgt");
             Route::get('/{type}',[VendorWebController::class,'inventoryCetegory'])->name("vendor.inventorycat");
             Route::get('/{id}/sidebar',[VendorWebController::class,'inventorySidebar'])->name("vendor.inventory_sidebar");
+            Route::get('/get/services',[VendorWebController::class,'getServices'])->name("vendor.inventory_services");
+            Route::get('/{id}/add',[VendorWebController::class,'addInventory'])->name("vendor.inventory.add");
         });
 
         Route::prefix('/branches')->group(function () {

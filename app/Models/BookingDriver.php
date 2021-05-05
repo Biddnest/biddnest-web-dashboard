@@ -17,8 +17,8 @@ class BookingDriver extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    // public function driver()
-    // {
-    //     return $this->morphTo();
-    // }
+    public function driver()
+     {
+         return $this->belongsTo(Vendor::class);
+     }
 }

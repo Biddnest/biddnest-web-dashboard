@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\VendorEnums;
 use App\Models\Bid;
 use App\Models\Booking;
+use App\Models\BookingDriver;
 use App\Models\Inventory;
 use App\Models\Organization;
 use App\Models\Payout;
@@ -224,7 +226,76 @@ class VendorWebController extends Controller
 
     public function bookingDetails(Request $request)
     {
-        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with('movement_dates')->first();
-        return view('vendor-panel.order.details', ['booking'=>$booking]);
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+            $query->pluck('date');
+        }])->with(['bid'=>function($q){
+            $q->where(['organization_id'=>Session::get('organization_id')]);
+        }])->first();
+        $vehicle=VehicleController::getVehicles(Session::get('organization_id'), true);
+        return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle]);
+    }
+
+    public function myQuote(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        return view('vendor-panel.order.myquote', ['booking'=>$booking]);
+    }
+
+    public function myBid(Request $request)
+    {
+        $bidding_graph=[];
+        $booking=Booking::where('public_booking_id', $request->id)->with('service')->first();
+        $bidding=Bid::where(['booking_id'=>$booking->id, 'organization_id'=>Session::get('organization_id')])->first();
+
+        if($bidding->status == BidEnums::$STATUS['lost'])
+            $bidding_graph=BookingsController::getposition(Session::get('account')['id'], $request->id);
+
+        return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'bidding_graph'=>$bidding_graph]);
+    }
+
+    public function scheduleOrder(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+            $query->pluck('date');
+        }])->with(['bid'=>function($q){
+            $q->where(['organization_id'=>Session::get('organization_id')]);
+        }])->first();
+        return view('vendor-panel.order.scheduledorder', ['booking'=>$booking]);
+    }
+
+    public function driverDetails(Request $request)
+    {
+        $driver=Vendor::select(["id", "fname", "lname", "phone"])
+            ->where("organization_id", Session::get('organization_id'))
+            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->get();
+        $vehicle=Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))
+            ->get();
+        $assigned_driver=BookingDriver::where('booking_id', Booking::where('public_booking_id', $request->id)->pluck('id')[0])->with('vehicle')->with('driver')->orderBy('id', 'DESC')->first();
+        return view('vendor-panel.order.driverdetail', ['drivers'=>$driver, 'vehicles'=>$vehicle, 'assigned_driver'=>$assigned_driver, 'id'=>$request->id]);
+    }
+
+    public function intransit(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        return view('vendor-panel.order.intransit', ['booking'=>$booking]);
+    }
+
+    public function completeOrder(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        return view('vendor-panel.order.complete', ['booking'=>$booking]);
+    }
+
+    public function getServices()
+    {
+        $services=Service::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return view('vendor-panel.inventory.services', ['services'=>$services]);
+    }
+
+    public function addInventory(Request $request)
+    {
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return view('vendor-panel.inventory.addinventory', ['inventories'=>$inventory, 'service_id'=>$request->id]);
     }
 }

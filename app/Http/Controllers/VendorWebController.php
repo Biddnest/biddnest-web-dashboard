@@ -224,7 +224,7 @@ class VendorWebController extends Controller
 
     public function bookingDetails(Request $request)
     {
-        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->first();
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with('movement_dates')->first();
         return view('vendor-panel.order.details', ['booking'=>$booking]);
     }
 }

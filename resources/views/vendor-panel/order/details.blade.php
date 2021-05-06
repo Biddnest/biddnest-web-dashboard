@@ -347,7 +347,10 @@
                                 <span class="error-message">Please enter valid OTP</span>
                             </div>
                             <div class="text-center">
-                                <span class="text-center">Forgot Pin?</span><a class="link-regular" href="#"> Reset</a>
+                                <span class="text-center">Forgot Pin?</span>
+                                <a class="modal-toggle" href="#" data-target="#reset-pin">
+                                    Reset
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -361,6 +364,44 @@
                                 class="btn theme-bg white-text w-30 " id="next-btn-2" style="margin-bottom: 20px;">Next</button>
                             <button
                                 class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="fullscreen-modal" id="reset-pin" style="min-height: 155%;">
+        <div class="fullscreen-modal-body" role="document">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Apply For Bid</h5>
+                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" data-url="{{route('api.vendor.reset-pine',['id'=>\Illuminate\Support\Facades\Session::get('account')['id']])}}" data-alert="mega" data-parsley-validate>
+                <div class="modal-body" style="padding: 10px 9px;">
+                    <div class="d-flex justify-content-center row ">
+                        <div class="col-sm-6 enter-pin p-60">
+                            <div class="form-input">
+                                <h4 class="text-center bold">Enter Your Password</h4>
+                                <input class="form-control" name="password" type="password" required/>
+                                <span class="error-message">Please enter valid Password</span>
+                            </div>
+                            <div class="form-input">
+                                <h4 class="text-center bold">Enter Your Pin</h4>
+                                <input class="form-control" name="pin" type="number" maxlength="4" minlength="4" required/>
+                                <span class="error-message">Please enter valid OTP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-15 ">
+                    <div class="w-50">
+                    </div>
+                    <div class="w-50 text-right">
+                        <a class="white-text p-10" href="#">
+                            <button class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
                         </a>
                     </div>
                 </div>

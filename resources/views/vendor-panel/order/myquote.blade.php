@@ -9,7 +9,7 @@
             <div class="page-head text-left  pt-0 pb-0 p-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page" ><a href="manage-bookings.html"> Manage Bookings</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" ><a href="{{route('vendor.bookings', ['type'=>"live"])}}Fgr"> Manage Bookings</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
                 </nav>
@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10">
                                 <div class="steps-container mr-4 justify-content-center">
-                                    <hr class="dash-line" style="width:11% !important;margin-left: 10%;">
+                                    <hr class="dash-line" style="margin-left: 5%;">
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
@@ -60,7 +60,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Schedule</a>
                                     </li>
-
+                                @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['payment_pending'])
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
+                                    </li>
                                 @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'] ))
 
                                     <li class="nav-item">

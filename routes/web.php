@@ -183,6 +183,8 @@ Route::prefix('web/api')->group(function () {
         Route::post('/branch/add',[VendorRouter::class,'branch_add'])->name("api.branch.add");
         Route::put('/branch/edit',[VendorRouter::class,'branch_edit'])->name("api.branch.edit");
 
+        Route::post('/reset-pin',[VendorRouter::class,'addPin'])->name("api.vendor.reset-pine");
+
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
         Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");

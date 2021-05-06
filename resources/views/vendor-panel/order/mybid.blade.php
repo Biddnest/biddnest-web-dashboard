@@ -52,7 +52,7 @@
                                 </li>
                                 @if($booking->bid->status = \App\Enums\BidEnums::$STATUS['bid_submitted'])
                                     <li class="nav-item">
-                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quoter',['id'=>$booking->public_booking_id])}}">My Quote</a>
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>

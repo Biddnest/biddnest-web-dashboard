@@ -26,7 +26,7 @@
                         </h3>
                     </div>
                     <form action="{{route('api.vendor_old_reset_password')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.login')}}" data-alert="tiny" class="form-new-order" id="myForm" autocomplete="off" data-parsley-validate style="width: 50%; align-self: center;">
-                        <input type="hidden" value="{{$vendor->id}}" name="bearer" required class="form-control">
+                        <input type="hidden" value="{{\Illuminate\Support\Facades\Session::get('account')['id']}}" name="bearer" required class="form-control">
                         <div class="form-input">
                             <label>Old Password</label>
                             <input type="password" id="old_password" name="old_password" placeholder="Old Password" tabindex="10" required class="form-control">

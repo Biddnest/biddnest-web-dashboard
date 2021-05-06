@@ -117,6 +117,8 @@ $("body").on('submit', "form", function() {
                                 redirectTo(form.data("url"));
                         } else if (form.data("next") == "refresh") {
                             location.reload();
+                        }else if (form.data("next") == "modal") {
+                            $(form.data(".modal-id")).modal();
                         }
                     }
                 } else if (response.status == "fail") {

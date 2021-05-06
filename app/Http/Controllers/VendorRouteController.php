@@ -371,7 +371,7 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VendorUserController::resetPin($request->pin, $request->password, $request->token_payload->id);
+        return VendorUserController::resetPin($request->pin, $request->password, Session::get('account')['id']);
     }
 
 }

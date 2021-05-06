@@ -300,9 +300,9 @@
                                                 <th scope="row">{{$inventory->name}}</th>
                                                 <td class="">
                                                     @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
-                                                        {{$inventory->quantity}}
+                                                        {{$inventory->quantity ?? ''}}
                                                     @else
-                                                        {{$inventory->quantity->min}}-{{$inventory->quantity->max}}
+                                                        {{$inventory->quantity->min ?? ''}}-{{$inventory->quantity->max ?? ''}}
                                                     @endif
                                                 </td>
                                                 <td class="">{{$inventory->size}}</td>

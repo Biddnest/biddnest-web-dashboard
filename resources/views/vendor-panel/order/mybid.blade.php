@@ -179,6 +179,27 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                        @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
+                                            <div class="p-15 ">
+                                                <div class="d-felx justify-content-around row  ">
+                                                    <div class="bid-badge">
+                                                        <h4 class="">₹ {{$bidding->bid_amount}}</h4>
+                                                        <p>Your Bid Price</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between  detail-order">
+                                                    <div class="data">ORDER ID</div>
+                                                    <div class="value">#{{$booking->public_booking_id}}</div>
+                                                </div>
+                                                <div class="d-flex justify-content-between detail-order">
+                                                    <div class="data">MOVING DATE</div>
+                                                    <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                </div>
+                                                <div class="d-flex justify-content-between detail-order">
+                                                    <div class="data">CATEGORY</div>
+                                                    <div class="value">{{$booking->service->name}}</div>
+                                                </div>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>

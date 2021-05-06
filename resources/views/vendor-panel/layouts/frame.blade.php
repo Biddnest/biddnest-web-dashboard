@@ -12,7 +12,7 @@
     @include('vendor-panel.layouts.includes.sidebar')
     <div class="content-wrapper" data-barba="wrapper">
         <div class="floating-btn">
-            <img src="{{asset('static/images/graph/Group 14372.svg')}}" alt="">
+            <img src="{{asset('static/vendor/images/graph/Group 14372.svg')}}" alt="">
         </div>
         <!-- top_nav_bar -->
         <div class="h-auto">

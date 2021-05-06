@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\VendorEnums;
 use App\Models\Bid;
 use App\Models\Booking;
+use App\Models\BookingDriver;
 use App\Models\Inventory;
 use App\Models\Organization;
 use App\Models\Payout;
+use App\Models\Service;
 use App\Models\Ticket;
 use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
@@ -61,7 +65,15 @@ class VendorWebController extends Controller
 
     public function dashboard()
     {
-        return view('vendor-panel.dashboard.dashboard');
+        $count_live=Bid::where(['status'=>BidEnums::$STATUS['active'], 'organization_id'=>Session::get('organization_id')])->count();
+        $count_ongoing= Bid::where(['status'=>BidEnums::$STATUS['bid_submitted'], 'vendor_id'=>Session::get('account')['id']])->count();
+        $count_won= Bid::where(['status'=>BidEnums::$STATUS['won'], 'vendor_id'=>Session::get('account')['id']])->count();
+        $count_branch=Organization::where("id", Session::get('account')['id'])->orWhere("parent_org_id", Session::get('account')['id'])->count();
+        $count_emp=Vendor::where('organization_id', Session::get('organization_id'))->count();
+        $total_revenue =Payout::where('organization_id', Session::get('organization_id'))->sum('final_payout');
+
+        $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->latest()->limit(3)->get();
+        return view('vendor-panel.dashboard.dashboard',['count_live'=>$count_live, 'count_ongoing'=>$count_ongoing, 'count_won'=>$count_won, 'count_branch'=>$count_branch, 'count_emp'=>$count_emp, 'total_revenue'=>$total_revenue, 'booking_live'=>$booking_live]);
     }
 
     public function bookingType(Request $request)
@@ -91,6 +103,7 @@ class VendorWebController extends Controller
 
         return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type]);
     }
+
     public function sidebar_userManagement(Request $request)
     {
         $user=Vendor::where('id', $request->id)->with('organization')->first();
@@ -163,8 +176,17 @@ class VendorWebController extends Controller
     public function serviceSidebar(Request $request)
     {
         $ticket=Ticket::where('id', $request->id)->with('reply')->first();
-        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
-        return view('vendor-panel.tickets.servicesidebar', ['tickets'=>$ticket, 'replies'=>$replies]);
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('vendor')->latest()->take(2)->get();
+
+        return view('vendor-panel.tickets.servicesidebar', ['ticket'=>$ticket, 'replies'=>$replies]);
+    }
+
+    public function serviceSidebar_reply(Request $request)
+    {
+        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('vendor')->get();
+
+        return view('vendor-panel.tickets.reply', ['tickets'=>$ticket, 'replies'=>$replies]);
     }
 
     public function profile(Request $request)
@@ -179,5 +201,178 @@ class VendorWebController extends Controller
             $parentbranch =Organization::where("id", $user->organization->id)->first();
 
         return view('vendor-panel.dashboard.myprofile', ['user'=>$user, 'branch'=>$parentbranch]);
+    }
+
+    public function userAdd(Request $request)
+    {
+        $users = Vendor::where("id", $request->id)->first();
+        $branch = Organization::where(["parent_org_id"=>Session::get('organization_id'), "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", Session::get('organization_id'))->get();
+        return view('vendor-panel.user.add_user',['id'=>$request->id, 'roles'=>$users, 'branches'=>$branch]);
+    }
+
+    public function addBranch(Request $request)
+    {
+        $branch = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $zones=Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $organization = Organization::where(["id"=>Session::get('organization_id'), "deleted"=>CommonEnums::$NO])->first();
+        $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor-panel.branch.add_branch', ['id'=>Session::get('organization_id'), 'services'=>$services, 'organization'=>$organization, 'zones'=>$zones, 'branch'=>$branch]);
+    }
+
+    public function serviceRequestAdd()
+    {
+        return view('vendor-panel.tickets.add_ticket');
+    }
+
+    public function bookingDetails(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+            $query->pluck('date');
+        }])->with(['bid'=>function($q){
+            $q->where(['organization_id'=>Session::get('organization_id')]);
+        }])->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
+        $vehicle=VehicleController::getVehicles(Session::get('organization_id'), true);
+        return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle]);
+    }
+    public function bookingRequirment(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+            $query->pluck('date');
+        }])->with(['bid'=>function($q){
+            $q->where(['organization_id'=>Session::get('organization_id')]);
+        }])->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
+        return view('vendor-panel.order.requirement', ['booking'=>$booking]);
+    }
+
+    public function myQuote(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('vendor-panel.order.myquote', ['booking'=>$booking]);
+    }
+
+    public function myBid(Request $request)
+    {
+        $bidding_graph=[];
+        $booking=Booking::where('public_booking_id', $request->id)->with('service')->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
+        $bidding=Bid::where(['booking_id'=>$booking->id, 'organization_id'=>Session::get('organization_id')])->first();
+
+        if($bidding->status == BidEnums::$STATUS['lost'])
+            $bidding_graph=BookingsController::getposition(Session::get('account')['id'], $request->id);
+
+        return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'bidding_graph'=>$bidding_graph]);
+    }
+
+    public function scheduleOrder(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+            $query->pluck('date');
+        }])->with(['bid'=>function($q){
+            $q->where(['organization_id'=>Session::get('organization_id')]);
+        }])->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('vendor-panel.order.scheduledorder', ['booking'=>$booking]);
+    }
+
+    public function driverDetails(Request $request)
+    {
+        $driver=Vendor::select(["id", "fname", "lname", "phone"])
+            ->where("organization_id", Session::get('organization_id'))
+            ->where(["user_role" => VendorEnums::$ROLES['driver']])
+            ->get();
+        $vehicle=Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))
+            ->get();
+        $assigned_driver=BookingDriver::where('booking_id', Booking::where('public_booking_id', $request->id)->pluck('id')[0])->with('vehicle')->with('driver')->orderBy('id', 'DESC')->first();
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('vendor-panel.order.driverdetail', ['drivers'=>$driver, 'vehicles'=>$vehicle, 'assigned_driver'=>$assigned_driver, 'id'=>$request->id, 'booking'=>$booking]);
+    }
+
+    public function intransit(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('vendor-panel.order.intransit', ['booking'=>$booking]);
+    }
+
+    public function completeOrder(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('vendor-panel.order.complete', ['booking'=>$booking]);
+    }
+
+    public function getServices()
+    {
+        $services=Service::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return view('vendor-panel.inventory.services', ['services'=>$services]);
+    }
+
+    public function addInventory(Request $request)
+    {
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return view('vendor-panel.inventory.addinventory', ['inventories'=>$inventory, 'service_id'=>$request->id]);
     }
 }

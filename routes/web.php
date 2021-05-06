@@ -167,19 +167,30 @@ Route::prefix('web/api')->group(function () {
         Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices'])->name("api.deleteInventoryPrices");
 
         Route::post('/booking/bid',[VendorRouter::class,'addBid'])->name("api.booking.bid");
-        Route::post('/booking/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
-        Route::post('/booking/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
+        Route::put('/booking/{id}/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
+        Route::put('/booking/{id}/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
         Route::post('/booking/assign-driver',[VendorRouter::class,'assignDriver'])->name("api.driver.assign");
-        Route::post('/booking/trip/start',[VendorRouter::class,'startTrip'])->name("api.trip.start");
-        Route::post('/booking/trip/end',[VendorRouter::class,'endTrip'])->name("api.trip.end");
 
         Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
+        Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");
+        Route::post('/tickets/add',[VendorRouter::class,'addTickets'])->name("api.ticket.addticket");
 
         Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
+        Route::post('/user/add',[VendorRouter::class,'addUser'])->name("api.user.add");
+        Route::put('/user/edit',[VendorRouter::class,'editUser'])->name("api.user.edit");
+        Route::delete('/user/{id}',[VendorRouter::class,'deleteUser'])->name("api.user.delete");
+
+        Route::post('/branch/add',[VendorRouter::class,'branch_add'])->name("api.branch.add");
+        Route::put('/branch/edit',[VendorRouter::class,'branch_edit'])->name("api.branch.edit");
+
+        Route::put('/reset-pin',[VendorRouter::class,'addPin'])->name("api.vendor.reset-pine");
 
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
         Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
+
+
+
     });
     /*vendor web apis end*/
 
@@ -365,13 +376,21 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/booking')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
-            Route::get('/past/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
-            Route::get('/{public_booking_id}/details',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
-            Route::get('/{public_booking_id}/item-list',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
+            Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
+            Route::get('/{id}/details',[VendorWebController::class,'bookingDetails'])->name("vendor.detailsbookings");
+            Route::get('/{id}/requirment',[VendorWebController::class,'bookingRequirment'])->name("vendor.requirment-order");
+            Route::get('/{id}/my-quote',[VendorWebController::class,'myQuote'])->name("vendor.my-quote");
+            Route::get('/{id}/my-bid',[VendorWebController::class,'myBid'])->name("vendor.my-bid");
+            Route::get('/{id}/scheduled',[VendorWebController::class,'scheduleOrder'])->name("vendor.schedule-order");
+            Route::get('/{id}/driver-details',[VendorWebController::class,'driverDetails'])->name("vendor.driver-details");
+            Route::get('/{id}/in-transit',[VendorWebController::class,'intransit'])->name("vendor.in-transit");
+            Route::get('/{id}/complete',[VendorWebController::class,'completeOrder'])->name("vendor.complete-order");
         });
 
         Route::prefix('/user')->group(function () {
+            Route::get('/add-role',[VendorWebController::class,'userAdd'])->name("vendor.addusermgt");
             Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
+            Route::get('/{id}/edit-role',[VendorWebController::class,'userAdd'])->name("vendor.editusermgt");
             Route::get('/{id}/sidebar',[VendorWebController::class,'sidebar_userManagement'])->name("vendor.sidebar.userrole");
         });
 
@@ -379,10 +398,14 @@ Route::prefix('vendor')->group(function(){
             Route::get('/',[VendorWebController::class,'inventoryManagement'])->name("vendor.inventorymgt");
             Route::get('/{type}',[VendorWebController::class,'inventoryCetegory'])->name("vendor.inventorycat");
             Route::get('/{id}/sidebar',[VendorWebController::class,'inventorySidebar'])->name("vendor.inventory_sidebar");
+            Route::get('/get/services',[VendorWebController::class,'getServices'])->name("vendor.inventory_services");
+            Route::get('/{id}/add',[VendorWebController::class,'addInventory'])->name("vendor.inventory.add");
         });
 
         Route::prefix('/branches')->group(function () {
             Route::get('/',[VendorWebController::class,'getBranches'])->name("vendor.branches");
+            Route::get('/add-branch',[VendorWebController::class,'addBranch'])->name("vendor.addbranch");
+            Route::get('/{id}/edit-branch',[VendorWebController::class,'addBranch'])->name("vendor.editbranch");
         });
 
         Route::get('/payout',[VendorWebController::class,'payout'])->name("vendor.payout");
@@ -395,7 +418,9 @@ Route::prefix('vendor')->group(function(){
 
         Route::prefix('/service-request')->group(function () {
             Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
+            Route::get('/add',[VendorWebController::class,'serviceRequestAdd'])->name("vendor.service_request_add");
             Route::get('/{id}/sidebar',[VendorWebController::class,'serviceSidebar'])->name("vendor.service_sidebar");
+            Route::get('/reply/{id}/detail',[VendorWebController::class,'serviceSidebar_reply'])->name("vendor.service_sidebar.reply");
         });
 
 

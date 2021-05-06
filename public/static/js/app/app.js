@@ -117,6 +117,8 @@ $("body").on('submit', "form", function() {
                                 redirectTo(form.data("url"));
                         } else if (form.data("next") == "refresh") {
                             location.reload();
+                        }else if (form.data("next") == "modal") {
+                            $(form.data(".modal-id")).modal();
                         }
                     }
                 } else if (response.status == "fail") {
@@ -433,8 +435,48 @@ console.log($(this).val());
     }
 });
 
+$(document).ready(function () {
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $("tr").click(function () {
+    });
+});
+
+$("body").on('click', ".bookings", function(event) {
+    var target = $(this).closest($(this).data("parent"));
+    if(confirm($(this).data('confirm'))) {
+        $.update($(this).data("url"), {}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert($(this).data('success'), response.message);
+                target.hide();
+            } else {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    }
+    return false;
+});
 
 
+$('.filterdate').datepicker({
+    format: 'yyyy-mm-dd'
+});
 
 
+$("body").on('change', ".addpin", function(event) {
+    var password = document.getElementById("password").value;
+    var pin =document.getElementById("pin").value;
+        $.update($(this).data("url"), {password, pin}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Pin reseted Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
 
+        });
+    return false;
+});

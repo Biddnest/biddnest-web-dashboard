@@ -163,12 +163,12 @@ class OrganisationController extends Controller
 
     public static function addBranch($data, $id)
     {
-        $exist = Organization::findOrFail($id);
+       $exist = Organization::findOrFail($id);
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
         $meta = json_decode($exist['meta'], true);
-        $meta['org_description']= $data['organization']['org_type'];
+        $meta['org_description']= $data['organization']['description'];
         $meta['address']= $data['address']['address'];
         $meta['landmark']= $data['address']['landmark'];
 
@@ -216,12 +216,12 @@ class OrganisationController extends Controller
 
     public static function updateBranch($data, $id, $parent_org_id)
     {
-        $exist = Organization::where(["id"=>$id, "parent_org_id"=>$parent_org_id])->first();
+        $exist = Organization::where("id", $id)->orWhere("parent_org_id", $parent_org_id)->first();
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
         $meta = json_decode($exist['meta'], true);
-        $meta['org_description']= $data['organization']['org_type'];
+        $meta['org_description']= $data['organization']['description'];
         $meta['address']= $data['address']['address'];
         $meta['landmark']= $data['address']['landmark'];
 

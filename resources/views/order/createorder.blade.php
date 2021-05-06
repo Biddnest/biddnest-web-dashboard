@@ -56,21 +56,21 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Phone Number</label>
-                                <input type="tel" value="9762553805" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" required>
+                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="full-name">Full Name</label>
-                                <input type="text" value="Dhanashri Mane" id="fullname" placeholder="David Jerome" name="contact_details[name]" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="David Jerome" name="contact_details[name]" class="form-control" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="email-label">Email</label>
-                                <input type="email" value="dhanashree.mane@diginnovators.com" placeholder="abc@mail.com" name="contact_details[email]" id="E-mail" class="form-control" required>
+                                <input type="email" placeholder="abc@mail.com" name="contact_details[email]" id="E-mail" class="form-control" required>
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
@@ -119,7 +119,7 @@
                         <div class="d-flex  row  p-20">
                           <div class="col-sm-6">
                             <div class="form-input">
-                              <label>Search Address </label>
+                              <label>From Address </label>
                               <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
@@ -151,21 +151,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="Benguluru" id="source-city" value="Pune" class="form-control" name="source[meta][city]" required>
+                                    <input type="text" placeholder="Benguluru" id="source-city" class="form-control" name="source[meta][city]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From State</label>
-                                    <input type="text" placeholder="Karnataka" id="source-state" class="form-control" value="Maharashtra" name="source[meta][state]" required>
+                                    <input type="text" placeholder="Karnataka" id="source-state" class="form-control" name="source[meta][state]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="530000" id="source-pin" value="7584585" class="form-control" name="source[meta][pincode]" required>
+                                  <input type="text" placeholder="530000" id="source-pin" class="form-control" name="source[meta][pincode]" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -198,7 +198,7 @@
                           <div class="d-flex  row  p-20">
                             <div class="col-sm-6">
                                 <div class="form-input">
-                                <label>Search  Address</label>
+                                <label>To  Address</label>
                                 <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="dest-autocomplete" class="form-control">
                                     <input type="hidden"  name="destination[lat]" id="dest-lat" class="form-control" required>
                                     <input type="hidden"  name="destination[lng]" id="dest-lng" class="form-control" required>
@@ -229,21 +229,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="Chennai" id="dest-city" value="Chennai" name="destination[meta][city]" class="form-control" required>
+                                  <input type="text" placeholder="Chennai" id="dest-city"  name="destination[meta][city]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="Chennai" id="dest-state" value="Tamil Nadu" name="destination[meta][state]" class="form-control" required>
+                                    <input type="text" placeholder="Chennai" id="dest-state"  name="destination[meta][state]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="530001" name="destination[meta][pincode]" value="875895" id="dest-pin" class="form-control" required>
+                                  <input type="text" placeholder="530001" name="destination[meta][pincode]"  id="dest-pin" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -252,7 +252,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
-                                    <input type="number" placeholder="1st floor" name="destination[meta][floor]" id="" class="form-control" required>
+                                    <input type="number" placeholder="1st floor" value="0" name="destination[meta][floor]" id="" class="form-control" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>

@@ -186,8 +186,17 @@ class BidController extends Controller
         return true;
     }
 
-    public static function submitBid($data, $org_id, $vendor_id)
+    public static function submitBid($data, $org_id, $vendor_id, $web=false)
     {
+
+        if($web)
+        {
+            $min_power=explode(";",$data['man_power'])[0];
+            $max_power=explode(";",$data['man_power'])[1];
+        }else{
+            $min_power=$data['man_power']['min'];
+            $max_power=$data['man_power']['max'];
+        }
         $vendor = Vendor::where("id", $vendor_id)->first();
 
         if(!password_verify($data['pin'], $vendor->pin))
@@ -215,7 +224,7 @@ class BidController extends Controller
             $inventory_result = $inventory_price->save();
         }
 
-        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$data['man_power']['min'], "max_man_power"=>$data['man_power']['max']];
+        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
 
         $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id']])
             ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])

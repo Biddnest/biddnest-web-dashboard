@@ -148,38 +148,23 @@ class VendorRouteController extends Controller
             'moving_date'=>'required',
             'vehicle_type'=>'required|string',
 
-            'man_power.min'=>'required|integer',
-            'man_power.max'=>'required|integer'
+            'man_power'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('id'));
+        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('account')['id'], true);
     }
 
     public function reject(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::reject($request->public_booking_id, Session::get('organization_id'), Session::get('id'));
+        return BookingsController::reject($request->id, Session::get('organization_id'), Session::get('id'));
     }
 
     public function addBookmark(Request $request)
     {
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required'
-        ]);
-
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::addBookmark($request->public_booking_id,Session::get('organization_id'), Session::get('id'));
+        return BookingsController::addBookmark($request->id,Session::get('organization_id'), Session::get('id'));
     }
 
     public function assignDriver(Request $request)
@@ -194,28 +179,6 @@ class VendorRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return BookingsController::assignDriver($request->public_booking_id, $request->driver_id, $request->vehicle_id);
-    }
-
-    public function startTrip(Request $request){
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required',
-            'pin' => 'required',
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::startTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
-    }
-
-    public function endTrip(Request $request){
-        $validation = Validator::make($request->all(),[
-            'public_booking_id' => 'required',
-            'pin' => 'required',
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-
-        return BookingsController::endTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
     }
 
     public function createTickets(Request $request)
@@ -268,6 +231,147 @@ class VendorRouteController extends Controller
     public function deleteVehicle(Request $request)
     {
         return VehicleController::delete($request->id);
+    }
+
+    public function addReply(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketReplyController::addReplyFromVendor(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
+    }
+
+    public function adduser(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required|string',
+            'phone'=>'required|min:10|max:10',
+            'branch' => 'required',
+            'role'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addNewRole($request->all(), Session::get('organization_id'));
+    }
+
+    public function editUser(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'role_id'=>'required',
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required|string',
+            'phone'=>'required|min:10|max:10',
+            'branch' => 'required',
+            'role'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::editNewRole($request->all(), Session::get('account')['id'], $request->role_id);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        return OrganisationController::deleteRole($request->id, Session::get('organization_id'));
+    }
+
+    public function branch_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'parent_org_id'=>'required',
+            'phone.primary'=>'required|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string',
+            'organization.description' =>'required|string',
+
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string',
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addBranch($request->all(), $request->parent_org_id);
+    }
+
+    public function branch_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'parent_org_id'=>'required',
+            'phone.primary'=>'required|min:10|max:10',
+
+            'organization.org_name' => 'required|string',
+            'organization.org_type' => 'required|string',
+            'organization.description' =>'required|string',
+
+            'address.address' => 'required|string',
+            'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',
+            'address.landmark'=> 'required|string',
+            'address.state' => 'required|string',
+            'address.city' => 'required|string',
+            'address.pincode' => 'required|min:6|max:6',
+            'zone' => 'required|integer',
+            'service.*' =>'required|integer',
+            'service_type' =>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::updateBranch($request->all(), $request->id, $request->parent_org_id);
+
+    }
+
+    public function addTickets(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category' => 'required',
+            'heading' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::createForVendor(Session::get('account')['id'], $request->category, [], $request->heading, $request->desc);
+    }
+
+    public function addPin(Request $request)
+    {
+
+        $validation = Validator::make($request->all(),[
+            'pin' => 'required|digits:4',
+            'password' =>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VendorUserController::resetPin($request->pin, $request->password, Session::get('account')['id']);
     }
 
 }

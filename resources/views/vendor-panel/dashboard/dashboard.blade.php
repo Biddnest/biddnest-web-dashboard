@@ -11,39 +11,35 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">Last login at</li>
                         <li class="breadcrumb-item"><a href="#">11:55:02 AM</a></li>
-
                     </ol>
                 </nav>
-
-
             </div>
-
         </div>
         <!-- Dashboard cards -->
         <div class="vender-all-details dashboard-cards flex-row">
             <div class="simple-card">
                 <p> LIVE ORDERS</p>
-                <h1>501</h1>
+                <h1>{{$count_live}}</h1>
             </div>
             <div class="simple-card">
                 <p>ONGOING ORDERS</p>
-                <h1>865</h1>
+                <h1>{{$count_ongoing}}</h1>
             </div>
             <div class="simple-card">
                 <p>ORDERS WON</p>
-                <h1>900</h1>
+                <h1>{{$count_won}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL BRANCHES</p>
-                <h1>56</h1>
+                <h1>{{$count_branch}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL EMPLOYEES</p>
-                <h1>4,567</h1>
+                <h1>{{$count_emp}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL REVENUE</p>
-                <h1>₹24K</h1>
+                <h1>₹{{$total_revenue}}</h1>
             </div>
         </div>
         <!--  dashboard Columns -->
@@ -55,8 +51,7 @@
                             <h3 class="f-18">Live Orders</h3>
                         </div>
                         <div class="p-10 card-head left">
-                            <a><i><img src="./assets/images/filter1.svg" alt="" srcset=""></i></a>
-
+                            <a><i><img src="{{asset('static/vendor//images/filter1.svg')}}" alt="" srcset=""></i></a>
                             <!-- <a><i><img src="./assets/images/filter.svg" alt="" srcset=""></i> -->
                             <div class="dropdown-menu ">
                                 <a class="dropdown-item border-top-bottom" href="#">
@@ -84,9 +79,6 @@
                                         </label>
                                     </div>
                                 </a>
-
-
-
                             </div>
                         </div>
 
@@ -95,31 +87,20 @@
                         <thead class="secondg-bg border-none p-0 f-14">
                         <tr>
                             <th scope="col">Order ID</th>
-
                             <th scope="col">Time Left</th>
                             <th scope="col">Order Amount</th>
                         </tr>
                         </thead>
                         <tbody class="mtop-20">
-                        <tr class="tb-border cursor-pointer " onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <th scope="row" style="text-decoration: underline;"> SKU123456</th>
+                            @foreach($booking_live as $booking)
+                                <tr class="tb-border">
+                                    <th scope="row" style="text-decoration: underline;">{{$booking->public_booking_id}}</th>
 
-                            <td class="text-center">0:03:02</td>
-                            <td class="text-center">₹2,300</td>
-                        </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"  >
-                            <th scope="row" style="text-decoration: underline;">SKU123456</th>
-
-                            <td>0:03:02</td>
-                            <td>₹2,300</td>
-                        </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"             >
-                            <th scope="row"  style="text-decoration: underline;">SKU123456</th>
-
-                            <td>0:03:02</td>
-                            <td>₹2,300</td>
-                        </tr>
-                        </tbody>
+                                    <td class="text-center"><span class="timer-bg text-center timer" data-time="{{$booking->bid_result_at}}"></span></td>
+                                    <td class="text-center">₹{{$booking->final_estimated_quote}}</td>
+                                </tr>
+                            @endforeach
+                       </tbody>
                     </table>
                 </div>
             </div>

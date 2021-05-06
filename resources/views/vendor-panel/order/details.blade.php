@@ -307,7 +307,7 @@
                                                 </td>
                                                 <td class="">{{$inventory->size}}</td>
                                                 <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
-                                                    <input class="form-control border-purple w-88" name="inventory[][amount]" type="text" placeholder="2000"/>
+                                                    <input class="form-control border-purple w-88" name="inventory[][amount]" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -318,7 +318,7 @@
                             <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                 <div><p class="mt-2">Total Price</p></div>
                                 <div class="col-2">
-                                    <input class="form-control border-purple" value="{{$booking->final_estimated_quote}}" type="number" name="bid_amount" placeholder="4000" />
+                                    <input class="form-control border-purple" value="{{$booking->final_estimated_quote}}" type="number" name="bid_amount" id="bid_amount" required placeholder="4000" />
                                 </div>
                             </div>
                         </div>

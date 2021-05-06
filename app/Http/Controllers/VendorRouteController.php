@@ -154,7 +154,7 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('id'), true);
+        return BidController::submitBid($request->all(), Session::get('organization_id'), Session::get('account')['id'], true);
     }
 
     public function reject(Request $request)
@@ -358,6 +358,20 @@ class VendorRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return TicketController::createForVendor(Session::get('account')['id'], $request->category, [], $request->heading, $request->desc);
+    }
+
+    public function addPin(Request $request)
+    {
+
+        $validation = Validator::make($request->all(),[
+            'pin' => 'required|digits:4',
+            'password' =>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VendorUserController::resetPin($request->pin, $request->password, $request->token_payload->id);
     }
 
 }

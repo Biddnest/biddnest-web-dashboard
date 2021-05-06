@@ -188,10 +188,11 @@ class BidController extends Controller
 
     public static function submitBid($data, $org_id, $vendor_id, $web=false)
     {
+
         if($web)
         {
-            $min_power=explode(",",$data['man_power'])[0];
-            $max_power=explode(",",$data['man_power'])[1];
+            $min_power=explode(";",$data['man_power'])[0];
+            $max_power=explode(";",$data['man_power'])[1];
         }else{
             $min_power=$data['man_power']['min'];
             $max_power=$data['man_power']['max'];

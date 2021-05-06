@@ -462,3 +462,19 @@ $("body").on('click', ".bookings", function(event) {
 $('.filterdate').datepicker({
     format: 'yyyy-mm-dd'
 });
+
+
+$("body").on('change', ".addpin", function(event) {
+    var password = document.getElementById("password").value;
+    var pin =document.getElementById("pin").value;
+        $.update($(this).data("url"), {password, pin}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Pin reseted Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    return false;
+});

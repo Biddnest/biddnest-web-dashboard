@@ -231,13 +231,48 @@ class VendorWebController extends Controller
         }])->with(['bid'=>function($q){
             $q->where(['organization_id'=>Session::get('organization_id')]);
         }])->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
         $vehicle=VehicleController::getVehicles(Session::get('organization_id'), true);
         return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle]);
+    }
+    public function bookingRequirment(Request $request)
+    {
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+            $query->pluck('date');
+        }])->with(['bid'=>function($q){
+            $q->where(['organization_id'=>Session::get('organization_id')]);
+        }])->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
+        return view('vendor-panel.order.requirement', ['booking'=>$booking]);
     }
 
     public function myQuote(Request $request)
     {
         $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('vendor-panel.order.myquote', ['booking'=>$booking]);
     }
 
@@ -245,6 +280,15 @@ class VendorWebController extends Controller
     {
         $bidding_graph=[];
         $booking=Booking::where('public_booking_id', $request->id)->with('service')->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+
         $bidding=Bid::where(['booking_id'=>$booking->id, 'organization_id'=>Session::get('organization_id')])->first();
 
         if($bidding->status == BidEnums::$STATUS['lost'])
@@ -260,6 +304,14 @@ class VendorWebController extends Controller
         }])->with(['bid'=>function($q){
             $q->where(['organization_id'=>Session::get('organization_id')]);
         }])->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('vendor-panel.order.scheduledorder', ['booking'=>$booking]);
     }
 
@@ -272,18 +324,43 @@ class VendorWebController extends Controller
         $vehicle=Vehicle::select(["id", "name", "vehicle_type", "number"])->where("organization_id", Session::get('organization_id'))
             ->get();
         $assigned_driver=BookingDriver::where('booking_id', Booking::where('public_booking_id', $request->id)->pluck('id')[0])->with('vehicle')->with('driver')->orderBy('id', 'DESC')->first();
-        return view('vendor-panel.order.driverdetail', ['drivers'=>$driver, 'vehicles'=>$vehicle, 'assigned_driver'=>$assigned_driver, 'id'=>$request->id]);
+        $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('vendor-panel.order.driverdetail', ['drivers'=>$driver, 'vehicles'=>$vehicle, 'assigned_driver'=>$assigned_driver, 'id'=>$request->id, 'booking'=>$booking]);
     }
 
     public function intransit(Request $request)
     {
         $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('vendor-panel.order.intransit', ['booking'=>$booking]);
     }
 
     public function completeOrder(Request $request)
     {
         $booking=Booking::where('public_booking_id', $request->id)->first();
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
         return view('vendor-panel.order.complete', ['booking'=>$booking]);
     }
 

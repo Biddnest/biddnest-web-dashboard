@@ -53,11 +53,11 @@ class BookingsController extends Controller
         }
         $movement_dates = explode(",",$request->movement_dates);
 
-        return self::createEnquiry($request->all(), $user_id, $movement_dates);
+        return self::createEnquiry($request->all(), $user_id, $movement_dates, true);
 
     }
 
-    public static function createEnquiry($data, $user_id, $movement_dates)
+    public static function createEnquiry($data, $user_id, $movement_dates, $web=false)
     {
         if (App::environment('production')) {
             $exsist = Booking::where(["user_id" => $user_id,
@@ -180,15 +180,22 @@ class BookingsController extends Controller
             $result_date = $movementdates->save();
         }
 
-
         foreach ($data["inventory_items"] as $items) {
+
+            if($web)
+            {
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => explode(";",$items['quantity'])[0], "max" => explode(";",$items['quantity'])[1]]);
+            }else{
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
+            }
+
             $bookinginventory = new BookingInventory;
             $bookinginventory->booking_id = $booking->id;
             $bookinginventory->inventory_id = $items["inventory_id"];
             $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
             $bookinginventory->material = $items["material"];
             $bookinginventory->size = $items["size"];
-            $bookinginventory->quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
+            $bookinginventory->quantity = $quantity;
             $bookinginventory->quantity_type = $inventory_quantity_type;
             $result_items = $bookinginventory->save();
         }

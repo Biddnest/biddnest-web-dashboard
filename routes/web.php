@@ -183,7 +183,7 @@ Route::prefix('web/api')->group(function () {
         Route::post('/branch/add',[VendorRouter::class,'branch_add'])->name("api.branch.add");
         Route::put('/branch/edit',[VendorRouter::class,'branch_edit'])->name("api.branch.edit");
 
-        Route::post('/reset-pin',[VendorRouter::class,'addPin'])->name("api.vendor.reset-pine");
+        Route::put('/reset-pin',[VendorRouter::class,'addPin'])->name("api.vendor.reset-pine");
 
         Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
         Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
@@ -378,6 +378,7 @@ Route::prefix('vendor')->group(function(){
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
             Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
             Route::get('/{id}/details',[VendorWebController::class,'bookingDetails'])->name("vendor.detailsbookings");
+            Route::get('/{id}/requirment',[VendorWebController::class,'bookingRequirment'])->name("vendor.requirment-order");
             Route::get('/{id}/my-quote',[VendorWebController::class,'myQuote'])->name("vendor.my-quote");
             Route::get('/{id}/my-bid',[VendorWebController::class,'myBid'])->name("vendor.my-bid");
             Route::get('/{id}/scheduled',[VendorWebController::class,'scheduleOrder'])->name("vendor.schedule-order");

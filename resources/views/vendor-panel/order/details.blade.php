@@ -299,10 +299,10 @@
                                             <tr class="">
                                                 <th scope="row">{{$inventory->name}}</th>
                                                 <td class="">
-                                                    @if($inventory->quantity_type == \App\Enums\CommonEnums::$YES)
-                                                        {{$inventory->quantity->min}}-{{$inventory->quantity->max}}
-                                                    @else
+                                                    @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
                                                         {{$inventory->quantity}}
+                                                    @else
+                                                        {{$inventory->quantity->min}}-{{$inventory->quantity->max}}
                                                     @endif
                                                 </td>
                                                 <td class="">{{$inventory->size}}</td>
@@ -422,7 +422,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" data-alert="mega" data-parsley-validate>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.vendor.reset-pine')}}" method="PUT" data-next="modal" data-modal-id="#reset-pin" data-alert="mega" data-parsley-validate>
                 <div class="modal-body" style="padding: 10px 9px;">
                     <div class="d-flex justify-content-center row ">
                         <div class="col-sm-6 enter-pin p-60">
@@ -443,7 +443,7 @@
                     <div class="w-50">
                     </div>
                     <div class="w-50 text-right">
-                        <a class="white-text p-10 addpin" href="#" data-url="{{route('api.vendor.reset-pine',['id'=>\Illuminate\Support\Facades\Session::get('account')['id']])}}">
+                        <a class="white-text p-10" href="#">
                             <button class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
                         </a>
                     </div>

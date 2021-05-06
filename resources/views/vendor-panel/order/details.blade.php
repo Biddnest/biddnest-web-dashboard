@@ -232,7 +232,7 @@
                                 <div><p class="mt-2">Expected Price</p></div>
                                 <div class="col-2">
                                     <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
-                                    <input class="form-control border-purple" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
+                                    <input class="form-control border-purple" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
                                 </div>
                             </div>
                             <div class="col-sm-12  p-0  pb-0" >
@@ -263,7 +263,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="">{{$inventory->size}}</td>
-                                                <td> <input class="form-control border-purple w-88" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
                                                     <input class="form-control border-purple w-88" name="inventory[][amount]" type="text" placeholder="2000"/>
                                                 </td>
                                             </tr>

@@ -97,7 +97,7 @@ return array(
     'Database\\Seeders\\' => array($baseDir . '/database/seeders'),
     'Database\\Factories\\' => array($baseDir . '/database/factories'),
     'Cron\\' => array($vendorDir . '/dragonmantank/cron-expression/src/Cron'),
-    'Craftsys\\Msg91\\' => array($vendorDir . '/craftsys/msg91-php/src', $vendorDir . '/craftsys/msg91-laravel/src'),
+    'Craftsys\\Msg91\\' => array($vendorDir . '/craftsys/msg91-laravel/src', $vendorDir . '/craftsys/msg91-php/src'),
     'Channel\\' => array($vendorDir . '/workerman/channel/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),

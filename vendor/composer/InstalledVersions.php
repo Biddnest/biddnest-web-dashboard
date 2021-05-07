@@ -20,8 +20,6 @@ use Composer\Semver\VersionParser;
 
 
 
-
-
 class InstalledVersions
 {
 private static $installed = array (
@@ -32,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'daf312fe96c8797dd4978668b28fcc2cbe8388eb',
+    'reference' => '7dd7fbf89af0febd695c9a5cb4a74fd29c3701be',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -580,7 +578,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'daf312fe96c8797dd4978668b28fcc2cbe8388eb',
+      'reference' => '7dd7fbf89af0febd695c9a5cb4a74fd29c3701be',
     ),
     'laravel/sail' => 
     array (
@@ -1532,6 +1530,7 @@ foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
 
+
 if (1 === \count($packages)) {
 return $packages[0];
 }
@@ -1727,7 +1726,6 @@ self::$installedByVendor = array();
 
 
 
-
 private static function getInstalled()
 {
 if (null === self::$canGetVendors) {
@@ -1737,6 +1735,7 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
+
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];

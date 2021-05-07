@@ -6,6 +6,8 @@ function changeMenu(){
         if ($(this).attr("href") == url) {
             // console.log("match");
             // $(this).parent().parent().prev("li").addClass("active-menu-item");
+
+            // $('.active-menu-item').removeClass("active-menu-item");
             $(this).parent().addClass("active-menu-item");
             // return false;
         }

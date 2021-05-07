@@ -425,16 +425,19 @@ export function initOrderDistributionChart(){
 export function initCountdown() {
 
     if ($(".timer").length) {
-        var BID_END_TIME = $(".timer").data("time");
 
-        if (typeof BID_END_TIME !== undefined) {
+        $(".timer").each(function(){
+            var BID_END_TIME = $(this).data("time");
+            // if (typeof BID_END_TIME !== undefined) {
 
-            $(".timer").countdown(BID_END_TIME, function (event) {
-                $(this).text(
-                    event.strftime('%H:%M:%S')
-                );
-            });
-        }
+                $(this).countdown(BID_END_TIME, function (event) {
+                    $(this).text(
+                        event.strftime('%H:%M:%S')
+                    );
+                });
+            // }
+        });
+
 
 
     }

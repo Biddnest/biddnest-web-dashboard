@@ -45,6 +45,7 @@ class GeoController extends Controller
         return $zone;
     }
 
+    //need to verify and remove this useless function
     public function getZones($lat, $lng){
 
     }

@@ -109,6 +109,7 @@ class NotificationController extends Controller
             {
                 $save_notification =new Notification;
                 $save_notification->user_id=$user;
+                $save_notification->for="user";
                 $save_notification->title=$title;
                 $save_notification->desc=$desc;
                 $result=$save_notification->save;
@@ -122,6 +123,7 @@ class NotificationController extends Controller
             foreach ($user_id as $user) {
                 $save_notification = new Notification;
                 $save_notification->vendor_id = $user;
+                $save_notification->for="vendor";
                 $save_notification->title = $title;
                 $save_notification->desc = $desc;
                 $result=$save_notification->save;

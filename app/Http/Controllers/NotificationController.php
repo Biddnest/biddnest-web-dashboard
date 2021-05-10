@@ -103,6 +103,33 @@ class NotificationController extends Controller
     }
 
     public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url = null){
+        if($type == "user")
+        {
+            foreach ($user_id as $user)
+            {
+                $save_notification =new Notification;
+                $save_notification->user_id=$user;
+                $save_notification->title=$title;
+                $save_notification->desc=$desc;
+                $result=$save_notification->save;
+
+                if(!$result)
+                    return Helper::response(false, "Fail to send.");
+            }
+        }
+        elseif ($type == "vendor")
+        {
+            foreach ($user_id as $user) {
+                $save_notification = new Notification;
+                $save_notification->vendor_id = $user;
+                $save_notification->title = $title;
+                $save_notification->desc = $desc;
+                $result=$save_notification->save;
+
+                if(!$result)
+                    return Helper::response(false, "Fail to send.");
+            }
+        }
 
         $players=[];
         foreach($user_id as $user) {
@@ -111,25 +138,11 @@ class NotificationController extends Controller
                 $pids = OneSignalPlayer::where("user_id", $user)->pluck("player_id");
                 foreach ($pids as $pid) {
                     $players[] = $pid;
-
-                    $save_notification =new Notification;
-                    $save_notification->user_id=$pid;
-                    $save_notification->title=$title;
-                    $save_notification->desc=$desc;
-                    $save_notification->save;
-
                 }
             } else {
                 $pids = OneSignalPlayer::where("vendor_id", $user)->pluck("player_id");
                 foreach ($pids as $pid) {
                     $players[] = $pid;
-
-                    $save_notification =new Notification;
-                    $save_notification->vendor_id=$pid;
-                    $save_notification->title=$title;
-                    $save_notification->desc=$desc;
-                    $save_notification->save;
-
                 }
             }
         }

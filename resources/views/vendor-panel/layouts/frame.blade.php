@@ -73,7 +73,8 @@
 
                                                 </div>
                                             </div>
-                                        </a></li>
+                                        </a>
+                                    </li>
                                     <li><a href="#">
                                             <div class="d-flex notification-msg ">
                                                 <div class="order-icon">
@@ -87,7 +88,8 @@
 
                                                 </div>
                                             </div>
-                                        </a></li>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
 

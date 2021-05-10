@@ -199,7 +199,7 @@
                             <div class="d-flex   justify-content-center p-10">
 
                                 <div class=""><a class="white-text p-10" href="payout-details.html"><button
-                                            class="btn theme-bg white-text">View More</button></a></div>
+                                            class="btn theme-bg white-text" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">View More</button></a></div>
 
 
 

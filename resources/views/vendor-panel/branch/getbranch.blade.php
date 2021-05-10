@@ -71,12 +71,12 @@
                     <div class="header-wrap toal-header">
                         <h3 class="f-18 ml-1">Branch Details</h3>
                         <div class="header-wrap p-0 ">
-                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
+                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">
                                 <i class="filter-dropdown "><img class="bg-grey-icon"
                                                                      src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
 
-                            </a>
+                            </a>--}}
                             <div class="search">
                                 <input type="text" class="searchTerm" placeholder="Search...">
                                 <button type="submit" class="searchButton">
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="all-vender-details">
-                        <div class="d-flex row  filter-menus diplay-none">
+                       {{-- <div class="d-flex row  filter-menus diplay-none">
                             <div class="col-lg-4">
                                 <div class="form-input">
                                     <select id="" class="form-control f-12">
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>--}}
                         <table class="table text-left p-0 theme-text mb-0 primary-table">
                             <thead class="secondg-bg p-0">
                             <tr>

@@ -13,10 +13,10 @@
                                 <a class="nav-link" id="order-trend-tab" data-toggle="tab" href="#order-trend" role="tab"
                                     aria-controls="order-trend" aria-selected="false">Order Trend</a>
                             </li>
-        
+
                         </ul>
                     </h3>
-                    
+
 
                     <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
                         onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
@@ -166,7 +166,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('details-zones')}}"><button
+                                <div class=""><a class="white-text p-10" href="{{route('details-zones')}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button
                                             class="btn theme-bg white-text">View More</button></a></div>
 
 
@@ -214,7 +214,7 @@
 
                             </div>
 
-                            
+
                             <!-- <div class="d-flex  row  p-10">
 
                                 <div class="col-sm-6">
@@ -273,40 +273,40 @@
                                     List of Orders
                                 </div>
                                 <table class="table text-center p-10 theme-text tb-border2" id="items" >
-                            
+
                                     <thead class="secondg-bg  p-0">
                                         <tr>
                                             <th scope="col">Order ID</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Order Date</th>
-        
+
                                         </tr>
                                     </thead>
-                            
+
                                     <tbody class="mtop-20">
                                         <tr class="  cursor-pointer">
                                             <th scope="row">SKU123456</th>
-        
-        
+
+
                                             <td class=""><span class="light-bg text-center status-badge">Enquiry</span></td>
                                             <td class="text-center">23 Dec 20</td>
-        
+
                                         </tr>
                                         <tr class="  cursor-pointer">
                                             <th scope="row">SKU123456</th>
                                             <td class=""><span class=" p-color text-center status-badge">In Transit</span>
                                             </td>
                                             <td>23 Dec 20</td>
-        
-        
+
+
                                         </tr>
                                         <tr class="  cursor-pointer">
                                             <th scope="row">SKU123456</th>
                                             <td class=""><span class="  text-center status-badge">Awaiting
                                                     Pickup</span></td>
                                             <td>24 Dec 20</td>
-        
-        
+
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -330,7 +330,7 @@
                                 List of Coupons
                             </div>
                             <table class="table text-center p-10 theme-text tb-border2" id="items" >
-                        
+
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                     <tr>
                                         <th scope="col">Coupon</th>
@@ -339,7 +339,7 @@
 
                                     </tr>
                                 </thead>
-                        
+
                                 <tbody class="mtop-20">
                                     <tr class="cursor-pointer">
                                         <th scope="row">SKU123456</th>
@@ -368,7 +368,7 @@
                         </div>
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="zone-details.html"><button
+                                <div class=""><a class="white-text p-10" href="zone-details.html" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button
                                             class="btn theme-bg white-text">View More</button></a></div>
 
 
@@ -382,7 +382,7 @@
                             </div>
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="zone-details.html"><button
+                                <div class=""><a class="white-text p-10" href="zone-details.html" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button
                                             class="btn theme-bg white-text">View More</button></a></div>
 
 

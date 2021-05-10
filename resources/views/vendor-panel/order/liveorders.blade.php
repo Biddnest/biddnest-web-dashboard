@@ -68,7 +68,7 @@
                         </div>
                         <div class="pt-1 card-head left col-sm-3 ">
                             <div class="search">
-                                <a href="#" class="margin-r-20 pt-2" data-toggle="dropdown"
+                                {{--<a href="#" class="margin-r-20 pt-2" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
                                     <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
 
@@ -101,7 +101,7 @@
                                             </label>
                                         </div>
                                     </a>
-                                </div>
+                                </div>--}}
                                 <input type="text" class="searchTerm" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>

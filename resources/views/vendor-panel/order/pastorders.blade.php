@@ -41,7 +41,7 @@
                     <h3 class="f-18 ml-1 theme_text">Past Orders </h1>
 
                         <div class="header-wrap p-0 filter-dropdown ">
-                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
+                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
                                 <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
 
@@ -75,7 +75,7 @@
 
 
 
-                            </div>
+                            </div>--}}
                             <div class="search">
                                 <input type="text" class="searchTerm" placeholder="Search...">
                                 <button type="submit" class="searchButton">

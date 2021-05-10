@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="d-flex   justify-content-center p-10">
-                <div class=""><a class="white-text p-10" href="{{route('vendor.service_sidebar.reply', ['id'=>$ticket->id])}}"><button
+                <div class=""><a class="white-text p-10" href="{{route('vendor.service_sidebar.reply', ['id'=>$ticket->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button
                             class="btn theme-bg white-text">View More</button></a></div>
             </div>
         </div>

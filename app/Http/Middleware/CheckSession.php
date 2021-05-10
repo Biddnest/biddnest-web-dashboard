@@ -18,8 +18,10 @@ class CheckSession
     public function handle(Request $request, Closure $next)
     {
 
-        if(!Session::get('sessionActive'))
+        if(!Session::get('sessionFor') || Session::get('sessionFor') != "admin") {
+            Session::flush();
             return response()->redirectToRoute('login');
+        }
 
             return $next($request);
 

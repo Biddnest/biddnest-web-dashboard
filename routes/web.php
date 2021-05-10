@@ -7,7 +7,8 @@ use App\Enums\BookingEnums;
 use App\Enums\NotificationEnums;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Route as Router;
-use App\Http\Controllers\VendorController as VendorRouter;
+use App\Http\Controllers\VendorRouteController as VendorRouter;
+use App\Http\Controllers\VendorWebApiRouteController as VendorApiRouter;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\VendorWebController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::get('/', function () {
 Route::get('/debug',function(){
     abort(500);
 });
+
+
 
 Route::prefix('web/api')->group(function () {
 
@@ -146,16 +149,58 @@ Route::prefix('web/api')->group(function () {
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
 
-});
 
-Route::prefix('vendors')->group(function () {
-    Route::post('/inventory-price',[VendorRouter::class,'addPrice']);
-    Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices']);
-    Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices']);
-    Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices']);
+    /*vendor web apis start*/
+    Route::prefix('vendor')->group(function () {
+        Route::prefix('auth')->group(function () {
+            Route::post('/login', [VendorRouter::class, 'login'])->name("api.vendor_login");
+            Route::post('/password/otp/send',[VendorRouter::class,'forgot_password_send_otp'])->name("api.vendor_send_otp");
+            Route::post('/password/otp/verify',[VendorRouter::class,'forgot_password_verify_otp'])->name("api.vendor_verify_otp");
+            Route::post('/password/reset',[VendorRouter::class,'reset_password'])->name("api.vendor_reset_password");
+        });
+
+        Route::post('/password/reset',[VendorRouter::class,'old_reset_password'])->name("api.vendor_old_reset_password");
+
+        Route::post('/inventory-price',[VendorRouter::class,'addPrice'])->name("api.addPrice");
+        Route::get('/inventory-price',[VendorRouter::class,'getInventoryprices'])->name("api.getInventoryPrices");
+        Route::put('/inventory-price',[VendorRouter::class,'updateInventoryprices'])->name("api.updateInventoryPrices");
+        Route::delete('/inventory-price',[VendorRouter::class,'deleteInventoryprices'])->name("api.deleteInventoryPrices");
+
+        Route::post('/booking/bid',[VendorRouter::class,'addBid'])->name("api.booking.bid");
+        Route::put('/booking/{id}/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
+        Route::put('/booking/{id}/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
+        Route::post('/booking/assign-driver',[VendorRouter::class,'assignDriver'])->name("api.driver.assign");
+
+        Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
+        Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");
+        Route::post('/tickets/add',[VendorRouter::class,'addTickets'])->name("api.ticket.addticket");
+
+        Route::put('/user/status',[VendorRouter::class,'userToggle'])->name("api.user.status");
+        Route::post('/user/add',[VendorRouter::class,'addUser'])->name("api.user.add");
+        Route::put('/user/edit',[VendorRouter::class,'editUser'])->name("api.user.edit");
+        Route::delete('/user/{id}',[VendorRouter::class,'deleteUser'])->name("api.user.delete");
+
+        Route::post('/branch/add',[VendorRouter::class,'branch_add'])->name("api.branch.add");
+        Route::put('/branch/edit',[VendorRouter::class,'branch_edit'])->name("api.branch.edit");
+
+        Route::put('/reset-pin',[VendorRouter::class,'addPin'])->name("api.vendor.reset-pine");
+
+        Route::post('/vehicle',[VendorRouter::class,'addVehicle'])->name("api.vehicle.create");
+        Route::put('/vehicle',[VendorRouter::class,'updateVehicle'])->name("api.vehicle.update");
+        Route::delete('/vehicle/{id}',[VendorRouter::class,'deleteVehicle'])->name("api.vehicle.delete");
+
+
+
+    });
+    /*vendor web apis end*/
+
+
 });
 
 Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return response()->redirectToRoute('login');
+    });
         Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
             Route::get('/login',[WebController::class,'login'])->name("login");
             Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("forgotpassword");
@@ -308,46 +353,95 @@ Route::get('/debug/socket', function () {
     return view("debug.socket");
 });
 
+/* Vendor page routes */
 Route::prefix('vendor')->group(function(){
-    Route::prefix('/auth')->middleware("redirectToDashboard")->group(function () {
+    Route::get('/', function () {
+        return response()->redirectToRoute('vendor.login');
+    });
+
+    Route::prefix('/auth')->middleware('redirectToVendorDashboard')->group(function () {
         Route::get('/login',[VendorWebController::class,'login'])->name("vendor.login");
-        Route::get('/forgotpassword',[WebController::class,'forgotPassword'])->name("vendor.forgotpassword");
-        Route::get('/reset-password',[WebController::class,'resetPassword'])->name("vendor.reset-password");
+        Route::get('/forgot-password',[VendorWebController::class,'forgotPassword'])->name("vendor.forgotpassword");
+        Route::get('/reset-password/{id}',[VendorWebController::class,'resetPassword'])->name("vendor.reset-passwords");
+        Route::get('/{phone}/verify-otp',[VendorWebController::class,'verifyOtp'])->name("vendor.verifyotp");
     });
 
-    Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
+    Route::get("/logout", [VendorWebController::class, 'logout'])->name('vendor.logout');
+    Route::get('/reset-password',[VendorWebController::class,'Passwordreset'])->name("vendor.password-reset");
+
+    Route::middleware("CheckVendorSession")->group(function(){
+
+        Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
+        Route::get('/{id}/my-profile',[VendorWebController::class,'profile'])->name("vendor.myprofile");
+
+        Route::prefix('/booking')->group(function () {
+            Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
+            Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
+            Route::get('/{id}/details',[VendorWebController::class,'bookingDetails'])->name("vendor.detailsbookings");
+            Route::get('/{id}/requirment',[VendorWebController::class,'bookingRequirment'])->name("vendor.requirment-order");
+            Route::get('/{id}/my-quote',[VendorWebController::class,'myQuote'])->name("vendor.my-quote");
+            Route::get('/{id}/my-bid',[VendorWebController::class,'myBid'])->name("vendor.my-bid");
+            Route::get('/{id}/scheduled',[VendorWebController::class,'scheduleOrder'])->name("vendor.schedule-order");
+            Route::get('/{id}/driver-details',[VendorWebController::class,'driverDetails'])->name("vendor.driver-details");
+            Route::get('/{id}/in-transit',[VendorWebController::class,'intransit'])->name("vendor.in-transit");
+            Route::get('/{id}/complete',[VendorWebController::class,'completeOrder'])->name("vendor.complete-order");
+        });
+
+        Route::prefix('/user')->group(function () {
+            Route::get('/add-role',[VendorWebController::class,'userAdd'])->name("vendor.addusermgt");
+            Route::get('/{type}',[VendorWebController::class,'userManagement'])->name("vendor.managerusermgt");
+            Route::get('/{id}/edit-role',[VendorWebController::class,'userAdd'])->name("vendor.editusermgt");
+            Route::get('/{id}/sidebar',[VendorWebController::class,'sidebar_userManagement'])->name("vendor.sidebar.userrole");
+        });
+
+        Route::prefix('/inventory')->group(function () {
+            Route::get('/',[VendorWebController::class,'inventoryManagement'])->name("vendor.inventorymgt");
+            Route::get('/{type}',[VendorWebController::class,'inventoryCetegory'])->name("vendor.inventorycat");
+            Route::get('/{id}/sidebar',[VendorWebController::class,'inventorySidebar'])->name("vendor.inventory_sidebar");
+            Route::get('/get/services',[VendorWebController::class,'getServices'])->name("vendor.inventory_services");
+            Route::get('/{id}/add',[VendorWebController::class,'addInventory'])->name("vendor.inventory.add");
+        });
+
+        Route::prefix('/branches')->group(function () {
+            Route::get('/',[VendorWebController::class,'getBranches'])->name("vendor.branches");
+            Route::get('/add-branch',[VendorWebController::class,'addBranch'])->name("vendor.addbranch");
+            Route::get('/{id}/edit-branch',[VendorWebController::class,'addBranch'])->name("vendor.editbranch");
+        });
+
+        Route::get('/payout',[VendorWebController::class,'payout'])->name("vendor.payout");
+        Route::get('/payout/sidebar/{id}',[VendorWebController::class,'payoutSidebar'])->name("vendor.sidebar.payout");
+
+        Route::prefix('/vehicle')->group(function () {
+            Route::get('/',[VendorWebController::class,'getVehicle'])->name("vendor.vehicle");
+            Route::get('/{id}',[VendorWebController::class,'getVehicle'])->name("vendor.edit_vehicle");
+        });
+
+        Route::prefix('/service-request')->group(function () {
+            Route::get('/',[VendorWebController::class,'serviceRequest'])->name("vendor.service_request");
+            Route::get('/add',[VendorWebController::class,'serviceRequestAdd'])->name("vendor.service_request_add");
+            Route::get('/{id}/sidebar',[VendorWebController::class,'serviceSidebar'])->name("vendor.service_sidebar");
+            Route::get('/reply/{id}/detail',[VendorWebController::class,'serviceSidebar_reply'])->name("vendor.service_sidebar.reply");
+        });
 
 
-    Route::prefix('/booking')->middleware("redirectToDashboard")->group(function () {
-        Route::get('/{id}/sidebar',[VendorWebController::class,'login'])->name("vendor.booking.sidebar");
-        Route::get('/{type}',[VendorWebController::class,'login'])->name("vendor.bookings");
+        Route::prefix('/users')->middleware("redirectToDashboard")->group(function () {
+            Route::get('/create',[VendorWebController::class,'login'])->name("vendor.suer.create");
+            Route::get('/{id}/view',[VendorWebController::class,'login'])->name("vendor.user.view");
+            Route::get('/{id}/edit',[VendorWebController::class,'login'])->name("vendor.users.edit");
+
+            Route::get('/sidebar',[VendorWebController::class,'login'])->name("vendor.users.sidebar");
+
+            Route::get('/{role}',[VendorWebController::class,'login'])->name("vendor.users");
+        });
+
+        Route::get('/inventories/{id}/edit',[VendorWebController::class,'login'])->name("vendor.inventory.edit");
+        Route::get('/inventories/sidebar',[VendorWebController::class,'login'])->name("vendor.inventory.sidebar");
+        Route::get('/inventories/{category}',[VendorWebController::class,'login'])->name("vendor.inventory");
+
+
+        Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.my-service-requests");
+        Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.reports");
     });
-
-    Route::prefix('/users')->middleware("redirectToDashboard")->group(function () {
-        Route::get('/create',[VendorWebController::class,'login'])->name("vendor.suer.create");
-        Route::get('/{id}/view',[VendorWebController::class,'login'])->name("vendor.user.view");
-        Route::get('/{id}/edit',[VendorWebController::class,'login'])->name("vendor.users.edit");
-
-        Route::get('/sidebar',[VendorWebController::class,'login'])->name("vendor.users.sidebar");
-
-        Route::get('/{role}',[VendorWebController::class,'login'])->name("vendor.users");
-    });
-
-    Route::get('/inventories/{id}/edit',[VendorWebController::class,'login'])->name("vendor.inventory.edit");
-    Route::get('/inventories/sidebar',[VendorWebController::class,'login'])->name("vendor.inventory.sidebar");
-    Route::get('/inventories/{category}',[VendorWebController::class,'login'])->name("vendor.inventory");
-
-
-    Route::get('/branches',[VendorWebController::class,'login'])->name("vendor.branches");
-    Route::get('/vehicles',[VendorWebController::class,'login'])->name("vendor.vehicles");
-    Route::get('/payouts',[VendorWebController::class,'login'])->name("vendor.payouts");
-    Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.my-service-requests");
-    Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.reports");
-
-
-
-
-
 });
 
 

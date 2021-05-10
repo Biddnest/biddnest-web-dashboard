@@ -79,6 +79,14 @@ $("body").on('submit', "form", function() {
                                 redirectTo(url);
                                 return false;
                             }
+                            if (form.hasClass("vendor-pass-reset")) {
+                                var url = form.data('url');
+                                // Logger.info(url);
+                                url = url.replace(':phone', response.data.vendor.phone);
+                                // Logger.info(url);
+                                redirectTo(url);
+                                return false;
+                            }
                             if (form.hasClass("onboard-vendor-form")) {
                                 var url = form.data('url');
                                 url = url.replace(':id', response.data.organization.id);
@@ -109,6 +117,8 @@ $("body").on('submit', "form", function() {
                                 redirectTo(form.data("url"));
                         } else if (form.data("next") == "refresh") {
                             location.reload();
+                        }else if (form.data("next") == "modal") {
+                            $(form.data(".modal-id")).modal();
                         }
                     }
                 } else if (response.status == "fail") {
@@ -270,7 +280,7 @@ $("body").on('click', ".delete", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
         var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
-            // console.log(response);
+            console.log(response);
             if(response.status == "success")
             {
                 tinySuccessAlert("Deleted Successfully", response.message);
@@ -303,6 +313,24 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
         $(".side-bar-pop-up").html(response);
     });
+
+});
+
+$("body").on('click', ".invsidebar", function(event) {
+    var $this = $(this);
+
+    $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
+        '                    <svg class="circular" height="50" width="50">\n' +
+        '                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="6" stroke-miterlimit="10" />\n' +
+        '                    </svg>\n' +
+        '                </div>');
+
+    $('.side-bar-pop-up').addClass('display-pop-up');
+    $.get($(this).data("sidebar"), {}, function(response){
+
+        $(".side-bar-pop-up").html(response);
+    });
+
 
 });
 
@@ -407,8 +435,48 @@ console.log($(this).val());
     }
 });
 
+$(document).ready(function () {
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $("tr").click(function () {
+    });
+});
+
+$("body").on('click', ".bookings", function(event) {
+    var target = $(this).closest($(this).data("parent"));
+    if(confirm($(this).data('confirm'))) {
+        $.update($(this).data("url"), {}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert($(this).data('success'), response.message);
+                target.hide();
+            } else {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    }
+    return false;
+});
 
 
+$('.filterdate').datepicker({
+    format: 'yyyy-mm-dd'
+});
 
 
+$("body").on('change', ".addpin", function(event) {
+    var password = document.getElementById("password").value;
+    var pin =document.getElementById("pin").value;
+        $.update($(this).data("url"), {password, pin}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Pin reseted Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
 
+        });
+    return false;
+});

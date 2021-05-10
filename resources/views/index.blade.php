@@ -261,7 +261,7 @@
                     <div class="p-10 card-head">
                         <h3 class="f-18 mt-0">Users by Zones</h3>
                     </div>
-                    <!-- <div id="myzonechart" class="chart--container"> -->
+                    <div id="myzonechart" class="chart--container">
                 </div>
             </div>
         </div>

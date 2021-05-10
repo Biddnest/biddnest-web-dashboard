@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table text-center p-10 theme-text">
+            <table class="table text-center p-10 theme-text" style="margin-bottom: 100px;">
                 <thead class="secondg-bg  p-0">
                 <tr>
                     <th scope="col">Order ID</th>

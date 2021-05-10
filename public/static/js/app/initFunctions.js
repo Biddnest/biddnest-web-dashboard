@@ -244,12 +244,10 @@ export function initAllSelectBoxes() {
 
 }
 
-export function initSlick() {
-    if ($(".slick-container").length) {
-        $('.slick-container').slick({
-            arrows: false
-        });
-    }
+export function initSlick(){
+    $('.slick-container').slick({
+        arrows: false
+    });
 }
 
 export function initTextAreaEditor() {
@@ -355,87 +353,98 @@ export function initOrderDistributionChart() {
                 ctx.save();
             }
         });
-        var chartData = JSON.parse($("#order_dist_dataset").val());
-        var sum = chartData.map((item) => item.value).reduce((a, b) => a + b);
-        var textInside = sum.toString();
-        var myChart = new Chart(document.getElementById('mychart'), {
-            type: 'doughnut',
-            animation: {
-                animateScale: true
-            },
-            data: {
-                labels: chartData.map((item) => item.label),
-                datasets: [{
-
-                    label: 'Visitor',
-                    data: chartData.map((item) => item.value),
-                    backgroundColor: [
-                        "#f8c446",
-                        "#fbd64e",
-                        "#fcdf75",
-                        "#fdeaa7",
-                        "#fef6d9",
-                    ]
-                }]
-            },
-            options: {
-                cutoutPercentage: 75,
-
-                elements: {
-                    center: {
-                        text: textInside
-                    }
+        if($("#order_dist_dataset").length){
+            var chartData = JSON.parse($("#order_dist_dataset").val());
+            var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
+            var textInside = sum.toString();
+            var myChart = new Chart(document.getElementById('mychart'), {
+                type: 'doughnut',
+                animation:{
+                    animateScale:true
                 },
-                responsive: true,
-                legend: false,
-                legendCallback: function(chart) {
+                data: {
+                    labels: chartData.map((item) => item.label ),
+                    datasets: [{
 
-                    var legendHtml = [];
-                    legendHtml.push('<ul>');
-                    var item = chart.data.datasets[0];
-                    for (var i = 0; i < item.data.length; i++) {
-
-                        legendHtml.push('<li>');
-                        legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] + '"></span>');
-                        legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
-                        legendHtml.push('</li>');
-                    }
-
-                    legendHtml.push('</ul>');
-                    return legendHtml.join("");
-
+                        label: 'Visitor',
+                        data: chartData.map((item) => item.value ),
+                        backgroundColor: [
+                            "#f8c446",
+                            "#fbd64e",
+                            "#fcdf75",
+                            "#fdeaa7",
+                            "#fef6d9",
+                        ]
+                    }]
                 },
-                tooltips: {
-                    enabled: true,
-                    mode: 'label',
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var indice = tooltipItem.index;
-                            return data.labels[indice];
+                options: {
+                    cutoutPercentage: 75,
+
+                    elements: {
+                        center: {
+                            text: textInside
                         }
-                    }
-                },
-            }
-        });
+                    },
+                    responsive: true,
+                    legend: false,
+                    legendCallback: function(chart) {
+
+                        var legendHtml = [];
+                        legendHtml.push('<ul>');
+                        var item = chart.data.datasets[0];
+                        for (var i=0; i < item.data.length; i++) {
+
+                            legendHtml.push('<li>');
+                            legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
+                            legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
+                            legendHtml.push('</li>');
+                        }
+
+                        legendHtml.push('</ul>');
+                        return legendHtml.join("");
+
+                    },
+                    tooltips: {
+                        enabled: true,
+                        mode: 'label',
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var indice = tooltipItem.index;
+                                return  data.labels[indice] ;
+                            }
+                        }
+                    },
+                }
+            });
+        }
 
         $('#my-legend-con').html(myChart.generateLegend());
     }
 }
 
 export function initCountdown() {
-    if ($(".timer").length) {
-        var BID_END_TIME = $(".timer").data("time");
-        $(".timer")
-            .countdown(BID_END_TIME, function(event) {
-                $(this).text(
-                    event.strftime('%H:%M:%S')
-                );
-            });
-    }
 
+    if ($(".timer").length) {
+
+        $(".timer").each(function(){
+            var BID_END_TIME = $(this).data("time");
+            // if (typeof BID_END_TIME !== undefined) {
+
+                $(this).countdown(BID_END_TIME, function (event) {
+                    $(this).text(
+                        event.strftime('%H:%M:%S')
+                    );
+                });
+            // }
+        });
+
+
+
+    }
 }
-export function initDatePicker() {
-    if ($(".date").length) {
+
+export function initDatePicker(){
+    if($(".date").length) {
         $('.date').datepicker({
             // multidateSeparator:",",
             multidate: true,
@@ -444,8 +453,37 @@ export function initDatePicker() {
         });
     }
 }
-export function initRangeSlider() {
-    if ($(".custom_slider").length) {
+
+export function initPopUp(){
+    $(document).ready(function(){
+        $('.enter-pin').hide();
+        $("#submitbtn").hide();
+        $("#next-btn-2").hide();
+        $(".enter-pin").hide();
+        $('.bid-amount-2').hide();
+        $('#next-btn-1').click(function(){
+            $(this).hide();
+            $('.bid-amount').hide();
+            $('.bid-amount-2').show();
+            $("#next-btn-2").show();
+        });
+        $('#next-btn-2').click(function(){
+            $(this).hide();
+            $('.bid-amount').hide();
+            $('.bid-amount-2').hide();
+            $("#submitbtn").show();
+            $(".enter-pin").show();
+        });
+        /*$('#submitbtn').click(function(){
+            $('.bid-amount').hide();
+            $('.bid-amount-2').hide();
+            $(".enter-pin").hide();
+            $(".modal-footer").hide();
+        });*/
+    });
+}
+export function initRangeSlider(){
+    if($(".custom_slider").length) {
         $(".custom_slider").ionRangeSlider({
             type: $(this).data("type"),
             min: $(this).data("min"),
@@ -468,5 +506,5 @@ export function initToggles() {
 
         $(this).attr("id", "checkbox_" + index);
         $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
-    })
+    });
 }

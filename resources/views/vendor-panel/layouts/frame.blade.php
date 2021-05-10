@@ -4,15 +4,15 @@
 <head>
 
     <title>@yield('title')</title>
-    @include('vendor-panel.layouts.includes.css')
+    @include('vendor-panel.layouts.includes.app-css')
 
 </head>
 <body>
 <main class="dashboard grey-bg">
     @include('vendor-panel.layouts.includes.sidebar')
-    <div class="content-wrapper">
+    <div class="content-wrapper" data-barba="wrapper">
         <div class="floating-btn">
-            <img src="./assets/images/graph/Group 14372.svg" alt="">
+            <img src="{{asset('static/vendor/images/graph/Group 14372.svg')}}" alt="">
         </div>
         <!-- top_nav_bar -->
         <div class="h-auto">
@@ -126,14 +126,14 @@
                                     </g>
                                 </g>
                             </svg>
-                            <span>Amith Raji</span>
+                            <span>{{\Illuminate\Support\Facades\Session::get("account")['name']}}</span>
 
                             <div class="dropdown">
                                 <ul>
-                                    <li><a href="my-profile.html">My Profile</a></li>
-                                    <li><a href="#">Change Password</a></li>
+                                    <li><a href="{{route('vendor.myprofile', ['id'=>\Illuminate\Support\Facades\Session::get('account')['id']])}}">My Profile</a></li>
+                                    <li><a href="{{route('vendor.password-reset' , ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">Change Password</a></li>
 
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="#0" onclick="location.assign('{{route('vendor.logout')}}')">Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -152,242 +152,21 @@
         <!-- footer -->
     </div>
 
-
-
-
-
-    <!-- Pop-up -->
-
-
-
-    <!-- <div class="side-bar-pop-up">
-        <div class="modal-header">
-           <div class="theme-text heading f-18">Order Details</div>
-            <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close"
-                onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-
-                <i class="fa fa-times theme-text" aria-hidden="true"></i>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="tab-content" id="myTabContent">
-
-                <div class="tab-pane fade show active margin-topneg-15" id="customer" role="tabpanel"
-                    aria-labelledby="new-order-tab">
-
-                    <div class="d-flex  row  p-10">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Order ID
-                            </div>
-
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="theme-text f-14">
-                                P012345698
-                            </div>
-                        </div>
-                        <div class="col-sm-1">
-                            <div class="theme-text f-14">
-                             <i class="icon dripicons-pencil p-1 cursor-pointer"
-                                    aria-hidden="true"></i>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="d-flex  row  p-10">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Vendor Name
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 d-flex justify-content-between">
-                                Wayne Pvt Ltd
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="d-flex  row  p-10">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Vendor Details
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14">
-                                support@wayne.com
-                            </div>
-                            <div class="theme-text f-14">
-                                +91 9782435672
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="d-flex  row  p-10">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Driver name
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14">
-                                <div class="d-flex vertical-center">
-                                 Davide Jerome
-
-                                 </div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="d-flex  row  p-10">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Driver Details
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14">
-                                davidjerome@gmail.com
-                            </div>
-                            <div class="theme-text f-14">
-                                +91 9782435672
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="d-flex  row  p-10">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Time value
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14">
-                                00:03:20
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="d-flex  row  p-10 ">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Order Status
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text status-badge f-14 bold">
-                                Awaiting Pickup
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex  row  p-10 ">
-
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Order Amount
-                            </div>
-
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Rs 2,300
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex  row  p-10 ">
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Address
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Lorem ipsum dolor sit
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex  row  p-10 ">
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Inventory
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Lorem ipsum
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="d-flex  row  p-10 ">
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Payment
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="theme-text f-14 bold">
-                                Lorem ipsum
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <div class="d-flex   justify-content-center p-10">
-
-                        <div class=""><a class="white-text p-10" href="payout-details.html"><button
-                                    class="btn theme-bg white-text">View More</button></a></div>
-
-
-
-
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-    </div> -->
+    <div class="side-bar-pop-up">
+    </div>
 
 </main>
 
 
-@include('vendor-panel.layouts.includes.js')
+@include('vendor-panel.layouts.includes.app-js')
 
 
 <!-- Optional JavaScript -->
 
 
-
+{{--
 <script src="./assets/js/sidebarCollapse.js">
 
-</script>
+</script>--}}
 </body>
 </html>

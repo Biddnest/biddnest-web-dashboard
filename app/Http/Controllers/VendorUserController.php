@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CommonEnums;
 use App\Helper;
 use App\Models\Admin;
+use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Organization;
 use App\Models\OrganizationService;
@@ -12,6 +13,7 @@ use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use App\Sms;
 use App\Models\Bid;
 use App\Models\BidInventory;
@@ -28,8 +30,7 @@ class VendorUserController extends Controller
 
     public static function login($username, $password)
 {
-    $vendor_user=Vendor::where(['username'=>$username])
-        ->OrWhere(['email'=>$username])
+    $vendor_user=Vendor::where(['email'=>$username])
         ->where([ 'status'=>1, 'deleted'=>0])
         ->with("organization")
         ->first();
@@ -37,25 +38,28 @@ class VendorUserController extends Controller
     if(!$vendor_user)
         return Helper::response(false,"Incorrect username or password");
 
+
     // return password_verify($password, $admin_user->password) ? Helper::response(true, "Login was successfull", ["token"=>Helper::generateAuthToken(["email"=>$admin_user->email,"password"=>$password]),"expiry"=>CarbonImmutable::now()->add(365, 'day')]) : Helper::response(false, "password is incorrect");
 
 
     if(password_verify($password, $vendor_user->password))
     {
+        if($vendor_user->status != VendorEnums::$STATUS['active'])
+            return Helper::response(false, "Your Account is inactive or suspended. Please contact your organization admin.");
+
         Session::put(["account"=>['id'=>$vendor_user->id,
             'name'=>$vendor_user->fname.' '.$vendor_user->lname,
             'email'=>$vendor_user->email]]);
-        Session::put('sessionActive', true);
+        Session::put('sessionFor', "vendor");
         Session::put('user_role', $vendor_user->user_role);
 
-        Session::put('organization', $vendor_user->organization->id);
+        Session::put('organization_id', $vendor_user->organization->id);
 
         return Helper::response(true, "Login was successfull");
         }
         else{
             return Helper::response(false, "password is incorrect");
         }
-
     }
 
     public static function loginForApp($username, $password)
@@ -105,14 +109,14 @@ class VendorUserController extends Controller
         dispatch(function() use($phone, $otp){
             Sms::sendOtp($phone, $otp);
         })->afterResponse();
-        $data['otp'] = $otp;
+//        $data['otp'] = $otp;
 
-        return Helper::response(true, "Otp has been sent to the phone.", $data);
+        return Helper::response(true, "Otp has been sent to the phone.", ["vendor"=>["phone"=>$phone]]);
     }
 
     public static function verifyOtp($phone, $otp)
     {
-        $vendor = Vendor::where("phone",$phone)->where(['deleted'=>0])->first();
+        $vendor = Vendor::where("phone", $phone)->where(['deleted'=>CommonEnums::$NO])->first();
         if(!$vendor)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
 
@@ -120,7 +124,7 @@ class VendorUserController extends Controller
             return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
         }
         else if($vendor->verf_code == $otp) {
-            Vendor::where("phone",$phone)->update(["otp_verified"=>1]);
+            Vendor::where("phone", $phone)->update(["otp_verified"=>1]);
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$vendor->phone,"id"=>$vendor->id]);
 
@@ -128,15 +132,23 @@ class VendorUserController extends Controller
             if($vendor->fname){
                 $data = $vendor;
             }
-
+            $id = Crypt::encryptString($vendor->id);
             return Helper::response(true, "Otp has been verified",[
                 "user"=>$data,
-                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s"),
+                "otp"=>["id"=>$id]
             ]);
 
         }else {
             return Helper::response(false, "Incorrect otp provided");
         }
+    }
+
+    public static function passwordReset($password, $bearer)
+    {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $update_password=Vendor::where('id',$bearer)->update(['password' => $hash]);
+        return !$update_password ? Helper::response(false,"Reset password failed") : Helper::response(true,"Password reset successfully");
     }
 
     public static function resetPassword($phone, $otp, $new_password, $confirm_password)
@@ -226,9 +238,14 @@ class VendorUserController extends Controller
         return Helper::response(true, "Here is the Pin status.", ["pin"=>['set'=>$set]]);
     }
 
-    public static function getUser(Request $request)
+    public static function getUser(Request $request, $web=false)
     {
-        $org = Organization::find($request->token_payload->organization_id);
+        if($web)
+            $organization_id= Session::get('organization_id');
+        else
+            $organization_id= $request->token_payload->organization_id;
+
+        $org = Organization::find($organization_id);
 
         if(!$org)
             return Helper::response(false, "Invalid organization id.");
@@ -238,14 +255,14 @@ class VendorUserController extends Controller
         }
         else {
             if (!$org->parent_org_id) {
-                $organization_id = $request->token_payload->organization_id;
+                $organization_id = $organization_id;
                 $user_id = Vendor::where(function ($query) use ($organization_id) {
                     $query->where("organization_id", $organization_id);
                     $query->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
                 });
             }
             else
-                $user_id = Vendor::where("organization_id", $request->token_payload->organization_id);
+                $user_id = Vendor::where("organization_id", $organization_id);
         }
         switch ($request->type) {
             case "admin":
@@ -267,14 +284,19 @@ class VendorUserController extends Controller
 
         $users = $user_id->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
 
-        return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
+        if($web)
+            return $users;
+        else
+            return Helper::response(true, "Show data successfully", ["user_role" => $users->items(), "paging" => [
             "current_page" => $users->currentPage(), "total_pages" => $users->lastPage(), "next_page" => $users->nextPageUrl(), "previous_page" => $users->previousPageUrl()
-        ]]);
+            ]]);
     }
 
-    public static function updateStatus(Request $request)
+    public static function updateStatus(Request $request, $web = false)
     {
-        if($request->id == $request->token_payload->id)
+        $bearer = $web ? Session::get('id') : $request->token_payload->id;
+
+        if($request->id == $bearer)
             return Helper::response(false, "You can not disable yourself.");
 
         $vendor = Vendor::find($request->id);

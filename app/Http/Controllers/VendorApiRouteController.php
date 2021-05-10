@@ -189,6 +189,8 @@ class VendorApiRouteController extends Controller
         return BidController::getPriceList($request->public_booking_id, $request->token_payload->organization_id);
     }
 
+
+    /*Need org_id check in below function*/
     public function assignDriver(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -205,12 +207,12 @@ class VendorApiRouteController extends Controller
 
     public function getDrivers(Request $request)
     {
-        return VendorController::getDrivers($request->token_payload->organization_id);
+        return VehicleController::getDrivers($request->token_payload->organization_id);
     }
 
     public function getVehicles(Request $request)
     {
-        return VendorController::getVehicles($request->token_payload->organization_id);
+        return VehicleController::getVehicles($request->token_payload->organization_id);
     }
 
     public function startTrip(Request $request){

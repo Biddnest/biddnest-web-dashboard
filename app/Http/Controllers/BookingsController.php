@@ -30,6 +30,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 
 class BookingsController extends Controller
@@ -52,11 +53,11 @@ class BookingsController extends Controller
         }
         $movement_dates = explode(",",$request->movement_dates);
 
-        return self::createEnquiry($request->all(), $user_id, $movement_dates);
+        return self::createEnquiry($request->all(), $user_id, $movement_dates, true);
 
     }
 
-    public static function createEnquiry($data, $user_id, $movement_dates)
+    public static function createEnquiry($data, $user_id, $movement_dates, $web=false)
     {
         if (App::environment('production')) {
             $exsist = Booking::where(["user_id" => $user_id,
@@ -118,7 +119,7 @@ class BookingsController extends Controller
 
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        if($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+        if($data['meta']['images'] != "") { //need to remove [0]==> temp fixed
             foreach ($data['meta']['images'] as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
             }
@@ -179,15 +180,22 @@ class BookingsController extends Controller
             $result_date = $movementdates->save();
         }
 
-
         foreach ($data["inventory_items"] as $items) {
+
+            if($web)
+            {
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => explode(";",$items['quantity'])[0], "max" => explode(";",$items['quantity'])[1]]);
+            }else{
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
+            }
+
             $bookinginventory = new BookingInventory;
             $bookinginventory->booking_id = $booking->id;
             $bookinginventory->inventory_id = $items["inventory_id"];
             $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
             $bookinginventory->material = $items["material"];
             $bookinginventory->size = $items["size"];
-            $bookinginventory->quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
+            $bookinginventory->quantity = $quantity;
             $bookinginventory->quantity_type = $inventory_quantity_type;
             $result_items = $bookinginventory->save();
         }
@@ -434,11 +442,20 @@ class BookingsController extends Controller
 
     }
 
-    public static function getBookingsForVendorApp(Request $request)
+    public static function getBookingsForVendorApp(Request $request, $web=false)
     {
         // $limit=CommonEnums::$PAGE_LENGTH;
         // $offset=0;
-        $bid_id = Bid::where("organization_id", $request->token_payload->organization_id);
+        if($web) {
+            $organization_id = Session::get('organization_id');
+            $vendor_id = Session::get('account')['id'];
+        }
+        else {
+            $organization_id = $request->token_payload->organization_id;
+            $vendor_id = $request->token_payload->id;;
+        }
+
+        $bid_id = Bid::where("organization_id", $organization_id);
 
         switch ($request->type) {
             case "live":
@@ -446,7 +463,7 @@ class BookingsController extends Controller
                 break;
 
             case "scheduled":
-                $bid_id->where("status", BidEnums::$STATUS['won']);
+                $bid_id->where("status", BidEnums::$STATUS['won'])->where("vendor_id", $vendor_id);
                 break;
 
             case "bookmarked":
@@ -454,7 +471,7 @@ class BookingsController extends Controller
                 break;
 
             case "participated":
-                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']]);
+                $bid_id->whereIn("status", [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->where(["vendor_id"=>$vendor_id]);
                 break;
 
             case "past":
@@ -476,22 +493,25 @@ class BookingsController extends Controller
 
         $bookings->with('service')
             ->with('movement_dates')
-            ->with(['bid' => function ($bid) use ($request) {
-                $bid->where("organization_id", $request->token_payload->organization_id)->with('vendor');
+            ->with(['bid' => function ($bid) use ($organization_id) {
+                $bid->where("organization_id", $organization_id)->with('vendor');
             }]);
 
         if (isset($request->from) && isset($request->to))
-            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
+            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->where('organization_id', $organization_id);
 
         if (isset($request->status))
-            $bookings->orWhere('status', $request->status);
+            $bookings->orWhere('status', $request->status)->where('organization_id', $organization_id);
 
         if (isset($request->service_id))
-            $bookings->where('service_id', $request->service_id);
+            $bookings->where('service_id', $request->service_id)->where('organization_id', $organization_id);
 
         $bookings = $bookings->paginate(CommonEnums::$PAGE_LENGTH);
 
-        return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
+        if($web)
+            return $bookings;
+        else
+            return Helper::response(true, "Show data successfully", ["bookings" => $bookings->items(), "paging" => [
             "current_page" => $bookings->currentPage(), "total_pages" => $bookings->lastPage(), "next_page" => $bookings->nextPageUrl(), "previous_page" => $bookings->previousPageUrl()
         ]]);
     }
@@ -512,13 +532,13 @@ class BookingsController extends Controller
 
 
         if (isset($request->from) && isset($request->to))
-            $booking->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));
+            $booking->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->where('organization_id', $request->token_payload->organization_id);
 
         if (isset($request->status))
-            $booking->orWhere('status', $request->status);
+            $booking->orWhere('status', $request->status)->where('organization_id', $request->token_payload->organization_id);
 
         if (isset($request->service_id))
-            $booking->where('service_id', $request->service_id);
+            $booking->where('service_id', $request->service_id)->where('organization_id', $request->token_payload->organization_id);
 
         $booking->orderBy('id', 'DESC')
             ->with('user')
@@ -642,7 +662,6 @@ class BookingsController extends Controller
 
         return Helper::response(true, "save successfully");
     }
-
 
     public static function startTrip($public_booking_id, $organization_id, $pin)
     {

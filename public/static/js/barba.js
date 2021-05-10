@@ -6,6 +6,8 @@ function changeMenu(){
         if ($(this).attr("href") == url) {
             // console.log("match");
             // $(this).parent().parent().prev("li").addClass("active-menu-item");
+
+            // $('.active-menu-item').removeClass("active-menu-item");
             $(this).parent().addClass("active-menu-item");
             // return false;
         }
@@ -38,6 +40,7 @@ import {
     initSlick,
     initTextAreaEditor,
     initDatePicker,
+    initPopUp,
     initRangeSlider,
     initRevenueChart,
     initToggles,
@@ -58,11 +61,6 @@ barba.init({
         namespace: 'createslider',
         afterEnter(data) {
 
-        }
-      },{
-        namespace: 'orderdetails_bidding',
-        afterEnter(data) {
-            initCountdown();
         }
       },
     ]
@@ -88,6 +86,7 @@ barba.hooks.after((data) => {
 
     initTextAreaEditor();
     initDatePicker();
+    initPopUp();
     initSlick();
     initToggles();
     initRangeSlider();
@@ -106,6 +105,7 @@ $(document).ready(function(){
     initTextAreaEditor();
     initCountdown();
     initDatePicker();
+    initPopUp();
     initToggles();
     initRangeSlider();
     initRevenueChart();

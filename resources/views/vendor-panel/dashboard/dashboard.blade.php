@@ -1,7 +1,68 @@
 @extends('vendor-panel.layouts.frame')
-@section('title') Login @endsection
+@section('title') Dashboard @endsection
 @section('body')
-    <div class="main-content grey-bg">
+    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="dashboard">
+        <input type="hidden" value='@json($graph)' id="revenue_dataset">
+        @php $dataset = []; $final = []; @endphp
+        @foreach($graph['order_distribution'] as $od)
+            @switch($od['status'])
+               {{-- @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                @php
+                    $dataset['label'] = "Biding";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break
+
+                @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                @php
+                    $dataset['label'] = "Pending to Confirm from Customer";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break--}}
+
+                @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                @php
+                    $dataset['label'] = "Pending Assign Driver";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break
+
+                @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                @php
+                    $dataset['label'] = "Awaiting Pickup";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break
+
+                @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                @php
+                    $dataset['label'] = "In Transit";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break
+
+                @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                @php
+                    $dataset['label'] = "Completed";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break
+
+                @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                @php
+                    $dataset['label'] = "Cancelled";
+                    $dataset['value'] = $od['count'];
+                @endphp
+                @break
+            @endswitch
+            @if(count($dataset)>0) @php array_push($final, $dataset); $dataset = []; @endphp @endif
+
+        @endforeach
+
+        <input type="hidden" value='@json($final)' id="order_dist_dataset">
+
+
+
         <h3 class="page-head text-left p-4 f-20">Dashboard
             <i class="icon dripiconmeter"></i>
         </h3>
@@ -11,39 +72,35 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">Last login at</li>
                         <li class="breadcrumb-item"><a href="#">11:55:02 AM</a></li>
-
                     </ol>
                 </nav>
-
-
             </div>
-
         </div>
         <!-- Dashboard cards -->
         <div class="vender-all-details dashboard-cards flex-row">
             <div class="simple-card">
                 <p> LIVE ORDERS</p>
-                <h1>501</h1>
+                <h1>{{$count_live}}</h1>
             </div>
             <div class="simple-card">
                 <p>ONGOING ORDERS</p>
-                <h1>865</h1>
+                <h1>{{$count_ongoing}}</h1>
             </div>
             <div class="simple-card">
                 <p>ORDERS WON</p>
-                <h1>900</h1>
+                <h1>{{$count_won}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL BRANCHES</p>
-                <h1>56</h1>
+                <h1>{{$count_branch}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL EMPLOYEES</p>
-                <h1>4,567</h1>
+                <h1>{{$count_emp}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL REVENUE</p>
-                <h1>₹24K</h1>
+                <h1>₹{{$total_revenue}}</h1>
             </div>
         </div>
         <!--  dashboard Columns -->
@@ -55,8 +112,7 @@
                             <h3 class="f-18">Live Orders</h3>
                         </div>
                         <div class="p-10 card-head left">
-                            <a><i><img src="./assets/images/filter1.svg" alt="" srcset=""></i></a>
-
+                            <a><i><img src="{{asset('static/vendor//images/filter1.svg')}}" alt="" srcset=""></i></a>
                             <!-- <a><i><img src="./assets/images/filter.svg" alt="" srcset=""></i> -->
                             <div class="dropdown-menu ">
                                 <a class="dropdown-item border-top-bottom" href="#">
@@ -84,9 +140,6 @@
                                         </label>
                                     </div>
                                 </a>
-
-
-
                             </div>
                         </div>
 
@@ -95,31 +148,20 @@
                         <thead class="secondg-bg border-none p-0 f-14">
                         <tr>
                             <th scope="col">Order ID</th>
-
                             <th scope="col">Time Left</th>
                             <th scope="col">Order Amount</th>
                         </tr>
                         </thead>
                         <tbody class="mtop-20">
-                        <tr class="tb-border cursor-pointer " onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                            <th scope="row" style="text-decoration: underline;"> SKU123456</th>
+                            @foreach($booking_live as $booking)
+                                <tr class="tb-border">
+                                    <th scope="row" style="text-decoration: underline;">{{$booking->public_booking_id}}</th>
 
-                            <td class="text-center">0:03:02</td>
-                            <td class="text-center">₹2,300</td>
-                        </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"  >
-                            <th scope="row" style="text-decoration: underline;">SKU123456</th>
-
-                            <td>0:03:02</td>
-                            <td>₹2,300</td>
-                        </tr>
-                        <tr class="tb-border cursor-pointer"   onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"             >
-                            <th scope="row"  style="text-decoration: underline;">SKU123456</th>
-
-                            <td>0:03:02</td>
-                            <td>₹2,300</td>
-                        </tr>
-                        </tbody>
+                                    <td class="text-center"><span class="timer-bg text-center timer" data-time="{{$booking->bid_result_at}}"></span></td>
+                                    <td class="text-center">₹{{$booking->final_estimated_quote}}</td>
+                                </tr>
+                            @endforeach
+                       </tbody>
                     </table>
                 </div>
             </div>
@@ -140,28 +182,8 @@
         <div class="d-flex h-auto  Dashboard-lcards">
             <div class="col-sm-12 h-auto p-0">
                 <div class="d-flex  card ">
-
                     <div class="p-10 d-flex justify-content-between ">
-                        <h3 class="f-18">Revenue Trend</h3>
-                        <div class="d-flex ">
-
-                            <div class="d-felx flex-column ml-20">
-                                <div class="dropdown mr-2">
-                                    <button
-                                        class="btn btn-chart dropdown-toggle btn-dropdown mr-0 ml-10 Weekly"
-                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        Weekly
-                                    </button>
-                                    <div class="dropdown-menu bx-rev dashboard-dropdown" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Monthly</a>
-                                        <a class="dropdown-item" href="#">Daily</a>
-                                        <a class="dropdown-item" href="#">Weekly</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <h3 class="f-18 mt-0">Revenue Trend</h3>
 
                     </div>
                     <div class="revenue-chart">

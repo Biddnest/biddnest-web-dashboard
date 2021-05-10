@@ -4,6 +4,7 @@
  */
 
 namespace App;
+use App\Models\Notification;
 use GuzzleHttp\Client;
 
 class PushNotification
@@ -15,6 +16,8 @@ class PushNotification
 
         if(count($players)<1)
             return Helper::response(false, "No players registered yet.");
+
+
 
         switch($user_type){
             case "user":

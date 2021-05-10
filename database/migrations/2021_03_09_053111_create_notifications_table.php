@@ -27,6 +27,7 @@ class CreateNotificationsTable extends Migration
 
             $table->text("title");
             $table->text("desc");
+            $table->string("url")->nullable();
             $table->tinyInteger("status")->default(1);
             $table->timestamps();
             $table->tinyInteger('deleted')->default(0);

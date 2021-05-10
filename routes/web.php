@@ -446,7 +446,7 @@ Route::prefix('vendor')->group(function(){
 
 
 Route::get('/debug/push/booking', function () {
-    return NotificationController::sendTo("vendor", [1], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
+    return NotificationController::sendTo("vendor", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
         "type" => NotificationEnums::$TYPE['booking'],
         "public_booking_id" => "BD606AD99B49C69",
         "booking_status" => BookingEnums::$STATUS['biding']

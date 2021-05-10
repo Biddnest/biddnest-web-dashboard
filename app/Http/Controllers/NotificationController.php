@@ -112,10 +112,7 @@ class NotificationController extends Controller
                 $save_notification->for="user";
                 $save_notification->title=$title;
                 $save_notification->desc=$desc;
-                $result=$save_notification->save();
-
-                if(!$result)
-                    return Helper::response(false, "Fail to send.", ['id'=>$user]);
+                $save_notification->save();
             }
         }
         elseif ($type == "vendor")
@@ -126,10 +123,7 @@ class NotificationController extends Controller
                 $save_notification->for="vendor";
                 $save_notification->title = $title;
                 $save_notification->desc = $desc;
-                $result=$save_notification->save();
-
-                if(!$result)
-                    return Helper::response(false, "Fail to send vendor.", ['id'=>$user]);
+                $save_notification->save();
             }
         }
 

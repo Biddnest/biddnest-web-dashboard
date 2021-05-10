@@ -111,11 +111,25 @@ class NotificationController extends Controller
                 $pids = OneSignalPlayer::where("user_id", $user)->pluck("player_id");
                 foreach ($pids as $pid) {
                     $players[] = $pid;
+
+                    $save_notification =new Notification;
+                    $save_notification->user_id=$pid;
+                    $save_notification->title=$title;
+                    $save_notification->desc=$desc;
+                    $save_notification->save;
+
                 }
             } else {
                 $pids = OneSignalPlayer::where("vendor_id", $user)->pluck("player_id");
                 foreach ($pids as $pid) {
                     $players[] = $pid;
+
+                    $save_notification =new Notification;
+                    $save_notification->vendor_id=$pid;
+                    $save_notification->title=$title;
+                    $save_notification->desc=$desc;
+                    $save_notification->save;
+
                 }
             }
         }

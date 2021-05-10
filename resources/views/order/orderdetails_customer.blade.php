@@ -76,37 +76,35 @@
                     <div class="tab-pane fade show active" id="customer-details" role="tabpanel" aria-labelledby="customer-details-tab">
                         <div class="d-flex  row p-15 pb-0" >
                             <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Order ID
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Customer Name
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Customer Phone
                                 </div>
-                                <br />
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Customer Email
                                 </div>
-
-                                <div class="theme-text f-14 bold p-15">
+                                  <br/>
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   From Address
                                 </div>
-                                <br />
-                                <div class="theme-text f-14 bold p-15">
+                                <br/>
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   To Address
                                 </div>
-                                <br />
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                     Delivery Distance
                                 </div>
 
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Order Amount
                                 </div>
 
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Booking Status
                                 </div>
                             </div>
@@ -118,7 +116,7 @@
                                 <div class="theme-text f-14 p-15">
                                  {{json_decode($booking->contact_details,true)['name'] }}
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15"><span>+91</span>
                                  {{json_decode($booking->contact_details,true)['phone'] }}
                                 </div>
                                 <div class="theme-text f-14 p-15">
@@ -142,43 +140,43 @@
                                 <div class="theme-text f-14 p-15">
                                     @switch($booking->status)
                                         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
-                                        <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
+                                        <span class="status-badge info-bg  text-center td-padding" style="font-weight:bold !important">Enquiry</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['placed'])
-                                        <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
+                                        <span class="status-badge yellow-bg  text-center td-padding" style="font-weight:bold !important">Placed</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['biding'])
-                                        <span class="status-badge green-bg  text-center td-padding">Bidding</span>
+                                        <span class="status-badge green-bg  text-center td-padding" style="font-weight:bold !important">Bidding</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                        <span class="status-badge grey-bg  text-center td-padding">Rebidding</span>
+                                        <span class="status-badge grey-bg  text-center td-padding" style="font-weight:bold !important">Rebidding</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                        <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
+                                        <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Payment Pending</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                        <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
+                                        <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Pending Driver Assign</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-                                        <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
+                                        <span class="status-badge blue-bg  text-center td-padding" style="font-weight:bold !important">Awaiting Pickup</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                        <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
+                                        <span class="status-badge icon-bg  text-center td-padding" style="font-weight:bold !important">In Transit</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['completed'])
-                                        <span class="status-badge green-bg  text-center td-padding">Completed</span>
+                                        <span class="status-badge green-bg  text-center td-padding" style="font-weight:bold !important">Completed</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-                                        <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
+                                        <span class="status-badge red-bg  text-center td-padding" style="font-weight:bold !important">Cancelled</span>
                                         @break
                                     @endswitch
                                 </div>
@@ -210,7 +208,7 @@
                                     <tr class="tb-border  cursor-pointer">
                                       <th scope="row">{{$inventory->name}}</th>
                                       <td  class="text-center">{{$inventory->quantity}}</td>
-                                      <td class=""><span class=" status-badge">{{$inventory->size}}</span></td>
+                                      <td class=""><span class=" status-badge text-center f-14" style="font-weight: bold !important;text-transform: capitalize;">{{$inventory->size}}</span></td>
                                     </tr>
                                 @endforeach
                             </tbody>

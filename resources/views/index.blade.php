@@ -79,6 +79,50 @@
 
      <input type="hidden" value='@json($final)' id="order_dist_dataset">
 
+     @php $datasetzing = []; $finalzing = []; $zing_count=0; @endphp
+     @foreach($graph['vendor_statewise'] as $zing)
+         @switch($od['state'])
+             @case('Maharashtra')
+             @php
+                 $dataset['label'] = "Maharashtra";
+                 $dataset['value'] = $zing['count'];
+             @endphp
+             @break
+
+             @case('Karnataka')
+             @php
+                 $dataset['label'] = "Karnataka";
+                 $dataset['value'] = $zing['count'];
+             @endphp
+             @break
+
+             @case('Uttar Pradesh')
+             @php
+                 $dataset['label'] = "Uttar Pradesh";
+                 $dataset['value'] = $zing['count'];
+             @endphp
+             @break
+
+             @case('Punjab')
+             @php
+                 $dataset['label'] = "Punjab";
+                 $dataset['value'] = $zing['count'];
+             @endphp
+             @break
+
+             @default
+             @php
+                 $zing_count +=$zing['count'];
+                  $dataset['label'] = "Others";
+                  $dataset['value'] = $zing_count;
+             @endphp
+             @break
+         @endswitch
+         @if(count($datasetzing)>0) @php array_push($finalzing, $datasetzing); $datasetzing = []; @endphp @endif
+
+     @endforeach
+     <input type="hidden" value='@json($finalzing)' id="vendor_dist_dataset">
+
 
     <h3 class="page-head text-left p-4 f-20">Dashboard
         <i class="icon dripiconmeter"></i>

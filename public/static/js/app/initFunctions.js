@@ -333,7 +333,6 @@ export function initRevenueChart(){
     }
 }
 
-
 export function initOrderDistributionChart(){
     // console.log("icam called");
     if($("#my-legend-con").length){
@@ -421,6 +420,8 @@ export function initOrderDistributionChart(){
         $('#my-legend-con').html(myChart.generateLegend());
     }
 }
+
+
 
 export function initCountdown() {
 

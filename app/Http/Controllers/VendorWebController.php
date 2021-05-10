@@ -124,7 +124,6 @@ class VendorWebController extends Controller
         $past_booking=Booking::whereIn('id', Bid::where(['organization_id'=>Session::get('organization_id'), 'status'=>BidEnums::$STATUS['won']])->pluck('booking_id'))->whereIn('status', [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
 
         $booking=BookingsController::getBookingsForVendorApp($request, true);
-
         return view('vendor-panel.order.liveorders', ['bookings'=>$booking, 'type'=>$request->type, 'count_booking'=>$count_booking, 'participated_booking'=>$participated_booking, 'schedul_booking'=>$schedul_booking, 'save_booking'=>$save_booking, 'past_booking'=>$past_booking]);
     }
 
@@ -168,14 +167,26 @@ class VendorWebController extends Controller
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }
 
-    public function getBranches()
+    public function getBranches(Request $request)
     {
         $home_branch =Organization::where('id', Session::get('organization_id'))->with('admin')->first();
 
-        if($home_branch->parent_org_id)
-            $branch = Organization::where('parent_org_id', $home_branch->parent_org_id)->orWhere('id', $home_branch->parent_org_id)->where('id', '!=', $home_branch->id)->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
-        else
-            $branch =Organization::where("parent_org_id", $home_branch->id)->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
+        if($home_branch->parent_org_id) {
+            $branch = Organization::where('parent_org_id', $home_branch->parent_org_id)->orWhere('id', $home_branch->parent_org_id)->where('id', '!=', $home_branch->id);
+            if(isset($request->search)){
+                $branch=$branch->where('phone', 'like', $request->search."%")
+                    ->where('city', 'like', "%".$request->search."%");
+            }
+            $branch =$branch->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
+        }
+        else {
+            $branch = Organization::where("parent_org_id", $home_branch->id);
+            if(isset($request->search)){
+                $branch=$branch->where('phone', 'like', $request->search."%")
+                    ->where('city', 'like', "%".$request->search."%");
+            }
+            $branch = $branch->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
+        }
 
         return view('vendor-panel.branch.getbranch', ['branches'=>$branch, 'home_branch'=>$home_branch]);
     }
@@ -207,7 +218,11 @@ class VendorWebController extends Controller
 
     public function serviceRequest(Request $request)
     {
-        $tickets=Ticket::where(['vendor_id'=>Session::get('account')['id']])->paginate(CommonEnums::$PAGE_LENGTH);
+        $tickets=Ticket::where(['vendor_id'=>Session::get('account')['id']]);
+        if(isset($request->search)){
+            $tickets=$tickets->where('heading', 'like',"%".$request->search."%");
+        }
+        $tickets=$tickets->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type]);
     }
 

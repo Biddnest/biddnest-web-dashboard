@@ -102,7 +102,7 @@
                                         </div>
                                     </a>
                                 </div>--}}
-                                <input type="text" class="searchTerm" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('vendor.bookings', ['type'=>$type])}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -213,15 +213,15 @@
                                                 </a>
                                                 <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                     <i class="tooltip-trigger">
-                                                        @if($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO)
-                                                            <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Quote Later">
-                                                        @else
-                                                            <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
-                                                                 data-toggle="tooltip" data-placement="top"
-                                                                 title="Quote Later">
-                                                        @endif
+                                                            @if($booking->bid && ($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO))
+                                                                <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Quote Later">
+                                                            @else
+                                                                <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
+                                                                     data-toggle="tooltip" data-placement="top"
+                                                                     title="Quote Later">
+                                                            @endif
                                                     </i>
                                                 </a>
                                             </td>

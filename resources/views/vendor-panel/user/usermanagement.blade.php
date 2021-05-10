@@ -29,9 +29,9 @@
                         <div class=" card-head right text-left">
                             <h3 class=" f-18 pb-0">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    @foreach(\App\Enums\VendorEnums::$ROLES as $kay=>$fetch_role)
+                                    @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$fetch_role)
                                         <li class="nav-item">
-                                            <a class="nav-link @if($role == $kay)active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>$kay])}}" >{{ucfirst(trans($kay))}}</a>
+                                            <a class="nav-link @if($role == $key)active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>$key])}}" >{{ucfirst(trans($key))}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="p-1 card-head left col-sm-3">
                             <div class="search">
-                                <input type="text" class="searchTerm" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('vendor.managerusermgt', ['type'=>$role])}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>

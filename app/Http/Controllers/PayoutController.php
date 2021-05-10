@@ -34,7 +34,14 @@ class PayoutController extends Controller
         else
             $organization_id = $request->token_payload->organization_id;
 
-        $payouts = Payout::where("organization_id", $organization_id)->paginate(CommonEnums::$PAGE_LENGTH);
+        $payouts = Payout::where("organization_id", $organization_id);
+        if($web)
+        {
+            if(isset($request->search)){
+                $payouts=$payouts->where('public_payout_id', 'like', "%".$request->search."%");
+            }
+        }
+        $payouts=$payouts->paginate(CommonEnums::$PAGE_LENGTH);
 
         if (isset($request->from) && isset($request->to))
             $payouts->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)));

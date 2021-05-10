@@ -31,65 +31,20 @@
                         <li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
                             <div class="dropdown">
                                 <ul>
-                                    <li><a href="#">
-                                            <div class="d-flex notification-msg ">
-                                                <div class="order-icon">
-                                                    <i class="icon dripicons-bell h-auto" ></i>
+                                    @foreach(\App\Models\Notification::where('vendor_id', \Illuminate\Support\Facades\Session::get('organization_id'))->latest()->limit(5)->get() as $notification)
+                                        <li><a href="{{$notification->url ?? '#'}}">
+                                                <div class="d-flex notification-msg ">
+                                                    <div class="order-icon">
+                                                        <i class="icon dripicons-bell h-auto" ></i>
+                                                    </div>
+                                                    <div class="notification-details">
+                                                        <h6>{{$notification->title}}</h6>
+                                                        <p class="">{{$notification->desc}}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="notification-details">
-                                                    <h6> Your order is placed</h6>
-                                                    <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                        elit.</p>
-
-
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">
-                                            <div class="d-flex notification-msg ">
-                                                <div class="order-icon">
-                                                    <i class="icon dripicons-bell h-auto" ></i>
-                                                </div>
-                                                <div class="notification-details">
-                                                    <h6> Your order is placed</h6>
-                                                    <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                        elit.</p>
-
-
-                                                </div>
-                                            </div>
-                                        </a></li>
-                                    <li><a href="#">
-                                            <div class="d-flex notification-msg ">
-                                                <div class="order-icon">
-                                                    <i class="icon dripicons-bell h-auto" ></i>
-                                                </div>
-                                                <div class="notification-details">
-                                                    <h6> Your order is placed</h6>
-                                                    <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                        elit.</p>
-
-
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">
-                                            <div class="d-flex notification-msg ">
-                                                <div class="order-icon">
-                                                    <i class="icon dripicons-bell h-auto" ></i>
-                                                </div>
-                                                <div class="notification-details">
-                                                    <h6> Your order is placed</h6>
-                                                    <p class="">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                        elit.</p>
-
-
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 

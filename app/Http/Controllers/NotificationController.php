@@ -112,6 +112,7 @@ class NotificationController extends Controller
                 $save_notification->for="user";
                 $save_notification->title=$title;
                 $save_notification->desc=$desc;
+                $save_notification->url=$url;
                 $save_notification->save();
             }
         }
@@ -123,6 +124,7 @@ class NotificationController extends Controller
                 $save_notification->for="vendor";
                 $save_notification->title = $title;
                 $save_notification->desc = $desc;
+                $save_notification->url = $url;
                 $save_notification->save();
             }
         }

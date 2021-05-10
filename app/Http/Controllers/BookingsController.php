@@ -480,7 +480,18 @@ class BookingsController extends Controller
         }
 
         $bookings = Booking::whereIn("id", $bid_id
-            ->pluck('booking_id'))->orderBy('id', 'DESC')
+            ->pluck('booking_id'));
+
+        if($web)
+        {
+            if(isset($request->search)){
+                $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                    ->orWhere('source_meta', 'like', "%".$request->search."%")
+                    ->orWhere('destination_meta', 'like', "%".$request->search."%");
+            }
+        }
+
+        $bookings ->orderBy('id', 'DESC')
             ->with('user');
             if($request->type == "participated" || $request->type == "past")
                 $bookings->with('status_history');

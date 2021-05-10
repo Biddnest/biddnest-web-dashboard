@@ -28,7 +28,7 @@
                                 <h3 class="f-18">Vendor Payout </h3>
                             </div>
                             <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
-                                <a href="#" class="margin-r-20 relative" data-toggle="dropdown"
+                               {{-- <a href="#" class="margin-r-20 relative" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
                                     <i><img class="" src="./assets/images/filter.svg" alt="" srcset=""></i>
                                 </a>
@@ -68,11 +68,11 @@
                                             </label>
                                         </div>
                                     </a>
-                                </div>
+                                </div>--}}
                             </div>
                             <div class="card-head  pt-2 mt-1 left col-sm-3">
                                 <div class="search">
-                                    <input type="text" class="searchTerm" placeholder="Search...">
+                                    <input type="text" class="searchTerm table-search" data-url="{{route('vendor.payout')}}" placeholder="Search...">
                                     <button type="submit" class="searchButton">
                                         <i class="fa fa-search"></i>
                                     </button>

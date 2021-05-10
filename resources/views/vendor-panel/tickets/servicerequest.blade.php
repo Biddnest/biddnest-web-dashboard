@@ -26,7 +26,7 @@
                     <div class="header-wrap">
                         <h3 class="f-18 ml-1">Service Request</h3>
                         <div class="header-wrap p-0 filter-dropdown ">
-                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
                             </a>
                             <div class="dropdown-menu">
@@ -54,9 +54,9 @@
                                         </label>
                                     </div>
                                 </a>
-                            </div>
+                            </div>--}}
                             <div class="search">
-                                <input type="text" class="searchTerm" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('vendor.service_request')}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -69,9 +69,9 @@
                             <thead class="secondg-bg  p-0 f-14">
                                 <tr class="f-weight-500">
                                     <th scope="col" class="text-left">Service ID</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col"> Status</th>
+                                    <th scope="col" style="text-align: center;">Category</th>
+                                    <th scope="col" style="text-align: center;">Title</th>
+                                    <th scope="col" style="text-align: center;"> Status</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">

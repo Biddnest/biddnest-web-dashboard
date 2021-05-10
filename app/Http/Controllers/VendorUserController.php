@@ -264,6 +264,15 @@ class VendorUserController extends Controller
             else
                 $user_id = Vendor::where("organization_id", $organization_id);
         }
+
+        if($web){
+            if(isset($request->search)){
+                $user_id->where('phone', 'like', $request->search."%")
+                    ->orWhere('fname', 'like', "%".$request->search."%")
+                    ->orWhere('lname', 'like', "%".$request->search."%");
+            }
+        }
+
         switch ($request->type) {
             case "admin":
                 $user_id->where("user_role", VendorEnums::$ROLES['admin']);

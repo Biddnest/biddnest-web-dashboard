@@ -123,7 +123,6 @@ class WebController extends Controller
                                        ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
                                        ->sum("final_quote");
         }
-
         $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(3)->get();
         return view('index', ['count_orders'=>$count_orders,
             'count_vendors'=>$count_vendors,
@@ -142,7 +141,8 @@ class WebController extends Controller
                      "sales"=>$last_week_sale
                 ],
                     ],
-                "order_distribution"=>Booking::select('status', DB::raw("count(*) AS count"))->groupBy('status')->get()
+                "order_distribution"=>Booking::select('status', DB::raw("count(*) AS count"))->groupBy('status')->get(),
+                "vendor_statewise"=>Organization::select('state', DB::raw("count(*) AS count"))->groupBy('state')->get()
             ],
         ]);
     }

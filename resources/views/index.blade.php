@@ -96,7 +96,7 @@
     <!-- Dashboard cards -->
     <div class="vender-all-details dashboard-cards flex-row">
         <div class="simple-card">
-            <p>ORDER</p>
+            <p>ORDERS</p>
             <h1>{{$count_orders}}</h1>
         </div>
         <div class="simple-card">
@@ -160,8 +160,8 @@
                     </div>--}}
                 </div>
                 <table class="table text-center p-0">
-                    <thead class="secondg-bg border-none p-0">
-                        <tr>
+                    <thead class="secondg-bg border-none p-0 f-14">
+                        <tr style="color: #3c4b58;">
                             <th scope="col">Order ID</th>
                             <th scope="col">Order Status</th>
                             <th scope="col">Created At</th>

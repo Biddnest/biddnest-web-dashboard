@@ -57,12 +57,12 @@
                   <div class="card  h-auto p-0 " >
                       <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
                         <h3 class="f-18" style="margin-top: 0;">
-                          <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist">
+                          <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight:600; margin-left: -6px;">
                             <li class="nav-item ">
-                              <a class="nav-link active p-15" id="customer-details-tab" data-toggle="tab" href="#customer-details" role="tab" aria-controls="home" aria-selected="true">Customer</a>
+                              <a class="nav-link active p-15" id="customer-details-tab" data-toggle="tab" href="#customer-details" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="#vendor-details" role="tab" aria-controls="profile" aria-selected="false">Vendor</a>
+                              <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="#vendor-details" role="tab" aria-controls="profile" aria-selected="false">Vendor Details</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="#quotation" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
@@ -81,31 +81,31 @@
                             <div class="d-flex  row p-15 pb-0" >
 
                               <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Order ID
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Vendor Name
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Vendor Details
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Driver Name
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Driver Email
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Timer Value
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Order Status
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Order Amount
                                 </div>
-                                <div class="theme-text f-14 bold p-15">
+                                <div class="theme-text f-14 bold p-15 pl-0">
                                   Address
                                 </div>
                               </div>
@@ -219,22 +219,22 @@
                         <div class="d-flex  row p-15 pb-0 " >
 
                           <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0 ">
                               Assigned Vendor
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Assigned Vehicle
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Assigned Driver
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Driver Phone Number
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Commission Amount
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Discount From Vendor
                             </div>
 
@@ -297,18 +297,18 @@
                         <div class="d-flex  row p-15 quotation-main pb-0" >
 
                           <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Assigned Vendor
                             </div>
 
 
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Commission Amount
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Discount From Vendor
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Base Price
                             </div>
 
@@ -907,22 +907,22 @@
                         <div class="d-flex  row p-15 pb-0" >
 
                           <div class="col-sm-4  secondg-bg margin-topneg-15 pt-10 ">
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Order ID
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Customer Name
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Vender Name
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Review Description
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Status
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0">
                               Ratings
                             </div>
 

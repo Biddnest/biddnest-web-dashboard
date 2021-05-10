@@ -2,7 +2,7 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
-export function initMapPicker(){
+export function initMapPicker() {
     $('.source-map-picker').locationpicker({
         location: {
             latitude: 12.930621,
@@ -29,11 +29,11 @@ export function initMapPicker(){
         draggable: true,
         onchanged: function(currentLocation, radius, isMarkerDropped) {},
         onlocationnotfound: function(locationName) {},
-        oninitialized: function (component) {},
+        oninitialized: function(component) {},
         // must be undefined to use the default gMaps marker
         markerIcon: undefined,
         markerDraggable: true,
-        markerVisible : true
+        markerVisible: true
     });
 
     $('.dest-map-picker').locationpicker({
@@ -62,18 +62,18 @@ export function initMapPicker(){
         draggable: true,
         onchanged: function(currentLocation, radius, isMarkerDropped) {},
         onlocationnotfound: function(locationName) {},
-        oninitialized: function (component) {},
+        oninitialized: function(component) {},
         // must be undefined to use the default gMaps marker
         markerIcon: undefined,
         markerDraggable: true,
-        markerVisible : true
+        markerVisible: true
     });
 }
 
 export function initAllSelectBoxes() {
 
 
-    if($(".select-box").length) {
+    if ($(".select-box").length) {
         $(".select-box").select2({
             tags: false,
             multiple: true,
@@ -86,7 +86,7 @@ export function initAllSelectBoxes() {
         });
     }
 
-    if($(".select-box2").length) {
+    if ($(".select-box2").length) {
         $(".select-box2").select2({
             tags: true,
             multiple: true,
@@ -98,68 +98,20 @@ export function initAllSelectBoxes() {
             // minimumInputLength: 3,
         });
     }
-if($(".selectuser").length) {
-    $(".searchuser").select2({
-        multiple: true,
-        tags: false,
-        minimumResultsForSearch: 3,
-        minimumInputLength: 3,
-        closeOnSelect: false,
-        debug: true,
-        placeholder: 'Search for users',
-        // allowClear: true,
-        ajax: {
-            url: API_SEARCH_USERS,
-            method: "GET",
-            data: function (params) {
-
-                var query = {
-                    q: params.term,
-                    page: params.page || 1
-                }
-
-                // Query parameters will be ?search=[term]&type=public
-                return query;
-            },
-            error: (a, b, c) => {
-                Logger.error(a.responseText, b, c);
-            },
-
-            processResults: function (data) {
-
-                // Transforms the top-level key of the response object from 'items' to 'results'
-                var output = [];
-                for (var i = 0; i < data.data.users.length; i++) {
-                    output.push({
-                        id: data.data.users[i].id,
-                        text: data.data.users[i].fname + " " + data.data.users[i].lname + " - " + data.data.users[i].email
-                    })
-                }
-
-
-                return {
-                    results: output
-                };
-            }
-
-        }
-    });
-}
-
-    if($(".selectvendor").length){
-        $(".searchvendor").select2({
+    if ($(".selectuser").length) {
+        $(".searchuser").select2({
             multiple: true,
             tags: false,
             minimumResultsForSearch: 3,
             minimumInputLength: 3,
             closeOnSelect: false,
             debug: true,
-            placeholder: 'Search for vendor',
+            placeholder: 'Search for users',
             // allowClear: true,
             ajax: {
-                url: API_SEARCH_VENDOR,
+                url: API_SEARCH_USERS,
                 method: "GET",
-                data: function (params) {
+                data: function(params) {
 
                     var query = {
                         q: params.term,
@@ -173,7 +125,55 @@ if($(".selectuser").length) {
                     Logger.error(a.responseText, b, c);
                 },
 
-                processResults: function (data) {
+                processResults: function(data) {
+
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    var output = [];
+                    for (var i = 0; i < data.data.users.length; i++) {
+                        output.push({
+                            id: data.data.users[i].id,
+                            text: data.data.users[i].fname + " " + data.data.users[i].lname + " - " + data.data.users[i].email
+                        })
+                    }
+
+
+                    return {
+                        results: output
+                    };
+                }
+
+            }
+        });
+    }
+
+    if ($(".selectvendor").length) {
+        $(".searchvendor").select2({
+            multiple: true,
+            tags: false,
+            minimumResultsForSearch: 3,
+            minimumInputLength: 3,
+            closeOnSelect: false,
+            debug: true,
+            placeholder: 'Search for vendor',
+            // allowClear: true,
+            ajax: {
+                url: API_SEARCH_VENDOR,
+                method: "GET",
+                data: function(params) {
+
+                    var query = {
+                        q: params.term,
+                        page: params.page || 1
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    return query;
+                },
+                error: (a, b, c) => {
+                    Logger.error(a.responseText, b, c);
+                },
+
+                processResults: function(data) {
 
                     // Transforms the top-level key of the response object from 'items' to 'results'
                     var output = [];
@@ -194,7 +194,7 @@ if($(".selectuser").length) {
         });
     }
 
-    if($(".selectadmin").length){
+    if ($(".selectadmin").length) {
         $(".searchadmin").select2({
             multiple: true,
             tags: false,
@@ -207,7 +207,7 @@ if($(".selectuser").length) {
             ajax: {
                 url: API_SEARCH_ADMIN,
                 method: "GET",
-                data: function (params) {
+                data: function(params) {
 
                     var query = {
                         q: params.term,
@@ -221,7 +221,7 @@ if($(".selectuser").length) {
                     Logger.error(a.responseText, b, c);
                 },
 
-                processResults: function (data) {
+                processResults: function(data) {
 
                     // Transforms the top-level key of the response object from 'items' to 'results'
                     var output = [];
@@ -244,17 +244,17 @@ if($(".selectuser").length) {
 
 }
 
-export function initSlick(){
-  if($(".slick-container").length) {
-      $('.slick-container').slick({
-          arrows: false
-      });
-  }
+export function initSlick() {
+    if ($(".slick-container").length) {
+        $('.slick-container').slick({
+            arrows: false
+        });
+    }
 }
 
-export function initTextAreaEditor(){
+export function initTextAreaEditor() {
     // $("textarea").addClass('editor');
-    if($('textarea').length) {
+    if ($('textarea').length) {
         // var editor = new FroalaEditor('.editor');
 
         $('textarea').not(".select2-search__field").tinymce({
@@ -266,9 +266,9 @@ export function initTextAreaEditor(){
 }
 
 /*Charts*/
-export function initRevenueChart(){
+export function initRevenueChart() {
     // console.log("icam called");
-    if($("#revenue_dataset").length){
+    if ($("#revenue_dataset").length) {
         var dataset = JSON.parse($("#revenue_dataset").val());
 
         var myChart = new Chart(document.getElementById("myRevenueChart"), {
@@ -276,30 +276,30 @@ export function initRevenueChart(){
             data: {
                 labels: dataset.revenue.this_week.dates,
                 datasets: [{
-                    label: 'Last Week',
-                    data: dataset.revenue.last_week.sales,
+                        label: 'Last Week',
+                        data: dataset.revenue.last_week.sales,
 
-                    backgroundColor: [
-                        'rgba(231,230,241,0.7)',
+                        backgroundColor: [
+                            'rgba(231,230,241,0.7)',
 
-                    ],
-                    borderColor: [
-                        'rgba(45,43,135,1)',
-                        'rgba(45,43,135,1)',
-                        'rgba(45,43,135,1)',
-                        'rgba(45,43,135,1)',
-                        'rgba(45,43,135,1)',
-                        'rgba(45,43,135,1)',
-                        'rgba(45,43,135,1)',
+                        ],
+                        borderColor: [
+                            'rgba(45,43,135,1)',
+                            'rgba(45,43,135,1)',
+                            'rgba(45,43,135,1)',
+                            'rgba(45,43,135,1)',
+                            'rgba(45,43,135,1)',
+                            'rgba(45,43,135,1)',
+                            'rgba(45,43,135,1)',
 
 
-                    ],
-                    borderWidth: 1
-                },
+                        ],
+                        borderWidth: 1
+                    },
                     {
                         label: 'This Week',
                         data: dataset.revenue.this_week.sales,
-                        borderDash: [10,5],
+                        borderDash: [10, 5],
 
                         backgroundColor: [
                             'rgba(255,252,242,0.7)',
@@ -323,7 +323,7 @@ export function initRevenueChart(){
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
                 },
@@ -336,11 +336,11 @@ export function initRevenueChart(){
 }
 
 
-export function initOrderDistributionChart(){
+export function initOrderDistributionChart() {
     // console.log("icam called");
-    if($("#my-legend-con").length){
+    if ($("#my-legend-con").length) {
         Chart.pluginService.register({
-            beforeDraw: function (chart) {
+            beforeDraw: function(chart) {
                 var width = chart.chart.width,
                     height = chart.chart.height,
                     ctx = chart.chart.ctx;
@@ -348,7 +348,7 @@ export function initOrderDistributionChart(){
                 var fontSize = (height / 114).toFixed(2);
                 ctx.font = fontSize + "em sans-serif";
                 ctx.textBaseline = "middle";
-                var text = chart.config.options.elements.center?.text || '',
+                var text = chart.config.options.elements.center ?.text || '',
                     textX = Math.round((width - ctx.measureText(text).width) / 2),
                     textY = height / 2;
                 ctx.fillText(text, textX, textY);
@@ -356,19 +356,19 @@ export function initOrderDistributionChart(){
             }
         });
         var chartData = JSON.parse($("#order_dist_dataset").val());
-        var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
+        var sum = chartData.map((item) => item.value).reduce((a, b) => a + b);
         var textInside = sum.toString();
         var myChart = new Chart(document.getElementById('mychart'), {
             type: 'doughnut',
-            animation:{
-                animateScale:true
+            animation: {
+                animateScale: true
             },
             data: {
-                labels: chartData.map((item) => item.label ),
+                labels: chartData.map((item) => item.label),
                 datasets: [{
 
                     label: 'Visitor',
-                    data: chartData.map((item) => item.value ),
+                    data: chartData.map((item) => item.value),
                     backgroundColor: [
                         "#f8c446",
                         "#fbd64e",
@@ -393,10 +393,10 @@ export function initOrderDistributionChart(){
                     var legendHtml = [];
                     legendHtml.push('<ul>');
                     var item = chart.data.datasets[0];
-                    for (var i=0; i < item.data.length; i++) {
+                    for (var i = 0; i < item.data.length; i++) {
 
                         legendHtml.push('<li>');
-                        legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
+                        legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] + '"></span>');
                         legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
                         legendHtml.push('</li>');
                     }
@@ -411,7 +411,7 @@ export function initOrderDistributionChart(){
                     callbacks: {
                         label: function(tooltipItem, data) {
                             var indice = tooltipItem.index;
-                            return  data.labels[indice] ;
+                            return data.labels[indice];
                         }
                     }
                 },
@@ -422,11 +422,11 @@ export function initOrderDistributionChart(){
     }
 }
 
-export function initCountdown(){
-    if($(".timer").length){
+export function initCountdown() {
+    if ($(".timer").length) {
         var BID_END_TIME = $(".timer").data("time");
         $(".timer")
-            .countdown(BID_END_TIME, function (event) {
+            .countdown(BID_END_TIME, function(event) {
                 $(this).text(
                     event.strftime('%H:%M:%S')
                 );
@@ -434,8 +434,8 @@ export function initCountdown(){
     }
 
 }
-export function initDatePicker(){
-    if($(".date").length) {
+export function initDatePicker() {
+    if ($(".date").length) {
         $('.date').datepicker({
             // multidateSeparator:",",
             multidate: true,
@@ -444,8 +444,8 @@ export function initDatePicker(){
         });
     }
 }
-export function initRangeSlider(){
-    if($(".custom_slider").length) {
+export function initRangeSlider() {
+    if ($(".custom_slider").length) {
         $(".custom_slider").ionRangeSlider({
             type: $(this).data("type"),
             min: $(this).data("min"),
@@ -461,12 +461,12 @@ export function initRangeSlider(){
     }
 }
 
-export function initToggles(){
+export function initToggles() {
     Logger.info("init toggles");
-    $("input[type=checkbox]").each(function(index){
-        Logger.info("init "+index);
+    $("input[type=checkbox]").each(function(index) {
+        Logger.info("init " + index);
 
-        $(this).attr("id", "checkbox_"+index);
+        $(this).attr("id", "checkbox_" + index);
         $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
     })
 }

@@ -165,7 +165,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="530000" id="source-pin" value="7584585" class="form-control" name="source[meta][pincode]" required>
+                                  <input type="text" placeholder="530000" id="source-pin" value="758458" class="form-control" name="source[meta][pincode]" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>

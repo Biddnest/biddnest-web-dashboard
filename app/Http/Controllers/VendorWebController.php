@@ -18,8 +18,11 @@ use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Zone;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class VendorWebController extends Controller
@@ -73,7 +76,42 @@ class VendorWebController extends Controller
         $total_revenue =Payout::where('organization_id', Session::get('organization_id'))->sum('final_payout');
 
         $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->latest()->limit(3)->get();
-        return view('vendor-panel.dashboard.dashboard',['count_live'=>$count_live, 'count_ongoing'=>$count_ongoing, 'count_won'=>$count_won, 'count_branch'=>$count_branch, 'count_emp'=>$count_emp, 'total_revenue'=>$total_revenue, 'booking_live'=>$booking_live]);
+
+        $dataset = [];
+        $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
+        $last_week = CarbonPeriod::create( Carbon::now()->subDays(14)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
+
+        $this_week_sale = [];
+        $last_week_sale = [];
+        foreach ($this_week as $key=>$date){
+            $date1 = $date->format('Y-m-d');
+            $this_week[$key] = $date->format('d M');
+            $this_week_sale[] = Booking::whereDate("created_at",$date1)->where('organization_id', Session::get('organization_id'))
+                ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
+                ->sum("final_quote");
+        }
+        foreach ($last_week as $key=>$date){
+            $date1 = $date->format('Y-m-d');
+//            $last_week[$key] = $date->format('d M');
+            $last_week_sale[] = Booking::whereDate("created_at",$date1)->where('organization_id', Session::get('organization_id'))
+                ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
+                ->sum("final_quote");
+        }
+
+        return view('vendor-panel.dashboard.dashboard',['count_live'=>$count_live, 'count_ongoing'=>$count_ongoing, 'count_won'=>$count_won, 'count_branch'=>$count_branch, 'count_emp'=>$count_emp, 'total_revenue'=>$total_revenue, 'booking_live'=>$booking_live,
+            'graph'=>[
+                "revenue"=>[
+                    "this_week"=>[
+                        "dates"=>$this_week,
+                        "sales"=>$this_week_sale
+                    ],
+                    "last_week"=>[
+                        "dates"=>$this_week,
+                        "sales"=>$last_week_sale
+                    ],
+                ],
+                "order_distribution"=>Booking::select('status', DB::raw("count(*) AS count"))->where('organization_id', Session::get('organization_id'))->groupBy('status')->get()
+            ]]);
     }
 
     public function bookingType(Request $request)

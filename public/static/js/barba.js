@@ -44,7 +44,8 @@ import {
     initRangeSlider,
     initRevenueChart,
     initToggles,
-    initOrderDistributionChart
+    initOrderDistributionChart,
+    initOrderDistributionChartVendor
 } from './app/initFunctions.js';
 barba.init({
     views: [{
@@ -93,6 +94,7 @@ barba.hooks.after((data) => {
     //keep charts at end
     initRevenueChart();
     initOrderDistributionChart();
+    initOrderDistributionChartVendor();
             // return false;
 });
 
@@ -110,6 +112,6 @@ $(document).ready(function(){
     initRangeSlider();
     initRevenueChart();
     initOrderDistributionChart();
-
+    initOrderDistributionChartVendor();
 });
 

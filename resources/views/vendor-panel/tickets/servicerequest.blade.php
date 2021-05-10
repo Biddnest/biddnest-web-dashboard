@@ -6,7 +6,7 @@
             <h3 class="page-head text-left p-4 f-20 theme-text">Service Request</h3>
             <div class="mr-20">
                 <a href="{{route('vendor.service_request_add')}}">
-                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE New User</button>
+                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE SERVICE REQUEST</button>
                 </a>
             </div>
         </div>

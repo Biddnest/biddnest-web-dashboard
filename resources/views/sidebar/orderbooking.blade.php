@@ -337,7 +337,7 @@
 
 
                             </div>
-                            <table class="table text-center p-10 theme-text">
+                            <table class="table text-left p-10 theme-text">
                                 <thead class="secondg-bg  p-0">
                                 <tr>
                                     <th scope="col">Particular</th>
@@ -345,7 +345,7 @@
 
                                 </tr>
                                 </thead>
-                                <tbody class="mtop-20">
+                                <tbody class="mtop-20 text-left">
                                 <tr>
                                     <td>Subtotal</td>
                                     <td>{{$booking->payment->sub_total ?? 'Not generated'}}</td>

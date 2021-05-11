@@ -119,7 +119,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Size</label>
-                                <select class="form-control select-box2" style="width: 0.75em !important;" name="size[]" multiple required>
+                                <select class="form-control select-box2" name="size[]" multiple required>
                                     @if($inventory && $inventory->size)
                                         @foreach(json_decode($inventory->size) as $size)
                                             <option value="{{$size}}" selected>{{$size}}</option>

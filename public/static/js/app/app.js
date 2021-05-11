@@ -443,18 +443,15 @@ $(document).ready(function () {
 
 $("body").on('click', ".bookings", function(event) {
     var target = $($(this).closest(".fullscreen-modal"));
-    var parent =  $(this).find($(this).data("parent"));
         $.update($(this).data("url"), {}, function (response) {
             console.log(response);
             if (response.status == "success") {
                 tinySuccessAlert($(this).data('success'), response.message);
                 target.fadeOut(100).hide();
-                parent.hide();
             } else {
                 tinyAlert("Failed", response.message);
                 target.fadeOut(100).hide();
             }
-
         });
     return false;
 });

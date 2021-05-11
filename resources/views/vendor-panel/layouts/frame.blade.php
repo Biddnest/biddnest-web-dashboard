@@ -111,7 +111,7 @@
 
     <div class="side-bar-pop-up">
     </div>
-
+    @yield('modal')
 </main>
 
 

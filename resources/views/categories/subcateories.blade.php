@@ -28,7 +28,7 @@
             <div class="card h-auto p-0 pt-10">
                 <div class="header-wrap" style="padding: 5px 20px;">
                     <header>
-                        <h3 class="f-18 pl-3">
+                        <h3 class="f-18 pl-3 ml-3">
                             Subcategory
                         </h3>
                     </header>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
-                    <table class="table text-center p-0 theme-text mb-0 primary-table">
+                    <table class="table text-center p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg p-0">
                             <tr>
                                 <th scope="col">Image</th>
@@ -81,7 +81,7 @@
                                         </a>
                                     </td>--}}
                                     <td>
-                                        <a class="inline-icon-button" href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a class="inline-icon-button mr-4" href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         <a href="#" class="delete inline-icon-button" data-parent=".sub_{{$subcategory->id}}" data-confirm="Are you sure, you want delete this Sub-Category permenently? You won't be able to undo this." data-url="{{route('sub_service_delete', ['id'=>$subcategory->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>

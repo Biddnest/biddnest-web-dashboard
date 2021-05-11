@@ -11,8 +11,8 @@
          <div class="page-head text-left  pt-0 pb-0 mt-1">
              <nav aria-label="breadcrumb">
                  <ol class="breadcrumb">
-                     <li class="breadcrumb-item active" aria-current="page">Sliders & Banners</li>
-                     <li class="breadcrumb-item"><a href="testimonials.html"> Testimonials</a></li>
+                     <li class="breadcrumb-item active" aria-current="page"><a href="{{route('slider')}}">Sliders & Banners</a></li>
+                     <li class="breadcrumb-item"><a  href="{{route('testimonials')}}"> Testimonials</a></li>
                      <li class="breadcrumb-item"><a href="#"> @if(!$testimonials) Create @else Edit @endif Testimonials</a></li>
                  </ol>
              </nav>
@@ -35,7 +35,7 @@
                          <div class="col-lg-6">
                              <p class="img-label">Image</p>
                              <div class="upload-section p-20 pt-0 pl-0">
-                                 <img class="upload-preview" src="@if(!$testimonials){{asset('static/images/upload-image.svg')}}@else{{$testimonials->image}}@endif" alt=""/>
+                                 <img class="upload-preview ml-4 pl-3" src="@if(!$testimonials){{asset('static/images/upload-image.svg')}}@else{{$testimonials->image}}@endif" alt=""/>
                                  <div class="ml-1">
                                      <div class="file-upload">
                                          <input type="file" />
@@ -49,6 +49,7 @@
                              </div>
                          </div>
                      </div>
+                     
                      <div class="d-flex row p-20 pt-0">
                          <div class="col-lg-6">
                              <div class="form-input">

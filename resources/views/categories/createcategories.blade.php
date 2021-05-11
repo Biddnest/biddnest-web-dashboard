@@ -12,9 +12,9 @@
     <div class="page-head text-left p-5 pt-0 pb-0">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">Categories
+          <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories</a> 
           </li>
-          <li class="breadcrumb-item"><a href="#">Create</a></li>
+          <li class="breadcrumb-item">Create Categories</li>
         </ol>
       </nav>
     </div>

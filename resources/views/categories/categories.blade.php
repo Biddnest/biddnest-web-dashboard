@@ -38,7 +38,7 @@
                 <div class="card h-auto p-0 pt-10">
                     <div class="header-wrap" style="padding: 5px 20px;">
                         <header>
-                            <h3 class="f-18 ml-4" >
+                            <h3 class="f-18 ml-4 pl-2" >
                                 Category
                             </h3>
                         </header>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="all-vender-details">
-                        <table class="table  p-0 theme-text mb-0 primary-table">
+                        <table class="table  p-0 theme-text mb-0 f-14">
                             <thead class="secondg-bg p-0">
                             <tr>
                                 <th scope="col" >Image</th>
@@ -103,11 +103,11 @@
                                         {{-- <input type="checkbox" {{($category->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}} data-toggle="toggle" data-size="xs" data-width="110" data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="{{($category->status == \App\Enums\CommonEnums::$YES) ? "Active" : "Inactive"}}" data-off="{{($category->status == \App\Enums\CommonEnums::$NO) ? "Active" : "Inactive"}}" id="category_{{$category->id}}" class="change_status" data-url="{{route('status_update',['id'=>$category->id])}}">--}}
                                     </td>
                                     <td class="cursor-pointer">
-                                        <div class="btn btn-sm status-badge green-bg #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
+                                        <div class="btn btn-sm status-badge p-2 text-center green-bg #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
                                             Add</div>
                                     </td>
 
-                                    <td class="cursor-pointer"> <a class ="inline-icon-button" href="{{route('edit-categories', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                    <td class="cursor-pointer"> <a class ="inline-icon-button mr-4" href="{{route('edit-categories', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         <a href="#" class="delete inline-icon-button" data-parent=".cat_{{$category->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('service_delete',['id'=>$category->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>

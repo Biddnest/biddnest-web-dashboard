@@ -44,7 +44,7 @@
             <div class="card  h-auto p-0 pt-10">
                 <div class="header-wrap">
                     <div class="col-sm-8 p-3 ">
-                        <h3 class="f-18 ml-2 mt-3 ">Review</h3 >
+                        <h3 class="f-18 ml-2 mt-3 ">Review & Ratings</h3 >
                     </div>
                     <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
                         {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
-                    <table class="table text-left p-0 theme-text mb-0 primary-table">
+                    <table class="table text-left p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg  p-0">
                             <tr>
                                 <th scope="col">Order ID</th>
@@ -135,7 +135,7 @@
                                         @endfor
                                     </td>
                                     <td>
-                                        <a  class = "inline-icon-button" href="{{route('create-review')}}">
+                                        <a  class = "inline-icon-button mr-4" href="{{route('create-review')}}">
                                             <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
                                            
                                         </a>

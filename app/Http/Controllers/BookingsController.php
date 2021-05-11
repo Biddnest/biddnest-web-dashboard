@@ -119,7 +119,7 @@ class BookingsController extends Controller
 
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        if($data['meta']['images'] != "") { //need to remove [0]==> temp fixed
+        if($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
             foreach ($data['meta']['images'] as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
             }
@@ -146,7 +146,7 @@ class BookingsController extends Controller
             $economic_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
-            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type);
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $web);
             $primium_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
         } catch (Exception $e) {

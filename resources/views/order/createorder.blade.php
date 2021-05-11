@@ -56,7 +56,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Phone Number</label>
-                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" required>
+                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
@@ -450,7 +450,7 @@
         </td>
 
         <td class="" style="width: 20%;">
-            <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" required>
+            <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" >
 
             <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
         </td>

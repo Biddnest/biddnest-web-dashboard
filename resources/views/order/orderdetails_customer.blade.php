@@ -55,7 +55,7 @@
                               <a class="nav-link active p-15" id="customer-details-tab" data-toggle="tab" href="#customer-details" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="#vendor-details" role="tab" aria-controls="profile" aria-selected="false">Vendor Details</a>
+                            <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
@@ -76,68 +76,68 @@
                     <div class="tab-pane fade show active" id="customer-details" role="tabpanel" aria-labelledby="customer-details-tab">
                         <div class="d-flex  row p-15 pb-0" >
                             <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Order ID
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Name
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Phone
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Email
                                 </div>
                                   <br/>
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   From Address
                                 </div>
                                 <br/>
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   To Address
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                     Delivery Distance
                                 </div>
 
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Order Amount
                                 </div>
 
-                                <div class="theme-text f-14 bold p-15 pl-0">
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Booking Status
                                 </div>
                             </div>
 
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                   {{$booking->public_booking_id}}
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                  {{json_decode($booking->contact_details,true)['name'] }}
                                 </div>
-                                <div class="theme-text f-14 p-15"><span>+91</span>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;"><span>+91</span>
                                  {{json_decode($booking->contact_details,true)['phone'] }}
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                  {{json_decode($booking->contact_details,true)['email'] }}
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @php $source =  json_decode($booking->source_meta,true); @endphp
                                     Floor: {{$source['floor']}}, {{$source['address']}}. @if($source['lift'] == 1) Lift is available.@else Lift is not available. @endif
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @php $source =  json_decode($booking->destination_meta,true); @endphp
                                     Floor: {{$source['floor']}}, {{$source['address']}}. @if($source['lift'] == 1) Lift is available. @else Lift is not available. @endif
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     {{ json_decode($booking->meta, true)['distance'] }}Kms
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     &#8377;{{$booking->final_quote}}
                                 </div>
 
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @switch($booking->status)
                                         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                         <span class="status-badge info-bg  text-center td-padding" style="font-weight:bold !important">Enquiry</span>
@@ -220,7 +220,7 @@
                         @endif
                         <div class="col-md-12 border-top-3">
                         <div class="d-flex justify-content-end">
-                                        <a class="white-text p-10" href="{{route('order-details-vendor', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg">Next</button></a>
+                                        <a class="white-text p-10" href="{{route('order-details-vendor', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                     </div>
                         </div>
                         <!-- <div class="border-top-3">

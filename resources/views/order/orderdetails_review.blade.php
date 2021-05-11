@@ -64,7 +64,7 @@
 
                       <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
                         <h3 class="f-18" style="margin-top: 0;">
-                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600;">
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer</a>
                                 </li>

@@ -64,7 +64,7 @@
 
                     <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
                         <h3 class="f-18" style="margin-top: 0;">
-                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600 !important;">
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer</a>
                                 </li>
@@ -103,18 +103,18 @@
                             <div class="d-flex  row p-15 quotation-main pb-0" >
 
                                 <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Assigned Vendor
                                     </div>
 
 
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Commission Amount
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Discount
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Base Price
                                     </div>
 
@@ -124,20 +124,20 @@
 
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14  p-15" style="padding-top: 5px;">
                                         {{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}
                                     </div>
 
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
                                             @php $commision_amount = ($booking->organization->commission/100)* $booking->payment->grand_total; @endphp
                                             ₹ {{$commision_amount}}
                                         @else Payment Pending @endif
                                     </div>
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
                                         @if($booking->payment)@if($booking->payment->coupon)@if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed'])₹@endif{{ucfirst(trans($booking->payment->coupon->discount_amount))}} @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['percentage'])% Off @endif @else Coupon not Applied @endif @else Payment Pending @endif
                                     </div>
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
                                         @if($booking->payment)
                                             ₹ {{$commision_amount- $booking->payment->discount_amount}}
                                         @else Payment Pending @endif

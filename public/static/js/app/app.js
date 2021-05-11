@@ -439,8 +439,6 @@ $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-    $("tr").click(function () {
-    });
 });
 
 $("body").on('click', ".bookings", function(event) {

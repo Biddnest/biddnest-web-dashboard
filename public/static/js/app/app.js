@@ -326,6 +326,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
 });
 
+
 $("body").on('click', ".invsidebar", function(event) {
     var $this = $(this);
 

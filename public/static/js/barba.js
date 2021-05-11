@@ -33,6 +33,7 @@ function changeMenu(){
     });
 }
 
+
 import {
     initCountdown,
     initMapPicker,

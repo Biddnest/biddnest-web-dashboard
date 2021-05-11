@@ -13,9 +13,9 @@
         <div class="page-head  p-1 mt-2 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories and Subcategories /
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories and Subcategories</a>
                     </li>
-                    <li class="breadcrumb-item pl-2"><a href="#">Create Inventory</a></li>
+                    <li class="breadcrumb-item pl-2"><a href="#">@if(!$inventory)Create @else Edit @endif Inventory</a></li>
                 </ol>
             </nav>
         </div>
@@ -25,7 +25,7 @@
             <div class="card h-auto p-0 p-10">
                 <div class="card-head right text-left border-bottom-2 p-8">
                     <h3 class="f-18 mt-3 mb-3 pl-3 theme-text">
-                      Create Subcategory
+                        @if(!$inventory)Create @else Edit @endif Subcategory
                     </h3>
                 </div>
                 <div class="" id="">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex row pl-4 pr-4">
+                    <div class="d-flex row pl-4 pr-4" style="margin-top: 15px;">
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Item Name</label>

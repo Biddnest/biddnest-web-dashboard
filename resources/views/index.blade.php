@@ -214,7 +214,7 @@
                     </thead>
                     <tbody class="mtop-20">
                         @foreach($bookings as $booking)
-                            <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
+                            <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.dashboard',['id'=>$booking->id]) }}">
                                 <th scope="row" style="text-decoration: underline;">{{$booking->public_booking_id}}</th>
                                 <td class="">
                                     @switch($booking->status)

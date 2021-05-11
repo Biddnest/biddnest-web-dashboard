@@ -147,6 +147,12 @@ class WebController extends Controller
         ]);
     }
 
+    public function sidebar_dashboard(Request $request)
+    {
+        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
+        return view('sidebar.dashboard',['booking'=>$booking]);
+    }
+
     public function apiSettings()
     {
         $setting =Settings::whereNotIn('key', ["contact_details"])->get();

@@ -13,9 +13,9 @@
         <div class="page-head  p-1 mt-2 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Categories
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories and Subcategories /
                     </li>
-                    <li class="breadcrumb-item"><a href="#">Create Inventory</a></li>
+                    <li class="breadcrumb-item pl-2"><a href="#">Create Inventory</a></li>
                 </ol>
             </nav>
         </div>

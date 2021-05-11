@@ -167,10 +167,10 @@
     <!--  dashboard Columns -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards">
         <div class="col-sm-8 p-0">
-            <div class="card p-10" style="">
+            <div class="card p-10 pl-0 pr-0">
                 <div class="d-flex flex-row justify-content-between">
-                    <div class="p-10 card-head right text-left">
-                        <h3 class="f-18 mt-0">Recent Orders</h3>
+                    <div class="p-10 card-head right text-left ml-3">
+                        <h3 class="f-18 mt-0 ">Recent Orders</h3>
                     </div>
                     {{--<div class="p-10 card-head left">
                         <a><i><img src="{{asset('static/images/filter.svg') }}" alt="" srcset=""></i>
@@ -283,7 +283,7 @@
                         <div class="canvas-con-inner">
                             <canvas id="mychart" height="150px" width="150px" ></canvas>
                         </div>
-                        <div id="my-legend-con" class="legend-con"></div>
+                        <div id="my-legend-con" class="legend-con mt-4"></div>
                     </div>
                 </div>
             </div>

@@ -191,7 +191,7 @@
 
           <div class="col-sm-6">
             <div class="form-input">
-              <label>Zone Scope</label>
+              <label>Zone</label>
               <div>
                 <select class="form-control br-5 field-toggle" data-value="1" data-target=".zones" name="zone_scope" required>
                   <option value="">--Select--</option>

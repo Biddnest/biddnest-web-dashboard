@@ -33,6 +33,17 @@ class OrganisationController extends Controller
     {
             $imageman = new ImageManager(array('driver' => 'gd'));
 
+            $org_email=Organization::where('email', $data['email'])->first();
+            $vendor_email=Vendor::where('email', $admin['email'])->first();
+            if($org_email || $vendor_email)
+                return Helper::response(false,"Email id is already exist in system");
+
+            $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
+            $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
+            if($org_phone || $vendor_phone)
+                return Helper::response(false,"Phone no is already exist in system");
+
+
             $organizations=new Organization;
             $image = $data['image'];
             $uniq = uniqid();
@@ -355,6 +366,13 @@ class OrganisationController extends Controller
         if(!$organization_exist && !$vendor_exist)
             return Helper::response(false,"Incorrect Organization id.");
 
+        $vendor_email = Vendor::where('email', $data['email'])->first();
+        if($vendor_email)
+            return Helper::response(false,"Email Id is already exist in system.");
+
+        $vendor_phone = Vendor::where('phone', $data['phone'])->first();
+        if($vendor_phone)
+            return Helper::response(false,"Phone no is already exist in system.");
 
         $meta = array(["branch"=>$data['branch']]);
 

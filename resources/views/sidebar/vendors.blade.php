@@ -98,7 +98,7 @@
 
             <div class="d-flex justify-content-center p-20">
                 <div class="">
-                    <a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}">
+                    <a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                         <button class="btn theme-bg white-text my-0" style="width: 127px;
                                     border-radius: 6px;">View More</button>
                     </a>
@@ -201,7 +201,7 @@
             @endif
             <div class="d-flex   justify-content-center p-20">
 
-                <div class=""><a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}">
+                <div class=""><a class="white-text p-10" href="{{route('vendor-details', ["id"=>$organization->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
                         <button class="btn theme-bg white-text my-0" style="width: 127px;
                                 border-radius: 6px;">View More</button>
                     </a></div>

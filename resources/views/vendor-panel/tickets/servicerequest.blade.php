@@ -6,7 +6,7 @@
             <h3 class="page-head text-left p-4 f-20 theme-text">Service Request</h3>
             <div class="mr-20">
                 <a href="{{route('vendor.service_request_add')}}">
-                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE New User</button>
+                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE SERVICE REQUEST</button>
                 </a>
             </div>
         </div>
@@ -15,7 +15,6 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb text-breadcrum">
                         <li class="breadcrumb-item active" aria-current="page">Service Request</li>
-                        <li class="breadcrumb-item"><a href="#">Create Request </a></li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +26,7 @@
                     <div class="header-wrap">
                         <h3 class="f-18 ml-1">Service Request</h3>
                         <div class="header-wrap p-0 filter-dropdown ">
-                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
                             </a>
                             <div class="dropdown-menu">
@@ -55,9 +54,9 @@
                                         </label>
                                     </div>
                                 </a>
-                            </div>
+                            </div>--}}
                             <div class="search">
-                                <input type="text" class="searchTerm" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('vendor.service_request')}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -70,9 +69,9 @@
                             <thead class="secondg-bg  p-0 f-14">
                                 <tr class="f-weight-500">
                                     <th scope="col" class="text-left">Service ID</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col"> Status</th>
+                                    <th scope="col" style="text-align: center;">Category</th>
+                                    <th scope="col" style="text-align: center;">Title</th>
+                                    <th scope="col" style="text-align: center;"> Status</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">

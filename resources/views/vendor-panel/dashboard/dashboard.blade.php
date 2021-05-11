@@ -59,7 +59,7 @@
 
         @endforeach
 
-        <input type="hidden" value='@json($final)' id="order_dist_dataset">
+        <input type="hidden" value='@json($final)' id="order_dist_dataset_vendor">
 
 
 
@@ -175,7 +175,7 @@
                         <div class="canvas-con-inner">
                             <canvas id="mychart" height="130px" width="130px" ></canvas>
                         </div>
-                        <div id="my-legend-con" class="legend-con"></div>
+                        <div id="my-legend-con_vendor" class="legend-con"></div>
                     </div>                            </div>
             </div>
         </div>

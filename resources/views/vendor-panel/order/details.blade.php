@@ -261,7 +261,7 @@
 @endsection
 
 @section('modal')
-    <div class="fullscreen-modal" id="add-role" style="min-height: 155%;">
+    <div class="fullscreen-modal" id="add-role" style="min-height: 155%; left: 270px !important; width: 81% !important; top: 0px!important;">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Your Bid</h5>
@@ -416,7 +416,7 @@
         </div>
     </div>
 
-    <div class="fullscreen-modal" id="reset-pin" style="min-height: 155%;">
+    <div class="fullscreen-modal" id="reset-pin" style="min-height: 155%; left: 270px !important; width: 81% !important; top: 0px!important;">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Reset Your Pin</h5>

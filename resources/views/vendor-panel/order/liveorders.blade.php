@@ -205,7 +205,7 @@
                                                              title="Accept">
                                                     </i>
                                                 </a>
-                                                <a class="modal-toggle" data-target="#reject-order_{{$booking->id}}"  {{--data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this."--}}>
+                                                <a href="#" class="reject inline-icon-button"  data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
                                                     <i class="tooltip-trigger"><img
                                                         src="{{asset('static/vendor/images/reject-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"
@@ -312,7 +312,7 @@
 
 @endsection
 
-@section('modal')
+{{--@section('modal')
     @foreach($bookings as $booking)
         <div class="fullscreen-modal" id="reject-order_{{$booking->id}}" style="min-height: 155%; top: 0px !important;">
     <div class="fullscreen-modal-body reject-order-pop-up" role="document"  style="width: 50% !important; left: 30% !important; top: 80px !important;">
@@ -341,5 +341,5 @@
         </div>
     </div>
 </div>
-    @endforeach
-@endsection
+    @endforeach--}}
+{{--@endsection--}}

@@ -108,12 +108,12 @@ class VendorRouteController extends Controller
     public function updateInventoryprices(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'price_id' => 'required|integer',
             'inventory_id'=>"required|int",
             // 'organization_id'=>"required|int",
-            'service_type'=>"required|int",
-            'size' => 'required|string',
-            'material' => 'required|string',
+//            'service_type'=>"required|int",
+            'price.*.id' => 'required|string',
+            'price.*.size' => 'required|string',
+            'price.*.material' => 'required|string',
             'price.*.price.economics' => 'nullable',
             'price.*.price.premium' => 'nullable'
         ]);

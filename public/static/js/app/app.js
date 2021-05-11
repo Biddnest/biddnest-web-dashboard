@@ -326,7 +326,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
 });
 
-$("body").on('click', ".invsidebar div:not(.actions)", function(event) {
+$("body").on('click', ".invsidebar", function(event) {
     var $this = $(this);
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +

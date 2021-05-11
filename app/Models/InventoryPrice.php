@@ -11,7 +11,4 @@ class InventoryPrice extends Model
     protected $hidden =['created_at', 'updated_at','deleted'];
     use HasFactory;
 
-    public  function inventory(){
-        $this->belongsTo(Inventory::class);
-    }
 }

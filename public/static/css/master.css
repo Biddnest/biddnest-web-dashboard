@@ -1364,14 +1364,16 @@ p.zone-status {
 }
 
 .tb-border2 {
-    border: 1px solid transparent;
-    border-bottom-color: #dad1d140;
+    border: 2px solid transparent;
+    /* border-bottom-color: #dad1d140; */
     border-right-color: #DFE6EC !important;
     border-left-color: #DFE6EC !important;
+    border-bottom: 2px solid #dad1d140 !important;
+
 }
 
 .tb-border2 tbody tr {
-    border-bottom: 1px solid #dad1d140 !important;
+    border-bottom: 2px solid #dad1d140 !important;
     border-bottom-color: #dad1d140 !important;
 }
 

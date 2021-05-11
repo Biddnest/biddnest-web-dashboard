@@ -322,7 +322,6 @@
                             <div class="form-input">
                               <label>Room Selection</label>
                                 <select name="meta[subcategory]" class="form-control subservices">
-
                                 </select>
                                 <span class="error-message">Please enter valid</span>
                             </div>
@@ -354,14 +353,14 @@
 
                                     <td class="">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">--Choose Inventory First--</option>
+                                            <option value="">--Choose Inventory--</option>
 
                                         </select>
                                     </td>
 
                                     <td class="">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">--Choose Inventory First--</option>
+                                            <option value="">--Choose Inventory--</option>
 
                                         </select>
                                     </td>
@@ -440,13 +439,13 @@
 
         <td class="">
             <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                <option value="">--Choose Inventory First--</option>
+                <option value="">--Choose Inventory--</option>
             </select>
         </td>
 
         <td class="">
             <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                <option value="">--Choose Inventory First--</option>
+                <option value="">--Choose Inventory--</option>
             </select>
         </td>
 

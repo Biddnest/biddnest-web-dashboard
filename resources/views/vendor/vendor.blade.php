@@ -106,9 +106,9 @@
                                             </div>
                                             <div class="col-lg-12 pr-0 pl-0">
                                     <div class="all-vender-details">
-                                            <table class="table text-center p-0 theme-text mb-0 primary-table">
-                                                <thead class="secondg-bg  p-0">
-                                                    <tr>
+                                            <table class="table  p-0 theme-text mb-0 ">
+                                                <thead class="secondg-bg bx-shadowg p-0 f-14" style="font-weight: 700 !important;">
+                                                    <tr class="">
                                                         <th scope="col" >Vendor Name</th>
                                                         <th scope="col">Org Name</th>
                                                         <th scope="col">Zone</th>

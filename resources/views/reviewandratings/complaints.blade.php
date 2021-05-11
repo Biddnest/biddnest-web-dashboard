@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
-                    <table class="table text-left p-0  mb-0">
+                    <table class="table text-left p-0 f-14 mb-0">
                         <thead class="secondg-bg  p-0">
                             <tr>
                                 <th scope="col" style="width: 11%;">Complaint Type</th>
@@ -165,7 +165,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                        <a  class = "inline-icon-button" href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                        <a  class = "inline-icon-button mr-4" href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         <a href="#" class = "inline-icon-button">
                                         <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                         </a>

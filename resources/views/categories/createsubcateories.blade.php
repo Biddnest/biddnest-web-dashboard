@@ -12,9 +12,9 @@
         <div class="page-head text-left p-5 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Categories
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories/
                     </li>
-                    <li class="breadcrumb-item"><a href="Push-Notifications.html">Subcategory Management</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('create-subcateories')}}">Subcategory Management</a></li>
                     <li class="breadcrumb-item"><a href="#">Create Subcategory</a></li>
                 </ol>
             </nav>
@@ -56,7 +56,7 @@
                         <div class="d-flex row p-20">
                             <div class="col-lg-6">
                                 <div class="form-input">
-                                  <label class="full-name">Name</label>
+                                  <label class="full-name">Subcategory Name</label>
                                   <input type="text" id="banner_name" placeholder="Name" name="name" value="@if(isset($subcategory)){{$subcategory->name}}@endif" class="form-control br-5" required/>
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
@@ -75,7 +75,7 @@
 {{--                              </div>--}}
                               <div class="col-lg-6">
                                 <div class="form-input">
-                                  <label class="phone-num-lable">Category Name</label>
+                                  <label class="phone-num-lable">Main Category Name</label>
                                     <select class="form-control br-5 field-toggle" name="category" required>
                                         <option value="">--Select--</option>
                                         @foreach($categories as $category)
@@ -92,7 +92,7 @@
                               </div>
                             <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
                                 <div class="heading p-8 border-around m-auto " >
-                                    List
+                                   Inventory List
                                 </div>
 
                                 <table class="table text-center p-10 theme-text tb-border2" id="itms">
@@ -164,14 +164,14 @@
 
                                                <td class="">
                                                    <select class="form-control br-5 material" name="inventories[][material]" required>
-                                                       <option value="">--Choose Inventory First--</option>
+                                                       <option value="">Choose Inventory</option>
 
                                                    </select>
                                                </td>
 
                                                <td class="">
                                                    <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
-                                                       <option value="">--Choose Inventory First--</option>
+                                                       <option value="">Choose Inventory</option>
 
                                                    </select>
                                                </td>
@@ -235,13 +235,13 @@
 
         <td class="">
             <select class="form-control br-5 material" name="inventory[][material]" required>
-                <option value="">--Choose Inventory First--</option>
+                <option value="">Choose Inventory</option>
             </select>
         </td>
 
         <td class="">
             <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
-                <option value="">--Choose Inventory First--</option>
+                <option value="">Choose Inventory</option>
             </select>
         </td>
 

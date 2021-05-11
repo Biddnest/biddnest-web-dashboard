@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
-                    <table class="table text-center p-0 theme-text mb-0 primary-table">
+                    <table class="table text-center p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg  p-0">
                                                     <tr>
                                                         <th scope="col">Coupon  Name</th>
@@ -156,7 +156,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <div class="d-flex justify-content-center vertical-center">
+                                        <div class="d-flex  vertical-center">
                                             <div class="progress">
                                                 <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
                                             </div>
@@ -177,8 +177,8 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a  class="inline-icon-button" style="display: table-cell" href="{{route('edit-coupons', ['id'=>$coupon->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                        <a href="#" style="display: table-cell" class="delete inline-icon-button" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permenently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                        <a  class="inline-icon-button mr-4" style="display: table-cell" href="{{route('edit-coupons', ['id'=>$coupon->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a href="#" style="display: table-cell" class="delete inline-icon-button ml-4" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permenently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

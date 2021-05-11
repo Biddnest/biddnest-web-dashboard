@@ -37,7 +37,7 @@
                                 <div class="col-lg-12">
                                     <div class="card  h-auto p-0 pt-10 ">
                                         <div class="header-wrap pl-10">
-                                            <h3 class="f-18 pl-3">Verified Vendors</h3 >
+                                            <h3 class="f-18 pl-3 ml-3">Verified Vendors</h3 >
                                             <div class="p-1 pr-3 card-head left col-sm-3">
                                                     <div class="search">
                                                         <input type="text" class="searchTerm table-search" data-url="{{route('verified-vendors')}}" placeholder="Search...">
@@ -51,7 +51,7 @@
                                         <table class="table text-center p-0 theme-text mb-0 primary-table">
                                             <thead class="secondg-bg  p-0">
                                             <tr>
-                                                <th scope="col" style="width: 132px;">Vendor Name</th>
+                                                <th scope="col">Vendor Name</th>
                                                 <th scope="col">Org Name</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">City</th>
@@ -73,7 +73,7 @@
                                                     <td >{{$vendor->phone}}</td>
                                                     <td >{{ucfirst(trans($vendor->city))}}</td>
                                                     <td >{{ucfirst(trans($vendor->zone->name))}}</td>
-                                                    <td> <a  class = "inline-icon-button" href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                    <td> <a  class = "inline-icon-button mr-4" href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                                         <a href="#" class="delete inline-icon-button" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                     </td>
                                                 </tr>

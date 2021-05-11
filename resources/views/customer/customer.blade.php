@@ -52,9 +52,9 @@
                         <h3 class="f-18 pl-8 title" >Customers</h3 >
 
                     </div>
-                    <div class="col-sm-1 -mr-4 pt-4 pl-8 " style="">
+                    <div class="col-sm-1 -mr-4 pt-4 pl-8 ">
                     </div>
-                    {{--<div class="col-sm-1 -mr-4 pt-4 pl-8 " style="">
+                    {{--<div class="col-sm-1 -mr-4 pt-4 pl-8 " >
                         <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                         </a>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
-                    <table class="table text-center p-0 theme-text mb-0 primary-table left-col-table">
+                    <table class="table text-center p-0 theme-text mb-0  f-14 left-col-table">
                         <thead class="secondg-bg  p-0">
                             <tr>
                                                 <th scope="col">Customer Name</th>
@@ -123,7 +123,7 @@
                                                 </td>
 
                                                 <td style="text-align: center;">
-                                                    <a class ="inline-icon-button" href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 mr-3" aria-hidden="true"></i></a>
+                                                    <a class ="inline-icon-button mr-4" href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 " aria-hidden="true"></i></a>
                                                     <a href="#" class ="inline-icon-button" >
                                                     <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                                     </a>

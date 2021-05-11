@@ -141,7 +141,7 @@
                                 </thead>
                                 <tbody class="mtop-20 text-left f-13">
                                     @foreach($bookings as $booking)
-                                        <tr class="tb-border book_{{$booking->id}}">
+                                        <tr class="tb-border reject_{{$booking->id}}">
                                         <td scope="row" class="text-left"> <a href="order-details.html">
                                                 {{$booking->public_booking_id}}</a> </td>
                                         <td>{{json_decode($booking->source_meta, true)['city']}}</td>
@@ -205,7 +205,7 @@
                                                              title="Accept">
                                                     </i>
                                                 </a>
-                                                <a href="#" class="bookings inline-icon-button" data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
+                                                <a href="#" class="reject inline-icon-button"  data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
                                                     <i class="tooltip-trigger"><img
                                                         src="{{asset('static/vendor/images/reject-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"
@@ -311,3 +311,35 @@
 </div>
 
 @endsection
+
+{{--@section('modal')
+    @foreach($bookings as $booking)
+        <div class="fullscreen-modal" id="reject-order_{{$booking->id}}" style="min-height: 155%; top: 0px !important;">
+    <div class="fullscreen-modal-body reject-order-pop-up" role="document"  style="width: 50% !important; left: 30% !important; top: 80px !important;">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 22px;">Reject Order</h5>
+            <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" style="margin-top: -10px !important;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body pb-0 border-none">
+            <div class="d-flex  row justify-content-center">
+                <h6 class="f-14"> Are you sure you want to REJECT the Order ?</h6>
+            </div>
+            <div class="modal-footer p-1 border-none">
+                <div class="w-50">
+                    <a class="white-text close" href="#"  data-dismiss="modal" aria-label="Close" style="opacity: 5; float: left;">
+                        <button class="btn theme-br theme-text  white-bg p-button" style="float: left; margin-left: 10px;">NO</button>
+                    </a>
+                </div>
+                <div class="w-50 text-right">
+                    <a  href="#" class="white-text p-10 bookings" data-parent="reject_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}">
+                        <button class="btn theme-bg white-text p-button" data-dismiss="modal" >Yes</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @endforeach--}}
+{{--@endsection--}}

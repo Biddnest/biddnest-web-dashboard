@@ -439,6 +439,7 @@ $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
 });
 
 $("body").on('click', ".bookings", function(event) {
@@ -458,13 +459,40 @@ $("body").on('click', ".bookings", function(event) {
     return false;
 });
 
+$("body").on('click', ".reject", function(event) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var target = $(this).closest($(this).data("parent"));
+            $.update($(this).data("url"), {}, function (response) {
+                console.log(response);
+                if (response.status == "success") {
+                    tinySuccessAlert($(this).data('success'), response.message);
+                    target.hide();
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
+
+            });
+        }
+    })
+
+    return false;
+});
 
 $('.filterdate').datepicker({
     format: 'yyyy-mm-dd'
 });
 
 
-$("body").on('change', ".addpin", function(event) {
+/*$("body").on('change', ".addpin", function(event) {
     var password = document.getElementById("password").value;
     var pin =document.getElementById("pin").value;
         $.update($(this).data("url"), {password, pin}, function (response) {
@@ -477,4 +505,4 @@ $("body").on('change', ".addpin", function(event) {
 
         });
     return false;
-});
+});*/

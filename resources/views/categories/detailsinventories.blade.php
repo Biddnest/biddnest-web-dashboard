@@ -4,28 +4,28 @@
 @section('content')
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="detail-onventory">
-              
+
               <div class="d-flex  flex-row justify-content-between">
                 <h3 class="page-head text-left p-4">Inventory Details
                 </h3>
-             
+
             </div>
             <div class="d-flex  flex-row justify-content-between">
               <div class="page-head text-left p-4 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"> Categories
-                    </li>
-                    <li class="breadcrumb-item"><a href="categories-subcategories.html"> Manage Categories</a></li>
-                    
-                    <li class="breadcrumb-item active" aria-current="page"> Categories
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}"> Categories
+                        </a> </li>
+                    <li class="breadcrumb-item"><a href="{{route('inventories')}}"> Manage Inventory</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page"> Inventory
                     </li>
                   </ol>
                 </nav>
-              
-              
+
+
               </div>
-        
+
           </div>
               <!-- Dashboard cards -->
               <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
@@ -86,7 +86,7 @@
                       <span class="slider"></span>
                     </label>
                     <div class="theme-text f-20 ">Book for others</div> -->
-    
+
                             </div>
 
                         </span>

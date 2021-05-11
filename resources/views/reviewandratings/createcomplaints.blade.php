@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Review & Ratings</li>
-            <li class="breadcrumb-item"><a href="complaints.html">Complaints</a></li>
+            <li class="breadcrumb-item"><a href="{{route('complaints')}}">Complaints</a></li>
             <li class="breadcrumb-item active" aria-current="page">Create New Complaint</li>
           </ol>
         </nav>

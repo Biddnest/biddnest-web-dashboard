@@ -16,7 +16,7 @@
                                   <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">Vendor Management</li>
-                                      <li class="breadcrumb-item"><a href="#"> Manage Vendor</a></li>
+                                      <li class="breadcrumb-item">Manage Vendor</li>
 
                                     </ol>
                                   </nav>

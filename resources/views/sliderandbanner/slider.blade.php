@@ -19,7 +19,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">Sliders & Banners
                         </li>
-                        <li class="breadcrumb-item"><a href="categories-subcategories.html"> Manage Sliders</a></li>
+                        <li class="breadcrumb-item">Manage Sliders</li>
                     </ol>
                 </nav>
             </div>

@@ -14,7 +14,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page"><a href="{{route('subcateories')}}">Sub-Categories</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#"> @if(!$subcategory) Create @else Edit @endif Subcategory</a></li>
+                    <li class="breadcrumb-item"> @if(!$subcategory) Create @else Edit @endif Subcategory</li>
                 </ol>
             </nav>
         </div>

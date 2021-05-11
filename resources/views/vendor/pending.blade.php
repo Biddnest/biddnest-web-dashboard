@@ -17,19 +17,19 @@
                                 <div class="page-head text-left  pt-0 pb-0 p-2">
                                   <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page">Vendor Management</li>
-                                      <li class="breadcrumb-item"><a href="#"> Pending Vendors
-                                    </a></li>
-                                      
+                                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('vendors')}}">Vendor Management</a></li>
+                                      <li class="breadcrumb-item">Pending Vendors
+                                   </li>
+
                                     </ol>
                                   </nav>
-                                
-                                
-                                </div>
-                          
-                            </div>  
 
-                          
+
+                                </div>
+
+                            </div>
+
+
                             <!-- Dashboard cards -->
 
 
@@ -46,7 +46,7 @@
                                                   </button>
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <div class="all-vender-details">
                                             <table class="table text-justify p-0 theme-text mb-0 primary-table">
                                                 <thead class="secondg-bg  p-0">
@@ -62,11 +62,11 @@
                                                 <tbody class="mtop-20">
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Mohan Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Bengaluru</td>  
-                                                        <td>Bengaluru Urban</td>                                                     
-                                                   
+                                                        <td>Bengaluru</td>
+                                                        <td>Bengaluru Urban</td>
+
                                                         <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -74,12 +74,12 @@
                                                         </td>                                                    </tr>
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Tuka Ram</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Chennai</td> 
-                                                        <td>Bengaluru Urban</td> 
+                                                        <td>Chennai</td>
+                                                        <td>Bengaluru Urban</td>
 
-                                                                                                            
+
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -87,10 +87,10 @@
                                                         </td>
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Soham Hans</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Bengaluru</td>  
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Bengaluru</td>
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -98,10 +98,10 @@
                                                         </td>
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Mithila Shekhar</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Kolkata</td>  
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Kolkata</td>
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -109,11 +109,11 @@
                                                         </td>
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Shrikirshna Mohan</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Kochi</td>  
+                                                        <td>Kochi</td>
 
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -121,11 +121,11 @@
                                                         </td>
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Ram Kumar</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Hyderabad</td>  
+                                                        <td>Hyderabad</td>
 
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -134,10 +134,10 @@
 
                                                     <tr class="tb-border cursor-pointer">
                                                         <td scope="row">Sanjay Subramanyan</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Bengaluru</td>  
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Bengaluru</td>
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -145,10 +145,10 @@
                                                         </td>
                                                     <tr class="tb-border cursor-pointer" >
                                                         <td scope="row">Unni Srinivas</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Kolkata</td>  
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Kolkata</td>
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>
@@ -156,10 +156,10 @@
                                                         </td>
                                                     <tr class="tb-border cursor-pointer" >
                                                         <td scope="row">Rajesh Kannan</td>
-                                                        <td>Wayne Pvt Ltd</td>                                                        
+                                                        <td>Wayne Pvt Ltd</td>
                                                         <td class="">+91-873546576</td>
-                                                        <td>Bengaluru</td>  
-                                                        <td>Bengaluru Urban</td>                                                     
+                                                        <td>Bengaluru</td>
+                                                        <td>Bengaluru Urban</td>
                                                           <td>
                                                             <i class="fa fa-check-circle"></i>
                                                              <i class="icon dripicons-pencil  p-1 mx-4" aria-hidden="true"></i>

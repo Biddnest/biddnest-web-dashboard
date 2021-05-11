@@ -229,7 +229,7 @@ class InventoryController extends Controller
 
     }
 
-    public static function getPremiumPrice($data , $inventory_quantity_type)
+    public static function getPremiumPrice($data , $inventory_quantity_type, $web)
     {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
@@ -237,7 +237,13 @@ class InventoryController extends Controller
                                                 "size"=>$item['size'],
                                                 "material"=>$item['material']])->min('price_premium');
 
-            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
+//            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
+            if($web == true)
+            {
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["min" => explode(";",$item['quantity'])[0], "max" => explode(";",$item['quantity'])[1]]);
+            }else{
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["min" => $item['quantity']['min'], "max" => $item['quantity']['max']]);
+            }
            $finalprice += $minprice ? $minprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
         }
 

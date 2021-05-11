@@ -12,7 +12,7 @@
     <div class="page-head text-left p-5 pt-0 pb-0">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories</a> 
+          <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories</a>
           </li>
           <li class="breadcrumb-item">Create Categories</li>
         </ol>
@@ -45,7 +45,7 @@
                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                         UPLOAD IMAGE
                                 </button>
-                                <input type="file" required/>
+                                <input type="file" name="image" value="@if($category){{$category->image}}@endif" required/>
                             </div>
                             <p class="text-black">Max File size: 1MB</p>
                           </div>

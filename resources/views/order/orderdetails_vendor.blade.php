@@ -64,7 +64,7 @@
 
                       <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
                         <h3 class="f-18" style="margin-top: 0;">
-                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600;">
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer</a>
                                 </li>
@@ -100,22 +100,22 @@
                         @else
                               <div class="d-flex  row p-15 pb-0 " >
                           <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                               Assigned Vendor
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                               Assigned Vehicle
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                               Assigned Driver
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                               Driver Phone Number
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                               Commission Amount
                             </div>
-                            <div class="theme-text f-14 bold p-15">
+                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                               Discount
                             </div>
 
@@ -125,22 +125,22 @@
 
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
-                              <div class="theme-text f-14 p-15">
+                              <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                   {{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->vehicle){{ucfirst(trans($booking->vehicle->name))}} {{ucfirst(trans($booking->vehicle->number))}} @endif
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->driver){{ucfirst(trans($booking->driver->fname))}} {{ucfirst(trans($booking->driver->lname))}} @endif
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                   +91 -  @if($booking->driver){{ucfirst(trans($booking->driver->phone))}} @endif
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->payment) ₹{{ucfirst(trans($booking->payment->grand_total))}}@else Payment Pending @endif
                                 </div>
-                                <div class="theme-text f-14 p-15">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->payment)@if($booking->payment->coupon)@if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed'])₹@endif{{ucfirst(trans($booking->payment->coupon->discount_amount))}} @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['percentage'])% Off @endif @else Coupon not Applied @endif @else Payment Pending @endif
                                 </div>
 
@@ -157,19 +157,18 @@
                             <div class="border-top-3">
                               <div class="d-flex justify-content-start">
                                   <div class="w-50">
-{{--                                      <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>--}}
+                                      {{-- <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>--}}
                                   </div>
                                   <div class="w-50 margin-r-20">
                                       <div class="d-flex justify-content-end">
-                                          <a  href="{{route('order-details', ['id'=>$booking->id])}}"><button  class="btn theme-text white-bg theme-br mr-20">Back</button></a>
-                                          <a href="{{route('order-details-quotation', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg" >Next</button></a>
+                                          <a   href="{{route('order-details', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
+                                          <a href="{{route('order-details-quotation', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                       </div>
 
                                   </div>
                               </div>
 
                             </div>
-
                       </div>
 
                   </div>

@@ -64,7 +64,7 @@
 
                       <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
                         <h3 class="f-18" style="margin-top: 0;">
-                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600;">
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer</a>
                                 </li>
@@ -101,22 +101,22 @@
                           <div class="d-flex  row p-15 pb-0 " >
 
                               <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
-                                  <div class="theme-text f-14 bold p-15">
+                                  <div class="theme-text f-14 bold p-15" style="padding-top: 5px;">
                                       Sub Total - 1
                                   </div>
-                                  <div class="theme-text f-14 bold p-15">
+                                  <div class="theme-text f-14 bold p-15" style="padding-top: 5px;">
                                       Sub Total - 1
                                   </div>
-                                  <div class="theme-text f-14 bold p-15">
+                                  <div class="theme-text f-14 bold p-15" style="padding-top: 5px;">
                                       Buffer Amount
                                   </div>
-                                  <div class="theme-text f-14 bold p-15">
+                                  <div class="theme-text f-14 bold p-15" style="padding-top: 5px;">
                                       Grand Total - 1
                                   </div>
-                                  <div class="theme-text f-14 bold p-15">
+                                  <div class="theme-text f-14 bold p-15" style="padding-top: 5px;">
                                       Commission
                                   </div>
-                                  <div class="theme-text f-14 bold p-15">
+                                  <div class="theme-text f-14 bold p-15" style="padding-top: 5px;">
                                       Total
                                   </div>
 
@@ -124,23 +124,23 @@
 
                               <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
-                                  <div class="theme-text f-14 p-15">
-                                    <br>
+                                  <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                  <br/>
                                   </div>
-                                  <div class="theme-text f-14 p-15">
+                                  <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                       ₹{{$booking->payment->sub_total}}
                                   </div>
-                                  <div class="theme-text f-14 p-15">
+                                  <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                       ₹{{$booking->payment->other_charges}}
                                   </div>
-                                  <div class="theme-text f-14 p-15">
+                                  <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                       ₹{{$booking->payment->grand_total}}
                                   </div>
-                                  <div class="theme-text f-14 p-15">
+                                  <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                       @php $commision_amount = ($booking->organization->commission/100)* $booking->payment->grand_total; @endphp
                                       ₹ {{$commision_amount}}
                                   </div>
-                                  <div class="theme-text f-14 p-15">
+                                  <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                       ₹{{$booking->payment->grand_total + $commision_amount}}
                                   </div>
 

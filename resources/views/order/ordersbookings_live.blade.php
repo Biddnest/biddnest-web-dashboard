@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderBookingslive">
     <div class="d-flex  flex-row justify-content-between">
-        <h3 class="page-head text-left p-4 f-20">Bookings</h3>
+        <h3 class="page-head text-left p-4 f-20">Bookings & Orders</h3>
         <div class="mr-20">
             <a href="{{ route('create-order')}}">
                 <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New order</button>
@@ -15,7 +15,7 @@
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+                    <li class="breadcrumb-item active" aria-current="page">Bookings & Orders</li>
                     <li class="breadcrumb-item"><a href="#"> Manage Bookings</a></li>
                 </ol>
             </nav>
@@ -50,14 +50,14 @@
                 <!-- Table -->
                 <div class="tab-content margin-topneg-42" id="myTabContent">
                     <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
-                        <table class="table text-center p-0   theme-text  ">
+                        <table class="table  p-0 theme-text" style="text-align: left !important;">
                             <thead class="secondg-bg  p-0 f-14">
                             <tr>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
-                                <th scope="col">Service Type</th>
-                                <th scope="col">Order Date</th>
+                                <th scope="col" style="width: 40%;">Service Type</th>
+                                <th scope="col" style="width: 60%;">Order Date</th>
                                 <th scope="col">Assigned Vendor</th>
                                 <th scope="col">Order Status</th>
                                 <th scope="col">Operations</th>
@@ -137,7 +137,7 @@
                                     </td>
 
                                     <td class="no-toggle">
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell; right: 10px"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button mr-4" style="display: table-cell; right: 10px"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
                                         <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>

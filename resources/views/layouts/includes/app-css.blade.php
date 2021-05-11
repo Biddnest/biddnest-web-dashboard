@@ -199,6 +199,7 @@
                 padding: 0.75rem;
                 border-top: none;
                 vertical-align: baseline;
+                text-align: left !important;
             }
             .Dashboard-lcards .table th {
                 /*padding: 1.75rem !important;*/
@@ -652,6 +653,7 @@
                 position: absolute;
                 left: 50%;
                 top: 50%;
+                margin-right: 1.5rem!important;
                 transform: translate(-50%,-40%) !important;
 
             }

@@ -157,7 +157,7 @@
                                                    <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                        <option value="">--Select--</option>
                                                        @foreach($inventories as $inventory)
-                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->name}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
                                                        @endforeach
                                                    </select>
                                                </td>

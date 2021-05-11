@@ -205,7 +205,7 @@
                                                              title="Accept">
                                                     </i>
                                                 </a>
-                                                <a href="#" class="reject inline-icon-button"  data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
+                                                <a href="#" class="rejected inline-icon-button"  data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
                                                     <i class="tooltip-trigger"><img
                                                         src="{{asset('static/vendor/images/reject-mark.svg')}}" alt=""
                                                         data-toggle="tooltip" data-placement="top"

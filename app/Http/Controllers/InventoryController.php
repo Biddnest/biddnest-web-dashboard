@@ -6,6 +6,7 @@ use App\Helper;
 use App\Models\SubserviceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 use App\Models\Inventory;
 use App\Models\InventoryPrice;
@@ -133,7 +134,7 @@ class InventoryController extends Controller
     }
 
     //route controller => VendorApiRouteController
-    public static function addPrice($data)
+    public static function addPrice($data, $web=false)
     {
         $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
@@ -145,7 +146,7 @@ class InventoryController extends Controller
 
         foreach($data['price'] as $price) {
             $inventoryprice=new InventoryPrice;
-            // $inventoryprice->organization_id= $data['organization_id'];
+            $inventoryprice->organization_id= Session::get('organization_id');
             $inventoryprice->service_type= $data['service_type'];
             $inventoryprice->inventory_id= $data['inventory_id'];
             $inventoryprice->size= $price['size'];
@@ -157,6 +158,8 @@ class InventoryController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
+        if($web)
+            return Helper::response(true,"Price Saved successfully");
         else
             return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
     }
@@ -205,7 +208,7 @@ class InventoryController extends Controller
 
     public static function deletePrice($id)
     {
-        $result=InventoryPrice::where("id",$id)->update(["deleted"=>1]);
+        $result=InventoryPrice::where(["inventory_id"=>$id, 'organization_id'=>Session::get('organization_id')])->update(["deleted"=>1]);
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");

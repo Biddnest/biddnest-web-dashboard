@@ -326,7 +326,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
 });
 
-$("body").on('click', ".invsidebar", function(event) {
+$("body").on('click', ".invsidebar div:not(.actions)", function(event) {
     var $this = $(this);
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
@@ -516,3 +516,10 @@ $('.filterdate').datepicker({
         });
     return false;
 });*/
+
+
+$("body").on('change', ".inventory-item-select", function(event) {
+    console.log("change");
+    var query = $(this).val();
+    redirectTo($(this).data('url')+"?item="+query);
+});

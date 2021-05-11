@@ -68,7 +68,7 @@
                                         <div class="item-name" >{{$inventory->name}}</div>
                                         <div class="actions justify-content-between">
 {{--                                            <i><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" srcset=""></i>--}}
-                                            <i><img src="{{asset('static/vendor/images/Icon material-edit.svg')}}" alt="" srcset=""></i>
+                                            <a href="{{route('vendor.inventory.edit',['id'=>$inventory->id])}}"><i><img src="{{asset('static/vendor/images/Icon material-edit.svg')}}" alt="" srcset=""></i></a>
                                             <i><img src="{{asset('static/vendor/images/Icon metro-bin.svg')}}" alt="" srcset=""></i>
                                         </div>
                                     </div>

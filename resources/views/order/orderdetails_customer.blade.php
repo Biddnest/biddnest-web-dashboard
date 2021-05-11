@@ -187,16 +187,12 @@
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
                             </div>--}}
                         </div>
-
-                        <div class="d-flex  row  p-15 pt-0 ">
-                            <div class="col-sm-12 border-top-pop">
-                                <div class="theme-text f-14 bold pt-10">
+                            <div class="col-sm-12  mt-5">
+                                <div class="heading f-16 p-8 border-around ">
                                   Inventory List
                                 </div>
-                            </div>
-                        </div>
-                        <table class="table text-center p-10 theme-text">
-                            <thead class="secondg-bg  p-0 f-14">
+                        <table class="table text-center p-10 theme-text tb-border2">
+                            <thead class="secondg-bg bx-shadowg p-0 f-14">
                                 <tr>
                                   <th scope="col">Item Name</th>
                                   <th scope="col" >Quantity</th>
@@ -213,6 +209,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
+
                         @if(count($booking->inventories)== 0)
                             <div class="row hide-on-data">
                                 <div class="col-md-12 text-center p-20">
@@ -220,18 +218,23 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="border-top-3">
+                        <div class="col-md-12 border-top-3">
+                        <div class="d-flex justify-content-end">
+                                        <a class="white-text p-10" href="{{route('order-details-vendor', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg">Next</button></a>
+                                    </div>
+                        </div>
+                        <!-- <div class="border-top-3">
                             <div class="d-flex justify-content-between">
                                 <div class="w-100">
                                     {{--<a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Back</button></a>--}}
                                 </div>
-                                <div class="w-100 margin-r-20">
+                                <div class="margin-r-20">
                                     <div class="d-flex justify-content-end">
                                         <a class="white-text p-10" href="{{route('order-details-vendor', ['id'=>$booking->id])}}"><button  class="btn white-text theme-bg">Next</button></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

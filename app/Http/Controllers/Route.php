@@ -190,14 +190,17 @@ class Route extends Controller
             'name' => 'required',
             'image' => 'required',
             'id' => 'required|integer',
-            'category'=>'required|integer'
-
+            'category'=>'required|integer',
+            'inventories.*.name'=>'required',
+            'inventories.*.material'=>'required',
+            'inventories.*.size'=>'required',
+            'inventories.*.quantity'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image);
+        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image, $request->inventories);
     }
 
     public function subservice_delete(Request $request)

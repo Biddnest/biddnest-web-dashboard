@@ -181,29 +181,22 @@ class InventoryController extends Controller
         // if(!$Organization)
         //     return Helper::response(false,"Incorrect Organization id.");
 
-        $Service = Service::findOrFail($data["service_type"]);
+       /* $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
-            return Helper::response(false,"Incorrect service type.");
+            return Helper::response(false,"Incorrect service type.");*/
 
         $Inventory = Inventory::findOrFail($data["inventory_id"]);
         if(!$Inventory)
             return Helper::response(false,"Incorrect inventory id.");
 
-        $updateColumns = [
-            // "organization_id"=> $data['organization_id'],
-            "service_type"=> $data['service_type'],
-            "inventory_id"=> $data['inventory_id'],
-            "size"=> $data['size'],
-            "material"=> $data['material'],
-            "price_economics"=> $data['price']['economics'],
-            "price_premium"=> $data['price']['premium'],
-        ];
-
-        $InventoryPrice= InventoryPrice::where("id", $data['price_id'])->update($updateColumns);
-
-        return Helper::response(true, "Inventory Price has been updated.",[
-            "InventoryPrice"=>InventoryPrice::select('*')->findOrFail($InventoryPrice)
-        ]);
+        foreach($data['price'] as $price) {
+            $updateColumns = [
+                "price_economics" => $price['price']['economics'],
+                "price_premium" => $price['price']['premium'],
+            ];
+            $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
+        }
+        return Helper::response(true, "Inventory Price has been updated.");
     }
 
     public static function deletePrice($id)

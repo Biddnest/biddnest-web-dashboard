@@ -122,7 +122,7 @@
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-20 border-top pt-0 pb-0">
                             <div class="w-50">
-                                <a class="white-text p-10" href="#">
+                                <a class="white-text p-10 cancel" href="#">
                                     <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                                 </a>
                             </div>

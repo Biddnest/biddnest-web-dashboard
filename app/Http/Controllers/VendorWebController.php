@@ -10,6 +10,7 @@ use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingDriver;
 use App\Models\Inventory;
+use App\Models\InventoryPrice;
 use App\Models\Organization;
 use App\Models\Payout;
 use App\Models\Service;
@@ -425,7 +426,13 @@ class VendorWebController extends Controller
 
     public function addInventory(Request $request)
     {
-        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereNotIn('id', [InventoryPrice::where('organization_id', Session::get('organization_id'))->distinct('inventory_id')->pluck('inventory_id')])->get();
         return view('vendor-panel.inventory.addinventory', ['inventories'=>$inventory, 'service_id'=>$request->id]);
+    }
+
+    public function editInventory(Request $request)
+    {
+        $inventory=InventoryPrice::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->get();
+        return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory]);
     }
 }

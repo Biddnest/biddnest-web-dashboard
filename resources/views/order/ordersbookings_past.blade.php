@@ -57,8 +57,8 @@
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <th scope="col">Service Type</th>
-                                <th scope="col">Order Date</th>
-                                <th scope="col">Assigned Vendor</th>
+                                <th scope="col" style="width: 70%;" >Order Date</th>
+                                <th scope="col"style="width: 70%;" >Assigned Vendor</th>
                                 <th scope="col">Order Status</th>
                                 <th scope="col">Operations</th>
                             </tr>
@@ -133,7 +133,7 @@
                                     </td>
 
                                     <td class="no-toggle">
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button mr-4"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
                                         <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>

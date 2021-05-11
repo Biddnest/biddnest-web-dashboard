@@ -200,12 +200,16 @@ $("body").on('click', ".repeater", function(event) {
         $(".fixed").removeClass("hidden");
         $(".range").parent().addClass("hidden");
         $(".fixed").attr("required", "required");
+        $(".fixed").attr("name", "inventory_items[][quantity]");
+        $(".range").removeAttr("name");
     }
     if(type == 1)
     {
         $(".fixed").addClass("hidden");
         $(".range").parent().removeClass("hidden");
         $(".range").attr("required", "required");
+        $(".range").attr("name", "inventory_items[][quantity]");
+        $(".fixed").removeAttr("name");
     }
 });
 
@@ -265,12 +269,18 @@ $("body").on('change', ".category-select", function(event) {
         $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
         $(this).closest(".d-flex").find(".range").parent().addClass("hidden");
         $(this).closest(".d-flex").find(".fixed").attr("required", "required");
+        $(this).closest(".d-flex").find(".fixed").attr("name", "inventory_items[][quantity]");
+        $(this).closest(".d-flex").find(".range").removeAttr("required");
+        $(this).closest(".d-flex").find(".range").removeAttr("name");
     }
     if(type == 1)
     {
         $(this).closest(".d-flex").find(".fixed").addClass("hidden");
         $(this).closest(".d-flex").find(".range").parent().removeClass("hidden");
         $(this).closest(".d-flex").find(".range").attr("required", "required");
+        $(this).closest(".d-flex").find(".range").attr("name", "inventory_items[][quantity]");
+        $(this).closest(".d-flex").find(".fixed").removeAttr("required");
+        $(this).closest(".d-flex").find(".fixed").removeAttr("name");
     }
     return false;
 });
@@ -459,7 +469,7 @@ $("body").on('click', ".bookings", function(event) {
     return false;
 });
 
-$("body").on('click', ".reject", function(event) {
+$("body").on('click', ".rejected", function(event) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

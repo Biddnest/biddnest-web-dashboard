@@ -45,7 +45,7 @@
                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                         UPLOAD IMAGE
                                 </button>
-                                <input type="file" name="image" value="@if($category){{$category->image}}@endif" required/>
+                                <input type="file" value="@if($category){{$category->image}}@endif" required/>
                             </div>
                             <p class="text-black">Max File size: 1MB</p>
                           </div>

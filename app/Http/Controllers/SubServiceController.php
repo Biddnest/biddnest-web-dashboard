@@ -75,7 +75,7 @@ class SubServiceController extends Controller
             return Helper::response(true,"Data displayed successfully", $subservice);
     }
 
-    public static function update($id, $service_id, $name, $image)
+    public static function update($id, $service_id, $name, $image, $data)
     {
         $imageman = new ImageManager(array('driver' => 'gd'));
         $image_name = "subservice".$name."-".$id.".png";
@@ -92,6 +92,19 @@ class SubServiceController extends Controller
         $service->service_id = $service_id;
         $service->subservice_id = $id;
         $service_result = $service->save();
+
+        if($data) {
+            SubserviceInventory::where('subservice_id', $id)->delete();
+            foreach ($data as $filds) {
+                $inventory =new SubserviceInventory();
+                $inventory->subservice_id=$id;
+                $inventory->inventory_id=$filds["name"];
+                $inventory->size=$filds['size'];
+                $inventory->material=$filds['material'];
+                $inventory->quantity=$filds['quantity'];
+                $inventory->save();
+            }
+        }
 
         if(!$subservice && !$service_result)
             return Helper::response(false,"Couldn't Update data");

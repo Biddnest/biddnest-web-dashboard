@@ -11,7 +11,7 @@
             <div class="page-head text-left p-4 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="booking-orders.html">Booking & Orders</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
 
                         <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
@@ -134,25 +134,17 @@
                                 </div>
 
                                 <div class="bidlist-table  border-pop">
-
                                     <div class="d-flex  row  p-10">
-
-
-
                                         <div class="col-sm-12 ">
                                             <div class="d-flex  p-10  justify-content-between ">
                                                 <div class="vertical-center">
                                                     <div class="theme-text f-18 bold">
                                                         Venders Bid List
                                                     </div>
-
                                                 </div>
                                                 <div class="vertical-center">
                                                     <a class="assign-btn" href="#"> <button class="btn btn-3">ASSIGN MANUALLY</button> </a>
                                                 </div>
-
-
-
                                             </div>
                                             <table class="table text-center p-10 theme-text">
                                                 <thead class="secondg-bg  p-0">
@@ -198,10 +190,7 @@
                                                 @endforeach
                                                 </tbody>
                                             </table>
-
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="assign-manul-table  diplay-none border-pop">
@@ -288,22 +277,17 @@
 
                                     </div>
                                 </div>
-
                             </div>
-
 
 
                             <div class="border-top-3">
                                 <div class="d-flex justify-content-start">
                                     <div class="w-50">
-                                        <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
+{{--                                        <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>--}}
                                     </div>
-                                    <div class="w-50 margin-r-20">
-                                        <div class="d-flex justify-content-end">
-                                            <button  class="btn theme-text white-bg theme-br w-30 mr-20">Back</button>
-                                            <button  class="btn white-text theme-bg w-30" >Next</button>
-                                        </div>
-
+                                    <div class="d-flex justify-content-end">
+                                        <a   href="{{route('order-details-quotation', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
+                                        <a href="{{route('order-details-payment', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                     </div>
                                 </div>
 

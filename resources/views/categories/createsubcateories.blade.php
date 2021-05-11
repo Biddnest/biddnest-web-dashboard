@@ -38,11 +38,12 @@
                               <img class="upload-preview" src="@if(isset($subcategory) && isset($subcategory->image)){{$subcategory->image}}@else{{asset('static/images/upload-image.svg')}}@endif" alt=""/>
                               <div class="ml-1">
                                 <div class="file-upload">
-                                    <input type="hidden" class="base-holder" value="@if(isset($subcategory)){{$subcategory->image}}@endif" required />
-                                    <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                         UPLOAD IMAGE
                                     </button>
-                                    <input type="file" name="image"  value="@if(isset($subcategory)){{$subcategory->image}}@endif" required/>
+                                    <input type="file"  value="@if(isset($subcategory)){{$subcategory->image}}@endif" required/>
+                                    <input type="hidden" class="base-holder" name="image" value="@if(isset($subcategory)){{$subcategory->image}}@endif" required />
+
                                 </div>
                                 <p>Max File size: 1MB</p>
                               </div>

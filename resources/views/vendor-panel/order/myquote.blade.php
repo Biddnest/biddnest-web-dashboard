@@ -9,7 +9,7 @@
             <div class="page-head text-left  pt-0 pb-0 p-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page" ><a href="{{route('vendor.bookings', ['type'=>"live"])}}Fgr"> Manage Bookings</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" ><a href="{{route('vendor.bookings', ['type'=>"live"])}}"> Manage Bookings</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
                 </nav>

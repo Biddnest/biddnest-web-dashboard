@@ -9,7 +9,7 @@
             <div class="page-head text-left p-2 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="branches.html">Branches</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('vendor.branches')}}">Branches</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Create New Branch</li>
                     </ol>
                 </nav>

@@ -13,8 +13,8 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Sliders & Banners</li>
-                    <li class="breadcrumb-item"><a href="sliders-banners.html"> Manage Sliders</a></li>
-                    <li class="breadcrumb-item"><a href="#"> @if(isset($slider)) Edit @else Create @endif Sliders</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('slider')}}"> Manage Sliders</a></li>
+                    <li class="breadcrumb-item"> @if(isset($slider)) Edit @else Create @endif Sliders</li>
                   </ol>
                 </nav>
               </div>

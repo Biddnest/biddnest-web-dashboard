@@ -442,19 +442,17 @@ $(document).ready(function () {
 });
 
 $("body").on('click', ".bookings", function(event) {
-    var target = $(this).closest($(this).data("parent"));
-    if(confirm($(this).data('confirm'))) {
+    var target = $($(this).closest(".fullscreen-modal"));
         $.update($(this).data("url"), {}, function (response) {
             console.log(response);
             if (response.status == "success") {
                 tinySuccessAlert($(this).data('success'), response.message);
-                target.hide();
+                target.fadeOut(100).hide();
             } else {
                 tinyAlert("Failed", response.message);
+                target.fadeOut(100).hide();
             }
-
         });
-    }
     return false;
 });
 
@@ -464,7 +462,7 @@ $('.filterdate').datepicker({
 });
 
 
-$("body").on('change', ".addpin", function(event) {
+/*$("body").on('change', ".addpin", function(event) {
     var password = document.getElementById("password").value;
     var pin =document.getElementById("pin").value;
         $.update($(this).data("url"), {password, pin}, function (response) {
@@ -477,4 +475,4 @@ $("body").on('change', ".addpin", function(event) {
 
         });
     return false;
-});
+});*/

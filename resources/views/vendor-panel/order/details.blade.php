@@ -258,7 +258,9 @@
         </div>
     </div>
 
+@endsection
 
+@section('modal')
     <div class="fullscreen-modal" id="add-role" style="min-height: 155%;">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">

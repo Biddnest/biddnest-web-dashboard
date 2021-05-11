@@ -486,8 +486,8 @@
                 width: 100% !important;
             }
             .select2-search__field{
-                /* width: 100% !important; */
-                width: 0.75em !important;
+                 width: 100% !important;
+                /*width: 0.75em !important;*/
             }
             .select2-container--default .select2-selection--multiple{
                 border: 2px solid #DFE6EC;

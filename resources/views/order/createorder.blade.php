@@ -326,11 +326,11 @@
                                 <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
-                          <div class="col-sm-12 mtop-20  p-0  pb-0" >
+                          <div class="col-sm-12 mtop-20  p-15   pb-0" >
                             <div class="heading p-8 border-around ">
                               Inventory
                             </div>
-                            <table class="table text-center p-10 theme-text tb-border2" id="items" >
+                            <table class="table text-center p-10  theme-text tb-border2" id="items" >
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
                                     <th scope="col">Item Name</th>
@@ -395,7 +395,7 @@
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
                               <label>Comments from Customers</label>
-                              <textarea placeholder="Need to Include bike" id="" name="meta[customer][remarks]" class="form-control" rows="4"
+                              <textarea placeholder="Need to Include movers for customer's bike too" id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50"></textarea>
                               <span class="error-message">Please enter valid</span>
                             </div>

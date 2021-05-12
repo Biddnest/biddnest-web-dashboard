@@ -26,7 +26,7 @@
                             </h3>
                         </header>
                         <div class="form-wrapper">
-                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="tiny" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
+                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
                                 <div class="row pr-3 pl-3">
                                     <div class="col-lg-6">
                                         <p class="img-label" style="padding-left: 0px;">Image</p>
@@ -100,7 +100,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Date of Birth</label>
-                                            <input type="date" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" placeholder="David" class="form-control filterdate" required>
+                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" placeholder="David" class="form-control filterdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>

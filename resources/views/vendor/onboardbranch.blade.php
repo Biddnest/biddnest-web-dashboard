@@ -17,7 +17,8 @@
             </nav>
         </div>
         <div class="mr-20">
-            <a class="modal-toggle" data-modal="#add-branch" onclick="$('#add-branch').modal();">
+{{--            <a class="modal-toggle" data-toggle="modal" data-target="#add-branch">--}}
+                <a class="modal-toggle" data-modal="#add-branch" onclick="$('#add-branch').modal({backdrop: false});">
                 <button class="btn theme-bg white-text w-10">Add Branch</button>
             </a>
         </div>

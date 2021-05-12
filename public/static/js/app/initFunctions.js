@@ -570,13 +570,6 @@ export function initPopUp(){
     });
 }
 
-export function initTogglePopUp(){
-    $("body").on('click', ".modal-toggle", function(event) {
-        console.log("sda");
-        $($(this).data("target")).fadeIn(100).show();
-        return false;
-    });
-}
 export function initRangeSlider(){
     if($(".custom_slider").length) {
         $(".custom_slider").ionRangeSlider({

@@ -40,13 +40,14 @@ class BookingsController extends Controller
         $user = User::where("phone",$request->phone)
                 ->orWhere("email",$request->email)
                 ->first();
-        if($user)
+        if($user) {
             $user_id = $user->id;
 
             $fname = explode($request->contact_details['name'], " ")[0];
             $lname = str_replace($fname, "", $request->contact_details['name']);
 
             UserController::directupdate($request->contact_details['phone'], $fname, $lname, $request->contact_details['email']);
+        }
         else
         {
             $fname = explode($request->contact_details['name'], " ")[0];

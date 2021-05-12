@@ -331,7 +331,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_branch_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
                     <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="parent_org_id" value="{{$id}}">
                         <input type="hidden" name="id" value="{{$branch->id}}">

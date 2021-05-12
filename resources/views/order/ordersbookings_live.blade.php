@@ -15,7 +15,7 @@
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Bookings & Orders</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('orders-booking')}}">Bookings & Orders</a></li>
                     <li class="breadcrumb-item">Manage Bookings</li>
                 </ol>
             </nav>

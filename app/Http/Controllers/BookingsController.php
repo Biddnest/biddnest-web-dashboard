@@ -594,7 +594,7 @@ class BookingsController extends Controller
                     ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
             }])->with('user')->first();
 
-        if($booking->bid->status == BidEnums::$STATUS['lost'])
+        if($booking->bid && $booking->bid->status == BidEnums::$STATUS['lost'])
             $booking->bid->statistics = self::getposition($request->token_payload->id, $request->public_booking_id);
 
         return Helper::response(true, "Show data successfully", ["booking" => $booking]);

@@ -220,11 +220,11 @@ $("body").on('click', ".closer", function(event) {
     return false;
 });
 
-/*$("body").on('click', ".modal-toggle", function(event) {
+$("body").on('click', ".modal-toggle", function(event) {
     console.log("sda");
     $($(this).data("target")).fadeIn(100).show();
     return false;
-});*/
+});
 $("body").on('click', ".fullscreen-modal-body .close", function(event) {
     console.log("close");
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
@@ -428,7 +428,7 @@ $("body").on('change', ".reply_status", function(event) {
 
 $("body").on('input', ".table-search", function(event) {
     var query = $(this).val();
-    if(query.length > 3){
+    if(query.length > 5){
         redirectTo($(this).data('url')+"?search="+query);
     }
 });

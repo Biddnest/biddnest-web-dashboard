@@ -60,8 +60,13 @@ barba.init({
         afterEnter(data) {
             // loadRevenueChart();
         }
-      },{
+      }, {
         namespace: 'createslider',
+        afterEnter(data) {
+
+        }
+      },{
+        namespace: 'createbranch',
         afterEnter(data) {
 
         }

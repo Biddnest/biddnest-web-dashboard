@@ -64,7 +64,7 @@
                                         <div class="form-input">
                                             <p class="img-label">Image</p>
                                             <div class="upload-section p-20 pt-0">
-                                                <img class="upload-preview" src="@if($organization->image){{$organization->image}}@else{{asset('static/images/upload-image.svg')}}@endif" alt="">
+                                                <img class="upload-preview" src="@if($organization->image){{$organization->image}} @else {{asset('static/images/upload-image.svg')}} @endif" alt="">
                                                 <div class="ml-1">
                                                     <!-- <button class="btn theme-bg white-text my-0">UPLOAD IMAGE</button> -->
                                                     <div class="file-upload">

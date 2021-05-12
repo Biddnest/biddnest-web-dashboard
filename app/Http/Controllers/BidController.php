@@ -256,7 +256,7 @@ class BidController extends Controller
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
-                return $inv = InventoryPrice::where([
+                 $inv = InventoryPrice::where([
                     "inventory_id"=>$booking_inventory["inventory_id"],
                     "material"=>$booking_inventory["material"],
                     "size"=>$booking_inventory["size"],

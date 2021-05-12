@@ -261,7 +261,7 @@ class BidController extends Controller
                     "organization_id"=>$organization_id
                 ])->get();
 
-                return $inv->$price_type;
+                return $inv[$price_type];
                 $list_item["bid_inventory_id"] = $booking_inventory["inventory_id"];
                 $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
                 $list_item["material"] = $booking_inventory["material"];

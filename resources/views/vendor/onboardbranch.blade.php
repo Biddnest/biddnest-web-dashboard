@@ -111,9 +111,9 @@
     </div>
 </div>
 
-{{--@endsection--}}
+@endsection
 
-{{--@section('modal')--}}
+@section('modal')
 
     <div class="fullscreen-modal" id="add-branch">
         <div class="fullscreen-modal-body" role="document">

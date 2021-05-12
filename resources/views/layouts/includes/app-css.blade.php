@@ -542,7 +542,7 @@
             }
             .fullscreen-modal{
                 z-index: 999;
-                display: block;
+                display: none;
                 position: relative;
                 top: 0;
                 left: 0;

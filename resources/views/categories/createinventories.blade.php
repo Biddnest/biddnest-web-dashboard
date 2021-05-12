@@ -13,9 +13,10 @@
         <div class="page-head  p-1 mt-2 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories and Subcategories</a>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories & Subcategory</a>
                     </li>
-                    <li class="breadcrumb-item pl-2"><a href="#">@if(!$inventory)Create @else Edit @endif Inventory</a></li>
+                    <li class="breadcrumb-item pl-2"><a href="{{route('inventories')}}">Inventory List</a></li>
+                    <li class="breadcrumb-item pl-2">@if(!$inventory)Create @else Edit @endif Inventory</li>
                 </ol>
             </nav>
         </div>
@@ -25,7 +26,7 @@
             <div class="card h-auto p-0 p-10">
                 <div class="card-head right text-left border-bottom-2 p-8">
                     <h3 class="f-18 mt-3 mb-3 pl-3 theme-text">
-                        @if(!$inventory)Create @else Edit @endif Subcategory
+                        @if(!$inventory)Create @else Edit @endif Inventory
                     </h3>
                 </div>
                 <div class="" id="">

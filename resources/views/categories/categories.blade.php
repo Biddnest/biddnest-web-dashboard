@@ -21,7 +21,7 @@
             <div class="page-head text-left  pt-0 pb-0 p-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Categories & Subcategories
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories & Subcategories</a>
                         </li>
                         <li class="breadcrumb-item"><a href="#">Category Management</a></li>
 

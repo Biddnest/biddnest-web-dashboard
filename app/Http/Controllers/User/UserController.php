@@ -249,9 +249,9 @@ class UserController extends Controller
         $save_result = $user->save();
 
         if(!$save_result)
-            return Helper::response(false,"Couldn't save Testimonials");
+            return Helper::response(false,"Couldn't save Customers");
 
-        return Helper::response(true,"save Testimonials successfully", ["customer"=>User::findOrFail($user->id)]);
+        return Helper::response(true,"save Customers successfully", ["customer"=>User::findOrFail($user->id)]);
     }
 
     public static function directSignup($phone, $fname, $lname, $email, $gender=null, $refby_code=null){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\NotificationEnums;
+use App\Models\BookingInventory;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
@@ -245,6 +246,7 @@ class BidController extends Controller
     public static function getPriceList($public_booking_id, $organization_id){
 
         $booking = Bid::whereIn("booking_id", Booking::where("public_booking_id", $public_booking_id)->pluck("id"))->with("booking_inventories")->with('booking')->first();
+
         if(!$booking)
             return Helper::response(false,"Invalied Booking Id");
 
@@ -254,7 +256,7 @@ class BidController extends Controller
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
-                $inv = InventoryPrice::where([
+                return $inv = InventoryPrice::where([
                     "inventory_id"=>$booking_inventory["inventory_id"],
                     "material"=>$booking_inventory["material"],
                     "size"=>$booking_inventory["size"],

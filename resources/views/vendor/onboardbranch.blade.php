@@ -529,7 +529,7 @@
                                                                                   aria-label="Close"><button
                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
                         <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
-                                                        aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
+                                                        aria-label="Close"><button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button></a></div>
                     </div>
                 </form>
             </div>

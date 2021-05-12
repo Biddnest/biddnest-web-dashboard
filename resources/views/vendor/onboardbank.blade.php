@@ -89,7 +89,7 @@
                             <div class="col-lg-4">
                                 <p class="img-label">Aadhaar Card</p>
                                 <div class="upload-section p-20 pt-0">
-                                    <img class="upload-preview" src="@if($bank && $bank->aadhar_card) {{$bank->aadhar_card}} @else {{asset("static/images/upload-ing.svg")}} @endif" alt="">
+                                    <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload cursor-pointer">
                                             <input id="upload" type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" class="cursor-pointer" >
@@ -134,9 +134,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload">
-                                            <input type="hidden" class="base-holder" name="doc[pan_card]" value="{{$bank->pan_card ?? ''}}" required />
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg"/>
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->pan_card) CHANGE @else UPLOAD FILE @endif</button>
-                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" required/>
+                                            <input type="hidden" class="base-holder" name="doc[pan_card]" value="{{$bank->pan_card ?? ''}}" required />
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>

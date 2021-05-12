@@ -295,7 +295,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Commision</label>
-                                <input type="text" id="fullname" placeholder="560097" value="{{$organization->commission}}%"
+                                <input type="text" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
                                        class="form-control" readonly>
                             </div>
                         </div>
@@ -508,7 +508,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Commision</label>
-                                    <input type="number" id="fullname" placeholder="560097" value="{{$branch->commission}}%"
+                                    <input type="number" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
                                            class="form-control" name="commission" required maxlength="2">
                                 </div>
                             </div>

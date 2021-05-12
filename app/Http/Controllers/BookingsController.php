@@ -125,7 +125,14 @@ class BookingsController extends Controller
 
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        if($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+        if($web) {
+            if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+                foreach ($data['meta']['images'] as $key => $image) {
+                    $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+                }
+            }
+        }
+        else{
             foreach ($data['meta']['images'] as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
             }

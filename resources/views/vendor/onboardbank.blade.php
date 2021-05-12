@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="tab-content" id="myTabContent">
-                    <form class="form-new-order input-text-blue" action="{{route('bank_add')}}" data-alert="mega" method="POST"  data-parsley-validate>
+                    <form class="form-new-order input-text-blue" action="{{route('bank_add')}}" data-next="redirect" data-url="{{route("onboard-userrole-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                         <input type="hidden" name="bank_id" value="{{$bank->id ?? ''}}">
                         <input type="hidden" name="id" value="{{$id}}">
                         <div class="row p-20">
@@ -89,7 +89,7 @@
                             <div class="col-lg-4">
                                 <p class="img-label">Aadhaar Card</p>
                                 <div class="upload-section p-20 pt-0">
-                                    <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
+                                    <img class="upload-preview" src="@if($bank && $bank->aadhar_card) {{$bank->aadhar_card}} @else {{asset("static/images/upload-ing.svg")}} @endif" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload cursor-pointer">
                                             <input id="upload" type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" class="cursor-pointer" >
@@ -158,13 +158,13 @@
                             </div>
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
-                            <div class="w-50"><a class="white-text p-10" href="#">
+                            <div class="w-50"><a class="white-text p-10" href="{{route('vendors')}}">
                                     <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                             </div>
                             <div class="w-50 text-right">
-                                    <button class="btn theme-br white-text w-30">Save</button>
-                                <a class="white-text p-10" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">
-                                    <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
+                                    <button class="btn theme-br white-text w-30">Next</button>
+                               {{-- <a class="white-text p-10" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">
+                                    <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>--}}
                             </div>
                         </div>
                     </form>

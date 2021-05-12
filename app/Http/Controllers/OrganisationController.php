@@ -297,7 +297,7 @@ class OrganisationController extends Controller
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't save data");
@@ -338,7 +338,7 @@ class OrganisationController extends Controller
             $result_bank= Org_kyc::where("id", $bank_id)
                 ->update($update_data);
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't Update data");

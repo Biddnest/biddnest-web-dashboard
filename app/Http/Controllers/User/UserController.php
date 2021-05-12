@@ -235,6 +235,14 @@ class UserController extends Controller
 
     public static function add($fname, $lname, $phone, $email, $gender, $dob, $avatar)
     {
+        $user_email=User::where('email', $email)->first();
+        if($user_email)
+            return Helper::response(false,"Email id is already exist in system");
+
+        $user_phone=User::where('phone', $phone)->first();
+        if($user_phone)
+            return Helper::response(false,"Phone no is already exist in system");
+
         $image_man = new ImageManager(array('driver' => 'gd'));
         $uniq = uniqid();
 

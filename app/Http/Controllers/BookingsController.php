@@ -46,7 +46,7 @@ class BookingsController extends Controller
             $fname = explode($request->contact_details['name'], " ")[0];
             $lname = str_replace($fname, "", $request->contact_details['name']);
 
-            UserController::directupdate($request->contact_details['phone'], $fname, $lname, $request->contact_details['email']);
+            UserController::directupdate($request->contact_details['phone'], $fname, $lname, $request->contact_details['email'], $user_id);
         }
         else
         {

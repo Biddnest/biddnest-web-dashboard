@@ -268,23 +268,21 @@ class UserController extends Controller
         $user->fname=$fname;
         $user->lname=$lname;
         $user->email=$email;
+        $user->meta=json_encode(["refferal_code"=>$ref_code, "reffered_by"=>null]);
+        $user->avatar=$avatar_file_name;
         $user->save();
 
         return $user;
     }
-    public static function directupdate($phone, $fname, $lname, $email, $gender=null, $refby_code=null){
+    public static function directupdate($phone, $fname, $lname, $email, $user_id, $gender=null, $refby_code=null){
 
         $avatar_file_name = $fname."-".$lname."-".uniqid().".png";
 
-        $short_id = Shortid::generate(6, null, true);
-        $ref_code = strtoupper(substr($fname,0,3).$short_id);
-
-        $user = new User;
-        $user->phone=$phone;
-        $user->fname=$fname;
-        $user->lname=$lname;
-        $user->email=$email;
-        $user->save();
+        $user= User::where('id', $user_id)->update([
+            "fname"=>$fname,
+            "lname"=>$lname,
+            "avatar"=>$avatar_file_name
+        ]);
 
         return $user;
     }

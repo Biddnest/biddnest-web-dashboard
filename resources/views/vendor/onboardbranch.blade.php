@@ -17,7 +17,7 @@
             </nav>
         </div>
         <div class="mr-20">
-            <a class="modal-toggle" data-target="#add-branch">
+            <a class="modal-toggle" data-toggle="modal" data-target="#add-branch">
                 <button class="btn theme-bg white-text w-10">Add Branch</button>
             </a>
         </div>

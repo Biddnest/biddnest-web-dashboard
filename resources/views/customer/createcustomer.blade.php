@@ -38,8 +38,9 @@
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
+                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" accept=".png,.jpg,.jpeg"/>
                                                     <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->avatar}}@endif" required />
-                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" required/>
+
                                                 </div>
                                                 <p>Max File size: 1MB</p>
                                             </div>

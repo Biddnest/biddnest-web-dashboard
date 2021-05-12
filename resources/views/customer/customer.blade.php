@@ -124,9 +124,9 @@
 
                                                 <td style="text-align: center;">
                                                     <a class ="inline-icon-button mr-4" href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 " aria-hidden="true"></i></a>
-                                                    <a href="#" class ="inline-icon-button" >
+                                                    {{--<a href="#" class ="inline-icon-button" >
                                                     <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
-                                                    </a>
+                                                    </a>--}}
                                                 </td>
                                             </tr>
                                            @endforeach

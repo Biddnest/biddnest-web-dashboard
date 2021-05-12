@@ -115,7 +115,7 @@
 
 @section('modal')
 
-    <div class="fullscreen-modal hidden" id="add-branch">
+    <div class="fullscreen-modal" id="add-branch">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Branch</h5>

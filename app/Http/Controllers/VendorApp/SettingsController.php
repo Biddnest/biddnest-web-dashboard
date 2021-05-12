@@ -77,7 +77,8 @@ class SettingsController extends Controller
                 ],
                 "bid"=>[
                     "status"=>BidEnums::$STATUS,
-                    "type"=>BidEnums::$BID_TYPE
+                    "type"=>BidEnums::$BID_TYPE,
+                    "color"=>BidEnums::$COLOR
                 ],
                 "payment"=>[
                     'razorpay'=>[

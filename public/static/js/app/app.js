@@ -224,6 +224,7 @@ $("body").on('click', ".modal-toggle", function(event) {
     console.log("sda");
     // $($(this).data("target")).fadeIn(100).show();
     $($(this).data("modal")).toggleClass("show");
+    $(".fullscreen-modal").removeClass("hidden");
     return false;
 });
 $("body").on('click', ".fullscreen-modal-body .close", function(event) {

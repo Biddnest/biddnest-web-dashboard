@@ -428,7 +428,7 @@ $("body").on('change', ".reply_status", function(event) {
 
 $("body").on('input', ".table-search", function(event) {
     var query = $(this).val();
-    if(query.length > 0 && query.length < 16){
+    if(query.length >= 15 || query.length >= 5){
         redirectTo($(this).data('url')+"?search="+query);
     }
 });

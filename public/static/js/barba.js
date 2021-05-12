@@ -68,7 +68,7 @@ barba.init({
       },{
         namespace: 'createbranch',
         afterEnter(data) {
-
+            initTogglePopUp();
         }
       },
     ]

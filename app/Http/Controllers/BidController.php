@@ -265,11 +265,11 @@ class BidController extends Controller
                 $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
-                $list_item["price"] = sizeof($inv) > 0 ? $inv["$price_type"] : 0.00;
+                $list_item["price"] = sizeof($inv) > 0 ? $inv->$price_type : 0.00;
 
                 array_push($price_list, $list_item);
 
-                $total += sizeof($inv) > 0 ? $inv[$price_type] : 0.00;
+                $total += sizeof($inv) > 0 ? $inv->$price_type : 0.00;
 
             }
         }

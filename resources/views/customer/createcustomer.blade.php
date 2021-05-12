@@ -38,7 +38,7 @@
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
-                                                    <input type="file" required/>
+                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" required/>
                                                 </div>
                                                 <p>Max File size: 1MB</p>
                                             </div>
@@ -107,7 +107,7 @@
                                 <div class="d-flex  justify-content-between flex-row  " style="border-top: 1px solid #70707040;margin-top: 70px;">
                                     <div class="w-50">
                                         <a class="white-text p-10 cancel" href="#">
-                                            <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                                            <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                                         </a>
                                     </div>
                                     <div class="w-50 text-right">

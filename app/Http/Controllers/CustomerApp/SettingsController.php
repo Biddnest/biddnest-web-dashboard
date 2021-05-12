@@ -70,7 +70,8 @@ class SettingsController extends Controller
                 "booking"=>[
                     "status"=>BookingEnums::$STATUS,
                     "booking_type"=>BookingEnums::$BOOKING_TYPE,
-                    "fetch_type"=>BookingEnums::$BOOKING_FETCH_TYPE
+                    "fetch_type"=>BookingEnums::$BOOKING_FETCH_TYPE,
+                    "color"=>BookingEnums::$COLOR_CODE
                 ],
                 "bid"=>[
                     "status"=>BidEnums::$STATUS

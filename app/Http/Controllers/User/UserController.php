@@ -238,13 +238,15 @@ class UserController extends Controller
         $image_man = new ImageManager(array('driver' => 'gd'));
         $uniq = uniqid();
 
+        $image=Helper::saveFile($image_man->make($avatar)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Customer");
+
         $user = new User;
         $user->fname=$fname;
         $user->lname=$lname;
         $user->email=$email;
         $user->phone=$phone;
         $user->gender=$gender;
-        $user->avatar=Helper::saveFile($image_man->make($avatar)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Customer");
+        $user->avatar=$image;
         $user->dob=$dob;
         $save_result = $user->save();
 

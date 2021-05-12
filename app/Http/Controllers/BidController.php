@@ -269,7 +269,7 @@ class BidController extends Controller
 
                 array_push($price_list, $list_item);
 
-                $total += sizeof($inv) > 0 ? $inv->$price_type : 0.00;
+                $total += $inv ? $inv->$price_type : 0.00;
 
             }
         }

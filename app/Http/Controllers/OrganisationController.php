@@ -124,8 +124,7 @@ class OrganisationController extends Controller
             ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']);
-
+            $update_data["image"] =  Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
         $result_organization =Organization::where(["id"=>$id])->update($update_data);
 
         OrganizationService::where("organization_id", $id)->delete();

@@ -253,7 +253,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 
@@ -480,7 +480,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 

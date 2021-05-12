@@ -272,4 +272,20 @@ class UserController extends Controller
 
         return $user;
     }
+    public static function directupdate($phone, $fname, $lname, $email, $gender=null, $refby_code=null){
+
+        $avatar_file_name = $fname."-".$lname."-".uniqid().".png";
+
+        $short_id = Shortid::generate(6, null, true);
+        $ref_code = strtoupper(substr($fname,0,3).$short_id);
+
+        $user = new User;
+        $user->phone=$phone;
+        $user->fname=$fname;
+        $user->lname=$lname;
+        $user->email=$email;
+        $user->save();
+
+        return $user;
+    }
 }

@@ -524,12 +524,12 @@
 
                         </div>
                     </div>
-                    <div class="modal-footer p-15 " style="padding: 0px 5px;">
+                    <<div class="modal-footer p-15 " style="padding: 0px 5px;">
                         <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
-                                                                                  aria-label="Close">
-                                <button type="button"  class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+                                                                                  aria-label="Close"><button type="button"
+                                                                                                             class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
                         <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
-                                                        aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
+                                                        aria-label="Close"><button class="btn theme-bg white-text w-30">Update</button></a></div>
                     </div>
                 </form>
             </div>

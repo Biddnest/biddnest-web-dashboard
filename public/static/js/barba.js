@@ -42,6 +42,7 @@ import {
     initTextAreaEditor,
     initDatePicker,
     initPopUp,
+    initTogglePopUp,
     initRangeSlider,
     initRevenueChart,
     initToggles,
@@ -89,6 +90,7 @@ barba.hooks.after((data) => {
     initTextAreaEditor();
     initDatePicker();
     initPopUp();
+    initTogglePopUp();
     initSlick();
     initToggles();
     initRangeSlider();
@@ -109,6 +111,7 @@ $(document).ready(function(){
     initCountdown();
     initDatePicker();
     initPopUp();
+    initTogglePopUp();
     initToggles();
     initRangeSlider();
     initRevenueChart();

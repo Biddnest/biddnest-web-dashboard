@@ -508,8 +508,8 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Commision</label>
-                                    <input type="number" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
-                                           class="form-control" name="commission" required maxlength="2">
+                                    <input type="text" id="fullname" placeholder="Commission" value="{{$organization->commission}}"
+                                           class="form-control" name="commission" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">

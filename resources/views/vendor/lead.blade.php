@@ -16,7 +16,7 @@
                                 <div class="page-head text-left  pt-0 pb-0 p-2">
                                   <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('vendors')}}">Vendor Management</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('lead-vendors')}}">Vendor Management</a></li>
                                       <li class="breadcrumb-item">Leads</li>
 
                                     </ol>

@@ -427,7 +427,7 @@ class VendorWebController extends Controller
     public function addInventory(Request $request)
     {
         $inventory_items=[];
-        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->OrWhereNotIn('id', [InventoryPrice::where('organization_id', Session::get('organization_id'))->distinct('inventory_id')->pluck('inventory_id')])->get();
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->OrWhereNotIn('id', [InventoryPrice::where('organization_id', Session::get('organization_id'))->pluck('inventory_id')])->get();
         if(isset($request->item)) {
             $inventory_items =Inventory::where('id', $request->item)->first();
         }

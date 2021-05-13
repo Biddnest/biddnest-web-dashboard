@@ -58,7 +58,7 @@
                                 <th scope="col">To</th>
                                 <!-- <th scope="col">Service Type</th> -->
                                 <th scope="col" style="width: 22%; ">Order Date</th>
-                                <th scope="col" style="width: 22%; ">Assigned Vendor</th>
+                                <th scope="col" style="width: 23%; ">Assigned Vendor</th>
                                 <th scope="col" style="text-align: center !important;">Order Status</th>
                                 <th scope="col">Operations</th>
                             </tr>

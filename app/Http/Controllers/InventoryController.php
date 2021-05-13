@@ -63,10 +63,10 @@ class InventoryController extends Controller
         $icon_name = "inventory-icon-".$name."-".uniqid().".png";
         $imageman = new ImageManager(array('driver' => 'gd'));
 
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
             $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 100),$image_name,"inventories");
 
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
             $update_data["icon"] = Helper::saveFile($imageman->make($icon)->resize(256,256)->encode('png', 100),$icon_name,"inventories");
 
         $update_data = [

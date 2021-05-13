@@ -951,7 +951,12 @@ class WebController extends Controller
     public function sidebar_inventory(Request $request)
     {
         $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'organization_id'=>$request->org_id, 'service_type'=>$request->cat_id])->with('inventory')->get();
-        return view('sidebar.inventory',['$inventories'=>$inventory]);
+        return view('sidebar.inventory',['inventories'=>$inventory]);
     }
 
+    public static function sidebar_reviews(Request $request)
+    {
+        $reviews=Review::where('id', $request->id)->with('Booking')->with('user')->first();
+        return view('sidebar.reviews',['reviews'=>$reviews]);
+    }
 }

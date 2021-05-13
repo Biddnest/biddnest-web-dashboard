@@ -347,6 +347,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/slider/{id}',[WebController::class,'sidebar_slider'])->name('sidebar.slider');
         Route::get('/user/{id}',[WebController::class,'sidebar_user'])->name('sidebar.user');
         Route::get('/payout/{id}',[WebController::class,'sidebar_payout'])->name('sidebar.payout');
+        Route::get('/reviews/{id}',[WebController::class,'sidebar_reviews'])->name('sidebar.reviews');
         Route::get('/branch/{id}',[WebController::class,'sidebar_branch'])->name('sidebar.branch');
         Route::get('/inventory_price/{id}/{org_id}/{cat_id}',[WebController::class,'sidebar_inventory'])->name('sidebar.inventory');
     });

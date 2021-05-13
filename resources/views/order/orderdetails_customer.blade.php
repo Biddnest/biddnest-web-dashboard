@@ -183,8 +183,8 @@
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
                             </div>--}}
                         </div>
-                            <div class="col-sm-12  mt-5">
-                                <div class="heading f-16 p-8 border-around ">
+                            <div class="col-sm-12 pl-0 pr-0 ">
+                                <div class="heading f-16 p-10 pl-4 border-around ">
                                   Inventory List
                                 </div>
                         <table class="table text-center p-10 theme-text tb-border2">

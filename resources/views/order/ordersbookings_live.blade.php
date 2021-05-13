@@ -57,9 +57,9 @@
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <!-- <th scope="col" style="width: 40%;">Service Type</th> -->
-                                <th scope="col" style="width: 22%;">Order Date</th>
+                                <th scope="col" style="width: 22%; ">Order Date</th>
                                 <th scope="col" style="width: 22%;">Assigned Vendor</th>
-                                <th scope="col">Order Status</th>
+                                <th scope="col" style="text-align: center !important;">Order Status</th>
                                 <th scope="col">Operations</th>
                             </tr>
                             </thead>
@@ -91,7 +91,7 @@
                                             Not Assigned
                                         @endif
                                     </td>
-                                    <td class="">
+                                    <td class="" >
 
                                         @switch($booking->status)
                                             @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
@@ -136,8 +136,8 @@
                                         @endswitch
                                     </td>
 
-                                    <td class="no-toggle">
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button mr-4" style="display: table-cell; right: 10px"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
+                                    <td class="no-toggle" style="text-align: center !important;">
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button ml-4" style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
 {{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
                                     </td>
                                 </tr>

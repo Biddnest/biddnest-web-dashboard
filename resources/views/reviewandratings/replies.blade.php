@@ -137,17 +137,130 @@
                             <div class="  tab-content  flex-row justify-content-between">
                                 @if($ticket_info)
                                     <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="new-order-tab">
-                                        <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
-                                            <div class="col-sm-12">
-                                                <div class="form-input">
-                                                    <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
-                                                    <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                        <div class="col-sm-12" style="margin-top: 20px; margin: 0px !important; padding: 0px !important;">
+                                            @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['order_cancellation'])
+                                                <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Order ID
+                                                    </div>
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Status
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
-                                            </div>
-                                        </form>
+                                                <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">{{$ticket_info->public_booking_id}}</a>
+                                                    </div>
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        @switch($ticket_info->status)
+                                                            @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                                                Enquiry
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                                                Placed
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                                                Bidding
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                                                Rebidding
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                                Payment Pending
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                                Pending Driver Assign
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                                Awaiting Pickup
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                                In Transit
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                                Completed
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                                Cancelled
+                                                            @break
+                                                        @endswitch
+                                                    </div>
+                                                </div>
+                                            @elseif($tickets->type == \App\Enums\TicketEnums::$TYPE['new_branch'])
+                                                <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Organization Name
+                                                    </div>
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Branch Name
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->id]) }}">{{$ticket_info->org_name}} {{$ticket_info->org_type}}</a>
+                                                    </div>
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.branch',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->city}}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
+                                                    <div class="form-input">
+                                                        <label>Aproval Status</label>
+
+                                                        <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" required>
+                                                            @foreach(\App\Enums\CommonEnums::$TICKE_STATUS as $key=>$status)
+                                                                <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="error-message">Please enter valid</span>
+                                                    </div>
+                                                </div>
+                                            @elseif($tickets->type == \App\Enums\TicketEnums::$TYPE['price_update'])
+                                                <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Organization Name
+                                                    </div>
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Service Type
+                                                    </div>
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Inventory Item Name
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->organization_id]) }}">{{$ticket_info->vendor->org_name}} {{$ticket_info->org_type}}</a>
+                                                    </div>
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        {{$ticket_info->services->name}}
+                                                    </div>
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.inventory',['id'=>$ticket_info->inventory_id]) }}">{{$ticket_info->inventory->name}}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
+                                                    <div class="form-input">
+                                                        <label>Aproval Status</label>
+
+                                                        <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_priceticket_status', ['id'=>$ticket_info->id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" required>
+                                                            @foreach(\App\Enums\CommonEnums::$TICKE_STATUS as $key=>$status)
+                                                                <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span class="error-message">Please enter valid</span>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 @endif
 

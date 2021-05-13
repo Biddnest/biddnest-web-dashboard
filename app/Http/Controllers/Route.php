@@ -1060,6 +1060,15 @@ class Route extends Controller
         return TicketReplyController::changeStatus($request->id, $request->data);
     }
 
+    public function changeStatusPrice(Request $request)
+    {
+        return InventoryController::changeStatus($request->id, $request->data);
+    }
+    public function changeStatusBranch(Request $request)
+    {
+        return OrganisationController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->data);
+    }
+
     public function notification_add(Request $request)
     {
         $validation = Validator::make($request->all(),[

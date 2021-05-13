@@ -148,6 +148,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
+    Route::put('/{id}/{org_id}/{cat_id}/change-price-status',[Router::class,'changeStatusPrice'])->name("change_priceticket_status");
+    Route::put('/{id}/change-branch-status',[Router::class,'changeStatusBranch'])->name("change_Branchticket_status");
 
 
     /*vendor web apis start*/
@@ -345,7 +347,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/slider/{id}',[WebController::class,'sidebar_slider'])->name('sidebar.slider');
         Route::get('/user/{id}',[WebController::class,'sidebar_user'])->name('sidebar.user');
         Route::get('/payout/{id}',[WebController::class,'sidebar_payout'])->name('sidebar.payout');
-        Route::get('/dashboard/{id}',[WebController::class,'sidebar_dashboard'])->name('sidebar.dashboard');
+        Route::get('/branch/{id}',[WebController::class,'sidebar_branch'])->name('sidebar.branch');
+        Route::get('/inventory_price/{id}',[WebController::class,'sidebar_inventory'])->name('sidebar.inventory');
     });
 
 

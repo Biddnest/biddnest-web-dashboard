@@ -503,4 +503,14 @@ class OrganisationController extends Controller
         return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
     }
 
+    public static function changeStatus($id, $status)
+    {
+        $change_status=Vendor::where(["id"=>$id])->update(["ticket_status" => $status]);
+
+        if(!$change_status)
+            return Helper::response(false,"Couldn't Update status");
+
+        return Helper::response(true,"Status Updated successfully");
+    }
+
 }

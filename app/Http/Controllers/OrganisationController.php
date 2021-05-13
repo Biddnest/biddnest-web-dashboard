@@ -221,7 +221,7 @@ class OrganisationController extends Controller
 
         if($vendor)
         {
-            TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
+            TicketController::createForVendor(Session::get('account')['id'], 5,  ["Branch_id"=>$organizations->id]);
         }
 
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
@@ -283,7 +283,7 @@ class OrganisationController extends Controller
             return Helper::response(false,"Couldn't save data");
 
         if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
-            TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
+            TicketController::createForVendor(Session::get('account')['id'], 5,  ["Branch_id"=>$id]);
 
 
         return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
@@ -501,6 +501,16 @@ class OrganisationController extends Controller
 //        return $query;
         $users = Organization::where("org_name", "LIKE", $query . '%')->paginate(5);
         return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
+    }
+
+    public static function changeStatus($id, $status)
+    {
+        $change_status=Vendor::where(["id"=>$id])->update(["ticket_status" => $status]);
+
+        if(!$change_status)
+            return Helper::response(false,"Couldn't Update status");
+
+        return Helper::response(true,"Status Updated successfully");
     }
 
 }

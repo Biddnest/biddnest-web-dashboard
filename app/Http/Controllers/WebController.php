@@ -148,11 +148,6 @@ class WebController extends Controller
         ]);
     }
 
-    public function sidebar_dashboard(Request $request)
-    {
-        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
-        return view('sidebar.dashboard',['booking'=>$booking]);
-    }
 
     public function apiSettings()
     {
@@ -792,18 +787,20 @@ class WebController extends Controller
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
         {
-            $ticket_info=Booking::where('id', json_decode($ticket->meta, true)['public_booking_id'])->with()->first();
+            $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
         }
         elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
         {
-            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)[])->first();
+            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)['Branch_id'])->first();
+            $service_status=$ticket_info->ticket_status;
         }
         elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
         {
-            $ticket_info=InventoryPrice::where([])->limit(1)->get();
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'service_type'=>json_decode($ticket->meta, true)['service_type'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('vendor')->with('services')->limit(1)->get();
+            $service_status=$ticket_info->ticket_status;
         }
 
-        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status]);
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);
     }
 
     public function serviceRequests(Request $request)
@@ -939,4 +936,27 @@ class WebController extends Controller
 
     }
 
+   /* public function sidebar_dashboard(Request $request)
+    {
+        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
+        return view('sidebar.dashboard',['booking'=>$booking]);
+    }*/
+
+    public function sidebar_branch(Request $request)
+    {
+        $branch=Organization::where('id', $request->id)->with('zone')->with('services')->first();
+        return view('sidebar.branch',['branch'=>$branch]);
+    }
+
+    public function sidebar_inventory(Request $request)
+    {
+        $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'organization_id'=>$request->org_id, 'service_type'=>$request->cat_id])->with('inventory')->get();
+        return view('sidebar.inventory',['inventories'=>$inventory]);
+    }
+
+    public static function sidebar_reviews(Request $request)
+    {
+        $reviews=Review::where('id', $request->id)->with('Booking')->with('user')->first();
+        return view('sidebar.reviews',['reviews'=>$reviews]);
+    }
 }

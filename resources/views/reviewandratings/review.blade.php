@@ -30,8 +30,8 @@
             <h1 class="f-34">{{$total_review}}</h1>
         </div>
         <div class="simple-card w-38">
-            <p class="f-13">DRAFT REVIEWS</p>
-            <h1 class="f-34">{{$inactive_review}}</h1>
+            <p class="f-13">AVERAGE REVIEWS</p>
+            <h1 class="f-34">{{$total_review}}</h1>
         </div>
         <div class="simple-card w-38">
             <p class="f-13">ACTIVE REVIEWS</p>
@@ -96,12 +96,12 @@
                                 <th scope="col">Review Description</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Ratings</th>
-                                <th scope="col">Operations</th>
+{{--                                <th scope="col">Operations</th>--}}
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
                             @foreach($reviews as $review)
-                                <tr class="tb-border cursor-pointer">
+                                <tr class="tb-border cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.reviews',['id'=>$review->id]) }}">
                                     <td scope="row">{{$review->booking->public_booking_id}}</td>
                                     <td>{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</td>
                                     <td>{{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}</td>
@@ -134,7 +134,7 @@
                                             <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
                                         @endfor
                                     </td>
-                                    <td>
+                                    {{--<td>
                                         <a  class = "inline-icon-button mr-4" href="{{route('create-review')}}">
                                             <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
 
@@ -143,7 +143,7 @@
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                         </a>
 
-                                    </td>
+                                    </td>--}}
                                 </tr>
                             @endforeach
                         </tbody>

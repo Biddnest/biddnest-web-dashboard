@@ -288,4 +288,16 @@ class InventoryController extends Controller
 
         return Helper::response(true, "status updated successfully");
     }
+
+    public static function changeStatus($id, $org_id, $service_id, $status)
+    {
+        $change_status =InventoryPrice::where(['inventory_id'=>$id, 'organization_id'=>$org_id, 'service_type'=>$service_id])->update([
+            "ticket_status"=>$status
+        ]);
+
+        if(!$change_status)
+            return Helper::response(false,"Couldn't Update status");
+
+        return Helper::response(true,"Status Updated successfully");
+    }
 }

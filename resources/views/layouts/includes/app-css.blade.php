@@ -522,9 +522,9 @@
             /*    z-index: 999;*/
             /*    margin-top: 15%;*/
             /*}*/
-           /* .fullscreen-modal-body .modal-header::before{
+            .fullscreen-modal-body .modal-header::before{
                 display: none;
-            }*/
+            }
             .fullscreen-modal-body .modal-header .modal-title{
                 font-weight: bold;
                 font-size: 18px;

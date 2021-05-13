@@ -21,5 +21,7 @@ class TicketEnums
     */
     public static $TEMPLATES = ["order_reschedule"=>["title_template"=>"Request for order reschedule {{booking.id}}{{user.name}}", "body_template"=>"I want like to reshedule my current order"],
                                 "order_cancellation"=>["title_template"=>"Request for order cancel {{booking.id}}{{user.name}}", "body_template"=>"I want like to cancel my current order"],
-                                "call_back"=>["title_template"=>"Request for call back", "body_template"=>"I would like to talk to Executive"]];
+                                "call_back"=>["title_template"=>"Request for call back", "body_template"=>"I would like to talk to Executive"],
+                                "new_branch"=>["title_template"=>"Request for Branch Aproval ", "body_template"=>"I have Added new Branch"],
+                                "price_update"=>["title_template"=>"Request for Inventory Price Aproval", "body_template"=>"I have updated/added new price for Inventory Items"]];
 }

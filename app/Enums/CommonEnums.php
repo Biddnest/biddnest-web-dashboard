@@ -14,4 +14,6 @@ class CommonEnums{
     public static $NO = 0;
 
     public static $PAGE_LENGTH = 15;
+
+    public static $TICKE_STATUS=["open"=>0, "aprove"=>1, "modify"=>2];
 }

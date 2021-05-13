@@ -153,6 +153,8 @@ class InventoryController extends Controller
             $inventoryprice->material= $price['material'];
             $inventoryprice->price_economics= $price['price']['economics'];
             $inventoryprice->price_premium= $price['price']['premium'];
+            if($web)
+                $inventoryprice->ticket_status= CommonEnums::$TICKE_STATUS['open'];
             $result= $inventoryprice->save();
         }
 
@@ -198,14 +200,18 @@ class InventoryController extends Controller
                 "price_economics" => $price['price']['economics'],
                 "price_premium" => $price['price']['premium'],
             ];
+
+            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
+                $updateColumns = ["ticket_status" => CommonEnums::$TICKE_STATUS['open']];
+
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }
 
-        if($web) {
+        if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
             TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
 
+        if($web)
             return Helper::response(true, "Price Saved successfully");
-        }
         else
             return Helper::response(true, "Inventory Price has been updated.");
     }

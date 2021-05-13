@@ -111,7 +111,7 @@
                                             <select class="form-control" name="branch" required>
                                                 <option value="">--Select--</option>
                                                 @foreach($branches as $branch)
-                                                    <option value="{{$branch->id}}" @if ($branch->id == $roles->organization_id) selected @endif>{{$branch->city}}</option>
+                                                    <option value="{{$branch->id}}" @if($roles && ($branch->id == $roles->organization_id)) selected @endif>{{$branch->city}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid

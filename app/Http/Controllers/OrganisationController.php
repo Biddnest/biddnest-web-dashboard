@@ -202,6 +202,10 @@ class OrganisationController extends Controller
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
         $organizations->verification_status = $exist['verification_status'];
+        if($vendor)
+        {
+            $organizations->ticket_status = CommonEnums::$TICKE_STATUS['open'];
+        }
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value)
@@ -258,6 +262,14 @@ class OrganisationController extends Controller
             "meta" =>json_encode($meta)
         ]);
 
+        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
+        {
+            Organization::where(["id" => $id])
+                ->update([
+                    'ticket_status' => CommonEnums::$TICKE_STATUS['open']
+                ]);
+        }
+
         OrganizationService::where("organization_id", $id)->delete();
         foreach($data['service'] as $value)
         {
@@ -270,10 +282,9 @@ class OrganisationController extends Controller
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
-        if($vendor)
-        {
+        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
             TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
-        }
+
 
         return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }

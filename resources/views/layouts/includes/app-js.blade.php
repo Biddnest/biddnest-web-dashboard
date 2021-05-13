@@ -45,7 +45,7 @@ crossorigin="anonymous"></script>
 {{--<script src="{{ asset('static/js/live-order-chart.js') }}"></script>--}}
 <script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script>
 
-<script src="{{ asset('static/js/userZone.js') }}"></script>
+{{--<script src="{{ asset('static/js/userZone.js') }}"></script>--}}
 
 <!-- <script src="{{ asset('static/js/progress-bar.js') }}"></script> -->
 

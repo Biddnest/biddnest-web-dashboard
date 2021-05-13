@@ -38,7 +38,7 @@
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
-                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" accept=".png,.jpg,.jpeg"/>
+                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" accept=".png,.jpg,.jpeg" required/>
                                                     <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->avatar}}@endif" required />
 
                                                 </div>

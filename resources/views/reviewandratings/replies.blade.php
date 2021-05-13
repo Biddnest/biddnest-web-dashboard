@@ -96,21 +96,22 @@
                             </div>
                         </div>
                         <div class="card testimonials-card bootstrap snippets bootdey col-md-5" style="border-radius: 5px !important; float: right; margin-right: 0px;">
-                            <div class="card-head right text-left  p-8">
-                                <h3 class="f-18">
+                            <div class="card-head right text-left  ">
+                                <h3 class="f-18 mt-0 border-bottom">
                                     <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab"
+                                            <a class="nav-link active " id="new-order-tab" data-toggle="tab" href="#order" role="tab"
                                                aria-controls="home" aria-selected="true">Add Reply</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#past" role="tab"
+                                            <a class="nav-link " id="quotation" data-toggle="tab" href="#past" role="tab"
                                                aria-controls="home" aria-selected="false">Action</a>
                                         </li>
                                     </ul>
                                 </h3>
                             </div>
-                            <div class=" d-flex  flex-row justify-content-between">
+                            <div class=" tab-content  flex-row justify-content-between">
+
                                 <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                                     <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
                                         <div class="col-sm-12">
@@ -125,9 +126,10 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane fade " id="past" role="tabpanel" aria-labelledby="quotation">
-                                    <label>Ticket Status</label>
-                                    <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
+                                    <div class="col-sm-12 " >
                                         <div class="form-input">
+                                        <label>Ticket Status</label>
+
                                             <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_status', ['id'=>$tickets->id])}}" required>
                                                 @foreach(\App\Enums\TicketEnums::$STATUS as $key=>$status)
                                                     <option id="reply" value="{{$status}}" @if($tickets && ($tickets->status==$status)) Selected @endif >{{ucwords($key)}}</option>

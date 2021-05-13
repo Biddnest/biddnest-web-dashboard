@@ -21,7 +21,7 @@
 <div class="modal-body border-top margin-topneg-7 vendor-modal p-0">
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="vendor" role="tabpanel" aria-labelledby="past-tab">
-
+            <input type="hidden" value='@json($graph)' id="revenue_dataset">
             <div class="row d-flex  pb-3 pl-3">
                 <div class="col-lg-6 align-items-center">
                     <h1 class="f-14  bold">Vendor Name</h1>
@@ -87,11 +87,18 @@
                 </div>
             </div>
             <div class="row pb-3 pl-3">
-                <div class="col-lg-6 align-items-center">
-                    <h1 class="f-14  bold">Vendor Revenue Trend</h1>
-                </div>
-                <div class="mt-3 ml-3">
-                    <img src="{{asset('static/images/graph/graph.svg')}}" alt="">
+                <div class="d-flex h-auto  Dashboard-lcards">
+                    <div class="col-sm-12 h-auto p-0">
+                        <div class="d-flex  card ">
+                            <div class="p-10 d-flex justify-content-between ">
+                                <h3 class="f-18 mt-0">Revenue Trend</h3>
+
+                            </div>
+                            <div class="revenue-chart">
+                                <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -205,10 +212,6 @@
                         <button class="btn theme-bg white-text my-0" style="width: 127px;
                                 border-radius: 6px;">View More</button>
                     </a></div>
-
-
-
-
             </div>
         </div>
 
@@ -216,3 +219,4 @@
         <!--  -->
     </div>
 </div>
+

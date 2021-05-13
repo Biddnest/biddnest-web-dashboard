@@ -44,6 +44,7 @@ import {
     initPopUp,
     initRangeSlider,
     initRevenueChart,
+    InitUserZoneChart,
     initToggles,
     initOrderDistributionChart,
     initOrderDistributionChartVendor
@@ -94,6 +95,7 @@ barba.hooks.after((data) => {
     initRevenueChart();
     initOrderDistributionChart();
     initOrderDistributionChartVendor();
+    InitUserZoneChart();
     initTextAreaEditor();
             // return false;
 });
@@ -112,6 +114,7 @@ $(document).ready(function(){
     initRevenueChart();
     initOrderDistributionChart();
     initOrderDistributionChartVendor();
+    InitUserZoneChart();
     initTextAreaEditor();
 });
 

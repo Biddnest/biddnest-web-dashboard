@@ -428,16 +428,20 @@ $("body").on('change', ".reply_status", function(event) {
     return false;
 });
 
-$("body").on('input', ".table-search", function(event) {
-    var query = $(this).val();
-    if(query.length >= 4){
-        redirectTo($(this).data('url')+"?search="+query);
+$("body").on('keydown', ".table-search", function(event) {
+    if(event.keyCode == 13){
+        var query = $(this).val();
+        if (query.length >= 3) {
+            redirectTo(window.location.href + "?search=" + query);
+        }
     }
 });
-$("body").on('input', ".table-search1", function(event) {
-    var query = $(this).val();
-    if(query.length >= 15){
-        redirectTo($(this).data('url')+"?search="+query);
+$("body").on('keydown', ".table-search1", function(event) {
+    if(event.keyCode == 13){
+        var query = $(this).val();
+        if (query.length >= 15) {
+            redirectTo(window.location.href + "?search=" + query);
+        }
     }
 });
 

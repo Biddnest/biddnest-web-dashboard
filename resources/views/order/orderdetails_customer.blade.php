@@ -190,8 +190,8 @@
                         <table class="table text-center p-10 theme-text tb-border2">
                             <thead class="secondg-bg bx-shadowg p-0 f-14">
                                 <tr>
-                                  <th scope="col">Item Name</th>
-                                  <th scope="col" >Quantity</th>
+                                  <th scope="col" style="    width: 50%;">Item Name</th>
+                                  <th scope="col" style="    width: 50%;" >Quantity</th>
                                   <th scope="col" >Size</th>
                                 </tr>
                             </thead>

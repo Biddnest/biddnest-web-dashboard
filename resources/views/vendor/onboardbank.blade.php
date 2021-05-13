@@ -92,9 +92,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload cursor-pointer">
-                                            <input id="upload" type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" class="cursor-pointer" >
                                             <input type="hidden" class="base-holder" name="doc[aadhar_card]" required value="{{$bank->aadhar_card ?? ''}}" />
                                             <button id="upload-btn" type="button" data-action="upload" class="btn theme-bg white-text my-0 cursor-pointer">@if($bank && $bank->aadhar_card) CHANGE @else UPLOAD FILE @endif</button>
+                                            <input id="upload" type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" class="cursor-pointer" @if(!$bank || !$bank->aadhar_card) required @endif>
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>
@@ -106,9 +106,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload">
-                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg">
                                             <input type="hidden" class="base-holder" name="doc[gst_certificate]" value="{{$bank->gst_certificate ?? ''}}" required />
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->gst_certificate) CHANGE @else UPLOAD FILE @endif</button>
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->gst_certificate) required @endif>
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>
@@ -120,9 +120,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload">
-                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg">
                                             <input type="hidden" class="base-holder" name="doc[biddnest_agreement]" value="{{$bank->bidnest_agreement ?? ''}}" required />
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->bidnest_agreement) CHANGE @else UPLOAD FILE @endif</button>
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->bidnest_agreement) required @endif>
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>
@@ -134,9 +134,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload">
-                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg"/>
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->pan_card) CHANGE @else UPLOAD FILE @endif</button>
                                             <input type="hidden" class="base-holder" name="doc[pan_card]" value="{{$bank->pan_card ?? ''}}" required />
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->pan_card) required @endif/>
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>
@@ -148,9 +148,9 @@
                                     <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
                                     <div class="ml-1">
                                         <div class="file-upload">
-                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg">
                                             <input type="hidden" class="base-holder" name="doc[company_registration_certificate]" value="{{$bank->company_reg_certificate ?? ''}}" required />
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->company_reg_certificate) CHANGE @else UPLOAD FILE @endif</button>
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->company_reg_certificate) required @endif>
                                         </div>
                                         <p class="file-name">Allowed: pdf, doc, image</p>
                                     </div>

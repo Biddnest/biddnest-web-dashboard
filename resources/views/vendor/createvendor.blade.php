@@ -80,7 +80,7 @@
                                                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                                     UPLOAD IMAGE
                                                                 </button>
-                                                                <input type="file" required/>
+                                                                <input type="file" accept=".png,.jpg,.jpeg" required/>
                                                             </div>
                                                             <p class="text-black">Max File size: 1MB</p>
                                                         </div>

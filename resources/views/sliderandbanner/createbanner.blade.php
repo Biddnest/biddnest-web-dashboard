@@ -164,88 +164,88 @@
                       </div>
                 </div>
               </div>
+    <script type="text/html" id="banner-form">
+
+        <div class="d-flex row p-20 banner-form-wrapper relative">
+            <div class="col-lg-6">
+                <p class="img-label">Image</p>
+                <div class="upload-section p-20 pt-0">
+                    <img class="upload-preview"
+                         src="{{asset('static/images/upload-image.svg')}}"
+                         alt=""
+                    />
+                    <div class="ml-1">
+                        <div class="file-upload">
+                            <input type="file" />
+                            <input type="hidden" class="base-holder" name="banners[][image]" value="" required />
+                            <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                UPLOAD IMAGE
+                            </button>
+                        </div>
+                        <p class="text-black">Max File size: 1MB</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-right">
+
+                <a href="#0" class="btn bg-danger closer text-white" data-parent=".banner-form-wrapper">Delete</a>
+                <a class="btn bg-primary dragger text-white" style="cursor: move;">Drag & Reorder</a>
             </div>
 
-<script type="text/html" id="banner-form">
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">Banner Name</label>
+                    <input type="text"
+                           id="name" required
+                           autocomplete="off"
+                           placeholder="Diwali"
+                           class="form-control br-5"
+                           name="banners[][name]"
+                    />
+                    <span class="error-message"
+                    >Please enter a valid URL</span
+                    >
+                </div>
+            </div>
 
-    <div class="d-flex row p-20 banner-form-wrapper relative">
-        <div class="col-lg-6">
-            <p class="img-label">Image</p>
-            <div class="upload-section p-20 pt-0">
-                <img class="upload-preview"
-                     src="{{asset('static/images/upload-image.svg')}}"
-                     alt=""
-                />
-                <div class="ml-1">
-                    <div class="file-upload">
-                        <input type="file" />
-                        <input type="hidden" class="base-holder" name="banners[][image]" value="" required />
-                        <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
-                            UPLOAD IMAGE
-                        </button>
-                    </div>
-                    <p class="text-black">Max File size: 1MB</p>
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">Url</label>
+                    <input
+                        type="url"
+                        id="url" required
+                        autocomplete="off"
+                        placeholder="Diwali.com"
+                        class="form-control br-5"
+                        name="banners[][url]"
+                    />
+                    <span class="error-message"
+                    >Please enter a valid URL</span
+                    >
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">From date</label>
+                    <input type="date" name="banners[][date][from]" class=" form-control br-5" required="required" value="{{$slider->from_date}}" />
+                    <span class="error-message">please enter valid date</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
+                    <label class="full-name">To date</label>
+                    <input type="date" name="banners[][date][to]" class=" form-control br-5" required="required" value="{{$slider->to_date}}" />
+                    <span class="error-message">please enter valid date</span>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 text-right">
 
-            <a href="#0" class="btn bg-danger closer text-white" data-parent=".banner-form-wrapper">Delete</a>
-            <a class="btn bg-primary dragger text-white" style="cursor: move;">Drag & Reorder</a>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="form-input">
-                <label class="full-name">Banner Name</label>
-                <input type="text"
-                       id="name" required
-                       autocomplete="off"
-                       placeholder="Diwali"
-                       class="form-control br-5"
-                       name="banners[][name]"
-                />
-                <span class="error-message"
-                >Please enter a valid URL</span
-                >
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="form-input">
-                <label class="full-name">Url</label>
-                <input
-                    type="url"
-                    id="url" required
-                    autocomplete="off"
-                    placeholder="Diwali.com"
-                    class="form-control br-5"
-                    name="banners[][url]"
-                />
-                <span class="error-message"
-                >Please enter a valid URL</span
-                >
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="form-input">
-                <label class="full-name">From date</label>
-                <input type="date" name="banners[][date][from]" class=" form-control br-5" required="required" value="{{$slider->from_date}}" />
-                <span class="error-message">please enter valid date</span>
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="form-input">
-                <label class="full-name">To date</label>
-                <input type="date" name="banners[][date][to]" class=" form-control br-5" required="required" value="{{$slider->to_date}}" />
-                <span class="error-message">please enter valid date</span>
-            </div>
-        </div>
-    </div>
-
-</script>
+    </script>
 </div>
+
+
 
 
 

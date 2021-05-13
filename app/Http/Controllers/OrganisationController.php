@@ -505,7 +505,7 @@ class OrganisationController extends Controller
 
     public static function changeStatus($id, $status)
     {
-        $change_status=Vendor::where(["id"=>$id])->update(["ticket_status" => $status]);
+        $change_status=Organization::where(["id"=>$id])->update(["ticket_status" => $status]);
 
         if(!$change_status)
             return Helper::response(false,"Couldn't Update status");

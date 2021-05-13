@@ -11,16 +11,17 @@ class InventoryPrice extends Model
     protected $hidden =['created_at', 'updated_at','deleted'];
     use HasFactory;
 
-    public  function vendor(){
-        $this->belongsToMany(Organization::class);
+
+    public function organization(){
+        return $this->belongsTo(Organization::class);
     }
 
-    public  function services(){
-        $this->belongsToMany(Service::class);
+    public function service(){
+        return $this->belongsTo(Service::class,"service_type");
     }
 
-    public  function inventory(){
-        $this->belongsToMany(Inventory::class);
+    public function inventory(){
+        return $this->belongsTo(Inventory::class);
     }
 
 }

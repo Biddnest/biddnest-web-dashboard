@@ -1062,11 +1062,11 @@ class Route extends Controller
 
     public function changeStatusPrice(Request $request)
     {
-        return InventoryController::changeStatus($request->id, $request->data);
+        return InventoryController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->data);
     }
     public function changeStatusBranch(Request $request)
     {
-        return OrganisationController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->data);
+        return OrganisationController::changeStatus($request->id, $request->data);
     }
 
     public function notification_add(Request $request)

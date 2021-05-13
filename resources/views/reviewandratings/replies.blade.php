@@ -206,7 +206,7 @@
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->id]) }}">{{$ticket_info->org_name}} {{$ticket_info->org_type}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->org_name}} {{$ticket_info->org_type}}</a>
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                         <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.branch',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->city}}</a>
@@ -216,7 +216,7 @@
                                                     <div class="form-input">
                                                         <label>Aproval Status</label>
 
-                                                        <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" required>
+                                                        <select id="status" name="status" class="form-control reply_status" data-url="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" required>
                                                             @foreach(\App\Enums\CommonEnums::$TICKE_STATUS as $key=>$status)
                                                                 <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
                                                             @endforeach
@@ -238,10 +238,10 @@
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->organization_id]) }}">{{$ticket_info->vendor->org_name}} {{$ticket_info->org_type}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->organization_id]) }}">{{$ticket_info->organization->org_name}} {{$ticket_info->org_type}}</a>
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        {{$ticket_info->services->name}}
+                                                        {{$ticket_info->service->name}}
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                         <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.inventory',['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type]) }}">{{$ticket_info->inventory->name}}</a>

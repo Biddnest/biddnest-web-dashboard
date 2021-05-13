@@ -792,18 +792,20 @@ class WebController extends Controller
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
         {
-            $ticket_info=Booking::where('id', json_decode($ticket->meta, true)['public_booking_id'])->with()->first();
+            $ticket_info=Booking::where('id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
         }
         elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
         {
-            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)[])->first();
+            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)['Branch_id'])->first();
+            $service_status=$ticket_info->ticket_status;
         }
         elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
         {
-            $ticket_info=InventoryPrice::where([])->limit(1)->get();
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'service_type'=>json_decode($ticket->meta, true)['service_type'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->limit(1)->get();
+            $service_status=$ticket_info->ticket_status;
         }
 
-        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status]);
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);
     }
 
     public function serviceRequests(Request $request)

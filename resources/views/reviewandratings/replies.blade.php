@@ -117,12 +117,14 @@
                             <div class="card-head right text-left  ">
                                 <h3 class="f-18 mt-0 border-bottom">
                                     <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
+                                        @if($ticket_info)
+                                            <li class="nav-item">
+                                                <a class="nav-link active " id="new-order-tab" data-toggle="tab" href="#info" role="tab"
+                                                   aria-controls="home" aria-selected="true">Info</a>
+                                            </li>
+                                        @endif
                                         <li class="nav-item">
-                                            <a class="nav-link active " id="new-order-tab" data-toggle="tab" href="#info" role="tab"
-                                               aria-controls="home" aria-selected="true">Info</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link " id="new-order-tab" data-toggle="tab" href="#order" role="tab"
+                                            <a class="nav-link @if(!$ticket_info) active @endif " id="new-order-tab" data-toggle="tab" href="#order" role="tab"
                                                aria-controls="home" aria-selected="true">Add Reply</a>
                                         </li>
                                         <li class="nav-item">
@@ -133,22 +135,23 @@
                                 </h3>
                             </div>
                             <div class="  tab-content  flex-row justify-content-between">
-
-                                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="new-order-tab">
-                                    <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
-                                        <div class="col-sm-12">
-                                            <div class="form-input">
-                                                <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
-                                                <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                @if($ticket_info)
+                                    <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="new-order-tab">
+                                        <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
+                                            <div class="col-sm-12">
+                                                <div class="form-input">
+                                                    <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
+                                                    <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                            <div class="col-sm-12">
+                                                <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @endif
 
-                                <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="new-order-tab">
+                                <div class="tab-pane fade @if(!$ticket_info) show active @endif " id="order" role="tabpanel" aria-labelledby="new-order-tab">
                                     <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
                                         <div class="col-sm-12">
                                             <div class="form-input">

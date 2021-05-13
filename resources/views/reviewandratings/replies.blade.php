@@ -54,7 +54,7 @@
                             <h4 class="name" style="font-size: 16px !important; margin-top: 5px !important; margin-bottom: 0px !important; font-weight: 600 !important;">{{$tickets->desc}}</h4>
                             @if($tickets->type == \App\Enums\TicketEnums::$TYPE['new_branch'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['price_update'])
                                 <div class="mr-20">
-                                    @switch($service->ticket_status)
+                                    @switch($service)
                                         @case(\App\Enums\CommonEnums::$TICKE_STATUS['open'])
                                         <span class="status-badge red-bg text-black-50 text-center">Open</span>
                                         @break

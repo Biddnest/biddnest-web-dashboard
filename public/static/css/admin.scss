@@ -4937,6 +4937,7 @@ input[type=submit].btn-block {
 
 .breadcrumb-item {
     display: flex;
+    cursor: default !important;
 }
 
 .breadcrumb-item+.breadcrumb-item {

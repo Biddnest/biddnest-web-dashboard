@@ -20,6 +20,7 @@ use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\CouponZone;
 use App\Models\Inventory;
+use App\Models\InventoryPrice;
 use App\Models\Notification;
 use App\Models\Org_kyc;
 use App\Models\Page;
@@ -147,11 +148,6 @@ class WebController extends Controller
         ]);
     }
 
-    public function sidebar_dashboard(Request $request)
-    {
-        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
-        return view('sidebar.dashboard',['booking'=>$booking]);
-    }
 
     public function apiSettings()
     {
@@ -420,10 +416,12 @@ class WebController extends Controller
         $vendors->with('admin');
 
 
-        $count_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
-        $count_verified_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->whereIn("zone_id", $zone)->count();
-        $count_unverifide_vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
-        return view('vendor.vendor',['vendors'=>$vendors ->paginate(CommonEnums::$PAGE_LENGTH), 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'unverifide_vendors'=>$count_unverifide_vendors]);
+        $count_vendors = Organization::where(["deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
+        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->whereIn("zone_id", $zone)->count();
+        $count_active_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
+        $count_lead_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['lead'], "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
+        $count_suspended_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['suspended'], "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
+        return view('vendor.vendor',['vendors'=>$vendors ->paginate(CommonEnums::$PAGE_LENGTH), 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'active_vendors'=>$count_active_vendors, 'lead_vendors'=>$count_lead_vendors, 'suspended_vendors'=>$count_suspended_vendors]);
     }
 
     public function sidebar_vendors(Request $request)
@@ -782,9 +780,27 @@ class WebController extends Controller
 
     public function reply(Request $request)
     {
+        $service_status=[];
+        $ticket_info=[];
         $ticket=Ticket::where('id', $request->id)->with('reply')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
-        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies]);
+
+        if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
+        {
+            $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
+        }
+        elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
+        {
+            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)['Branch_id'])->first();
+            $service_status=$ticket_info->ticket_status;
+        }
+        elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
+        {
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'service_type'=>json_decode($ticket->meta, true)['service_type'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->with('service')->first();
+            $service_status=$ticket_info->ticket_status;
+        }
+
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);
     }
 
     public function serviceRequests(Request $request)
@@ -920,4 +936,27 @@ class WebController extends Controller
 
     }
 
+   /* public function sidebar_dashboard(Request $request)
+    {
+        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
+        return view('sidebar.dashboard',['booking'=>$booking]);
+    }*/
+
+    public function sidebar_branch(Request $request)
+    {
+        $branch=Organization::where('id', $request->id)->with('zone')->with('services')->first();
+        return view('sidebar.branch',['branch'=>$branch]);
+    }
+
+    public function sidebar_inventory(Request $request)
+    {
+        $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'organization_id'=>$request->org_id, 'service_type'=>$request->cat_id])->with('inventory')->get();
+        return view('sidebar.inventory',['inventories'=>$inventory]);
+    }
+
+    public static function sidebar_reviews(Request $request)
+    {
+        $reviews=Review::where('id', $request->id)->with('Booking')->with('user')->first();
+        return view('sidebar.reviews',['reviews'=>$reviews]);
+    }
 }

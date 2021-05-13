@@ -191,6 +191,7 @@ $("body").on('change', ".field-toggle", function(event) {
 
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
+    console.log('show');
     $(".hide-on-data").fadeOut(100);
     initRangeSlider();
     var id=$(".category-select").val();
@@ -429,7 +430,7 @@ $("body").on('change', ".reply_status", function(event) {
 
 $("body").on('input', ".table-search", function(event) {
     var query = $(this).val();
-    if(query.length > 5){
+    if(query.length >= 4){
         redirectTo($(this).data('url')+"?search="+query);
     }
 });

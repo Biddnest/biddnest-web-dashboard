@@ -170,7 +170,7 @@
             <div class="card p-10 pl-0 pr-0">
                 <div class="d-flex flex-row justify-content-between">
                     <div class="p-10 card-head right text-left ml-3">
-                        <h3 class="f-18 mt-0 ">Recent Orders</h3>
+                        <h3 class="f-18 mt-0 ml-2">Recent Orders</h3>
                     </div>
                     {{--<div class="p-10 card-head left">
                         <a><i><img src="{{asset('static/images/filter.svg') }}" alt="" srcset=""></i>
@@ -207,15 +207,15 @@
                     <thead class="secondg-bg border-none p-0 f-14">
                         <tr style="color: #3c4b58;">
                             <th scope="col">Order ID</th>
-                            <th scope="col">Order Status</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Order Amount</th>
+                            <th scope="col" style="text-align: center !important; width:10%">Order Status</th>
+                            <th scope="col"style="text-align: center !important;     width: 20%;">Created At</th>
+                            <th scope="col"  style="text-align: center !important;">Order Amount</th>
                         </tr>
                     </thead>
                     <tbody class="mtop-20">
                         @foreach($bookings as $booking)
-                            <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.dashboard',['id'=>$booking->id]) }}">
-                                <th scope="row" style="text-decoration: underline;">{{$booking->public_booking_id}}</th>
+                            <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
+                                <th scope="row" style="text-decoration: underline; padding-left: 24px !important;">{{$booking->public_booking_id}}</th>
                                 <td class="">
                                     @switch($booking->status)
                                         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
@@ -259,14 +259,14 @@
                                         @break;
                                     @endswitch
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center" style="text-align: center !important; ">
                                     @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
                                         {{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}
                                     @else
                                         Bidding Done
                                     @endif
                                 </td>
-                                <td class="text-center">₹ @if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif</td>
+                                <td class="text-center" style="text-align: center !important; ">₹ @if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif</td>
                             </tr>
                         @endforeach
                     </tbody>

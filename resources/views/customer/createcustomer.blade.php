@@ -34,12 +34,11 @@
                                             <img class="upload-preview" src="@if(!$users){{asset('static/images/upload-image.svg')}}@else{{$users->avatar}}@endif" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
-
+                                                    <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->avatar}}@endif" required />
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
-                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" accept=".png,.jpg,.jpeg"/>
-                                                    <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->avatar}}@endif" required />
+                                                    <input type="file" accept=".png,.jpg,.jpeg" @if(!$users) required @endif/>
 
                                                 </div>
                                                 <p>Max File size: 1MB</p>

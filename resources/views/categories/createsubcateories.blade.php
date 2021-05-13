@@ -42,7 +42,7 @@
                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                         UPLOAD IMAGE
                                     </button>
-                                    <input type="file"  value="@if(isset($subcategory)){{$subcategory->image}}@endif" required/>
+                                    <input type="file" @if(!$subcategory) required @endif/>
                                 </div>
                                 <p>Max File size: 1MB</p>
                               </div>
@@ -84,20 +84,20 @@
                                   <span class="error-message">Please enter valid Service</span>
                                 </div>
                               </div>
-                              <div class="col-sm-12   border-top-pop mtop-20">
+                              <!-- <div class="col-sm-12   border-top-pop mtop-20">
                                 <div class="theme-text f-14 bold pt-10">
                                    List
                                 </div>
-                              </div>
+                              </div> -->
                             <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
-                                <div class="heading p-8 border-around m-auto " >
-                                   Inventory List
-                                </div>
+                            <div class="heading p-10 pl-4 border-around ">
+                              Inventory List
+                            </div>
 
                                 <table class="table text-center p-10 theme-text tb-border2" id="itms">
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
                                     <tr class="">
-                                        <th scope="col  " class="text-left">Item Name</th>
+                                        <th scope="col  " class="text-left"  style="padding-left: 16px !important;">Item Name</th>
 
                                         <th scope="col  " class="text-left">Material</th>
 
@@ -114,7 +114,7 @@
                                        @if($subcategory && $subcategory->inventorymap)
                                         @foreach($subcategory->inventorymap as $inventory_key)
                                         <tr class="inventory-snip">
-                                            <td scope="row" class="text-left">
+                                            <td scope="row" class="text-left"  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                     <option value="">--Select--</option>
                                                     @foreach($inventories as $inventory)
@@ -123,7 +123,7 @@
                                                 </select>
                                             </td>
 
-                                            <td class="">
+                                            <td class=""  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 material" name="inventories[][material]" required>
                                                     <option value="">--Choose Inventory First--</option>
                                                     @foreach(json_decode($inventory_key->meta->material, true) as $material)
@@ -132,7 +132,7 @@
                                                 </select>
                                             </td>
 
-                                            <td class="">
+                                            <td class=""  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
                                                     <option value="">--Choose Inventory First--</option>
                                                     @foreach(json_decode($inventory_key->meta->size, true) as $size)
@@ -152,23 +152,23 @@
                                     @endforeach
                                        @else
                                            <tr class="inventory-snip">
-                                               <td scope="row" class="text-left">
+                                               <td scope="row" class="text-left" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                        <option value="">--Select--</option>
                                                        @foreach($inventories as $inventory)
-                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->name}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
                                                        @endforeach
                                                    </select>
                                                </td>
 
-                                               <td class="">
+                                               <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 material" name="inventories[][material]" required>
                                                        <option value="">Choose Inventory</option>
 
                                                    </select>
                                                </td>
 
-                                               <td class="">
+                                               <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
                                                        <option value="">Choose Inventory</option>
 
@@ -219,39 +219,40 @@
                 </div>
         </div>
     </div>
+    <script type="text/html" id="add-inventory-row">
+        <tr class="inventory-snip">
+            <th scope="row" class="text-left">
+                <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
+                    <option value="">--Select--</option>
+                    @foreach($inventories as $inventory)
+                        <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                    @endforeach
+                </select>
+            </th>
+
+            <td class="">
+                <select class="form-control br-5 material" name="inventory[][material]" required>
+                    <option value="">Choose Inventory</option>
+                </select>
+            </td>
+
+            <td class="">
+                <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+                    <option value="">Choose Inventory</option>
+                </select>
+            </td>
+
+            <td class="" style="width: 20%;">
+                <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
+            </td>
+
+            <td>
+                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+            </td>
+        </tr>
+    </script>
 </div>
 
-<script type="text/html" id="add-inventory-row">
-    <tr class="inventory-snip">
-        <th scope="row" class="text-left">
-            <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
-                <option value="">--Select--</option>
-                @foreach($inventories as $inventory)
-                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
-                @endforeach
-            </select>
-        </th>
 
-        <td class="">
-            <select class="form-control br-5 material" name="inventory[][material]" required>
-                <option value="">Choose Inventory</option>
-            </select>
-        </td>
-
-        <td class="">
-            <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
-                <option value="">Choose Inventory</option>
-            </select>
-        </td>
-
-        <td class="" style="width: 20%;">
-            <input class="form-control br-5" type="number" name="inventory[][quantity]" required>
-        </td>
-
-        <td>
-            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-        </td>
-    </tr>
-</script>
 
 @endsection

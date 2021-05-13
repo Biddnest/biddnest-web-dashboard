@@ -522,9 +522,9 @@
             /*    z-index: 999;*/
             /*    margin-top: 15%;*/
             /*}*/
-           /* .fullscreen-modal-body .modal-header::before{
+            .fullscreen-modal-body .modal-header::before{
                 display: none;
-            }*/
+            }
             .fullscreen-modal-body .modal-header .modal-title{
                 font-weight: bold;
                 font-size: 18px;
@@ -543,11 +543,11 @@
             .fullscreen-modal{
                 z-index: 999;
                 display: none;
-                position: relative;
-                top: 0;
-                left: 0;
-                margin-left: 20%;
-                width: 80%;
+                position: absolute;
+                top: 30px;
+                left: 0px;
+                margin-left: 0%;
+                width: 100%;
                 min-height: 100%;
                 background-color: rgba(0,0,0,0.4);
                 padding: 5% 10%;
@@ -561,7 +561,8 @@
             .branch-wrapper .branch-snip .data-group a{
                 /*display: inline-block;*/
                 margin: 5px;
-                padding: 10px 11px;
+                /* padding: 10px 11px; */
+                padding: 10px 16px;
                 border-radius: 50%;
                 background: #f2f2f2;
             }
@@ -585,7 +586,7 @@
             }
 
             .branch-wrapper .branch-snip .data-group:last-child::after{ display: none;}
-            .branch-wrapper .branch-snip .data-group::after{
+            /* .branch-wrapper .branch-snip .data-group::after{
                 width: 1px;
                 position: absolute;
                 height: 70%;
@@ -595,7 +596,7 @@
                 display: block;
                 background: #c0c0c0;
 
-            }
+            } */
             .branch-wrapper .branch-snip{
                 position: relative;
                 border-radius: 2px;

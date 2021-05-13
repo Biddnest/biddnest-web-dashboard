@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                 <div class="card h-auto p-0 pt-10">
                     <div class="header-wrap">
-                        <div class="col-sm-8 p-3 ">
+                        <div class="col-sm-8 p-3 ml-3">
                             <h3 class="f-18 ml-2 mt-4">Sliders & Banners </h3>
                         </div>
                         <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -28px;">
@@ -80,10 +80,10 @@
                                     <!-- <th scope="col" style="width: 4%;"></th> -->
                                     <th scope="col">Image</th>
                                     <th scope="col">Banner Name</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col" style="text-align: center !important;">Status</th>
                                     <th scope="col">Platform</th>
                                     <th scope="col">Created On</th>
-                                    <th scope="col">Operations</th>
+                                    <th scope="col" style="text-align: center !important; width: 20%">Operations</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-14">
@@ -124,7 +124,7 @@
                                         <td>
                                             {{ \Carbon\Carbon::parse($slider->created_at)->format("d M Y") }}
                                         </td>
-                                        <td>
+                                        <td style="text-align:center !important">
                                             <a class="inline-icon-button" href="{{route('edit-slider', ['id'=>$slider->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                             <a href="#" class="delete inline-icon-button" data-parent=".slider_{{$slider->id}}" data-confirm="Are you sure, you want delete this Slider permenently? You won't be able to undo this." data-url="{{route('sliders_delete',['id'=>$slider->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                         </td>

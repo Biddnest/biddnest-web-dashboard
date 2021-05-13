@@ -5,14 +5,12 @@
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails">
               <div class="d-flex  flex-row justify-content-between">
                   <h3 class="page-head text-left p-4">Order Details</h3>
-
               </div>
               <div class="d-flex  flex-row justify-content-between">
                 <div class="page-head text-left p-4 pt-0 pb-0">
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
-
                       <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
                   </nav>
@@ -64,7 +62,7 @@
 
                       <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
                         <h3 class="f-18" style="margin-top: 0;">
-                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600;">
+                            <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600;  margin-left: -6px;">
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
                                 </li>
@@ -101,48 +99,48 @@
                             <div class="d-flex  row p-15 pb-0" >
 
                                 <div class="col-sm-4  secondg-bg margin-topneg-15 pt-10 ">
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Order ID
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Customer Name
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Vender Name
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Review Description
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Status
                                     </div>
-                                    <div class="theme-text f-14 bold p-15">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Ratings
                                     </div>
                                 </div>
 
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;" >
                                       {{$booking->public_booking_id}}
                                     </div>
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
                                       {{ucfirst(trans($booking->user->fname))}} {{ucfirst(trans($booking->user->lname))}}
                                     </div>
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
                                         @if($booking->organization){{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}} @endif
                                     </div>
-                                    <div class="theme-text f-14 p-15">
+                                    <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
                                       {{$booking->review->desc}}
                                     </div>
-                                    <div class="theme-text f-14  text-center status-badge mtop-20">
+                                    <div class="theme-text f-14  text-center status-badge mt-1">
                                       @foreach(\App\Enums\BookingEnums::$STATUS as $status=>$key)
                                           @if($key == $booking->$status)
                                             {{ucfirst(trans($status))}}
                                           @endif
                                       @endforeach
                                     </div>
-                                    <div class="theme-text f-14 p-15 mt-2">
+                                    <div class="theme-text f-14 p-15 pl-0  mt-3" style="padding-top: 5px;">
                                         @php $ratings = 0; @endphp
                                         @foreach(json_decode($booking->review->ratings, true) as $rating)
                                             @php $ratings += $rating['rating']; @endphp

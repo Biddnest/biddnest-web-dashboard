@@ -153,13 +153,19 @@ class InventoryController extends Controller
             $inventoryprice->material= $price['material'];
             $inventoryprice->price_economics= $price['price']['economics'];
             $inventoryprice->price_premium= $price['price']['premium'];
+            if($web)
+                $inventoryprice->ticket_status= CommonEnums::$TICKE_STATUS['open'];
             $result= $inventoryprice->save();
         }
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        if($web)
-            return Helper::response(true,"Price Saved successfully");
+
+        if($web) {
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+
+            return Helper::response(true, "Price Saved successfully");
+        }
         else
             return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
     }
@@ -175,7 +181,7 @@ class InventoryController extends Controller
             return Helper::response(true,"Data Display successfully", ["InventoryPrice"=>$result]);
     }
 
-    public static function updatePrice($data)
+    public static function updatePrice($data, $web=false)
     {
         // $Organization = Organization::findOrFail($data["organization_id"]);
         // if(!$Organization)
@@ -194,9 +200,20 @@ class InventoryController extends Controller
                 "price_economics" => $price['price']['economics'],
                 "price_premium" => $price['price']['premium'],
             ];
+
+            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
+                $updateColumns = ["ticket_status" => CommonEnums::$TICKE_STATUS['open']];
+
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }
-        return Helper::response(true, "Inventory Price has been updated.");
+
+        if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+
+        if($web)
+            return Helper::response(true, "Price Saved successfully");
+        else
+            return Helper::response(true, "Inventory Price has been updated.");
     }
 
     public static function deletePrice($id)
@@ -270,5 +287,17 @@ class InventoryController extends Controller
             return Helper::response(false, "failed to updated status");
 
         return Helper::response(true, "status updated successfully");
+    }
+
+    public static function changeStatus($id, $org_id, $service_id, $status)
+    {
+        $change_status =InventoryPrice::where(['inventory_id'=>$id, 'organization_id'=>$org_id, 'service_type'=>$service_id])->update([
+            "ticket_status"=>$status
+        ]);
+
+        if(!$change_status)
+            return Helper::response(false,"Couldn't Update status");
+
+        return Helper::response(true,"Status Updated successfully");
     }
 }

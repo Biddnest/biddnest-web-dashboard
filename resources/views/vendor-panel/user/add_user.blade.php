@@ -55,7 +55,7 @@
                                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                     UPLOAD IMAGE
                                                 </button>
-                                                <input type="file" value="@if(!$roles){{asset('static/images/upload-image.svg')}}@else{{$roles->image}}@endif" required/>
+                                                <input type="file" @if(!$roles) required @endif/>
                                             </div>
                                             <p class="text-black">Max File size: 1MB</p>
                                         </div>
@@ -111,7 +111,7 @@
                                             <select class="form-control" name="branch" required>
                                                 <option value="">--Select--</option>
                                                 @foreach($branches as $branch)
-                                                    <option value="{{$branch->id}}" @if ($branch->id == $roles->organization_id) selected @endif>{{$branch->city}}</option>
+                                                    <option value="{{$branch->id}}" @if($roles && ($branch->id == $roles->organization_id)) selected @endif>{{$branch->city}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid

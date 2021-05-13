@@ -35,7 +35,7 @@
                   <h3 class="f-18">
                     <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                       <li class="nav-item">
-                        <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab"
+                        <a class="nav-link active p-15 pl-2" id="new-order-tab" data-toggle="tab" href="#order" role="tab"
                           aria-controls="home" aria-selected="true">Create New Order</a>
                       </li>
                       <li class="nav-item">
@@ -278,7 +278,7 @@
                             <div class="form-input" >
                               <label class="start-date">Start date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date" required="required" placeholder="15 Jan" />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan" />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>
@@ -327,13 +327,13 @@
                             </div>
                           </div>
                           <div class="col-sm-12 mtop-20  p-15   pb-0" >
-                            <div class="heading p-8 border-around ">
+                            <div class="heading p-10 pl-4 border-around ">
                               Inventory
                             </div>
                             <table class="table text-center p-10  theme-text tb-border2" id="items" >
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
-                                    <th scope="col">Item Name</th>
+                                    <th scope="col" style="padding-left: 16px !important;">Item Name</th>
                                       <th scope="col">Material</th>
                                         <th scope="col">Size</th>
                                       <th scope="col">Quantity</th>
@@ -342,7 +342,7 @@
                                 </thead>
                                 <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                     <tr class="inventory-snip">
-                                    <td scope="row" class="text-left">
+                                    <td scope="row" class="text-left" style="padding-left: 14px !important;">
                                         <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                                             <option value="">--Select--</option>
                                             @foreach($inventories as $inventory)
@@ -351,14 +351,14 @@
                                         </select>
                                     </td>
 
-                                    <td class="">
+                                    <td class=""  style="padding-left: 14px !important;">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
                                             <option value="">--Choose Inventory--</option>
 
                                         </select>
                                     </td>
 
-                                    <td class="">
+                                    <td class=""  style="padding-left: 14px !important;">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
                                             <option value="">--Choose Inventory--</option>
 
@@ -403,7 +403,7 @@
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-10 ">
                           <div class="w-50">
-                              <a class="white-text p-10" href="#">
+                              <a class="white-text p-10" href="{{route('orders-booking')}}">
                                   <button type="button" class="btn  w-30 white-text">Cancel</button>
                               </a>
                           </div>
@@ -424,41 +424,42 @@
     </div>
 
     </div>
+    <script type="text/html" id="add-inventory-row">
+        <tr class="inventory-snip">
+            <th scope="row" class="text-left">
+                <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
+                    <option value="">--Select--</option>
+                    @foreach($inventories as $inventory)
+                        <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                    @endforeach
+                </select>
+            </th>
+
+            <td class="">
+                <select class="form-control br-5 material" name="inventory_items[][material]" required>
+                    <option value="">--Choose Inventory--</option>
+                </select>
+            </td>
+
+            <td class="">
+                <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
+                    <option value="">--Choose Inventory--</option>
+                </select>
+            </td>
+
+            <td class="" style="width: 20%;">
+                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" >
+
+                <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
+            </td>
+
+            <td>
+                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+            </td>
+        </tr>
+
+    </script>
 </div>
 
-<script type="text/html" id="add-inventory-row">
-    <tr class="inventory-snip">
-        <th scope="row" class="text-left">
-            <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
-                <option value="">--Select--</option>
-                @foreach($inventories as $inventory)
-                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
-                @endforeach
-            </select>
-        </th>
 
-        <td class="">
-            <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                <option value="">--Choose Inventory--</option>
-            </select>
-        </td>
-
-        <td class="">
-            <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                <option value="">--Choose Inventory--</option>
-            </select>
-        </td>
-
-        <td class="" style="width: 20%;">
-            <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" >
-
-            <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
-        </td>
-
-        <td>
-            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-        </td>
-    </tr>
-
-</script>
 @endsection

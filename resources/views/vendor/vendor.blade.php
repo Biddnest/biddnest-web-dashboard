@@ -26,26 +26,26 @@
 
                             </div>
         <div class="vender-all-details">
-                                <div class="simple-card" style="width: 30%;">
+                                <div class="simple-card" >
                                     <p>TOTAL VENDORS</p>
                                     <h1>{{$vendors_count }}</h1>
                                 </div>
-                                <div class="simple-card" style="width: 30%;">
-                                    <p>UNVERIFIED VENDORS</p>
-                                    <h1>{{$unverifide_vendors}}</h1>
+                                <div class="simple-card" >
+                                    <p> ACTIVE VENDORS</p>
+                                    <h1>{{$active_vendors}}</h1>
                                 </div>
-                                <div class="simple-card" style="width: 30%;">
+                                <div class="simple-card" >
                                     <p> VERIFIED VENDORS</p>
                                     <h1>{{$verifide_vendors}}</h1>
                                 </div>
-{{--                                <div class="simple-card">--}}
-{{--                                    <p> ECONOMIC VENDORS</p>--}}
-{{--                                    <h1>2,594</h1>--}}
-{{--                                </div>--}}
-{{--                                <div class="simple-card">--}}
-{{--                                    <p> PREMIUM VENDORS</p>--}}
-{{--                                    <h1>2,248</h1>--}}
-{{--                                </div>--}}
+                                <div class="simple-card">
+                                    <p> Leads</p>
+                                    <h1>{{$lead_vendors}}</h1>
+                                </div>
+                                <div class="simple-card">
+                                    <p>SUSPENDED VENDORS</p>
+                                    <h1>{{$suspended_vendors}}</h1>
+                                </div>
                             </div>
         <!-- Dashboard cards -->
         <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -112,7 +112,7 @@
                                                         <th scope="col" >Vendor Name</th>
                                                         <th scope="col">Org Name</th>
                                                         <th scope="col">Zone</th>
-                                                        <th scope="col">Status</th>
+                                                        <th scope="col" style="    text-align: center !important; width: 16%;">Status</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>

@@ -13,9 +13,10 @@
         <div class="page-head  p-1 mt-2 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories and Subcategories</a>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories & Subcategory</a>
                     </li>
-                    <li class="breadcrumb-item pl-2"><a href="#">@if(!$inventory)Create @else Edit @endif Inventory</a></li>
+                    <li class="breadcrumb-item pl-2"><a href="{{route('inventories')}}">Inventory List</a></li>
+                    <li class="breadcrumb-item pl-2">@if(!$inventory)Create @else Edit @endif Inventory</li>
                 </ol>
             </nav>
         </div>
@@ -25,7 +26,7 @@
             <div class="card h-auto p-0 p-10">
                 <div class="card-head right text-left border-bottom-2 p-8">
                     <h3 class="f-18 mt-3 mb-3 pl-3 theme-text">
-                        @if(!$inventory)Create @else Edit @endif Subcategory
+                        @if(!$inventory)Create @else Edit @endif Inventory
                     </h3>
                 </div>
                 <div class="" id="">
@@ -55,7 +56,7 @@
                                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                     UPLOAD IMAGE
                                                 </button>
-                                            <input type="file" required/>
+                                            <input type="file" @if(!$inventory) required @endif/>
                                         </div>
                                         <p class="text-black pl-2">Max File size: 1MB</p>
                                     </div>
@@ -71,11 +72,11 @@
                                             />
                                         <div class="ml-1">
                                             <div class="file-upload">
-                                                <input type="file" />
                                                 <input type="hidden" class="base-holder" name="icon" value="@if($inventory){{$inventory->icon}}@endif" required />
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
+                                                <input type="file" @if(!$inventory) required @endif/>
                                             </div>
                                             <p class="text-black pl-2">Max File size: 1MB</p>
                                         </div>

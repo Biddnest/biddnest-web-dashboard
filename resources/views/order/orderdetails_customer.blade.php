@@ -148,7 +148,7 @@
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                        <span class="status-badge grey-bg  text-center td-padding" style="font-weight:bold !important">Rebidding</span>
+                                        <span class="status-badge light-bg  text-center td-padding" style="font-weight:bold !important">Rebidding</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
@@ -183,16 +183,16 @@
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
                             </div>--}}
                         </div>
-                            <div class="col-sm-12  mt-5">
-                                <div class="heading f-16 p-8 border-around ">
+                            <div class="col-sm-12 pl-0 pr-0 ">
+                                <div class="heading f-16 p-10 pl-4 border-around ">
                                   Inventory List
                                 </div>
                         <table class="table text-center p-10 theme-text tb-border2">
                             <thead class="secondg-bg bx-shadowg p-0 f-14">
                                 <tr>
-                                  <th scope="col">Item Name</th>
-                                  <th scope="col" >Quantity</th>
-                                  <th scope="col" >Size</th>
+                                  <th scope="col" style="    width: 50%;">Item Name</th>
+                                  <th scope="col" style="    width: 50%;" >Quantity</th>
+                                  <th scope="col" style="    text-align: center !important;">Size</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-15">

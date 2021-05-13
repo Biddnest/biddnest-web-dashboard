@@ -208,7 +208,7 @@
                         <tr style="color: #3c4b58;">
                             <th scope="col">Order ID</th>
                             <th scope="col" style="text-align: center !important; width:10%">Order Status</th>
-                            <th scope="col"style="text-align: center !important;     width: 20%;">Created At</th>
+                            <th scope="col"style="text-align: center !important;     width: 20%;">Time Left</th>
                             <th scope="col"  style="text-align: center !important;">Order Amount</th>
                         </tr>
                     </thead>
@@ -261,7 +261,8 @@
                                 </td>
                                 <td class="text-center" style="text-align: center !important; ">
                                     @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
-                                        {{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}
+                                        {{--{{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}--}}
+                                        <span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
                                     @else
                                         Bidding Done
                                     @endif

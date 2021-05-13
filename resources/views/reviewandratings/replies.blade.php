@@ -244,14 +244,14 @@
                                                         {{$ticket_info->services->name}}
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.inventory',['id'=>$ticket_info->inventory_id]) }}">{{$ticket_info->inventory->name}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.inventory',['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type]) }}">{{$ticket_info->inventory->name}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                                     <div class="form-input">
                                                         <label>Aproval Status</label>
 
-                                                        <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_priceticket_status', ['id'=>$ticket_info->id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" required>
+                                                        <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_priceticket_status', ['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" required>
                                                             @foreach(\App\Enums\CommonEnums::$TICKE_STATUS as $key=>$status)
                                                                 <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
                                                             @endforeach

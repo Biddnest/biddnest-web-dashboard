@@ -348,7 +348,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/user/{id}',[WebController::class,'sidebar_user'])->name('sidebar.user');
         Route::get('/payout/{id}',[WebController::class,'sidebar_payout'])->name('sidebar.payout');
         Route::get('/branch/{id}',[WebController::class,'sidebar_branch'])->name('sidebar.branch');
-        Route::get('/inventory_price/{id}',[WebController::class,'sidebar_inventory'])->name('sidebar.inventory');
+        Route::get('/inventory_price/{id}/{org_id}/{cat_id}',[WebController::class,'sidebar_inventory'])->name('sidebar.inventory');
     });
 
 

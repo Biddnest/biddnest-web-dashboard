@@ -148,11 +148,6 @@ class WebController extends Controller
         ]);
     }
 
-    public function sidebar_dashboard(Request $request)
-    {
-        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
-        return view('sidebar.dashboard',['booking'=>$booking]);
-    }
 
     public function apiSettings()
     {
@@ -939,6 +934,24 @@ class WebController extends Controller
         Session::flash('redirect','Zone has been toggled');
         return back();
 
+    }
+
+   /* public function sidebar_dashboard(Request $request)
+    {
+        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
+        return view('sidebar.dashboard',['booking'=>$booking]);
+    }*/
+
+    public function sidebar_branch(Request $request)
+    {
+        $branch=Organization::where('id', $request->id)->with('zone')->with('services')->first();
+        return view('sidebar.branch',['branch'=>$branch]);
+    }
+
+    public function sidebar_inventory(Request $request)
+    {
+        $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'organization_id'=>$request->org_id, 'service_type'=>$request->cat_id])->with('inventory')->get();
+        return view('sidebar.inventory',['$inventories'=>$inventory]);
     }
 
 }

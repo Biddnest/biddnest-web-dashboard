@@ -278,7 +278,7 @@
                             <div class="form-input" >
                               <label class="start-date">Start date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date" required="required" placeholder="15 Jan" />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan" />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>
@@ -403,7 +403,7 @@
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-10 ">
                           <div class="w-50">
-                              <a class="white-text p-10" href="#">
+                              <a class="white-text p-10" href="{{route('orders-booking')}}">
                                   <button type="button" class="btn  w-30 white-text">Cancel</button>
                               </a>
                           </div>

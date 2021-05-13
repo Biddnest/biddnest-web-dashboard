@@ -85,8 +85,6 @@ barba.hooks.after((data) => {
     initCountdown();
 
     initMapPicker();
-
-    initTextAreaEditor();
     initDatePicker();
     initPopUp();
     initSlick();
@@ -96,6 +94,7 @@ barba.hooks.after((data) => {
     initRevenueChart();
     initOrderDistributionChart();
     initOrderDistributionChartVendor();
+    initTextAreaEditor();
             // return false;
 });
 
@@ -105,7 +104,6 @@ $(document).ready(function(){
     initMapPicker();
     initAllSelectBoxes();
     initSlick();
-    initTextAreaEditor();
     initCountdown();
     initDatePicker();
     initPopUp();
@@ -114,5 +112,6 @@ $(document).ready(function(){
     initRevenueChart();
     initOrderDistributionChart();
     initOrderDistributionChartVendor();
+    initTextAreaEditor();
 });
 

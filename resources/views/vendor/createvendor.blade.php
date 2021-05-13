@@ -175,7 +175,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-input">
                                                         <label class="full-name">Organization Description</label>
-                                                        <textarea class = "form-control" rows = "4" placeholder="Add Organization Description"   id="" spellcheck="false" name="organization[description]" required ></textarea>
+                                                        <textarea class = "form-control" rows="4" placeholder="Add Organization Description" spellcheck="false" name="organization[description]" required ></textarea>
 
                                                             <!-- <textarea placeholder="Add Organization Description"
                                                                  id="" class="form-control"

@@ -135,6 +135,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\PushNotification' => $baseDir . '/app/PushNotification.php',
     'App\\Razorpay' => $baseDir . '/app/Razorpay.php',
+    'App\\RazorpayX' => $baseDir . '/app/RazorpayX.php',
     'App\\Sms' => $baseDir . '/app/Sms.php',
     'App\\StringFormatter' => $baseDir . '/app/StringFormatter.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Cors.php',

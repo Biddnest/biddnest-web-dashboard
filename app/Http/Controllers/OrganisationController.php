@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Enums\OrganizationEnums;
 use App\Helper;
 use App\Models\Organization;
+use App\Models\Settings;
 use App\Models\Vendor;
 use App\Models\OrganizationService;
 use App\Models\Org_kyc;
 use App\Enums\VendorEnums;
 use App\Enums\CommonEnums;
+use App\RazorpayX;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManager;
+use Monolog\Logger;
 
 class OrganisationController extends Controller
 {
@@ -90,6 +94,11 @@ class OrganisationController extends Controller
 
         if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
+
+        /*dispatcher to register vendor with razorpayx*/
+        dispatch(function() use($result_organization){
+            PayoutController::registerContact($result_organization->id);
+        })->afterResponse();
 
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
     }
@@ -212,6 +221,8 @@ class OrganisationController extends Controller
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
+
+
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
@@ -283,10 +294,7 @@ class OrganisationController extends Controller
             if(!$exist)
                 return Helper::response(false,"Incorrect Organization id.");
 
-//            $imageman = new ImageManager(array('driver' => 'gd'));
-
-
-            $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+            $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifsc"=>$data['ifcs'], "branch_name"=>$data['branch_name']];
             $bank = new Org_kyc;
             $bank->organization_id = $id;
             $bank->aadhar_card =Helper::saveFile(base64_decode($data['doc']['aadhar_card']),"BD".uniqid().explode('/', mime_content_type($data['doc']['aadhar_card']))[1],"vendors/bank/".$id.$exist['org_name']);
@@ -302,7 +310,13 @@ class OrganisationController extends Controller
             if(!$result_bank)
                 return Helper::response(false,"Couldn't save data");
 
-            return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
+
+            dispatch(function() use ($result_bank){
+                PayoutController::registerFundAccount($result_bank->id);
+            })->afterResponse();
+
+
+            return Helper::response(true,"save data successfully", ["organization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
         }
         else
         {
@@ -310,7 +324,7 @@ class OrganisationController extends Controller
             if(!$exist)
                 return Helper::response(false,"Invalide or incorrect Organization id or Bank id ");
 
-            $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
+            $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifsc"=>$data['ifsc'], "branch_name"=>$data['branch_name']];
 
             $update_data = ["banking_details"=>$meta];
 

@@ -7,6 +7,6 @@ namespace App\Enums;
 
 
 class PayoutEnums{
-    public static $STATUS = ["scheduled" => 0, "processing" => 1, "transferred" => 2, "suspended" => 3, "cancelled" => 4];
+    public static $STATUS = ["scheduled" => 0, "processing" => 1, "transferred" => 2, "suspended" => 3, "cancelled" => 4, "temporary_hold"=>5,"queued"=>6];
 
 }

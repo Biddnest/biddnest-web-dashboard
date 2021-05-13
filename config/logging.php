@@ -56,7 +56,7 @@ return [
 
         'slack' => [
             'driver' => 'slack',
-            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'url' => env('LOG_SLACK_WEBHOOK_URL',"https://hooks.slack.com/services/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"),
             'username' => 'Biddnest Error Handler',
             'emoji' => ':warning:',
             'level' => env('LOG_LEVEL', 'critical'),

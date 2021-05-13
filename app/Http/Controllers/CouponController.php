@@ -275,5 +275,33 @@ class CouponController extends Controller
        // return $discount_amount;
    }
 
+    public static function getApplicableDiscount($public_booking_id, $coupon_code){
+
+        $coupon = Coupon::where("code",$coupon_code)->with('users')->with('organizations')->with('zones')->first();
+
+        $booking = Booking::where('public_booking_id',$public_booking_id)->with("organization")->with("payment")->first();
+
+        $discount_amount = $coupon->discount_type == CouponEnums::$DISCOUNT_TYPE['fixed'] ? number_format($coupon->discount_amount,2) :  number_format($booking->final_quote * ($coupon->discount_amount / 100),2);
+
+        $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
+
+        $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
+
+        $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
+        $tax =  $grand_total * ($tax_percentage/100);
+        $grand_total += $tax;
+
+
+        return (array)["coupon" => ["discount" => number_format($discount_amount, 2)], "payment_details" => [
+            "sub_total" => $booking->payment->sub_total,
+            "surge_charge" => $booking->payment->other_charges,
+            "discount" => $discount_amount,
+            "tax(" . $tax_percentage . "%)" => $tax,
+            "grand_total" => $grand_total
+        ]];
+
+        // return $discount_amount;
+    }
+
 
 }

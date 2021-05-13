@@ -99,29 +99,29 @@
                             <div class="d-flex  row p-15 pb-0" >
 
                                 <div class="col-sm-4  secondg-bg margin-topneg-15 pt-10 ">
-                                    <div class="theme-text f-14 bold p-15 pl-0">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Order ID
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Customer Name
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Vender Name
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Review Description
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Status
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0">
+                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Ratings
                                     </div>
                                 </div>
 
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
-                                    <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
+                                    <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;" >
                                       {{$booking->public_booking_id}}
                                     </div>
                                     <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >

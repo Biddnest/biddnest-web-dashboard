@@ -158,8 +158,12 @@ class InventoryController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
-        if($web)
-            return Helper::response(true,"Price Saved successfully");
+
+        if($web) {
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+
+            return Helper::response(true, "Price Saved successfully");
+        }
         else
             return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
     }
@@ -175,7 +179,7 @@ class InventoryController extends Controller
             return Helper::response(true,"Data Display successfully", ["InventoryPrice"=>$result]);
     }
 
-    public static function updatePrice($data)
+    public static function updatePrice($data, $web=false)
     {
         // $Organization = Organization::findOrFail($data["organization_id"]);
         // if(!$Organization)
@@ -196,7 +200,14 @@ class InventoryController extends Controller
             ];
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }
-        return Helper::response(true, "Inventory Price has been updated.");
+
+        if($web) {
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+
+            return Helper::response(true, "Price Saved successfully");
+        }
+        else
+            return Helper::response(true, "Inventory Price has been updated.");
     }
 
     public static function deletePrice($id)

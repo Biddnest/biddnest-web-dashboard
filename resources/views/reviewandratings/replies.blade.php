@@ -50,9 +50,27 @@
                                     @endswitch
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="d-flex  flex-row justify-content-between" style="margin-top: 10px; margin-left: 15px;">
                             <h4 class="name" style="font-size: 16px !important; margin-top: 5px !important; margin-bottom: 0px !important; font-weight: 600 !important;">{{$tickets->desc}}</h4>
+                            @if($tickets->type == \App\Enums\TicketEnums::$TYPE['new_branch'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['price_update'])
+                                <div class="mr-20">
+                                    @switch($service->status)
+                                        @case(\App\Enums\CommonEnums::$TICKE_STATUS['open'])
+                                        <span class="status-badge red-bg text-black-50 text-center">Open</span>
+                                        @break
+
+                                        @case(\App\Enums\CommonEnums::$TICKE_STATUS['aprove'])
+                                        <span class="status-badge green-bg text-black-50 text-center">Aprooved</span>
+                                        @break
+
+                                        @case(\App\Enums\CommonEnums::$TICKE_STATUS['modify'])
+                                        <span class="status-badge red-bg text-black-50 text-center">Modify</span>
+                                        @break
+                                    @endswitch
+                                </div>
+                            @endif
                         </div>
+
                     </div>
                     <div class="row" style="margin-left: 30px; margin-right: 0px;">
                         <div class="card testimonials-card bootstrap snippets bootdey col-md-6" style="border-radius: 5px !important; margin-left: 0px; margin-right: 30px;">
@@ -100,7 +118,11 @@
                                 <h3 class="f-18 mt-0 border-bottom">
                                     <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active " id="new-order-tab" data-toggle="tab" href="#order" role="tab"
+                                            <a class="nav-link active " id="new-order-tab" data-toggle="tab" href="#info" role="tab"
+                                               aria-controls="home" aria-selected="true">Info</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " id="new-order-tab" data-toggle="tab" href="#order" role="tab"
                                                aria-controls="home" aria-selected="true">Add Reply</a>
                                         </li>
                                         <li class="nav-item">
@@ -112,7 +134,21 @@
                             </div>
                             <div class="  tab-content  flex-row justify-content-between">
 
-                                <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
+                                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="new-order-tab">
+                                    <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
+                                        <div class="col-sm-12">
+                                            <div class="form-input">
+                                                <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
+                                                <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                                     <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
                                         <div class="col-sm-12">
                                             <div class="form-input">

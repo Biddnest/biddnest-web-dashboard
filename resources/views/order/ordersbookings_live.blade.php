@@ -107,7 +107,7 @@
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                            <span class="status-badge grey-bg  text-center td-padding">Rebidding</span>
+                                            <span class="status-badge light-bg  text-center td-padding ">Rebidding</span>
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])

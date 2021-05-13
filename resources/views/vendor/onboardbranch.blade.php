@@ -61,19 +61,19 @@
                                 <div class="branch-wrapper barnch_{{$value->id}}">
                                     <div class="branch-snip d-flex flex-row justify-content-around">
                                         <div class="data-group border-right">
-                                            <h3>Branch Name</h3>
+                                            <h3 style="font-size: 18px;">Branch Name</h3>
                                             <p>{{ucfirst(trans($value->city))}}</p>
                                         </div>
                                         <div class="data-group border-right">
-                                            <h3>Address</h3>
+                                            <h3 style="font-size: 18px;">Address</h3>
                                             <p>{{json_decode($value->meta, true)['address']}} {{ucfirst(trans($value->city))}}, {{$value->pincode}}</p>
                                         </div>
                                         <div class="data-group border-right">
-                                            <h3>Phone</h3>
+                                            <h3 style="font-size: 18px;">Phone</h3>
                                             <p>{{$value->phone}}</p>
                                         </div>
                                         <div class="data-group border-right">
-                                            <h3>City</h3>
+                                            <h3 style="font-size: 18px;">City</h3>
                                             <p>{{ucfirst(trans($value->city))}}</p>
                                         </div>
                                         <div class="data-group">

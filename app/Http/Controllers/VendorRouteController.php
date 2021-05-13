@@ -110,7 +110,7 @@ class VendorRouteController extends Controller
         $validation = Validator::make($request->all(),[
             'inventory_id'=>"required|int",
             // 'organization_id'=>"required|int",
-//            'service_type'=>"required|int",
+            'service_type'=>"required|int",
             'price.*.id' => 'required|string',
             'price.*.size' => 'required|string',
             'price.*.material' => 'required|string',
@@ -121,7 +121,7 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return InventoryController::updatePrice($request->all());
+            return InventoryController::updatePrice($request->all(), true);
     }
 
     public function deleteInventoryprices(Request $request)

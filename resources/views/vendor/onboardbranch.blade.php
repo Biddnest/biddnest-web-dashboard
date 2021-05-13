@@ -109,29 +109,24 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
-
-@section('modal')
-
     <div class="fullscreen-modal" id="add-branch">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Branch</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_branch_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" id="myForm" data-parsley-validate>
                 <div class="modal-body p-15 margin-topneg-7">
-                        <input type="hidden" name="id" value="{{$id}}">
+                    <input type="hidden" name="id" value="{{$id}}">
                     <div class="d-flex row">
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Organization Name</label>
-                                        <input type="text" id="fullname" placeholder="Wayne Packing Pvt Ltd" value="{{$organization->org_name}}"
-                                               class="form-control" name="organization[org_name]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="Wayne Packing Pvt Ltd" value="{{$organization->org_name}}"
+                                       class="form-control" name="organization[org_name]" required>
+                                <span class="error-message">Please enter valid
                                             Organization Name</span>
                             </div>
                         </div>
@@ -148,7 +143,7 @@
                             <div class="form-input">
                                 <label class="phone-num-lable"> Contact Number</label>
                                 <input type="tel" id="input-blue" placeholder="9876543210" value=""
-                                               class=" form-control form-control-tel" name="phone[primary]" required>
+                                       class=" form-control form-control-tel" name="phone[primary]" required>
                                 <span class="error-message">Please enter valid
                                             Phone number</span>
                             </div>
@@ -169,8 +164,8 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Address</label>
-                                        <input type="text" id="fullname" placeholder="Lorem ipsum dolor sit amet, consetetur sadip" value="" class="form-control" name="address[address]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="Lorem ipsum dolor sit amet, consetetur sadip" value="" class="form-control" name="address[address]" required>
+                                <span class="error-message">Please enter valid
                                             Address</span>
                             </div>
                         </div>
@@ -178,91 +173,91 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Lattitude</label>
-                                        <input type="text" id="fullname" placeholder="57.2046° N" value=""
-                                               class="form-control" name="address[lat]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="57.2046° N" value=""
+                                       class="form-control" name="address[lat]" required>
+                                <span class="error-message">Please enter valid
                                             Lattitude</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Longitude</label>
-                                        <input type="text" id="fullname" placeholder="77.7907° E" value=""
-                                               class="form-control" name="address[lng]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="77.7907° E" value=""
+                                       class="form-control" name="address[lng]" required>
+                                <span class="error-message">Please enter valid
                                             Longitude</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Landmark</label>
-                                        <input type="text" id="fullname" placeholder="Pheonix Market City" value=""
-                                               class="form-control" name="address[landmark]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="Pheonix Market City" value=""
+                                       class="form-control" name="address[landmark]" required>
+                                <span class="error-message">Please enter valid
                                             Landmark</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">City</label>
-                                        <input type="text" id="fullname" placeholder="Bengaluru" value=""
-                                               class="form-control" name="address[city]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="Bengaluru" value=""
+                                       class="form-control" name="address[city]" required>
+                                <span class="error-message">Please enter valid
                                             City</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label>State</label>
-                                        <select id="" class="form-control" name="address[state]" required>
-                                            <option value="">--Select--</option>
-                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
-                                            </option>
-                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                            <option value="Assam">Assam</option>
-                                            <option value="Bihar">Bihar</option>
-                                            <option value="Chandigarh">Chandigarh</option>
-                                            <option value="Chhattisgarh">Chhattisgarh</option>
-                                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                            <option value="Daman and Diu">Daman and Diu</option>
-                                            <option value="Delhi">Delhi</option>
-                                            <option value="Lakshadweep">Lakshadweep</option>
-                                            <option value="Puducherry">Puducherry</option>
-                                            <option value="Goa">Goa</option>
-                                            <option value="Gujarat">Gujarat</option>
-                                            <option value="Haryana">Haryana</option>
-                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                            <option value="Jharkhand">Jharkhand</option>
-                                            <option value="Karnataka" selected>Karnataka</option>
-                                            <option value="Kerala">Kerala</option>
-                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                            <option value="Maharashtra">Maharashtra</option>
-                                            <option value="Manipur">Manipur</option>
-                                            <option value="Meghalaya">Meghalaya</option>
-                                            <option value="Mizoram">Mizoram</option>
-                                            <option value="Nagaland">Nagaland</option>
-                                            <option value="Odisha">Odisha</option>
-                                            <option value="Punjab">Punjab</option>
-                                            <option value="Rajasthan">Rajasthan</option>
-                                            <option value="Sikkim">Sikkim</option>
-                                            <option value="Tamil Nadu">Tamil Nadu</option>
-                                            <option value="Telangana">Telangana</option>
-                                            <option value="Tripura">Tripura</option>
-                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                            <option value="Uttarakhand">Uttarakhand</option>
-                                            <option value="West Bengal">West Bengal</option>
-                                        </select>
-                                        <span class="error-message">Please enter valid</span>
+                                <select id="" class="form-control" name="address[state]" required>
+                                    <option value="">--Select--</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                    </option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka" selected>Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+                                <span class="error-message">Please enter valid</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Pincode</label>
-                                        <input type="text" id="fullname" placeholder="560097" value=""
-                                               class="form-control" name="address[pincode]" required>
-                                        <span class="error-message">Please enter valid
+                                <input type="text" id="fullname" placeholder="560097" value=""
+                                       class="form-control" name="address[pincode]" required>
+                                <span class="error-message">Please enter valid
                                             Pincode</span>
                             </div>
                         </div>
@@ -302,10 +297,10 @@
                         <div class="col-lg-12">
                             <div class="form-input">
                                 <label class="full-name">Branch Description</label>
-                                        <textarea placeholder="Need to Include bike" style="resize: none;" id=""
-                                                  class="form-control" rows="4" cols="50" spellcheck="false" name="organization[description]" required>
+                                <textarea placeholder="Need to Include bike" style="resize: none;" id=""
+                                          class="form-control" rows="4" cols="50" spellcheck="false" name="organization[description]" required>
                                           </textarea>
-                                        <span class="error-message">Please enter valid Description</span>
+                                <span class="error-message">Please enter valid Description</span>
                             </div>
                         </div>
 
@@ -313,8 +308,8 @@
                 </div>
                 <div class="modal-footer p-15 " style="padding: 0px 5px;">
                     <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
-                                         aria-label="Close"><button type="button"
-                                class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+                                                                              aria-label="Close"><button type="button"
+                                                                                                         class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
                     <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
                                                     aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
                 </div>
@@ -497,8 +492,8 @@
                                         @foreach($services as $service)
                                             <option value="{{$service->id}}"
                                                     @foreach($branch->services as $org_service)
-                                                        @if($service->id == $org_service->id) selected                                                                 @endif
-                                                    @endforeach>{{ucfirst(trans($service->name))}}</option>
+                                                    @if($service->id == $org_service->id) selected                                                                 @endif
+                                                @endforeach>{{ucfirst(trans($service->name))}}</option>
                                         @endforeach
                                     </select>
                                     <span class="error-message">Please enter valid
@@ -526,7 +521,7 @@
                     </div>
                     <<div class="modal-footer p-15 " style="padding: 0px 5px;">
                         <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" ><button type="button"
-                                                                                                             class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal"
+                                                                                                                                   class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal"
                                                                                                                                    aria-label="Close">Cancel</button></a></div>
                         <div class="w-50 text-right"><a class="white-text p-10" href="#" ><button class="btn theme-bg white-text w-30" data-dismiss="modal"
                                                                                                   aria-label="Close">Update</button></a></div>
@@ -535,5 +530,11 @@
             </div>
         </div>
     @endforeach
+</div>
+@endsection
+
+@section('modal')
+
+
 
 @endsection

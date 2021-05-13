@@ -100,11 +100,6 @@
             </div>
         </div>
     </div>
-</div>
-
-@endsection
-
-@section('modal')
 
     <div class="fullscreen-modal" id="add-role">
         <div class="fullscreen-modal-body" role="document">
@@ -121,8 +116,8 @@
                             <p class="img-label">Image</p>
                             <div class="upload-section p-20 pt-0">
                                 <img class="upload-preview"
-                                 src="{{asset('static/images/upload-image.svg')}}"
-                                 alt=""/>
+                                     src="{{asset('static/images/upload-image.svg')}}"
+                                     alt=""/>
                                 <div class="ml-1">
                                     <div class="file-upload">
                                         <input type="hidden" class="base-holder" name="image" value="" required />
@@ -214,112 +209,119 @@
     </div>
 
     @foreach($roles as $role)
-            <div class="fullscreen-modal" id="role_{{$role->id}}">
-                    <div class="fullscreen-modal-body" role="document">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add New Role</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_edit')}}" data-next="redirect" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
-                            <div class="modal-body" style="padding: 10px 9px;">
-                                <div class="d-flex row p-20 pt-0 pb-0">
-                                    <div class="col-lg-6">
-                                        <p class="img-label">Image</p>
-                                        <div class="upload-section p-20 pt-0">
-                                            <img class="upload-preview"
-                                                 src="{{$role->image}}"
-                                                 alt=""/>
-                                            <div class="ml-1">
-                                                <div class="file-upload">
-                                                    <input type="file" />
-                                                    <input type="hidden" class="base-holder" name="image" value="{{$role->image}}" required />
-                                                    <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
-                                                        UPLOAD IMAGE
-                                                    </button>
-                                                </div>
-                                                <p class="text-black">Max File size: 1MB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input type="hidden" name="id" value="{{$role->organization_id}}">
-                                        <input type="hidden" name="role_id" value="{{$role->id}}">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Employee First Name</label>
-                                            <input type="text" id="fullname" placeholder="First Name" name="fname" value="{{$role->fname}}" class="form-control" required>
-                                            <span class="error-message">Please enter valid First Name</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Employee Last Name</label>
-                                            <input type="text" id="fullname" placeholder="Last Name" value="{{$role->lname}}" name="lname" class="form-control" required>
-                                            <span class="error-message">Please enter valid Last Name</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="phone-num-lable">Employee Contact Number</label>
-                                            <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control" required>
-                                            <span class="error-message">Please enter valid Phone number</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Role Type</label>
-                                            <select id="role" name="role" class="form-control" required>
-                                                <option value="">--Select--</option>
-                                                @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$type)
-                                                    <option value="{{$type}}" @if ($type == $role->user_role) selected @endif>{{ucfirst(trans($key))}}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="error-message">Please enter valid Service</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Branch</label>
-                                            <select class="form-control" name="branch" required>
-                                                <option value="">--Select--</option>
-                                                @foreach($branches as $branch)
-                                                    <option value="{{$branch->id}}" @if ($branch->id == $role->organization_id) selected @endif>{{$branch->city}}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="error-message">Please enter valid Branch</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Email ID</label>
-                                            <input type="email" id="fullname" placeholder="role@email.com" name="email" class="form-control" value="{{$role->email}}" required>
-                                            <span class="error-message">Please enter valid Email</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Password</label>
-                                            <input type="password" id="fullname" placeholder="Enter Password" name="password" class="form-control">
-                                            <span class="error-message">Please enter valid Password</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer p-15 ">
-                                <div class="w-50"> </div>
-                                <div class="w-50 text-right">
-                                    <a class="white-text p-10" href="#" data-dismiss="modal" aria-label="Close">
-                                        <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+        <div class="fullscreen-modal" id="role_{{$role->id}}">
+            <div class="fullscreen-modal-body" role="document">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Role</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_edit')}}" data-next="redirect" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
+                    <div class="modal-body" style="padding: 10px 9px;">
+                        <div class="d-flex row p-20 pt-0 pb-0">
+                            <div class="col-lg-6">
+                                <p class="img-label">Image</p>
+                                <div class="upload-section p-20 pt-0">
+                                    <img class="upload-preview"
+                                         src="{{$role->image}}"
+                                         alt=""/>
+                                    <div class="ml-1">
+                                        <div class="file-upload">
+                                            <input type="file" />
+                                            <input type="hidden" class="base-holder" name="image" value="{{$role->image}}" required />
+                                            <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                                                UPLOAD IMAGE
+                                            </button>
+                                        </div>
+                                        <p class="text-black">Max File size: 1MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="hidden" name="id" value="{{$role->organization_id}}">
+                                <input type="hidden" name="role_id" value="{{$role->id}}">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Employee First Name</label>
+                                    <input type="text" id="fullname" placeholder="First Name" name="fname" value="{{$role->fname}}" class="form-control" required>
+                                    <span class="error-message">Please enter valid First Name</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Employee Last Name</label>
+                                    <input type="text" id="fullname" placeholder="Last Name" value="{{$role->lname}}" name="lname" class="form-control" required>
+                                    <span class="error-message">Please enter valid Last Name</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="phone-num-lable">Employee Contact Number</label>
+                                    <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control" required>
+                                    <span class="error-message">Please enter valid Phone number</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Role Type</label>
+                                    <select id="role" name="role" class="form-control" required>
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$type)
+                                            <option value="{{$type}}" @if ($type == $role->user_role) selected @endif>{{ucfirst(trans($key))}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="error-message">Please enter valid Service</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Branch</label>
+                                    <select class="form-control" name="branch" required>
+                                        <option value="">--Select--</option>
+                                        @foreach($branches as $branch)
+                                            <option value="{{$branch->id}}" @if ($branch->id == $role->organization_id) selected @endif>{{$branch->city}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="error-message">Please enter valid Branch</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Email ID</label>
+                                    <input type="email" id="fullname" placeholder="role@email.com" name="email" class="form-control" value="{{$role->email}}" required>
+                                    <span class="error-message">Please enter valid Email</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Password</label>
+                                    <input type="password" id="fullname" placeholder="Enter Password" name="password" class="form-control">
+                                    <span class="error-message">Please enter valid Password</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-15 ">
+                        <div class="w-50"> </div>
+                        <div class="w-50 text-right">
+                            <a class="white-text p-10" href="#" data-dismiss="modal" aria-label="Close">
+                                <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     @endforeach
+</div>
+
+@endsection
+
+@section('modal')
+
+
 @endsection

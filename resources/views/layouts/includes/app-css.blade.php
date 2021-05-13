@@ -522,9 +522,9 @@
             /*    z-index: 999;*/
             /*    margin-top: 15%;*/
             /*}*/
-           /* .fullscreen-modal-body .modal-header::before{
+            .fullscreen-modal-body .modal-header::before{
                 display: none;
-            }*/
+            }
             .fullscreen-modal-body .modal-header .modal-title{
                 font-weight: bold;
                 font-size: 18px;
@@ -543,11 +543,11 @@
             .fullscreen-modal{
                 z-index: 999;
                 display: none;
-                position: relative;
-                top: 0;
-                left: 0;
-                margin-left: 20%;
-                width: 80%;
+                position: absolute;
+                top: 30px;
+                left: 0px;
+                margin-left: 0%;
+                width: 100%;
                 min-height: 100%;
                 background-color: rgba(0,0,0,0.4);
                 padding: 5% 10%;

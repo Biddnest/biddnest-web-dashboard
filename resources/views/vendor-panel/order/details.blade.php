@@ -258,9 +258,6 @@
         </div>
     </div>
 
-@endsection
-
-@section('modal')
     <div class="fullscreen-modal" id="add-role" style="min-height: 155%; left: 270px !important; width: 81% !important; top: 0px!important;">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
@@ -289,31 +286,31 @@
                                 </div>
                                 <table class="table text-left theme-text tb-border2" id="items" >
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
-                                        <tr class="">
-                                            <th scope="col">Item Name</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Size</th>
-                                            <th scope="col" style="width: 120px;">Old Price</th>
-                                        </tr>
+                                    <tr class="">
+                                        <th scope="col">Item Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col" style="width: 120px;">Old Price</th>
+                                    </tr>
                                     </thead>
                                     <tbody class="mtop-20 f-13">
-                                        @foreach($booking->inventories as $inventory)
-                                            <tr class="">
-                                                <th scope="row">{{$inventory->name}}</th>
-                                                <td class="">
-                                                    @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
-                                                        {{$inventory->quantity ?? ''}}
-                                                    @else
-                                                        {{$inventory->quantity->min ?? ''}}-{{$inventory->quantity->max ?? ''}}
-                                                    @endif
-                                                </td>
-                                                <td class="">{{$inventory->size}}</td>
-                                                <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
-                                                    <input class="form-control border-purple w-88" name="inventory[][amount]" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        <tr id='addr1'></tr>
+                                    @foreach($booking->inventories as $inventory)
+                                        <tr class="">
+                                            <th scope="row">{{$inventory->name}}</th>
+                                            <td class="">
+                                                @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
+                                                    {{$inventory->quantity ?? ''}}
+                                                @else
+                                                    {{$inventory->quantity->min ?? ''}}-{{$inventory->quantity->max ?? ''}}
+                                                @endif
+                                            </td>
+                                            <td class="">{{$inventory->size}}</td>
+                                            <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                <input class="form-control border-purple w-88" name="inventory[][amount]" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <tr id='addr1'></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -336,15 +333,15 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Type of Movement</label>
-                                            <select id="" class="form-control" name="type_of_movement" required>
-                                                <option value="">--select--</option>
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)
-                                                    <option value="dedicated">Dedicated</option>
-                                                @else
-                                                    <option value="shared">Shared</option>
-                                                    <option value="dedicated">Dedicated</option>
-                                                @endif
-                                            </select>
+                                        <select id="" class="form-control" name="type_of_movement" required>
+                                            <option value="">--select--</option>
+                                            @if(json_decode($booking->source_meta, true)['shared_service']== true)
+                                                <option value="dedicated">Dedicated</option>
+                                            @else
+                                                <option value="shared">Shared</option>
+                                                <option value="dedicated">Dedicated</option>
+                                            @endif
+                                        </select>
                                         <span class="error-message"></span>
                                     </div>
                                 </div>
@@ -373,13 +370,13 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                       <label class="full-name">Name of Vehicle</label>
-                                       <select id="" class="form-control" name="vehicle_type">
+                                        <label class="full-name">Name of Vehicle</label>
+                                        <select id="" class="form-control" name="vehicle_type">
                                             <option value="">--select--</option>
                                             @foreach($vehicles as $vehicle)
-                                               <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>
-                                           @endforeach
-                                       </select>
+                                                <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>
+                                            @endforeach
+                                        </select>
                                         <span class="error-message"></span>
                                     </div>
                                 </div>
@@ -404,9 +401,9 @@
                     <div class="w-50">
                     </div>
                     <div class="w-50 text-right"><a class="white-text p-10" href="#"><button
-                           type="button" class="btn theme-bg white-text w-30 " id="next-btn-1" style="margin-bottom: 20px;">Next</button>
+                                type="button" class="btn theme-bg white-text w-30 " id="next-btn-1" style="margin-bottom: 20px;">Next</button>
                             <button type="button"
-                                class="btn theme-bg white-text w-30 " id="next-btn-2" style="margin-bottom: 20px;">Next</button>
+                                    class="btn theme-bg white-text w-30 " id="next-btn-2" style="margin-bottom: 20px;">Next</button>
                             <button
                                 class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
                         </a>
@@ -453,4 +450,9 @@
             </form>
         </div>
     </div>
+
+@endsection
+
+@section('modal')
+
 @endsection

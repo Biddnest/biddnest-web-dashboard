@@ -164,9 +164,6 @@
                       </div>
                 </div>
               </div>
-            </div>
-</div>
-
     <script type="text/html" id="banner-form">
 
         <div class="d-flex row p-20 banner-form-wrapper relative">
@@ -199,11 +196,11 @@
                 <div class="form-input">
                     <label class="full-name">Banner Name</label>
                     <input type="text"
-                        id="name" required
-                        autocomplete="off"
-                        placeholder="Diwali"
-                        class="form-control br-5"
-                        name="banners[][name]"
+                           id="name" required
+                           autocomplete="off"
+                           placeholder="Diwali"
+                           class="form-control br-5"
+                           name="banners[][name]"
                     />
                     <span class="error-message"
                     >Please enter a valid URL</span
@@ -246,5 +243,10 @@
         </div>
 
     </script>
+</div>
+
+
+
+
 
 @endsection

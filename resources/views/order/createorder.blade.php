@@ -424,41 +424,42 @@
     </div>
 
     </div>
+    <script type="text/html" id="add-inventory-row">
+        <tr class="inventory-snip">
+            <th scope="row" class="text-left">
+                <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
+                    <option value="">--Select--</option>
+                    @foreach($inventories as $inventory)
+                        <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                    @endforeach
+                </select>
+            </th>
+
+            <td class="">
+                <select class="form-control br-5 material" name="inventory_items[][material]" required>
+                    <option value="">--Choose Inventory--</option>
+                </select>
+            </td>
+
+            <td class="">
+                <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
+                    <option value="">--Choose Inventory--</option>
+                </select>
+            </td>
+
+            <td class="" style="width: 20%;">
+                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" >
+
+                <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
+            </td>
+
+            <td>
+                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+            </td>
+        </tr>
+
+    </script>
 </div>
 
-<script type="text/html" id="add-inventory-row">
-    <tr class="inventory-snip">
-        <th scope="row" class="text-left">
-            <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
-                <option value="">--Select--</option>
-                @foreach($inventories as $inventory)
-                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
-                @endforeach
-            </select>
-        </th>
 
-        <td class="">
-            <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                <option value="">--Choose Inventory--</option>
-            </select>
-        </td>
-
-        <td class="">
-            <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                <option value="">--Choose Inventory--</option>
-            </select>
-        </td>
-
-        <td class="" style="width: 20%;">
-            <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" >
-
-            <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
-        </td>
-
-        <td>
-            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-        </td>
-    </tr>
-
-</script>
 @endsection

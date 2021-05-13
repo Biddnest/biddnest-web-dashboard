@@ -137,8 +137,8 @@
                                     </td>
 
                                     <td class="no-toggle">
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button mr-4" style="display: table-cell; right: 10px"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button mr-4" style="display: table-cell; right: 10px"><i class="icon fa fa-eye p-1" aria-hidden="true"></i></a>
+{{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
                                     </td>
                                 </tr>
                             @endforeach

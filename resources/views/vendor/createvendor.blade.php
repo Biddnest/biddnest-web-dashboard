@@ -80,7 +80,7 @@
                                                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                                     UPLOAD IMAGE
                                                                 </button>
-                                                                <input type="file" required/>
+                                                                <input type="file" accept=".png,.jpg,.jpeg" required/>
                                                             </div>
                                                             <p class="text-black">Max File size: 1MB</p>
                                                         </div>
@@ -175,7 +175,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-input">
                                                         <label class="full-name">Organization Description</label>
-                                                        <textarea class = "form-control" rows = "4" placeholder="Add Organization Description"   id="" spellcheck="false" name="organization[description]" required ></textarea>
+                                                        <textarea class = "form-control" rows="4" placeholder="Add Organization Description" spellcheck="false" name="organization[description]" required ></textarea>
 
                                                             <!-- <textarea placeholder="Add Organization Description"
                                                                  id="" class="form-control"

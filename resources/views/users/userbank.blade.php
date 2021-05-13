@@ -89,11 +89,11 @@
                                             <img class="upload-preview" src="@if(!$users->aadhar_img){{asset('static/images/upload-image.svg')}}@else{{$users->aadhar_img}}@endif" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
-                                                    <input type="file" />
                                                     <input type="hidden" class="base-holder" name="aadhar_image" value="@if($users){{$users->aadhar_img}}@endif" required />
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
+                                                    <input type="file" accept=".png,.jpg,.jpeg" @if(!$users) required @endif/>
                                                 </div>
                                                 <p class="text-black">Max File size: 1MB</p>
                                             </div>

@@ -84,20 +84,20 @@
                                   <span class="error-message">Please enter valid Service</span>
                                 </div>
                               </div>
-                              <div class="col-sm-12   border-top-pop mtop-20">
+                              <!-- <div class="col-sm-12   border-top-pop mtop-20">
                                 <div class="theme-text f-14 bold pt-10">
                                    List
                                 </div>
-                              </div>
+                              </div> -->
                             <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
-                                <div class="heading p-8 border-around m-auto " >
-                                   Inventory List
-                                </div>
+                            <div class="heading p-10 pl-4 border-around ">
+                              Inventory List
+                            </div>
 
                                 <table class="table text-center p-10 theme-text tb-border2" id="itms">
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
                                     <tr class="">
-                                        <th scope="col  " class="text-left">Item Name</th>
+                                        <th scope="col  " class="text-left"  style="padding-left: 16px !important;">Item Name</th>
 
                                         <th scope="col  " class="text-left">Material</th>
 
@@ -114,7 +114,7 @@
                                        @if($subcategory && $subcategory->inventorymap)
                                         @foreach($subcategory->inventorymap as $inventory_key)
                                         <tr class="inventory-snip">
-                                            <td scope="row" class="text-left">
+                                            <td scope="row" class="text-left"  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                     <option value="">--Select--</option>
                                                     @foreach($inventories as $inventory)
@@ -123,7 +123,7 @@
                                                 </select>
                                             </td>
 
-                                            <td class="">
+                                            <td class=""  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 material" name="inventories[][material]" required>
                                                     <option value="">--Choose Inventory First--</option>
                                                     @foreach(json_decode($inventory_key->meta->material, true) as $material)
@@ -132,7 +132,7 @@
                                                 </select>
                                             </td>
 
-                                            <td class="">
+                                            <td class=""  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
                                                     <option value="">--Choose Inventory First--</option>
                                                     @foreach(json_decode($inventory_key->meta->size, true) as $size)
@@ -152,7 +152,7 @@
                                     @endforeach
                                        @else
                                            <tr class="inventory-snip">
-                                               <td scope="row" class="text-left">
+                                               <td scope="row" class="text-left" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                        <option value="">--Select--</option>
                                                        @foreach($inventories as $inventory)
@@ -161,14 +161,14 @@
                                                    </select>
                                                </td>
 
-                                               <td class="">
+                                               <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 material" name="inventories[][material]" required>
                                                        <option value="">Choose Inventory</option>
 
                                                    </select>
                                                </td>
 
-                                               <td class="">
+                                               <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
                                                        <option value="">Choose Inventory</option>
 

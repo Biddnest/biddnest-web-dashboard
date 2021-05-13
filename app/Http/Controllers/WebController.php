@@ -429,7 +429,40 @@ class WebController extends Controller
         $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')->first();
         $branch = Organization::where("parent_org_id", $request->id)->count();
         $payouts = Payout::where("organization_id", $request->id)->get();
-        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts]);
+
+        $dataset = [];
+        $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
+        $last_week = CarbonPeriod::create( Carbon::now()->subDays(14)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
+
+        $this_week_sale = [];
+        $last_week_sale = [];
+        foreach ($this_week as $key=>$date){
+            $date1 = $date->format('Y-m-d');
+            $this_week[$key] = $date->format('d M');
+            $this_week_sale[] = Booking::whereDate("created_at",$date1)->where('organization_id', $request->id)
+                ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
+                ->sum("final_quote");
+        }
+        foreach ($last_week as $key=>$date){
+            $date1 = $date->format('Y-m-d');
+//            $last_week[$key] = $date->format('d M');
+            $last_week_sale[] = Booking::whereDate("created_at",$date1)->where('organization_id', $request->id)
+                ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
+                ->sum("final_quote");
+        }
+
+        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts,
+            'graph'=>[
+                "revenue"=>[
+                    "this_week"=>[
+                        "dates"=>$this_week,
+                        "sales"=>$this_week_sale
+                    ],
+                    "last_week"=>[
+                        "dates"=>$this_week,
+                        "sales"=>$last_week_sale
+                    ],
+                ]]]);
     }
 
     public function vendorsDetails(Request $request)

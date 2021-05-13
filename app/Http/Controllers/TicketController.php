@@ -256,6 +256,32 @@ class TicketController extends Controller
                 $ticket->meta = json_encode($meta);
                 break;
 
+            case TicketEnums::$TYPE['new_branch']:
+                    $title1 = TicketEnums::$TEMPLATES['new_branch']['title_template'];
+                    $body1 = TicketEnums::$TEMPLATES['new_branch']['body_template'];
+                    $title = $title1;
+                    $body = $body1;
+                    $ticket = new Ticket;
+                    $ticket->vendor_id = $sender_id;
+                    $ticket->heading = $title;
+                    $ticket->desc = $body;
+                    $ticket->type = $ticket_type;
+                    $ticket->meta = json_encode($meta);
+            break;
+
+            case TicketEnums::$TYPE['price_update']:
+                    $title1 = TicketEnums::$TEMPLATES['price_update']['title_template'];
+                    $body1 = TicketEnums::$TEMPLATES['price_update']['body_template'];
+                    $title = $title1;
+                    $body = $body1;
+                    $ticket = new Ticket;
+                    $ticket->vendor_id = $sender_id;
+                    $ticket->heading = $title;
+                    $ticket->desc = $body;
+                    $ticket->type = $ticket_type;
+                    $ticket->meta = json_encode($meta);
+            break;
+
             default:
                 $title = "";
                 $desc = "";

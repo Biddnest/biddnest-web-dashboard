@@ -12,6 +12,7 @@ use App\Enums\VendorEnums;
 use App\Enums\CommonEnums;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 
 class OrganisationController extends Controller
@@ -173,7 +174,7 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function addBranch($data, $id)
+    public static function addBranch($data, $id, $vendor=flase)
     {
        $exist = Organization::findOrFail($id);
         if(!$exist)
@@ -214,6 +215,11 @@ class OrganisationController extends Controller
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
+        if($vendor)
+        {
+            TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
+        }
+
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }
 
@@ -226,7 +232,7 @@ class OrganisationController extends Controller
         return Helper::response(true, "Here are Branches", ['branches'=>$branches]);
     }
 
-    public static function updateBranch($data, $id, $parent_org_id)
+    public static function updateBranch($data, $id, $parent_org_id, $vendor=false)
     {
         $exist = Organization::where("id", $id)->orWhere("parent_org_id", $parent_org_id)->first();
         if(!$exist)
@@ -263,6 +269,11 @@ class OrganisationController extends Controller
 
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
+
+        if($vendor)
+        {
+            TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
+        }
 
         return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
     }

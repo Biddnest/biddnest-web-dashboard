@@ -313,7 +313,7 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::addBranch($request->all(), $request->parent_org_id);
+        return OrganisationController::addBranch($request->all(), $request->parent_org_id, true);
     }
 
     public function branch_edit(Request $request)
@@ -342,7 +342,7 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::updateBranch($request->all(), $request->id, $request->parent_org_id);
+        return OrganisationController::updateBranch($request->all(), $request->id, $request->parent_org_id, true);
 
     }
 

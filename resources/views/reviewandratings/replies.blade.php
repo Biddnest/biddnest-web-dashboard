@@ -29,7 +29,7 @@
                     </div>
                     <div class="card testimonials-card" style="border-radius: 5px !important; margin-left: 30px; margin-right: 30px;">
                         <div class="d-flex  flex-row justify-content-between">
-                            <h3 class="page-head theme-text text-left" style="font-size: 16px !important; margin-top: 5px !important; margin-bottom: 0px !important;">{{$tickets->heading}}</h3>
+                            <h3 class="page-head theme-text text-left ml-4" style="font-size: 16px !important; margin-top: 5px !important; margin-bottom: 0px !important;">{{$tickets->heading}}</h3>
                             <div class="mr-20">
                                     @switch($tickets->status)
                                         @case(\App\Enums\TicketEnums::$STATUS['open'])
@@ -110,7 +110,7 @@
                                     </ul>
                                 </h3>
                             </div>
-                            <div class=" tab-content  flex-row justify-content-between">
+                            <div class="  tab-content  flex-row justify-content-between">
 
                                 <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                                     <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
@@ -126,7 +126,7 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane fade " id="past" role="tabpanel" aria-labelledby="quotation">
-                                    <div class="col-sm-12 " >
+                                    <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                         <div class="form-input">
                                         <label>Ticket Status</label>
 

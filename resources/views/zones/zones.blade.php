@@ -53,7 +53,7 @@
                         <div class="col-sm-12 pl-0 pr-0">
                             <div class="card  h-auto p-0 pt-10">
                                 <div class="header-wrap">
-                                    <div class="col-sm-8 p-3 ">
+                                    <div class="col-sm-8 p-3 ml-3">
                                         <h3 class="f-18 ml-2 mt-4">Zone Management </h3>
 
                                     </div>

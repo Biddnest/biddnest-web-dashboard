@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="servicerequest">
     <div class="d-flex  flex-row justify-content-between">
-        <h3 class="page-head theme-text text-left p-4 f-20">Service Requests</h3>
+        <h3 class="page-head theme-text text-left p-4 f-20 ">Service Requests</h3>
         <div class="mr-20">
             <a href="{{route('create-review')}}">
                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i> CREATE REQUEST
@@ -28,7 +28,7 @@
             <div class="card  h-auto p-0 pt-10">
                 <div class="header-wrap">
                     <div class="col-sm-8 p-3 ">
-                        <h3 class="f-18 ml-2 mt-3 ">Service Requests </h3>
+                        <h3 class="f-18 ml-2 mt-3 ml-4">Service Requests </h3>
                     </div>
                     <div class="header-wrap p-0 col-sm-1 " style="display: flex; justify-content: flex-end;  margin-right: -18px;">
                         {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -104,12 +104,12 @@
                     <table class="table text-left p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg  p-0">
                             <tr>
-                                <th scope="col" style="width: 2%;">Service Type</th>
-                                <th scope="col" style="width: 8%;">Title</th>
-                                <th scope="col" style="width: 15%;">Created By</th>
-                                <th scope="col" style="width: 20%;">Created At</th>
-                                <th scope="col" style="width: 10%;">Status</th>
-                                <th scope="col" style="width: 10%;">Operations</th>
+                                <th scope="col" >Service Type</th>
+                                <th scope="col" >Title</th>
+                                <th scope="col" >Created By</th>
+                                <th scope="col" >Created At</th>
+                                <th scope="col" style="width: 10%; text-align: center !important;">Status</th>
+                                <th scope="col" style="width: 10%; text-align: center !important;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
@@ -151,7 +151,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a class = "inline-icon-button mr-4" href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-eye p-1 mr-2" aria-hidden="true"></i></a>
+                                        <a class = "inline-icon-button mr-4"style="display: flex;"  href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-eye pb-2 mr-2" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

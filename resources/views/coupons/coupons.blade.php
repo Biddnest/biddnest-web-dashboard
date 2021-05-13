@@ -43,7 +43,7 @@
         <div class="col-sm-12 pl-0 pr-0">
             <div class="card  h-auto p-0 pt-10">
                 <div class="header-wrap">
-                    <div class="col-sm-8 p-3">
+                    <div class="col-sm-8 p-3 ml-3">
                         <h3 class="f-18 mt-3">Coupons & Offers </h3>
                     </div>
 
@@ -119,7 +119,7 @@
                                                         <th scope="col">Value</th>
                                                         <th scope="col">Coupon Usage</th>
                                                         <th scope="col">Coupon Description</th>
-                                                        <th scope="col">Status</th>
+                                                        <th scope="col" style="text-align: center !important;">Status</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>

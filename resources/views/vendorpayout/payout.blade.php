@@ -30,7 +30,7 @@
         <div class="col-sm-12 pl-0 pr-0">
             <div class="card  h-auto p-0 pt-10">
             <div class="header-wrap">
-                    <div class="col-sm-8 p-3 ">
+                    <div class="col-sm-8 p-3 ml-3">
                         <h3 class="f-18 ml-2 mt-3">Vendor Payout </h3>
                     </div>
                     <div class="header-wrap p-0 col-sm-1 " style="display: flex; justify-content: flex-end;  margin-right: -18px;">
@@ -89,7 +89,7 @@
                                 <th scope="col">Payout ID </th>
 {{--                                <th scope="col">Description</th>--}}
                                 <th scope="col">Vendor ID </th>
-                                <th scope="col">Status</th>
+                                <th scope="col" style="text-align: center !important;" >Status</th>
                                 <th scope="col">Pay out Date</th>
                                 <th scope="col">Commission Rate</th>
                                 <th scope="col">Amount</th>
@@ -102,7 +102,7 @@
                                     <td scope="row">{{$payout->public_payout_id}}</td>
     {{--                                <td>Payment for BLR movers</td>--}}
                                     <td>{{$payout->organization_id}}</td>
-                                    <td>
+                                    <td style="text-align: center !important;">
                                         @switch($payout->status)
                                             @case(\App\Enums\PayoutEnums::$STATUS['scheduled'])
                                             <span class="status-badge green-bg text-center">Scheduled</span>

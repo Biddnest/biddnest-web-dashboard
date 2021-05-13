@@ -192,7 +192,7 @@
                                 <tr>
                                   <th scope="col" style="    width: 50%;">Item Name</th>
                                   <th scope="col" style="    width: 50%;" >Quantity</th>
-                                  <th scope="col" >Size</th>
+                                  <th scope="col" style="    text-align: center !important;">Size</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-15">

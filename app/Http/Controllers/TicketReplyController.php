@@ -76,4 +76,13 @@ class TicketReplyController extends Controller
 
         return Helper::response(true, "status updated Successfully");
     }
+
+    public static function changeAproovedBranchStatus($id, $status)
+    {
+
+    }
+    public static function changeAproovedPriceStatus($id, $status)
+    {
+
+    }
 }

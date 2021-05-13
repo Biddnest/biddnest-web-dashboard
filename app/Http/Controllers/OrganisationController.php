@@ -202,6 +202,10 @@ class OrganisationController extends Controller
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
         $organizations->verification_status = $exist['verification_status'];
+        if($vendor)
+        {
+            $organizations->ticket_status = CommonEnums::$TICKE_STATUS['open'];
+        }
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value)
@@ -257,6 +261,14 @@ class OrganisationController extends Controller
             "service_type"=>$data['service_type'],
             "meta" =>json_encode($meta)
         ]);
+
+        if($vendor)
+        {
+            Organization::where(["id"=>$id])
+                ->update([
+                    'ticket_status' => CommonEnums::$TICKE_STATUS['open']
+                ]);
+        }
 
         OrganizationService::where("organization_id", $id)->delete();
         foreach($data['service'] as $value)

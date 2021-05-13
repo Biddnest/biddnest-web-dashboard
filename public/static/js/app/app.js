@@ -191,6 +191,7 @@ $("body").on('change', ".field-toggle", function(event) {
 
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
+    console.log('show');
     $(".hide-on-data").fadeOut(100);
     initRangeSlider();
     var id=$(".category-select").val();

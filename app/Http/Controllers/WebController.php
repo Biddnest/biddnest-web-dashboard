@@ -20,6 +20,7 @@ use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\CouponZone;
 use App\Models\Inventory;
+use App\Models\InventoryPrice;
 use App\Models\Notification;
 use App\Models\Org_kyc;
 use App\Models\Page;
@@ -784,9 +785,25 @@ class WebController extends Controller
 
     public function reply(Request $request)
     {
+        $service_status=[];
+        $ticket_info=[];
         $ticket=Ticket::where('id', $request->id)->with('reply')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
-        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies]);
+
+        if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
+        {
+            $ticket_info=Booking::where('id', json_decode($ticket->meta, true)['public_booking_id'])->with()->first();
+        }
+        elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
+        {
+            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)[])->first();
+        }
+        elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
+        {
+            $ticket_info=InventoryPrice::where([])->limit(1)->get();
+        }
+
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status]);
     }
 
     public function serviceRequests(Request $request)

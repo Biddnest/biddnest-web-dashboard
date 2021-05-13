@@ -151,11 +151,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a class = "inline-icon-button mr-4" href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                        <a href="#" class = "inline-icon-button">
-                                        <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
-                                        </a>
-
+                                        <a class = "inline-icon-button mr-4" href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-eye p-1 mr-2" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -327,13 +327,13 @@
                             </div>
                           </div>
                           <div class="col-sm-12 mtop-20  p-15   pb-0" >
-                            <div class="heading p-8 border-around ">
+                            <div class="heading p-10 pl-4 border-around ">
                               Inventory
                             </div>
                             <table class="table text-center p-10  theme-text tb-border2" id="items" >
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
-                                    <th scope="col">Item Name</th>
+                                    <th scope="col" style="padding-left: 16px !important;">Item Name</th>
                                       <th scope="col">Material</th>
                                         <th scope="col">Size</th>
                                       <th scope="col">Quantity</th>
@@ -342,7 +342,7 @@
                                 </thead>
                                 <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                     <tr class="inventory-snip">
-                                    <td scope="row" class="text-left">
+                                    <td scope="row" class="text-left" style="padding-left: 14px !important;">
                                         <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                                             <option value="">--Select--</option>
                                             @foreach($inventories as $inventory)
@@ -351,14 +351,14 @@
                                         </select>
                                     </td>
 
-                                    <td class="">
+                                    <td class=""  style="padding-left: 14px !important;">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
                                             <option value="">--Choose Inventory--</option>
 
                                         </select>
                                     </td>
 
-                                    <td class="">
+                                    <td class=""  style="padding-left: 14px !important;">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
                                             <option value="">--Choose Inventory--</option>
 

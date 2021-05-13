@@ -790,7 +790,7 @@ class WebController extends Controller
         $ticket=Ticket::where('id', $request->id)->with('reply')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
 
-        if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket == TicketEnums::$TYPE['order_reschedule'])
+        if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
         {
             $ticket_info=Booking::where('id', json_decode($ticket->meta, true)['public_booking_id'])->with()->first();
         }

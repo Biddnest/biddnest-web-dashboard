@@ -147,6 +147,12 @@ class WebController extends Controller
         ]);
     }
 
+    public function sidebar_dashboard(Request $request)
+    {
+        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
+        return view('sidebar.dashboard',['booking'=>$booking]);
+    }
+
     public function apiSettings()
     {
         $setting =Settings::whereNotIn('key', ["contact_details"])->get();
@@ -405,7 +411,7 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $vendors = Organization::where(["status"=>OrganizationEnums::$STATUS["active"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+        $vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
 
         if(isset($request->search)){
             $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");

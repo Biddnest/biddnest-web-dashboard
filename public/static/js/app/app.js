@@ -223,6 +223,7 @@ $("body").on('click', ".closer", function(event) {
 $("body").on('click', ".modal-toggle", function(event) {
     console.log("sda");
     $($(this).data("target")).fadeIn(100).show();
+    // $($(this).data("modal")).toggleClass("show");
     return false;
 });
 $("body").on('click', ".fullscreen-modal-body .close", function(event) {
@@ -326,6 +327,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
 });
 
+
 $("body").on('click', ".invsidebar", function(event) {
     var $this = $(this);
 
@@ -427,7 +429,13 @@ $("body").on('change', ".reply_status", function(event) {
 
 $("body").on('input', ".table-search", function(event) {
     var query = $(this).val();
-    if(query.length >= 3){
+    if(query.length >= 4){
+        redirectTo($(this).data('url')+"?search="+query);
+    }
+});
+$("body").on('input', ".table-search1", function(event) {
+    var query = $(this).val();
+    if(query.length >= 15){
         redirectTo($(this).data('url')+"?search="+query);
     }
 });
@@ -516,3 +524,10 @@ $('.filterdate').datepicker({
         });
     return false;
 });*/
+
+
+$("body").on('change', ".inventory-item-select", function(event) {
+    console.log("change");
+    var query = $(this).val();
+    redirectTo($(this).data('url')+"?item="+query);
+});

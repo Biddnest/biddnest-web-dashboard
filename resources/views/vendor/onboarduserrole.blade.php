@@ -205,7 +205,7 @@
                     <div class="w-50"> </div>
                     <div class="w-50 text-right">
                         <a class="white-text p-10" href="#" data-dismiss="modal" aria-label="Close">
-                            <button class="btn theme-bg white-text w-30">Save</button>
+                            <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
                         </a>
                     </div>
                 </div>
@@ -314,7 +314,7 @@
                                 <div class="w-50"> </div>
                                 <div class="w-50 text-right">
                                     <a class="white-text p-10" href="#" data-dismiss="modal" aria-label="Close">
-                                        <button class="btn theme-bg white-text w-30">Save</button>
+                                        <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
                                     </a>
                                 </div>
                             </div>

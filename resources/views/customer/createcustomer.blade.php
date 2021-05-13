@@ -26,7 +26,7 @@
                             </h3>
                         </header>
                         <div class="form-wrapper">
-                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="tiny" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
+                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
                                 <div class="row pr-3 pl-3">
                                     <div class="col-lg-6">
                                         <p class="img-label" style="padding-left: 0px;">Image</p>
@@ -34,11 +34,13 @@
                                             <img class="upload-preview" src="@if(!$users){{asset('static/images/upload-image.svg')}}@else{{$users->avatar}}@endif" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
-                                                    <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->avatar}}@endif" required />
+
                                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
-                                                    <input type="file" required/>
+                                                    <input type="file" value="@if($users){{$users->avatar}}@endif" accept=".png,.jpg,.jpeg"/>
+                                                    <input type="hidden" class="base-holder" name="image" value="@if($users){{$users->avatar}}@endif" required />
+
                                                 </div>
                                                 <p>Max File size: 1MB</p>
                                             </div>
@@ -99,15 +101,15 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Date of Birth</label>
-                                            <input type="date" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" placeholder="David" class="form-control" required>
+                                            <input type="date" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" placeholder="dd/mm/yyyy" class="form-control filterdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex  justify-content-between flex-row  " style="border-top: 1px solid #70707040;margin-top: 70px;">
                                     <div class="w-50">
-                                        <a class="white-text p-10 cancel" href="#">
-                                            <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                                        <a class="white-text p-10 cancel" href="{{route('customers')}}">
+                                            <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                                         </a>
                                     </div>
                                     <div class="w-50 text-right">

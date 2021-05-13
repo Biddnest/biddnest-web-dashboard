@@ -6,16 +6,16 @@
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4 f-20">Push Notification & Messages</h3>
         <div class="mr-20 create-notification">
-                        
+
             <button class="btn theme-bg white-text dropdown-toggle"><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New </button>
                             <div class="dropdown">
                                 <ul>
                                     <li><a href="{{route('create-push-notification')}}">Push Notification</a></li>
                                     <li><a href="{{route('create-mail-notification')}}">Mail</a></li>
-                                 
+
                                 </ul>
                             </div>
-                     
+
                         </div>
                     </div>
                     <div class="d-flex  flex-row justify-content-between">
@@ -23,14 +23,14 @@
                           <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">Push Notification & Messages</li>
-                              <li class="breadcrumb-item"><a href="#">Notifications</a></li>
-                              
+                              <li class="breadcrumb-item">Notifications</li>
+
                             </ol>
                           </nav>
-                        
-                        
+
+
                         </div>
-                  
+
                     </div>
 
                     <!-- Dashboard cards -->
@@ -52,11 +52,11 @@
                                             </li>
 
                                         </ul>
-                                      </h3> 
-                                          
-                                       
+                                      </h3>
+
+
                                     </div>
-                              
+
                                 </div>
                                 <!-- Table -->
 
@@ -86,7 +86,7 @@
                                                     </td>
                                                     <td>
                                                        This mail is to inform you...
-                                                        
+
                                                     </td>
                                                     <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                             class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
@@ -102,7 +102,7 @@
                                                     </td>
                                                     <td>
                                                        This mail is to inform you...
-                                                        
+
                                                     </td>
                                                     <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                             class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
@@ -129,7 +129,7 @@
                                                     </td>
                                                     <td>
                                                     This mail is to inform you...
-                                                        
+
                                                     </td>
                                                     <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                         class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
@@ -144,15 +144,15 @@
                                                     </td>
                                                     <td>
                                                     This mail is to inform you...
-                                                        
+
                                                     </td>
                                                     <td> <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i><i
                                                         class="icon dripicons-trash p-1" aria-hidden="true"></i></i></td>
                                                 </tr>
                                             </tbody>
-    
+
                                         </table>
-                                        
+
                                         <div class="pagination">
                                             <ul>
                                                 <li class="p-1">Page</li>
@@ -164,7 +164,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                     <!--  -->
                                 </div>
 

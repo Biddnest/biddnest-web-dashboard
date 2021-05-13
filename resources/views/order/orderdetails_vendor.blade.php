@@ -5,13 +5,12 @@
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails">
               <div class="d-flex  flex-row justify-content-between">
                   <h3 class="page-head text-left p-4">Order Details</h3>
-
               </div>
               <div class="d-flex  flex-row justify-content-between">
                 <div class="page-head text-left p-4 pt-0 pb-0">
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="booking-orders.html">Booking & Orders</a></li>
+                      <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
 
                       <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
@@ -20,10 +19,8 @@
 
               </div>
     <div class="row">
-
         <div class="col-md-12" style="padding: 0px 40px; border: none;">
             <div class="card" style="border:none;">
-
                 <div class="card-body" style="padding: 20px;">
 
                     <hr class="dash-line">
@@ -44,7 +41,6 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -129,13 +125,13 @@
                                   {{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->vehicle){{ucfirst(trans($booking->vehicle->name))}} {{ucfirst(trans($booking->vehicle->number))}} @endif
+                                    @if($booking->vehicle){{ucfirst(trans($booking->vehicle->name))}} {{ucfirst(trans($booking->vehicle->number))}} @else Vehicle is not assigned @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->driver){{ucfirst(trans($booking->driver->fname))}} {{ucfirst(trans($booking->driver->lname))}} @endif
+                                    @if($booking->driver){{ucfirst(trans($booking->driver->fname))}} {{ucfirst(trans($booking->driver->lname))}} @else Driver is not assigned  @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                  +91 -  @if($booking->driver){{ucfirst(trans($booking->driver->phone))}} @endif
+                                   @if($booking->driver) +91 -{{ucfirst(trans($booking->driver->phone))}} @else Driver is not assigned @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->payment) ₹{{ucfirst(trans($booking->payment->grand_total))}}@else Payment Pending @endif

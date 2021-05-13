@@ -145,7 +145,7 @@
                             <table class="table text-center p-10 theme-text">
                                 <thead class="secondg-bg  p-0">
                                 <tr>
-                                    <th scope="col">Item Name</th>
+                                    <th scope="col" style="float: left; margin-left: -8px;">Item Name</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Size</th>
 
@@ -155,7 +155,7 @@
 
                                 @foreach($booking->inventories as $inventory)
                                 <tr class="tb-border  cursor-pointer">
-                                    <th scope="row">{{$inventory->name}}</th>
+                                    <th scope="row" style="float: left; margin-left: -8px;">{{$inventory->name}}</th>
 
                                     <td class="text-center">@if(json_decode($inventory->size,true)){{json_decode($inventory->size,true)['min']}} - {{json_decode($inventory->size,true)['max']}}@else {{$inventory->size}} @endif</td>
                                     <td class=""><span class="red-bg text-center w-100  td-padding">{{$inventory->material}}</span></td>
@@ -253,7 +253,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 
@@ -480,7 +480,7 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>1])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
 
 
 

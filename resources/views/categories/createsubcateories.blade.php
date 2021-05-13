@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createsubcategory">
     <div class="d-flex flex-row justify-content-between">
-        <h3 class="heading1 p-4">Create Subcategory</h3>
+        <h3 class="heading1 p-4"> @if(!$subcategory) Create @else Edit @endif Subcategory</h3>
     </div>
 
     <!-- Dashboard cards -->
@@ -12,10 +12,9 @@
         <div class="page-head text-left p-5 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories/
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('subcateories')}}">Sub-Categories</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="{{route('create-subcateories')}}">Subcategory Management</a></li>
-                    <li class="breadcrumb-item"><a href="#">Create Subcategory</a></li>
+                    <li class="breadcrumb-item"> @if(!$subcategory) Create @else Edit @endif Subcategory</li>
                 </ol>
             </nav>
         </div>
@@ -36,14 +35,14 @@
                           <div class="col-lg-6">
                             <p class="img-label">Photo</p>
                             <div class="upload-section p-20 pt-0">
-                              <img class="upload-preview" src="@if(isset($subcategory)){{$subcategory->image}}@else{{asset('static/images/upload-image.svg')}}@endif" alt=""/>
+                              <img class="upload-preview" src="@if(isset($subcategory) && isset($subcategory->image)){{$subcategory->image}}@else{{asset('static/images/upload-image.svg')}}@endif" alt=""/>
                               <div class="ml-1">
                                 <div class="file-upload">
                                     <input type="hidden" class="base-holder" name="image" value="@if(isset($subcategory)){{$subcategory->image}}@endif" required />
                                     <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                         UPLOAD IMAGE
                                     </button>
-                                    <input type="file" required/>
+                                    <input type="file"  value="@if(isset($subcategory)){{$subcategory->image}}@endif" required/>
                                 </div>
                                 <p>Max File size: 1MB</p>
                               </div>
@@ -157,7 +156,7 @@
                                                    <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                        <option value="">--Select--</option>
                                                        @foreach($inventories as $inventory)
-                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->name}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
+                                                           <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
                                                        @endforeach
                                                    </select>
                                                </td>

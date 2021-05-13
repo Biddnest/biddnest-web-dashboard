@@ -235,8 +235,18 @@ class UserController extends Controller
 
     public static function add($fname, $lname, $phone, $email, $gender, $dob, $avatar)
     {
+        $user_email=User::where('email', $email)->first();
+        if($user_email)
+            return Helper::response(false,"Email id is already exist in system");
+
+        $user_phone=User::where('phone', $phone)->first();
+        if($user_phone)
+            return Helper::response(false,"Phone no is already exist in system");
+
         $image_man = new ImageManager(array('driver' => 'gd'));
         $uniq = uniqid();
+
+        $image=Helper::saveFile($image_man->make($avatar)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Customer");
 
         $user = new User;
         $user->fname=$fname;
@@ -244,14 +254,14 @@ class UserController extends Controller
         $user->email=$email;
         $user->phone=$phone;
         $user->gender=$gender;
-        $user->avatar=Helper::saveFile($image_man->make($avatar)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Customer");
+        $user->avatar=$image;
         $user->dob=$dob;
         $save_result = $user->save();
 
         if(!$save_result)
-            return Helper::response(false,"Couldn't save Testimonials");
+            return Helper::response(false,"Couldn't save Customers");
 
-        return Helper::response(true,"save Testimonials successfully", ["customer"=>User::findOrFail($user->id)]);
+        return Helper::response(true,"save Customers successfully", ["customer"=>User::findOrFail($user->id)]);
     }
 
     public static function directSignup($phone, $fname, $lname, $email, $gender=null, $refby_code=null){
@@ -266,7 +276,21 @@ class UserController extends Controller
         $user->fname=$fname;
         $user->lname=$lname;
         $user->email=$email;
+        $user->meta=json_encode(["refferal_code"=>$ref_code, "reffered_by"=>null]);
+        $user->avatar=$avatar_file_name;
         $user->save();
+
+        return $user;
+    }
+    public static function directupdate($phone, $fname, $lname, $email, $user_id, $gender=null, $refby_code=null){
+
+        $avatar_file_name = $fname."-".$lname."-".uniqid().".png";
+
+        $user= User::where('id', $user_id)->update([
+            "fname"=>$fname,
+            "lname"=>$lname,
+            "avatar"=>$avatar_file_name
+        ]);
 
         return $user;
     }

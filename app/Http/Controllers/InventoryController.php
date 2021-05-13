@@ -6,6 +6,7 @@ use App\Helper;
 use App\Models\SubserviceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 use App\Models\Inventory;
 use App\Models\InventoryPrice;
@@ -133,7 +134,7 @@ class InventoryController extends Controller
     }
 
     //route controller => VendorApiRouteController
-    public static function addPrice($data)
+    public static function addPrice($data, $web=false)
     {
         $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
@@ -145,7 +146,7 @@ class InventoryController extends Controller
 
         foreach($data['price'] as $price) {
             $inventoryprice=new InventoryPrice;
-            // $inventoryprice->organization_id= $data['organization_id'];
+            $inventoryprice->organization_id= Session::get('organization_id');
             $inventoryprice->service_type= $data['service_type'];
             $inventoryprice->inventory_id= $data['inventory_id'];
             $inventoryprice->size= $price['size'];
@@ -157,6 +158,8 @@ class InventoryController extends Controller
 
         if(!$result)
             return Helper::response(false,"Couldn't save data");
+        if($web)
+            return Helper::response(true,"Price Saved successfully");
         else
             return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
     }
@@ -178,34 +181,27 @@ class InventoryController extends Controller
         // if(!$Organization)
         //     return Helper::response(false,"Incorrect Organization id.");
 
-        $Service = Service::findOrFail($data["service_type"]);
+       /* $Service = Service::findOrFail($data["service_type"]);
         if(!$Service)
-            return Helper::response(false,"Incorrect service type.");
+            return Helper::response(false,"Incorrect service type.");*/
 
         $Inventory = Inventory::findOrFail($data["inventory_id"]);
         if(!$Inventory)
             return Helper::response(false,"Incorrect inventory id.");
 
-        $updateColumns = [
-            // "organization_id"=> $data['organization_id'],
-            "service_type"=> $data['service_type'],
-            "inventory_id"=> $data['inventory_id'],
-            "size"=> $data['size'],
-            "material"=> $data['material'],
-            "price_economics"=> $data['price']['economics'],
-            "price_premium"=> $data['price']['premium'],
-        ];
-
-        $InventoryPrice= InventoryPrice::where("id", $data['price_id'])->update($updateColumns);
-
-        return Helper::response(true, "Inventory Price has been updated.",[
-            "InventoryPrice"=>InventoryPrice::select('*')->findOrFail($InventoryPrice)
-        ]);
+        foreach($data['price'] as $price) {
+            $updateColumns = [
+                "price_economics" => $price['price']['economics'],
+                "price_premium" => $price['price']['premium'],
+            ];
+            $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
+        }
+        return Helper::response(true, "Inventory Price has been updated.");
     }
 
     public static function deletePrice($id)
     {
-        $result=InventoryPrice::where("id",$id)->update(["deleted"=>1]);
+        $result=InventoryPrice::where(["inventory_id"=>$id, 'organization_id'=>Session::get('organization_id')])->update(["deleted"=>1]);
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");

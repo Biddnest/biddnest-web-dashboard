@@ -15,8 +15,8 @@
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Bookings & Orders</li>
-                    <li class="breadcrumb-item"><a href="#"> Manage Bookings</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('orders-booking-past')}}">Bookings & Orders</a></li>
+                    <li class="breadcrumb-item">Manage Bookings</li>
                 </ol>
             </nav>
         </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="p-1 card-head left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm table-search" data-url="{{route('orders-booking-past')}}" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search1" data-url="{{route('orders-booking-past')}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>

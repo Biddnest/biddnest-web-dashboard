@@ -21,7 +21,7 @@
             <div class="page-head text-left  pt-0 pb-0 p-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Categories & Subcategories
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories & Subcategories</a>
                         </li>
                         <li class="breadcrumb-item"><a href="#">Category Management</a></li>
 
@@ -61,7 +61,7 @@
                                 <th scope="col">Category</th>
                                 <th scope="col"> Inventory Quantity Type</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Add Category</th>
+{{--                                <th scope="col">Add Category</th>--}}
                                 <th scope="col">Operations</th>
                             </tr>
                             </thead>
@@ -102,10 +102,10 @@
                                         <input type="checkbox" {{($category->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('status_update',['id'=>$category->id])}}">
                                         {{-- <input type="checkbox" {{($category->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}} data-toggle="toggle" data-size="xs" data-width="110" data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="{{($category->status == \App\Enums\CommonEnums::$YES) ? "Active" : "Inactive"}}" data-off="{{($category->status == \App\Enums\CommonEnums::$NO) ? "Active" : "Inactive"}}" id="category_{{$category->id}}" class="change_status" data-url="{{route('status_update',['id'=>$category->id])}}">--}}
                                     </td>
-                                    <td class="cursor-pointer">
+                                    {{--<td class="cursor-pointer">
                                         <div class="btn btn-sm status-badge p-2 text-center green-bg #FEF6E0"> <i class="fa fa-plus p-1" aria-hidden="true"></i>
                                             Add</div>
-                                    </td>
+                                    </td>--}}
 
                                     <td class="cursor-pointer"> <a class ="inline-icon-button mr-4" href="{{route('edit-categories', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         <a href="#" class="delete inline-icon-button" data-parent=".cat_{{$category->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('service_delete',['id'=>$category->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>

@@ -148,7 +148,7 @@ class BidController extends Controller
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
 
-        $lost_vendor_id =Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];
+        /*$lost_vendor_id =Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];*/
         $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
                             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
@@ -254,22 +254,22 @@ class BidController extends Controller
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
-                $inv = InventoryPrice::where([
+                 $inv = InventoryPrice::where([
                     "inventory_id"=>$booking_inventory["inventory_id"],
                     "material"=>$booking_inventory["material"],
                     "size"=>$booking_inventory["size"],
                     "organization_id"=>$organization_id
-                ])->get();
+                ])->first();
 
                 $list_item["bid_inventory_id"] = $booking_inventory["inventory_id"];
                 $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
-                $list_item["price"] = sizeof($inv) > 0 ? $inv->$price_type : 0.00;
+                $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;
 
                 array_push($price_list, $list_item);
 
-                $total += sizeof($inv) > 0 ? $inv->$price_type : 0.00;
+                $total += $inv ? $inv->$price_type : 0.00;
 
             }
         }

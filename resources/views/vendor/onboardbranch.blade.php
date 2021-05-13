@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Main Content -->
-<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createVendor">
+<div class="main-content grey-bg" data-barba="container" data-barba-namespace="createbranch">
 
     <div class="d-flex  flex-row justify-content-between">
         <div class="page-head text-left p-4 pt-0 pb-0">
@@ -17,7 +17,8 @@
             </nav>
         </div>
         <div class="mr-20">
-            <a class="modal-toggle" data-target="#add-branch">
+            <a class="modal-toggle" data-toggle="modal" data-target="#add-branch">
+{{--                <a class="modal-toggle" data-modal="#add-branch" onclick="$('#add-branch').modal({backdrop: false});">--}}
                 <button class="btn theme-bg white-text w-10">Add Branch</button>
             </a>
         </div>
@@ -294,7 +295,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Commision</label>
-                                <input type="text" id="fullname" placeholder="560097" value="{{$organization->commission}}%"
+                                <input type="text" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
                                        class="form-control" readonly>
                             </div>
                         </div>
@@ -312,7 +313,7 @@
                 </div>
                 <div class="modal-footer p-15 " style="padding: 0px 5px;">
                     <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
-                                         aria-label="Close"><button
+                                         aria-label="Close"><button type="button"
                                 class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
                     <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
                                                     aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
@@ -330,7 +331,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue" action="{{route('edit_branch_vendor')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-branch-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
                     <div class="modal-body p-15 margin-topneg-7">
                         <input type="hidden" name="parent_org_id" value="{{$id}}">
                         <input type="hidden" name="id" value="{{$branch->id}}">
@@ -507,8 +508,8 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Commision</label>
-                                    <input type="number" id="fullname" placeholder="560097" value="{{$branch->commission}}%"
-                                           class="form-control" name="commission" required maxlength="2">
+                                    <input type="text" id="fullname" placeholder="Commission" value="{{$branch->commission}}"
+                                           class="form-control" name="commission" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -523,12 +524,12 @@
 
                         </div>
                     </div>
-                    <div class="modal-footer p-15 " style="padding: 0px 5px;">
-                        <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
-                                                                                  aria-label="Close"><button
-                                    class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
-                        <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
-                                                        aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
+                    <<div class="modal-footer p-15 " style="padding: 0px 5px;">
+                        <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" ><button type="button"
+                                                                                                             class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal"
+                                                                                                                                   aria-label="Close">Cancel</button></a></div>
+                        <div class="w-50 text-right"><a class="white-text p-10" href="#" ><button class="btn theme-bg white-text w-30" data-dismiss="modal"
+                                                                                                  aria-label="Close">Update</button></a></div>
                     </div>
                 </form>
             </div>

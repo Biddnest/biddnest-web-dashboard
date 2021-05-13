@@ -10,7 +10,7 @@
         <div class="page-head text-left p-4 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="booking-orders.html">Booking & Orders</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
 
                     <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                 </ol>
@@ -88,28 +88,24 @@
                                 <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Email
                                 </div>
-                                  <br/>
                                 <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   From Address
                                 </div>
-                                <br/>
                                 <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   To Address
                                 </div>
                                 <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                     Delivery Distance
                                 </div>
-
                                 <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Order Amount
                                 </div>
-
                                 <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                   Booking Status
                                 </div>
                             </div>
 
-                            <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                            <div class="col-sm-8 white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                   {{$booking->public_booking_id}}
                                 </div>
@@ -134,7 +130,7 @@
                                     {{ json_decode($booking->meta, true)['distance'] }}Kms
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    &#8377;{{$booking->final_quote}}
+                                    &#8377;@if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif
                                 </div>
 
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">

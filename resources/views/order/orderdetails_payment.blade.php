@@ -11,7 +11,7 @@
                 <div class="page-head text-left p-4 pt-0 pb-0">
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="booking-orders.html">Booking & Orders</a></li>
+                      <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
 
                       <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
@@ -153,14 +153,13 @@
                       <div class="border-top-3">
                               <div class="d-flex justify-content-start">
                                   <div class="w-50">
-                                      <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
+{{--                                      <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>--}}
                                   </div>
                                   <div class="w-50 margin-r-20">
                                       <div class="d-flex justify-content-end">
-                                      <button  class="btn theme-text white-bg theme-br w-30 mr-20">Back</button>
-                                          <button  class="btn white-text theme-bg w-30" >Next</button>
+                                          <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
+                                          <a href="{{route('order-details-review', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                       </div>
-
                                   </div>
                               </div>
 

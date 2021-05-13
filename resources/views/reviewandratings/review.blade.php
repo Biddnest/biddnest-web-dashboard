@@ -18,8 +18,8 @@
         <div class="page-head text-left p-2 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Review & Ratings</li>
-                    <li class="breadcrumb-item"><a href="{{route('review')}}">Manage Reviews</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('review')}}">Review & Ratings</a></li>
+                    <li class="breadcrumb-item">Manage Reviews</li>
                 </ol>
             </nav>
         </div>
@@ -137,12 +137,12 @@
                                     <td>
                                         <a  class = "inline-icon-button mr-4" href="{{route('create-review')}}">
                                             <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
-                                           
+
                                         </a>
                                         <a href="#" class ="inline-icon-button">
                                         <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                         </a>
-                                      
+
                                     </td>
                                 </tr>
                             @endforeach

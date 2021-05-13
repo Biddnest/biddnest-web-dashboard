@@ -40,8 +40,14 @@ class BookingsController extends Controller
         $user = User::where("phone",$request->phone)
                 ->orWhere("email",$request->email)
                 ->first();
-        if($user)
+        if($user) {
             $user_id = $user->id;
+
+            $fname = explode($request->contact_details['name'], " ")[0];
+            $lname = str_replace($fname, "", $request->contact_details['name']);
+
+            UserController::directupdate($request->contact_details['phone'], $fname, $lname, $request->contact_details['email'], $user_id);
+        }
         else
         {
             $fname = explode($request->contact_details['name'], " ")[0];
@@ -119,7 +125,14 @@ class BookingsController extends Controller
 
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        if($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+        if($web) {
+            if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+                foreach ($data['meta']['images'] as $key => $image) {
+                    $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+                }
+            }
+        }
+        else{
             foreach ($data['meta']['images'] as $key => $image) {
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
             }
@@ -580,7 +593,8 @@ class BookingsController extends Controller
                 $bid->where("organization_id", $request->token_payload->organization_id)
                     ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
             }])->with('user')->first();
-        if($booking->bid->status == BidEnums::$STATUS['lost'])
+
+        if($booking->bid && $booking->bid->status == BidEnums::$STATUS['lost'])
             $booking->bid->statistics = self::getposition($request->token_payload->id, $request->public_booking_id);
 
         return Helper::response(true, "Show data successfully", ["booking" => $booking]);

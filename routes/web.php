@@ -345,6 +345,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/slider/{id}',[WebController::class,'sidebar_slider'])->name('sidebar.slider');
         Route::get('/user/{id}',[WebController::class,'sidebar_user'])->name('sidebar.user');
         Route::get('/payout/{id}',[WebController::class,'sidebar_payout'])->name('sidebar.payout');
+        Route::get('/dashboard/{id}',[WebController::class,'sidebar_dashboard'])->name('sidebar.dashboard');
     });
 
 
@@ -400,6 +401,7 @@ Route::prefix('vendor')->group(function(){
             Route::get('/{id}/sidebar',[VendorWebController::class,'inventorySidebar'])->name("vendor.inventory_sidebar");
             Route::get('/get/services',[VendorWebController::class,'getServices'])->name("vendor.inventory_services");
             Route::get('/{id}/add',[VendorWebController::class,'addInventory'])->name("vendor.inventory.add");
+            Route::get('/{id}/edit',[VendorWebController::class,'editInventory'])->name("vendor.inventory.edit");
         });
 
         Route::prefix('/branches')->group(function () {
@@ -434,13 +436,6 @@ Route::prefix('vendor')->group(function(){
             Route::get('/{role}',[VendorWebController::class,'login'])->name("vendor.users");
         });
 
-        Route::get('/inventories/{id}/edit',[VendorWebController::class,'login'])->name("vendor.inventory.edit");
-        Route::get('/inventories/sidebar',[VendorWebController::class,'login'])->name("vendor.inventory.sidebar");
-        Route::get('/inventories/{category}',[VendorWebController::class,'login'])->name("vendor.inventory");
-
-
-        Route::get('/my-service-requests',[VendorWebController::class,'login'])->name("vendor.my-service-requests");
-        Route::get('/reports',[VendorWebController::class,'login'])->name("vendor.reports");
     });
 });
 

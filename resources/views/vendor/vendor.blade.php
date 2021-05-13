@@ -15,8 +15,8 @@
                                 <div class="page-head text-left  pt-0 pb-0 p-2">
                                   <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page">Vendor Management</li>
-                                      <li class="breadcrumb-item"><a href="#"> Manage Vendor</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('vendors')}}">Vendor Management</a></li>
+                                      <li class="breadcrumb-item">Manage Vendor</li>
 
                                     </ol>
                                   </nav>
@@ -145,8 +145,8 @@
                                                                 @endswitch
                                                             </td>
                                  <td> <a  class = "inline-icon-button mr-4" href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                                                <a  class = "inline-icon-button" href="#" class="delete" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
-                                                            </td>
+                                                                <a  class = "inline-icon-button delete" href="#" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

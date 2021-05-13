@@ -20,15 +20,15 @@
                 <div class="col-lg-12 ">
                     <div class="profile-section">
                         <figure>
-                            <img src="@if($users->avatar){{$users->avatar}}@endif" alt="">
+                            <img src="@if($users->avatar){{$users->avatar}}@endif" alt="" style="width: 50%;">
                         </figure>
                         <div class="profile-details-side-pop">
                             <ul>
-                                <li>
+                                <li style="padding-bottom: 5px;">
                                     <h1>{{$users->fname}} {{$users->lname}}</h1>
                                     <a href="{{route('edit-customers', ['id'=>$users->id])}}"><i class="fa fa-pencil pr-1 mr-1 " style="color: #3BA3FB;" aria-hidden="true"></i></a>
                                 </li>
-                                <li>
+                                <li style="padding-bottom: 5px;">
                                     <h2>{{$users->email}}</h2>
                                 </li>
                                 <li>

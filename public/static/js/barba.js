@@ -33,6 +33,7 @@ function changeMenu(){
     });
 }
 
+
 import {
     initCountdown,
     initMapPicker,
@@ -58,7 +59,7 @@ barba.init({
         afterEnter(data) {
             // loadRevenueChart();
         }
-      },{
+      }, {
         namespace: 'createslider',
         afterEnter(data) {
 

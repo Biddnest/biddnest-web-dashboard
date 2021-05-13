@@ -124,8 +124,7 @@ class OrganisationController extends Controller
             ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['organization']['org_name']);
-
+            $update_data["image"] =  Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
         $result_organization =Organization::where(["id"=>$id])->update($update_data);
 
         OrganizationService::where("organization_id", $id)->delete();
@@ -298,7 +297,7 @@ class OrganisationController extends Controller
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't save data");
@@ -339,7 +338,7 @@ class OrganisationController extends Controller
             $result_bank= Org_kyc::where("id", $bank_id)
                 ->update($update_data);
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't Update data");

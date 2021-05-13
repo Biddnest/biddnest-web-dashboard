@@ -16,8 +16,8 @@
         <div class="page-head text-left p-2 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Services</li>
-                    <li class="breadcrumb-item"><a href="{{route('create-service')}}">Create Request</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('create-service')}}">Services</a></li>
+                    <li class="breadcrumb-item">Create Request</li>
                 </ol>
             </nav>
         </div>
@@ -155,7 +155,7 @@
                                         <a href="#" class = "inline-icon-button">
                                         <i class="fa fa-ban p-1" aria-hidden="true" style="cursor: no-drop !important;"></i>
                                         </a>
-                                      
+
                                     </td>
                                 </tr>
                             @endforeach

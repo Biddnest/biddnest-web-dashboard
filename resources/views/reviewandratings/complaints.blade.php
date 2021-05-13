@@ -16,8 +16,8 @@
         <div class="page-head text-left p-2 pt-0 pb-0">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Complaint</li>
-                    <li class="breadcrumb-item"><a href="{{route('service-requests')}}">Services</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('complaints')}}">Complaint</a></li>
+                    <li class="breadcrumb-item">Services</li>
                 </ol>
             </nav>
         </div>

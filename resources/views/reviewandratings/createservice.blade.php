@@ -10,7 +10,7 @@
                               <div class="page-head text-left  pt-0 pb-0 p-4 mt-2">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="service-requests.html">Service Requests</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('service-requests')}}">Service Requests</a></li>
                                         <li class="breadcrumb-item active" aria-current="page"> Create Service</li>
 
 

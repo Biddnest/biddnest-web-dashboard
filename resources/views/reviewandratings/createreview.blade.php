@@ -12,16 +12,14 @@
                                 <div class="page-head text-left p-2 pt-0 pb-0">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="{{route('review')}}">Review & Ratings
+                                            <li class="breadcrumb-item"><a href="{{route('review')}}">Review & Ratings</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Create Review for Customer</li>
-                                            </a></li>
-        
                                         </ol>
                                     </nav>
-        
-        
+
+
                                 </div>
-        
+
                             </div>
                             <!-- <div class="d-flex flex-row text-left ml-120">
                                 <a href="Reviews.html" class="text-decoration-none">
@@ -96,15 +94,15 @@
 
                                             </div>
 
-                                               
+
                                             <div class="col-lg-12">
                                                 <div class="form-input">
                                                     <label class="">Description</label>
-                                                        <textarea id="testim-description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus erat at ligula auctor malesuada. Suspendisse potenti. Duis Bibendum arcu in consequat tempus." style="resize: none;" id="" class="form-control " rows="3" cols="50" spellcheck="false">                   
+                                                        <textarea id="testim-description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus erat at ligula auctor malesuada. Suspendisse potenti. Duis Bibendum arcu in consequat tempus." style="resize: none;" id="" class="form-control " rows="3" cols="50" spellcheck="false">
                                                           </textarea>
                                                        <span class="error-message">Please enter  valid Description</span>
                                                 </div>
-                                            </div> 
+                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="form-input">
                                                     <label class="full-name">Status</label>

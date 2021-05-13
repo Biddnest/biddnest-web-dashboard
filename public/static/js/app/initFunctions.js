@@ -569,6 +569,7 @@ export function initPopUp(){
         });*/
     });
 }
+
 export function initRangeSlider(){
     if($(".custom_slider").length) {
         $(".custom_slider").ionRangeSlider({

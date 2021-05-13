@@ -426,13 +426,18 @@ class VendorWebController extends Controller
 
     public function addInventory(Request $request)
     {
+        $inventory_items=[];
         $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereNotIn('id', [InventoryPrice::where('organization_id', Session::get('organization_id'))->distinct('inventory_id')->pluck('inventory_id')])->get();
-        return view('vendor-panel.inventory.addinventory', ['inventories'=>$inventory, 'service_id'=>$request->id]);
+        if(isset($request->item)) {
+            $inventory_items =Inventory::where('id', $request->item)->first();
+        }
+        return view('vendor-panel.inventory.addinventory', ['inventories'=>$inventory, 'service_id'=>$request->id, 'inventory_items'=>$inventory_items]);
     }
 
     public function editInventory(Request $request)
     {
-        $inventory=InventoryPrice::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->get();
-        return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory]);
+        $inventory=InventoryPrice::where('inventory_id', $request->id)->where('organization_id', Session::get('organization_id'))->get();
+        $inventory_item=Inventory::where('id', $request->id)->first();
+        return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory, 'item'=>$inventory_item, 'inventory_id'=>$request->id]);
     }
 }

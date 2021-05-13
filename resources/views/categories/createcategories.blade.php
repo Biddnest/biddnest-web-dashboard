@@ -41,7 +41,7 @@
                           <img class="upload-preview" src="@if(!$category){{asset('static/images/upload-image.svg')}}@else{{$category->image}}@endif" alt=""/>
                           <div class="ml-1">
                             <div class="file-upload">
-                                <input type="file" value="@if($category){{$category->image}}@endif" accept=".png,.jpg,.jpeg"/>
+                                <input type="file" value="@if($category){{$category->image}}@endif" accept=".png,.jpg,.jpeg" required/>
                                 <input type="hidden" class="base-holder" id="image" name="image" value="@if($category){{$category->image}}@endif" required/>
                                 <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                                         UPLOAD IMAGE

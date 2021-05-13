@@ -561,7 +561,8 @@
             .branch-wrapper .branch-snip .data-group a{
                 /*display: inline-block;*/
                 margin: 5px;
-                padding: 10px 11px;
+                /* padding: 10px 11px; */
+                padding: 10px 16px;
                 border-radius: 50%;
                 background: #f2f2f2;
             }
@@ -585,7 +586,7 @@
             }
 
             .branch-wrapper .branch-snip .data-group:last-child::after{ display: none;}
-            .branch-wrapper .branch-snip .data-group::after{
+            /* .branch-wrapper .branch-snip .data-group::after{
                 width: 1px;
                 position: absolute;
                 height: 70%;
@@ -595,7 +596,7 @@
                 display: block;
                 background: #c0c0c0;
 
-            }
+            } */
             .branch-wrapper .branch-snip{
                 position: relative;
                 border-radius: 2px;

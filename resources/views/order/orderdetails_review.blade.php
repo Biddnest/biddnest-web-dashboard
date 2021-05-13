@@ -133,14 +133,14 @@
                                     <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
                                       {{$booking->review->desc}}
                                     </div>
-                                    <div class="theme-text f-14  text-center status-badge mtop-20">
+                                    <div class="theme-text f-14  text-center status-badge mt-1">
                                       @foreach(\App\Enums\BookingEnums::$STATUS as $status=>$key)
                                           @if($key == $booking->$status)
                                             {{ucfirst(trans($status))}}
                                           @endif
                                       @endforeach
                                     </div>
-                                    <div class="theme-text f-14 p-15 pl-0  mt-2" style="padding-top: 5px;">
+                                    <div class="theme-text f-14 p-15 pl-0  mt-3" style="padding-top: 5px;">
                                         @php $ratings = 0; @endphp
                                         @foreach(json_decode($booking->review->ratings, true) as $rating)
                                             @php $ratings += $rating['rating']; @endphp

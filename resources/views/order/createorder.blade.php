@@ -35,7 +35,7 @@
                   <h3 class="f-18">
                     <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                       <li class="nav-item">
-                        <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab"
+                        <a class="nav-link active p-15 pl-2" id="new-order-tab" data-toggle="tab" href="#order" role="tab"
                           aria-controls="home" aria-selected="true">Create New Order</a>
                       </li>
                       <li class="nav-item">

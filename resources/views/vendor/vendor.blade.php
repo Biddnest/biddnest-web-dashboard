@@ -112,7 +112,7 @@
                                                         <th scope="col" >Vendor Name</th>
                                                         <th scope="col">Org Name</th>
                                                         <th scope="col">Zone</th>
-                                                        <th scope="col">Status</th>
+                                                        <th scope="col" style="    text-align: center !important; width: 16%;">Status</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>

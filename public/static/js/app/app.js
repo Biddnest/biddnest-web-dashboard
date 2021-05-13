@@ -536,3 +536,4 @@ $("body").on('change', ".inventory-item-select", function(event) {
     var query = $(this).val();
     redirectTo($(this).data('url')+"?item="+query);
 });
+

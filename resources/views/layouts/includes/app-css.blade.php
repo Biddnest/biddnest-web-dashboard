@@ -855,5 +855,7 @@
             .pagination ul li {
                 font-size: 14px !important;
             }
+
+
     </style>
 

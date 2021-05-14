@@ -233,6 +233,12 @@ $("body").on('click', ".fullscreen-modal-body .close", function(event) {
     return false;
 });
 
+$("body").on('click', ".fullscreen-modal-body .cancel", function(event) {
+    console.log("close");
+    $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
+    return false;
+});
+
 
 $("body").on('change', ".inventory-select", function(event) {
     console.log("change");
@@ -390,10 +396,6 @@ $("body").on('keyup', "#amount", function(event) {
     return false;
 });
 
-$("body").on('click', ".cancel", function(event) {
-    document.getElementById("newForm").reset();
-    return false;
-});
 
 $("body").on('change', ".change_status", function(event) {
     var target = $(this).closest($(this).data("parent"));

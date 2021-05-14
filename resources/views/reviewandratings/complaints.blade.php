@@ -165,10 +165,10 @@
                                         @endswitch
                                     </td>
                                     <td>
-                        <a  class = "inline-icon-button mr-4" href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                        <a href="#" class = "inline-icon-button">
+                        <a  class = "inline-icon-button mr-4" href="{{route('reply', ['id'=>$complaint->id])}}"><i class="icon fa fa-eye p-1 mr-2" aria-hidden="true"></i></a>
+                                        {{--<a href="#" class = "inline-icon-button">
                                         <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
-                                        </a>
+                                        </a>--}}
                                     </td>
                                 </tr>
                             @endforeach

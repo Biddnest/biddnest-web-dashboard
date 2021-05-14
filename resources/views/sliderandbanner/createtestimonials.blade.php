@@ -13,7 +13,7 @@
                  <ol class="breadcrumb">
                      <li class="breadcrumb-item active" aria-current="page"><a href="{{route('slider')}}">Sliders & Banners</a></li>
                      <li class="breadcrumb-item"><a  href="{{route('testimonials')}}"> Testimonials</a></li>
-                     <li class="breadcrumb-item"><a href="#"> @if(!$testimonials) Create @else Edit @endif Testimonials</a></li>
+                     <li class="breadcrumb-item"> @if(!$testimonials) Create @else Edit @endif Testimonials</li>
                  </ol>
              </nav>
          </div>
@@ -49,7 +49,7 @@
                              </div>
                          </div>
                      </div>
-                     
+
                      <div class="d-flex row p-20 pt-0">
                          <div class="col-lg-6">
                              <div class="form-input">

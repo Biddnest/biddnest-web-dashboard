@@ -80,11 +80,10 @@ class SubServiceController extends Controller
         $image_man = new ImageManager(array('driver' => 'gd'));
         $image_name = "subservice".$name."-".$id.".png";
 
+        $update_data = ["name"=>$name];
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"subservices");
 
-
-        $update_data = ["name"=>$name];
         $subservice=Subservice::where("id", $id)->update($update_data);
 
         ServiceSubservice::where('service_id', $service_id)->delete();

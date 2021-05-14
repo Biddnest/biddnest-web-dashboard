@@ -17,7 +17,7 @@
             <div class="page-head text-left p-2 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Sliders & Banners
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('slider')}}">Sliders & Banners</a>
                         </li>
                         <li class="breadcrumb-item">Manage Sliders</li>
                     </ol>

@@ -346,7 +346,7 @@
                                             <div id="comments">
                                                 <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                                     style="border-top: 1px solid #70707040;">
-                                                    <div class="w-50"><a class="white-text p-10 cancel" href="#"><button
+                                                    <div class="w-50"><a class="white-text p-10 cancel" href="{{route('vendors')}}"><button
                                                                 class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                                     </div>
                                                     <div class="w-50 text-right"><a class="white-text p-10"><button

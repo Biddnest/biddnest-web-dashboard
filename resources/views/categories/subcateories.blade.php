@@ -55,7 +55,7 @@
                         <tbody class="mtop-20 f-13">
                             @foreach($subcategories as $subcategory)
                                 <tr class="tb-border cursor-pointer sub_{{$subcategory->id}} category-sidebar-toggle" data-sidebar="{{ route('sidebar.subcategory',['id'=>$subcategory->id]) }}">
-                                    <td scope="row"> <img class="defau  lt-image" src="{{$subcategory->image}}" alt=""></td>
+                                    <td scope="row"> <img class="defau  lt-image" src="{{$subcategory->image}}" alt="" style="width: 100px;"></td>
                                     <td>{{$subcategory->name}}</td>
                                     <td>
                                        {{-- @switch($subcategory->status)

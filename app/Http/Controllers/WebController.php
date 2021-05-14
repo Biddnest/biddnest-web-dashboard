@@ -623,9 +623,7 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-
-        $coupons=Coupon::where("deleted", CommonEnums::$NO);
-
+       $coupons = Coupon::where("deleted", CommonEnums::$NO);
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
             $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 

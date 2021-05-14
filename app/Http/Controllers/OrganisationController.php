@@ -95,7 +95,7 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
     }
 
-    public static function update($data, $meta, $admin, $id)
+    public static function update($data, $meta, $admin, $id, $vendor_id)
     {
 //            $organization_exist = Organization::findOrFail($id);
         $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
@@ -139,7 +139,7 @@ class OrganisationController extends Controller
             $result_service = $service->save();
         }
 
-        $vendor_result =Vendor::where(["id"=>$vendor_exist->id, "organization_id"=>$id])
+        $vendor_result =Vendor::where(["id"=>$vendor_id, "organization_id"=>$id])
             ->update([
                 "fname"=>$admin['fname'],
                 "lname"=>$admin['lname'],
@@ -174,7 +174,7 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function addBranch($data, $id, $vendor=flase)
+    public static function addBranch($data, $id, $vendor=false)
     {
         $exist = Organization::findOrFail($id);
         if(!$exist)

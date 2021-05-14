@@ -79,6 +79,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <input type="hidden" name="id" value="{{$id}}">
+                                        <input type="hidden" name="vendor_id" value="{{$organization->admin->id}}">
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">

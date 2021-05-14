@@ -178,7 +178,7 @@
                                     </td>
                                     <td>
                                         <a  class="inline-icon-button mr-4" style="display: table-cell" href="{{route('edit-coupons', ['id'=>$coupon->id])}}"><i class="icon dripicons-pencil p-1 mr-4" aria-hidden="true"></i></a>
-                                        <a href="#" style="display: table-cell" class="delete inline-icon-button ml-4" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permenently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                        <a href="#" style="display: table-cell" class="delete inline-icon-button ml-4" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permanently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

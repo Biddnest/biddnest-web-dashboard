@@ -1,3 +1,4 @@
+/*
 if($("#my-legend-con").length) {
 
     var chartData = JSON.parse($("#vendor_dist_dataset").val())
@@ -166,3 +167,4 @@ if($("#my-legend-con").length) {
         width: '100%',
     });
 }
+*/

@@ -334,6 +334,7 @@ class Route extends Controller
     {
         $validation = Validator::make($request->all(),[
             'id'=>'required',
+            'vendor_id'=>'required',
             'image'=>'required|string',
             'fname' => 'required|string',
             'lname' => 'required|string',
@@ -367,7 +368,7 @@ class Route extends Controller
 
         $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);
 
-        return OrganisationController::update($request->all(), $meta, $admin, $request->id);
+        return OrganisationController::update($request->all(), $meta, $admin, $request->id, $request->vendor_id);
     }
 
     public function vendor_fetch(Request $request)

@@ -18,7 +18,6 @@
         </div>
         <div class="mr-20">
             <a class="modal-toggle" data-toggle="modal" data-target="#add-branch">
-{{--                <a class="modal-toggle" data-modal="#add-branch" onclick="$('#add-branch').modal({backdrop: false});">--}}
                 <button class="btn theme-bg white-text w-10">Add Branch</button>
             </a>
         </div>
@@ -143,7 +142,7 @@
                             <div class="form-input">
                                 <label class="phone-num-lable"> Contact Number</label>
                                 <input type="tel" id="input-blue" placeholder="9876543210" value=""
-                                       class=" form-control form-control-tel" name="phone[primary]" required>
+                                       class=" form-control" name="phone[primary]" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid
                                             Phone number</span>
                             </div>
@@ -307,11 +306,16 @@
                     </div>
                 </div>
                 <div class="modal-footer p-15 " style="padding: 0px 5px;">
-                    <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" data-dismiss="modal"
-                                                                              aria-label="Close"><button type="button"
-                                                                                                         class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
-                    <div class="w-50 text-right"><a class="white-text p-10" href="#" data-dismiss="modal"
-                                                    aria-label="Close"><button class="btn theme-bg white-text w-30">Save</button></a></div>
+                    <div class="w-50" style="text-align: left !important;">
+                        <a class="white-text p-10 cancel" href="#" >
+                            <button type="button" class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        </a>
+                    </div>
+                    <div class="w-50 text-right">
+                        <a class="white-text p-10" href="#" >
+                            <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>
@@ -353,7 +357,7 @@
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Contact Number</label>
                                     <input type="tel" id="input-blue" placeholder="9876543210" value="{{$branch->phone}}"
-                                           class=" form-control" name="phone[primary]" required>
+                                           class="form-control" name="phone[primary]" maxlength="10" minlength="10" required>
                                     <span class="error-message">Please enter valid
                                             Phone number</span>
                                 </div>
@@ -520,11 +524,16 @@
                         </div>
                     </div>
                     <<div class="modal-footer p-15 " style="padding: 0px 5px;">
-                        <div class="w-50" style="text-align: left !important;"><a class="white-text p-10 cancel" href="#" ><button type="button"
-                                                                                                                                   class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal"
-                                                                                                                                   aria-label="Close">Cancel</button></a></div>
-                        <div class="w-50 text-right"><a class="white-text p-10" href="#" ><button class="btn theme-bg white-text w-30" data-dismiss="modal"
-                                                                                                  aria-label="Close">Update</button></a></div>
+                        <div class="w-50" style="text-align: left !important;">
+                            <a class="white-text p-10 cancel" href="#" >
+                                <button type="button" class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            </a>
+                        </div>
+                        <div class="w-50 text-right">
+                            <a class="white-text p-10" href="#">
+                                <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Update</button>
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>

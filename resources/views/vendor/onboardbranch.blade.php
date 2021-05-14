@@ -108,6 +108,7 @@
             </div>
         </div>
     </div>
+
     <div class="fullscreen-modal" id="add-branch">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
@@ -307,13 +308,13 @@
                 </div>
                 <div class="modal-footer p-15 " style="padding: 0px 5px;">
                     <div class="w-50" style="text-align: left !important;">
-                        <a class="white-text p-10 cancel" href="#" >
-                            <button type="button" class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <a class="white-text p-10 cancel" href="#" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                         </a>
                     </div>
                     <div class="w-50 text-right">
-                        <a class="white-text p-10" href="#" >
-                            <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
+                        <a class="white-text p-10 cancel" href="#" data-dismiss="modal" aria-label="Close">
+                            <button class="btn theme-bg white-text w-30">Save</button>
                         </a>
                     </div>
                 </div>
@@ -523,14 +524,14 @@
 
                         </div>
                     </div>
-                    <<div class="modal-footer p-15 " style="padding: 0px 5px;">
+                    <div class="modal-footer p-15 " style="padding: 0px 5px;">
                         <div class="w-50" style="text-align: left !important;">
-                            <a class="white-text p-10 cancel" href="#" >
-                                <button type="button" class="btn theme-br theme-text w-30 white-bg" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <a class="white-text p-10 cancel" href="#" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="btn theme-br theme-text w-30 white-bg" >Cancel</button>
                             </a>
                         </div>
                         <div class="w-50 text-right">
-                            <a class="white-text p-10" href="#">
+                            <a class="white-text p-10 cancel" href="#">
                                 <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Update</button>
                             </a>
                         </div>

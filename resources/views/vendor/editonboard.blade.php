@@ -57,7 +57,7 @@
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                              aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" id="myForm" data-parsley-validate>
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$organization->id])}}" id="myForm" data-parsley-validate>
 
                                 <div class="d-flex row p-20">
                                     <div class="col-lg-6">
@@ -79,6 +79,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <input type="hidden" name="id" value="{{$id}}">
+                                        <input type="hidden" name="vendor_id" value="{{$organization->admin->id}}">
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -304,7 +305,7 @@
                                 <div id="comments">
                                     <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                          style="border-top: 1px solid #70707040;">
-                                        <div class="w-50"><a class="white-text p-10 cancel" href="#"><button
+                                        <div class="w-50"><a class="white-text p-10 cancel" href="{{route('vendors')}}"><button
                                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                         </div>
                                         <div class="w-50 text-right"><button

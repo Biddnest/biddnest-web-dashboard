@@ -32,62 +32,62 @@ class OrganisationController extends Controller
 
     public static function add($data, $meta, $admin)
     {
-            $imageman = new ImageManager(array('driver' => 'gd'));
+        $imageman = new ImageManager(array('driver' => 'gd'));
 
-            $org_email=Organization::where('email', $data['email'])->first();
-            $vendor_email=Vendor::where('email', $admin['email'])->first();
-            if($org_email || $vendor_email)
-                return Helper::response(false,"Email id is already exist in system");
+        $org_email=Organization::where('email', $data['email'])->first();
+        $vendor_email=Vendor::where('email', $admin['email'])->first();
+        if($org_email || $vendor_email)
+            return Helper::response(false,"Email id is already exist in system");
 
-            $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
-            $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
-            if($org_phone || $vendor_phone)
-                return Helper::response(false,"Phone no is already exist in system");
+        $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
+        $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
+        if($org_phone || $vendor_phone)
+            return Helper::response(false,"Phone no is already exist in system");
 
 
-            $organizations=new Organization;
-            $image = $data['image'];
-            $uniq = uniqid();
-            $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
-            $organizations->email=$data['email'];
-            $organizations->phone=$data['phone']['primary'];
-            $organizations->org_name=$data['organization']['org_name'];
-            $organizations->org_type=$data['organization']['org_type'];
-            $organizations->lat =$data['address']['lat'];
-            $organizations->lng =$data['address']['lng'];
-            $organizations->zone_id =$data['zone'];
-            $organizations->pincode =$data['address']['pincode'];
-            $organizations->city =$data['address']['city'];
-            $organizations->state =$data['address']['state'];
-            $organizations->service_type =$data['service_type'];
-            $organizations->meta =json_encode($meta);
-            $organizations->commission = $data['commission'];
-            $result_organization= $organizations->save();
+        $organizations=new Organization;
+        $image = $data['image'];
+        $uniq = uniqid();
+        $organizations->image=Helper::saveFile($imageman->make($image)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
+        $organizations->email=$data['email'];
+        $organizations->phone=$data['phone']['primary'];
+        $organizations->org_name=$data['organization']['org_name'];
+        $organizations->org_type=$data['organization']['org_type'];
+        $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng'];
+        $organizations->zone_id =$data['zone'];
+        $organizations->pincode =$data['address']['pincode'];
+        $organizations->city =$data['address']['city'];
+        $organizations->state =$data['address']['state'];
+        $organizations->service_type =$data['service_type'];
+        $organizations->meta =json_encode($meta);
+        $organizations->commission = $data['commission'];
+        $result_organization= $organizations->save();
 
-            foreach($data['service'] as $value)
-            {
+        foreach($data['service'] as $value)
+        {
             $service=new OrganizationService;
             $service->organization_id=$organizations->id;
             $service->service_id=$value;
             $result_service= $service->save();
-            }
+        }
 
-            $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
+        $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
 
-            $vendor = new Vendor;
-            $vendor->fname = ucwords(strtolower($admin['fname']));
-            $vendor->lname = ucwords(strtolower($admin['lname']));
-            $vendor->email = strtolower($admin['email']);
-            $vendor->phone = $admin['phone'];
-            $vendor->pin = null;
-            $image_man = new ImageManager(array('driver' => 'gd'));
-            $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
-            $vendor->image = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
-            $vendor->organization_id = $organizations->id;
-            $vendor->meta = json_encode($admin_meta);
-            $vendor->user_role = VendorEnums::$ROLES["admin"];
-            $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
-            $vendor_result = $vendor->save();
+        $vendor = new Vendor;
+        $vendor->fname = ucwords(strtolower($admin['fname']));
+        $vendor->lname = ucwords(strtolower($admin['lname']));
+        $vendor->email = strtolower($admin['email']);
+        $vendor->phone = $admin['phone'];
+        $vendor->pin = null;
+        $image_man = new ImageManager(array('driver' => 'gd'));
+        $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
+        $vendor->image = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 75),$avatar_file_name,"avatars");
+        $vendor->organization_id = $organizations->id;
+        $vendor->meta = json_encode($admin_meta);
+        $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+        $vendor_result = $vendor->save();
 
         if(!$vendor_result && !$result_organization)
             return Helper::response(false,"Couldn't save data");
@@ -95,17 +95,17 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
     }
 
-    public static function update($data, $meta, $admin, $id)
+    public static function update($data, $meta, $admin, $id, $vendor_id)
     {
 //            $organization_exist = Organization::findOrFail($id);
-            $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
-            if(!$vendor_exist)
-                return Helper::response(false,"Incorrect Vendor id.");
+        $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
+        if(!$vendor_exist)
+            return Helper::response(false,"Incorrect Vendor id.");
 
-            $imageman = new ImageManager(array('driver' => 'gd'));
+        $imageman = new ImageManager(array('driver' => 'gd'));
 
-            $image = $data['image'];
-            $uniq = uniqid();
+        $image = $data['image'];
+        $uniq = uniqid();
 
         if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
             $update_data["image"] =  Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","vendors/".$uniq.$data['organization']['org_name']);
@@ -113,33 +113,33 @@ class OrganisationController extends Controller
 
         $update_data = [
 
-                "email"=>$data['email'],
-                "phone"=>$data['phone']['primary'],
-                "org_name"=>$data['organization']['org_name'],
-                "org_type"=>$data['organization']['org_type'],
-                "lat"=>$data['address']['lat'],
-                "lng"=>$data['address']['lng'],
-                "zone_id"=>$data['zone'],
-                "pincode"=>$data['address']['pincode'],
-                "city"=>$data['address']['city'],
-                "state"=>$data['address']['state'],
-                "service_type"=>$data['service_type'],
-                "meta"=>json_encode($meta),
-                "commission"=>$data['commission']
-            ];
+            "email"=>$data['email'],
+            "phone"=>$data['phone']['primary'],
+            "org_name"=>$data['organization']['org_name'],
+            "org_type"=>$data['organization']['org_type'],
+            "lat"=>$data['address']['lat'],
+            "lng"=>$data['address']['lng'],
+            "zone_id"=>$data['zone'],
+            "pincode"=>$data['address']['pincode'],
+            "city"=>$data['address']['city'],
+            "state"=>$data['address']['state'],
+            "service_type"=>$data['service_type'],
+            "meta"=>json_encode($meta),
+            "commission"=>$data['commission']
+        ];
 
         $result_organization =Organization::where(["id"=>$id])->update($update_data);
 
         OrganizationService::where("organization_id", $id)->delete();
         foreach($data['service'] as $value)
         {
-                $service=new OrganizationService;
-                $service->organization_id=$id;
-                $service->service_id =$value;
-                $result_service = $service->save();
+            $service=new OrganizationService;
+            $service->organization_id=$id;
+            $service->service_id =$value;
+            $result_service = $service->save();
         }
 
-        $vendor_result =Vendor::where(["id"=>$vendor_exist->id, "organization_id"=>$id])
+        $vendor_result =Vendor::where(["id"=>$vendor_id, "organization_id"=>$id])
             ->update([
                 "fname"=>$admin['fname'],
                 "lname"=>$admin['lname'],
@@ -174,9 +174,9 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($id)]);
     }
 
-    public static function addBranch($data, $id, $vendor=flase)
+    public static function addBranch($data, $id, $vendor=false)
     {
-       $exist = Organization::findOrFail($id);
+        $exist = Organization::findOrFail($id);
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
@@ -210,10 +210,10 @@ class OrganisationController extends Controller
 
         foreach($data['service'] as $value)
         {
-           $service=new OrganizationService;
-           $service->organization_id=$organizations->id;
-           $service->service_id=$value;
-           $result_service= $service->save();
+            $service=new OrganizationService;
+            $service->organization_id=$organizations->id;
+            $service->service_id=$value;
+            $result_service= $service->save();
         }
 
         if(!$result_organization && !$result_service)
@@ -221,7 +221,7 @@ class OrganisationController extends Controller
 
         if($vendor)
         {
-            TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
+            TicketController::createForVendor(Session::get('account')['id'], 5,  ["Branch_id"=>$organizations->id]);
         }
 
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
@@ -248,19 +248,19 @@ class OrganisationController extends Controller
         $meta['landmark']= $data['address']['landmark'];
 
         $result_organization =Organization::where(["id"=>$id])
-        ->update([
-            "org_name"=>$data['organization']['org_name'],
-            "org_type"=>$data['organization']['org_type'],
-            "phone"=>$data['phone']['primary'],
-            "lat"=>$data['address']['lat'],
-            "lng"=>$data['address']['lng'],
-            "zone_id"=>$data['zone'],
-            "pincode"=>$data['address']['pincode'],
-            "city"=>$data['address']['city'],
-            "state"=>$data['address']['state'],
-            "service_type"=>$data['service_type'],
-            "meta" =>json_encode($meta)
-        ]);
+            ->update([
+                "org_name"=>$data['organization']['org_name'],
+                "org_type"=>$data['organization']['org_type'],
+                "phone"=>$data['phone']['primary'],
+                "lat"=>$data['address']['lat'],
+                "lng"=>$data['address']['lng'],
+                "zone_id"=>$data['zone'],
+                "pincode"=>$data['address']['pincode'],
+                "city"=>$data['address']['city'],
+                "state"=>$data['address']['state'],
+                "service_type"=>$data['service_type'],
+                "meta" =>json_encode($meta)
+            ]);
 
         if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
         {
@@ -276,14 +276,14 @@ class OrganisationController extends Controller
             $service=new OrganizationService;
             $service->organization_id=$id;
             $service->service_id =$value;
-           $result_service = $service->save();
+            $result_service = $service->save();
         }
 
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
         if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
-            TicketController::createForVendor(Session::get('account')['id'], 5,  ["parent_org_id"=>$id, "Branch_id"=>$organizations->id]);
+            TicketController::createForVendor(Session::get('account')['id'], 5,  ["Branch_id"=>$id]);
 
 
         return Helper::response(true,"Update data successfully", ["organization"=>Organization::with('branch')->with('services')->findOrFail($id)]);
@@ -467,7 +467,7 @@ class OrganisationController extends Controller
             $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['fname']);
 
         $vendor_result = Vendor::where(["id"=>$role_id])
-        ->update($update_data);
+            ->update($update_data);
 
         if(!$vendor_result)
             return Helper::response(false,"Couldn't Update data");
@@ -501,6 +501,16 @@ class OrganisationController extends Controller
 //        return $query;
         $users = Organization::where("org_name", "LIKE", $query . '%')->paginate(5);
         return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
+    }
+
+    public static function changeStatus($id, $status)
+    {
+        $change_status=Organization::where(["id"=>$id])->update(["ticket_status" => $status]);
+
+        if(!$change_status)
+            return Helper::response(false,"Couldn't Update status");
+
+        return Helper::response(true,"Status Updated successfully");
     }
 
 }

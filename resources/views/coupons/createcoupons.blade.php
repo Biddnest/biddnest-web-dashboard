@@ -65,7 +65,7 @@
             <div class="form-input">
               <label>Coupon Description</label>
               <span class="">
-              <textarea class = "form-control" rows = "2" placeholder = "desc" required name="desc">@if($coupons){{$coupons->desc}}@endif</textarea>
+              <textarea class = "form-control" rows = "2" placeholder = "Enter Coupon Description" required name="desc">@if($coupons){{$coupons->desc}}@endif</textarea>
 
                 <!-- <textarea  required class="form-control" rows="" cols="" placeholder="hello" name="desc" style="margin: 0 20px 0 0;">
                     @if($coupons){{$coupons->desc}}@endif
@@ -120,7 +120,7 @@
             <div class="form-input">
               <label>Start Date </label>
               <span class="">
-                <input type="date" class="form-control br-5" value="@if($coupons){{$coupons->valid_from}}@endif" name="valid_from" required="required" placeholder="15/02/2021"/>
+                <input type="text" class="form-control br-5 date dateselect" value="@if($coupons){{$coupons->valid_from}}@endif" name="valid_from" required="required" placeholder="15/02/2021"/>
                <span class="error-message">Please enter  valid</span>
               </span>
            </div>
@@ -130,7 +130,7 @@
             <div class="form-input">
               <label>End Date </label>
               <span class="">
-                <input type="date" class=" form-control br-5" name="valid_to" value="@if($coupons){{$coupons->valid_to}}@endif" required="required"  placeholder="15/02/2021"/>
+                <input type="text" class=" form-control br-5 date dateselect " name="valid_to" value="@if($coupons){{$coupons->valid_to}}@endif" required="required"  placeholder="15/02/2021"/>
                <span class="error-message">Please enter  valid</span>
               </span>
             </div>

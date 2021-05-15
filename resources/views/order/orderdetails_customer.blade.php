@@ -190,7 +190,7 @@
                         <table class="table text-center p-10 theme-text tb-border2">
                             <thead class="secondg-bg bx-shadowg p-0 f-14">
                                 <tr>
-                                  <th scope="col" style="    width: 50%;">Item Name</th>
+                                  <th scope="col" style="    width: 50%; padding-left: 15px !important;">Item Name</th>
                                   <th scope="col" style="    width: 50%;" >Quantity</th>
                                   <th scope="col" style="    text-align: center !important;">Size</th>
                                 </tr>
@@ -198,7 +198,7 @@
                             <tbody class="mtop-15">
                                 @foreach($booking->inventories as $inventory)
                                     <tr class="tb-border  cursor-pointer">
-                                      <th scope="row">{{$inventory->name}}</th>
+                                      <th scope="row" style="padding-left: 15px !important;">{{$inventory->name}}</th>
                                       <td  class="text-center">{{$inventory->quantity}}</td>
                                       <td class=""><span class=" status-badge text-center f-14" style="font-weight: bold !important;text-transform: capitalize;">{{$inventory->size}}</span></td>
                                     </tr>

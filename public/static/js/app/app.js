@@ -233,6 +233,12 @@ $("body").on('click', ".fullscreen-modal-body .close", function(event) {
     return false;
 });
 
+$("body").on('click', ".fullscreen-modal-body .cancel", function(event) {
+    console.log("close");
+    $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
+    return false;
+});
+
 
 $("body").on('change', ".inventory-select", function(event) {
     console.log("change");
@@ -390,10 +396,6 @@ $("body").on('keyup', "#amount", function(event) {
     return false;
 });
 
-$("body").on('click', ".cancel", function(event) {
-    document.getElementById("newForm").reset();
-    return false;
-});
 
 $("body").on('change', ".change_status", function(event) {
     var target = $(this).closest($(this).data("parent"));
@@ -428,16 +430,20 @@ $("body").on('change', ".reply_status", function(event) {
     return false;
 });
 
-$("body").on('input', ".table-search", function(event) {
-    var query = $(this).val();
-    if(query.length >= 4){
-        redirectTo($(this).data('url')+"?search="+query);
+$("body").on('keydown', ".table-search", function(event) {
+    if(event.keyCode == 13){
+        var query = $(this).val();
+        if (query.length >= 3) {
+            redirectTo(window.location.href + "?search=" + query);
+        }
     }
 });
-$("body").on('input', ".table-search1", function(event) {
-    var query = $(this).val();
-    if(query.length >= 15){
-        redirectTo($(this).data('url')+"?search="+query);
+$("body").on('keydown', ".table-search1", function(event) {
+    if(event.keyCode == 13){
+        var query = $(this).val();
+        if (query.length >= 15) {
+            redirectTo(window.location.href + "?search=" + query);
+        }
     }
 });
 
@@ -532,3 +538,4 @@ $("body").on('change', ".inventory-item-select", function(event) {
     var query = $(this).val();
     redirectTo($(this).data('url')+"?item="+query);
 });
+

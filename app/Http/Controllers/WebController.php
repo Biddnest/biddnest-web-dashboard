@@ -148,11 +148,6 @@ class WebController extends Controller
         ]);
     }
 
-    public function sidebar_dashboard(Request $request)
-    {
-        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
-        return view('sidebar.dashboard',['booking'=>$booking]);
-    }
 
     public function apiSettings()
     {
@@ -434,7 +429,40 @@ class WebController extends Controller
         $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')->first();
         $branch = Organization::where("parent_org_id", $request->id)->count();
         $payouts = Payout::where("organization_id", $request->id)->get();
-        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts]);
+
+        $dataset = [];
+        $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
+        $last_week = CarbonPeriod::create( Carbon::now()->subDays(14)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
+
+        $this_week_sale = [];
+        $last_week_sale = [];
+        foreach ($this_week as $key=>$date){
+            $date1 = $date->format('Y-m-d');
+            $this_week[$key] = $date->format('d M');
+            $this_week_sale[] = Booking::whereDate("created_at",$date1)->where('organization_id', $request->id)
+                ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
+                ->sum("final_quote");
+        }
+        foreach ($last_week as $key=>$date){
+            $date1 = $date->format('Y-m-d');
+//            $last_week[$key] = $date->format('d M');
+            $last_week_sale[] = Booking::whereDate("created_at",$date1)->where('organization_id', $request->id)
+                ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
+                ->sum("final_quote");
+        }
+
+        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts,
+            'graph'=>[
+                "revenue"=>[
+                    "this_week"=>[
+                        "dates"=>$this_week,
+                        "sales"=>$this_week_sale
+                    ],
+                    "last_week"=>[
+                        "dates"=>$this_week,
+                        "sales"=>$last_week_sale
+                    ],
+                ]]]);
     }
 
     public function vendorsDetails(Request $request)
@@ -456,7 +484,7 @@ class WebController extends Controller
 
     public function onbaordEdit(Request  $request)
     {
-        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('admin')->with('services')->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }
@@ -595,7 +623,7 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $coupons = Coupon::where(["deleted"=>CommonEnums::$NO]);
+       $coupons = Coupon::where("deleted", CommonEnums::$NO);
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
             $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 
@@ -792,18 +820,20 @@ class WebController extends Controller
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
         {
-            $ticket_info=Booking::where('id', json_decode($ticket->meta, true)['public_booking_id'])->with()->first();
+            $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
         }
         elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
         {
-            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)[])->first();
+            $ticket_info=Organization::where('id', json_decode($ticket->meta, true)['Branch_id'])->first();
+            $service_status=$ticket_info->ticket_status;
         }
         elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
         {
-            $ticket_info=InventoryPrice::where([])->limit(1)->get();
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'service_type'=>json_decode($ticket->meta, true)['service_type'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->with('service')->first();
+            $service_status=$ticket_info->ticket_status;
         }
 
-        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status]);
+        return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);
     }
 
     public function serviceRequests(Request $request)
@@ -939,4 +969,27 @@ class WebController extends Controller
 
     }
 
+   /* public function sidebar_dashboard(Request $request)
+    {
+        $booking=Booking::where('id', $request->id)->with('organization')->with('driver')->with('inventories')->with('payment')->first();
+        return view('sidebar.dashboard',['booking'=>$booking]);
+    }*/
+
+    public function sidebar_branch(Request $request)
+    {
+        $branch=Organization::where('id', $request->id)->with('zone')->with('services')->first();
+        return view('sidebar.branch',['branch'=>$branch]);
+    }
+
+    public function sidebar_inventory(Request $request)
+    {
+        $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'organization_id'=>$request->org_id, 'service_type'=>$request->cat_id])->with('inventory')->get();
+        return view('sidebar.inventory',['inventories'=>$inventory]);
+    }
+
+    public static function sidebar_reviews(Request $request)
+    {
+        $reviews=Review::where('id', $request->id)->with('Booking')->with('user')->first();
+        return view('sidebar.reviews',['reviews'=>$reviews]);
+    }
 }

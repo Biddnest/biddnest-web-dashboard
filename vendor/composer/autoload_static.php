@@ -765,6 +765,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\PushNotification' => __DIR__ . '/../..' . '/app/PushNotification.php',
         'App\\Razorpay' => __DIR__ . '/../..' . '/app/Razorpay.php',
+        'App\\RazorpayX' => __DIR__ . '/../..' . '/app/RazorpayX.php',
         'App\\Sms' => __DIR__ . '/../..' . '/app/Sms.php',
         'App\\StringFormatter' => __DIR__ . '/../..' . '/app/StringFormatter.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',

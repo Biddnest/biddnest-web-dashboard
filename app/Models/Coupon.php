@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
-    protected $hidden = ['created_at','updated_at','deleted'];
+    protected $hidden = ['created_at','updated_at'];
     use HasFactory;
 
     public function zones(){

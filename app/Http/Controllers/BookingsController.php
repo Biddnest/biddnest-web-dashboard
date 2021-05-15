@@ -368,12 +368,14 @@ class BookingsController extends Controller
             ->whereNotIn("status", [BookingEnums::$STATUS["enquiry"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
             ->orderBy('id', 'DESC')
             ->with('movement_dates')
-            ->with('inventories')->with('status_history')->with('service')
+            ->with('inventories')
+            ->with('status_history')
+            ->with('service')
             ->get();
 
-        if (!$bookingorder) {
+        /*if (!$bookingorder) {
             return Helper::response(false, "No Booking Found");
-        }
+        }*/
 
         return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }

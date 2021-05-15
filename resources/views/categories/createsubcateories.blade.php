@@ -221,8 +221,13 @@
     </div>
     <script type="text/html" id="add-inventory-row">
         <tr class="inventory-snip">
+<<<<<<< HEAD
+            <th scope="row" class="text-left " style="padding-left: 14px !important;">
+                <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
+=======
             <th scope="row" class="text-left">
                 <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+>>>>>>> d09fdeeb32464aca3fa4a958a8ad4cd1b98c5cd9
                     <option value="">--Select--</option>
                     @foreach($inventories as $inventory)
                         <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -230,14 +235,24 @@
                 </select>
             </th>
 
+<<<<<<< HEAD
+            <td class="" style="padding-left: 14px !important;">
+                <select class="form-control br-5 material" name="inventory[][material]" required>
+=======
             <td class="">
                 <select class="form-control br-5 material" name="inventories[][material]" required>
+>>>>>>> d09fdeeb32464aca3fa4a958a8ad4cd1b98c5cd9
                     <option value="">Choose Inventory</option>
                 </select>
             </td>
 
+<<<<<<< HEAD
+            <td class="" style="padding-left: 14px !important;">
+                <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
+=======
             <td class="">
                 <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
+>>>>>>> d09fdeeb32464aca3fa4a958a8ad4cd1b98c5cd9
                     <option value="">Choose Inventory</option>
                 </select>
             </td>

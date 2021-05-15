@@ -366,11 +366,11 @@ class BookingsController extends Controller
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
             ->whereNotIn("status", [BookingEnums::$STATUS["enquiry"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
-            ->orderBy('id', 'DESC')
             ->with('movement_dates')
-            ->with('inventories')
-            ->with('status_history')
+//            ->with('inventories')
+//            ->with('status_history')
             ->with('service')
+            ->orderBy('id', 'DESC')
             ->get();
 
         /*if (!$bookingorder) {

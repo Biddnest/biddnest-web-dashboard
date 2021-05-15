@@ -426,8 +426,8 @@
     </div>
     <script type="text/html" id="add-inventory-row">
         <tr class="inventory-snip">
-            <th scope="row" class="text-left">
-                <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
+            <th scope="row" class="text-left"  style="padding-left: 14px !important;">
+                <select class="form-control br-5 inventory-select"  name="inventory_items[][inventory_id]" required >
                     <option value="">--Select--</option>
                     @foreach($inventories as $inventory)
                         <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -435,13 +435,13 @@
                 </select>
             </th>
 
-            <td class="">
+            <td class=""  style="padding-left: 14px !important;">
                 <select class="form-control br-5 material" name="inventory_items[][material]" required>
                     <option value="">--Choose Inventory--</option>
                 </select>
             </td>
 
-            <td class="">
+            <td class=""  style="padding-left: 14px !important;">
                 <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
                     <option value="">--Choose Inventory--</option>
                 </select>

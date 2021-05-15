@@ -221,7 +221,7 @@
     </div>
     <script type="text/html" id="add-inventory-row">
         <tr class="inventory-snip">
-            <th scope="row" class="text-left">
+            <th scope="row" class="text-left " style="padding-left: 14px !important;">
                 <select class="form-control br-5 inventory-select" name="inventoryy[][name]" required>
                     <option value="">--Select--</option>
                     @foreach($inventories as $inventory)
@@ -230,13 +230,13 @@
                 </select>
             </th>
 
-            <td class="">
+            <td class="" style="padding-left: 14px !important;">
                 <select class="form-control br-5 material" name="inventory[][material]" required>
                     <option value="">Choose Inventory</option>
                 </select>
             </td>
 
-            <td class="">
+            <td class="" style="padding-left: 14px !important;">
                 <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
                     <option value="">Choose Inventory</option>
                 </select>

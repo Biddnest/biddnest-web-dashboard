@@ -149,7 +149,7 @@
                                                             </td>
                                                             <td class="">
                                                                 @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
-                                                                    <a class="modal-toggle" data-target="#add-role_{{$bidding->organization_id}}">
+                                                                    <a class="modal-toggle" data-toggle="modal" data-target="#add-role_{{$bidding->organization_id}}">
                                                                         <button class="btn white-text theme-bg">Assign</button>
                                                                     </a>
                                                                 @endif

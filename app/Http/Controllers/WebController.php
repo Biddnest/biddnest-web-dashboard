@@ -699,7 +699,13 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $slider=Slider::where(["deleted"=>CommonEnums::$NO, "zone_scope"=>SliderEnum::$ZONE['all']])->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
+        $slider=Slider::where(["deleted"=>CommonEnums::$NO]);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+            $slider->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
+            $slider->where("zone_scope", SliderEnum::$ZONE['all']);
 
         if(isset($request->search)){
             $slider=$slider->where('name', 'like', "%".$request->search."%");
@@ -835,7 +841,7 @@ class WebController extends Controller
         }
         elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
         {
-            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'service_type'=>json_decode($ticket->meta, true)['service_type'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->with('service')->first();
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->first();
             $service_status=$ticket_info->ticket_status;
         }
 

@@ -88,7 +88,7 @@
                             </thead>
                             <tbody class="mtop-20 f-14">
                                 @foreach($sliders as $slider)
-                                    <tr class="tb-border cursor-pointer clickable-row slider_{{$slider->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.slider',['id'=>$slider->id]) }}">
+                                    <tr class="tb-border cursor-pointer clickable-row slider_{{$slider->id}} sidebar-toggle_slider" data-sidebar="{{ route('sidebar.slider',['id'=>$slider->id]) }}">
                                         <td scope="row" class="span3" style="width: 25%;">
                                             <div class="d-flex justify-content-center">
                                                 <img class="p-2" onclick="$('.slick-container_{{$slider->id}}').slick('slickPrev')"

@@ -678,7 +678,8 @@ class Route extends Controller
              'valid_to'=>'required',
              'organizations.*'=>'required',
              'zones.*'=>'required',
-             'users.*'=>'required'
+             'users.*'=>'required',
+             'status'=>'required'
          ]);
 
          if($validation->fails())

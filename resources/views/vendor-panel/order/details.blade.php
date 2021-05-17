@@ -239,7 +239,7 @@
                                                 <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
                                             </a>
                                         @endif
-                                        <a class="modal-toggle" data-target="#add-role">
+                                        <a class="modal-toggle" data-toggle="modal" data-target="#add-role">
                                             <button class="btn theme-br theme-text">Accept</button>
                                         </a>
                                         @if($booking->bid->status != \App\Enums\BidEnums::$STATUS['bid_submitted'])

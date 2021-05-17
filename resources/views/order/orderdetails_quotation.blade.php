@@ -54,12 +54,6 @@
 
         <div class="d-flex flex-row  Dashboard-lcards  justify-content-center">
             <div class="col">
-                <!-- <div class="d-flex  flex-row text-left">
-                    <a href="booking-orders.html" class="text-decoration-none">
-                        <h3 class="page-subhead text-left p-4 f-20 theme-text">
-                        <i class="p-1"> <img src="assets/images/Icon feather-chevrons-left.svg" alt="" srcset=""></i> Back to Bookings & Orders</h3></a>
-
-                </div> -->
                 <div class="card  h-auto p-0 " >
 
                     <div class="card-head right text-center  pb-0 p-05" style="padding-top: 0">
@@ -93,11 +87,46 @@
                         <div class="tab-pane fade show active " id="quotation" role="tabpanel" aria-labelledby="quotation-tab">
 
                             @if(!$booking->organization)
-                                <div class="row hide-on-data">
+                               {{-- <div class="row hide-on-data">
                                     <div class="col-md-12 text-center p-20">
                                         <p class="font14"><i>. No any vendore won bid yet, Quotation is not Generated.</i></p>
                                     </div>
+                                </div>--}}
+
+                                <div class="d-flex  row p-15 quotation-main pb-0" >
+
+                                    <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
+                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                           Booking Type
+                                        </div>
+
+                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                            Estimate Amount
+                                        </div>
+                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                            Created At
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+
+                                        <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                                           @foreach(\App\Enums\BookingEnums::$BOOKING_TYPE as $type=>$key)
+                                               @if($key == $booking->booking_type)
+                                                    {{ucwords($type)}}
+                                                @endif
+                                            @endforeach
+                                        </div>
+
+                                        <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                            ₹ {{$booking->final_estimated_quote}}
+                                        </div>
+                                        <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
+                                            {{$booking->created_at->format('d M Y')}}
+                                        </div>
+                                    </div>
                                 </div>
+
                             @else
 
                             <div class="d-flex  row p-15 quotation-main pb-0" >
@@ -106,7 +135,6 @@
                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Assigned Vendor
                                     </div>
-
 
                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Commission Amount
@@ -117,8 +145,6 @@
                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                         Base Price
                                     </div>
-
-
 
                                 </div>
 
@@ -144,12 +170,6 @@
                                     </div>
 
                                 </div>
-
-                                {{--<div class="d-flex  mtop-5">
-                                    <i class="icon dripicons-pencil p-1 cursor-pointer theme-text" aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
-                                </div>--}}
-
-
                             </div>
                             @endif
 

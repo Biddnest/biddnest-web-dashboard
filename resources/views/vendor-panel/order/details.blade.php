@@ -258,7 +258,7 @@
         </div>
     </div>
 
-    <div class="fullscreen-modal" id="add-role" style="min-height: 155%; left: 270px !important; width: 81% !important; top: 0px!important;">
+    <div class="fullscreen-modal" id="add-role" style="min-height: 155%; left: 0px !important; width: 100% !important; top: 50px!important;">
         <div class="fullscreen-modal-body" role="document">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Your Bid</h5>

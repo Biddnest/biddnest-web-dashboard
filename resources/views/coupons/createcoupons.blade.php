@@ -276,11 +276,11 @@
           </div>
 
           @if($coupons)
-            <div class="col-sm-6 user hidden" >
+            <div class="col-sm-6" >
                 <div class="form-input">
                   <label>Change Status</label>
                   <div>
-                      <select class="form-control searchuser" name="status" required>
+                      <select class="form-control" name="status" required>
                               @foreach(\App\Enums\CouponEnums::$STATUS as $status=>$key)
                                   <option value="{{$key}}" @if($coupons->status == $key) selected @endif>{{ucfirst(trans($status))}}</option>
                               @endforeach

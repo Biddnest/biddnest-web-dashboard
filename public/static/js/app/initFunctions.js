@@ -742,6 +742,20 @@ export function initPopUp(){
     });
 }
 
+export function initPopUpAdmin(){
+    $(document).ready(function(){
+        $("#submitbtnadmin").hide();
+        $('.bid-amount-2admin').hide();
+        $('#next-btn-1admin').click(function(){
+            $(this).hide();
+            $('.bid-amountadmin').hide();
+            $('.bid-amount-2admin').show();
+            $("#submitbtnadmin").show();
+        });
+
+    });
+}
+
 export function initRangeSlider(){
     if($(".custom_slider").length) {
         $(".custom_slider").ionRangeSlider({

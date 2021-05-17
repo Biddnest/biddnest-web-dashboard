@@ -86,12 +86,16 @@ class SubServiceController extends Controller
 
         $subservice=Subservice::where("id", $id)->update($update_data);
 
-        ServiceSubservice::where('service_id', $service_id)->delete();
+       /* ServiceSubservice::where('service_id', $service_id)->delete();
 
         $service=new ServiceSubservice;
         $service->service_id = $service_id;
         $service->subservice_id = $id;
-        $service_result = $service->save();
+        $service_result = $service->save();*/
+
+        $service_result=ServiceSubservice::where('subservice_id', $id)->update([
+            'service_id'=>$service_id
+        ]);
 
         if($data) {
             SubserviceInventory::where('subservice_id', $id)->delete();
@@ -108,8 +112,8 @@ class SubServiceController extends Controller
 
         if(!$subservice && !$service_result)
             return Helper::response(false,"Couldn't Update data");
-        else
-            return Helper::response(true,"Update data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
+
+        return Helper::response(true,"Update data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
     }
 
     public static function getOne($id)

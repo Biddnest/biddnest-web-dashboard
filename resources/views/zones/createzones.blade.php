@@ -114,7 +114,7 @@
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="areas">Areas</label>
-                            <select class="form-control select-box2" name="area[]" multiple required>
+                            <select class="form-control select-box2" style="background-image: none !important;" name="area[]" multiple required>
 
                                 @isset($zones)
                                     @foreach(json_decode($zones->area, true) as $area)

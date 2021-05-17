@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
-                    <div class="w-50"><a class="white-text p-10" href="#">
+                    <div class="w-50"><a class="white-text p-10" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">
                             <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                     </div>
                     <div class="w-50 text-right">

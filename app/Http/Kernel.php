@@ -46,6 +46,12 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 //            \App\Http\Middleware\VerifyJwtToken::class,
         ],
+
+        'site' => [
+//            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+//            \App\Http\Middleware\VerifyJwtToken::class,
+        ],
     ];
 
     /**

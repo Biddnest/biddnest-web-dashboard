@@ -114,7 +114,8 @@ class CouponController extends Controller
                "zone_scope"=>in_array($data['zone_scope'], CouponEnums::$ZONE_SCOPE) ? $data['zone_scope'] : null,
                "user_scope"=>in_array($data['user_scope'], CouponEnums::$USER_SCOPE) ? $data['user_scope'] : null,
                "valid_from"=>date("Y-m-d", strtotime($data['valid_from'])),
-               "valid_to"=>date("Y-m-d", strtotime($data['valid_to']))
+               "valid_to"=>date("Y-m-d", strtotime($data['valid_to'])),
+               "status"=>$data['status']
            ]);
 
        if(!$coupon_update)

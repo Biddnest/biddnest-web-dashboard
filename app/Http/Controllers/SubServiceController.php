@@ -108,8 +108,8 @@ class SubServiceController extends Controller
 
         if(!$subservice && !$service_result)
             return Helper::response(false,"Couldn't Update data");
-        else
-            return Helper::response(true,"Update data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
+
+        return Helper::response(true,"Update data successfully",["subservice"=>Subservice::select(self::$public_data)->findOrFail($id)]);
     }
 
     public static function getOne($id)

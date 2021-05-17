@@ -163,7 +163,7 @@ class VendorWebController extends Controller
     public function inventorySidebar(Request $request)
     {
         $inventory=Inventory::where(['id'=>$request->id, 'deleted'=>CommonEnums::$NO])->with(['prices'=>function($query){
-            $query->where('organization_id', Session::get('organization_id'));
+            $query->where(['organization_id'=>Session::get('organization_id'),'deleted'=>CommonEnums::$NO]);
         }])->first();
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
     }

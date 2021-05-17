@@ -81,7 +81,7 @@ class InventoryController extends Controller
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"inventories");
 
         if(filter_var($icon, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["icon"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$icon_name,"inventories");
+            $update_data["icon"] = Helper::saveFile($image_man->make($icon)->resize(256,256)->encode('png', 100),$icon_name,"inventories");
 
 
         $result = Inventory::where("id",$id)->update($update_data);

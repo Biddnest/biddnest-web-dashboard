@@ -1,5 +1,3 @@
-import barba from "../vendor/js/multirange";
-
 function changeMenu(){
     var url = $(location).attr("href");//window.location.pathname;
     console.log(url);

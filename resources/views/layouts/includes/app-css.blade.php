@@ -802,7 +802,7 @@
                 display: none;
             }
             input[type=checkbox]:checked + label.custom-check {
-                background: #bada55;
+                background: #f8c446;
             }
 
             input[type=checkbox]:checked + label.custom-check:after {
@@ -855,6 +855,46 @@
             .pagination ul li {
                 font-size: 14px !important;
             }
+
+
+    .a-underline{
+        text-decoration: underline !important;
+        text-decoration-color: #f8c446;
+
+    }
+
+
+
+    /* select {
+    width: 268px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 5px;
+    height: 34px ;
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd !important;
+    -webkit-appearance: none !important;
+    background-position-x: 244px !important;
+} */
+
+select {
+    background-image: linear-gradient(45deg, transparent 70%, #555 33%), linear-gradient(135deg, #555 40%, transparent 26%) !important;
+    background-position: calc(100% - 10px) 14px, calc(100% - 0px) 14px, 100% 0;
+  background-size:
+    10px 10px,
+    10px 10px;
+  background-repeat: no-repeat;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  text-indent: 1px !important;
+    text-overflow: '' !important;
+
+}
+select::-ms-expand {
+    display: none !important;
+}
+
 
 
     </style>

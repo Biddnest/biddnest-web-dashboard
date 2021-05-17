@@ -3,6 +3,8 @@
 @section('content')
 
 
+
+
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createinventories">
     <div class="d-flex flex-row justify-content-between">
         <h3 class="page-head f-20 p-4">Categories & Subcategories</h3>
@@ -96,7 +98,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Material</label>
-                                        <select class="form-control select-box2" name="material[]" multiple required>
+                                        <select class="form-control select-box2" name="material[]" style="background-image: none !important;" multiple required>
                                             @if($inventory && $inventory->material)
                                                 @foreach(json_decode($inventory->material) as $material)
                                                     <option value="{{$material}}" selected>{{$material}}</option>
@@ -109,7 +111,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Size</label>
-                                        <select class="form-control select-box2" name="size[]" multiple required>
+                                        <select class="form-control select-box2" name="size[]" style="background-image: none !important;" multiple required>
                                             @if($inventory && $inventory->size)
                                                 @foreach(json_decode($inventory->size) as $size)
                                                     <option value="{{$size}}" selected>{{$size}}</option>

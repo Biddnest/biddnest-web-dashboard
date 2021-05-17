@@ -86,12 +86,16 @@ class SubServiceController extends Controller
 
         $subservice=Subservice::where("id", $id)->update($update_data);
 
-        ServiceSubservice::where('service_id', $service_id)->delete();
+       /* ServiceSubservice::where('service_id', $service_id)->delete();
 
         $service=new ServiceSubservice;
         $service->service_id = $service_id;
         $service->subservice_id = $id;
-        $service_result = $service->save();
+        $service_result = $service->save();*/
+
+        $service_result=ServiceSubservice::where('subservice_id', $id)->update([
+            'service_id'=>$service_id
+        ]);
 
         if($data) {
             SubserviceInventory::where('subservice_id', $id)->delete();

@@ -112,8 +112,8 @@
                                     </thead>
                                     <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                        @if($subcategory && $subcategory->inventorymap)
-                                        @foreach($subcategory->inventorymap as $inventory_key)
-                                        <tr class="inventory-snip">
+                                            @foreach($subcategory->inventorymap as $inventory_key)
+                                                <tr class="inventory-snip">
                                             <td scope="row" class="text-left"  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
                                                     <option value="">--Select--</option>
@@ -149,7 +149,7 @@
                                                 <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                            @endforeach
                                        @else
                                            <tr class="inventory-snip">
                                                <td scope="row" class="text-left" style="padding-left: 14px !important;">

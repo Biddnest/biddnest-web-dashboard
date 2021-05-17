@@ -942,7 +942,6 @@
             border: 1px solid #dfdfdf !important;
             border-radius: 3px !important;
             margin-right: 2rem !important;
-            /* padding: 1rem !important; */
             padding-right: 2rem !important;
 }
             select::-ms-expand {

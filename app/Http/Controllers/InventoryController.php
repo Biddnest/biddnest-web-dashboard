@@ -200,9 +200,11 @@ class InventoryController extends Controller
             return Helper::response(false,"Incorrect service type.");*/
 
         $Inventory = Inventory::findOrFail($data["inventory_id"]);
+
         if(!$Inventory)
             return Helper::response(false,"Incorrect inventory id.");
 
+        $service_type=$Inventory->service_type;
         foreach($data['price'] as $price) {
             $updateColumns = [
                 "price_economics" => $price['price']['economics'],
@@ -216,7 +218,7 @@ class InventoryController extends Controller
         }
 
         if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
-            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $service_type]);
 
         if($web)
             return Helper::response(true, "Price Saved successfully");

@@ -65,7 +65,7 @@
                                         <img src="{{$inventory->icon}}" style="width: 50%;">
                                     </div>
                                     <div class="card-footer d-felx  justify-content-between">
-                                        <div class="item-name invsidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">{{$inventory->name}}</div>
+                                        <div class="item-name invsidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}" style="font-size: 12px;">{{$inventory->name}}</div>
                                         <div class="actions justify-content-between">
 {{--                                            <i><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" srcset=""></i>--}}
                                             <a href="{{route('vendor.inventory.edit',['id'=>$inventory->id])}}"><i><img src="{{asset('static/vendor/images/Icon material-edit.svg')}}" alt="" srcset=""></i></a>

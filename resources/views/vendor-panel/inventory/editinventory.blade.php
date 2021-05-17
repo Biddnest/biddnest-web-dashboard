@@ -22,7 +22,7 @@
                 <div class="card h-auto p-0 pt-20 pb-0">
                     <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('api.updateInventoryPrices')}}" method= "PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.inventorymgt')}}" data-alert="tiny" id="myForm" data-parsley-validate>                        <div class="header-wraps" >
                             <input type="hidden" name="inventory_id" value="{{$inventory_id}}">
-                            <input type="hidden" value="{{$service_id}}" name="service_type">
+{{--                            <input type="hidden" value="{{$service_id}}" name="service_type">--}}
                             <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
                                 <thead class="secondg-bg p-0">
                                 <tr>

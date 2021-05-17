@@ -145,7 +145,7 @@
                             <table class="table text-center p-10 theme-text">
                                 <thead class="secondg-bg  p-0">
                                 <tr>
-                                    <th scope="col" style="float: left; margin-left: -8px;">Item Name</th>
+                                    <th scope="col" style="text-align:left !important; padding-left: 12px !important;">Item Name</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Size</th>
 
@@ -155,7 +155,7 @@
 
                                 @foreach($booking->inventories as $inventory)
                                 <tr class="tb-border  cursor-pointer">
-                                    <th scope="row" style="float: left; margin-left: -8px;">{{$inventory->name}}</th>
+                                    <th scope="row" style="text-align:left !important; padding-left: 12px !important;">{{$inventory->name}}</th>
 
                                     <td class="text-center">@if(json_decode($inventory->size,true)){{json_decode($inventory->size,true)['min']}} - {{json_decode($inventory->size,true)['max']}}@else {{$inventory->size}} @endif</td>
                                     <td class=""><span class="red-bg text-center w-100  td-padding">{{$inventory->material}}</span></td>
@@ -340,32 +340,32 @@
                             <table class="table text-left p-10 theme-text">
                                 <thead class="secondg-bg  p-0">
                                 <tr>
-                                    <th scope="col">Particular</th>
-                                    <th scope="col">Amount</th>
+                                    <th scope="col" style="text-align: left; padding-left: 14px !important;">Particular</th>
+                                    <th scope="col" style="text-align: left; padding-left: 14px !important;">Amount</th>
 
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20 text-left">
                                 <tr>
-                                    <td>Subtotal</td>
-                                    <td>{{$booking->payment->sub_total ?? 'Not generated'}}</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">Subtotal</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->sub_total ?? 'Not generated'}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Other Charges</td>
-                                    <td>{{$booking->payment->other_charges ?? 'Not generated'}}</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">Other Charges</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->other_charges ?? 'Not generated'}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Discount <br /> @if( $booking->payment && $booking->payment->coupon) {{ $booking->payment->coupon ?? 'Not generated' }} @endif</td>
-                                    <td>{{$booking->payment->discount_amount ?? 'Not generated'}}</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">Discount <br /> @if( $booking->payment && $booking->payment->coupon) {{ $booking->payment->coupon ?? 'Not generated' }} @endif</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->discount_amount ?? 'Not generated'}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Tax</td>
-                                    <td>{{$booking->payment->tax ?? 'Not generated'}}</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">Tax</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->tax ?? 'Not generated'}}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Grand Total</td>
-                                    <td>{{$booking->payment->grand_total ?? 'Not generated'}}</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">Grand Total</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->grand_total ?? 'Not generated'}}</td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -8,6 +8,7 @@ use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
+use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
@@ -624,22 +625,23 @@ class WebController extends Controller
             $zone = Session::get('admin_zones');
 
        $coupons = Coupon::where("deleted", CommonEnums::$NO);
+
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
             $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
         {
-            $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'));
+//            $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'));
 
-            if(!Session::get('active_zone'))
-                $coupons->orWhereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
+//            if(!Session::get('active_zone'))
+                $coupons->whereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
         }
 
 
         if(isset($request->search)){
             $coupons=$coupons->where('name', 'like', "%".$request->search."%");
         }
-        $coupons->with('zones')->orderBy('id','DESC');
+//        $coupons->with('zones')->orderBy('id','DESC');
 
         return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
@@ -668,7 +670,11 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $zones =Zone::where(["deleted"=>CommonEnums::$NO])->whereIn('id', $zone);
+        $zones =Zone::where(["deleted"=>CommonEnums::$NO]);
+
+        if(Session::get('user_role') != AdminEnums::$ROLES['admin'])
+            $zones->whereIn('id', $zone);
+
         if(isset($request->search)){
             $zones=$zones->where('name', 'like', "%".$request->search."%");
         }
@@ -693,7 +699,7 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $slider=Slider::where(["deleted"=>CommonEnums::$NO])->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
+        $slider=Slider::where(["deleted"=>CommonEnums::$NO, "zone_scope"=>SliderEnum::$ZONE['all']])->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
 
         if(isset($request->search)){
             $slider=$slider->where('name', 'like', "%".$request->search."%");

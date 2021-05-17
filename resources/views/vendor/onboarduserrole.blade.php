@@ -109,7 +109,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_add')}}" data-next="redirect" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_add')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="POST" data-parsley-validate>
                 <div class="modal-body" style="padding: 10px 9px;">
                     <div class="d-flex row p-20 pt-0 pb-0">
                         <div class="col-lg-6">
@@ -221,7 +221,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_edit')}}" data-next="redirect" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('role_edit')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('onboard-userrole-vendors', ['id'=>$id])}}" data-alert="mega" method="PUT" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex row p-20 pt-0 pb-0">
                             <div class="col-lg-6">

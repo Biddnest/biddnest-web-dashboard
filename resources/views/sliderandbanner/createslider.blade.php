@@ -125,7 +125,7 @@
                                 <div class="col-lg-6">
                                   <div class="form-input">
                                     <label class="full-name">From date</label>
-                                    <input type="date" name="from_date" value="{{$slider->from_date ?? ''}}" class=" form-control br-5" required="required"/>
+                                    <input type="text" name="from_date" value="{{$slider->from_date ?? ''}}" class=" form-control br-5 filterdate dateselect" required="required"/>
                                     <span class="error-message">please enter valid date</span>
                                   </div>
                                 </div>
@@ -133,7 +133,7 @@
                                 <div class="col-lg-6">
                                   <div class="form-input">
                                     <label class="full-name">To date</label>
-                                    <input type="date" name="to_date" value="{{$slider->to_date ?? ''}}" class=" form-control br-5" required="required" />
+                                    <input type="text" name="to_date" value="{{$slider->to_date ?? ''}}" class=" form-control br-5 filterdate dateselect" required="required" />
                                     <span class="error-message">please enter valid date</span>
                                   </div>
                                 </div>
@@ -177,8 +177,8 @@
                               <div class="col-md-12" id="comments">
                                   <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                                     <div class="w-50">
-                                            <a class="white-text p-10 cancel" href="#">
-                                              <button class="btn theme-br theme-text w-30 white-bg br-5">
+                                            <a class="white-text p-10 cancel" href="{{route('slider')}}">
+                                              <button type="button" class="btn theme-br theme-text w-30 white-bg br-5">
                                                     Cancel
                                               </button>
                                             </a>

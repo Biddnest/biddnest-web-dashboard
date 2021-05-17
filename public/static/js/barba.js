@@ -1,3 +1,5 @@
+import barba from "../vendor/js/multirange";
+
 function changeMenu(){
     var url = $(location).attr("href");//window.location.pathname;
     console.log(url);
@@ -50,6 +52,7 @@ import {
     initOrderDistributionChart,
     initOrderDistributionChartVendor
 } from './app/initFunctions.js';
+
 barba.init({
     views: [{
         namespace: 'slider',

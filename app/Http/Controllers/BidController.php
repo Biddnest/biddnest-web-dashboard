@@ -219,7 +219,7 @@ class BidController extends Controller
         {
             $inventory_price = new BidInventory;
             $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
-            $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
+            $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id'], 'organization_id'=>$org_id])->pluck('id')[0];
             $inventory_price->amount=$key['amount'];
             $inventory_result = $inventory_price->save();
         }
@@ -230,6 +230,53 @@ class BidController extends Controller
             ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
             ->update([
             "vendor_id"=>$vendor_id,
+            "bid_amount"=>$data['bid_amount'],
+            "meta"=>json_encode($meta),
+            "status"=>BidEnums::$STATUS['bid_submitted'],
+            "submit_at"=>Carbon::now()
+        ]);
+
+        if(!$submit_bid)
+            return Helper::response(false,"Couldn't Submit Quotaion");
+
+        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+    }
+
+
+    public static function submitBidAdmin($data)
+    {
+
+            $min_power=explode(";",$data['man_power'])[0];
+            $max_power=explode(";",$data['man_power'])[1];
+
+
+        $exist_bid = Bid::where("organization_id", $data['organization_id'])
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
+                            ->whereIn("status", [BidEnums::$STATUS['active']])
+                            ->first();
+        if(!$exist_bid)
+            return Helper::response(false,"Not in active state");
+
+        $startTime = Carbon::now();
+        $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
+        $totalDuration = $finishTime->diffInSeconds($startTime);
+        if($totalDuration <= 3 || $startTime >= $finishTime)
+            return Helper::response(false,"Bidding has been closed for this booking");
+
+        foreach($data['inventory'] as $key)
+        {
+            $inventory_price = new BidInventory;
+            $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
+            $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
+            $inventory_price->amount=$key['amount'];
+            $inventory_result = $inventory_price->save();
+        }
+
+        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
+
+        $submit_bid = Bid::where(["organization_id"=>$data['organization_id'], "id"=>$exist_bid['id']])
+            ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
+            ->update([
             "bid_amount"=>$data['bid_amount'],
             "meta"=>json_encode($meta),
             "status"=>BidEnums::$STATUS['bid_submitted'],

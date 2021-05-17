@@ -149,7 +149,7 @@
                                                             </td>
                                                             <td class="">
                                                                 @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
-                                                                    <a class="modal-toggle" data-toggle="modal" data-target="#add-role_{{$bidding->organization_id}}">
+                                                                    <a class="modal-toggle" data-target="#add-role_{{$bidding->organization_id}}">
                                                                         <button class="btn white-text theme-bg">Assign</button>
                                                                     </a>
                                                                 @endif
@@ -189,15 +189,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="redirect" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}" data-alert="mega" method="POST" data-parsley-validate>
+                    <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_booking_bid')}}" data-next="redirect" data-redirect-type="hard"  data-url="{{route('order-details-bidding', ['id'=>$booking->id])}}" data-alert="mega" method="POST" data-parsley-validate>
                         <div class="modal-body" style="padding: 10px 9px;">
                             <div class="d-flex justify-content-center row ">
-                                <div class="col-sm-12 bid-amountadmin">
+                                <div class="col-sm-12 bid-amount-admin">
                                     <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
                                         <div><p class="mt-2">Expected Price</p></div>
                                         <div class="col-2">
                                             <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
                                             <input class="form-control border-purple" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple" type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" placeholder="6000" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12  p-0  pb-0" >
@@ -245,90 +246,74 @@
                                     </div>
                                 </div>
 
-                                <div class ="col-sm-12 bid-amount-2admin">
-                                <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
-                                    <div><p class="mt-2">Expected Price</p></div>
-                                    <div class="col-2">
-                                        <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
-                                    </div>
-                                </div>
-                                <div class="d-flex row p-10">
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Type of Movement</label>
-                                            <select id="" class="form-control" name="type_of_movement" required>
-                                                <option value="">--select--</option>
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)
-                                                    <option value="dedicated">Dedicated</option>
-                                                @else
-                                                    <option value="shared">Shared</option>
-                                                    <option value="dedicated">Dedicated</option>
-                                                @endif
-                                            </select>
-                                            <span class="error-message"></span>
+                                <div class ="col-sm-12 bid-amount-2-admin">
+                                    <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
+                                        <div><p class="mt-2">Expected Price</p></div>
+                                        <div class="col-2">
+                                            <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Moving Date</label>
-                                            <div>
-                                                @foreach($booking->movement_dates as $mdate)
-                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
-                                                @endforeach
+                                    <div class="d-flex row p-10">
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <label class="full-name">Type of Movement</label>
+                                                <select id="" class="form-control" name="type_of_movement" required>
+                                                    <option value="">--select--</option>
+                                                    @if(json_decode($booking->source_meta, true)['shared_service']== true)
+                                                        <option value="dedicated">Dedicated</option>
+                                                    @else
+                                                        <option value="shared">Shared</option>
+                                                        <option value="dedicated">Dedicated</option>
+                                                    @endif
+                                                </select>
+                                                <span class="error-message"></span>
                                             </div>
-                                            <input type="text" class="form-control br-5 filterdate" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
-                                            <span class="error-message">Please enter valid</span>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
-                                            <div class="d-felx justify-content-between" style="margin-top: 20px;">
-                                                <div class="d-flex range-input-group justify-content-between flex-row">
-                                                    <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <label class="full-name">Moving Date</label>
+                                                <div>
+                                                    @foreach($booking->movement_dates as $mdate)
+                                                        <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                    @endforeach
                                                 </div>
+                                                <input type="text" class="form-control br-5 filterdate selectdate" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+                                                <span class="error-message">Please enter valid</span>
                                             </div>
-                                            <span class="error-message">Please enter valid </span>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Name of Vehicle</label>
-                                            <select id="" class="form-control" name="vehicle_type">
-                                                <option value="">--select--</option>
-                                                @foreach($org_id->organization->vehicle as $vehicle)
-                                                    <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="error-message"></span>
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
+                                                <div class="d-felx justify-content-between" style="margin-top: 20px;">
+                                                        <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
+
+                                                </div>
+                                                <span class="error-message">Please enter valid </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <label class="full-name">Name of Vehicle</label>
+                                                <select id="" class="form-control" name="vehicle_type">
+                                                    <option value="">--select--</option>
+                                                    @foreach($org_id->organization->vehicle as $vehicle)
+                                                        <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="error-message"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                               {{-- <div class="col-sm-6 enter-pin p-60">
-                                    <div class="form-input">
-                                        <h4 class="text-center bold">Enter Your Pin</h4>
-                                        <input class="form-control" name="pin" type="number" maxlength="4" minlength="4" required/>
-                                        <span class="error-message">Please enter valid OTP</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <span class="text-center">Forgot Pin?</span>
-                                        <a class="modal-toggle" href="#" data-target="#reset-pin">
-                                            Reset
-                                        </a>
-                                    </div>
-                                </div>--}}
+
                             </div>
                         </div>
                         <div class="modal-footer p-15 ">
                             <div class="w-50">
                             </div>
-                            <div class="w-50 text-right"><a class="white-text p-10" href="#"><button
-                                        type="button" class="btn theme-bg white-text w-30 " id="next-btn-1admin" style="margin-bottom: 20px;">Next</button>
-                                   {{-- <button type="button"
-                                            class="btn theme-bg white-text w-30 " id="next-btn-2" style="margin-bottom: 20px;">Next</button>--}}
-                                    <button
-                                        class="btn theme-bg white-text w-30 " id="submitbtnadmin" style="margin-bottom: 20px;">Submit</button>
+                            <div class="w-50 text-right"><a class="white-text p-10" href="#">
+                                    <button type="button" class="btn theme-bg white-text w-30 " id="next-btn-1-admin" style="margin-bottom: 20px;">Next</button>
+                                    <button  class="btn theme-bg white-text w-30 " id="submitbtn-admin" style="margin-bottom: 20px;">Submit</button>
                                 </a>
                             </div>
                         </div>
@@ -336,7 +321,6 @@
                 </div>
             </div>
         @endforeach
-
         <script type="application/javascript">
             var BID_END_TIME = "{{$booking->bid_end_at}}";
         </script>

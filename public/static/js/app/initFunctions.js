@@ -703,6 +703,7 @@ export function initCountdown() {
 
 export function initDatePicker(){
     if($(".date").length) {
+
         $('.date').datepicker({
             // multidateSeparator:",",
             multidate: true,

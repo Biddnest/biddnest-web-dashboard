@@ -1,6 +1,6 @@
 
 
-$('select').each(function(){
+$('select:not(.select-box2)').each(function(){
     var $this = $(this), numberOfOptions = $(this).children('option').length;
 
     $this.addClass('select-hidden');

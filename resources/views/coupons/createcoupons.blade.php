@@ -276,7 +276,11 @@
           </div>
       </div>
       <div class="d-flex  justify-content-between flex-row  p-10 border-top " >
-        <div class="w-50"><a class="white-text p-10 cancel" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a></div>
+        <div class="w-50">
+            <a class="white-text p-10 cancel" href="{{route('coupons')}}">
+                <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+            </a>
+        </div>
         <div class="w-50 text-right"><button class="btn theme-bg white-text w-30 mr-4" type="submit">Save</button></div>
        </div>
 </form>

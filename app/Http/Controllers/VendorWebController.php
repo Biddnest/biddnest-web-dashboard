@@ -162,7 +162,7 @@ class VendorWebController extends Controller
 
     public function inventorySidebar(Request $request)
     {
-        $inventory=Inventory::where('id', $request->id)->with(['prices'=>function($query){
+        $inventory=Inventory::where(['id'=>$request->id, 'deleted'=>CommonEnums::$NO])->with(['prices'=>function($query){
             $query->where('organization_id', Session::get('organization_id'));
         }])->first();
         return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
@@ -436,7 +436,7 @@ class VendorWebController extends Controller
 
     public function editInventory(Request $request)
     {
-        $inventory=InventoryPrice::where('inventory_id', $request->id)->where('organization_id', Session::get('organization_id'))->get();
+        $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->get();
         $inventory_item=Inventory::where('id', $request->id)->first();
         return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory, 'item'=>$inventory_item, 'inventory_id'=>$request->id]);
     }

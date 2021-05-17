@@ -46,6 +46,7 @@ import {
     initRevenueChart,
     InitUserZoneChart,
     initToggles,
+    initSelect,
     initOrderDistributionChart,
     initOrderDistributionChartVendor
 } from './app/initFunctions.js';
@@ -90,6 +91,7 @@ barba.hooks.after((data) => {
     initPopUp();
     initSlick();
     initToggles();
+    initSelect();
     initRangeSlider();
     //keep charts at end
     initRevenueChart();
@@ -110,6 +112,7 @@ $(document).ready(function(){
     initDatePicker();
     initPopUp();
     initToggles();
+    initSelect();
     initRangeSlider();
     initRevenueChart();
     initOrderDistributionChart();

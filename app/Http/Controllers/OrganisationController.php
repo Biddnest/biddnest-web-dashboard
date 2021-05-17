@@ -442,10 +442,13 @@ class OrganisationController extends Controller
             return Helper::response(false,"Incorrect Role or Organization id");
 
         $meta = array(["branch"=>$data['branch']]);
-        $imageman = new ImageManager(array('driver' => 'gd'));
 
         $image = $data['image'];
         $uniq = uniqid();
+
+        $image_man = new ImageManager(array('driver' => 'gd'));
+        $image_name = "BD".$uniq.".png";
+
 
         if(!$data['password'])
             $password=$exist['password'];
@@ -464,7 +467,8 @@ class OrganisationController extends Controller
         ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq."png","vendors/".$uniq.$data['fname']);
+            $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"vendors/".$data['fname']);
+
 
         $vendor_result = Vendor::where(["id"=>$role_id])
             ->update($update_data);

@@ -772,7 +772,7 @@ export function initToggles() {
 export function initSelect() {
 
 
-    $('select:not(.select-box2, .select-box)').each(function(){
+   /* $('select:not(.select-box2, .select-box)').each(function(){
         var $this = $(this), numberOfOptions = $(this).children('option').length;
 
         $this.addClass('select-hidden');
@@ -816,7 +816,7 @@ export function initSelect() {
             $list.hide();
         });
 
-    });
+    });*/
 // table-select
 
 }

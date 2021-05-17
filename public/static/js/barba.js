@@ -50,6 +50,7 @@ import {
     initOrderDistributionChart,
     initOrderDistributionChartVendor
 } from './app/initFunctions.js';
+Barba.Pjax.cacheEnabled = false;
 barba.init({
     views: [{
         namespace: 'slider',

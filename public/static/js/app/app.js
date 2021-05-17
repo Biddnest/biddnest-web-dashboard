@@ -36,7 +36,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
-import { initRangeSlider } from "./initFunctions.js";
+import { initRangeSlider, initRevenueChart } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -331,7 +331,9 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
 
         $(".side-bar-pop-up").html(response);
     });
-
+    initRevenueChart(
+        console.log('graph')
+    );
 });
 
 

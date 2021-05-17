@@ -55,15 +55,15 @@
                             @if($tickets->type == \App\Enums\TicketEnums::$TYPE['new_branch'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['price_update'])
                                 <div class="mr-20">
                                     @switch($service)
-                                        @case(\App\Enums\CommonEnums::$TICKE_STATUS['open'])
+                                        @case(\App\Enums\CommonEnums::$TICKET_STATUS['open'])
                                         <span class="status-badge red-bg text-black-50 text-center">Open</span>
                                         @break
 
-                                        @case(\App\Enums\CommonEnums::$TICKE_STATUS['aprove'])
+                                        @case(\App\Enums\CommonEnums::$TICKET_STATUS['aprove'])
                                         <span class="status-badge green-bg text-black-50 text-center">Aprooved</span>
                                         @break
 
-                                        @case(\App\Enums\CommonEnums::$TICKE_STATUS['modify'])
+                                        @case(\App\Enums\CommonEnums::$TICKET_STATUS['modify'])
                                         <span class="status-badge red-bg text-black-50 text-center">Modify</span>
                                         @break
                                     @endswitch
@@ -217,7 +217,7 @@
                                                         <label>Aproval Status</label>
 
                                                         <select id="status" name="status" class="form-control reply_status" data-url="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" required>
-                                                            @foreach(\App\Enums\CommonEnums::$TICKE_STATUS as $key=>$status)
+                                                            @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
                                                                 <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
                                                             @endforeach
                                                         </select>
@@ -252,7 +252,7 @@
                                                         <label>Aproval Status</label>
 
                                                         <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_priceticket_status', ['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" required>
-                                                            @foreach(\App\Enums\CommonEnums::$TICKE_STATUS as $key=>$status)
+                                                            @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
                                                                 <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
                                                             @endforeach
                                                         </select>

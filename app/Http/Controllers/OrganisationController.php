@@ -204,7 +204,7 @@ class OrganisationController extends Controller
         $organizations->verification_status = $exist['verification_status'];
         if($vendor)
         {
-            $organizations->ticket_status = CommonEnums::$TICKE_STATUS['open'];
+            $organizations->ticket_status = CommonEnums::$TICKET_STATUS['open'];
         }
         $result_organization= $organizations->save();
 
@@ -262,11 +262,11 @@ class OrganisationController extends Controller
                 "meta" =>json_encode($meta)
             ]);
 
-        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
+        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
         {
             Organization::where(["id" => $id])
                 ->update([
-                    'ticket_status' => CommonEnums::$TICKE_STATUS['open']
+                    'ticket_status' => CommonEnums::$TICKET_STATUS['open']
                 ]);
         }
 
@@ -282,7 +282,7 @@ class OrganisationController extends Controller
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
-        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKE_STATUS['modify']))
+        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
             TicketController::createForVendor(Session::get('account')['id'], 5,  ["Branch_id"=>$id]);
 
 

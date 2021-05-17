@@ -105,6 +105,7 @@ barba.hooks.after((data) => {
             // return false;
 });
 
+
 changeMenu();
 // loadRevenueChart();
 $(document).ready(function(){

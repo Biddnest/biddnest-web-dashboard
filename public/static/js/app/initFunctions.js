@@ -744,13 +744,14 @@ export function initPopUp(){
 
 export function initPopUpAdmin(){
     $(document).ready(function(){
-        $("#submitbtnadmin").hide();
-        $('.bid-amount-2admin').hide();
-        $('#next-btn-1admin').click(function(){
+        $("#submitbtn-admin").hide();
+        $("#next-btn-2-admin").hide();
+        $('.bid-amount-2-admin').hide();
+        $('#next-btn-1-admin').click(function(){
             $(this).hide();
-            $('.bid-amountadmin').hide();
-            $('.bid-amount-2admin').show();
-            $("#submitbtnadmin").show();
+            $('.bid-amount-admin').hide();
+            $('.bid-amount-2-admin').show();
+            $("#submitbtn-admin").show();
         });
 
     });

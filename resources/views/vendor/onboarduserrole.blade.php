@@ -92,7 +92,7 @@
                         <div class="w-50">
                         </div>
                         <div class="w-50 text-right">
-                            <a class="white-text p-10" href="{{route("onboard-bank-vendors", ['id'=>$id])}}">
+                            <a class="white-text p-10" href="{{route("onboard-bank-vendors",["id"=>$id])}}">
                                 <button class="btn theme-br theme-text w-30 white-bg">Back</button></a></a>
                         </div>
                     </div>
@@ -197,7 +197,11 @@
                     </div>
                 </div>
                 <div class="modal-footer p-15 ">
-                    <div class="w-50"> </div>
+                    <div class="w-50" style="text-align: left !important;">
+                        <a class="white-text p-10 cancel" href="#" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                        </a>
+                    </div>
                     <div class="w-50 text-right">
                         <a class="white-text p-10" href="#" data-dismiss="modal" aria-label="Close">
                             <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>
@@ -306,7 +310,11 @@
                         </div>
                     </div>
                     <div class="modal-footer p-15 ">
-                        <div class="w-50"> </div>
+                        <div class="w-50" style="text-align: left !important;">
+                            <a class="white-text p-10 cancel" href="#" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                            </a>
+                        </div>
                         <div class="w-50 text-right">
                             <a class="white-text p-10" href="#" data-dismiss="modal" aria-label="Close">
                                 <button class="btn theme-bg white-text w-30" data-dismiss="modal" aria-label="Close">Save</button>

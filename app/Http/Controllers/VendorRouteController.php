@@ -110,7 +110,7 @@ class VendorRouteController extends Controller
         $validation = Validator::make($request->all(),[
             'inventory_id'=>"required|int",
             // 'organization_id'=>"required|int",
-            'service_type'=>"required|int",
+//            'service_type'=>"required|int",
             'price.*.id' => 'required|string',
             'price.*.size' => 'required|string',
             'price.*.material' => 'required|string',

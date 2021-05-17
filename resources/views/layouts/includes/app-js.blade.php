@@ -51,7 +51,7 @@ crossorigin="anonymous"></script>
 
 
 <script src="{{ asset('static/js/maps.js') }}"></script>
-<script src="{{ asset('static/js/select.js') }}"></script>
+{{--<script src="{{ asset('static/js/select.js') }}"></script>--}}
 
   <script src="{{ asset('static/js/jquery.tagsinput.min.js')}}"></script>
 

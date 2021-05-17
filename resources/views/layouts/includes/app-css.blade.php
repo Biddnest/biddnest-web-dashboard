@@ -955,4 +955,21 @@
             .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
                 color: #312489 !important;
             }
+
+            .status-3 {
+                font-size: 12px;
+                font-weight: 300;
+                background-color: #fff;
+                min-width: 120px;
+                display: inline-block;
+                text-align: center;
+                color: #2E0789;
+                font-weight: 700;
+                font-family: "Gilroy";
+                letter-spacing: 1px;
+                border: 1px solid #2E0789;
+                border-radius: 5px !important;
+                margin-bottom: 10px;
+                margin-top: -5px;
+            }
         </style>

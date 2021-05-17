@@ -309,7 +309,9 @@ class WebController extends Controller
     public function orderDetailsBidding(Request $request)
     {
         $booking = Booking::with('status_history')->with(['biddings'=>function($bid){
-            $bid->orderBy('updated_at')->orderBy('status')->with('organization');
+            $bid->orderBy('updated_at')->orderBy('status')->with(['organization'=>function($query){
+                $query->with('vehicle');
+            }]);
         }])->findOrFail($request->id);
 
         $hist = [];
@@ -631,19 +633,38 @@ class WebController extends Controller
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
         {
-//            $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'));
-
-//            if(!Session::get('active_zone'))
                 $coupons->whereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
         }
+
 
 
         if(isset($request->search)){
             $coupons=$coupons->where('name', 'like', "%".$request->search."%");
         }
+
+        $coupons_active= Coupon::where(['status'=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
+        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+            $coupons_active->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
+        {
+            $coupons_active->whereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
+        }
+
+
+        $coupons_inactive= Coupon::where(['status'=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO]);
+        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+            $coupons_inactive->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
+        {
+            $coupons_inactive->whereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
+        }
+
+
 //        $coupons->with('zones')->orderBy('id','DESC');
 
-        return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH)]);
+        return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH), "coupons_active"=>$coupons_active->paginate(CommonEnums::$PAGE_LENGTH), "coupons_inactive"=>$coupons_inactive->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
     public function sidebar_coupons(Request $request)

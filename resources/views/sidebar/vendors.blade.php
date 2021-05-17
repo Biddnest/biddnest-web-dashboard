@@ -18,7 +18,7 @@
         <i class="fa fa-times theme-text" aria-hidden="true"></i>
     </button>
 </div>
-<div class="modal-body border-top margin-topneg-7 vendor-modal p-0">
+<div class="modal-body border-top margin-topneg-7 vendor-modal p-1 ml-4">
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="vendor" role="tabpanel" aria-labelledby="past-tab">
             <input type="hidden" value='@json($graph)' id="revenue_dataset">
@@ -89,8 +89,8 @@
             <div class="row pb-3 pl-3">
                 <div>
                     <div class="col-sm-12 h-auto p-0">
-                        <div class="d-flex  card ">
-                            <div class="p-10 d-flex justify-content-between ">
+                        <div class="d-flex  card ml-1">
+                            <div class="p-10 d-flex justify-content-between pl-0 ">
                                 <h3 class="f-18 mt-0">Revenue Trend</h3>
 
                             </div>
@@ -166,8 +166,8 @@
 
 
             <div class="d-flex row  p-20 border-top-pop">
-                <div class="col-lg-6">
-                    <div class="theme-text f-14 bold">
+                <div class="col-lg-6 pl-0">
+                    <div class="theme-text ml-2 f-14 bold">
                         List of Payouts
                     </div>
                 </div>
@@ -175,7 +175,7 @@
             <table class="table text-center p-10 theme-text th-no-border">
                 <thead class="secondg-bg p-0"  >
                 <tr>
-                    <th scope="col" class="text-left" style="width :134px">Payout ID</th>
+                    <th scope="col" class="text-left" style="padding-left: 14px !important;">Payout ID</th>
                     <th scope="col">Status</th>
                     <th scope="col">Payout Date</th>
 
@@ -184,7 +184,7 @@
                 <tbody class="mtop-20">
                     @foreach($payouts as $payout)
                         <tr class="cursor-pointer">
-                            <td scope="row" class="text-left">
+                            <td scope="row" class="text-left" style="padding-left: 14px !important;">
                                 <p style="text-decoration: underline;margin: 0;">{{$payout->public_payout_id}}</p>
                             </td>
                             <td class="">

@@ -32,7 +32,7 @@
         <div class="col-sm-10">
             <div class="card  h-auto p-0 pt-10 ">
                 <div class="card-head right text-left  p-8">
-                  <h3 class="f-18">
+                  <h3 class="f-18 mt-2">
                     <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                       <li class="nav-item">
                         <a class="nav-link active p-15 pl-2" id="new-order-tab" data-toggle="tab" href="#order" role="tab"
@@ -47,7 +47,7 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                      <form class="form-new-order order_create pt-4 mt-3 input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate autocomplete="off" onsubmit="return false">
+                      <form class="form-new-order order_create input-text-blue" action="{{route('add_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate autocomplete="off" onsubmit="return false">
                       <div class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>
@@ -327,13 +327,13 @@
                             </div>
                           </div>
                           <div class="col-sm-12 mtop-20  p-15   pb-0" >
-                            <div class="heading p-10 pl-4 border-around ">
+                            <div class="heading p-8 border-around ">
                               Inventory
                             </div>
                             <table class="table text-center p-10  theme-text tb-border2" id="items" >
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
-                                    <th scope="col" style="padding-left: 16px !important;">Item Name</th>
+                                    <th scope="col">Item Name</th>
                                       <th scope="col">Material</th>
                                         <th scope="col">Size</th>
                                       <th scope="col">Quantity</th>
@@ -342,7 +342,7 @@
                                 </thead>
                                 <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
                                     <tr class="inventory-snip">
-                                    <td scope="row" class="text-left" style="padding-left: 14px !important;">
+                                    <td scope="row" class="text-left">
                                         <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                                             <option value="">--Select--</option>
                                             @foreach($inventories as $inventory)
@@ -351,16 +351,16 @@
                                         </select>
                                     </td>
 
-                                    <td class=""  style="padding-left: 14px !important;">
+                                    <td class="">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">--Choose Inventory--</option>
+                                            <option value="">Choose Inventory</option>
 
                                         </select>
                                     </td>
 
-                                    <td class=""  style="padding-left: 14px !important;">
+                                    <td class="">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">--Choose Inventory--</option>
+                                            <option value="">Choose Inventory</option>
 
                                         </select>
                                     </td>
@@ -426,8 +426,8 @@
     </div>
     <script type="text/html" id="add-inventory-row">
         <tr class="inventory-snip">
-            <th scope="row" class="text-left"  style="padding-left: 14px !important;">
-                <select class="form-control br-5 inventory-select"  name="inventory_items[][inventory_id]" required >
+            <th scope="row" class="text-left">
+                <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
                     <option value="">--Select--</option>
                     @foreach($inventories as $inventory)
                         <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -435,15 +435,15 @@
                 </select>
             </th>
 
-            <td class=""  style="padding-left: 14px !important;">
+            <td class="">
                 <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                    <option value="">--Choose Inventory--</option>
+                    <option value="">Choose Inventory</option>
                 </select>
             </td>
 
-            <td class=""  style="padding-left: 14px !important;">
+            <td class="">
                 <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                    <option value="">--Choose Inventory--</option>
+                    <option value="">Choose Inventory</option>
                 </select>
             </td>
 

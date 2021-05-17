@@ -96,7 +96,7 @@
                                                                   type="url"
                                                                   id="url"
                                                                   autocomplete="off"
-                                                                  placeholder="Diwali.com"
+                                                                  placeholder="http://Diwali.com"
                                                                   class="form-control br-5"
                                                                   name="banners[][url]"
                                                                   value="{{$banner->url}}"
@@ -110,7 +110,7 @@
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">From date</label>
-                                                              <input type="date" name="banners[][date][from]" class="form-control br-5" required="required" value="{{$banner->from_date}}"/>
+                                                              <input type="text" name="banners[][date][from]" class="form-control br-5 filterdate dateselect" required="required" value="{{$banner->from_date}}"/>
                                                               <span class="error-message">please enter valid date</span>
                                                           </div>
                                                       </div>
@@ -118,7 +118,7 @@
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">To date</label>
-                                                              <input type="date" name="banners[][date][to]" class="form-control br-5" required="required" value="{{$banner->to_date}}" />
+                                                              <input type="text" name="banners[][date][to]" class="form-control br-5 filterdate dateselect" required="required" value="{{$banner->to_date}}" />
                                                               <span class="error-message">please enter valid date</span>
                                                           </div>
                                                       </div>
@@ -142,8 +142,8 @@
                               <div class="col-md-12" id="comments">
                                   <div class="d-flex justify-content-between flex-row p-10 py-0" style="border-top: 1px solid #70707040">
                                     <div class="w-50">
-                                            <a class="white-text p-10 cancel" href="#">
-                                              <button class="btn theme-br theme-text w-30 white-bg br-5">
+                                            <a class="white-text p-10 cancel" href="{{route('slider')}}">
+                                              <button type="button" class="btn theme-br theme-text w-30 white-bg br-5">
                                                     Cancel
                                               </button>
                                             </a>
@@ -215,7 +215,7 @@
                         type="url"
                         id="url" required
                         autocomplete="off"
-                        placeholder="Diwali.com"
+                        placeholder="http://Diwali.com"
                         class="form-control br-5"
                         name="banners[][url]"
                     />
@@ -228,7 +228,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">From date</label>
-                    <input type="date" name="banners[][date][from]" class=" form-control br-5" required="required" value="{{$slider->from_date}}" />
+                    <input type="text" name="banners[][date][from]" class=" form-control br-5 filterdate dateselect" required="required" value="{{$slider->from_date}}" />
                     <span class="error-message">please enter valid date</span>
                 </div>
             </div>
@@ -236,7 +236,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">To date</label>
-                    <input type="date" name="banners[][date][to]" class=" form-control br-5" required="required" value="{{$slider->to_date}}" />
+                    <input type="text" name="banners[][date][to]" class=" form-control br-5 filterdate dateselect" required="required" value="{{$slider->to_date}}" />
                     <span class="error-message">please enter valid date</span>
                 </div>
             </div>

@@ -29,6 +29,7 @@
 
         <!-- date-time picker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+
         <!-- Custom css -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
         <!-- <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" /> -->

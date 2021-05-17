@@ -129,8 +129,8 @@
                 </div>
                 <div class="d-flex    w-100 p-10 border-top margin-r-20 justify-content-between ">
                     <div class="w-50 ">
-                        <a class="white-text p-10 cancel" href="#">
-                            <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                        <a class="white-text p-10 cancel" href="{{route('zones')}}">
+                            <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                         </a>
                     </div>
                     <div class="w-50 text-right">

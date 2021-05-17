@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="row pb-3 pl-3">
-                <div class="d-flex h-auto  Dashboard-lcards">
+                <div>
                     <div class="col-sm-12 h-auto p-0">
                         <div class="d-flex  card ml-1">
                             <div class="p-10 d-flex justify-content-between pl-0 ">

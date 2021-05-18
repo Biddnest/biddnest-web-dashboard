@@ -219,10 +219,10 @@
                                                 <th scope="col" style="text-align: left; padding-left:18px!important;">Item Name</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col" style="text-align: left;">Size</th>
-                                                <th scope="col" style="width: 120px;">Old Price</th>
+                                                <th scope="col" style="width: 120px;">Vendor's Price</th>
                                             </tr>
                                             </thead>
-                                            <tbody class="mtop-20 f-13">
+                                            <tbody class="mtop-20 f-13 calc-total" data-result=".calc-result">
                                             @foreach($booking->inventories as $inventory)
                                                 <tr class="">
                                                     <th scope="row" style="text-align: left;">{{$inventory->name}}</th>
@@ -239,7 +239,7 @@
                                                         @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, $org_id->organization_id, true); @endphp
                                                         @foreach($price['inventories'] as $inv_price)
                                                             @if($inv_price['bid_inventory_id'] == $inventory->inventory_id)
-                                                                <input class="form-control border-purple "style="width: 106px;" name="inventory[][amount]" value="{{$inv_price['price']}}" id="amount_{{$inventory->id}}" type="number" placeholder="2000"/>
+                                                                <input class="form-control border-purple calc-total-input validate-input" style="width: 106px;" name="inventory[][amount]" value="{{$inv_price['price']}}" id="amount_{{$inventory->id}}" type="number" placeholder="2000" required/>
                                                             @endif
                                                         @endforeach
                                                     </td>
@@ -252,7 +252,7 @@
                                     <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                         <div><p class="mt-2">Total Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple ml-2" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" />
+                                            <input class="form-control border-purple ml-2 calc-result validate-input" type="text" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" />
                                         </div>
                                     </div>
                                 </div>

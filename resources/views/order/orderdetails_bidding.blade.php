@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title') Orders And Bookings @endsection
 @section('content')
-    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails">
+    <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails" style="position: relative">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4">Order Details</h3>
         </div>
@@ -181,7 +181,7 @@
         </div>
 
         @foreach($booking->biddings as $org_id)
-            <div class="fullscreen-modal" id="add-role_{{$org_id->organization_id}}" style="min-height: 155%; left: 0px !important; width: 100% !important; top: 50px!important;">
+            <div class="fullscreen-modal" id="add-role_{{$org_id->organization_id}}" >
                 <div class="fullscreen-modal-body" role="document">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Your Bid</h5>
@@ -191,8 +191,9 @@
                     </div>
                     <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('add_booking_bid')}}" data-next="redirect" data-redirect-type="hard"  data-url="{{route('order-details-bidding', ['id'=>$booking->id])}}" data-alert="mega" method="POST" data-parsley-validate>
                         <div class="modal-body" style="padding: 10px 9px;">
-                            <div class="d-flex justify-content-center row ">
-                                <div class="col-sm-12 bid-amount-admin">
+                            <div class="d-flex justify-content-center row " data-org="{{$org_id->organization_id}}">
+{{--                                <h3>First</h3>--}}
+                                <div class="col-sm-12 bid-amount-admin ">
                                     <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
                                         <div><p class="mt-2">Expected Price</p></div>
                                         <div class="col-2">
@@ -230,7 +231,7 @@
                                                     </td>
                                                     <td class="">{{$inventory->size}}</td>
                                                     <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
-                                                        <input class="form-control border-purple w-88" name="inventory[][amount]" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                        <input class="form-control border-purple w-88" name="inventory[][amount]" value="0" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -245,8 +246,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class ="col-sm-12 bid-amount-2-admin">
+{{--                                <h3>Second</h3>--}}
+                                <div class ="col-sm-12 bid-amount-2-admin ">
                                     <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
                                         <div><p class="mt-2">Expected Price</p></div>
                                         <div class="col-2">
@@ -312,8 +313,8 @@
                             <div class="w-50">
                             </div>
                             <div class="w-50 text-right"><a class="white-text p-10" href="#">
-                                    <button type="button" class="btn theme-bg white-text w-30 " id="next-btn-1-admin" style="margin-bottom: 20px;">Next</button>
-                                    <button  class="btn theme-bg white-text w-30 " id="submitbtn-admin" style="margin-bottom: 20px;">Submit</button>
+                                    <button type="button" class="btn theme-bg white-text w-30 next-btn-1-admin" data-direction="next" id="next-btn-1-admin" {{--onclick="steps_api_{{$org_id->organization_id}}.next();"--}} style="margin-bottom: 20px;">Next</button>
+                                    <button  class="btn theme-bg white-text w-30 submitbtn-admin" id="submitbtn-admin" style="margin-bottom: 20px;">Submit</button>
                                 </a>
                             </div>
                         </div>
@@ -321,6 +322,8 @@
                 </div>
             </div>
         @endforeach
+
+
         <script type="application/javascript">
             var BID_END_TIME = "{{$booking->bid_end_at}}";
         </script>

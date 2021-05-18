@@ -743,18 +743,23 @@ export function initPopUp(){
 }
 
 export function initPopUpAdmin(){
-    $(document).ready(function(){
-        $("#submitbtn-admin").hide();
-        $("#next-btn-2-admin").hide();
+        $('.submitbtn-admin').hide();
+        $('.next-btn-2-admin').hide();
         $('.bid-amount-2-admin').hide();
-        $('#next-btn-1-admin').click(function(){
-            $(this).hide();
-            $('.bid-amount-admin').hide();
-            $('.bid-amount-2-admin').show();
-            $("#submitbtn-admin").show();
-        });
 
-    });
+    /*if($(".bid-modal").length) {
+        $(".bid-modal").each(function (){
+            var step= $(this).steps({
+                headerTag: "h3",
+                buttonSelector:'button',
+                bodyTag: ".bid-modal-step",
+                transitionEffect: "slideLeft",
+                autoFocus: true
+            });
+        });
+        var steps= window['step_api_' + $(this).data('org') ];
+        window['step_api_' + $(this).data('org') ] = steps.data('plugin_Steps');
+    }*/
 }
 
 export function initRangeSlider(){

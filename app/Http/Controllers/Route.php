@@ -1172,6 +1172,7 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required',
             'organization_id' => 'required',
+            'vendor_id'=>'required',
             'inventory.*.booking_inventory_id'=>'required|integer',
             'inventory.*.amount'=>'required',
 

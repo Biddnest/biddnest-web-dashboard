@@ -310,7 +310,7 @@ class WebController extends Controller
     {
         $booking = Booking::with('status_history')->with(['biddings'=>function($bid){
             $bid->orderBy('updated_at')->orderBy('status')->with(['organization'=>function($query){
-                $query->with('vehicle');
+                $query->with('vehicle')->with('admin');
             }]);
         }])->findOrFail($request->id);
 

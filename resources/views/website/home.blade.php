@@ -1,7 +1,7 @@
 @extends('website.homelayouts.app')
 @section('title') Home @endsection
 @section('content')
-<div class="content-wrapper">
+<div class="content-wrapper" data-barba="container" data-barba-namespace="home">
         <div class="d-flex center">
             <div class="container container-top p-50 top-header-card border-top-cards">
                 <div class="top-cards">

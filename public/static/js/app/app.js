@@ -549,19 +549,19 @@ $("body").on('change', ".inventory-item-select", function(event) {
 
 $("body").on('click', ".next-btn-1-admin", function(event) {
 
-    /*let isValid = true;
+    let isValid = true;
     $($(this).closest('form').find('input.validate-input')).each( function() {
         Logger.info(isValid);
         if ($(this).parsley().validate() !== true)
             isValid = false;
     });
     Logger.info(isValid);
-    if (isValid) {*/
+    if (isValid) {
         $(this).hide();
         $(this).closest('form').find('.bid-amount-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').show();
         $(this).closest('form').find('.submitbtn-admin').show();
-    // }
+    }
 });
 
 $("body").on('click', ".next-btn-1", function(event) {

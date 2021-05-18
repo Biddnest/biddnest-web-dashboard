@@ -623,8 +623,7 @@ $("body").on('keyup', ".calc-total", function(event) {
 
         total += $(this).val();
    });
-    Logger.info("total", total);
-    Logger.info($(this).data("result"));
+
    // $($(this).data("result")).val(total);
    $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
 });

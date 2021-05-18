@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="77" viewBox="0 0 240 77">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.5" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#49039b"/>
+      <stop offset="1" stop-color="#0f0c75"/>
+    </linearGradient>
+    <clipPath id="clip-Artboard_2">
+      <rect width="240" height="77"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_2" data-name="Artboard – 2" clip-path="url(#clip-Artboard_2)">
+    <g id="Group_14549" data-name="Group 14549" transform="translate(8.064 4.465)">
+      <path id="Path_12744" data-name="Path 12744" d="M9.076,0H214.8a9.076,9.076,0,0,1,9.076,9.076V58.993a9.076,9.076,0,0,1-9.076,9.076H9.076A9.076,9.076,0,0,1,0,58.993V9.076A9.076,9.076,0,0,1,9.076,0Z" transform="translate(-0.001)" fill="url(#linear-gradient)"/>
+      <path id="Icon_awesome-google-play" data-name="Icon awesome-google-play" d="M28.317,20.726,8.794,1.15,33.633,15.41l-5.316,5.316ZM3.7,0a3.439,3.439,0,0,0-1.92,3.123V42.16A3.439,3.439,0,0,0,3.7,45.283L26.4,22.637ZM41.312,19.957,36.1,16.94l-5.812,5.706L36.1,28.351l5.316-3.016a3.549,3.549,0,0,0-.106-5.378ZM8.794,44.141l24.839-14.26-5.316-5.316Z" transform="translate(24.304 12.101)" fill="#fff"/>
+      <g id="Group_12837" data-name="Group 12837" transform="translate(87.733 15.127)">
+        <text id="GET_IT_ON" data-name="GET IT ON" transform="translate(25 9)" fill="#fff" font-size="10" font-family="ArialMT, Arial"><tspan x="-24.819" y="0">GET IT ON</tspan></text>
+        <text id="Google_Play" data-name="Google Play" transform="translate(46 30.639)" fill="#fff" font-size="16" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="-46.234" y="0">Google Play</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

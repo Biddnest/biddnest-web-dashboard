@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="56" viewBox="0 0 61 56">
+  <defs>
+    <clipPath id="clip-_7">
+      <rect width="61" height="56"/>
+    </clipPath>
+  </defs>
+  <g id="_7" data-name="7" clip-path="url(#clip-_7)">
+    <g id="Group_14571" data-name="Group 14571" transform="translate(-790.096 -410.09)">
+      <path id="home" d="M48.656,21.75l0,0-20.4-20.4a4.6,4.6,0,0,0-6.51,0L1.357,21.736l-.021.021A4.6,4.6,0,0,0,4.4,29.6q.07.007.142.007h.813V44.618a5.394,5.394,0,0,0,5.388,5.387h7.98a1.465,1.465,0,0,0,1.465-1.465V36.771a2.461,2.461,0,0,1,2.458-2.458h4.707a2.461,2.461,0,0,1,2.458,2.458V48.54a1.465,1.465,0,0,0,1.465,1.465h7.98a5.394,5.394,0,0,0,5.388-5.387V29.607H45.4a4.6,4.6,0,0,0,3.258-7.857Zm0,0" transform="translate(795.597 413.088)" fill="#c5c5dd"/>
+      <rect id="Rectangle_5268" data-name="Rectangle 5268" width="14" height="14" rx="1" transform="translate(813.999 426)" fill="#fff"/>
+      <text id="_2" data-name="2" transform="translate(820.999 438)" fill="#0f0c75" font-size="13" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="-3.615" y="0">2</tspan></text>
+    </g>
+  </g>
+</svg>

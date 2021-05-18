@@ -370,19 +370,14 @@ class BidController extends Controller
 
             }
         }
-
         if($web)
-        {
-            return ["price_list" => [
+            return [ "inventories" => $price_list, "total"=>$total ];
+        else
+            return Helper::response(true,"Here is the pricelist",["price_list"=>[
                 "inventories" => $price_list,
-                "total" => $total
-            ]];
-        }
-        else {
-            return Helper::response(true, "Here is the pricelist", ["price_list" => [
-                "inventories" => $price_list,
-                "total" => $total
+                "total"=>$total
             ]]);
-        }
+
     }
+
 }

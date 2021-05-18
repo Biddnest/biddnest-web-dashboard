@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="53" height="49" viewBox="0 0 53 49">
+  <defs>
+    <clipPath id="clip-upi_4">
+      <rect width="53" height="49"/>
+    </clipPath>
+  </defs>
+  <g id="upi_4" data-name="upi – 4" clip-path="url(#clip-upi_4)">
+    <path id="Icon_material-content-copy" data-name="Icon material-content-copy" d="M16.3,1.5H4.9A1.905,1.905,0,0,0,3,3.4V16.7H4.9V3.4H16.3Zm2.85,3.8H8.7A1.905,1.905,0,0,0,6.8,7.2V20.5a1.905,1.905,0,0,0,1.9,1.9H19.149a1.905,1.905,0,0,0,1.9-1.9V7.2A1.905,1.905,0,0,0,19.149,5.3Zm0,15.2H8.7V7.2H19.149Z" transform="translate(14.476 12.551)" fill="#0f0c75"/>
+  </g>
+</svg>

@@ -129,7 +129,7 @@
             </div>
 
         </div>
-        <div data-barba="wrapper">
+        <div data-barba="wrappere">
             @yield('content')
         </div>
         <!-- footer -->

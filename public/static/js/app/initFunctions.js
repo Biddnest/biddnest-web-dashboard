@@ -255,9 +255,9 @@ export function initTextAreaEditor() {
     if ($('textarea').length) {
         // var editor = new FroalaEditor('.editor');
         //
-        $('textarea').not(".select2-search__field").tinymce({
-            height: 300
-        });
+        // $('textarea').not(".select2-search__field").tinymce({
+        //     height: 300
+        // });
 
     }
 

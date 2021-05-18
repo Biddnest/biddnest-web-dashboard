@@ -3,7 +3,6 @@
 @section('content')
 
 
-
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createorders">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4">Create New Order</h3>
@@ -28,7 +27,7 @@
            -->
     </div>
     <!-- Dashboard cards -->
-    <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
+    <div class="d-flex flex-row justify-content-center Dashboard-lcards " >
         <div class="col-sm-10">
             <div class="card  h-auto p-0 pt-10 ">
                 <div class="card-head right text-left  p-8">
@@ -273,8 +272,8 @@
                           </div>
                         </div>
                         <div class="border-bottom"></div>
-                        <div class="d-flex  row  p-20">
-                          <div class="col-sm-6">
+                        <div class="d-flex  row  p-20" >
+                          <div class="col-sm-6" >
                             <div class="form-input" >
                               <label class="start-date">Start date</label>
                               <div id="my-modal">

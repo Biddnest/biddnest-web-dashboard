@@ -184,7 +184,7 @@
             <div class="fullscreen-modal" id="add-role_{{$org_id->organization_id}}" >
                 <div class="fullscreen-modal-body" role="document">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Your Bid</h5>
+                        <h5 class="modal-title  ml-4 pl-2" id="exampleModalLongTitle">Your Bid</h5>
                         <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -193,18 +193,18 @@
                         <div class="modal-body" style="padding: 10px 9px;">
                             <div class="d-flex justify-content-center row " data-org="{{$org_id->organization_id}}">
 {{--                                <h3>First</h3>--}}
-                                <div class="col-sm-12 bid-amount-admin ">
+                                <div class="col-sm-12 bid-amount-admin mr-2 ">
                                     <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
-                                        <div><p class="mt-2">Expected Price</p></div>
+                                        <div><p class="mt-2 ml-0">Expected Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
-                                            <input class="form-control border-purple" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
-                                            <input class="form-control border-purple" type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple ml-2" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple ml-2"  type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" placeholder="6000" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12  p-0  pb-0" >
                                         <div class="heading p-8 mtop-22">
-                                            <p class="text-muted light">
+                                            <p class="text-muted light ml-1 pl-1">
                                                 <span class="bold">Note:</span>
                                                 you can modify the old price for individual item OR you can directly set a new Total Price
                                             </p>
@@ -212,16 +212,16 @@
                                         <table class="table text-left theme-text tb-border2" id="items" >
                                             <thead class="secondg-bg bx-shadowg p-0 f-14">
                                             <tr class="">
-                                                <th scope="col">Item Name</th>
+                                                <th scope="col" style="text-align: left; padding-left:18px!important;">Item Name</th>
                                                 <th scope="col">Quantity</th>
-                                                <th scope="col">Size</th>
+                                                <th scope="col" style="text-align: left;">Size</th>
                                                 <th scope="col" style="width: 120px;">Old Price</th>
                                             </tr>
                                             </thead>
                                             <tbody class="mtop-20 f-13">
                                             @foreach($booking->inventories as $inventory)
                                                 <tr class="">
-                                                    <th scope="row">{{$inventory->name}}</th>
+                                                    <th scope="row" style="text-align: left;">{{$inventory->name}}</th>
                                                     <td class="">
                                                         @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
                                                             {{$inventory->quantity ?? ''}}
@@ -229,9 +229,9 @@
                                                             {{$inventory->quantity->min ?? ''}}-{{$inventory->quantity->max ?? ''}}
                                                         @endif
                                                     </td>
-                                                    <td class="">{{$inventory->size}}</td>
-                                                    <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
-                                                        <input class="form-control border-purple w-88" name="inventory[][amount]" value="0" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                    <td class="text-left" >{{$inventory->size}}</td>
+                                                    <td> <input class="form-control border-purple " style="width: 106px;" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                        <input class="form-control border-purple "style="width: 106px;" name="inventory[][amount]" value="0" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -242,7 +242,7 @@
                                     <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                         <div><p class="mt-2">Total Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple" value="{{$booking->final_estimated_quote}}" type="number" name="bid_amount" id="bid_amount" required placeholder="4000" />
+                                            <input class="form-control border-purple ml-2" value="{{$booking->final_estimated_quote}}" type="number" name="bid_amount" id="bid_amount" required placeholder="4000" />
                                         </div>
                                     </div>
                                 </div>

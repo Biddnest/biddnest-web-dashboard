@@ -117,46 +117,46 @@
                             <table class="table text-left p-0  theme-text ">
                                 <thead class="secondg-bg  p-0 f-14">
                                     <tr>
-                                        <th scope="col" class="text-left">Order ID</th>
-                                        <th scope="col">From</th>
-                                        <th scope="col">To</th>
-                                        <th scope="col">Order Date</th>
+                                        <th scope="col" class="text-left" style="padding: 14px;">Order ID</th>
+                                        <th scope="col" style="padding: 14px;">From</th>
+                                        <th scope="col" style="padding: 14px;">To</th>
+                                        <th scope="col" style="padding: 14px;">Order Date</th>
                                         @if($type == "participated")
-                                            <th scope="col">Bid Amount</th>
-                                            <th scope="col">Bid Submit By</th>
+                                            <th scope="col" style="padding: 14px;">Bid Amount</th>
+                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>
                                         @endif
                                         @if($type != "scheduled")
-                                            <th scope="col">Time Left</th>
+                                            <th scope="col" style="padding: 14px;">Time Left</th>
                                         @endif
                                         @if($type == "participated")
-                                            <th scope="col">Bid Status</th>
+                                            <th scope="col" style="padding: 14px;">Bid Status</th>
                                         @endif
                                         @if($type == "scheduled")
-                                            <th scope="col">Submitted On</th>
-                                            <th scope="col">Your Bid</th>
-                                            <th scope="col" style="text-align: center;">Status</th>
+                                            <th scope="col" style="padding: 14px;">Submitted On</th>
+                                            <th scope="col" style="padding: 14px;">Your Bid</th>
+                                            <th scope="col" style="text-align: center; padding: 14px;">Status</th>
                                         @endif
-                                        <th scope="col">Actions</th>
+                                        <th scope="col"  style="text-align: center; padding: 14px; padding-left:0 !important">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="mtop-20 text-left f-13">
                                     @foreach($bookings as $booking)
                                         <tr class="tb-border reject_{{$booking->id}}">
-                                        <td scope="row" class="text-left"> <a href="order-details.html">
+                                        <td scope="row" class="text-left" style="padding: 14px;" > <a href="order-details.html">
                                                 {{$booking->public_booking_id}}</a> </td>
-                                        <td>{{json_decode($booking->source_meta, true)['city']}}</td>
-                                        <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                        <td>{{$booking->created_at->format('d M Y')}}</td>
+                                        <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
+                                        <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                        <td style="padding: 14px;">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
-                                            <td>{{$booking->bid->bid_amount}}</td>
-                                            <td>{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
+                                            <td style="padding: 14px;">{{$booking->bid->bid_amount}}</td>
+                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
                                         @endif
                                         @if($type != "scheduled")
-                                            <td><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
+                                            <td style="padding: 10px;"><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
                                             </td>
                                         @endif
                                         @if($type == "participated")
-                                            <td style="text-align: center;">
+                                            <td style="text-align: center;" style="padding: 10px;">
                                                     @switch($booking->bid->status)
                                                         @case(\App\Enums\BidEnums::$STATUS['bid_submitted'])
                                                             @if($booking->status == \App\Enums\BookingEnums::$STATUS['biding'])
@@ -197,7 +197,7 @@
                                             </td>
                                         @endif
                                         @if($type == "live")
-                                            <td class="cursor-pointer">
+                                            <td class="cursor-pointer" style="padding: 10px;">
                                                 <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
                                                     <i class="tooltip-trigger">
                                                         <img src="{{asset('static/vendor/images/acceptmark.svg')}}" alt=""
@@ -291,7 +291,7 @@
                             <ul>
                                 <li class="p-1">Page</li>
                                 <li class="digit">{{$bookings->currentPage()}}</li>
-                                <li class="label">of</li>
+                                <li class="f-16 ml-2 mr-2" style="transform: translate(0px, 4px);">Of</li>
                                 <li class="digit">{{$bookings->lastPage()}}</li>
                                 @if(!$bookings->onFirstPage())
                                     <li class="button"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>

@@ -719,23 +719,11 @@ export function initDatePicker(){
 export function initPopUp(){
     $(document).ready(function(){
         $('.enter-pin').hide();
-        $("#submitbtn").hide();
-        $("#next-btn-2").hide();
+        $('.submitbtn').hide();
+        $('.next-btn-2').hide();
         $(".enter-pin").hide();
         $('.bid-amount-2').hide();
-        $('#next-btn-1').click(function(){
-            $(this).hide();
-            $('.bid-amount').hide();
-            $('.bid-amount-2').show();
-            $("#next-btn-2").show();
-        });
-        $('#next-btn-2').click(function(){
-            $(this).hide();
-            $('.bid-amount').hide();
-            $('.bid-amount-2').hide();
-            $("#submitbtn").show();
-            $(".enter-pin").show();
-        });
+
         /*$('#submitbtn').click(function(){
             $('.bid-amount').hide();
             $('.bid-amount-2').hide();

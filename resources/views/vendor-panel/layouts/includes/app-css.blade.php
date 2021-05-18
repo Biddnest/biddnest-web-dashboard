@@ -82,13 +82,14 @@
         margin-top: 20px;
     }
     .fullscreen-modal{
-        z-index: 999;
+        z-index: 9999;
         display: none;
-        position: absolute;
-        top: 10px;
-        left: 0;
+        position: fixed;
+        top: 0px;
+        left: 20%;
         margin-left: 0%;
-        width: 100%;
+        width: 80%;
+        height: 100vh;
         /*min-height: auto;*/
         background-color: rgba(0,0,0,0.4);
         padding: 5% 10%;

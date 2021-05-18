@@ -33,15 +33,12 @@ crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
 
 
-
-
 <script type="text/javascript" src='https://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
 <script src="{{ asset('static/js/locationpicker.jquery.js')}}"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
-
 <script src="{{ asset('static/js/intlTelInput.js') }}"></script>
-
+<script src="{{ asset('static/js/jquery.matchHeight.js') }}"></script>
 {{--<script src="{{ asset('static/js/live-order-chart.js') }}"></script>--}}
 <script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script>
 
@@ -86,6 +83,16 @@ crossorigin="anonymous"></script>
     @endif
 
 </script>
+
+<!-- <script>
+$(function() {
+	$('.match-item').matchHeight({
+        target: $('.match-height')
+    });
+});
+
+
+</script> -->
 
 
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>

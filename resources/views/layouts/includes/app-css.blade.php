@@ -949,10 +949,10 @@
             }
 
 
-            .select2-container--default .select2-selection--multiple .select2-selection__choice{
+            /* .select2-container--default .select2-selection--multiple .select2-selection__choice{
                 background-color: #F2E6FF !important;
             }
             .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
                 color: #312489 !important;
-            }
+            } */
         </style>

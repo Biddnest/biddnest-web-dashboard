@@ -74,38 +74,38 @@
                 </div>
                 <div class="tab-content border-top margin-topneg-7" id="myTabContent">
                     <div class="tab-pane fade show active" id="customer-details" role="tabpanel" aria-labelledby="customer-details-tab">
-                        <div class="d-flex  row p-15 pb-0" >
-                            <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                        <div class="d-flex  row  match-height  p-15 pb-0" >
+                            <div class="col-sm-4 match-item secondg-bg margin-topneg-15 pt-10">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Order ID
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Name
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Phone
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Email
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   From Address
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   To Address
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                     Delivery Distance
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Order Amount
                                 </div>
-                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Booking Status
                                 </div>
                             </div>
 
-                            <div class="col-sm-8 white-bg  margin-topneg-15 pt-10">
+                            <div class="col-sm-8  match-item white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                   {{$booking->public_booking_id}}
                                 </div>

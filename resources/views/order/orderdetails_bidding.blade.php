@@ -134,13 +134,16 @@
                                                                     <span class="green-bg text-center w-100  td-padding">Yet to Submit</span>
                                                                 @break;
                                                                 @case(\App\Enums\BidEnums::$STATUS['rejected'])
-                                                                    <span class="green-bg text-center w-100  td-padding">Rejected</span>
+                                                                    <span class="red-bg text-center w-100  td-padding">Rejected</span>
                                                                 @break;
                                                                 @case(\App\Enums\BidEnums::$STATUS['bid_submitted'])
                                                                     <span class="green-bg text-center w-100  td-padding">Submitted</span>
                                                                 @break;
                                                                 @case(\App\Enums\BidEnums::$STATUS['lost'])
-                                                                    <span class="green-bg text-center w-100  td-padding">Lost</span>
+                                                                    <span class="red-bg text-center w-100  td-padding">Lost</span>
+                                                                @break;
+                                                                @case(\App\Enums\BidEnums::$STATUS['expired'])
+                                                                    <span class="red-bg text-center w-100  td-padding">Expired</span>
                                                                 @break;
                                                                 @case(\App\Enums\BidEnums::$STATUS['won'])
                                                                     <span class="green-bg text-center w-100  td-padding">Won</span>
@@ -199,7 +202,8 @@
                                         <div class="col-2">
                                             <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
                                             <input class="form-control border-purple" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
-                                            <input class="form-control border-purple" type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple" type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" readonly/>
+                                            <input class="form-control border-purple" type="hidden" type="text" value="{{$org_id->organization->admin->id}}" name="vendor_id" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12  p-0  pb-0" >

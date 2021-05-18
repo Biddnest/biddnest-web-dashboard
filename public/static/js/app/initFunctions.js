@@ -712,7 +712,6 @@ export function initDatePicker(){
             multidate: true,
             format: 'yyyy-mm-dd',
             'startDate': '+1d',
-            orientation: "false",
 
         });
     }

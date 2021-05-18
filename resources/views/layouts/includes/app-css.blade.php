@@ -988,4 +988,12 @@
             .datepicker .datepicker-switch:hover, .datepicker .prev:hover, .datepicker .next:hover, .datepicker tfoot tr th:hover{
                 background: transparent !important;
             }
+
+            .datepicker-dropdown.datepicker-orient-top:before{
+                display: none !important;
+            }
+
+            .datepicker-dropdown:after{
+                display: none !important;
+            }
         </style>

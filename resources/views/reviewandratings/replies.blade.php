@@ -149,7 +149,7 @@
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">{{$ticket_info->public_booking_id}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">{{$ticket_info->public_booking_id}}</a>
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                         @switch($ticket_info->status)
@@ -206,10 +206,10 @@
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->org_name}} {{$ticket_info->org_type}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->org_name}} {{$ticket_info->org_type}}</a>
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.branch',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->city}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.branch',['id'=>$ticket_info->parent_org_id]) }}">{{$ticket_info->city}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
@@ -238,13 +238,13 @@
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->organization_id]) }}">{{$ticket_info->organization->org_name}} {{$ticket_info->org_type}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->organization_id]) }}">{{$ticket_info->organization->org_name}} {{$ticket_info->org_type}}</a>
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                         {{$ticket_info->service->name}}
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.inventory',['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type]) }}">{{$ticket_info->inventory->name}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.inventory',['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type]) }}">{{$ticket_info->inventory->name}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">

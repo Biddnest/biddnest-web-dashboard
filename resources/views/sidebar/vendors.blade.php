@@ -1,4 +1,5 @@
 <div class="modal-header pb-0 border-none">
+    <input type="hidden" value='@json($graph)' id="revenue_dataset">
     <h3 class="f-14">
         <ul class="nav nav-tabs pt-20 p-0" id="myTab" role="tablist">
             <li class="nav-item" style="margin-right: 0px;">
@@ -21,7 +22,7 @@
 <div class="modal-body border-top margin-topneg-7 vendor-modal p-1 ml-4">
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="vendor" role="tabpanel" aria-labelledby="past-tab">
-            <input type="hidden" value='@json($graph)' id="revenue_dataset">
+
             <div class="row d-flex  pb-3 pl-3">
                 <div class="col-lg-6 align-items-center">
                     <h1 class="f-14  bold">Vendor Name</h1>
@@ -87,18 +88,9 @@
                 </div>
             </div>
             <div class="row pb-3 pl-3">
-                <div>
-                    <div class="col-sm-12 h-auto p-0">
-                        <div class="d-flex  card ml-1">
-                            <div class="p-10 d-flex justify-content-between pl-0 ">
-                                <h3 class="f-18 mt-0">Revenue Trend</h3>
-
-                            </div>
-                            <div class="revenue-chart">
-                                <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                <h3 class="f-18 mt-0">Revenue Trend</h3>
+                <div class="revenue-chart">
+                    <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
                 </div>
             </div>
 

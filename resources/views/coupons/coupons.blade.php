@@ -31,11 +31,11 @@
         </div>
         <div class="simple-card min-width-30">
             <p>ACTIVE COUPONS</p>
-            <h1>{{sizeof(array_keys((array)$coupons, (string)\App\Enums\CouponEnums::$STATUS['active']))}}</h1>
+            <h1>{{count($coupons_active)}}</h1>
         </div>
         <div class="simple-card min-width-30">
             <p>INACTIVE COUPONS</p>
-            <h1>{{sizeof(array_keys((array)$coupons, (string)\App\Enums\CouponEnums::$STATUS['inactive']))}}</h1>
+            <h1>{{count($coupons_inactive)}}</h1>
         </div>
     </div>
     <!-- Dashboard cards -->

@@ -336,6 +336,28 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
     );
 });
 
+$("body").on('click', ".sidebar-toggle_slider td:not(:first-child)", function(event) {
+    var $this = $(this);
+
+    // if($(this).hasClass('no-toggle'))
+        // return false;
+
+    $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
+        '                    <svg class="circular" height="50" width="50">\n' +
+        '                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="6" stroke-miterlimit="10" />\n' +
+        '                    </svg>\n' +
+        '                </div>');
+
+    $('.side-bar-pop-up').addClass('display-pop-up');
+    $.get($(this).parent().data("sidebar"), {}, function(response){
+
+        $(".side-bar-pop-up").html(response);
+    });
+    initRevenueChart(
+        console.log('graph')
+    );
+});
+
 
 $("body").on('click', ".invsidebar", function(event) {
     var $this = $(this);
@@ -541,3 +563,10 @@ $("body").on('change', ".inventory-item-select", function(event) {
     redirectTo($(this).data('url')+"?item="+query);
 });
 
+$("body").on('click', ".next-btn-1-admin", function(event) {
+    $(this).hide();
+    $(this).closest('form').find('.bid-amount-admin').hide();
+    $(this).closest('form').find('.next-btn-1-admin').hide();
+    $(this).closest('form').find('.bid-amount-2-admin').show();
+    $(this).closest('form').find('.submitbtn-admin').show();
+});

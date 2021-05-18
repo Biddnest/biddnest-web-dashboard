@@ -572,14 +572,14 @@
             }
 
             .fullscreen-modal {
-                z-index: 999;
+                z-index: 9999;
                 display: none;
-                position: absolute;
-                top: 30px;
-                left: 0px;
+                position: fixed;
+                top: 0px;
+                left: 20%;
                 margin-left: 0%;
-                width: 100%;
-                min-height: 100%;
+                width: 80%;
+                height: 100vh;
                 background-color: rgba(0, 0, 0, 0.4);
                 padding: 5% 10%;
                 overflow-y: scroll;
@@ -954,5 +954,22 @@
             }
             .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
                 color: #312489 !important;
-            } */
+            }
+
+            .status-3 {
+                font-size: 12px;
+                font-weight: 300;
+                background-color: #fff;
+                min-width: 120px;
+                display: inline-block;
+                text-align: center;
+                color: #2E0789;
+                font-weight: 700;
+                font-family: "Gilroy";
+                letter-spacing: 1px;
+                border: 1px solid #2E0789;
+                border-radius: 5px !important;
+                margin-bottom: 10px;
+                margin-top: -5px;
+            }
         </style>

@@ -42,6 +42,7 @@ import {
     initTextAreaEditor,
     initDatePicker,
     initPopUp,
+    initPopUpAdmin,
     initRangeSlider,
     initRevenueChart,
     InitUserZoneChart,
@@ -50,7 +51,7 @@ import {
     initOrderDistributionChart,
     initOrderDistributionChartVendor
 } from './app/initFunctions.js';
-Barba.Pjax.cacheEnabled = false;
+
 barba.init({
     views: [{
         namespace: 'slider',
@@ -90,6 +91,7 @@ barba.hooks.after((data) => {
     initMapPicker();
     initDatePicker();
     initPopUp();
+    initPopUpAdmin();
     initSlick();
     initToggles();
     initSelect();
@@ -103,6 +105,7 @@ barba.hooks.after((data) => {
             // return false;
 });
 
+
 changeMenu();
 // loadRevenueChart();
 $(document).ready(function(){
@@ -112,6 +115,7 @@ $(document).ready(function(){
     initCountdown();
     initDatePicker();
     initPopUp();
+    initPopUpAdmin();
     initToggles();
     initSelect();
     initRangeSlider();

@@ -742,6 +742,26 @@ export function initPopUp(){
     });
 }
 
+export function initPopUpAdmin(){
+        $('.submitbtn-admin').hide();
+        $('.next-btn-2-admin').hide();
+        $('.bid-amount-2-admin').hide();
+
+    /*if($(".bid-modal").length) {
+        $(".bid-modal").each(function (){
+            var step= $(this).steps({
+                headerTag: "h3",
+                buttonSelector:'button',
+                bodyTag: ".bid-modal-step",
+                transitionEffect: "slideLeft",
+                autoFocus: true
+            });
+        });
+        var steps= window['step_api_' + $(this).data('org') ];
+        window['step_api_' + $(this).data('org') ] = steps.data('plugin_Steps');
+    }*/
+}
+
 export function initRangeSlider(){
     if($(".custom_slider").length) {
         $(".custom_slider").ionRangeSlider({

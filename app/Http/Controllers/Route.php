@@ -678,7 +678,8 @@ class Route extends Controller
              'valid_to'=>'required',
              'organizations.*'=>'required',
              'zones.*'=>'required',
-             'users.*'=>'required'
+             'users.*'=>'required',
+             'status'=>'required'
          ]);
 
          if($validation->fails())
@@ -1164,5 +1165,27 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->id);
+    }
+
+    public function booking_add_bid(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'organization_id' => 'required',
+            'inventory.*.booking_inventory_id'=>'required|integer',
+            'inventory.*.amount'=>'required',
+
+            'bid_amount'=>'required',
+            'type_of_movement'=>'required|string',
+            'moving_date'=>'required',
+            'vehicle_type'=>'required|string',
+
+            'man_power'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BidController::submitBidAdmin($request->all());
     }
 }

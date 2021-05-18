@@ -17,6 +17,10 @@ class Organization extends Model
         return $this->hasMany(Vendor::class);
     }
 
+    public function vehicle(){
+        return $this->hasMany(Vehicle::class);
+    }
+
     public function admin()
     {
         return $this->hasOne(Vendor::class);

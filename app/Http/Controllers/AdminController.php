@@ -40,7 +40,9 @@ class AdminController extends Controller
         $admin_user=Admin::where(['username'=>$username])
             ->OrWhere(['email'=>$username])
             ->where([ 'status'=>1, 'deleted'=>0])
-            ->with("zones")
+            ->with(["zones"=>function($query){
+                $query->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
+            }])
             ->first();
 
         if(!$admin_user)

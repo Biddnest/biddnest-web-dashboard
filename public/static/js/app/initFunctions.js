@@ -494,6 +494,9 @@ export function initOrderDistributionChartVendor(){
                     tooltips: {
                         enabled: true,
                         mode: 'label',
+                        yAlign: 'bottom',
+
+
                         callbacks: {
                             label: function(tooltipItem, data) {
                                 var indice = tooltipItem.index;

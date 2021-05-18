@@ -62,6 +62,8 @@ div.legend-text{
     display: flex;
     justify-content: space-between;
     text-align: right;
+    margin-top: 6px;
+
 }
         span.chart-legend {
             width: 13px;
@@ -75,7 +77,7 @@ div.legend-text{
     .chart-legend-label-text{
             display: flex;
            justify-content: space-between;
-            width: 9em;
+            width: 15em !important;
             text-align: left;
             vertical-align: baseline;
             

@@ -80,38 +80,38 @@
         <div class="vender-all-details dashboard-cards flex-row">
             <div class="simple-card">
                 <p> LIVE ORDERS</p>
-                <h1>{{$count_live}}</h1>
+                <h1 style="font-size: 30px;">{{$count_live}}</h1>
             </div>
             <div class="simple-card">
                 <p>ONGOING ORDERS</p>
-                <h1>{{$count_ongoing}}</h1>
+                <h1 style="font-size: 30px;">{{$count_ongoing}}</h1>
             </div>
             <div class="simple-card">
                 <p>ORDERS WON</p>
-                <h1>{{$count_won}}</h1>
+                <h1 style="font-size: 30px;">{{$count_won}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL BRANCHES</p>
-                <h1>{{$count_branch}}</h1>
+                <h1 style="font-size: 30px;">{{$count_branch}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL EMPLOYEES</p>
-                <h1>{{$count_emp}}</h1>
+                <h1 style="font-size: 30px;">{{$count_emp}}</h1>
             </div>
             <div class="simple-card">
                 <p>TOTAL REVENUE</p>
-                <h1>₹{{$total_revenue}}</h1>
+                <h1 style="font-size: 30px;"> ₹{{round($total_revenue/1000)}}K</h1>
             </div>
         </div>
         <!--  dashboard Columns -->
         <div class="d-flex flex-row justify-content-between Dashboard-lcards">
             <div class="col-sm-8 p-0">
-                <div class="card p-10">
+                <div class="card p-10 pl-0 pr-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div class="p-10 card-head right text-left">
-                            <h3 class="f-18">Live Orders</h3>
+                            <h3 class="f-18 mt-0 ml-4">Live Orders</h3>
                         </div>
-                        <div class="p-10 card-head left">
+                        <div class="p-10 card-head left mr-4">
                             <a><i><img src="{{asset('static/vendor//images/filter1.svg')}}" alt="" srcset=""></i></a>
                             <!-- <a><i><img src="./assets/images/filter.svg" alt="" srcset=""></i> -->
                             <div class="dropdown-menu ">
@@ -148,8 +148,8 @@
                         <thead class="secondg-bg border-none p-0 f-14">
                         <tr>
                             <th scope="col">Order ID</th>
-                            <th scope="col">Time Left</th>
-                            <th scope="col">Order Amount</th>
+                            <th scope="col" style="text-align: center;">Time Left</th>
+                            <th scope="col" style="text-align: center;">Order Amount</th>
                         </tr>
                         </thead>
                         <tbody class="mtop-20">
@@ -168,14 +168,14 @@
             <div class="col-sm-4 p-0">
                 <div class="d-flex card ">
                     <div class="p-10 ">
-                        <h3 class="f-18">Live Orders Distribution</h3>
+                        <h3 class="f-18 mt-0">Live Orders Distribution</h3>
                     </div>
                     <div class="canvas-con">
-                        <div class="total-user">Orders</div>
+                        <!-- <div class="total-user">Orders</div> -->
                         <div class="canvas-con-inner">
-                            <canvas id="mychart" height="130px" width="130px" ></canvas>
+                            <canvas id="mychart" height="130px" width="152px" ></canvas>
                         </div>
-                        <div id="my-legend-con_vendor" class="legend-con"></div>
+                        <div id="my-legend-con_vendor" class="legend-con mt-4"></div>
                     </div>                            </div>
             </div>
         </div>

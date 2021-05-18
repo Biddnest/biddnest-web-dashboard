@@ -55,6 +55,8 @@
   display: flex;
   justify-content: space-between;
   text-align: right;
+  margin-top: 6px;
+
 }
 
 .legend-con li span.chart-legend {
@@ -69,7 +71,7 @@
 .legend-con li .chart-legend-label-text {
   display: flex;
   justify-content: space-between;
-  width: 7em;
+  width: 15em;
   text-align: left;
   vertical-align: baseline;
 }

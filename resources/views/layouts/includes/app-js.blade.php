@@ -37,9 +37,8 @@ crossorigin="anonymous"></script>
 <script src="{{ asset('static/js/locationpicker.jquery.js')}}"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
-
 <script src="{{ asset('static/js/intlTelInput.js') }}"></script>
-
+<script src="{{ asset('static/js/jquery.matchHeight.js') }}"></script>
 {{--<script src="{{ asset('static/js/live-order-chart.js') }}"></script>--}}
 <script src="{{ asset('static/js/revenue-trand-chart.js') }}"></script>
 
@@ -84,6 +83,16 @@ crossorigin="anonymous"></script>
     @endif
 
 </script>
+
+<!-- <script>
+$(function() {
+	$('.match-item').matchHeight({
+        target: $('.match-height')
+    });
+});
+
+
+</script> -->
 
 
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>

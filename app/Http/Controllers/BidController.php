@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\NotificationEnums;
+use App\Http\Controllers\BookingsController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
@@ -26,7 +27,6 @@ use App\Enums\BidEnums;
 use Carbon\CarbonImmutable;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
-use App\Http\Controllers\BookingsController;
 
 
 class BidController extends Controller
@@ -277,11 +277,15 @@ class BidController extends Controller
         $submit_bid = Bid::where(["organization_id"=>$data['organization_id'], "id"=>$exist_bid['id']])
             ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
             ->update([
-            "bid_amount"=>$data['bid_amount'],
-            "meta"=>json_encode($meta),
-            "status"=>BidEnums::$STATUS['bid_submitted'],
-            "submit_at"=>Carbon::now()
+                "vendor_id"=>$data['vendor_id'],
+                "bid_amount"=>$data['bid_amount'],
+                "meta"=>json_encode($meta),
+                "status"=>BidEnums::$STATUS['bid_submitted'],
+                "submit_at"=>Carbon::now()
         ]);
+
+        if($submit_bid)
+            $bid_end = self::bidEndByAdmin($exist_bid['booking_id'], $data['organization_id'], $data['vendor_id'], $data['bid_amount']);
 
         if(!$submit_bid)
             return Helper::response(false,"Couldn't Submit Quotaion");
@@ -289,7 +293,53 @@ class BidController extends Controller
         return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
     }
 
-    public static function getPriceList($public_booking_id, $organization_id){
+    private static function bidEndByAdmin($booking_id, $org_id, $vendor_id, $amount)
+    {
+
+        $won_vendor = Bid::where(["booking_id"=>$booking_id, "organization_id"=>$org_id])
+            ->update(["status"=>BidEnums::$STATUS['won']]);
+
+
+        /*$lost_vendor_id =Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])->pluck("vendor_id")[0];*/
+        $lost_vendor = Bid::where(["booking_id"=>$booking_id, "status"=>BidEnums::$STATUS['bid_submitted']])
+            ->update(["status"=>BidEnums::$STATUS['lost']]);
+
+
+        $expire_vendor = Bid::where(["booking_id"=>$booking_id, "status"=>BidEnums::$STATUS['active']])
+            ->update(["status"=>BidEnums::$STATUS['expired']]);
+
+
+
+        $booking_update_status = Booking::where("id", $booking_id)
+            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->update([
+                "organization_id"=>$org_id,
+                "final_quote"=>$amount,
+                "status"=>BookingEnums::$STATUS['payment_pending']
+            ]);
+
+        $sub_total = (float) $amount;
+        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+        $tax_percentage = (float) Settings::where("key", "tax")->pluck('value')[0];
+        $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
+        $grand_total = (float) $sub_total+$other_charges+$tax;
+
+        $payment = new Payment;
+        $payment->public_transaction_id = Uuid::uuid4();
+        $payment->booking_id = $booking_id;
+        $payment->other_charges = $other_charges;
+        $payment->tax = $tax;
+        $payment->sub_total= $sub_total;
+        $payment->grand_total = $grand_total;
+        $payment_result = $payment->save();
+
+        $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['payment_pending']);
+
+        return true;
+    }
+
+
+    public static function getPriceList($public_booking_id, $organization_id, $web=false){
 
         $booking = Bid::whereIn("booking_id", Booking::where("public_booking_id", $public_booking_id)->pluck("id"))->with("booking_inventories")->with('booking')->first();
         if(!$booking)
@@ -320,9 +370,19 @@ class BidController extends Controller
 
             }
         }
-        return Helper::response(true,"Here is the pricelist",["price_list"=>[
-            "inventories" => $price_list,
-            "total"=>$total
-        ]]);
+
+        if($web)
+        {
+            return ["price_list" => [
+                "inventories" => $price_list,
+                "total" => $total
+            ]];
+        }
+        else {
+            return Helper::response(true, "Here is the pricelist", ["price_list" => [
+                "inventories" => $price_list,
+                "total" => $total
+            ]]);
+        }
     }
 }

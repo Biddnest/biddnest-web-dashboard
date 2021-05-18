@@ -3,6 +3,8 @@
 @section('content')
 <!-- Main Content -->
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="vendorDetails">
+    <input type="hidden" value='@json($graph)' id="revenue_dataset">
+
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4">Order Details</h3>
     </div>
@@ -94,13 +96,13 @@
                                     <span class="status-badge">
                                         @foreach(\App\Enums\OrganizationEnums::$STATUS as $key=>$status)
                                             @if($status == $organization->status)
-                                                <div class="status-badge light-bg">{{ucfirst(trans($key))}}</div>
+                                                <span class="status-badge light-bg">{{ucfirst(trans($key))}}</span>
                                             @endif
                                         @endforeach
                                     </span>
                                 </div>
                                 <div class="theme-text f-12 p-20 pb-0">
-                                  <p class="">{{json_decode($organization->meta, true)['org_description']}}</p>
+                                  <p class="">{!! json_decode($organization->meta, true)['org_description'] !!}</p>
                                 </div>
                                 <div class="theme-text f-14 p-20 ">
                                     {{$organization->state}}
@@ -117,24 +119,13 @@
                             </div>
                             <div class="col-sm-12 p-20 mt-2">
                                 <div class="theme-text f-14 bold text-center">
-                                    <img src="{{asset('static/images/graph/graph-lg.svg')}}" width="95%">
-                                </div>
-                            </div>
-                        </div>
-
-                        {{--<div class="border-top-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="w-100">
-                                    <a class="white-text p-20" href="#"><button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
-                                </div>
-                                <div class="w-100 margin-r-20">
-                                    <div class="d-flex justify-content-end">
-                                        <div></div>
-                                        <button  class="btn white-text theme-bg w-30">Next</button>
+{{--                                    <img src="{{asset('static/images/graph/graph-lg.svg')}}" width="95%">--}}
+                                    <div class="revenue-chart">
+                                        <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
                                     </div>
                                 </div>
                             </div>
-                        </div>--}}
+                        </div>
 
                     <!-- Tab-1 form -->
                     </div>

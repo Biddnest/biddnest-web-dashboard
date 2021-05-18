@@ -294,11 +294,11 @@
                                 <li class="f-16 ml-2 mr-2" style="transform: translate(0px, 4px);">Of</li>
                                 <li class="digit">{{$bookings->lastPage()}}</li>
                                 @if(!$bookings->onFirstPage())
-                                    <li class="button"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                    <li class="button" style="transform: translate(0px, 1px);"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
                                     </li>
                                 @endif
                                 @if($bookings->currentPage() != $bookings->lastPage())
-                                    <li class="button"><a href="{{$bookings->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                    <li class="button" style="transform: translate(0px, 1px);"><a href="{{$bookings->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
                                     </li>
                                 @endif
                             </ul>

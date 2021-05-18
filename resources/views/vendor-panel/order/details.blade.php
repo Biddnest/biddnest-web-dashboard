@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10" style="margin-bottom: 30px;">
                                 <div class="steps-container p-15 mr-5 pr-5">
-                                    <hr class="dash-line" >
+                                    <hr class="dash-line" style="width: 80%;     margin-left: 50px;" >
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
@@ -44,11 +44,11 @@
                             @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'] || $booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
                                 <div class="d-felx justify-content-center pt-4 border-top row">
                                     <div class="bid-badge mr-4">
-                                        <h4 class="step-title">₹ {{$booking->final_estimated_quote}}</h4>
+                                        <h4 class="step-title" style="padding: 12px 34px;">₹ {{$booking->final_estimated_quote}}</h4>
                                         <p>Estimated Price</p>
                                     </div>
                                     <div class="bid-badge mr-4">
-                                        <h4 class="step-title"><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h4>
+                                        <h4 class="step-title " style="padding: 12px 34px;"><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h4>
                                         <p>Time Left</p>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                             <div class="tab-content w-100" id="myTabContent">
                                 <div class="tab-pane fade active show" id="order-details" role="tabpanel" aria-labelledby="order-details-tab">
                                     <div class="d-flex  row pt-3 pr-4 pl-3 margin-topneg-15">
-                                        <div class="col-sm-4  secondg-bg   pt-10">
+                                        <div class="col-sm-4  secondg-bg  mt-2 ml-2 pt-10">
                                             <div class="theme-text f-14 bold p-8">
                                                 From
                                             </div>
@@ -193,7 +193,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-5 white-bg  pt-10">
+                                        <div class="col-sm-5 mt-2  pt-10">
                                             <div class="theme-text f-14 p-8">
                                                {{json_decode($booking->source_meta, true)['address']}}
                                             </div>

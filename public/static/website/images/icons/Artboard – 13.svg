@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="27" viewBox="0 0 26 27">
+  <defs>
+    <clipPath id="clip-Artboard_13">
+      <rect width="26" height="27"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_13" data-name="Artboard – 13" clip-path="url(#clip-Artboard_13)">
+    <g id="information" transform="translate(-0.161 7.215)">
+      <path id="Path_13110" data-name="Path 13110" d="M183.619,72H168.381a.381.381,0,0,0-.381.381V81.9a.381.381,0,0,0,.381.381H169.9v1.9a.381.381,0,0,0,.65.269l2.174-2.174h10.89A.381.381,0,0,0,184,81.9V72.381A.381.381,0,0,0,183.619,72Zm-.381,9.524H172.571a.381.381,0,0,0-.269.112l-1.635,1.635V81.9a.381.381,0,0,0-.381-.381h-1.524V72.762h14.476Z" transform="translate(-162.839 -72)" fill="#3b4b58" stroke="#3b4b58" stroke-width="0.2"/>
+      <path id="Path_13111" data-name="Path 13111" d="M248.381,136.762h8.381a.381.381,0,0,0,0-.762h-8.381a.381.381,0,1,0,0,.762Z" transform="translate(-239.029 -132.952)" fill="#3b4b58" stroke="#3b4b58" stroke-width="0.2"/>
+      <path id="Path_13112" data-name="Path 13112" d="M248.381,168.762h8.381a.381.381,0,0,0,0-.762h-8.381a.381.381,0,1,0,0,.762Z" transform="translate(-239.029 -163.429)" fill="#3b4b58" stroke="#3b4b58" stroke-width="0.2"/>
+      <path id="Path_13113" data-name="Path 13113" d="M248.381,200.762h5.333a.381.381,0,0,0,0-.762h-5.333a.381.381,0,1,0,0,.762Z" transform="translate(-239.029 -193.905)" fill="#3b4b58" stroke="#3b4b58" stroke-width="0.2"/>
+      <path id="Path_13114" data-name="Path 13114" d="M384.762,200h-.381a.381.381,0,0,0,0,.762h.381a.381.381,0,1,0,0-.762Z" transform="translate(-368.553 -193.905)" fill="#3b4b58" stroke="#3b4b58" stroke-width="0.2"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="54" viewBox="0 0 58 54">
+  <defs>
+    <clipPath id="clip-Artboard_">
+      <rect width="58" height="54"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_" data-name="Artboard " clip-path="url(#clip-Artboard_)">
+    <path id="Icon_awesome-google-play" data-name="Icon awesome-google-play" d="M28.317,20.726,8.794,1.15,33.633,15.41l-5.316,5.316ZM3.7,0a3.439,3.439,0,0,0-1.92,3.123V42.16A3.439,3.439,0,0,0,3.7,45.283L26.4,22.637ZM41.312,19.957,36.1,16.94l-5.812,5.706L36.1,28.351l5.316-3.016a3.549,3.549,0,0,0-.106-5.378ZM8.794,44.141l24.839-14.26-5.316-5.316Z" transform="translate(6.811 4.359)" fill="#fff"/>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="27" viewBox="0 0 26 27">
+  <defs>
+    <clipPath id="clip-Artboard_8">
+      <rect width="26" height="27"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_8" data-name="Artboard – 8" clip-path="url(#clip-Artboard_8)">
+    <path id="Icon_metro-headphones" data-name="Icon metro-headphones" d="M6.394,9.574h-.85V15.52h.85a.426.426,0,0,0,.425-.425V10a.426.426,0,0,0-.425-.425Zm5.947,0a.426.426,0,0,0-.425.425v5.1a.426.426,0,0,0,.425.425h.85V9.574Zm3.823-.85A6.8,6.8,0,1,0,2.978,11.045,2.974,2.974,0,0,0,5.119,15.49V9.6a2.955,2.955,0,0,0-1.165.43,5.522,5.522,0,1,1,10.825,0,2.956,2.956,0,0,0-1.165-.43V15.49a2.974,2.974,0,0,0,2.142-4.445,6.783,6.783,0,0,0,.407-2.321Z" transform="translate(3.633 5.775)" fill="#fff"/>
+  </g>
+</svg>

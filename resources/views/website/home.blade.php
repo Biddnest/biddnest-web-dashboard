@@ -5,14 +5,16 @@
         <div class="d-flex center">
             <div class="container container-top p-50 top-header-card border-top-cards">
                 <div class="top-cards">
-                    <div class="col-lg-4 col-xs-12 d-flex space-between">
-                        <div class="card-header card-methord building-type ">
-                            <div class="card-body-top">
-                                <img class="icon-cards" src="{{ asset('static/website/images/icons/home.svg')}}" />
-                                <p class="building-type-text">Residential</p>
+                    <div class="col-lg-10 col-xs-12 d-flex space-between">
+                        @foreach($categories as $category)
+                            <div class="card-header card-methord building-type ">
+                                <div class="card-body-top">
+                                    <img class="icon-cards" src="{{$category->image}}" />
+                                    <p class="building-type-text">{{ucwords($category->name)}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-header card-methord building-type">
+                        @endforeach
+                       {{-- <div class="card-header card-methord building-type">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{ asset('static/website/images/icons/supermarket.svg')}}" />
                                 <p class="building-type-text">Commercial</p>
@@ -23,7 +25,7 @@
                                 <img class="icon-cards" src="{{ asset('static/website/images/icons/building.svg')}}" />
                                 <p class="building-type-text">Office</p>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
                 <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
@@ -305,99 +307,33 @@
             <div class="container">
                 <div class="row">
                     <div class="card">
-                        <div class="col-lg-12 text-center mb-4 mt-6">
+                        <div class="col-lg-12 text-center mb-2 mt-6">
                             <h1>Testimonials</h1>
-                            <p class="section-subheading text-muted mt-2">Lorem Ipsum</p>
+{{--                            <p class="section-subheading text-muted mt-2">Lorem Ipsum</p>--}}
                         </div>
                     </div>
                 </div>
                 <div class="container mb-5">
-                    <div class="slick testimonialslideshow">
-                        <div class="cd-testimonials-wrapper cd-container bg-white">
-                            <div class="cd-testimonials">
-                                <div>
-                                    <img class="testi-img mt-1 " src="{{ asset('static/website/images/images/Artboard – 3.png')}}" />
-                                </div>
-                                <div class="testimonial-content ">
-                                    <div class="">
-                                        <img class=" mb-1" src="{{ asset('static/website/images/icons/Artboard – 5.svg')}}" />
-                                        <p class="text-justify f-15">
-                                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,
-                                        </p>
-                                        <h5 class="texti-text mt-2">Mohit Raj</h5>
-                                        <h5 class="text-initial ">Bangaluru</h5>
+                    <div class="slick testimonialslideshow" >
+                        @foreach($testimonials as $testimonial)
+                            <div class="cd-testimonials-wrapper cd-container bg-white">
+                                <div class="cd-testimonials">
+                                    <div>
+                                        <img class="testi-img mt-1 " src="{{$testimonial->image}}" style="width: 200px; border-radius: 10px;"/>
+                                    </div>
+                                    <div class="testimonial-content ">
+                                        <div class="">
+                                            <img class=" mb-1" src="{{ asset('static/website/images/icons/Artboard – 5.svg')}}"/>
+                                            <p class="text-justify f-15">
+                                               {!! $testimonial->desc !!}
+                                            </p>
+                                            <h5 class="texti-text mt-2">{{$testimonial->name}}</h5>
+                                            <h5 class="text-initial ">{{$testimonial->designation}}</h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="cd-testimonials-wrapper cd-container bg-white">
-                            <div class="cd-testimonials">
-                                <div>
-                                    <img class="testi-img mt-1" src="{{ asset('static/website/images/images/Artboard – 3.png')}}" />
-                                </div>
-                                <div class="testimonial-content">
-                                    <div class="">
-                                        <img class="d-flex" src="{{ asset('static/website/images/icons/Artboard – 5.svg')}}" />
-                                        <p class="text-justify f-15">
-                                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Ipsum has been the
-                                        </p>
-                                        <h5 class="texti-text">Mohit Raj</h5>
-                                        <h5 class="text-initial">Bangaluru</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cd-testimonials-wrapper cd-container bg-white">
-                            <div class="cd-testimonials">
-                                <div>
-                                    <img class="testi-img mt-1" src="{{ asset('static/website/images/images/Artboard – 3.png')}}" />
-                                </div>
-                                <div class="testimonial-content">
-                                    <div class="">
-                                        <img class="d-flex" src="{{ asset('static/website/images/icons/Artboard – 5.svg')}}" />
-                                        <p class="text-justify f-15">
-                                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Ipsum has been the
-                                        </p>
-                                        <h5 class="texti-text">Mohit Raj</h5>
-                                        <h5 class="text-initial">Bangaluru</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cd-testimonials-wrapper cd-container bg-white">
-                            <div class="cd-testimonials">
-                                <div>
-                                    <img class="testi-img mt-1" src="{{ asset('static/website/images/images/Artboard – 3.png')}}" />
-                                </div>
-                                <div class="testimonial-content">
-                                    <div class="">
-                                        <img class="d-flex" src="{{ asset('static/website/images/icons/Artboard – 5.svg')}}" />
-                                        <p class="text-justify f-15">
-                                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Ipsum has been the
-                                        </p>
-                                        <h5 class="texti-text">Mohit Raj</h5>
-                                        <h5 class="text-initial">Bangaluru</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cd-testimonials-wrapper cd-container bg-white">
-                            <div class="cd-testimonials">
-                                <div>
-                                    <img class="testi-img mt-1" src="{{ asset('static/website/images/images/Artboard – 3.png')}}" />
-                                </div>
-                                <div class="testimonial-content">
-                                    <div class="">
-                                        <img class="d-flex" src="{{ asset('static/website/images/icons/Artboard – 5.svg')}}" />
-                                        <p class="text-justify f-15">
-                                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Ipsum has been the
-                                        </p>
-                                        <h5 class="texti-text">Mohit Raj</h5>
-                                        <h5 class="text-initial">Bangaluru</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

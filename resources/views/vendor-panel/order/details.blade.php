@@ -322,17 +322,17 @@
                             </div>
 
                             <div class ="col-sm-12 bid-amount-2">
-                                <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
+                                <div class="d-flex flex-row p-10 pr-4 justify-content-between secondg-bg heading status-badge">
                                     <div><p class="mt-2">Expected Price</p></div>
                                     <div class="col-2">
                                         <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
                                     </div>
                                 </div>
                                 <div class="d-flex row p-10">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 ">
                                         <div class="form-input">
-                                            <label class="full-name">Type of Movement</label>
-                                            <select id="" class="form-control" name="type_of_movement" required>
+                                            <label class="full-name mb-4">Type of Movement</label>
+                                            <select id="" class="form-control mt-2" name="type_of_movement" required>
                                                 <option value="">--select--</option>
                                                 @if(json_decode($booking->source_meta, true)['shared_service']== true)
                                                     <option value="dedicated">Dedicated</option>
@@ -357,9 +357,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="form-input">
+                                        <div class="form-input mt-5">
                                             <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
-                                            <div class="d-felx justify-content-between" style="margin-top: 20px;">
+                                            <div class="d-felx justify-content-between" style="margin-top: 10px !important; ">
                                                 <div class="d-flex range-input-group justify-content-between flex-row">
                                                     <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
                                                 </div>
@@ -368,9 +368,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="form-input">
-                                            <label class="full-name">Name of Vehicle</label>
-                                            <select id="" class="form-control" name="vehicle_type">
+                                        <div class="form-input mt-5">
+                                            <label class="full-name mb-4">Name of Vehicle</label>
+                                            <select id="" class="form-control mt-2" name="vehicle_type">
                                                 <option value="">--select--</option>
                                                 @foreach($vehicles as $vehicle)
                                                     <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>

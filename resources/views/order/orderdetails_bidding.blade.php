@@ -203,7 +203,7 @@
                                             <input class="form-control border-purple ml-2" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
                                             <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
                                             <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" readonly/>
-                                            <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$org_id->organization->admin->id}}" name="vendor_id" readonly/>
+                                            <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$org_id->organization->admin->id ?? ''}}" name="vendor_id" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12  p-0  pb-0" >
@@ -235,7 +235,13 @@
                                                     </td>
                                                     <td class="text-left" >{{$inventory->size}}</td>
                                                     <td> <input class="form-control border-purple " style="width: 106px;" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
-                                                        <input class="form-control border-purple "style="width: 106px;" name="inventory[][amount]" value="0" id="amount_{{$inventory->id}}" type="text" placeholder="2000"/>
+
+                                                        @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, $org_id->organization_id, true); @endphp
+                                                        @foreach($price['inventories'] as $inv_price)
+                                                            @if($inv_price['bid_inventory_id'] == $inventory->inventory_id)
+                                                                <input class="form-control border-purple "style="width: 106px;" name="inventory[][amount]" value="{{$inv_price['price']}}" id="amount_{{$inventory->id}}" type="number" placeholder="2000"/>
+                                                            @endif
+                                                        @endforeach
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -246,7 +252,7 @@
                                     <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                         <div><p class="mt-2">Total Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple ml-2" value="{{$booking->final_estimated_quote}}" type="number" name="bid_amount" id="bid_amount" required placeholder="4000" />
+                                            <input class="form-control border-purple ml-2" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" />
                                         </div>
                                     </div>
                                 </div>

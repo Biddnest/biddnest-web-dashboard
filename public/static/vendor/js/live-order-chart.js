@@ -71,6 +71,7 @@ var myChart = new Chart(document.getElementById('mychart'), {
         tooltips: {
              enabled: true,
              mode: 'label',
+
              callbacks: {
                 label: function(tooltipItem, data) {
                     var indice = tooltipItem.index;

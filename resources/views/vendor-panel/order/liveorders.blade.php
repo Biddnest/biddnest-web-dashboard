@@ -45,7 +45,7 @@
                 <div class="card  h-auto p-0 pt-10">
                     <div class="d-flex flex-row justify-content-between p-10">
                         <div class="card-head right text-left">
-                            <h3 class=" f-18 pb-0">
+                            <h3 class=" f-18 mt-0 pb-0">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     @foreach(\App\Enums\BookingEnums::$BOOKING_FETCH_TYPE as $fetch_type)
                                         <li class="nav-item ">

@@ -3345,6 +3345,8 @@ html body main .nav-tabs {
 html body main .nav-tabs .nav-item.show .nav-link, html body main .nav-tabs .nav-link {
   color: #3B4B58;
   border: none;
+  font-weight: 400 !important;
+
 }
 html body main .nav-tabs .nav-item.show .nav-link:hover, html body main .nav-tabs .nav-link:hover {
   border: none;
@@ -4326,6 +4328,8 @@ hr {
   display: flex;
   justify-content: space-between;
   text-align: right;
+  margin-top: 6px;
+
 }
 .legend-con li span.chart-legend {
   width: 13px;
@@ -4338,7 +4342,7 @@ hr {
 .legend-con li .chart-legend-label-text {
   display: flex;
   justify-content: space-between;
-  width: 9em;
+  width: 15em;
   text-align: left;
   vertical-align: baseline;
   margin-top: 5px;

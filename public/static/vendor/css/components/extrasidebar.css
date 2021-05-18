@@ -338,6 +338,8 @@ html body main .nav-tabs {
 html body main .nav-tabs .nav-item.show .nav-link, html body main .nav-tabs .nav-link {
   color: #3B4B58;
   border: none;
+  font-weight: 400 !important;
+
 }
 
 html body main .nav-tabs .nav-item.show .nav-link:hover, html body main .nav-tabs .nav-link:hover {

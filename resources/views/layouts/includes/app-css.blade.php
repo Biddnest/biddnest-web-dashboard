@@ -572,14 +572,14 @@
             }
 
             .fullscreen-modal {
-                z-index: 999;
+                z-index: 9999;
                 display: none;
-                position: absolute;
-                top: 30px;
-                left: 0px;
+                position: fixed;
+                top: 0px;
+                left: 20%;
                 margin-left: 0%;
-                width: 100%;
-                min-height: 100%;
+                width: 80%;
+                height: 100vh;
                 background-color: rgba(0, 0, 0, 0.4);
                 padding: 5% 10%;
                 overflow-y: scroll;

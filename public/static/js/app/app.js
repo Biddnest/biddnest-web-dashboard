@@ -563,3 +563,10 @@ $("body").on('change', ".inventory-item-select", function(event) {
     redirectTo($(this).data('url')+"?item="+query);
 });
 
+$("body").on('click', ".next-btn-1-admin", function(event) {
+    $(this).hide();
+    $(this).closest('form').find('.bid-amount-admin').hide();
+    $(this).closest('form').find('.next-btn-1-admin').hide();
+    $(this).closest('form').find('.bid-amount-2-admin').show();
+    $(this).closest('form').find('.submitbtn-admin').show();
+});

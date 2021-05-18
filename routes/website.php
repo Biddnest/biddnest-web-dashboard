@@ -3,6 +3,9 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
+
+use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-   echo "Welcome";
-});
+
+
+    Route::get('/home',[WebsiteController::class,'home'])->name("home");
+

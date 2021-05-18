@@ -564,9 +564,34 @@ $("body").on('change', ".inventory-item-select", function(event) {
 });
 
 $("body").on('click', ".next-btn-1-admin", function(event) {
-    $(this).hide();
-    $(this).closest('form').find('.bid-amount-admin').hide();
-    $(this).closest('form').find('.next-btn-1-admin').hide();
-    $(this).closest('form').find('.bid-amount-2-admin').show();
-    $(this).closest('form').find('.submitbtn-admin').show();
+
+    let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each( function() {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    Logger.info(isValid);
+    if (isValid) {
+        $(this).hide();
+        $(this).closest('form').find('.bid-amount-admin').hide();
+        $(this).closest('form').find('.next-btn-1-admin').hide();
+        $(this).closest('form').find('.bid-amount-2-admin').show();
+        $(this).closest('form').find('.submitbtn-admin').show();
+    }
 });
+
+$("body").on('keyup', ".calc-total", function(event) {
+    let total=0.00;
+
+   $(this).find('.calc-total-input').each(function(){
+
+        total += $(this).val();
+   });
+    Logger.info("total", total);
+    Logger.info($(this).data("result"));
+   // $($(this).data("result")).val(total);
+   $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
+});
+
+

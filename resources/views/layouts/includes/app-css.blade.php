@@ -954,7 +954,7 @@
             }
             .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
                 color: #312489 !important;
-            }
+            }*/
 
             .status-3 {
                 font-size: 12px;

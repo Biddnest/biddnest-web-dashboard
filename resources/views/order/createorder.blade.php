@@ -7,7 +7,7 @@
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4">Create New Order</h3>
     </div>
-    <div class="d-flex  flex-row justify-content-betwee
+    <div class="d-flex  flex-row justify-content-betwee">
         <div class="page-head text-left p-4 pt-0 pb-0">
             <nav aria-label="breadcrumb " style="margin-left:-10px">
                 <ol class="breadcrumb">

@@ -541,22 +541,6 @@ $('.filterdate').datepicker({
 });
 
 
-/*$("body").on('change', ".addpin", function(event) {
-    var password = document.getElementById("password").value;
-    var pin =document.getElementById("pin").value;
-        $.update($(this).data("url"), {password, pin}, function (response) {
-            console.log(response);
-            if (response.status == "success") {
-                tinySuccessAlert("Pin reseted Successfully", response.message);
-            } else {
-                tinyAlert("Failed", response.message);
-            }
-
-        });
-    return false;
-});*/
-
-
 $("body").on('change', ".inventory-item-select", function(event) {
     console.log("change");
     var query = $(this).val();
@@ -575,10 +559,45 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
     if (isValid) {
         $(this).hide();
         $(this).closest('form').find('.bid-amount-admin').hide();
-        $(this).closest('form').find('.next-btn-1-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').show();
         $(this).closest('form').find('.submitbtn-admin').show();
     }
+});
+
+$("body").on('click', ".next-btn-1", function(event) {
+
+    /*let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each( function() {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    Logger.info(isValid);
+    if (isValid) {*/
+        $(this).hide();
+        $(this).closest('form').find('.bid-amount').hide();
+        $(this).closest('form').find('.bid-amount-2').show();
+        $(this).closest('form').find('.next-btn-2').show();
+    // }
+
+});
+
+$("body").on('click', ".next-btn-2", function(event) {
+
+    /*let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each( function() {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    Logger.info(isValid);
+    if (isValid) {*/
+        $(this).hide();
+        $(this).closest('form').find('.bid-amount').hide();
+        $(this).closest('form').find('.bid-amount-2').hide();
+        $(this).closest('form').find('.submitbtn').show();
+        $(this).closest('form').find('.enter-pin').show();
+    // }
 });
 
 $("body").on('keyup', ".calc-total", function(event) {
@@ -588,8 +607,7 @@ $("body").on('keyup', ".calc-total", function(event) {
 
         total += $(this).val();
    });
-    Logger.info("total", total);
-    Logger.info($(this).data("result"));
+
    // $($(this).data("result")).val(total);
    $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
 });

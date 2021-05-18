@@ -257,7 +257,7 @@
             </div>
         </div>
 
-        <div class="fullscreen-modal" id="add-role" style="min-height: 155%; left: 0px !important; width: 100% !important; top: 50px!important;">
+        <div class="fullscreen-modal" id="add-role" >
             <div class="fullscreen-modal-body" role="document">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Your Bid</h5>
@@ -292,7 +292,7 @@
                                             <th scope="col" style="width: 120px;">Old Price</th>
                                         </tr>
                                         </thead>
-                                        <tbody class="mtop-20 f-13">
+                                        <tbody class="mtop-20 f-13 calc-total" data-result=".calc-result">
                                         @foreach($booking->inventories as $inventory)
                                             <tr class="">
                                                 <th scope="row">{{$inventory->name}}</th>
@@ -309,7 +309,7 @@
                                                     @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true); @endphp
                                                     @foreach($price['inventories'] as $inv_price)
                                                         @if($inv_price['bid_inventory_id'] == $inventory->inventory_id)
-                                                            <input class="form-control border-purple w-88" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price']}}" type="number" placeholder="2000"/>
+                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price']}}" type="number" placeholder="2000"/>
                                                         @endif
                                                     @endforeach
                                                 </td>
@@ -322,7 +322,7 @@
                                 <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                     <div><p class="mt-2">Total Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" />
+                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" />
                                     </div>
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
                                                     <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                 @endforeach
                                             </div>
-                                            <input type="text" class="form-control br-5 filterdate selectdate" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+                                            <input type="text" class="form-control br-5 filterdate selectdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
                                             <span class="error-message">Please enter valid</span>
                                         </div>
                                     </div>
@@ -367,7 +367,7 @@
                                             <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
                                             <div class="d-felx justify-content-between" style="margin-top: 10px !important; ">
                                                 <div class="d-flex range-input-group justify-content-between flex-row">
-                                                    <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
+                                                    <input type="text" class="custom_slider custom_slider_1 range validate-input" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
                                                 </div>
                                             </div>
                                             <span class="error-message">Please enter valid </span>
@@ -406,11 +406,11 @@
                         <div class="w-50">
                         </div>
                         <div class="w-50 text-right"><a class="white-text p-10" href="#"><button
-                                    type="button" class="btn theme-bg white-text w-30 " id="next-btn-1" style="margin-bottom: 20px;">Next</button>
+                                    type="button" class="btn theme-bg white-text w-30 next-btn-1" id="next-btn-1" style="margin-bottom: 20px;">Next</button>
                                 <button type="button"
-                                        class="btn theme-bg white-text w-30 " id="next-btn-2" style="margin-bottom: 20px;">Next</button>
+                                        class="btn theme-bg white-text w-30 next-btn-2" id="next-btn-2" style="margin-bottom: 20px;">Next</button>
                                 <button
-                                    class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
+                                    class="btn theme-bg white-text w-30 submitbtn" id="submitbtn" style="margin-bottom: 20px;">Submit</button>
                             </a>
                         </div>
                     </div>
@@ -418,7 +418,7 @@
             </div>
         </div>
 
-        <div class="fullscreen-modal" id="reset-pin" style="min-height: 155%; left: 270px !important; width: 81% !important; top: 0px!important;">
+        <div class="fullscreen-modal" id="reset-pin">
             <div class="fullscreen-modal-body" role="document">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Reset Your Pin</h5>

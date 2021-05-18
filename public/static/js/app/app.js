@@ -541,22 +541,6 @@ $('.filterdate').datepicker({
 });
 
 
-/*$("body").on('change', ".addpin", function(event) {
-    var password = document.getElementById("password").value;
-    var pin =document.getElementById("pin").value;
-        $.update($(this).data("url"), {password, pin}, function (response) {
-            console.log(response);
-            if (response.status == "success") {
-                tinySuccessAlert("Pin reseted Successfully", response.message);
-            } else {
-                tinyAlert("Failed", response.message);
-            }
-
-        });
-    return false;
-});*/
-
-
 $("body").on('change', ".inventory-item-select", function(event) {
     console.log("change");
     var query = $(this).val();

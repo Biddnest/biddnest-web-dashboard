@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="26" viewBox="0 0 27 26">
+  <defs>
+    <clipPath id="clip-_44">
+      <rect width="27" height="26"/>
+    </clipPath>
+  </defs>
+  <g id="_44" data-name="44" clip-path="url(#clip-_44)">
+    <g id="Group_14566" data-name="Group 14566" transform="translate(5.34 5.1)">
+      <g id="Icon_ionic-ios-close-circle-outline" data-name="Icon ionic-ios-close-circle-outline">
+        <path id="Path_12736" data-name="Path 12736" d="M18.461,17.437l-2.067-2.014,2.067-2.014a.6.6,0,0,0,0-.864.642.642,0,0,0-.887,0l-2.067,2.014-2.067-2.014a.611.611,0,0,0-.887,0,.58.58,0,0,0,0,.864l2.067,2.014-2.067,2.014a.58.58,0,0,0,0,.864.634.634,0,0,0,.887,0l2.067-2.014L17.574,18.3a.642.642,0,0,0,.887,0A.6.6,0,0,0,18.461,17.437Z" transform="translate(-7.347 -7.473)" fill="#fdc403"/>
+        <path id="Path_12737" data-name="Path 12737" d="M11.535,4.445a7.11,7.11,0,0,1,4.994,2.014,6.759,6.759,0,0,1,0,9.731,7.2,7.2,0,0,1-9.988,0,6.759,6.759,0,0,1,0-9.731,7.11,7.11,0,0,1,4.994-2.014m0-1.07a8.056,8.056,0,0,0-8.16,7.95,8.056,8.056,0,0,0,8.16,7.95,8.056,8.056,0,0,0,8.16-7.95,8.056,8.056,0,0,0-8.16-7.95Z" transform="translate(-3.375 -3.375)" fill="#0f0c75"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="27" viewBox="0 0 26 27">
+  <defs>
+    <clipPath id="clip-Artboard_6">
+      <rect width="26" height="27"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_6" data-name="Artboard – 6" clip-path="url(#clip-Artboard_6)">
+    <path id="Icon_awesome-crown" data-name="Icon awesome-crown" d="M13.148,11.156H2.789a.4.4,0,0,0-.4.4v.8a.4.4,0,0,0,.4.4H13.148a.4.4,0,0,0,.4-.4v-.8A.4.4,0,0,0,13.148,11.156Zm1.594-7.969a1.2,1.2,0,0,0-1.2,1.2,1.171,1.171,0,0,0,.11.493l-1.8,1.081a.8.8,0,0,1-1.1-.289L8.723,2.117a1.2,1.2,0,1,0-1.509,0L5.185,5.668a.8.8,0,0,1-1.1.289l-1.8-1.081a1.195,1.195,0,1,0-1.088.7,1.221,1.221,0,0,0,.192-.02l1.8,4.8H12.75l1.8-4.8a1.221,1.221,0,0,0,.192.02,1.2,1.2,0,0,0,0-2.391Z" transform="translate(5.031 5.625)" fill="#0f0c75"/>
+  </g>
+</svg>

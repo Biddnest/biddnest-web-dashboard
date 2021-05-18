@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="77" viewBox="0 0 240 77">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.41" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#49039b"/>
+      <stop offset="0.502" stop-color="#2c0888"/>
+      <stop offset="1" stop-color="#0f0c75"/>
+    </linearGradient>
+    <clipPath id="clip-Artboard_1">
+      <rect width="240" height="77"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard – 1" clip-path="url(#clip-Artboard_1)">
+    <g id="Group_14550" data-name="Group 14550" transform="translate(4 4.465)">
+      <path id="Path_12745" data-name="Path 12745" d="M9.076,0H214.8a9.076,9.076,0,0,1,9.076,9.076V58.993a9.076,9.076,0,0,1-9.076,9.076H9.076A9.076,9.076,0,0,1,0,58.993V9.076A9.076,9.076,0,0,1,9.076,0Z" transform="translate(0)" fill="url(#linear-gradient)"/>
+      <g id="Group_12837" data-name="Group 12837" transform="translate(86.221 15.127)">
+        <text id="DOWNLOAD_ON_" data-name="DOWNLOAD ON " transform="translate(40 9)" fill="#fff" font-size="10" font-family="ArialMT, Arial"><tspan x="-39.724" y="0">DOWNLOAD ON </tspan></text>
+        <text id="Apple_Store" data-name="Apple Store" transform="translate(48 31.639)" fill="#fff" font-size="17" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="-47.7" y="0">Apple Store</tspan></text>
+      </g>
+      <path id="Icon_awesome-apple" data-name="Icon awesome-apple" d="M30.772,25.183c-.019-3.556,1.589-6.24,4.844-8.216a10.41,10.41,0,0,0-8.206-4.321c-3.439-.271-7.2,2.006-8.575,2.006-1.453,0-4.786-1.909-7.4-1.909C6.027,12.83.281,17.054.281,25.648a24.148,24.148,0,0,0,1.4,7.867c1.24,3.556,5.716,12.276,10.386,12.13,2.442-.058,4.166-1.734,7.344-1.734,3.081,0,4.68,1.734,7.4,1.734,4.709-.068,8.759-7.993,9.941-11.559-6.317-2.974-5.978-8.72-5.978-8.9ZM25.288,9.274A9.125,9.125,0,0,0,27.613,2.25a10.274,10.274,0,0,0-6.579,3.381,9.268,9.268,0,0,0-2.48,6.966C21.083,12.791,23.389,11.493,25.288,9.274Z" transform="translate(26.412 9.851)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

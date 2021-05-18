@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="90" viewBox="0 0 86 90">
+  <defs>
+    <clipPath id="clip-Artboard_3">
+      <rect width="86" height="90"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_3" data-name="Artboard – 3" clip-path="url(#clip-Artboard_3)">
+    <g id="Group_14553" data-name="Group 14553" transform="translate(-515.5 -434)">
+      <g id="desk" transform="translate(544.529 470.143)">
+        <path id="Path_12298" data-name="Path 12298" d="M0,244.475v1.433H2.025v1.911h8.181v-1.911H21.6v8.6h1.433v-8.6h1.433v-1.433Z" transform="translate(0 -235.542)" fill="#0f0c75"/>
+        <path id="Path_12299" data-name="Path 12299" d="M42.387,344.475h8.181v1.911H42.387Z" transform="translate(-40.362 -330.764)" fill="#0f0c75"/>
+        <path id="Path_12300" data-name="Path 12300" d="M42.387,414.475h8.181v1.911H42.387Z" transform="translate(-40.362 -397.419)" fill="#0f0c75"/>
+        <path id="Path_12301" data-name="Path 12301" d="M45.785,65.024l-2.147-2.147,2.014-2.014a2.125,2.125,0,0,0,.624,1.521l1.055,1.055,3.015-3.015L49.291,59.37a2.133,2.133,0,0,0-2.421-.419l-1.425-1.425-1.014,1.014.759.759-3.267,3.267v.625l1.834,1.834h2.027Z" transform="translate(-39.921 -57.525)" fill="#0f0c75"/>
+        <path id="Path_12302" data-name="Path 12302" d="M308.031,80.265h1.433V78.831h3.059v-5.3h-7.552v5.3h3.059Z" transform="translate(-290.4 -72.765)" fill="#0f0c75"/>
+      </g>
+    </g>
+  </g>
+</svg>

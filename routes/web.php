@@ -228,7 +228,8 @@ Route::prefix('admin')->group(function () {
 
         //booking and orders
         Route::prefix('booking')->group(function () {
-            Route::get('/',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
+            Route::get('/enquiry',[WebController::class,'ordersBookingsEnquiry'])->name("enquiry-booking");
+            Route::get('/live',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
             Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");

@@ -30,7 +30,10 @@
                         <h3 class=" f-18 pb-0" style="margin-top: 0px !important;">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking')}}" aria-controls="home" aria-selected="true">Live Order</a>
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('enquiry-booking')}}" aria-controls="home" aria-selected="true">Enquiries</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking')}}" aria-controls="home" aria-selected="true">Confirmed Orders</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Past Orders</a>

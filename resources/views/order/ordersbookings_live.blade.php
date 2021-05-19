@@ -30,7 +30,10 @@
                         <h3 class=" f-18 pb-0" style="margin-top: 0px !important;">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Live Order</a>
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('enquiry-booking')}}" aria-controls="home" aria-selected="true">Enquiries</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Confirmed Orders</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
@@ -94,29 +97,10 @@
                                     <td class="" >
 
                                         @switch($booking->status)
-                                            @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
-                                            <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
-                                            @break
 
-                                            @case(\App\Enums\BookingEnums::$STATUS['placed'])
-                                            <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
+                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                    <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
                                             @break
-
-                                            @case(\App\Enums\BookingEnums::$STATUS['biding'])
-                                            <span class="status-badge green-bg  text-center td-padding">Bidding</span>
-                                            @break
-
-                                            @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                            <span class="status-badge light-bg  text-center td-padding ">Rebidding</span>
-                                            @break
-
-                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                            <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
-                                            @break
-
-                                    @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                            <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
-                                    @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                             <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>

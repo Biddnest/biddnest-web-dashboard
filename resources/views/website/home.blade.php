@@ -14,18 +14,6 @@
                                 </div>
                             </div>
                         @endforeach
-                       {{-- <div class="card-header card-methord building-type">
-                            <div class="card-body-top">
-                                <img class="icon-cards" src="{{ asset('static/website/images/icons/supermarket.svg')}}" />
-                                <p class="building-type-text">Commercial</p>
-                            </div>
-                        </div>
-                        <div class="card-header card-methord building-type">
-                            <div class="card-body-top">
-                                <img class="icon-cards" src="{{ asset('static/website/images/icons/building.svg')}}" />
-                                <p class="building-type-text">Office</p>
-                            </div>
-                        </div>--}}
                     </div>
                 </div>
                 <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
@@ -449,23 +437,144 @@
                 </div>
             </div>
         </section>
-        <script>
-        function openContent(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
+    <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25">
+                <div class="modal-header p-0 br-5 ">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <header class="join-as-vendor">
+                        <img src="{{ asset('static/website/images/icons/logo.png')}}">
+                    </header>
+                </div>
+                <div class="modal-body  margin-topneg-7">
+                    <form data-alert="inline" action="{{ route('api.login') }}" method="POST" onsubmit="return false;" data-parsley-validate >
+                        <div class="d-flex f-direction text-justify center">
+                            <h2 class="p-text">Login</h2>
+                            <div class="col-lg-12 col-xs-12 mt-3">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Phone Number</label>
+                                    <input type="text" class="form-control" name="phone" id="formGroupExampleInput" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                </div>
+                            </div>
+                            <a {{--data-toggle="modal" data-target="#otp-modal"--}}>
+                                <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
+                                    submit
+                                </button>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25">
+                <div class="modal-header p-0 br-5 ">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <header class="join-as-vendor">
+                        <img src="{{ asset('static/website/images/icons/logo.png')}}">
+                    </header>
+                </div>
+                <div class="modal-body  margin-topneg-7">
+                    <div class="d-flex f-direction text-justify center">
+                        <h2 class="p-text">Login</h2>
+                        <div class="col-lg-12 col-xs-12 mt-3">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Phone Number</label>
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="9990009990" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-xs-12 mt-3">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">OTP</label>
+                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="9990009990" required>
+                            </div>
+                        </div>
+                        <a href="./book-move.html">
+                            <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
+                                submit
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- location from picker -->
+        <div class="modal fade" id="from_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+            <div class="modal-dialog theme-text input-text-blue" role="document">
+                <div class="modal-content w-1000 mt-50 right-25">
+                    <div class="modal-header  bg-purple">
+                        <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
+                            From Location
+                        </h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-15 margin-topneg-7">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>SVM Complex,indiranagar,Benguluru</label>
+                                <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control p-2 mt-2 mb-3" required>
+                                <span class="error-message">Please enter valid</span>
+                            </div>
+                        </div>
+                        <div id="mapcomponent" class="source-map-picker"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- location to picker -->
+        <div class="modal fade" id="to_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-content w-1000 mt-50 right-25">
+                <div class="modal-header bg-purple">
+                    <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
+                        To Location
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-15 margin-topneg-7">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>SVM Complex,indiranagar,Benguluru</label>
+                            <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete2" class="form-control p-2 mt-2 mb-3" required>
+                            <span class="error-message">Please enter valid</span>
+                        </div>
+                    </div>
+                    <div id="mapcomponent" class="dest-map-picker"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            function openContent(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+        </script>
 </div>
 @endsection

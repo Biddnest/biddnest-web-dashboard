@@ -40,6 +40,7 @@ import {
     initAllSelectBoxes,
     initSlick,
     initTextAreaEditor,
+    initTooltip,
     initDatePicker,
     initPopUp,
     initPopUpAdmin,
@@ -92,6 +93,7 @@ barba.hooks.after((data) => {
     initDatePicker();
     initPopUp();
     initPopUpAdmin();
+    initTooltip();
     initSlick();
     initToggles();
     initSelect();
@@ -116,6 +118,7 @@ $(document).ready(function(){
     initDatePicker();
     initPopUp();
     initPopUpAdmin();
+    initTooltip();
     initToggles();
     initSelect();
     initRangeSlider();

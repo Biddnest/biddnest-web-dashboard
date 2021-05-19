@@ -36,7 +36,7 @@
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                {{--<div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Designation</label>
                                         <select id="role" name="role" class="form-control" required>
@@ -47,7 +47,7 @@
                                         </select>
                                         <span class="error-message">Please enter valid Designation</span>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                             <h5 class="card-title border-bottom theme-text fw-500 pt-3  pb-10 mt-20">Organization Details
                             </h5>

@@ -466,7 +466,7 @@ class OrganisationController extends Controller
             "lname"=>$data['lname'],
             "email"=>$data['email'],
             "phone"=>$data['phone'],
-            "meta"=>$meta,
+            "meta"=>json_encode($meta),
             "password"=>$password,
             "user_role"=>$data['role'],
             "organization_id"=>$data['branch'],

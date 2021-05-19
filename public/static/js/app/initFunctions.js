@@ -263,6 +263,12 @@ export function initTextAreaEditor() {
 
 }
 
+export function initTooltip(){
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+}
+
 /*Charts*/
 export function initRevenueChart() {
     // console.log("icam called");

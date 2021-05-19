@@ -142,8 +142,8 @@
                                 <tbody class="mtop-20 text-left f-13">
                                     @foreach($bookings as $booking)
                                         <tr class="tb-border reject_{{$booking->id}}">
-                                        <td scope="row" class="text-left" style="padding: 14px;" > <a href="order-details.html">
-                                                {{$booking->public_booking_id}}</a> </td>
+                                        <td scope="row" class="text-left" style="padding: 14px;" >
+                                                {{$booking->public_booking_id}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
                                         <td style="padding: 14px;">{{$booking->created_at->format('d M Y')}}</td>

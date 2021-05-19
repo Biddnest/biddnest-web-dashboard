@@ -123,7 +123,7 @@
                                         <th scope="col" style="padding: 14px;">Order Date</th>
                                         @if($type == "participated")
                                             <th scope="col" style="padding: 14px;">Bid Amount</th>
-                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>
+{{--                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>--}}
                                         @endif
                                         @if($type != "scheduled")
                                             <th scope="col" style="padding: 14px;">Time Left</th>
@@ -149,7 +149,7 @@
                                         <td style="padding: 14px;">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
                                             <td style="padding: 14px;">{{$booking->bid->bid_amount}}</td>
-                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
+{{--                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}
                                         @endif
                                         @if($type != "scheduled")
                                             <td style="padding: 10px;"><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>

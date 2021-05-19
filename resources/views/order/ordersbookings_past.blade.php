@@ -86,7 +86,7 @@
                                     <td>{{$booking->created_at->format('d M Y')}}</td>
                                     <td>
                                         @if($booking->organization_id)
-                                            {{$booking->organization->name}}
+                                            {{$booking->organization->org_name}} {{$booking->organization->org_type}}
                                         @else
                                             Not Assigned
                                         @endif

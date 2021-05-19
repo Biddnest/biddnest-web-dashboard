@@ -21,4 +21,5 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::get('/',[WebsiteController::class,'home'])->name("home");
+    Route::get('/join-vendor',[WebsiteController::class,'joinVendor'])->name("join-vendor");
 

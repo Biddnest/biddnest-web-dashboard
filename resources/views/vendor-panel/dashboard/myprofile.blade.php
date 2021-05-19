@@ -194,11 +194,11 @@
                                 </div>
                                 <div class="theme-text f-14  p-8">
                                     <div class="d-flex justify-content-start">
-                                        <span class="status-badge-3 grey-badge ml-0">
-                                            @foreach($user->organization->services as $service)
+                                        @foreach($user->organization->services as $service)
+                                            <span class="status-badge-3 grey-badge ml-0">
                                                 {{ucwords($service->name)}}
-                                            @endforeach
-                                        </span>
+                                            </span>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="theme-text f-14  p-8">

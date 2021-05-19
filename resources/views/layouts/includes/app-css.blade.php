@@ -541,7 +541,9 @@
                 border: 3px dashed #c0c0c0;
                 visibility: visible !important;
             }
-
+            .side-bar-pop-up {
+                top: 0px !important;
+            }
             /*.modal-backdrop{*/
             /*    display: none !important;*/
             /*}*/

@@ -147,18 +147,18 @@
                     <table class="table text-center p-0">
                         <thead class="secondg-bg border-none p-0 f-14">
                         <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col" style="text-align: center;">Time Left</th>
-                            <th scope="col" style="text-align: center;">Order Amount</th>
+                            <th scope="col" style="padding: 14px;">Order ID</th>
+                            <th scope="col" style="text-align: center; padding: 14px;">Time Left</th>
+                            <th scope="col" style="text-align: center; padding: 14px;">Order Amount</th>
                         </tr>
                         </thead>
                         <tbody class="mtop-20">
                             @foreach($booking_live as $booking)
                                 <tr class="tb-border">
-                                    <th scope="row" style="text-decoration: underline;">{{$booking->public_booking_id}}</th>
+                                    <th scope="row" style="text-decoration: underline; padding: 14px;">{{$booking->public_booking_id}}</th>
 
-                                    <td class="text-center"><span class="timer-bg text-center timer" data-time="{{$booking->bid_result_at}}"></span></td>
-                                    <td class="text-center">₹{{$booking->final_estimated_quote}}</td>
+                                    <td class="text-center " style="padding: 14px;"><span class="timer-bg text-center timer" data-time="{{$booking->bid_result_at}}"></span></td>
+                                    <td class="text-center" style="padding: 14px;">₹{{$booking->final_estimated_quote}}</td>
                                 </tr>
                             @endforeach
                        </tbody>

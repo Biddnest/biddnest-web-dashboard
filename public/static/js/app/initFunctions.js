@@ -711,7 +711,8 @@ export function initDatePicker(){
             // multidateSeparator:",",
             multidate: true,
             format: 'yyyy-mm-dd',
-            'startDate': '+1d'
+            'startDate': '+1d',
+
         });
     }
 }

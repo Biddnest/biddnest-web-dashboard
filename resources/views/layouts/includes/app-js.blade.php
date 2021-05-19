@@ -83,18 +83,6 @@ crossorigin="anonymous"></script>
     @endif
 
 </script>
-
-<!-- <script>
-$(function() {
-	$('.match-item').matchHeight({
-        target: $('.match-height')
-    });
-});
-
-
-</script> -->
-
-
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 <script src="{{ asset('static/js/sidebarCollapse.js') }}"></script>
 <script  type="module" src="{{ asset('static/js/barba.js') }}"></script>

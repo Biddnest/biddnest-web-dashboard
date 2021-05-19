@@ -947,15 +947,6 @@
             select::-ms-expand {
                 display: none !important;
             }
-
-
-            /* .select2-container--default .select2-selection--multiple .select2-selection__choice{
-                background-color: #F2E6FF !important;
-            }
-            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
-                color: #312489 !important;
-            }*/
-
             .status-3 {
                 font-size: 12px;
                 font-weight: 300;
@@ -971,5 +962,38 @@
                 border-radius: 5px !important;
                 margin-bottom: 10px;
                 margin-top: -5px;
+            }
+
+
+            main .content-wrapper{
+                position: relative !important;
+                height: auto !important;
+
+
+            }
+            footer {
+                background: #fff;
+                margin: 0 !important;
+                padding-bottom: 10px;
+            }
+
+            footer p{
+                margin-bottom: 0 !important;
+
+            }
+
+            .datepicker{
+                padding: 0 !important;
+            }
+            .datepicker .datepicker-switch:hover, .datepicker .prev:hover, .datepicker .next:hover, .datepicker tfoot tr th:hover{
+                background: transparent !important;
+            }
+
+            .datepicker-dropdown.datepicker-orient-top:before{
+                display: none !important;
+            }
+
+            .datepicker-dropdown:after{
+                display: none !important;
             }
         </style>

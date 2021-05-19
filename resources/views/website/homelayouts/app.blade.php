@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand -mt-10" href="#"><img src="{{ asset('static/website/images/images/logo.png')}}" /></a>
+                    <a class="navbar-brand -mt-10" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/logo.png')}}" /></a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -29,7 +29,7 @@
                                 <span class="nav-menu-link">My Bookings</span></a>
                         </li>
                         <li>
-                            <a href="./contact-us.html">
+                            <a href="{{route('contact_us')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
                                 <span class="nav-menu-link">Contact Us</span></a>
                         </li>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
 
-                            <a href="terms.html" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
+                            <a href="{{route('terms_and_conditions')}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
                         </div>
                     </div>
                     <div class="row mt-30 footer-row border-bottom border-top p-3">

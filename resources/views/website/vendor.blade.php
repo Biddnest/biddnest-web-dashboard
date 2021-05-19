@@ -22,39 +22,38 @@
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput">First Name</label>
-                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="David" required>
+                                        <input type="text" class="form-control" id="formGroupExampleInput" name="fname" placeholder="David" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Last Name</label>
-                                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Jeromi" required>
+                                        <input type="text" class="form-control" id="formGroupExampleInput2" name="lname" placeholder="Jeromi" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput">Email Id</label>
-                                        <input type="email" class="form-control" id="formGroupExampleInput" placeholder="davidjeromi@gmail.com" required>
+                                        <input type="email" class="form-control" id="formGroupExampleInput" name="email" placeholder="davidjeromi@gmail.com" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label class="phone-num-lable">Phone Number</label>
-                                        <input type="number" id="phone" placeholder="9990009900"
-                                               class=" form-control form-control-tel" required>
+                                        <input type="number" id="phone" placeholder="9990009900" name="[phone][primary]" class=" form-control form-control-tel" maxlength="10" minlength="10" required>
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Designation</label>
-                                        <select id="" class="form-control">
-                                            <option>Vendor</option>
-                                            <option>Sale</option>
-                                            <option>Purchase</option>
+                                        <select id="role" name="role" class="form-control" required>
+                                            <option value="">--Select--</option>
+                                            @foreach(\App\Enums\VendorEnums::$ROLES as $role=>$key)
+                                                <option value="{{$key}}">{{ucwords($role)}}</option>
+                                            @endforeach
                                         </select>
-                                        <span class="error-message">Please enter valid
-                                            Designation</span>
+                                        <span class="error-message">Please enter valid Designation</span>
                                     </div>
                                 </div>
                             </div>

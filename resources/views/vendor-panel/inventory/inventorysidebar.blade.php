@@ -23,8 +23,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14 d-flex justify-content-end">
-                        <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
-                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
+                      {{--  <i class="icon dripicons-pencil p-1" aria-hidden="true"></i>
+                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i>--}}
                     </div>
                 </div>
                 <div class="col-sm-12 p-0">

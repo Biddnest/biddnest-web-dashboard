@@ -7,7 +7,7 @@
             <div class="mr-20">
                 <a href="{{route('vendor.inventory_services')}}">
                     <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
-                                                               aria-hidden="true"></i>CREATE New Item</button>
+                                                               aria-hidden="true"></i>Add Item Price</button>
                 </a>
             </div>
         </div>

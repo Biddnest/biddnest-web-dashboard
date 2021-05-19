@@ -201,6 +201,7 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
+        $organizations->status =$exist['status'];
         $organizations->verification_status = $exist['verification_status'];
         if($vendor)
         {

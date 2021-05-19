@@ -47,7 +47,7 @@
                                         <div class="form-input">
                                             <label class="phone-num-lable"> Contact Number</label>
                                             <input type="tel" id="input-blue" placeholder="9876543210" value="@if($branch){{$branch->phone}}@endif"
-                                                   class=" form-control" name="phone[primary]" required>
+                                                   class=" form-control" name="phone[primary]" maxlength="10" minlength="10" required>
                                             <span class="error-message">Please enter valid
                                             Phone number</span>
                                         </div>

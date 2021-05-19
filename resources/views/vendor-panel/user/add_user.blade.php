@@ -150,7 +150,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Address Line 1</label>
-                                        <input type="text" id="fullname" name="addres1" value="{{json_decode($roles->meta, true)['address_line1'] ?? ''}}" placeholder="Flat no, Street no" class="form-control" required>
+                                        <input type="text" id="fullname" name="addres1" value="@if($roles){{json_decode($roles->meta, true)['address_line1'] ?? ''}}@endif" placeholder="Flat no, Street no" class="form-control" required>
                                         <span class="error-message">Please enter valid
                                         Address Line 1</span>
                                     </div>
@@ -159,7 +159,7 @@
                                     <div class="form-input">
                                         <label class="full-name">Address Line 2</label>
                                         <span class="">
-                                        <input type="text" id="fullname"  name="addres2" value="{{json_decode($roles->meta, true)['address_line2'] ?? ''}}" placeholder="Landmark, Area" class="form-control" required>
+                                        <input type="text" id="fullname"  name="addres2" value="@if($roles){{json_decode($roles->meta, true)['address_line2'] ?? ''}}@endif" placeholder="Landmark, Area" class="form-control" required>
                                         <span class="error-message">Please enter valid
                                         Address Line 2</span>
                                         </span>

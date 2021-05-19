@@ -352,14 +352,14 @@
 
                                     <td class="">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">Choose Inventory</option>
+                                            <option value="">Choose Item</option>
 
                                         </select>
                                     </td>
 
                                     <td class="">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">Choose Inventory</option>
+                                            <option value="">Choose Item</option>
 
                                         </select>
                                     </td>
@@ -436,13 +436,13 @@
 
             <td class="">
                 <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                    <option value="">Choose Inventory</option>
+                    <option value="">Choose Item</option>
                 </select>
             </td>
 
             <td class="">
                 <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                    <option value="">Choose Inventory</option>
+                    <option value="">Choose Item</option>
                 </select>
             </td>
 

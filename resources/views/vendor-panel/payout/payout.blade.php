@@ -24,8 +24,8 @@
                 <div class="col-sm-12">
                     <div class="card  h-auto p-0 pt-10">
                         <div class="row no-gutters">
-                            <div class="col-sm-8 p-3 ">
-                                <h3 class="f-18">Vendor Payout </h3>
+                            <div class="col-sm-8 p-3 ml-4 ">
+                                <h3 class="f-18 mt-3 ml-4">Vendor Payout </h3>
                             </div>
                             <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
                                {{-- <a href="#" class="margin-r-20 relative" data-toggle="dropdown"
@@ -70,7 +70,7 @@
                                     </a>
                                 </div>--}}
                             </div>
-                            <div class="card-head  pt-2 mt-1 left col-sm-3">
+                            <div class="card-head ml-4 pl-4 pt-2 mt-1 ">
                                 <div class="search">
                                     <input type="text" class="searchTerm table-search" data-url="{{route('vendor.payout')}}" placeholder="Search...">
                                     <button type="submit" class="searchButton">
@@ -83,48 +83,48 @@
                             <table class="table text-left p-0 theme-text mb-0 primary-table">
                                 <thead class="secondg-bg  p-0">
                                 <tr>
-                                    <th scope="col">Payout ID </th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col"><b> Date</b> <i class="fa fa-fw fa-sort"></i></th>
-                                    <th scope="col" > Rate</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Transaction ID</th>
+                                    <th scope="col" style="padding: 14px;">Payout ID </th>
+                                    <th scope="col" style="padding: 14px;">Description</th>
+                                    <th scope="col" style="padding: 14px; text-align:center !important">Status</th>
+                                    <th scope="col" style="padding: 14px; text-align:center !important"><b>  Date</b> <i class="fa fa-fw fa-sort"></i></th>
+                                    <th scope="col" style="padding: 14px;" > Rate</th>
+                                    <th scope="col" style="padding: 14px;">Amount</th>
+                                    <th scope="col" style="padding: 14px;">Transaction ID</th>
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20 f-13">
                                     @foreach($payouts as $payout)
                                         <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.sidebar.payout',['id'=>$payout->id]) }}">
-                                            <td scope="row">{{$payout->public_payout_id}}</td>
-                                            <td>{{$payout->remarks ?? ''}}</td>
-                                            <td>
+                                            <td style="padding-top: 20px;" scope="row">{{$payout->public_payout_id}}</td>
+                                            <td style="padding-top: 20px;">{{$payout->remarks ?? ''}}</td>
+                                            <td style="padding: 14px; text-align:center !important;">
                                                 @switch($payout->status)
                                                     @case(\App\Enums\PayoutEnums::$STATUS['transferred'])
-                                                        <div class="status-badge green-bg">Completed</div>
+                                                        <div class="status-badge green-bg" style=" font-size:600" >Completed</div>
                                                     @break
 
                                                     @case(\App\Enums\PayoutEnums::$STATUS['scheduled'])
-                                                        <div class="status-badge green-bg">Scheduled</div>
+                                                        <div class="status-badge green-bg" style=" font-size:600">Scheduled</div>
                                                     @break
 
                                                     @case(\App\Enums\PayoutEnums::$STATUS['processing'])
-                                                        <div class="status-badge green-bg">Processing</div>
+                                                        <div class="status-badge green-bg" style=" font-size:600">Processing</div>
                                                     @break
 
                                                     @case(\App\Enums\PayoutEnums::$STATUS['suspended'])
-                                                        <div class="status-badge red-bg">Suspended</div>
+                                                        <div class="status-badge red-bg" style=" font-size:600">Suspended</div>
                                                     @break
 
                                                     @case(\App\Enums\PayoutEnums::$STATUS['cancelled'])
-                                                        <div class="status-badge red-bg">Cancelled</div>
+                                                        <div class="status-badge red-bg" style=" font-size:600">Cancelled</div>
                                                     @break
 
                                                 @endswitch
                                             </td>
-                                            <td>{{$payout->created_at->format('d M Y')}}</td>
-                                            <td>{{$payout->commission_percentage}}%</td>
-                                            <td class="">₹{{$payout->final_payout}}</td>
-                                            <td>{{$payout->bank_transaction_id ?? ''}}</td>
+                                            <td style="padding-top: 20px; ">{{$payout->created_at->format('d M Y')}}</td>
+                                            <td style="padding-top: 20px;">{{$payout->commission_percentage}}%</td>
+                                            <td style="padding-top: 20px;"class="">₹{{$payout->final_payout}}</td>
+                                            <td style="padding-top: 20px;">{{$payout->bank_transaction_id ?? ''}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

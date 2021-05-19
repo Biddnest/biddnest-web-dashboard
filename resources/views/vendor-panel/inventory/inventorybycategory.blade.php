@@ -25,14 +25,14 @@
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
         <div class="col-lg-12">
             <div class="card h-auto p-0 pt-20">
-                <div class="card-head right text-left  p-15 pt-20 pb-0 row justify-content-between d-felx">
-                    <div class="col-lg-8">
-                        <h3 class="f-18  theme-text">
-                            Selelect Category
+                <div class="card-head right text-left  p-15 pt-20 pb-10 row ">
+                    <div class="col-lg-8 ml-4">
+                        <h3 class="f-18 mt-2 mb-2 theme-text">
+                            Select Category
                         </h3>
                     </div>
                 </div>
-                <ul class="nav nav-tabs p-15 secondg-bg pt-0 pb-0" id="myTab" role="tablist">
+                <ul class="nav nav-tabs p-15 secondg-bg pt-0 pb-0 f-16" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link p-15" id="live-tab" href="{{route('vendor.inventorymgt')}}">All</a>
                     </li>
@@ -44,7 +44,7 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
-                        <div class="d-flex  row p-20 justify-content-between">
+                        <div class="d-flex  row p-20 justify-content-start" style="margin-left: -2px; margin-right: -90px;">
                             @foreach($inventories as $inventory)
                                 <div class="simple-card category-cards col-sm-2">
                                 <div class="card-title invsidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">{{ucfirst(trans($inventory->category))}}</div>

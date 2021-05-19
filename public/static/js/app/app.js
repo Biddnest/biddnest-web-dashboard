@@ -507,9 +507,11 @@ $("body").on('click', ".rejected", function(event) {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
+        confirmButtonColor: '#FDC403',
+        confirmButtonText: 'Yes!',
+        customClass: "Custom_Cancel"
+
     }).then((result) => {
         if (result.isConfirmed) {
             var target = $(this).closest($(this).data("parent"));

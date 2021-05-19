@@ -28,7 +28,7 @@
             <div class="card  h-auto p-0 pt-10 pb-0">
                 <div class="card-head right text-center   pt-10">
                     <div class="d-flex justify-content-between">
-                        <h3 class="f-18">
+                        <h3 class="f-18 mt-0">
                             <ul class="nav nav-tabs pt-20 justify-content-start p-0 flex-row "
                                 id="myTab" role="tablist">
                                 <li class="nav-item ">
@@ -43,7 +43,7 @@
                                 </li>--}}
                             </ul>
                         </h3>
-                        <div class="theme-text margin-r-20 f-14 p-05">
+                        <div class="theme-text margin-r-20 mt-2 f-14 p-05">
                             <a href="{{route('vendor.editusermgt', ['id'=>\Illuminate\Support\Facades\Session::get('account')['id']])}}"><i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i></a>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                                 <div class="theme-text f-14  p-8">
                                     {{$user->organization->id}}
                                 </div>
-                                <div class="theme-text f-14  p-8">
+                                <div class="theme-text f-14 ml-0 p-8">
                                     {{ucwords($branch->city)}} <span class="status-badge-3">Parent Branch</span>
                                 </div>
 
@@ -195,13 +195,13 @@
                                 <div class="theme-text f-14  p-8">
                                     <div class="d-flex justify-content-start">
                                         @foreach($user->organization->services as $service)
-                                            <span class="status-badge-3">
+                                            <span class="status-badge-3 ml-0">
                                                 {{ucwords($service->name)}}
                                             </span>
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="theme-text f-14  p-8">
+                                <div class="theme-text f-14 mt-4  p-8">
                                     {{$user->organization->commission}}%
                                 </div>
                                 <div class="theme-text f-14  p-8">

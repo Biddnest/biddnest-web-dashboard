@@ -277,7 +277,7 @@
                             <div class="form-input" >
                               <label class="start-date">Start date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan" />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan" style="cursor: pointer;" />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>
@@ -326,8 +326,8 @@
                             </div>
                           </div>
                           <div class="col-sm-12 mtop-20  p-15   pb-0" >
-                            <div class="heading p-8 border-around ">
-                              Inventory
+                            <div class="heading p-10 border-around " style="padding-left: 26px;">
+                              Item List
                             </div>
                             <table class="table text-center p-10  theme-text tb-border2" id="items" >
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
@@ -352,14 +352,14 @@
 
                                     <td class="">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">Choose Inventory</option>
+                                            <option value="">Choose Item</option>
 
                                         </select>
                                     </td>
 
                                     <td class="">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">Choose Inventory</option>
+                                            <option value="">Choose Item</option>
 
                                         </select>
                                     </td>

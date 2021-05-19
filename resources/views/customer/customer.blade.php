@@ -105,7 +105,7 @@
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col" style="text-align: center !important;width: 15%;">Status</th>
-                                                <th scope="col" style="text-align: center;">Operations</th>
+                                                <th scope="col" style="text-align: center !important;">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20">
@@ -124,9 +124,9 @@
 
                                                 <td style="text-align: center !important;">
                                                     <a class ="inline-icon-button mr-4" href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 " aria-hidden="true"></i></a>
-                                                    {{--<a href="#" class ="inline-icon-button" >
+                                                    <a href="#" class ="inline-icon-button" >
                                                     <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
-                                                    </a>--}}
+                                                    </a>
                                                 </td>
                                             </tr>
                                            @endforeach

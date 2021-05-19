@@ -6,7 +6,7 @@
             <h3 class="page-head text-left p-4 f-20 theme-text">Service Request</h3>
             <div class="mr-20">
                 <a href="{{route('vendor.service_request_add')}}">
-                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE SERVICE REQUEST</button>
+                    <button class="btn theme-bg white-text mt-5"><i class="fa fa-plus p-1" aria-hidden="true"></i>CREATE SERVICE REQUEST</button>
                 </a>
             </div>
         </div>
@@ -23,9 +23,9 @@
         <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
             <div class="col-sm-12">
                 <div class="card  h-auto  pt-8 p-0">
-                    <div class="header-wrap">
-                        <h3 class="f-18 ml-1">Service Request</h3>
-                        <div class="header-wrap p-0 filter-dropdown ">
+                    <div class="header-wrap pt-4 pb-4">
+                        <h3 class="f-18 mt-0 mb-0  ml-1">Service Request</h3>
+                        <div class="header-wrap  p-0 filter-dropdown ">
                             {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
                             </a>
@@ -68,17 +68,17 @@
                         <table class="table text-center p-0  theme-text ">
                             <thead class="secondg-bg  p-0 f-14">
                                 <tr class="f-weight-500">
-                                    <th scope="col" class="text-left">Service ID</th>
-                                    <th scope="col" style="text-align: center;">Category</th>
-                                    <th scope="col" style="text-align: center;">Title</th>
-                                    <th scope="col" style="text-align: center;"> Status</th>
+                                    <th scope="col" class="text-left" style="padding: 14px;">Service ID</th>
+                                    <th scope="col" style="text-align: center; padding:14px">Category</th>
+                                    <th scope="col" style="text-align: center; padding:14px">Title</th>
+                                    <th scope="col" style="text-align: center; padding:14px"> Status</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">
                                 @foreach($tickets as $ticket)
                                     <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.service_sidebar',['id'=>$ticket->id]) }}">
-                                        <td scope="row" class="text-left">{{$ticket->id}}</td>
-                                        <td>
+                                        <td scope="row" style="padding: 14px;" class="text-left">{{$ticket->id}}</td>
+                                        <td style="text-align: center; padding: 14px;">
                                             @switch($ticket->type)
                                                 @case(\App\Enums\TicketEnums::$TYPE['complaint'])
                                                     Complaint
@@ -102,8 +102,8 @@
 
                                             @endswitch
                                         </td>
-                                        <td>{{$ticket->heading}}</td>
-                                        <td class="">
+                                        <td style="text-align: center; padding: 14px;">{{$ticket->heading}}</td>
+                                        <td class="" style="text-align: center; padding: 14px;">
                                             @switch($ticket->status)
                                                 @case(\App\Enums\TicketEnums::$STATUS['open'])
                                                     <span class="complete-bg  text-center td-padding">Open</span>

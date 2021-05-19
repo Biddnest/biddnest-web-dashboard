@@ -96,22 +96,22 @@
                         @else
                               <div class="d-flex  row p-15 pb-0 " >
                           <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
-                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                               Assigned Vendor
                             </div>
-                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                               Assigned Vehicle
                             </div>
-                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                               Assigned Driver
                             </div>
-                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                               Driver Phone Number
                             </div>
-                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                               Commission Amount
                             </div>
-                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                               Discount
                             </div>
 

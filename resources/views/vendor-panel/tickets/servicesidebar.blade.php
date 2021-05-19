@@ -1,8 +1,8 @@
 <div class="modal-header pb-0 border-none">
-    <h3 class="f-18 p-10">
+    <h3 class="f-18 mt-0 pt-0 p-10">
         Service Request Details
     </h3>
-    <button type="button" class="close theme-text margin-topneg-10" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+    <button type="button" class="close  theme-text margin-topneg-10" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <!-- <span aria-hidden="true" >&times;</span> -->
         <i class="fa fa-times theme-text" aria-hidden="true"></i>
     </button>
@@ -69,8 +69,8 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex     p-15 border-top">
-                <div class=" row  d-felx">
+            <div class="  p-15 border-top">
+                <div class=" row ">
                     <div class="col-sm-12  p-8">
                         <div class="theme-text f-14 bold">
                             Replies
@@ -109,14 +109,14 @@
                         @endif
                     @endforeach
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <form action="{{route('api.ticket.addreply')}}" method="POST" data-next="refresh" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate>
                             <div class="form-input">
                                 <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                                     <textarea type="text" id="fullname" name="reply"
                                               placeholder="Chandigarh"
                                               class="form-control" rows="3" required> </textarea>
-                                <button class="btn-1 btn white-bg float-right mt-1 ">Comment</button>
+                                <button class="btn-1 btn white-bg float-right mt-1 " style="position:absolute; top: 66px; right: 27px;">Comment</button>
                             </div>
                         </form>
                     </div>

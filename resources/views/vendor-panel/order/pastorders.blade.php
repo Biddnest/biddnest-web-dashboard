@@ -95,34 +95,34 @@
                     <table class="table text-left p-0  theme-text ">
                         <thead class="secondg-bg  p-0 f-14">
                         <tr>
-                            <th scope="col" class="text-left">Order ID</th>
-                            <th scope="col">From</th>
-                            <th scope="col">To</th>
-                            <th scope="col">Order Date</th>
-                            <th scope="col" style="padding-left: 36px !important;">Date of Movement</th>
-                            <th scope="col" style="padding-left: 36px !important;">Amount</th>
-                            <th scope="col" style="text-align: center !important;">Order Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" style="padding: 14px;" class="text-left">Order ID</th>
+                            <th scope="col" style="padding: 14px;">From</th>
+                            <th scope="col" style="padding: 14px;">To</th>
+                            <th scope="col" style="padding: 14px;">Order Date</th>
+                            <th scope="col" style="padding-left: 36px !important; padding: 14px;">Date of Movement</th>
+                            <th scope="col" style="padding-left: 36px !important; padding: 14px;">Amount</th>
+                            <th scope="col" style="text-align: center !important; padding: 14px;">Order Status</th>
+                            <th scope="col" style="padding: 14px;">Action</th>
                         </tr>
                         </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($bookings as $booking)
                                 <tr class="tb-border">
-                                    <td scope="row" class="text-left"> <a href="order-details.html">
+                                    <td  scope="row" class="text-left" style="padding: 14px;"> <a href="order-details.html">
                                             {{$booking->public_booking_id}}</a> </td>
-                                    <td>{{json_decode($booking->source_meta, true)['city']}}</td>
-                                    <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                    <td >{{$booking->created_at->format('d M Y')}}</td>
-                                    <td style="text-align: center !important;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>
-                                    <td style="text-align: center !important;">{{$booking->final_quote}}</td>
-                                    <td class=""><span class="complete-bg  text-center td-padding">
+                                    <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
+                                    <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                    <td style="padding: 14px;" >{{$booking->created_at->format('d M Y')}}</td>
+                                    <td style="text-align: center !important; padding: 14px;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>
+                                    <td style="text-align: center !important; padding: 14px;">{{$booking->final_quote}}</td>
+                                    <td class="" style="padding: 14px;"><span class="complete-bg  text-center td-padding">
                                             @if($booking->status == \App\Enums\BookingEnums::$STATUS['completed'])
                                                 Completed
                                             @elseif($booking->status ==\App\Enums\BookingEnums::$STATUS['cancelled'])
                                                 cancelled
                                             @endif
                                         </span></td>
-                                    <td><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">
+                                    <td style="padding: 14px;"><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">
                                             <i class="tooltip-trigger">
                                                 <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
                                             </i>

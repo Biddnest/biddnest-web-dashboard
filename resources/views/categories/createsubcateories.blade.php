@@ -163,14 +163,14 @@
 
                                                <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 material" name="inventories[][material]" required>
-                                                       <option value="">Choose Inventory</option>
+                                                       <option value="">Choose Item</option>
 
                                                    </select>
                                                </td>
 
                                                <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
-                                                       <option value="">Choose Inventory</option>
+                                                       <option value="">Choose Item</option>
 
                                                    </select>
                                                </td>

@@ -394,7 +394,7 @@
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
                               <label>Comments from Customers</label>
-                              <textarea placeholder="Need to Include movers for customer's bike too" id="" name="meta[customer][remarks]" class="form-control" rows="4"
+                              <textarea placeholder="Add note/comment for order" id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50"></textarea>
                               <span class="error-message">Please enter valid</span>
                             </div>

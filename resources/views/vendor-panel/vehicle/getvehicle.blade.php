@@ -36,7 +36,7 @@
                     <div class="card  h-auto p-0 pt-10 pb-0" >
                         <form action="@if(!$exist_vehicle){{route('api.vehicle.create')}}@else{{route('api.vehicle.update')}}@endif" method="@if(isset($exist_vehicle)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.vehicle')}}" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate >
                             <div class="d-flex row p-15 pb-0">
-                                <div class="" style="padding-left: 50px;">
+                                <div class="" >
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-input">
@@ -77,29 +77,29 @@
                                     </button>
                                 </div>
                             <div class="col-sm-12">
-                                <div class="heading p-8  ">
+                                <div class="heading p-8 pl-0 ">
                                     List of Vehicle
                                 </div>
                                 <table class="table text-left p-10 theme-text tb-border2" id="items">
 
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
                                     <tr class="">
-                                        <th scope="col">Vehicle Name</th>
-                                        <th scope="col">Vehicle Number</th>
-                                        <th scope="col">Vehicle Type</th>
+                                        <th scope="col" style="padding: 14px;">Vehicle Name</th>
+                                        <th scope="col" style="padding: 14px;">Vehicle Number</th>
+                                        <th scope="col" style="padding: 14px;">Vehicle Type</th>
                                         @if(\App\Helper::is("admin", true))
-                                            <th scope="col" class="text-center">Actions</th>
+                                            <th scope="col" style="padding: 14px;" class="text-center">Actions</th>
                                         @endif
                                     </tr>
                                     </thead>
                                     <tbody class="mtop-20 f-13">
                                         @foreach($vehicles as $vehicle)
                                             <tr class="vehicle_{{$vehicle->id}}">
-                                                <th scope="row">{{ucwords($vehicle->name)}}</th>
-                                                <td class="">{{strtoupper($vehicle->number)}}</td>
-                                                <td class="">{{ucwords($vehicle->vehicle_type)}}</td>
+                                                <th scope="row" style="padding: 14px;">{{ucwords($vehicle->name)}}</th>
+                                                <td class="" style="padding: 14px;">{{strtoupper($vehicle->number)}}</td>
+                                                <td class="" style="padding: 14px;">{{ucwords($vehicle->vehicle_type)}}</td>
                                                 @if(\App\Helper::is("admin", true))
-                                                    <td class="text-center">
+                                                    <td class="text-center" style="padding: 14px;">
                                                         <a  class = "inline-icon-button"  href="{{route('vendor.edit_vehicle', ['id'=>$vehicle->id])}}"><i class="icon dripicons-pencil  p-1 cursor-pointer" aria-hidden="true"></i></a>
                                                         <a href="#" class="delete inline-icon-button" data-parent=".vehicle_{{$vehicle->id}}" data-confirm="Are you sure, you want delete this Vehicle permenently? You won't be able to undo this." data-url="{{route('api.vehicle.delete',['id'=>$vehicle->id])}}"><i class="icon dripicons-trash p-1 cursor-pointer" aria-hidden="true"></i></a>
                                                     </td>

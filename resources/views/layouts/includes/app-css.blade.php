@@ -999,9 +999,15 @@
                 display: none !important;
             }
             .total-user {
-  position: absolute;
-  font-size: 16px;
-  margin-right: 48% !important;
-  margin-top: 28% !important; 
-}
+                position: absolute;
+                font-size: 16px;
+                margin-right: 48% !important;
+                margin-top: 28% !important; 
+            }
+
+
+            .Custom_Cancel{
+                background-color: #DD6B55 !important;
+
+            }
         </style>

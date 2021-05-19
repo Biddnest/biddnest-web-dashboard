@@ -6,7 +6,7 @@
     <body>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation navigation-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="{{ asset('static/website/images/images/b.png')}}" /></a>
+            <a class="navbar-brand" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/b.png')}}" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,7 +22,7 @@
 
                     </li>
                     <li class="nav-item mr-16">
-                        <a class="nav-link" href="contact-us.html"><i
+                        <a class="nav-link" href="{{route('contact_us')}}"><i
                                 class="icon-2 mr-1 pr-1 pt-1 dripicons-headset"></i>CONTACT US</a>
                     </li>
                     <li class="account-settings dropdown theme-text mt-1 pt-1">
@@ -86,7 +86,15 @@
             </div>
         </div>
     </nav>
-
+    <header class="join-as-vendor h-300">
+        <div class="continer">
+            <div class="row">
+                <div class="col-lg-12 center d-flex ">
+                    <h2 class="pt-100">@yield('header_title')</h2>
+                </div>
+            </div>
+        </div>
+    </header>
     <div data-barba="wrapper">
         @yield('content')
     </div>

@@ -398,7 +398,7 @@ class OrganisationController extends Controller
         if($vendor_phone)
             return Helper::response(false,"Phone no is already exist in system.");
 
-        $meta = array(["branch"=>$data['branch']]);
+        $meta = array(["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']]);
 
         if(!$data['password'])
             $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
@@ -418,6 +418,11 @@ class OrganisationController extends Controller
         $vendor->meta = json_encode($meta);
         $vendor->user_role = $data['role'];
         $vendor->password = $password;
+        $vendor->dob = $data['dob'];
+        $vendor->doj = $data['doj'];
+        $vendor->dor = $data['dor'];
+        $vendor->state = $data['state'];
+        $vendor->city = $data['city'];
         $vendor_result = $vendor->save();
 
         if(!$vendor_result)
@@ -442,7 +447,7 @@ class OrganisationController extends Controller
         if(!$exist)
             return Helper::response(false,"Incorrect Role or Organization id");
 
-        $meta = array(["branch"=>$data['branch']]);
+        $meta = array(["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']]);
 
         $image = $data['image'];
         $uniq = uniqid();
@@ -464,7 +469,12 @@ class OrganisationController extends Controller
             "meta"=>$meta,
             "password"=>$password,
             "user_role"=>$data['role'],
-            "organization_id"=>$data['branch']
+            "organization_id"=>$data['branch'],
+            "dob"=>$data['dob'],
+            "doj"=>$data['doj'],
+            "dor"=>$data['dor'],
+            "state"=>$data['state'],
+            "city"=>$data['city']
         ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)

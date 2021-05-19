@@ -194,6 +194,111 @@
                                 <span class="error-message">Please enter valid Password</span>
                             </div>
                         </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="">Date Of Birth</label>
+                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                <span class="error-message">Please enter valid Date of Birth</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="">Date Of Joining</label>
+                                <input type="text" id="fullname" name="doj"  placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                <span class="error-message">Please enter valid Date of Joining</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="">Date Of Relieving</label>
+                                <input type="text" id="fullname" name="doj" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                <span class="error-message">Please enter valid Date of Relieving</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Address Line 1</label>
+                                <input type="text" id="fullname" name="addres1" placeholder="Flat no, Street no" class="form-control" required>
+                                <span class="error-message">Please enter valid
+                                        Address Line 1</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Address Line 2</label>
+                                <span class="">
+                                        <input type="text" id="fullname"  name="addres2" placeholder="Landmark, Area" class="form-control" required>
+                                        <span class="error-message">Please enter valid
+                                        Address Line 2</span>
+                                        </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">State</label>
+                                <span class="">
+                                        <select id="" class="form-control" name="state" required>
+                                            <option value="">--Select--</option>
+                                            <option value="Andhra Pradesh" >Andhra Pradesh</option>
+                                            <option value="Andaman and Nicobar Islands" >Andaman and Nicobar Islands</option>
+                                            <option value="Arunachal Pradesh" >Arunachal Pradesh</option>
+                                            <option value="Assam" >Assam</option>
+                                            <option value="Bihar" >Bihar</option>
+                                            <option value="Chandigarh" >Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                            <option value="Daman and Diu">Daman and Diu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Puducherry" >Puducherry</option>
+                                            <option value="Goa" >Goa</option>
+                                            <option value="Gujarat" >Gujarat</option>
+                                            <option value="Haryana" >Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir" >Jammu and Kashmir</option>
+                                            <option value="Jharkhand" >Jharkhand</option>
+                                            <option value="Karnataka" >Karnataka</option>
+                                            <option value="Kerala" >Kerala</option>
+                                            <option value="Madhya Pradesh" >Madhya Pradesh</option>
+                                            <option value="Maharashtra" >Maharashtra</option>
+                                            <option value="Manipur" >Manipur</option>
+                                            <option value="Meghalaya" >Meghalaya</option>
+                                            <option value="Mizoram" >Mizoram</option>
+                                            <option value="Nagaland" >Nagaland</option>
+                                            <option value="Odisha" >Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan" >Rajasthan</option>
+                                            <option value="Sikkim" >Sikkim</option>
+                                            <option value="Tamil Nadu" >Tamil Nadu</option>
+                                            <option value="Telangana" >Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh" >Uttar Pradesh</option>
+                                            <option value="Uttarakhand" >Uttarakhand</option>
+                                            <option value="West Bengal" >West Bengal</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid
+                                            State</span>
+                                        </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">City</label>
+                                <span class="">
+                                        <input type="text" id="fullname" placeholder="Chandigarh" name="city"  class="form-control" required>
+                                        <span class="error-message">Please enter valid
+                                            City</span>
+                                        </span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer p-15 ">
@@ -307,6 +412,111 @@
                                     <span class="error-message">Please enter valid Password</span>
                                 </div>
                             </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="">Date Of Birth</label>
+                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <span class="error-message">Please enter valid Date of Birth</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="">Date Of Joining</label>
+                                    <input type="text" id="fullname" name="doj" value="{{$role->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <span class="error-message">Please enter valid Date of Joining</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="">Date Of Relieving</label>
+                                    <input type="text" id="fullname" name="doj" value="{{$role->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <span class="error-message">Please enter valid Date of Relieving</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Address Line 1</label>
+                                    <input type="text" id="fullname" name="addres1" value="{{json_decode($role->meta, true)['address_line1'] ?? ''}}" placeholder="Flat no, Street no" class="form-control" required>
+                                    <span class="error-message">Please enter valid
+                                        Address Line 1</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Address Line 2</label>
+                                    <span class="">
+                                        <input type="text" id="fullname"  name="addres2" value="{{json_decode($role->meta, true)['address_line2'] ?? ''}}" placeholder="Landmark, Area" class="form-control" required>
+                                        <span class="error-message">Please enter valid
+                                        Address Line 2</span>
+                                        </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">State</label>
+                                    <span class="">
+                                        <select id="" class="form-control" name="state" required>
+                                            <option value="">--Select--</option>
+                                            <option value="Andhra Pradesh" @if($role->state=="Andhra Pradesh") selected @endif>Andhra Pradesh</option>
+                                            <option value="Andaman and Nicobar Islands" @if($role->state=="Andaman and Nicobar Islands") selected @endif>Andaman and Nicobar Islands</option>
+                                            <option value="Arunachal Pradesh" @if($role->state=="Arunachal Pradesh") selected @endif>Arunachal Pradesh</option>
+                                            <option value="Assam" @if($role->state=="Assam") selected @endif>Assam</option>
+                                            <option value="Bihar" @if($role->state=="Bihar") selected @endif>Bihar</option>
+                                            <option value="Chandigarh" @if($role->state=="Chandigarh") selected @endif>Chandigarh</option>
+                                            <option value="Chhattisgarh" @if($role->state=="Chhattisgarh") selected @endif>Chhattisgarh</option>
+                                            <option value="Dadar and Nagar Haveli" @if($role->state=="Dadar and Nagar Haveli") selected @endif>Dadar and Nagar Haveli</option>
+                                            <option value="Daman and Diu" @if($role->state=="Daman and Diu") selected @endif>Daman and Diu</option>
+                                            <option value="Delhi" @if($role->state=="Delhi") selected @endif>Delhi</option>
+                                            <option value="Lakshadweep" @if($role->state=="Lakshadweep") selected @endif>Lakshadweep</option>
+                                            <option value="Puducherry" @if($role->state=="Puducherry") selected @endif>Puducherry</option>
+                                            <option value="Goa" @if($role->state=="Goa") selected @endif>Goa</option>
+                                            <option value="Gujarat" @if($role->state=="Gujarat") selected @endif>Gujarat</option>
+                                            <option value="Haryana" @if($role->state=="Haryana") selected @endif>Haryana</option>
+                                            <option value="Himachal Pradesh" @if($role->state=="Himachal Pradesh") selected @endif>Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir" @if($role->state=="Jammu and Kashmir") selected @endif>Jammu and Kashmir</option>
+                                            <option value="Jharkhand" @if($role->state=="Jharkhand") selected @endif>Jharkhand</option>
+                                            <option value="Karnataka" @if($role->state=="Karnataka") selected @endif>Karnataka</option>
+                                            <option value="Kerala" @if($role->state=="Kerala") selected @endif>Kerala</option>
+                                            <option value="Madhya Pradesh" @if($role->state=="Madhya Pradesh") selected @endif>Madhya Pradesh</option>
+                                            <option value="Maharashtra" @if($role->state=="Maharashtra") selected @endif>Maharashtra</option>
+                                            <option value="Manipur" @if($role->state=="Manipur") selected @endif>Manipur</option>
+                                            <option value="Meghalaya" @if($role->state=="Meghalaya") selected @endif>Meghalaya</option>
+                                            <option value="Mizoram" @if($role->state=="Mizoram") selected @endif>Mizoram</option>
+                                            <option value="Nagaland" @if($role->state=="Nagaland") selected @endif>Nagaland</option>
+                                            <option value="Odisha" @if($role->state=="Odisha") selected @endif>Odisha</option>
+                                            <option value="Punjab" @if($role->state=="Punjab") selected @endif>Punjab</option>
+                                            <option value="Rajasthan" @if($role->state=="Rajasthan") selected @endif>Rajasthan</option>
+                                            <option value="Sikkim" @if($role->state=="Sikkim") selected @endif>Sikkim</option>
+                                            <option value="Tamil Nadu" @if($role->state=="Tamil Nadu") selected @endif>Tamil Nadu</option>
+                                            <option value="Telangana" @if($role->state=="Telangana") selected @endif>Telangana</option>
+                                            <option value="Tripura" @if($role->state=="Tripura") selected @endif>Tripura</option>
+                                            <option value="Uttar Pradesh" @if($role->state=="Uttar Pradesh") selected @endif>Uttar Pradesh</option>
+                                            <option value="Uttarakhand" @if($role->state=="Uttarakhand") selected @endif>Uttarakhand</option>
+                                            <option value="West Bengal" @if($role->state=="West Bengal") selected @endif>West Bengal</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid
+                                            State</span>
+                                        </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">City</label>
+                                    <span class="">
+                                        <input type="text" id="fullname" placeholder="Chandigarh" value="{{$role->city ?? ''}}" name="city"  class="form-control" required>
+                                        <span class="error-message">Please enter valid
+                                            City</span>
+                                        </span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer p-15 ">

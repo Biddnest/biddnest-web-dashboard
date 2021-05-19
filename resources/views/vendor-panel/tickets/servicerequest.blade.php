@@ -88,6 +88,14 @@
                                                     Service Request
                                                 @break
 
+                                                @case(\App\Enums\TicketEnums::$TYPE['new_branch'])
+                                                    New Branch
+                                                @break
+
+                                                @case(\App\Enums\TicketEnums::$TYPE['price_update'])
+                                                    Price Update
+                                                @break
+
                                                 @case(\App\Enums\TicketEnums::$TYPE['call_back'])
                                                     Call Back
                                                 @break

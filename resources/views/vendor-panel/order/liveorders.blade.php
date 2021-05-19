@@ -254,22 +254,26 @@
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
                                                         <a href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                              title="View Order Detail"></a>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
                                                         <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                              title="View Order Detail"></a>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                         <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                              title="View Order Detail"></a>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
                                                         <a href="{{route('vendor.in-transit',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                          title="View Order Detail"></a>
                                                         @break
 
                                                     @endswitch

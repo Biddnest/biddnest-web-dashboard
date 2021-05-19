@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class WebsiteRouteController extends Controller
 {
+    public function login(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|string|min:10'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return UserController::login($request->phone);
+
+    }
+
     public function addVendor(Request $request)
     {
         $validation = Validator::make($request->all(),[

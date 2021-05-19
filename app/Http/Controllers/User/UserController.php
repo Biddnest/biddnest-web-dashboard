@@ -16,6 +16,7 @@ use App\Sms;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 use PUGX\Shortid\Shortid;
 
@@ -68,7 +69,7 @@ class UserController extends Controller
      * @param $otp
      * @return JsonResponse|object
      */
-    public static function verifyLoginOtp($phone, $otp){
+    public static function verifyLoginOtp($phone, $otp, $web=false){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
@@ -84,11 +85,20 @@ class UserController extends Controller
             if($user->fname){
                 $data = $user;
             }
-
-            return Helper::response(true, "Otp has been verified",[
-                "user"=>$data,
-                "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
-            ]);
+            if($web){
+                Session::put(["account"=>['id'=>$user->id,
+                    'name'=>$user->fname.' '.$user->lname,
+                    'email'=>$user->email]]);
+                Session::put('sessionFor', "user");
+                return Helper::response(true, "Otp has been verified",[
+                    "user"=>$data
+                ]);
+            }else{
+                return Helper::response(true, "Otp has been verified",[
+                    "user"=>$data,
+                    "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
+                ]);
+            }
 
         }else {
             return Helper::response(false, "Incorrect otp provided");

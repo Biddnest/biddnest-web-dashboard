@@ -49,7 +49,7 @@
                                 <div class="simple-card category-cards invsidebar col-sm-2" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">
                                 <div class="card-title">{{ucfirst(trans($inventory->category))}}</div>
                                 <div class="card-body">
-                                    <img src="{{$inventory->icon}}">
+                                    <img src="{{$inventory->icon}}" style="width: 50%;">
                                 </div>
                                 <div class="card-footer d-felx  justify-content-between">
                                     <div class="item-name">{{ucfirst(trans($inventory->name))}}</div>

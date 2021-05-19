@@ -37,16 +37,16 @@
                         <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">All</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link p-15" id="past-tab"  href="{{route('vendor.inventorycat', ['type'=>"furniture"])}}">Furniture</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link  p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"electronics"])}}" >Electronics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"electricle"])}}" >Electrical</a>
+                        <a class="nav-link p-15" id="past-tab"  href="{{route('vendor.inventorycat', ['type'=>"furniture"])}}">Furniture</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"applience"])}}">Appliances</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"electricle"])}}" >Electrical</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  p-15" id="driver-tab" href="{{route('vendor.inventorycat', ['type'=>"automobile"])}}">Automobile</a>

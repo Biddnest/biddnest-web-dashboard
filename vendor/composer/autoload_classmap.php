@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Commands\\BidEnd' => $baseDir . '/app/Console/Commands/BidEnd.php',
+    'App\\Console\\Commands\\Payout' => $baseDir . '/app/Console/Commands/Payout.php',
     'App\\Console\\Commands\\WebSocket' => $baseDir . '/app/Console/Commands/WebSocket.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Enums\\AdminEnums' => $baseDir . '/app/Enums/AdminEnums.php',
@@ -67,6 +68,8 @@ return array(
     'App\\Http\\Controllers\\VendorWebController' => $baseDir . '/app/Http/Controllers/VendorWebController.php',
     'App\\Http\\Controllers\\Vendor\\VendorController' => $baseDir . '/app/Http/Controllers/Vendor/VendorController.php',
     'App\\Http\\Controllers\\WebController' => $baseDir . '/app/Http/Controllers/WebController.php',
+    'App\\Http\\Controllers\\WebsiteController' => $baseDir . '/app/Http/Controllers/WebsiteController.php',
+    'App\\Http\\Controllers\\WebsiteRouteController' => $baseDir . '/app/Http/Controllers/WebsiteRouteController.php',
     'App\\Http\\Controllers\\ZoneController' => $baseDir . '/app/Http/Controllers/ZoneController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

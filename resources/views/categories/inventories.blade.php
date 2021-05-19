@@ -20,7 +20,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page"><a href="{{route('categories')}}">Categories & Subcategories
                                     </a></li>
-                    <li class="breadcrumb-item pl-2"><a href="{{route('inventories')}}">Inventory List</a></li>
+                    <li class="breadcrumb-item pl-2"><a href="{{route('inventories')}}" style="cursor: default;">Inventory List</a></li>
                 </ol>
             </nav>
         </div>

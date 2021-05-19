@@ -269,7 +269,7 @@
                                 dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy. Dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has been the industry’s standard dummy text .
                             </p>
-                            <a href="#services" class="page-scroll mb-view btn join-now">
+                            <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now">
                                 <button type="button" class="btn join-now">
                                     <img src="{{ asset('static/website/images/icons/crown.png')}}" />
                                     JOIN NOW
@@ -280,7 +280,7 @@
                             <p class="f-16 mb-2 space">
                                 2. hello world! lets build somethings intresting
                             </p>
-                            <a href="#services" class="page-scroll mb-view btn join-now">
+                            <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now">
                                 <button type="button" class="btn join-now">
                                     <img src="{{ asset('static/website/images/icons/crown.png')}}" />
                                     JOIN NOW
@@ -291,7 +291,7 @@
                             <p class="f-16 mb-2 space">
                                 3. dummy text.
                             </p>
-                            <a href="#services" class="page-scroll mb-view btn join-now">
+                            <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now">
                                 <button type="button" class="btn join-now">
                                     <img src="{{ asset('static/website/images/icons/crown.png')}}" />
                                     JOIN NOW

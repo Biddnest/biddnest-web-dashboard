@@ -68,6 +68,13 @@
                                 @endif
                                 </tbody>
                             </table>
+                            @if(count($inventories) == 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. You didn't add any price on this Inventory.</i></p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-20 border-top pt-0 pb-0">
                             <div class="w-50">

@@ -187,7 +187,7 @@ class WebController extends Controller
             $zone = Session::get('admin_zones');
 
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
-            ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+            ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->where("zone_id", $zone);
 
         if(isset($request->search)){
             $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
@@ -200,6 +200,31 @@ class WebController extends Controller
             ->orderBy("id","DESC");
 
         return view('order.ordersbookings_live',[
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
+    }
+
+    public function ordersBookingsEnquiry(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $bookings = Booking::where("status", "<=", BookingEnums::$STATUS['payment_pending'])
+            ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+
+        if(isset($request->search)){
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
+        }
+
+        $bookings->with('service')
+            ->with('organization')
+            ->orderBy("id","DESC");
+
+        return view('order.ordersbooking_enquiry',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }

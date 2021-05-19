@@ -19,7 +19,7 @@
                         </li>
 
                         <ul class="sub-menu booking" id="booking">
-                            <li class="sub-menu-item  "><a href="{{route('orders-booking')}}"><i
+                            <li class="sub-menu-item  "><a href="{{route('enquiry-booking')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Booking & Orders</a></li>
                             <li class="sub-menu-item"><a href="{{route('create-order')}}"><i

@@ -25,11 +25,10 @@ class WebsiteRouteController extends Controller
     public function addVendor(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'image'=>'required|string',
             'fname' => 'required|string',
             'lname' => 'required|string',
             'email' => 'required|string',
-            'role' => 'required',
+//            'role' => 'required',
 
             'phone.primary'=>'required|min:10|max:10',
 
@@ -50,6 +49,6 @@ class WebsiteRouteController extends Controller
 
         $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);
 
-        return OrganisationController::add($request->all(), $meta, $admin);
+        return OrganisationController::addForWeb($request->all(), $meta, $admin);
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AdminEnums;
 use App\Enums\CommonEnums;
 use App\Helper;
+use App\Models\Admin;
+use App\Models\AdminZone;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 
@@ -29,6 +32,15 @@ class ZoneController extends Controller
         $zone->district = $district;
         $zone->state = $state;
         $result= $zone->save();
+
+        $admins=Admin::where("role", AdminEnums::$ROLES['admin'])->pluck('id');
+        foreach($admins as $admin){
+            $zones = new AdminZone;
+            $zones->admin_id =$admin;
+            $zones->zone_id = $zone->id;
+            $zones->save();
+        }
+
         if(!$result)
             return Helper::response(false,"Couldn't save zones.");
 

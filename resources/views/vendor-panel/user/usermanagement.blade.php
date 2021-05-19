@@ -3,19 +3,19 @@
 @section('body')
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="userroles">
         <div class="d-flex  flex-row justify-content-between">
-            <h3 class="page-head text-left p-4 -ml-2 f-20">Manage User Roles</h3>
-            <div class="mr-2">
+            <h3 class="page-head text-left p-4 pl-0 f-20 ml-0" style="padding-left: 0px !important;">Manage User Roles</h3>
+            <div class="mr-2 mt-4">
                 <a href="{{route('vendor.addusermgt')}}">
                     <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New User</button>
                 </a>
             </div>
         </div>
-        <div class="d-flex  flex-row justify-content-between -ml-2">
-            <div class="page-head text-left  pt-0 pb-0 p-2">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Manage User Roles</li>
-                        <li class="breadcrumb-item">Manage Users</li>
+        <div class="d-flex  flex-row justify-content-between ">
+            <div class="page-head text-left  pt-0 pb-0 p-2" style="padding-left: 0px !important;">
+                <nav aria-label="breadcrumb" >
+                    <ol class="breadcrumb" style="padding-left: 0px !important;">
+                        <li class="breadcrumb-item active  ml-0"  aria-current="page">Manage User Roles</li>
+                        <li class="breadcrumb-item  ml-0">Manage Users</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +27,7 @@
                 <div class="card  h-auto p-0 pt-10">
                     <div class="d-flex flex-row justify-content-between p-10">
                         <div class=" card-head right text-left">
-                            <h3 class=" f-18 pb-0">
+                            <h3 class=" f-18 pb-0 mt-0 ">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$fetch_role)
                                         <li class="nav-item">
@@ -69,9 +69,9 @@
                                         <tr class="tb-border user_{{$user->id}}  cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.sidebar.userrole',['id'=>$user->id]) }}">
                                             <td scope="row" class="text-left">{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</td>
 
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->phone}}</td>
-                                            <td>{{ucfirst(trans($user->organization->city))}}</td>
+                                            <td style="text-align:left!important;" >{{$user->email}}</td>
+                                            <td style="text-align:left!important;">{{$user->phone}}</td>
+                                            <td >{{ucfirst(trans($user->organization->city))}}</td>
 
                                             <td class="text-center">
                                                 @if($user->status == \App\Enums\VendorEnums::$STATUS['inactive'])

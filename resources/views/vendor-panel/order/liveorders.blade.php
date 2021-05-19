@@ -134,7 +134,7 @@
                                         @if($type == "scheduled")
                                             <th scope="col" style="padding: 14px;">Submitted On</th>
                                             <th scope="col" style="padding: 14px;">Your Bid</th>
-                                            <th scope="col" style="text-align: center; padding: 14px;">Status</th>
+                                            <th scope="col" style="text-align: center; padding: 14px; width:20%">Status</th>
                                         @endif
                                         <th scope="col"  style="text-align: center; padding: 14px; padding-left:0 !important">Actions</th>
                                     </tr>
@@ -186,7 +186,8 @@
                                                 <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
                                                     <i class="p-1">
                                                         <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                         alt="">
+                                                         alt=""  data-toggle="tooltip" data-placement="top"
+                                                             title="View">
                                                     </i>
                                                 </a>
                                                 <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this."><i class="p-1"><img
@@ -232,19 +233,19 @@
                                             <td style="text-align: center;">
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                                        <span class="grey-bg  text-center status-badge complete-bg">Customer Confirmation Pending</span>
+                                                        <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Customer Confirmation Pending</span>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                                        <span class="badge-light  text-center status-badge complete-bg">Pending Driver Assign</span>
+                                                        <span class="badge-light  text-center status-badge complete-bg" style="font-weight: 600!important;">Pending Driver Assign</span>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-                                                        <span class="green-bg  text-center status-badge complete-bg">Awaiting Pickup</span>
+                                                        <span class="green-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Awaiting Pickup</span>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                                        <span class="grey-bg  text-center status-badge complete-bg">In Transit</span>
+                                                        <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;"> In Transit</span>
                                                         @break
 
                                                     @endswitch

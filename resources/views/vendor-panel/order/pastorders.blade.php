@@ -38,7 +38,7 @@
 
 
                 <div class="header-wrap">
-                    <h3 class="f-18 ml-1 theme_text">Past Orders </h1>
+                    <h3 class="f-18 mt-0 ml-1 mb-0 theme_text">Past Orders </h1>
 
                         <div class="header-wrap p-0 filter-dropdown ">
                             {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
@@ -99,9 +99,9 @@
                             <th scope="col">From</th>
                             <th scope="col">To</th>
                             <th scope="col">Order Date</th>
-                            <th scope="col">Date of Movement</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Order Status</th>
+                            <th scope="col" style="padding-left: 36px !important;">Date of Movement</th>
+                            <th scope="col" style="padding-left: 36px !important;">Amount</th>
+                            <th scope="col" style="text-align: center !important;">Order Status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -112,9 +112,9 @@
                                             {{$booking->public_booking_id}}</a> </td>
                                     <td>{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                    <td>{{$booking->created_at->format('d M Y')}}</td>
-                                    <td>{{json_decode($booking->bid->meta, true)['moving_date']}}</td>
-                                    <td>{{$booking->final_quote}}</td>
+                                    <td >{{$booking->created_at->format('d M Y')}}</td>
+                                    <td style="text-align: center !important;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>
+                                    <td style="text-align: center !important;">{{$booking->final_quote}}</td>
                                     <td class=""><span class="complete-bg  text-center td-padding">
                                             @if($booking->status == \App\Enums\BookingEnums::$STATUS['completed'])
                                                 Completed

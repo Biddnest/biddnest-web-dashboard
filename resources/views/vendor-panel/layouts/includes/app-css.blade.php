@@ -118,6 +118,22 @@
         border-top-color: #2e0789 !important;
     }
 
+    select {
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            background: transparent !important;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") !important;
+            background-repeat: no-repeat !important;
+            background-position-x: 100% !important;
+            background-position-y: 5px !important;
+            border: 1px solid #dfdfdf !important;
+            border-radius: 3px !important;
+            margin-right: 2rem !important;
+            padding-right: 2rem !important;
+        }
+        select::-ms-expand {
+            display: none !important;
+        }
     .status-3 {
         font-size: 12px;
         font-weight: 300;
@@ -137,6 +153,7 @@
     .page-head {
         margin-bottom: 25px !important;
     }
+
 
 
 </style>

@@ -263,6 +263,12 @@ export function initTextAreaEditor() {
 
 }
 
+export function initTooltip(){
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+}
+
 /*Charts*/
 export function initRevenueChart() {
     // console.log("icam called");
@@ -533,9 +539,9 @@ export function InitUserZoneChart() {
                             fontFamily: 'Roboto',
                             offsetX: '55px'
                         },
-                    size: '10px',
-                    x: '70%',
-                    y: '47%'
+                    size: '8px',
+                    x: '65%',
+                    y: '60%'
                 },
                 {
                     type: 'circle',
@@ -550,9 +556,9 @@ export function InitUserZoneChart() {
                         fontFamily: 'Roboto',
                         offsetX: '60px'
                     },
-                    size: '10px',
-                    x: '70%',
-                    y: '67%'
+                    size: '8px',
+                    x: '65%',
+                    y: '70%'
                 },
                 {
                     type: 'circle',
@@ -567,9 +573,9 @@ export function InitUserZoneChart() {
                         fontFamily: 'Roboto',
                         offsetX: '45px'
                     },
-                    size: '10px',
-                    x: '70%',
-                    y: '87%'
+                    size: '8px',
+                    x: '65%',
+                    y: '80%'
                 },
                 {
                     type: 'zingchart.maps',

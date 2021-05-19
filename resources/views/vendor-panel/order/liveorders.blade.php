@@ -123,7 +123,7 @@
                                         <th scope="col" style="padding: 14px;">Order Date</th>
                                         @if($type == "participated")
                                             <th scope="col" style="padding: 14px;">Bid Amount</th>
-                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>
+{{--                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>--}}
                                         @endif
                                         @if($type != "scheduled")
                                             <th scope="col" style="padding: 14px;">Time Left</th>
@@ -142,14 +142,14 @@
                                 <tbody class="mtop-20 text-left f-13">
                                     @foreach($bookings as $booking)
                                         <tr class="tb-border reject_{{$booking->id}}">
-                                        <td scope="row" class="text-left" style="padding: 14px;" > <a href="order-details.html">
-                                                {{$booking->public_booking_id}}</a> </td>
+                                        <td scope="row" class="text-left" style="padding: 14px;" >
+                                                {{$booking->public_booking_id}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
                                         <td style="padding: 14px;">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
                                             <td style="padding: 14px;">{{$booking->bid->bid_amount}}</td>
-                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>
+{{--                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}
                                         @endif
                                         @if($type != "scheduled")
                                             <td style="padding: 10px;"><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
@@ -255,22 +255,26 @@
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
                                                         <a href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                              title="View Order Detail"></a>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
                                                         <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                              title="View Order Detail"></a>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                         <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                              title="View Order Detail"></a>
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
                                                         <a href="{{route('vendor.in-transit',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                                              alt=""></a>
+                                                                                                                                              alt="" data-toggle="tooltip" data-placement="top"
+                                                                                                                                          title="View Order Detail"></a>
                                                         @break
 
                                                     @endswitch

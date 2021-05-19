@@ -31,7 +31,7 @@
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$fetch_role)
                                         <li class="nav-item">
-                                            <a class="nav-link @if($role == $key)active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>$key])}}" >{{ucfirst(trans($key))}}</a>
+                                            <a class="nav-link @if($role == $key)active @endif p-15"  href="{{route('vendor.managerusermgt', ['type'=>$key])}}" >{{ucfirst(trans($key))}}s</a>
                                         </li>
                                     @endforeach
                                 </ul>

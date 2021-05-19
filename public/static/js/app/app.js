@@ -484,13 +484,6 @@ console.log($(this).val());
     }
 });
 
-$(document).ready(function () {
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-
-});
-
 $("body").on('click', ".bookings", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm($(this).data('confirm'))) {
@@ -605,7 +598,7 @@ $("body").on('keyup', ".calc-total", function(event) {
 
    $(this).find('.calc-total-input').each(function(){
 
-        total += $(this).val();
+        total = total + $(this).val();
    });
 
    // $($(this).data("result")).val(total);

@@ -44,7 +44,7 @@
                             </ul>
                         </h3>
                         <div class="theme-text margin-r-20 f-14 p-05">
-                            <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i>
+                            <a href="{{route('vendor.editusermgt', ['id'=>\Illuminate\Support\Facades\Session::get('account')['id']])}}"><i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>

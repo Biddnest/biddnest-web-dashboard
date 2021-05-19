@@ -122,8 +122,12 @@
                                                 cancelled
                                             @endif
                                         </span></td>
-                                    <td><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}"><img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                                                                                          alt=""></a></td>
+                                    <td><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">
+                                            <i class="tooltip-trigger">
+                                                <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                            </i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

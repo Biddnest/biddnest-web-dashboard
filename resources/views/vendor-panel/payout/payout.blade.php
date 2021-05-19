@@ -12,11 +12,11 @@
                 </div>
                 <div class="simple-card min-width-30">
                     <p>SCHEDULED PAYOUTS</p>
-                    <h1>{{sizeof(array_keys((array)$payouts, (string)\App\Enums\PayoutEnums::$STATUS['scheduled']))}}</h1>
+                    <h1>{{$payout_schedule}}</h1>
                 </div>
                 <div class="simple-card min-width-30">
                     <p>FAILED PAYOUTS</p>
-                    <h1>{{sizeof(array_keys((array)$payouts, (string)\App\Enums\PayoutEnums::$STATUS['suspended']))}}</h1>
+                    <h1>{{$payout_fail}}</h1>
                 </div>
             </div>
             <!-- Dashboard cards -->

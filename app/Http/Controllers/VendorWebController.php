@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\PayoutEnums;
 use App\Enums\VendorEnums;
 use App\Models\Bid;
 use App\Models\Booking;
@@ -206,7 +207,9 @@ class VendorWebController extends Controller
     public function payout(Request $request)
     {
         $payout=PayoutController::getByOrganization($request, true);
-        return view('vendor-panel.payout.payout', ['payouts'=>$payout]);
+        $payout_schedule=Payout::where(["organization_id"=>Session::get('organization_id'), "status"=>PayoutEnums::$STATUS['scheduled']])->count();
+        $payout_fail=Payout::where(["organization_id"=>Session::get('organization_id'), "status"=>PayoutEnums::$STATUS['suspended']])->count();
+        return view('vendor-panel.payout.payout', ['payouts'=>$payout, 'payout_schedule'=>$payout_schedule, 'payout_fail'=>$payout_fail]);
     }
 
     public function payoutSidebar(Request $request)
@@ -427,7 +430,7 @@ class VendorWebController extends Controller
     public function addInventory(Request $request)
     {
         $inventory_items=[];
-        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereNotIn('id', InventoryPrice::where('organization_id', Session::get('organization_id'))->pluck('inventory_id'))->get();
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereNotIn('id', InventoryPrice::where('organization_id', Session::get('organization_id'))->where("deleted", CommonEnums::$NO)->pluck('inventory_id'))->get();
         if(isset($request->item)) {
             $inventory_items =Inventory::where('id', $request->item)->first();
         }

@@ -4,14 +4,14 @@
 
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="newuserroles">
         <div class="d-flex  flex-row justify-content-between">
-            <h3 class="page-head text-left p-4 theme-text">@if($roles)Edite @else Add New @endif User</h3>
+            <h3 class="page-head text-left p-4 theme-text">@if($roles)Edit @else Add New @endif User</h3>
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left p-2 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('vendor.managerusermgt', ['type'=>"admin"])}}"> Users & Roles</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">@if($roles)Edite @else Add New @endif User</li>
+                        <li class="breadcrumb-item active" aria-current="page">@if($roles)Edit @else Add New @endif User</li>
                     </ol>
                 </nav>
             </div>
@@ -19,12 +19,12 @@
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-sm-10">
                 <div class="card  h-auto p-0 pt-10 ">
-                    <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="@if($roles){{route('api.user.edit')}} @else {{route('api.user.add')}}@endif" data-next="redirect" data-url="{{route('vendor.managerusermgt', ['type'=>"admin"])}}" data-alert="mega" method="@if($roles){{"PUT"}}@else{{"POST"}}@endif" data-parsley-validate>
+                    <form class="form-new-order  onboard-vendor-branch input-text-blue mt-0 pt-0" action="@if($roles){{route('api.user.edit')}} @else {{route('api.user.add')}}@endif" data-next="redirect" data-url="{{route('vendor.managerusermgt', ['type'=>"admin"])}}" data-alert="mega" method="@if($roles){{"PUT"}}@else{{"POST"}}@endif" data-parsley-validate>
                         <div class="card-head right text-left  p-8 ">
                             @if($roles)
                                 <input type="hidden" name="role_id" value="{{$roles->id}}">
                             @endif
-                            <div class="d-flex row p-15 pb-0">
+                            <div class="d-flex row p-15 pt-0 pb-0">
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="">Select Role</label>

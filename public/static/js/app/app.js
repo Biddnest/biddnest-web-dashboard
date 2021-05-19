@@ -598,7 +598,7 @@ $("body").on('keyup', ".calc-total", function(event) {
 
    $(this).find('.calc-total-input').each(function(){
 
-        total = total + $(this).val();
+        total += parseInt($(this).val());
    });
 
    // $($(this).data("result")).val(total);

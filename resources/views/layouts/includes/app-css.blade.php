@@ -998,4 +998,10 @@
             .datepicker-dropdown:after{
                 display: none !important;
             }
+            .total-user {
+  position: absolute;
+  font-size: 16px;
+  margin-right: 48% !important;
+  margin-top: 28% !important; 
+}
         </style>

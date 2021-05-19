@@ -10,10 +10,15 @@ use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
-    public static function home()
+    public function home()
     {
         $testimonial=Testimonials::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('website.home', ["testimonials"=>$testimonial, "categories"=>$categories]);
+    }
+
+    public function joinVendor()
+    {
+        return view('website.vendor');
     }
 }

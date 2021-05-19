@@ -232,7 +232,7 @@ class VendorWebController extends Controller
 
     public function serviceSidebar(Request $request)
     {
-        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $ticket=Ticket::where('id', $request->id)->with('reply')->orderBy('id', 'DESC')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('vendor')->latest()->take(2)->get();
 
         return view('vendor-panel.tickets.servicesidebar', ['ticket'=>$ticket, 'replies'=>$replies]);

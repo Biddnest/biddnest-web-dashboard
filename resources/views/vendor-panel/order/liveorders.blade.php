@@ -124,7 +124,7 @@
                                         <th scope="col" style="padding: 14px;">To</th>
                                         <th scope="col" style="padding: 14px;">Order Date</th>
                                         @if($type == "participated")
-                                            <th scope="col" style="padding: 14px;">Bid Amount</th>
+                                            <th scope="col" style="padding: 14px; text-align: center !important; ">Bid Amount</th>
 {{--                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>--}}
                                         @endif
                                         @if($type != "scheduled")
@@ -147,10 +147,10 @@
                                         <td scope="row" class="text-left" style="padding: 14px;" >
                                                 {{$booking->public_booking_id}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
-                                        <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                        <td style="padding: 14px; text-align: center !important; ">{{$booking->created_at->format('d M Y')}}</td>
+                                        <td style="padding: 14px; " >{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                        <td style="padding: 14px; ">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
-                                            <td style="padding: 14px;">{{$booking->bid->bid_amount}}</td>
+                                            <td style="padding: 14px; text-align: center !important; ">{{$booking->bid->bid_amount}}</td>
 {{--                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}
                                         @endif
                                         @if($type != "scheduled")

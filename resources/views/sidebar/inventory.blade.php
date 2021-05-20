@@ -16,11 +16,6 @@
              aria-labelledby="zone-tab">
             <!-- form starts -->
             <div class="d-flex  row justify-content-between p-8">
-                <div class="col-sm-6">
-                    <div class="theme-text f-14">
-                        List of Items
-                    </div>
-                </div>
                 <div class="col-sm-12 p-0">
                     <table class="table  p-0">
                         <thead class="secondg-bg border-none p-0">
@@ -30,20 +25,24 @@
                             <th scope="col" class="text-center">Primium Price</th>
                         </tr>
                         </thead>
-                        <tbody class="mtop-20 ">
+                        @foreach($service_types as $service_type)
+                            <tbody class="mtop-20 ">
+                                <tr class="tb-border"><td scope="row" style="font-size: 14px; font-weight: 700;">{{$service_type->service->name}}</td></tr>
+                                @foreach($inventories as $inventory)
+                                    @if($service_type->service->id == $inventory->service_type)
+                                        <tr class="tb-border">
+                                            <td scope="row"> Size :{{$inventory->size}}
+                                                <br>
+                                                Material :{{$inventory->material}}
+                                            </td>
 
-                        @foreach($inventories as $inventory)
-                            <tr class="tb-border">
-                                <td scope="row"> Size :{{$inventory->size}}
-                                    <br>
-                                    Material :{{$inventory->material}}
-                                </td>
-
-                                <td class="text-center">₹ {{$inventory->price_economics}}</td>
-                                <td class="text-center">₹ {{$inventory->price_premium}}</td>
-                            </tr>
+                                            <td class="text-center">₹ {{$inventory->price_economics}}</td>
+                                            <td class="text-center">₹ {{$inventory->price_premium}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
                         @endforeach
-                        </tbody>
                     </table>
                     @if(count($inventories) == 0)
                         <div class="row hide-on-data">

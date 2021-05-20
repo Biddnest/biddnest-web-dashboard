@@ -476,6 +476,7 @@ export function initOrderDistributionChartVendor(){
                     elements: {
                         center: {
                             text: textInside
+
                         }
                     },
                     responsive: true,

@@ -171,7 +171,7 @@
                         <h3 class="f-18 mt-0">Live Orders Distribution</h3>
                     </div>
                     <div class="canvas-con">
-                        <!-- <div class="total-user">Orders</div> -->
+                        <div class="total-user">Orders</div>
                         <div class="canvas-con-inner">
                             <canvas id="mychart" height="130px" width="152px" ></canvas>
                         </div>

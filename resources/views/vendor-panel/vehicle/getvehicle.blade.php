@@ -34,7 +34,7 @@
 
                      </div> -->
                     <div class="card  h-auto p-0 pt-10 pb-0" >
-                        <form action="@if(!$exist_vehicle){{route('api.vehicle.create')}}@else{{route('api.vehicle.update')}}@endif" method="@if(isset($exist_vehicle)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.vehicle')}}" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue" id="myForm" data-parsley-validate >
+                        <form action="@if(!$exist_vehicle){{route('api.vehicle.create')}}@else{{route('api.vehicle.update')}}@endif" method="@if(isset($exist_vehicle)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.vehicle')}}" data-alert="tiny" class="form-new-order pt-1 mt-0 input-text-blue" id="myForm" data-parsley-validate >
                             <div class="d-flex row p-15 pb-0">
                                 <div class="" >
                                 </div>
@@ -71,7 +71,7 @@
                                                         Vehicle Type/span>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 mt-3">
+                                <div class="col-lg-2 mt-4">
                                     <button class="btn">
                                         Save
                                     </button>

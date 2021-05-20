@@ -138,7 +138,7 @@
                             <ul>
                                 <li class="p-1">Page</li>
                                 <li class="digit">{{$tickets->currentPage()}}</li>
-                                <li class="label">of</li>
+                                <li class="f-16 ml-2 mr-2" style="transform: translate(0px, 4px);">Of</li>
                                 <li class="digit">{{$tickets->lastPage()}}</li>
                                 @if(!$tickets->onFirstPage())
                                     <li class="button"><a href="{{$tickets->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>

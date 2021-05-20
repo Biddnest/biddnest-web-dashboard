@@ -22,9 +22,9 @@
                 <div class="card h-auto p-0 pt-20">
                     <div class="tab-pane fade  active show" id="order-status" role="tabpanel" aria-labelledby="order-status-tab">
                         <div class="p-15">
-                            <div class="d-flex p-10" style="margin-bottom: 30px;">
+                            <div class="d-flex p-10" style="margin-bottom: 30px; margin-left: -54px;">
                                 <div class="steps-container p-15 mr-5 pr-5">
-                                    <hr class="dash-line" style="width: 80%;     margin-left: 50px;" >
+                                    <hr class="dash-line" style="width: 90%;     margin-left: 50px;" >
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">

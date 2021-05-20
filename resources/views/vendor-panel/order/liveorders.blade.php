@@ -1,6 +1,8 @@
 @extends('vendor-panel.layouts.frame')
 @section('title') Manage Bookings @endsection
 @section('body')
+
+
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderlive">
         <div class="d-flex  flex-row justify-content-between" >
             <h3 class="page-head text-left p-4 f-20">Manage Bookings</h3>
@@ -122,18 +124,18 @@
                                         <th scope="col" style="padding: 14px;">To</th>
                                         <th scope="col" style="padding: 14px;">Order Date</th>
                                         @if($type == "participated")
-                                            <th scope="col" style="padding: 14px;">Bid Amount</th>
+                                            <th scope="col" style="padding: 14px; text-align: center !important; ">Bid Amount</th>
 {{--                                            <th scope="col" style="padding: 14px;">Bid Submit By</th>--}}
                                         @endif
                                         @if($type != "scheduled")
                                             <th scope="col" style="padding: 14px;">Time Left</th>
                                         @endif
                                         @if($type == "participated")
-                                            <th scope="col" style="padding: 14px;">Bid Status</th>
+                                            <th scope="col" style="padding: 14px; text-align:center !important">Bid Status</th>
                                         @endif
                                         @if($type == "scheduled")
                                             <th scope="col" style="padding: 14px;">Submitted On</th>
-                                            <th scope="col" style="padding: 14px;">Your Bid</th>
+                                            <th scope="col" style="padding: 14px; text-align: center !important; ">Your Bid</th>
                                             <th scope="col" style="text-align: center; padding: 14px; width:20%">Status</th>
                                         @endif
                                         <th scope="col"  style="text-align: center; padding: 14px; padding-left:0 !important">Actions</th>
@@ -145,10 +147,10 @@
                                         <td scope="row" class="text-left" style="padding: 14px;" >
                                                 {{$booking->public_booking_id}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
-                                        <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                        <td style="padding: 14px;">{{$booking->created_at->format('d M Y')}}</td>
+                                        <td style="padding: 14px; " >{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                        <td style="padding: 14px; ">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
-                                            <td style="padding: 14px;">{{$booking->bid->bid_amount}}</td>
+                                            <td style="padding: 14px; text-align: center !important; ">{{$booking->bid->bid_amount}}</td>
 {{--                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}
                                         @endif
                                         @if($type != "scheduled")

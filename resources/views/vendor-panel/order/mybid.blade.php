@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10">
                                 <div class="steps-container mr-4 justify-content-center">
-                                    <hr class="dash-line" style="margin-left: 5%;">
+                                    <hr class="dash-line" style="margin-left: 5%; width: 86% !important;">
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
@@ -144,11 +144,11 @@
                                             @endif
                                             <div class="p-15 ">
                                                 <div class="d-felx justify-content-around row  ">
-                                                    <div class="bid-badge">
+                                                    <div class="bid-badge" style="margin: 0 auto !important;">
                                                         <h4 class="">₹ {{$bidding->bid_amount}}</h4>
                                                         <p>Current Bid Price</p>
                                                     </div>
-                                                    <div class="bid-badge">
+                                                    <div class="bid-badge" style="margin: 0 auto !important;">
                                                         <h4 class=""><span class="text-center timer f-24" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h4>
                                                         <p>Time Left</p>
                                                     </div>
@@ -182,8 +182,8 @@
                                         @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
                                             <div class="p-15 ">
                                                 <div class="d-felx justify-content-around row  ">
-                                                    <div class="bid-badge">
-                                                        <h4 class="">₹ {{$bidding->bid_amount}}</h4>
+                                                    <div class="bid-badge" style="margin: 0 auto !important;">
+                                                        <h4 style="padding: 12px 70px;" class="">₹ {{$bidding->bid_amount}}</h4>
                                                         <p>Your Bid Price</p>
                                                     </div>
                                                 </div>

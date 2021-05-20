@@ -20,12 +20,12 @@
             <div class="col-lg-10">
                 <div class="card h-auto p-0 pt-10">
                     <div class="card-head right text-left  p-10 pt-20 pb-0">
-                        <h3 class="f-18 mb-4 theme-text">
+                        <h3 class="f-18 mb-4 ml-4 pl-1 theme-text">
                                 Create Service
                         </h3>
                     </div>
-                    <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.ticket.addticket')}}" data-next="redirect" data-url="{{route('vendor.service_request')}}" data-alert="mega" method="{{"POST"}}" data-parsley-validate>
-                        <div class="d-flex pa-20 row p-10">
+                    <form class="form-new-order  onboard-vendor-branch input-text-blue" action="{{route('api.ticket.addticket')}}" data-next="redirect" data-url="{{route('vendor.service_request')}}" data-alert="mega" method="{{"POST"}}" data-parsley-validate>
+                        <div class="d-flex pa-20 mr-1 ml-1 row p-10">
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name"> Category </label>
@@ -64,7 +64,7 @@
                                 <div class="w-50">
 
                                 </div>
-                                <div class="w-50 text-right">
+                                <div class="w-50 text-right mr-2">
                                     <a class="white-text p-10"><button class="btn theme-bg br-5 white-text w-30">
                                                 Submit
                                         </button></a>

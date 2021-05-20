@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10">
                                 <div class="steps-container mr-4 justify-content-center">
-                                    <hr class="dash-line" style="margin-left: 5%;">
+                                    <hr class="dash-line" style="margin-left: 5%; width: 86%;">
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex  border-bottom pb-0">
+                        <div class="d-flex border-top  border-bottom pb-0">
                             <ul class="nav nav-tabs pt-20 p-0 f-18" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link" id="new-order-tab" data-toggle="tab" href="{{route('vendor.detailsbookings',['id'=>$booking->public_booking_id])}}" role="tab" aria-controls="home" aria-selected="true">Order Details</a>
@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 pt-10 p-60 text-center">
-                                            <h3 class="f-24 theme-text bold p-10">Time Left</h3>
+                                            <h3 class="f-24 theme-text bold p-10" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">Time Left</h3>
                                             <div id="app"><span class="text-center timer f-24" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></div>
                                         </div>
                                     </div>

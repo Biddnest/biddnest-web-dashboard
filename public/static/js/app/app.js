@@ -503,14 +503,13 @@ $("body").on('click', ".bookings", function(event) {
 
 $("body").on('click', ".rejected", function(event) {
     Swal.fire({
-        title: 'Are you sure?',
+        title: 'Are you sure you want to Reject this order?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#d33',
         confirmButtonColor: '#FDC403',
         confirmButtonText: 'Yes!',
-        customClass: "Custom_Cancel"
 
     }).then((result) => {
         if (result.isConfirmed) {

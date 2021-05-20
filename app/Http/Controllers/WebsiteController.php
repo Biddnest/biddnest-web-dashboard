@@ -50,4 +50,51 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('website.booking.addbooking', ['categories'=>$categories]);
     }
+    public function estimateBooking()
+    {
+        return view('website.booking.estimatebooking');
+    }
+    public function placeBooking()
+    {
+        return view('website.booking.placebooking');
+    }
+
+    public function myBookings()
+    {
+        return view('website.booking.mybooking');
+    }
+
+    public function finalQuote()
+    {
+        return view('website.booking.finalquote');
+    }
+
+    public function payment()
+    {
+        return view('website.booking.payment');
+    }
+
+    public function orderDetails()
+    {
+        return view('website.booking.orderdetails');
+    }
+
+    public function bookingHistory()
+    {
+        return view('website.booking.bookinghistory');
+    }
+
+    public function myProfile()
+    {
+        return view('website.myprofile');
+    }
+    public function myRequest()
+    {
+        return view('website.myrequest');
+    }
+
+    public function termsAndCondition()
+    {
+        return view('website.termsandcondition');
+    }
 }

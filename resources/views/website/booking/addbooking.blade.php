@@ -435,8 +435,22 @@
                                         <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move ">Lets get your requirements</h4>
                                     </div>
                                     <div class="row d-flex justify-content-center">
-                                        <select name="meta[subcategory]" class="form-control subservices">
-                                        </select>
+                                        <div class="col-md-2 view-content ">
+                                            <div class="room-req-count mb-1 text-center h-100 px-3 disabled ">
+                                                <div class="card-block ">
+                                                    <h3><i class="fa fa-home fa-2x "></i></h3>
+                                                    <p class="card-title room-type pl-0 l-cap cursor-pointer ">1 bhk</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 view-content ">
+                                            <div class="room-req-count mb-1 text-center h-100 px-3 disabled ">
+                                                <div class="card-block ">
+                                                    <h3><i class="fa fa-home fa-2x "></i></h3>
+                                                    <p class="card-title room-type pl-0 l-cap cursor-pointer ">1 bhk</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-2 view-content ">
                                             <div class="room-req-count mb-1 text-center h-100 px-3 disabled ">
                                                 <div class="card-block ">
@@ -965,27 +979,11 @@
                                         </h4>
                                         <div class="form-group ">
                                             <label for="comments-area " class="comments ">Comments from Customer</label>
-                                            <textarea class="form-control " id="comments-area " rows="4 " placeholder="Need to include movers for customer 's bike too"></textarea>
+                                            <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4"  cols="50"></textarea>
                                         </div>
                                         <h4 class="pl-0 pb-4 pt-3 comments">Upload Photos</h4>
                                     </div>
                                     <div class="row d-flex justify-content-around uploaded-image mb-5 ml-0 mr-0">
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
-                                        </div>
                                         <div class="col-md-2 pl-0  add-photos">
                                             <div class="custom-file" id="customFile">
                                                 <input type="file" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
@@ -997,6 +995,22 @@
 
                                             </div>
                                         </div>
+                                        <div class="col-md-10 pl-0 view-content upload-image-container">
+
+                                        </div>
+                                        {{--<div class="col-md-2 pl-0 view-content upload-image-container">
+                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                            <i class="fa fa-close fa-2x"></i>
+                                        </div>
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                            <i class="fa fa-close fa-2x"></i>
+                                        </div>
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                            <i class="fa fa-close fa-2x"></i>
+                                        </div>--}}
+
                                     </div>
                                     <div class=" actionBtn actionBtn-view border-top ">
                                         <a href="{{route('home')}}">
@@ -1004,113 +1018,11 @@
                                                 Cancel
                                             </button>
                                         </a>
-                                        <button  class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4" id="next4" type="button">
+                                        <button  class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4" id="next4">
                                             Next
-                                        </button>
+                                            </button>
                                         <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3" type="button">Back
                                         </button>
-                                    </div>
-                                </div>
-                                <!-- Fifth Step -->
-                                <div class="row setup-content-3 step-5" id="step-5" style="display: none;">
-                                    <div class="col-md-12">
-                                        <div>
-                                            <p class="text-muted">Step 5 / 6</p>
-                                            <h5 class="border-bottom theme-text pb-4 text-view-center">Get The Estimated Cost </h5>
-                                        </div>
-                                        <form class="quation-form">
-                                            <div class="p-0  border-top-2 order-cards">
-                                                <div class="d-flex justify-content-center f-14  text-center  mt-2 mb-1">
-                                                    Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
-                                                </div>
-                                                <div class="d-flex flex-row flex-view-col justify-content-around f-14 theme-text text-center  quotation mb-3">
-                                                    <div class="flex-column justify-content-center test">
-                                                        <div class="card m-20  card-price eco cursor-pointer">
-                                                            <div class="p-60 f-32 border-cicle eco-card">
-                                                                <div>
-                                                                    <div class="f-30">₹ 2,300</div>
-                                                                    <div class="f-16 ">Base price</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="p-eco f-18"> Economy
-                                                                <p class="italic f-12 ">Economy Service include moving only
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="radio-group">
-                                                            <div class="form-input radio-item ">
-                                                                <input type="radio" id="economy" name="economy-premium" class="radio-button__input cursor-pointer economy">
-                                                                <label class="" for="economy"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="felx-column">
-                                                        <div class="card m-20 card-price pre  cursor-pointer ">
-                                                            <div class="p-60 f-32  border-cicle pre-card  ">
-                                                                <div class="f-30">₹ 3,300</div>
-                                                                <div class="f-16 p-1">Base price</div>
-                                                            </div>
-                                                            <div class=" f-18"> Premium
-                                                                <p class="italic f-12 ">Premium Service include Packing
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="radio-group">
-                                                            <div class="form-input radio-item ">
-                                                                <input type="radio" id="premium" name="economy-premium" class="radio-button__input premium">
-                                                                <label class="" for="premium"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class=" actionBtn actionBtn-view border-top ">
-                                            <a href="{{route('home')}}">
-                                                <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
-                                                    Cancel
-                                                </button>
-                                            </a>
-                                            <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next5" id="next5" type="button">
-                                                Next
-                                            </button>
-                                            <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3" type="button">Back
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Sixth Step -->
-                                <div class="row setup-content-3 step-6" id="step-6" style="display: none;">
-                                    <div class="col-md-12">
-                                        <div>
-                                            <p class="text-muted">Step 6 / 6</p>
-                                            <h5 class="border-bottom theme-text pb-4 text-view-center">Place Your Request!
-                                            </h5>
-                                        </div>
-                                        <div class="border-bottom">
-                                            <i class="fa fa-thumbs-up center successful-icon mt-2 view-block text-view-center"></i>
-                                            <p class="text-muted f-16 center italic order-status-message text-view-center">
-                                                Your Order has been submitted</p>
-                                            <p class=" f-16 para-head center order-num text-view-center">ORDER ID
-                                                <span>: #323223</span>
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <div class="text-center ">
-                                                <p class="text-muted f-14 pt-4 italic notification-message"> You will get the estimated price once the time is up</p>
-                                                <h3 class="f-18 pb-4 theme-text bold ">Time Left</h3>
-                                                <div id="app"></div>
-                                            </div>
-                                        </div>
-                                        <div class="button-bottom d-flex justify-content-center pt-4">
-                                            <div class="">
-                                                <a class="white-text " href="{{route('home')}}">
-                                                    <button type="submit" class="btn btn-theme-bg padding-btn-res white-bg">View my
-                                                        bookings
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -1122,6 +1034,38 @@
 
 
         <script>
+            function previewImages() {
+
+                var preview = document.querySelector('.upload-image-container');
+
+                if (this.files) {
+                    [].forEach.call(this.files, readAndPreview);
+                }
+
+                function readAndPreview(file) {
+
+                    // Make sure `file.name` matches our extensions criteria
+                    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                        return alert(file.name + " is not an image");
+                    } // else...
+
+                    var reader = new FileReader();
+
+                    reader.addEventListener("load", function() {
+                        var image = new Image();
+                        image.height = 100;
+                        image.title  = file.name;
+                        image.src    = this.result;
+                        preview.appendChild(image);
+                    });
+
+                    reader.readAsDataURL(file);
+
+                }
+
+            }
+
+            document.querySelector('.custom-file-input').addEventListener("change", previewImages);
 
             function updateCount(type) {
                 let currentValue = Number(document.getElementById('inc ').value)

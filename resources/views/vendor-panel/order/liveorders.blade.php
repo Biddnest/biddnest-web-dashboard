@@ -1,6 +1,8 @@
 @extends('vendor-panel.layouts.frame')
 @section('title') Manage Bookings @endsection
 @section('body')
+
+
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderlive">
         <div class="d-flex  flex-row justify-content-between" >
             <h3 class="page-head text-left p-4 f-20">Manage Bookings</h3>

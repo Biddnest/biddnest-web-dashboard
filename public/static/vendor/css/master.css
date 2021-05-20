@@ -4301,6 +4301,21 @@ hr {
   margin-top: 28% !important; 
 }
 
+
+.swal2-popup .swal2-modal .Custom_Cancel .swal2-icon-warning .swal2-show{
+  width: 46% !important;
+  height: 42% !important;
+}
+
+.swal2-confirm .swal2-styled{
+  padding: 10px 70px !important;
+  display: flex !important;
+  margin-top: 40px !important;
+
+
+
+}
+
 .canvas-con-inner {
   height: 100%;
 }

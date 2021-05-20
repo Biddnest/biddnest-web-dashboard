@@ -199,7 +199,7 @@
                                         @endif
                                         @if($type == "live")
                                             <td class="cursor-pointer" style="padding: 10px;">
-                                                <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
+                                                <a  class="inline-icon-button" href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
                                                     <i class="tooltip-trigger">
                                                         <img src="{{asset('static/vendor/images/acceptmark.svg')}}" alt=""
                                                              data-toggle="tooltip" data-placement="top"

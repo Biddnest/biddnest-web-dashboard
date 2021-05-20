@@ -37,6 +37,8 @@ Route::prefix('website')->group(function () {
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
     Route::get('/T&C', [WebsiteController::class, 'termsAndConditions'])->name("terms_and_conditions");
 
+    Route::get('/Book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
+
     Route::middleware("checkWebSession")->group(function(){
         Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
     });

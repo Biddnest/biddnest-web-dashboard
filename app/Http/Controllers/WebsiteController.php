@@ -30,7 +30,7 @@ class WebsiteController extends Controller
 
     public function completeContactUs()
     {
-        return view('website.completecontactus');
+        return view('website.booking.completecontactus');
     }
 
     public function faq()
@@ -43,5 +43,11 @@ class WebsiteController extends Controller
     {
         $faqs=Faq::get();
         return view('website.faq', ['faqs'=>$faqs]);
+    }
+
+    public function addBooking()
+    {
+        $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('website.booking.addbooking', ['categories'=>$categories]);
     }
 }

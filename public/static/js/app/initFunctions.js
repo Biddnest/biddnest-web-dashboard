@@ -264,9 +264,10 @@ export function initTextAreaEditor() {
 }
 
 export function initTooltip(){
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" })
-    })
+        $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
+        $('[data-toggle="tooltip').on('click', function () {
+            $(this).tooltip('hide');
+        });
 }
 
 /*Charts*/

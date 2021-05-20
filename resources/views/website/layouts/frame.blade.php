@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     <li class="nav-item mr-16">
-                        <a class="nav-link" href="booking-history.html"><img src="{{ asset('static/website/images/icons/Icon metro-truck2.svg')}}" class="mb-1 mr-1" /> MY BOOKINGS</a>
+                        <a class="nav-link" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Icon metro-truck2.svg')}}" class="mb-1 mr-1" /> MY BOOKINGS</a>
 
                     </li>
                     <li class="nav-item mr-16">
@@ -65,19 +65,19 @@
                         <div class="dropdown-content">
                             <ul class="d-content">
                                 <li>
-                                    <img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile
+                                    <a class="menu" href="{{route('my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
                                 </li>
                                 <li>
-                                    <img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history
+                                    <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
                                 </li>
                                 <li>
-                                    <img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking
+                                    <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
                                 </li>
                                 <li>
-                                    <img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request
+                                    <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
                                 </li>
                                 <li>
-                                    <img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout
+                                    <a class="menu" href="#0"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
                                 </li>
                             </ul>
                         </div>

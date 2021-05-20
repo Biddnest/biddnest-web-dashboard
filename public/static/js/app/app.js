@@ -726,36 +726,4 @@ $("body").on('change', ".card-methord02", function(event) {
     $(this).addClass('check-icon02');
 });
 
-$("body").on('change', ".categoryweb-select", function(event) {
-    console.log("change");
-    var id=$(this).val();
 
-    $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
-
-    var materal=$("#sub_"+id).data("subcategory");
-
-    materal.map((value)=>{
-        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
-    });
-
-    var type=$("#sub_"+id).data("type");
-    if(type == 0)
-    {
-        $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
-        $(this).closest(".d-flex").find(".range").parent().addClass("hidden");
-        $(this).closest(".d-flex").find(".fixed").attr("required", "required");
-        $(this).closest(".d-flex").find(".fixed").attr("name", "inventory_items[][quantity]");
-        $(this).closest(".d-flex").find(".range").removeAttr("required");
-        $(this).closest(".d-flex").find(".range").removeAttr("name");
-    }
-    if(type == 1)
-    {
-        $(this).closest(".d-flex").find(".fixed").addClass("hidden");
-        $(this).closest(".d-flex").find(".range").parent().removeClass("hidden");
-        $(this).closest(".d-flex").find(".range").attr("required", "required");
-        $(this).closest(".d-flex").find(".range").attr("name", "inventory_items[][quantity]");
-        $(this).closest(".d-flex").find(".fixed").removeAttr("required");
-        $(this).closest(".d-flex").find(".fixed").removeAttr("name");
-    }
-    return false;
-});

@@ -35,9 +35,18 @@ Route::prefix('website')->group(function () {
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
-    Route::get('/T&C', [WebsiteController::class, 'termsAndConditions'])->name("terms_and_conditions");
+    Route::get('/T&C', [WebsiteController::class, 'termsAndCondition'])->name("terms_and_conditions");
 
-    Route::get('/Book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
+    Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
+    Route::get('/book-move/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
+    Route::get('/book-move/place', [WebsiteController::class, 'placeBooking'])->name("place-booking");
+    Route::get('/my-bookings', [WebsiteController::class, 'myBookings'])->name("my-bookings");
+    Route::get('/my-bookings/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");
+    Route::get('/my-bookings/payment', [WebsiteController::class, 'payment'])->name("payment");
+    Route::get('/my-bookings/ongoing-order', [WebsiteController::class, 'orderDetails'])->name("order-details");
+    Route::get('/my-bookings/order-history', [WebsiteController::class, 'bookingHistory'])->name("order-history");
+    Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("my-profile");
+    Route::get('/my-request', [WebsiteController::class, 'myRequest'])->name("my-request");
 
     Route::middleware("checkWebSession")->group(function(){
         Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");

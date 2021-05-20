@@ -14,6 +14,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+
+
 <!-- custom css -->
 <link rel="stylesheet" href="{{ asset('static/website/css/intlTelInput.css')}}">
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
@@ -38,5 +41,9 @@
 
      .answer {
          display: none;
+     }
+     a.menu{
+         color: #0f0c75 !important;
+         font-size: 14px !important;
      }
 </style>

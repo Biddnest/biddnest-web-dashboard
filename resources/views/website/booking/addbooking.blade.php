@@ -222,7 +222,7 @@
                                                         <div class="card address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
                                                             <div class="card-block ">
                                                                 <img src="{{$category->image}}" alt="residential-building " class="address-icon mb-2 " style="width: 50px;"/>
-                                                                <input type="radio" value="{{$category->id}}" name="service_id" class="cursor-pointer category-select" data-target=".range" required>
+                                                                <input type="radio" value="{{$category->id}}" name="service_id" class="cursor-pointer categoryweb-select" data-target=".range" required>
                                                                 <p class="card-title pl-0 address-type text-white ">
                                                                 {{ucwords($category->name)}}</p>
                                                             </div>

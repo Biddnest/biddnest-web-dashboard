@@ -727,7 +727,7 @@ $("body").on('change', ".card-methord02", function(event) {
     $(this).addClass('check-icon02');
 });
 
-$("body").on('change', ".category-select", function(event) {
+$("body").on('change', ".categoryweb-select", function(event) {
     console.log("change");
     var id=$(this).val();
 

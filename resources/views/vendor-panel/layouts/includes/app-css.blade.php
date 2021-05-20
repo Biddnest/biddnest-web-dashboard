@@ -173,6 +173,14 @@
 
 
 }
+.legend-con li span.chart-legend{
+    margin-right: 5px !important;
+
+}
+
+.legend-con ul{
+    padding-left: 30px !important ;
+}
 
 .swal2-styled.swal2-confirm{
     padding: 8px 80px !important;
@@ -198,8 +206,8 @@
 }
 
 .total-user{
-    margin-right: 54% !important;
-    margin-top: 22% !important;
+    margin-right: 51% !important;
+    margin-top: 23% !important;
 }
 
 </style>

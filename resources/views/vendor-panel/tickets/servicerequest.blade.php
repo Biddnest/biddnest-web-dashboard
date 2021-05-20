@@ -68,16 +68,16 @@
                         <table class="table text-center p-0  theme-text ">
                             <thead class="secondg-bg  p-0 f-14">
                                 <tr class="f-weight-500">
-                                    <th scope="col" class="text-left" style="padding: 14px;">Service ID</th>
-                                    <th scope="col" style="text-align: center; padding:14px">Category</th>
-                                    <th scope="col" style="text-align: center; padding:14px">Title</th>
+                                    <th scope="col" class="text-left" style=" padding: 14px;">Service ID</th>
+                                    <th scope="col" style="text-align: center; padding:14px; padding: 14px 24px;">Category</th>
+                                    <th scope="col" style="text-align: left; padding:14px">Title</th>
                                     <th scope="col" style="text-align: center; padding:14px"> Status</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">
                                 @foreach($tickets as $ticket)
                                     <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('vendor.service_sidebar',['id'=>$ticket->id]) }}">
-                                        <td scope="row" style="padding: 14px;" class="text-left">{{$ticket->id}}</td>
+                                        <td scope="row" style="padding: 14px; padding-left:50px!important" class="text-left">{{$ticket->id}}</td>
                                         <td style="text-align: center; padding: 14px;">
                                             @switch($ticket->type)
                                                 @case(\App\Enums\TicketEnums::$TYPE['complaint'])
@@ -102,11 +102,11 @@
 
                                             @endswitch
                                         </td>
-                                        <td style="text-align: center; padding: 14px;">{{$ticket->heading}}</td>
-                                        <td class="" style="text-align: center; padding: 14px;">
+                                        <td style="text-align: left; padding: 14px;">{{$ticket->heading}}</td>
+                                        <td class="" style="text-align: center; padding: 14px; ">
                                             @switch($ticket->status)
                                                 @case(\App\Enums\TicketEnums::$STATUS['open'])
-                                                    <span class="complete-bg  text-center td-padding">Open</span>
+                                                    <span class="complete-bg  text-center td-padding" style="    padding: 5px 50px;" >Open</span>
                                                 @break
 
                                                 @case(\App\Enums\TicketEnums::$STATUS['rejected'])
@@ -118,7 +118,7 @@
                                                 @break
 
                                                 @case(\App\Enums\TicketEnums::$STATUS['closed'])
-                                                    <span class="complete-bg  text-center td-padding">Closed</span>
+                                                    <span class="complete-bg  text-center td-padding" style="padding: 5px 46px;">Closed</span>
                                                 @break
 
                                             @endswitch
@@ -138,7 +138,7 @@
                             <ul>
                                 <li class="p-1">Page</li>
                                 <li class="digit">{{$tickets->currentPage()}}</li>
-                                <li class="f-16 ml-2 mr-2" style="transform: translate(0px, 4px);">Of</li>
+                            <li class="f-16 ml-2 mr-2" style="transform: translate(0px, 4px);">Of</li>
                                 <li class="digit">{{$tickets->lastPage()}}</li>
                                 @if(!$tickets->onFirstPage())
                                     <li class="button"><a href="{{$tickets->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>

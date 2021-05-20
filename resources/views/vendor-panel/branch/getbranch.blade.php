@@ -25,26 +25,26 @@
             <div class="col-sm-12">
                 <div class="card  h-auto  p-8 p-0">
                     <div class="header-wrap border-bottom p-15 pb-1">
-                        <h3 class="f-18 f-weight-500">Your Branch Details</h3>
+                        <h3 class="f-18 mt-1 mb-4 f-weight-500">Your Branch Details</h3>
                     </div>
-                    <div class=" d-felx  row p-15 justify-content-start">
-                        <div class="col-sm-8 p-1">
-                            <div class="d-felx justify-content-between row pl-3 pb-0">
-                                <div class="col-sm-3 branch-card">
+                    <div class=" d-flex  row p-15 justify-content-start">
+                        <div class="col-sm-8 p-1 ml-3">
+                            <div class="row pl-3 pb-0">
+                                <div class="col-sm-4 branch-card">
                                     <p class="l-cap">Org Name</p>
-                                    <p class="f-16 bold">{{$home_branch->org_name}} {{$home_branch->org_type}}</p>
+                                    <p class="f-16 bold" style="font-weight: 500;">{{$home_branch->org_name}} {{$home_branch->org_type}}</p>
                                 </div>
                                 <div class="col-sm-3 branch-card">
                                     <p class="l-cap">Phone</p>
-                                    <p class="f-16 bold">+91-{{$home_branch->phone}}</p>
+                                    <p class="f-16 bold" style="font-weight: 500;">+91-{{$home_branch->phone}}</p>
                                 </div>
                                 <div class="col-sm-3 branch-card">
                                     <p class="l-cap">Address</p>
-                                    <p class="f-16 bold">{{json_decode($home_branch->meta, true)['address']}}</p>
+                                    <p class="f-16 bold" style="font-weight: 500;">{{json_decode($home_branch->meta, true)['address']}}</p>
                                 </div>
-                                <div class="col-sm-3 branch-card">
+                                <div class="col-sm-2 branch-card">
                                     <p class="l-cap">City</p>
-                                    <p class="f-16 bold">{{$home_branch->city}}</p>
+                                    <p class="f-16 bold" style="font-weight: 500;">{{$home_branch->city}}</p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
             <div class="col-sm-12">
                 <div class="card  h-auto  pt-8 p-0">
                     <div class="header-wrap toal-header">
-                        <h3 class="f-18 ml-1">Branch Details</h3>
+                        <h3 class="f-18 mt-0 mb-0 ml-1">Branch Details</h3>
                         <div class="header-wrap p-0 ">
                             {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">
@@ -130,20 +130,20 @@
                         <table class="table text-left p-0 theme-text mb-0 primary-table">
                             <thead class="secondg-bg p-0">
                             <tr>
-                                <th scope="col">Branch Name</th>
-                                <th scope="col">Phone Number</th>
-                                <th scope="col">City</th>
-                                <th scope="col" class="text-center">Status</th>
-                                @if(\App\Helper::is("admin", true))<th scope="col">Actions</th>@endif
+                                <th scope="col" style="padding: 14px;">Branch Name</th>
+                                <th scope="col" style="padding: 14px;">Phone Number</th>
+                                <th scope="col" style="padding: 14px;">City</th>
+                                <th scope="col" style="padding: 14px;" class="text-center">Status</th>
+                                @if(\App\Helper::is("admin", true))<th scope="col" style="padding: 14px; text-align:center!important">Actions</th>@endif
                             </tr>
                             </thead>
                             <tbody class="mtop-20">
                                 @foreach($branches as $branch)
                                     <tr class="tb-border cursor-pointer">
-                                        <td>{{$branch->city}} @if(!$branch->parent_org_id) (Parent Branch) @endif</td>
-                                        <td>+91-{{$branch->phone}}</td>
-                                        <td>{{$branch->city}}</td>
-                                        <td class="text-center">
+                                        <td style="padding: 16px 0px;">{{$branch->city}} @if(!$branch->parent_org_id) (Parent Branch) @endif</td>
+                                        <td style="padding: 16px 0px;">+91-{{$branch->phone}}</td>
+                                        <td style="padding: 16px 0px;">{{$branch->city}}</td>
+                                        <td style="padding: 10px 0px;"class="text-center">
                                             @switch($branch->status)
                                                 @case(\App\Enums\OrganizationEnums::$STATUS['lead'])
                                                 <div class="status-badge light-bg light-bg">Lead</div>
@@ -159,7 +159,7 @@
                                             @endswitch
                                         </td>
                                         @if(\App\Helper::is("admin", true))
-                                        <td>
+                                        <td style="padding: 16px 0px; text-align:center!important">
                                             <a href="{{route('vendor.editbranch', ['id'=>$branch->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         </td>
                                         @endif
@@ -175,12 +175,11 @@
                             </div>
                         @endif
                     </div>
-                </div>
-                <div class="pagination">
+                    <div class="pagination mb-3 mt-4">
                     <ul>
                         <li class="p-1">Page</li>
                         <li class="digit">{{$branches->currentPage()}}</li>
-                        <li class="label">of</li>
+                        <li class="f-16 ml-2 mr-2" style="transform: translate(0px, 4px);">Of</li>
                         <li class="digit">{{$branches->lastPage()}}</li>
                         @if(!$branches->onFirstPage())
                             <li class="button"><a href="{{$branches->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
@@ -192,6 +191,8 @@
                         @endif
                     </ul>
                 </div>
+                </div>
+              
 
             </div>
 

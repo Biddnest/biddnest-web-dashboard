@@ -58,7 +58,7 @@
                                     <th scope="col" class="text-left" style="padding: 16px 26px;">Branch</th>
                                     <th scope="col " class="text-center" style="padding: 16px 26px;">Status</th>
                                     @if(\App\Helper::is("admin", true))
-                                        <th scope="col" class="text-center" style="padding: 16px 26px;">Actions</th>
+                                        <th scope="col" class="text-center" style="padding: 16px 0px;">Actions</th>
                                     @endif
                                 </tr>
                                 </thead>

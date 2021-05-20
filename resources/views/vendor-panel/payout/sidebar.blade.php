@@ -1,9 +1,9 @@
 
-<div class="modal-header pb-0 border-none">
-    <h3 class="f-18 p-15">
+<div class="modal-header pb-0 border-bottom">
+    <h3 class="f-18 mt-0 p-15">
         Vendor Payout
     </h3>
-    <button type="button" class="close theme-text margin-topneg-10" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <!-- <span aria-hidden="true" >&times;</span> -->
         <i class="icon dripicons-cross theme-text" aria-hidden="true"></i>
     </button>

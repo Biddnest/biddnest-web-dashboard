@@ -21,13 +21,13 @@
             <div class="col-lg-10">
                 <div class="card h-auto p-0 pt-10">
                     <div class="card-head right text-left  p-10 pt-20 pb-0">
-                        <h3 class="f-18 mb-4 theme-text">
+                        <h3 class="f-18 mb-0 theme-text pl-4 ml-4">
                             Selelect Category
                         </h3>
                     </div>
-                    <div class="d-flex pa-20 row p-20 justify-content-between">
+                    <div class="d-flex pa-20 row p-20 ml-3 justify-content-start ">
                         @foreach($services as $service)
-                            <div class="simple-card category-card">
+                            <div class="simple-card category-card mt-3 mb-4">
                                 <a href="{{route('vendor.inventory.add',['id'=>$service->id])}}">
                                     <img src="{{$service->image}}">
                                     <p class="p-1">{{ucwords($service->name)}}</p>

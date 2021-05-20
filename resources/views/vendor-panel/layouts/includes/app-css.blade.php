@@ -157,5 +157,49 @@
     }
 
 
+    .chart-legend-label-text{
+            display: flex;
+           justify-content: start !important;
+            width: 12em !important;
+            text-align: left;
+            vertical-align: baseline;
+            
+        }
+
+.swal2-popup{
+    width: 58em !important;
+    height: 42% !important;
+
+
+
+}
+
+.swal2-styled.swal2-confirm{
+    padding: 8px 80px !important;
+    font-size: 14px !important;
+
+}
+.swal2-actions{
+    margin: 5.25em auto 0 !important;
+    justify-content: space-between !important;
+
+
+}
+
+.swal2-styled.swal2-cancel{
+    background-color: #fff !important;
+    color: #FDC403 !important;
+    padding: 6px 70px !important;
+    font-size: 14px !important;
+    border: 2px solid #FDC403 !important;
+
+
+
+}
+
+.total-user{
+    margin-right: 54% !important;
+    margin-top: 22% !important;
+}
 
 </style>

@@ -1,6 +1,7 @@
 @extends('vendor-panel.layouts.frame')
 @section('title') Manage User Roles @endsection
 @section('body')
+
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="userroles">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4 pl-0 f-20 ml-0" style="padding-left: 0px !important;">Manage User Roles</h3>

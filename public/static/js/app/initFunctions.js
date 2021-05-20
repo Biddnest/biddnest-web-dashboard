@@ -265,7 +265,7 @@ export function initTextAreaEditor() {
 
 export function initTooltip(){
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" })
     })
 }
 

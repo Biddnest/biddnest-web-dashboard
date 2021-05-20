@@ -135,7 +135,7 @@
                                         @endif
                                         @if($type == "scheduled")
                                             <th scope="col" style="padding: 14px;">Submitted On</th>
-                                            <th scope="col" style="padding: 14px;">Your Bid</th>
+                                            <th scope="col" style="padding: 14px; text-align: center !important; ">Your Bid</th>
                                             <th scope="col" style="text-align: center; padding: 14px; width:20%">Status</th>
                                         @endif
                                         <th scope="col"  style="text-align: center; padding: 14px; padding-left:0 !important">Actions</th>
@@ -148,7 +148,7 @@
                                                 {{$booking->public_booking_id}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
-                                        <td style="padding: 14px;">{{$booking->created_at->format('d M Y')}}</td>
+                                        <td style="padding: 14px; text-align: center !important; ">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
                                             <td style="padding: 14px;">{{$booking->bid->bid_amount}}</td>
 {{--                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}

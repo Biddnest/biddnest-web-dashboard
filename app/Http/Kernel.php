@@ -75,5 +75,6 @@ class Kernel extends HttpKernel
         'redirectToDashboard' => \App\Http\Middleware\redirectToDashboard::class,
         'redirectToVendorDashboard' => \App\Http\Middleware\redirectToVendorDashboard::class,
         'CheckVendorSession' => \App\Http\Middleware\CheckVendorSession::class,
+        'CheckWebSession' => \App\Http\Middleware\CheckWebSession::class,
     ];
 }

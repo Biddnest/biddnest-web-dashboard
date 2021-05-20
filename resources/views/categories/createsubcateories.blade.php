@@ -125,7 +125,7 @@
 
                                             <td class=""  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 material" name="inventories[][material]" required>
-                                                    <option value="">--Choose Inventory First--</option>
+                                                    <option value="">--Choose Item--</option>
                                                     @foreach(json_decode($inventory_key->meta->material, true) as $material)
                                                         <option value="{{$material}}"  @if($inventory_key->material == $material) selected @endif>{{$material}}</option>
                                                     @endforeach
@@ -134,7 +134,7 @@
 
                                             <td class=""  style="padding-left: 14px !important;">
                                                 <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
-                                                    <option value="">--Choose Inventory First--</option>
+                                                    <option value="">--Choose Item--</option>
                                                     @foreach(json_decode($inventory_key->meta->size, true) as $size)
                                                         <option value="{{$size}}"  @if($inventory_key->size == $size) selected @endif>{{$size}}</option>
                                                     @endforeach
@@ -163,14 +163,14 @@
 
                                                <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 material" name="inventories[][material]" required>
-                                                       <option value="">Choose Inventory</option>
+                                                       <option value="">Choose Item</option>
 
                                                    </select>
                                                </td>
 
                                                <td class="" style="padding-left: 14px !important;">
                                                    <select class="form-control br-5 size" name="inventories[][size]" id="size" required>
-                                                       <option value="">Choose Inventory</option>
+                                                       <option value="">Choose Item</option>
 
                                                    </select>
                                                </td>
@@ -232,13 +232,13 @@
 
             <td class="" style="padding-left: 14px !important;">
                 <select class="form-control br-5 material" name="inventory[][material]" required>
-                    <option value="">Choose Inventory</option>
+                    <option value="">Choose Item</option>
                 </select>
             </td>
 
             <td class="" style="padding-left: 14px !important;">
                 <select class="form-control br-5 size" name="inventory[][size]" id="size" required>
-                    <option value="">Choose Inventory</option>
+                    <option value="">Choose Item</option>
                 </select>
             </td>
 

@@ -75,12 +75,64 @@
             <div class="d-flex  row  p-8">
                 <div class="col-sm-6">
                     <div class="text-drawer f-14 ">
+                        Date of Birth
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="theme-text f-14 d-flex justify-content-between">
+                        {{date('d/M/Y', strtotime($user->dob)) ?? '-'}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex  row  p-8">
+                <div class="col-sm-6">
+                    <div class="text-drawer f-14 ">
+                        Date of Joining
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="theme-text f-14 d-flex justify-content-between">
+                        {{date('d/M/Y', strtotime($user->doj)) ?? '-'}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex  row  p-8">
+                <div class="col-sm-6">
+                    <div class="text-drawer f-14 ">
+                        Date of Relieving
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="theme-text f-14 d-flex justify-content-between">
+                        {{date('d/M/Y', strtotime($user->dor)) ?? '-'}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex  row  p-8">
+                <div class="col-sm-6">
+                    <div class="text-drawer f-14 ">
+                        Address
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="theme-text f-14 d-flex justify-content-between">
+                        {{json_decode($user->meta, true)['address_line1'] ?? ''}}, {{json_decode($user->meta, true)['address_line2'] ?? ''}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex  row  p-8">
+                <div class="col-sm-6">
+                    <div class="text-drawer f-14 ">
                         State,City
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{ucwords($user->organization->state)}}, {{ucwords($user->organization->city)}}
+                        {{ucwords($user->state) ?? ''}}, {{ucwords($user->city) ?? ''}}
                     </div>
                 </div>
             </div>

@@ -109,7 +109,7 @@
                                                 {{ucwords($banner->name)}}
                                             </p>
                                         </a>
-                                        <a href="#services" class="page-scroll btn btn-xl d-content">
+                                        <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
                                             <button type="button" class="btn btn-primary m-60">Book Now</button>
                                         </a>
                                     </div>
@@ -230,88 +230,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-                        <div class="modal-dialog theme-text input-text-blue" role="document">
-                            <div class="modal-content w-70 m-0-auto w-1000 mt-50 right-25">
-                                <div class="modal-header p-0 br-5 ">
-                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <header class="join-as-vendor">
-                                        <img src="{{ asset('static/website/images/icons/logo.png')}}">
-                                    </header>
-                                </div>
-                                <div class="modal-body  margin-topneg-7">
-                                    <div class="d-flex f-direction text-justify center">
-                                        <h2 class="p-text">Login</h2>
-                                        <div class="col-lg-12 col-xs-12 mt-3">
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput">Phone Number</label>
-                                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="9990009990" required>
-                                            </div>
-                                        </div>
-                                        <a href="./book-move.html">
-                                            <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
-                                                submit
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <!-- location from picker -->
-            <div class="modal fade" id="from_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-                    <div class="modal-dialog theme-text input-text-blue" role="document">
-                        <div class="modal-content w-1000 mt-50 right-25">
-                            <div class="modal-header  bg-purple">
-                                <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
-                                    From Location
-                                </h5>
-                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body p-15 margin-topneg-7">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>SVM Complex,indiranagar,Benguluru</label>
-                                        <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control p-2 mt-2 mb-3" required>
-                                        <span class="error-message">Please enter valid</span>
-                                    </div>
-                                </div>
-                                <div id="mapcomponent" class="source-map-picker"></div>
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            <!-- location to picker -->
-            <div class="modal fade" id="to_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-                    <div class="modal-dialog theme-text input-text-blue" role="document">
-                        <div class="modal-content w-1000 mt-50 right-25">
-                            <div class="modal-header bg-purple">
-                                <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
-                                    To Location
-                                </h5>
-                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body p-15 margin-topneg-7">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>SVM Complex,indiranagar,Benguluru</label>
-                                        <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete2" class="form-control p-2 mt-2 mb-3" required>
-                                        <span class="error-message">Please enter valid</span>
-                                    </div>
-                                </div>
-                                <div id="mapcomponent" class="dest-map-picker"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
         </footer>
         @include('website.homelayouts.includes.app-js')
     </body>

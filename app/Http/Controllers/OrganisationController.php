@@ -95,6 +95,71 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
     }
 
+    public static function addForWeb($data, $meta, $admin)
+    {
+        $imageman = new ImageManager(array('driver' => 'gd'));
+
+        $org_email=Organization::where('email', $data['email'])->first();
+        $vendor_email=Vendor::where('email', $admin['email'])->first();
+        if($org_email || $vendor_email)
+            return Helper::response(false,"Email id is already exist in system");
+
+        $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
+        $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
+        if($org_phone || $vendor_phone)
+            return Helper::response(false,"Phone no is already exist in system");
+
+
+        $organizations=new Organization;
+        $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
+        $uniq = uniqid();
+        $organizations->image=Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['organization']['org_name']);
+        $organizations->email=$data['email'];
+        $organizations->phone=$data['phone']['primary'];
+        $organizations->org_name=$data['organization']['org_name'];
+        $organizations->org_type=$data['organization']['org_type'];
+        $organizations->lat =null;
+        $organizations->lng =null;
+        $organizations->zone_id =null;
+        $organizations->pincode =$data['address']['pincode'];
+        $organizations->city =$data['address']['city'];
+        $organizations->state =$data['address']['state'];
+        $organizations->service_type =null;
+        $organizations->meta =json_encode($meta);
+        $organizations->commission = null;
+        $result_organization= $organizations->save();
+
+        /*foreach($data['service'] as $value)
+        {
+            $service=new OrganizationService;
+            $service->organization_id=$organizations->id;
+            $service->service_id=$value;
+            $result_service= $service->save();
+        }*/
+
+        $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
+
+        $vendor = new Vendor;
+        $vendor->fname = ucwords(strtolower($admin['fname']));
+        $vendor->lname = ucwords(strtolower($admin['lname']));
+        $vendor->email = strtolower($admin['email']);
+        $vendor->phone = $admin['phone'];
+        $vendor->pin = null;
+        $image_man = new ImageManager(array('driver' => 'gd'));
+        $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
+        $vendor->image = Helper::saveFile(Helper::generateAvatar($admin['fname']." ".$admin['lname']),$avatar_file_name,"vendors/".$uniq.$admin['fname']);
+        $vendor->organization_id = $organizations->id;
+        $vendor->meta = json_encode($admin_meta);
+        $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
+        $vendor_result = $vendor->save();
+
+        if(!$vendor_result && !$result_organization)
+            return Helper::response(false,"Couldn't save data");
+
+        return Helper::response(true,"Generated Lead successfully", ["organization"=>Organization::with('vendors')->with('services')->findOrFail($organizations->id)]);
+    }
+
     public static function update($data, $meta, $admin, $id, $vendor_id)
     {
 //            $organization_exist = Organization::findOrFail($id);
@@ -398,7 +463,7 @@ class OrganisationController extends Controller
         if($vendor_phone)
             return Helper::response(false,"Phone no is already exist in system.");
 
-        $meta = array(["branch"=>$data['branch']]);
+        $meta = array(["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']]);
 
         if(!$data['password'])
             $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
@@ -418,6 +483,11 @@ class OrganisationController extends Controller
         $vendor->meta = json_encode($meta);
         $vendor->user_role = $data['role'];
         $vendor->password = $password;
+        $vendor->dob = $data['dob'];
+        $vendor->doj = $data['doj'];
+        $vendor->dor = $data['dor'];
+        $vendor->state = $data['state'];
+        $vendor->city = $data['city'];
         $vendor_result = $vendor->save();
 
         if(!$vendor_result)
@@ -442,7 +512,7 @@ class OrganisationController extends Controller
         if(!$exist)
             return Helper::response(false,"Incorrect Role or Organization id");
 
-        $meta = array(["branch"=>$data['branch']]);
+        $meta = array(["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']]);
 
         $image = $data['image'];
         $uniq = uniqid();
@@ -461,10 +531,15 @@ class OrganisationController extends Controller
             "lname"=>$data['lname'],
             "email"=>$data['email'],
             "phone"=>$data['phone'],
-            "meta"=>$meta,
+            "meta"=>json_encode($meta),
             "password"=>$password,
             "user_role"=>$data['role'],
-            "organization_id"=>$data['branch']
+            "organization_id"=>$data['branch'],
+            "dob"=>$data['dob'],
+            "doj"=>$data['doj'],
+            "dor"=>$data['dor'],
+            "state"=>$data['state'],
+            "city"=>$data['city']
         ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)

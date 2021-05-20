@@ -56,6 +56,9 @@
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/skins/content/default/content.min.css" integrity="sha512-KYlPDsJE6wqDev6smrRzaH8VwjoFV9Xj4VzyoUok3vzkVZe0g32WFiVawEiAD77EI2tSoruKNJCedUSCrk5E/Q==" crossorigin="anonymous" />--}}
 
         <style>
+            .dateselect{
+                cursor: pointer;
+            }
             .nav-collapse .li {
                 list-style-type: none !important;
             }
@@ -1002,7 +1005,7 @@
                 position: absolute;
                 font-size: 16px;
                 margin-right: 48% !important;
-                margin-top: 28% !important; 
+                margin-top: 28% !important;
             }
 
 

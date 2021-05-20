@@ -352,6 +352,13 @@ class BookingsController extends Controller
             ->orderBy('id', 'DESC')
             ->with('movement_dates')
             ->with('inventories')->with('status_history')->with('service')
+            ->with('payment')
+            ->with('driver')
+            ->with('vehicle')
+            ->with('review')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
             ->get();
 
         if (!$bookingorder) {

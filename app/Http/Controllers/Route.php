@@ -493,7 +493,14 @@ class Route extends Controller
             'phone'=>'required|min:10|max:10',
             'branch' => 'required',
             'role'=>'required',
-            'image'=>'required'
+            'image'=>'required',
+            'dob'=>'required',
+            'doj'=>'required',
+            'dor'=>'required',
+            'state'=>'required',
+            'city'=>'required',
+            'address1'=>'required',
+            'address2'=>'required'
         ]);
 
         if($validation->fails())
@@ -513,7 +520,14 @@ class Route extends Controller
             'phone'=>'required|min:10|max:10',
             'branch' => 'required',
             'role'=>'required',
-            'image'=>'required'
+            'image'=>'required',
+            'dob'=>'required',
+            'doj'=>'required',
+            'dor'=>'required',
+            'state'=>'required',
+            'city'=>'required',
+            'address1'=>'required',
+            'address2'=>'required'
         ]);
 
         if($validation->fails())

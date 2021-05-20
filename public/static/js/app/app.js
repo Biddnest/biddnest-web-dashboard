@@ -535,7 +535,6 @@ $('.filterdate').datepicker({
     format: 'yyyy-mm-dd'
 });
 
-
 $("body").on('change', ".inventory-item-select", function(event) {
     console.log("change");
     var query = $(this).val();
@@ -608,3 +607,156 @@ $("body").on('keyup', ".calc-total", function(event) {
 });
 
 
+/* Website js code start */
+
+$('.dateselect ').datepicker({
+    format: 'mm/dd/yyyy ',
+});
+
+$("body").on('click', ".next1", function(event) {
+    console.log("step2");
+    $('.step-1').css('display', 'none');
+    $('.step-2').css('display', 'block');
+    $(".completed-step-2").addClass("turntheme");
+    $(".completed-step-1").removeClass("turntheme");
+    $(".steps-step-2").addClass("color-purple");
+    $(".steps-step-1").removeClass("color-purple");
+});
+
+$("body").on('click', ".next2", function(event) {
+    $('.step-2').css('display', 'none');
+    $('.step-3').css('display', 'block');
+    $(".completed-step-3").addClass("turntheme");
+    $(".completed-step-2").removeClass("turntheme");
+    $(".steps-step-3").addClass("color-purple");
+    $(".steps-step-2").removeClass("color-purple");
+});
+
+$("body").on('click', ".next3", function(event) {
+    $('.step-3').css('display', 'none');
+    $('.step-4').css('display', 'block');
+    $(".completed-step-4").addClass("turntheme");
+    $(".completed-step-3").removeClass("turntheme");
+    $(".steps-step-4").addClass("color-purple");
+    $(".steps-step-3").removeClass("color-purple");
+});
+
+$("body").on('click', ".next4", function(event) {
+    $('.step-4').css('display', 'none');
+    $('.step-5').css('display', 'block');
+    $(".completed-step-5").addClass("turntheme");
+    $(".completed-step-4").removeClass("turntheme");
+    $(".steps-step-5").addClass("color-purple");
+    $(".steps-step-4").removeClass("color-purple");
+});
+
+$("body").on('click', ".next5", function(event) {
+    $('.step-5').css('display', 'none');
+    $('.step-6').css('display', 'block');
+    $(".completed-step-6").addClass("turntheme");
+    $(".completed-step-5").removeClass("turntheme");
+    $(".steps-step-6").addClass("color-purple");
+    $(".steps-step-5").removeClass("color-purple");
+});
+
+
+$("body").on('change', ".switch", function(event) {
+    $(".toggle-input").toggleClass('diplay-none ');
+});
+
+$("body").on('click', ".reject", function(event) {
+    $('.rejection-message ').toggleClass("diplay-none");
+    $('.order-cards ').toggleClass("diplay-none");
+    $('.reject-btn ').html('Submit ');
+});
+
+$("body").on('click', "#backbtn", function(event) {
+    $('.rejection-message ').addClass("diplay-none");
+    $('.order-cards ').removeClass("diplay-none");
+});
+
+$("body").on('change', ".economy", function(event) {
+    if ($(".economy").is(":checked")) {
+        $(".eco").addClass("blue-bg");
+        $(".pre").removeClass("blue-bg");
+        $('.eco-card ').addClass("border-white");
+        $('.pre-card ').removeClass("border-white");
+    } else {
+        $(".eco").removeClass("blue-bg");
+        $('.eco-card ').removeClass("border-white");
+    }
+});
+
+$("body").on('change', ".premium", function(event) {
+    if ($(".premium").is(":checked")) {
+        $(".pre").addClass("blue-bg");
+        $(".eco").removeClass("blue-bg");
+        $('.eco-card ').removeClass("border-white");
+        $('.pre-card ').addClass("border-white");
+    } else {
+        $(".pre").removeClass("blue-bg");
+        $('.pre-card ').removeClass("border-white");
+    }
+});
+
+$("body").on('change', ".eco", function(event) {
+    $(".economy").prop("checked", true);
+    $(".eco").addClass("blue-bg");
+    $(".pre").removeClass("blue-bg");
+    $('.eco-card ').addClass("border-white");
+    $('.pre-card ').removeClass("border-white");
+});
+
+$("body").on('change', ".pre", function(event) {
+    $(".premium").prop("checked", true);
+    $(".pre").addClass("blue-bg");
+    $(".eco").removeClass("blue-bg");
+    $('.eco-card ').removeClass("border-white");
+    $('.pre-card ').addClass("border-white");
+});
+
+$("body").on('change', ".card-block", function(event) {
+    $(".card-block").removeClass("turnthemeicon");
+    $(this).addClass("turnthemeicon");
+});
+
+$("body").on('change', ".card-methord02", function(event) {
+    $('.card-methord02').removeClass('turntheme');
+    $('.card-methord02').removeClass('check-icon02');
+    $(this).addClass('turntheme');
+    $(this).addClass('check-icon02');
+});
+
+$("body").on('change', ".categoryweb-select", function(event) {
+    console.log("change");
+    var id=$(this).val();
+
+    $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
+
+    var materal=$("#sub_"+id).data("subcategory");
+
+    materal.map((value)=>{
+        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
+    });
+
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
+        $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").parent().addClass("hidden");
+        $(this).closest(".d-flex").find(".fixed").attr("required", "required");
+        $(this).closest(".d-flex").find(".fixed").attr("name", "inventory_items[][quantity]");
+        $(this).closest(".d-flex").find(".range").removeAttr("required");
+        $(this).closest(".d-flex").find(".range").removeAttr("name");
+    }
+    if(type == 1)
+    {
+        $(this).closest(".d-flex").find(".fixed").addClass("hidden");
+        $(this).closest(".d-flex").find(".range").parent().removeClass("hidden");
+        $(this).closest(".d-flex").find(".range").attr("required", "required");
+        $(this).closest(".d-flex").find(".range").attr("name", "inventory_items[][quantity]");
+        $(this).closest(".d-flex").find(".fixed").removeAttr("required");
+        $(this).closest(".d-flex").find(".fixed").removeAttr("name");
+    }
+    return false;
+});

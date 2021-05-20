@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('web/api')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post("/login", [WebsiteRouter::class, 'login'])->name('api.login');
+
+    });
+
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
 
 
@@ -29,10 +34,14 @@ Route::prefix('website')->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name("home");
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
-    Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
     Route::get('/T&C', [WebsiteController::class, 'termsAndConditions'])->name("terms_and_conditions");
 
+    Route::get('/Book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
+
+    Route::middleware("checkWebSession")->group(function(){
+        Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
+    });
 });
 
 

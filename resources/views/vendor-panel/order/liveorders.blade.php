@@ -174,9 +174,9 @@
                                             </td>
                                             <td class="">
                                                 <a href="{{route('vendor.my-bid', ['id'=>$booking->public_booking_id])}}">
-                                                    <i class="p-1">
+                                                    <i class="p-1 tooltip-trigger">
                                                         <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
-                                                             alt="">
+                                                             alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
                                                     </i>
                                                 </a>
                                             </td>
@@ -184,7 +184,7 @@
                                         @if($type == "bookmarked")
                                             <td class="">
                                                 <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
-                                                    <i class="p-1">
+                                                    <i class="p-1 tooltip-trigger">
                                                         <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
                                                          alt="" data-toggle="tooltip" data-placement="top"
                                                              title="View Order Detail">
@@ -199,7 +199,7 @@
                                         @endif
                                         @if($type == "live")
                                             <td class="cursor-pointer" style="padding: 10px;">
-                                                <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
+                                                <a  class="inline-icon-button" href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
                                                     <i class="tooltip-trigger">
                                                         <img src="{{asset('static/vendor/images/acceptmark.svg')}}" alt=""
                                                              data-toggle="tooltip" data-placement="top"

@@ -178,7 +178,7 @@
                                 </div>
                               </div>
                               <div class="col-sm-6">
-                                <div class="form-inputs ">
+                                <div class="form-group">
                                 <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Do you have lift</label>
                                     <label class="container" style="margin-top: 10px; margin-left:-30px">
                                         <input type="hidden" value="0" name="source[meta][lift]" id="letter">
@@ -277,7 +277,7 @@
                             <div class="form-input" >
                               <label class="start-date">Start date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan" style="cursor: pointer;" />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan"  />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>
@@ -394,7 +394,7 @@
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
                               <label>Comments from Customers</label>
-                              <textarea placeholder="Need to Include movers for customer's bike too" id="" name="meta[customer][remarks]" class="form-control" rows="4"
+                              <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50"></textarea>
                               <span class="error-message">Please enter valid</span>
                             </div>
@@ -436,13 +436,13 @@
 
             <td class="">
                 <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                    <option value="">Choose Inventory</option>
+                    <option value="">Choose Item</option>
                 </select>
             </td>
 
             <td class="">
                 <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                    <option value="">Choose Inventory</option>
+                    <option value="">Choose Item</option>
                 </select>
             </td>
 

@@ -637,6 +637,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
 
     public static $classMap = array (
         'App\\Console\\Commands\\BidEnd' => __DIR__ . '/../..' . '/app/Console/Commands/BidEnd.php',
+        'App\\Console\\Commands\\Payout' => __DIR__ . '/../..' . '/app/Console/Commands/Payout.php',
         'App\\Console\\Commands\\WebSocket' => __DIR__ . '/../..' . '/app/Console/Commands/WebSocket.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Enums\\AdminEnums' => __DIR__ . '/../..' . '/app/Enums/AdminEnums.php',
@@ -697,6 +698,8 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Http\\Controllers\\VendorWebController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorWebController.php',
         'App\\Http\\Controllers\\Vendor\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Vendor/VendorController.php',
         'App\\Http\\Controllers\\WebController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebController.php',
+        'App\\Http\\Controllers\\WebsiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebsiteController.php',
+        'App\\Http\\Controllers\\WebsiteRouteController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebsiteRouteController.php',
         'App\\Http\\Controllers\\ZoneController' => __DIR__ . '/../..' . '/app/Http/Controllers/ZoneController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

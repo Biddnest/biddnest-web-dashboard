@@ -109,7 +109,7 @@
                                                 {{ucwords($banner->name)}}
                                             </p>
                                         </a>
-                                        <a href="#services" class="page-scroll btn btn-xl d-content">
+                                        <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
                                             <button type="button" class="btn btn-primary m-60">Book Now</button>
                                         </a>
                                     </div>

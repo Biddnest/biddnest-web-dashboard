@@ -178,7 +178,7 @@
                                 </div>
                               </div>
                               <div class="col-sm-6">
-                                <div class="form-inputs ">
+                                <div class="form-group">
                                 <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Do you have lift</label>
                                     <label class="container" style="margin-top: 10px; margin-left:-30px">
                                         <input type="hidden" value="0" name="source[meta][lift]" id="letter">

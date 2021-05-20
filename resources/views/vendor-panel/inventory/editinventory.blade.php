@@ -23,58 +23,65 @@
                     <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('api.updateInventoryPrices')}}" method= "PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.inventorymgt')}}" data-alert="tiny" id="myForm" data-parsley-validate>                        <div class="header-wraps" >
                             <input type="hidden" name="inventory_id" value="{{$inventory_id}}">
 {{--                            <input type="hidden" value="{{$service_id}}" name="service_type">--}}
-                            <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
-                                <thead class="secondg-bg p-0">
-                                <tr>
-                                    <th scope="col" style="width: 132px;">Item</th>
-                                    <th scope="col">Size</th>
-                                    <th scope="col" class="text-center">Material</th>
-                                    <th scope="col" class="text-center">Economic Price</th>
-                                    <th scope="col" class="text-center">Premium Price</th>
-                                </tr>
-                                </thead>
-                                <tbody class="mtop-20 inventory-snip">
-                                @if($inventories)
-                                    @foreach($inventories as $inventory)
-                                            <tr class="tb-border">
-                                                <td scope="row">
-                                                    <span>{{$item->name}}</span>
-                                                    <input type="hidden" value="{{$inventory->id}}" name="price[][id]">
-                                                </td>
-                                                <td>
-                                                    <span>{{$inventory->size}}</span>
-                                                    <input type="hidden" value="{{$inventory->size}}" name="price[][size]">
-                                                </td>
-                                                <td class="text-center">
-                                                    <span>{{$inventory->material}}</span>
-                                                    <input type="hidden" value="{{$inventory->material}}" name="price[][material]">
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center inventroy-price">
-                                                        <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][price][economics]" value="{{$inventory->price_economics}}" id="" placeholder="400"></div>
-                                                        <div class="currancy distance">/km</div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center inventroy-price">
-                                                        <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][price][premium]" value="{{$inventory->price_premium}}" id="" placeholder="500"></div>
-                                                        <div class="currancy distance">/km</div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
+                                    <thead class="secondg-bg p-0">
+                                        <tr>
+                                            <th scope="col" style="width: 132px;">Item</th>
+                                            <th scope="col">Size</th>
+                                            <th scope="col" class="text-center">Material</th>
+                                            <th scope="col" class="text-center">Economic Price</th>
+                                            <th scope="col" class="text-center">Premium Price</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach($service_types as $service_type)
+                                        <tbody class="mtop-20 inventory-snip">
+                                            <tr class="tb-border"><td scope="row"><h4>{{$service_type->service->name}}</h4></td></tr>
+                                            @if($inventories)
+                                                @foreach($inventories as $inventory)
+                                                    @if($service_type->service->id == $inventory->service_type)
+                                                        <tr class="tb-border">
+                                                            <td scope="row">
+                                                                <span>{{$item->name}}</span>
+                                                                <input type="hidden" value="{{$inventory->id}}" name="price[][id]">
+                                                            </td>
+                                                            <td>
+                                                                <span>{{$inventory->size}}</span>
+                                                                <input type="hidden" value="{{$inventory->size}}" name="price[][size]">
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span>{{$inventory->material}}</span>
+                                                                <input type="hidden" value="{{$inventory->material}}" name="price[][material]">
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="d-flex justify-content-center inventroy-price">
+                                                                    <div class="currancy">₹</div>
+                                                                    <div class="form-input table-input"><input type="number" class="form-control" name="price[][price][economics]" value="{{$inventory->price_economics}}" id="" placeholder="400"></div>
+                                                                    <div class="currancy distance">/km</div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="d-flex justify-content-center inventroy-price">
+                                                                    <div class="currancy">₹</div>
+                                                                    <div class="form-input table-input"><input type="number" class="form-control" name="price[][price][premium]" value="{{$inventory->price_premium}}" id="" placeholder="500"></div>
+                                                                    <div class="currancy distance">/km</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </tbody>
                                     @endforeach
-                                @endif
-                                </tbody>
-                            </table>
-                            @if(count($inventories) == 0)
-                                <div class="row hide-on-data">
-                                    <div class="col-md-12 text-center p-20">
-                                        <p class="font14"><i>. You didn't add any price on this Inventory.</i></p>
+                                </table>
+                                @if(count($inventories) == 0)
+                                    <div class="row hide-on-data">
+                                        <div class="col-md-12 text-center p-20">
+                                            <p class="font14"><i>. You didn't add any price on this Inventory.</i></p>
+                                        </div>
                                     </div>
-                                </div>
-                            @endif
+                                @endif
+
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-20 border-top pt-0 pb-0">
                             <div class="w-50">

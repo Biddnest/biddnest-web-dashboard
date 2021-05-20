@@ -36,20 +36,24 @@
                             <th scope="col" class="text-center">Primium Price</th>
                         </tr>
                         </thead>
-                        <tbody class="mtop-20 ">
+                        @foreach($service_types as $service_type)
+                            <tbody class="mtop-20 ">
+                                <tr class="tb-border"><td scope="row" style="font-size: 14px; font-weight: 700;">{{$service_type->service->name}}</td></tr>
+                                @foreach($inventories->prices as $inventory)
+                                    @if($service_type->service->id == $inventory->service_type)
+                                        <tr class="tb-border">
+                                            <td scope="row"> Size :{{$inventory->size}}
+                                                <br>
+                                                Material :{{$inventory->material}}
+                                            </td>
 
-                            @foreach($inventories->prices as $inventory)
-                                <tr class="tb-border">
-                                    <td scope="row"> Size :{{$inventory->size}}
-                                        <br>
-                                        Material :{{$inventory->material}}
-                                    </td>
-
-                                    <td class="text-center">₹ {{$inventory->price_economics}}</td>
-                                    <td class="text-center">₹ {{$inventory->price_premium}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                                            <td class="text-center">₹ {{$inventory->price_economics}}</td>
+                                            <td class="text-center">₹ {{$inventory->price_premium}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        @endforeach
                     </table>
                     @if(count($inventories->prices) == 0)
                         <div class="row hide-on-data">

@@ -510,7 +510,6 @@ $("body").on('click', ".rejected", function(event) {
         cancelButtonColor: '#d33',
         confirmButtonColor: '#FDC403',
         confirmButtonText: 'Yes!',
-        customClass: "Custom_Cancel"
 
     }).then((result) => {
         if (result.isConfirmed) {

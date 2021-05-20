@@ -131,7 +131,7 @@
                                             <th scope="col" style="padding: 14px;">Time Left</th>
                                         @endif
                                         @if($type == "participated")
-                                            <th scope="col" style="padding: 14px;">Bid Status</th>
+                                            <th scope="col" style="padding: 14px; text-align:center !important">Bid Status</th>
                                         @endif
                                         @if($type == "scheduled")
                                             <th scope="col" style="padding: 14px;">Submitted On</th>

@@ -25,7 +25,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10">
                                 <div class="steps-container  ">
-                                    <hr class="dash-line" >
+                                    <hr class="dash-line" style="width: 80%;     margin-left: 50px;" >
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">

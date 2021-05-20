@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10">
                                 <div class="steps-container  ">
-                                    <hr class="dash-line" >
+                                    <hr class="dash-line"  style="width: 88%; margin-left: 50px;" >
                                     @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex  border-bottom pb-0">
+                        <div class="d-flex border-top  border-bottom pb-0">
                             <ul class="nav nav-tabs pt-20 p-0 f-18" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link" id="new-order-tab" data-toggle="tab" href="{{route('vendor.detailsbookings',['id'=>$booking->public_booking_id])}}" role="tab" aria-controls="home" aria-selected="true">Order Details</a>

@@ -33,13 +33,13 @@
                                 <div class="col-lg-10">
                                     <div class="card h-auto p-0 pt-10">
                                         <div class="card-head right text-left border-bottom-2 p-10 pt-20 pb-0">
-                                            <h3 class="f-18 mb-4 theme-text">
+                                            <h3 class="f-18 mb-0 mt-2  theme-text">
                                                Create Service
                                             </h3>
                                         </div>
                                         <form
                                         class="form-new-order onboard-vendor-form input-text-blue">
-                                        <div class="d-flex pa-20 row p-10">
+                                        <div class="d-flex pa-20 mr-1 ml-1 row p-10">
 
                                             <div class="col-lg-6">
                                                 <div class="form-input">

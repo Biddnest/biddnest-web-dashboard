@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 pt-10 p-60 text-center">
-                                            <h3 class="f-24 theme-text bold p-10">Time Left</h3>
+                                            <h3 class="f-24 theme-text bold p-10" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">Time Left</h3>
                                             <div id="app"><span class="text-center timer f-24" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></div>
                                         </div>
                                     </div>

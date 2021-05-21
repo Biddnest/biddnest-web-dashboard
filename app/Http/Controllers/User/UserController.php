@@ -329,6 +329,13 @@ class UserController extends Controller
     {
         $otp = Helper::generateOTP(6);
 
+        $phone_exist=User::where("phone",$phone)->first();
+
+        if($phone_exist)
+        {
+            return Helper::response(false, "Phone number is exist.");
+        }
+
         User::where("id",$id)->update(["verf_code"=>$otp]);
 
         dispatch(function() use($phone, $otp){

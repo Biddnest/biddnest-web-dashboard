@@ -450,7 +450,7 @@
                     </header>
                 </div>
                 <div class="modal-body  margin-topneg-7">
-                    <form data-alert="inline" action="{{ route('api.login') }}" method="POST" onsubmit="return false;" data-parsley-validate >
+                    <form class="px-3 login" data-alert="mega" action="{{ route('api.login') }}" method="POST"  data-parsley-validate >
                         <div class="d-flex f-direction text-justify center">
                             <h2 class="p-text">Login</h2>
                             <div class="col-lg-12 col-xs-12 mt-3">
@@ -459,11 +459,15 @@
                                     <input type="text" class="form-control" name="phone" id="formGroupExampleInput" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <a {{--data-toggle="modal" data-target="#otp-modal"--}}>
+                            {{--<button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
+                                submit
+                            </button>--}}
+                            <a data-toggle="modal" data-target="#otp-modal">
                                 <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
-                                    submit
+                                    Submit
                                 </button>
                             </a>
+
                         </div>
                     </form>
                 </div>
@@ -483,26 +487,27 @@
                     </header>
                 </div>
                 <div class="modal-body  margin-topneg-7">
-                    <div class="d-flex f-direction text-justify center">
-                        <h2 class="p-text">Login</h2>
-                        <div class="col-lg-12 col-xs-12 mt-3">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Phone Number</label>
-                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="9990009990" required>
+                    <form action="{{ route('api.otp') }}" method="POST" data-next="refresh" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue onboard-vendor-form" id="myForm" data-parsley-validate>
+                        <div class="d-flex f-direction text-justify center">
+                            <h2 class="p-text">Login</h2>
+                            <div class="col-lg-12 col-xs-12 mt-3">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Phone Number</label>
+                                    <input type="number" class="form-control" name="phone" id="formGroupExampleInput" placeholder="9990009990" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12 col-xs-12 mt-3">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">OTP</label>
-                                <input type="number" class="form-control" id="formGroupExampleInput" placeholder="9990009990" required>
+                            <div class="col-lg-12 col-xs-12 mt-3">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">OTP</label>
+                                    <input type="number" class="form-control" name="otp" id="formGroupExampleInput" placeholder="9990009990" required>
+                                </div>
                             </div>
+
+                                <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
+                                    submit
+                                </button>
                         </div>
-                        <a href="./book-move.html">
-                            <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
-                                submit
-                            </button>
-                        </a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -523,11 +528,11 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>SVM Complex,indiranagar,Benguluru</label>
-                                <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control p-2 mt-2 mb-3" required>
+                                <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete" class="form-control" required>
                                 <span class="error-message">Please enter valid</span>
                             </div>
                         </div>
-                        <div id="mapcomponent" class="source-map-picker"></div>
+                        <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
 
                     </div>
                 </div>
@@ -535,7 +540,7 @@
         </div>
         <!-- location to picker -->
         <div class="modal fade" id="to_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-dialog theme-text input-text-blue" role="document">
             <div class="modal-content w-1000 mt-50 right-25">
                 <div class="modal-header bg-purple">
                     <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
@@ -549,15 +554,15 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>SVM Complex,indiranagar,Benguluru</label>
-                            <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete2" class="form-control p-2 mt-2 mb-3" required>
+                            <input type="text" placeholder="Srm colony,Chennai" id="dest-autocomplete" class="form-control">
                             <span class="error-message">Please enter valid</span>
                         </div>
                     </div>
-                    <div id="mapcomponent" class="dest-map-picker"></div>
+                    <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
         <script>
             function openContent(evt, cityName) {
                 var i, tabcontent, tablinks;

@@ -22,6 +22,20 @@ class WebsiteRouteController extends Controller
 
     }
 
+    public function verifyOtp(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|string|min:10',
+            'otp' => 'required|numeric'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return UserController::verifyLoginOtpWeb($request->phone, $request->otp, true);
+
+    }
+
     public function addVendor(Request $request)
     {
         $validation = Validator::make($request->all(),[

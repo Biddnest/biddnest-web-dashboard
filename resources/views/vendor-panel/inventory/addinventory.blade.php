@@ -72,15 +72,15 @@
                             </div>
                         </div>--}}
 
-                        <div class="header-wraps" >
+                        <div class="header-wraps p-0" >
                             <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
                                 <thead class="secondg-bg p-0">
                                 <tr>
-                                    <th scope="col" style="width: 132px;">Item</th>
+                                    <th scope="col" style="width: 132px; padding:14px">Item</th>
                                     <th scope="col">Size</th>
-                                    <th scope="col" class="text-center">Material</th>
-                                    <th scope="col" class="text-center">Economic Price</th>
-                                    <th scope="col" class="text-center">Premium Price</th>
+                                    <th scope="col" class="text-center" style="padding:14px">Material</th>
+                                    <th scope="col" class="text-center" style="padding:14px">Economic Price</th>
+                                    <th scope="col" class="text-center" style="padding:14px">Premium Price</th>
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20 inventory-snip">

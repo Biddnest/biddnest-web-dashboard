@@ -40,10 +40,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'site' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+
 
         'api' => [
             'driver' => 'token',

@@ -368,7 +368,7 @@ class BookingsController extends Controller
         return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
-    public static function bookingHistoryLive($user_id)
+    public static function bookingHistoryLive($user_id, $web=false)
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
@@ -383,8 +383,10 @@ class BookingsController extends Controller
         /*if (!$bookingorder) {
             return Helper::response(false, "No Booking Found");
         }*/
-
-        return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
+        if($web)
+            return $bookingorder;
+        else
+            return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
     public static function reschedulBooking($public_booking_id, $dates, $user_id)

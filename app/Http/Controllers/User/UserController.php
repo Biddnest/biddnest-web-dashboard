@@ -69,7 +69,7 @@ class UserController extends Controller
      * @param $otp
      * @return JsonResponse|object
      */
-    public static function verifyLoginOtp($phone, $otp, $web=false){
+    public static function verifyLoginOtp($phone, $otp){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
@@ -85,7 +85,7 @@ class UserController extends Controller
             if($user->fname){
                 $data = $user;
             }
-            if($web){
+            if($web == true){
                 Session::put(["account"=>['id'=>$user->id,
                     'name'=>$user->fname.' '.$user->lname,
                     'email'=>$user->email]]);
@@ -99,6 +99,34 @@ class UserController extends Controller
                     "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
                 ]);
             }
+
+        }else {
+            return Helper::response(false, "Incorrect otp provided");
+        }
+    }
+
+    public static function verifyLoginOtpWeb($phone, $otp){
+        $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
+        if(!$user)
+            return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
+
+        if($user->verf_code == null){
+            return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
+        } else if($user->verf_code == $otp) {
+            User::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
+
+            $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
+
+            $data = null;
+            if($user->fname){
+                $data = $user;
+            }
+
+            Session::put(["account"=>['id'=>$user->id]]);
+            Session::put('sessionFor', "user");
+            return Helper::response(true, "Otp has been verified",[
+                    "user"=>$data
+                ]);
 
         }else {
             return Helper::response(false, "Incorrect otp provided");

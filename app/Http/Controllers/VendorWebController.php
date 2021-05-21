@@ -166,7 +166,8 @@ class VendorWebController extends Controller
         $inventory=Inventory::where(['id'=>$request->id, 'deleted'=>CommonEnums::$NO])->with(['prices'=>function($query){
             $query->where(['organization_id'=>Session::get('organization_id'),'deleted'=>CommonEnums::$NO]);
         }])->first();
-        return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory]);
+        $service_types=InventoryPrice::select('service_type')->where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->groupBy('service_type')->with('service')->get();
+        return view('vendor-panel.inventory.inventorysidebar', ['inventories'=>$inventory, "service_types"=>$service_types]);
     }
 
     public function getBranches(Request $request)
@@ -430,7 +431,7 @@ class VendorWebController extends Controller
     public function addInventory(Request $request)
     {
         $inventory_items=[];
-        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereNotIn('id', InventoryPrice::where('organization_id', Session::get('organization_id'))->where("deleted", CommonEnums::$NO)->pluck('inventory_id'))->get();
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereNotIn('id', InventoryPrice::where(['organization_id'=>Session::get('organization_id'),"service_type"=>$request->id])->where("deleted", CommonEnums::$NO)->pluck('inventory_id'))->get();
         if(isset($request->item)) {
             $inventory_items =Inventory::where('id', $request->item)->first();
         }
@@ -441,6 +442,7 @@ class VendorWebController extends Controller
     {
         $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->get();
         $inventory_item=Inventory::where('id', $request->id)->first();
-        return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory, 'item'=>$inventory_item, 'inventory_id'=>$request->id]);
+        $service_types=InventoryPrice::select('service_type')->where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->groupBy('service_type')->with('service')->get();
+        return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory, 'item'=>$inventory_item, 'service_types'=>$service_types, 'inventory_id'=>$request->id]);
     }
 }

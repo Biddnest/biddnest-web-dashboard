@@ -65,4 +65,23 @@ class WebsiteRouteController extends Controller
 
         return OrganisationController::addForWeb($request->all(), $meta, $admin);
     }
+
+    public function editProfile(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'fname'=>'required|string',
+            'lname'=>'required|string',
+            'phone'=>'required|string',
+            'email'=>'required',
+            'gender'=>'required|string',
+            'dob'=>'required',
+            'image'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone);
+    }
 }

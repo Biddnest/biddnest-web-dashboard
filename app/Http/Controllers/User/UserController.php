@@ -188,7 +188,7 @@ class UserController extends Controller
      * @return JsonResponse|object
      */
     public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar, $phone=null){
-        $user = User::where("id",$id)->where([ 'deleted'=>0])->first();
+        $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
 
@@ -331,5 +331,34 @@ class UserController extends Controller
         ]);
 
         return $user;
+    }
+
+    public static function updateMobile($id, $phone)
+    {
+        $otp = Helper::generateOTP(6);
+
+        User::where("id",$id)->update(["verf_code"=>$otp]);
+
+        dispatch(function() use($phone, $otp){
+            Sms::sendOtp($phone, $otp);
+        })->afterResponse();
+        $data['otp'] = $otp;
+
+        return Helper::response(true, "Otp has been sent to the new phone.", $data);
+    }
+
+    public static function verifyMobile($id, $phone, $otp)
+    {
+        $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
+        if($user->verf_code == $otp)
+        {
+            User::where("id",$id)->update(["phone"=>$phone, "verf_code"=>null,"otp_verified"=>1]);
+            return Helper::response(true, "Contact number has been updated.",[
+                "user"=>User::select(self::$publicData)->findOrFail($user->id)
+            ]);
+        }
+        else {
+            return Helper::response(false, "Incorrect otp provided");
+        }
     }
 }

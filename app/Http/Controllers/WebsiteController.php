@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use App\Models\Service;
 use App\Models\Testimonials;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
@@ -69,6 +70,7 @@ class WebsiteController extends Controller
 
     public function finalQuote(Request $request)
     {
+        $id=$request->booking_id;
         return view('website.booking.finalquote');
     }
 
@@ -90,7 +92,8 @@ class WebsiteController extends Controller
 
     public function myProfile(Request $request)
     {
-        return view('website.myprofile');
+        $user = User::where('id', 214)->first();
+        return view('website.myprofile', ['user'=>$user]);
     }
     public function myRequest(Request $request)
     {

@@ -52,13 +52,13 @@ class WebsiteController extends Controller
     }
     public function estimateBooking(Request $request)
     {
-        $id=$request->booking_id;
+        $id=$request->id;
         return view('website.booking.estimatebooking');
     }
 
     public function placeBooking(Request $request)
     {
-        $id=$request->booking_id;
+        $id=$request->id;
         return view('website.booking.placebooking');
     }
 
@@ -70,13 +70,13 @@ class WebsiteController extends Controller
 
     public function finalQuote(Request $request)
     {
-        $id=$request->booking_id;
-        return view('website.booking.finalquote');
+        $booking=BookingsController::getBookingByPublicIdForApp($request->id, 214, true);
+        return view('website.booking.finalquote', ['booking'=>$booking]);
     }
 
     public function payment(Request $request)
     {
-        $id=$request->booking_id;
+        $id=$request->id;
         return view('website.booking.payment');
     }
 
@@ -98,7 +98,8 @@ class WebsiteController extends Controller
     }
     public function myRequest(Request $request)
     {
-        return view('website.myrequest');
+        $tickets=TicketController::get(214, true);
+        return view('website.myrequest', ['tickets'=>$tickets]);
     }
 
 }

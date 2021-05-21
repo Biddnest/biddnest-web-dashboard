@@ -48,7 +48,7 @@
                                             <div class="d-flex">
                                                 <div class="d-flex f-direction">
                                                     <p class="l-cap pl-2 mb-0">Distance</p>
-                                                    <p class=" f-18 pl-2">{{json_decode($booking->meta, true)['distance']}}Km</p>
+                                                    <p class=" f-18 pl-2">{{json_decode($booking->meta, true)['distance']}} Km</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,6 +67,14 @@
                                                         <a class="white-text" href="{{route('estimate-booking', ['id'=>$booking->public_booking_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Enquiry
+                                                            </button>
+                                                        </a>
+                                                    @break
+                                                    @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['placed']; @endphp
+                                                        <a class="white-text" href="{{route('estimate-booking', ['id'=>$booking->public_booking_id])}}">
+                                                            <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
+                                                                Placed
                                                             </button>
                                                         </a>
                                                     @break

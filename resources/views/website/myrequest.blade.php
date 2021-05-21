@@ -28,25 +28,62 @@
                         <div class="row">
                             <div class="col-md-8 col-xs-12 col-sm-12  border-right">
                                 <h5 class="heading ml-4 mt-4">My Request</h5>
-                                <div class="card ml-4 mt-4">
+                                @foreach($tickets as $ticket)
+                                    <div class="card ml-4 mt-4">
                                     <div class="card-body">
                                         <div>
                                             <div class="d-flex justify-content-between">
                                                 <div class="ticket-id pt-4">
                                                     <h6 class="para-head light pl-2">
-                                                        REQUEST ID <span class="bold">: #454567</span>
+                                                        REQUEST ID <span class="bold">: #{{$ticket->id}}</span>
                                                     </h6>
                                                 </div>
-                                                <div class="status-badge bg-green white-text h-content">
-                                                    <a data-toggle="modal" data-target="#req-modal">
-                                                        <p class="f-10 mb-0">COMPLETED</p>
-                                                    </a>
-                                                </div>
+                                                @switch($ticket->status)
+                                                    @case(\App\Enums\TicketEnums::$STATUS['open'])
+                                                        <div class="status-badge bg-green white-text h-content" style="min-width: auto!important;">
+                                                            <a data-toggle="modal" data-target="#req-modal">
+                                                                <p class="f-12 mb-0" style="padding-left: 0px!important;">
+                                                                    Open
+                                                                </p>
+                                                            </a>
+                                                        </div>
+                                                    @break;
+
+                                                    @case(\App\Enums\TicketEnums::$STATUS['closed'])
+                                                        <div class="status-badge bg-green white-text h-content"  style="min-width: auto!important;">
+                                                            <a data-toggle="modal" data-target="#req-modal">
+                                                                <p class="f-12 mb-0" style="padding-left: 0px!important;">
+                                                                    Closed
+                                                                </p>
+                                                            </a>
+                                                        </div>
+                                                    @break;
+
+                                                    @case(\App\Enums\TicketEnums::$STATUS['rejected'])
+                                                        <div class="status-badge bg-red white-text h-content"  style="min-width: auto!important;">
+                                                            <a data-toggle="modal" data-target="#req-modal">
+                                                                <p class="f-12 mb-0" style="padding-left: 0px!important;">
+                                                                    Rejected
+                                                                </p>
+                                                            </a>
+                                                        </div>
+                                                    @break;
+
+                                                    @case(\App\Enums\TicketEnums::$STATUS['resolved'])
+                                                        <div class="status-badge bg-green white-text h-content" style="min-width: auto!important;">
+                                                            <a data-toggle="modal" data-target="#req-modal">
+                                                                <p class="f-12 mb-0" style="padding-left: 0px!important;">
+                                                                    Resolved
+                                                                </p>
+                                                            </a>
+                                                        </div>
+                                                    @break;
+                                                @endswitch
                                             </div>
-                                            <h6 class="para-head pl-2">Demo Subject</h6>
+                                            <h6 class="para-head pl-2">{{ucwords($ticket->heading)}}</h6>
                                             <p class="para">
-                                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.
-                                                <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>
+                                                {{$ticket->desc}}
+                                              {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}
 
                                             </p>
                                         </div>
@@ -81,82 +118,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card mt-4 ml-4">
-                                    <div class="card-body">
-                                        <div>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="ticket-id pt-4">
-                                                    <h6 class="para-head pl-2 light">
-                                                        REQUEST ID <span class="bold">: #454567</span>
-                                                    </h6>
-                                                </div>
-                                                <div class="status-badge bg-red white-text h-content">
-                                                    <p class="f-10 mb-0">PENDING</p>
-                                                </div>
-                                            </div>
-                                            <h6 class="para-head pl-2">Demo Subject</h6>
-                                            <p class="para">
-                                                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.
-                                                <span id="pending_more" class="cursor-pointer" href="#" onclick="toggle_pending('more_content');">.....View more </span>
-                                            </p>
-                                        </div>
-                                        <div id="more_content" class="togglenone">
-                                            <div class="ticket-id d-flex pt-4  border-top justify-content-between">
-                                                <p class="para-head l-cap">Ticket Id : <span>#454556</span></p>
-                                                <p class="bg-blur col-orange l-cap">In process</p>
-                                            </div>
-                                            <div class="ticket-id border-top pt-4">
-                                                <h6 class="para-head ml-1">Subject</h6>
-                                                <p class="l-cap col-grey pl-1">Category</p>
-                                                <p class="para pl-1"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                            </div>
-                                            <div class="reply border-top pt-4">
-                                                <h5 class="para-head mb-3">Reply</h5>
-                                                <div class="d-flex">
-                                                    <i class="fa fa-square f-52"></i>
-                                                    <!-- <i class="fas fa-stop"></i> -->
-                                                    <div class="mt-1">
-                                                        <h6 class="para-text bold ml-3 mb-0">Customer Support</h6>
-                                                        <p class="text-muted ml-1">2 days ago</p>
-                                                        <p class="para ml-1"> Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting
-                                                            industry. Ipsum has been the industry’s
-                                                        </p>
-                                                        <p class="para ml-1">
-                                                            industry’s standard dummy text ever since the 1500s, when an unknown
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="col-md-4 col-xs-12 col-sm-12 ">
                                 <h5 class="heading mt-4 f-20 mb-3">New Request</h5>
-                                <form>
+                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh"  data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
                                     <div class="form-group">
                                         <label class="phone-num-lable">Category</label>
-                                        <span class="">
-                                              <select id="" class="form-control">
-                                                <option>Vendor</option>
-                                                <option>Sale</option>
-                                                <option>Purchase</option>
+                                              <select name="category" class="form-control" required>
+                                                <option value="">--Select--</option>
+                                                  @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
+                                                      <option value="{{$key}}">{{ucwords($type)}}</option>
+                                                  @endforeach
                                               </select>
                                               <span class="error-message">Please enter valid
                                                 Designation</span>
-                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label for="formGroupExampleInput" class="para-head">Subject</label>
-                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="David" />
+                                        <input type="text" class="form-control" id="formGroupExampleInput" name="heading" placeholder="Subject" required/>
                                     </div>
                                     <div class="form-input">
                                         <label class="para-head">Message</label>
-                                        <span class="">
-                                              <textarea id="" class="form-control" rows="4" placeholder="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                                                              "></textarea>
+                                              <textarea id="" class="form-control" name="desc" rows="4" placeholder="Description" required></textarea>
                                               <span class="error-message">Please enter valid</span>
-                                        </span>
                                     </div>
                                     <a class="white-text" href="#">
                                         <button class="btn mt-4 btn-theme-bg full-width white-bg">

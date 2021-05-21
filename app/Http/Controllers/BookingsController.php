@@ -313,7 +313,7 @@ class BookingsController extends Controller
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
     }
 
-    public static function getBookingByPublicIdForApp($public_booking_id, $user_id)
+    public static function getBookingByPublicIdForApp($public_booking_id, $user_id, $web=false)
     {
         $booking = Booking::where("public_booking_id", $public_booking_id)
             //            ->where("user_id", $user_id)
@@ -341,7 +341,10 @@ class BookingsController extends Controller
             return Helper::response(false, "Invalid Booking id");
         }
 
-        return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
+        if($web)
+            return $booking;
+        else
+            return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
     }
 
     public static function bookingHistoryPast($user_id, $web=false)

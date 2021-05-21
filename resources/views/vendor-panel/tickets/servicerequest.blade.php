@@ -114,7 +114,7 @@
                                                 @break
 
                                                 @case(\App\Enums\TicketEnums::$STATUS['resolved'])
-                                                    <span class="green-bg  text-center td-padding">Resolved</span>
+                                                    <span class="  text-center td-padding" style="background-color: #e5fcf1;">Resolved</span>
                                                 @break
 
                                                 @case(\App\Enums\TicketEnums::$STATUS['closed'])

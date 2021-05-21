@@ -27,7 +27,7 @@ Route::prefix('web/api')->group(function () {
     });
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
-
+    Route::put('/my-request', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
 
 });
 
@@ -48,6 +48,7 @@ Route::prefix('website')->group(function () {
     Route::get('/my-bookings/order-history', [WebsiteController::class, 'bookingHistory'])->name("order-history");
     Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("my-profile");
     Route::get('/my-request', [WebsiteController::class, 'myRequest'])->name("my-request");
+
 
     Route::middleware("checkWebSession")->group(function(){
         Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");

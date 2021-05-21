@@ -84,4 +84,18 @@ class WebsiteRouteController extends Controller
 
         return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone);
     }
+
+    public function addTicket(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'category'=>'required',
+            'heading' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::createForUserApp(214, $request->category, [], $request->heading, $request->desc);
+    }
 }

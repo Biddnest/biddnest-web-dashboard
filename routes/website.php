@@ -27,7 +27,9 @@ Route::prefix('web/api')->group(function () {
     });
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
-    Route::put('/my-request', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
+    Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
+
+    Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");
 
 });
 

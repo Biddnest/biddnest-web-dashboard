@@ -318,7 +318,7 @@ class TicketController extends Controller
         }
     }
 
-    public static function get($sender_id = null)
+    public static function get($sender_id = null, $web=false)
     {
         if(!$sender_id)
         {
@@ -336,7 +336,10 @@ class TicketController extends Controller
         if(!$tickets)
             return Helper::response(false, "Could'nt get ticket.");
 
-        return Helper::response(true, "Ticket raised",["ticket"=>$tickets]);
+        if($web)
+            return $tickets;
+        else
+            return Helper::response(true, "Ticket raised",["ticket"=>$tickets]);
     }
 
     public static function addReplyFromUser($sender_id, $ticket_id, $reply)

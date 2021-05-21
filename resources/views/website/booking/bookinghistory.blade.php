@@ -35,20 +35,20 @@
                                                     <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">From</p>
-                                                        <p class=" f-18 pl-2">Bangaluru</p>
+                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
                                                     <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">To</p>
-                                                        <p class=" f-18 pl-2">Chennai</p>
+                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">Distance</p>
-                                                        <p class=" f-18 pl-2">314Km</p>
+                                                        <p class=" f-18 pl-2">{{json_decode($booking->meta, true)['distance']}} Km</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -57,15 +57,29 @@
                                             <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
                                                 <div>
                                                     <p class="bold mt-1 pl-4">
-                                                        #312334 <span class="light">| 12 Dec 21</span>
+                                                        #{{$booking->public_booking_id}} <span class="light">| @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
                                                     </p>
                                                 </div>
                                                 <div>
-                                                    <a class="white-text" href="#">
-                                                        <button class="btn btn-green-bg f-10 white-bg" data-toggle="modal" data-target="#order-history-modal_{{$booking->id}}">
-                                                            completed
-                                                        </button>
-                                                    </a>
+                                                    @switch($booking->status)
+                                                        @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['completed']; @endphp
+                                                        <a class="white-text" href="#">
+                                                            <button class="btn f-12 white-bg" data-toggle="modal" data-target="#order-history-modal_{{$booking->id}}" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
+                                                                Completed
+                                                            </button>
+                                                        </a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['cancelled']; @endphp
+                                                        <a class="white-text" href="#">
+                                                            <button class="btn f-12 white-bg" data-toggle="modal" data-target="#order-history-modal_{{$booking->id}}" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
+                                                                Cancelled
+                                                            </button>
+                                                        </a>
+                                                        @break
+                                                    @endswitch
                                                 </div>
                                             </div>
                                         </div>
@@ -107,44 +121,53 @@
                                     <div class="d-flex border-bottom justify-content-between">
                                         <div>
                                             <p class="f-14">FROM</p>
-                                            <p class="bg-blur f-18">Bengaluru</p>
+                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
                                         <div class="mt-1 pt-3">
                                             <img src="{{asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div>
                                             <p class="f-14">TO</p>
-                                            <p class="bg-blur f-18">Chennai</p>
+                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left ">
                                         <div>
                                             <h6 class="l-cap f-14">Date</h6>
-                                            <h5 class="f-14">20 Jan 21</h5>
+                                            <h5 class="f-14">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Price</h6>
-                                            <h5 class="f-14">Rs. 9,800</h5>
+                                            <h5 class="f-14">{{$booking->final_quote}}</h5>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left">
                                         <div>
                                             <h6 class="l-cap f-14">Order ID</h6>
-                                            <h5 class="f-14">#312334</h5>
+                                            <h5 class="f-14">#{{$booking->public_booking_id}}</h5>
                                         </div>
                                         <div class="m-w-60">
                                             <h6 class="l-cap f-14">Distance</h6>
-                                            <h5 class="f-14">314 KM</h5>
+                                            <h5 class="f-14">{{json_decode($booking->meta, true)['distance']}} KM</h5>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left">
                                         <div>
                                             <h6 class="l-cap f-14">Status</h6>
-                                            <h5 class="f-14">Booked</h5>
+                                            <h5 class="f-14">
+                                                @switch($booking->status)
+                                                    @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                        Completed
+                                                    @break;
+                                                    @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                        Cancelled
+                                                    @break;
+                                                @endswitch
+                                            </h5>
                                         </div>
                                         <div class="m-w-60 -mr-10">
                                             <h6 class="l-cap f-14">Category</h6>
-                                            <h5 class="f-14">Commercial</h5>
+                                            <h5 class="f-14">{{ucwords($booking->service->name)}}</h5>
                                         </div>
                                     </div>
 
@@ -153,29 +176,29 @@
                                             <div class="d-flex justify-content-between  pr-2">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 pl-0 ">Driver</p>
-                                                    <p class="mt-0 pl-0 f-14">Omkar Patel</p>
+                                                    <p class="mt-0 pl-0 f-14">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}}@endif</p>
                                                 </div>
                                                 <div>
                                                     <div>
                                                         <p class="l-cap f-12 mb-0 pl-0">Vehicle Name</p>
-                                                        <p class="f-14 mt-0 pl-0">Motor-X</p>
+                                                        <p class="f-14 mt-0 pl-0">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-between  pr-2">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 pl-0">Phone Number</p>
-                                                    <p class="mt-0 pl-0 f-14">9099090999</p>
+                                                    <p class="mt-0 pl-0 f-14">@if($booking->driver){{$booking->driver->phone}}@endif</p>
                                                 </div>
                                                 <div class="pr-1">
                                                     <p class="l-cap f-12 mb-0 pl-0">Vehicle Type</p>
-                                                    <p class="mt-0 pl-0 f-14">Heavy</p>
+                                                    <p class="mt-0 pl-0 f-14">@if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end pr-2">
                                                 <div class="pr-3">
                                                     <p class="l-cap f-12 mb-0 pl-0">Manpower</p>
-                                                    <p class="mt-0 pl-0 f-14">5</p>
+                                                    <p class="mt-0 pl-0 f-14">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
                                                 </div>
                                             </div>
                                         </div>

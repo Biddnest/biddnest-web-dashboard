@@ -25,16 +25,17 @@
                 </div>
                 <div class="tab-content margin-topneg-7 border-top" id="myTabContent">
                     <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
-                        <div class="text-center" id="timer">
-                            <h4 class="border-bottom p-4">ORDER ID <span>#232345</span></h4>
-                            <p class="text-muted pt-4 italic">
-                                You will get the estimated price once the time is up
-                            </p>
-                            <h3 class="f-18 pb-4 bold mt-2">Time Left</h3>
+                        @if(($booking->status == \App\Enums\BookingEnums::$STATUS['biding']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding']))
+                            <div class="text-center" id="timer">
+                                <h4 class="border-bottom p-4">ORDER ID <span>#232345</span></h4>
+                                <p class="text-muted pt-4 italic">
+                                    You will get the estimated price once the time is up
+                                </p>
+                                <h3 class="f-18 pb-4 bold mt-2">Time Left</h3>
 
-                            <div id="app"></div>
-                        </div>
-
+                                <div id="app"></div>
+                            </div>
+                        @elseif(($booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending']))
                         <div id="proceed" {{--style="display: none"--}}>
                             <div class="container">
                                 <div class="row mt-2 border-bottom">
@@ -96,7 +97,7 @@
                                                 class="btn btn-theme-w-bg">Reject</button></a>
                                     </div>
                                     <div class="">
-                                        <a href="{{route('payment')}}">
+                                        <a href="{{route('payment',['id'=>1])}}">
                                             <button type="submit" class="btn btn-theme-bg white-bg">
                                                 Place Order
                                             </button>

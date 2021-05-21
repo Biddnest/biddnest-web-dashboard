@@ -56,13 +56,13 @@
                             <table class="table  p-0 theme-text" style="text-align: left !important;">
                                 <thead class="secondg-bg  p-0 f-14">
                                 <tr>
-                                    <th scope="col">Order ID</th>
+                                    <th scope="col">Enquiry ID</th>
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
                                     <!-- <th scope="col" style="width: 40%;">Service Type</th> -->
-                                    <th scope="col" style="width: 22%; ">Order Date</th>
+                                    <th scope="col" style="width: 22%; ">Enquiry Date</th>
                                     <th scope="col" style="width: 23%;">Assigned Vendor</th>
-                                    <th scope="col" style="text-align: center !important;">Order Status</th>
+                                    <th scope="col" style="text-align: center !important;">Enquiry Status</th>
                                     <th scope="col">Operations</th>
                                 </tr>
                                 </thead>

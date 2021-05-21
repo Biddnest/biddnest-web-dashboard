@@ -87,7 +87,8 @@ class WebsiteController extends Controller
 
     public function bookingHistory(Request $request)
     {
-        return view('website.booking.bookinghistory');
+        $bookings=BookingsController::bookingHistoryPast(214, true);
+        return view('website.booking.bookinghistory', ['bookings'=>$bookings]);
     }
 
     public function myProfile(Request $request)

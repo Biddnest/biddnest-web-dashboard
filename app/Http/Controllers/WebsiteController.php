@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\Faq;
 use App\Models\Service;
+use App\Models\Settings;
 use App\Models\Testimonials;
+use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,12 +30,19 @@ class WebsiteController extends Controller
 
     public function contactUs()
     {
-        return view('website.contactus');
+        $booking=Booking::where("user_id", 214)->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->get();
+        $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
+        return view('website.contactus', ['bookings'=>$booking, 'contact_details'=>$contact_details]);
     }
 
     public function completeContactUs()
     {
-        return view('website.booking.completecontactus');
+        $booking=Booking::where("user_id", 214)->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
+        $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
+         $ticket_details=Ticket::where("booking_id", $booking->id)->with(['reply'=>function($query){
+            $query->where("user_id", null)->latest()->limit(1);
+        }])->with('admin')->first();
+        return view('website.completecontactus', ['booking'=>$booking, 'contact_details'=>$contact_details, 'ticket_detail'=>$ticket_details]);
     }
 
     public function faq()
@@ -52,14 +63,14 @@ class WebsiteController extends Controller
     }
     public function estimateBooking(Request $request)
     {
-        $id=$request->id;
-        return view('website.booking.estimatebooking');
+        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>214])->first();
+        return view('website.booking.estimatebooking',['booking'=>$booking]);
     }
 
     public function placeBooking(Request $request)
     {
-        $id=$request->id;
-        return view('website.booking.placebooking');
+        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>214])->first();
+        return view('website.booking.placebooking',['booking'=>$booking]);
     }
 
     public function myBookings(Request $request)
@@ -70,8 +81,9 @@ class WebsiteController extends Controller
 
     public function finalQuote(Request $request)
     {
+        $reject_resions=json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
         $booking=BookingsController::getBookingByPublicIdForApp($request->id, 214, true);
-        return view('website.booking.finalquote', ['booking'=>$booking]);
+        return view('website.booking.finalquote', ['booking'=>$booking, 'resions'=>$reject_resions]);
     }
 
     public function payment(Request $request)

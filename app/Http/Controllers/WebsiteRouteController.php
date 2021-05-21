@@ -98,4 +98,47 @@ class WebsiteRouteController extends Controller
 
         return TicketController::createForUserApp(214, $request->category, [], $request->heading, $request->desc);
     }
+
+    public function raiseTicket(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'data' => 'required',
+            //'heading' => 'required|string',
+            //'desc' => 'required|string',
+            // 'ticket_type'=>'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create(214, 2,  ["public_booking_id"=>$request->data]);
+    }
+
+    public function addRejectTicket(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+             'heading' => 'required|string',
+             'desc' => 'required|string',
+            // 'ticket_type'=>'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create(214, 2,  ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+    }
+
+    public function bookingConfirmEstimate(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_type' => 'required|string',
+            'public_booking_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+        else
+            return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, 214);
+    }
 }

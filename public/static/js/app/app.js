@@ -31,6 +31,21 @@ $.update = function(url, data, callback, type){
     });
 }
 
+$.add = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
+        type = type || callback,
+            callback = data,
+            data = {}
+    }
+    return $.ajax({
+        url: url,
+        type: 'POST',
+        success: callback,
+        data: data,
+        contentType: type
+    });
+}
+
 
 Logger.useDefaults();
 
@@ -726,4 +741,21 @@ $("body").on('change', ".card-methord02", function(event) {
     $(this).addClass('check-icon02');
 });
 
+$("body").on('click', ".raised", function(event) {
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var data = $(this).data("booking");
+        var href = $(this).data("redirect");
+        $.add($(this).data("url"), {data}, function (response){
+            if(response.status == "success")
+            {
+                // tinySuccessAlert("Ticket Raised Successfully", response.message);
+                window.location.href = href;
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
 
+        });
+    return false;
+});

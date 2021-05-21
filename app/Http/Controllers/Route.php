@@ -65,6 +65,7 @@ class Route extends Controller
         else
             return AdminController::resetPassword($request->password, $request->bearer);
     }
+
     public function old_reset_password(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -772,11 +773,13 @@ class Route extends Controller
 //         return $request->query;
          return UserController::search($request);
      }
+
      public function searchVendor(Request $request)
      {
 //         return $request->query;
          return OrganisationController::search($request);
      }
+
      public function searchadmin(Request $request)
      {
 //         return $request->query;
@@ -1080,6 +1083,7 @@ class Route extends Controller
     {
         return InventoryController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->data);
     }
+
     public function changeStatusBranch(Request $request)
     {
         return OrganisationController::changeStatus($request->id, $request->data);

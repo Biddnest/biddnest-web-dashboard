@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('web/api')->group(function () {
+/*Route::prefix('web/api')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post("/login", [WebsiteRouter::class, 'login'])->name('api.login');
         Route::post("/otp", [WebsiteRouter::class, 'verifyOtp'])->name('api.otp');
@@ -55,7 +55,7 @@ Route::prefix('website')->group(function () {
     Route::middleware("checkWebSession")->group(function(){
         Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
     });
-});
+});*/
 
 
 

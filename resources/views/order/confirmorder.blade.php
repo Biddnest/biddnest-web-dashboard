@@ -42,7 +42,7 @@
                     </div>
                     <div class="tab-content  margin-topneg-15" id="myTabContent">
                         <div class="tab-pane fade show active  pt-20  border-top" id="past" role="tabpanel" aria-labelledby="past-tab">
-                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('order_confirm')}}" method="PUT" data-next="redirect" data-url="{{route('orders-booking')}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('order_confirm')}}" method="PUT" data-next="redirect" data-url="{{route('enquiry-booking')}}" data-alert="mega" id="myForm" data-parsley-validate  autocomplete="off">
                                 <input type="hidden" name="id" value="{{$booking->user_id}}">
                                 <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                 <div class="p-0  border-top-2 order-cards">

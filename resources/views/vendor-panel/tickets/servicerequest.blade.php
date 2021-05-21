@@ -106,11 +106,11 @@
                                         <td class="" style="text-align: center; padding: 14px; ">
                                             @switch($ticket->status)
                                                 @case(\App\Enums\TicketEnums::$STATUS['open'])
-                                                    <span class="complete-bg  text-center td-padding" style="    padding: 5px 50px;" >Open</span>
+                                                    <span class=" text-center td-padding" style="background-color: #fde79a;    padding: 5px 50px;" >Open</span>
                                                 @break
 
                                                 @case(\App\Enums\TicketEnums::$STATUS['rejected'])
-                                                    <span class="red-bg  text-center td-padding">Rejected</span>
+                                                    <span class="red-bg  text-center td-padding" style="background-color: #fbe5e5 !important; ">Rejected</span>
                                                 @break
 
                                                 @case(\App\Enums\TicketEnums::$STATUS['resolved'])

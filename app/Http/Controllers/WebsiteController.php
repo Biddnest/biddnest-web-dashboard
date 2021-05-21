@@ -39,10 +39,9 @@ class WebsiteController extends Controller
         return view('website.faq', ['faqs'=>$faqs]);
     }
 
-    public function termsAndConditions()
+    public function termsAndCondition()
     {
-        $faqs=Faq::get();
-        return view('website.faq', ['faqs'=>$faqs]);
+        return view('website.termsandcondition');
     }
 
     public function addBooking()
@@ -50,51 +49,52 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('website.booking.addbooking', ['categories'=>$categories]);
     }
-    public function estimateBooking()
+    public function estimateBooking(Request $request)
     {
+        $id=$request->booking_id;
         return view('website.booking.estimatebooking');
     }
-    public function placeBooking()
+
+    public function placeBooking(Request $request)
     {
+        $id=$request->booking_id;
         return view('website.booking.placebooking');
     }
 
-    public function myBookings()
+    public function myBookings(Request $request)
     {
-        return view('website.booking.mybooking');
+        $bookings=BookingsController::bookingHistoryLive(214, true);
+        return view('website.booking.mybooking', ['bookings'=>$bookings]);
     }
 
-    public function finalQuote()
+    public function finalQuote(Request $request)
     {
         return view('website.booking.finalquote');
     }
 
-    public function payment()
+    public function payment(Request $request)
     {
+        $id=$request->booking_id;
         return view('website.booking.payment');
     }
 
-    public function orderDetails()
+    public function orderDetails(Request $request)
     {
         return view('website.booking.orderdetails');
     }
 
-    public function bookingHistory()
+    public function bookingHistory(Request $request)
     {
         return view('website.booking.bookinghistory');
     }
 
-    public function myProfile()
+    public function myProfile(Request $request)
     {
         return view('website.myprofile');
     }
-    public function myRequest()
+    public function myRequest(Request $request)
     {
         return view('website.myrequest');
     }
 
-    public function termsAndCondition()
-    {
-        return view('website.termsandcondition');
-    }
 }

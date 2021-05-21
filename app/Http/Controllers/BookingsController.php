@@ -160,7 +160,7 @@ class BookingsController extends Controller
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
             $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, true);
-            $primium_price = $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+            $primium_price = $primium_price + $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
         } catch (Exception $e) {
             DB::rollBack();

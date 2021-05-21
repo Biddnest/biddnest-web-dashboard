@@ -85,20 +85,12 @@ class UserController extends Controller
             if($user->fname){
                 $data = $user;
             }
-            if($web == true){
-                Session::put(["account"=>['id'=>$user->id,
-                    'name'=>$user->fname.' '.$user->lname,
-                    'email'=>$user->email]]);
-                Session::put('sessionFor', "user");
-                return Helper::response(true, "Otp has been verified",[
-                    "user"=>$data
-                ]);
-            }else{
+
                 return Helper::response(true, "Otp has been verified",[
                     "user"=>$data,
                     "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
                 ]);
-            }
+
 
         }else {
             return Helper::response(false, "Incorrect otp provided");

@@ -26,225 +26,72 @@
                 <div class="tab-content margin-topneg-7 border-top" id="myTabContent">
                     <div class="tab-pane fade show active " id="booking" role="tabpanel" aria-labelledby="booking-tab">
                         <div class="row  pt-4">
-                            <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
-                                <div class="card view-left-text">
-                                    <div class="card-body bg-card-book">
-                                        <div class="d-flex pt-4 pb-2 justify-content-around">
-                                            <div class="d-flex ">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">From</p>
-                                                    <p class=" f-18 pl-2">Bangaluru</p>
+                            @foreach($bookings as $booking)
+                                <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
+                                    <div class="card view-left-text">
+                                        <div class="card-body bg-card-book">
+                                            <div class="d-flex pt-4 pb-2 justify-content-around">
+                                                <div class="d-flex ">
+                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                                    <div class="d-flex f-direction">
+                                                        <p class="l-cap pl-2 mb-0">From</p>
+                                                        <p class=" f-18 pl-2">Bangaluru</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">To</p>
-                                                    <p class=" f-18 pl-2">Chennai</p>
+                                                <div class="d-flex">
+                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                                    <div class="d-flex f-direction">
+                                                        <p class="l-cap pl-2 mb-0">To</p>
+                                                        <p class=" f-18 pl-2">Chennai</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">Distance</p>
-                                                    <p class=" f-18 pl-2">314Km</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
-                                            <div>
-                                                <p class="bold mt-1 pl-4">
-                                                    #312334 <span class="light">| 12 Dec 21</span>
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <a class="white-text" href="#">
-                                                    <button class="btn btn-green-bg f-10 white-bg" data-toggle="modal" data-target="#order-history-modal">
-                                                        completed
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
-                                <div class="card view-left-text">
-                                    <div class="card-body bg-card-book">
-                                        <div class="d-flex pt-4 pb-2 justify-content-around">
-                                            <div class="d-flex ">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">From</p>
-                                                    <p class=" f-18 pl-2">Bangaluru</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">To</p>
-                                                    <p class=" f-18 pl-2">Chennai</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">Distance</p>
-                                                    <p class=" f-18 pl-2">314Km</p>
+                                                <div class="d-flex">
+                                                    <div class="d-flex f-direction">
+                                                        <p class="l-cap pl-2 mb-0">Distance</p>
+                                                        <p class=" f-18 pl-2">314Km</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
-                                            <div>
-                                                <p class="bold mt-1 pl-4">
-                                                    #312334 <span class="light">| 12 Dec 21</span>
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <a class="white-text" href="#">
-                                                    <button class="btn btn-green-bg f-10 white-bg" data-toggle="modal" data-target="#order-history-modal">
-                                                        completed
-                                                    </button>
-                                                </a>
+                                        <div class="card-footer">
+                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
+                                                <div>
+                                                    <p class="bold mt-1 pl-4">
+                                                        #312334 <span class="light">| 12 Dec 21</span>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <a class="white-text" href="#">
+                                                        <button class="btn btn-green-bg f-10 white-bg" data-toggle="modal" data-target="#order-history-modal_{{$booking->id}}">
+                                                            completed
+                                                        </button>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
-                                <div class="card view-left-text">
-                                    <div class="card-body bg-card-book">
-                                        <div class="d-flex pt-4 pb-2 justify-content-around">
-                                            <div class="d-flex ">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">From</p>
-                                                    <p class=" f-18 pl-2">Bangaluru</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">To</p>
-                                                    <p class=" f-18 pl-2">Chennai</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">Distance</p>
-                                                    <p class=" f-18 pl-2">314Km</p>
-                                                </div>
-                                            </div>
+                            @endforeach
+                                @if(count($bookings)== 0)
+                                    <div class="container" id="no-booking-show">
+                                        <div class="">
+                                            <img src="{{asset('static/website/images/images/no-booking.svg')}}" />
+                                        </div>
+                                        <div class="italic theme-text">
+                                            <h1 class="f-14 center"> You have no History of Bookings</h1>
+
+                                        </div>
+                                        <div class=" center d-flex">
+                                            <a class="white-text " href="{{route('add-booking')}}">
+                                                <button class="btn mt-4 btn-theme-bg white-bg">Book Now</button>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
-                                            <div>
-                                                <p class="bold mt-1 pl-4">
-                                                    #312334 <span class="light">| 12 Dec 21</span>
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <a class="white-text" href="#">
-                                                    <button class="btn btn-green-bg f-10 white-bg" data-toggle="modal" data-target="#order-history-modal">
-                                                        completed
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
-                                <div class="card view-left-text">
-                                    <div class="card-body bg-card-book">
-                                        <div class="d-flex pt-4 pb-2 justify-content-around">
-                                            <div class="d-flex ">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">From</p>
-                                                    <p class=" f-18 pl-2">Bangaluru</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">To</p>
-                                                    <p class=" f-18 pl-2">Chennai</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="d-flex f-direction">
-                                                    <p class="l-cap pl-2 mb-0">Distance</p>
-                                                    <p class=" f-18 pl-2">314Km</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
-                                            <div>
-                                                <p class="bold mt-1 pl-4">
-                                                    #312334 <span class="light">| 12 Dec 21</span>
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <a class="white-text" href="#">
-                                                    <button class="btn btn-green-bg f-10 white-bg" data-toggle="modal" data-target="#order-history-modal">
-                                                        completed
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="history-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-                            <div class="modal-dialog para-head input-text-blue" role="document">
-                                <div class="modal-content w-1000 mt-50 right-25">
-                                    <div class="modal-header bg-purple">
-                                        <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
-                                            Order Details
-                                        </h5>
-                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body p-15 margin-topneg-2">
-                                        <div>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="ticket-id pt-3">
-                                                    <h6 class="para-head light pl-3">
-                                                        REQUEST ID <span class="bold">: #454567</span>
-                                                    </h6>
-                                                </div>
-                                                <div class="status-badge white-text bg-green">
-                                                    <a data-toggle="modal" data-target="#order-history-modal">completed</a>
-                                                </div>
-                                            </div>
-                                            <div class="border-bottom pt-4">
-                                                <h6 class="para-head pl-3 ">Demo Subject</h6>
-                                                <p class="para mt-1 pl-3">
-                                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.
-                                                </p>
-                                            </div>
-                                            <div class="pt-4">
-                                                <h6 class="para-head pl-3">Reply</h6>
-                                                <p class="para mt-1 pl-3">
-                                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endif
                         </div>
                     </div>
-                    <div class="modal fade" id="order-history-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+                    @foreach($bookings as $booking)
+                        <div class="modal fade" id="order-history-modal_{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                         <div class="modal-dialog para-head input-text-blue" role="document">
                             <div class="modal-content w-1000 mt-50 right-25 w-90 ml-4">
                                 <div class="modal-header bg-purple">
@@ -337,6 +184,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

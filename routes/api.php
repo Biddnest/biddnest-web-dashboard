@@ -25,6 +25,8 @@ Route::prefix('v1')->group(function () {
     Route::get("/configuration",[ApiRouter::class, 'config']);
 
     Route::put("/profile/update",[ApiRouter::class, 'updateProfile']);
+    Route::put("/profile/update-mobile",[ApiRouter::class, 'updateMobile']);
+    Route::put("/profile/verify-otp",[ApiRouter::class, 'verifyOtp']);
 
     Route::get('/sliders',[ApiRouter::class,'getAppSliders']);
     Route::get('/services',[ApiRouter::class,'getServices']);

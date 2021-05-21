@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14 d-flex justify-content-between">
-                        {{date('d/M/Y', strtotime($user->dob)) ?? '-'}}
+                        {{date('dd/mm/Y', strtotime($user->dob)) ?? '-'}}
                     </div>
                 </div>
             </div>

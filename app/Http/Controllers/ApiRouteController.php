@@ -523,4 +523,27 @@ class ApiRouteController extends Controller
     {
         return ZoneController::get();
     }
+
+    public function updateMobile(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'phone' => 'required'
+        ]);
+        if ($validation->fails())
+            return Helper::response(false, "validation failed", $validation->errors(), 400);
+
+        return UserController::updateMobile($request->token_payload->id, $request->phone);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'phone' => 'required',
+            'otp' => 'required'
+        ]);
+        if ($validation->fails())
+            return Helper::response(false, "validation failed", $validation->errors(), 400);
+
+        return UserController::verifyMobile($request->token_payload->id, $request->phone, $request->otp);
+    }
 }

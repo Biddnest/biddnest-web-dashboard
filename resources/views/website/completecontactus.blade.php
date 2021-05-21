@@ -14,7 +14,7 @@
                                         <img class="-mt-10" src="{{ asset('static/website/images/icons/location.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <p>ABC Studio, ABC Street, KBC Chennai, 490430</p>
+                                        <p>{{json_decode($contact_details, true)['address']}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -24,7 +24,11 @@
                                         <img src="{{ asset('static/website/images/icons/mail.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <p class="f-14 underline">support@gmail.com</p>
+                                        @foreach(json_decode($contact_details, true)['email_id'] as $email)
+                                            <p class="f-14 underline">
+                                                {{$email}}
+                                            </p>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +38,11 @@
                                         <img src="{{ asset('static/website/images/icons/call.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <p> +91 - 8989898989</p>
+                                        @foreach(json_decode($contact_details, true)['contact_no'] as $phone)
+                                            <p>
+                                                {{$phone}}
+                                            </p>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -46,14 +54,14 @@
                                     <div class="d-flex justify-content-between ">
                                         <div class=" p-0">
                                             <p>From</p>
-                                            <p class="bg-blur"> Bangaluru</p>
+                                            <p class="bg-blur"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
                                         <div class=" mt-1 pt-3 pr-2 a-self-center">
                                             <img class="-ml-10" src="{{ asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div class="">
                                             <p>To</p>
-                                            <p class="bg-blur">Chennai</p>
+                                            <p class="bg-blur">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -62,21 +70,70 @@
                                         <div class="">
                                             <div>
                                                 <p class="mb-0">Order Id </p>
-                                                <p> #31234 </p>
+                                                <p> #{{$booking->public_booking_id}} </p>
                                             </div>
                                             <div>
                                                 <p class="mb-0">Date </p>
-                                                <p> 20/Jan/21 </p>
+                                                <p> {{date('d M Y', strtotime($booking->created_at))}} </p>
                                             </div>
                                         </div>
                                         <div class="">
                                             <div>
                                                 <p class="mb-0">Price </p>
-                                                <p> Rs.9,800 </p>
+                                                <p> Rs.@if($booking->final_quote)
+                                                        {{$booking->final_quote}}
+                                                    @else
+                                                        {{$booking->final_estimated_quote}}
+                                                    @endif
+                                                </p>
                                             </div>
                                             <div>
                                                 <p class="mb-0">Status </p>
-                                                <p>Completed </p>
+                                                @switch($booking->status)
+                                                    @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                                    <p>Enquiry</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                                    <p>Placed</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                                    <p>Biding</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                                    <p>Rebiding</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                    <p>Payment Pending</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                    <p>Pending Driver Assign</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                    <p>Awaiting Pickup</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                    <p>In Transit</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                    <p>Completed</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                    <p>Cancelled</p>
+                                                    @break
+
+                                                    @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                                    <p>Bounced</p>
+                                                    @break
+                                                @endswitch
                                             </div>
                                         </div>
                                     </div>
@@ -90,29 +147,27 @@
                             </div>
                             <div id="view_more_content" class="togglenone">
                                 <div class="ticket-id d-flex pt-4  border-top justify-content-between">
-                                    <p class="para-head l-cap">Ticket Id : <span>#454556</span></p>
+                                    <p class="para-head l-cap">Ticket Id : <span>#{{$ticket_detail->id}}</span></p>
                                     <p class="bg-blur col-orange l-cap">In process</p>
                                 </div>
                                 <div class="ticket-id border-top pt-4">
                                     <h6 class="para-head ml-1">Subject</h6>
-                                    <p class="l-cap col-grey pl-1">Category</p>
-                                    <p class="para pl-1"> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                                    <p class="l-cap col-grey pl-1">{{$ticket_detail->heading}}</p>
+                                    <p class="para pl-1"> {{$ticket_detail->desc}}</p>
                                 </div>
                                 <div class="reply border-top pt-4">
                                     <h5 class="para-head mb-3">Reply</h5>
                                     <div class="d-flex">
                                         <i class="fa fa-square f-52"></i>
                                         <!-- <i class="fas fa-stop"></i> -->
-                                        <div class="mt-1">
-                                            <h6 class="para-text bold ml-3 mb-0">Customer Support</h6>
-                                            <p class="text-muted ml-1">2 days ago</p>
-                                            <p class="para ml-1"> Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Ipsum
-                                                has been the industry’s
-                                            </p>
-                                            <p class="para ml-1">
-                                                industry’s standard dummy text ever since the 1500s, when an unknown
-                                            </p>
-                                        </div>
+                                        @foreach($ticket_detail->reply as $reply)
+                                            <div class="mt-1">
+                                                <h6 class="para-text bold ml-3 mb-0">Customer Support</h6>
+                                                <p class="text-muted ml-1">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</p>
+                                                <p class="para ml-1"> {{$reply->chat}}
+                                                </p>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

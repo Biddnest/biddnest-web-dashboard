@@ -57,7 +57,7 @@
                                         <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
                                             <div>
                                                 <p class="bold mt-1 pl-4">
-                                                    #{{$booking->public_booking_id}} <span class="light">| 12 Dec 21</span>
+                                                    #{{$booking->public_booking_id}} <span class="light">| {{date('d M Y', strtotime($booking->created_at)}}</span>
                                                 </p>
                                             </div>
                                             <div>
@@ -72,7 +72,7 @@
                                                     @break
                                                     @case(\App\Enums\BookingEnums::$STATUS['placed'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['placed']; @endphp
-                                                        <a class="white-text" href="{{route('estimate-booking', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="#">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Placed
                                                             </button>

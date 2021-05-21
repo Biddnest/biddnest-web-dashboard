@@ -115,7 +115,7 @@
                                             <p class="text-muted f-16 center italic order-status-message text-view-center">
                                                 Your Order has been submitted</p>
                                             <p class=" f-16 para-head center order-num text-view-center">ORDER ID
-                                                <span>: #323223</span>
+                                                <span>: #{{$booking->public_booking_id}}</span>
                                             </p>
                                         </div>
                                         <div>

@@ -102,24 +102,24 @@
                             </div>
                         </div>
                         <div class="col-md-9 book-move-questions-container ">
-                            <form id="wizard">
                                 <div class="row setup-content-3 step-estimate" id="step-5">
                                     <div class="col-md-12">
                                         <div>
                                             <p class="text-muted">Step 5 / 6</p>
                                             <h5 class="border-bottom theme-text pb-4 text-view-center">Get The Estimated Cost </h5>
                                         </div>
-                                        <form class="quation-form">
+                                        <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-url="{{route('place-booking', ['id'=>$booking->public_booking_id])}}" data-alert="mega"  data-parsley-validate>
                                             <div class="p-0  border-top-2 order-cards">
                                                 <div class="d-flex justify-content-center f-14  text-center  mt-2 mb-1">
                                                     Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
                                                 </div>
+                                                <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                                 <div class="d-flex flex-row flex-view-col justify-content-around f-14 theme-text text-center  quotation mb-3">
                                                     <div class="flex-column justify-content-center test">
                                                         <div class="card m-20  card-price eco cursor-pointer">
                                                             <div class="p-60 f-32 border-cicle eco-card">
                                                                 <div>
-                                                                    <div class="f-30">₹ 2,300</div>
+                                                                    <div class="f-30">₹ {{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                                     <div class="f-16 ">Base price</div>
                                                                 </div>
                                                             </div>
@@ -130,7 +130,7 @@
                                                         </div>
                                                         <div class="radio-group">
                                                             <div class="form-input radio-item ">
-                                                                <input type="radio" id="economy" name="economy-premium" class="radio-button__input cursor-pointer economy">
+                                                                <input type="radio" id="economy" value="economic" name="service_type" class="radio-button__input cursor-pointer">
                                                                 <label class="" for="economy"></label>
                                                             </div>
                                                         </div>
@@ -138,7 +138,7 @@
                                                     <div class="felx-column">
                                                         <div class="card m-20 card-price pre  cursor-pointer ">
                                                             <div class="p-60 f-32  border-cicle pre-card  ">
-                                                                <div class="f-30">₹ 3,300</div>
+                                                                <div class="f-30">₹ {{json_decode($booking->quote_estimate, true)['premium']}}</div>
                                                                 <div class="f-16 p-1">Base price</div>
                                                             </div>
                                                             <div class=" f-18"> Premium
@@ -148,27 +148,27 @@
                                                         </div>
                                                         <div class="radio-group">
                                                             <div class="form-input radio-item ">
-                                                                <input type="radio" id="premium" name="economy-premium" class="radio-button__input premium">
+                                                                <input type="radio" id="premium" value="premium" name="service_type" class="radio-button__input ">
                                                                 <label class="" for="premium"></label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                        <div class=" actionBtn actionBtn-view border-top ">
-                                            <a href="{{route('home')}}">
-                                                <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
-                                                    Cancel
+
+                                            <div class=" actionBtn actionBtn-view border-top ">
+                                                <a href="{{route('home')}}">
+                                                    <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
+                                                        Cancel
+                                                    </button>
+                                                </a>
+                                                <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right">
+                                                    Next
                                                 </button>
-                                            </a>
-                                            <a href="{{route('place-booking')}}" ><button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next5" id="next5" type="button">
-                                                Next
-                                                </button></a>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

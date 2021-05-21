@@ -26,10 +26,15 @@ use Illuminate\Support\Facades\Route;
 
     });
 
+    Route::put('/book-move-estimate', [WebsiteRouter::class, 'bookingConfirmEstimate'])->name("order_estimate");
+
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
     Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
 
+
     Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");
+    Route::post('/raise_support', [WebsiteRouter::class, 'raiseTicket'])->name("raise_support");
+    Route::post('/add-reject-ticket', [WebsiteRouter::class, 'addRejectTicket'])->name("add_cancel_ticket");
 
 });
 
@@ -51,9 +56,10 @@ Route::prefix('website')->group(function () {
     Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("my-profile");
     Route::get('/my-request', [WebsiteController::class, 'myRequest'])->name("my-request");
 
+    Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
 
     Route::middleware("checkWebSession")->group(function(){
-        Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
+
     });
 });*/
 

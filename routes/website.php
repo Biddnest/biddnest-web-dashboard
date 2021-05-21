@@ -39,12 +39,12 @@ Route::prefix('website')->group(function () {
     Route::get('/T&C', [WebsiteController::class, 'termsAndCondition'])->name("terms_and_conditions");
 
     Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
-    Route::get('/book-move/{{booking_id}}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
-    Route::get('/book-move/{{booking_id}}/place', [WebsiteController::class, 'placeBooking'])->name("place-booking");
+    Route::get('/book-move/{id}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
+    Route::get('/book-move/{id}/place', [WebsiteController::class, 'placeBooking'])->name("place-booking");
     Route::get('/my-bookings', [WebsiteController::class, 'myBookings'])->name("my-bookings");
-    Route::get('/my-bookings/{{booking_id}}/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");
-    Route::get('/my-bookings/{{booking_id}}/payment', [WebsiteController::class, 'payment'])->name("payment");
-    Route::get('/my-bookings/{{booking_id}}/ongoing-order', [WebsiteController::class, 'orderDetails'])->name("order-details");
+    Route::get('/my-bookings/{id}/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");
+    Route::get('/my-bookings/{id}/payment', [WebsiteController::class, 'payment'])->name("payment");
+    Route::get('/my-bookings/{id}/ongoing-order', [WebsiteController::class, 'orderDetails'])->name("order-details");
     Route::get('/my-bookings/order-history', [WebsiteController::class, 'bookingHistory'])->name("order-history");
     Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("my-profile");
     Route::get('/my-request', [WebsiteController::class, 'myRequest'])->name("my-request");

@@ -40,8 +40,7 @@
                                                 First Name
                                             </p>
                                             <p class="fw-500 f-18">
-                                                David
-
+                                               {{ucwords($user->fname)}}
                                             </p>
 
                                         </div>
@@ -49,7 +48,7 @@
                                             <p class="mt-2 mb-0  l-cap">
                                                 Email Id</p>
                                             <p class="fw-500 f-18">
-                                                davidjerome@gmail.com
+                                                {{$user->email}}
                                             </p>
                                         </div>
                                         <div>
@@ -57,22 +56,22 @@
                                                 Gender
                                             </p>
                                             <p class="fw-500 f-18">
-                                                Male
+                                                {{$user->gender}}
                                             </p>
                                         </div>
                                     </div>
                                     <div class=" ">
                                         <div>
                                             <p class="mt-2 mb-0 l-cap">Last Name</p>
-                                            <p class="fw-500 f-18">Jerome</p>
+                                            <p class="fw-500 f-18">{{ucwords($user->lname)}}</p>
                                         </div>
                                         <div>
                                             <p class="mt-2 mb-0  l-cap">Phone Number </p>
-                                            <p class="fw-500 f-18">9739912345</p>
+                                            <p class="fw-500 f-18">{{$user->phone}}</p>
                                         </div>
                                         <div>
                                             <p class="mt-2 mb-0  l-cap">Date of Birth </p>
-                                            <p class="fw-500 f-18">12 Dec 20</p>
+                                            <p class="fw-500 f-18">{{date('d M Y', strtotime($user->dob))}}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -72,7 +72,7 @@ class UserController extends Controller
      * @param $otp
      * @return JsonResponse|object
      */
-    public static function verifyLoginOtp($phone, $otp, $web=true){
+    public static function verifyLoginOtp($phone, $otp, $web=false){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
@@ -107,7 +107,7 @@ class UserController extends Controller
         }
     }
 
-    public static function verifyLoginOtpWeb($phone, $otp){
+   /* public static function verifyLoginOtpWeb($phone, $otp){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
@@ -131,7 +131,7 @@ class UserController extends Controller
         }else {
             return Helper::response(false, "Incorrect otp provided");
         }
-    }
+    }*/
 
     /**
      * @param $id

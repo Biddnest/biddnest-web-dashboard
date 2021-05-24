@@ -349,6 +349,28 @@ class BookingsController extends Controller
             return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
     }
 
+    public static function bookingHistoryEnquiry($user_id, $web=false)
+    {
+
+        $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
+            "user_id" => $user_id])
+            ->where("status", BookingEnums::$STATUS["enquiry"])
+            ->with('movement_dates')
+//            ->with('inventories')
+//            ->with('status_history')
+            ->with('service')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        /*if (!$bookingorder) {
+            return Helper::response(false, "No Booking Found");
+        }*/
+        if($web)
+            return $bookingorder;
+        else
+            return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
+    }
+
     public static function bookingHistoryPast($user_id, $web=false)
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,

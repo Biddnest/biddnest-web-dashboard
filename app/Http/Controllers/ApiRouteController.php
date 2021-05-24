@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\VerifyJwtToken;
+use App\Models\Testimonials;
 use App\StringFormatter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -279,6 +280,11 @@ class ApiRouteController extends Controller
         return BookingsController::reschedulBooking($request->public_booking_id, $request->movement_dates, $request->token_payload->id);
     }
 
+    public function getBookingHistoryEnquiry(Request $request)
+    {
+        return BookingsController::bookingHistoryEnquiry($request->token_payload->id);
+    }
+
     public function getBookingHistoryPast(Request $request)
     {
         return BookingsController::bookingHistoryPast($request->token_payload->id);
@@ -545,5 +551,10 @@ class ApiRouteController extends Controller
             return Helper::response(false, "validation failed", $validation->errors(), 400);
 
         return UserController::verifyMobile($request->token_payload->id, $request->phone, $request->otp);
+    }
+
+    public function getTestimonials()
+    {
+        return TestimonialController::get();
     }
 }

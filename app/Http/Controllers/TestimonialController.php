@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Testimonials;
@@ -60,5 +61,12 @@ class TestimonialController extends Controller
             return Helper::response(false,"Couldn't Delete Testimonials");
 
         return Helper::response(true,"Testimonials Deleted successfully");
+    }
+
+    public static function get()
+    {
+        $testimonials = Testimonials::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+
+        return Helper::response(true,"Testimonials", ["testimonials"=>$testimonials]);
     }
 }

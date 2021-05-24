@@ -80,6 +80,12 @@ class WebsiteController extends Controller
         return view('website.booking.mybooking', ['bookings'=>$bookings]);
     }
 
+    public function myBookingsEnquiries(Request $request)
+    {
+        $bookings=BookingsController::bookingHistoryEnquiry(214, true);
+        return view('website.booking.mybookingenquiries', ['bookings'=>$bookings]);
+    }
+
     public function finalQuote(Request $request)
     {
         $reject_resions=json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);

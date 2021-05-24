@@ -54,6 +54,7 @@ Route::prefix('site')->group(function () {
     Route::get('/book-move/{id}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
     Route::get('/book-move/{id}/place', [WebsiteController::class, 'placeBooking'])->name("place-booking");
     Route::get('/my-bookings', [WebsiteController::class, 'myBookings'])->name("my-bookings");
+    Route::get('/my-bookings/enquiry', [WebsiteController::class, 'myBookingsEnquiries'])->name("my-bookings-enquiries");
     Route::get('/my-bookings/{id}/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");
     Route::get('/my-bookings/{id}/payment', [WebsiteController::class, 'payment'])->name("payment");
     Route::get('/my-bookings/{id}/payment-verified', [WebsiteController::class, 'verifiedPayment'])->name("verifiedpayment");

@@ -372,7 +372,10 @@ class BidController extends Controller
 
                 array_push($price_list, $list_item);
 
-                $total += $inv ? $inv->$price_type : 0.00;
+                if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
+                    $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;
+                else
+                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] : 0.00;
 
             }
         }

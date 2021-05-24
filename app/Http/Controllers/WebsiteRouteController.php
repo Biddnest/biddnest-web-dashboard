@@ -154,4 +154,48 @@ class WebsiteRouteController extends Controller
         else
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, 214);
     }
+
+    public function verifiedCoupon(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+            'coupon' =>'string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        $valid= CouponController::checkIfValid($request->public_booking_id, $request->coupon, true);
+
+        if(is_array($valid))
+            return WebsiteController::verifiedPayment($valid, $request->public_booking_id, $request->coupon);
+        else
+            return Helper::response(false,$valid);
+    }
+
+    public function initiatePayment(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id' => 'required|string',
+            'code' =>'string|nullable'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PaymentController::intiatePayment($request->id, $request->code, true);
+    }
+
+    public function statusComplete(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'booking_id' => 'required|string',
+            'paymentid' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return PaymentController::statusComplete(214, $request->booking_id, $request->paymentid);
+    }
 }

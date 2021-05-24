@@ -7,12 +7,12 @@
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="review">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head theme-text text-left p-4 f-20">Review & Ratings</h3>
-        <div class="mr-20">
+        {{--<div class="mr-20">
             <a href="{{route('create-review')}}">
                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i> CREATE REVIEW
                 </button>
             </a>
-        </div>
+        </div>--}}
     </div>
     <div class="d-flex  flex-row justify-content-between">
         <div class="page-head text-left p-2 pt-0 pb-0">

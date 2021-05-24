@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingInventoryEnums;
+use App\Enums\InventoryEnums;
 use App\Enums\NotificationEnums;
 use App\Http\Controllers\BookingsController;
 use App\Models\Payment;
@@ -363,7 +365,10 @@ class BidController extends Controller
                 $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
-                $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;
+                if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
+                    $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;
+                else
+                    $list_item["price"] = $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] : 0.00;
 
                 array_push($price_list, $list_item);
 

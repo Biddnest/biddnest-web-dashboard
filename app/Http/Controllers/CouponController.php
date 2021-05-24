@@ -189,7 +189,7 @@ class CouponController extends Controller
 
     }
 
-   public static function checkIfValid($public_booking_id, $coupon_code){
+   public static function checkIfValid($public_booking_id, $coupon_code, $web=false){
 
        $coupon = Coupon::where("code",$coupon_code)->with('users')->with('organizations')->with('zones')->first();
 
@@ -264,14 +264,23 @@ class CouponController extends Controller
        $tax =  $grand_total * ($tax_percentage/100);
        $grand_total += $tax;
 
-
-       return (array)["coupon" => ["discount" => number_format($discount_amount, 2)], "payment_details" => [
-           "sub_total" => $booking->payment->sub_total,
-           "surge_charge" => $booking->payment->other_charges,
-           "discount" => $discount_amount,
-           "tax(" . $tax_percentage . "%)" => $tax,
-           "grand_total" => $grand_total
-       ]];
+        if($web)
+            return (array)[
+                "sub_total" => $booking->payment->sub_total,
+                "surge_charge" => $booking->payment->other_charges,
+                "discount" => $discount_amount,
+                "tax_percentage"=>$tax_percentage,
+                "tax" => $tax,
+                "grand_total" => $grand_total
+            ];
+        else
+           return (array)["coupon" => ["discount" => number_format($discount_amount, 2)], "payment_details" => [
+               "sub_total" => $booking->payment->sub_total,
+               "surge_charge" => $booking->payment->other_charges,
+               "discount" => $discount_amount,
+               "tax(" . $tax_percentage . "%)" => $tax,
+               "grand_total" => $grand_total
+           ]];
 
        // return $discount_amount;
    }

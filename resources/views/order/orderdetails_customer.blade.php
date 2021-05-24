@@ -199,7 +199,13 @@
                                 @foreach($booking->inventories as $inventory)
                                     <tr class="tb-border  cursor-pointer">
                                       <th scope="row" style="padding-left: 15px !important;">{{$inventory->name}}</th>
-                                      <td  class="text-center">{{$inventory->quantity}}</td>
+                                      <td  class="text-center">
+                                          @if($inventory->quantity_type == \App\Enums\BookingInventoryEnums::$QUANTITY['fixed'])
+                                            {{$inventory->quantity}}
+                                          @else
+                                            {{json_decode($inventory->quantity, true)['min']}}-{{json_decode($inventory->quantity, true)['max']}}
+                                          @endif
+                                      </td>
                                       <td class=""><span class=" status-badge text-center f-14" style="font-weight: bold !important;text-transform: capitalize;">{{$inventory->size}}</span></td>
                                     </tr>
                                 @endforeach

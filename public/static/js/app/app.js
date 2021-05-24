@@ -629,9 +629,6 @@ $("body").on('keyup', ".calc-total", function(event) {
 
 /* Website js code start */
 
-$('.dateselect ').datepicker({
-    format: 'mm/dd/yyyy ',
-});
 
 $("body").on('click', ".next1", function(event) {
     console.log("step2");
@@ -809,16 +806,60 @@ $("body").on('click', ".copy", function(event) {
     return false;
 });
 
-$("body").on('click', ".card-methord", function(event) {
+$("body").on('click', ".card-method", function(event) {
         var method = $(this).data("method");
         console.log(method);
-        $('.card-methord').removeClass('turntheme');
-        $('.card-methord').removeClass('check-icon02');
+        $('.card-method').removeClass('turntheme');
+        $('.card-method').removeClass('check-icon02');
 
         $(this).addClass('turntheme');
         $(this).addClass('check-icon02');
     return false;
 });
+
+
+$("body").on('click', ".payment", function(event) {
+        var method = $('.card-method').data("method");
+        var amount = $(this).data("amount");
+        var booking_id = $(this).data("booking");
+        var coupon_code = document.getElementById("coupon").value;
+        var url = $(this).data("url");
+
+    var options = {
+        "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
+        "amount": (amount *100), // 2000 paise = INR 20
+        "name": "Bidnest",
+        "description": "Payment",
+        "image": "http://127.0.0.1:8000/static/images/favicon.svg",
+        "handler": function (response){
+            $.ajax({
+                url: "http://127.0.0.1:8000/website/api/initiate-payment",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    id:booking_id ,code : coupon_code,
+                },
+                success: function (msg) {
+                    window.location.href = url;
+                }
+            });
+        },
+        "prefill": {
+            "name": "test",
+            "email": "test@gmail.com",
+            "contact": "7788556655"
+        },
+
+        "theme": {
+            "color": "#4b2b9b"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+
+});
+
+
 
 /*$("body").on('click', ".weblogin", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();

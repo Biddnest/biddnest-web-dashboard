@@ -41,6 +41,8 @@
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
 <script src="{{ asset('static/website/js/timer.js')}}"></script>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 <script  type="module" src="{{ asset('static/js/barba.js') }}"></script>
 

@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
 
-    public static function intiatePayment($public_booking_id, $coupon_code = null)
+    public static function intiatePayment($public_booking_id, $coupon_code = null, $web=false)
     {
         $booking_exist = Booking::where(["public_booking_id" => $public_booking_id, "status" => BookingEnums::$STATUS['payment_pending']])->with('payment')->first();
 
@@ -77,6 +77,9 @@ class PaymentController extends Controller
 
         if(!$payment_result)
             return Helper::response(false, "Payment couldn't save successfully");
+
+        if($web)
+            self::statusComplete($booking_exist->user_id, $public_booking_id, Payment::where('id', $booking_exist->payment->id)->pluck('rzp_payment_id')[0]);
 
         return Helper::response(true, "Payment save successfully", ['payment'=>['grand_total'=>$grand_total, 'currency'=>"INR",'rzp_order_id'=>$order_id, 'auto_captured'=>1]]);
     }

@@ -38,6 +38,9 @@ Route::prefix('website/api')->group(function () {
     Route::post('/cancel-ticket', [WebsiteRouter::class, 'addCancelTicket'])->name("cancel_ticket");
     Route::post('/add-reschedule-ticket', [WebsiteRouter::class, 'addReschedulTicket'])->name("reshcedulel_ticket");
 
+    Route::post('/verified-coupon', [WebsiteRouter::class, 'verifiedCoupon'])->name("verifiedcoupon");
+    Route::post('/initiate-payment', [WebsiteRouter::class, 'initiatePayment'])->name("initiate-payment");
+    Route::post('/status/complete',[WebsiteRouter::class, 'statusComplete'])->name("complete-status");
 });
 
 Route::prefix('site')->group(function () {
@@ -53,6 +56,7 @@ Route::prefix('site')->group(function () {
     Route::get('/my-bookings', [WebsiteController::class, 'myBookings'])->name("my-bookings");
     Route::get('/my-bookings/{id}/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");
     Route::get('/my-bookings/{id}/payment', [WebsiteController::class, 'payment'])->name("payment");
+    Route::get('/my-bookings/{id}/payment-verified', [WebsiteController::class, 'verifiedPayment'])->name("verifiedpayment");
     Route::get('/my-bookings/{id}/ongoing-order', [WebsiteController::class, 'orderDetails'])->name("website.order-details");
     Route::get('/my-bookings/order-history', [WebsiteController::class, 'bookingHistory'])->name("order-history");
     Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("website.my-profile");

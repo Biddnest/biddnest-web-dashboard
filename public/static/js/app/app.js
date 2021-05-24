@@ -810,9 +810,11 @@ $("body").on('click', ".copy", function(event) {
 });
 
 $("body").on('click', ".card-methord", function(event) {
-        var code = $(this).data("code");
-        $(this).removeClass('turntheme');
-        $(this).removeClass('check-icon02');
+        var method = $(this).data("method");
+        console.log(method);
+        $('.card-methord').removeClass('turntheme');
+        $('.card-methord').removeClass('check-icon02');
+
         $(this).addClass('turntheme');
         $(this).addClass('check-icon02');
     return false;

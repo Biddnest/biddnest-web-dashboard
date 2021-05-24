@@ -37,6 +37,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/coupon/verify',[ApiRouter::class,'verifyCoupon']);
     Route::get('/coupon/get',[ApiRouter::class,'getCouponsForBooking']);
 
+    Route::get('/testimonials',[ApiRouter::class,'getTestimonials']);
+
     Route::get('/zone',[ApiRouter::class,'getZones']);
     //bookings APIs
     Route::prefix('bookings')->group(function () {
@@ -49,6 +51,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/distance',[ApiRouter::class,'getDistance']);
 
         // Route::post('/reschedule',[ApiRouter::class,'reschedul']);
+        Route::get('/history/enquiry',[ApiRouter::class,'getBookingHistoryEnquiry']);
         Route::get('/history/past',[ApiRouter::class,'getBookingHistoryPast']);
         Route::get('/history/live',[ApiRouter::class,'getBookingHistoryLive']);
 

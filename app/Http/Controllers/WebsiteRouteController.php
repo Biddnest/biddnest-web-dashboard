@@ -13,27 +13,16 @@ class WebsiteRouteController extends Controller
     public function login(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'phone' => 'required|string|min:10'
-        ]);
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return UserController::login($request->phone);
-
-    }
-
-    public function verifyOtp(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
             'phone' => 'required|string|min:10',
-            'otp' => 'required|numeric'
+            'otp' => 'nullable|numeric'
         ]);
-
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return UserController::verifyLoginOtpWeb($request->phone, $request->otp, true);
 
+        if($request->otp == "")
+            return UserController::login($request->phone, true);
+        else
+            return UserController::verifyLoginOtp($request->phone, $request->otp, true);
     }
 
     public function addVendor(Request $request)
@@ -128,6 +117,30 @@ class WebsiteRouteController extends Controller
 
         return TicketController::create(214, 2,  ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
+
+    public function addCancelTicket(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required|string',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return TicketController::create(214, 2,  ["public_booking_id"=>$request->public_booking_id]);
+    }
+
+    public function addReschedulTicket(Request $request)
+        {
+            $validation = Validator::make($request->all(),[
+                'public_booking_id' => 'required|string',
+            ]);
+
+            if($validation->fails())
+                return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+            return TicketController::create(214, 3,  ["public_booking_id"=>$request->public_booking_id]);
+        }
 
     public function bookingConfirmEstimate(Request $request)
     {

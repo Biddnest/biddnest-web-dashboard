@@ -8,21 +8,29 @@
                 <div class="card-body ">
                     <div class="card-title border-bottom d-flex justify-content-between pl-3 mt-4 pb-10">
                         <h5>Here is your final bill</h5>
-                        <h4 class="f-30">Rs 4000</h4>
+{{--                        <h4 class="f-30">Rs {{$payment_summary->grand_total}}</h4>--}}
                     </div>
                     <div>
                         <p class="bold">PAYMENT SUMMARY</p>
                         <div class="d-flex justify-content-between">
-                            <p class="text-muted">Item Total </p>
-                            <p>3900</p>
+                            <p class="text-muted">Sub Total </p>
+{{--                            <p>{{$payment_summary->sub_total}}</p>--}}
                         </div>
                         <div class="d-flex justify-content-between border-bottom">
-                            <p class="text-muted"> Tax and Charges</p>
-                            <p>100</p>
+                            <p class="text-muted">Surge Charges</p>
+{{--                            <p>{{$payment_summary->sub_total}}</p>--}}
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <p class="text-muted"> Discount</p>
+{{--                            <p>- {{$payment_summary->discount}}</p>--}}
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+{{--                            <p class="text-muted"> Tax ({{$payment_summary->tax_percentage}}%)</p>--}}
+{{--                            <p>{{$payment_summary->tax}}</p>--}}
                         </div>
                         <div class="mt-1 pt-1 pl-2 d-flex justify-content-between bold border-bottom">
                             <h6 class="pl-1">Grand Total</h6>
-                            <h5>4000</h5>
+{{--                            <h5>{{$payment_summary->grand_total}}</h5>--}}
 
                         </div>
                     </div>
@@ -32,17 +40,13 @@
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-8">
                             <div class="input-group mb-view ">
-                                <input type="text" class="form-control h-content mb-view" placeholder="Enter Coupon Code if any">
-
+                                <input type="text" class="form-control h-content mb-view" name="coupon" id="coupon" placeholder="Enter Coupon Code if any">
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-2 ">
                             <button type="submit" class="btn btn-theme-bg white-bg" id="padding-apply">Apply
-                                <a class="white-text " href="#"></a>
-
                             </button>
                         </div>
-
                     </div>
 
 
@@ -50,38 +54,28 @@
                     <div class="border-bottom ">
                         <p class="para-head mt-2 pl-1 ml-1">Available Coupons</p>
                         <div class="d-flex direction-col mb-4">
-                            <div class="coupon ml-2">
-                                <div class="d-flex mt-1 justify-content-center">
-
-                                    <h5 class="coupon-code center d-flex">
-                                        LMN2020
-                                    </h5>
-                                    <img class="m-0" src="{{asset('static/website/images/icons/copy.svg')}}" />
+                            @foreach($coupons as $coupon)
+                                <div class="coupon ml-2">
+                                    <div class="d-flex mt-1 justify-content-center">
+                                        <h5 class="coupon-code center d-flex">
+                                            {{$coupon->code}}
+                                        </h5>
+                                        <a href="#" class="copy" data-code="{{$coupon->code}}"><img class="m-0" src="{{asset('static/website/images/icons/copy.svg')}}" /></a>
+                                    </div>
+                                    <p>{!! $coupon->desc !!}</p>
                                 </div>
-                                <p>Dummy text of the printing and life setting industry</p>
-                            </div>
-                            <div class="coupon">
-                                <div class="d-flex mt-1 justify-content-center">
-                                    <h5 class="coupon-code center d-flex">
-                                        LMN2020
-                                    </h5>
-                                    <img class="m-0" src="{{asset('static/website/images/icons/copy.svg')}}" />
-                                </div>
-                                <p>Dummy text of the printing and life setting industry</p>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- Payment -->
                     <div class="mt-2">
                         <h6 class="ml-1 "> Select the payment method:</h6>
-                        <div class="d-flex row  justify-content-between p-2 mr-1 pl-3 ">
+                        <div class="d-flex row  justify-content-between mr-1 pl-3 ">
                             <div class="col-md-2.5  card  bg-turnblue card-methord ">
                                 <img style="width: 90px;" class="mt-1" src="{{asset('static/website/images/icons/upi.svg')}}" />
                                 <p class=" center p-2 -mt-10 text-white">UPI Payment</p>
-
-
                             </div>
-                            <div class="card col-md-2.5    bg-turnblue card-methord p-2">
+                            <div class="card col-md-2.5    bg-turnblue card-methord">
                                 <img class="mt-1" src="{{asset('static/website/images/icons/upi1.svg')}}" />
                                 <p class=" center  p-2 text-white">Net Banking</p>
 

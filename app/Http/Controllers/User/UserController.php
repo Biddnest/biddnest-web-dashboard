@@ -31,7 +31,7 @@ class UserController extends Controller
      * @param $phone
      * @return JsonResponse|object
      */
-    public static function login($phone)
+    public static function login($phone, $web=false)
     {
         $user = User::where(['phone'=>$phone])
             ->where([ 'deleted'=>0])
@@ -61,7 +61,10 @@ class UserController extends Controller
         })->afterResponse();
         $data['otp'] = $otp;
 
-        return Helper::response(true, "Otp has been sent to the phone.", $data);
+        if($web)
+            return Helper::response("await", "Otp has been sent to the phone.", $data);
+        else
+            return Helper::response(true, "Otp has been sent to the phone.", $data);
     }
 
     /**
@@ -69,7 +72,7 @@ class UserController extends Controller
      * @param $otp
      * @return JsonResponse|object
      */
-    public static function verifyLoginOtp($phone, $otp){
+    public static function verifyLoginOtp($phone, $otp, $web=true){
         $user = User::where("phone",$phone)->where(['deleted'=>0])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid Action",null,401);
@@ -86,11 +89,18 @@ class UserController extends Controller
                 $data = $user;
             }
 
+            if($web)
+            {
+                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email]]);
+                Session::put('sessionFor', "user");
+                return Helper::response(true, "Otp has been verified", ["user" => $data]);
+            }
+            else{
                 return Helper::response(true, "Otp has been verified",[
                     "user"=>$data,
                     "token"=>$jwt_token, "expiry_on"=>CarbonImmutable::now()->add(365, 'day')->format("Y-m-d h:i:s")
                 ]);
-
+            }
 
         }else {
             return Helper::response(false, "Incorrect otp provided");
@@ -107,18 +117,16 @@ class UserController extends Controller
         } else if($user->verf_code == $otp) {
             User::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
 
-            $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
+//            $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
 
             $data = null;
             if($user->fname){
                 $data = $user;
             }
 
-            Session::put(["account"=>['id'=>$user->id]]);
+            Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email]]);
             Session::put('sessionFor', "user");
-            return Helper::response(true, "Otp has been verified",[
-                    "user"=>$data
-                ]);
+            return Helper::response(true, "Otp has been verified", ["user" => $data]);
 
         }else {
             return Helper::response(false, "Incorrect otp provided");

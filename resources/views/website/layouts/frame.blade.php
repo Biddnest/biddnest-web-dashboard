@@ -65,7 +65,7 @@
                         <div class="dropdown-content">
                             <ul class="d-content">
                                 <li>
-                                    <a class="menu" href="{{route('my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
+                                    <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
                                 </li>
                                 <li>
                                     <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>

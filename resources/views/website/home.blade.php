@@ -5,7 +5,7 @@
         <div class="d-flex center">
             <div class="container container-top p-50 top-header-card border-top-cards">
                 <div class="top-cards">
-                    <div class="col-lg-10 col-xs-12 d-flex space-between">
+                    <div class="col-lg-4 col-xs-12 d-flex space-between">
                         @foreach($categories as $category)
                             <div class="card-header card-methord building-type ">
                                 <div class="card-body-top">
@@ -438,7 +438,7 @@
             </div>
         </section>
 
-    <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+        <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
             <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25">
                 <div class="modal-header p-0 br-5 ">
@@ -450,21 +450,29 @@
                     </header>
                 </div>
                 <div class="modal-body  margin-topneg-7">
-                    <form class="px-3 login" data-alert="mega" action="{{ route('api.login') }}" method="POST"  data-parsley-validate >
+                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="redirect"   data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
                             <h2 class="p-text">Login</h2>
                             <div class="col-lg-12 col-xs-12 mt-3">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
-                                    <input type="text" class="form-control" name="phone" id="formGroupExampleInput" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            {{--<button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
-                                submit
-                            </button>--}}
-                            <a data-toggle="modal" data-target="#otp-modal">
+                            <div class="col-lg-12 col-xs-12 mt-3 otp hidden" id="otp">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">OTP</label>
+                                    <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
+                                </div>
+                            </div>
+                           {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
+                                <button type="button" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
+                                    Next
+                                </button>
+                            </a>--}}
+                            <a class="weblogin">
                                 <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
-                                    Submit
+                                    Send OTP
                                 </button>
                             </a>
 
@@ -475,43 +483,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-        <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25">
-                <div class="modal-header p-0 br-5 ">
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <header class="join-as-vendor">
-                        <img src="{{ asset('static/website/images/icons/logo.png')}}">
-                    </header>
-                </div>
-                <div class="modal-body  margin-topneg-7">
-                    <form action="{{ route('api.otp') }}" method="POST" data-next="refresh" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue onboard-vendor-form" id="myForm" data-parsley-validate>
-                        <div class="d-flex f-direction text-justify center">
-                            <h2 class="p-text">Login</h2>
-                            <div class="col-lg-12 col-xs-12 mt-3">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Phone Number</label>
-                                    <input type="number" class="form-control" name="phone" id="formGroupExampleInput" placeholder="9990009990" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-xs-12 mt-3">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">OTP</label>
-                                    <input type="number" class="form-control" name="otp" id="formGroupExampleInput" placeholder="9990009990" required>
-                                </div>
-                            </div>
-
-                                <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-6 mb-4 padding-btn-res white-bg">
-                                    submit
-                                </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
         <!-- location from picker -->
         <div class="modal fade" id="from_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
             <div class="modal-dialog theme-text input-text-blue" role="document">
@@ -538,6 +509,7 @@
                 </div>
             </div>
         </div>
+
         <!-- location to picker -->
         <div class="modal fade" id="to_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
             <div class="modal-dialog theme-text input-text-blue" role="document">
@@ -563,6 +535,7 @@
             </div>
         </div>
         </div>
+
         <script>
             function openContent(evt, cityName) {
                 var i, tabcontent, tablinks;

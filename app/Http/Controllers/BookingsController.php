@@ -319,7 +319,9 @@ class BookingsController extends Controller
             //            ->where("user_id", $user_id)
             ->where("deleted", CommonEnums::$NO)->orderBy('id', 'DESC')
             ->with('movement_dates')
-            ->with('inventories')
+            ->with(['inventories'=>function($query){
+                $query->with('inventory');
+            }])
             ->with('status_history')
             ->with('organization')
             ->with('service')
@@ -434,7 +436,7 @@ class BookingsController extends Controller
         return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($exist->id)]);
     }
 
-    public static function getPaymentDetails($public_booking_id, $discount_amount = 0.00)
+    public static function getPaymentDetails($public_booking_id, $discount_amount = 0.00, $web=false)
     {
         $booking = Booking::where("public_booking_id", $public_booking_id)
             ->where("status", BookingEnums::$STATUS['payment_pending'])->with('payment')->first();
@@ -462,13 +464,25 @@ class BookingsController extends Controller
             $grand_total += $tax;
         }
 
-        return Helper::response(true, "Get payment data successfully", ["payment_details" => [
-            "sub_total" => $booking->payment->sub_total,
-            "surge_charge" => $booking->payment->other_charges,
-            "discount" => $discount_amount,
-            "tax(" . $tax_percentage . "%)" => $tax,
-            "grand_total" => $grand_total
-        ]]);
+        if($web) {
+            $summary = [
+                "sub_total" => $booking->payment->sub_total,
+                "surge_charge" => $booking->payment->other_charges,
+                "discount" => $discount_amount,
+                "tax" => $tax,
+                "tax_percentage" => $tax_percentage,
+                "grand_total" => $grand_total
+            ];
+            return $summary;
+        }
+        else
+            return Helper::response(true, "Get payment data successfully", ["payment_details" => [
+                "sub_total" => $booking->payment->sub_total,
+                "surge_charge" => $booking->payment->other_charges,
+                "discount" => $discount_amount,
+                "tax(" . $tax_percentage . "%)" => $tax,
+                "grand_total" => $grand_total
+            ]]);
 
     }
 

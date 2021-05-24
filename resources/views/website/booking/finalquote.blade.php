@@ -9,7 +9,7 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
@@ -82,35 +82,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion" id="comments">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-groups">
-                                            <label class="container-01">
-                                                <input type="checkbox" id="Lift1" />
-                                                <span class="checkmark-agree -mt-10"></span>
-                                            </label>
+                                    <div class="accordion" id="comments">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-groups">
+                                                <label class="container-01">
+                                                    <input type="checkbox" id="Lift1" readonly/>
+                                                    <span class="checkmark-agree -mt-10"></span>
+                                                </label>
 
-                                            <span class="error-message">Please enter valid</span>
+                                                <span class="error-message">Please enter valid</span>
+                                            </div>
+                                            <p class="text-muted center mt-2 pl-0">
+                                                I agree to the Terms & Conditions
+                                            </p>
                                         </div>
-                                        <p class="text-muted center mt-2 pl-0">
-                                            I agree to the Terms & Conditions
-                                        </p>
-                                    </div>
 
-                                    <div class="button-bottom d-flex justify-content-between pt-4">
-                                        <div class="">
-                                            <a class="white-text" data-toggle="modal" data-target="#reject-modal"><button
-                                                    class="btn btn-theme-w-bg">Reject</button></a>
-                                        </div>
-                                        <div class="">
-                                            <a href="{{route('payment',['id'=>1])}}">
-                                                <button type="submit" class="btn btn-theme-bg white-bg">
-                                                    Place Order
-                                                </button>
-                                            </a>
+                                        <div class="button-bottom d-flex justify-content-between pt-4">
+                                            <div class="">
+                                                <a class="white-text" data-toggle="modal" data-target="#reject-modal"><button
+                                                        class="btn btn-theme-w-bg">Reject</button></a>
+                                            </div>
+                                            <div class="">
+                                                <a href="{{route('payment',['id'=>$booking->public_booking_id])}}">
+                                                    <button class="btn btn-theme-bg white-bg">
+                                                        Place Order
+                                                    </button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         @endif
                         <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">

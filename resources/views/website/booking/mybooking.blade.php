@@ -9,7 +9,7 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
@@ -57,7 +57,7 @@
                                         <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
                                             <div>
                                                 <p class="bold mt-1 pl-4">
-                                                    #{{$booking->public_booking_id}} <span class="light">| {{date('d M Y', strtotime($booking->created_at)}}</span>
+                                                    #{{$booking->public_booking_id}} <span class="light">| {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                 </p>
                                             </div>
                                             <div>
@@ -108,7 +108,7 @@
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['pending_driver_assign']; @endphp
-                                                        <a class="white-text" href="{{route('order-details', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('website.order-details', ['id'=>$booking->public_booking_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Pending Driver Assign
                                                             </button>
@@ -117,7 +117,7 @@
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['awaiting_pickup']; @endphp
-                                                        <a class="white-text" href="{{route('order-details', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('website.order-details', ['id'=>$booking->public_booking_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Awaiting Pickup
                                                             </button>
@@ -126,7 +126,7 @@
 
                                                     @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['in_transit']; @endphp
-                                                        <a class="white-text" href="{{route('order-details', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('website.order-details', ['id'=>$booking->public_booking_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 In Transit
                                                             </button>

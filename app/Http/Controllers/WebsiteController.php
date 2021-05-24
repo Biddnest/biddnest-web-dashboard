@@ -6,6 +6,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Coupon;
 use App\Models\Faq;
 use App\Models\Service;
 use App\Models\Settings;
@@ -88,13 +89,15 @@ class WebsiteController extends Controller
 
     public function payment(Request $request)
     {
-        $id=$request->id;
-        return view('website.booking.payment');
+        $payment_summary=BookingsController::getPaymentDetails($request->id, 0.00, true);
+        $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
     }
 
     public function orderDetails(Request $request)
     {
-        return view('website.booking.orderdetails');
+        $booking=BookingsController::getBookingByPublicIdForApp($request->id, 214, true);
+        return view('website.booking.orderdetails', ['booking'=>$booking]);
     }
 
     public function bookingHistory(Request $request)

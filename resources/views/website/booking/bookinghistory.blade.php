@@ -9,7 +9,7 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab p-15" id="quotation" data-toggle="tab" href="{{route('my-bookings')}}">Ongoing Booking</a>

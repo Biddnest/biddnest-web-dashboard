@@ -100,7 +100,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-7">
-                                            <form action="{{route('profile_edit')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('my-profile')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate >
+                                            <form action="{{route('profile_edit')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('website.my-profile')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate >
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="">
@@ -174,7 +174,7 @@
                                                 <div class="accordion" id="comments">
                                                     <div class="button-bottom d-flex justify-content-between pt-4">
                                                         <div class="">
-                                                            <a class="white-text" href="{{route('my-profile')}}">
+                                                            <a class="white-text" href="{{route('website.my-profile')}}">
                                                                 <button type="button" class="btn btn-theme-w-bg f-14">
                                                                     cancel
                                                                 </button>

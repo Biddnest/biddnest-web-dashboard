@@ -16,9 +16,15 @@ use Illuminate\Foundation\Inspiring;
 class Helper
 {
     public static function response($status, $message, $data=null, $http_code=200){
-        $stat =$status ? "success" : "fail";
-        /*if($status === true)
-            $message = Inspiring::quote();*/
+//        $stat =$status ? "success" : "fail";
+        if($status === true)
+           $stat = "success";
+
+        if($status === false)
+           $stat = "fail";
+
+        if($status === "await")
+           $stat = "await";
 
         return response()->json(["status" => $stat, "message"=>ucwords($message), "data"=>$data])->setStatusCode($http_code);
     }

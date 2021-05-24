@@ -136,7 +136,9 @@ $("body").on('submit', "form", function() {
                             $(form.data(".modal-id")).modal();
                         }
                     }
-                } else if (response.status == "fail") {
+                }
+
+                else if (response.status == "fail") {
 
                     if (form.data("alert") == "tiny")
                         tinyAlert("Oops", response.message);
@@ -146,7 +148,13 @@ $("body").on('submit', "form", function() {
                         megaAlert("Oops", response.message);
 
                     revertFormAnim(button, buttonPretext);
-                } else {
+                }
+
+                else if(response.status == "await"){
+                    $(form.data('await-input')).toggleClass('hidden');
+                    revertFormAnim(button, buttonPretext);
+                }
+                else {
                     Logger.info(response.message);
                     revertFormAnim(button, buttonPretext);
                 }
@@ -373,7 +381,6 @@ $("body").on('click', ".sidebar-toggle_slider td:not(:first-child)", function(ev
     );
 });
 
-
 $("body").on('click', ".invsidebar", function(event) {
     var $this = $(this);
 
@@ -412,7 +419,6 @@ $("body").on('click', ".category-sidebar-toggle td:not(:nth-last-child(-n+2))", 
 
 });
 
-
 $("body").on('change', ".vendor-select", function(event) {
     var id=$(this).val();
     var commision=$("#org_"+id).data("comission");
@@ -434,7 +440,6 @@ $("body").on('keyup', "#amount", function(event) {
     document.getElementById("commission_amount").value = discount;
     return false;
 });
-
 
 $("body").on('change', ".change_status", function(event) {
     var target = $(this).closest($(this).data("parent"));
@@ -477,6 +482,7 @@ $("body").on('keydown', ".table-search", function(event) {
         }
     }
 });
+
 $("body").on('keydown', ".table-search1", function(event) {
     if(event.keyCode == 13){
         var query = $(this).val();
@@ -673,7 +679,6 @@ $("body").on('click', ".next5", function(event) {
     $(".steps-step-5").removeClass("color-purple");
 });
 
-
 $("body").on('change', ".switch", function(event) {
     $(".toggle-input").toggleClass('diplay-none ');
 });
@@ -759,3 +764,79 @@ $("body").on('click', ".raised", function(event) {
         });
     return false;
 });
+
+$("body").on('click', ".reshcedule", function(event) {
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var data = $(this).data("id");
+        var href = $(this).data("next-url");
+        $.add($(this).data("url"), {data}, function (response){
+            if(response.status == "success")
+            {
+                // tinySuccessAlert("Ticket Raised Successfully", response.message);
+                window.location.href = href;
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    return false;
+});
+
+$("body").on('click', ".reject-booking", function(event) {
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var data = $(this).data("id");
+        var href = $(this).data("next-url");
+        $.add($(this).data("url"), {data}, function (response){
+            if(response.status == "success")
+            {
+                // tinySuccessAlert("Ticket Raised Successfully", response.message);
+                window.location.href = href;
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    return false;
+});
+
+$("body").on('click', ".copy", function(event) {
+        var code = $(this).data("code");
+        document.getElementById("coupon").value = code;
+    return false;
+});
+
+$("body").on('click', ".card-methord", function(event) {
+        var code = $(this).data("code");
+        $(this).removeClass('turntheme');
+        $(this).removeClass('check-icon02');
+        $(this).addClass('turntheme');
+        $(this).addClass('check-icon02');
+    return false;
+});
+
+/*$("body").on('click', ".weblogin", function(event) {
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var phone = document.getElementById("phone").value;
+        console.log(phone);
+        $.add($(this).data("url"), {phone}, function (response){
+            if(response.status == "success")
+            {
+                // tinySuccessAlert("No added Successfully", response.message);
+                // $(this).fadeOut(100).remove();
+                $('.weblogin').css('display', 'none');
+                $('.otp').css('display', 'block');
+                $('.otp-add').css('display', 'block');
+                $('.otp').attr("required", "required");
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
+
+        });
+    return false;
+});*/

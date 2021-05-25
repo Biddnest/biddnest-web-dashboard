@@ -845,6 +845,7 @@ $("body").on('click', ".payment", function(event) {
                 "description": "Payment",
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
                 "handler": function (response){
+                    console.log(response.id);
                     $.ajax({
                         url: url_status,
                         type: 'post',

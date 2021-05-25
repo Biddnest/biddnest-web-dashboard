@@ -826,36 +826,7 @@ $("body").on('click', ".payment", function(event) {
         var url_payment = $(this).data("payment");
         var url_status = $(this).data("status");
 
-    var options = {
-        "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
-        "amount": (amount *100), // 2000 paise = INR 20
-        "name": "Bidnest",
-        "description": "Payment",
-        "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
-        "handler": function (response){
-            $.ajax({
-                url: url_status,
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    booking_id:booking_id ,payment_id : response.id,
-                },
-                success: function (msg) {
-                    window.location.href = url;
-                }
-            });
-        },
-        "prefill": {
-            "method": method,
-            "name": "test",
-            "email": "test@gmail.com",
-            "contact": "7788556655"
-        },
 
-        "theme": {
-            "color": "#4b2b9b"
-        }
-    };
 
     $.ajax({
         url: url_payment,
@@ -865,7 +836,38 @@ $("body").on('click', ".payment", function(event) {
             id:booking_id ,code : coupon_code,
         },
         success: function (response) {
-            options.order_id=response.data.payment.rzp_order_id;
+            // options.order_id=response.data.payment.rzp_order_id;
+            var options = {
+                "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
+                "order_id":response.data.payment.rzp_order_id,
+                "amount": (amount *100), // 2000 paise = INR 20
+                "name": "Bidnest",
+                "description": "Payment",
+                "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
+                "handler": function (response){
+                    $.ajax({
+                        url: url_status,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            booking_id:booking_id ,payment_id : response.id,
+                        },
+                        success: function (msg) {
+                            redirectTo(url);
+                        }
+                    });
+                },
+                "prefill": {
+                    "method": method,
+                    "name": "test",
+                    "email": "test@gmail.com",
+                    "contact": "7788556655"
+                },
+
+                "theme": {
+                    "color": "#4b2b9b"
+                }
+            };
             var rzp1 = new Razorpay(options);
             rzp1.open();
             // window.location.href = url;

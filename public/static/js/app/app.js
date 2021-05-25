@@ -832,7 +832,7 @@ $("body").on('click', ".payment", function(event) {
         "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
         "handler": function (response){
             $.ajax({
-                url: "https://dashboard-biddnest.dev.diginnovators.com/website/status/complete",
+                url: "https://dashboard-biddnest.dev.diginnovators.com/website/api/status/complete",
                 type: 'post',
                 dataType: 'json',
                 data: {

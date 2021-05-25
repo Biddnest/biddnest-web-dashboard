@@ -69,7 +69,7 @@
                                 @if(\Illuminate\Support\Facades\Session::get('account'))
                                     <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? ''}}</span>
                                 @else
-                                    <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl">
+                                    <a data-toggle="modal" data-target="#Login-modal">
                                         <span class="logged-in-username">Login</span>
                                     </a>
                                 @endif

@@ -66,27 +66,35 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="logged-in-username">Amith Raji</span>
+                                @if(\Illuminate\Support\Facades\Session::get('account'))
+                                    <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? ''}}</span>
+                                @else
+                                    <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl">
+                                        <span class="logged-in-username">Login</span>
+                                    </a>
+                                @endif
                             </a>
-                            <div class="dropdown-content col-grey cursor-pointer">
-                                <ul class="d-content">
-                                    <li>
-                                        <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="#0"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            @if(\Illuminate\Support\Facades\Session::get('account'))
+                                <div class="dropdown-content col-grey cursor-pointer">
+                                    <ul class="d-content">
+                                        <li>
+                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="#0"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
                         </li>
                     </ul>
                 </div>

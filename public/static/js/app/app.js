@@ -829,10 +829,10 @@ $("body").on('click', ".payment", function(event) {
         "amount": (amount *100), // 2000 paise = INR 20
         "name": "Bidnest",
         "description": "Payment",
-        "image": "http://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
+        "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
         "handler": function (response){
             $.ajax({
-                url: "http://dashboard-biddnest.dev.diginnovators.com/website/status/complete",
+                url: "https://dashboard-biddnest.dev.diginnovators.com/website/status/complete",
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -856,7 +856,7 @@ $("body").on('click', ".payment", function(event) {
     };
 
     $.ajax({
-        url: "http://dashboard-biddnest.dev.diginnovators.com/website/api/initiate-payment",
+        url: "https://dashboard-biddnest.dev.diginnovators.com/website/api/initiate-payment",
         type: 'post',
         dataType: 'json',
         data: {

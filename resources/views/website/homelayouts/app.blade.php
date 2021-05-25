@@ -34,6 +34,8 @@
                                 <span class="nav-menu-link">Contact Us</span></a>
                         </li>
                         <li class="account-settings m-dropdown dropdown">
+                            @if(\Illuminate\Support\Facades\Session::get('account'))
+                            <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px">
                                     <defs>
                                         <style>
@@ -65,13 +67,13 @@
                                         </g>
                                     </g>
                                 </svg>
-                                @if(\Illuminate\Support\Facades\Session::get('account'))
-                                    <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? ''}}</span>
-                                @else
-                                    <a data-toggle="modal" data-target="#Login-modal">
-                                        <span class="logged-in-username">Login</span>
-                                    </a>
-                                @endif
+                                <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? ''}}</span>
+                            </a>
+                            @else
+                                <a data-toggle="modal" data-target="#Login-modal">
+                                    <span class="logged-in-username">Login</span>
+                                </a>
+                            @endif
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">
                                     <ul class="d-content">

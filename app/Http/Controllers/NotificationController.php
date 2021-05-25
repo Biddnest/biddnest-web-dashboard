@@ -118,7 +118,7 @@ class NotificationController extends Controller
                 $save_notification->url=$url;
                 $save_notification->save();
             }
-       
+
         $players=[];
         foreach($user_id as $user) {
 //            $players[] = (string) $user;

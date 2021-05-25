@@ -816,9 +816,9 @@ $("body").on('click', ".card-method", function(event) {
     return false;
 });
 
-
 $("body").on('click', ".payment", function(event) {
-        var method = $('.card-method').data("method");
+        var method = $('.check-icon02').data("method");
+        console.log(method);
         var amount = $(this).data("amount");
         var booking_id = $(this).data("booking");
         var coupon_code = document.getElementById("coupon").value;
@@ -844,6 +844,7 @@ $("body").on('click', ".payment", function(event) {
             });
         },
         "prefill": {
+            "method": method,
             "name": "test",
             "email": "test@gmail.com",
             "contact": "7788556655"
@@ -874,25 +875,24 @@ $("body").on('click', ".call-request", function(event) {
     return false;
 });
 
-/*$("body").on('click', ".weblogin", function(event) {
-        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        var phone = document.getElementById("phone").value;
-        console.log(phone);
-        $.add($(this).data("url"), {phone}, function (response){
-            if(response.status == "success")
-            {
-                // tinySuccessAlert("No added Successfully", response.message);
-                // $(this).fadeOut(100).remove();
-                $('.weblogin').css('display', 'none');
-                $('.otp').css('display', 'block');
-                $('.otp-add').css('display', 'block');
-                $('.otp').attr("required", "required");
-            }
-            else
-            {
-                tinyAlert("Failed", response.message);
-            }
+$("body").on('click', ".verify-coupon", function(event) {
+    var public_booking_id = document.getElementById("public_booking_id").value;
+    var coupon = document.getElementById("coupon").value;
+    $.add($(this).data("url"), {public_booking_id, coupon}, function (response){
+        if(response.status == "success")
+        {
+            console.log(response);
+            tinySuccessAlert("Coupon Verified", response.message);
+            $('.discount').html(response.data.discount);
+            $('.grand-total').html(response.data.grand_total);
+            $('.payment').attr("data-amount",response.data.grand_total);
+        }
+        else
+        {
+            tinyAlert("Failed", response.message);
+        }
 
-        });
+    });
     return false;
-});*/
+});
+

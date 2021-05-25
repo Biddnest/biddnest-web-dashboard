@@ -18,11 +18,11 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="text-muted">Surge Charges</p>
-                            <p>{{$payment_summary['sub_total']}}</p>
+                            <p>{{$payment_summary['surge_charge']}}</p>
                         </div>
                         <div class="d-flex justify-content-between ">
                             <p class="text-muted"> Discount</p>
-                            <p>-{{$payment_summary['discount']}}</p>
+                            -<p class="discount">{{$payment_summary['discount']}}</p>
                         </div>
                         <div class="d-flex justify-content-between border-bottom">
                             <p class="text-muted"> Tax ({{$payment_summary['tax_percentage']}}%)</p>
@@ -30,11 +30,11 @@
                         </div>
                         <div class="mt-1 pt-1 pl-2 d-flex justify-content-between bold border-bottom">
                             <h6 class="pl-1">Grand Total</h6>
-                            <h5>{{$payment_summary['grand_total'] - $payment_summary['discount']}}</h5>
+                            <h5 class="grand-total">{{$payment_summary['grand_total']}}</h5>
 
                         </div>
                     </div>
-                    <form action="{{route('verifiedcoupon')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('verifiedpayment', ['id'=>$public_booking_id])}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
+{{--                    <form action="{{route('verifiedcoupon')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('verifiedpayment', ['id'=>$public_booking_id])}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>--}}
                         <div class="row d-flex justify-content-between mt-2">
                             <div class="col-md-2 col-sm-12 col-xs-12 center">
                                 <p class=" mb-view pl-0">Apply Coupon Code</p>
@@ -42,19 +42,19 @@
                             <div class="col-md-8 col-sm-8 col-xs-8">
                                 <div class="input-group mb-view ">
                                     <input type="text" class="form-control h-content mb-view" name="coupon" id="coupon"  placeholder="Enter Coupon Code if any">
-                                    <input type="hidden" class="form-control h-content mb-view" name="public_booking_id"  value="{{$public_booking_id}}">
+                                    <input type="hidden" class="form-control h-content mb-view" name="public_booking_id" id="public_booking_id" value="{{$public_booking_id}}">
                                 </div>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-2 ">
                                 @if($payment_summary['discount'] <= 0)
-                                    <button type="submit" class="btn btn-theme-bg white-bg" id="padding-apply">Apply
+                                    <button type="button" class="btn btn-theme-bg white-bg verify-coupon" id="padding-apply" data-url="{{route('verifiedcoupon')}}">Apply
                                     </button>
                                 @else
                                     <a href="{{route('payment',['id'=>$public_booking_id])}}" ><button class="btn btn-theme-bg white-bg" id="padding-apply">Remove</button></a>
                                 @endif
                             </div>
                         </div>
-                    </form>
+{{--                    </form>--}}
 
                     <!-- coupon -->
                     <div class="border-bottom ">
@@ -77,26 +77,26 @@
                     <div class="mt-2">
                         <h6 class="ml-1 "> Select the payment method:</h6>
                         <div class="d-flex row  justify-content-between mr-1 pl-3 ">
-                            <div class="col-md-2.5  card  bg-turnblue card-method" data-method="upi">
+                            <div class="col-md-2.5  card  bg-turnblue card-method" data-method="upi" style="width: 22%;">
                                 <img style="width: 90px;" class="mt-1" src="{{asset('static/website/images/icons/upi.svg')}}" />
                                 <p class=" center p-2 -mt-10 text-white">UPI Payment</p>
                             </div>
-                            <div class="card col-md-2.5    bg-turnblue card-method" data-method="net-bancking">
+                            <div class="card col-md-2.5    bg-turnblue card-method" data-method="netbanking" style="width: 22%;">
                                 <img class="mt-1" src="{{asset('static/website/images/icons/upi1.svg')}}" />
                                 <p class=" center  p-2 text-white">Net Banking</p>
                             </div>
-                            <div class="card col-md-2.5   bg-turnblue card-method " data-method="debit card">
+                            <div class="card col-md-2.5   bg-turnblue card-method " data-method="card" style="width: 22%;">
                                 <img class="mt-1 pt-2" src="{{asset('static/website/images/icons/upi2.svg')}}" />
                                 <p class=" center p-2 text-white">Debit Card</p>
                             </div>
-                            <div class="card col-md-2.5   bg-turnblue card-method " data-method="credit card">
+                            <div class="card col-md-2.5   bg-turnblue card-method " data-method="card" style="width: 22%;">
                                 <img class="mt-1 pt-2" src="{{asset('static/website/images/icons/upi3.svg')}}" />
                                 <p class=" center p-2 text-white">Credit Card</p>
                             </div>
                         </div>
                     </div>
                     <div style="float: right;" class="btn-proceed mr-2 mt-2 ">
-                        <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total'] - $payment_summary['discount']}}" data-booking="{{$public_booking_id}}">
+                        <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}">
                             <button  class="btn btn-theme-bg  white-bg">Proceed</button>
                         </a>
                     </div>

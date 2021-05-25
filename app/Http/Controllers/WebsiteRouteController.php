@@ -181,9 +181,10 @@ class WebsiteRouteController extends Controller
         $valid= CouponController::checkIfValid($request->public_booking_id, $request->coupon, true);
 
         if(is_array($valid))
-            return WebsiteController::verifiedPayment($valid, $request->public_booking_id, $request->coupon);
+            return Helper::response(true,"valid Coupon", $valid);
         else
             return Helper::response(false,$valid);
+
     }
 
     public function initiatePayment(Request $request)

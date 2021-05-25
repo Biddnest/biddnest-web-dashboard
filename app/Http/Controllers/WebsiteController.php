@@ -111,12 +111,12 @@ class WebsiteController extends Controller
         return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
     }
 
-    public function verifiedPayment(Request $request)
+    /*public function verifiedPayment(Request $request)
     {
         $coupon_veridied=BookingsController::getPaymentDetails($request->id, 0.00, true);
         $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
         return view('website.booking.payment', ['payment_summary'=>$coupon_veridied, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
-    }
+    }*/
 
     public function orderDetails(Request $request)
     {

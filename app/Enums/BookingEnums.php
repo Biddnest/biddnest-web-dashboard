@@ -11,6 +11,8 @@ class BookingEnums{
 
     public static $BOOKING_TYPE=["economic"=>0, "premium"=>1];
 
+    public static $CREATED_THROUGH_CHANNEL=["app"=>0, "web"=>1, "support"=>2];
+
     public static $BOOKING_FETCH_TYPE=["live","scheduled","bookmarked","participated"];
 }
 

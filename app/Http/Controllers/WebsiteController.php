@@ -14,6 +14,7 @@ use App\Models\Testimonials;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class WebsiteController extends Controller
 {
@@ -24,6 +25,12 @@ class WebsiteController extends Controller
         return view('website.home', ["testimonials"=>$testimonial, "categories"=>$categories]);
     }
 
+    public function logout()
+    {
+        Session::flush();
+        return response()->redirectToRoute('home');
+    }
+
     public function joinVendor()
     {
         return view('website.vendor');
@@ -31,14 +38,17 @@ class WebsiteController extends Controller
 
     public function contactUs()
     {
-        $booking=Booking::where("user_id", 214)->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->get();
+        $booking=[];
+        if(Session::get('account'))
+           $booking=Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->get();
+
         $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
         return view('website.contactus', ['bookings'=>$booking, 'contact_details'=>$contact_details]);
     }
 
     public function completeContactUs()
     {
-        $booking=Booking::where("user_id", 214)->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
+        $booking=Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
         $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
          $ticket_details=Ticket::where("booking_id", $booking->id)->with(['reply'=>function($query){
             $query->where("user_id", null)->latest()->limit(1);
@@ -64,32 +74,32 @@ class WebsiteController extends Controller
     }
     public function estimateBooking(Request $request)
     {
-        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>214])->first();
+        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
         return view('website.booking.estimatebooking',['booking'=>$booking]);
     }
 
     public function placeBooking(Request $request)
     {
-        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>214])->first();
+        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
         return view('website.booking.placebooking',['booking'=>$booking]);
     }
 
     public function myBookings(Request $request)
     {
-        $bookings=BookingsController::bookingHistoryLive(214, true);
+        $bookings=BookingsController::bookingHistoryLive(Session::get('account')['id'], true);
         return view('website.booking.mybooking', ['bookings'=>$bookings]);
     }
 
     public function myBookingsEnquiries(Request $request)
     {
-        $bookings=BookingsController::bookingHistoryEnquiry(214, true);
+        $bookings=BookingsController::bookingHistoryEnquiry(Session::get('account')['id'], true);
         return view('website.booking.mybookingenquiries', ['bookings'=>$bookings]);
     }
 
     public function finalQuote(Request $request)
     {
         $reject_resions=json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
-        $booking=BookingsController::getBookingByPublicIdForApp($request->id, 214, true);
+        $booking=BookingsController::getBookingByPublicIdForApp($request->id, Session::get('account')['id'], true);
         return view('website.booking.finalquote', ['booking'=>$booking, 'resions'=>$reject_resions]);
     }
 
@@ -109,24 +119,24 @@ class WebsiteController extends Controller
 
     public function orderDetails(Request $request)
     {
-        $booking=BookingsController::getBookingByPublicIdForApp($request->id, 214, true);
+        $booking=BookingsController::getBookingByPublicIdForApp($request->id, Session::get('account')['id'], true);
         return view('website.booking.orderdetails', ['booking'=>$booking]);
     }
 
     public function bookingHistory(Request $request)
     {
-        $bookings=BookingsController::bookingHistoryPast(214, true);
+        $bookings=BookingsController::bookingHistoryPast(Session::get('account')['id'], true);
         return view('website.booking.bookinghistory', ['bookings'=>$bookings]);
     }
 
     public function myProfile(Request $request)
     {
-        $user = User::where('id', 214)->first();
+        $user = User::where('id', Session::get('account')['id'])->first();
         return view('website.myprofile', ['user'=>$user]);
     }
     public function myRequest(Request $request)
     {
-        $tickets=TicketController::get(214, true);
+        $tickets=TicketController::get(Session::get('account')['id'], true);
         return view('website.myrequest', ['tickets'=>$tickets]);
     }
 

@@ -6,6 +6,7 @@ use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class WebsiteRouteController extends Controller
@@ -85,7 +86,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::createForUserApp(214, $request->category, [], $request->heading, $request->desc);
+        return TicketController::createForUserApp(Session::get('account')['id'], $request->category, [], $request->heading, $request->desc);
     }
 
     public function raiseTicket(Request $request)
@@ -100,7 +101,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create(214, 2,  ["public_booking_id"=>$request->data]);
+        return TicketController::create(Session::get('account')['id'], 2,  ["public_booking_id"=>$request->data]);
     }
 
     public function addRejectTicket(Request $request)
@@ -115,7 +116,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create(214, 2,  ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::create(Session::get('account')['id'], 2,  ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
 
     public function addCancelTicket(Request $request)
@@ -127,7 +128,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create(214, 2,  ["public_booking_id"=>$request->public_booking_id]);
+        return TicketController::create(Session::get('account')['id'], 2,  ["public_booking_id"=>$request->public_booking_id]);
     }
 
     public function addReschedulTicket(Request $request)
@@ -139,7 +140,7 @@ class WebsiteRouteController extends Controller
             if($validation->fails())
                 return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-            return TicketController::create(214, 3,  ["public_booking_id"=>$request->public_booking_id]);
+            return TicketController::create(Session::get('account')['id'], 3,  ["public_booking_id"=>$request->public_booking_id]);
         }
 
     public function bookingConfirmEstimate(Request $request)
@@ -152,7 +153,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, 214);
+            return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, Session::get('account')['id']);
     }
 
     public function verifiedCoupon(Request $request)
@@ -196,6 +197,6 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return PaymentController::statusComplete(214, $request->booking_id, $request->paymentid);
+        return PaymentController::statusComplete(Session::get('account')['id'], $request->booking_id, $request->paymentid);
     }
 }

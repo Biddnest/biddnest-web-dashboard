@@ -24,10 +24,12 @@
                                 <span class="nav-menu-link">Become A Vendor</span>
                             </a>
                         </li>
-                        <li>
-                           <a href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />
-                                <span class="nav-menu-link">My Bookings</span></a>
-                        </li>
+                        @if(\Illuminate\Support\Facades\Session::get('account'))
+                            <li>
+                               <a href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />
+                                    <span class="nav-menu-link">My Bookings</span></a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{route('contact_us')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
@@ -67,7 +69,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? ''}}</span>
+                                <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                             @else
                                 <a data-toggle="modal" data-target="#Login-modal">
@@ -90,7 +92,7 @@
                                             <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
                                         </li>
                                         <li>
-                                            <a class="menu" href="#0"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
+                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
                                         </li>
                                     </ul>
                                 </div>

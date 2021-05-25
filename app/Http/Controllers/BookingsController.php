@@ -205,8 +205,14 @@ class BookingsController extends Controller
 
             $bookinginventory = new BookingInventory;
             $bookinginventory->booking_id = $booking->id;
-            $bookinginventory->inventory_id = $items["inventory_id"];
-            $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
+
+            if($items["inventory_id"]) {
+                $bookinginventory->inventory_id = $items["inventory_id"];
+                $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
+            }
+            else
+                $bookinginventory->name = $items["name"];
+
             $bookinginventory->material = $items["material"];
             $bookinginventory->size = $items["size"];
             $bookinginventory->quantity = $quantity;

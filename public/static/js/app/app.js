@@ -832,11 +832,11 @@ $("body").on('click', ".payment", function(event) {
         "image": "http://127.0.0.1:8000/static/images/favicon.svg",
         "handler": function (response){
             $.ajax({
-                url: "http://127.0.0.1:8000/website/api/initiate-payment",
+                url: "http://127.0.0.1:8000/website/status/complete",
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    id:booking_id ,code : coupon_code,
+                    booking_id:booking_id ,payment_id : response.id,
                 },
                 success: function (msg) {
                     window.location.href = url;
@@ -854,8 +854,23 @@ $("body").on('click', ".payment", function(event) {
             "color": "#4b2b9b"
         }
     };
-    var rzp1 = new Razorpay(options);
-    rzp1.open();
+
+    $.ajax({
+        url: "http://127.0.0.1:8000/website/api/initiate-payment",
+        type: 'post',
+        dataType: 'json',
+        data: {
+            id:booking_id ,code : coupon_code,
+        },
+        success: function (response) {
+            options.order_id=response.data.payment.rzp_order_id;
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            // window.location.href = url;
+        }
+    });
+
+
 
 });
 

@@ -197,19 +197,19 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return PaymentController::intiatePayment($request->id, $request->code, true);
+        return PaymentController::intiatePayment($request->id, $request->code);
     }
 
     public function statusComplete(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'booking_id' => 'required|string',
-            'paymentid' => 'required|string'
+            'payment_id' => 'required|string'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return PaymentController::statusComplete(Session::get('account')['id'], $request->booking_id, $request->paymentid);
+        return PaymentController::statusComplete(Session::get('account')['id'], $request->booking_id, $request->payment_id);
     }
 }

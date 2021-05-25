@@ -205,11 +205,10 @@ class BookingsController extends Controller
 
             $bookinginventory = new BookingInventory;
             $bookinginventory->booking_id = $booking->id;
+            $bookinginventory->inventory_id = $items["inventory_id"];
 
-            if($items["inventory_id"]) {
-                $bookinginventory->inventory_id = $items["inventory_id"];
+            if($items["inventory_id"] !== null)
                 $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
-            }
             else
                 $bookinginventory->name = $items["name"];
 

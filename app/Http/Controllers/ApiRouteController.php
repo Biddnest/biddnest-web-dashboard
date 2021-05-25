@@ -217,7 +217,7 @@ class ApiRouteController extends Controller
             'movement_dates.*' =>'required|date',
 
             'inventory_items.*.inventory_id' =>'nullable|integer',
-            'inventory_items.*.name' =>'nullable|integer',
+            'inventory_items.*.name' =>'nullable|string',
             'inventory_items.*.material' =>'required|string',
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',

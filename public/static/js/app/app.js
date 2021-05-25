@@ -844,14 +844,16 @@ $("body").on('click', ".payment", function(event) {
                 "name": "Bidnest",
                 "description": "Payment",
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
-                "handler": function (response){
-                    console.log(response);
+                "handler": function (resp){
+                    console.log({
+                        booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
+                    });
                     $.ajax({
                         url: url_status,
                         type: 'post',
                         dataType: 'json',
                         data: {
-                            booking_id:booking_id ,payment_id : response.id,
+                            booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                         },
                         success: function (msg) {
                             redirectTo(url);

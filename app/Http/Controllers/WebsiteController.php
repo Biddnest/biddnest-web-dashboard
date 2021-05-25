@@ -106,7 +106,7 @@ class WebsiteController extends Controller
 
     public function payment(Request $request)
     {
-        $payment_summary=BookingsController::getPaymentDetails($request->id, 0.00, true);
+        return $payment_summary=BookingsController::getPaymentDetails($request->id, 0.00, true);
         $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
         return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
     }

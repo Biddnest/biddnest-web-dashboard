@@ -182,7 +182,7 @@
                                                 <div class=""><a class="white-text" href="{{route('contact_us')}}"><button
                                                             class="btn btn-theme-w-bg btn-confirm-padding padding-btn-res">No</button></a>
                                                 </div>
-                                                <div class=""><a class="white-text raised" data-booking="{{$booking->public_booking_id}}" data-url="{{route('raise_support')}}" data-redirect="{{route('complete_contact_us')}}" href="#"><button
+                                                <div class=""><a class="white-text raised" data-booking="{{$booking->public_booking_id}}" data-url="{{route('raise_support')}}" href="#"><button
                                                             class="btn btn-theme-bg  white-bg btn-confirm-padding padding-btn-res">Yes</button></a>
                                                 </div>
                                             </div>

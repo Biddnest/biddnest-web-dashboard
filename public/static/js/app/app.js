@@ -750,8 +750,8 @@ $("body").on('click', ".raised", function(event) {
         $.add($(this).data("url"), {data}, function (response){
             if(response.status == "success")
             {
-                // tinySuccessAlert("Ticket Raised Successfully", response.message);
-                window.location.href = href;
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                // window.location.href = href;
             }
             else
             {

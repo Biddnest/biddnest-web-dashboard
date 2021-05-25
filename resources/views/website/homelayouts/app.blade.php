@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- Required meta tags -->
-        @include('website.homelayouts.includes.app-css')
+        @include('website.layouts.includes.app-css')
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top header-fixed">
@@ -257,6 +257,6 @@
                 </div>
 
         </footer>
-        @include('website.homelayouts.includes.app-js')
+        @include('website.layouts.includes.app-js')
     </body>
 </html>

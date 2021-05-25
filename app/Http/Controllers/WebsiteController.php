@@ -22,7 +22,8 @@ class WebsiteController extends Controller
     {
         $testimonial=Testimonials::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('website.home', ["testimonials"=>$testimonial, "categories"=>$categories]);
+        $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
+        return view('website.home', ["testimonials"=>$testimonial, "categories"=>$categories, 'contact_details'=>$contact_details]);
     }
 
     public function logout()

@@ -40,8 +40,8 @@
                                 <input id="dp1" class="input-overwrite" placeholder="16/may/2021" />
                             </div>
                             <div class="form-group  mr-1">
-                                <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose" type="button"><i
-                                        class="fa fa-calendar"></i>Choose
+                                <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i
+                                        class="fa fa-calendar "></i>Choose
                                 </button>
                             </div>
                         </div>

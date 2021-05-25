@@ -378,4 +378,21 @@ class TicketController extends Controller
 
         return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
     }
+
+    public static function createCallBack($ticket_type, $phone)
+    {
+        $meta=["phone"=>$phone];
+        $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+        $body = "Request to call back on ".$phone;
+        $ticket = new Ticket;
+        $ticket->heading = $title;
+        $ticket->desc = $body;
+        $ticket->type = $ticket_type;
+        $ticket->meta = json_encode($meta);
+
+        if(!$ticket->save())
+            return Helper::response(false, "Could'nt create ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+    }
 }

@@ -808,7 +808,6 @@ $("body").on('click', ".copy", function(event) {
 
 $("body").on('click', ".card-method", function(event) {
         var method = $(this).data("method");
-        console.log(method);
         $('.card-method').removeClass('turntheme');
         $('.card-method').removeClass('check-icon02');
 
@@ -859,7 +858,21 @@ $("body").on('click', ".payment", function(event) {
 
 });
 
+$("body").on('click', ".call-request", function(event) {
+    var data = document.getElementById("contact_no").value;
+    $.add($(this).data("url"), {data}, function (response){
+        if(response.status == "success")
+        {
+            tinySuccessAlert("Request Raised Successfully", response.message);
+        }
+        else
+        {
+            tinyAlert("Failed", response.message);
+        }
 
+    });
+    return false;
+});
 
 /*$("body").on('click', ".weblogin", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();

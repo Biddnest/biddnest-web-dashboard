@@ -65,7 +65,7 @@ Route::prefix('site')->group(function () {
 
     Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
 
-    Route::middleware("checkWebSession")->group(function(){
+    Route::middleware("CheckWebSession")->group(function(){
         Route::get('/home', [WebsiteController::class, 'home'])->name("home-logged");
     });
 });

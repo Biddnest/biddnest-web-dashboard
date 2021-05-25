@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div style="float: right;" class="btn-proceed mr-2 mt-2 ">
-                        <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}">
+                        <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}" data-payment="{{route('initiate-payment')}}" data-status="{{route('complete-status')}}">
                             <button  class="btn btn-theme-bg  white-bg">Proceed</button>
                         </a>
                     </div>

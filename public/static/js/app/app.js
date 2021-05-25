@@ -823,6 +823,8 @@ $("body").on('click', ".payment", function(event) {
         var booking_id = $(this).data("booking");
         var coupon_code = document.getElementById("coupon").value;
         var url = $(this).data("url");
+        var url_payment = $(this).data("payment");
+        var url_status = $(this).data("status");
 
     var options = {
         "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
@@ -832,7 +834,7 @@ $("body").on('click', ".payment", function(event) {
         "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
         "handler": function (response){
             $.ajax({
-                url: "https://dashboard-biddnest.dev.diginnovators.com/website/api/status/complete",
+                url: url_status,
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -856,7 +858,7 @@ $("body").on('click', ".payment", function(event) {
     };
 
     $.ajax({
-        url: "https://dashboard-biddnest.dev.diginnovators.com/website/api/initiate-payment",
+        url: url_payment,
         type: 'post',
         dataType: 'json',
         data: {

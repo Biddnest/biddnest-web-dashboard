@@ -142,6 +142,17 @@ label {
  }
 
 
+ .close .text-white  {
+    outline: none !important;
+    border: none !important;
+
+ }
+
+
+ button:focus { outline: none; }
+
+
+
 
  .card .required-item {
      width: fit-content !important;

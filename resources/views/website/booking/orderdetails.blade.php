@@ -69,19 +69,19 @@
                                     <div class=" d-flex justify-content-between">
                                         <div>
                                             <p class="f-14 ">FROM</p>
-                                            <p class="bg-blur f-18"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                            <p class="bg-blur f-16"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
                                         <div class=" mt-1 pt-3">
                                             <img src="{{asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div>
                                             <p class="f-14">TO</p>
-                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                            <p class="bg-blur f-16" style="width: 132px; text-align: center;">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
 
 
-                                    <div class="card text-left  details-card  bg-blur mt-1 ">
+                                    <div class="card text-left  details-card  bg-blur" style=" margin-top: 26px;">
                                         <div class="d-flex justify-content-between">
                                             <div class="">
                                                 <div>
@@ -113,7 +113,7 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="">
                                                 <div>
-                                                    <button data-toggle="modal" data-target="#detail-modal" class="btn btn-theme-bg p-1 f-12 ">Send details to
+                                                    <button data-toggle="modal" data-target="#detail-modal" class="btn btn-theme-bg  f-12 " style="padding: 6px 18px;">Send details to
                                                         phone</button>
                                                 </div>
                                             </div>
@@ -127,30 +127,30 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xs-12  col-sm-12 mt-4 pl-4 text-left">
-                                    <div class="d-flex mr-30 justify-content-between">
+                                    <div class="d-flex justify-content-between" style="width: 94%;">
                                         <div>
                                             <h6 class="l-cap f-14 p-0">Date</h6>
-                                            <h5>@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
+                                            <h5 class="f-16">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Price </h6>
-                                            <h5>Rs. {{$booking->final_quote}}</h5>
+                                            <h5 class="f-16">Rs. {{$booking->final_quote}}</h5>
                                         </div>
                                     </div>
-                                    <div class="d-flex mr-46 justify-content-between mt-2 ">
+                                    <div class="d-flex  justify-content-between mt-2 " style="width: 97%;">
                                         <div>
                                             <h6 class="l-cap f-14">Order ID</h6>
-                                            <h5>#{{$booking->public_booking_id}}</h5>
+                                            <h5 class="f-16">#{{$booking->public_booking_id}}</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Distance</h6>
-                                            <h5>{{json_decode($booking->meta, true)['distance']}} KM</h5>
+                                            <h5 class="f-16">{{json_decode($booking->meta, true)['distance']}} KM</h5>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between mt-2 mr-2">
+                                    <div class="d-flex justify-content-between  mt-2 " style="width: 92%;">
                                         <div>
                                             <h6 class="l-cap f-14">Status</h6>
-                                            <h5>
+                                            <h5 class="f-16">
                                                 @switch($booking->status)
                                                     @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
                                                         Pending Driver Assign
@@ -172,7 +172,7 @@
                                         </div>
                                         <div class="margin-cat">
                                             <h6 class="l-cap f-14">Category</h6>
-                                            <h5>{{ucwords($booking->service->name)}}</h5>
+                                            <h5 class="f-16">{{ucwords($booking->service->name)}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -250,17 +250,17 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body margin-topneg-2">
+                                        <div class="modal-body margin-topneg-2 pb-0 mt-0 pt-0">
                                             @foreach($booking->inventories as $inventory)
-                                                <div class="row border-bottom d-flex center">
+                                                <div class="row border-bottom d-flex center mt-2">
                                                 <div class="col-2 ">
 {{--                                                    <i class="icon-order-details fa fa-bed"></i>--}}
-                                                    <img src="{{$inventory->inventory->icon}}" alt="" style="border-radius: 50%; width: 50px;">
+                                                    <img class="img-location" src="{{$inventory->inventory->icon}}" alt="" style="border-radius: 50%; width: 50px;">
                                                 </div>
                                                 <div class="col-4">
-                                                    <p class="pl-0">{{$inventory->name}}</p>
+                                                    <p class="pl-0 mb-0">{{$inventory->name}}</p>
                                                     <div>
-                                                        <p class="bg-blur f-12">{{$inventory->size}}</p>
+                                                        <p class="bg-blur f-12 mb-4">{{$inventory->size}}</p>
 
                                                     </div>
                                                 </div>
@@ -268,7 +268,7 @@
                                                     <p>{{$inventory->material}}</p>
                                                 </div>
                                                 <div class="col-2">
-                                                    <p class="bg-blur bg-blur-num">
+                                                    <p class="bg-blur bg-blur-num">X
                                                         @if(\App\Enums\BookingInventoryEnums::$QUANTITY['fixed'] == $inventory->quantity_type)
                                                             {{$inventory->quantity}}
                                                         @else

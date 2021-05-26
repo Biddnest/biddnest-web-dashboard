@@ -124,17 +124,17 @@
                                     <div class="d-flex border-bottom justify-content-between">
                                         <div>
                                             <p class="f-14">FROM</p>
-                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                            <p class="bg-blur f-16">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
                                         <div class="mt-1 pt-3">
                                             <img src="{{asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div>
                                             <p class="f-14">TO</p>
-                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                            <p class="bg-blur f-16" style="width:110px; ">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left ">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left " style="width:81%;">
                                         <div>
                                             <h6 class="l-cap f-14">Date</h6>
                                             <h5 class="f-14">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
@@ -144,7 +144,7 @@
                                             <h5 class="f-14">{{$booking->final_quote}}</h5>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left" style="width:91%;">
                                         <div>
                                             <h6 class="l-cap f-14">Order ID</h6>
                                             <h5 class="f-14">#{{$booking->public_booking_id}}</h5>
@@ -154,7 +154,7 @@
                                             <h5 class="f-14">{{json_decode($booking->meta, true)['distance']}} KM</h5>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left" style="width:88%;">
                                         <div>
                                             <h6 class="l-cap f-14">Status</h6>
                                             <h5 class="f-14">
@@ -176,7 +176,7 @@
 
                                     <div class="card text-left mt-1">
                                         <div class="details-card bg-blur">
-                                            <div class="d-flex justify-content-between  pr-2">
+                                            <div class="d-flex justify-content-between  pr-2" style="width: 104%;">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 pl-0 ">Driver</p>
                                                     <p class="mt-0 pl-0 f-14">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}}@endif</p>
@@ -188,7 +188,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-between  pr-2">
+                                            <div class="d-flex justify-content-between  pr-2" style="width: 101%;">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 pl-0">Phone Number</p>
                                                     <p class="mt-0 pl-0 f-14">@if($booking->driver){{$booking->driver->phone}}@endif</p>
@@ -198,7 +198,7 @@
                                                     <p class="mt-0 pl-0 f-14">@if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-end pr-2">
+                                            <div class="d-flex justify-content-end pr-2 " style="width: 102%;">
                                                 <div class="pr-3">
                                                     <p class="l-cap f-12 mb-0 pl-0">Manpower</p>
                                                     <p class="mt-0 pl-0 f-14">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>

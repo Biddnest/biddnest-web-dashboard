@@ -35,7 +35,7 @@
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
                                 <span class="nav-menu-link">Contact Us</span></a>
                         </li>
-                        <li class="account-settings m-dropdown dropdown">
+                        <li class="account-settings m-dropdown dropdown mt-0">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px">

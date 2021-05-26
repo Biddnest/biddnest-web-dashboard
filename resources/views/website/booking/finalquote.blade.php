@@ -36,23 +36,23 @@
                                 </p>
                                 <h3 class="f-18 pb-4 bold mt-2">Time Left</h3>
 
-                                <div id="app"></div>
+                                <div id="app" style="margin-bottom: 40px;"></div>
                             </div>
                         @elseif(($booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending']))
                             <div id="proceed" {{--style="display: none"--}}>
                                 <div class="container">
                                     <div class="row mt-2 border-bottom">
-                                        <div class="col-12 d-flex justify-content-around center">
+                                        <div class="col-12 d-flex justify-content-around center ml-4">
                                             <div class="pr-3">
                                                 <p class="para-head">FROM</p>
-                                                <p class="bg-blur para-head">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                                <p class="bg-blur para-head" style="width: 150px; text-align:center ">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                             </div>
                                             <div class="pr-3 a-self-center">
                                                 <img src="{{asset('static/website/images/icons/moving-truck.svg')}}" />
                                             </div>
                                             <div class="pr-5">
                                                 <p class="para-head">TO</p>
-                                                <p class="bg-blur para-head">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                                <p class="bg-blur para-head" style="width: 150px; text-align:center">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                             </div>
                                         </div>
                                         <div class="col-12 mt-2 final-price center f-direction">

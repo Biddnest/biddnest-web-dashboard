@@ -80,11 +80,13 @@ label {
  }
 
 
- .quote p{
-    white-space: nowrap !important;
 
+
+
+
+ .dropdown-content .col-grey .cursor-pointer > ul >li:hover{
+background: yellow;
  }
-
 
 
 

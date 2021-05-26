@@ -215,12 +215,62 @@
                                         <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move ">Lets get the delivery details
                                         </h4>
                                         <div class="accordion " id="delivery-details ">
-                                            <p class="address-category pl-0 ">Category</p>
+                                        <div class="container">
+  
+<p class="address-category pl-0 ">Category</p>
+  
+  <div class="row">
+    
+      <div class="col-md-4 col-lg-4 col-sm-4">
+        
+        <label >
+          <input type="radio" name="product" class="card-input-element" />
+
+            <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer"   >
+              <div class="panel-heading text-white">
+              Residential
+              </div>
+             
+            </div>
+
+        </label>
+        
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-4">
+        
+        <label>
+          <input type="radio" name="product" class="card-input-element" />
+
+            <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
+              <div class="panel-heading text-white">Commercial</div>
+              
+            </div>
+        </label>
+        
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-4">
+        
+        <label>
+          <input type="radio" name="product" class="card-input-element" />
+
+            <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
+              <div class="panel-heading text-white">Industrial</div>
+            
+            </div>
+        </label>
+        
+      </div>
+  </div>
+  
+</div>
+                                            <!-- <p class="address-category pl-0 ">Category</p>
                                             <div class="row my-3 address-details border-bottom d-flex justify-content-between ">
                                                 @foreach($categories as $category)
                                                     <div class="col-md-4 col-sm-3 mb-4 view-content radio-inline">
                                                         <div class="card address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
+
                                                             <div class="card-block ">
+
                                                                 <img src="{{$category->image}}" alt="residential-building " class="address-icon mb-2 " style="width: 50px;"/>
                                                                 <input type="radio" value="{{$category->id}}" name="service_id" class="cursor-pointer categoryweb-select" data-target=".range" required>
                                                                 <p class="card-title pl-0 address-type text-white ">
@@ -229,7 +279,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                            </div>
+                                            </div> -->
                                             <div class="d-flex row p-20 ">
                                                 <div class="col-sm-6 ">
                                                     <div class="form-group ">
@@ -250,7 +300,7 @@
                                                 </div>
                                                 <div class="col-sm-6 mtop-22 mb-view ">
                                                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
-{{--                                                    <div id="mapcomponent " class="dest-map-picker " style="width: 100%; height: 155px; "></div>--}}
+                                                    {{--                                                    <div id="mapcomponent " class="dest-map-picker " style="width: 100%; height: 155px; "></div>--}}
                                                     <!-- <div id="frommap " ></div> -->
                                                 </div>
                                                 <div class="col-sm-6 ">
@@ -294,8 +344,8 @@
                                                         </div>
 
                                                         <div class="col-sm-6 ">
-                                                            <div class="form-group ">
-                                                                <label class="form-check-box " for="Lift1 ">Do you have lift</label>
+                                                            <div class="form-group mt-1 ">
+                                                                <label class="form-check-box ml-0" for="Lift1 ">Do you have lift</label>
                                                                 <label class="switch">
                                                                     <input type="hidden" value="0" name="source[meta][lift]" id="letter">
                                                                     <input type="checkbox" name="select_letter" value="1" id="Lift1"
@@ -328,7 +378,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mtop-22 mb-view ">
-{{--                                                    <div id="mapcomponent " class="source-map-picker " style="width: 100%; height: 155px; "></div>--}}
+                                                {{--  <div id="mapcomponent " class="source-map-picker " style="width: 100%; height: 155px; "></div>--}}
                                                     <!-- <div id="tomap " style="width: 100%; height: 155px; "></div> -->
                                                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                                                 </div>
@@ -372,8 +422,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 ">
-                                                            <div class="form-group ">
-                                                                <label class="form-check-box " for="Lift1 ">Do you have lift</label>
+                                                            <div class="form-group mt-1" >
+                                                                <label class="form-check-box ml-0 " for="Lift1 ">Do you have lift</label>
                                                                 <label class="switch">
                                                                     <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
                                                                     <input type="checkbox" name="select_letter" value="1" id="Lift2"
@@ -427,6 +477,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <!-- Third Step -->
 
                                 <div class="setup-content-3 step-3" id="step-3" style="display: none;">
@@ -482,7 +533,7 @@
                                     </div>
                                     <div class="row mb-4 mt-3">
                                         <div class="col-md-4 view-content ">
-                                            <div class="card required-item ">
+                                            <div class="card required-item " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -490,11 +541,11 @@
                                                     <i class="icon-2 dripicons-cross "></i>
                                                 </div>
                                                 <div class="card-body requirements-field ">
-                                                    <p class="card-title required-item-name mb-0 ">Bed</p>
+                                                    <p class="card-title required-item-name mb-0 f-16">Bed</p>
                                                     <div class="row ">
                                                         <div class="col-md-6 requirements d-flex ">
-                                                            <p class="card-text required-item-qty pr-1 br-r ">Wood
-                                                            </p>
+                                                            <p class="card-text required-item-qty pr-1 f-16">Wood
+                                                            </p> <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
                                                         </div>
                                                         <div class="col-md-6 requirements ">
@@ -517,7 +568,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 view-content ">
-                                            <div class="card required-item ml-10 ">
+                                            <div class="card required-item ml-10 " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -525,10 +576,11 @@
                                                     <i class="icon-2 dripicons-cross "></i>
                                                 </div>
                                                 <div class="card-body requirements-field ">
-                                                    <p class="card-title required-item-name mb-0 ">Bed</p>
+                                                    <p class="card-title required-item-name mb-0 f-16">Bed</p>
                                                     <div class="row ">
-                                                        <div class="col-md-6 requirements d-flex ">
-                                                            <p class="card-text required-item-qty pr-1 br-r ">Wood</p>
+                                                        <div class="col-md-6 requirements d-flexf-16 ">
+                                                            <p class="card-text required-item-qty pr-1 ">Wood</p>
+                                                            <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
                                                         </div>
                                                         <div class="col-md-6 requirements ">
@@ -551,7 +603,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 view-content ">
-                                            <div class="card required-item ">
+                                            <div class="card required-item " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -559,10 +611,11 @@
                                                     <i class="icon-2 dripicons-cross "></i>
                                                 </div>
                                                 <div class="card-body requirements-field ">
-                                                    <p class="card-title required-item-name mb-0 ">Bed</p>
+                                                    <p class="card-title required-item-name mb-0 f-16">Bed</p>
                                                     <div class="row ">
-                                                        <div class="col-md-6 requirements d-flex ">
-                                                            <p class="card-text required-item-qty pr-1 br-r ">Wood</p>
+                                                        <div class="col-md-6 requirements d-flex f-16">
+                                                            <p class="card-text required-item-qty pr-1 ">Wood</p>
+                                                            <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
                                                         </div>
                                                         <div class="col-md-6 requirements ">
@@ -586,7 +639,7 @@
                                         </div>
 
                                         <div class="col-md-4 mt-4 mt-20 view-content ">
-                                            <div class="card required-item ml-10 ">
+                                            <div class="card required-item ml-10 " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -594,10 +647,11 @@
                                                     <i class="icon-2 dripicons-cross "></i>
                                                 </div>
                                                 <div class="card-body requirements-field ">
-                                                    <p class="card-title required-item-name mb-0 ">Bed</p>
+                                                    <p class="card-title required-item-name mb-0 f-16 ">Bed</p>
                                                     <div class="row ">
-                                                        <div class="col-md-6 requirements d-flex ">
-                                                            <p class="card-text required-item-qty pr-1 br-r ">Wood</p>
+                                                        <div class="col-md-6 requirements d-flex f-16">
+                                                            <p class="card-text required-item-qty pr-1 ">Wood</p>
+                                                            <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
                                                         </div>
                                                         <div class="col-md-6 requirements ">
@@ -619,8 +673,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-4 mt-20 view-content ">
-                                            <div class="card required-item ">
+                                        <div class="col-md-4 mt-4 mt-20 view-content " >
+                                            <div class="card required-item " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -628,10 +682,11 @@
                                                     <i class="icon-2 dripicons-cross "></i>
                                                 </div>
                                                 <div class="card-body requirements-field ">
-                                                    <p class="card-title required-item-name mb-0 ">Bed</p>
+                                                    <p class="card-title required-item-name mb-0  f-16">Bed</p>
                                                     <div class="row ">
-                                                        <div class="col-md-6 requirements d-flex ">
-                                                            <p class="card-text required-item-qty pr-1 br-r ">Wood</p>
+                                                        <div class="col-md-6 requirements d-flex f-16 ">
+                                                            <p class="card-text required-item-qty pr-1">Wood</p>
+                                                            <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
                                                         </div>
                                                         <div class="col-md-6 requirements ">
@@ -1029,8 +1084,11 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+        <div class="spcae" style=" height: 650px !important; margin-bottom: 100px !important;"></div>
+
 
 
         <script>

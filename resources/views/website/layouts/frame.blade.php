@@ -14,16 +14,16 @@
             <div class="header-controls ml-30 collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-16 active">
-                        <a class="nav-link bec-vendor-purple" href="{{route('join-vendor')}}"><img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" /> Become a Vendor
+                        <a class="nav-link bec-vendor-purple f-14" href="{{route('join-vendor')}}"><img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" /> Become a Vendor
                         </a>
                     </li>
                     @if(\Illuminate\Support\Facades\Session::get('account'))
-                        <li class="nav-item mr-16">
-                            <a class="nav-link" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Icon metro-truck2.svg')}}" class="mb-1 mr-1" /> MY BOOKINGS</a>
+                        <li class="nav-item mr-16 ">
+                            <a class="nav-link f-14"  href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Icon metro-truck2.svg')}}" class="mb-1 mr-1" /> MY BOOKINGS</a>
                         </li>
                     @endif
                     <li class="nav-item mr-16">
-                        <a class="nav-link" href="{{route('contact_us')}}"><i
+                        <a class="nav-link f-14" href="{{route('contact_us')}}"><i
                                 class="icon-2 mr-1 pr-1 pt-1 dripicons-headset"></i>CONTACT US</a>
                     </li>
                     <li class="account-settings dropdown theme-text mt-1 pt-1">

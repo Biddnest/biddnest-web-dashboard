@@ -50,4 +50,48 @@
      .custom-check{
          display: none;
      }
+
+     .spcae{
+        margin-bottom: 130px !important;
+
+        height: 650px !important;
+
+    }
+
+    .card-img-top {
+        width: 107% !important;
+        margin-left: -8px !important;
+
+
+    }
+
+
+
+label {
+    width: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+     box-shadow: 0 0 1px 1px #2ecc71;
+ }
+
+
+
+ .card .required-item {
+     width: fit-content !important;
+
+ }
 </style>

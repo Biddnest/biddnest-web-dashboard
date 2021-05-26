@@ -543,21 +543,21 @@
                                                 <div class="card-body requirements-field ">
                                                     <p class="card-title required-item-name mb-0 f-16">Bed</p>
                                                     <div class="row ">
-                                                        <div class="col-md-6 requirements d-flex ">
-                                                            <p class="card-text required-item-qty pr-1 f-16">Wood
+                                                        <div class="col-md-6 requirements d-flex f-16">
+                                                            <p class="card-text required-item-qty pr-1">Wood
                                                             </p> <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
                                                         </div>
                                                         <div class="col-md-6 requirements ">
                                                             <div class="input-group ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onClick="updateCount( 'dicrement'); " class="btn btn-default btn-number input-number " data-type="minus " data-field="quant[1] ">
+                                                                    <button onClick="updateCount( 'dicrement'); " class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
                                                                         <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                     </button>
                                                                 </span>
-                                                                <input type="text " id="inc " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                <input type="text " id="inc " class="form-control input-number " style="padding: 11px 6px!important;" value="1 " min="1 " max="10 ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onClick="updateCount( 'increment'); " class="btn btn-default btn-number input-number " data-type="plus " data-field="quant[1] ">
+                                                                    <button onClick="updateCount( 'increment'); " class="btn btn-default btn-number input-number " data-type="plus " style="padding: 12px 6px!important;"  data-field="quant[1] ">
                                                                         <span class="plus-icon "><i class="fa fa-plus "></i></span>
                                                                     </button>
                                                                 </span>
@@ -578,7 +578,7 @@
                                                 <div class="card-body requirements-field ">
                                                     <p class="card-title required-item-name mb-0 f-16">Bed</p>
                                                     <div class="row ">
-                                                        <div class="col-md-6 requirements d-flexf-16 ">
+                                                        <div class="col-md-6 requirements d-flex f-16 ">
                                                             <p class="card-text required-item-qty pr-1 ">Wood</p>
                                                             <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
@@ -586,13 +586,13 @@
                                                         <div class="col-md-6 requirements ">
                                                             <div class="input-group ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number " data-type="minus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number "  style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
                                                                         <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                     </button>
                                                                 </span>
-                                                                <input type="text " id="inc " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                <input type="text " id="inc " class="form-control input-number " style="padding: 11px 6px!important;" value="1 " min="1 " max="10 ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onClick="updateCount( 'dicrement'); " class="btn btn-default btn-number input-number " data-type="plus " data-field="quant[1] ">
+                                                                    <button onClick="updateCount( 'dicrement'); " class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
                                                                         <span class="plus-icon "><i class="fa fa-plus "></i></span>
                                                                     </button>
                                                                 </span>
@@ -621,13 +621,13 @@
                                                         <div class="col-md-6 requirements ">
                                                             <div class="input-group ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClickminus(); "  class="btn btn-default btn-number input-number " data-type="minus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClickminus(); "  class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
                                                                         <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                     </button>
                                                                 </span>
-                                                                <input type="text " id="inc " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                <input type="text " id="inc " class="form-control input-number " style="padding: 11px 6px!important;" value="1 " min="1 " max="10 ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number " data-type="plus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number "  style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
                                                                         <span class="plus-icon "><i class="fa fa-plus "></i></span>
                                                                     </button>
                                                                 </span>
@@ -657,13 +657,13 @@
                                                         <div class="col-md-6 requirements ">
                                                             <div class="input-group ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number " data-type="minus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number" style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
                                                                         <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                     </button>
                                                                 </span>
-                                                                <input type="text " id="inc " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                <input type="text " id="inc " class="form-control input-number" style="padding: 11px 6px!important;" value="1 " min="1 " max="10 ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number " data-type="plus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
                                                                         <span class="plus-icon "><i class="fa fa-plus "></i></span>
                                                                     </button>
                                                                 </span>
@@ -692,13 +692,13 @@
                                                         <div class="col-md-6 requirements ">
                                                             <div class="input-group ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number " data-type="minus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number "  style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
                                                                         <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                     </button>
                                                                 </span>
-                                                                <input type="text " id="inc " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                <input type="text " id="inc " class="form-control input-number " style="padding: 11px 6px!important;" value="1 " min="1 " max="10 ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number " data-type="plus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
                                                                         <span class="plus-icon "><i class="fa fa-plus "></i></span>
                                                                     </button>
                                                                 </span>

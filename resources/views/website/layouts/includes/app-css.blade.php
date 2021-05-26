@@ -106,6 +106,41 @@ label {
 
 
 
+ .hor-center{
+    display: flex !important ;
+    justify-content: center  !important;
+    flex-direction: column  !important;
+    align-items: center  !important;
+ }
+
+
+ .img-location{
+    transform: translate(2px, -9px) !important ;
+
+ }
+
+
+ p.f-16{
+     font-size: 16px !important;
+ }
+
+
+ .quote p{
+    white-space: nowrap !important;
+
+ }
+
+ .para-head {
+    white-space: normal !important;
+
+ }
+
+
+ .para{
+    white-space: normal !important;
+
+ }
+
 
 
  .card .required-item {

@@ -103,10 +103,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-7">
-                                            <form action="{{route('profile_edit')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('website.my-profile')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate >
+                                            <form action="{{route('profile_edit')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('website.my-profile')}}" data-alert="mega" class="form-new-order  input-text-blue" data-parsley-validate >
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="">
+                                                        <div class="hor-center mb-2"  style=" display: flex !important; justify-content: center  !important; flex-direction: column  !important; align-items: center  !important;">
                                                             <p class="img-label">Image</p>
                                                             <div class="upload-section p-20 pt-0">
                                                                 <img style="border-radius: 50%; margin-left: 10px; margin-bottom: 10px;" src="@if($user->avatar){{$user->avatar}}@else{{asset('static/website/images/icons/profile-circle.svg')}}@endif" />

@@ -4369,7 +4369,7 @@ html body main .dropdown-item:hover:first-child {
     z-index: 1;
     font-size: 14px;
     border-radius: 5px !important;
-    top: 46px;
+    top: 40px;
 
 
   }
@@ -11017,6 +11017,7 @@ ul.header-controls li.notifications:hover .dropdown {
 .quote p {
   padding-left: 1em;
   font-weight: 400;
+
 }
 
 .bg-red {

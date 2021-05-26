@@ -266,12 +266,15 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
-        $organizations->status =$exist['status'];
         $organizations->verification_status = $exist['verification_status'];
         if($vendor)
         {
+            $organizations->status =$exist['status'];
             $organizations->ticket_status = CommonEnums::$TICKET_STATUS['open'];
         }
+        else
+            $organizations->status =$exist['status'];
+        
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value)

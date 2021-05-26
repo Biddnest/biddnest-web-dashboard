@@ -161,8 +161,10 @@ class InventoryController extends Controller
             $inventoryprice->material= $price['material'];
             $inventoryprice->price_economics= $price['price']['economics'];
             $inventoryprice->price_premium= $price['price']['premium'];
-            if($web)
-                $inventoryprice->ticket_status= CommonEnums::$TICKET_STATUS['open'];
+            if($web) {
+                $inventoryprice->ticket_status = CommonEnums::$TICKET_STATUS['open'];
+                $inventoryprice->status = CommonEnums::$NO;
+            }
             $result= $inventoryprice->save();
         }
 
@@ -212,7 +214,7 @@ class InventoryController extends Controller
             ];
 
             if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
-                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open']];
+                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open'], "status"=>CommonEnums::$NO];
 
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }

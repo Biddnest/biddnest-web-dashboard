@@ -705,6 +705,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckSession' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckSession.php',
         'App\\Http\\Middleware\\CheckVendorSession' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckVendorSession.php',
+        'App\\Http\\Middleware\\CheckWebSession' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckWebSession.php',
         'App\\Http\\Middleware\\CommonResponse' => __DIR__ . '/../..' . '/app/Http/Middleware/CommonResponse.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

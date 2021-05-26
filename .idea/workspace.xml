@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/website/homelayouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/website/homelayouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/website/homelayouts/includes/app-js.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/website/homelayouts/includes/app-js.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/website/layouts/includes/app-css.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/website/layouts/includes/app-css.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/website/layouts/includes/app-js.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/website/layouts/includes/app-js.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +179,7 @@
       <option name="presentableId" value="Default" />
       <updated>1621935182809</updated>
       <workItem from="1621935184445" duration="870000" />
-      <workItem from="1621936519889" duration="27808000" />
+      <workItem from="1621936519889" duration="32640000" />
     </task>
     <task id="LOCAL-00001" summary="fixing the booking enquiry for custome item">
       <created>1621936690829</created>
@@ -310,7 +307,42 @@
       <option name="project" value="LOCAL" />
       <updated>1621966273584</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="js and css layout file fixing">
+      <created>1621966490206</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1621966490206</updated>
+    </task>
+    <task id="LOCAL-00020" summary="added enquiry public id">
+      <created>1621968200483</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1621968200483</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added enquiry public id">
+      <created>1621968230463</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1621968230463</updated>
+    </task>
+    <task id="LOCAL-00022" summary="ticket raised fixing in order details">
+      <created>1622008223519</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1622008223519</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fixed api for display inventory name">
+      <created>1622011385911</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1622011385911</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,6 +365,9 @@
     <MESSAGE value="fixing notification of uat point" />
     <MESSAGE value="payment status change api fixing" />
     <MESSAGE value="js and css layout file fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="js and css layout file fixing" />
+    <MESSAGE value="added enquiry public id" />
+    <MESSAGE value="ticket raised fixing in order details" />
+    <MESSAGE value="fixed api for display inventory name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed api for display inventory name" />
   </component>
 </project>

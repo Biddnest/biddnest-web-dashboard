@@ -245,7 +245,6 @@ class BidController extends Controller
         return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
     }
 
-
     public static function submitBidAdmin($data)
     {
 
@@ -340,7 +339,6 @@ class BidController extends Controller
 
         return true;
     }
-
 
     public static function getPriceList($public_booking_id, $organization_id, $web=false){
 

@@ -206,7 +206,7 @@
                 <table class="table text-center p-0">
                     <thead class="secondg-bg border-none p-0 f-14">
                         <tr style="color: #3c4b58;">
-                            <th scope="col">Order ID</th>
+                            <th scope="col">ID</th>
                             <th scope="col" style="text-align: center !important; width:10%">Order Status</th>
                             <th scope="col"style="text-align: center !important;     width: 20%;">Time Left</th>
                             <th scope="col"  style="text-align: center !important;">Order Amount</th>
@@ -215,7 +215,13 @@
                     <tbody class="mtop-20">
                         @foreach($bookings as $booking)
                             <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
-                                <th scope="row" style="text-decoration: underline; padding-left: 24px !important;">{{$booking->public_booking_id}}</th>
+                                <th scope="row" style="text-decoration: underline; padding-left: 24px !important;">
+                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                        {{$booking->public_booking_id}}
+                                    @else
+                                        {{$booking->public_enquiry_id}}
+                                    @endif
+                                </th>
                                 <td class="">
                                     @switch($booking->status)
                                         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])

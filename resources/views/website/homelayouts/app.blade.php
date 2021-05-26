@@ -24,16 +24,19 @@
                                 <span class="nav-menu-link">Become A Vendor</span>
                             </a>
                         </li>
-                        <li>
-                           <a href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />
-                                <span class="nav-menu-link">My Bookings</span></a>
-                        </li>
+                        @if(\Illuminate\Support\Facades\Session::get('account'))
+                            <li>
+                               <a href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />
+                                    <span class="nav-menu-link">My Bookings</span></a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{route('contact_us')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
                                 <span class="nav-menu-link">Contact Us</span></a>
                         </li>
                         <li class="account-settings m-dropdown dropdown">
+                            @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px">
                                     <defs>
@@ -66,27 +69,34 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="logged-in-username">Amith Raji</span>
+                                <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
-                            <div class="dropdown-content col-grey cursor-pointer">
-                                <ul class="d-content">
-                                    <li>
-                                        <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu" href="#0"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            @else
+                                <a data-toggle="modal" data-target="#Login-modal">
+                                    <span class="logged-in-username">Login</span>
+                                </a>
+                            @endif
+                            @if(\Illuminate\Support\Facades\Session::get('account'))
+                                <div class="dropdown-content col-grey cursor-pointer">
+                                    <ul class="d-content">
+                                        <li>
+                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
+                                        </li>
+                                        <li>
+                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
                         </li>
                     </ul>
                 </div>
@@ -109,9 +119,18 @@
                                                 {{ucwords($banner->name)}}
                                             </p>
                                         </a>
-                                        <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
+                                        {{--<a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
                                             <button type="button" class="btn btn-primary m-60">Book Now</button>
-                                        </a>
+                                        </a>--}}
+                                        @if(\Illuminate\Support\Facades\Session::get('account'))
+                                            <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
+                                                <button type="button" class="btn btn-primary m-60">Book Now</button>
+                                            </a>
+                                        @else
+                                            <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl d-content">
+                                                <button type="button" class="btn btn-primary m-60">Book Now</button>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +146,6 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
         </div>
         <div data-barba="wrapper">
             @yield('content')
@@ -145,7 +163,6 @@
                             <p class="footer-text footer-quick-links cursor-pointer">Privacy</p>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-
                             <a href="{{route('terms_and_conditions')}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
                         </div>
                     </div>
@@ -154,16 +171,22 @@
                             <div class="footer-text text-view-center -m-36">
                                 <img class="-mb-20" src="{{ asset('static/website/images/icons/logo.png')}}" />
                                 <p>
-                                    <a href="#"><i class="fa fa-envelope pl-25 pr-25 f-18 mb-1"></i></a>support@biddnest.com
+                                    @foreach(json_decode($contact_details, true)['email_id'] as $email)
+                                        <i class="fa fa-envelope pl-25 pr-25 f-18 mb-1"></i>{{$email}}
+                                        @break
+                                    @endforeach
                                 </p>
                                 <p class="ml-p">
-                                    <a href="#"><i class="fa fa-phone pl-25 pr-25 f-18 mb-1"></i></a>+ 91 - 8000040000
+                                    @foreach(json_decode($contact_details, true)['contact_no'] as $phone)
+                                        <i class="fa fa-phone pl-25 pr-25 f-18 mb-1"></i>{{$phone}}
+                                        @break
+                                    @endforeach
                                 </p>
                             </div>
                             <div class="input-group pl-25 mt-30 m-auto-view">
-                                <input type="text" class="form-control -mr-4" placeholder="Request a call back" />
+                                <input type="tel" class="form-control -mr-4" id="contact_no" placeholder="Request a call back" maxlength="10" minlength="10"/>
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary input-button f-4" type="button">
+                                    <button class="btn btn-secondary input-button f-4 call-request" type="button" data-url="{{route('request-callback')}}">
                                         <i class="fa fa f-12 p-0"><span class="pl-1 f-14">Request</span></i>
                                     </button>
                                 </div>

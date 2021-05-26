@@ -41,4 +41,4 @@
 <script src="{{ asset('static/website/js/helperfunction.js')}}"></script>
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
-<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>
+{{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}

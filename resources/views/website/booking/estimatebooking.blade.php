@@ -108,7 +108,7 @@
                                             <p class="text-muted">Step 5 / 6</p>
                                             <h5 class="border-bottom theme-text pb-4 text-view-center">Get The Estimated Cost </h5>
                                         </div>
-                                        <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-url="{{route('place-booking', ['id'=>$booking->public_booking_id])}}" data-alert="mega"  data-parsley-validate>
+                                        <form class="form-new-order  input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-url="{{route('place-booking', ['id'=>$booking->public_booking_id])}}" data-alert="mega"  data-parsley-validate>
                                             <div class="p-0  border-top-2 order-cards">
                                                 <div class="d-flex justify-content-center f-14  text-center  mt-2 mb-1">
                                                     Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations

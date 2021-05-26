@@ -40,16 +40,24 @@
                                 <input id="dp1" class="input-overwrite" placeholder="16/may/2021" />
                             </div>
                             <div class="form-group  mr-1">
-                                <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose" type="button"><i
-                                        class="fa fa-calendar"></i>Choose
+                                <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i
+                                        class="fa fa-calendar "></i>Choose
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl">
-                    <button type="button" class="btn btn-primary view-btn">Book Now</button>
-                </a>
+                <div style="text-align: center;">
+                    @if(\Illuminate\Support\Facades\Session::get('account'))
+                        <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
+                            <button type="button" class="btn btn-primary view-btn">Book Now</button>
+                        </a>
+                    @else
+                        <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
+                            <button type="button" class="btn btn-primary view-btn">Book Now</button>
+                        </a>
+                    @endif
+                </div>
             </div>
         </div>
         <!-- section how it works -->
@@ -450,7 +458,7 @@
                     </header>
                 </div>
                 <div class="modal-body  margin-topneg-7">
-                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="redirect"   data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
+                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}}  data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
                             <h2 class="p-text">Login</h2>
                             <div class="col-lg-12 col-xs-12 mt-3">

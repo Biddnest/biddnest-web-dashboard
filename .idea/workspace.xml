@@ -1,167 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="Fixed Payment Bug">
+    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VendorApiRouteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VendorApiRouteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true" />
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="DONT_SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable path="composer" />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
-  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
-      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
-      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
-      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
-      <path value="$PROJECT_DIR$/vendor/opis/closure" />
-      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/brick/math" />
-      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
-      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
-      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
-      <path value="$PROJECT_DIR$/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
-      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
-      <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
-      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
-      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
-      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
-      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
-      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
-      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
-      <path value="$PROJECT_DIR$/vendor/craftsys/msg91-laravel" />
-      <path value="$PROJECT_DIR$/vendor/craftsys/msg91-php" />
-      <path value="$PROJECT_DIR$/vendor/laravel/sail" />
-      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
-      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
-      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
-      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
-      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
-      <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
-      <path value="$PROJECT_DIR$/vendor/kitloong/laravel-migrations-generator" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
-      <path value="$PROJECT_DIR$/vendor/intervention/image" />
-      <path value="$PROJECT_DIR$/vendor/fabian-tomischka/php-avatar-generator" />
-      <path value="$PROJECT_DIR$/vendor/mrclay/minify" />
-      <path value="$PROJECT_DIR$/vendor/htmlmin/htmlmin" />
-      <path value="$PROJECT_DIR$/vendor/rmccue/requests" />
-      <path value="$PROJECT_DIR$/vendor/razorpay/razorpay" />
-      <path value="$PROJECT_DIR$/vendor/berkayk/onesignal-laravel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random-lib" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
-      <path value="$PROJECT_DIR$/vendor/pugx/shortid-php" />
-      <path value="$PROJECT_DIR$/vendor/ircmaxell/security-lib" />
-      <path value="$PROJECT_DIR$/vendor/workerman/channel" />
-      <path value="$PROJECT_DIR$/vendor/workerman/phpsocket.io" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/workerman/workerman" />
+      <path value="$PROJECT_DIR$/vendor/workerman/phpsocket.io" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/workerman/channel" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/ircmaxell/security-lib" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/pugx/shortid-php" />
+      <path value="$PROJECT_DIR$/vendor/laravel/sail" />
+      <path value="$PROJECT_DIR$/vendor/craftsys/msg91-php" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/vendor/craftsys/msg91-laravel" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random-lib" />
+      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/vendor/razorpay/razorpay" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/vendor/rmccue/requests" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/htmlmin/htmlmin" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/mrclay/minify" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/fabian-tomischka/php-avatar-generator" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/kitloong/laravel-migrations-generator" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
     </include_path>
   </component>
-  <component name="ProjectId" id="1njcBNgaUKI5aDRFrixfwPDyY9f" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1t1SceE4n91P1ZzAOAa2G0lM8gu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -170,24 +162,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Enums" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Enums" />
-      <recent name="$PROJECT_DIR$/storage/app/public/misc" />
-      <recent name="$PROJECT_DIR$/public/static" />
-      <recent name="$PROJECT_DIR$/resources/fonts" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/layouts/includes.blade.php" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -198,391 +175,232 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bf38840a-5866-4aa1-b377-29b941502d92" name="Default Changelist" comment="" />
-      <created>1611906804061</created>
+      <changelist id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="" />
+      <created>1621935182809</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1611906804061</updated>
-      <workItem from="1611906813966" duration="500000" />
-      <workItem from="1611914410923" duration="1389000" />
-      <workItem from="1611926057076" duration="3841000" />
-      <workItem from="1612179977235" duration="11923000" />
-      <workItem from="1612204773686" duration="7134000" />
-      <workItem from="1612441669235" duration="1705000" />
-      <workItem from="1612770117176" duration="148000" />
-      <workItem from="1612880031509" duration="7086000" />
-      <workItem from="1613133267306" duration="38670000" />
-      <workItem from="1614057758498" duration="1584000" />
-      <workItem from="1614254803883" duration="13445000" />
-      <workItem from="1614577809524" duration="19238000" />
-      <workItem from="1614753683006" duration="14905000" />
-      <workItem from="1615182554147" duration="25419000" />
-      <workItem from="1615467333061" duration="1118000" />
-      <workItem from="1615786767049" duration="39902000" />
-      <workItem from="1616132711040" duration="4276000" />
-      <workItem from="1616390215775" duration="10522000" />
-      <workItem from="1616482283351" duration="26760000" />
-      <workItem from="1616737175235" duration="23153000" />
-      <workItem from="1616961300379" duration="3152000" />
-      <workItem from="1616965011868" duration="10061000" />
-      <workItem from="1617097384817" duration="18221000" />
-<<<<<<< HEAD
-      <workItem from="1617256266953" duration="12089000" />
-      <workItem from="1617391682318" duration="5377000" />
-      <workItem from="1617601578617" duration="805000" />
-=======
-      <workItem from="1617256266953" duration="11687000" />
-<<<<<<< HEAD
-      <workItem from="1617601610166" duration="7349000" />
-=======
-      <workItem from="1617601610166" duration="3616000" />
->>>>>>> bbb964a0a8e33b705851ff8aa5f86bff0bca11e6
->>>>>>> 9677280a738ede2da19ab1e6a93383a9129912dc
+      <updated>1621935182809</updated>
+      <workItem from="1621935184445" duration="870000" />
+      <workItem from="1621936519889" duration="33705000" />
     </task>
-    <task id="LOCAL-00016" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616652269533</created>
+    <task id="LOCAL-00001" summary="fixing the booking enquiry for custome item">
+      <created>1621936690829</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621936690829</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fixing the booking enquiry for custome item">
+      <created>1621936894182</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621936894182</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fixing the booking enquiry for custome item">
+      <created>1621938282343</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1621938282343</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixing the booking enquiry for custome item">
+      <created>1621947710965</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1621947710965</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added call back api and functionality">
+      <created>1621950492343</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621950492343</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixing notification of uat point">
+      <created>1621951052173</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621951052173</updated>
+    </task>
+    <task id="LOCAL-00007" summary="payment status change api fixing">
+      <created>1621957395638</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1621957395638</updated>
+    </task>
+    <task id="LOCAL-00008" summary="payment status change api fixing">
+      <created>1621959209545</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621959209545</updated>
+    </task>
+    <task id="LOCAL-00009" summary="payment status change api fixing">
+      <created>1621959657969</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1621959657969</updated>
+    </task>
+    <task id="LOCAL-00010" summary="payment status change api fixing">
+      <created>1621959801279</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1621959801279</updated>
+    </task>
+    <task id="LOCAL-00011" summary="payment status change api fixing">
+      <created>1621959975346</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1621959975346</updated>
+    </task>
+    <task id="LOCAL-00012" summary="payment status change api fixing">
+      <created>1621960287646</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1621960287646</updated>
+    </task>
+    <task id="LOCAL-00013" summary="payment status change api fixing">
+      <created>1621960997365</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1621960997365</updated>
+    </task>
+    <task id="LOCAL-00014" summary="payment status change api fixing">
+      <created>1621961259555</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1621961259555</updated>
+    </task>
+    <task id="LOCAL-00015" summary="payment status change api fixing">
+      <created>1621961496622</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1621961496622</updated>
+    </task>
+    <task id="LOCAL-00016" summary="payment status change api fixing">
+      <created>1621962514118</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1616652269533</updated>
+      <updated>1621962514118</updated>
     </task>
-    <task id="LOCAL-00017" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616652652424</created>
+    <task id="LOCAL-00017" summary="payment status change api fixing">
+      <created>1621962591979</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1616652652424</updated>
+      <updated>1621962591979</updated>
     </task>
-    <task id="LOCAL-00018" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616657865252</created>
+    <task id="LOCAL-00018" summary="js and css layout file fixing">
+      <created>1621966273584</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1616657865252</updated>
+      <updated>1621966273584</updated>
     </task>
-    <task id="LOCAL-00019" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616658229657</created>
+    <task id="LOCAL-00019" summary="js and css layout file fixing">
+      <created>1621966490206</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1616658229657</updated>
+      <updated>1621966490206</updated>
     </task>
-    <task id="LOCAL-00020" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616667721415</created>
+    <task id="LOCAL-00020" summary="added enquiry public id">
+      <created>1621968200483</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1616667721415</updated>
+      <updated>1621968200483</updated>
     </task>
-    <task id="LOCAL-00021" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616673938092</created>
+    <task id="LOCAL-00021" summary="added enquiry public id">
+      <created>1621968230463</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1616673938092</updated>
+      <updated>1621968230463</updated>
     </task>
-    <task id="LOCAL-00022" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616675916027</created>
+    <task id="LOCAL-00022" summary="ticket raised fixing in order details">
+      <created>1622008223519</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1616675916027</updated>
+      <updated>1622008223519</updated>
     </task>
-    <task id="LOCAL-00023" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616677977095</created>
+    <task id="LOCAL-00023" summary="fixed api for display inventory name">
+      <created>1622011385911</created>
       <option name="number" value="00023" />
       <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1616677977095</updated>
+      <updated>1622011385911</updated>
     </task>
-    <task id="LOCAL-00024" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616678308110</created>
+    <task id="LOCAL-00024" summary="fixed api for display Booking">
+      <created>1622011678702</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1616678308110</updated>
+      <updated>1622011678702</updated>
     </task>
-    <task id="LOCAL-00025" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616678446747</created>
+    <task id="LOCAL-00025" summary="fixed api for display Booking">
+      <created>1622018919357</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1616678446747</updated>
+      <updated>1622018919357</updated>
     </task>
-    <task id="LOCAL-00026" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616678510962</created>
+    <task id="LOCAL-00026" summary="fixed category Book move">
+      <created>1622019560518</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1616678510962</updated>
+      <updated>1622019560518</updated>
     </task>
-    <task id="LOCAL-00027" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616678693603</created>
+    <task id="LOCAL-00027" summary="fixed enquiry Booking add">
+      <created>1622022995796</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1616678693603</updated>
+      <updated>1622022995796</updated>
     </task>
-    <task id="LOCAL-00028" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616679056188</created>
+    <task id="LOCAL-00028" summary="fixed enquiry Booking add">
+      <created>1622024542512</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1616679056188</updated>
+      <updated>1622024542512</updated>
     </task>
-    <task id="LOCAL-00029" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616680329307</created>
+    <task id="LOCAL-00029" summary="Added notifications in biding">
+      <created>1622027559129</created>
       <option name="number" value="00029" />
       <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1616680329307</updated>
+      <updated>1622027559129</updated>
     </task>
-    <task id="LOCAL-00030" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616684432392</created>
+    <task id="LOCAL-00030" summary="fixed notifications">
+      <created>1622029508228</created>
       <option name="number" value="00030" />
       <option name="presentableId" value="LOCAL-00030" />
       <option name="project" value="LOCAL" />
-      <updated>1616684432392</updated>
+      <updated>1622029508228</updated>
     </task>
-    <task id="LOCAL-00031" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616684446851</created>
+    <task id="LOCAL-00031" summary="fixed notifications">
+      <created>1622029894336</created>
       <option name="number" value="00031" />
       <option name="presentableId" value="LOCAL-00031" />
       <option name="project" value="LOCAL" />
-      <updated>1616684446851</updated>
+      <updated>1622029894336</updated>
     </task>
-    <task id="LOCAL-00032" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616699987055</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1616699987055</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616700007025</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1616700007025</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616703027388</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1616703027388</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Pulling changes">
-      <created>1616737409625</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1616737409625</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616739099849</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1616739099849</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616743006879</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1616743006880</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616743010999</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1616743010999</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616743428283</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1616743428283</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616744568091</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1616744568091</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616744608909</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1616744608909</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616760984825</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1616760984825</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616764269378</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1616764269379</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616786338132</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1616786338132</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616786442983</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1616786442983</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616825933872</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1616825933872</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616829733123</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1616829733123</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616829930286</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1616829930286</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616844323613</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1616844323613</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616845562529</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1616845562530</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616845758129</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1616845758129</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616849094683</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1616849094683</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616850223771</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1616850223771</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616850652520</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1616850652520</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616850755002</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1616850755002</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1616850778048</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1616850778048</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1617013291605</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1617013291606</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php">
-      <created>1617014605046</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1617014605046</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Create Slider fixed">
-      <created>1617016447065</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1617016447065</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Create Slider fixed">
-      <created>1617027574858</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1617027574858</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Create Slider fixed">
-      <created>1617027599596</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1617027599596</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Fixed Payment Bug">
-      <created>1617086333327</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1617086333327</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Fixed Payment Bug">
-      <created>1617086899890</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1617086899890</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Fixed Payment Bug">
-      <created>1617087370914</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1617087370914</updated>
-    </task>
-    <option name="localTasksCounter" value="65" />
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,39 +419,19 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Pulling changes" />
-    <MESSAGE value="Merge branch 'dev' of https://github.com/diginnovators/cp-biddnest-web-backend into dev&#10;&#10;# Conflicts:&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;resources/views/layouts/includes/app-css.blade.php" />
-    <MESSAGE value="Create Slider fixed" />
-    <MESSAGE value="Fixed Payment Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Payment Bug" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php</url>
-          <line>1</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/coupons/coupons.blade.php</url>
-          <line>139</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/app/Http/Controllers/NotificationController.php</url>
-          <line>35</line>
-          <properties>
-            <option name="className" value="\App\Http\Controllers\NotificationController" />
-            <option name="methodName" value="saveVendorPlayer" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="fixing the booking enquiry for custome item" />
+    <MESSAGE value="added call back api and functionality" />
+    <MESSAGE value="fixing notification of uat point" />
+    <MESSAGE value="payment status change api fixing" />
+    <MESSAGE value="js and css layout file fixing" />
+    <MESSAGE value="added enquiry public id" />
+    <MESSAGE value="ticket raised fixing in order details" />
+    <MESSAGE value="fixed api for display inventory name" />
+    <MESSAGE value="fixed api for display Booking" />
+    <MESSAGE value="fixed category Book move" />
+    <MESSAGE value="fixed enquiry Booking add" />
+    <MESSAGE value="Added notifications in biding" />
+    <MESSAGE value="fixed notifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed notifications" />
   </component>
 </project>

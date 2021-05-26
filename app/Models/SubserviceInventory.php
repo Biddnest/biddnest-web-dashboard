@@ -11,6 +11,6 @@ class SubserviceInventory extends Model
     use HasFactory;
 
     public function meta(){
-        return $this->hasOne(Inventory::class,"id","subservice_id");
+        return $this->hasOne(Inventory::class,"id","inventory_id");
     }
 }

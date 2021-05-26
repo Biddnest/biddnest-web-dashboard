@@ -149,7 +149,13 @@
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">{{$ticket_info->public_booking_id}}</a>
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">
+                                                            @if($ticket_info->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                                {{$ticket_info->public_booking_id}}
+                                                            @else
+                                                                {{$ticket_info->public_enquiry_id}}
+                                                            @endif
+                                                        </a>
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                         @switch($ticket_info->status)

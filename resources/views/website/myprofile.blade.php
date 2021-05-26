@@ -12,6 +12,9 @@
                                 <a class="nav-link light-nav-tab active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="home" aria-selected="true">My Profile</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link light-nav-tab p-15" id="quotation" data-toggle="tab" href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">

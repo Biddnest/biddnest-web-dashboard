@@ -154,8 +154,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-flex justify-content-between  detail-order">
-                                                    <div class="data">ORDER ID</div>
-                                                    <div class="value">#{{$booking->public_booking_id}}</div>
+                                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                        <div class="data">ORDER ID</div>
+                                                        <div class="value">#
+                                                                {{$booking->public_booking_id}}
+                                                        </div>
+                                                    @else
+                                                        <div class="data">ENQUIRY ID</div>
+                                                        <div class="value">#
+                                                            {{$booking->public_enquiry_id}}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">MOVING DATE</div>

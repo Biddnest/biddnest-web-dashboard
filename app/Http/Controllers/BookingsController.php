@@ -59,11 +59,11 @@ class BookingsController extends Controller
         }
         $movement_dates = explode(",",$request->movement_dates);
 
-        return self::createEnquiry($request->all(), $user_id, $movement_dates, true);
+        return self::createEnquiry($request->all(), $user_id, $movement_dates, false, true);
 
     }
 
-    public static function createEnquiry($data, $user_id, $movement_dates, $web=false)
+    public static function createEnquiry($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
     {
         if (App::environment('production')) {
             $exsist = Booking::where(["user_id" => $user_id,
@@ -85,8 +85,10 @@ class BookingsController extends Controller
         }
 
         $booking = new Booking;
-        $booking_id = "BD" . uniqid();
+        $booking_id = "BDO-" . uniqid();
+        $enquiry_id = "ENQ-" . uniqid();
         $booking->public_booking_id = strtoupper($booking_id);
+        $booking->public_enquiry_id = strtoupper($enquiry_id);
         $booking->user_id = (int)$user_id;
         $booking->service_id = $data['service_id'];
         $booking->source_lat = $data['source']['lat'];
@@ -123,9 +125,15 @@ class BookingsController extends Controller
                 'email' => $data['contact_details']['email']]);
         }
 
+        if($web)
+            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['web'];
+
+        if($created_by_support)
+            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['support'];
+
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        if($web) {
+        if($web || $created_by_support) {
             if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
                 foreach ($data['meta']['images'] as $key => $image) {
                     $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
@@ -156,11 +164,11 @@ class BookingsController extends Controller
         }
 
         try {
-            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, true);
+            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $web, $created_by_support);
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
-            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, true);
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
         } catch (Exception $e) {
@@ -196,7 +204,7 @@ class BookingsController extends Controller
 
         foreach ($data["inventory_items"] as $items) {
 
-            if($web)
+            if($web || $created_by_support)
             {
                 $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => explode(";",$items['quantity'])[0], "max" => explode(";",$items['quantity'])[1]]);
             }else{
@@ -206,7 +214,12 @@ class BookingsController extends Controller
             $bookinginventory = new BookingInventory;
             $bookinginventory->booking_id = $booking->id;
             $bookinginventory->inventory_id = $items["inventory_id"];
-            $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
+
+            if($items["inventory_id"] !== null)
+                $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
+            else
+                $bookinginventory->name = $items["name"];
+
             $bookinginventory->material = $items["material"];
             $bookinginventory->size = $items["size"];
             $bookinginventory->quantity = $quantity;
@@ -355,7 +368,7 @@ class BookingsController extends Controller
 
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->where("status", BookingEnums::$STATUS["enquiry"])
+            ->where("status", "<=", [BookingEnums::$STATUS["payment_pending"]])
             ->with('movement_dates')
 //            ->with('inventories')
 //            ->with('status_history')
@@ -403,7 +416,8 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereNotIn("status", [ BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
             ->with('movement_dates')
 //            ->with('inventories')
 //            ->with('status_history')

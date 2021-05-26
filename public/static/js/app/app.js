@@ -750,8 +750,8 @@ $("body").on('click', ".raised", function(event) {
         $.add($(this).data("url"), {data}, function (response){
             if(response.status == "success")
             {
-                // tinySuccessAlert("Ticket Raised Successfully", response.message);
-                window.location.href = href;
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                // window.location.href = href;
             }
             else
             {
@@ -764,9 +764,9 @@ $("body").on('click', ".raised", function(event) {
 
 $("body").on('click', ".reshcedule", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        var data = $(this).data("id");
+        var public_booking_id = $(this).data("id");
         var href = $(this).data("next-url");
-        $.add($(this).data("url"), {data}, function (response){
+        $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
                 // tinySuccessAlert("Ticket Raised Successfully", response.message);
@@ -783,9 +783,9 @@ $("body").on('click', ".reshcedule", function(event) {
 
 $("body").on('click', ".reject-booking", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        var data = $(this).data("id");
+        var public_booking_id = $(this).data("id");
         var href = $(this).data("next-url");
-        $.add($(this).data("url"), {data}, function (response){
+        $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
                 // tinySuccessAlert("Ticket Raised Successfully", response.message);
@@ -808,7 +808,6 @@ $("body").on('click', ".copy", function(event) {
 
 $("body").on('click', ".card-method", function(event) {
         var method = $(this).data("method");
-        console.log(method);
         $('.card-method').removeClass('turntheme');
         $('.card-method').removeClass('check-icon02');
 
@@ -817,69 +816,105 @@ $("body").on('click', ".card-method", function(event) {
     return false;
 });
 
-
 $("body").on('click', ".payment", function(event) {
-        var method = $('.card-method').data("method");
+        var method = $('.check-icon02').data("method");
+        console.log(method);
         var amount = $(this).data("amount");
         var booking_id = $(this).data("booking");
         var coupon_code = document.getElementById("coupon").value;
         var url = $(this).data("url");
+        var url_payment = $(this).data("payment");
+        var url_status = $(this).data("status");
 
-    var options = {
-        "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
-        "amount": (amount *100), // 2000 paise = INR 20
-        "name": "Bidnest",
-        "description": "Payment",
-        "image": "http://127.0.0.1:8000/static/images/favicon.svg",
-        "handler": function (response){
-            $.ajax({
-                url: "http://127.0.0.1:8000/website/api/initiate-payment",
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    id:booking_id ,code : coupon_code,
+
+
+    $.ajax({
+        url: url_payment,
+        type: 'post',
+        dataType: 'json',
+        data: {
+            id:booking_id ,code : coupon_code,
+        },
+        success: function (response) {
+            // options.order_id=response.data.payment.rzp_order_id;
+            var options = {
+                "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
+                "order_id":response.data.payment.rzp_order_id,
+                "amount": (amount *100), // 2000 paise = INR 20
+                "name": "Bidnest",
+                "description": "Payment",
+                "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
+                "handler": function (resp){
+                    console.log({
+                        booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
+                    });
+                    $.ajax({
+                        url: url_status,
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
+                        },
+                        success: function (msg) {
+                            redirectTo(url);
+                        }
+                    });
                 },
-                success: function (msg) {
-                    window.location.href = url;
-                }
-            });
-        },
-        "prefill": {
-            "name": "test",
-            "email": "test@gmail.com",
-            "contact": "7788556655"
-        },
+                "prefill": {
+                    "method": method,
+                    "name": "test",
+                    "email": "test@gmail.com",
+                    "contact": "7788556655"
+                },
 
-        "theme": {
-            "color": "#4b2b9b"
+                "theme": {
+                    "color": "#4b2b9b"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            // window.location.href = url;
         }
-    };
-    var rzp1 = new Razorpay(options);
-    rzp1.open();
+    });
+
+
 
 });
 
+$("body").on('click', ".call-request", function(event) {
+    var data = document.getElementById("contact_no").value;
+    $.add($(this).data("url"), {data}, function (response){
+        if(response.status == "success")
+        {
+            tinySuccessAlert("Request Raised Successfully", response.message);
+        }
+        else
+        {
+            tinyAlert("Failed", response.message);
+        }
 
-
-/*$("body").on('click', ".weblogin", function(event) {
-        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        var phone = document.getElementById("phone").value;
-        console.log(phone);
-        $.add($(this).data("url"), {phone}, function (response){
-            if(response.status == "success")
-            {
-                // tinySuccessAlert("No added Successfully", response.message);
-                // $(this).fadeOut(100).remove();
-                $('.weblogin').css('display', 'none');
-                $('.otp').css('display', 'block');
-                $('.otp-add').css('display', 'block');
-                $('.otp').attr("required", "required");
-            }
-            else
-            {
-                tinyAlert("Failed", response.message);
-            }
-
-        });
+    });
     return false;
-});*/
+});
+
+$("body").on('click', ".verify-coupon", function(event) {
+    var public_booking_id = document.getElementById("public_booking_id").value;
+    var coupon = document.getElementById("coupon").value;
+    $.add($(this).data("url"), {public_booking_id, coupon}, function (response){
+        if(response.status == "success")
+        {
+            console.log(response);
+            tinySuccessAlert("Coupon Verified", response.message);
+            $('.discount').html(response.data.discount);
+            $('.grand-total').html(response.data.grand_total);
+            $('.payment').attr("data-amount",response.data.grand_total);
+        }
+        else
+        {
+            tinyAlert("Failed", response.message);
+        }
+
+    });
+    return false;
+});
+

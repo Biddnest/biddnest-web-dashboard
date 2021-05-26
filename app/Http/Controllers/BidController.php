@@ -401,9 +401,9 @@ class BidController extends Controller
 //                if($booking_inventory["name"])
                     $list_item["name"] = $booking_inventory["name"];
 
-//                $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
+                $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
 
-                $list_item["material"] = $booking_inventory["material"];
+//                $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
                     $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;

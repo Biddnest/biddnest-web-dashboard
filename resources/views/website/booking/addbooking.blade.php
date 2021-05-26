@@ -216,75 +216,32 @@
                                         </h4>
                                         <div class="accordion " id="delivery-details ">
                                         <div class="container">
-  
+
 <p class="address-category pl-0 ">Category</p>
-  
+
   <div class="row">
-    
-      <div class="col-md-4 col-lg-4 col-sm-4">
-        
-        <label >
-          <input type="radio" name="product" class="card-input-element" />
-
-            <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer"   >
-              <div class="panel-heading text-white">
-              Residential
-              </div>
-             
-            </div>
-
-        </label>
-        
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-4">
-        
-        <label>
-          <input type="radio" name="product" class="card-input-element" />
-
-            <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
-              <div class="panel-heading text-white">Commercial</div>
-              
-            </div>
-        </label>
-        
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-4">
-        
-        <label>
-          <input type="radio" name="product" class="card-input-element" />
-
-            <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
-              <div class="panel-heading text-white">Industrial</div>
-            
-            </div>
-        </label>
-        
-      </div>
+      @foreach($categories as $category)
+          <div class="col-md-4 col-lg-4 col-sm-4">
+            <label >
+              <input type="radio" name="product" value="{{$category->id}}" class="card-input-element" />
+                <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer"   >
+                  <div class="panel-heading text-white">
+                      <img src="{{$category->image}}" >
+                      {{ucwords($category->name)}}
+                  </div>
+                </div>
+            </label>
+          </div>
+      @endforeach
   </div>
-  
+
 </div>
-                                            <!-- <p class="address-category pl-0 ">Category</p>
-                                            <div class="row my-3 address-details border-bottom d-flex justify-content-between ">
-                                                @foreach($categories as $category)
-                                                    <div class="col-md-4 col-sm-3 mb-4 view-content radio-inline">
-                                                        <div class="card address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer">
 
-                                                            <div class="card-block ">
-
-                                                                <img src="{{$category->image}}" alt="residential-building " class="address-icon mb-2 " style="width: 50px;"/>
-                                                                <input type="radio" value="{{$category->id}}" name="service_id" class="cursor-pointer categoryweb-select" data-target=".range" required>
-                                                                <p class="card-title pl-0 address-type text-white ">
-                                                                {{ucwords($category->name)}}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div> -->
                                             <div class="d-flex row p-20 ">
                                                 <div class="col-sm-6 ">
                                                     <div class="form-group ">
                                                         <label class="address-details-input ">From Address</label>
-                                                        <<input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
+                                                        <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
                                                         <span class="error-message ">Please enter valid</span>
                                                         </span>
                                                     </div>
@@ -477,7 +434,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Third Step -->
 
                                 <div class="setup-content-3 step-3" id="step-3" style="display: none;">

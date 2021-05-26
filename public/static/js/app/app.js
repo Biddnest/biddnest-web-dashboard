@@ -658,7 +658,7 @@ $("body").on('click', ".next3", function(event) {
     $(".steps-step-3").removeClass("color-purple");
 });
 
-$("body").on('click', ".next4", function(event) {
+/*$("body").on('click', ".next4", function(event) {
     $('.step-4').css('display', 'none');
     $('.step-5').css('display', 'block');
     $(".completed-step-5").addClass("turntheme");
@@ -674,7 +674,7 @@ $("body").on('click', ".next5", function(event) {
     $(".completed-step-5").removeClass("turntheme");
     $(".steps-step-6").addClass("color-purple");
     $(".steps-step-5").removeClass("color-purple");
-});
+});*/
 
 $("body").on('change', ".switch", function(event) {
     $(".toggle-input").toggleClass('diplay-none ');

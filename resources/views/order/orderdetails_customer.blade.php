@@ -107,7 +107,11 @@
 
                             <div class="col-sm-8  match-item white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                  {{$booking->public_booking_id}}
+                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                        {{$booking->public_booking_id}}
+                                    @else
+                                        {{$booking->public_enquiry_id}}
+                                    @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                  {{json_decode($booking->contact_details,true)['name'] }}

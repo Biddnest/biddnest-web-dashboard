@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InventoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/orderdetails_customer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/orderdetails_customer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/orderdetails_review.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/orderdetails_review.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/order/ordersbooking_enquiry.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/ordersbooking_enquiry.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reviewandratings/replies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reviewandratings/replies.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sidebar/customer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sidebar/customer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sidebar/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sidebar/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sidebar/orderbooking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sidebar/orderbooking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor-panel/order/liveorders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor-panel/order/liveorders.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor-panel/order/mybid.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor-panel/order/mybid.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +373,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622019560518</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fixed enquiry Booking add">
+      <created>1622022995796</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1622022995796</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fixed enquiry Booking add">
+      <created>1622024542512</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1622024542512</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,6 +416,7 @@
     <MESSAGE value="fixed api for display inventory name" />
     <MESSAGE value="fixed api for display Booking" />
     <MESSAGE value="fixed category Book move" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed category Book move" />
+    <MESSAGE value="fixed enquiry Booking add" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed enquiry Booking add" />
   </component>
 </project>

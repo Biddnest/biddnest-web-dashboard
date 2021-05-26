@@ -167,6 +167,46 @@ label {
 
 
 
+ @media (max-width:480px)  { 
+               .col-mobile{
+                    flex-direction: column !important;
+
+                }
+                .padding-view{
+                    padding-left: 0 !important;
+
+                }
+
+                .top-aliments{
+                    width: 100%  !important;
+    display: flex  !important;
+    justify-content: center  !important;
+    flex-wrap: wrap  !important;
+
+                }
+                .bg-blur {
+                    width: fit-content !important;
+                }
+
+                .f-30{
+                    margin-left: 0  !important;
+                }
+
+                .m-20{
+                    margin: 0 !important;
+                } 
+                .details-card{
+                    width: auto!important;
+                } 
+            
+                .w-84{
+width: 84% !important;
+                }
+
+            
+             }
+
+
 
  .card .required-item {
      width: fit-content !important;

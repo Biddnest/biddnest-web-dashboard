@@ -57,9 +57,9 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
+                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
                                             <div>
-                                                <p class="bold mt-1 pl-4">
+                                                <p class="bold mt-1 pl-4 padding-view">
                                                     #{{$booking->public_booking_id}} <span class="light">| {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                 </p>
                                             </div>

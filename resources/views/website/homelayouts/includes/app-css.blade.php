@@ -107,6 +107,16 @@ label {
 background: yellow !important;
  }
 
+ @media (max-width:480px)  { 
+                .testimonial-content{
+                     margin-left: 0px !important; 
+            
+                }
+               
+            
+            
+             }
+
 
 
 

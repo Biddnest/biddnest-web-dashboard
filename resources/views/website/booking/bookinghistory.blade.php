@@ -57,9 +57,9 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
+                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
                                                 <div>
-                                                    <p class="bold mt-1 pl-4">
+                                                    <p class="bold mt-1 pl-4 padding-view">
                                                         #{{$booking->public_booking_id}} <span class="light">| @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
                                                     </p>
                                                 </div>
@@ -134,7 +134,7 @@
                                             <p class="bg-blur f-16" style="width:110px; ">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left " style="width:81%;">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left w-84" style="width:81%;">
                                         <div>
                                             <h6 class="l-cap f-14">Date</h6>
                                             <h5 class="f-14">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>

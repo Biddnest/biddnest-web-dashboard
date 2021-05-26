@@ -4,6 +4,7 @@
     <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InventoryController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +350,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622011678702</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fixed api for display Booking">
+      <created>1622018919357</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1622018919357</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fixed category Book move">
+      <created>1622019560518</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1622019560518</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,6 +392,7 @@
     <MESSAGE value="ticket raised fixing in order details" />
     <MESSAGE value="fixed api for display inventory name" />
     <MESSAGE value="fixed api for display Booking" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed api for display Booking" />
+    <MESSAGE value="fixed category Book move" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed category Book move" />
   </component>
 </project>

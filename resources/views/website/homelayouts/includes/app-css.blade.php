@@ -86,9 +86,25 @@ label {
  }
 
 
+.drop-list:hover{
+    background: #e6e9eb;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 
- .dropdown-content .col-grey .cursor-pointer > ul >li:hover{
-background: yellow;
+
+}
+
+.dropdown-content {
+   
+    padding: none !important;
+   
+}
+ 
+
+
+
+ .dropdown-content .col-grey .cursor-pointer li:hover{
+background: yellow !important;
  }
 
 

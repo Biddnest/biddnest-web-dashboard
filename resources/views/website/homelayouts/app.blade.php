@@ -18,7 +18,7 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <li class="drop-list" style="padding: 5px 10px;">
                             <a class="bec-vendor mr-2 " href="{{route('join-vendor')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" class="res-nav" />
                                 <span class="nav-menu-link">Become A Vendor</span>
@@ -79,20 +79,20 @@
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">
                                     <ul class="d-content">
-                                        <li style="padding: 4px 0px;">
-                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> <span class="ml-1">My Profile</span> </a>
                                         </li>
-                                        <li style="padding: 4px 0px;">
-                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
                                         </li>
-                                        <li style="padding: 4px 0px;">
-                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
                                         </li>
-                                        <li style="padding: 4px 0px;">
-                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /> <span class="ml-1">My Request </span></a>
                                         </li>
-                                        <li style="padding: 4px 0px;">
-                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
                                         </li>
                                     </ul>
                                 </div>

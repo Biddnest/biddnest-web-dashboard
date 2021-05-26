@@ -7,9 +7,9 @@
             <div class="quote p-0 br-5 w-70 ontop bg-white">
                 <div class="row">
                     <div class="col-3 p-4 bg-gray-circle border-right">
-                        <a href="{{route('page', ["slug"=>"about-us"])}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">1</h4><p>About Us</p></div></a>
-                        <a href="{{route('page', ["slug"=>"terms-and-conditions"])}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">2</h4><p>Terms and Conditions</p></div></a>
-                        <a href="{{route('page', ["slug"=>"privacy-policies"])}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">3</h4><p>Privacy and Policy</p></div></a>
+                        <a href="{{route('terms.page', ["slug"=>"about-us"])}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">1</h4><p>About Us</p></div></a>
+                        <a href="{{route('terms.page', ["slug"=>"terms-and-conditions"])}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">2</h4><p>Terms and Conditions</p></div></a>
+                        <a href="{{route('terms.page', ["slug"=>"privacy-policies"])}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">3</h4><p>Privacy and Policy</p></div></a>
                         <a href="{{route('faq')}}"><div class="d-flex mt-1 pt-3"><h4 class="icon bg-purple cursor-pointer text-white">4</h4><p>FAQ</p></div></a>
                     </div>
                     <div class="col-9 p-4 pr-2" id="terms-section">

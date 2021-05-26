@@ -69,7 +69,7 @@ class WebsiteController extends Controller
         return view('website.faq', ['faqs'=>$faqs]);
     }
 
-    public function page(Request $request)
+    public function termPage(Request $request)
     {
         $page=Page::where("slug", $request->slug)->first();
         return view('website.page', ['page'=>$page]);

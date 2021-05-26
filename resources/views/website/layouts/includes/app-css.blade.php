@@ -200,8 +200,14 @@ label {
                 } 
             
                 .w-84{
-width: 84% !important;
+                    width: 84% !important;
                 }
+
+                .custom-file{
+                    height: calc(3.25rem + 8px);
+
+                }
+
 
             
              }

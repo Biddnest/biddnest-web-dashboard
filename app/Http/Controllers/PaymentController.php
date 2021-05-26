@@ -134,10 +134,10 @@ class PaymentController extends Controller
             dispatch(function () use ($order_id_exist) {
 
                 $booking = Booking::find($order_id_exist->booking_id);
-                NotificationController::sendTo( "We have received your payment for booking id " . $booking->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
+                NotificationController::sendTo("user", [$booking->user_id], "We have received your payment for booking id " . $booking->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" => $booking->public_booking_id
-                ], "user", [$booking->user_id]);
+                ]);
 
             })->afterResponse();
             return Helper::response(true, "Payment successfull");

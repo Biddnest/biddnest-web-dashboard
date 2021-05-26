@@ -80,6 +80,15 @@ label {
  }
 
 
+ .quote p{
+    white-space: nowrap !important;
+
+ }
+
+
+
+
+
 
   
 

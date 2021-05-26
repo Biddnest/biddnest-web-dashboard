@@ -84,7 +84,7 @@
                                                 @endswitch
                                             </div>
                                             <h6 class="para-head pl-2">{{ucwords($ticket->heading)}}</h6>
-                                            <p class="para">
+                                            <p class="para" style="white-space: normal !important;">
                                                 {{$ticket->desc}}
                                               {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}
 

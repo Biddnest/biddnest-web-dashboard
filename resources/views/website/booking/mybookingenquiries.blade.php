@@ -33,25 +33,25 @@
                                 <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
                                     <div class="card view-left-text">
                                         <div class="card-body bg-card-book">
-                                            <div class="d-flex pt-4 pb-2 justify-content-around">
-                                                <div class="d-flex ">
-                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                            <div class="d-flex pt-4 pb-2 justify-content-between" style="margin-right: 14px !important;">
+                                                <div class="d-flex">
+                                                    <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">From</p>
-                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                                        <p class=" f-16 pl-1">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                                    <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">To</p>
-                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                                        <p class=" f-16 pl-1">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">Distance</p>
-                                                        <p class=" f-18 pl-2">{{json_decode($booking->meta, true)['distance']}} Km</p>
+                                                        <p class=" f-16 pl-1">{{json_decode($booking->meta, true)['distance']}} Km</p>
                                                     </div>
                                                 </div>
                                             </div>

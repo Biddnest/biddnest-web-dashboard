@@ -73,6 +73,7 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('website.booking.addbooking', ['categories'=>$categories]);
     }
+
     public function estimateBooking(Request $request)
     {
         $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
@@ -106,17 +107,11 @@ class WebsiteController extends Controller
 
     public function payment(Request $request)
     {
+        $user = User::where("id", Session::get('account')['id'])->first();
         $payment_summary=BookingsController::getPaymentDetails($request->id, 0.00, true);
         $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
+        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id, "user"=>$user]);
     }
-
-    /*public function verifiedPayment(Request $request)
-    {
-        $coupon_veridied=BookingsController::getPaymentDetails($request->id, 0.00, true);
-        $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return view('website.booking.payment', ['payment_summary'=>$coupon_veridied, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
-    }*/
 
     public function orderDetails(Request $request)
     {

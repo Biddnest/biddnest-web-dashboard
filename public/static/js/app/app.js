@@ -658,7 +658,7 @@ $("body").on('click', ".next3", function(event) {
     $(".steps-step-3").removeClass("color-purple");
 });
 
-$("body").on('click', ".next4", function(event) {
+/*$("body").on('click', ".next4", function(event) {
     $('.step-4').css('display', 'none');
     $('.step-5').css('display', 'block');
     $(".completed-step-5").addClass("turntheme");
@@ -674,7 +674,7 @@ $("body").on('click', ".next5", function(event) {
     $(".completed-step-5").removeClass("turntheme");
     $(".steps-step-6").addClass("color-purple");
     $(".steps-step-5").removeClass("color-purple");
-});
+});*/
 
 $("body").on('change', ".switch", function(event) {
     $(".toggle-input").toggleClass('diplay-none ');
@@ -769,8 +769,9 @@ $("body").on('click', ".reshcedule", function(event) {
         $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
-                // tinySuccessAlert("Ticket Raised Successfully", response.message);
-                window.location.href = href;
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                // window.location.href = href;
+                redirectTo(href);
             }
             else
             {
@@ -788,8 +789,9 @@ $("body").on('click', ".reject-booking", function(event) {
         $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
-                // tinySuccessAlert("Ticket Raised Successfully", response.message);
-                window.location.href = href;
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                // window.location.href = href;
+                redirectTo(href);
             }
             else
             {
@@ -825,6 +827,9 @@ $("body").on('click', ".payment", function(event) {
         var url = $(this).data("url");
         var url_payment = $(this).data("payment");
         var url_status = $(this).data("status");
+        var name = $(this).data("user-name");
+        var email = $(this).data("user-email");
+        var contact = $(this).data("user-contact");
 
 
 
@@ -862,9 +867,9 @@ $("body").on('click', ".payment", function(event) {
                 },
                 "prefill": {
                     "method": method,
-                    "name": "test",
-                    "email": "test@gmail.com",
-                    "contact": "7788556655"
+                    "name": name,
+                    "email": email,
+                    "contact": contact
                 },
 
                 "theme": {
@@ -908,6 +913,9 @@ $("body").on('click', ".verify-coupon", function(event) {
             $('.discount').html(response.data.discount);
             $('.grand-total').html(response.data.grand_total);
             $('.payment').attr("data-amount",response.data.grand_total);
+            $(".verify-coupon").addClass("remove");
+            $(".verify-coupon").text("Remove");
+            $(".verify-coupon").removeClass("verify-coupon");
         }
         else
         {
@@ -915,6 +923,12 @@ $("body").on('click', ".verify-coupon", function(event) {
         }
 
     });
+    return false;
+});
+
+$("body").on('click', ".remove", function(event) {
+    var url = $(this).data("remove-url");
+    window.location.href = url;
     return false;
 });
 

@@ -46,12 +46,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-2 ">
-                                @if($payment_summary['discount'] <= 0)
-                                    <button type="button" class="btn btn-theme-bg white-bg verify-coupon" id="padding-apply" data-url="{{route('verifiedcoupon')}}">Apply
+                                <button type="button" class="btn btn-theme-bg white-bg verify-coupon" id="padding-apply" data-url="{{route('verifiedcoupon')}}" data-remove-url="{{route('payment',['id'=>$public_booking_id])}}">Apply
                                     </button>
-                                @else
-                                    <a href="{{route('payment',['id'=>$public_booking_id])}}" ><button class="btn btn-theme-bg white-bg" id="padding-apply">Remove</button></a>
-                                @endif
                             </div>
                         </div>
 {{--                    </form>--}}
@@ -68,7 +64,7 @@
                                         </h5>
                                         <a href="#" class="copy" data-code="{{$coupon->code}}"><img class="m-0" src="{{asset('static/website/images/icons/copy.svg')}}" /></a>
                                     </div>
-                                    <p>{!! $coupon->desc !!}</p>
+                                    <p style="white-space:normal !important;">{!! $coupon->desc !!}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -96,7 +92,7 @@
                         </div>
                     </div>
                     <div style="float: right;" class="btn-proceed mr-2 mt-2 ">
-                        <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}" data-payment="{{route('initiate-payment')}}" data-status="{{route('complete-status')}}">
+                        <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}" data-payment="{{route('initiate-payment')}}" data-status="{{route('complete-status')}}" data-user-name="{{ucwords($user->fname)}} {{ucwords($user->lname)}}" data-user-email="{{$user->email}}" data-user-contact="{{$user->phone}}">
                             <button  class="btn btn-theme-bg  white-bg">Proceed</button>
                         </a>
                     </div>

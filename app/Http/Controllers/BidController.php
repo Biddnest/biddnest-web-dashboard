@@ -397,7 +397,12 @@ class BidController extends Controller
                 ])->first();
 
                 $list_item["bid_inventory_id"] = $booking_inventory["inventory_id"];
-//                $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
+
+                if(!$booking_inventory["inventory_id"])
+                    $list_item["name"] = $booking_inventory["name"];
+                else
+                    $list_item["name"] = Inventory::where("id",$booking_inventory["inventory_id"])->pluck("name")[0];
+
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])

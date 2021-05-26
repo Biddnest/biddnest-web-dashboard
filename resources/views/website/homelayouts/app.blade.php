@@ -79,19 +79,19 @@
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">
                                     <ul class="d-content">
-                                        <li>
+                                        <li style="padding: 4px 0px;">
                                             <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
                                         </li>
-                                        <li>
+                                        <li style="padding: 4px 0px;">
                                             <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
                                         </li>
-                                        <li>
+                                        <li style="padding: 4px 0px;">
                                             <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
                                         </li>
-                                        <li>
+                                        <li style="padding: 4px 0px;">
                                             <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
                                         </li>
-                                        <li>
+                                        <li style="padding: 4px 0px;">
                                             <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
                                         </li>
                                     </ul>
@@ -187,7 +187,7 @@
                                 <input type="tel" class="form-control -mr-4" id="contact_no" placeholder="Request a call back" maxlength="10" minlength="10"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary input-button f-4 call-request" type="button" data-url="{{route('request-callback')}}">
-                                        <i class="fa fa f-12 p-0"><span class="pl-1 f-14">Request</span></i>
+                                        <i class="fa fa f-12 p-0"><span class="p-1 f-14">Submit</span></i>
                                     </button>
                                 </div>
                             </div>

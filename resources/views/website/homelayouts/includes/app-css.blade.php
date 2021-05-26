@@ -20,6 +20,67 @@
         color: #0f0c75 !important;
         font-size: 14px !important;
     }
+
+
+
+label {
+    width: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+     box-shadow: 0 0 1px 1px #2ecc71;
+ }
+
+
+ ::-webkit-input-placeholder{
+     color: red;
+ }
+
+
+
+
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: red ;
+  opacity: 1;}
+
+ input[type="name"].input-overwrite::-webkit-input-placeholder {
+    color: #696f74 !important;
+
+ }
+
+
+ .datepicker-dropdown.datepicker-orient-top:after{
+     display: none !important;
+ }
+ .datepicker-dropdown.datepicker-orient-top:before{
+     display: none !important;
+ }
+
+ .datepicker-dropdown.datepicker-orient-bottom:after{
+    display: none !important;
+
+ }
+
+ .datepicker-dropdown.datepicker-orient-bottom:before{
+    display: none !important;
+
+ }
+
+
+
   
 
 

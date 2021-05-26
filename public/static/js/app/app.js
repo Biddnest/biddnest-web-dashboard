@@ -764,9 +764,9 @@ $("body").on('click', ".raised", function(event) {
 
 $("body").on('click', ".reshcedule", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        var data = $(this).data("id");
+        var public_booking_id = $(this).data("id");
         var href = $(this).data("next-url");
-        $.add($(this).data("url"), {data}, function (response){
+        $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
                 // tinySuccessAlert("Ticket Raised Successfully", response.message);
@@ -783,9 +783,9 @@ $("body").on('click', ".reshcedule", function(event) {
 
 $("body").on('click', ".reject-booking", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        var data = $(this).data("id");
+        var public_booking_id = $(this).data("id");
         var href = $(this).data("next-url");
-        $.add($(this).data("url"), {data}, function (response){
+        $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
                 // tinySuccessAlert("Ticket Raised Successfully", response.message);

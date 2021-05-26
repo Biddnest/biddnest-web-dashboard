@@ -75,6 +75,7 @@ return array(
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckSession' => $baseDir . '/app/Http/Middleware/CheckSession.php',
     'App\\Http\\Middleware\\CheckVendorSession' => $baseDir . '/app/Http/Middleware/CheckVendorSession.php',
+    'App\\Http\\Middleware\\CheckWebSession' => $baseDir . '/app/Http/Middleware/CheckWebSession.php',
     'App\\Http\\Middleware\\CommonResponse' => $baseDir . '/app/Http/Middleware/CommonResponse.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

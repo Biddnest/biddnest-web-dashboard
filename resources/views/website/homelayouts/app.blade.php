@@ -157,13 +157,16 @@
                     <div class="footer-phone row center mt-3 mb-2 ">
 
                         <div class="col-md-3 col-xs-3 br-r">
-                            <p class="footer-text footer-quick-links cursor-pointer">Blog</p>
+                            <a href="{{route('page', ["slug"=>"about-us"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">About Us</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <p class="footer-text footer-quick-links cursor-pointer">Privacy</p>
+                            <a href="{{route('page', ["slug"=>"terms-and-conditions"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('terms_and_conditions')}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
+                            <a href="{{route('page', ["slug"=>"privacy-policies"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">Privacy</a>
+                        </div>
+                        <div class="col-md-3 col-xs-3 br-r">
+                            <a href="{{route('faq')}}" class="footer-text f-22 footer-quick-links cursor-pointer">FAQ</a>
                         </div>
                     </div>
                     <div class="row mt-30 footer-row border-bottom border-top p-3">
@@ -231,7 +234,8 @@
                     <div class="row mt-4 mb-1">
                         <div class="col-md-6 text-left">
                                     <span class="copyright footer-text fade text-view-center view-block ">
-                                        &copy; 2021 BIDDNEST Inc. All right reserved.</span>
+                                     Copyright © {{date("Y", time())}} All Rights Reserved by. <a href="#"
+                                                                                                  target="_blank">BIDNEST</a>.</span>
                         </div>
                         <div class="col-md-6">
                             <ul class="list-inline social-buttons">

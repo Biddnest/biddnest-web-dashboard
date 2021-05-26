@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Faq;
+use App\Models\Page;
 use App\Models\Service;
 use App\Models\Settings;
 use App\Models\Testimonials;
@@ -68,9 +69,10 @@ class WebsiteController extends Controller
         return view('website.faq', ['faqs'=>$faqs]);
     }
 
-    public function termsAndCondition()
+    public function page(Request $request)
     {
-        return view('website.termsandcondition');
+        $page=Page::where("slug", $request->slug)->first();
+        return view('website.page', ['page'=>$page]);
     }
 
     public function addBooking()

@@ -189,16 +189,20 @@
                                         <div class="reply border-top pt-4">
                                             <h5 class="para-head mb-3">Reply</h5>
                                             <div class="d-flex">
-                                                <i class="fa fa-square f-52"></i>
+
                                                 <!-- <i class="fas fa-stop"></i> -->
                                                 @foreach($ticket_detail->reply as $reply)
+                                                    <i class="fa fa-square f-52"></i>
                                                     <div class="mt-1">
-                                                        <h6 class="para-text bold ml-3 mb-0">Customer Support</h6>
+                                                        <h6 class="para-text bold ml-3 mb-0">{{ucwords($reply->admin->fname)}} {{ucwords($reply->admin->lname)}}</h6>
                                                         <p class="text-muted ml-1">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</p>
                                                         <p class="para ml-1"> {{$reply->chat}}
                                                         </p>
                                                     </div>
                                                 @endforeach
+                                                @if(count($ticket_detail->reply) >= 0)
+                                                    <p class="para ml-1">You Don't Recieve Any Reply From Support.</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

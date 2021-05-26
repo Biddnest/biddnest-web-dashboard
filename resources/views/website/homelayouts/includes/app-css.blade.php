@@ -80,7 +80,10 @@ label {
  }
 
 
+ .close .text-white  {
+    outline: none !important;
 
+ }
 
 
 

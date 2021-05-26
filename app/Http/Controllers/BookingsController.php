@@ -164,11 +164,11 @@ class BookingsController extends Controller
         }
 
         try {
-            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, true);
+            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $web, $created_by_support);
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
-            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, true);
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
         } catch (Exception $e) {

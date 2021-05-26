@@ -36,7 +36,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="theme-text f-14">
-                                        {{$booking->public_booking_id}}
+                                        @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                            {{$booking->public_booking_id}}
+                                        @else
+                                            {{$booking->public_enquiry_id}}
+                                        @endif
                                     </div>
                                 </div>
                             </div>

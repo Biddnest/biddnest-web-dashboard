@@ -441,15 +441,15 @@
                                         <div class="col-md-2 col-lg-2 col-sm-4">
                                             
                                             <label>
-                                            <input type="radio" name="product" class="card-input-element" />
+                                            <input type="radio" name="product" class="card-input-element01" />
 
-                                                <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
+                                                <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important" >
                                                 <div class="panel-heading">
                                                     <h3>                                                    
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ">
+                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 ">
                                                 1 bhk
                                                 </div>
                                                 </div>
@@ -460,7 +460,7 @@
                                         <div class="col-md-2 col-lg-2 col-sm-4">
                                             
                                             <label>
-                                            <input type="radio" name="product" class="card-input-element" />
+                                            <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
                                                 <div class="panel-heading">
@@ -468,7 +468,7 @@
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ">
+                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 ">
                                                 1 bhk
                                                 </div>
                                                 </div>
@@ -479,7 +479,7 @@
                                         <div class="col-md-2 col-lg-2 col-sm-4">
                                             
                                             <label>
-                                            <input type="radio" name="product" class="card-input-element" />
+                                            <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
                                                 <div class="panel-heading">
@@ -487,7 +487,7 @@
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ">
+                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 ">
                                                 1 bhk
                                                 </div>
                                                 </div>

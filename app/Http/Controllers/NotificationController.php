@@ -102,7 +102,7 @@ class NotificationController extends Controller
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
     }
 
-    public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url = null){
+    public static function sendTo($title, $desc, $data, $type= "user", $user_id = [], $url = null){
             foreach ($user_id as $user)
             {
                 $save_notification =new Notification;

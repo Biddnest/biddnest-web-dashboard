@@ -4,16 +4,8 @@
     <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/order/orderdetails_customer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/orderdetails_customer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/order/orderdetails_review.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/orderdetails_review.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/order/ordersbooking_enquiry.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/order/ordersbooking_enquiry.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reviewandratings/replies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reviewandratings/replies.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sidebar/customer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sidebar/customer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sidebar/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sidebar/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sidebar/orderbooking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sidebar/orderbooking.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor-panel/order/liveorders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor-panel/order/liveorders.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor-panel/order/mybid.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor-panel/order/mybid.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622024542512</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Added notifications in biding">
+      <created>1622027559129</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1622027559129</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,6 +416,7 @@
     <MESSAGE value="fixed api for display Booking" />
     <MESSAGE value="fixed category Book move" />
     <MESSAGE value="fixed enquiry Booking add" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed enquiry Booking add" />
+    <MESSAGE value="Added notifications in biding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added notifications in biding" />
   </component>
 </project>

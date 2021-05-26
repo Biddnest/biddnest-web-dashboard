@@ -90,7 +90,21 @@ label {
 
 .card-input-element:checked + .card-input {
      box-shadow: 0 0 1px 1px #2ecc71;
+     background: #2c136c !important;
  }
+
+
+ .card-input-element01:checked + .card-input {
+    color:#2c136c !important; 
+ }
+
+
+ .card-input-element01{
+     display: none;
+
+ }
+
+
 
 
 

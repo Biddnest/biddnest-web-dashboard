@@ -861,7 +861,8 @@ $("body").on('click', ".payment", function(event) {
                             booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                         },
                         success: function (msg) {
-                            redirectTo(url);
+                            // redirectTo(url);
+                            window.location.href = url;
                         }
                     });
                 },

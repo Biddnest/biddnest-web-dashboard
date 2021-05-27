@@ -26,8 +26,10 @@
                 <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
                     <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: none;">
                         <p>FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0 source" type="text" name="source" placeholder="SMR Apartments ">
+                        <input class="input-overwrite text-heading book-address mb-0 source" type="text" placeholder="SMR Apartments ">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" type="text" placeholder="Mahadevapura, Bangalore" readonly>
+                        <input  type="hidden" id="source-lat" name="source_lat" readonly>
+                        <input  type="hidden" id="source-lng" name="source_lng" readonly>
                     </div>
                 </div>
                 <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
@@ -35,7 +37,8 @@
                         <p>TO</p>
                         <input class="input-overwrite text-heading book-address mb-0 destination" type="text" name="destination" placeholder="Majestic Villas">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="text" placeholder="Gandhinagar, Chennai" readonly>
-
+                        <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
+                        <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
                     </div>
                 </div>
                 <i class="bg-white icon arrow dripicons-chevron-right"></i>

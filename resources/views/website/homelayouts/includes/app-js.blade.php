@@ -76,7 +76,7 @@
                let city="";
                 for(var i=0; i<= response.results[0].address_components.length; i++)
                 {
-                    let addr=response.results[0].address_components[i];
+                    var addr=response.results[0].address_components[i];
                     console.log(addr);
                     if(addr.types.indexOf('sublocality_level_2')) {
 

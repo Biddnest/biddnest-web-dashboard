@@ -106,7 +106,8 @@ class NotificationController extends Controller
            if(!$user_id)
                return true;
 
-           /*foreach ($user_id as $user)
+//           return $user_id;
+           foreach ($user_id as $user)
            {
                 $save_notification =new Notification;
 
@@ -120,7 +121,7 @@ class NotificationController extends Controller
                 $save_notification->desc=$desc;
                 $save_notification->url=$url;
                 $save_notification->save();
-           }*/
+           }
 
         $players=[];
         foreach($user_id as $user) {

@@ -3,7 +3,7 @@
 @section('header_title') Frequently Asked Questuons @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="faq">
-        <div class="container ">
+        <div class="container" style="white-space: normal !important;">
             <div class="quote responsive br-5 w-70 ontop bg-white">
                 <div class="card-body">
                     <h5 class="card-title light center mt-1 pb-10">HOW CAN WE HELP YOU ?</h5>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="quote responsive br-5 w-70 bg-white ontop p-10 " style="margin-top: 240px;">
+            <div class="quote responsive br-5 w-70 bg-white ontop p-0 " style="margin-top: 240px; margin-bottom: 240px;  ">
                 <div class="container ">
                     @foreach($faqs as $faq)
                         <div class="accor-item d-flex justify-content-between  row card p-3 br-0">
@@ -25,7 +25,7 @@
                             <i class="fa fa-angle-down"></i>
                         </div>
                         <div class="content answer pt-2">
-                            <p>
+                            <p class="pl-2 pr-2" style="white-space: normal !important; text-align:justify">
                                 {{$faq->desc}}
                             </p>
                         </div>
@@ -34,6 +34,8 @@
 
             </div>
         </div>
+        <div class="space"></div>
+
         <script>
             var coll = document.getElementsByClassName("accor-item");
             var i;

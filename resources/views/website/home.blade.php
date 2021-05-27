@@ -33,29 +33,29 @@
                     </div>
                 </div> -->
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location">
+                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: none;">
                         <p>FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments ">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore">
+                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments " style="cursor: none;">
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore" style="cursor: none;">
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location">
+                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: none;">
                         <p>TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai">
+                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas" style="cursor: none;">
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai" style="cursor: none;">
 
                     </div>
                 </div>
                 <i class="bg-white icon arrow dripicons-chevron-right"></i>
                 <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body d-flex justify-content-between h-100">
+                    <div class="card-body d-flex justify-content-between h-100" style="cursor: none;">
                         <div>
                             <p>DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite" type="name" placeholder="16/may/2021" />
+                            <input id="dp1" class="input-overwrite" type="name" placeholder="16/may/2021"  style="cursor: none;"/>
                         </div>
-                        <div class="form-group  mr-1">
+                        <div class="form-group  mr-1" style="cursor: none;">
                             <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
                             </button>
                         </div>
@@ -459,12 +459,12 @@
                                 </div>
                             </div>
                             {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
-                            <button type="button" class="btn btn-theme-bg  full-width text-view-center mt-3 mb-4 padding-btn-res white-bg" style="padding: 6px 139px !important;">
+                            <button type="button" class="btn btn-theme-bg  full-width text-view-center mt-3 mb-4 padding-btn-res white-bg padding-larg" >
                                 Next
                             </button>
                             </a>--}}
                             <a class="weblogin">
-                                <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-3 mb-4 padding-btn-res white-bg" style="padding: 6px 139px !important;">
+                                <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-3 mb-4 padding-btn-res white-bg padding-larg" >
                                     Send OTP
                                 </button>
                             </a>

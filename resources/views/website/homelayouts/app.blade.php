@@ -18,7 +18,7 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li >
+                        <li class="mar-vendor">
                             <a class="bec-vendor mr-2 " href="{{route('join-vendor')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" class="res-nav" />
                                 <span class="nav-menu-link">Become A Vendor</span>

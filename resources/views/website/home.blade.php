@@ -23,16 +23,24 @@
             </div>
 
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="    cursor: auto;">
+                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: none;">
                         <p>FROM</p>
+<<<<<<< HEAD
                         <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments " style="    cursor: auto;">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore" style="    cursor: auto;">
+=======
+                        <input class="input-overwrite text-heading book-address mb-0 source" type="text" placeholder="SMR Apartments " readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" type="text" placeholder="Mahadevapura, Bangalore" readonly>
+                        <input  type="hidden" id="source-lat" name="source_lat" readonly>
+                        <input  type="hidden" id="source-lng" name="source_lng" readonly>
+>>>>>>> 1b0a10ef111145842c7e7afc06c2ae5d4621c829
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="    cursor: auto;">
+                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: none;">
                         <p>TO</p>
+<<<<<<< HEAD
                         <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas" style="    cursor: auto;">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai" style="    cursor: auto;">
 
@@ -47,6 +55,24 @@
                         </div>
                         <div class="form-group  mr-1">
                             <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" style="    cursor: auto;" type="button"><i class="fa fa-calendar "></i>Choose
+=======
+                        <input class="input-overwrite text-heading book-address mb-0 destination" type="text" name="destination" placeholder="Majestic Villas" readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="text" placeholder="Gandhinagar, Chennai" readonly>
+                        <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
+                        <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
+                    </div>
+                </div>
+                <i class="bg-white icon arrow dripicons-chevron-right"></i>
+
+                <div class="card top-header-card col-md-4 col-xs-12">
+                    <div class="card-body d-flex justify-content-between h-100">
+                        <div>
+                            <p>DATE OF MOVEMENT</p>
+                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="16/may/2021" readonly/>
+                        </div>
+                        <div class="form-group  mr-1">
+                            <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
+>>>>>>> 1b0a10ef111145842c7e7afc06c2ae5d4621c829
                             </button>
                         </div>
                     </div>
@@ -54,10 +80,10 @@
             </div>
             <div style="text-align: center;">
                 @if(\Illuminate\Support\Facades\Session::get('account'))
-               {{-- <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
+                <a href="#" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
+                        <button type="submit" class="btn btn-primary view-btn">Book Now</button>
+                </a>
 
-                </a>--}}
-                    <button type="submit" class="btn btn-primary view-btn page-scroll btn btn-xl">Book Now</button>
                 @else
                 <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
                     <button type="button" class="btn btn-primary view-btn">Book Now</button>
@@ -481,12 +507,18 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
                         <div class="form-group">
                             <label>SVM Complex,indiranagar,Benguluru</label>
                             <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete" class="form-control" required>
                             <span class="error-message">Please enter valid</span>
                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#" class="page-scroll btn btn-xl">
+                            <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close" style="padding: 10px !important;">OK</button>
+                        </a>
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
 
@@ -516,7 +548,10 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close">OK</button>
+                        <a href="#" class="page-scroll btn btn-xl">
+                            <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close" style="padding: 10px !important;">OK</button>
+                        </a>
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>

@@ -65,7 +65,7 @@ if (env != "development")
 // getLocationPermission();
 
 /* AJAX Universal */
-$("body").on('submit', "form", function() {
+$("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
@@ -966,4 +966,7 @@ $("body").on('click', ".remove", function(event) {
     window.location.href = url;
     return false;
 });
+
+
+
 

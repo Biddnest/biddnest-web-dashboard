@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="" />
+    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="tabs url bug fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/js/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/js/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/js/app/initFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/js/app/initFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/website/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/website/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/website/homelayouts/includes/app-js.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/website/homelayouts/includes/app-js.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -430,7 +436,49 @@
       <option name="project" value="LOCAL" />
       <updated>1622034212627</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="tabs url bug fixed">
+      <created>1622039138879</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1622039138879</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Payment page fixed">
+      <created>1622043583029</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043583029</updated>
+    </task>
+    <task id="LOCAL-00039" summary="tabs url bug fixed">
+      <created>1622043928268</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043928268</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Contact us page is fixed">
+      <created>1622045061727</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1622045061727</updated>
+    </task>
+    <task id="LOCAL-00041" summary="terms, privacy, about us pages added">
+      <created>1622051501876</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1622051501876</updated>
+    </task>
+    <task id="LOCAL-00042" summary="back button fixed">
+      <created>1622057867623</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1622057867623</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,6 +512,11 @@
     <MESSAGE value="fixed notifications" />
     <MESSAGE value="fixed biding" />
     <MESSAGE value="fixed biding submit display on app" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed biding submit display on app" />
+    <MESSAGE value="Payment page fixed" />
+    <MESSAGE value="tabs url bug fixed" />
+    <MESSAGE value="Contact us page is fixed" />
+    <MESSAGE value="terms, privacy, about us pages added" />
+    <MESSAGE value="back button fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="back button fixed" />
   </component>
 </project>

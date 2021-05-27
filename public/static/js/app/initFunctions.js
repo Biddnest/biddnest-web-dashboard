@@ -33,7 +33,8 @@ export function initMapPicker() {
         // must be undefined to use the default gMaps marker
         markerIcon: undefined,
         markerDraggable: true,
-        markerVisible: true
+        markerVisible: true,
+
     });
 
     $('.dest-map-picker').locationpicker({

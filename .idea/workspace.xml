@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/PushNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/PushNotification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,13 +185,6 @@
       <updated>1621935182809</updated>
       <workItem from="1621935184445" duration="870000" />
       <workItem from="1621936519889" duration="33705000" />
-    </task>
-    <task id="LOCAL-00007" summary="payment status change api fixing">
-      <created>1621957395638</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1621957395638</updated>
     </task>
     <task id="LOCAL-00008" summary="payment status change api fixing">
       <created>1621959209545</created>
@@ -529,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622117079397</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary=" fixed notification in admin">
+      <created>1622117122799</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117122799</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

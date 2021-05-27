@@ -30,7 +30,7 @@ class NotificationController extends Controller
                 $notification->generated_by=NotificationEnums::$GENERATE_BY['admin'];
                 $push_notification = $notification->save();
             }
-            NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+            NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
         else {
             foreach ($user as $single_user)

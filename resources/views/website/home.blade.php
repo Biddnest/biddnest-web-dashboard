@@ -23,15 +23,15 @@
             </div>
 
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location">
+                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: none;">
                         <p>FROM</p>
                         <input class="input-overwrite text-heading book-address mb-0 source" type="text" name="source" placeholder="SMR Apartments ">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" type="text" placeholder="Mahadevapura, Bangalore" readonly>
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location">
+                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: none;">
                         <p>TO</p>
                         <input class="input-overwrite text-heading book-address mb-0 destination" type="text" name="destination" placeholder="Majestic Villas">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="text" placeholder="Gandhinagar, Chennai" readonly>
@@ -481,17 +481,15 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             <label>SVM Complex,indiranagar,Benguluru</label>
                             <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete" class="form-control" required>
                             <span class="error-message">Please enter valid</span>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close">OK</button>
-                    </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
+
                 </div>
             </div>
         </div>

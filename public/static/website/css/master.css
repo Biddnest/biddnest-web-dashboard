@@ -4307,9 +4307,9 @@ html body main .dropdown-item:hover:first-child {
     padding: 8px 16px 6px 16px;
     font-weight: 600;
   }
-  .navbar-default .navbar-nav .bec-vendor:hover {
+  /* .navbar-default .navbar-nav .bec-vendor:hover {
     background-color: #fff;
-  }
+  } */
   .navbar-default .navbar-toggle {
     border-color: #fff;
   }
@@ -11080,7 +11080,7 @@ ul.header-controls li.notifications:hover .dropdown {
   background-color: transparent;
   color: #fff;
 }
-.navbar-default .navbar-nav .navbar-default .navbar-nav .bec-vendor {
+/* .navbar-default .navbar-nav .navbar-default .navbar-nav .bec-vendor {
   background-color: #fff;
   opacity: 0.8;
   color: #2e0789 !important;
@@ -11091,7 +11091,7 @@ ul.header-controls li.notifications:hover .dropdown {
 }
 .navbar-default .navbar-nav .bec-vendor:hover {
   background-color: #fff;
-}
+} */
 .navbar-default .navbar-toggle {
   border-color: #fff;
 }

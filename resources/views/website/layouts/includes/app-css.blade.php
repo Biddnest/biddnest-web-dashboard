@@ -43,10 +43,7 @@
      .answer {
          display: none;
      }
-     a.menu{
-         color: #0f0c75 !important;
-         font-size: 14px !important;
-     }
+   
      .custom-check{
          display: none;
      }
@@ -208,14 +205,32 @@ label {
 
                 }
 
+                .mar-vendor{
+                    margin-left: 10px !important; 
+
+                }
+
 
             
              }
 
 
 
+
+
+
  .card .required-item {
      width: fit-content !important;
 
+ }
+
+ .border-l-radius{
+     border-top-left-radius: 5px !important;
+ }
+
+
+ .space{
+     height: 300px !important;
+     margin-bottom: 100px !important;
  }
 </style>

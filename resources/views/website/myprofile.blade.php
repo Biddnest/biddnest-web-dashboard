@@ -107,7 +107,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="hor-center mb-2"  style=" display: flex !important; justify-content: center  !important; flex-direction: column  !important; align-items: center  !important;">
-                                                            <p class="img-label">Image</p>
+                                                            <p class="img-label pl-0 f-20">Image</p>
                                                             <div class="upload-section p-20 pt-0">
                                                                 <img style="border-radius: 50%; margin-left: 10px; margin-bottom: 10px;" src="@if($user->avatar){{$user->avatar}}@else{{asset('static/website/images/icons/profile-circle.svg')}}@endif" />
                                                                 <div class="ml-1">

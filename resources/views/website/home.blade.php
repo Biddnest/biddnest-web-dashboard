@@ -42,6 +42,7 @@
                     </div>
                 </div>
                 <i class="bg-white icon arrow dripicons-chevron-right"></i>
+
                 <div class="card top-header-card col-md-4 col-xs-12">
                     <div class="card-body d-flex justify-content-between h-100">
                         <div>

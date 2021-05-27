@@ -11414,7 +11414,7 @@ body.fixed .header-fixed {
 }
 .flow__item__circle:after {
   position: absolute;
-  top: 610px;
+  top: 590px;
   text-align: center;
   color: grey;
   text-transform: uppercase;

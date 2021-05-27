@@ -197,7 +197,7 @@
                                     <div class="flow__item-line" data-onboarding-step="3"></div>
                                     @if(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'] == $booking->status)
                                         <div class="flow__item">
-                                            <div class="flow__item__circle bg-purple u-purple-color" data-onboarding-step="" data-onboarding-step-text="Driver Assigned"><img src="{{asset('static/website/images/icons/person1.svg')}}" /></div>
+                                            <div class="flow__item__circle bg-purple u-purple-color" data-onboarding-step="" data-onboarding-step-text="Pending Driver Assigned"><img src="{{asset('static/website/images/icons/person1.svg')}}" /></div>
                                         </div>
                                     @else
                                         <div class="flow__item">

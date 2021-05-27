@@ -485,18 +485,20 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
+                    <div class="row">
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label>SVM Complex,indiranagar,Benguluru</label>
+                            <label>From Location</label>
                             <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete" class="form-control" required>
                             <span class="error-message">Please enter valid</span>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="page-scroll btn btn-xl">
-                            <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close" style="padding: 10px !important;">OK</button>
+                    <div class="col-sm-4" style="margin-top: 24px;">
+                        <a href="#" class="page-scroll btn join-now btn-responsive">
+                            <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
                         </a>
 
+                    </div>
                     </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
 
@@ -518,18 +520,20 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <label>SVM Complex,indiranagar,Benguluru</label>
-                            <input type="text" placeholder="Srm colony,Chennai" id="dest-autocomplete" class="form-control">
-                            <span class="error-message">Please enter valid</span>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label>To Location</label>
+                                <input type="text" placeholder="Srm colony,Chennai" id="dest-autocomplete" class="form-control">
+                                <span class="error-message">Please enter valid</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="page-scroll btn btn-xl">
-                            <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close" style="padding: 10px !important;">OK</button>
-                        </a>
+                        <div class="col-sm-4" style="margin-top: 24px;">
+                            <a href="#" class="btn join-now btn-responsive">
+                                <button type="button" class="btn btn-primary view-btn closed " data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
+                            </a>
 
+                        </div>
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>

@@ -106,21 +106,21 @@ class NotificationController extends Controller
            if(!$user_id)
                return true;
 
-           foreach ($user_id as $user)
-           {
-                $save_notification =new Notification;
+        //    foreach ($user_id as $user)
+        //    {
+        //         $save_notification =new Notification;
 
-                if($type == "user")
-                    $save_notification->user_id=$user;
-                else
-                    $save_notification->vendor_id = $user;
+        //         if($type == "user")
+        //             $save_notification->user_id=$user;
+        //         else
+        //             $save_notification->vendor_id = $user;
 
-                $save_notification->for=$type;
-                $save_notification->title=$title;
-                $save_notification->desc=$desc;
-                $save_notification->url=$url;
-                $save_notification->save();
-           }
+        //         $save_notification->for=$type;
+        //         $save_notification->title=$title;
+        //         $save_notification->desc=$desc;
+        //         $save_notification->url=$url;
+        //         $save_notification->save();
+        //    }
 
         $players=[];
         foreach($user_id as $user) {

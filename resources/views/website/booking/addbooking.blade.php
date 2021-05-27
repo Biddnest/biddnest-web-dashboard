@@ -795,8 +795,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-start mt-1  ">
-                                                                            <span class="input-group-btn mr-1">
+                                                                        <div class="input-group justify-content-between mt-1  ">
+                                                                            <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
@@ -806,7 +806,7 @@
                                                                             </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ml-1 ">
+                                                                            <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
@@ -847,8 +847,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-start mt-1  ">
-                                                                            <span class="input-group-btn mr-1">
+                                                                        <div class="input-group justify-content-between mt-1  ">
+                                                                            <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
@@ -857,7 +857,7 @@
                                                                                 </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ml-1">
+                                                                            <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
@@ -897,8 +897,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-start mt-1 " >
-                                                                            <span class="input-group-btn mr-1 ">
+                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                            <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
@@ -907,7 +907,7 @@
                                                                             </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;" >
-                                                                            <span class="input-group-btn ml-1">
+                                                                            <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
@@ -949,8 +949,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-start mt-1 " >
-                                                                            <span class="input-group-btn mr-1 ">
+                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                            <span class="input-group-btn  ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
@@ -959,7 +959,7 @@
                                                                                 </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ml-1 ">
+                                                                            <span class="input-group-btn  ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
@@ -999,8 +999,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-start mt-1 " >
-                                                                            <span class="input-group-btn mr-1 ">
+                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                            <span class="input-group-btn  ">
                                                                                 <button type="button "
                                                                                         class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                         data-type="minus "
@@ -1010,7 +1010,7 @@
                                                                             </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 " style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ml-1 ">
+                                                                            <span class="input-group-btn ">
                                                                                 <button type="button "
                                                                                         class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                         data-type="plus "
@@ -1049,7 +1049,6 @@
                                             <label for="comments-area " class="comments ">Comments from Customer</label>
                                             <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4"  cols="50"></textarea>
                                         </div>
-                                        <h4 class="pl-0 pb-4 pt-3 comments ml-1">Upload Photos</h4>
                                     </div>
                                     <!-- <div class="row d-flex justify-content-around uploaded-image mb-5 ml-0 mr-0 ml-3">
                                         <div class="col-md-2 pl-0  add-photos">
@@ -1081,22 +1080,32 @@
 
                                     </div> -->
 
-                                    <div class="row d-flex justify-content-around uploaded-image mb-5 ml-0 mr-0">
+
+
+                                    <div> 
+                                    <h4 class="pl-0 pb-4 pt-3 comments ml-1">Upload Photos</h4>
+
+
+                                    <div class="row d-flex uploaded-image mb-5 ml-0 mr-0">
                                         <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
+                                        <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
                                         <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
+                                        <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
                                         <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
+                                        <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
                                         <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
+                                            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
                                         <div class="col-md-2 pl-0  add-photos">
                                             <div class="custom-file" id="customFile">
@@ -1105,12 +1114,14 @@
                                                 <label class="custom-file-label" for="exampleInputFile">
 
                                                 </label>
-                                                <i class="fa fa-plus fa-2x cursor-pointer"></i>
+                                                <i class="fa fa-plus fa-2x cursor-pointer" ></i>
 
                                             </div>
 
                                         </div>
                                     </div>
+                                    </div>
+
                                     <div class=" actionBtn actionBtn-view border-top ">
                                         <a href="{{route('home')}}">
                                             <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
@@ -1136,6 +1147,11 @@
 
 
         <script>
+
+
+
+
+
             function previewImages() {
 
                 var preview = document.querySelector('.upload-image-container');
@@ -1182,6 +1198,8 @@
                 }
                 document.getElementById('inc ').value = currentValue
             }
+
+            
         </script>
 
     </div>

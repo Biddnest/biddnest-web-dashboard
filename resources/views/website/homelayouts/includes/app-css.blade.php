@@ -51,6 +51,11 @@ label {
 
 
 
+ .padding-location{
+    padding: 6px 46px !important;
+ }
+
+
 
  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: red ;

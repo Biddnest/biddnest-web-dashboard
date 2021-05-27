@@ -21,8 +21,10 @@ class NotificationController extends Controller
         $notification =new Notification;
         if($vendor != null)
         {
-            if($vendor[0] == "all")
-                $vendors= Vendor::where(['deleted'=>CommonEnums::$NO])->pluck('id');
+            if($for == 4) {
+                $vendors = Vendor::where(['deleted' => CommonEnums::$NO])->pluck('id');
+                $for="vendor";
+            }
             else
                 $vendors =Vendor::whereIn("organization_id", $vendor)->where(['deleted'=>CommonEnums::$NO])->pluck('id');
 
@@ -41,8 +43,10 @@ class NotificationController extends Controller
             NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
         else {
-            if($user[0] == "all")
-                $users=User::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('id');
+            if($for == 3) {
+                $users = User::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->pluck('id');
+                $for="user";
+            }
             else
                 $users=$user;
 

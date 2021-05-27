@@ -190,7 +190,7 @@ class BidController extends Controller
         NotificationController::sendTo("vendor", $won_vendor_id, "Hurrey ! You Won Bid On This Booking.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
-        ],);
+        ]);
 
         $lost_vendor_id =Bid::where([ "booking_id"=>$book_id, "status"=>BidEnums::$STATUS['lost']])->pluck("vendor_id");
         NotificationController::sendTo("vendor", $lost_vendor_id,"Oops ! You Lost Bid On This Booking.", "Tap to respond.", [

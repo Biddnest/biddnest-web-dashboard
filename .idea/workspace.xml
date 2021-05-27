@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="" />
+    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment=" fixed notification in admin">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -157,9 +160,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/order" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\cp-biddnest-web-dashboard\resources\views\order" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -177,76 +185,6 @@
       <updated>1621935182809</updated>
       <workItem from="1621935184445" duration="870000" />
       <workItem from="1621936519889" duration="33705000" />
-    </task>
-    <task id="LOCAL-00001" summary="fixing the booking enquiry for custome item">
-      <created>1621936690829</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1621936690829</updated>
-    </task>
-    <task id="LOCAL-00002" summary="fixing the booking enquiry for custome item">
-      <created>1621936894182</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1621936894182</updated>
-    </task>
-    <task id="LOCAL-00003" summary="fixing the booking enquiry for custome item">
-      <created>1621938282343</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1621938282343</updated>
-    </task>
-    <task id="LOCAL-00004" summary="fixing the booking enquiry for custome item">
-      <created>1621947710965</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1621947710965</updated>
-    </task>
-    <task id="LOCAL-00005" summary="added call back api and functionality">
-      <created>1621950492343</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1621950492343</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fixing notification of uat point">
-      <created>1621951052173</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1621951052173</updated>
-    </task>
-    <task id="LOCAL-00007" summary="payment status change api fixing">
-      <created>1621957395638</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1621957395638</updated>
-    </task>
-    <task id="LOCAL-00008" summary="payment status change api fixing">
-      <created>1621959209545</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1621959209545</updated>
-    </task>
-    <task id="LOCAL-00009" summary="payment status change api fixing">
-      <created>1621959657969</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1621959657969</updated>
-    </task>
-    <task id="LOCAL-00010" summary="payment status change api fixing">
-      <created>1621959801279</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1621959801279</updated>
     </task>
     <task id="LOCAL-00011" summary="payment status change api fixing">
       <created>1621959975346</created>
@@ -430,7 +368,168 @@
       <option name="project" value="LOCAL" />
       <updated>1622034212627</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="tabs url bug fixed">
+      <created>1622039138879</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1622039138879</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Payment page fixed">
+      <created>1622043583029</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043583029</updated>
+    </task>
+    <task id="LOCAL-00039" summary="tabs url bug fixed">
+      <created>1622043928268</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1622043928268</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Contact us page is fixed">
+      <created>1622045061727</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1622045061727</updated>
+    </task>
+    <task id="LOCAL-00041" summary="terms, privacy, about us pages added">
+      <created>1622051501876</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1622051501876</updated>
+    </task>
+    <task id="LOCAL-00042" summary="back button fixed">
+      <created>1622057867623</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1622057867623</updated>
+    </task>
+    <task id="LOCAL-00043" summary="integrating location">
+      <created>1622103600948</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1622103600949</updated>
+    </task>
+    <task id="LOCAL-00044" summary="integrating location">
+      <created>1622107669630</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1622107669630</updated>
+    </task>
+    <task id="LOCAL-00045" summary="fixing notification">
+      <created>1622109857560</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1622109857560</updated>
+    </task>
+    <task id="LOCAL-00046" summary="fixing notification">
+      <created>1622110366686</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1622110366686</updated>
+    </task>
+    <task id="LOCAL-00047" summary="fixing notification">
+      <created>1622110844405</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1622110844405</updated>
+    </task>
+    <task id="LOCAL-00048" summary="hold page in admin panel added and fixed notification">
+      <created>1622114457031</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1622114457032</updated>
+    </task>
+    <task id="LOCAL-00049" summary="hold page in admin panel added and fixed notification">
+      <created>1622114721363</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1622114721363</updated>
+    </task>
+    <task id="LOCAL-00050" summary=" fixed notification in admin">
+      <created>1622115498753</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1622115498755</updated>
+    </task>
+    <task id="LOCAL-00051" summary=" fixed notification in admin">
+      <created>1622115755950</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1622115755950</updated>
+    </task>
+    <task id="LOCAL-00052" summary=" fixed notification in admin">
+      <created>1622116600247</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1622116600247</updated>
+    </task>
+    <task id="LOCAL-00053" summary=" fixed notification in admin">
+      <created>1622116755996</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1622116755997</updated>
+    </task>
+    <task id="LOCAL-00054" summary=" fixed notification in admin">
+      <created>1622116941710</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1622116941710</updated>
+    </task>
+    <task id="LOCAL-00055" summary=" fixed notification in admin">
+      <created>1622117079397</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117079397</updated>
+    </task>
+    <task id="LOCAL-00056" summary=" fixed notification in admin">
+      <created>1622117122799</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117122799</updated>
+    </task>
+    <task id="LOCAL-00057" summary=" fixed notification in admin">
+      <created>1622117251538</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117251538</updated>
+    </task>
+    <task id="LOCAL-00058" summary=" fixed notification in admin">
+      <created>1622117714827</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117714827</updated>
+    </task>
+    <task id="LOCAL-00059" summary=" fixed notification in admin">
+      <created>1622118798807</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1622118798807</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,6 +563,15 @@
     <MESSAGE value="fixed notifications" />
     <MESSAGE value="fixed biding" />
     <MESSAGE value="fixed biding submit display on app" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed biding submit display on app" />
+    <MESSAGE value="Payment page fixed" />
+    <MESSAGE value="tabs url bug fixed" />
+    <MESSAGE value="Contact us page is fixed" />
+    <MESSAGE value="terms, privacy, about us pages added" />
+    <MESSAGE value="back button fixed" />
+    <MESSAGE value="integrating location" />
+    <MESSAGE value="fixing notification" />
+    <MESSAGE value="hold page in admin panel added and fixed notification" />
+    <MESSAGE value=" fixed notification in admin" />
+    <option name="LAST_COMMIT_MESSAGE" value=" fixed notification in admin" />
   </component>
 </project>

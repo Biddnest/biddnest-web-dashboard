@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Faq;
+use App\Models\Page;
 use App\Models\Service;
 use App\Models\Settings;
 use App\Models\Testimonials;
@@ -40,11 +41,16 @@ class WebsiteController extends Controller
     public function contactUs()
     {
         $booking=[];
-        if(Session::get('account'))
-           $booking=Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->get();
+        $ticket_details=[];
+        if(Session::get('account')) {
+            $booking = Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
+            $ticket_details = Ticket::where("booking_id", $booking->id)->with(['reply' => function ($query) {
+                $query->where("user_id", null)->with('admin')->latest()->limit(1);
+            }])->first();
+        }
 
         $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
-        return view('website.contactus', ['bookings'=>$booking, 'contact_details'=>$contact_details]);
+        return view('website.contactus', ['booking'=>$booking, 'contact_details'=>$contact_details, 'ticket_detail'=>$ticket_details]);
     }
 
     /*public function completeContactUs()
@@ -63,9 +69,10 @@ class WebsiteController extends Controller
         return view('website.faq', ['faqs'=>$faqs]);
     }
 
-    public function termsAndCondition()
+    public function termPage(Request $request)
     {
-        return view('website.termsandcondition');
+        $page=Page::where("slug", $request->slug)->first();
+        return view('website.page', ['page'=>$page]);
     }
 
     public function addBooking()
@@ -73,6 +80,7 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('website.booking.addbooking', ['categories'=>$categories]);
     }
+
     public function estimateBooking(Request $request)
     {
         $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
@@ -106,17 +114,11 @@ class WebsiteController extends Controller
 
     public function payment(Request $request)
     {
+        $user = User::where("id", Session::get('account')['id'])->first();
         $payment_summary=BookingsController::getPaymentDetails($request->id, 0.00, true);
         $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
+        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id, "user"=>$user]);
     }
-
-    /*public function verifiedPayment(Request $request)
-    {
-        $coupon_veridied=BookingsController::getPaymentDetails($request->id, 0.00, true);
-        $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return view('website.booking.payment', ['payment_summary'=>$coupon_veridied, 'coupons'=>$coupons, "public_booking_id"=>$request->id]);
-    }*/
 
     public function orderDetails(Request $request)
     {

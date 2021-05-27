@@ -36,9 +36,117 @@
 
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
 <script src="{{ asset('static/website/js/intlTelInput.js')}}"></script>
-<script src="{{ asset('static/website/js/maps.js')}}"></script>
+{{--<script src="{{ asset('static/website/js/maps.js')}}"></script>--}}
 <script src="{{ asset('static/website/js/curosel.js')}}"></script>
 <script src="{{ asset('static/website/js/helperfunction.js')}}"></script>
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
+<script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
+<script>
+    $('.source-map-picker').locationpicker({
+        location: {
+            latitude: 12.930621,
+            longitude: 80.111410
+        },
+        locationName: "",
+        radius: 500,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [],
+        mapOptions: {},
+        scrollwheel: true,
+        inputBinding: {
+            latitudeInput: $("#source-lat"),
+            longitudeInput: $("#source-lng"),
+            radiusInput: null,
+            locationNameInput: $("#source-autocomplete")
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
+            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
+           $.get(url, function (response){
+                // console.log(response);
+               let street="";
+               let city="";
+                for(let i=0; i<= response.results[0].address_components.length; i++)
+                {
+                    let addr=response.results[0].address_components[i];
+                    console.log(addr);
+                    if(addr.types.indexOf('sublocality_level_2')) {
+
+                        // $(".source").val(addr.long_name);
+                        // break;
+                        street +=addr.long_name+", ";
+                    }
+                    if(addr.types.indexOf('locality')) {
+
+                        // $(".source_city").val(addr2.long_name);
+                        // break;
+                        city +=addr.long_name;
+                    }
+                }
+               $(".source").val(street);
+               $(".source_city").val(city);
+                /*for(var j=0; j<= response.results[0].address_components.length; j++)
+                {
+                    let addr2=response.results[0].address_components[j];
+                    if(addr2.types.indexOf('locality')) {
+                        console.log(addr2);
+                        $(".source_city").val(addr2.long_name);
+                        break;
+                    }
+                }*/
+                /*response.results[0].address_components.every(function (addr){
+                    // console.log(addr.types);
+
+                });*/
+           });
+        },
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function(component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible: true,
+
+    });
+
+    $('.dest-map-picker').locationpicker({
+        location: {
+            latitude: 12.930621,
+            longitude: 80.111410
+        },
+        locationName: "",
+        radius: 500,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [],
+        mapOptions: {},
+        scrollwheel: true,
+        inputBinding: {
+            latitudeInput: $("#dest-lat"),
+            longitudeInput: $("#dest-lng"),
+            radiusInput: null,
+            locationNameInput: $("#dest-autocomplete")
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function(currentLocation, radius, isMarkerDropped) {},
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function(component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible: true
+    });
+</script>

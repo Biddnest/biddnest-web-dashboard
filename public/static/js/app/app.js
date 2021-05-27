@@ -65,7 +65,7 @@ if (env != "development")
 // getLocationPermission();
 
 /* AJAX Universal */
-$("body").on('submit', "form", function() {
+$("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
@@ -640,6 +640,16 @@ $("body").on('click', ".next1", function(event) {
     $(".steps-step-1").removeClass("color-purple");
 });
 
+$("body").on('click', ".back2", function(event) {
+    console.log("step2");
+    $('.step-1').css('display', 'block');
+    $('.step-2').css('display', 'none');
+    $(".completed-step-1").addClass("turntheme");
+    $(".completed-step-2").removeClass("turntheme");
+    $(".steps-step-1").addClass("color-purple");
+    $(".steps-step-2").removeClass("color-purple");
+});
+
 $("body").on('click', ".next2", function(event) {
     $('.step-2').css('display', 'none');
     $('.step-3').css('display', 'block');
@@ -647,6 +657,15 @@ $("body").on('click', ".next2", function(event) {
     $(".completed-step-2").removeClass("turntheme");
     $(".steps-step-3").addClass("color-purple");
     $(".steps-step-2").removeClass("color-purple");
+});
+
+$("body").on('click', ".back3", function(event) {
+    $('.step-2').css('display', 'block');
+    $('.step-3').css('display', 'none');
+    $(".completed-step-2").addClass("turntheme");
+    $(".completed-step-3").removeClass("turntheme");
+    $(".steps-step-2").addClass("color-purple");
+    $(".steps-step-3").removeClass("color-purple");
 });
 
 $("body").on('click', ".next3", function(event) {
@@ -658,7 +677,16 @@ $("body").on('click', ".next3", function(event) {
     $(".steps-step-3").removeClass("color-purple");
 });
 
-$("body").on('click', ".next4", function(event) {
+$("body").on('click', ".back4", function(event) {
+    $('.step-3').css('display', 'block');
+    $('.step-4').css('display', 'none');
+    $(".completed-step-3").addClass("turntheme");
+    $(".completed-step-4").removeClass("turntheme");
+    $(".steps-step-3").addClass("color-purple");
+    $(".steps-step-4").removeClass("color-purple");
+});
+
+/*$("body").on('click', ".next4", function(event) {
     $('.step-4').css('display', 'none');
     $('.step-5').css('display', 'block');
     $(".completed-step-5").addClass("turntheme");
@@ -674,6 +702,12 @@ $("body").on('click', ".next5", function(event) {
     $(".completed-step-5").removeClass("turntheme");
     $(".steps-step-6").addClass("color-purple");
     $(".steps-step-5").removeClass("color-purple");
+});*/
+
+$('.bookdate').datepicker({
+    multidate: true,
+    format: 'yyyy-mm-dd',
+    'startDate': '+1d',
 });
 
 $("body").on('change', ".switch", function(event) {
@@ -769,8 +803,9 @@ $("body").on('click', ".reshcedule", function(event) {
         $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
-                // tinySuccessAlert("Ticket Raised Successfully", response.message);
-                window.location.href = href;
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                // window.location.href = href;
+                redirectTo(href);
             }
             else
             {
@@ -788,8 +823,9 @@ $("body").on('click', ".reject-booking", function(event) {
         $.add($(this).data("url"), {public_booking_id}, function (response){
             if(response.status == "success")
             {
-                // tinySuccessAlert("Ticket Raised Successfully", response.message);
-                window.location.href = href;
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                // window.location.href = href;
+                redirectTo(href);
             }
             else
             {
@@ -825,6 +861,9 @@ $("body").on('click', ".payment", function(event) {
         var url = $(this).data("url");
         var url_payment = $(this).data("payment");
         var url_status = $(this).data("status");
+        var name = $(this).data("user-name");
+        var email = $(this).data("user-email");
+        var contact = $(this).data("user-contact");
 
 
 
@@ -838,7 +877,7 @@ $("body").on('click', ".payment", function(event) {
         success: function (response) {
             // options.order_id=response.data.payment.rzp_order_id;
             var options = {
-                "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
+                "key": RZP_KEY, // secret key id
                 "order_id":response.data.payment.rzp_order_id,
                 "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",
@@ -856,15 +895,16 @@ $("body").on('click', ".payment", function(event) {
                             booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                         },
                         success: function (msg) {
-                            redirectTo(url);
+                            // redirectTo(url);
+                            window.location.href = url;
                         }
                     });
                 },
                 "prefill": {
                     "method": method,
-                    "name": "test",
-                    "email": "test@gmail.com",
-                    "contact": "7788556655"
+                    "name": name,
+                    "email": email,
+                    "contact": contact
                 },
 
                 "theme": {
@@ -908,6 +948,9 @@ $("body").on('click', ".verify-coupon", function(event) {
             $('.discount').html(response.data.discount);
             $('.grand-total').html(response.data.grand_total);
             $('.payment').attr("data-amount",response.data.grand_total);
+            $(".verify-coupon").addClass("remove");
+            $(".verify-coupon").text("Remove");
+            $(".verify-coupon").removeClass("verify-coupon");
         }
         else
         {
@@ -917,4 +960,13 @@ $("body").on('click', ".verify-coupon", function(event) {
     });
     return false;
 });
+
+$("body").on('click', ".remove", function(event) {
+    var url = $(this).data("remove-url");
+    window.location.href = url;
+    return false;
+});
+
+
+
 

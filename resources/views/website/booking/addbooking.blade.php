@@ -393,7 +393,7 @@
                                                     <div class="form-group ">
                                                         <label class="start-date ">Start date</label>
                                                         <div id="my-modal ">
-                                                            <input type="text" id="dateselect date" class="dateselect form-control br-5 " placeholder="15 Jan" name="movement_dates" required/>
+                                                            <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" name="movement_dates" required/>
                                                             <span class="error-message ">please enter valid  date</span>
                                                         </div>
                                                     </div>
@@ -423,7 +423,7 @@
                                             <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right mr-4 next2" id="next2">
                                                 Next
                                             </button>
-                                            <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 ">Back
+                                            <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back2">Back
                                             </button>
                                         </div>
                                     </div>
@@ -435,17 +435,17 @@
                                     <div class="col-md-12 ">
                                         <p class="text-muted ">Step 3/ 6</p>
                                         <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;" >Lets get your requirements</h4>
-                                    </div>                                    
+                                    </div>
                                     <div class="row d-flex justify-content-center">
-                                        
+
                                         <div class="col-md-2 col-lg-2 col-sm-4">
-                                            
+
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important" >
                                                 <div class="panel-heading">
-                                                    <h3>                                                    
+                                                    <h3>
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
@@ -455,16 +455,16 @@
                                                 </div>
 
                                             </label>
-                                            
+
                                         </div>
                                         <div class="col-md-2 col-lg-2 col-sm-4">
-                                            
+
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
                                                 <div class="panel-heading">
-                                                    <h3>                                                    
+                                                    <h3>
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
@@ -474,16 +474,16 @@
                                                 </div>
 
                                             </label>
-                                            
+
                                         </div>
                                         <div class="col-md-2 col-lg-2 col-sm-4">
-                                            
+
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
                                                 <div class="panel-heading">
-                                                    <h3>                                                    
+                                                    <h3>
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
@@ -493,11 +493,11 @@
                                                 </div>
 
                                             </label>
-                                            
+
                                         </div>
-                                       
+
                                     </div>
-                                                                    
+
                                     <!-- <div class="row d-flex justify-content-center">
                                         <div class="col-md-2 view-content ">
                                             <div class="room-req-count mb-1 text-center h-100 px-3 disabled ">
@@ -544,7 +544,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="row mb-4 mt-3">
+                                    <div class="row gutter=[3] mb-4 mt-3">
                                         <div class="col-md-4 view-content ">
                                             <div class="card required-item " style="width: fit-content;">
                                                 <div class="container-image-item ">
@@ -651,7 +651,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 mt-4 mt-20 view-content ">
+                                        <div class="col-md-4 mt-4 mt-20 view-content  ">
                                             <div class="card required-item ml-10 " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
@@ -721,9 +721,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-4 mt-20 view-content ">
-                                            <div>
-                                                <i class="icon-2 mr-1 dripicons-plus add-item-icon " data-toggle="modal" data-target="#addItemModal"></i>
+                                        <div class=" mt-20 view-content border-add" >
+                                            <div class="">
+                                                <i class="icon-2 mr-1 dripicons-plus add-item-icon  " data-toggle="modal" data-target="#addItemModal"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -736,7 +736,7 @@
                                         <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next3" id="next3">
                                             Next
                                         </button>
-                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 ">Back
+                                        <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back3">Back
                                         </button>
                                     </div>
                                     <!--Add Item Modal-->
@@ -754,7 +754,7 @@
                                                         <form class="requirements-modal ">
                                                             <div class="input-group mt-3 mb-3 search-bar-with-category ">
                                                                 <input type="search " class="form-control " placeholder="Search for item.. ">
-                                                                <div class="input-group-append ">
+                                                                <!-- <div class="input-group-append ">
                                                                     <select class="select-item-choice select-category-btn ">
                                                                         <option value=" " disabled selected>-Select
                                                                             Category-
@@ -763,7 +763,7 @@
                                                                         <option value="2 ">Option 2</option>
                                                                         <option value="3 ">Option 3</option>
                                                                     </select>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </form>
                                                         <div class="row modal-item-container pb-4 pt-4 ">
@@ -775,7 +775,7 @@
                                                                     <div class="col-md-6 modal-second-inner-column ">
                                                                         <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Steel
                                                                                 </option>
@@ -784,8 +784,8 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                        <div class="choose-your-material pt-3">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
                                                                                 </option>
@@ -795,20 +795,20 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
+                                                                        <div class="input-group justify-content-between mt-1  ">
                                                                             <span class="input-group-btn ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="minus-icon "><i
                                                                                             class="fa fa-minus "></i></span>
                                                                             </button>
                                                                             </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
                                                                             <span class="input-group-btn ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="plus-icon "><i
@@ -827,7 +827,7 @@
                                                                     <div class="col-md-6 modal-second-inner-column ">
                                                                         <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Steel
                                                                                 </option>
@@ -836,8 +836,8 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                        <div class="choose-your-material pt-3">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
                                                                                 </option>
@@ -847,19 +847,19 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
+                                                                        <div class="input-group justify-content-between mt-1  ">
                                                                             <span class="input-group-btn ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                                 </button>
                                                                             </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
                                                                             <span class="input-group-btn ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="plus-icon "><i class="fa fa-plus "></i></span>
@@ -877,7 +877,7 @@
                                                                     <div class="col-md-6 modal-second-inner-column ">
                                                                         <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Steel
                                                                                 </option>
@@ -886,8 +886,8 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                        <div class="choose-your-material pt-3">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
                                                                                 </option>
@@ -897,19 +897,19 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
+                                                                        <div class="input-group justify-content-between mt-1 " >
                                                                             <span class="input-group-btn ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                             </button>
                                                                             </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;" >
                                                                             <span class="input-group-btn ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="plus-icon "><i class="fa fa-plus "></i></span>
@@ -929,7 +929,7 @@
                                                                     <div class="col-md-6 modal-second-inner-column ">
                                                                         <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Steel
                                                                                 </option>
@@ -938,8 +938,8 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                        <div class="choose-your-material pt-3 ">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
                                                                                 </option>
@@ -949,19 +949,19 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                            <span class="input-group-btn  ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="minus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                                 </button>
                                                                             </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
-                                                                            <span class="input-group-btn ">
+                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
+                                                                            <span class="input-group-btn  ">
                                                                                 <button
-                                                                                    class="btn btn-default btn-number input-number "
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                     data-type="plus "
                                                                                     data-field="quant[1] ">
                                                                                     <span class="plus-icon "><i class="fa fa-plus "></i></span>
@@ -979,7 +979,7 @@
                                                                     <div class="col-md-6 modal-second-inner-column ">
                                                                         <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Steel
                                                                                 </option>
@@ -988,8 +988,8 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px;">
+                                                                        <div class="choose-your-material pt-3">
+                                                                            <select class="select-material " style="padding: 8px; width:110px">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
                                                                                 </option>
@@ -999,22 +999,22 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                            <span class="input-group-btn  ">
                                                                                 <button type="button "
-                                                                                        class="btn btn-default btn-number input-number "
+                                                                                        class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                         data-type="minus "
                                                                                         data-field="quant[1] ">
                                                                                     <span class="minus-icon "><i
                                                                                             class="fa fa-minus "></i></span>
                                                                             </button>
                                                                             </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
+                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 " style="padding: 11px 6px!important;">
                                                                             <span class="input-group-btn ">
                                                                                 <button type="button "
-                                                                                        class="btn btn-default btn-number input-number "
+                                                                                        class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
                                                                                         data-type="plus "
-                                                                                        data-field="quant[1] ">
+                                                                                        data-field="quant[1] " >
                                                                                     <span class="plus-icon "><i
                                                                                             class="fa fa-plus "></i></span>
                                                                             </button>
@@ -1049,9 +1049,8 @@
                                             <label for="comments-area " class="comments ">Comments from Customer</label>
                                             <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4"  cols="50"></textarea>
                                         </div>
-                                        <h4 class="pl-0 pb-4 pt-3 comments ml-1">Upload Photos</h4>
                                     </div>
-                                    <div class="row d-flex justify-content-around uploaded-image mb-5 ml-0 mr-0 ml-3">
+                                    <!-- <div class="row d-flex justify-content-around uploaded-image mb-5 ml-0 mr-0 ml-3">
                                         <div class="col-md-2 pl-0  add-photos">
                                             <div class="custom-file" id="customFile">
                                                 <input type="file" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
@@ -1063,12 +1062,8 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-md-10 pl-0 view-content upload-image-container">
+                                        <div class="col-md-10 pl-3 view-content upload-image-container">
 
-                                        </div>
-                                        {{--<div class="col-md-2 pl-0 view-content upload-image-container">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x"></i>
                                         </div>
                                         <div class="col-md-2 pl-0 view-content upload-image-container">
                                             <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
@@ -1077,9 +1072,56 @@
                                         <div class="col-md-2 pl-0 view-content upload-image-container">
                                             <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
                                             <i class="fa fa-close fa-2x"></i>
-                                        </div>--}}
+                                        </div>
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                            <i class="fa fa-close fa-2x"></i>
+                                        </div>
 
+                                    </div> -->
+
+
+
+                                    <div> 
+                                    <h4 class="pl-0 pb-4 pt-3 comments ml-1">Upload Photos</h4>
+
+
+                                    <div class="row d-flex uploaded-image mb-5 ml-0 mr-0">
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
+                                        <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                        <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
+                                        </div>
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
+                                        <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                        <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
+                                        </div>
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
+                                        <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                        <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
+                                        </div>
+                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <input type="hidden" id="custId" name="custId" value="3487">
+                                        <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
+                                            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
+                                        </div>
+                                        <div class="col-md-2 pl-0  add-photos">
+                                            <div class="custom-file" id="customFile">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
+
+                                                <label class="custom-file-label" for="exampleInputFile">
+
+                                                </label>
+                                                <i class="fa fa-plus fa-2x cursor-pointer" ></i>
+
+                                            </div>
+
+                                        </div>
                                     </div>
+                                    </div>
+
                                     <div class=" actionBtn actionBtn-view border-top ">
                                         <a href="{{route('home')}}">
                                             <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
@@ -1089,7 +1131,7 @@
                                         <button  class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4" id="next4">
                                             Next
                                             </button>
-                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3" type="button">Back
+                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back4" type="button">Back
                                         </button>
                                     </div>
                                 </div>
@@ -1105,6 +1147,11 @@
 
 
         <script>
+
+
+
+
+
             function previewImages() {
 
                 var preview = document.querySelector('.upload-image-container');
@@ -1125,6 +1172,8 @@
                     reader.addEventListener("load", function() {
                         var image = new Image();
                         image.height = 100;
+                        image.marginleft = '10px';
+                        image.paddingleft = '10px';
                         image.title  = file.name;
                         image.src    = this.result;
                         preview.appendChild(image);
@@ -1149,6 +1198,8 @@
                 }
                 document.getElementById('inc ').value = currentValue
             }
+
+            
         </script>
 
     </div>

@@ -43,10 +43,7 @@
      .answer {
          display: none;
      }
-     a.menu{
-         color: #0f0c75 !important;
-         font-size: 14px !important;
-     }
+   
      .custom-check{
          display: none;
      }
@@ -89,7 +86,7 @@ label {
 }
 
 .card-input-element:checked + .card-input {
-     box-shadow: 0 0 1px 1px #2ecc71;
+     box-shadow: 0 0 1px 1px #fdc403;
      background: #2c136c !important;
  }
 
@@ -106,10 +103,153 @@ label {
 
 
 
+ .drop-list:hover{
+    background: #e6e9eb;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 
+
+}
+
+
+
+.border-add{
+    border: 4px solid #fdc403;
+    width: 197px;
+    margin-left: 16px;
+    margin-top: 16px;
+    border-radius: 5px;
+}
+
+
+.add-item-icon{
+    bottom: 216px !important;
+    right: 104px !important;
+}
+
+.dropdown-content{
+    top: 31px !important;
+
+}
+
+ .hor-center{
+    display: flex !important ;
+    justify-content: center  !important;
+    flex-direction: column  !important;
+    align-items: center  !important;
+ }
+
+
+ .img-location{
+    transform: translate(2px, -9px) !important ;
+
+ }
+
+
+ p.f-16{
+     font-size: 16px !important;
+ }
+
+
+ .quote p{
+    white-space: nowrap !important;
+
+ }
+
+ .para-head {
+    white-space: normal !important;
+
+ }
+
+
+ .para{
+    white-space: normal !important;
+
+ }
+
+
+ .close .text-white  {
+    outline: none !important;
+    border: none !important;
+
+ }
+
+
+ button:focus { outline: none; }
+
+
+
+ @media (max-width:480px)  { 
+               .col-mobile{
+                    flex-direction: column !important;
+
+                }
+                .padding-view{
+                    padding-left: 0 !important;
+
+                }
+
+                .top-aliments{
+                    width: 100%  !important;
+    display: flex  !important;
+    justify-content: center  !important;
+    flex-wrap: wrap  !important;
+
+                }
+                .bg-blur {
+                    width: fit-content !important;
+                }
+
+                .f-30{
+                    margin-left: 0  !important;
+                }
+
+                .m-20{
+                    margin: 0 !important;
+                } 
+                .details-card{
+                    width: auto!important;
+                } 
+            
+                .w-84{
+                    width: 84% !important;
+                }
+
+                .custom-file{
+                    height: calc(3.25rem + 8px);
+
+                }
+
+                .mar-vendor{
+                    margin-left: 10px !important; 
+
+                }
+
+
+            
+             }
+
+
+
+
+             img.req-search-image{
+                height: fit-content !important;
+                max-width:100%
+
+             }
 
  .card .required-item {
      width: fit-content !important;
 
+ }
+
+ .border-l-radius{
+     border-top-left-radius: 5px !important;
+ }
+
+
+ .space{
+     height: 300px !important;
+     margin-bottom: 100px !important;
  }
 </style>

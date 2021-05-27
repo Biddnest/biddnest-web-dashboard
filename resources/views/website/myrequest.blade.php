@@ -9,16 +9,16 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="quotation" data-toggle="tab" href="{{route('my-bookings')}}">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="booking-history" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab active p-15" id="request-tab" data-toggle="tab" href="#request" role="tab" aria-controls="profile" aria-selected="false">My Requests</a>
@@ -84,7 +84,7 @@
                                                 @endswitch
                                             </div>
                                             <h6 class="para-head pl-2">{{ucwords($ticket->heading)}}</h6>
-                                            <p class="para">
+                                            <p class="para" style="white-space: normal !important;">
                                                 {{$ticket->desc}}
                                               {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}
 

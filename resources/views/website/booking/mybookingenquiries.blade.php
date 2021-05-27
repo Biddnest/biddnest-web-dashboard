@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="quotation" data-toggle="tab" href="{{route('my-bookings')}}">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="booking-history" data-toggle="tab" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="request-tab" data-toggle="tab" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -33,33 +33,33 @@
                                 <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
                                     <div class="card view-left-text">
                                         <div class="card-body bg-card-book">
-                                            <div class="d-flex pt-4 pb-2 justify-content-around">
-                                                <div class="d-flex ">
-                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                            <div class="d-flex pt-4 pb-2 justify-content-between" style="margin-right: 14px !important;">
+                                                <div class="d-flex">
+                                                    <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">From</p>
-                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                                        <p class=" f-16 pl-1">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                                    <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">To</p>
-                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                                        <p class=" f-16 pl-1">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">Distance</p>
-                                                        <p class=" f-18 pl-2">{{json_decode($booking->meta, true)['distance']}} Km</p>
+                                                        <p class=" f-16 pl-1">{{json_decode($booking->meta, true)['distance']}} Km</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
+                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
                                                 <div>
-                                                    <p class="bold mt-1 pl-4">
+                                                    <p class="bold mt-1 pl-4 padding-view">
                                                         #{{$booking->public_booking_id}} <span class="light">| {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                     </p>
                                                 </div>

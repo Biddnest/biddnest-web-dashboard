@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="home" aria-selected="true">My Profile</a>
+                                <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="home" aria-selected="true">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15"   href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="quotation" data-toggle="tab" href="{{route('my-bookings')}}">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15"   href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="booking-history" data-toggle="tab" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15"   href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="request-tab" data-toggle="tab" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15"  href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -103,11 +103,11 @@
                                             </button>
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-7">
-                                            <form action="{{route('profile_edit')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('website.my-profile')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate >
+                                            <form action="{{route('profile_edit')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('website.my-profile')}}" data-alert="mega" class="form-new-order  input-text-blue" data-parsley-validate >
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="">
-                                                            <p class="img-label">Image</p>
+                                                        <div class="hor-center mb-2"  style=" display: flex !important; justify-content: center  !important; flex-direction: column  !important; align-items: center  !important;">
+                                                            <p class="img-label pl-0 f-20">Image</p>
                                                             <div class="upload-section p-20 pt-0">
                                                                 <img style="border-radius: 50%; margin-left: 10px; margin-bottom: 10px;" src="@if($user->avatar){{$user->avatar}}@else{{asset('static/website/images/icons/profile-circle.svg')}}@endif" />
                                                                 <div class="ml-1">

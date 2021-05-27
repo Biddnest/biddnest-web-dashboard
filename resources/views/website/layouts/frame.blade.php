@@ -71,20 +71,20 @@
                         @if(\Illuminate\Support\Facades\Session::get('account'))
                             <div class="dropdown-content">
                             <ul class="d-content">
-                                <li>
-                                    <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
+                                <li class="drop-list" style="padding: 5px 10px;">
+                                    <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /><span class="ml-1">My Profile</span></a>
                                 </li>
-                                <li>
-                                    <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
+                                <li class="drop-list" style="padding: 5px 10px;">
+                                    <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
                                 </li>
-                                <li>
-                                    <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
+                                <li class="drop-list" style="padding: 5px 10px;">
+                                    <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
                                 </li>
-                                <li>
-                                    <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
+                                <li class="drop-list" style="padding: 5px 10px;">
+                                    <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /><span class="ml-1">My Request </span></a>
                                 </li>
-                                <li>
-                                    <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
+                                <li class="drop-list" style="padding: 5px 10px;">
+                                    <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
                                 </li>
                             </ul>
                         </div>

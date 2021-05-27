@@ -18,5 +18,6 @@ class NotificationEnums
         "link"=>2,
     ];
 
+    public static $GENERATE_BY=["system"=>0, "admin"=>1];
 
 }

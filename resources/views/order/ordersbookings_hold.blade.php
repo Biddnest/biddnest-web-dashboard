@@ -15,7 +15,7 @@
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('orders-booking-past')}}">Bookings & Orders</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('orders-booking-hold')}}">Bookings & Orders</a></li>
                     <li class="breadcrumb-item">Manage Bookings</li>
                 </ol>
             </nav>
@@ -36,10 +36,10 @@
                                     <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking')}}" aria-controls="home" aria-selected="true">Confirmed Orders</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Past Orders</a>
+                                    <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-hold')}}" aria-controls="home" aria-selected="true">On Hold</a>
+                                    <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">On Hold</a>
                                 </li>
                             </ul>
                         </h3>
@@ -59,12 +59,12 @@
                         <table class="table text-center p-0   theme-text  ">
                             <thead class="secondg-bg  p-0 f-14">
                             <tr>
-                                <th scope="col">Order ID</th>
+                                <th scope="col">Enquiry ID</th>
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <!-- <th scope="col">Service Type</th> -->
                                 <th scope="col" style="width: 22%; ">Order Date</th>
-                                <th scope="col" style="width: 23%; ">Assigned Vendor</th>
+{{--                                <th scope="col" style="width: 23%; ">Assigned Vendor</th>--}}
                                 <th scope="col" style="text-align: center !important;">Order Status</th>
                                 <th scope="col">Operations</th>
                             </tr>
@@ -72,7 +72,7 @@
                             <tbody class="mtop-20  f-13">
                             @foreach($bookings as $booking)
                                 <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
-                                    <td scope="row">{{$booking->public_booking_id}}</td>
+                                    <td scope="row">{{$booking->public_enquiry_id}}</td>
                                     <td>{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
                                     <!-- <td>
@@ -90,13 +90,13 @@
                                         @endswitch
                                     </td> -->
                                     <td>{{$booking->created_at->format('d M Y')}}</td>
-                                    <td>
+                                    {{--<td>
                                         @if($booking->organization_id)
                                             {{$booking->organization->org_name}} {{$booking->organization->org_type}}
                                         @else
                                             Not Assigned
                                         @endif
-                                    </td>
+                                    </td>--}}
                                     <td class="">
 
                                         @switch($booking->status)
@@ -135,6 +135,10 @@
                                             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                             <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
                                             @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                            <span class="status-badge red-bg  text-center td-padding">Hold</span>
+                                            @break
                                         @endswitch
                                     </td>
 
@@ -149,7 +153,7 @@
                         @if(count($bookings)== 0)
                             <div class="row hide-on-data">
                                 <div class="col-md-12 text-center p-20">
-                                    <p class="font14"><i>. You don't have any Past Orders here.</i></p>
+                                    <p class="font14"><i>. No Orders Are On Hold.</i></p>
                                 </div>
                             </div>
                         @endif

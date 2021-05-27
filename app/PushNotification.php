@@ -45,7 +45,7 @@ class PushNotification
                 'contents' => [
                     'en' => $title
                 ],
-                'headings' => [
+                'heading' => [
                     'en' => $title
                 ],
                 'subtitle' => [

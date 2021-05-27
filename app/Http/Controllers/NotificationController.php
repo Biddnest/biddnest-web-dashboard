@@ -27,6 +27,7 @@ class NotificationController extends Controller
                 $notification->for=$for;
                 $notification->desc=$desc;
                 $notification->vendor_id=$org_vendor;
+                $notification->generated_by=NotificationEnums::$GENERATE_BY['admin'];
                 $push_notification = $notification->save();
             }
             NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
@@ -120,6 +121,7 @@ class NotificationController extends Controller
                 $save_notification->title=$title;
                 $save_notification->desc=$desc;
                 $save_notification->url=$url;
+                $save_notification->generated_by=NotificationEnums::$GENERATE_BY['system'];
                 $save_notification->save();
            }
 

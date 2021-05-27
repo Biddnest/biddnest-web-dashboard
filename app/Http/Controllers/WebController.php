@@ -6,6 +6,7 @@ use App\Enums\AdminEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
+use App\Enums\NotificationEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
@@ -852,7 +853,7 @@ class WebController extends Controller
 
     public function pushNotification()
     {
-        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
+        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'generated_by'=>NotificationEnums::$GENERATE_BY['admin']])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
         return view('sliderandbanner.pushnotification', ['notifications'=>$notification]);
     }
 

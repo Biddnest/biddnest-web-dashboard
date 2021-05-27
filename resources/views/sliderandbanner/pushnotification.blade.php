@@ -50,8 +50,8 @@
                         <table class="table text-left p-0 theme-text mb-0 primary-table margin-topneg-35">
                             <thead class="secondg-bg text-left p-0">
                                 <tr>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Vendor Name</th>
+                                    <th scope="col">Sent TO Name</th>
+{{--                                    <th scope="col">Vendor Name</th>--}}
                                     <th scope="col">Title</th>
                                     <th scope="col">Desc</th>
 {{--                                    <th scope="col">Operations</th>--}}
@@ -60,8 +60,8 @@
                             <tbody class="mtop-20 f-13">
                             @foreach($notifications as $notification)
                                 <tr class="tb-border ">
-                                    <td>@if($notification->user){{$notification->user->fname}} {{$notification->user->lname}}@endif</td>
-                                    <td>@if($notification->vendor){{$notification->vendor->fname}} {{$notification->vendor->lname}}@endif</td>
+                                    <td>@if($notification->user){{$notification->user->fname}} {{$notification->user->lname}}@elseif($notification->vendor){{$notification->vendor->fname}} {{$notification->vendor->lname}}@endif</td>
+{{--                                    <td>@if($notification->vendor){{$notification->vendor->fname}} {{$notification->vendor->lname}}@endif</td>--}}
                                     <td>{{$notification->title}}</td>
                                     <td>{{$notification->desc}}</td>
                                     {{--<td> <a href="edit-notification.html">

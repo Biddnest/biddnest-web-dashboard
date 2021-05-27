@@ -26,30 +26,19 @@
                 <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
                     <div class="card-body" data-toggle="modal" data-target="#from_location" style="    cursor: auto;">
                         <p>FROM</p>
-<<<<<<< HEAD
                         <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments " style="    cursor: auto;">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore" style="    cursor: auto;">
-=======
-                        <input class="input-overwrite text-heading book-address mb-0 source" type="text" name="source" placeholder="SMR Apartments ">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" type="text" placeholder="Mahadevapura, Bangalore" readonly>
->>>>>>> fff24763ad1522e519d1b972f1c6cf12646f1b72
                     </div>
                 </div>
                 <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
                     <div class="card-body" data-toggle="modal" data-target="#to_location" style="    cursor: auto;">
                         <p>TO</p>
-<<<<<<< HEAD
                         <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas" style="    cursor: auto;">
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai" style="    cursor: auto;">
-=======
-                        <input class="input-overwrite text-heading book-address mb-0 destination" type="text" name="destination" placeholder="Majestic Villas">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="text" placeholder="Gandhinagar, Chennai" readonly>
->>>>>>> fff24763ad1522e519d1b972f1c6cf12646f1b72
 
                     </div>
                 </div>
                 <i class="bg-white icon arrow dripicons-chevron-right"></i>
-<<<<<<< HEAD
                 <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
                     <div class="card-body d-flex justify-content-between h-100" style="    cursor: auto;">
                         <div>
@@ -58,16 +47,6 @@
                         </div>
                         <div class="form-group  mr-1">
                             <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" style="    cursor: auto;" type="button"><i class="fa fa-calendar "></i>Choose
-=======
-                <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body d-flex justify-content-between h-100">
-                        <div>
-                            <p>DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move-date" placeholder="16/may/2021" readonly/>
-                        </div>
-                        <div class="form-group  mr-1">
-                            <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
->>>>>>> fff24763ad1522e519d1b972f1c6cf12646f1b72
                             </button>
                         </div>
                     </div>

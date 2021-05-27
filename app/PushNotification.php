@@ -43,7 +43,7 @@ class PushNotification
             'json' => [
                 'app_id'=>$credentials[0],
                 'contents' => [
-                    'en' => $title
+                    'en' => $desc
                 ],
                 'headings' => [
                     'en' => $title

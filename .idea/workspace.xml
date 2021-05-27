@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment="">
+    <list default="true" id="46d61e8d-bc8f-483d-9d3f-6eac0138ad26" name="Default Changelist" comment=" fixed notification in admin">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,27 +185,6 @@
       <updated>1621935182809</updated>
       <workItem from="1621935184445" duration="870000" />
       <workItem from="1621936519889" duration="33705000" />
-    </task>
-    <task id="LOCAL-00008" summary="payment status change api fixing">
-      <created>1621959209545</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1621959209545</updated>
-    </task>
-    <task id="LOCAL-00009" summary="payment status change api fixing">
-      <created>1621959657969</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1621959657969</updated>
-    </task>
-    <task id="LOCAL-00010" summary="payment status change api fixing">
-      <created>1621959801279</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1621959801279</updated>
     </task>
     <task id="LOCAL-00011" summary="payment status change api fixing">
       <created>1621959975346</created>
@@ -529,7 +508,28 @@
       <option name="project" value="LOCAL" />
       <updated>1622117122799</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary=" fixed notification in admin">
+      <created>1622117251538</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117251538</updated>
+    </task>
+    <task id="LOCAL-00058" summary=" fixed notification in admin">
+      <created>1622117714827</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1622117714827</updated>
+    </task>
+    <task id="LOCAL-00059" summary=" fixed notification in admin">
+      <created>1622118798807</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1622118798807</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

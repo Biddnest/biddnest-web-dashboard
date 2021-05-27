@@ -11089,9 +11089,12 @@ ul.header-controls li.notifications:hover .dropdown {
   padding: 6px 10px !important;
   font-weight: 600 !important;
 }
+
+
+*/
 .navbar-default .navbar-nav .bec-vendor:hover {
   background-color: #fff;
-} */
+} 
 .navbar-default .navbar-toggle {
   border-color: #fff;
 }

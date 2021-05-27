@@ -544,7 +544,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="row mb-4 mt-3">
+                                    <div class="row gutter=[3] mb-4 mt-3">
                                         <div class="col-md-4 view-content ">
                                             <div class="card required-item " style="width: fit-content;">
                                                 <div class="container-image-item ">
@@ -651,7 +651,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 mt-4 mt-20 view-content ">
+                                        <div class="col-md-4 mt-4 mt-20 view-content  ">
                                             <div class="card required-item ml-10 " style="width: fit-content;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
@@ -721,9 +721,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-4 mt-20 view-content ">
-                                            <div>
-                                                <i class="icon-2 mr-1 dripicons-plus add-item-icon " data-toggle="modal" data-target="#addItemModal"></i>
+                                        <div class=" mt-20 view-content border-add" >
+                                            <div class="">
+                                                <i class="icon-2 mr-1 dripicons-plus add-item-icon  " data-toggle="modal" data-target="#addItemModal"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -784,7 +784,7 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
+                                                                        <div class="choose-your-material pt-3">
                                                                             <select class="select-material " style="padding: 8px;">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
@@ -795,8 +795,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-start mt-1 ">
+                                                                            <span class="input-group-btn mr-1">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="minus "
@@ -806,7 +806,7 @@
                                                                             </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
-                                                                            <span class="input-group-btn ">
+                                                                            <span class="input-group-btn ml-1 ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="plus "
@@ -836,7 +836,7 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
+                                                                        <div class="choose-your-material pt-3">
                                                                             <select class="select-material " style="padding: 8px;">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
@@ -847,8 +847,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-start mt-1 ">
+                                                                            <span class="input-group-btn mr-1">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="minus "
@@ -857,7 +857,7 @@
                                                                                 </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
-                                                                            <span class="input-group-btn ">
+                                                                            <span class="input-group-btn ml-1">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="plus "
@@ -886,7 +886,7 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
+                                                                        <div class="choose-your-material pt-3">
                                                                             <select class="select-material " style="padding: 8px;">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
@@ -897,8 +897,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-start mt-1 ">
+                                                                            <span class="input-group-btn mr-1 ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="minus "
@@ -907,7 +907,7 @@
                                                                             </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
-                                                                            <span class="input-group-btn ">
+                                                                            <span class="input-group-btn ml-1">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="plus "
@@ -938,7 +938,7 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
+                                                                        <div class="choose-your-material pt-3 ">
                                                                             <select class="select-material " style="padding: 8px;">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
@@ -949,8 +949,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-start mt-1 ">
+                                                                            <span class="input-group-btn mr-1 ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="minus "
@@ -959,7 +959,7 @@
                                                                                 </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
-                                                                            <span class="input-group-btn ">
+                                                                            <span class="input-group-btn ml-1 ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number "
                                                                                     data-type="plus "
@@ -988,7 +988,7 @@
                                                                                 <option value="3 ">Option 3</option>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="choose-your-material ">
+                                                                        <div class="choose-your-material pt-3">
                                                                             <select class="select-material " style="padding: 8px;">
                                                                                 <option value=" " disabled selected>
                                                                                     Small
@@ -999,8 +999,8 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 ">
-                                                                            <span class="input-group-btn ">
+                                                                        <div class="input-group justify-content-start mt-1 ">
+                                                                            <span class="input-group-btn mr-1 ">
                                                                                 <button type="button "
                                                                                         class="btn btn-default btn-number input-number "
                                                                                         data-type="minus "
@@ -1010,7 +1010,7 @@
                                                                             </button>
                                                                             </span>
                                                                             <input type="text " class="form-control input-number " value="1 " min="1 " max="10 ">
-                                                                            <span class="input-group-btn ">
+                                                                            <span class="input-group-btn ml-1 ">
                                                                                 <button type="button "
                                                                                         class="btn btn-default btn-number input-number "
                                                                                         data-type="plus "
@@ -1063,7 +1063,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-md-10 pl-0 view-content upload-image-container">
+                                        <div class="col-md-10 pl-3 view-content upload-image-container">
 
                                         </div>
                                         {{--<div class="col-md-2 pl-0 view-content upload-image-container">
@@ -1125,6 +1125,8 @@
                     reader.addEventListener("load", function() {
                         var image = new Image();
                         image.height = 100;
+                        image.marginleft = '10px';
+                        image.paddingleft = '10px';
                         image.title  = file.name;
                         image.src    = this.result;
                         preview.appendChild(image);

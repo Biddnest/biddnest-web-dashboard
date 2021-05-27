@@ -33,30 +33,30 @@
                     </div>
                 </div> -->
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: none;">
+                <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="    cursor: auto;">
                         <p>FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments " style="cursor: none;">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore" style="cursor: none;">
+                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments " style="    cursor: auto;">
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore" style="    cursor: auto;">
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: none;">
+                <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="    cursor: auto;">
                         <p>TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas" style="cursor: none;">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai" style="cursor: none;">
+                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas" style="    cursor: auto;">
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai" style="    cursor: auto;">
 
                     </div>
                 </div>
                 <i class="bg-white icon arrow dripicons-chevron-right"></i>
-                <div class="card top-header-card col-md-4 col-xs-12">
-                    <div class="card-body d-flex justify-content-between h-100" style="cursor: none;">
+                <div class="card top-header-card col-md-4 col-xs-12" style="    cursor: auto;">
+                    <div class="card-body d-flex justify-content-between h-100" style="    cursor: auto;">
                         <div>
                             <p>DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite" type="name" placeholder="16/may/2021"  style="cursor: none;"/>
+                            <input id="dp1" class="input-overwrite" type="name" placeholder="16/may/2021" style="    cursor: auto;" />
                         </div>
-                        <div class="form-group  mr-1" style="cursor: none;">
-                            <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
+                        <div class="form-group  mr-1">
+                            <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" style="    cursor: auto;" type="button"><i class="fa fa-calendar "></i>Choose
                             </button>
                         </div>
                     </div>

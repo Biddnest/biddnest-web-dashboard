@@ -86,7 +86,7 @@ label {
 }
 
 .card-input-element:checked + .card-input {
-     box-shadow: 0 0 1px 1px #2ecc71;
+     box-shadow: 0 0 1px 1px #fdc403;
      background: #2c136c !important;
  }
 
@@ -111,6 +111,21 @@ label {
 
 }
 
+
+
+.border-add{
+    border: 4px solid #fdc403;
+    width: 197px;
+    margin-left: 16px;
+    margin-top: 16px;
+    border-radius: 5px;
+}
+
+
+.add-item-icon{
+    bottom: 216px !important;
+    right: 104px !important;
+}
 
 .dropdown-content{
     top: 31px !important;
@@ -217,7 +232,11 @@ label {
 
 
 
+             img.req-search-image{
+                height: fit-content !important;
+                max-width:100%
 
+             }
 
  .card .required-item {
      width: fit-content !important;

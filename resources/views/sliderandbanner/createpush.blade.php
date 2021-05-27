@@ -75,6 +75,7 @@
                                   <label class="full-name ">Customer</label>
                                   <select id="cust" class="form-control br-5 searchuser user" name="user[]" multiple>
                                       <option value="">--Select--</option>
+                                      <option value="all">all</option>
                                       @foreach(\App\Models\User::where(['status'=>\App\Enums\CommonEnums::$YES, 'deleted'=>\App\Enums\CommonEnums::$NO])->get() as $customer)
                                           <option value="{{$customer->id}}">{{ucfirst(trans($customer->fname))}} {{ucfirst(trans($customer->lname))}}</option>
                                       @endforeach
@@ -87,6 +88,7 @@
                                   <label class="full-name">Vendor</label>
                                   <select id="vendor" class="form-control br-5 searchvendor vendor" name="vendor[]" multiple>
                                       <option value="">--Select--</option>
+                                      <option value="all">All</option>
                                       @foreach(\App\Models\Organization::where('deleted', \App\Enums\CommonEnums::$NO)->get() as $org)
                                           <option value="{{$org->id}}">{{ucfirst(trans($org->org_name))}} {{$org->org_type}}</option>
                                       @endforeach

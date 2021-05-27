@@ -10,6 +10,7 @@ use App\Enums\NotificationEnums;
 use App\Helper;
 use App\Models\Notification;
 use App\Models\OneSignalPlayer;
+use App\Models\User;
 use App\Models\Vendor;
 use App\PushNotification;
 
@@ -20,7 +21,11 @@ class NotificationController extends Controller
         $notification =new Notification;
         if($vendor != null)
         {
-            $vendors =Vendor::where(['organization_id'=>$vendor, 'deleted'=>CommonEnums::$NO])->pluck('id');
+            if($vendor[0] == "all")
+                $vendors= Vendor::where(['deleted'=>CommonEnums::$NO])->pluck('id');
+            else
+                $vendors =Vendor::whereIn("organization_id", $vendor)->where(['deleted'=>CommonEnums::$NO])->pluck('id');
+
             foreach ($vendors as $org_vendor)
             {
                 $notification->title=$title;
@@ -29,11 +34,19 @@ class NotificationController extends Controller
                 $notification->vendor_id=$org_vendor;
                 $notification->generated_by=NotificationEnums::$GENERATE_BY['admin'];
                 $push_notification = $notification->save();
+
+                if (!$push_notification)
+                    return Helper::response(false, "Notification could not be added");
             }
             NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
         else {
-            foreach ($user as $single_user)
+            if($user[0] == "all")
+                $users=User::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('id');
+            else
+                $users=$user;
+
+            foreach ($users as $single_user)
             {
                 $notification->title = $title;
                 $notification->for = $for;
@@ -48,13 +61,15 @@ class NotificationController extends Controller
                 $notification->generated_by = NotificationEnums::$GENERATE_BY['admin'];
 
                 $push_notification = $notification->save();
+
+                if (!$push_notification)
+                    return Helper::response(false, "Notification could not be added");
             }
 
-            NotificationController::sendTo("user", $user, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+            NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
 
-        if (!$push_notification)
-            return Helper::response(false, "Notification could not be added");
+
 
         return Helper::response(true, "Notification added successfully");
 

@@ -4,11 +4,12 @@
 <div class="content-wrapper" data-barba="container" data-barba-namespace="home">
     <div class="d-flex center">
         <div class="container container-top p-50 top-header-card border-top-cards">
+            <form action="{{route('add-booking')}}" class="no-ajax">
             <div class="top-cards mt-2">
                 <div class="col-lg-4 col-xs-12 d-flex space-between">
                 @foreach($categories as $category)
                     <label>
-                        <input type="radio" name="product" class="card-input-element" />
+                        <input type="radio" name="category" class="card-input-element" />
                         <div class="card-header card-methord building-type">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
@@ -20,31 +21,20 @@
 
                 </div>
             </div>
-            <!-- <div class="top-cards mt-2">
-                    <div class="col-lg-4 col-xs-12 d-flex space-between">
-                        @foreach($categories as $category)
-                            <div class="card-header card-methord building-type ">
-                                <div class="card-body-top">
-                                    <img class="icon-cards" src="{{$category->image}}" />
-                                    <p class="building-type-text">{{ucwords($category->name)}}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div> -->
+
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
                 <div class="card top-header-card col-md-4 col-xs-12">
                     <div class="card-body" data-toggle="modal" data-target="#from_location">
                         <p>FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="SMR Apartments ">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Mahadevapura, Bangalore">
+                        <input class="input-overwrite text-heading book-address mb-0 source" type="text" name="source" placeholder="SMR Apartments ">
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" type="text" placeholder="Mahadevapura, Bangalore" readonly>
                     </div>
                 </div>
                 <div class="card top-header-card col-md-4 col-xs-12">
                     <div class="card-body" data-toggle="modal" data-target="#to_location">
                         <p>TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0" type="name" placeholder="Majestic Villas">
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="name" placeholder="Gandhinagar, Chennai">
+                        <input class="input-overwrite text-heading book-address mb-0 destination" type="text" name="destination" placeholder="Majestic Villas">
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="text" placeholder="Gandhinagar, Chennai" readonly>
 
                     </div>
                 </div>
@@ -53,10 +43,10 @@
                     <div class="card-body d-flex justify-content-between h-100">
                         <div>
                             <p>DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite" type="name" placeholder="16/may/2021" />
+                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move-date" placeholder="16/may/2021" readonly/>
                         </div>
                         <div class="form-group  mr-1">
-                            <button id="dateselect" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
+                            <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
                             </button>
                         </div>
                     </div>
@@ -64,15 +54,17 @@
             </div>
             <div style="text-align: center;">
                 @if(\Illuminate\Support\Facades\Session::get('account'))
-                <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
-                    <button type="button" class="btn btn-primary view-btn">Book Now</button>
-                </a>
+               {{-- <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
+
+                </a>--}}
+                    <button type="submit" class="btn btn-primary view-btn page-scroll btn btn-xl">Book Now</button>
                 @else
                 <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
                     <button type="button" class="btn btn-primary view-btn">Book Now</button>
                 </a>
                 @endif
             </div>
+            </form>
         </div>
     </div>
     <!-- section how it works -->
@@ -489,15 +481,17 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
                         <div class="form-group">
                             <label>SVM Complex,indiranagar,Benguluru</label>
                             <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete" class="form-control" required>
                             <span class="error-message">Please enter valid</span>
                         </div>
                     </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close">OK</button>
+                    </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
-
                 </div>
             </div>
         </div>
@@ -516,12 +510,15 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
                         <div class="form-group">
                             <label>SVM Complex,indiranagar,Benguluru</label>
                             <input type="text" placeholder="Srm colony,Chennai" id="dest-autocomplete" class="form-control">
                             <span class="error-message">Please enter valid</span>
                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close">OK</button>
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>

@@ -147,7 +147,7 @@ export function initAllSelectBoxes() {
         });
     }
 
-    if ($(".selectvendor").length) {
+    if ($(".searchvendor").length) {
         $(".searchvendor").select2({
             multiple: true,
             tags: false,

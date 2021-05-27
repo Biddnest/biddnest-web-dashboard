@@ -15,7 +15,7 @@
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('orders-booking-past')}}">Bookings & Orders</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('orders-booking-hold')}}">Bookings & Orders</a></li>
                     <li class="breadcrumb-item">Manage Bookings</li>
                 </ol>
             </nav>
@@ -39,7 +39,7 @@
                                     <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Hold Orders</a>
+                                    <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">On Hold</a>
                                 </li>
                             </ul>
                         </h3>
@@ -153,7 +153,7 @@
                         @if(count($bookings)== 0)
                             <div class="row hide-on-data">
                                 <div class="col-md-12 text-center p-20">
-                                    <p class="font14"><i>. You don't have any Hold Orders here.</i></p>
+                                    <p class="font14"><i>. No Orders Are On Hold.</i></p>
                                 </div>
                             </div>
                         @endif

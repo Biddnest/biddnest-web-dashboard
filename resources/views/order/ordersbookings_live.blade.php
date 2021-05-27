@@ -39,7 +39,7 @@
                                     <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-hold')}}" aria-controls="home" aria-selected="true">Hold Orders</a>
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-hold')}}" aria-controls="home" aria-selected="true">On Hold</a>
                                 </li>
                             </ul>
                         </h3>

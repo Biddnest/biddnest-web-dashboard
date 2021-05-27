@@ -33,19 +33,24 @@ class NotificationController extends Controller
             NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
         }
         else {
-            $notification->title = $title;
-            $notification->for = $for;
-            $notification->desc = $desc;
-            /* if($admin != null)
-             {
-                 $notification->admin_id=$admin;
-                 NotificationController::sendTo("admin", [$admin], $title, $desc, []);
-             }*/
+            foreach ($user as $single_user)
+            {
+                $notification->title = $title;
+                $notification->for = $for;
+                $notification->desc = $desc;
+                /* if($admin != null)
+                 {
+                     $notification->admin_id=$admin;
+                     NotificationController::sendTo("admin", [$admin], $title, $desc, []);
+                 }*/
 
-            $notification->user_id = $user;
-            NotificationController::sendTo("user", [$user], $title, $desc, []);
+                $notification->user_id = $single_user;
+                $notification->generated_by = NotificationEnums::$GENERATE_BY['admin'];
 
-            $push_notification = $notification->save();
+                $push_notification = $notification->save();
+            }
+
+            NotificationController::sendTo("user", $user, $title, $desc, []);
         }
 
         if (!$push_notification)

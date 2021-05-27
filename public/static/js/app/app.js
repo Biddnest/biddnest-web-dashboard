@@ -640,6 +640,16 @@ $("body").on('click', ".next1", function(event) {
     $(".steps-step-1").removeClass("color-purple");
 });
 
+$("body").on('click', ".back2", function(event) {
+    console.log("step2");
+    $('.step-1').css('display', 'block');
+    $('.step-2').css('display', 'none');
+    $(".completed-step-1").addClass("turntheme");
+    $(".completed-step-2").removeClass("turntheme");
+    $(".steps-step-1").addClass("color-purple");
+    $(".steps-step-2").removeClass("color-purple");
+});
+
 $("body").on('click', ".next2", function(event) {
     $('.step-2').css('display', 'none');
     $('.step-3').css('display', 'block');
@@ -649,6 +659,15 @@ $("body").on('click', ".next2", function(event) {
     $(".steps-step-2").removeClass("color-purple");
 });
 
+$("body").on('click', ".back3", function(event) {
+    $('.step-2').css('display', 'block');
+    $('.step-3').css('display', 'none');
+    $(".completed-step-2").addClass("turntheme");
+    $(".completed-step-3").removeClass("turntheme");
+    $(".steps-step-2").addClass("color-purple");
+    $(".steps-step-3").removeClass("color-purple");
+});
+
 $("body").on('click', ".next3", function(event) {
     $('.step-3').css('display', 'none');
     $('.step-4').css('display', 'block');
@@ -656,6 +675,15 @@ $("body").on('click', ".next3", function(event) {
     $(".completed-step-3").removeClass("turntheme");
     $(".steps-step-4").addClass("color-purple");
     $(".steps-step-3").removeClass("color-purple");
+});
+
+$("body").on('click', ".back4", function(event) {
+    $('.step-3').css('display', 'block');
+    $('.step-4').css('display', 'none');
+    $(".completed-step-3").addClass("turntheme");
+    $(".completed-step-4").removeClass("turntheme");
+    $(".steps-step-3").addClass("color-purple");
+    $(".steps-step-4").removeClass("color-purple");
 });
 
 /*$("body").on('click', ".next4", function(event) {
@@ -675,6 +703,12 @@ $("body").on('click', ".next5", function(event) {
     $(".steps-step-6").addClass("color-purple");
     $(".steps-step-5").removeClass("color-purple");
 });*/
+
+$('.bookdate').datepicker({
+    multidate: true,
+    format: 'yyyy-mm-dd',
+    'startDate': '+1d',
+});
 
 $("body").on('change', ".switch", function(event) {
     $(".toggle-input").toggleClass('diplay-none ');
@@ -843,7 +877,7 @@ $("body").on('click', ".payment", function(event) {
         success: function (response) {
             // options.order_id=response.data.payment.rzp_order_id;
             var options = {
-                "key": "rzp_test_BOaQJYdd6vjFWT", // secret key id
+                "key": RZP_KEY, // secret key id
                 "order_id":response.data.payment.rzp_order_id,
                 "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",

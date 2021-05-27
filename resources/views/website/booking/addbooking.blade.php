@@ -393,7 +393,7 @@
                                                     <div class="form-group ">
                                                         <label class="start-date ">Start date</label>
                                                         <div id="my-modal ">
-                                                            <input type="text" id="dateselect date" class="dateselect form-control br-5 " placeholder="15 Jan" name="movement_dates" required/>
+                                                            <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" name="movement_dates" required/>
                                                             <span class="error-message ">please enter valid  date</span>
                                                         </div>
                                                     </div>
@@ -423,7 +423,7 @@
                                             <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right mr-4 next2" id="next2">
                                                 Next
                                             </button>
-                                            <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 ">Back
+                                            <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back2">Back
                                             </button>
                                         </div>
                                     </div>
@@ -435,17 +435,17 @@
                                     <div class="col-md-12 ">
                                         <p class="text-muted ">Step 3/ 6</p>
                                         <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;" >Lets get your requirements</h4>
-                                    </div>                                    
+                                    </div>
                                     <div class="row d-flex justify-content-center">
-                                        
+
                                         <div class="col-md-2 col-lg-2 col-sm-4">
-                                            
+
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important" >
                                                 <div class="panel-heading">
-                                                    <h3>                                                    
+                                                    <h3>
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
@@ -455,16 +455,16 @@
                                                 </div>
 
                                             </label>
-                                            
+
                                         </div>
                                         <div class="col-md-2 col-lg-2 col-sm-4">
-                                            
+
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
                                                 <div class="panel-heading">
-                                                    <h3>                                                    
+                                                    <h3>
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
@@ -474,16 +474,16 @@
                                                 </div>
 
                                             </label>
-                                            
+
                                         </div>
                                         <div class="col-md-2 col-lg-2 col-sm-4">
-                                            
+
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
 
                                                 <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
                                                 <div class="panel-heading">
-                                                    <h3>                                                    
+                                                    <h3>
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
@@ -493,11 +493,11 @@
                                                 </div>
 
                                             </label>
-                                            
+
                                         </div>
-                                       
+
                                     </div>
-                                                                    
+
                                     <!-- <div class="row d-flex justify-content-center">
                                         <div class="col-md-2 view-content ">
                                             <div class="room-req-count mb-1 text-center h-100 px-3 disabled ">
@@ -736,7 +736,7 @@
                                         <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next3" id="next3">
                                             Next
                                         </button>
-                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 ">Back
+                                        <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back3">Back
                                         </button>
                                     </div>
                                     <!--Add Item Modal-->
@@ -1089,7 +1089,7 @@
                                         <button  class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4" id="next4">
                                             Next
                                             </button>
-                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3" type="button">Back
+                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back4" type="button">Back
                                         </button>
                                     </div>
                                 </div>

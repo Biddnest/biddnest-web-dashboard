@@ -157,13 +157,13 @@
                     <div class="footer-phone row center mt-3 mb-2 ">
 
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('page', ["slug"=>"about-us"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">About Us</a>
+                            <a href="{{route('terms.page', ["slug"=>"about-us"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">About Us</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('page', ["slug"=>"terms-and-conditions"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
+                            <a href="{{route('terms.page', ["slug"=>"terms-and-conditions"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('page', ["slug"=>"privacy-policies"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">Privacy</a>
+                            <a href="{{route('terms.page', ["slug"=>"privacy-policies"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">Privacy</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
                             <a href="{{route('faq')}}" class="footer-text f-22 footer-quick-links cursor-pointer">FAQ</a>

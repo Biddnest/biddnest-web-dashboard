@@ -29,12 +29,12 @@
                 <div class="tab-content margin-topneg-7 border-top" id="myTabContent">
                     <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
                         @if(($booking->status == \App\Enums\BookingEnums::$STATUS['biding']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding']))
-                            <div class="text-center" id="timer">
+                            <div class="text-center" id="timer" data-count="{{\Carbon\Carbon::now()->diffInSeconds($booking->bid_result_at)}}">
                                 <h4 class="border-bottom p-4">ORDER ID <span>#{{$booking->public_booking_id}}</span></h4>
                                 <p class="text-muted pt-4 italic">
                                     You will get the estimated price once the time is up
                                 </p>
-                                <h3 class="f-18 pb-4 bold mt-2">Time Left</h3>
+                                <h3 class="f-18 pb-4 bold mt-2 time">Time Left</h3>
 
                                 <div id="app" style="margin-bottom: 60px;"></div>
                             </div>

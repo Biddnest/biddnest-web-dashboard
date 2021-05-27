@@ -497,7 +497,7 @@ Route::prefix('site')->group(function () {
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
-    Route::get('/{slug}', [WebsiteController::class, 'page'])->name("page");
+    Route::get('/page/{slug}', [WebsiteController::class, 'termPage'])->name("terms.page");
 
     Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
     Route::get('/book-move/{id}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");

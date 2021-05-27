@@ -71,12 +71,12 @@
         onchanged: function (currentLocation, radius, isMarkerDropped) {
             var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
            $.get(url, function (response){
-                console.log(response);
+                // console.log(response);
                let street="";
                let city="";
-                for(var i=0; i<= response.results[0].address_components.length; i++)
+                for(let i=0; i<= response.results[0].address_components.length; i++)
                 {
-                    var addr=response.results[0].address_components[i];
+                    let addr=response.results[0].address_components[i];
                     console.log(addr);
                     if(addr.types.indexOf('sublocality_level_2')) {
 

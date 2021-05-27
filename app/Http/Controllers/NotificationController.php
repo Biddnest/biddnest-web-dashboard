@@ -103,7 +103,7 @@ class NotificationController extends Controller
     }
 
     public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url = null){
-            foreach ($user_id as $user)
+           /* foreach ($user_id as $user)
             {
                 $save_notification =new Notification;
 
@@ -117,7 +117,7 @@ class NotificationController extends Controller
                 $save_notification->desc=$desc;
                 $save_notification->url=$url;
                 $save_notification->save();
-            }
+            }*/
 
         $players=[];
         foreach($user_id as $user) {

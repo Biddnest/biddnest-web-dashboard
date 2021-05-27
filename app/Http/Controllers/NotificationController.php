@@ -33,7 +33,7 @@ class NotificationController extends Controller
             NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
         }
         else {
-            $$notification->title = $title;
+            $notification->title = $title;
             $notification->for = $for;
             $notification->desc = $desc;
             /* if($admin != null)

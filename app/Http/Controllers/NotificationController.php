@@ -30,7 +30,7 @@ class NotificationController extends Controller
                 $notification->generated_by=NotificationEnums::$GENERATE_BY['admin'];
                 $push_notification = $notification->save();
             }
-            NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
+            NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
         else {
             foreach ($user as $single_user)
@@ -50,7 +50,7 @@ class NotificationController extends Controller
                 $push_notification = $notification->save();
             }
 
-            NotificationController::sendTo("user", $user, $title, $desc, []);
+            NotificationController::sendTo("user", $user, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
 
         if (!$push_notification)

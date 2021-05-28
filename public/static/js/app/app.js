@@ -289,12 +289,21 @@ $("body").on('change', ".notification", function(event) {
         $(this).closest(".d-flex").find(".vendor").addClass("hidden");
         $(this).closest(".d-flex").find(".user").removeClass("hidden");
         $(this).closest(".d-flex").find(".userselect").attr("required", "required");
+        $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
     }
     if(id == "vendor")
     {
         $(this).closest(".d-flex").find(".user").addClass("hidden");
         $(this).closest(".d-flex").find(".vendor").removeClass("hidden");
         $(this).closest(".d-flex").find(".vendorselect").attr("required", "required");
+        $(this).closest(".d-flex").find(".userselect").removeAttr("required", "required");
+    }
+    if(id == 3 || id == 4)
+    {
+        $(this).closest(".d-flex").find(".vendor").addClass("hidden");
+        $(this).closest(".d-flex").find(".user").addClass("hidden");
+        $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
+        $(this).closest(".d-flex").find(".userselect").removeAttr("required", "required");
     }
 
     return false;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingEnums;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helper;
@@ -381,7 +382,7 @@ class TicketController extends Controller
 
     public static function createCallBack($ticket_type, $phone)
     {
-        $meta=["phone"=>$phone];
+        $meta=["phone"=>$phone, "public_booking_id"=>null];
         $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
         $body = "Request to call back on ".$phone;
         $ticket = new Ticket;
@@ -407,6 +408,8 @@ class TicketController extends Controller
         $ticket->user_id = $sender_id;
         $ticket->type = $ticket_type;
         $ticket->meta = json_encode($meta);
+
+        BookingsController::statusChange($data, BookingEnums::$STATUS['bounced']);
 
         if(!$ticket->save())
             return Helper::response(false, "Could'nt create ticket.");

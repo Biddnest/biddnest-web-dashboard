@@ -57,7 +57,6 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/recent',[ApiRouter::class,'getRecentBooking']);
 
-
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);

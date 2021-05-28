@@ -464,7 +464,7 @@ class ApiRouteController extends Controller
 
     public function callBack(Request $request)
     {
-        return TicketController::create($request->token_payload->id, 4, []);
+        return TicketController::create($request->token_payload->id, 4, ["public_booking_id"=>null]);
     }
 
     public function addReply(Request $request)

@@ -151,7 +151,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a class = "inline-icon-button mr-4"style="display: flex;"  href="@if($servic->type == \App\Enums\TicketEnums::$TYPE['call_back'])#@else{{route('reply', ['id'=>$servic->id])}}@endif"><i class="fa fa-eye pb-2 mr-2" aria-hidden="true"></i></a>
+                                        <a class = "inline-icon-button mr-4"style="display: flex;"  href="{{route('reply', ['id'=>$servic->id])}}"><i class="fa fa-eye pb-2 mr-2" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

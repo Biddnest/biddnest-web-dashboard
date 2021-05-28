@@ -1078,12 +1078,12 @@ class Route extends Controller
 
     public function changeStatus(Request $request)
     {
-        return TicketReplyController::changeStatus($request->id, $request->data);
+        return TicketReplyController::changeStatus($request->id, $request->status);
     }
 
     public function changeStatusPrice(Request $request)
     {
-        return InventoryController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->data);
+        return InventoryController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->status);
     }
 
     public function changeStatusBranch(Request $request)

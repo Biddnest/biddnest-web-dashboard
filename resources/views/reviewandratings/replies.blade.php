@@ -219,7 +219,7 @@
                                             @elseif($tickets->type == \App\Enums\TicketEnums::$TYPE['new_branch'])
                                                 <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                                        Organization Name
+                                                        Org Name
                                                     </div>
                                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                                         Branch Name
@@ -235,20 +235,25 @@
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                                     <div class="form-input">
+                                                        <form action="PUT" action="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" data-next="refresh" data-parsley-validate>
                                                         <label>Aproval Status</label>
+                                                            <select id="status" name="status" class="form-control" required>
+                                                                @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
+                                                                    <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords(str_replace("_", " ", $key))}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <span class="error-message">Please enter valid</span>
 
-                                                        <select id="status" name="status" class="form-control reply_status" data-url="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" required>
-                                                            @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
-                                                                <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <span class="error-message">Please enter valid</span>
+                                                            <a class="white-text p-10" href="#">
+                                                                <button class="btn theme-bg white-text w-30">Submit</button>
+                                                            </a>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             @elseif($tickets->type == \App\Enums\TicketEnums::$TYPE['price_update'])
                                                 <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                                        Organization Name
+                                                        Org Name
                                                     </div>
                                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                                         Service Type
@@ -270,14 +275,20 @@
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                                     <div class="form-input">
-                                                        <label>Aproval Status</label>
+                                                        <form action="PUT" action="{{route('change_priceticket_status', ['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" data-next="refresh" data-parsley-validate>
+                                                            <label>Aproval Status</label>
 
-                                                        <select id="status" name="role" class="form-control reply_status" data-url="{{route('change_priceticket_status', ['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" required>
-                                                            @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
-                                                                <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords($key)}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <span class="error-message">Please enter valid</span>
+                                                            <select id="status" name="status" class="form-control" required>
+                                                                @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
+                                                                    <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords(str_replace("_", " ", $key))}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <span class="error-message">Please enter valid</span>
+
+                                                            <a class="white-text p-10" href="#">
+                                                                <button class="btn theme-bg white-text w-30">Submit</button>
+                                                            </a>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             @endif

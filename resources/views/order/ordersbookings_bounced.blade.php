@@ -139,8 +139,8 @@
                                             <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
                                             @break
 
-                                            @case(\App\Enums\BookingEnums::$STATUS['hold'])
-                                            <span class="status-badge red-bg  text-center td-padding">Hold</span>
+                                            @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                            <span class="status-badge red-bg  text-center td-padding">Bounced</span>
                                             @break
                                         @endswitch
                                     </td>

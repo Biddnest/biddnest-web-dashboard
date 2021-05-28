@@ -15,5 +15,5 @@ class CommonEnums{
 
     public static $PAGE_LENGTH = 15;
 
-    public static $TICKET_STATUS=["open"=>0, "approve"=>1, "modify"=>2];
+    public static $TICKET_STATUS=["open"=>0, "approve"=>1, "need_modification"=>2];
 }

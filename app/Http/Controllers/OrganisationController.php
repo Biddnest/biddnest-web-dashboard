@@ -113,20 +113,21 @@ class OrganisationController extends Controller
         $organizations=new Organization;
         $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
         $uniq = uniqid();
-        $organizations->image=Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['organization']['org_name']);
+//        $organizations->image=Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['organization']['org_name']);
+        $organizations->image=null;
         $organizations->email=$data['email'];
         $organizations->phone=$data['phone']['primary'];
         $organizations->org_name=$data['organization']['org_name'];
         $organizations->org_type=$data['organization']['org_type'];
-        $organizations->lat =null;
-        $organizations->lng =null;
-        $organizations->zone_id =null;
+        $organizations->lat =0;
+        $organizations->lng =0;
+        $organizations->zone_id =1;
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
         $organizations->state =$data['address']['state'];
-        $organizations->service_type =null;
+        $organizations->service_type =2;
         $organizations->meta =json_encode($meta);
-        $organizations->commission = null;
+        $organizations->commission = 0;
         $result_organization= $organizations->save();
 
         /*foreach($data['service'] as $value)
@@ -147,7 +148,8 @@ class OrganisationController extends Controller
         $vendor->pin = null;
         $image_man = new ImageManager(array('driver' => 'gd'));
         $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
-        $vendor->image = Helper::saveFile(Helper::generateAvatar($admin['fname']." ".$admin['lname']),$avatar_file_name,"vendors/".$uniq.$admin['fname']);
+//        $vendor->image = Helper::saveFile(Helper::generateAvatar($admin['fname']." ".$admin['lname']),$avatar_file_name,"vendors/".$uniq.$admin['fname']);
+        $vendor->image = null;
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
@@ -266,12 +268,15 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
-        $organizations->status =$exist['status'];
         $organizations->verification_status = $exist['verification_status'];
         if($vendor)
         {
+            $organizations->status =$exist['status'];
             $organizations->ticket_status = CommonEnums::$TICKET_STATUS['open'];
         }
+        else
+            $organizations->status =$exist['status'];
+
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value)

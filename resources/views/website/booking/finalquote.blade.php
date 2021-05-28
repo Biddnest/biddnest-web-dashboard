@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="booking-history" data-toggle="tab" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="request-tab" data-toggle="tab" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -29,30 +29,30 @@
                 <div class="tab-content margin-topneg-7 border-top" id="myTabContent">
                     <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
                         @if(($booking->status == \App\Enums\BookingEnums::$STATUS['biding']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding']))
-                            <div class="text-center" id="timer">
+                            <div class="text-center" id="timer" data-count="{{\Carbon\Carbon::now()->diffInSeconds($booking->bid_result_at)}}">
                                 <h4 class="border-bottom p-4">ORDER ID <span>#{{$booking->public_booking_id}}</span></h4>
                                 <p class="text-muted pt-4 italic">
                                     You will get the estimated price once the time is up
                                 </p>
-                                <h3 class="f-18 pb-4 bold mt-2">Time Left</h3>
+                                <h3 class="f-18 pb-4 bold mt-2 time">Time Left</h3>
 
-                                <div id="app"></div>
+                                <div id="app" style="margin-bottom: 60px;"></div>
                             </div>
                         @elseif(($booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending']))
                             <div id="proceed" {{--style="display: none"--}}>
                                 <div class="container">
                                     <div class="row mt-2 border-bottom">
-                                        <div class="col-12 d-flex justify-content-around center">
+                                        <div class="col-12 d-flex justify-content-around center ml-4">
                                             <div class="pr-3">
                                                 <p class="para-head">FROM</p>
-                                                <p class="bg-blur para-head">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                                <p class="bg-blur para-head" style="width: 150px; text-align:center ">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                             </div>
                                             <div class="pr-3 a-self-center">
                                                 <img src="{{asset('static/website/images/icons/moving-truck.svg')}}" />
                                             </div>
                                             <div class="pr-5">
                                                 <p class="para-head">TO</p>
-                                                <p class="bg-blur para-head">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                                <p class="bg-blur para-head" style="width: 150px; text-align:center">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                             </div>
                                         </div>
                                         <div class="col-12 mt-2 final-price center f-direction">

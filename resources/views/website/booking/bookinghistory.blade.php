@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="new-order-tab" data-toggle="tab" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="quotation" data-toggle="tab" href="{{route('my-bookings')}}">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab active p-15" id="booking-history" data-toggle="tab" href="#booking" role="tab" aria-controls="profile" aria-selected="false">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" id="request-tab" data-toggle="tab" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -35,31 +35,31 @@
                                         <div class="card-body bg-card-book">
                                             <div class="d-flex pt-4 pb-2 justify-content-around">
                                                 <div class="d-flex ">
-                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                                    <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">From</p>
-                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                                        <p class=" f-16 pl-2">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <img class="card-icons" src="{{asset('static/website/images/icons/location.svg')}}" />
+                                                    <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">To</p>
-                                                        <p class=" f-18 pl-2">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                                        <p class=" f-16 pl-2">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="d-flex f-direction">
                                                         <p class="l-cap pl-2 mb-0">Distance</p>
-                                                        <p class=" f-18 pl-2">{{json_decode($booking->meta, true)['distance']}} Km</p>
+                                                        <p class=" f-16 pl-2">{{json_decode($booking->meta, true)['distance']}} Km</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between">
+                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
                                                 <div>
-                                                    <p class="bold mt-1 pl-4">
+                                                    <p class="bold mt-1 pl-4 padding-view">
                                                         #{{$booking->public_booking_id}} <span class="light">| @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
                                                     </p>
                                                 </div>
@@ -124,17 +124,17 @@
                                     <div class="d-flex border-bottom justify-content-between">
                                         <div>
                                             <p class="f-14">FROM</p>
-                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                            <p class="bg-blur f-16">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
                                         <div class="mt-1 pt-3">
                                             <img src="{{asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div>
                                             <p class="f-14">TO</p>
-                                            <p class="bg-blur f-18">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                            <p class="bg-blur f-16" style="width:110px; ">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left ">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left w-84" style="width:81%;">
                                         <div>
                                             <h6 class="l-cap f-14">Date</h6>
                                             <h5 class="f-14">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
@@ -144,7 +144,7 @@
                                             <h5 class="f-14">{{$booking->final_quote}}</h5>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left" style="width:91%;">
                                         <div>
                                             <h6 class="l-cap f-14">Order ID</h6>
                                             <h5 class="f-14">#{{$booking->public_booking_id}}</h5>
@@ -154,7 +154,7 @@
                                             <h5 class="f-14">{{json_decode($booking->meta, true)['distance']}} KM</h5>
                                         </div>
                                     </div>
-                                    <div class="d-flex mt-1 pt-2 ml-3 mr-36 justify-content-between text-left">
+                                    <div class="d-flex mt-1 pt-2 ml-3 justify-content-between text-left" style="width:88%;">
                                         <div>
                                             <h6 class="l-cap f-14">Status</h6>
                                             <h5 class="f-14">
@@ -176,7 +176,7 @@
 
                                     <div class="card text-left mt-1">
                                         <div class="details-card bg-blur">
-                                            <div class="d-flex justify-content-between  pr-2">
+                                            <div class="d-flex justify-content-between  pr-2" style="width: 104%;">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 pl-0 ">Driver</p>
                                                     <p class="mt-0 pl-0 f-14">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}}@endif</p>
@@ -188,7 +188,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-between  pr-2">
+                                            <div class="d-flex justify-content-between  pr-2" style="width: 101%;">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 pl-0">Phone Number</p>
                                                     <p class="mt-0 pl-0 f-14">@if($booking->driver){{$booking->driver->phone}}@endif</p>
@@ -198,7 +198,7 @@
                                                     <p class="mt-0 pl-0 f-14">@if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-end pr-2">
+                                            <div class="d-flex justify-content-end pr-2 " style="width: 102%;">
                                                 <div class="pr-3">
                                                     <p class="l-cap f-12 mb-0 pl-0">Manpower</p>
                                                     <p class="mt-0 pl-0 f-14">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>

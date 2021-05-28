@@ -20,4 +20,138 @@
         color: #0f0c75 !important;
         font-size: 14px !important;
     }
+
+
+
+label {
+    width: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+     box-shadow: 0 0 1px 1px #fdc403;
+ }
+
+
+ ::-webkit-input-placeholder{
+     color: red;
+ }
+
+
+
+ .padding-location{
+    padding: 6px 46px !important;
+ }
+
+
+
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: red ;
+  opacity: 1;}
+
+ input[type="name"].input-overwrite::-webkit-input-placeholder {
+    color: #696f74 !important;
+
+ }
+
+
+ .datepicker-dropdown.datepicker-orient-top:after{
+     display: none !important;
+ }
+ .datepicker-dropdown.datepicker-orient-top:before{
+     display: none !important;
+ }
+
+ .datepicker-dropdown.datepicker-orient-bottom:after{
+    display: none !important;
+
+ }
+
+ .datepicker-dropdown.datepicker-orient-bottom:before{
+    display: none !important;
+
+ }
+
+
+ .close .text-white  {
+    outline: none !important;
+
+ }
+
+
+.drop-list:hover{
+    background: #e6e9eb;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+
+}
+
+.dropdown-content {
+    top: 49px !important;
+
+   
+    padding: none !important;
+   
+}
+
+ .padding-larg{
+    padding: 6px 139px !important;
+
+ }
+
+
+ .datepicker table tr td.active.active{
+    background: #2E0789 !important;
+    width: 46px !important;
+    background: #2E0789 !important;
+    padding: 11px !important;
+    height: 46px !important;
+ }
+
+ .dropdown-menu{
+    display: block;
+    top: 71px;
+    left: 182px;
+    left: 900px !important;
+ }
+
+ @media (max-width:480px)  { 
+                .testimonial-content{
+                     margin-left: 0px !important; 
+            
+                }
+                .mar-vendor{
+                    margin-left: 10px !important; 
+
+                }
+
+                .padding-btn-res{
+                    padding: 5px 60px !important;
+    width: fit-content;
+                }
+               
+            
+            
+             }
+
+
+
+
+
+  
+
+
 </style>

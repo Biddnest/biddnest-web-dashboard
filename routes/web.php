@@ -232,6 +232,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/enquiry',[WebController::class,'ordersBookingsEnquiry'])->name("enquiry-booking");
             Route::get('/live',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
             Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
+            Route::get('/hold',[WebController::class,'ordersBookingsHold'])->name("orders-booking-hold");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");
@@ -497,7 +498,7 @@ Route::prefix('site')->group(function () {
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
-    Route::get('/T&C', [WebsiteController::class, 'termsAndCondition'])->name("terms_and_conditions");
+    Route::get('/page/{slug}', [WebsiteController::class, 'termPage'])->name("terms.page");
 
     Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
     Route::get('/book-move/{id}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");

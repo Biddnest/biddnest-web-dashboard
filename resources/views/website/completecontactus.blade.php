@@ -14,7 +14,7 @@
                                         <img class="-mt-10" src="{{ asset('static/website/images/icons/location.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <p>{{json_decode($contact_details, true)['address']}}</p>
+                                        <h6>{{json_decode($contact_details, true)['address']}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -54,14 +54,14 @@
                                     <div class="d-flex justify-content-between ">
                                         <div class=" p-0">
                                             <p>From</p>
-                                            <p class="bg-blur"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                            <p class="bg-blur" style="text-align: center; width: fit-content;"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
-                                        <div class=" mt-1 pt-3 pr-2 a-self-center">
+                                        <div class=" mt-1 pt-3 pb-3 pr-2">
                                             <img class="-ml-10" src="{{ asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div class="">
                                             <p>To</p>
-                                            <p class="bg-blur">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                            <p class="bg-blur" style="text-align: center; width: fit-content;">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
                                 </div>

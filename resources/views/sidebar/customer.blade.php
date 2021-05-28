@@ -123,7 +123,13 @@
                                     @foreach($users->bookings as $booking)
                                         <tr class="cursor-pointer">
                                             <td scope="row">
-                                                <p style="text-decoration: underline;margin: 0;">{{$booking->public_booking_id}}</p>
+                                                <p style="text-decoration: underline;margin: 0;">
+                                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                        {{$booking->public_booking_id}}
+                                                    @else
+                                                        {{$booking->public_enquiry_id}}
+                                                    @endif
+                                                </p>
                                             </td>
                                             <td class="">
                                                 @foreach(\App\Enums\BookingEnums::$STATUS as $status=>$val)

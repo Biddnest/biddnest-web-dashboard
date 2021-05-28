@@ -33,7 +33,8 @@ export function initMapPicker() {
         // must be undefined to use the default gMaps marker
         markerIcon: undefined,
         markerDraggable: true,
-        markerVisible: true
+        markerVisible: true,
+
     });
 
     $('.dest-map-picker').locationpicker({
@@ -99,6 +100,7 @@ export function initAllSelectBoxes() {
         });
     }
     if ($(".searchuser").length) {
+
         $(".searchuser").select2({
             multiple: true,
             tags: false,
@@ -128,6 +130,7 @@ export function initAllSelectBoxes() {
                 processResults: function(data) {
 
                     // Transforms the top-level key of the response object from 'items' to 'results'
+
                     var output = [];
                     for (var i = 0; i < data.data.users.length; i++) {
                         output.push({
@@ -146,7 +149,8 @@ export function initAllSelectBoxes() {
         });
     }
 
-    if ($(".selectvendor").length) {
+    if ($(".searchvendor").length) {
+
         $(".searchvendor").select2({
             multiple: true,
             tags: false,

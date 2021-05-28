@@ -10,6 +10,7 @@ use App\Enums\NotificationEnums;
 use App\Helper;
 use App\Models\Notification;
 use App\Models\OneSignalPlayer;
+use App\Models\User;
 use App\Models\Vendor;
 use App\PushNotification;
 
@@ -20,35 +21,59 @@ class NotificationController extends Controller
         $notification =new Notification;
         if($vendor != null)
         {
-            $vendors =Vendor::where(['organization_id'=>$vendor, 'deleted'=>CommonEnums::$NO])->pluck('id');
+            if($for == 4) {
+                $vendors = Vendor::where(['deleted' => CommonEnums::$NO])->pluck('id');
+                $for="vendor";
+            }
+            else
+                $vendors =Vendor::whereIn("organization_id", $vendor)->where(['deleted'=>CommonEnums::$NO])->pluck('id');
+
             foreach ($vendors as $org_vendor)
             {
                 $notification->title=$title;
                 $notification->for=$for;
                 $notification->desc=$desc;
                 $notification->vendor_id=$org_vendor;
+                $notification->generated_by=NotificationEnums::$GENERATE_BY['admin'];
                 $push_notification = $notification->save();
+
+                if (!$push_notification)
+                    return Helper::response(false, "Notification could not be added");
             }
-            NotificationController::sendTo("vendor", [$org_vendor], $title, $desc, []);
+            NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
         else {
-            $$notification->title = $title;
-            $notification->for = $for;
-            $notification->desc = $desc;
-            /* if($admin != null)
-             {
-                 $notification->admin_id=$admin;
-                 NotificationController::sendTo("admin", [$admin], $title, $desc, []);
-             }*/
+            if($for == 3) {
+                $users = User::where(["status" => CommonEnums::$YES, "deleted" => CommonEnums::$NO])->pluck('id');
+                $for="user";
+            }
+            else
+                $users=$user;
 
-            $notification->user_id = $user;
-            NotificationController::sendTo("user", [$user], $title, $desc, []);
+            foreach ($users as $single_user)
+            {
+                $notification->title = $title;
+                $notification->for = $for;
+                $notification->desc = $desc;
+                /* if($admin != null)
+                 {
+                     $notification->admin_id=$admin;
+                     NotificationController::sendTo("admin", [$admin], $title, $desc, []);
+                 }*/
 
-            $push_notification = $notification->save();
+                $notification->user_id = $single_user;
+                $notification->generated_by = NotificationEnums::$GENERATE_BY['admin'];
+
+                $push_notification = $notification->save();
+
+                if (!$push_notification)
+                    return Helper::response(false, "Notification could not be added");
+            }
+
+            NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
         }
 
-        if (!$push_notification)
-            return Helper::response(false, "Notification could not be added");
+
 
         return Helper::response(true, "Notification added successfully");
 
@@ -102,9 +127,13 @@ class NotificationController extends Controller
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
     }
 
-    public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url = null){
-            foreach ($user_id as $user)
-            {
+    public static function sendTo($type= "user", $user_id = null, $title, $desc, $data, $url = null){
+           if(!$user_id)
+               return true;
+
+//           return $user_id;
+           foreach ($user_id as $user)
+           {
                 $save_notification =new Notification;
 
                 if($type == "user")
@@ -116,8 +145,9 @@ class NotificationController extends Controller
                 $save_notification->title=$title;
                 $save_notification->desc=$desc;
                 $save_notification->url=$url;
+                $save_notification->generated_by=NotificationEnums::$GENERATE_BY['system'];
                 $save_notification->save();
-            }
+           }
 
         $players=[];
         foreach($user_id as $user) {

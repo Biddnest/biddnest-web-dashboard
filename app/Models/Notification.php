@@ -9,7 +9,7 @@ class Notification extends Model
 {
     protected $table = "notifications";
     use HasFactory;
-    protected $hidden = ['created_at','updated_at','deleted'];
+    protected $hidden = ['deleted'];
 
     public function user(){
         return $this->belongsTo(User::class);

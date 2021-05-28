@@ -15,7 +15,7 @@
                                         <img class="-mt-10" src="{{ asset('static/website/images/icons/location.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <p>{{json_decode($contact_details, true)['address']}}</p>
+                                        <h6>{{json_decode($contact_details, true)['address']}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -53,21 +53,20 @@
                                 <h5 class="card-title  pb-10">Latest Orders</h5>
 
                                 <div class="card view-content p-4">
-                                    @foreach($bookings as $booking)
                                     <div class="row f-initial ">
                                         <div class="col-md-5 col-sm-12 br-rg">
 
-                                            <div class="d-flex justify-content-between ">
+                                            <div class="d-flex justify-content-center" style="flex-direction: column;     align-items: center;">
                                                 <div class=" p-0">
                                                     <p>From</p>
-                                                    <p class="bg-blur">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                                    <p class="bg-blur" style="text-align: center; width: fit-content;">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                                 </div>
-                                                <div class=" mt-1 pt-3 pr-2 a-self-center">
+                                                <div class=" mt-1 pt-3 pb-3 pr-2 ml-3">
                                                     <img class="-ml-10" src="{{ asset('static/website/images/icons/moving-truck.svg')}}" />
                                                 </div>
                                                 <div class="">
                                                     <p>To</p>
-                                                    <p class="bg-blur">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                                    <p class="bg-blur" style="text-align: center; width: fit-content;">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                                 </div>
 
                                             </div>
@@ -146,15 +145,68 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3  col-sm-12">
-                                            <div>
-                                                <div class="d-flex center"><a class="white-text " data-toggle="modal" data-target="#for-friend" href="#"><button
-                                                            class="btn btn-theme-bg mt-2  white-bg">Get support</button></a>
+                                            @if($ticket_detail == "")
+                                                <div>
+                                                    <div class="d-flex center"><a class="white-text " data-toggle="modal" data-target="#for-friend" href="#"><button
+                                                                class="btn btn-theme-bg mt-2  white-bg">Get support</button></a>
+                                                    </div>
                                                 </div>
+                                            @else
+                                                <div class="">
+                                                    <p class="center text-center f-14">Ticket has already been raised</p>
+                                                    <a id="more" class="d-flex center" href="#" onclick="toggle_visibility('view_more_content');"> View more </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div id="view_more_content" class="togglenone">
+                                        <div class="ticket-id d-flex pt-4  border-top justify-content-between">
+                                            <p class="para-head l-cap">Ticket Id : <span>#{{$ticket_detail->id}}</span></p>
+
+                                                @switch($ticket_detail->status)
+                                                    @case(\App\Enums\TicketEnums::$STATUS['open'])
+                                                        <p class="bg-blur col-orange l-cap">Open</p>
+                                                    @break
+
+                                                    @case(\App\Enums\TicketEnums::$STATUS['rejected'])
+                                                        <p class="bg-blur col-orange l-cap">Rejected</p>
+                                                    @break
+
+                                                    @case(\App\Enums\TicketEnums::$STATUS['resolved'])
+                                                        <p class="bg-blur col-orange l-cap">Resolved</p>
+                                                    @break
+
+                                                    @case(\App\Enums\TicketEnums::$STATUS['closed'])
+                                                        <p class="bg-blur col-orange l-cap">Closed</p>
+                                                    @break
+                                                @endswitch
+                                        </div>
+                                        <div class="ticket-id border-top pt-4">
+                                            <h6 class="para-head ml-1">Subject</h6>
+                                            <p class="l-cap col-grey pl-1">{{$ticket_detail->heading}}</p>
+                                            <p class="para pl-1"> {{$ticket_detail->desc}}</p>
+                                        </div>
+                                        <div class="reply border-top pt-4">
+                                            <h5 class="para-head mb-3">Reply</h5>
+                                            <div class="d-flex">
+
+                                                <!-- <i class="fas fa-stop"></i> -->
+                                                @foreach($ticket_detail->reply as $reply)
+                                                    <i class="fa fa-square f-52"></i>
+                                                    <div class="mt-1">
+                                                        <h6 class="para-text bold ml-3 mb-0">{{ucwords($reply->admin->fname)}} {{ucwords($reply->admin->lname)}}</h6>
+                                                        <p class="text-muted ml-1">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</p>
+                                                        <p class="para ml-1"> {{$reply->chat}}
+                                                        </p>
+                                                    </div>
+                                                @endforeach
+                                                @if(count($ticket_detail->reply) >= 0)
+                                                    <p class="para ml-1">You Don't Recieve Any Reply From Support.</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                                    @if(count($bookings) <= 0)
+                                    @if($booking == "")
                                         <h6 class="card-title  pb-10">You Don't Have Any Latest Orders</h6>
                                     @endif
                                 </div>
@@ -162,7 +214,6 @@
                     </div>
                 </div>
                 @if(\Illuminate\Support\Facades\Session::get('account'))
-                        @foreach($bookings as $booking)
                             <div class="modal fade" id="for-friend" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                                 <div class="modal-dialog col-grey input-text-blue" role="document">
                                     <div class="modal-content  w-1000 mt-50  right-25">
@@ -190,15 +241,24 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
                 @endif
             </div>
         </section>
-        {{--<script>
+        <script type="text/javascript">
+            function toggle_visibility(id) {
+                var e = document.getElementById(id);
+                if (e.style.display == 'block') {
+                    e.style.display = 'none';
+                    document.getElementById("more").innerText = "View More";
+                } else {
+                    e.style.display = 'block';
+                    document.getElementById("more").innerText = "View Less";
+                }
+            }
+        </script>
+        <script>
             $(document).ready(function() {
-
                 var showHeaderAt = 150;
-
                 var win = $(window),
                     body = $('body');
                 if (win.width() > 400) {
@@ -211,6 +271,6 @@
                     });
                 }
             });
-        </script>--}}
+        </script>
     </div>
 @endsection

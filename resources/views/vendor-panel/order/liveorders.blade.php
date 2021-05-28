@@ -119,7 +119,7 @@
                             <table class="table text-left p-0  theme-text ">
                                 <thead class="secondg-bg  p-0 f-14">
                                     <tr>
-                                        <th scope="col" class="text-left" style="padding: 14px;">Order ID</th>
+                                        <th scope="col" class="text-left" style="padding: 14px;">{{--Order--}} ID</th>
                                         <th scope="col" style="padding: 14px;">From</th>
                                         <th scope="col" style="padding: 14px;">To</th>
                                         <th scope="col" style="padding: 14px;">Order Date</th>
@@ -145,7 +145,12 @@
                                     @foreach($bookings as $booking)
                                         <tr class="tb-border reject_{{$booking->id}}">
                                         <td scope="row" class="text-left" style="padding: 14px;" >
-                                                {{$booking->public_booking_id}}</td>
+                                            @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                {{$booking->public_booking_id}}
+                                            @else
+                                                {{$booking->public_enquiry_id}}
+                                            @endif
+                                        </td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td style="padding: 14px; " >{{json_decode($booking->destination_meta, true)['city']}}</td>
                                         <td style="padding: 14px; ">{{$booking->created_at->format('d M Y')}}</td>

@@ -6,6 +6,7 @@ use App\Enums\AdminEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
+use App\Enums\NotificationEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
@@ -250,6 +251,31 @@ class WebController extends Controller
            ->orderBy("id","DESC");
 
         return view('order.ordersbookings_past',[
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
+    }
+
+    public function ordersBookingsHold(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+       $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])
+           ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+
+        if(isset($request->search)){
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
+        }
+
+        $bookings->with("service")
+           ->with('organization')
+           ->orderBy("id","DESC");
+
+        return view('order.ordersbookings_hold',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
         ]);
     }
@@ -827,7 +853,7 @@ class WebController extends Controller
 
     public function pushNotification()
     {
-        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
+        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'generated_by'=>NotificationEnums::$GENERATE_BY['admin']])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
         return view('sliderandbanner.pushnotification', ['notifications'=>$notification]);
     }
 

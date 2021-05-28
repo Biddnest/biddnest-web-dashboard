@@ -1,4 +1,4 @@
-var totaltime = 30;
+var totaltime = 300;
 var finalTime = 0;
 
 
@@ -16,17 +16,17 @@ function update(percent){
                );
           }
 }
-var count = parseInt($('#time').text());
+var count = parseInt($('#time').data('count'));
 myCounter = setInterval(function () {
   count -=1;
-  $('#time').html(count);
+  $('#time').data('count');
     update(count);
-  
+
   if(count==finalTime) clearInterval(myCounter);
-}, 1000);   
+}, 1000);
 
 
-// 
+//
 
 
 const FULL_DASH_ARRAY = 283;

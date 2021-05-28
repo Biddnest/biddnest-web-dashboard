@@ -18,7 +18,7 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <li class="mar-vendor">
                             <a class="bec-vendor mr-2 " href="{{route('join-vendor')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" class="res-nav" />
                                 <span class="nav-menu-link">Become A Vendor</span>
@@ -35,7 +35,7 @@
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
                                 <span class="nav-menu-link">Contact Us</span></a>
                         </li>
-                        <li class="account-settings m-dropdown dropdown">
+                        <li class="account-settings m-dropdown dropdown mt-0">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px">
@@ -79,20 +79,20 @@
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">
                                     <ul class="d-content">
-                                        <li>
-                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> My Profile</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> <span class="ml-1">My Profile</span> </a>
                                         </li>
-                                        <li>
-                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" />Booking history</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
                                         </li>
-                                        <li>
-                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" />Ongoing Booking</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
                                         </li>
-                                        <li>
-                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" />My Request</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /> <span class="ml-1">My Request </span></a>
                                         </li>
-                                        <li>
-                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" />Logout</a>
+                                        <li class="drop-list" style="padding: 5px 10px;">
+                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -157,13 +157,16 @@
                     <div class="footer-phone row center mt-3 mb-2 ">
 
                         <div class="col-md-3 col-xs-3 br-r">
-                            <p class="footer-text footer-quick-links cursor-pointer">Blog</p>
+                            <a href="{{route('terms.page', ["slug"=>"about-us"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">About Us</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <p class="footer-text footer-quick-links cursor-pointer">Privacy</p>
+                            <a href="{{route('terms.page', ["slug"=>"terms-and-conditions"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('terms_and_conditions')}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
+                            <a href="{{route('terms.page', ["slug"=>"privacy-policies"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">Privacy</a>
+                        </div>
+                        <div class="col-md-3 col-xs-3 br-r">
+                            <a href="{{route('faq')}}" class="footer-text f-22 footer-quick-links cursor-pointer">FAQ</a>
                         </div>
                     </div>
                     <div class="row mt-30 footer-row border-bottom border-top p-3">
@@ -187,7 +190,7 @@
                                 <input type="tel" class="form-control -mr-4" id="contact_no" placeholder="Request a call back" maxlength="10" minlength="10"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary input-button f-4 call-request" type="button" data-url="{{route('request-callback')}}">
-                                        <i class="fa fa f-12 p-0"><span class="pl-1 f-14">Request</span></i>
+                                        <i class="fa fa f-12 p-0"><span class="p-1 f-14">Submit</span></i>
                                     </button>
                                 </div>
                             </div>
@@ -231,7 +234,8 @@
                     <div class="row mt-4 mb-1">
                         <div class="col-md-6 text-left">
                                     <span class="copyright footer-text fade text-view-center view-block ">
-                                        &copy; 2021 BIDDNEST Inc. All right reserved.</span>
+                                     Copyright © {{date("Y", time())}} All Rights Reserved by. <a href="#"
+                                                                                                  target="_blank">BIDNEST</a>.</span>
                         </div>
                         <div class="col-md-6">
                             <ul class="list-inline social-buttons">

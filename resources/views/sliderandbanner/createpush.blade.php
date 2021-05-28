@@ -52,8 +52,10 @@
                             <label class="full-name">Notification For</label>
                               <select id="zone" class="form-control br-5" name="for">
                                   <option value="">--Select--</option>
-                                  <option value="1" id="1" data-value="customer">Customer</option>
-                                  <option value="2" id="2" data-value="vendor">Vendor</option>
+                                  <option value="user" id="1" data-value="customer">Selected Customer</option>
+                                  <option value="vendor" id="2" data-value="vendor">Selected Vendor</option>
+                                  <option value="3"  data-value="customers">All Customers</option>
+                                  <option value="4"  data-value="vendors">All Vendors</option>
                               </select>
                             <span class="error-message">Please enter a valid banner name</span>
                           </div>
@@ -73,11 +75,9 @@
                           <div class="col-lg-6 user">
                               <div class="form-input">
                                   <label class="full-name ">Customer</label>
-                                  <select id="cust" class="form-control br-5 searchuser user" name="user">
+                                  <select id="cust" class="form-control br-5 searchuser user" name="user[]" multiple >
                                       <option value="">--Select--</option>
-                                      @foreach(\App\Models\User::where(['status'=>\App\Enums\CommonEnums::$YES, 'deleted'=>\App\Enums\CommonEnums::$NO])->get() as $customer)
-                                          <option value="{{$customer->id}}">{{ucfirst(trans($customer->fname))}} {{ucfirst(trans($customer->lname))}}</option>
-                                      @endforeach
+
                                   </select>
                                   <span class="error-message">Please enter a valid banner type</span>
                               </div>
@@ -85,11 +85,9 @@
                           <div class="col-lg-6 vendor">
                               <div class="form-input">
                                   <label class="full-name">Vendor</label>
-                                  <select id="vendor" class="form-control br-5 searchvendor vendor" name="vendor">
+                                  <select id="vendor" class="form-control br-5 searchvendor vendor" name="vendor[]" multiple>
                                       <option value="">--Select--</option>
-                                      @foreach(\App\Models\Organization::where('deleted', \App\Enums\CommonEnums::$NO)->get() as $org)
-                                          <option value="{{$org->id}}">{{ucfirst(trans($org->org_name))}} {{$org->org_type}}</option>
-                                      @endforeach
+
                                   </select>
                                   <span class="error-message">Please enter a valid banner type</span>
                               </div>

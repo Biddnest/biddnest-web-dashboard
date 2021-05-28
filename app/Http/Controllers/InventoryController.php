@@ -161,8 +161,10 @@ class InventoryController extends Controller
             $inventoryprice->material= $price['material'];
             $inventoryprice->price_economics= $price['price']['economics'];
             $inventoryprice->price_premium= $price['price']['premium'];
-            if($web)
-                $inventoryprice->ticket_status= CommonEnums::$TICKET_STATUS['open'];
+            if($web) {
+                $inventoryprice->ticket_status = CommonEnums::$TICKET_STATUS['open'];
+                $inventoryprice->status = CommonEnums::$NO;
+            }
             $result= $inventoryprice->save();
         }
 
@@ -212,7 +214,7 @@ class InventoryController extends Controller
             ];
 
             if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
-                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open']];
+                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open'], "status"=>CommonEnums::$NO];
 
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }
@@ -239,7 +241,7 @@ class InventoryController extends Controller
             return Helper::response(true,"Service deleted successfully");
     }
 
-    public static function getEconomicPrice($data, $inventory_quantity_type, $web=false)
+    public static function getEconomicPrice($data, $inventory_quantity_type, $web=false, $created_by_support=false)
     {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
@@ -247,7 +249,7 @@ class InventoryController extends Controller
                                                 "size"=>$item['size'],
                                                 "material"=>$item['material']])->min('price_economics'
                                             );
-            if($web == true)
+            if($web || $created_by_support)
             {
                 $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
             }else{
@@ -255,14 +257,14 @@ class InventoryController extends Controller
             }
 //            $quantity = $inventory_quantity_type ==  ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
 //             GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
-           $finalprice += $minprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+           $finalprice += $minprice ?  $minprice * $quantity * GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0;
         }
 
         return $finalprice;
 
     }
 
-    public static function getPremiumPrice($data , $inventory_quantity_type, $web=false)
+    public static function getPremiumPrice($data , $inventory_quantity_type, $web=false, $created_by_support=false)
     {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
@@ -271,7 +273,7 @@ class InventoryController extends Controller
                                                 "material"=>$item['material']])->min('price_premium');
 
 //            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
-            if($web == true)
+            if($web == true || $created_by_support == true)
             {
                 $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
             }else{

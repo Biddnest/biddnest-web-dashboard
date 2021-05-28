@@ -38,6 +38,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-hold')}}" aria-controls="home" aria-selected="true">On Hold</a>
+                                    </li>
                                 </ul>
                             </h3>
                         </div>
@@ -69,7 +72,7 @@
                                 <tbody class="mtop-20  f-13">
                                 @foreach($bookings as $booking)
                                     <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
-                                        <td scope="row">{{$booking->public_booking_id}}</td>
+                                        <td scope="row">{{$booking->public_enquiry_id}}</td>
                                         <td>{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
                                     <!-- <td>

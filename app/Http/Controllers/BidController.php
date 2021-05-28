@@ -59,7 +59,7 @@ class BidController extends Controller
                 $vendor_ids[] = $vendor['id'];
             }
 
-            NotificationController::sendTo("vendor", [$vendor_ids], "New booking request received.", "Tap to respond.", [
+            NotificationController::sendTo("vendor", $vendor_ids, "New booking request received.", "Tap to respond.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" =>$public_booking_id
             ]);
@@ -146,10 +146,10 @@ class BidController extends Controller
                                     "status"=>BidEnums::$STATUS['active']
                                     ]);
 
-            NotificationController::sendTo("vendor", $vendor_id, "You Can Re-bid On This Booking.", "Tap to respond.", [
+           /* NotificationController::sendTo("vendor", $vendor_id, "You Can Re-bid On This Booking.", "Tap to respond.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
-            ] );
+            ] );*/
 
             $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 
@@ -192,7 +192,7 @@ class BidController extends Controller
 
         $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['payment_pending']);
 
-        $won_vendor_id = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['won']])->pluck("vendor_id");
+       /* $won_vendor_id = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['won']])->pluck("vendor_id");
         NotificationController::sendTo("vendor", $won_vendor_id, "Hurrey ! You Won Bid On This Booking.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
@@ -208,7 +208,7 @@ class BidController extends Controller
         NotificationController::sendTo("vendor", $expired_vendor_id, "Oops ! This Booking Is Expired.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
-        ] );
+        ] );*/
 
         return true;
     }

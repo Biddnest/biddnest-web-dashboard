@@ -793,13 +793,14 @@ class Route extends Controller
              'designation'=>'required|string',
              'image'=>'required',
              'heading'=>'required|string',
-             'desc'=>'required|string'
+             'desc'=>'required|string',
+             'rating'=>'required'
          ]);
 
          if($validation->fails())
              return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc);
+         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc, $request->rating);
      }
 
     public function testimonial_edit(Request $request)
@@ -810,13 +811,14 @@ class Route extends Controller
             'designation'=>'required|string',
             'image'=>'required',
             'heading'=>'required|string',
-            'desc'=>'required|string'
+            'desc'=>'required|string',
+            'rating'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TestimonialController::update($request->id, $request->name, $request->designation, $request->image, $request->heading, $request->desc);
+        return TestimonialController::update($request->id, $request->name, $request->designation, $request->image, $request->heading, $request->desc, $request->rating);
     }
 
     public function testimonial_delete(Request $request)
@@ -1076,12 +1078,12 @@ class Route extends Controller
 
     public function changeStatus(Request $request)
     {
-        return TicketReplyController::changeStatus($request->id, $request->data);
+        return TicketReplyController::changeStatus($request->id, $request->status);
     }
 
     public function changeStatusPrice(Request $request)
     {
-        return InventoryController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->data);
+        return InventoryController::changeStatus($request->id, $request->org_id, $request->cat_id, $request->status);
     }
 
     public function changeStatusBranch(Request $request)
@@ -1171,7 +1173,7 @@ class Route extends Controller
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->id);
     }
 
-    public function booking_reject(Request $request)
+   /* public function booking_reject(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'reason' => 'required|string',
@@ -1183,7 +1185,7 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->id);
-    }
+    }*/
 
     public function booking_add_bid(Request $request)
     {

@@ -67,26 +67,26 @@
                          </div>
                          <div class="col-lg-6">
 
-                             {{-- <label class="full-name theme-text bold f-14 pt-4">Ratings</label>
+                            <label class="full-name theme-text bold f-14 pt-4">Ratings</label>
                                                           <div class="rating">
-                                                            <input type="radio" name="rating" id="rating-5">
-                                                            <label for="rating-5"></label>
-                                                            <input type="radio" name="rating" id="rating-4">
-                                                            <label for="rating-4"></label>
-                                                            <input type="radio" name="rating" id="rating-3">
-                                                            <label for="rating-3"></label>
-                                                            <input type="radio" name="rating" id="rating-2">
-                                                            <label for="rating-2"></label>
-                                                            <input type="radio" name="rating" id="rating-1">
-                                                            <label for="rating-1"></label>
-                                                       </div>--}}
+                                                              <input type="radio" class="star-input" name="rating" id="star-1" value="5" required @if($testimonials && ($testimonials->ratings == 5)) checked @endif>
+                                                              <label for="star-1" class="star"></label>
+                                                              <input type="radio" class="star-input" name="rating" id="star-2" value="4" required @if($testimonials && ($testimonials->ratings == 4)) checked @endif>
+                                                              <label for="star-2" class="star"></label>
+                                                              <input type="radio" class="star-input" name="rating" id="star-3" value="3" required @if($testimonials && ($testimonials->ratings == 3)) checked @endif>
+                                                              <label for="star-3" class="star"></label>
+                                                              <input type="radio" class="star-input" name="rating" id="star-4" value="2" required @if($testimonials && ($testimonials->ratings == 2)) checked @endif>
+                                                              <label for="star-4" class="star"></label>
+                                                              <input type="radio" class="star-input" name="rating" id="star-5" value="1" required @if($testimonials && ($testimonials->ratings == 1)) checked @endif>
+                                                              <label for="star-5" class="star"></label>
+                                                       </div>
                              <label class="full-name theme-text bold f-14 pt-4">Heading</label>
                              <input type="text" name="heading" placeholder="Awesome Service" name="heading" value="@if($testimonials){{$testimonials->heading}}@endif" class="form-control br-5" required>
                          </div>
                          <div class="col-lg-12">
                              <div class="form-group theme-text">
                                  <label class="pt-4 f-14 bold">Description</label>
-                                 <textarea class ="form-control" rows = "3" name="desc" placeholder = "Player Details" required>@if($testimonials){{$testimonials->desc}}@endif</textarea>
+                                 <textarea class ="form-control" rows = "3" name="desc" placeholder = "Player Details" required>@if($testimonials){!!$testimonials->desc!!}@endif</textarea>
                                  <span class="error-message">Please enter valid Description</span>
                              </div>
                          </div>

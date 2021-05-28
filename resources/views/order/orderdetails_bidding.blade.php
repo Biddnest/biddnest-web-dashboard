@@ -296,7 +296,7 @@
                                             <div class="form-input">
                                                 <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
                                                 <div class="d-felx justify-content-between" style="margin-top: 20px;">
-                                                        <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
+                                                        <input type="text" class="custom_slider custom_slider_1 range" name="man_power"  data-min="0" data-max="100" data-from="0" data-to="100" data-type="double" data-step="1" />
 
                                                 </div>
                                                 <span class="error-message">Please enter valid </span>

@@ -77,11 +77,19 @@ class TicketReplyController extends Controller
         return Helper::response(true, "status updated Successfully");
     }
 
-    public static function changeAproovedBranchStatus($id, $status)
+    public static function changeApprovedBranchStatus($id, $status)
     {
 
     }
-    public static function changeAproovedPriceStatus($id, $status)
+    public static function changeApprovedPriceStatus($id, $status)
+    {
+
+    }
+    public static function changeRescheduleBooking($id, $status)
+    {
+
+    }
+    public static function changeCancelBooking($id, $status)
     {
 
     }

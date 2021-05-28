@@ -30,7 +30,7 @@ class PayoutController extends Controller
 //        $schedule_from = Carbon::parse('last sunday')->format("Y-m-d H:i:s");
 //        $schedule_to = Carbon::parse('last saturday')->format("Y-m-d H:i:s");
 
-        $payouts = Payout::where("dispatch_at", "<=", Carbon::now())
+      $payouts = Payout::where("dispatch_at", "<=", Carbon::now())
             ->where("status", ">=", PayoutEnums::$STATUS['scheduled'])
             ->with(['organization'=>function($query){
                 $query->with('kyc');
@@ -41,7 +41,8 @@ class PayoutController extends Controller
 
 
 
-            $rx = new RazorpayX(Settings::where("key","razorpayx_key")->pluck('value')[0], Settings::where("key","razorpayx_secret")->pluck('value')[0]);
+        $rx = new RazorpayX(Settings::where("key","razor_key")->pluck('value')[0], Settings::where("key","razor_secret")->pluck('value')[0]);
+
             foreach($payouts as $payout){
 
                 if(!$payout->organization->parent_org_id){
@@ -55,7 +56,7 @@ class PayoutController extends Controller
 
 
                 $payload = [
-                    "account_number"=> json_decode($kyc->banking_details,true)['account_no'],
+                    "account_number"=> "7878780080316316",
                     "fund_account_id"=> $fa,
                     "amount"=> $payout->final_payout * 100,
                     "currency"=> "INR",
@@ -67,7 +68,8 @@ class PayoutController extends Controller
                     "notes"=> $payout->meta
                 ];
 
-                $create = $rx->payout->create($payload);
+                 $rx->payout();
+                return $create = $rx->create($payload);
 
                 if($create['status']){
 

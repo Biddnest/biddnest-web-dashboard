@@ -45,7 +45,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
-        Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
+//        Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);
 
         Route::post('/distance',[ApiRouter::class,'getDistance']);
@@ -57,7 +57,6 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/recent',[ApiRouter::class,'getRecentBooking']);
 
-
         Route::prefix('payment')->group(function () {
             Route::get('/summary',[ApiRouter::class,'paymentDetails']);
             Route::post('/initiate',[ApiRouter::class, 'intiatePayment']);
@@ -67,6 +66,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('request')->group(function () {
             Route::post('/reschedule',[ApiRouter::class,'createRescheduleTicket']);
             Route::post('/canceled',[ApiRouter::class,'createCancellationTicket']);
+            Route::post('/rejected',[ApiRouter::class,'createRejectedTicket']);
         });
     });
 

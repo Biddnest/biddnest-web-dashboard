@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingEnums;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helper;
@@ -381,7 +382,7 @@ class TicketController extends Controller
 
     public static function createCallBack($ticket_type, $phone)
     {
-        $meta=["phone"=>$phone];
+        $meta=["phone"=>$phone, "public_booking_id"=>null];
         $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
         $body = "Request to call back on ".$phone;
         $ticket = new Ticket;
@@ -389,6 +390,28 @@ class TicketController extends Controller
         $ticket->desc = $body;
         $ticket->type = $ticket_type;
         $ticket->meta = json_encode($meta);
+
+        if(!$ticket->save())
+            return Helper::response(false, "Could'nt create ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+    }
+
+    public static function createRejectCall($sender_id, $ticket_type, $data)
+    {
+        $meta=["Public_booking_id"=>$data];
+        $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+        $body = "Request to Cancel this Oreder ".$data;
+        $ticket = new Ticket;
+        $ticket->heading = $title;
+        $ticket->desc = $body;
+        $ticket->user_id = $sender_id;
+        $ticket->type = $ticket_type;
+        $ticket->meta = json_encode($meta);
+
+         $booking_id = Booking::where("public_booking_id", $data)->pluck('id')[0];
+         Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['bounced']]);
+        BookingsController::statusChange($booking_id, BookingEnums::$STATUS['bounced']);
 
         if(!$ticket->save())
             return Helper::response(false, "Could'nt create ticket.");

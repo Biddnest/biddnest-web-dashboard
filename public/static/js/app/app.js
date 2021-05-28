@@ -61,7 +61,6 @@ const env = "development";
 if (env != "development")
     Logger.setLevel(Logger.OFF);
 
-
 // getLocationPermission();
 
 /* AJAX Universal */
@@ -211,7 +210,6 @@ $("body").on('change', ".field-toggle", function(event) {
     }
 });
 
-
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
     console.log('show');
@@ -250,6 +248,7 @@ $("body").on('click', ".modal-toggle", function(event) {
     // $($(this).data("modal")).toggleClass("show");
     return false;
 });
+
 $("body").on('click', ".fullscreen-modal-body .close", function(event) {
     console.log("close");
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
@@ -261,7 +260,6 @@ $("body").on('click', ".fullscreen-modal-body .cancel", function(event) {
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
     return false;
 });
-
 
 $("body").on('change', ".inventory-select", function(event) {
     console.log("change");
@@ -279,6 +277,35 @@ $("body").on('change', ".inventory-select", function(event) {
     size.map((value)=>{
         $(this).closest(".inventory-snip").find(".size").append('<option value="'+value+'">'+value+'</option>')
     });
+    return false;
+});
+
+$("body").on('change', ".notification", function(event) {
+    console.log("change");
+    var id=$(this).val();
+    console.log(id);
+    if(id == "user")
+    {
+        $(this).closest(".d-flex").find(".vendor").addClass("hidden");
+        $(this).closest(".d-flex").find(".user").removeClass("hidden");
+        $(this).closest(".d-flex").find(".userselect").attr("required", "required");
+        $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
+    }
+    if(id == "vendor")
+    {
+        $(this).closest(".d-flex").find(".user").addClass("hidden");
+        $(this).closest(".d-flex").find(".vendor").removeClass("hidden");
+        $(this).closest(".d-flex").find(".vendorselect").attr("required", "required");
+        $(this).closest(".d-flex").find(".userselect").removeAttr("required", "required");
+    }
+    if(id == 3 || id == 4)
+    {
+        $(this).closest(".d-flex").find(".vendor").addClass("hidden");
+        $(this).closest(".d-flex").find(".user").addClass("hidden");
+        $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
+        $(this).closest(".d-flex").find(".userselect").removeAttr("required", "required");
+    }
+
     return false;
 });
 

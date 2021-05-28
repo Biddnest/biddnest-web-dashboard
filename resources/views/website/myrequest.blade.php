@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-md-4 col-xs-12 col-sm-12 ">
                                 <h5 class="heading mt-4 f-20 mb-3">New Request</h5>
-                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh"  data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
+                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>
                                     <div class="form-group">
                                         <label class="phone-num-lable">Category</label>
                                               <select name="category" class="form-control" required>

@@ -409,7 +409,8 @@ class TicketController extends Controller
         $ticket->type = $ticket_type;
         $ticket->meta = json_encode($meta);
 
-        $booking_id = Booking::where("public_booking_id", $data)->pluck('id')[0];
+         $booking_id = Booking::where("public_booking_id", $data)->pluck('id')[0];
+         Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['bounced']]);
         BookingsController::statusChange($booking_id, BookingEnums::$STATUS['bounced']);
 
         if(!$ticket->save())

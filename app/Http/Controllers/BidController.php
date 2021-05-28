@@ -146,10 +146,10 @@ class BidController extends Controller
                                     "status"=>BidEnums::$STATUS['active']
                                     ]);
 
-            NotificationController::sendTo("vendor", $vendor_id, "You Can Re-bid On This Booking.", "Tap to respond.", [
+           /* NotificationController::sendTo("vendor", $vendor_id, "You Can Re-bid On This Booking.", "Tap to respond.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
-            ] );
+            ] );*/
 
             $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
 

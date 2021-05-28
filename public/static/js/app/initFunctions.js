@@ -716,7 +716,7 @@ export function initCountdown() {
     }
 }
 
-export function initDatePicker(){
+export function initDateBookPicker(){
     if($(".date").length) {
 
         $('.date').datepicker({
@@ -724,6 +724,17 @@ export function initDatePicker(){
             multidate: true,
             format: 'yyyy-mm-dd',
             'startDate': '+1d',
+
+        });
+    }
+}
+
+export function initDatePicker(){
+    if($(".filterdate").length) {
+
+        $('.filterdate').datepicker({
+            // multidateSeparator:",",
+            format: 'yyyy-mm-dd',
 
         });
     }

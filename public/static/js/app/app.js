@@ -578,9 +578,9 @@ $("body").on('click', ".rejected", function(event) {
     return false;
 });
 
-$('.filterdate').datepicker({
+/*$('.filterdate').datepicker({
     format: 'yyyy-mm-dd'
-});
+});*/
 
 $("body").on('change', ".inventory-item-select", function(event) {
     console.log("change");

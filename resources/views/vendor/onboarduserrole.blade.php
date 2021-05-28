@@ -198,7 +198,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="">Date Of Birth</label>
-                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                 <span class="error-message">Please enter valid Date of Birth</span>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="">Date Of Joining</label>
-                                <input type="text" id="fullname" name="doj"  placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                <input type="text" id="fullname" name="doj"  placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                 <span class="error-message">Please enter valid Date of Joining</span>
                             </div>
                         </div>
@@ -214,7 +214,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="">Date Of Relieving</label>
-                                <input type="text" id="fullname" name="dor" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                <input type="text" id="fullname" name="dor" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                 <span class="error-message">Please enter valid Date of Relieving</span>
                             </div>
                         </div>
@@ -416,7 +416,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Birth</label>
-                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                     <span class="error-message">Please enter valid Date of Birth</span>
                                 </div>
                             </div>
@@ -424,7 +424,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Joining</label>
-                                    <input type="text" id="fullname" name="doj" value="{{$role->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="doj" value="{{$role->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                     <span class="error-message">Please enter valid Date of Joining</span>
                                 </div>
                             </div>
@@ -432,7 +432,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Relieving</label>
-                                    <input type="text" id="fullname" name="dor" value="{{$role->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="dor" value="{{$role->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                     <span class="error-message">Please enter valid Date of Relieving</span>
                                 </div>
                             </div>

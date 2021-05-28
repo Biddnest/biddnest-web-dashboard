@@ -358,7 +358,7 @@
                                                     <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                 @endforeach
                                             </div>
-                                            <input type="text" class="form-control br-5 filterdate selectdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
                                             <span class="error-message">Please enter valid</span>
                                         </div>
                                     </div>

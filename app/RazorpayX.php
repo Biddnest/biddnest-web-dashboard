@@ -9,6 +9,7 @@ namespace App;
 use App\Enums\CommonEnums;
 use App\Models\Settings;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 class RazorpayX
 {
@@ -36,9 +37,14 @@ class RazorpayX
     }
 
     public function create($data){
+        try{
 
         $response = $this->client->request('POST', $this->url, ['auth' => [$this->key, $this->secret], 'json'=>$data
         ]);
+        }
+        catch(ClientException $e){
+            return $e->getMessage();
+        }
         return json_decode($response,true);
     }
 

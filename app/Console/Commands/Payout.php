@@ -40,10 +40,10 @@ class Payout extends Command
     {
         switch ($this->argument('action')){
             case "schedule":
-                PayoutController::schedulePayouts();
+                $this->info(PayoutController::schedulePayouts());
                 break;
             case "dispatch":
-                PayoutController::disburse();
+                $this->info(PayoutController::disburse());
                 break;
 
             default:

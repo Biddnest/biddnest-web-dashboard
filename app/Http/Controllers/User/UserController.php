@@ -93,6 +93,8 @@ class UserController extends Controller
             {
                 Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email]]);
                 Session::put('sessionFor', "user");
+
+                Session::save();
                 return Helper::response(true, "Otp has been verified", ["user" => $data]);
             }
             else{

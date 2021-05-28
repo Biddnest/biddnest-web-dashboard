@@ -47,12 +47,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-
-//        'website' => [
-//            'driver' => 'session',
-//            'provider' => 'users',
-//            'hash' => false,
-//        ],
+/*
+        'website' => [
+            'driver' => 'session',
+            'provider' => 'users'
+        ],*/
     ],
 
     /*

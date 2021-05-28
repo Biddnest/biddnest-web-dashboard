@@ -103,31 +103,21 @@ class NotificationController extends Controller
     }
 
     public static function sendTo($type= "user", $user_id = [], $title, $desc, $data, $url = null){
-        /*if($type == "user")
-        {
             foreach ($user_id as $user)
             {
                 $save_notification =new Notification;
-                $save_notification->user_id=$user;
-                $save_notification->for="user";
+
+                if($type == "user")
+                    $save_notification->user_id=$user;
+                else
+                    $save_notification->vendor_id = $user;
+
+                $save_notification->for=$type;
                 $save_notification->title=$title;
                 $save_notification->desc=$desc;
                 $save_notification->url=$url;
                 $save_notification->save();
             }
-        }
-        elseif ($type == "vendor")
-        {
-            foreach ($user_id as $user) {
-                $save_notification = new Notification;
-                $save_notification->vendor_id = $user;
-                $save_notification->for="vendor";
-                $save_notification->title = $title;
-                $save_notification->desc = $desc;
-                $save_notification->url = $url;
-                $save_notification->save();
-            }
-        }*/
 
         $players=[];
         foreach($user_id as $user) {

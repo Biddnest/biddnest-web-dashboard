@@ -1173,7 +1173,7 @@ class Route extends Controller
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->id);
     }
 
-    public function booking_reject(Request $request)
+   /* public function booking_reject(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'reason' => 'required|string',
@@ -1185,7 +1185,7 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->id);
-    }
+    }*/
 
     public function booking_add_bid(Request $request)
     {

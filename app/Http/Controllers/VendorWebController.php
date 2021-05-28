@@ -301,6 +301,7 @@ class VendorWebController extends Controller
         $vehicle=VehicleController::getVehicles(Session::get('organization_id'), true);
         return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle]);
     }
+
     public function bookingRequirment(Request $request)
     {
         $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){

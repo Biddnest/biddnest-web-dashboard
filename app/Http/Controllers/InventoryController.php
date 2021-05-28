@@ -163,7 +163,7 @@ class InventoryController extends Controller
             $inventoryprice->price_premium= $price['price']['premium'];
             if($web) {
                 $inventoryprice->ticket_status = CommonEnums::$TICKET_STATUS['open'];
-                $inventoryprice->status = CommonEnums::$NO;
+                $inventoryprice->status = InventoryEnums::$STATUS['pending_approval'];
             }
             $result= $inventoryprice->save();
         }

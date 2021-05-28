@@ -125,9 +125,9 @@
                                     <td scope="row">{{Illuminate\Support\Str::limit($servic->heading, 30)}}</td>
                                     <td>
                                         @if($servic->vendor)
-                                            {{ucfirst(trans($servic->vendor->fname))}} {{ucfirst(trans($servic->vendor->lname))}}
-                                        @else
-                                            {{ucfirst(trans($servic->user->fname))}} {{ucfirst(trans($servic->user->lname))}}
+                                            {{ucfirst(trans($servic->vendor->fname)) ?? 'NA'}} {{ucfirst(trans($servic->vendor->lname)) ?? ''}}
+                                        @elseif($servic->user)
+                                            {{ucfirst(trans($servic->user->fname)) ?? 'NA'}} {{ucfirst(trans($servic->user->lname)) ?? ''}}
                                         @endif
                                     </td>
                                     <td>{{date('d M y', strtotime($servic->created_at))}}</td>

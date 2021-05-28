@@ -793,13 +793,14 @@ class Route extends Controller
              'designation'=>'required|string',
              'image'=>'required',
              'heading'=>'required|string',
-             'desc'=>'required|string'
+             'desc'=>'required|string',
+             'rating'=>'required'
          ]);
 
          if($validation->fails())
              return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc);
+         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc, $request->rating);
      }
 
     public function testimonial_edit(Request $request)
@@ -810,13 +811,14 @@ class Route extends Controller
             'designation'=>'required|string',
             'image'=>'required',
             'heading'=>'required|string',
-            'desc'=>'required|string'
+            'desc'=>'required|string',
+            'rating'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TestimonialController::update($request->id, $request->name, $request->designation, $request->image, $request->heading, $request->desc);
+        return TestimonialController::update($request->id, $request->name, $request->designation, $request->image, $request->heading, $request->desc, $request->rating);
     }
 
     public function testimonial_delete(Request $request)

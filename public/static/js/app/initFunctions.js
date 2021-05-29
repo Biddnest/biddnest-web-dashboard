@@ -729,7 +729,7 @@ export function initDateBookPicker(){
     }
 }
 
-export function initDatePicker(){
+/*export function initDatePicker(){
     if($(".filterdate").length) {
 
         $('.filterdate').datepicker({
@@ -738,7 +738,7 @@ export function initDatePicker(){
 
         });
     }
-}
+}*/
 
 export function initPopUp(){
     $(document).ready(function(){

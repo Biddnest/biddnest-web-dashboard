@@ -287,10 +287,9 @@ class BookingsController extends Controller
 
     }
 
-    public static function cancelBooking($public_booking_id, $reason, $desc, $user_id)
+    public static function cancelBooking($public_booking_id)
     {
-        $exist = Booking::where(["user_id" => $user_id,
-            "public_booking_id" => $public_booking_id])->first();
+        $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
         if (!$exist) {
             return Helper::response(false, "Order is not Exist");
         }
@@ -301,17 +300,12 @@ class BookingsController extends Controller
 
         $cancelbooking = Booking::where(["user_id" => $exist->user_id,
             "public_booking_id" => $exist->public_booking_id])
-            ->update(["status" => BookingEnums::$STATUS['cancelled'], "cancelled_meta" => json_encode(["reason" => $reason, "desc" => $desc], true)]);
-
-        // $bookingstatus = new BookingStatus;
-        // $bookingstatus->booking_id = $exist->id;
-        // $bookingstatus->status=BookingEnums::$STATUS['cancelled'];
-        // $result_status = $bookingstatus->save();
+            ->update(["status" => BookingEnums::$STATUS['cancelled']]);
 
         $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
 
         if (!$cancelbooking && !$result_status) {
-            return Helper::response(false, "Couldn't save data");
+            return Helper::response(false, "Couldn't Cancel Order");
         }
 
         dispatch(function () use ($exist) {
@@ -437,21 +431,28 @@ class BookingsController extends Controller
             return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
-    public static function reschedulBooking($public_booking_id, $dates, $user_id)
+    public static function reschedulBooking($public_booking_id, $date)
     {
-        $exist = Booking::where(["user_id" => $user_id,
-            "public_booking_id" => $public_booking_id])->first();
+        $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
         if (!$exist)
             return Helper::response(false, "Order is not Exist");
 
-        MovementDates::where("booking_id", $exist->id)->delete();
+//        MovementDates::where("booking_id", $exist->id)->delete();
 
-        foreach ($dates as $value) {
+
             $movementdates = new MovementDates;
             $movementdates->booking_id = $exist->id;
-            $movementdates->date = $value;
+            $movementdates->date = $date;
             $result_date = $movementdates->save();
-        }
+
+            $bid_exist = Bid::where(["booking_id"=>$exist->id, "organization_id"=>$exist->organization_id, "status"=>BidEnums::$STATUS['won']])->first();
+            $meta = json_decode($bid_exist['meta'], true);
+            $meta['moving_date'] = $date;
+
+            Bid::where(["booking_id"=>$exist->id, "organization_id"=>$exist->organization_id, "status"=>BidEnums::$STATUS['won']])
+                ->update([
+                    "meta"=>json_encode($meta)
+                ]);
 
         dispatch(function () use ($exist) {
 

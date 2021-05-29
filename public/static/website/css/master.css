@@ -10440,7 +10440,7 @@ ul.header-controls li.notifications:hover .dropdown {
   }
 
   .fa-close {
-    display: none !important;
+    display: flex !important;
   }
 
   .add-photos i.fa.fa-plus.fa-2x {

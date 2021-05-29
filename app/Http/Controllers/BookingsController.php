@@ -580,8 +580,8 @@ class BookingsController extends Controller
             if($request->type == "participated" || $request->type == "past")
                 $bookings->with('status_history');
 
-            if($request->type == "live")
-                $bookings->whereNotIn("status", [BookingEnums::$STATUS['hold']]);
+           /* if($request->type == "live")
+                $bookings->whereNotIn("status", [BookingEnums::$STATUS['hold']]);*/
 
             if($request->type == "past")
                 $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);

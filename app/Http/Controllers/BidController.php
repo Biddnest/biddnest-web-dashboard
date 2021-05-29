@@ -117,7 +117,7 @@ class BidController extends Controller
         if(!$min_amount || $low_quoted_vendors > 1)
         {
             $count_rebid=BookingStatus::where(["booking_id"=>$book_id, "status"=>BookingEnums::$STATUS['rebiding']])->count();
-            if($count_rebid >= Settings::where("key", "max_rebid_count")->pluck('value')[0])
+            if($count_rebid >= (int)Settings::where('key', 'max_rebid_count')->pluck('value')[0])
             {
                 BookingsController::statusChange($book_id, BookingEnums::$STATUS['hold']);
                 Booking::where("id", $book_id)->update(["status"=>BookingEnums::$STATUS['hold']]);

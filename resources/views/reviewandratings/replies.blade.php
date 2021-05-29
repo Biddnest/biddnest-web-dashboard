@@ -198,6 +198,12 @@
                                                             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                                                 Cancelled
                                                             @break
+                                                            @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                                                Bounced
+                                                            @break
+                                                            @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                                                Hold
+                                                            @break
                                                         @endswitch
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">

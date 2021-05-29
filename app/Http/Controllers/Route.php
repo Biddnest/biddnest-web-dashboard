@@ -1209,4 +1209,14 @@ class Route extends Controller
 
         return BidController::submitBidAdmin($request->all());
     }
+
+    public function rescheduleOrder(Request $request)
+    {
+
+    }
+
+    public function cancelOrder(Request $request)
+    {
+
+    }
 }

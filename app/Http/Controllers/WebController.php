@@ -968,7 +968,7 @@ class WebController extends Controller
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
         {
-            $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
+            return $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
         }
         elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
         {

@@ -38,7 +38,7 @@ class ApiRouteController extends Controller
             'phone' => 'required|string|min:10'
         ]);
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return UserController::login($request->phone);
 
@@ -56,7 +56,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return UserController::verifyLoginOtp($request->phone, $request->otp);
 
@@ -84,7 +84,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return UserController::signupUser($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $request->referral_code);
 
@@ -129,7 +129,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return UserController::getAppSliders($request->lat, $request->lng);
     }
@@ -142,7 +142,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return ServiceController::getForApp($request->lat, $request->lng);
     }
@@ -154,7 +154,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return SubServiceController::getSubservicesForApp($request->service_id);
     }
@@ -166,7 +166,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return InventoryController::getBySubserviceForApp($request->subservice_id);
     }
@@ -224,7 +224,7 @@ class ApiRouteController extends Controller
             ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return BookingsController::createEnquiry($request->all(), $request->token_payload->id, $request->movement_dates);
     }
@@ -237,7 +237,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->token_payload->id);
     }
@@ -251,7 +251,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->token_payload->id);
     }*/
@@ -263,7 +263,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return BookingsController::getBookingByPublicIdForApp($request->id,$request->token_payload->id);
     }
@@ -276,7 +276,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return BookingsController::reschedulBooking($request->public_booking_id, $request->movement_dates, $request->token_payload->id);
     }*/
@@ -303,7 +303,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return BookingsController::getfinalquote($request->public_booking_id, $request->token_payload->id);
     }
@@ -315,7 +315,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
             return BookingsController::getPaymentDetails($request->public_booking_id);
     }
@@ -328,7 +328,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
          $valid= CouponController::checkIfValid($request->public_booking_id, $request->coupon_code);
 
@@ -346,7 +346,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
     }
@@ -369,7 +369,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return ReviewController::add($request->token_payload->id,$request->public_booking_id, $request->review, $request->suggestion);
     }
@@ -388,7 +388,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
 
             return NotificationController::saveCustomerPlayer($request->player_id, $request->token_payload->id);
@@ -404,7 +404,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketController::create($request->token_payload->id, 3,  ["public_booking_id"=>$request->public_booking_id]);
     }
@@ -419,7 +419,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketController::create($request->token_payload->id, 2,  ["public_booking_id"=>$request->public_booking_id]);
     }
@@ -433,7 +433,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketController::createRejectCall($request->token_payload->id, 4, $request->public_booking_id);
     }
@@ -452,7 +452,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketController::createForUserApp($request->token_payload->id, $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
@@ -475,7 +475,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketController::addReplyFromUser($request->token_payload->id, $request->ticket_id, $request->reply);
     }
@@ -487,7 +487,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketController::getOneForUserApp($request->token_payload->id, $request->id);
     }
@@ -500,7 +500,7 @@ class ApiRouteController extends Controller
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return PaymentController::statusComplete($request->token_payload->id, $request->public_booking_id, $request->payment_id);
     }
@@ -519,7 +519,7 @@ class ApiRouteController extends Controller
             'destination.lng' => 'required'
         ]);
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return Helper::response(true, "Here is the distance", ["distance" => GeoController::distance($request->source['lat'], $request->source['lng'], $request->destination['lat'], $request->destination['lng'])]);
     }
@@ -530,7 +530,7 @@ class ApiRouteController extends Controller
             'public_booking_id' => 'required'
         ]);
         if ($validation->fails())
-            return Helper::response(false, "validation failed", $validation->errors(), 400);
+            return Helper::response(false, "validation failed", implode(",",$validation->messages()->all()), 400);
 
         return CouponController::getAvailableCouponsForBooking($request->public_booking_id);
     }
@@ -551,7 +551,7 @@ class ApiRouteController extends Controller
             'phone' => 'required'
         ]);
         if ($validation->fails())
-            return Helper::response(false, "validation failed", $validation->errors(), 400);
+            return Helper::response(false, "validation failed", implode(",",$validation->messages()->all()), 400);
 
         return UserController::updateMobile($request->token_payload->id, $request->phone);
     }
@@ -563,7 +563,7 @@ class ApiRouteController extends Controller
             'otp' => 'required'
         ]);
         if ($validation->fails())
-            return Helper::response(false, "validation failed", $validation->errors(), 400);
+            return Helper::response(false, "validation failed", implode(",",$validation->messages()->all()), 400);
 
         return UserController::verifyMobile($request->token_payload->id, $request->phone, $request->otp);
     }

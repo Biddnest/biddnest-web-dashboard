@@ -963,7 +963,7 @@ class WebController extends Controller
     {
         $service_status=[];
         $ticket_info=[];
-        return $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])

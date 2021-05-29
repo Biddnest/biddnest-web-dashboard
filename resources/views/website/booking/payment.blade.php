@@ -62,7 +62,7 @@
                                         <h5 class="coupon-code center d-flex">
                                             {{$coupon->code}}
                                         </h5>
-                                        <a href="#" class="copy" data-code="{{$coupon->code}}"><img class="m-0" src="{{asset('static/website/images/icons/copy.svg')}}" /></a>
+                                        <a href="#" class="copy" style="margin-top: 14px;" data-code="{{$coupon->code}}"><img class="m-0" src="{{asset('static/website/images/icons/copy.svg')}}" /></a>
                                     </div>
                                     <p style="white-space:normal !important;">{!! $coupon->desc !!}</p>
                                 </div>
@@ -72,20 +72,20 @@
                     <!-- Payment -->
                     <div class="mt-2">
                         <h6 class="ml-1 "> Select the payment method:</h6>
-                        <div class="d-flex row  justify-content-between mr-1 pl-3 ">
-                            <div class="col-md-2.5  card  bg-turnblue card-method" data-method="upi" style="width: 22%;">
+                        <div class="d-flex row  justify-content-around mr-1 pl-3 ">
+                            <div class="col-md-2.5  card  bg-turnblue card-method mt-2" data-method="upi" style="width: 22%; height:120px">
                                 <img style="width: 90px;" class="mt-1" src="{{asset('static/website/images/icons/upi.svg')}}" />
                                 <p class=" center p-2 -mt-10 text-white">UPI Payment</p>
                             </div>
-                            <div class="card col-md-2.5    bg-turnblue card-method" data-method="netbanking" style="width: 22%;">
+                            <div class="card col-md-2.5    bg-turnblue card-method mt-2" data-method="netbanking" style="width: 22%; height:120px">
                                 <img class="mt-1" src="{{asset('static/website/images/icons/upi1.svg')}}" />
                                 <p class=" center  p-2 text-white">Net Banking</p>
                             </div>
-                            <div class="card col-md-2.5   bg-turnblue card-method " data-method="card" style="width: 22%;">
+                            <div class="card col-md-2.5   bg-turnblue card-method mt-2" data-method="card" style="width: 22%; height:120px">
                                 <img class="mt-1 pt-2" src="{{asset('static/website/images/icons/upi2.svg')}}" />
                                 <p class=" center p-2 text-white">Debit Card</p>
                             </div>
-                            <div class="card col-md-2.5   bg-turnblue card-method " data-method="card" style="width: 22%;">
+                            <div class="card col-md-2.5   bg-turnblue card-method mt-2 " data-method="card" style="width: 22%; height:120px">
                                 <img class="mt-1 pt-2" src="{{asset('static/website/images/icons/upi3.svg')}}" />
                                 <p class=" center p-2 text-white">Credit Card</p>
                             </div>

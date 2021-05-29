@@ -4760,7 +4760,13 @@ div#filter button.btn:hover {
 }
 
 .tab button.active {
-  background-color: #2a2386 !important;
+  background: #2a2386 !important;
+  color: #fff !important;
+
+}
+.tab button.active .icon-svg{
+  fill: white !important;
+
 }
 
 .tab button:hover .icon-svg {
@@ -10573,9 +10579,9 @@ ul.header-controls li.notifications:hover .dropdown {
     margin: 0 -24px;
   }
 
-  .nav-item {
+  /* .nav-item {
     margin-left: 10px;
-  }
+  } */
   .nav-itemi {
     margin-right: 10px !important;
   }
@@ -10776,7 +10782,7 @@ ul.header-controls li.notifications:hover .dropdown {
   }
 
   .min-view {
-    justify-content: space-between !important;
+    justify-content: start !important;
     margin-right: 56px;
   }
 
@@ -12559,7 +12565,7 @@ input[type=radio].radio-selection-btn {
 
 img.req-search-image {
   max-width: 100%;
-  height: 170px;
+  height: fit-content !important;
 }
 
 .col-md-6.modal-first-inner-column {

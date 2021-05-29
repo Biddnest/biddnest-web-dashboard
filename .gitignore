@@ -15,4 +15,4 @@ yarn-error.log
 /public/company_reg_certificate
 /public/inventory
 .idea/
-
+/vendor

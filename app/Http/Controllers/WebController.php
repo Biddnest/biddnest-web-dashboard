@@ -963,12 +963,12 @@ class WebController extends Controller
     {
         $service_status=[];
         $ticket_info=[];
-        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        return $ticket=Ticket::where('id', $request->id)->with('reply')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
         {
-            return $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
+            $ticket_info=Booking::where('public_booking_id', json_decode($ticket->meta, true)['public_booking_id'])->with('organization')->with('driver')->first();
         }
         elseif ($ticket->type == TicketEnums::$TYPE['new_branch'])
         {

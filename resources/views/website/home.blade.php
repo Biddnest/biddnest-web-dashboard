@@ -58,8 +58,8 @@
             </div>
             <div style="text-align: center;">
                 @if(\Illuminate\Support\Facades\Session::get('account'))
-                <a href="#" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
-                        <button type="submit" class="btn btn-primary view-btn view-none">Book Now</button>
+                <a href="#" class="page-scroll btn btn-xl mar-top" style="position: relative!important; right: 0px!important; left: 0px!important;">
+                        <button type="submit" class="btn btn-primary view-btn ">Book Now</button>
                 </a>
 
                 @else
@@ -149,7 +149,7 @@
                     <div class="quote mb-view bg-white quote-container-5">
                         <p class="card-num">5</p>
 
-                        <img class="w-150" src="{{ asset('static/website/images/images/gifs/5.gif')}}" alt="some-picture" />
+                        <img class="w-150" src="{{ asset('static/website/images/images/gifs/truck.gif')}}" alt="some-picture" />
                         <h5 class="d-flex center theme-text how-work-step">Step 5</h5>
                         <h3 class="d-flex center theme-text how-work-title">
                             Get Moving!
@@ -455,12 +455,12 @@
                                 </div>
                             </div>
                             {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
-                            <button type="button" class="btn btn-theme-bg  full-width text-view-center mt-3 mb-4 padding-btn-res white-bg" style="padding: 6px 139px !important;">
+                            <button type="button" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
                                 Next
                             </button>
                             </a>--}}
                             <a class="weblogin">
-                                <button type="submit" class="btn btn-theme-bg  full-width text-view-center mt-3 mb-4 padding-btn-res white-bg" style="padding: 6px 139px !important;">
+                                <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
                                     Send OTP
                                 </button>
                             </a>

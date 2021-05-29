@@ -748,7 +748,11 @@
                                                     <!-- Modal Header -->
                                                     <div class="modal-header border-bottom ">
                                                         <h4 class="modal-title add-item-title theme-text ">Add Item</h4>
+                                                        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                                                     </div>
+                                                   
                                                     <!-- Modal body -->
                                                     <div class="modal-body add-item-body ">
                                                         <form class="requirements-modal ">
@@ -795,7 +799,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1  ">
+                                                                        <div class="input-group justify-content-between mt-1  mb-2">
                                                                             <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
@@ -847,7 +851,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1  ">
+                                                                        <div class="input-group justify-content-between mt-1 mb-2 ">
                                                                             <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
@@ -897,7 +901,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                        <div class="input-group justify-content-between mt-1 mb-2" >
                                                                             <span class="input-group-btn ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
@@ -947,7 +951,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                        <div class="input-group justify-content-between mt-1 mb-2" >
                                                                             <span class="input-group-btn  ">
                                                                                 <button
                                                                                     class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
@@ -997,7 +1001,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 " >
+                                                                        <div class="input-group justify-content-between mt-1 mb-2" >
                                                                             <span class="input-group-btn  ">
                                                                                 <button type="button "
                                                                                         class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
@@ -1085,22 +1089,22 @@
 
 
                                     <div class="row d-flex uploaded-image mb-5 ml-0 mr-0">
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <div class="col-md-2 pl-0 upload-image-container">
                                         <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
                                         <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <div class="col-md-2 pl-0 upload-image-container">
                                         <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
                                         <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <div class="col-md-2 pl-0 upload-image-container">
                                         <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
                                         <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
                                         </div>
-                                        <div class="col-md-2 pl-0 view-content upload-image-container">
+                                        <div class="col-md-2 pl-0 upload-image-container">
                                         <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
                                             <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>

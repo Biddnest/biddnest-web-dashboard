@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand -mt-10" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/logo.png')}}" /></a>
+                    <a class="navbar-brand -mt-10" href="{{route('home')}}"><img class="logo-small" src="{{ asset('static/website/images/images/logo.png')}}" /></a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -38,7 +38,8 @@
                         <li class="account-settings m-dropdown dropdown mt-0">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px; margin-left: -6px;
+">
                                     <defs>
                                         <style>
                                             .a {
@@ -124,11 +125,11 @@
                                         </a>--}}
                                         @if(\Illuminate\Support\Facades\Session::get('account'))
                                             <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
-                                                <button type="button" class="btn btn-primary m-60">Book Now</button>
+                                                <!-- <button type="button" class="btn btn-primary m-60 view-none">Book Now</button> -->
                                             </a>
                                         @else
                                             <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl d-content">
-                                                <button type="button" class="btn btn-primary m-60">Book Now</button>
+                                                <!-- <button type="button" class="btn btn-primary m-60 view-none">Book Now</button> -->
                                             </a>
                                         @endif
                                     </div>
@@ -154,7 +155,7 @@
 
         <footer class="bg-purple">
             <div class="container">
-                    <div class="footer-phone row center mt-3 mb-2 ">
+                    <div class="footer-phone row around  center mt-3 mb-2 ">
 
                         <div class="col-md-3 col-xs-3 br-r">
                             <a href="{{route('terms.page', ["slug"=>"about-us"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">About Us</a>
@@ -237,7 +238,7 @@
                                      Copyright © {{date("Y", time())}} All Rights Reserved by. <a href="#"
                                                                                                   target="_blank">BIDNEST</a>.</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 around">
                             <ul class="list-inline social-buttons">
                                 <li>
                                     <a href="#"><i class="fa fa-twitter"></i></a>

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 <style>
     a.menu{
-        color: #0f0c75 !important;
+        color: #3d4751 !important;
         font-size: 14px !important;
     }
 
@@ -129,24 +129,116 @@ label {
  }
 
  @media (max-width:480px)  { 
-                .testimonial-content{
-                     margin-left: 0px !important; 
-            
-                }
-                .mar-vendor{
-                    margin-left: 10px !important; 
+    .navbar-default .navbar-nav .bec-vendor{
+        background: none !important;
+    }
+    .testimonial-content{
+            margin-left: 0px !important; 
 
-                }
+    }
+    .mar-vendor{
+        margin-left: 10px !important; 
 
-                .padding-btn-res{
-                    padding: 5px 60px !important;
-    width: fit-content;
-                }
-               
-            
-            
-             }
+    }
 
+    .padding-btn-res{
+        padding: 5px 60px !important;
+        width: fit-content;
+    }
+
+    .view-none{
+        display: none !important;
+    }
+    .p-50{
+    padding-top: 0 !important;
+    }
+
+    .navbar-default{
+        background: none !important;
+    }
+    body.fixed .header-fixed{
+        padding: 0px 0px!important;
+
+    }
+    .join-now {
+        padding: 4px 26px !important;
+        background-color: #fdc403;
+        color: #fff;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        max-width: fit-content;
+        margin: 0 auto;
+
+    }
+    .reverse{
+    display: flex;
+    flex-direction: column-reverse;
+    }
+    
+    .center-align{
+    text-align: center !important;
+
+    }
+    center{
+        display: flex !important;
+
+    }
+    .around{
+    display: flex !important;
+    justify-content: space-around !important;
+    }
+    ul.social-buttons{
+    margin-right: 0px;
+
+    }
+
+    .text-gray{
+    color: #343d45 !important;
+
+    }
+    .pl-8{
+    padding-left: 8px !important;
+    }
+    a.menu{
+        color: #fff !important;
+    }
+    .logo-small{
+        width: 100px;
+        margin-top: 7px;
+
+    }
+    .testimonialslideshow{
+        margin-left: 0px !important;
+
+    }
+    
+
+             
+             
+             
+ }
+
+
+ .tab .active{
+    background-color: #2a2386 !important;
+    color: #fff !important;
+ }
+ 
+
+    a.menu{
+        color:  #3d4751 ;
+    }
+    .text-gray{
+    color: #343d45 !important;
+
+    }
+
+
+    .testimonialslideshow{
+        margin-left: 50px;
+
+    }
 
 
 

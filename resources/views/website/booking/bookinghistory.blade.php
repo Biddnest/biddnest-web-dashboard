@@ -92,7 +92,7 @@
                                 @if(count($bookings)== 0)
                                     <div class="container" id="no-booking-show">
                                         <div class="">
-                                            <img src="{{asset('static/website/images/images/no-booking.svg')}}" />
+                                            <img class="img-res" src="{{asset('static/website/images/images/no-booking.svg')}}"  />
                                         </div>
                                         <div class="italic theme-text">
                                             <h1 class="f-14 center"> You have no History of Bookings</h1>

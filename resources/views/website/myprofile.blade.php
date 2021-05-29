@@ -38,7 +38,7 @@
                                         </div>
                                     @endif
                             </div>
-                            <div class="col-md-9 f-16 mt-1 ">
+                            <!-- <div class="col-md-9 f-16 mt-1 ">
                                 <div class="top-aliments  d-flex justify-content-between">
                                     <div class="col">
                                         <div>
@@ -85,6 +85,71 @@
                                             <i data-toggle="modal" data-target="#edit-profile" class="icon dripicons-pencil cursor-pointer"></i>
                                         </div>
                                     </div>
+                                </div>
+
+                            </div> -->
+
+                            <div class="col-md-9 f-16 mt-1 ">
+                        
+                              
+                                
+                                <div class="row d-flex justify-content-start text-left">  
+                                    <div class="col-6"> 
+                                            <p class="mb-0 mt-2 l-cap">
+                                                First Name
+                                            </p>
+                                            <p class="fw-500 f-18">
+                                               {{ucwords($user->fname)}}
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-4">
+                                            <p class="mt-2 mb-0 l-cap">Last Name</p>
+                                            <p class="fw-500 f-18">{{ucwords($user->lname)}}</p>
+                                        </div>
+                                        <div class="col-2 d-flex justify-content-end">
+                                        <div class=" mt-2">
+                                            <i data-toggle="modal" data-target="#edit-profile" class="icon dripicons-pencil cursor-pointer"></i>
+                                        </div>
+                                    </div>
+                                    
+                            
+                                </div>
+                                <div class="row d-flex justify-content-start text-left">  
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <p class="mt-2 mb-0  l-cap">
+                                                Email Id</p>
+                                            <p class="fw-500 f-18">
+                                                {{$user->email}}
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <p class="mt-2 mb-0  l-cap">
+                                                Gender
+                                            </p>
+                                            <p class="fw-500 f-18">
+                                                {{$user->gender}}
+                                            </p>
+                                        </div>
+                            
+                                </div>
+                                <div class="row d-flex justify-content-start text-left">  
+                                <div class="col-6">
+                                            <p class="mt-2 mb-0  l-cap">Phone Number </p>
+                                            <p class="fw-500 f-18">{{$user->phone}}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="mt-2 mb-0  l-cap">Date of Birth </p>
+                                            <p class="fw-500 f-18">{{date('d M Y', strtotime($user->dob))}}</p>
+                                        </div>
+                            
+                                </div>
+                                
+                                
+                                <div class="top-aliments  d-flex justify-content-between">
+                                  
+                                   
                                 </div>
 
                             </div>

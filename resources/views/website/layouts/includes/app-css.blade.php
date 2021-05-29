@@ -113,6 +113,9 @@ label {
 
 
 
+
+
+
 .border-add{
     border: 4px solid #fdc403;
     width: 197px;
@@ -191,9 +194,9 @@ label {
 
                 .top-aliments{
                     width: 100%  !important;
-    display: flex  !important;
-    justify-content: center  !important;
-    flex-wrap: wrap  !important;
+                    display: flex  !important;
+                    justify-content: center  !important;
+                    flex-wrap: wrap  !important;
 
                 }
                 .bg-blur {
@@ -214,30 +217,59 @@ label {
                 .w-84{
                     width: 84% !important;
                 }
-
                 .custom-file{
                     height: calc(3.25rem + 8px);
 
                 }
-
                 .mar-vendor{
                     margin-left: 10px !important; 
 
                 }
+                .img-res{
+                    width: 100%;
+                    height: auto;
 
+                }
 
-            
-             }
-
-
-
-
-             img.req-search-image{
+                img.req-search-image{
                 height: fit-content !important;
                 max-width:100%
 
              }
+             .card-method{
+                 /* width: max-content !important; */
+                 width: 34% !important;
 
+
+             }
+
+             .ml-20{
+                 margin-left: 20px !important;
+            }
+             .row-horizonal{
+                display: flex !important;
+                justify-content: flex-start !important; 
+                flex-direction: row !important;
+                flex-wrap: inherit !important;
+             }
+             .col-paddingnon{
+                 padding-right: 0px !important; 
+                 padding-left: 0px !important;
+
+
+             }
+
+             .margin-view{
+                 margin-left : 1rem !important;
+             }
+
+             .modal-dialog.addItemModal {
+                max-width: 100%;
+}
+
+
+             }
+           
  .card .required-item {
      width: fit-content !important;
 

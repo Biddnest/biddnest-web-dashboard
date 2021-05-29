@@ -817,6 +817,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Http\\Middleware\\VerifyJwtToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyJwtToken.php',
         'App\\Http\\Middleware\\redirectToDashboard' => __DIR__ . '/../..' . '/app/Http/Middleware/redirectToDashboard.php',
         'App\\Http\\Middleware\\redirectToVendorDashboard' => __DIR__ . '/../..' . '/app/Http/Middleware/redirectToVendorDashboard.php',
+        'App\\Imports\\InventoryImport' => __DIR__ . '/../..' . '/app/Imports/InventoryImport.php',
         'App\\Jobs\\SendOtp' => __DIR__ . '/../..' . '/app/Jobs/SendOtp.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\AdminZone' => __DIR__ . '/../..' . '/app/Models/AdminZone.php',

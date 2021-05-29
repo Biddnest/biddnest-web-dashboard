@@ -271,7 +271,7 @@ class OrganisationController extends Controller
         $organizations->verification_status = $exist['verification_status'];
         if($vendor)
         {
-            $organizations->status =$exist['status'];
+            $organizations->status =OrganizationEnums::$STATUS['pending_approval'];
             $organizations->ticket_status = CommonEnums::$TICKET_STATUS['open'];
         }
         else

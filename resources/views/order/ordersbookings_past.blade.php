@@ -38,6 +38,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Past Orders</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-hold')}}" aria-controls="home" aria-selected="true">On Hold</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-bounced')}}" aria-controls="home" aria-selected="true">Bounced Orders</a>
+                                </li>
                             </ul>
                         </h3>
                     </div>

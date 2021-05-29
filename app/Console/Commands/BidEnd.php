@@ -53,7 +53,7 @@ class BidEnd extends Command
             $output = BidController::getbookings($this->argument('id'));
             $this->comment('Afected orders '.json_encode($output));
         }
-       
+
 
         // $this->comment(json_encode($output));
     }

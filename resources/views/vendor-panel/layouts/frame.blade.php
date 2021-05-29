@@ -31,7 +31,7 @@
                         <li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
                             <div class="dropdown">
                                 <ul>
-                                    @foreach(\App\Models\Notification::where('vendor_id', \Illuminate\Support\Facades\Session::get('organization_id'))->latest()->limit(5)->get() as $notification)
+                                    @foreach(\App\Models\Notification::where('vendor_id', \Illuminate\Support\Facades\Session::get('organization_id'))->latest()->limit(15)->get() as $notification)
                                         <li><a href="{{$notification->url ?? '#'}}">
                                                 <div class="d-flex notification-msg ">
                                                     <div class="order-icon">

@@ -47,10 +47,10 @@
                                              </div>
                                          </div>
                                          <p class="card-text theme-text f-12">
-                                             {{$testimonial->desc}}
+                                             {!! $testimonial->desc !!}
                                          </p>
                                          <small class="theme-text end  f-14">- {{$testimonial->name}}, </small>
-                                         <small class="theme-text"><span class="end f-12">S{{$testimonial->designation}}</span></small>
+                                         <small class="theme-text"><span class="end f-12">{{$testimonial->designation }}</span></small>
                                      </div>
                                  </div>
                              </div>

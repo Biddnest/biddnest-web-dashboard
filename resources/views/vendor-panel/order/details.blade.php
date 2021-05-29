@@ -358,7 +358,7 @@
                                                     <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                 @endforeach
                                             </div>
-                                            <input type="text" class="form-control br-5 filterdate selectdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
                                             <span class="error-message">Please enter valid</span>
                                         </div>
                                     </div>
@@ -367,7 +367,7 @@
                                             <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
                                             <div class="d-felx justify-content-between" style="margin-top: 10px !important; ">
                                                 <div class="d-flex range-input-group justify-content-between flex-row">
-                                                    <input type="text" class="custom_slider custom_slider_1 range validate-input" name="man_power"  data-min="0" data-max="5" data-from="0" data-to="5" data-type="double" data-step="1" />
+                                                    <input type="text" class="custom_slider custom_slider_1 range validate-input" name="man_power"  data-min="0" data-max="100" data-from="0" data-to="100" data-type="double" data-step="1" />
                                                 </div>
                                             </div>
                                             <span class="error-message">Please enter valid </span>

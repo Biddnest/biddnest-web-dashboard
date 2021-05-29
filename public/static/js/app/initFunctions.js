@@ -100,6 +100,7 @@ export function initAllSelectBoxes() {
         });
     }
     if ($(".searchuser").length) {
+
         $(".searchuser").select2({
             multiple: true,
             tags: false,
@@ -129,6 +130,7 @@ export function initAllSelectBoxes() {
                 processResults: function(data) {
 
                     // Transforms the top-level key of the response object from 'items' to 'results'
+
                     var output = [];
                     for (var i = 0; i < data.data.users.length; i++) {
                         output.push({
@@ -147,7 +149,8 @@ export function initAllSelectBoxes() {
         });
     }
 
-    if ($(".selectvendor").length) {
+    if ($(".searchvendor").length) {
+
         $(".searchvendor").select2({
             multiple: true,
             tags: false,
@@ -713,7 +716,7 @@ export function initCountdown() {
     }
 }
 
-export function initDatePicker(){
+export function initDateBookPicker(){
     if($(".date").length) {
 
         $('.date').datepicker({
@@ -721,6 +724,17 @@ export function initDatePicker(){
             multidate: true,
             format: 'yyyy-mm-dd',
             'startDate': '+1d',
+
+        });
+    }
+}
+
+export function initDatePicker(){
+    if($(".filterdate").length) {
+
+        $('.filterdate').datepicker({
+            // multidateSeparator:",",
+            format: 'yyyy-mm-dd',
 
         });
     }

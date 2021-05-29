@@ -369,6 +369,7 @@ class BookingsController extends Controller
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
             ->where("status", "<=", [BookingEnums::$STATUS["payment_pending"]])
+            ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
 //            ->with('inventories')
 //            ->with('status_history')
@@ -390,6 +391,7 @@ class BookingsController extends Controller
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
             ->whereIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->where("deleted", CommonEnums::$NO)
             ->orderBy('id', 'DESC')
             ->with('movement_dates')
             ->with('inventories')->with('status_history')->with('service')
@@ -416,8 +418,9 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold']])
             ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
+            ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
 //            ->with('inventories')
 //            ->with('status_history')
@@ -533,7 +536,7 @@ class BookingsController extends Controller
         }
         else {
             $organization_id = $request->token_payload->organization_id;
-            $vendor_id = $request->token_payload->id;;
+            $vendor_id = $request->token_payload->id;
         }
 
         $bid_id = Bid::where("organization_id", $organization_id);
@@ -576,6 +579,9 @@ class BookingsController extends Controller
             ->with('user');
             if($request->type == "participated" || $request->type == "past")
                 $bookings->with('status_history');
+
+            if($request->type == "live")
+                $bookings->whereNotIn("status", [BookingEnums::$STATUS['hold']]);
 
             if($request->type == "past")
                 $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);

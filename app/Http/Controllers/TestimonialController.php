@@ -11,17 +11,18 @@ use Intervention\Image\ImageManager;
 
 class TestimonialController extends Controller
 {
-    public static function add($name, $designation, $image, $heading, $desc)
+    public static function add($name, $designation, $image, $heading, $desc, $ratings)
     {
         $image_man = new ImageManager(array('driver' => 'gd'));
         $uniq = uniqid();
 
         $testimonial=new Testimonials;
-        $testimonial->image =Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Testimonials");
+        $testimonial->image =Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 100),"BD".$uniq.".png","Testimonials");
         $testimonial->name =$name;
         $testimonial->designation= $designation;
         $testimonial->heading =$heading;
         $testimonial->desc =$desc;
+        $testimonial->ratings =$ratings;
         $save_result = $testimonial->save();
 
         if(!$save_result)
@@ -30,7 +31,7 @@ class TestimonialController extends Controller
         return Helper::response(true,"save Testimonials successfully", ["testimonials"=>Testimonials::findOrFail($testimonial->id)]);
     }
 
-    public static function update($id, $name, $designation, $image, $heading, $desc)
+    public static function update($id, $name, $designation, $image, $heading, $desc, $ratings)
     {
         $image_man = new ImageManager(array('driver' => 'gd'));
         $uniq = uniqid();
@@ -39,11 +40,12 @@ class TestimonialController extends Controller
           "name"=>$name,
           "designation"=>$designation,
           "heading"=>$heading,
-          "desc"=>$desc
+          "desc"=>$desc,
+            "ratings" =>$ratings
         ];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),"BD".$uniq.".png","Testimonials");
+            $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 100),"BD".$uniq.".png","Testimonials");
 
         $update_result=Testimonials::where("id", $id)->update($update_data);
 

@@ -152,6 +152,8 @@ Route::prefix('web/api')->group(function () {
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
     Route::put('/{id}/{org_id}/{cat_id}/change-price-status',[Router::class,'changeStatusPrice'])->name("change_priceticket_status");
     Route::put('/{id}/change-branch-status',[Router::class,'changeStatusBranch'])->name("change_Branchticket_status");
+    Route::put('/{id}/reschedule-order',[Router::class,'rescheduleOrder'])->name("reschedule-order");
+    Route::put('/{id}/cancel-order',[Router::class,'cancelOrder'])->name("cancel-order");
 
 
     /*vendor web apis start*/
@@ -232,6 +234,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/enquiry',[WebController::class,'ordersBookingsEnquiry'])->name("enquiry-booking");
             Route::get('/live',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
             Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
+            Route::get('/hold',[WebController::class,'ordersBookingsHold'])->name("orders-booking-hold");
+            Route::get('/bounced',[WebController::class,'ordersBookingsBounced'])->name("orders-booking-bounced");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");

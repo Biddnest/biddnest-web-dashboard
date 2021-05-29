@@ -42,6 +42,7 @@ import {
     initTextAreaEditor,
     initTooltip,
     initDatePicker,
+    initDateBookPicker,
     initPopUp,
     initPopUpAdmin,
     initRangeSlider,
@@ -54,6 +55,7 @@ import {
 } from './app/initFunctions.js';
 
 barba.init({
+    cacheIgnore: true,
     views: [{
         namespace: 'slider',
         afterEnter(data) {
@@ -73,7 +75,6 @@ barba.init({
     ]
 });
 
-
 barba.hooks.before((data) => {
     NProgress.inc();
     $(".main-content").css("opacity", 0.5);
@@ -91,6 +92,7 @@ barba.hooks.after((data) => {
 
     initMapPicker();
     initDatePicker();
+    initDateBookPicker();
     initPopUp();
     initPopUpAdmin();
     initTooltip();
@@ -116,6 +118,7 @@ $(document).ready(function(){
     initSlick();
     initCountdown();
     initDatePicker();
+    initDateBookPicker();
     initPopUp();
     initPopUpAdmin();
     initTooltip();

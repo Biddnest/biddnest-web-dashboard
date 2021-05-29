@@ -14,4 +14,6 @@ class InventoryEnums{
     public static $SIZE = ["small"=>1, "medium"=>2, "large"=>3];
 
     public static $CATEGORY = ["electronics", "furniture", "appliances", "electrical", "automobile", "others"];
+
+    public static $STATUS = ["pending_approval"=>0, "active"=>1, "inactive"=>2];
 }

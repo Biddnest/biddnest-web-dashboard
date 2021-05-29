@@ -10,4 +10,5 @@ return array(
     'Requests' => array($vendorDir . '/rmccue/requests/library'),
     'RandomLib' => array($vendorDir . '/paragonie/random-lib/lib'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
+    'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
 );

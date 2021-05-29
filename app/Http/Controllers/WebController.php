@@ -6,6 +6,7 @@ use App\Enums\AdminEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
+use App\Enums\NotificationEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
@@ -149,7 +150,6 @@ class WebController extends Controller
         ]);
     }
 
-
     public function apiSettings()
     {
         $setting =Settings::whereNotIn('key', ["contact_details"])->get();
@@ -186,7 +186,7 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
+        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced']])
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->where("zone_id", $zone);
 
         if(isset($request->search)){
@@ -254,12 +254,62 @@ class WebController extends Controller
         ]);
     }
 
+    public function ordersBookingsHold(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+       $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])
+           ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+
+        if(isset($request->search)){
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
+        }
+
+        $bookings->with("service")
+           ->with('organization')
+           ->orderBy("id","DESC");
+
+        return view('order.ordersbookings_hold',[
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
+    }
+
+    public function ordersBookingsBounced(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+       $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])
+           ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+
+        if(isset($request->search)){
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
+        }
+
+        $bookings->with("service")
+           ->with('organization')
+           ->orderBy("id","DESC");
+
+        return view('order.ordersbookings_bounced',[
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
+    }
+
     public function orderDetailsCustomer(Request $request)
     {
 
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
-        $query->limit(1)->orderBy("id","DESC");
-    }])->with('inventories')->with('driver')->with('organization')->findOrFail($request->id);
+            $query->limit(1)->orderBy("id","DESC");
+        }])->with('inventories')->with('driver')->with('organization')->findOrFail($request->id);
 
         $hist = [];
 
@@ -291,6 +341,7 @@ class WebController extends Controller
             "booking" => $booking
         ]);
     }
+
     public function orderDetailsVendor(Request $request)
     {
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
@@ -311,6 +362,7 @@ class WebController extends Controller
             "booking" => $booking
         ]);
     }
+
     public function orderDetailsQuotation(Request $request)
     {
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
@@ -331,6 +383,7 @@ class WebController extends Controller
             "booking" => $booking
         ]);
     }
+
     public function orderDetailsBidding(Request $request)
     {
        $booking = Booking::with('status_history')->with(['biddings'=>function($bid){
@@ -351,6 +404,7 @@ class WebController extends Controller
             "booking" => $booking
         ]);
     }
+
     public function orderDetailsReview(Request $request)
     {
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
@@ -380,11 +434,13 @@ class WebController extends Controller
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('order.createorder', ['categories'=>$category, 'inventories'=>$inventory]);
     }
+
     public function confirmOrder(Request $request)
     {
         $booking =Booking::where('id', $request->id)->first();
         return view('order.confirmorder', ['booking'=>$booking]);
     }
+
     public function rejectOrder(Request $request)
     {
         $booking =Booking::where('id', $request->id)->first();
@@ -827,7 +883,7 @@ class WebController extends Controller
 
     public function pushNotification()
     {
-        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
+        $notification =Notification::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'generated_by'=>NotificationEnums::$GENERATE_BY['admin']])->with('user')->with('admin')->with('vendor')->paginate(CommonEnums::$PAGE_LENGTH);
         return view('sliderandbanner.pushnotification', ['notifications'=>$notification]);
     }
 
@@ -923,6 +979,14 @@ class WebController extends Controller
         {
             $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->first();
             $service_status=$ticket_info->ticket_status;
+        }
+        elseif ($ticket->type == TicketEnums::$TYPE['call_back'])
+        {
+            if(json_decode($ticket->meta, true)['public_booking_id']) {
+                $ticket_info = InventoryPrice::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
+                $service_status = [];
+            }
+
         }
 
         return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);

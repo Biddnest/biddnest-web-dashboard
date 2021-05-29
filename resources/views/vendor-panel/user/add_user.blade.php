@@ -121,7 +121,7 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="">Date Of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                 </div>
@@ -135,14 +135,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="">Date Of Joining</label>
-                                        <input type="text" id="fullname" name="doj" value="{{$roles->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                        <input type="text" id="fullname" name="doj" value="{{$roles->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                         <span class="error-message">Please enter valid Date of Joining</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="">Date Of Relieving</label>
-                                        <input type="text" id="fullname" name="doj" value="{{$roles->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                        <input type="text" id="fullname" name="dor" value="{{$roles->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
                                         <span class="error-message">Please enter valid Date of Relieving</span>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Address Line 1</label>
-                                        <input type="text" id="fullname" name="addres1" value="@if($roles){{json_decode($roles->meta, true)['address_line1'] ?? ''}}@endif" placeholder="Flat no, Street no" class="form-control" required>
+                                        <input type="text" id="fullname" name="address1" value="@if($roles){{json_decode($roles->meta, true)['address_line1'] ?? ''}}@endif" placeholder="Flat no, Street no" class="form-control" required>
                                         <span class="error-message">Please enter valid
                                         Address Line 1</span>
                                     </div>
@@ -159,7 +159,7 @@
                                     <div class="form-input">
                                         <label class="full-name">Address Line 2</label>
                                         <span class="">
-                                        <input type="text" id="fullname"  name="addres2" value="@if($roles){{json_decode($roles->meta, true)['address_line2'] ?? ''}}@endif" placeholder="Landmark, Area" class="form-control" required>
+                                        <input type="text" id="fullname"  name="address2" value="@if($roles){{json_decode($roles->meta, true)['address_line2'] ?? ''}}@endif" placeholder="Landmark, Area" class="form-control" required>
                                         <span class="error-message">Please enter valid
                                         Address Line 2</span>
                                         </span>

@@ -16,7 +16,7 @@ class CreateTableBookingInventories extends Migration
         Schema::create('booking_inventories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("booking_id")->index("booking_id");
-            $table->unsignedBigInteger("inventory_id")->index("inventory_id");
+            $table->unsignedBigInteger("inventory_id")->index("inventory_id")->nullable();
 
             $table->foreign('booking_id' )->references("id")->on('bookings');
             $table->foreign('inventory_id')->references("id")->on('inventories');

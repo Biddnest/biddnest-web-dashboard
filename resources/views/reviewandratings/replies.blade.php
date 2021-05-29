@@ -207,7 +207,7 @@
                                                         @endswitch
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'])
+                                                       {{-- @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'])
                                                             <input type="text" id="movement_dates" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan"  />
                                                             <span class="error-message">please enter valid date</span>
 
@@ -219,7 +219,7 @@
                                                             <a class="white-text p-10" href="#" data-url="{{route('cancel-order'), ['id'=>$ticket_info->public_booking_id]}}">
                                                                 <button class="btn theme-bg white-text w-30">Reject</button>
                                                             </a>
-                                                        @endif
+                                                        @endif--}}
                                                     </div>
                                                 </div>
                                             @elseif($tickets->type == \App\Enums\TicketEnums::$TYPE['new_branch'])

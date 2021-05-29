@@ -121,6 +121,7 @@ class BidController extends Controller
             {
                 BookingsController::statusChange($book_id, BookingEnums::$STATUS['hold']);
                 Booking::where("id", $book_id)->update(["status"=>BookingEnums::$STATUS['hold']]);
+                return true;
             }
 
             $order = Booking::where("id", $book_id)->first();

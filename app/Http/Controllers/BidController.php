@@ -245,7 +245,7 @@ class BidController extends Controller
         if($exist_bid->status == BidEnums::$STATUS['bid_submitted']){
             $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
 
-            if($submit_by == $vendor_id)
+            if($submit_by->id == $vendor_id)
                 $name = "you";
             else
                 $name = $submit_by->fname." ".$submit_by->lname;
@@ -257,7 +257,7 @@ class BidController extends Controller
         if($exist_bid->status == BidEnums::$STATUS['rejected']){
             $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
 
-            if($submit_by == $vendor_id)
+            if($submit_by->id == $vendor_id)
                 $name = "you";
             else
                 $name = $submit_by->fname." ".$submit_by->lname;

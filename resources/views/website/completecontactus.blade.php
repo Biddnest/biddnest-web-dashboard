@@ -14,12 +14,12 @@
                                         <img class="-mt-10" src="{{ asset('static/website/images/icons/location.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <h6>{{json_decode($contact_details, true)['address']}}</h6>
+                                        <h6 class="pl-2">{{json_decode($contact_details, true)['address']}}</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4  col-sm-12">
-                                <div class="d-flex -mt-10 justify-content-center a-item min-view theme-text">
+                                <div class="d-flex -mt-10 justify-content-start a-item min-view theme-text">
                                     <div class="">
                                         <img src="{{ asset('static/website/images/icons/mail.svg')}}" />
                                     </div>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 -mt-10  col-sm-12">
-                                <div class="d-flex  a-item min-view  justify-content-center">
+                                <div class="d-flex  a-item min-view  justify-content-start">
                                     <div class="mb-1 -mr-10">
                                         <img src="{{ asset('static/website/images/icons/call.svg')}}" />
                                     </div>

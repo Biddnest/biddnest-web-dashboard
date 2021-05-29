@@ -117,9 +117,11 @@ class BidController extends Controller
         if(!$min_amount || $low_quoted_vendors > 1)
         {
             $count_rebid=BookingStatus::where(["booking_id"=>$book_id, "status"=>BookingEnums::$STATUS['rebiding']])->count();
-            if($count_rebid >= 3)
+            if($count_rebid >= (int)Settings::where('key', 'max_rebid_count')->pluck('value')[0])
             {
                 BookingsController::statusChange($book_id, BookingEnums::$STATUS['hold']);
+                Booking::where("id", $book_id)->update(["status"=>BookingEnums::$STATUS['hold']]);
+                return true;
             }
 
             $order = Booking::where("id", $book_id)->first();
@@ -229,18 +231,43 @@ class BidController extends Controller
         if(!password_verify($data['pin'], $vendor->pin))
             return Helper::response(false,"Incorrect Pin entered");
 
-        $exist_bid = Bid::where("organization_id", $org_id)
-                            ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
-                            ->whereIn("status", [BidEnums::$STATUS['active']])
-                            ->first();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
-
         $startTime = Carbon::now();
         $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
         $totalDuration = $finishTime->diffInSeconds($startTime);
         if($totalDuration <= 3 || $startTime >= $finishTime)
-            return Helper::response(false,"Bidding has been closed for this booking");
+            return Helper::response(false,"Bidding time has finished for this booking. Could not place your bid.");
+
+
+        $exist_bid = Bid::where("organization_id", $org_id)
+                            ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
+//                            ->whereIn("status", [BidEnums::$STATUS['active']])
+                            ->first();
+        if($exist_bid->status == BidEnums::$STATUS['bid_submitted']){
+            $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
+
+            if($submit_by == $vendor_id)
+                $name = "you";
+            else
+                $name = $submit_by->fname." ".$submit_by->lname;
+
+            /*Current activity will be refreshed in the app with the refresh_current_activity key*/
+            return Helper::response(false,"Bid has already been submitted for this order by $name",["refresh_current_activity"=>true]);
+        }
+
+        if($exist_bid->status == BidEnums::$STATUS['rejected']){
+            $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
+
+            if($submit_by == $vendor_id)
+                $name = "you";
+            else
+                $name = $submit_by->fname." ".$submit_by->lname;
+
+            /*Current activity will be refreshed in the app with the refresh_current_activity key*/
+            return Helper::response(false,"This bid has been rejected by $name. Couldn't submit bid.",["refresh_current_activity"=>true]);
+        }
+
+        if($exist_bid->status != BidEnums::$STATUS['active'])
+            return Helper::response(false,"Bidding has been closed for this order.",["refresh_current_activity"=>true]);
 
         foreach($data['inventory'] as $key)
         {
@@ -422,7 +449,6 @@ class BidController extends Controller
                     $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;
                 else
                     $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] : 0.00;
-
             }
         }
         if($web)

@@ -23,20 +23,20 @@
             </div>
 
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: none;">
+                <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: auto;">
                         <p>FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0 source" type="text" placeholder="SMR Apartments " readonly>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" type="text" placeholder="Mahadevapura, Bangalore" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: auto;" type="text" placeholder="SMR Apartments " readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: auto;" type="text" placeholder="Mahadevapura, Bangalore" readonly>
                         <input  type="hidden" id="source-lat" name="source_lat" readonly>
                         <input  type="hidden" id="source-lng" name="source_lng" readonly>
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12" style="cursor: none;">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: none;">
+                <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: auto;">
                         <p>TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0 destination" type="text" name="destination" placeholder="Majestic Villas" readonly>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" type="text" placeholder="Gandhinagar, Chennai" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" name="destination" placeholder="Majestic Villas" readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: auto;" type="text" placeholder="Gandhinagar, Chennai" readonly>
                         <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
                         <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
                     </div>
@@ -59,7 +59,7 @@
             <div style="text-align: center;">
                 @if(\Illuminate\Support\Facades\Session::get('account'))
                 <a href="#" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
-                        <button type="submit" class="btn btn-primary view-btn">Book Now</button>
+                        <button type="submit" class="btn btn-primary view-btn view-none">Book Now</button>
                 </a>
 
                 @else
@@ -183,7 +183,7 @@
                     <h2 class="section-heading pb-0 mt-30">Join us as a Vendor</h2>
                     <p class="section-subheading text-muted">Lorem ipsum</p>
                 </div>
-                <div class="col-lg-6 col-xs-12 tab">
+                <div class="col-lg-6 col-xs-12 tab active">
                     <button class="tablinks vendor " onclick="openContent(event, 'content_accurate')" id="defaultOpen">
                         <span class="svg-container ml-2">
                             <svg class="icon-svg" id="XMLID_386_" xmlns="http://www.w3.org/2000/svg" width="57.789" height="55.473" viewBox="0 0 57.789 55.473">
@@ -308,10 +308,10 @@
     <!-- section refer and earn -->
     <section id="refer-earn" class="refer-earn p-10 mt-3 ">
         <div class="container">
-            <div class="row center">
-                <div class="col-lg-7">
-                    <div class="refer-head mt-3">Refer and Earn</div>
-                    <div class="refer-para mb-4 mt-1">
+            <div class="row center reverse">
+                <div class="col-lg-7 ">
+                    <div class="refer-head mt-3 center-align">Refer and Earn</div>
+                    <div class="refer-para mb-4 mt-1 center-align">
                         Dummy Text of the printing and typesetting industry. Lorem Ipsum has been the industry's started dummy text
                     </div>
                     <div class="btn-refer">
@@ -331,9 +331,9 @@
 
     <section id="get-app">
         <div class="container  text-view-center">
-            <div class="row mt-4 mb-4">
+            <div class="row mt-4 mb-4 reverse" >
                 <div class="col-lg-6 col-xs-12 mt-2">
-                    <div class="section-app-heading">
+                    <div class="section-app-heading text-gray">
                         <h1>Get <span class="site-app">BIDDNEST</span> App Now!</h1>
                     </div>
                     <p class="section-app-subheading m-0">
@@ -493,9 +493,9 @@
                             <span class="error-message">Please enter valid</span>
                         </div>
                     </div>
-                    <div class="col-sm-4" style="margin-top: 24px;">
-                        <a href="#" class="page-scroll btn join-now btn-responsive">
-                            <button type="button" class="btn btn-primary view-btn closed" data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
+                    <div class="col-sm-4" style="margin-top: 18px;">
+                        <a href="#" class="page-scroll btn btn-responsive">
+                            <button type="button" class="btn btn-primary view-btn closed " data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
                         </a>
 
                     </div>
@@ -528,8 +528,8 @@
                                 <span class="error-message">Please enter valid</span>
                             </div>
                         </div>
-                        <div class="col-sm-4" style="margin-top: 24px;">
-                            <a href="#" class="btn join-now btn-responsive">
+                        <div class="col-sm-4" style="margin-top: 18px;">
+                            <a href="#" class="btn  btn-responsive">
                                 <button type="button" class="btn btn-primary view-btn closed " data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
                             </a>
 

@@ -215,10 +215,10 @@
                                         <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;">Lets get the delivery details
                                         </h4>
                                         <div class="accordion " id="delivery-details ">
-                                        <p class="address-category pl-0 ">Category</p>
-                                            <div class="row">
+                                            <p class="address-category pl-0 ">Category</p>
+                                            <div class="row row-horizonal">
                                                 @foreach($categories as $category)
-                                                    <div class="col-md-4 col-lg-4 col-sm-4 ">
+                                                    <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon">
                                                         <label >
                                                         <input type="radio" name="product" value="{{$category->id}}" class="card-input-element" />
                                                             <div class="panel panel-default card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer " style="border-radius: 6px;"   >
@@ -436,9 +436,9 @@
                                         <p class="text-muted ">Step 3/ 6</p>
                                         <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;" >Lets get your requirements</h4>
                                     </div>
-                                    <div class="row d-flex justify-content-center">
+                                    <div class="row d-flex justify-content-center row-horizonal">
 
-                                        <div class="col-md-2 col-lg-2 col-sm-4">
+                                        <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
@@ -449,7 +449,7 @@
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 ">
+                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
                                                 1 bhk
                                                 </div>
                                                 </div>
@@ -457,7 +457,7 @@
                                             </label>
 
                                         </div>
-                                        <div class="col-md-2 col-lg-2 col-sm-4">
+                                        <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
@@ -468,7 +468,7 @@
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 ">
+                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
                                                 1 bhk
                                                 </div>
                                                 </div>
@@ -476,7 +476,7 @@
                                             </label>
 
                                         </div>
-                                        <div class="col-md-2 col-lg-2 col-sm-4">
+                                        <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                                             <label>
                                             <input type="radio" name="product" class="card-input-element01" />
@@ -487,7 +487,7 @@
                                                         <i class="fa fa-home fa-2x "></i>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 ">
+                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
                                                 1 bhk
                                                 </div>
                                                 </div>
@@ -544,7 +544,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="row gutter=[3] mb-4 mt-3">
+                                    <div class="row  mb-4 mt-3">
                                         <div class="col-md-4 view-content ">
                                             <div class="card required-item " style="width: fit-content;">
                                                 <div class="container-image-item ">
@@ -767,7 +767,7 @@
                                                             </div>
                                                         </form>
                                                         <div class="row modal-item-container pb-4 pt-4 ">
-                                                            <div class="col-md-4 ">
+                                                            <div class="col-md-4 mt-2  ">
                                                                 <div class="row modal-item-inner-container ">
                                                                     <div class="col-md-6 modal-first-inner-column ">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
@@ -819,7 +819,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4 ">
+                                                            <div class="col-md-4 mt-2 ">
                                                                 <div class="row modal-item-inner-container ">
                                                                     <div class="col-md-6 modal-first-inner-column ">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
@@ -869,7 +869,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4 ">
+                                                            <div class="col-md-4  mt-2 ">
                                                                 <div class="row modal-item-inner-container ">
                                                                     <div class="col-md-6 modal-first-inner-column ">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
@@ -919,9 +919,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row modal-item-container pb-5 pt-4 ">
-                                                            <div class="col-md-4 ">
+                                                            <div class="col-md-4 mt-2">
                                                                 <div class="row modal-item-inner-container ">
                                                                     <div class="col-md-6 modal-first-inner-column ">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
@@ -971,7 +969,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4 ">
+                                                            <div class="col-md-4 mt-2 ">
                                                                 <div class="row modal-item-inner-container ">
                                                                     <div class="col-md-6 modal-first-inner-column ">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">

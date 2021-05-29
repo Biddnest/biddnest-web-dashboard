@@ -422,7 +422,6 @@ class BidController extends Controller
                     $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] : 0.00;
                 else
                     $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] : 0.00;
-
             }
         }
         if($web)

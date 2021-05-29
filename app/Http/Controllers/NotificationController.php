@@ -128,6 +128,7 @@ class NotificationController extends Controller
     }
 
     public static function sendTo($type, $user_id, $title, $desc, $data, $url = null){
+        //$type = "user" / "vendor
            if(count($user_id) < 1)
                return true;
 

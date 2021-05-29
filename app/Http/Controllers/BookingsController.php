@@ -536,7 +536,7 @@ class BookingsController extends Controller
         }
         else {
             $organization_id = $request->token_payload->organization_id;
-            $vendor_id = $request->token_payload->id;;
+            $vendor_id = $request->token_payload->id;
         }
 
         $bid_id = Bid::where("organization_id", $organization_id);
@@ -581,7 +581,7 @@ class BookingsController extends Controller
                 $bookings->with('status_history');
 
             if($request->type == "live")
-                $bookings->whereIn("status", [BookingEnums::$STATUS['hold']]);
+                $bookings->whereNotIn("status", [BookingEnums::$STATUS['hold']]);
 
             if($request->type == "past")
                 $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);

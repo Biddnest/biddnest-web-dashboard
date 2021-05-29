@@ -55,6 +55,7 @@ import {
 } from './app/initFunctions.js';
 
 barba.init({
+    cacheIgnore: true,
     views: [{
         namespace: 'slider',
         afterEnter(data) {
@@ -73,7 +74,6 @@ barba.init({
       },
     ]
 });
-
 
 barba.hooks.before((data) => {
     NProgress.inc();

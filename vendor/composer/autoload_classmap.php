@@ -87,6 +87,7 @@ return array(
     'App\\Http\\Middleware\\VerifyJwtToken' => $baseDir . '/app/Http/Middleware/VerifyJwtToken.php',
     'App\\Http\\Middleware\\redirectToDashboard' => $baseDir . '/app/Http/Middleware/redirectToDashboard.php',
     'App\\Http\\Middleware\\redirectToVendorDashboard' => $baseDir . '/app/Http/Middleware/redirectToVendorDashboard.php',
+    'App\\Imports\\InventoryImport' => $baseDir . '/app/Imports/InventoryImport.php',
     'App\\Jobs\\SendOtp' => $baseDir . '/app/Jobs/SendOtp.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\AdminZone' => $baseDir . '/app/Models/AdminZone.php',

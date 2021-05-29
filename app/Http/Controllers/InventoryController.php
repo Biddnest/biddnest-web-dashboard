@@ -7,6 +7,7 @@ use App\Models\SubserviceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use App\Models\Inventory;
 use App\Models\InventoryPrice;
@@ -15,6 +16,9 @@ use App\Models\Service;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
 use App\Enums\ServiceEnums;
+use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades;
+use App\Imports\InventoryImport;
 
 class InventoryController extends Controller
 {
@@ -321,5 +325,51 @@ class InventoryController extends Controller
             return Helper::response(false,"Couldn't Update status");
 
         return Helper::response(true,"Status Updated successfully");
+    }
+
+    public static function import($file = false){
+
+        if($file){
+            $fileContent = $file;
+            DB::transaction(function () use ($fileContent){
+
+                try {
+                    Facades\Excel::import(new InventoryImport, $fileContent);
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            });
+            return "done";
+        }
+        else{
+//            return (string)json_encode(Storage::files("/public/imports/inventories"));
+            foreach (Storage::files("/public/imports/inventories") as $file){
+
+
+            $filename = explode("/","$file");
+            $imported_files =  DB::table("import_migrations")->pluck('file');
+//            return $file;
+            $return = "No tinitiated yet";
+                if(!in_array($file, (array)$imported_files)){
+//                    DB::transaction(function () use ($file) {
+//                        try {
+                            $return = Facades\Excel::import(new InventoryImport, $file);
+//                        } catch (\Exception $e) {
+//                            $return = $e->getMessage();
+//                        }
+//                    });
+
+                    DB::table("import_migrations")->insert([
+                        "file"=>$file
+                    ]);
+                }
+                return $return;
+
+            }
+
+        }
+
+
+
     }
 }

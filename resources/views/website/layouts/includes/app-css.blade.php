@@ -5,7 +5,6 @@
 
 <link rel="icon" type="image/svg+xml" href="{{ asset('static/images/favicon.svg')}}">
 <!-- Latest compiled and minified CSS -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -141,7 +140,7 @@ body{
 
     .step-text.text-right{
         white-space: nowrap !important;
-    } 
+    }
     .add-item-icon {
         bottom: 216px !important;
         right: 104px !important;
@@ -476,31 +475,31 @@ body{
         margin-bottom: 100px !important;
     }
     @media (max-width: 1200px) {
-        
-    }
-   
 
-@media (min-width:320px)  { 
-  
+    }
+
+
+@media (min-width:320px)  {
+
 
 
 
  }
 @media (min-width:481px)  {  }
 @media (min-width:641px)  { }
-@media (min-width:961px)  { 
+@media (min-width:961px)  {
     .full-width{
         padding: 5px 86px !important;
 
     }
  }
-@media (min-width:1025px) { 
+@media (min-width:1025px) {
     .full-width{
         padding: 5px 95px !important;
 
     }
  }
-@media (min-width:1281px) { 
+@media (min-width:1281px) {
     .full-width{
         padding: 5px 120px !important;
 
@@ -508,7 +507,7 @@ body{
 
  }
 
- @media (min-width:1481px) { 
+ @media (min-width:1481px) {
     .full-width{
         padding: 5px 120px !important;
 
@@ -516,7 +515,9 @@ body{
 
  }
 
-
+.hidden{
+    display: none;
+}
 
 
 

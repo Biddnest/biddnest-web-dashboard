@@ -397,7 +397,7 @@ class TicketController extends Controller
         return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
     }
 
-    public static function createRejectCall($sender_id, $ticket_type, $data, $head, $desc)
+    public static function createRejectCall($sender_id, $ticket_type, $data)
     {
         $meta=["Public_booking_id"=>$data];
         $title = TicketEnums::$TEMPLATES['call_back']['title_template'];

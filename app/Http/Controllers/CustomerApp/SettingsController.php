@@ -39,7 +39,7 @@ class SettingsController extends Controller
                ]
             ],
             "keys"=>[
-                "google_api_key"=>Crypt::encryptString(Settings::where("key", "google_api_key")->pluck('value')[0]),
+                "google_api_key"=>Crypt::encrypt(Settings::where("key", "google_api_key")->pluck('value')[0]),
                 "cancellation_reason_options"=>json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true)
             ],
             "enums"=>[
@@ -79,8 +79,8 @@ class SettingsController extends Controller
                 ],
                 "payment"=>[
                     'razorpay'=>[
-                        "rzp_id"=>Crypt::encryptString(Settings::where("key", "razor_key")->pluck('value')[0]),
-                        "rzp_secret"=>Crypt::encryptString(Settings::where("key", "razor_secret")->pluck('value')[0])
+                        "rzp_id"=>Crypt::encrypt(Settings::where("key", "razor_key")->pluck('value')[0]),
+                        "rzp_secret"=>Crypt::encrypt(Settings::where("key", "razor_secret")->pluck('value')[0])
                     ]
                 ],
                 "faq"=>[

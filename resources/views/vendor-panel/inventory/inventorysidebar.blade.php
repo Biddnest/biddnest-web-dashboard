@@ -47,8 +47,8 @@
                                                 Material :{{$inventory->material}}
                                             </td>
 
-                                            <td class="text-center">₹ {{$inventory->price_economics}}</td>
-                                            <td class="text-center">₹ {{$inventory->price_premium}}</td>
+                                            <td class="text-center">@if($inventory->price_economics)₹ {{$inventory->price_economics}} @else NA</td>
+                                            <td class="text-center">@if($inventory->price_premium)₹ {{$inventory->price_premium}} @else NA</td>
                                         </tr>
                                     @endif
                                 @endforeach

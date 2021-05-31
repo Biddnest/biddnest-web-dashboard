@@ -4521,6 +4521,8 @@ button.nextBtn-3 {
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 5px;
+  border: 2px solid #fdc403;
+
 }
 
 label.phone-num-lable,
@@ -10431,9 +10433,7 @@ ul.header-controls li.notifications:hover .dropdown {
     height: auto;
   }
 
-  .uploaded-image {
-    margin-left: 12px !important;
-  }
+ 
 
   .flex-view-col {
     flex-direction: column !important;
@@ -10444,14 +10444,15 @@ ul.header-controls li.notifications:hover .dropdown {
   }
 
   .add-photos i.fa.fa-plus.fa-2x {
-    left: 32% !important;
-    top: 32% !important;
+    left: 43% !important;
+    top: 22% !important;
   }
 
   .add-photos {
-    height: 71px !important;
-    max-width: 76px !important;
-    margin-left: 6px !important;
+    height: 61px !important;
+    max-width: 75px !important;
+    margin-left: 4px !important;
+    margin-top: 3px;
   }
 
   .close-item {
@@ -12217,6 +12218,9 @@ button.nextBtn-3 {
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 5px;
+  border: 2px solid #fdc403;
+  
+
 }
 
 label.phone-num-lable,
@@ -12585,9 +12589,7 @@ img.req-search-image {
   border-radius: 10px;
 }
 
-.choose-your-material {
-  margin: -5px;
-}
+
 
 .choose-your-material .select .select-styled {
   padding: 2px 4px !important;

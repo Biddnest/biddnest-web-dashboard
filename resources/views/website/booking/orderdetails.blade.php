@@ -255,7 +255,7 @@
                                                 <div class="row border-bottom d-flex center mt-2">
                                                 <div class="col-2 ">
 {{--                                                    <i class="icon-order-details fa fa-bed"></i>--}}
-                                                    <img class="img-location" src="{{$inventory->inventory->icon}}" alt="" style="border-radius: 50%; width: 50px;">
+                                                    <img class="img-location" src="{{$inventory->inventory->icon ?? '' }}" alt="" style="border-radius: 50%; width: 50px;">
                                                 </div>
                                                 <div class="col-4">
                                                     <p class="pl-0 mb-0">{{$inventory->name}}</p>

@@ -4,7 +4,7 @@
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="terms">
         <div class="container">
-            <div class="quote p-0 br-5 w-70 ontop bg-white">
+            <div class="quote p-0 br-5 w-70 ontop bg-white responsive">
                 <div class="row">
                     <div class="col-3 p-4 bg-gray-circle border-right border-l-radius">
                         <a href="{{route('terms.page', ["slug"=>"about-us"])}}"><div class="d-flex mt-1 pt-3 " style="align-items: baseline;"><h4 class="icon bg-purple cursor-pointer text-white">1</h4><p class="theme-text">About Us</p></div></a>

@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title light center mt-1 pb-10">HOW CAN WE HELP YOU ?</h5>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for a question here or type a query you have...">
+                        <input type="text" class="form-control" placeholder="Search...">
                         <div class="input-group-append">
                             <button class="btn btn-seach" type="button">
                                 <i class="fa fa-search pr-2 "></i>SEARCH
@@ -17,15 +17,15 @@
                     </div>
                 </div>
             </div>
-            <div class="quote responsive br-5 w-70 bg-white ontop p-0 " style="margin-top: 240px; margin-bottom: 240px;  ">
+            <div class="quote responsive br-5 w-70 bg-white ontop p-0 marg-faq" >
                 <div class="container ">
                     @foreach($faqs as $faq)
-                        <div class="accor-item d-flex justify-content-between  row card p-3 br-0">
+                        <div class="accor-item d-flex justify-content-between  row card p-3 br-0" style="flex-direction: row;">
                             <a>{{$faq->title}}</a>
-                            <i class="fa fa-angle-down"></i>
+                            <i class="fa fa-angle-down mt-1" ></i>
                         </div>
                         <div class="content answer pt-2">
-                            <p class="pl-2 pr-2" style="white-space: normal !important; text-align:justify">
+                            <p class="pl-2 pr-2" style="white-space: normal !important; text-align:justify " style="flex-direction: row;">
                                 {{$faq->desc}}
                             </p>
                         </div>

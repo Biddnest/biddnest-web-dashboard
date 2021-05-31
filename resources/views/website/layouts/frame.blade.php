@@ -14,7 +14,7 @@
 
             <div class="header-controls ml-30 collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item  active">
+                    <li class="nav-item  active" style="margin-right: 24px;">
                         <a class="nav-link bec-vendor-purple f-14" href="{{route('join-vendor')}}"><img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" /> Become a Vendor
                         </a>
                     </li>

@@ -33,8 +33,7 @@
         background-position-y: 5px !important;
         border: 1px solid #dfdfdf !important;
         border-radius: 3px !important;
-        margin-right: 2rem !important;
-        padding-right: 2rem !important;
+        margin-right: 0rem !important;
     }
     select::-ms-expand {
         display: none !important;
@@ -111,6 +110,11 @@ label {
 
 }
 
+.f-row{
+    display: flex;
+    flex-direction: row;
+}
+
 
 
 
@@ -176,13 +180,46 @@ label {
     border: none !important;
 
  }
+ .img-width{
+     width: 76px;
+ }
 
 
  button:focus { outline: none; }
 
 
 
+
+ .marg-faq{
+margin-top: 240px; 
+margin-bottom: 240px; 
+}
+
+
  @media (max-width:480px)  { 
+    .heading-view{
+        transform: translate(-24px, 10px);
+
+    }
+    .heading2-view{
+      transform: translate(-10px, 10px);
+
+
+    }
+    .img-width{
+     width: 36px;
+ }
+
+    .card-width{
+        width: 90px !important;
+    padding: 10px !important;
+    }
+
+    .marg-faq{
+        margin-top: 140px; 
+
+
+    }
 
     .upload-image-container i.fa.fa-close.fa-2x{
         right: -2px !important;
@@ -191,7 +228,7 @@ label {
 
     }
     .upload-image-container{
-        width: 122px !important;
+        width: 88px !important;
     /* height: 160px !important; */
     }
 
@@ -205,18 +242,29 @@ label {
     }
     div#filter{
         margin: -5px -6px 0px -12px;
-        width: 109%;
+        width: 133%;
+        margin-left: -45px;
 
     }
     .add-photos i.fa.fa-plus.fa-2x{
-        left: 41% !important;
-
+        left: 42% !important;
+        top: 22% !important;
     }
     img.image-upload-by-customer{
         height: auto !important;
 
     }
+
+    .mar-card{
+        margin: 10px 22px 10px 16px;
+
+    }
    
+
+.card-input {
+    margin: 2px;
+    padding: 0px;
+}
                .col-mobile{
                     flex-direction: column !important;
 
@@ -266,7 +314,7 @@ label {
                 }
 
                 img.req-search-image{
-                height: fit-content !important;
+                height: 100% !important;
                 max-width:100%
 
              }
@@ -277,6 +325,9 @@ label {
 
              }
 
+             button.nextBtn-3 {
+                 width: 116px;
+             }
              .ml-20{
                  margin-left: 20px !important;
             }
@@ -300,6 +351,12 @@ label {
              .modal-dialog.addItemModal {
                 max-width: 100%;
 }
+
+
+.view-flex{
+    display: flex;
+    justify-content: space-between;
+}
 .required-item{
     width: 140px !important;
 
@@ -317,9 +374,14 @@ label {
 .req-search-image {
    width:  100%;
 }
-.select-material {
+/* .select-material {
     width:  100% !important;
 
+} */
+
+
+.select-material {
+width: 90px !important;
 }
 .col-md-6.modal-first-inner-column{
     margin: 0 auto ! important;
@@ -339,16 +401,39 @@ label {
     bottom: 222px !important;
     right: 68px !important;
 }
+.choose-your-material.pt-3{
+    padding-top: 0px !important;
+}
+
+
+select {
+       
+        padding-right: 0rem !important;
+    }
+
+    .move-btn{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+
+    .bview-btn{
+        width: 114px;
+
+    }
+    #next2{
+        margin-right: 23px !important;
+
+    }
+
+
+
 
 }
 
 
-             }
+             
            
- .card .required-item {
-     width: fit-content !important;
-
- }
 
  .border-l-radius{
      border-top-left-radius: 5px !important;

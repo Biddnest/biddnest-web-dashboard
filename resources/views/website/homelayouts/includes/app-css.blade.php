@@ -129,6 +129,23 @@ label {
  }
 
  @media (max-width:480px)  { 
+   
+    .page-scroll.mb-view.btn.join-now{
+        margin-bottom: 20px;
+    margin-top: 20px !important;
+    width: auto;
+
+    }
+  
+   
+    .page-scroll.btn.join-now{
+        width: fit-content;
+    }
+    .svg-container.ml-2{
+        margin-left: 0px !important;
+    }
+
+   
     .navbar-default .navbar-nav .bec-vendor{
         background: none !important;
     }
@@ -167,7 +184,6 @@ label {
         text-transform: uppercase;
         display: flex;
         align-items: center;
-        max-width: fit-content;
         margin: 0 auto;
 
     }

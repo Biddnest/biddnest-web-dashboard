@@ -16,6 +16,7 @@ class NotificationEnums
         "general"=>0,
         "booking"=>1,
         "link"=>2,
+        "ticket"=>3
     ];
 
     public static $GENERATE_BY=["system"=>0, "admin"=>1];

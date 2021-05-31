@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="row d-flex justify-content-start text-left">
                                 <div class="col-md-7">
-                                            <p class="mt-2 mb-0  l-cap">Phone Number </p>
+                                    <p class="mt-2 mb-0  l-cap">Phone Number  <span style="display:inline-block;"><i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer"></i></span></p>
                                             <p class="fw-500 f-18">{{$user->phone}}</p>
                                         </div>
                                         <div class="col-md-5">
@@ -210,7 +210,7 @@
                                                     <div class="col-lg-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput2">Phone Number</label>
-                                                            <a data-toggle="modal" data-target="#edit-number" class="cursor-pointer"><input type="number" class="form-control" id="formGroupExampleInput2" name="phone" value="@if($user->phone){{$user->phone}}@endif" placeholder="9739912345" readonly/></a>
+                                                            <input type="number" class="form-control" id="formGroupExampleInput2" name="phone" value="@if($user->phone){{$user->phone}}@endif" placeholder="9739912345" readonly/>
                                                         </div>
                                                     </div>
 
@@ -273,10 +273,9 @@
                                             </button>
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-7">
-                                            <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                                            <form action="{{ route('update_phone') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                                                 <div class="d-flex f-direction text-justify center">
-                                                    <h2 class="p-text">Login</h2>
-                                                    <div class="col-lg-12 col-xs-12 mt-3">
+                                                    <div class="col-lg-12 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput">Phone Number</label>
                                                             <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>

@@ -238,8 +238,8 @@
 
                                                         @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, $org_id->organization_id, true); @endphp
                                                         @foreach($price['inventories'] as $inv_price)
-                                                            @if($inv_price['bid_inventory_id'] == $inventory->inventory_id)
-                                                                <input class="form-control border-purple calc-total-input validate-input" style="width: 106px;" name="inventory[][amount]" value="{{$inv_price['price']}}" id="amount_{{$inventory->id}}" type="number" placeholder="2000" required/>
+                                                            @if($inv_price['bid_inventory_id'] == $inventory->id)
+                                                                <input class="form-control border-purple calc-total-input validate-input" style="width: 106px;" name="inventory[][amount]" value="{{$inv_price['price'] ?? '0'}}" id="amount_{{$inventory->id}}" type="number" placeholder="2000" required/>
                                                             @endif
                                                         @endforeach
                                                     </td>

@@ -489,7 +489,7 @@
  }
 @media (min-width:1281px) { 
     .full-width{
-        padding: 5px 147px !important;
+        padding: 5px 120px !important;
 
     }
 

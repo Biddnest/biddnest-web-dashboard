@@ -90,11 +90,11 @@
                             </div> -->
 
                             <div class="col-md-9 f-16 mt-1 ">
-                        
-                              
-                                
-                                <div class="row d-flex justify-content-start text-left">  
-                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12"> 
+
+
+
+                                <div class="row d-flex justify-content-start text-left">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                             <p class="mb-0 mt-2 l-cap">
                                                 First Name
                                             </p>
@@ -113,10 +113,10 @@
                                             <i data-toggle="modal" data-target="#edit-profile" class="icon dripicons-pencil cursor-pointer"></i>
                                         </div>
                                     </div>
-                                    
-                            
+
+
                                 </div>
-                                <div class="row d-flex justify-content-start text-left">  
+                                <div class="row d-flex justify-content-start text-left">
                                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                             <p class="mt-2 mb-0  l-cap">
                                                 Email Id</p>
@@ -132,9 +132,9 @@
                                                 {{$user->gender}}
                                             </p>
                                         </div>
-                            
+
                                 </div>
-                                <div class="row d-flex justify-content-start text-left">  
+                                <div class="row d-flex justify-content-start text-left">
                                 <div class="col-md-7">
                                             <p class="mt-2 mb-0  l-cap">Phone Number </p>
                                             <p class="fw-500 f-18">{{$user->phone}}</p>
@@ -143,13 +143,13 @@
                                             <p class="mt-2 mb-0  l-cap">Date of Birth </p>
                                             <p class="fw-500 f-18">{{date('d M Y', strtotime($user->dob))}}</p>
                                         </div>
-                            
+
                                 </div>
-                                
-                                
+
+
                                 <div class="top-aliments  d-flex justify-content-between">
-                                  
-                                   
+
+
                                 </div>
 
                             </div>
@@ -210,7 +210,7 @@
                                                     <div class="col-lg-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput2">Phone Number</label>
-                                                            <input type="number" class="form-control" id="formGroupExampleInput2" name="phone" value="@if($user->phone){{$user->phone}}@endif" placeholder="9739912345" readonly/>
+                                                            <a data-toggle="modal" data-target="#edit-number" class="cursor-pointer"><input type="number" class="form-control" id="formGroupExampleInput2" name="phone" value="@if($user->phone){{$user->phone}}@endif" placeholder="9739912345" readonly/></a>
                                                         </div>
                                                     </div>
 
@@ -256,6 +256,24 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="edit-number" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+                                <div class="modal-dialog para-head input-text-blue" role="document">
+                                    <div class="modal-content w-90 w-1000 mt-50 right-25 ml-4 ">
+                                        <div class="modal-header bg-purple">
+                                            <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                                                Edit Numbaer
+                                            </h5>
+                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body p-15 margin-topneg-7">
+
                                         </div>
                                     </div>
                                 </div>

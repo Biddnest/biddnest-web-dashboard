@@ -75,7 +75,7 @@
                             </a>
                             @else
                                 <a data-toggle="modal" data-target="#Login-modal">
-                                    <span class="logged-in-username">Login</span>
+                                    <span class="logged-in-username cursor-pointer">Login</span>
                                 </a>
                             @endif
                             @if(\Illuminate\Support\Facades\Session::get('account'))

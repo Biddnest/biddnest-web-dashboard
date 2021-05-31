@@ -266,14 +266,41 @@
                                     <div class="modal-content w-90 w-1000 mt-50 right-25 ml-4 ">
                                         <div class="modal-header bg-purple">
                                             <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
-                                                Edit Numbaer
+                                                Update Phone Number
                                             </h5>
                                             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-7">
+                                            <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                                                <div class="d-flex f-direction text-justify center">
+                                                    <h2 class="p-text">Login</h2>
+                                                    <div class="col-lg-12 col-xs-12 mt-3">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Phone Number</label>
+                                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-xs-12 mt-1 otp hidden" id="otp">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">OTP</label>
+                                                            <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
+                                                        </div>
+                                                    </div>
+                                                    {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
+                                                    <button type="button" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                                                        Next
+                                                    </button>
+                                                    </a>--}}
+                                                    <a class="weblogin">
+                                                        <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                                                            Send OTP
+                                                        </button>
+                                                    </a>
 
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

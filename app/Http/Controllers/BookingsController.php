@@ -907,10 +907,10 @@ class BookingsController extends Controller
 
     }
 
-    public static function rejectBooking($user_id, $booking_id, $reason, $desc, $request_callback=false){
+    public static function rejectBooking($user_id, $public_booking_id, $reason, $desc, $request_callback=false){
         $cancelled_meta=["reason"=>$reason, "desc"=>$desc];
 
-        $booking_id = Booking::where("public_booking_id", $booking_id)->pluck('id')[0];
+        $booking_id = Booking::where("public_booking_id", $public_booking_id)->pluck('id')[0];
         $status_change = Booking::where("id", $booking_id)
             ->update([
                 "status"=>BookingEnums::$STATUS['bounced'],
@@ -922,7 +922,7 @@ class BookingsController extends Controller
             return Helper::response(false, "Coudn't update status");
 
         if($request_callback == true)
-            TicketController::createRejectCall($user_id, 4, $booking_id, $reason, $desc);
+            TicketController::createRejectCall($user_id, 4, $public_booking_id);
 
         return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }

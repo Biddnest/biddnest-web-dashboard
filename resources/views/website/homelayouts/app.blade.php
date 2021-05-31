@@ -22,19 +22,19 @@
                         <li class="mar-vendor">
                             <a class="bec-vendor mr-2 " href="{{route('join-vendor')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" class="res-nav" />
-                                <span class="nav-menu-link">Become A Vendor</span>
+                                <span class="nav-menu-link l-cap">Become A Vendor</span>
                             </a>
                         </li>
                         @if(\Illuminate\Support\Facades\Session::get('account'))
                             <li>
                                <a href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />
-                                    <span class="nav-menu-link">My Bookings</span></a>
+                                    <span class="nav-menu-link l-cap">My Bookings</span></a>
                             </li>
                         @endif
                         <li>
                             <a href="{{route('contact_us')}}">
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
-                                <span class="nav-menu-link">Contact Us</span></a>
+                                <span class="nav-menu-link l-cap">Contact Us</span></a>
                         </li>
                         <li class="account-settings m-dropdown dropdown mt-0">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
@@ -75,7 +75,7 @@
                             </a>
                             @else
                                 <a data-toggle="modal" data-target="#Login-modal">
-                                    <span class="logged-in-username cursor-pointer">Login</span>
+                                    <span class="logged-in-username l-cap">Login</span>
                                 </a>
                             @endif
                             @if(\Illuminate\Support\Facades\Session::get('account'))

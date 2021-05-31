@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NotificationEnums;
 use App\Enums\TicketEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
@@ -46,6 +47,20 @@ class TicketReplyController extends Controller
 
         if(!$chat_result)
             return Helper::response(false, "couldn't send Massage, Please try again");
+
+        dispatch(function() use($ticket_id){
+            $ticket_details=Ticket::findOrfail($ticket_id);
+            if($ticket_details->user_id) {
+                NotificationController::sendTo("user", [$ticket_details->user_id], "You have reply from Support.", "Tap to respond.", [
+                    "type" => NotificationEnums::$TYPE['ticket'],
+                ]);
+            }
+            if($ticket_details->vendor_id) {
+                NotificationController::sendTo("vendor", [$ticket_details->vendor_id], "You have reply from Support.", "Tap to respond.", [
+                    "type" => NotificationEnums::$TYPE['ticket'],
+                ]);
+            }
+        })->afterResponse();
 
         return Helper::response(true, "added chat Successfully", ['ticket'=>Ticket::where('id', $ticket_id)->with('reply')]);
     }

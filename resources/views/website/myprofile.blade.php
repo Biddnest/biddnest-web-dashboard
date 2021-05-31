@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="row d-flex justify-content-start text-left">
                                 <div class="col-md-7">
-                                            <p class="mt-2 mb-0  l-cap">Phone Number  <i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer" style="display:inline-block;"></i></p>
+                                    <p class="mt-2 mb-0  l-cap">Phone Number  <span style="display:inline-block;"><i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer"></i></span></p>
                                             <p class="fw-500 f-18">{{$user->phone}}</p>
                                         </div>
                                         <div class="col-md-5">

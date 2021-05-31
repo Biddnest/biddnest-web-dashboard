@@ -263,6 +263,14 @@
                                         @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                         <span class=" text-center status-badge red-bg">Cancelled</span>
                                         @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                        <span class=" text-center status-badge red-bg">On Hold</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        @break;
                                     @endswitch
                                 </td>
                                 <td class="text-center" style="text-align: center !important; ">

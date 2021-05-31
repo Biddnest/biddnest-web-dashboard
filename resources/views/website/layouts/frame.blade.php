@@ -112,7 +112,8 @@
                     <div class="modal-header p-0 br-5 ">
                         <div>
                             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
-                                <i class="fa fa-times mt-1 mr-1" style="color: #FFF !important;"></i>
+                            <i class=" dripicons-cross" style="color: #FFF !important;"></i>
+                                <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
                                 <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
                             </button>
                         </div>

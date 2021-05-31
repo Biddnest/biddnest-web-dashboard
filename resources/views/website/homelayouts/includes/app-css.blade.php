@@ -41,6 +41,8 @@
     display: block;
     width: 116px;
     margin-top: 6px;
+    margin-left: 8px;
+
 }
 
 .logged-in-username{
@@ -207,14 +209,6 @@ label {
  @media (min-width: 1200px){
 .container {
     width: 1120px !important;
-}
-.col-lg-6.col-xs-12.mt-2{
-    padding-left: 60px;
-
-}
-.container.get-offers{
-    padding-left: 60px;
-
 }
  }
 

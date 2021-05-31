@@ -136,7 +136,7 @@
                         <p class="card-num">4</p>
 
                         <img class="w-150" src="{{ asset('static/website/images/images/gifs/4.gif')}}" alt="some-picture" />
-                        <h5 class="d-flex center theme-text how-work-text">Step 4</h5>
+                        <h5 class="d-flex center theme-text how-work-step">Step 4</h5>
                         <h3 class="d-flex center theme-text how-work-title">
                             Schedule & Confirm
                         </h3>
@@ -308,19 +308,19 @@
     <!-- section refer and earn -->
     <section id="refer-earn" class="refer-earn p-10 mt-3 ">
         <div class="container">
-            <div class="row center reverse">
-                <div class="col-lg-7 ">
+            <div class="row d-flex justify-content-between reverse" >
+                <div class="col-lg-6 ">
                     <div class="refer-head mt-3 center-align" style="font-size:30px!important;">Refer and Earn</div>
                     <div class="refer-para mb-4 mt-1 center-align" style="font-size:18px!important;">
                         Dummy Text of the printing and typesetting industry. Lorem Ipsum has been the industry's started dummy text
                     </div>
-                    <div class="btn-refer">
+                    <div class="btn-refer" >
                         <a href="#services" class="page-scroll btn join-now">
                             <button type="button" class="btn join-now redem">Refer Now</button>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6" style="display: flex; justify-content: flex-end; width: 106% !important;" >
                     <div>
                         <img class="img-responsive responive" src="{{ asset('static/website/images/images/refer-earn.png')}}" />
                     </div>
@@ -358,8 +358,8 @@
                         </div>
                     </div>
 
-                    <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 90%;">
-                        <input type="text" class="form-control -mr-4" placeholder="Enter your mobile number to get link on phone" />
+                    <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 82%;">
+                        <input type="text" class="form-control -mr-4" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
                                 <i class="fa fa-paper-plane"><span class="pl-1 f-bolder">GET LINK</span></i>
@@ -386,7 +386,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-xs-12 mt-3 ">
-                    <div class="get-app-img">
+                    <div class="get-app-img" style="width: 106% !important;">
                         <img class="img-responsive responive" src="{{ asset('static/website/images/images/get-app.png')}}" />
                     </div>
                 </div>
@@ -397,14 +397,14 @@
     <section>
         <div class="container get-offers">
             <div class="row mt-6 mb-5">
-                <div class="col-sm-7 col-xs-12 ">
+                <div class="col-sm-7 col-xs-12 " style="padding-left: 8px !important;">
                     <p class="theme-text f-bolder text-view-center">
                         Whether you’re new to Packers & movers, just new to BIDDNEST,
                         <br /> We’re glad you’re here! Stay informed of our special offers.
                     </p>
                 </div>
                 <div class="col-sm-5 col-xs-12 col-sm-12">
-                    <div class="input-group-get-link ml-2-0 ml-2 mt-30" style="width: 90%;">
+                    <div class="input-group-get-link ml-2-0 ml-2 mt-30" style="width: 95%;">
                         <input type="text" class="form-control offer-input -mr-4" placeholder="Enter your email ID here" />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
@@ -423,7 +423,9 @@
                 <div class="modal-header p-0 br-5 ">
                     <div>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
-                            <i class="fa fa-times mt-1 mr-1" style="color: #FFF !important;"></i>
+                        <span>                         <i class="dripicons-cross f-30"></i></span>
+                        <!-- <i class="icon dripiconmeter " style="color: #FFF !important;"></i> -->
+                            <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
                             <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
                         </button>
                     </div>
@@ -441,7 +443,7 @@
 
                     <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
-                            <h2 class="p-text">Login</h2>
+                            <h2 class="p-text" >Login</h2>
                             <div class="col-lg-12 col-xs-12 mt-3">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>

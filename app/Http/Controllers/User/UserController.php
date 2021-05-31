@@ -335,7 +335,7 @@ class UserController extends Controller
         return $user;
     }
 
-    public static function updateMobile($id, $phone)
+    public static function updateMobile($id, $phone, $web=false)
     {
         $otp = Helper::generateOTP(6);
 
@@ -353,10 +353,13 @@ class UserController extends Controller
         })->afterResponse();
         $data['otp'] = $otp;
 
-        return Helper::response(true, "Otp has been sent to the new phone.", $data);
+        if($web)
+            return Helper::response(true, "Otp has been sent to the new phone.", $data);
+        else
+            return Helper::response(true, "Otp has been sent to the new phone.", $data);
     }
 
-    public static function verifyMobile($id, $phone, $otp)
+    public static function verifyMobile($id, $phone, $otp, $web=false)
     {
         $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
         if($user->verf_code == $otp)

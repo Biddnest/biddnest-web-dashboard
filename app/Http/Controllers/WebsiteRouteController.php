@@ -212,4 +212,19 @@ class WebsiteRouteController extends Controller
 
         return PaymentController::statusComplete(Session::get('account')['id'], $request->booking_id, $request->payment_id);
     }
+
+    public static function updateMobile(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|string|min:10',
+            'otp' => 'nullable|numeric'
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        if($request->otp == "")
+            return UserController::updateMobile(Session::get('aaccount')['id'], $request->phone, true);
+        else
+            return UserController::verifyMobile(Session::get('aaccount')['id'], $request->phone, $request->otp, true);
+    }
 }

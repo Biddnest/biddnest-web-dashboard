@@ -982,7 +982,7 @@ class WebController extends Controller
         }
         elseif ($ticket->type == TicketEnums::$TYPE['call_back'])
         {
-            if(json_decode($ticket->meta, true)['public_booking_id']) {
+            if($ticket->meta->public_booking_id) {
                 $ticket_info = InventoryPrice::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
                 $service_status = [];
             }

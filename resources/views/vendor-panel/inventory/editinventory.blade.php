@@ -20,7 +20,8 @@
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-lg-12">
                 <div class="card h-auto p-0 pt-20 pb-0">
-                    <form class="form-new-order  input-text-blue" action="{{route('api.updateInventoryPrices')}}" method= "PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.inventorymgt')}}" data-alert="tiny" id="myForm" data-parsley-validate>                        <div class="header-wraps p-0" >
+                    <form class="form-new-order  input-text-blue" action="{{route('api.updateInventoryPrices')}}" method= "PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.inventorymgt')}}" data-alert="tiny" id="myForm" data-parsley-validate>
+
                             <input type="hidden" name="inventory_id" value="{{$inventory_id}}">
 {{--                            <input type="hidden" value="{{$service_id}}" name="service_type">--}}
 
@@ -34,9 +35,13 @@
                                             <th scope="col" class="text-center" style="padding:14px">Premium Price</th>
                                         </tr>
                                     </thead>
-                                    @foreach($service_types as $service_type)
-                                        <tbody class="mtop-20 inventory-snip">
-                                            <tr class="tb-border"><td scope="row" style="padding-top: 24px;"><h4>{{$service_type->service->name}}</h4></td></tr>
+                                    <tbody class="mtop-20 inventory-snip">
+                                        @foreach($service_types as $service_type)
+                                            <tr class="tb-border">
+                                                <td scope="row" style="padding-top: 24px;">
+                                                    <h4>{{$service_type->service->name}}</h4>
+                                                </td>
+                                            </tr>
                                             @if($inventories)
                                                 @foreach($inventories as $inventory)
                                                     @if($service_type->service->id == $inventory->service_type)
@@ -71,8 +76,8 @@
                                                     @endif
                                                 @endforeach
                                             @endif
-                                        </tbody>
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 </table>
                                 @if(count($inventories) == 0)
                                     <div class="row hide-on-data">
@@ -82,19 +87,18 @@
                                     </div>
                                 @endif
 
-                        </div>
-                        <div class="d-flex  justify-content-between flex-row  p-20 border-top pt-0 pb-0">
-                            <div class="w-50">
-                                <a class="white-text p-10 cancel" href="{{route('vendor.inventorymgt')}}">
-                                    <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
-                                </a>
-                            </div>
-                            <div class="w-50 text-right">
-                                <a class="white-text p-10">
-                                    <button class="btn theme-bg white-text w-30">Update</button>
-                                </a>
-                            </div>
-                        </div>
+                                <div class="d-flex  justify-content-between flex-row  p-20 border-top pt-0 pb-0">
+                                    <div class="w-50">
+                                        <a class="white-text p-10 cancel" href="{{route('vendor.inventorymgt')}}">
+                                            <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
+                                        </a>
+                                    </div>
+                                    <div class="w-50 text-right">
+                                        <a class="white-text p-10">
+                                            <button class="btn theme-bg white-text w-30">Update</button>
+                                        </a>
+                                    </div>
+                                </div>
                     </form>
                 </div>
             </div>

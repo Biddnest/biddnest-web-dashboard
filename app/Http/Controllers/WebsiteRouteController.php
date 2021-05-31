@@ -223,8 +223,8 @@ class WebsiteRouteController extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         if($request->otp == "")
-            return UserController::updateMobile(Session::get('aaccount')['id'], $request->phone, true);
+            return UserController::updateMobile(Session::get('account')['id'], $request->phone, true);
         else
-            return UserController::verifyMobile(Session::get('aaccount')['id'], $request->phone, $request->otp, true);
+            return UserController::verifyMobile(Session::get('account')['id'], $request->phone, $request->otp, true);
     }
 }

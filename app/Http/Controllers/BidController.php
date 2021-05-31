@@ -429,7 +429,7 @@ class BidController extends Controller
                     "organization_id"=>$organization_id
                 ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
 
-                $list_item["bid_inventory_id"] = $booking_inventory["inventory_id"];
+                $list_item["bid_inventory_id"] = $booking_inventory["id"];
 
                 if(!$booking_inventory["inventory_id"])
                     $list_item["name"] = $booking_inventory["name"];

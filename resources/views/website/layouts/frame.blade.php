@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" max-scale="1">
         @include('website.layouts.includes.app-css')
     </head>
     <body>
@@ -13,7 +14,7 @@
 
             <div class="header-controls ml-30 collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item  active">
+                    <li class="nav-item  active" style="margin-right: 24px;">
                         <a class="nav-link bec-vendor-purple f-14" href="{{route('join-vendor')}}"><img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" /> Become a Vendor
                         </a>
                     </li>
@@ -64,8 +65,8 @@
                                 <span class="ml-1">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                         @else
-                            <a href="{{route('home')}}" class="nav-link">
-                                <span class="ml-1">Login</span>
+                            <a data-toggle="modal" data-target="#Login-modal">
+                                <span class="logged-in-username cursor-pointer">Login</span>
                             </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Session::get('account'))
@@ -105,6 +106,60 @@
     </header>
     <div data-barba="wrapper">
         @yield('content')
+        <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+            <div class="modal-dialog theme-text input-text-blue" role="document">
+                <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
+                    <div class="modal-header p-0 br-5 ">
+                        <div>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
+                                <i class="fa fa-times mt-1 mr-1" style="color: #FFF !important;"></i>
+                                <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
+                            </button>
+                        </div>
+                        <div>
+                            <header class="join-as-vendor">
+                                <img src="{{ asset('static/website/images/icons/logo.png')}}">
+                            </header>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-body  margin-topneg-7">
+
+                        <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                            <div class="d-flex f-direction text-justify center">
+                                <h2 class="p-text">Login</h2>
+                                <div class="col-lg-12 col-xs-12 mt-3">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput">Phone Number</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-xs-12 mt-1 otp hidden" id="otp">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput">OTP</label>
+                                        <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
+                                    </div>
+                                </div>
+                                {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
+                                <button type="button" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                                    Next
+                                </button>
+                                </a>--}}
+                                <a class="weblogin">
+                                    <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                                        Send OTP
+                                    </button>
+                                </a>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @include('website.layouts.includes.app-js')
 </body>

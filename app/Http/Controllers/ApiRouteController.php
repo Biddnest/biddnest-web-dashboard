@@ -413,29 +413,30 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            // 'heading' => 'required|string',
-            // 'desc' => 'required|string',
+             'reason' => 'required|string',
+             'desc' => 'required|string',
             // 'ticket_type'=>'required|integer'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::create($request->token_payload->id, 2,  ["public_booking_id"=>$request->public_booking_id]);
+        return TicketController::create($request->token_payload->id, 2,  ["public_booking_id"=>$request->public_booking_id], );
     }
+
     public function createRejectedTicket(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            // 'heading' => 'required|string',
-            // 'desc' => 'required|string',
-            // 'ticket_type'=>'required|integer'
+             'reason' => 'required|string',
+             'desc' => 'required|string',
+             'request_callback'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::createRejectCall($request->token_payload->id, 4, $request->public_booking_id);
+        return BookingsController::rejectBooking($request->token_payload->id, $request->public_booking_id, $request->reason, $request->desc, $request->request_callback);
     }
 
     public function getTickets(Request $request)

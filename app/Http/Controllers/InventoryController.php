@@ -217,13 +217,13 @@ class InventoryController extends Controller
                 "price_premium" => $price['price']['premium'],
             ];
 
-            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
-                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open'], "status"=>CommonEnums::$NO];
+            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))
+                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open'], "status"=>InventoryEnums::$STATUS['pending_approval']];
 
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }
 
-        if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
+        if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))
             TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $service_type]);
 
         if(!$InventoryPrice)
@@ -317,9 +317,19 @@ class InventoryController extends Controller
 
     public static function changeStatus($id, $org_id, $service_id, $status)
     {
-        $change_status =InventoryPrice::where(['inventory_id'=>$id, 'organization_id'=>$org_id, 'service_type'=>$service_id])->update([
-            "ticket_status"=>$status
-        ]);
+        if($status == CommonEnums::$TICKET_STATUS['open'])
+            $change_status =InventoryPrice::where(['inventory_id'=>$id, 'organization_id'=>$org_id, 'service_type'=>$service_id])->update([
+                "ticket_status"=>$status
+            ]);
+        elseif($status == CommonEnums::$TICKET_STATUS['need_modification'])
+            $change_status =InventoryPrice::where(['inventory_id'=>$id, 'organization_id'=>$org_id, 'service_type'=>$service_id])->update([
+                "ticket_status"=>$status
+            ]);
+        elseif($status == CommonEnums::$TICKET_STATUS['approve'])
+            $change_status =InventoryPrice::where(['inventory_id'=>$id, 'organization_id'=>$org_id, 'service_type'=>$service_id])->update([
+                "ticket_status"=>$status,
+                "status"=>InventoryEnums::$STATUS['active']
+            ]);
 
         if(!$change_status)
             return Helper::response(false,"Couldn't Update status");

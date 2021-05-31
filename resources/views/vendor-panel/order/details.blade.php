@@ -25,7 +25,7 @@
                             <div class="d-flex p-10" style="margin-bottom: 30px; margin-left: -54px;">
                                 <div class="steps-container p-15 mr-5 pr-5">
                                     <hr class="dash-line" style="width: 90%;     margin-left: 50px;" >
-                                    @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
+                                    @foreach(array_slice(\App\Enums\BookingEnums::$STATUS, 0, 9) as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
                                                 {{--                                @foreach($booking->status_ids as $status_history)--}}
@@ -308,8 +308,8 @@
 
                                                     @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true); @endphp
                                                     @foreach($price['inventories'] as $inv_price)
-                                                        @if($inv_price['bid_inventory_id'] == $inventory->inventory_id)
-                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price']}}" type="number" placeholder="2000"/>
+                                                        @if($inv_price['bid_inventory_id'] == $inventory->id)
+                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
                                                         @endif
                                                     @endforeach
                                                 </td>

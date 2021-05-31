@@ -25,7 +25,7 @@
                             <div class="d-flex p-10">
                                 <div class="steps-container   ">
                                     <hr class="dash-line" >
-                                    @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
+                                    @foreach(array_slice(\App\Enums\BookingEnums::$STATUS, 0, 9) as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
                                                 {{--                                @foreach($booking->status_ids as $status_history)--}}

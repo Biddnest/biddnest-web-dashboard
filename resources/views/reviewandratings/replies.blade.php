@@ -198,20 +198,26 @@
                                                             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                                                 Cancelled
                                                             @break
+                                                            @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                                                Bounced
+                                                            @break
+                                                            @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                                                Hold
+                                                            @break
                                                         @endswitch
                                                     </div>
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'])
-                                                            <input type="text" id="movement_dates" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan"  />
+                                                       @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'])
+                                                            <input type="text" id="movement_dates" name="movement_dates" class="form-control br-5 filterdate dateselect" required="required" placeholder="15 Jan"  />
                                                             <span class="error-message">please enter valid date</span>
 
-                                                            <a class="white-text p-10" href="#" data-booking_id="{{$ticket_info->public_booking_id}}" data-url="{{route('reschedule-order'), ['id'=>$ticket_info->public_booking_id]}}">
-                                                                <button class="btn theme-bg white-text w-30">Reschedule</button>
+                                                            <a class="white-text reschedule" href="#" data-url="{{route('web.reschedule-order', ['id'=>$ticket_info->public_booking_id])}}">
+                                                                <button class="btn theme-bg white-text w-100">Reschedule</button>
                                                             </a>
                                                         @endif
                                                         @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_cancellation'])
-                                                            <a class="white-text p-10" href="#" data-url="{{route('cancel-order'), ['id'=>$ticket_info->public_booking_id]}}">
-                                                                <button class="btn theme-bg white-text w-30">Reject</button>
+                                                            <a class="white-text cancel-booking" href="#" data-url="{{route('cancel-order', ['id'=>$ticket_info->public_booking_id])}}">
+                                                                <button class="btn theme-bg white-text w-100">Reject</button>
                                                             </a>
                                                         @endif
                                                     </div>
@@ -244,8 +250,8 @@
                                                             </select>
                                                             <span class="error-message">Please enter valid</span>
 
-                                                            <a class="white-text p-10" href="#">
-                                                                <button class="btn theme-bg white-text w-30">Submit</button>
+                                                            <a class="white-text" href="#">
+                                                                <button class="btn theme-bg white-text w-100">Submit</button>
                                                             </a>
                                                         </form>
                                                     </div>
@@ -285,8 +291,8 @@
                                                             </select>
                                                             <span class="error-message">Please enter valid</span>
 
-                                                            <a class="white-text p-10" href="#">
-                                                                <button class="btn theme-bg white-text w-30">Submit</button>
+                                                            <a class="white-text" href="#">
+                                                                <button class="btn theme-bg white-text w-100">Submit</button>
                                                             </a>
                                                         </form>
                                                     </div>

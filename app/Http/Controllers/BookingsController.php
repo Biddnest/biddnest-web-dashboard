@@ -23,6 +23,7 @@ use App\Models\MovementDates;
 use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Settings;
+use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Vendor;
@@ -287,10 +288,9 @@ class BookingsController extends Controller
 
     }
 
-    public static function cancelBooking($public_booking_id, $reason, $desc, $user_id)
+    public static function cancelBooking($public_booking_id)
     {
-        $exist = Booking::where(["user_id" => $user_id,
-            "public_booking_id" => $public_booking_id])->first();
+        $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
         if (!$exist) {
             return Helper::response(false, "Order is not Exist");
         }
@@ -301,17 +301,12 @@ class BookingsController extends Controller
 
         $cancelbooking = Booking::where(["user_id" => $exist->user_id,
             "public_booking_id" => $exist->public_booking_id])
-            ->update(["status" => BookingEnums::$STATUS['cancelled'], "cancelled_meta" => json_encode(["reason" => $reason, "desc" => $desc], true)]);
-
-        // $bookingstatus = new BookingStatus;
-        // $bookingstatus->booking_id = $exist->id;
-        // $bookingstatus->status=BookingEnums::$STATUS['cancelled'];
-        // $result_status = $bookingstatus->save();
+            ->update(["status" => BookingEnums::$STATUS['cancelled']]);
 
         $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
 
         if (!$cancelbooking && !$result_status) {
-            return Helper::response(false, "Couldn't save data");
+            return Helper::response(false, "Couldn't Cancel Order");
         }
 
         dispatch(function () use ($exist) {
@@ -437,21 +432,28 @@ class BookingsController extends Controller
             return Helper::response(true, "Data fetched successfully", ["booking" => $bookingorder]);
     }
 
-    public static function reschedulBooking($public_booking_id, $dates, $user_id)
+    public static function reschedulBooking($public_booking_id, $date)
     {
-        $exist = Booking::where(["user_id" => $user_id,
-            "public_booking_id" => $public_booking_id])->first();
+        $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
         if (!$exist)
             return Helper::response(false, "Order is not Exist");
 
-        MovementDates::where("booking_id", $exist->id)->delete();
+//        MovementDates::where("booking_id", $exist->id)->delete();
 
-        foreach ($dates as $value) {
+
             $movementdates = new MovementDates;
             $movementdates->booking_id = $exist->id;
-            $movementdates->date = $value;
+            $movementdates->date = $date;
             $result_date = $movementdates->save();
-        }
+
+            $bid_exist = Bid::where(["booking_id"=>$exist->id, "organization_id"=>$exist->organization_id, "status"=>BidEnums::$STATUS['won']])->first();
+            $meta = json_decode($bid_exist['meta'], true);
+            $meta['moving_date'] = $date;
+
+            Bid::where(["booking_id"=>$exist->id, "organization_id"=>$exist->organization_id, "status"=>BidEnums::$STATUS['won']])
+                ->update([
+                    "meta"=>json_encode($meta)
+                ]);
 
         dispatch(function () use ($exist) {
 
@@ -903,5 +905,25 @@ class BookingsController extends Controller
         $y = array_reverse($y);
         return ["rank" => $current_key + 1, "data" => $data, "axis" => ["x" => $x, "y" => $y]];
 
+    }
+
+    public static function rejectBooking($user_id, $public_booking_id, $reason, $desc, $request_callback=false){
+        $cancelled_meta=["reason"=>$reason, "desc"=>$desc];
+
+        $booking_id = Booking::where("public_booking_id", $public_booking_id)->pluck('id')[0];
+        $status_change = Booking::where("id", $booking_id)
+            ->update([
+                "status"=>BookingEnums::$STATUS['bounced'],
+                "cancelled_meta"=>json_encode($cancelled_meta)]);
+
+        $status_add = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['bounced']);
+
+        if(!$status_change || !$status_add)
+            return Helper::response(false, "Coudn't update status");
+
+        if($request_callback == true)
+            TicketController::createRejectCall($user_id, 4, $public_booking_id);
+
+        return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }
 }

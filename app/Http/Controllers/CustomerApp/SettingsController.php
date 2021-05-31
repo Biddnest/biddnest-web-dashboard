@@ -19,6 +19,7 @@ use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class SettingsController extends Controller
 {
@@ -28,13 +29,13 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
               "api"=>[
-                  "base_url"=>"https://dashboard-biddnest.dev.diginnovators.com",
+                  "base_url"=> env("APP_URL"),
                   "version"=>"v1",
-                  "environment"=>"staging"
+                  "environment"=>env("APP_DEBUG") ? "staging" : "production"
               ],
                "app"=>[
-                   "version_code"=>1,
-                   "version"=> "1.0.0",
+                   "version_code"=>Settings::where("key", "app_version_code")->pluck('value')[0],
+                   "version"=> Settings::where("key", "app_version")->pluck('value')[0],
                ]
             ],
             "keys"=>[

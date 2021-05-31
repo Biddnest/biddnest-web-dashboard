@@ -501,6 +501,35 @@ $("body").on('change', ".reply_status", function(event) {
     return false;
 });
 
+$("body").on('change', ".reschedule", function(event) {
+    var data = document.getElementById("movement_dates").value;
+    if(confirm('Are you sure want to reschedule this order?')) {
+        $.update($(this).data("url"), {data}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Reschedule Order Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
+        });
+    }
+    return false;
+});
+
+$("body").on('change', ".cancel-booking", function(event) {
+    if(confirm('Are you sure want to Cancel this order?')) {
+        $.update($(this).data("url"), {data}, function (response) {
+            console.log(response);
+            if (response.status == "success") {
+                tinySuccessAlert("Cancelde Order Successfully", response.message);
+            } else {
+                tinyAlert("Failed", response.message);
+            }
+        });
+    }
+    return false;
+});
+
 $("body").on('keydown', ".table-search", function(event) {
     if(event.keyCode == 13){
         var query = $(this).val();
@@ -653,9 +682,13 @@ $("body").on('keyup', ".calc-total", function(event) {
    $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
 });
 
+$('.filterdate').datepicker({
+    // multidateSeparator:",",
+    format: 'yyyy-mm-dd',
+
+});
 
 /* Website js code start */
-
 
 $("body").on('click', ".next1", function(event) {
     console.log("step2");

@@ -57,13 +57,15 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <div class="d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
-                                                <div>
+
+                                            <div class="row d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
+                                            <div class="col-md-6 col-mobile">
                                                     <p class="bold mt-1 pl-4 padding-view">
-                                                        #{{$booking->public_booking_id}} <span class="light">| @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
+                                                        <span> #{{$booking->public_booking_id}}</span>
+                                                         <span class="light">| @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
                                                     </p>
                                                 </div>
-                                                <div>
+                                                <div class="col-md-6 col-mobile" style="margin-top: 10px;">
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['completed'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['completed']; @endphp

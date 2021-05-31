@@ -33,6 +33,7 @@ class VendorController extends Controller
         if(password_verify($password, $vendor->password)){
             if($vendor->status != VendorEnums::$STATUS['active'])
                 return Helper::response(false, "Your Account is inactive or suspended. Please contact your Organization Admin.");
+
             Session::put('account', ['fname'=>$vendor->fname, 'lname'=>$vendor->lname,'email'=>$vendor->email]);
             return   Helper::response(true, "Login was successfull");
         }

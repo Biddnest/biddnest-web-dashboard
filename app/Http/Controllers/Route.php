@@ -626,7 +626,7 @@ class Route extends Controller
             'banners.*.name' => 'required|string',
             'banners.*.date.from' => 'required|date',
             'banners.*.date.to' => 'required|date',
-            "banners.*.url" => 'required|url',
+            "banners.*.url" => 'nullable|url',
             "banners.*.image" => 'required|string'
         ]);
 
@@ -1088,7 +1088,7 @@ class Route extends Controller
 
     public function changeStatusBranch(Request $request)
     {
-        return OrganisationController::changeStatus($request->id, $request->data);
+        return OrganisationController::changeStatus($request->id, $request->status);
     }
 
     public function notification_add(Request $request)
@@ -1208,5 +1208,23 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return BidController::submitBidAdmin($request->all());
+    }
+
+    public function rescheduleOrder(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id' => 'required',
+            'data' => 'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::reschedulBooking($request->id, $request->data);
+    }
+
+    public function cancelOrder(Request $request)
+    {
+        return BookingsController::cancelBooking($request->id);
     }
 }

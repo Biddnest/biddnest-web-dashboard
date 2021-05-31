@@ -13,9 +13,50 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 <style>
+    body{
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.card-num {
+  font-size: 115px;
+  position: absolute;
+  left: 21px;
+  color: #F8F8F8;
+}
+
+.card-num-right {
+  font-size: 115px;
+  position: absolute;
+  right: 21px;
+  color: #F8F8F8;
+}
+
+.navbar-brand>img{
+    display: block;
+    width: 116px;
+    margin-top: 6px;
+}
+
+.logged-in-username{
+    font-size: 14px;
+}
+
+.carousel-control .glyphicon-chevron-right{
+    margin-right: 118px;
+
+}
+
+
+.nav-menu-link.l-cap{
+    font-size: 14px !important;
+
+}
     a.menu{
         color: #3d4751 !important;
         font-size: 14px !important;
@@ -128,7 +169,73 @@ label {
     left: 900px !important;
  }
 
+ .quote p{
+         font-size: 14px;
+     }
+     p.f-16{
+        font-size: 16px !important;
+
+     }
+
+ @media (max-width:1300px)  { 
+     .marg-head{
+        margin-top: 5rem;
+     }
+     .quote p{
+         font-size: 16px;
+     }
+     .dropdown-content{
+        left: -28px !important;
+        padding: 8px;
+     }
+
+     p.f-16{
+         font-size: 16px !important;
+     }
+     #content_accurate{
+        padding-top: 0px !important;
+     }
+
+     section#get-app{
+        padding: 50px 30px;
+
+     }
+ }
+
+ 
+
+ @media (min-width: 1200px){
+.container {
+    width: 1120px !important;
+}
+.col-lg-6.col-xs-12.mt-2{
+    padding-left: 60px;
+
+}
+.container.get-offers{
+    padding-left: 60px;
+
+}
+ }
+
  @media (max-width:480px)  { 
+   
+    .page-scroll.mb-view.btn.join-now{
+        margin-bottom: 20px;
+    margin-top: 20px !important;
+    width: auto;
+
+    }
+  
+   
+    .page-scroll.btn.join-now{
+        width: fit-content;
+    }
+    .svg-container.ml-2{
+        margin-left: 0px !important;
+    }
+
+   
     .navbar-default .navbar-nav .bec-vendor{
         background: none !important;
     }
@@ -167,7 +274,6 @@ label {
         text-transform: uppercase;
         display: flex;
         align-items: center;
-        max-width: fit-content;
         margin: 0 auto;
 
     }
@@ -235,10 +341,10 @@ label {
     }
 
 
-    .testimonialslideshow{
+    /* .testimonialslideshow{
         margin-left: 50px;
 
-    }
+    } */
 
 
 

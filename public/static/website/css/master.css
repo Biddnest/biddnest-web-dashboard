@@ -847,7 +847,7 @@ header .intro-text .intro-heading {
 
 .icon-cards {
   height: 30px;
-  width: 50px;
+  width: 34px;
 }
 
 .w-32 {
@@ -913,12 +913,9 @@ header .intro-text .intro-heading {
   border: none;
 }
 
-.full-width {
-  padding: 5px 119px !important;
-}
 
 .container-top {
-  position: absolute;
+  transform: translate(12px, -60px);
   top: 428px;
 }
 
@@ -934,7 +931,7 @@ header .intro-text .intro-heading {
 }
 
 .how-work {
-  margin-top: 16%;
+  /* margin-top: 16%; */
 }
 
 /* HOW ITS WORKS */
@@ -1241,14 +1238,16 @@ section#join-vendor {
 
 @media only screen and (min-width: 768px) {
   .testimonial-content p {
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Roboto", sans-serif;
+    color: #3B4B58 ;
   }
 }
 @media only screen and (min-width: 1170px) {
   .testimonial-content p {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 18px;
+    /* line-height: 1.6; */
+    color: #3B4B58;
   }
 }
 .cd-author-info span p {
@@ -1572,7 +1571,7 @@ section#get-app {
 }
 
 footer {
-  padding: 25px 0;
+  /* padding: 25px 0; */
   text-align: center;
 }
 
@@ -1799,7 +1798,7 @@ ul.social-buttons {
     color: #000;
     font-weight: 600;
     text-align: initial;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .m-40 {
@@ -4344,7 +4343,7 @@ html body main .dropdown-item:hover:first-child {
 }
 @media (min-width: 480px) and (min-width: 720px) {
   .container-top {
-    position: absolute;
+    transform: translate(12px, -60px);
   }
 }
 @media (min-width: 480px) {
@@ -4521,6 +4520,8 @@ button.nextBtn-3 {
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 5px;
+  border: 2px solid #fdc403;
+
 }
 
 label.phone-num-lable,
@@ -4810,13 +4811,13 @@ div#filter button.btn:hover {
 }
 
 .input-overwrite::placeholder {
-  color: #3b4b58;
-  font-size: 22px;
+  color: #3B4B58;
+  font-size: 24px !important;
 }
 
 .small-heading::placeholder {
-  color: #3b4b58;
-  font-size: 16px;
+  color: #3B4B58;
+  font-size: 14px !important;
   font-weight: 400;
 }
 
@@ -6910,7 +6911,7 @@ header .intro-text .intro-heading {
   .arrow {
     position: absolute;
     top: 100px;
-    left: 384px;
+    left: 366px;
     border: 1px solid #f0f0f0;
     background: #fff;
   }
@@ -6955,7 +6956,7 @@ header .intro-text .intro-heading {
 
 .icon-cards {
   height: 30px;
-  width: 50px;
+  width: 34px;
 }
 
 .w-32 {
@@ -7035,8 +7036,7 @@ header .intro-text .intro-heading {
 }
 
 .container-top {
-  position: absolute;
-  top: 400px;
+  transform: translate(12px, -60px);
 }
 
 .btn-xl {
@@ -7046,9 +7046,6 @@ header .intro-text .intro-heading {
   left: 50px;
 }
 
-.how-work {
-  margin-top: 16%;
-}
 
 /* HOW ITS WORKS */
 .timeline {
@@ -7417,14 +7414,16 @@ section#join-vendor {
 
 @media only screen and (min-width: 768px) {
   .testimonial-content p {
-    font-size: 16px;
+    font-size: 18px;
     font-family: "Roboto", sans-serif;
+    color: #3B4B58;
   }
 }
 @media only screen and (min-width: 1170px) {
   .testimonial-content p {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 18px;
+    /* line-height: 1.6; */
+    color: #3B4B58;
   }
 }
 .cd-author-info span p {
@@ -7833,7 +7832,7 @@ section#get-app {
 }
 
 footer {
-  padding: 25px 0;
+  /* padding: 25px 0; */
   text-align: center;
 }
 
@@ -8132,9 +8131,7 @@ spam {
 
 .texti-text {
   color: #3c4b58;
-  font-weight: 600;
   text-align: initial;
-  font-size: 18px;
 }
 
 .slick-dots li button:before {
@@ -10431,27 +10428,26 @@ ul.header-controls li.notifications:hover .dropdown {
     height: auto;
   }
 
-  .uploaded-image {
-    margin-left: 12px !important;
-  }
+ 
 
   .flex-view-col {
     flex-direction: column !important;
   }
 
   .fa-close {
-    display: none !important;
+    display: flex !important;
   }
 
   .add-photos i.fa.fa-plus.fa-2x {
-    left: 32% !important;
-    top: 32% !important;
+    left: 43% !important;
+    top: 22% !important;
   }
 
   .add-photos {
-    height: 71px !important;
-    max-width: 76px !important;
-    margin-left: 6px !important;
+    height: 61px !important;
+    max-width: 75px !important;
+    margin-left: 4px !important;
+    margin-top: 3px;
   }
 
   .close-item {
@@ -10917,7 +10913,7 @@ ul.header-controls li.notifications:hover .dropdown {
   .arrow {
     position: absolute;
     top: 100px;
-    left: 384px;
+    left: 366px;
     border: 1px solid #f0f0f0;
     background: #fff;
     display: contents;
@@ -11165,7 +11161,7 @@ ul.header-controls li.notifications:hover .dropdown {
 }
 @media (min-width: 720px) {
   .container-top {
-    position: absolute;
+    transform: translate(12px, -60px);
   }
 }
 
@@ -12217,6 +12213,9 @@ button.nextBtn-3 {
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 5px;
+  border: 2px solid #fdc403;
+  
+
 }
 
 label.phone-num-lable,
@@ -12585,9 +12584,7 @@ img.req-search-image {
   border-radius: 10px;
 }
 
-.choose-your-material {
-  margin: -5px;
-}
+
 
 .choose-your-material .select .select-styled {
   padding: 2px 4px !important;
@@ -12888,18 +12885,20 @@ p.footer-text.footer-quick-links {
 }
 
 .footer-text p {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   cursor: pointer;
   font-weight: 300;
 }
 
 span.copyright.footer-text {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 p.theme-text.f-bolder {
-  font-size: large;
+  font-size: 20px;
+  white-space: nowrap !important;
+
 }
 
 .container.get-offers {
@@ -12965,7 +12964,7 @@ a.app-btn.blu.flex.vert.mr-2 {
 
 p.section-app-subheading.m-0 {
   margin: 20px 0 !important;
-  font-size: large;
+  font-size: 18px;
 }
 
 span.site-app {
@@ -12974,8 +12973,8 @@ span.site-app {
 }
 
 p.pl-1.check-text {
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 18px;
   margin-top: 3px;
   margin-bottom: 0px !important;
 }
@@ -13028,7 +13027,9 @@ section#how-work .how-work-step {
   font-weight: 500;
 }
 section#how-work .how-work-title {
-  letter-spacing: 2px;
+  font-size: 24px;
+  text-align: center !important;
+  font-size: bold !important;
 }
 
 h1.text-heading.book-address.mb-1 {
@@ -13097,6 +13098,8 @@ p.book-address-subtext {
   font-weight: 100;
   border-radius: 50%;
   padding: 4px 6px;
+  margin-left: 62px;
+
 }
 
 .carousel-arrows {

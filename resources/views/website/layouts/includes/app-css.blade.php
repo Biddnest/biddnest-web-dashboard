@@ -24,13 +24,10 @@
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 
 <style>
+    body {
+        font-family: 'Roboto', sans-serif !important;
+    }
 
-    
-
-
-body{
-    font-family: 'Roboto', sans-serif !important;
-}
     select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
@@ -138,9 +135,10 @@ body{
         border-radius: 5px;
     }
 
-    .step-text.text-right{
+    .step-text.text-right {
         white-space: nowrap !important;
     }
+
     .add-item-icon {
         bottom: 216px !important;
         right: 104px !important;
@@ -201,7 +199,8 @@ body{
     button:focus {
         outline: none;
     }
-    a.menu{
+
+    a.menu {
         color: #3d4751 !important;
         font-size: 14px !important;
     }
@@ -285,7 +284,7 @@ body{
 
         }
 
-      
+
 
         .card-input {
             margin: 2px;
@@ -470,62 +469,74 @@ body{
     .border-l-radius {
         border-top-left-radius: 5px !important;
     }
+
     .space {
         height: 300px !important;
         margin-bottom: 100px !important;
     }
+
     @media (max-width: 1200px) {
+        .ontop {
+            transform: translate(90px, -9px) !important;
+        }
+        .card.required-item {
+            width: inherit !important;
+        }
+        .container-image-item{
+            width: 170px;
+         }
+
+        .img-width {
+            width: 54px;
+        }
+       .screen-fix{
+           display: flex;
+           justify-content: space-between;
+           flex-direction: row;
+           width: 100% !important;
+
+       }
 
     }
 
 
-@media (min-width:320px)  {
+    @media (min-width:320px) {}
 
+    @media (min-width:481px) {}
 
+    @media (min-width:641px) {}
 
+    @media (min-width:961px) {
+        .full-width {
+            padding: 5px 86px !important;
 
- }
-@media (min-width:481px)  {  }
-@media (min-width:641px)  { }
-@media (min-width:961px)  {
-    .full-width{
-        padding: 5px 86px !important;
-
-    }
- }
-@media (min-width:1025px) {
-    .full-width{
-        padding: 5px 95px !important;
-
-    }
- }
-@media (min-width:1281px) {
-    .full-width{
-        padding: 5px 120px !important;
-
+        }
     }
 
- }
+    @media (min-width:1025px) {
+        .full-width {
+            padding: 5px 95px !important;
 
- @media (min-width:1481px) {
-    .full-width{
-        padding: 5px 120px !important;
+        }
+    }
+
+    @media (min-width:1281px) {
+        .full-width {
+            padding: 5px 120px !important;
+
+        }
 
     }
 
- }
+    @media (min-width:1481px) {
+        .full-width {
+            padding: 5px 120px !important;
 
-.hidden{
-    display: none;
-}
+        }
 
+    }
 
-
-
-
-
-
-
-
-
+    .hidden {
+        display: none;
+    }
 </style>

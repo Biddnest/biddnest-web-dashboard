@@ -36,7 +36,7 @@
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
                                 <span class="nav-menu-link l-cap">Contact Us</span></a>
                         </li>
-                        <li class="account-settings m-dropdown dropdown mt-0">
+                        <li class="account-settings m-dropdown dropdown mt-0 cursor-pointer">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px; margin-left: -6px;
@@ -233,9 +233,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-4 mb-1">
+                    <div class="row mt-4 mb-4">
                         <div class="col-md-6 text-left">
-                                    <span class="copyright footer-text fade text-view-center view-block ">
+                                    <span class=" copyright footer-text  text-view-center view-block " style="color: #fff;">
                                      Copyright © {{date("Y", time())}} All Rights Reserved by. <a href="#"
                                                                                                   target="_blank">BIDNEST</a>.</span>
                         </div>

@@ -6336,8 +6336,11 @@ h3 {
 .ontop {
   position: absolute;
   top: 300px;
-  width: 80%;
-  left: 224px;
+  width: 78%;
+  display: flex !important;
+  justify-content: center;
+  transform: translate(0px, -9px) !important;
+
 }
 
 .mb-0 {
@@ -6620,7 +6623,7 @@ body {
 .ontop {
   position: absolute;
   top: 300px;
-  width: 80%;
+  width: 78%;
 }
 
 .pt-100 {
@@ -10607,9 +10610,7 @@ ul.header-controls li.notifications:hover .dropdown {
     margin-top: 30px !important;
   }
 
-  .mt-3 {
-    margin-top: 13px !important;
-  }
+  
 
   .padding-btn-max {
     padding: 6px 10px !important;
@@ -10943,11 +10944,7 @@ ul.header-controls li.notifications:hover .dropdown {
   padding-top: 100px;
 }
 
-.ontop {
-  position: absolute;
-  top: 300px;
-  width: 80%;
-}
+
 
 .form-input label {
   font-size: 14px;
@@ -12953,7 +12950,7 @@ input.form-control.offer-input.-mr-4 {
   margin-right: 7px;
 }
 .app-btn .big-txt {
-  font-size: 15px;
+  font-size: 14px;
   text-transform: capitalize;
 }
 
@@ -13097,7 +13094,7 @@ p.book-address-subtext {
   font-weight: 100;
   border-radius: 50%;
   padding: 4px 6px;
-  margin-left: 62px;
+  /* margin-left: 62px; */
 
 }
 

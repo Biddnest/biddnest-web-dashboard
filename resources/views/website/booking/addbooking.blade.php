@@ -4,7 +4,7 @@
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="addbooking">
         <div class="container ">
-            <div class="book-move-screen responsive ontop w-70 ">
+            <div class="book-move-screen responsive ontop ">
                 <div class="card-body ">
                     <div class="row d-flex ">
                         <div class="col-md-3 br-line view-none ">
@@ -590,7 +590,7 @@
                                                 </div>
                                                 <div class="card-body requirements-field ">
                                                     <p class="card-title required-item-name mb-0 f-16">Bed</p>
-                                                    <div class="row ">
+                                                    <div class="row screen-fix">
                                                         <div class="col-md-6 requirements d-flex f-16 ">
                                                             <p class="card-text required-item-qty pr-1 ">Wood</p>
                                                             <span>|</span>

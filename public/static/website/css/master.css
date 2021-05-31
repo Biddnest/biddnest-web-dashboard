@@ -1572,7 +1572,7 @@ section#get-app {
 }
 
 footer {
-  padding: 25px 0;
+  /* padding: 25px 0; */
   text-align: center;
 }
 
@@ -7835,7 +7835,7 @@ section#get-app {
 }
 
 footer {
-  padding: 25px 0;
+  /* padding: 25px 0; */
   text-align: center;
 }
 
@@ -12890,18 +12890,18 @@ p.footer-text.footer-quick-links {
 }
 
 .footer-text p {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   cursor: pointer;
   font-weight: 300;
 }
 
 span.copyright.footer-text {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 p.theme-text.f-bolder {
-  font-size: large;
+  font-size: 16px;
 }
 
 .container.get-offers {
@@ -12967,7 +12967,7 @@ a.app-btn.blu.flex.vert.mr-2 {
 
 p.section-app-subheading.m-0 {
   margin: 20px 0 !important;
-  font-size: large;
+  font-size: 16px;
 }
 
 span.site-app {

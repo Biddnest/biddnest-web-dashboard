@@ -75,8 +75,8 @@
     <section id="how-work" class="how-work mb-5">
         <div class="container">
             <div class="row">
-                <div class="card">
-                    <div class="col-lg-12 col-xs-12 text-center mb-4">
+                <div class="card marg-head">
+                    <div class="col-lg-12 col-xs-12 text-center mb-4 marg-head">
                         <h2 class="section-heading">How does it work?</h2>
                         <p class="section-subheading text-muted">
                             With you in every step of the way
@@ -234,9 +234,10 @@
                         <p class="f-16 mb-2 space">
                             Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard
                             dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy. Dummy text of the printing and typesetting industry. Lorem Ipsum
+                            has been the industry’s when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy. Dummy text of the printing and typesetting industry. Lorem Ipsum
                             has been the industry’s standard dummy text .
                         </p>
-                        <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now">
+                        <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">
                                 <img src="{{ asset('static/website/images/icons/crown.png')}}" />
                                 JOIN NOW
@@ -247,7 +248,7 @@
                         <p class="f-16 mb-2 space">
                             2. hello world! lets build somethings intresting
                         </p>
-                        <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now">
+                        <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">
                                 <img src="{{ asset('static/website/images/icons/crown.png')}}" />
                                 JOIN NOW
@@ -258,7 +259,7 @@
                         <p class="f-16 mb-2 space">
                             3. dummy text.
                         </p>
-                        <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now">
+                        <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">
                                 <img src="{{ asset('static/website/images/icons/crown.png')}}" />
                                 JOIN NOW

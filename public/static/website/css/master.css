@@ -6912,7 +6912,7 @@ header .intro-text .intro-heading {
   .arrow {
     position: absolute;
     top: 100px;
-    left: 384px;
+    left: 366px;
     border: 1px solid #f0f0f0;
     background: #fff;
   }
@@ -10918,7 +10918,7 @@ ul.header-controls li.notifications:hover .dropdown {
   .arrow {
     position: absolute;
     top: 100px;
-    left: 384px;
+    left: 366px;
     border: 1px solid #f0f0f0;
     background: #fff;
     display: contents;

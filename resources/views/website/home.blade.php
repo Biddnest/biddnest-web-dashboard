@@ -6,9 +6,9 @@
         <div class="container container-top p-50 top-header-card border-top-cards">
             <form action="{{route('add-booking')}}" class="no-ajax">
             <div class="top-cards mt-2">
-                <div class="col-lg-4 col-xs-12 d-flex space-between">
+                <div class="col-lg-4 col-xs-12 d-flex space-between " style="padding-left: 6px;">
                 @foreach($categories as $category)
-                    <label>
+                    <label class="mr-1">
                         <input type="radio" name="category" class="card-input-element" />
                         <div class="card-header card-methord building-type">
                             <div class="card-body-top">

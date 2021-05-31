@@ -847,7 +847,7 @@ header .intro-text .intro-heading {
 
 .icon-cards {
   height: 30px;
-  width: 50px;
+  width: 34px;
 }
 
 .w-32 {
@@ -915,7 +915,7 @@ header .intro-text .intro-heading {
 
 
 .container-top {
-  position: absolute;
+  transform: translate(12px, -60px);
   top: 428px;
 }
 
@@ -931,7 +931,7 @@ header .intro-text .intro-heading {
 }
 
 .how-work {
-  margin-top: 16%;
+  /* margin-top: 16%; */
 }
 
 /* HOW ITS WORKS */
@@ -1238,14 +1238,16 @@ section#join-vendor {
 
 @media only screen and (min-width: 768px) {
   .testimonial-content p {
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Roboto", sans-serif;
+    color: #3B4B58 ;
   }
 }
 @media only screen and (min-width: 1170px) {
   .testimonial-content p {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 18px;
+    /* line-height: 1.6; */
+    color: #3B4B58;
   }
 }
 .cd-author-info span p {
@@ -1796,7 +1798,7 @@ ul.social-buttons {
     color: #000;
     font-weight: 600;
     text-align: initial;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .m-40 {
@@ -4341,7 +4343,7 @@ html body main .dropdown-item:hover:first-child {
 }
 @media (min-width: 480px) and (min-width: 720px) {
   .container-top {
-    position: absolute;
+    transform: translate(12px, -60px);
   }
 }
 @media (min-width: 480px) {
@@ -4809,13 +4811,13 @@ div#filter button.btn:hover {
 }
 
 .input-overwrite::placeholder {
-  color: #3b4b58;
-  font-size: 22px;
+  color: #3B4B58;
+  font-size: 24px !important;
 }
 
 .small-heading::placeholder {
-  color: #3b4b58;
-  font-size: 16px;
+  color: #3B4B58;
+  font-size: 14px !important;
   font-weight: 400;
 }
 
@@ -6954,7 +6956,7 @@ header .intro-text .intro-heading {
 
 .icon-cards {
   height: 30px;
-  width: 50px;
+  width: 34px;
 }
 
 .w-32 {
@@ -7034,8 +7036,7 @@ header .intro-text .intro-heading {
 }
 
 .container-top {
-  position: absolute;
-  top: 400px;
+  transform: translate(12px, -60px);
 }
 
 .btn-xl {
@@ -7045,9 +7046,6 @@ header .intro-text .intro-heading {
   left: 50px;
 }
 
-.how-work {
-  margin-top: 16%;
-}
 
 /* HOW ITS WORKS */
 .timeline {
@@ -7416,14 +7414,16 @@ section#join-vendor {
 
 @media only screen and (min-width: 768px) {
   .testimonial-content p {
-    font-size: 16px;
+    font-size: 18px;
     font-family: "Roboto", sans-serif;
+    color: #3B4B58;
   }
 }
 @media only screen and (min-width: 1170px) {
   .testimonial-content p {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 18px;
+    /* line-height: 1.6; */
+    color: #3B4B58;
   }
 }
 .cd-author-info span p {
@@ -8131,9 +8131,7 @@ spam {
 
 .texti-text {
   color: #3c4b58;
-  font-weight: 600;
   text-align: initial;
-  font-size: 18px;
 }
 
 .slick-dots li button:before {
@@ -11163,7 +11161,7 @@ ul.header-controls li.notifications:hover .dropdown {
 }
 @media (min-width: 720px) {
   .container-top {
-    position: absolute;
+    transform: translate(12px, -60px);
   }
 }
 
@@ -12898,7 +12896,9 @@ span.copyright.footer-text {
 }
 
 p.theme-text.f-bolder {
-  font-size: 16px;
+  font-size: 20px;
+  white-space: nowrap !important;
+
 }
 
 .container.get-offers {
@@ -12964,7 +12964,7 @@ a.app-btn.blu.flex.vert.mr-2 {
 
 p.section-app-subheading.m-0 {
   margin: 20px 0 !important;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 span.site-app {
@@ -12973,8 +12973,8 @@ span.site-app {
 }
 
 p.pl-1.check-text {
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 18px;
   margin-top: 3px;
   margin-bottom: 0px !important;
 }
@@ -13027,7 +13027,9 @@ section#how-work .how-work-step {
   font-weight: 500;
 }
 section#how-work .how-work-title {
-  letter-spacing: 2px;
+  font-size: 24px;
+  text-align: center !important;
+  font-size: bold !important;
 }
 
 h1.text-heading.book-address.mb-1 {
@@ -13096,6 +13098,8 @@ p.book-address-subtext {
   font-weight: 100;
   border-radius: 50%;
   padding: 4px 6px;
+  margin-left: 62px;
+
 }
 
 .carousel-arrows {

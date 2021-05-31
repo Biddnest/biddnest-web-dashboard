@@ -17,12 +17,21 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
-
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 <!-- custom css -->
 <link rel="stylesheet" href="{{ asset('static/website/css/intlTelInput.css')}}">
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 
 <style>
+
+    
+
+
+body{
+    font-family: 'Roboto', sans-serif !important;
+}
     select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
@@ -193,7 +202,10 @@
     button:focus {
         outline: none;
     }
-
+    a.menu{
+        color: #3d4751 !important;
+        font-size: 14px !important;
+    }
 
 
 
@@ -274,6 +286,7 @@
 
         }
 
+      
 
         .card-input {
             margin: 2px;

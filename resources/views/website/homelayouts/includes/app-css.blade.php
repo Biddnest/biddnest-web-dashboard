@@ -13,9 +13,50 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 <style>
+    body{
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.card-num {
+  font-size: 115px;
+  position: absolute;
+  left: 21px;
+  color: #F8F8F8;
+}
+
+.card-num-right {
+  font-size: 115px;
+  position: absolute;
+  right: 21px;
+  color: #F8F8F8;
+}
+
+.navbar-brand>img{
+    display: block;
+    width: 116px;
+    margin-top: 6px;
+}
+
+.logged-in-username{
+    font-size: 14px;
+}
+
+.carousel-control .glyphicon-chevron-right{
+    margin-right: 118px;
+
+}
+
+
+.nav-menu-link.l-cap{
+    font-size: 14px !important;
+
+}
     a.menu{
         color: #3d4751 !important;
         font-size: 14px !important;
@@ -129,7 +170,7 @@ label {
  }
 
  .quote p{
-         font-size: 16px;
+         font-size: 14px;
      }
      p.f-16{
         font-size: 16px !important;
@@ -300,10 +341,10 @@ label {
     }
 
 
-    .testimonialslideshow{
+    /* .testimonialslideshow{
         margin-left: 50px;
 
-    }
+    } */
 
 
 

@@ -728,21 +728,16 @@ class BookingsController extends Controller
         if (!$assign_driver)
             return Helper::response(false, "Not in active state");
 
-        $get_driver = BookingDriver::where("booking_id", $assign_driver['id'])->first();
+        BookingDriver::where("booking_id", $assign_driver->id)->delete();
 
         $save_driver = new BookingDriver;
-        $save_driver->booking_id = $assign_driver['id'];
+        $save_driver->booking_id = $assign_driver->id;
         $save_driver->driver_id = $driver_id;
         $save_driver->vehicle_id = $vehicle_id;
         $result_driver = $save_driver->save();
 
         $assign_driver_status = Booking::where(['public_booking_id' => $public_booking_id, 'id' => $assign_driver['id']])
             ->update(["status" => BookingEnums::$STATUS['awaiting_pickup']]);
-
-        // $bookingstatus = new BookingStatus;
-        // $bookingstatus->booking_id = $assign_driver->id;
-        // $bookingstatus->status=BookingEnums::$STATUS['pending_driver_assign'];
-        // $result_status = $bookingstatus->save();
 
         $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['awaiting_pickup']);
 

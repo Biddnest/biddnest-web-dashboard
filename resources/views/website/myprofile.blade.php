@@ -273,10 +273,9 @@
                                             </button>
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-7">
-                                            <form action="{{ route('update_phone') }}" data-await-input="#otp" method="PUT" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                                            <form action="{{ route('update_phone') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                                                 <div class="d-flex f-direction text-justify center">
-                                                    <h2 class="p-text">Login</h2>
-                                                    <div class="col-lg-12 col-xs-12 mt-3">
+                                                    <div class="col-lg-12 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput">Phone Number</label>
                                                             <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>

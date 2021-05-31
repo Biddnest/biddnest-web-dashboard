@@ -354,7 +354,7 @@ class UserController extends Controller
         $data['otp'] = $otp;
 
         if($web)
-            return Helper::response(true, "Otp has been sent to the new phone.", $data);
+            return Helper::response("await", "Otp has been sent to the new phone.", $data);
         else
             return Helper::response(true, "Otp has been sent to the new phone.", $data);
     }

@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if(\Illuminate\Support\Facades\Session::get('account'))
+                        @if(\Illuminate\Support\Facades\Session::get('account') && $booking)
                                 <h5 class="card-title  pb-10">Latest Orders</h5>
 
                                 <div class="card view-content p-4">

@@ -128,6 +128,54 @@ label {
     left: 900px !important;
  }
 
+ .quote p{
+         font-size: 16px;
+     }
+     p.f-16{
+        font-size: 16px !important;
+
+     }
+
+ @media (max-width:1300px)  { 
+     .marg-head{
+        margin-top: 5rem;
+     }
+     .quote p{
+         font-size: 16px;
+     }
+     .dropdown-content{
+        left: -28px !important;
+        padding: 8px;
+     }
+
+     p.f-16{
+         font-size: 16px !important;
+     }
+     #content_accurate{
+        padding-top: 0px !important;
+     }
+
+     section#get-app{
+        padding: 50px 30px;
+
+     }
+ }
+
+
+ @media (min-width: 1200px){
+.container {
+    width: 1120px !important;
+}
+.col-lg-6.col-xs-12.mt-2{
+    padding-left: 60px;
+
+}
+.container.get-offers{
+    padding-left: 60px;
+
+}
+ }
+
  @media (max-width:480px)  { 
    
     .page-scroll.mb-view.btn.join-now{

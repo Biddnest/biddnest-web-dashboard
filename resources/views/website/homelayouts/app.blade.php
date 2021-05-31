@@ -159,16 +159,16 @@
                     <div class="footer-phone row around  center mt-3 mb-2 ">
 
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('terms.page', ["slug"=>"about-us"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">About Us</a>
+                            <a href="{{route('terms.page', ["slug"=>"about-us"])}}" class="footer-text f-18 footer-quick-links cursor-pointer">About Us</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('terms.page', ["slug"=>"terms-and-conditions"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">T&C</a>
+                            <a href="{{route('terms.page', ["slug"=>"terms-and-conditions"])}}" class="footer-text f-18 footer-quick-links cursor-pointer">T&C</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('terms.page', ["slug"=>"privacy-policies"])}}" class="footer-text f-22 footer-quick-links cursor-pointer">Privacy</a>
+                            <a href="{{route('terms.page', ["slug"=>"privacy-policies"])}}" class="footer-text f-18 footer-quick-links cursor-pointer">Privacy</a>
                         </div>
                         <div class="col-md-3 col-xs-3 br-r">
-                            <a href="{{route('faq')}}" class="footer-text f-22 footer-quick-links cursor-pointer">FAQ</a>
+                            <a href="{{route('faq')}}" class="footer-text f-20 footer-quick-links cursor-pointer">FAQ</a>
                         </div>
                     </div>
                     <div class="row mt-30 footer-row border-bottom border-top p-3">

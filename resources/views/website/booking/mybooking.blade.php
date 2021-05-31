@@ -57,13 +57,13 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
-                                            <div>
-                                                <p class="bold mt-1 pl-4 padding-view">
-                                                    #{{$booking->public_booking_id}} <span class="light">| {{date('d M Y', strtotime($booking->created_at))}}</span>
+                                        <div class="row d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
+                                            <div class="col-md-6 col-mobile">
+                                                <p class="bold mt-1 pl-4 padding-view d-flex f-direction">
+                                                   <span>  #{{$booking->public_booking_id}}</span> <span class="light"> {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                 </p>
                                             </div>
-                                            <div>
+                                            <div class="col-md-6 col-mobile" style="margin-top: 10px;">
                                                 @switch($booking->status)
                                                     @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['enquiry']; @endphp

@@ -430,13 +430,13 @@ class ApiRouteController extends Controller
             'public_booking_id' => 'required|string',
              'reason' => 'required|string',
              'desc' => 'required|string',
-            // 'ticket_type'=>'required|integer'
+             'request_callback'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::createRejectCall($request->token_payload->id, 4, $request->public_booking_id, $request->reason, $request->desc);
+        return BookingsController::rejectBooking($request->token_payload->id, $request->public_booking_id, $request->reason, $request->desc, $request->request_callback);
     }
 
     public function getTickets(Request $request)

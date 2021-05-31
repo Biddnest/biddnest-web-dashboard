@@ -337,7 +337,8 @@ class OrganisationController extends Controller
         {
             Organization::where(["id" => $id])
                 ->update([
-                    'ticket_status' => CommonEnums::$TICKET_STATUS['open']
+                    'ticket_status' => CommonEnums::$TICKET_STATUS['open'],
+                    'status'=>OrganizationEnums::$STATUS['pending_approval']
                 ]);
         }
 
@@ -590,7 +591,14 @@ class OrganisationController extends Controller
 
     public static function changeStatus($id, $status)
     {
-        $change_status=Organization::where(["id"=>$id])->update(["ticket_status" => $status]);
+        if($status == CommonEnums::$TICKET_STATUS['open'])
+            $change_status=Organization::where(["id"=>$id])->update(["ticket_status" => $status]);
+        elseif($status == CommonEnums::$TICKET_STATUS['need_modification'])
+            $change_status=Organization::where(["id"=>$id])->update(["ticket_status" => $status]);
+        elseif($status == CommonEnums::$TICKET_STATUS['approve']) {
+            $org_status=Organization::where("id", (int)Organization::where("id", $id)->pluck('parent_org_id')[0])->pluck('status')[0];
+            $change_status = Organization::where(["id" => $id])->update(["ticket_status" => $status, "status" =>$org_status]);
+        }
 
         if(!$change_status)
             return Helper::response(false,"Couldn't Update status");

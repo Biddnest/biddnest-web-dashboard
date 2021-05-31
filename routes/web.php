@@ -152,7 +152,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
     Route::put('/{id}/{org_id}/{cat_id}/change-price-status',[Router::class,'changeStatusPrice'])->name("change_priceticket_status");
     Route::put('/{id}/change-branch-status',[Router::class,'changeStatusBranch'])->name("change_Branchticket_status");
-    Route::put('/{id}/reschedule-order',[Router::class,'rescheduleOrder'])->name("reschedule-order");
+    Route::put('/{id}/reschedule-order',[Router::class,'rescheduleOrder'])->name("web.reschedule-order");
     Route::put('/{id}/cancel-order',[Router::class,'cancelOrder'])->name("cancel-order");
 
 

@@ -105,7 +105,7 @@ class UserController extends Controller
             }
 
         }else {
-            return Helper::response(false, "Incorrect otp provided");
+            return Helper::response(false, "Incorrect otp provided, ");
         }
     }
 

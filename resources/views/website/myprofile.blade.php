@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="row d-flex justify-content-start text-left">
                                 <div class="col-md-7">
-                                            <p class="mt-2 mb-0  l-cap">Phone Number </p>
+                                            <p class="mt-2 mb-0  l-cap">Phone Number <i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer"></i></p>
                                             <p class="fw-500 f-18">{{$user->phone}}</p>
                                         </div>
                                         <div class="col-md-5">
@@ -210,7 +210,7 @@
                                                     <div class="col-lg-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput2">Phone Number</label>
-                                                            <a data-toggle="modal" data-target="#edit-number" class="cursor-pointer"><input type="number" class="form-control" id="formGroupExampleInput2" name="phone" value="@if($user->phone){{$user->phone}}@endif" placeholder="9739912345" readonly/></a>
+                                                            <input type="number" class="form-control" id="formGroupExampleInput2" name="phone" value="@if($user->phone){{$user->phone}}@endif" placeholder="9739912345" readonly/>
                                                         </div>
                                                     </div>
 

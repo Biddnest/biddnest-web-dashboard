@@ -306,13 +306,14 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/banner', [WebController::class, 'manageBanner'])->name("create-banner");
             Route::get('/{id}', [WebController::class, 'editSlider'])->name("edit-slider");
 
-
-            Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
-            Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
-            Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
-
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
             Route::get('/testimonials/{id}/edit',[WebController::class,'createTestimonials'])->name("edit-testimonials");
+        });
+
+        Route::prefix('notifications')->group(function () {
+            Route::get('/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
+            Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
+            Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
         });
 
         Route::prefix('review')->group(function () {

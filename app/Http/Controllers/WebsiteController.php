@@ -130,6 +130,7 @@ class WebsiteController extends Controller
 
     public function bookingHistory(Request $request)
     {
+        return Session::get('account')['id'];
         $bookings=BookingsController::bookingHistoryPast(Session::get('account')['id'], true);
         return view('website.booking.bookinghistory', ['bookings'=>$bookings]);
     }

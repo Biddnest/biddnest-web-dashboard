@@ -46,7 +46,25 @@
     const RZP_KEY = '{{\App\Models\Settings::where("key", "razor_key")->pluck('value')[0]}}';
 </script>
 
+<script>
+$('.card-methord').click(function() {
+            $('.card-methord02').removeClass('turntheme');
+            $('.card-methord02').removeClass('check-icon02');
+            $(this).addClass('turntheme');
+            $(this).addClass('check-icon02');
+
+
+        });
+        </script>
+
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
+
+
+
+
+
+
+
 
 

@@ -397,10 +397,9 @@ class TicketController extends Controller
         return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
     }
 
-    public static function createRejectCall($sender_id, $ticket_type, $data, $head, $desc)
+    public static function createRejectCall($sender_id, $ticket_type, $data)
     {
         $meta=["Public_booking_id"=>$data];
-        $cancelled_meta=["reason"=>$head, "desc"=>$desc];
         $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
         $body = "Request to Cancel this Oreder ".$data;
         $ticket = new Ticket;
@@ -410,16 +409,9 @@ class TicketController extends Controller
         $ticket->type = $ticket_type;
         $ticket->meta = json_encode($meta);
 
-         $booking_id = Booking::where("public_booking_id", $data)->pluck('id')[0];
-         Booking::where("id", $booking_id)
-             ->update([
-                 "status"=>BookingEnums::$STATUS['bounced'],
-                 "cancelled_meta"=>json_encode($cancelled_meta)]);
-        BookingsController::statusChange($booking_id, BookingEnums::$STATUS['bounced']);
-
         if(!$ticket->save())
             return Helper::response(false, "Could'nt create ticket.");
 
-        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+        return Helper::response(true, "Ticket raised Successfull",["ticket"=>Ticket::findOrFail($ticket->id)]);
     }
 }

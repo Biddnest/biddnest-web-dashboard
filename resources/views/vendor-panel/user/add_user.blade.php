@@ -121,7 +121,7 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="">Date Of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
+                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                 </div>
@@ -135,14 +135,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="">Date Of Joining</label>
-                                        <input type="text" id="fullname" name="doj" value="{{$roles->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
+                                        <input type="text" id="fullname" name="doj" value="{{$roles->doj ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
                                         <span class="error-message">Please enter valid Date of Joining</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="">Date Of Relieving</label>
-                                        <input type="text" id="fullname" name="dor" value="{{$roles->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control dateselect" required>
+                                        <input type="text" id="fullname" name="dor" value="{{$roles->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
                                         <span class="error-message">Please enter valid Date of Relieving</span>
                                     </div>
                                 </div>

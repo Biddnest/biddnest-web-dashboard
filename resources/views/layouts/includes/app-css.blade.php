@@ -524,6 +524,8 @@
                 border-radius: 5px;
             }
 
+
+           
             body.dragging,
             body.dragging * {
                 cursor: move !important;

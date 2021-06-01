@@ -23,6 +23,7 @@ use App\Models\MovementDates;
 use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Settings;
+use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Vendor;
@@ -904,5 +905,25 @@ class BookingsController extends Controller
         $y = array_reverse($y);
         return ["rank" => $current_key + 1, "data" => $data, "axis" => ["x" => $x, "y" => $y]];
 
+    }
+
+    public static function rejectBooking($user_id, $public_booking_id, $reason, $desc, $request_callback=false){
+        $cancelled_meta=["reason"=>$reason, "desc"=>$desc];
+
+        $booking_id = Booking::where("public_booking_id", $public_booking_id)->pluck('id')[0];
+        $status_change = Booking::where("id", $booking_id)
+            ->update([
+                "status"=>BookingEnums::$STATUS['bounced'],
+                "cancelled_meta"=>json_encode($cancelled_meta)]);
+
+        $status_add = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['bounced']);
+
+        if(!$status_change || !$status_add)
+            return Helper::response(false, "Coudn't update status");
+
+        if($request_callback == true)
+            TicketController::createRejectCall($user_id, 4, $public_booking_id);
+
+        return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }
 }

@@ -90,11 +90,11 @@
                             </div> -->
 
                             <div class="col-md-9 f-16 mt-1 ">
-                        
-                              
-                                
-                                <div class="row d-flex justify-content-start text-left">  
-                                    <div class="col-6"> 
+
+
+
+                                <div class="row d-flex justify-content-start text-left">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                             <p class="mb-0 mt-2 l-cap">
                                                 First Name
                                             </p>
@@ -104,27 +104,27 @@
 
                                         </div>
 
-                                        <div class="col-4">
+                                        <div class="col-md-3">
                                             <p class="mt-2 mb-0 l-cap">Last Name</p>
                                             <p class="fw-500 f-18">{{ucwords($user->lname)}}</p>
                                         </div>
-                                        <div class="col-2 d-flex justify-content-end">
+                                        <div class="col-md-2 d-flex justify-content-end">
                                         <div class=" mt-2">
                                             <i data-toggle="modal" data-target="#edit-profile" class="icon dripicons-pencil cursor-pointer"></i>
                                         </div>
                                     </div>
-                                    
-                            
+
+
                                 </div>
-                                <div class="row d-flex justify-content-start text-left">  
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="row d-flex justify-content-start text-left">
+                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                             <p class="mt-2 mb-0  l-cap">
                                                 Email Id</p>
                                             <p class="fw-500 f-18">
                                                 {{$user->email}}
                                             </p>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                             <p class="mt-2 mb-0  l-cap">
                                                 Gender
                                             </p>
@@ -132,24 +132,24 @@
                                                 {{$user->gender}}
                                             </p>
                                         </div>
-                            
+
                                 </div>
-                                <div class="row d-flex justify-content-start text-left">  
-                                <div class="col-6">
-                                            <p class="mt-2 mb-0  l-cap">Phone Number </p>
+                                <div class="row d-flex justify-content-start text-left">
+                                <div class="col-md-7">
+                                    <p class="mt-2 mb-0  l-cap">Phone Number  <span style="display:inline-block;"><i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer"></i></span></p>
                                             <p class="fw-500 f-18">{{$user->phone}}</p>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-5">
                                             <p class="mt-2 mb-0  l-cap">Date of Birth </p>
                                             <p class="fw-500 f-18">{{date('d M Y', strtotime($user->dob))}}</p>
                                         </div>
-                            
+
                                 </div>
-                                
-                                
+
+
                                 <div class="top-aliments  d-flex justify-content-between">
-                                  
-                                   
+
+
                                 </div>
 
                             </div>
@@ -254,6 +254,50 @@
                                                             </button>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="edit-number" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+                                <div class="modal-dialog para-head input-text-blue" role="document">
+                                    <div class="modal-content w-90 w-1000 mt-50 right-25 ml-4 ">
+                                        <div class="modal-header bg-purple">
+                                            <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                                                Update Phone Number
+                                            </h5>
+                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body p-15 margin-topneg-7">
+                                            <form action="{{ route('update_phone') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                                                <div class="d-flex f-direction text-justify center">
+                                                    <div class="col-lg-12 col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Phone Number</label>
+                                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-xs-12 mt-1 otp hidden" id="otp">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">OTP</label>
+                                                            <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
+                                                        </div>
+                                                    </div>
+                                                    {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
+                                                    <button type="button" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                                                        Next
+                                                    </button>
+                                                    </a>--}}
+                                                    <a class="weblogin">
+                                                        <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                                                            Send OTP
+                                                        </button>
+                                                    </a>
+
                                                 </div>
                                             </form>
                                         </div>

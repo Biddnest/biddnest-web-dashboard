@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if(\Illuminate\Support\Facades\Session::get('account'))
+                        @if(\Illuminate\Support\Facades\Session::get('account') && $booking)
                                 <h5 class="card-title  pb-10">Latest Orders</h5>
 
                                 <div class="card view-content p-4">
@@ -213,7 +213,7 @@
                         @endif
                     </div>
                 </div>
-                @if(\Illuminate\Support\Facades\Session::get('account'))
+                @if(\Illuminate\Support\Facades\Session::get('account') && $booking)
                             <div class="modal fade" id="for-friend" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                                 <div class="modal-dialog col-grey input-text-blue" role="document">
                                     <div class="modal-content  w-1000 mt-50  right-25">

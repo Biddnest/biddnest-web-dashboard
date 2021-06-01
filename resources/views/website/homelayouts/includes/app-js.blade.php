@@ -71,13 +71,12 @@
         onchanged: function (currentLocation, radius, isMarkerDropped) {
             var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
            $.get(url, function (response){
-                // console.log(response);
+                console.log(response);
                let street="";
                let city="";
                 for(let i=0; i<= response.results[0].address_components.length; i++)
                 {
                     let addr=response.results[0].address_components[i];
-                    console.log(addr);
                     if(addr.types.indexOf('sublocality_level_2')) {
 
                         // $(".source").val(addr.long_name);
@@ -87,8 +86,8 @@
                     if(addr.types.indexOf('locality')) {
 
                         // $(".source_city").val(addr2.long_name);
-                        // break;
                         city +=addr.long_name;
+                        break;
                     }
                 }
                $(".source").val(street);
@@ -149,4 +148,14 @@
         markerDraggable: true,
         markerVisible: true
     });
+
+
+    $('.card-methord').click(function() {
+            $('.card-methord').removeClass('turntheme');
+            $('.card-methord').removeClass('check-icon02');
+            $(this).addClass('turntheme');
+            $(this).addClass('check-icon02');
+
+
+        });
 </script>

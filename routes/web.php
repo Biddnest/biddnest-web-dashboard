@@ -300,19 +300,20 @@ Route::prefix('admin')->group(function () {
         Route::prefix('slider')->group(function () {
             Route::get('/',[WebController::class,'slider'])->name("slider");
             Route::get('/testimonials',[WebController::class,'testimonials'])->name("testimonials");
-            Route::get('/push-notification',[WebController::class,'pushNotification'])->name("push-notification");
 
             Route::get('/create',[WebController::class,'createSlider'])->name("create-slider");
             Route::get('/{id}/banner', [WebController::class, 'manageBanner'])->name("create-banner");
             Route::get('/{id}', [WebController::class, 'editSlider'])->name("edit-slider");
 
-
-            Route::get('/push-notification/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
-            Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
-            Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
-
             Route::get('/testimonials/create',[WebController::class,'createTestimonials'])->name("create-testimonials");
             Route::get('/testimonials/{id}/edit',[WebController::class,'createTestimonials'])->name("edit-testimonials");
+        });
+
+        Route::prefix('notifications')->group(function () {
+            Route::get('/',[WebController::class,'pushNotification'])->name("push-notification");
+            Route::get('/create',[WebController::class,'createPushNotification'])->name("create-push-notification");
+            Route::get('/mail-notification',[WebController::class,'mailNotification'])->name("mail-notification");
+            Route::get('/mail-notification/create',[WebController::class,'createMailNotification'])->name("create-mail-notification");
         });
 
         Route::prefix('review')->group(function () {
@@ -478,6 +479,8 @@ Route::prefix('website/api')->group(function () {
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
     Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
+    Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
+    Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
 
     Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");

@@ -14,7 +14,7 @@ class ZoneController extends Controller
 {
 
     public static function get(){
-        $zones=Zone::where("deleted",CommonEnums::$NO)->get();
+        $zones=Zone::where("deleted",CommonEnums::$NO)->where("status",CommonEnums::$YES)->get();
         return Helper::response(true, "zone shows successfully", ['zones'=>$zones]);
     }
     public static function getOne($id){

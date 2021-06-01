@@ -45,8 +45,6 @@ class GeoController extends Controller
             $tempDis  = self::distance($lat, $lng, $zone->lat,$zone->lng);
             $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
             $distance =$tempDis;
-            Log::info($zone->id);
-            Log::info($distance);
         }
         return $zone_id;
 //        return 1;

@@ -61,7 +61,7 @@
                             @foreach($inventories as $inventory)
                                 <div class="simple-card category-cards col-sm-2">
                                     <div class="card-title invsidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}" >{{ucfirst(trans($inventory->category))}}</div>
-                                    <div class="card-body invsidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}">
+                                    <div class="card-body invsidebar" data-sidebar="{{route('vendor.inventory_sidebar', ['id'=>$inventory->id])}}" style="background-color: #FFFFFF !important;">
                                         <img src="{{$inventory->icon}}" style="width: 50%;">
                                     </div>
                                     <div class="card-footer d-felx  justify-content-between">

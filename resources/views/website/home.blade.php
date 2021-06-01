@@ -6,11 +6,11 @@
         <div class="container container-top p-50 top-header-card border-top-cards">
             <form action="{{route('add-booking')}}" class="no-ajax">
             <div class="top-cards mt-2">
-                <div class="col-lg-4 col-xs-12 d-flex space-between " style="padding-left: 6px;">
+                <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-1">
                         <input type="radio" name="category" class="card-input-element" />
-                        <div class="card-header card-methord building-type">
+                        <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
                                 <p class="building-type-text">{{ucwords($category->name)}}</p>
@@ -136,7 +136,7 @@
                         <p class="card-num">4</p>
 
                         <img class="w-150" src="{{ asset('static/website/images/images/gifs/4.gif')}}" alt="some-picture" />
-                        <h5 class="d-flex center theme-text how-work-text">Step 4</h5>
+                        <h5 class="d-flex center theme-text how-work-step">Step 4</h5>
                         <h3 class="d-flex center theme-text how-work-title">
                             Schedule & Confirm
                         </h3>
@@ -198,7 +198,7 @@
                                 <path id="XMLID_425_" d="M1.129,351.44a1.129,1.129,0,1,0,.8,1.927,1.129,1.129,0,0,0-.8-1.927Z" transform="translate(0 -312.931)" />
                             </svg>
                         </span>
-                        <span class="ml-2" style="font-size:24px;"> Accurate report and fast execution</span>
+                        <span class="ml-2 f-18" style="font-size:24px;"> Accurate report and fast execution</span>
                     </button>
                     <button class="tablinks vendor bg-white border-cards" onclick="openContent(event, 'content_cost')">
                         <span class="svg-container ml-2">
@@ -211,7 +211,7 @@
                             </svg>
                         </span>
 
-                        <span class="ml-2" style="font-size:24px;">
+                        <span class="ml-2 f-18" style="font-size:24px;">
                             Cost Effective
                         </span>
                     </button>
@@ -226,7 +226,7 @@
                                 <path id="Path_9009" data-name="Path 9009" d="M57.034,16.364H52.67A20.465,20.465,0,0,1,41.262,12.9l-.531-.308-.5.332a20.429,20.429,0,0,1-6.7,2.9v-1.98l-2.381-.56a14.365,14.365,0,0,0-1.248-3.011l1.289-2.081L26.348,3.341,24.267,4.63a14.366,14.366,0,0,0-3.011-1.248L20.695,1H13.841l-.56,2.381A14.366,14.366,0,0,0,10.269,4.63L8.188,3.341,3.341,8.188,4.63,10.269A14.366,14.366,0,0,0,3.381,13.28L1,13.841v6.854l2.381.56A14.366,14.366,0,0,0,4.63,24.267L3.341,26.348l4.847,4.847,2.081-1.289a14.366,14.366,0,0,0,3.011,1.248l.56,2.381h6.854l.56-2.381a14.365,14.365,0,0,0,3.011-1.248l.417.258A22.364,22.364,0,0,0,28.972,40.81l-3.04,11.148,4.463-1.116,3.377,5.63,3.03-9.091a22,22,0,0,0,3.709,1.481l.255.076.255-.075a22,22,0,0,0,3.709-1.481l3.03,9.091,3.377-5.63L55.6,51.959,52.56,40.811a22.291,22.291,0,0,0,4.474-13.349ZM24.287,27.793l-.473.287a12.544,12.544,0,0,1-3.527,1.461l-.539.132-.484,2.054H15.272l-.484-2.054-.539-.132a12.544,12.544,0,0,1-3.527-1.461l-.473-.287L8.455,28.9,5.633,26.081l1.111-1.795-.287-.473a12.544,12.544,0,0,1-1.461-3.527l-.132-.539-2.055-.484V15.272l2.054-.484.132-.539a12.544,12.544,0,0,1,1.461-3.527l.287-.473-1.111-1.8L8.454,5.632l1.795,1.111.473-.287a12.544,12.544,0,0,1,3.527-1.461l.539-.132.484-2.054h3.991l.484,2.054.539.132a12.544,12.544,0,0,1,3.527,1.461l.473.287,1.795-1.111L28.9,8.454l-1.111,1.795.287.473a12.544,12.544,0,0,1,1.461,3.527l.132.539,2.055.484v.888a20.7,20.7,0,0,1-2.866.2h-.8A10.851,10.851,0,1,0,24.5,25.34v2.123c0,.159.016.315.02.474ZM24.5,16.364v6.307a9.025,9.025,0,1,1,1.761-6.307Zm8.8,35.808-2.045-3.408-2.767.691,1.9-6.957A22.393,22.393,0,0,0,35.2,46.483Zm19.745-2.717-2.767-.691-2.045,3.408-1.9-5.689A22.393,22.393,0,0,0,51.148,42.5Zm2.182-21.993a20.617,20.617,0,0,1-14.46,19.59,20.617,20.617,0,0,1-14.46-19.59V18.172h2.557a22.245,22.245,0,0,0,11.9-3.442,22.224,22.224,0,0,0,11.9,3.442h2.557Z" transform="translate(-1 -1)" />
                             </svg>
                         </span>
-                        <span class="ml-2" style="font-size:24px;">Qaulity Work</span>
+                        <span class="ml-2 f-18" style="font-size:24px;">Qaulity Work</span>
                     </button>
                 </div>
                 <div class="col-lg-6 col-xs-12">
@@ -308,19 +308,19 @@
     <!-- section refer and earn -->
     <section id="refer-earn" class="refer-earn p-10 mt-3 ">
         <div class="container">
-            <div class="row center reverse">
-                <div class="col-lg-7 ">
+            <div class="row d-flex justify-content-between reverse" >
+                <div class="col-md-6" style="width: auto;">
                     <div class="refer-head mt-3 center-align" style="font-size:30px!important;">Refer and Earn</div>
                     <div class="refer-para mb-4 mt-1 center-align" style="font-size:18px!important;">
                         Dummy Text of the printing and typesetting industry. Lorem Ipsum has been the industry's started dummy text
                     </div>
-                    <div class="btn-refer">
+                    <div class="btn-refer" >
                         <a href="#services" class="page-scroll btn join-now">
                             <button type="button" class="btn join-now redem">Refer Now</button>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6" style="display: flex; justify-content: flex-end;" >
                     <div>
                         <img class="img-responsive responive" src="{{ asset('static/website/images/images/refer-earn.png')}}" />
                     </div>
@@ -358,8 +358,8 @@
                         </div>
                     </div>
 
-                    <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 90%;">
-                        <input type="text" class="form-control -mr-4" placeholder="Enter your mobile number to get link on phone" />
+                    <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 82%;">
+                        <input type="text" class="form-control -mr-4" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
                                 <i class="fa fa-paper-plane"><span class="pl-1 f-bolder">GET LINK</span></i>
@@ -386,7 +386,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-xs-12 mt-3 ">
-                    <div class="get-app-img">
+                    <div class="get-app-img" style="width: 106% !important;">
                         <img class="img-responsive responive" src="{{ asset('static/website/images/images/get-app.png')}}" />
                     </div>
                 </div>
@@ -397,14 +397,14 @@
     <section>
         <div class="container get-offers">
             <div class="row mt-6 mb-5">
-                <div class="col-sm-7 col-xs-12 ">
+                <div class="col-sm-7 col-xs-12 " style="padding-left: 8px !important;">
                     <p class="theme-text f-bolder text-view-center">
                         Whether you’re new to Packers & movers, just new to BIDDNEST,
                         <br /> We’re glad you’re here! Stay informed of our special offers.
                     </p>
                 </div>
                 <div class="col-sm-5 col-xs-12 col-sm-12">
-                    <div class="input-group-get-link ml-2-0 ml-2 mt-30" style="width: 90%;">
+                    <div class="input-group-get-link ml-2-0 ml-2 mt-30" style="width: 95%;">
                         <input type="text" class="form-control offer-input -mr-4" placeholder="Enter your email ID here" />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
@@ -423,7 +423,9 @@
                 <div class="modal-header p-0 br-5 ">
                     <div>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
-                            <i class="fa fa-times mt-1 mr-1" style="color: #FFF !important;"></i>
+                        <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
+                        <!-- <i class="icon dripiconmeter " style="color: #FFF !important;"></i> -->
+                            <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
                             <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
                         </button>
                     </div>
@@ -441,14 +443,14 @@
 
                     <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
-                            <h2 class="p-text">Login</h2>
+                            <h2 class="p-text" style="font-size: 24px !important;">Login</h2>
                             <div class="col-lg-12 col-xs-12 mt-3">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden" id="otp">
+                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden"   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
@@ -459,11 +461,14 @@
                                 Next
                             </button>
                             </a>--}}
-                            <a class="weblogin">
-                                <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                            <div class="col-md-12 mt-4">
+                            <a class="weblogin" >
+                                <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg" style="    width: -webkit-fill-available;">
                                     Send OTP
                                 </button>
                             </a>
+                            </div>
+                           
 
                         </div>
                     </form>
@@ -486,19 +491,20 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                     <div class="row">
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <label>From Location</label>
-                            <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete" class="form-control" required>
-                            <span class="error-message">Please enter valid</span>
+                        <div class="col-sm-12"> 
+                        <label>From Location</label>
+
+                        <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
+                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete"  required />
+                        <div class="input-group-get">
+                            <button class="btn btn-secondary input-button" type="button">
+                                <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="col-sm-4" style="margin-top: 18px;">
-                        <a href="#" class="page-scroll btn btn-responsive">
-                            <button type="button" class="btn btn-primary view-btn closed " data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
-                        </a>
-
-                    </div>
+                    <span class="error-message">Please enter valid</span>
+                        </div>
+                   
                     </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
 
@@ -520,20 +526,21 @@
                     </button>
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <div class="form-group">
-                                <label>To Location</label>
-                                <input type="text" placeholder="Srm colony,Chennai" id="dest-autocomplete" class="form-control">
-                                <span class="error-message">Please enter valid</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4" style="margin-top: 18px;">
-                            <a href="#" class="btn  btn-responsive">
-                                <button type="button" class="btn btn-primary view-btn closed " data-dismiss="modal" aria-label="Close" style="padding: 6px 46px !important;">OK</button>
-                            </a>
+                <div class="row">
+                        <div class="col-sm-12"> 
+                        <label>To Location</label>
 
+                        <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
+                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Koramangala, Hsr Layout" id="source-autocomplete"  required />
+                        <div class="input-group-get">
+                            <button class="btn btn-secondary input-button" type="button">
+                                <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
+                            </button>
                         </div>
+                    </div>
+                    <span class="error-message">Please enter valid</span>
+                        </div>
+                   
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>

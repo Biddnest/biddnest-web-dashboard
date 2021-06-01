@@ -113,7 +113,7 @@
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                            <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
+                                            <span class="status-badge green-bg  text-center td-padding">In Transit</span>
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['completed'])

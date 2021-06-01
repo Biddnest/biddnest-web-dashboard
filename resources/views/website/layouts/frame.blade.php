@@ -27,7 +27,7 @@
                         <a class="nav-link f-14" href="{{route('contact_us')}}"><i
                                 class="icon-2 mr-1 pr-1 pt-1 dripicons-headset"></i>CONTACT US</a>
                     </li>
-                    <li class="account-settings dropdown theme-text mt-1 pt-1 ml-20">
+                    <li class="account-settings dropdown theme-text mt-1 pt-1 ml-20 f-14">
                         @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
@@ -66,7 +66,7 @@
                             </a>
                         @else
                             <a data-toggle="modal" data-target="#Login-modal">
-                                <span class="logged-in-username cursor-pointer">Login</span>
+                                <span class="logged-in-username cursor-pointer l-cap ">login</span>
                             </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Session::get('account'))
@@ -112,7 +112,8 @@
                     <div class="modal-header p-0 br-5 ">
                         <div>
                             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
-                                <i class="fa fa-times mt-1 mr-1" style="color: #FFF !important;"></i>
+                            <i class=" dripicons-cross" style="color: #FFF !important;"></i>
+                                <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
                                 <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
                             </button>
                         </div>

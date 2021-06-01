@@ -148,4 +148,14 @@
         markerDraggable: true,
         markerVisible: true
     });
+
+
+    $('.card-methord').click(function() {
+            $('.card-methord').removeClass('turntheme');
+            $('.card-methord').removeClass('check-icon02');
+            $(this).addClass('turntheme');
+            $(this).addClass('check-icon02');
+
+
+        });
 </script>

@@ -24,13 +24,10 @@
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 
 <style>
+    body {
+        font-family: 'Roboto', sans-serif !important;
+    }
 
-    
-
-
-body{
-    font-family: 'Roboto', sans-serif !important;
-}
     select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
@@ -38,11 +35,20 @@ body{
         background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") !important;
         background-repeat: no-repeat !important;
         background-position-x: 100% !important;
-        background-position-y: 5px !important;
+        background-position-y: 2px !important;
         border: 1px solid #dfdfdf !important;
         border-radius: 3px !important;
         margin-right: 0rem !important;
     }
+
+
+    .ontop {
+    position: absolute;
+    top: 300px;
+    width: 80%;
+    left: 10%;
+
+  }
 
     select::-ms-expand {
         display: none !important;
@@ -50,6 +56,11 @@ body{
 
     .answer {
         display: none;
+    }
+
+    .nav-menu-link:hover {
+        color: #fdc403 !important;
+
     }
 
     .custom-check {
@@ -64,8 +75,8 @@ body{
     }
 
     .card-img-top {
-        width: 107% !important;
-        margin-left: -8px !important;
+        width: 109% !important;
+        margin-left: -11px !important;
 
 
     }
@@ -86,8 +97,7 @@ body{
     }
 
     .card-input {
-        margin: 10px;
-        padding: 00px;
+        padding: 0px;
     }
 
     .card-input:hover {
@@ -138,12 +148,23 @@ body{
         border-radius: 5px;
     }
 
-    .step-text.text-right{
+    .step-text.text-right {
         white-space: nowrap !important;
     }
+
     .add-item-icon {
-        bottom: 216px !important;
-        right: 104px !important;
+        bottom: 221px !important;
+        right: 138px !important;
+    }
+
+    .add-photos {
+        height: 80px;
+
+    }
+
+    .add-photos i.fa.fa-plus.fa-2x {
+        transform: translate(34px, -15px);
+
     }
 
     .dropdown-content {
@@ -195,13 +216,16 @@ body{
 
     .img-width {
         width: 76px;
+        margin: 0 auto;
+
     }
 
 
     button:focus {
         outline: none;
     }
-    a.menu{
+
+    a.menu {
         color: #3d4751 !important;
         font-size: 14px !important;
     }
@@ -213,10 +237,29 @@ body{
         margin-bottom: 240px;
     }
 
+    .ontop-book {
+        width: 80% !important;
+
+    }
+
+
+    .mar-card {
+        border-radius: 10px;
+        margin-top: 2rem;
+    }
 
     @media (max-width:480px) {
+
+        .ontop{
+            left: 0%;
+        }
         .heading-view {
             transform: translate(-24px, 10px);
+
+        }
+
+        .ontop-book {
+            width: 100% !important;
 
         }
 
@@ -228,6 +271,8 @@ body{
 
         .img-width {
             width: 36px;
+            margin: 0 auto;
+
         }
 
         .card-width {
@@ -265,7 +310,6 @@ body{
 
         div#filter {
             margin: -5px -6px 0px -12px;
-            width: 133%;
             margin-left: -45px;
 
         }
@@ -285,10 +329,9 @@ body{
 
         }
 
-      
+
 
         .card-input {
-            margin: 2px;
             padding: 0px;
         }
 
@@ -396,7 +439,13 @@ body{
 
         .required-item {
             width: 140px !important;
+            margin: 0 auto;
+            margin-top: 28px;
 
+        }
+
+        .row.mb-4.mt-3 {
+            margin-top: 0px !important;
         }
 
         .container-image-item img {
@@ -467,65 +516,117 @@ body{
 
     }
 
+
+
     .border-l-radius {
         border-top-left-radius: 5px !important;
     }
+
     .space {
         height: 300px !important;
         margin-bottom: 100px !important;
     }
-    @media (max-width: 1200px) {
+
+
+
+    @media only screen and (max-width: 1200px) and (min-width: 900px) {
+        .modal-backdrop {
+            position: inherit !important;
+        }
+
+        .required-item-name {
+            font-size: 18px !important;
+        }
+
+        .add-photos {
+            height: 68px;
+
+
+        }
+
+        .add-photos i.fa.fa-plus.fa-2x {
+            transform: translate(33px, -20px);
+
+        }
+
+        .card-img-top {
+            width: 110% !important;
+            margin-top: -14px;
+            margin: 0 auto;
+        }
+
+        .ontop-book {
+            width: 84% !important;
+            transform: translate(52px, -9px) !important;
+        }
+
+        .card.required-item {
+            width: max-content !important;
+        }
+
+        .container-image-item {
+            /* width: 170px; */
+        }
+
+        .img-width {
+            width: 54px;
+            margin: 0 auto;
+
+        }
+
+        .screen-fix {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+
+        }
+
+        .add-item-icon {
+            bottom: 216px !important;
+            right: 104px !important;
+        }
 
     }
 
 
-@media (min-width:320px)  {
 
 
+    @media (min-width:961px) {
+        .full-width {
+            padding: 5px 86px !important;
 
-
- }
-@media (min-width:481px)  {  }
-@media (min-width:641px)  { }
-@media (min-width:961px)  {
-    .full-width{
-        padding: 5px 86px !important;
-
+        }
     }
- }
-@media (min-width:1025px) {
-    .full-width{
-        padding: 5px 95px !important;
 
+    @media (min-width:1025px) {
+        .full-width {
+            padding: 5px 95px !important;
+
+        }
     }
- }
-@media (min-width:1281px) {
-    .full-width{
-        padding: 5px 120px !important;
+
+    @media (min-width:1281px) {
+        .full-width {
+            padding: 5px 120px !important;
+
+        }
 
     }
 
- }
+    @media (min-width:1481px) {
+        .full-width {
+            padding: 5px 120px !important;
 
- @media (min-width:1481px) {
-    .full-width{
-        padding: 5px 120px !important;
+        }
 
     }
 
- }
+    .hidden {
+        display: none;
+    }
 
-.hidden{
-    display: none;
-}
-
-
-
-
-
-
-
-
-
-
+    .ontop-book {
+        width: 80%;
+        transform: translate(60px, -9px);
+    }
 </style>

@@ -7,7 +7,7 @@
             <div class="book-move-screen responsive ontop-book ">
                 <div class="card-body ">
                     <div class="row d-flex ">
-                        <div class="col-md-3 br-line view-none pt-4 ">
+                        <div class="col-md-3 br-line view-none pt-4">
                             <div class="row steps-form-3 ">
                                 <div class="col-md-8 setup-panel-3">
                                     <div class="steps-step-1 ">
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9 book-move-questions-container ">
+                        <div class="col-md-9 book-move-questions-container">
                             <form id="wizard">
                                 <div class="row setup-content-3 step-1" id="step-1">
                                     <div class="row ">

@@ -525,9 +525,7 @@
             }
 
 
-            .modal-backdrop{
-                position: inherit !important;
-            }
+           
             body.dragging,
             body.dragging * {
                 cursor: move !important;

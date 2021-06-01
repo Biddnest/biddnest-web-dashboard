@@ -32,18 +32,18 @@
                             <div class="col-md-8 col-xs-12 col-sm-12  border-right">
                                 <h5 class="heading ml-4 mt-4">My Request</h5>
                                 @foreach($tickets as $ticket)
-                                    <div class="card ml-4 mt-4">
-                                    <div class="card-body">
+                                    <div class="card ml-4 mt-4" style="    border-radius: 10px;">
+                                    <div class="card-body pl-3 pr-4">
                                         <div>
                                             <div class="d-flex justify-content-between">
-                                                <div class="ticket-id pt-4">
-                                                    <h6 class="para-head light pl-2">
+                                                <div class="ticket-id pt-2">
+                                                    <h6 class="para-head light pl-2 " style="font-size: 16px !important;">
                                                         REQUEST ID <span class="bold">: #{{$ticket->id}}</span>
                                                     </h6>
                                                 </div>
                                                 @switch($ticket->status)
                                                     @case(\App\Enums\TicketEnums::$STATUS['open'])
-                                                        <div class="status-badge bg-green white-text h-content" style="min-width: auto!important;">
+                                                        <div class="status-badge bg-green white-text mt-1 h-content" style="min-width: auto!important;">
                                                             <a data-toggle="modal" data-target="#req-modal">
                                                                 <p class="f-12 mb-0" style="padding-left: 0px!important;">
                                                                     Open
@@ -83,8 +83,8 @@
                                                     @break;
                                                 @endswitch
                                             </div>
-                                            <h6 class="para-head pl-2">{{ucwords($ticket->heading)}}</h6>
-                                            <p class="para" style="white-space: normal !important;">
+                                            <h6 class="para-head pl-2 " style="font-size: 16px;">{{ucwords($ticket->heading)}}</h6>
+                                            <p class="para ml-2" style="font-size: 14px;" style="white-space: normal !important;">
                                                 {{$ticket->desc}}
                                               {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}
 

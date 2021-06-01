@@ -251,6 +251,10 @@
     }
 
     @media (max-width:480px) {
+        .para.ml-2{
+    white-space: normal !important;
+
+        }
 
         .between{
             justify-content: space-between;

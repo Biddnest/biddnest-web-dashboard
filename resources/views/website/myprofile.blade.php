@@ -98,7 +98,7 @@
                                             <p class="mb-0 mt-2 l-cap">
                                                 First Name
                                             </p>
-                                            <p class="fw-500 f-18">
+                                            <p class="fw-500 f-20">
                                                {{ucwords($user->fname)}}
                                             </p>
 
@@ -106,7 +106,7 @@
 
                                         <div class="col-md-3">
                                             <p class="mt-2 mb-0 l-cap">Last Name</p>
-                                            <p class="fw-500 f-18">{{ucwords($user->lname)}}</p>
+                                            <p class="fw-500 f-20">{{ucwords($user->lname)}}</p>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-end">
                                         <div class=" mt-2">
@@ -120,7 +120,7 @@
                                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                             <p class="mt-2 mb-0  l-cap">
                                                 Email Id</p>
-                                            <p class="fw-500 f-18">
+                                            <p class="fw-500 f-20">
                                                 {{$user->email}}
                                             </p>
                                         </div>
@@ -128,7 +128,7 @@
                                             <p class="mt-2 mb-0  l-cap">
                                                 Gender
                                             </p>
-                                            <p class="fw-500 f-18">
+                                            <p class="fw-500 f-20">
                                                 {{$user->gender}}
                                             </p>
                                         </div>
@@ -137,11 +137,11 @@
                                 <div class="row d-flex justify-content-start text-left">
                                 <div class="col-md-7">
                                     <p class="mt-2 mb-0  l-cap">Phone Number  <span style="display:inline-block;"><i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer"></i></span></p>
-                                            <p class="fw-500 f-18">{{$user->phone}}</p>
+                                            <p class="fw-500 f-20">{{$user->phone}}</p>
                                         </div>
                                         <div class="col-md-5">
                                             <p class="mt-2 mb-0  l-cap">Date of Birth </p>
-                                            <p class="fw-500 f-18">{{date('d M Y', strtotime($user->dob))}}</p>
+                                            <p class="fw-500 f-20">{{date('d M Y', strtotime($user->dob))}}</p>
                                         </div>
 
                                 </div>

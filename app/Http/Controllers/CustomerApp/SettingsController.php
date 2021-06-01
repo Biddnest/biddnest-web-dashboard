@@ -29,13 +29,15 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
               "api"=>[
+                  "name"=>"Bidnest",
+                  "logo"=>env("APP_URL")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
                   "version"=>"v1",
                   "environment"=>env("APP_DEBUG") ? "staging" : "production"
               ],
                "app"=>[
-                   "version_code"=>Settings::where("key", "app_version_code")->pluck('value')[0],
-                   "version"=> Settings::where("key", "app_version")->pluck('value')[0],
+                   "version_code"=>(int)Settings::where("key", "app_version_code")->pluck('value')[0],
+                   "version"=>(int)Settings::where("key", "app_version")->pluck('value')[0],
                ]
             ],
             "keys"=>[

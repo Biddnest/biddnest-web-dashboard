@@ -422,7 +422,7 @@
             <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
                 <div class="modal-header p-0 br-5 ">
                     <div>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">
                         <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
                         <!-- <i class="icon dripiconmeter " style="color: #FFF !important;"></i> -->
                             <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
@@ -431,7 +431,7 @@
                     </div>
                     <div>
                         <header class="join-as-vendor">
-                            <img src="{{ asset('static/website/images/icons/logo.png')}}">
+                            <img src="{{ asset('static/website/images/icons/logo.png')}}" style="margin-left: 104px;display: flex;">
                         </header>
 
                     </div>
@@ -444,13 +444,13 @@
                     <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
                             <h2 class="p-text" style="font-size: 24px !important;">Login</h2>
-                            <div class="col-lg-12 col-xs-12 mt-3">
+                            <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden"   id="otp">
+                            <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden "   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
@@ -461,7 +461,7 @@
                                 Next
                             </button>
                             </a>--}}
-                            <div class="col-md-12 mt-4">
+                            <div class="col-md-12">
                             <a class="weblogin" >
                                 <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg" style="    width: -webkit-fill-available;">
                                     Send OTP

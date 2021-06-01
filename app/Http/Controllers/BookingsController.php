@@ -545,7 +545,7 @@ class BookingsController extends Controller
 
         switch ($request->type) {
             case "live":
-                $bid_id->where("status", BidEnums::$STATUS['active']);
+                $bid_id->where("status", BidEnums::$STATUS['active'])->where("bookmarked", "!=", CommonEnums::$YES);
                 break;
 
             case "scheduled":

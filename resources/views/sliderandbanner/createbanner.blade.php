@@ -90,7 +90,7 @@
 
                                                          <div class="col-lg-6">
                                                           <div class="form-input">
-                                                              <label class="full-name">Banner Name</label>
+                                                              <label class="full-name">Desc/Subtext</label>
                                                               <textarea id="desc" required
                                                                         rows="3"
                                                                         autocomplete="off"

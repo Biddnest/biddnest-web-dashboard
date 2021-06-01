@@ -48,8 +48,8 @@ class GeoController extends Controller
             Log::info($zone->id);
             Log::info($distance);
         }
-//        return $zone_id;
-        return 1;
+        return $zone_id;
+//        return 1;
     }
 
     //need to verify and remove this useless function

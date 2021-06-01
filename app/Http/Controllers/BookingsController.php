@@ -179,7 +179,7 @@ class BookingsController extends Controller
 
         $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
         $booking->quote_estimate = $estimate_quote;
-        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $distance = GeoController::displacement($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
             "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
@@ -582,8 +582,8 @@ class BookingsController extends Controller
             if($request->type == "participated" || $request->type == "past")
                 $bookings->with('status_history');
 
-           if($request->type == "live")
-                $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);
+          /* if($request->type == "live")
+                $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);*/
 
             if($request->type == "past")
                 $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);

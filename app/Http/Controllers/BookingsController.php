@@ -545,7 +545,7 @@ class BookingsController extends Controller
 
         switch ($request->type) {
             case "live":
-                $bid_id->where("status", BidEnums::$STATUS['active'])->where("bookmarked", "!=", CommonEnums::$YES);
+                $bid_id->where("status", BidEnums::$STATUS['active']);
                 break;
 
             case "scheduled":
@@ -582,8 +582,8 @@ class BookingsController extends Controller
             if($request->type == "participated" || $request->type == "past")
                 $bookings->with('status_history');
 
-          /* if($request->type == "live")
-                $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);*/
+           if($request->type == "live")
+                $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);
 
             if($request->type == "past")
                 $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);

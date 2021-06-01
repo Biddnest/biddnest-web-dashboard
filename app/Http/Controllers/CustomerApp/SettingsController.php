@@ -99,7 +99,7 @@ class SettingsController extends Controller
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
             ],
             "onesignal"=>[
-                "user_app_creds"=>base64_encode(json_decode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0], true))
+                "user_app_creds"=>base64_encode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0])
             ]
         ]);
     }

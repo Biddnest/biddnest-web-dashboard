@@ -6,6 +6,7 @@ use App\Enums\CommonEnums;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use App\Models\Settings;
+use Illuminate\Support\Facades\Log;
 
 class GeoController extends Controller
 {
@@ -44,6 +45,8 @@ class GeoController extends Controller
             $tempDis  = self::displacement($lat, $lng, $zone->lat,$zone->lng);
             $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
             $distance =$tempDis;
+            Log::info($zone->id);
+            Log::info($distance);
         }
         return $zone_id;
     }

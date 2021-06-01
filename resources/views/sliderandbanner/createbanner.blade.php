@@ -84,23 +84,21 @@
                                                                   value="{{$banner->name}}"
                                                               />
                                                               <span class="error-message"
-                                                              >Please enter a valid URL</span
-                                                              >
+                                                              >Please enter a valid URL</span>
                                                           </div>
                                                       </div>
 
                                                          <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">Banner Name</label>
-                                                              <input
-                                                                  type="text"
-                                                                  id="name" required
-                                                                  autocomplete="off"
-                                                                  placeholder="Only for web banner"
-                                                                  class="form-control br-5"
-                                                                  name="banners[][desc]"
-                                                                  value="{{$banner->desc}}"
-                                                              />
+                                                              <textarea id="desc" required
+                                                                        rows="3"
+                                                                        autocomplete="off"
+                                                                        placeholder="Only for web banner"
+                                                                        class="form-control br-5"
+                                                                        name="banners[][desc]"
+                                                                        value="{{$banner->desc}}"></textarea>
+
                                                               <span class="error-message"
                                                               >Please enter a valid URL</span
                                                               >

@@ -73,15 +73,33 @@
                                                       </div>
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
+                                                              <label class="full-name">Name/Title</label>
+                                                              <input
+                                                                  type="text"
+                                                                  id="name" required
+                                                                  autocomplete="off"
+                                                                  placeholder="Only for web banner"
+                                                                  class="form-control br-5"
+                                                                  name="banners[][name]"
+                                                                  value="{{$banner->name}}"
+                                                              />
+                                                              <span class="error-message"
+                                                              >Please enter a valid URL</span
+                                                              >
+                                                          </div>
+                                                      </div>
+
+                                                         <div class="col-lg-6">
+                                                          <div class="form-input">
                                                               <label class="full-name">Banner Name</label>
                                                               <input
                                                                   type="text"
                                                                   id="name" required
                                                                   autocomplete="off"
-                                                                  placeholder="Diwali"
+                                                                  placeholder="Only for web banner"
                                                                   class="form-control br-5"
-                                                                  name="banners[][name]"
-                                                                  value="{{$banner->name}}"
+                                                                  name="banners[][desc]"
+                                                                  value="{{$banner->desc}}"
                                                               />
                                                               <span class="error-message"
                                                               >Please enter a valid URL</span
@@ -96,7 +114,7 @@
                                                                   type="url"
                                                                   id="url"
                                                                   autocomplete="off"
-                                                                  placeholder="http://Diwali.com"
+                                                                  placeholder="Optional"
                                                                   class="form-control br-5"
                                                                   name="banners[][url]"
                                                                   value="{{$banner->url}}"

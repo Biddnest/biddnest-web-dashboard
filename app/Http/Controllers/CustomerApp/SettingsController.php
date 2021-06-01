@@ -41,7 +41,7 @@ class SettingsController extends Controller
                ]
             ],
             "keys"=>[
-                "google_api_key"=>Settings::where("key", "google_api_key")->pluck('value')[0],
+                "google_api_key"=>base64_encode(Settings::where("key", "google_api_key")->pluck('value')[0]),
                 "cancellation_reason_options"=>json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true)
             ],
             "enums"=>[
@@ -81,8 +81,8 @@ class SettingsController extends Controller
                 ],
                 "payment"=>[
                     'razorpay'=>[
-                        "rzp_id"=>Settings::where("key", "razor_key")->pluck('value')[0],
-                        "rzp_secret"=>Settings::where("key", "razor_secret")->pluck('value')[0]
+                        "rzp_id"=>base64_encode(Settings::where("key", "razor_key")->pluck('value')[0]),
+                        "rzp_secret"=>base64_encode(Settings::where("key", "razor_secret")->pluck('value')[0])
                     ]
                 ],
                 "faq"=>[
@@ -99,7 +99,7 @@ class SettingsController extends Controller
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
             ],
             "onesignal"=>[
-                "user_app_creds"=>json_decode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0], true)
+                "user_app_creds"=>base64_encode(json_decode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0], true))
             ]
         ]);
     }

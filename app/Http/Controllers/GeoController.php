@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use App\Models\Settings;
@@ -39,9 +40,10 @@ class GeoController extends Controller
         $zone = 0;
         $distance = 10000;
 
-        foreach (Zone::all() as $zone){
-            $tempDis  = self::displacement($lat, $lng, $zone['lat'],$zone['lng']);
+        foreach (Zone::where("status", CommonEnums::$YES)->get() as $zone){
+            $tempDis  = self::displacement($lat, $lng, $zone->lat,$zone->lng);
             $zone = $tempDis < $distance ? $zone->id : 0;
+            $distance =$tempDis;
         }
         return $zone;
     }

@@ -39,6 +39,10 @@ class BidController extends Controller
             $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
                             ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
+
+            if(!$vendorlist)
+                return Helper::response(false, "No Vendor Prsent to pick Order");
+
             Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
             $vendor_ids = [];
             // $bookingstatus = new BookingStatus;
@@ -47,6 +51,8 @@ class BidController extends Controller
             // $result_status = $bookingstatus->save();
             $public_booking_id = Booking::where('id', $booking_id)->pluck('public_booking_id')[0];
             $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['biding']);
+
+
 
             foreach($vendorlist as $vendor)
             {

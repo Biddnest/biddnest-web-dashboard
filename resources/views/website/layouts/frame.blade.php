@@ -27,7 +27,7 @@
                         <a class="nav-link f-14" href="{{route('contact_us')}}"><i
                                 class="icon-2 mr-1 pr-1 pt-1 dripicons-headset"></i>CONTACT US</a>
                     </li>
-                    <li class="account-settings dropdown theme-text mt-1 pt-1 ml-20">
+                    <li class="account-settings dropdown theme-text mt-1 pt-1 ml-20 f-14">
                         @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
@@ -66,7 +66,7 @@
                             </a>
                         @else
                             <a data-toggle="modal" data-target="#Login-modal">
-                                <span class="logged-in-username cursor-pointer l-cap">login</span>
+                                <span class="logged-in-username cursor-pointer l-cap ">login</span>
                             </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Session::get('account'))

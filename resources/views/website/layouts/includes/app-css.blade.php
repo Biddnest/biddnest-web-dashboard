@@ -249,6 +249,10 @@
     }
 
     @media (max-width:480px) {
+
+        .ontop{
+            left: 0%;
+        }
         .heading-view {
             transform: translate(-24px, 10px);
 

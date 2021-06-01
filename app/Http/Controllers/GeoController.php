@@ -37,15 +37,15 @@ class GeoController extends Controller
     }
 
     public static function getNearestZone($lat, $lng){
-        $zone = 0;
+        $zone_id = 0;
         $distance = 10000;
 
         foreach (Zone::where("status", CommonEnums::$YES)->get() as $zone){
             $tempDis  = self::displacement($lat, $lng, $zone->lat,$zone->lng);
-            $zone = $tempDis < $distance ? $zone->id : 0;
+            $zone_id = $tempDis < $distance ? $zone->id : 0;
             $distance =$tempDis;
         }
-        return $zone;
+        return $zone_id;
     }
 
     //need to verify and remove this useless function

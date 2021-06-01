@@ -676,7 +676,7 @@
         transform: translate(60px, -9px);
     }
     .add-item-icon {
-    transform: translate(48px, 125px);
+    transform: translate(37px, 125px);
 }
 
 

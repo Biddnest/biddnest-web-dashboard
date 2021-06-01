@@ -161,7 +161,7 @@
                                     </div>
                                     <div id="view_more_content" class="togglenone">
                                         <div class="ticket-id d-flex pt-4  border-top justify-content-between">
-                                            <p class="para-head l-cap">Ticket Id : <span>#{{$ticket_detail->id}}</span></p>
+                                            <p class="para-head l-cap">Ticket Id : <span>#{{$ticket_detail->id }}</span></p>
 
                                                 @switch($ticket_detail->status)
                                                     @case(\App\Enums\TicketEnums::$STATUS['open'])

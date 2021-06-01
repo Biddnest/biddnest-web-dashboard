@@ -29,17 +29,19 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
               "api"=>[
+                  "name"=>"Bidnest",
+                  "logo"=>env("APP_URL")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
                   "version"=>"v1",
                   "environment"=>env("APP_DEBUG") ? "staging" : "production"
               ],
                "app"=>[
-                   "version_code"=>Settings::where("key", "app_version_code")->pluck('value')[0],
-                   "version"=> Settings::where("key", "app_version")->pluck('value')[0],
+                   "version_code"=>(int)Settings::where("key", "app_version_code")->pluck('value')[0],
+                   "version"=>(int)Settings::where("key", "app_version")->pluck('value')[0],
                ]
             ],
             "keys"=>[
-                "google_api_key"=>Settings::where("key", "google_api_key")->pluck('value')[0],
+                "google_api_key"=>base64_encode(Settings::where("key", "google_api_key")->pluck('value')[0]),
                 "cancellation_reason_options"=>json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true)
             ],
             "enums"=>[
@@ -79,8 +81,8 @@ class SettingsController extends Controller
                 ],
                 "payment"=>[
                     'razorpay'=>[
-                        "rzp_id"=>Settings::where("key", "razor_key")->pluck('value')[0],
-                        "rzp_secret"=>Settings::where("key", "razor_secret")->pluck('value')[0]
+                        "rzp_id"=>base64_encode(Settings::where("key", "razor_key")->pluck('value')[0]),
+                        "rzp_secret"=>base64_encode(Settings::where("key", "razor_secret")->pluck('value')[0])
                     ]
                 ],
                 "faq"=>[
@@ -97,7 +99,7 @@ class SettingsController extends Controller
                 "details"=>Settings::where("key", "contact_details")->pluck('value')[0]
             ],
             "onesignal"=>[
-                "user_app_creds"=>json_decode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0], true)
+                "user_app_creds"=>base64_encode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0])
             ]
         ]);
     }

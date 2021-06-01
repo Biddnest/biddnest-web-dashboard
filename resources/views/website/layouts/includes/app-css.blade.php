@@ -143,9 +143,11 @@
     .border-add {
         border: 4px solid #fdc403;
         width: 197px;
-        margin-left: 16px;
         margin-top: 16px;
         border-radius: 5px;
+        height: 92%;
+        margin-left: 4px;
+
     }
 
     .step-text.text-right {
@@ -249,6 +251,15 @@
     }
 
     @media (max-width:480px) {
+        .row.d-flex.uploaded-image{
+            margin-left: 0px !important;
+            padding-left: 0px !important;
+
+        }
+         .comments.ml-2{
+            margin-left: 0px !important;
+            padding-left: 0px !important;
+        }
 
         .ontop{
             left: 0%;
@@ -260,6 +271,8 @@
 
         .ontop-book {
             width: 100% !important;
+            transform: translate(0px, 0px)  !important;;
+
 
         }
 
@@ -308,15 +321,20 @@
 
         }
 
+        .ontop-book{
+            display: block !important;
+        }
+
         div#filter {
             margin: -5px -6px 0px -12px;
-            margin-left: -45px;
+            /* margin-left: -45px; */
 
         }
 
         .add-photos i.fa.fa-plus.fa-2x {
-            left: 42% !important;
-            top: 22% !important;
+         
+            transform: translate(24px, -23px);
+
         }
 
         img.image-upload-by-customer {
@@ -472,6 +490,13 @@
             margin: 0 auto ! important;
         }
 
+        .card-align{
+            display: flex !important;
+            margin-left: -78px;
+            margin-top: 10px !important;
+
+        }
+
         .border-add {
             width: 136px;
             margin-left: 10px;
@@ -484,8 +509,10 @@
         }
 
         .add-item-icon {
-            bottom: 222px !important;
-            right: 68px !important;
+            transform: translate(133px, 190px) !important;
+
+            /* bottom: 222px !important;
+            right: 68px !important; */
         }
 
         .choose-your-material.pt-3 {
@@ -582,8 +609,8 @@
         }
 
         .add-item-icon {
-            bottom: 216px !important;
-            right: 104px !important;
+            transform: translate(72px, 125px) !important;
+
         }
 
     }
@@ -629,4 +656,9 @@
         width: 80%;
         transform: translate(60px, -9px);
     }
+    .add-item-icon {
+    transform: translate(48px, 125px);
+}
+
+
 </style>

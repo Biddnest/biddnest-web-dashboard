@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Http\Controllers\Controller;
+use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Faq;
@@ -117,9 +119,10 @@ class WebsiteController extends Controller
     public function payment(Request $request)
     {
         $user = User::where("id", Session::get('account')['id'])->first();
+        $moving_date=Bid::where(["booking_id"=>(int)Booking::where("public_booking_id", $request->id)->pluck('id')[0], "status"=>BidEnums::$STATUS['won']])->pluck('meta')[0];
         $payment_summary=BookingsController::getPaymentDetails($request->id, 0.00, true);
         $coupons=Coupon::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id, "user"=>$user]);
+        return view('website.booking.payment', ['payment_summary'=>$payment_summary, 'coupons'=>$coupons, "public_booking_id"=>$request->id, "user"=>$user, "moving_date"=>json_decode($moving_date, true)['moving_date']]);
     }
 
     public function orderDetails(Request $request)

@@ -189,20 +189,42 @@
                                             </td>
                                         @endif
                                         @if($type == "bookmarked")
-                                            <td class="">
+                                           {{-- <td class="">
                                                 <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
                                                     <i class="p-1 tooltip-trigger">
                                                         <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
                                                          alt="" data-toggle="tooltip" data-placement="top"
                                                              title="View Order Detail">
                                                     </i>
-                                                </a>
-                                               {{-- <a href="#" class="booking inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this."><i class="p-1"><img
-                                                        src="{{asset('static/vendor/images/Icon ionic-md-close-circle.svg')}}"
-                                                        alt="" data-toggle="tooltip" data-placement="top"
-                                                        title="Reject"></i></a>--}}
-
-                                            </td>
+                                            </td>--}}
+                                                <td class="cursor-pointer" style="padding: 10px;">
+                                                    <a  class="inline-icon-button" href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
+                                                        <i class="tooltip-trigger">
+                                                            <img src="{{asset('static/vendor/images/acceptmark.svg')}}" alt=""
+                                                                 data-toggle="tooltip" data-placement="top"
+                                                                 title="Accept">
+                                                        </i>
+                                                    </a>
+                                                    <a href="#" class="rejected inline-icon-button"  data-parent=".book_{{$booking->id}}" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
+                                                        <i class="tooltip-trigger"><img
+                                                                src="{{asset('static/vendor/images/reject-mark.svg')}}" alt=""
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Reject"></i>
+                                                    </a>
+                                                    <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
+                                                        <i class="tooltip-trigger">
+                                                            @if($booking->bid && ($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO))
+                                                                <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
+                                                                     data-toggle="tooltip" data-placement="top"
+                                                                     title="Quote Later">
+                                                            @else
+                                                                <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
+                                                                     data-toggle="tooltip" data-placement="top"
+                                                                     title="Quote Later">
+                                                            @endif
+                                                        </i>
+                                                    </a>
+                                                </td>
                                         @endif
                                         @if($type == "live")
                                             <td class="cursor-pointer" style="padding: 10px;">

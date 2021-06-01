@@ -430,4 +430,11 @@
         transform: translate(-15px, 16px);
 
     }
+
+    .hidden {
+        display: none;
+        margin-bottom: 100px !important;
+    }
+
+
 </style>

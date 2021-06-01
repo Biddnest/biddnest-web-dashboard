@@ -163,6 +163,13 @@
                             @endforeach
                        </tbody>
                     </table>
+                    @if(count($booking_live)== 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You don't have any Bookings here.</i></p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-sm-4 p-0">

@@ -49,6 +49,11 @@
         display: none;
     }
 
+    .nav-menu-link:hover{
+        color: #fdc403 !important;
+
+    }
+
     .custom-check {
         display: none;
     }

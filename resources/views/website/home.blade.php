@@ -149,7 +149,7 @@
                     <div class="quote mb-view bg-white quote-container-5">
                         <p class="card-num">5</p>
 
-                        <img class="w-150" src="{{ asset('static/website/images/images/gifs/')}}" alt="some-picture" />
+                        <img class="w-150" src="{{ asset('static/website/images/images/gifs/truck.gif')}}" alt="some-picture" />
                         <h5 class="d-flex center theme-text how-work-step">Step 5</h5>
                         <h3 class="d-flex center theme-text how-work-title">
                             Get Moving!

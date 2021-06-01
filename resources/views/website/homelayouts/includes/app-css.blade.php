@@ -216,12 +216,24 @@
         }
     }
 
+    .modal-header .close{
+        margin-top: -16px;
+
+    }
 
 
-    @media (min-width: 1200px) {
+
+    @media only screen and (max-width: 1200px) and (min-width: 900px)  {
         .container {
             width: 1120px !important;
         }
+        .drop-list{
+            padding: none !important;
+        }
+        .dropdown-content {
+            left: -67px !important;
+            padding: 8px;
+}
     }
 
     @media (max-width:480px) {
@@ -234,6 +246,10 @@
         }
         .intro-container{
             transform: translate(-52%, -76%);
+
+        }
+        .modal-header .close{
+            margin-top: -16px;
 
         }
 
@@ -398,9 +414,7 @@
 
     }
 
-    .nav-menu-link:hover {
-        color: #fff;
-    }
+   
 
     a:hover {
         color: #fdc403 !important;

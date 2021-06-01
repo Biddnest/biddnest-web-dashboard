@@ -42,7 +42,7 @@ class GeoController extends Controller
 
         foreach (Zone::where("status", CommonEnums::$YES)->get() as $zone){
             $tempDis  = self::displacement($lat, $lng, $zone->lat,$zone->lng);
-            $zone_id = $tempDis < $distance ? $zone->id : 0;
+            $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
             $distance =$tempDis;
         }
         return $zone_id;

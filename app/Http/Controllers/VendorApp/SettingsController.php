@@ -107,7 +107,7 @@ class SettingsController extends Controller
                 "categories"=>Service::select(['id', 'name'])->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get()
             ],
             "onesignal"=>[
-                "vendor_app_creds"=>base64_encode(json_decode(Settings::where("key", "onesignal_vendor_app_creds")->pluck('value'), true))
+                "vendor_app_creds"=>base64_encode(Settings::where("key", "onesignal_vendor_app_creds")->pluck('value'))
             ]
         ]);
     }

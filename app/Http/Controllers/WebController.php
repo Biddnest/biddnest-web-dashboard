@@ -212,10 +212,11 @@ class WebController extends Controller
             $zone = Session::get('admin_zones');
 
         $bookings = Booking::where("status", "<=", BookingEnums::$STATUS['payment_pending'])
-            ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
         if(isset($request->search)){
             $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('public_enquiry_id', 'like', $request->search."%")
                 ->orWhere('source_meta', 'like', "%".$request->search."%")
                 ->orWhere('destination_meta', 'like', "%".$request->search."%");
         }

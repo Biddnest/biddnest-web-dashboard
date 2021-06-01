@@ -228,6 +228,14 @@
         .container-top {
             transform: translate(0px, 0px) !important;
         }
+        .carousel-control .glyphicon-chevron-right{
+            margin-right: -7px;
+
+        }
+        .intro-container{
+            transform: translate(-52%, -76%);
+
+        }
 
         .ml-2.f-18 {
             font-size: 18px !important;

@@ -50,3 +50,8 @@
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
 
 
+
+
+
+
+

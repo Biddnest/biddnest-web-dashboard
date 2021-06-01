@@ -683,7 +683,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-4 mt-20 view-content " >
+                                        <div class="col-md-4 mt-4 mt-20 view-content card-align" >
                                             <div class="card required-item " style="width: max-content;     border-radius: 10px;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
@@ -718,10 +718,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-4  mt-20 ">
                                         <div class=" mt-20 view-content border-add" >
                                             <div class="">
                                                 <i class="icon-2 mr-1 dripicons-plus add-item-icon  " data-toggle="modal" data-target="#addItemModal"></i>
                                             </div>
+                                        </div>
                                         </div>
                                     </div>
                                     <div class=" actionBtn actionBtn-view border-top move-btn">

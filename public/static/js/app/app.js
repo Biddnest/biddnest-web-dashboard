@@ -386,7 +386,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
     );
 });
 
-$("body").on('click', ".sidebar-toggle_slider td:not(:first-child), not(:last-child)", function(event) {
+$("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)", function(event) {
     var $this = $(this);
 
     // if($(this).hasClass('no-toggle'))
@@ -924,6 +924,7 @@ $("body").on('click', ".payment", function(event) {
         var name = $(this).data("user-name");
         var email = $(this).data("user-email");
         var contact = $(this).data("user-contact");
+        var moving_date = $(this).data("moving-date");
 
 
 
@@ -941,7 +942,7 @@ $("body").on('click', ".payment", function(event) {
                 "order_id":response.data.payment.rzp_order_id,
                 "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",
-                "description": "Payment",
+                "description": "Payment for Moving Date on"+ moving_date,
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
                 "handler": function (resp){
                     console.log({

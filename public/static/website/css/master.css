@@ -10443,7 +10443,7 @@ ul.header-controls li.notifications:hover .dropdown {
     height: 61px !important;
     max-width: 75px !important;
     margin-left: 4px !important;
-    margin-top: 3px;
+    margin-top: 0px;
   }
 
   .close-item {
@@ -10987,7 +10987,7 @@ ul.header-controls li.notifications:hover .dropdown {
 }
 
 .navbar-default .navbar-nav .bec-vendor {
-  margin-top: 13px;
+  margin-top: 15px;
 }
 
 .a-item {

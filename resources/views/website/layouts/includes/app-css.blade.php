@@ -251,6 +251,10 @@
     }
 
     @media (max-width:480px) {
+        .view-bottom{
+        margin-bottom: 38px;
+
+    }
         .para.ml-2{
     white-space: normal !important;
 
@@ -678,6 +682,15 @@
     .add-item-icon {
     transform: translate(37px, 125px);
 }
+
+    .f-24{
+            font-size: 24px;
+            color: #3B4B58 !important;
+
+    }
+
+    
+
 
 
 </style>

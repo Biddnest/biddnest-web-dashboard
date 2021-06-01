@@ -187,6 +187,7 @@ class BookingsController extends Controller
             "timings" => null,
             "distance" => $distance]);
         $booking->status = BookingEnums::$STATUS['enquiry'];
+        $booking->zone_id = GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
         $result = $booking->save();
 
         // $bookingstatus = new BookingStatus;

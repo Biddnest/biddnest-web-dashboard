@@ -68,7 +68,7 @@
                         </ul>
                             @if(\App\Helper::is('admin'))
                         <li class="menu-item" data-toggle="" href="#Categories" role="button" aria-expanded="false"
-                            aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories & Subcategories</a>
+                            aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories</a>
                         </li>
                         <!-- sublinks -->
                         <ul class="sub-menu" id="Categories">
@@ -127,14 +127,14 @@
                             <li class="sub-menu-item"><a href="{{route('slider')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sliders &
                                     Banners</a></li>
-                            <li class="sub-menu-item"><a href="{{route('push-notification')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Push Notifications & Messages</a>
-                            </li>
                             <li class="sub-menu-item"> <a href="{{route('testimonials')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Testimonials</a>
                             </li>
 
                         </ul>
+                        <li class="menu-item" data-toggle="" href="#Notification" role="button" aria-expanded="false"
+                                    aria-controls="Notifications"><a class="" href="{{route('push-notification')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-bell"></i></span> </span>Notifications</a>
+                        </li>
                             @endif
 
                         <li class="menu-item hidden"><a class="regular-nav"> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-pie"></i></span> </span> Reports</a></li>

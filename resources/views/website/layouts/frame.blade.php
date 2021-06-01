@@ -111,14 +111,14 @@
                 <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
                     <div class="modal-header p-0 br-5 ">
                         <div>
-                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;">
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important;transform: translate(-13px, 26px);">
                             <i class=" dripicons-cross" style="color: #FFF !important;"></i>
                                 <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
                                 <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
                             </button>
                         </div>
                         <div>
-                            <header class="join-as-vendor">
+                            <header class="join-as-vendor" style="margin-left: 104px;display: flex;">
                                 <img src="{{ asset('static/website/images/icons/logo.png')}}">
                             </header>
 

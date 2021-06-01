@@ -39,3 +39,6 @@
 2021-05-01 01:45:09 pid:1854 Workerman[artisan] start in DEBUG mode
 2021-05-01 04:05:49 pid:1854 Workerman[artisan] stopping ...
 2021-05-01 04:05:49 pid:1854 Workerman[artisan] has been stopped
+2021-05-31 02:23:21 pid:1449 Workerman[artisan] start in DEBUG mode
+2021-05-31 02:25:01 pid:1449 Workerman[artisan] stopping ...
+2021-05-31 02:25:01 pid:1449 Workerman[artisan] has been stopped

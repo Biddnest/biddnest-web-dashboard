@@ -160,6 +160,7 @@
                                         </div>
                                     </div>
                                     <div id="view_more_content" class="togglenone">
+                                        @if($ticket_detail)
                                         <div class="ticket-id d-flex pt-4  border-top justify-content-between">
                                             <p class="para-head l-cap">Ticket Id : <span>#{{$ticket_detail->id }}</span></p>
 
@@ -205,6 +206,7 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                     @if($booking == "")
                                         <h6 class="card-title  pb-10">You Don't Have Any Latest Orders</h6>

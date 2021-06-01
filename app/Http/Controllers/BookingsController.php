@@ -179,7 +179,7 @@ class BookingsController extends Controller
 
         $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
         $booking->quote_estimate = $estimate_quote;
-        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $distance = GeoController::displacement($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
             "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
@@ -187,6 +187,7 @@ class BookingsController extends Controller
             "timings" => null,
             "distance" => $distance]);
         $booking->status = BookingEnums::$STATUS['enquiry'];
+        $booking->zone_id = GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
         $result = $booking->save();
 
         // $bookingstatus = new BookingStatus;
@@ -545,7 +546,7 @@ class BookingsController extends Controller
 
         switch ($request->type) {
             case "live":
-                $bid_id->where("status", BidEnums::$STATUS['active'])->where("bookmarked", "!=", CommonEnums::$YES);
+                $bid_id->where("status", BidEnums::$STATUS['active']);
                 break;
 
             case "scheduled":

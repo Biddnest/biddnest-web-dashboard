@@ -47,11 +47,11 @@ class BidEnd extends Command
             $cron_log->output = json_encode($output);
             $cron_log->save();
             $this->comment('Total orders '.$output['total_bookings']);
-            $this->comment('Afected orders '.json_encode($output['booking_id']));
+            $this->comment('Affected orders '.json_encode($output['booking_id']));
         }
         else{
             $output = BidController::getbookings($this->argument('id'));
-            $this->comment('Afected orders '.json_encode($output));
+            $this->comment('Affected orders '.json_encode($output));
         }
 
 

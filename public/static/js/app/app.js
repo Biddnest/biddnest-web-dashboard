@@ -386,7 +386,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
     );
 });
 
-$("body").on('click', ".sidebar-toggle_slider td:not(:first-child), not(:last-child)", function(event) {
+$("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)", function(event) {
     var $this = $(this);
 
     // if($(this).hasClass('no-toggle'))

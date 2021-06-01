@@ -251,6 +251,14 @@
     }
 
     @media (max-width:480px) {
+        .para.ml-2{
+    white-space: normal !important;
+
+        }
+
+        .between{
+            justify-content: space-between;
+        }
         .row.d-flex.uploaded-image{
             margin-left: 0px !important;
             padding-left: 0px !important;
@@ -557,6 +565,10 @@
 
 
     @media only screen and (max-width: 1200px) and (min-width: 900px) {
+        .flow__item__circle:after{
+            top: 636px;
+
+        }
         .modal-backdrop {
             position: inherit !important;
         }
@@ -620,21 +632,26 @@
 
     @media (min-width:961px) {
         .full-width {
-            padding: 5px 86px !important;
+            width: -webkit-fill-available;
+            width: -moz-fit-content;
 
         }
     }
 
     @media (min-width:1025px) {
         .full-width {
-            padding: 5px 95px !important;
+            width: -webkit-fill-available;
+            width: -moz-fit-content;
+
 
         }
     }
 
     @media (min-width:1281px) {
         .full-width {
-            padding: 5px 120px !important;
+            width: -webkit-fill-available;
+            width: -moz-fit-content;
+
 
         }
 
@@ -642,7 +659,9 @@
 
     @media (min-width:1481px) {
         .full-width {
-            padding: 5px 120px !important;
+            width: -webkit-fill-available;
+            width: -moz-fit-content;
+
 
         }
 

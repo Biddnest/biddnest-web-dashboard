@@ -40,9 +40,8 @@ class BidController extends Controller
                             ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
 
-            if(!$vendorlist) {
-                return Helper::response(false, "No Vendor Prsent to pick Order");
-                exit();
+            if(count($vendorlist) > 0) {
+                return false;
             }
 
 

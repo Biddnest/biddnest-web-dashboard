@@ -277,12 +277,12 @@ class BookingsController extends Controller
         $booking_id = $exist->id;
 
         dispatch(function() use($booking_id, $user_id,$complete_time, $public_booking_id) {
+                NotificationController::sendTo("user", [$user_id], "Your booking has been recieved.", "We are getting the best price for you. You will be notified soon.", [
+                    "type" => NotificationEnums::$TYPE['booking'],
+                    "public_booking_id" => $public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['biding']
+                ]);
             BidController::addvendors($booking_id);
-            NotificationController::sendTo("user", [$user_id], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-                "type" => NotificationEnums::$TYPE['booking'],
-                "public_booking_id" => $public_booking_id,
-                "booking_status" => BookingEnums::$STATUS['biding']
-            ]);
         })->afterResponse();
 
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);

@@ -4,10 +4,10 @@
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="addbooking">
         <div class="container ">
-            <div class="book-move-screen responsive ontop ">
+            <div class="book-move-screen responsive ontop-book ">
                 <div class="card-body ">
                     <div class="row d-flex ">
-                        <div class="col-md-3 br-line view-none ">
+                        <div class="col-md-3 br-line view-none pt-4 ">
                             <div class="row steps-form-3 ">
                                 <div class="col-md-8 setup-panel-3">
                                     <div class="steps-step-1 ">
@@ -216,13 +216,13 @@
                                         </h4>
                                         <div class="accordion mt-2" id="delivery-details ">
                                             <p class="address-category pl-0  ">Category</p>
-                                            <div class="row row-horizonal ml-0">
+                                            <div class="row row-horizonal ml-0 border-bottom pb-3">
                                                 @foreach($categories as $category)
-                                                    <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon ">
+                                                    <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
                                                         <label >
                                                         <input type="radio" name="product" value="{{$category->id}}" class="card-input-element" />
                                                             <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer " style="border-radius: 6px;"   >
-                                                            <div class="panel-heading text-white">
+                                                            <div class="panel-heading text-white f-direction" style="display: flex; justify-content-center;">
                                                                 <img src="{{$category->image}}" class="img-width">
                                                                 {{ucwords($category->name)}}
                                                             </div>
@@ -232,7 +232,7 @@
                                                 @endforeach
                                             </div>
                                             <div class="d-flex row p-20 ">
-                                                <div class="col-sm-6 ">
+                                                <div class="col-sm-6 mt-2">
                                                     <div class="form-group ">
                                                         <label class="address-details-input ">From Address</label>
                                                         <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
@@ -240,7 +240,7 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 ">
+                                                <div class="col-sm-6 mt-2">
                                                     <div class="form-group ">
                                                         <label class="address-details-input ">From Adress line 1</label>
                                                         <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]"  class="form-control" required>
@@ -284,8 +284,7 @@
                                                                 <span class="error-message ">Please enter valid</span>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6 ">
-                                                        </div>
+                                                      
                                                         <div class="col-sm-6 ">
                                                             <div class="form-group ">
                                                                 <label class="address-details-input ">From Floor</label>
@@ -362,8 +361,6 @@
                                                                 <input type="text" placeholder="530001" name="destination[meta][pincode]"  id="dest-pin" class="form-control" required>
                                                                 <span class="error-message ">Please enter valid</span>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-sm-6 ">
                                                         </div>
                                                         <div class="col-sm-6 ">
                                                             <div class="form-group ">
@@ -546,7 +543,7 @@
                                     </div>
                                     <div class="row  mb-4 mt-3">
                                         <div class="col-md-4 view-content ">
-                                            <div class="card required-item " style="width: fit-content;">
+                                            <div class="card required-item " style="width: max-content;     border-radius: 10px;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -581,7 +578,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 view-content ">
-                                            <div class="card required-item ml-10 " style="width: fit-content;">
+                                            <div class="card required-item " style="width: max-content;     border-radius: 10px;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -590,8 +587,8 @@
                                                 </div>
                                                 <div class="card-body requirements-field ">
                                                     <p class="card-title required-item-name mb-0 f-16">Bed</p>
-                                                    <div class="row screen-fix">
-                                                        <div class="col-md-6 requirements d-flex f-16 ">
+                                                    <div class="row ">
+                                                        <div class="col-md-6 requirements d-flex f-16">
                                                             <p class="card-text required-item-qty pr-1 ">Wood</p>
                                                             <span>|</span>
                                                             <p class="card-text required-item-qty pl-1 ">Small</p>
@@ -599,13 +596,13 @@
                                                         <div class="col-md-6 requirements ">
                                                             <div class="input-group ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onclick="buttonClickminus(); " class="btn btn-default btn-number input-number "  style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClickminus(); "  class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
                                                                         <span class="minus-icon "><i class="fa fa-minus "></i></span>
                                                                     </button>
                                                                 </span>
                                                                 <input type="text " id="inc " class="form-control input-number " style="padding: 11px 6px!important;" value="1 " min="1 " max="10 ">
                                                                 <span class="input-group-btn ">
-                                                                    <button onClick="updateCount( 'dicrement'); " class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
+                                                                    <button onclick="buttonClick(); " class="btn btn-default btn-number input-number "  style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
                                                                         <span class="plus-icon "><i class="fa fa-plus "></i></span>
                                                                     </button>
                                                                 </span>
@@ -616,7 +613,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 view-content ">
-                                            <div class="card required-item " style="width: fit-content;">
+                                            <div class="card required-item " style="width: max-content;     border-radius: 10px;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -652,7 +649,7 @@
                                         </div>
 
                                         <div class="col-md-4 mt-4 mt-20 view-content  ">
-                                            <div class="card required-item ml-10 " style="width: fit-content;">
+                                            <div class="card required-item ml-10 " style="width: max-content;     border-radius: 10px;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -687,7 +684,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-4 mt-20 view-content " >
-                                            <div class="card required-item " style="width: fit-content;">
+                                            <div class="card required-item " style="width: max-content;     border-radius: 10px;">
                                                 <div class="container-image-item ">
                                                     <img class="card-img-top " src="{{asset('static/website/images/images/1.png')}}" alt="image " style="width:100% ">
                                                 </div>
@@ -749,21 +746,22 @@
                                                     <div class="modal-header border-bottom ">
                                                         <h4 class="modal-title add-item-title theme-text ">Add Item</h4>
                                                         <button type="button" class="close " data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                         </button>
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
                                                    
                                                     <!-- Modal body -->
                                                     <div class="modal-body add-item-body ">
                                                         <form class="requirements-modal ">
                                                             <div class="input-group mt-3 mb-3 search-bar-with-category ">
-                                                                <input type="search " class="form-control " placeholder="Search for item.. ">
+                                                                <input type="search " class="form-control " style="border: none !important;" placeholder="Search for item.. ">
                                                                
                                                             </div>
                                                         </form>
 
                                                         <div class="row f-row ">
-                                                            <div class="col-md-4 col-sm-6 col-xs-6  card f-row pl-0 mar-card">
+                                                        <div class="col-md-4 col-sm-6 col-xs-6 ">
+                                                                <div class="card f-row pl-0 pr-2 mar-card">
                                                                 <div class="">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
                                                                 </div>
@@ -771,62 +769,7 @@
                                                                      <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="view-flex">
                                                                             <div class="choose-your-material ">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
-                                                                                    <option value=" " disabled selected>
-                                                                                        Steel
-                                                                                    </option>
-                                                                                    <option value="1 ">Option 1</option>
-                                                                                    <option value="2 ">Option 2</option>
-                                                                                    <option value="3 ">Option 3</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="choose-your-material mar-vendor pt-3">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
-                                                                                    <option value=" " disabled selected>
-                                                                                        Small
-                                                                                    </option>
-                                                                                    <option value="1 ">Option 1</option>
-                                                                                    <option value="2 ">Option 2</option>
-                                                                                    <option value="3 ">Option 3</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1  mb-2">
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="minus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="minus-icon "><i
-                                                                                            class="fa fa-minus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="plus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="plus-icon "><i
-                                                                                            class="fa fa-plus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                        </div>
-
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="col-md-4 col-sm-6 col-xs-6  card f-row pl-0 mar-card">
-                                                                <div class="">
-                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
-                                                                </div>
-                                                                <div class="ml-2">
-                                                                     <p class="spec-name pl-0 pt-2 f-15">Bed</p>
-                                                                        <div class="view-flex">
-                                                                            <div class="choose-your-material ">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
+                                                                                <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Steel
                                                                                     </option>
@@ -836,7 +779,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="choose-your-material pt-3">
-                                                                                <select class="select-material mar-vendor " style="padding: 8px; width:140px">
+                                                                                <select class="select-material mar-vendor" style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Small
                                                                                     </option>
@@ -870,10 +813,11 @@
                                                                         </div>
 
                                                                 </div>
-
+                                                                </div>
 
                                                             </div>
-                                                            <div class="col-md-4 col-sm-6 col-xs-6  card f-row pl-0 mar-card">
+                                                            <div class="col-md-4 col-sm-6 col-xs-6 ">
+                                                                <div class="card f-row pl-0 pr-2 mar-card">
                                                                 <div class="">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
                                                                 </div>
@@ -881,7 +825,7 @@
                                                                      <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="view-flex">
                                                                             <div class="choose-your-material ">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
+                                                                                <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Steel
                                                                                     </option>
@@ -891,7 +835,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="choose-your-material pt-3">
-                                                                                <select class="select-material mar-vendor" style="padding: 8px; width:140px">
+                                                                                <select class="select-material mar-vendor" style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Small
                                                                                     </option>
@@ -925,10 +869,11 @@
                                                                         </div>
 
                                                                 </div>
-
+                                                                </div>
 
                                                             </div>
-                                                            <div class="col-md-4 col-sm-6 col-xs-6  card f-row pl-0 mar-card">
+                                                            <div class="col-md-4 col-sm-6 col-xs-6 ">
+                                                                <div class="card f-row pl-0 pr-2 mar-card">
                                                                 <div class="">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
                                                                 </div>
@@ -936,7 +881,7 @@
                                                                      <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="view-flex">
                                                                             <div class="choose-your-material ">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
+                                                                                <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Steel
                                                                                     </option>
@@ -946,7 +891,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="choose-your-material pt-3">
-                                                                                <select class="select-material mar-vendor" style="padding: 8px; width:140px">
+                                                                                <select class="select-material mar-vendor" style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Small
                                                                                     </option>
@@ -980,10 +925,11 @@
                                                                         </div>
 
                                                                 </div>
-
+                                                                </div>
 
                                                             </div>
-                                                            <div class="col-md-4 col-sm-6 col-xs-6  card f-row pl-0 mar-card">
+                                                            <div class="col-md-4 col-sm-6 col-xs-6 ">
+                                                                <div class="card f-row pl-0 pr-2 mar-card">
                                                                 <div class="">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
                                                                 </div>
@@ -991,7 +937,7 @@
                                                                      <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="view-flex">
                                                                             <div class="choose-your-material ">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
+                                                                                <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Steel
                                                                                     </option>
@@ -1001,7 +947,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="choose-your-material pt-3">
-                                                                                <select class="select-material mar-vendor" style="padding: 8px; width:140px">
+                                                                                <select class="select-material mar-vendor" style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Small
                                                                                     </option>
@@ -1035,10 +981,11 @@
                                                                         </div>
 
                                                                 </div>
-
+                                                                </div>
 
                                                             </div>
-                                                            <div class="col-md-4 col-sm-6 col-xs-6  card f-row pl-0 mar-card">
+                                                            <div class="col-md-4 col-sm-6 col-xs-6 ">
+                                                                <div class="card f-row pl-0 pr-2 mar-card">
                                                                 <div class="">
                                                                         <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
                                                                 </div>
@@ -1046,7 +993,7 @@
                                                                      <p class="spec-name pl-0 pt-2 f-15">Bed</p>
                                                                         <div class="view-flex">
                                                                             <div class="choose-your-material ">
-                                                                                <select class="select-material " style="padding: 8px; width:140px">
+                                                                                <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Steel
                                                                                     </option>
@@ -1056,7 +1003,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="choose-your-material pt-3">
-                                                                                <select class="select-material mar-vendor" style="padding: 8px; width:140px">
+                                                                                <select class="select-material mar-vendor" style="padding: 4px; width:100px; border-radius: 5px !important;">
                                                                                     <option value=" " disabled selected>
                                                                                         Small
                                                                                     </option>
@@ -1090,285 +1037,67 @@
                                                                         </div>
 
                                                                 </div>
+                                                                </div>
 
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-6 col-xs-6 ">
+                                                                <div class="card f-row pl-0 pr-2 mar-card">
+                                                                <div class="">
+                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
+                                                                </div>
+                                                                <div class="ml-2">
+                                                                     <p class="spec-name pl-0 pt-2 f-15">Bed</p>
+                                                                        <div class="view-flex">
+                                                                            <div class="choose-your-material ">
+                                                                                <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
+                                                                                    <option value=" " disabled selected>
+                                                                                        Steel
+                                                                                    </option>
+                                                                                    <option value="1 ">Option 1</option>
+                                                                                    <option value="2 ">Option 2</option>
+                                                                                    <option value="3 ">Option 3</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="choose-your-material pt-3">
+                                                                                <select class="select-material mar-vendor" style="padding: 4px; width:100px; border-radius: 5px !important;">
+                                                                                    <option value=" " disabled selected>
+                                                                                        Small
+                                                                                    </option>
+                                                                                    <option value="1 ">Option 1</option>
+                                                                                    <option value="2 ">Option 2</option>
+                                                                                    <option value="3 ">Option 3</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
+                                                                        <div class="input-group justify-content-between mt-1  mb-2">
+                                                                            <span class="input-group-btn ">
+                                                                                <button
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
+                                                                                    data-type="minus "
+                                                                                    data-field="quant[1] ">
+                                                                                    <span class="minus-icon "><i
+                                                                                            class="fa fa-minus "></i></span>
+                                                                            </button>
+                                                                            </span>
+                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
+                                                                            <span class="input-group-btn ">
+                                                                                <button
+                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
+                                                                                    data-type="plus "
+                                                                                    data-field="quant[1] ">
+                                                                                    <span class="plus-icon "><i
+                                                                                            class="fa fa-plus "></i></span>
+                                                                            </button>
+                                                                            </span>
+                                                                        </div>
+
+                                                                </div>
+                                                                </div>
 
                                                             </div>
 
                                                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        <!-- <div class="row modal-item-container pb-4 pt-4 ">
-                                                            <div class="col-md-4 mt-2  ">
-                                                                <div class="row modal-item-inner-container ">
-                                                                    <div class="col-md-6 modal-first-inner-column ">
-                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
-                                                                    </div>
-                                                                    <div class="col-md-6 modal-second-inner-column ">
-                                                                        <p class="spec-name pl-0 pt-2 f-15">Bed</p>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Steel
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="choose-your-material pt-3">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Small
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1  mb-2">
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="minus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="minus-icon "><i
-                                                                                            class="fa fa-minus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="plus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="plus-icon "><i
-                                                                                            class="fa fa-plus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mt-2 ">
-                                                                <div class="row modal-item-inner-container ">
-                                                                    <div class="col-md-6 modal-first-inner-column ">
-                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
-                                                                    </div>
-                                                                    <div class="col-md-6 modal-second-inner-column ">
-                                                                        <p class="spec-name pl-0 pt-2 f-15">Bed</p>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Steel
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="choose-your-material pt-3">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Small
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 mb-2 ">
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="minus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="minus-icon "><i class="fa fa-minus "></i></span>
-                                                                                </button>
-                                                                            </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="plus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="plus-icon "><i class="fa fa-plus "></i></span>
-                                                                                </button>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4  mt-2 ">
-                                                                <div class="row modal-item-inner-container ">
-                                                                    <div class="col-md-6 modal-first-inner-column ">
-                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
-                                                                    </div>
-                                                                    <div class="col-md-6 modal-second-inner-column ">
-                                                                        <p class="spec-name pl-0 pt-2 f-15">Bed</p>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Steel
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="choose-your-material pt-3">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Small
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 mb-2" >
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="minus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="minus-icon "><i class="fa fa-minus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;" >
-                                                                            <span class="input-group-btn ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="plus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="plus-icon "><i class="fa fa-plus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mt-2">
-                                                                <div class="row modal-item-inner-container ">
-                                                                    <div class="col-md-6 modal-first-inner-column ">
-                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
-                                                                    </div>
-                                                                    <div class="col-md-6 modal-second-inner-column ">
-                                                                        <p class="spec-name pl-0 pt-2 f-15">Bed</p>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Steel
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="choose-your-material pt-3 ">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Small
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 mb-2" >
-                                                                            <span class="input-group-btn  ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="minus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="minus-icon "><i class="fa fa-minus "></i></span>
-                                                                                </button>
-                                                                            </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 "  style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn  ">
-                                                                                <button
-                                                                                    class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                    data-type="plus "
-                                                                                    data-field="quant[1] ">
-                                                                                    <span class="plus-icon "><i class="fa fa-plus "></i></span>
-                                                                                </button>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mt-2 ">
-                                                                <div class="row modal-item-inner-container ">
-                                                                    <div class="col-md-6 modal-first-inner-column ">
-                                                                        <img src="{{asset('static/website/images/images/1.png')}}" class="req-search-image " alt="ModalImage ">
-                                                                    </div>
-                                                                    <div class="col-md-6 modal-second-inner-column ">
-                                                                        <p class="spec-name pl-0 pt-2 f-15">Bed</p>
-                                                                        <div class="choose-your-material ">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Steel
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="choose-your-material pt-3">
-                                                                            <select class="select-material " style="padding: 8px; width:110px">
-                                                                                <option value=" " disabled selected>
-                                                                                    Small
-                                                                                </option>
-                                                                                <option value="1 ">Option 1</option>
-                                                                                <option value="2 ">Option 2</option>
-                                                                                <option value="3 ">Option 3</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                                                        <div class="input-group justify-content-between mt-1 mb-2" >
-                                                                            <span class="input-group-btn  ">
-                                                                                <button type="button "
-                                                                                        class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                        data-type="minus "
-                                                                                        data-field="quant[1] ">
-                                                                                    <span class="minus-icon "><i
-                                                                                            class="fa fa-minus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                            <input type="text " class="form-control input-number " value="1 " min="1 " max="10 " style="padding: 11px 6px!important;">
-                                                                            <span class="input-group-btn ">
-                                                                                <button type="button "
-                                                                                        class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;"
-                                                                                        data-type="plus "
-                                                                                        data-field="quant[1] " >
-                                                                                    <span class="plus-icon "><i
-                                                                                            class="fa fa-plus "></i></span>
-                                                                            </button>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
                                                     </div>
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer d-flex justify-content-between ">
@@ -1428,10 +1157,10 @@
 
 
                                     <div> 
-                                    <h4 class="pl-0 pb-4 pt-3 comments ml-1">Upload Photos</h4>
+                                    <h4 class="pl-2 pb-4 pt-3 comments ml-2">Upload Photos</h4>
 
 
-                                    <div class="row d-flex uploaded-image mb-5 ml-0 mr-0">
+                                    <div class="row d-flex uploaded-image mb-5 ml-2 pl-2 mr-0">
                                         <div class="col-md-2 pl-0 upload-image-container">
                                         <input type="hidden" id="custId" name="custId" value="3487">
                                         <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />

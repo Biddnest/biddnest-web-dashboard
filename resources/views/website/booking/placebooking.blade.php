@@ -7,7 +7,7 @@
             <div class="book-move-screen responsive ontop w-70 ">
                 <div class="card-body ">
                     <div class="row d-flex ">
-                        <div class="col-md-3 br-line view-none ">
+                        <div class="col-md-3 br-line view-none pt-4 ">
                             <div class="row steps-form-3 ">
                                 <div class="col-md-8 setup-panel-3">
                                     <div class="steps-step-1 ">

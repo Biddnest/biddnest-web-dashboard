@@ -110,18 +110,21 @@
         <div class="modal-dialog theme-text input-text-blue" role="document">
             <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
                 <div class="modal-header p-0 br-5 ">
+                    
+                    <div style="width: -webkit-fill-available;   width: 100%; width: -moz-available; width: -webkit-fill-available;  width: fill-available;">
+                        <header class="join-as-vendor">
+                            <img src="{{ asset('static/website/images/icons/logo.png')}}" >
+                        </header>
+
+                    </div>
+                    <!-- <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span> -->
+
                     <!-- <div>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">
                         <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
                        
                         </button>
                     </div> -->
-                    <div>
-                        <header class="join-as-vendor">
-                            <img src="{{ asset('static/website/images/icons/logo.png')}}" >
-                        </header>
-
-                    </div>
 
 
                 </div>

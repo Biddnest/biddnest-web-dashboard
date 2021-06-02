@@ -37,47 +37,17 @@
                                 <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
                                 <span class="nav-menu-link l-cap">Contact Us</span></a>
                         </li>
-                        <li class="account-settings m-dropdown dropdown mt-0 cursor-pointer">
+                        <li class=" nav-item  dropdown theme-text  f-14  m-dropdown cursor-pointer">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
-                            <a>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071" style="margin-right: 10px; margin-left: -6px;
-">
-                                    <defs>
-                                        <style>
-                                            .a {
-                                                fill: #fff;
-                                            }
-
-                                            .b {
-                                                clip-path: url(#a);
-                                            }
-
-                                            .c {
-                                                clip-path: url(#b);
-                                            }
-                                        </style>
-                                        <clipPath id="a">
-                                            <path class="a" d="M61.536-1844.464a2.267,2.267,0,0,0,2.268-2.268A2.267,2.267,0,0,0,61.536-1849a2.267,2.267,0,0,0-2.268,2.268A2.267,2.267,0,0,0,61.536-1844.464Zm0,1.134c-1.514,0-4.536.76-4.536,2.268v1.134h9.071v-1.134C66.071-1842.571,63.049-1843.33,61.536-1843.33Z"
-                                                  transform="translate(-57 1849)" />
-                                        </clipPath>
-                                        <clipPath id="b">
-                                            <path class="a" d="M0-1661.07H1015.959V-2607H0Z"
-                                                  transform="translate(0 2607)" />
-                                        </clipPath>
-                                    </defs>
-                                    <g class="b" transform="translate(0 0)">
-                                        <g class="c" transform="translate(-20.682 -275.035)">
-                                            <path class="a" d="M52-1854H64.7v12.7H52Z"
-                                                  transform="translate(-33.132 2127.22)" />
-                                        </g>
-                                    </g>
-                                </svg>
-                                <span class="logged-in-username">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
+                            <a class="nav-link f-14" >
+                            <i class="icon-2 dripicons-user"></i>
+                                <span class="pl-1  l-cap " style="letter-spacing: 1px; ">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                             @else
-                                <a data-toggle="modal" data-target="#Login-modal">
-                                    <span class="logged-in-username l-cap">Login</span>
-                                </a>
+                            <a class="nav-link f-14"  data-toggle="modal" data-target="#Login-modal">
+                            <i class="icon-2  dripicons-enter"></i>
+                                <span class="cursor-pointer l-cap f-14 pl-1"  style="letter-spacing: 1px;">login</span>
+                            </a>
                             @endif
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">

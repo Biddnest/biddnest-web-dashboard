@@ -150,15 +150,15 @@
                                                     </textarea>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-12 d-flex center mt-2 mb-2">
-                                                            <div class="form-groups">
-                                                                <label class="container-01 p-1 pl-2 m-0">
-                                                      <input type="checkbox" id="Lift1" />
-                                                      <span class="checkmark-agree -mt-10"></span>
+                                            <div class="col-12 d-flex center mt-2 mb-2">
+                                                <div class="form-groups">
+                                                    <label class="container-01 p-1 pl-6 m-0">
+                                                        <input type="checkbox" id="Lift1" name="request_callback" value="true"/>
+                                                        <span class="checkmark-agree -mt-10"></span>
                                                     </label>
-                                                            </div>
-                                                            <p class="text-muted f-10">Talk to our agend</p>
-                                                        </div> -->
+                                                </div>
+                                                <p class="text-muted f-10" style="padding-left: 20px;">Talk to our agend</p>
+                                            </div>
                                             <button type="submit" class="btn btn-theme-bg button-modal ml-5 text-view-center mt-2 padding-btn-res white-bg">
                                                 Cancel Booking
                                             </button>

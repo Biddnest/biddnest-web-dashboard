@@ -48,10 +48,12 @@
                                                 src="{{asset('static/website/images/icons/share.svg')}}"
                                                 class="share-margin" />Share</button>
                                     </div>
-                                    <div>
-                                        <button data-toggle="modal" data-target="#manage-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
-                                                src="{{asset('static/website/images/icons/cross.svg')}}" />Manage Orders</button>
-                                    </div>
+                                    @if(\App\Enums\BookingEnums::$STATUS['in_transit'] < $booking->status)
+                                        <div>
+                                            <button data-toggle="modal" data-target="#manage-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/cross.svg')}}" />Manage Orders</button>
+                                        </div>
+                                    @endif
                                     @if(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'] == $booking->status)
                                         <div>
                                             <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">Start trip</button>

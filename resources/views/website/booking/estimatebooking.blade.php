@@ -198,10 +198,10 @@
                              </button>
                       </div>
                       <div class="modal-body p-15 margin-topneg-2">
-                           <form>
+                           <form action="{{route('add_cancel_ticket')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate >
                               <div class="col-12">
                                    <div class="form-input">
-                                              <select id="" class="form-control">
+                                              <select id="" class="form-control" name="heading">
                                                   <option value="">--Select--</option>
                                                  @foreach($reasons as $reason)
                                                       <option value="{{$reason}}">{{$reason}}</option>
@@ -212,13 +212,13 @@
                               </div>
                                <div class="col-12">
                                    <div class="form-input">
-                                       <textarea class="form-control" rows="3" placeholder="Enter your expected price here"> </textarea>
+                                       <textarea class="form-control" rows="3" name="desc" placeholder="Description..."> </textarea>
                                    </div>
                                </div>
                                <div class="col-12 d-flex center mt-2 mb-2">
                                    <div class="form-groups">
                                        <label class="container-01 p-1 pl-6 m-0">
-                                              <input type="checkbox" id="Lift1" />
+                                              <input type="checkbox" id="Lift1" name="request_callback" value="true"/>
                                               <span class="checkmark-agree -mt-10"></span>
                                        </label>
                                    </div>

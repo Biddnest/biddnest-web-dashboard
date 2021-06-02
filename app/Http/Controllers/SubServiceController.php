@@ -139,7 +139,7 @@ class SubServiceController extends Controller
             return Helper::response(true,"Sub-Services deleted successfully");
     }
 
-    public static function getSubservicesForApp($id)
+    public static function getSubservicesForApp($id, $web=false)
     {
         $subservice=Subservice::select(self::$public_data)
         ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
@@ -148,6 +148,10 @@ class SubServiceController extends Controller
 
         if(!$subservice)
             return Helper::response(false,"Records not exist");
+
+
+        if($web)
+            return $subservice;
         else
             return Helper::response(true,"Data displayed successfully", ['subservices'=>$subservice]);
     }

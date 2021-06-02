@@ -612,7 +612,6 @@ $("body").on('click', ".rejected", function(event) {
 });*/
 
 $("body").on('change', ".inventory-item-select", function(event) {
-    console.log("change");
     var query = $(this).val();
     redirectTo($(this).data('url')+"?item="+query);
 });
@@ -745,24 +744,6 @@ $("body").on('click', ".back4", function(event) {
     $(".steps-step-3").addClass("color-purple");
     $(".steps-step-4").removeClass("color-purple");
 });
-
-/*$("body").on('click', ".next4", function(event) {
-    $('.step-4').css('display', 'none');
-    $('.step-5').css('display', 'block');
-    $(".completed-step-5").addClass("turntheme");
-    $(".completed-step-4").removeClass("turntheme");
-    $(".steps-step-5").addClass("color-purple");
-    $(".steps-step-4").removeClass("color-purple");
-});
-
-$("body").on('click', ".next5", function(event) {
-    $('.step-5').css('display', 'none');
-    $('.step-6').css('display', 'block');
-    $(".completed-step-6").addClass("turntheme");
-    $(".completed-step-5").removeClass("turntheme");
-    $(".steps-step-6").addClass("color-purple");
-    $(".steps-step-5").removeClass("color-purple");
-});*/
 
 $('.bookdate').datepicker({
     multidate: true,
@@ -1027,6 +1008,27 @@ $("body").on('click', ".remove", function(event) {
     window.location.href = url;
     return false;
 });
+
+
+$("body").on('click', ".web-category", function(event) {
+  var url=$(this).data("url");
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'json',
+        success: function (response) {
+           console.log(response);
+            var source = document.getElementById("entry-template").innerHTML;
+            var template = Handlebars.compile(source);
+            var html = template(response);
+            $('.subservices').html(html);
+        }
+    });
+    return false;
+});
+
+
 
 
 

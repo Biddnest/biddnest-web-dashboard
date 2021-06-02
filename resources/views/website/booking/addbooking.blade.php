@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="col-md-9 book-move-questions-container">
-                        <form id="wizard">
+                        <form id="wizard" class="move-booking">
                             <div class="row setup-content-3 step-1" id="step-1">
                                 <div class="row ">
                                     <div class="col-md-12 ">
@@ -208,7 +208,7 @@
                                             @foreach($categories as $category)
                                             <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
                                                 <label>
-                                                    <input type="radio" name="product" value="{{$category->id}}" class="card-input-element" />
+                                                    <input type="radio" name="product" value="{{$category->id}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}"/>
                                                     <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer " style="border-radius: 6px;">
                                                         <div class="panel-heading text-white f-direction" style="display: flex; justify-content-center;">
                                                             <img src="{{$category->image}}" class="img-width">
@@ -418,21 +418,20 @@
                                     <p class="text-muted ">Step 3/ 6</p>
                                     <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;">Lets get your requirements</h4>
                                 </div>
-                                <div class="row d-flex justify-content-center row-horizonal">
-
+                                <div class="row d-flex justify-content-center row-horizonal subservices">
                                     <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                                         <label>
-                                            <input type="radio" name="product" class="card-input-element01" />
+                                            <input type="radio" name="product" value="{{id}}" class="card-input-element01" />
 
                                             <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important">
                                                 <div class="panel-heading">
                                                     <h3>
-                                                        <i class="fa fa-home fa-2x "></i>
+                                                        <img src="{{image}}" class="img-width">
                                                     </h3>
                                                 </div>
                                                 <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
-                                                    1 bhk
+                                                    {{name}}
                                                 </div>
                                             </div>
 
@@ -442,42 +441,22 @@
                                     <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                                         <label>
-                                            <input type="radio" name="product" class="card-input-element01" />
+                                            <input type="radio" name="product" value="{{id}}" class="card-input-element01" />
 
-                                            <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
+                                            <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important">
                                                 <div class="panel-heading">
                                                     <h3>
-                                                        <i class="fa fa-home fa-2x "></i>
+                                                        <img src="{{image}}" class="img-width">
                                                     </h3>
                                                 </div>
                                                 <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
-                                                    1 bhk
+                                                    {{name}}
                                                 </div>
                                             </div>
 
                                         </label>
 
                                     </div>
-                                    <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
-
-                                        <label>
-                                            <input type="radio" name="product" class="card-input-element01" />
-
-                                            <div class="panel panel-default card-input disabled" style="box-shadow: none !important;">
-                                                <div class="panel-heading">
-                                                    <h3>
-                                                        <i class="fa fa-home fa-2x "></i>
-                                                    </h3>
-                                                </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
-                                                    1 bhk
-                                                </div>
-                                            </div>
-
-                                        </label>
-
-                                    </div>
-
                                 </div>
                                 <div id="filter" class="bg-light">
                                     <ul class="nav nav-tabs " id="myTab " role="tablist ">
@@ -683,6 +662,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class=" actionBtn actionBtn-view border-top move-btn">
                                     <a href="{{route('home')}}" class="view-none">
                                         <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 ">
@@ -709,7 +689,7 @@
                                         <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4" cols="50"></textarea>
                                     </div>
                                 </div>
-                               
+
 
 
 
@@ -1390,6 +1370,30 @@
 
 
 
+        {{--<script id="entry-template" type="text/x-handlebars-template">
+            {{#each response}}
+            <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
+
+                <label>
+                    <input type="radio" name="product" value="{{id}}" class="card-input-element01" />
+
+                    <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important">
+                        <div class="panel-heading">
+                            <h3>
+                                <img src="{{image}}" class="img-width">
+                            </h3>
+                        </div>
+                        <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
+                            {{name}}
+                        </div>
+                    </div>
+
+                </label>
+
+            </div>
+            {{/each}}
+        </script>--}}
+
         <script>
             function previewImages() {
 
@@ -1438,6 +1442,7 @@
                 document.getElementById('inc ').value = currentValue
             }
         </script>
+
 
     </div>
     @endsection

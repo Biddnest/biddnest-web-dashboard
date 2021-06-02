@@ -155,8 +155,8 @@
     }
 
     .add-item-icon {
-        bottom: 221px !important;
-        right: 138px !important;
+        bottom: 190px !important;
+        right: 130px !important;
     }
 
     .add-photos {
@@ -278,7 +278,7 @@
         flex-direction: column;
 
     }
-        
+
         .view-bottom{
         margin-bottom: 38px;
 
@@ -372,7 +372,7 @@
         }
 
         .add-photos i.fa.fa-plus.fa-2x {
-         
+
             transform: translate(24px, -23px);
 
         }
@@ -620,7 +620,7 @@ font-size: 14px;
 .f-40{
     font-size:40px
 }
-    
+
 
 
     @media only screen and (max-width: 1280px) and (min-width: 800px) {
@@ -646,9 +646,9 @@ font-size: 14px;
     .f-40{
     font-size:30px
 }
-   
-    
-    
+
+
+
         .modal-backdrop {
             position: inherit !important;
         }
@@ -767,9 +767,5 @@ font-size: 14px;
             color: #3B4B58 !important;
 
     }
-
-
-
-
 
 </style>

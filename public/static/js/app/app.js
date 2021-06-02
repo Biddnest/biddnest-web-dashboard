@@ -1019,10 +1019,28 @@ $("body").on('click', ".web-category", function(event) {
         dataType: 'json',
         success: function (response) {
            console.log(response);
-            var source = document.getElementById("entry-template").innerHTML;
+            var source = $("#entry-template").html();
             var template = Handlebars.compile(source);
-            var html = template(response);
+            var html = template(response.data);
             $('.subservices').html(html);
+        }
+    });
+    return false;
+});
+
+$("body").on('click', ".web-sub-category", function(event) {
+  var url=$(this).data("url");
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'json',
+        success: function (response) {
+           console.log(response);
+            var source = $("#entry-templateinventory").html();
+            var template = Handlebars.compile(source);
+            var html = template(response.data);
+            $('.inventory').html(html);
         }
     });
     return false;

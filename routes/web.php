@@ -483,6 +483,7 @@ Route::prefix('website/api')->group(function () {
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
+    Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");
 
     Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");
     Route::post('/raise_support', [WebsiteRouter::class, 'raiseTicket'])->name("raise_support");

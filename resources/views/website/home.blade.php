@@ -447,26 +447,29 @@
                             <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                    <input type="number" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden "   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
-                                    <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="Verify OTP">
+                                    <input type="number" class="form-control" name="otp" id="formGroupExampleInput" autocomplete="off" maxlength="6" minlength="6" placeholder="Verify OTP">
                                 </div>
                             </div>
                             {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
-                            <button type="button" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
+                            <button type="button" class="btn btn-theme-bg   text-view-center mt-3  padding-btn-res white-bg">
                                 Next
                             </button>
                             </a>--}}
                             <div class="col-md-12" style="width: 100%;">
+                            <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</span> </p>
+
                             <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
+                                <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center  padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
                                     Submit
                                 </button>
                             </a>
+                            <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
                             </div>
                            
 

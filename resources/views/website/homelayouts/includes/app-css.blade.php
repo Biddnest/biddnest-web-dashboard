@@ -245,6 +245,7 @@
         }
     }
 
+   
     @media (max-width:480px) {
         .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
             width: 96% !important;

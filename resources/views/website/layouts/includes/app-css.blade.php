@@ -267,7 +267,7 @@
     width: -webkit-fill-available;
     width: fill-available;
         }
-        .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
+        .modal-content.w-80.m-0-auto.w-1000.mt-20.right-25{
             width: 96% !important;
 
         }
@@ -804,6 +804,11 @@
         padding-left: 0px !important;
     }
 
+
+    .account-settings.dropdown.theme-text.mt-1{
+        padding-top: 2px;
+
+    }   
     .btn-max{
             width: 100%;
     width: -moz-available;

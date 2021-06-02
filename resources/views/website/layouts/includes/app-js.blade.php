@@ -57,6 +57,10 @@ $('.card-methord').click(function() {
         });
         </script>
 
+        <script>
+
+</script>
+
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
 <script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
@@ -72,6 +76,20 @@ $('.card-methord').click(function() {
         });
         // }
     });
+
+    $("body").on("click",".item-single-wrapper span.info",function(e){
+        $(this).toggleClass("show-drop");
+    });
+
+    /*$("body").on("click","*:not('.item-single-wrapper span.info')",function(e){
+        $(this).removeClass("show-drop");
+    });*/
+
+    $("body").on("click",".item-single-wrapper span.info .dropdown-content ul li",function(e){
+        $(this).closest("span.info").find("span").eq(0).html($(this).html());
+        $(this).closest("span.info").find("input").val($(this).data("value"));
+    });
+
 </script>
 
 

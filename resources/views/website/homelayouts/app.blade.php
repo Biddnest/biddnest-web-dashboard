@@ -6,6 +6,7 @@
         @include('website.homelayouts.includes.app-css')
     </head>
     <body>
+        
         <nav class="navbar navbar-default navbar-fixed-top header-fixed">
             <div class="container">
                 <div class="navbar-header">

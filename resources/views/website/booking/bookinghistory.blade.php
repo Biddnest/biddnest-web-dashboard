@@ -65,8 +65,7 @@
                                                          <span class="light"> @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
                                                     </p>
                                                 </div>
-                                                <div class="col-md-6 " style=" width: auto; margin-top: 8px; display: flex; justify-content: flex-end;    padding-right: 24px;     padding-bottom: 10px;
-">
+                                                <div class="col-md-6 " style=" width: auto; margin-top: 8px; display: flex; justify-content: flex-end;    padding-right: 24px;     padding-bottom: 10px;">
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['completed'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['completed']; @endphp

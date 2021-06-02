@@ -96,6 +96,7 @@
                         </div>
                     </div>
                     <div class="col-md-9 book-move-questions-container">
+
                         <form id="wizard" class="move-booking">
                             <div class="row setup-content-3 step-1" id="step-1">
                                 <div class="row ">
@@ -104,6 +105,7 @@
                                         <h4 class=" border-bottom pl-0 pb-3 theme-text ">Lets start with your personal information
                                         </h4>
                                     </div>
+
                                     <div class="col-md-12 ">
                                         <div class="accordion ml-3 " id="customer-details ">
                                             <div class="d-flex row p-20 ">

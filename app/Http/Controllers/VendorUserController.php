@@ -229,6 +229,8 @@ class VendorUserController extends Controller
     public static function checkPin($id)
     {
         $vendor_user=Vendor::where('id', $id)->first();
+        if(!$vendor_user)
+            return Helper::response(false, "This vendor doesn't exist",[], 401);
 
         if(!$vendor_user['pin'])
             $set = false;

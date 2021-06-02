@@ -82,8 +82,8 @@ class NotificationController extends Controller
 
     public static function saveCustomerPlayer($player_id, $user_id)
     {
-        $vendor = Vendor::find($user_id);
-        if(!$vendor)
+        $USER = User::find($user_id);
+        if(!$user)
             return Helper::response(true, "This user doesn't exist.",[],401);
         $player = OneSignalPlayer::where("user_id", $user_id)->where("player_id", $player_id)->first();
 
@@ -112,7 +112,7 @@ class NotificationController extends Controller
         if(!$vendor)
             return Helper::response(true, "This vendor doesnot exist.",[],401);
 
-        if(!Vendor)
+        if(!$vendor)
         $player = OneSignalPlayer::where("vendor_id", $vendor_id)->where("player_id", $player_id)->first();
 
         OneSignalPlayer::where('player_id', $player_id)

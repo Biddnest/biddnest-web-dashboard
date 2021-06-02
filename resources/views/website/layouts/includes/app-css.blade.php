@@ -988,4 +988,24 @@ display: block;
         cursor: pointer;
     }
 
+    
+
+
+    .check-blue {
+  position: relative;
+}
+
+.check-blue:before {
+    content: "";
+    font-family: FontAwesome;
+    position: absolute;
+    top: -18px;
+    right: 1px;
+    background-color: #2e0789;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
 </style>

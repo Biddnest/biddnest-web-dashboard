@@ -358,7 +358,7 @@
                         </div>
                     </div>
 
-                    <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 82%;">
+                    <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 79%;">
                         <input type="text" class="form-control -mr-4" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
@@ -450,7 +450,7 @@
                                     <input type="number" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden "   id="otp">
+                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden "   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="number" class="form-control" name="otp" id="formGroupExampleInput" autocomplete="off" maxlength="6" minlength="6" placeholder="Verify OTP">

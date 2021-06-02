@@ -245,6 +245,10 @@
         }
     }
 
+
+
+    
+
    
     @media (max-width:480px) {
         .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
@@ -471,5 +475,13 @@
     width: fill-available;
     }
 
+    .carousel-control .glyphicon-chevron-left{
+        margin-top: -63px;
+
+    }
+    .carousel-control .glyphicon-chevron-right{
+        margin-top: -63px;
+
+    }
 
 </style>

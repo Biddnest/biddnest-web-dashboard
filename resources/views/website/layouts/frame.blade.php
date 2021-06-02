@@ -7,14 +7,14 @@
     <body>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation navigation-top">
         <div class="container">
-            <a class="navbar-brand" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/b.png')}}" /></a>
+            <a class="navbar-brand" style="" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/b.png')}}" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="header-controls ml-30 collapse navbar-collapse" id="navbarSupportedContent" >
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item  active" style="margin-right: 24px;">
+                <ul class="navbar-nav ml-auto" style="    margin-right: 20px !important;">
+                    <li class="nav-item  active" >
                         <a class="nav-link bec-vendor-purple f-14" href="{{route('join-vendor')}}"><img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" /> Become a Vendor
                         </a>
                     </li>
@@ -130,7 +130,7 @@
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" autocomplete="off" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden pl-0 pr-0"   id="otp">
+                            <div class="col-lg-12  col-xs-12 mt-1 otp hidden pl-0 pr-0"   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" autocomplete="off" minlength="6" placeholder="Verify OTP">

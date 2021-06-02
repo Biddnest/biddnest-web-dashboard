@@ -46,8 +46,8 @@ class GeoController extends Controller
             $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
             $distance =$tempDis;
         }
-        return $zone_id;
-//        return 1;
+//        return $zone_id;
+        return 1;
     }
 
     //need to verify and remove this useless function

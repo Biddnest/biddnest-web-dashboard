@@ -142,15 +142,25 @@
                                                 </div>
                                             </div>
                                         </div>
-                                <div class="col-md-3  col-sm-12 view-bottom">
-                                    <div class="">
-                                        <p class="center text-center f-18">Ticket has already been raised</p>
-                                        <a id="more" class="d-flex center" href="#" onclick="toggle_visibility('view_more_content');"> View more </a>
-                                    </div>
-                                </div>
-                            </div>
-                                    <div id="view_more_content" class="togglenone">
                                         @if($ticket_detail)
+                                            <div class="col-md-3  col-sm-12 view-bottom">
+                                                <div class="">
+                                                    <p class="center text-center f-18">Ticket has already been raised</p>
+                                                    <a id="more" class="d-flex center" href="#" onclick="toggle_visibility('view_more_content');"> View more </a>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-md-3  col-sm-12">
+                                                <div>
+                                                    <div class="d-flex center"><a class="white-text " data-toggle="modal" data-target="#for-friend" href="#"><button
+                                                                class="btn btn-theme-bg mt-2  white-bg">Get support</button></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    @if($ticket_detail)
+                                        <div id="view_more_content" class="togglenone">
                                         <div class="ticket-id d-flex pt-4  border-top justify-content-between">
                                             <p class="para-head l-cap">Ticket Id : <span>#{{$ticket_detail->id }}</span></p>
 
@@ -196,8 +206,8 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        @endif
                                     </div>
+                                    @endif
                                     @if($booking == "")
                                         <h6 class="card-title  pb-10">You Don't Have Any Latest Orders</h6>
                                     @endif
@@ -248,7 +258,7 @@
                 }
             }
         </script>
-        {{--<script>
+        <script>
             $(document).ready(function() {
                 var showHeaderAt = 150;
                 var win = $(window),
@@ -263,6 +273,6 @@
                     });
                 }
             });
-        </script>--}}
+        </script>
     </div>
 @endsection

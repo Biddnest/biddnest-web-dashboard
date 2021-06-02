@@ -48,14 +48,16 @@
 
 <script>
 $('.card-methord').click(function() {
-            $('.card-methord02').removeClass('turntheme');
-            $('.card-methord02').removeClass('check-icon02');
+            $('.card-methord').removeClass('turntheme');
+            $('.card-methord').removeClass('check-icon02');
             $(this).addClass('turntheme');
             $(this).addClass('check-icon02');
 
 
         });
         </script>
+
+   
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
@@ -72,6 +74,20 @@ $('.card-methord').click(function() {
         });
         // }
     });
+
+    $("body").on("click",".item-single-wrapper span.info",function(e){
+        $(this).toggleClass("show-drop");
+    });
+
+    /*$("body").on("click","*:not('.item-single-wrapper span.info')",function(e){
+        $(this).removeClass("show-drop");
+    });*/
+
+    $("body").on("click",".item-single-wrapper span.info .dropdown-content ul li",function(e){
+        $(this).closest("span.info").find("span").eq(0).html($(this).html());
+        $(this).closest("span.info").find("input").val($(this).data("value"));
+    });
+
 </script>
 
 

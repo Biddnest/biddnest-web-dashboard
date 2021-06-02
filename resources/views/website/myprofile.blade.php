@@ -108,7 +108,7 @@
 
                             <div class="modal fade" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                                 <div class="modal-dialog para-head input-text-blue" role="document">
-                                    <div class="modal-content w-90 w-1000 mt-50 right-25 ml-4 ">
+                                    <div class="modal-content w-100 w-1000 mt-10 right-25">
                                         <div class="modal-header bg-purple">
                                             <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
                                                 Edit Profile
@@ -213,7 +213,7 @@
 
                             <div class="modal fade" id="edit-number" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                                 <div class="modal-dialog para-head input-text-blue" role="document">
-                                    <div class="modal-content w-90 w-1000 mt-50 right-25 ml-4 ">
+                                    <div class="modal-content w-100 w-1000 mt-50 right-25">
                                         <div class="modal-header bg-purple">
                                             <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
                                                 Update Phone Number
@@ -234,7 +234,7 @@
                                                     <div class="col-lg-12 col-xs-12 mt-1 otp hidden" id="otp">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput">OTP</label>
-                                                            <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
+                                                            <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="Verify OTP">
                                                         </div>
                                                     </div>
                                                     {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
@@ -242,12 +242,13 @@
                                                         Next
                                                     </button>
                                                     </a>--}}
-                                                    <a class="weblogin">
-                                                        <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg">
-                                                            Send OTP
-                                                        </button>
-                                                    </a>
-
+                                                    <div class="col-lg-12 col-xs-12 mt-1">
+                                                        <a class="weblogin">
+                                                            <button type="submit" class="btn btn-theme-bg  btn-proceed  text-view-center mt-3 mb-4 btn-max" >
+                                                                Submit
+                                                            </button>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

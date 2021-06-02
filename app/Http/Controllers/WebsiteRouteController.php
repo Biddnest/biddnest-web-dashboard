@@ -110,13 +110,13 @@ class WebsiteRouteController extends Controller
             'public_booking_id' => 'required|string',
              'heading' => 'required|string',
              'desc' => 'required|string',
-            // 'ticket_type'=>'required|integer'
+             'request_callback'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create(Session::get('account')['id'], 2,  ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return BookingsController::rejectBooking(Session::get('account')['id'], $request->public_booking_id, $request->reason, $request->desc, $request->request_callback);
     }
 
     public function addCancelTicket(Request $request)
@@ -226,5 +226,16 @@ class WebsiteRouteController extends Controller
             return UserController::updateMobile(Session::get('account')['id'], $request->phone, true);
         else
             return UserController::verifyMobile(Session::get('account')['id'], $request->phone, $request->otp, true);
+    }
+
+    public function getSubServices(Request $request){
+        $validation = Validator::make($request->all(),[
+            'service_id' => 'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return SubServiceController::getSubservicesForApp($request->service_id, true);
     }
 }

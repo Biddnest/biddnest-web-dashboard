@@ -1023,10 +1023,10 @@ $("body").on('click', ".web-category", function(event) {
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.subservices').html(html);
-            $('.inventory').html('<div class="col-md-4" data-toggle="modal" data-target="#addItemModal" style="min-height: 40vh !important;">\n' +
-                '                                        <div class="item-single-wrapper add-more" style="height: 100% !important;">\n' +
-                '                                            <i class="icon dripicons-plus" ></i>\n' +
-                '                                        </div>\n' +
+            $('.inventory').html('<div class="col-md-4" data-toggle="modal" data-target="#addItemModal" style="min-height: 40vh !important;">' +
+                '                                        <div class="item-single-wrapper add-more" style="height: 100% !important;">' +
+                '                                            <i class="icon dripicons-plus" ></i>' +
+                '                                        </div>' +
                 '                                    </div>');
         }
     });

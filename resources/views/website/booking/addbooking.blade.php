@@ -426,17 +426,21 @@
                                 <div id="filter" class="bg-light">
                                     <ul class="nav nav-tabs " id="myTab " role="tablist ">
                                         <li class="nav-item ">
-                                            <a class="nav-link active p-15 " id="live-tab " data-toggle="tab " href="#live " role="tab " aria-controls="home " aria-selected="true ">All</a>
+                                            <a class="nav-link active p-15 filter-button" id="live-tab " data-toggle="tab " href="#live " role="tab " aria-controls="home " aria-selected="true " data-filter="all">All</a>
                                         </li>
                                         @foreach(\App\Enums\InventoryEnums::$CATEGORY as $categories)
                                             <li class="nav-item ">
-                                                <a class="nav-link p-15 " id="past-tab " data-toggle="tab " href="#past " role="tab " aria-controls="profile " aria-selected="false ">{{ucwords($categories)}}</a>
+                                                <a class="nav-link p-15 filter-button" id="past-tab " data-toggle="tab " href="#past " role="tab " aria-controls="profile " aria-selected="false " data-filter="{{$categories}}">{{ucwords($categories)}}</a>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </div>
                                 <div class="row  mb-4 inventory">
-
+                                    <div class="col-md-4" data-toggle="modal" data-target="#addItemModal" style="min-height: 40vh !important;">
+                                        <div class="item-single-wrapper add-more" style="height: 100% !important;">
+                                            <i class="icon dripicons-plus" ></i>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class=" actionBtn actionBtn-view border-top move-btn">
@@ -612,6 +616,11 @@
     <div class="spcae" style=" height: 650px !important; margin-bottom: 100px !important;"></div>
 
     <script id="entry-template" type="text/x-handlebars-template">
+        @{{#if subservices}}
+        <div class="col-md-12" style="margin: 20px !important;">
+            <h6 class="text-center">What are you moving</h6>
+        </div>
+        @{{/if}}
         @{{#each subservices}}
             <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
@@ -624,7 +633,7 @@
                                     <img src="@{{image}}" class="img-width">
                                 </h3>
                             </div>
-                            <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
+                            <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view" style="color: #00000">
                             @{{name}}
                             </div>
                     </div>
@@ -637,7 +646,7 @@
 
     <script id="entry-templateinventory" type="text/x-handlebars-template">
         @{{#each inventories}}
-                <div class="col-md-4" style="padding-right: 10px; padding-left: 10px;">
+                <div class="col-md-4 filter @{{meta.category}}" style="padding-right: 10px; padding-left: 10px;">
                     <div class="item-single-wrapper">
                         <span class="closer" data-parent=".item-single-wrapper"><i class="icon dripicons-cross"></i></span>
                         <div class="item-image" style="">

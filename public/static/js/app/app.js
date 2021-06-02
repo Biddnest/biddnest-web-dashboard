@@ -1023,6 +1023,11 @@ $("body").on('click', ".web-category", function(event) {
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.subservices').html(html);
+            $('.inventory').html('<div class="col-md-4" data-toggle="modal" data-target="#addItemModal" style="min-height: 40vh !important;">\n' +
+                '                                        <div class="item-single-wrapper add-more" style="height: 100% !important;">\n' +
+                '                                            <i class="icon dripicons-plus" ></i>\n' +
+                '                                        </div>\n' +
+                '                                    </div>');
         }
     });
     return false;
@@ -1048,6 +1053,28 @@ $("body").on('click', ".web-sub-category", function(event) {
             $('.inventory').html(html);
         }
     });
+    return false;
+});
+
+$("body").on('click', ".filter-button", function(event) {
+    var value = $(this).attr('data-filter');
+
+    if(value == "all")
+    {
+        $('.filter').show('1000');
+    }
+    else
+    {
+        $(".filter").not('.'+value).hide('3000');
+        $('.filter').filter('.'+value).show('3000');
+
+    }
+
+    if ($(".filter-button").removeClass("active")) {
+        $(this).removeClass("active");
+    }
+    $(this).addClass("active");
+
     return false;
 });
 

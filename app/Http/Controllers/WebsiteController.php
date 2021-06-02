@@ -10,6 +10,7 @@ use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Faq;
+use App\Models\Inventory;
 use App\Models\Page;
 use App\Models\Service;
 use App\Models\Settings;
@@ -83,7 +84,8 @@ class WebsiteController extends Controller
     public function addBooking()
     {
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('website.booking.addbooking', ['categories'=>$categories]);
+        $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('website.booking.addbooking', ['categories'=>$categories, 'inventories'=>$inventories]);
     }
 
     public function estimateBooking(Request $request)

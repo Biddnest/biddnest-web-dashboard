@@ -149,11 +149,7 @@ class SubServiceController extends Controller
         if(!$subservice)
             return Helper::response(false,"Records not exist");
 
-
-        if($web)
-            return $subservice;
-        else
-            return Helper::response(true,"Data displayed successfully", ['subservices'=>$subservice]);
+        return Helper::response(true,"Data displayed successfully", ['subservices'=>$subservice]);
     }
 
     public static function statusUpdate($id)

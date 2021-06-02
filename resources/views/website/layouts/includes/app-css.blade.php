@@ -162,8 +162,8 @@
     }
 
     .add-item-icon {
-        bottom: 221px !important;
-        right: 138px !important;
+        bottom: 190px !important;
+        right: 130px !important;
     }
 
     .add-photos {
@@ -643,7 +643,7 @@
         .mobile-popup {
             display: none !important;
 
-        }
+}
     }
 
     .f-40 {
@@ -808,7 +808,7 @@
     .account-settings.dropdown.theme-text.mt-1{
         padding-top: 2px;
 
-    }   
+    }
     .btn-max{
             width: 100%;
     width: -moz-available;
@@ -824,7 +824,7 @@
         font-family: 'Source Sans Pro', sans-serif !important;
     }
     .item-single-wrapper{
-        margin: 10px;
+        margin-bottom:10px;
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
         border: 1px solid #f2f2f2;
         /*border-inline: none;*/

@@ -236,6 +236,19 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
-            return SubServiceController::getSubservicesForApp($request->service_id, true);
+            return SubServiceController::getSubservicesForApp($request->service_id);
     }
+    public function getInventories(Request $request){
+        $validation = Validator::make($request->all(),[
+            'subservice_id' => 'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return InventoryController::getBySubserviceForApp($request->subservice_id);
+    }
+
+
+
 }

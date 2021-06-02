@@ -458,6 +458,10 @@
         margin-bottom: 100px !important;
     }
 
+    .parsley-errors-list{
+        color: red !important;
+        padding-left: 0px !important;
+    }
 
     .width-max{
         width: 100%;

@@ -792,4 +792,15 @@
         color: #3B4B58 !important;
 
     }
+    .parsley-errors-list{
+        color: red !important;
+        padding-left: 0px !important;
+    }
+
+    .btn-max{
+            width: 100%;
+    width: -moz-available;         
+    width: -webkit-fill-available;  
+    width: fill-available;
+        }
 </style>

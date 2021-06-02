@@ -453,7 +453,7 @@
                             <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden "   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
-                                    <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
+                                    <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="Verify OTP">
                                 </div>
                             </div>
                             {{-- <a class="weblogin" data-url="{{ route('website.login') }}">
@@ -464,7 +464,7 @@
                             <div class="col-md-12" style="width: 100%;">
                             <a class="weblogin" >
                                 <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
-                                    Send OTP
+                                    Submit
                                 </button>
                             </a>
                             </div>

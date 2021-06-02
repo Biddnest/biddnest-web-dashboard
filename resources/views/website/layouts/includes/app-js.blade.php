@@ -38,7 +38,7 @@
 
 <script src="{{ asset('static/website/js/intlTelInput.js')}}"></script>
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
-// <script src="{{ asset('static/website/js/timer.js')}}"></script>
+{{--<script src="{{ asset('static/website/js/timer.js')}}"></script>--}}
 <script src="{{ asset('static/website/js/maps.js')}}"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -59,8 +59,20 @@ $('.card-methord').click(function() {
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
+<script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
+<script>
+    $(".timer").each(function(){
+        var BID_END_TIME = $(this).data("time");
+        // if (typeof BID_END_TIME !== undefined) {
 
-
+        $(this).countdown(BID_END_TIME, function (event) {
+            $(this).text(
+                event.strftime('%H:%M:%S')
+            );
+        });
+        // }
+    });
+</script>
 
 
 

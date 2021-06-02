@@ -130,7 +130,7 @@
                                                         </div>
                                                         <div class="radio-group">
                                                             <div class="form-input radio-item ">
-                                                                <input type="radio" id="economy" value="economic" name="service_type" class="radio-button__input cursor-pointer">
+                                                                <input type="radio" id="economy" value="economic" name="service_type" class="radio-button__input cursor-pointer" required>
                                                                 <label class="" for="economy"></label>
                                                             </div>
                                                         </div>
@@ -148,7 +148,7 @@
                                                         </div>
                                                         <div class="radio-group">
                                                             <div class="form-input radio-item ">
-                                                                <input type="radio" id="premium" value="premium" name="service_type" class="radio-button__input ">
+                                                                <input type="radio" id="premium" value="premium" name="service_type" class="radio-button__input " required>
                                                                 <label class="" for="premium"></label>
                                                             </div>
                                                         </div>

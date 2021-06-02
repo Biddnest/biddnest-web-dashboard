@@ -245,14 +245,14 @@ class InventoryController extends Controller
             return Helper::response(true,"Service deleted successfully");
     }
 
-    public static function getEconomicPrice($data, $inventory_quantity_type, $web=false, $created_by_support=false)
+    public static function getEconomicPrice($data, $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
     {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
             $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
                                                 "size"=>$item['size'],
-                                                "material"=>$item['material']])->min('price_economics'
-                                            );
+                                                "material"=>$item['material'], "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
+                                                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_economics');
             if($web || $created_by_support)
             {
                 $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
@@ -268,13 +268,14 @@ class InventoryController extends Controller
 
     }
 
-    public static function getPremiumPrice($data , $inventory_quantity_type, $web=false, $created_by_support=false)
+    public static function getPremiumPrice($data , $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
     {
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
             $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
                                                 "size"=>$item['size'],
-                                                "material"=>$item['material']])->min('price_premium');
+                                                "material"=>$item['material']])
+                                                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_premium');
 
 //            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
             if($web == true || $created_by_support == true)

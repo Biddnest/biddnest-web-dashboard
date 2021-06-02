@@ -89,7 +89,8 @@ class WebsiteController extends Controller
     public function estimateBooking(Request $request)
     {
         $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
-        return view('website.booking.estimatebooking',['booking'=>$booking]);
+        $reason = json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
+        return view('website.booking.estimatebooking',['booking'=>$booking, 'reasons'=>$reason]);
     }
 
     public function placeBooking(Request $request)
@@ -145,7 +146,7 @@ class WebsiteController extends Controller
     }
     public function myRequest(Request $request)
     {
-        $tickets=Ticket::where('user_id', Session::get('account')['id'])->paginate(5);
+        $tickets=Ticket::where('user_id', Session::get('account')['id'])->orderBy('id', 'DESC')->paginate(5);
         return view('website.myrequest', ['tickets'=>$tickets]);
     }
 

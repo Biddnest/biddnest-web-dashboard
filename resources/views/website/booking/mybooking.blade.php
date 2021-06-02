@@ -33,7 +33,7 @@
                                 <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
                                 <div class="card view-left-text">
                                     <div class="card-body bg-card-book">
-                                        <div class="d-flex pt-4 pb-2 justify-content-around">
+                                        <div class="d-flex pt-4 pb-2 justify-content-between pr-2">
                                             <div class="d-flex ">
                                                 <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" />
                                                 <div class="d-flex f-direction">
@@ -59,11 +59,11 @@
                                     <div class="card-footer">
                                         <div class="row d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
                                             <div class="col-md-6 col-mobile">
-                                                <p class="bold mt-1 pl-4 padding-view d-flex f-direction">
-                                                   <span>  #{{$booking->public_booking_id}}</span> <span class="light"> {{date('d M Y', strtotime($booking->created_at))}}</span>
+                                                <p class="bold mt-1 pl-2 padding-view d-flex f-direction">
+                                                   <span>  #{{$booking->public_booking_id}}  </span> <span class="light">  {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                 </p>
                                             </div>
-                                            <div class="col-md-6 col-mobile" style="margin-top: 10px;">
+                                            <div class="col-md-6 col-mobile" style="margin-top: 10px; display: flex; justify-content: flex-end; ">
                                                 @switch($booking->status)
                                                     @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['enquiry']; @endphp

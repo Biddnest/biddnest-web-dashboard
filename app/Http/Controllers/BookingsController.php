@@ -163,13 +163,13 @@ class BookingsController extends Controller
                     break;
             }
         }
-
+        $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
         try {
-            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $web, $created_by_support);
+            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
-            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $web, $created_by_support);
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
         } catch (Exception $e) {
@@ -179,7 +179,7 @@ class BookingsController extends Controller
 
         $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
         $booking->quote_estimate = $estimate_quote;
-        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $distance = GeoController::displacement($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
             "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
@@ -187,6 +187,7 @@ class BookingsController extends Controller
             "timings" => null,
             "distance" => $distance]);
         $booking->status = BookingEnums::$STATUS['enquiry'];
+        $booking->zone_id = $zone_id;
         $result = $booking->save();
 
         // $bookingstatus = new BookingStatus;
@@ -276,12 +277,12 @@ class BookingsController extends Controller
         $booking_id = $exist->id;
 
         dispatch(function() use($booking_id, $user_id,$complete_time, $public_booking_id) {
+                NotificationController::sendTo("user", [$user_id], "Your booking has been recieved.", "We are getting the best price for you. You will be notified soon.", [
+                    "type" => NotificationEnums::$TYPE['booking'],
+                    "public_booking_id" => $public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['biding']
+                ]);
             BidController::addvendors($booking_id);
-            NotificationController::sendTo("user", [$user_id], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-                "type" => NotificationEnums::$TYPE['booking'],
-                "public_booking_id" => $public_booking_id,
-                "booking_status" => BookingEnums::$STATUS['biding']
-            ]);
         })->afterResponse();
 
         return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
@@ -545,7 +546,7 @@ class BookingsController extends Controller
 
         switch ($request->type) {
             case "live":
-                $bid_id->where("status", BidEnums::$STATUS['active'])->where("bookmarked", "!=", CommonEnums::$YES);
+                $bid_id->where("status", BidEnums::$STATUS['active']);
                 break;
 
             case "scheduled":

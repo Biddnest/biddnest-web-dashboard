@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use App\Models\Settings;
+use Illuminate\Support\Facades\Log;
 
 class GeoController extends Controller
 {
@@ -36,14 +38,16 @@ class GeoController extends Controller
     }
 
     public static function getNearestZone($lat, $lng){
-        $zone = 0;
+        $zone_id = 0;
         $distance = 10000;
 
-        foreach (Zone::all() as $zone){
-            $tempDis  = self::displacement($lat, $lng, $zone['lat'],$zone['lng']);
-            $zone = $tempDis < $distance ? $zone->id : 0;
+        foreach (Zone::where("status", CommonEnums::$YES)->get() as $zone){
+            $tempDis  = self::distance($lat, $lng, $zone->lat,$zone->lng);
+            $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
+            $distance =$tempDis;
         }
-        return $zone;
+//        return $zone_id;
+        return 1;
     }
 
     //need to verify and remove this useless function

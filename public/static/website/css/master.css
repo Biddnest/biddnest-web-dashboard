@@ -418,7 +418,7 @@ body {
 }
 
 .m-dropdown {
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .mt-1 {
@@ -7029,7 +7029,8 @@ header .intro-text .intro-heading {
 }
 
 .full-width {
-  padding: 5px 119px !important;
+  width: -webkit-fill-available;
+  width: -moz-fit-content;
 }
 
 .container-top {
@@ -10364,7 +10365,9 @@ ul.header-controls li.notifications:hover .dropdown {
 }
 
 #padding-apply {
-  padding: 4px 35px;
+  /* padding: 4px 35px; */
+  padding: 7px 54px;
+
 }
 
 .nav-tabs .nav-link {
@@ -11007,7 +11010,7 @@ ul.header-controls li.notifications:hover .dropdown {
   margin: 0 auto;
 }
 .quote p {
-  padding-left: 1em;
+  /* padding-left: 1em; */
   font-weight: 400;
 
 }
@@ -12391,7 +12394,7 @@ img.image-upload-by-customer {
 
 .upload-image-container i.fa.fa-close.fa-2x {
   position: absolute;
-  right: -5px;
+  right: 9px;
   top: -11px;
   background-color: #fdc403;
   padding: 3px;

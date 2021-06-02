@@ -41,7 +41,7 @@ class WebSocket extends Command
     {
         switch ($this->argument('action')){
             case "start":
-                    $this->alert('Bidsnest Socket server');
+                    $this->alert('Bidnest Socket server');
                     $this->info('Initiating socket server');
 
                     $port = $this->option('port') ? $this->option('port') : 3000;
@@ -64,6 +64,10 @@ class WebSocket extends Command
 
             case "stop":
                 Worker::stopAll();
+                break;
+
+            default:
+                $this->error("Incorrect command provided -> ".$this->argument("action").". Instead try 'php artisan websocket start/stop --port={port_here}'");
         }
     }
 }

@@ -6,40 +6,40 @@
             <div class="container">
                 <div class="quote responsive br-5 w-70 ontop bg-white">
                     <div class="card-body f-14">
-                        <h5 class="card-title -mt-10  pb-1">Contact Details</h5>
+                        <h5 class="card-title -mt-10 f-24 mb-4 pb-1 f-24">Contact Details</h5>
                         <div class="row f-initial border-bottom m-20 pb-3 mt-0">
-                            <div class="col-md-4  col-sm-12">
+                            <div class="col-md-4  col-sm-12 view-bottom">
                                 <div class="d-flex justify-content-around">
                                     <div class="">
                                         <img class="-mt-10" src="{{ asset('static/website/images/icons/location.svg')}}" />
                                     </div>
                                     <div class="">
-                                        <h6 class="pl-2">{{json_decode($contact_details, true)['address']}}</h6>
+                                        <h6 class="f-18 pl-0">{{json_decode($contact_details, true)['address']}}</h6>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4  col-sm-12">
+                            <div class="col-md-4  col-sm-12 view-bottom">
                                 <div class="d-flex -mt-10 justify-content-start a-item min-view theme-text">
-                                    <div class="">
+                                    <div class="mr-1">
                                         <img src="{{ asset('static/website/images/icons/mail.svg')}}" />
                                     </div>
                                     <div class="">
                                         @foreach(json_decode($contact_details, true)['email_id'] as $email)
-                                            <p class="f-14 underline">
+                                            <p class="f-18 underline mb-0">
                                                 {{$email}}
                                             </p>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 -mt-10  col-sm-12">
+                            <div class="col-md-4 -mt-10  col-sm-12 view-bottom">
                                 <div class="d-flex  a-item min-view  justify-content-start">
                                     <div class="mb-1 -mr-10">
                                         <img src="{{ asset('static/website/images/icons/call.svg')}}" />
                                     </div>
                                     <div class="">
                                         @foreach(json_decode($contact_details, true)['contact_no'] as $phone)
-                                            <p>
+                                            <p class="f-18  mb-0">
                                                 {{$phone}}
                                             </p>
                                         @endforeach
@@ -47,100 +47,100 @@
                                 </div>
                             </div>
                         </div>
-                        <h5 class="card-title pb-10">Latest Orders</h5>
+                        <h5 class="card-title  mb-4 pb-2 mt-2 f-24">Latest Orders</h5>
                         <div class="card view-content p-4 ">
                             <div class="row f-initial">
-                                <div class="col-md-5 col-sm-12 br-rg">
+                                <div class="col-md-5 col-sm-12 br-rg view-bottom">
                                     <div class="d-flex justify-content-between ">
                                         <div class=" p-0">
-                                            <p>From</p>
-                                            <p class="bg-blur" style="text-align: center; width: fit-content;"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
+                                            <p class="f-14">From</p>
+                                            <p class="bg-blur f-18" style="text-align: center; width: fit-content ;"> {{ucwords(json_decode($booking->source_meta, true)['city'])}}</p>
                                         </div>
                                         <div class=" mt-1 pt-3 pb-3 pr-2">
                                             <img class="-ml-10" src="{{ asset('static/website/images/icons/moving-truck.svg')}}" />
                                         </div>
                                         <div class="">
-                                            <p>To</p>
-                                            <p class="bg-blur" style="text-align: center; width: fit-content;">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
+                                            <p class="f-14"> To</p>
+                                            <p class="bg-blur f-18" style="text-align: center; width: fit-content ;">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4  col-sm-12 br-rg">
-                                    <div class="d-flex justify-content-between  ">
-                                        <div class="">
-                                            <div>
-                                                <p class="mb-0">Order Id </p>
-                                                <p> #{{$booking->public_booking_id}} </p>
-                                            </div>
-                                            <div>
-                                                <p class="mb-0">Date </p>
-                                                <p> {{date('d M Y', strtotime($booking->created_at))}} </p>
+                                <div class="col-md-4  col-sm-12 br-rg view-bottom">
+                                            <div class="d-flex justify-content-between  ">
+                                                <div class="">
+                                                    <div class="mb-3 view-bottom">
+                                                        <p class="mb-0 f-14 l-cap ">Order Id </p>
+                                                        <p class="f-18"> #{{$booking->public_booking_id}} </p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <p class="mb-0 l-cap">Date</p>
+                                                        <p class="f-18"> {{date('d M Y', strtotime($booking->created_at))}} </p>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="mb-3 view-bottom">
+                                                        <p class="mb-0 f-14 l-cap">Price </p>
+                                                        <p class="f-18"> Rs.@if($booking->final_quote)
+                                                                   {{$booking->final_quote}}
+                                                            @else
+                                                                {{$booking->final_estimated_quote}}
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                    <div class="mb-3 view-bottom">
+                                                        <p class="mb-0 f-14 l-cap">Status </p>
+                                                        @switch($booking->status)
+                                                            @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                                                <p>Enquiry</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                                                    <p>Placed</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                                                    <p>Biding</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                                                    <p>Rebiding</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                                    <p>Payment Pending</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                                    <p>Pending Driver Assign</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                                    <p>Awaiting Pickup</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                                    <p>In Transit</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                                    <p>Completed</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                                    <p>Cancelled</p>
+                                                            @break
+
+                                                            @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                                                    <p>Bounced</p>
+                                                            @break
+                                                        @endswitch
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="">
-                                            <div>
-                                                <p class="mb-0">Price </p>
-                                                <p> Rs.@if($booking->final_quote)
-                                                        {{$booking->final_quote}}
-                                                    @else
-                                                        {{$booking->final_estimated_quote}}
-                                                    @endif
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <p class="mb-0">Status </p>
-                                                @switch($booking->status)
-                                                    @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
-                                                    <p>Enquiry</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['placed'])
-                                                    <p>Placed</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['biding'])
-                                                    <p>Biding</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                                    <p>Rebiding</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                                    <p>Payment Pending</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                                    <p>Pending Driver Assign</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-                                                    <p>Awaiting Pickup</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                                    <p>In Transit</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['completed'])
-                                                    <p>Completed</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-                                                    <p>Cancelled</p>
-                                                    @break
-
-                                                    @case(\App\Enums\BookingEnums::$STATUS['bounced'])
-                                                    <p>Bounced</p>
-                                                    @break
-                                                @endswitch
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3  col-sm-12">
+                                <div class="col-md-3  col-sm-12 view-bottom">
                                     <div class="">
-                                        <p class="center text-center f-14">Ticket has already been raised</p>
+                                        <p class="center text-center f-18">Ticket has already been raised</p>
                                         <a id="more" class="d-flex center" href="#" onclick="toggle_visibility('view_more_content');"> View more </a>
                                     </div>
                                 </div>

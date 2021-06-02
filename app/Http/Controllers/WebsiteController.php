@@ -19,6 +19,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+
 class WebsiteController extends Controller
 {
     public function home()
@@ -144,7 +145,7 @@ class WebsiteController extends Controller
     }
     public function myRequest(Request $request)
     {
-        $tickets=TicketController::get(Session::get('account')['id'], true);
+        $tickets=Ticket::where('user_id', Session::get('account')['id'])->orderBy('id', 'DESC')->paginate(5);
         return view('website.myrequest', ['tickets'=>$tickets]);
     }
 

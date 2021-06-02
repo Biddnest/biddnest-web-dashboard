@@ -35,16 +35,19 @@ class BidController extends Controller
 {
     public static function addvendors($booking_id)
     {
-        try {
+//        try {
             $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
                             ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
+
+            if(count($vendorlist) > 0) {
+                return false;
+            }
+
+
             Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
             $vendor_ids = [];
-            // $bookingstatus = new BookingStatus;
-            // $bookingstatus->booking_id = $booking_id;
-            // $bookingstatus->status=BookingEnums::$STATUS['biding'];
-            // $result_status = $bookingstatus->save();
+
             $public_booking_id = Booking::where('id', $booking_id)->pluck('public_booking_id')[0];
             $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['biding']);
 
@@ -71,9 +74,9 @@ class BidController extends Controller
 
             return true;
 
-        } catch (\Exception $e) {
+       /* } catch (\Exception $e) {
             return [false, "error"=>$e->getMessage()];
-        }
+        }*/
 
     }
 

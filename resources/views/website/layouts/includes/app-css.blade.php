@@ -357,7 +357,7 @@
         }
 
         .flow__item__circle:after {
-            top: 1062px !important;
+            top: 926px !important;
 
         }
 
@@ -387,6 +387,12 @@
 
         }
 
+        .fw-500.f-20{
+font-size: 18px;
+        }
+        .mt-2.mb-0.l-cap{
+font-size: 14px;
+        }
 
 
         .card-input {
@@ -395,6 +401,10 @@
 
         .col-mobile {
             flex-direction: column !important;
+
+        }
+        .row-mobile {
+            flex-direction: row !important;
 
         }
 
@@ -639,10 +649,6 @@
    
     
     
-        .flow__item__circle:after{
-            /* top: 636px; */
-
-        }
         .modal-backdrop {
             position: inherit !important;
         }

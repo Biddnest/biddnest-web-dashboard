@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings')}}">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab active p-15" id="booking-history" data-toggle="tab" href="#booking" role="tab" aria-controls="profile" aria-selected="false">Booking History</a>
+                                <a class="nav-link light-nav-tab active p-15 pt-0" id="booking-history" data-toggle="tab" href="#booking" role="tab" aria-controls="profile" aria-selected="false">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -58,14 +58,15 @@
                                         </div>
                                         <div class="card-footer">
 
-                                            <div class="row d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
-                                            <div class="col-md-6 col-mobile">
-                                                    <p class="bold mt-1 pl-4 padding-view">
+                                            <div class="row d-flex mt-1 f-14 pt-1 justify-content-between  row-mobile">
+                                            <div class="col-md-6 col-mobile" style="width: auto;">
+                                                    <p class="bold mt-1 pl-4 padding-view d-flex f-direction">
                                                         <span> #{{$booking->public_booking_id}}</span>
-                                                         <span class="light">| @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
+                                                         <span class="light"> @if($booking->bid) {{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}} @endif </span>
                                                     </p>
                                                 </div>
-                                                <div class="col-md-6 col-mobile" style="margin-top: 10px; display: flex; justify-content: flex-end;    padding-right: 24px;">
+                                                <div class="col-md-6 " style=" width: auto; margin-top: 8px; display: flex; justify-content: flex-end;    padding-right: 24px;     padding-bottom: 10px;
+">
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['completed'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['completed']; @endphp

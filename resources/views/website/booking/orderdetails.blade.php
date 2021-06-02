@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab active p-15 pt-0" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -33,7 +33,7 @@
                                 <div class="center mt-1">
                                     <h5>Booking Details</h5>
                                 </div>
-                                <div class="d-flex direction-col  ">
+                                <div class="d-flex direction-col desktop-popup view-none">
                                     <div>
                                         <button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
                                                 src="{{asset('static/website/images/icons/call-button.svg')}}" />Virtual
@@ -63,6 +63,43 @@
                                             <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">End trip</button>
                                         </div>
                                     @endif
+                                </div>
+
+                                <!-- for mobile view -->
+                                <div class="d-flex direction-col mobile-popup">
+                                    <div class="d-flex">
+                                        <div>
+                                            <button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
+                                                    src="{{asset('static/website/images/icons/call-button.svg')}}" />Virtual
+                                                Assistance</button>
+                                        </div>
+                                        <div>
+                                            <button data-toggle="modal" data-target="#order-detail-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/page.svg')}}" />Order Details</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div>
+                                            <button class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/share.svg')}}"
+                                                    class="share-margin" />Share details</button>
+                                        </div>
+                                        <div>
+                                            <button data-toggle="modal" data-target="#manage-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/cross.svg')}}" />Manage Orders</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        @if(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'] == $booking->status)
+                                            <div>
+                                                <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">Start trip</button>
+                                            </div>
+                                        @elseif(\App\Enums\BookingEnums::$STATUS['in_transit'] == $booking->status)
+                                            <div>
+                                                <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">End trip</button>
+                                            </div>
+                                        @endif
+                                    </div> 
                                 </div>
                             </div>
                             <div class="row pb-4 border-bottom">

@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="home" aria-selected="true">My Profile</a>
+                                <a class="nav-link active p-15 pt-0" id="new-order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="home" aria-selected="true">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15"   href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0"   href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15"   href="{{route('my-bookings')}}">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0"   href="{{route('my-bookings')}}">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15"   href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0"   href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15"  href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0"  href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -38,63 +38,13 @@
                                         </div>
                                     @endif
                             </div>
-                            <!-- <div class="col-md-9 f-16 mt-1 ">
-                                <div class="top-aliments  d-flex justify-content-between">
-                                    <div class="col">
-                                        <div>
-                                            <p class="mb-0 l-cap">
-                                                First Name
-                                            </p>
-                                            <p class="fw-500 f-18">
-                                               {{ucwords($user->fname)}}
-                                            </p>
-
-                                        </div>
-                                        <div>
-                                            <p class="mt-2 mb-0  l-cap">
-                                                Email Id</p>
-                                            <p class="fw-500 f-18">
-                                                {{$user->email}}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="mt-2 mb-0  l-cap">
-                                                Gender
-                                            </p>
-                                            <p class="fw-500 f-18">
-                                                {{$user->gender}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div>
-                                            <p class="mt-2 mb-0 l-cap">Last Name</p>
-                                            <p class="fw-500 f-18">{{ucwords($user->lname)}}</p>
-                                        </div>
-                                        <div>
-                                            <p class="mt-2 mb-0  l-cap">Phone Number </p>
-                                            <p class="fw-500 f-18">{{$user->phone}}</p>
-                                        </div>
-                                        <div>
-                                            <p class="mt-2 mb-0  l-cap">Date of Birth </p>
-                                            <p class="fw-500 f-18">{{date('d M Y', strtotime($user->dob))}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col d-flex justify-content-end">
-                                        <div class=" mt-2">
-                                            <i data-toggle="modal" data-target="#edit-profile" class="icon dripicons-pencil cursor-pointer"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> -->
-
+                         
                             <div class="col-md-9 f-16 mt-1 ">
 
 
 
-                                <div class="row d-flex justify-content-start text-left">
-                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
+                                <div class="row d-flex justify-content-between text-left">
+                                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6" style="width: auto;">
                                             <p class="mb-0 mt-2 l-cap">
                                                 First Name
                                             </p>
@@ -104,11 +54,11 @@
 
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-3  col-md-3 col-sm-3 col-xs-3" style="width: auto;">
                                             <p class="mt-2 mb-0 l-cap">Last Name</p>
                                             <p class="fw-500 f-20">{{ucwords($user->lname)}}</p>
                                         </div>
-                                        <div class="col-md-2 d-flex justify-content-end">
+                                        <div class="col-md-2 col-md-2 col-sm-2 col-xs-2 d-flex justify-content-end" style="width: auto;">
                                         <div class=" mt-2">
                                             <i data-toggle="modal" data-target="#edit-profile" class="icon dripicons-pencil cursor-pointer"></i>
                                         </div>
@@ -117,29 +67,29 @@
 
                                 </div>
                                 <div class="row d-flex justify-content-start text-left">
-                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="width: auto;">
                                             <p class="mt-2 mb-0  l-cap">
                                                 Email Id</p>
                                             <p class="fw-500 f-20">
                                                 {{$user->email}}
                                             </p>
                                         </div>
-                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="width: auto;">
                                             <p class="mt-2 mb-0  l-cap">
                                                 Gender
                                             </p>
-                                            <p class="fw-500 f-20">
+                                            <p class="fw-500 f-20" style="width: auto;">
                                                 {{$user->gender}}
                                             </p>
                                         </div>
 
                                 </div>
                                 <div class="row d-flex justify-content-start text-left">
-                                <div class="col-md-7">
+                                <div class="col-md-7" style="width: auto;">
                                     <p class="mt-2 mb-0  l-cap">Phone Number  <span style="display:inline-block;"><i data-toggle="modal" data-target="#edit-number" class="icon dripicons-pencil cursor-pointer"></i></span></p>
                                             <p class="fw-500 f-20">{{$user->phone}}</p>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-5" style="width: auto;">
                                             <p class="mt-2 mb-0  l-cap">Date of Birth </p>
                                             <p class="fw-500 f-20">{{date('d M Y', strtotime($user->dob))}}</p>
                                         </div>

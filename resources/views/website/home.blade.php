@@ -275,7 +275,7 @@
             <div class="row">
                 <div class="card">
                     <div class="col-lg-12 text-center mb-2 mt-6">
-                        <h1>Testimonials</h1>
+                        <h1 style="font-size: 30;">Testimonials</h1>
                          <p class="section-subheading text-muted mt-2">Lorem Ipsum</p>
                     </div>
                 </div>

@@ -33,7 +33,7 @@
                                 <div class="center mt-1">
                                     <h5>Booking Details</h5>
                                 </div>
-                                <div class="d-flex direction-col  ">
+                                <div class="d-flex direction-col desktop-popup view-none">
                                     <div>
                                         <button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
                                                 src="{{asset('static/website/images/icons/call-button.svg')}}" />Virtual
@@ -61,6 +61,43 @@
                                             <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">End trip</button>
                                         </div>
                                     @endif
+                                </div>
+
+                                <!-- for mobile view -->
+                                <div class="d-flex direction-col mobile-popup">
+                                    <div class="d-flex">
+                                        <div>
+                                            <button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
+                                                    src="{{asset('static/website/images/icons/call-button.svg')}}" />Virtual
+                                                Assistance</button>
+                                        </div>
+                                        <div>
+                                            <button data-toggle="modal" data-target="#order-detail-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/page.svg')}}" />Order Details</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div>
+                                            <button class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/share.svg')}}"
+                                                    class="share-margin" />Share details</button>
+                                        </div>
+                                        <div>
+                                            <button data-toggle="modal" data-target="#manage-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
+                                                    src="{{asset('static/website/images/icons/cross.svg')}}" />Manage Orders</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        @if(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'] == $booking->status)
+                                            <div>
+                                                <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">Start trip</button>
+                                            </div>
+                                        @elseif(\App\Enums\BookingEnums::$STATUS['in_transit'] == $booking->status)
+                                            <div>
+                                                <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">End trip</button>
+                                            </div>
+                                        @endif
+                                    </div> 
                                 </div>
                             </div>
                             <div class="row pb-4 border-bottom">

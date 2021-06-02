@@ -63,7 +63,7 @@
                                                    <span>  #{{$booking->public_booking_id}}  </span> <span class="light">  {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                 </p>
                                             </div>
-                                            <div class="col-md-6 " style="width: auto; margin-top: 8px; display: flex; justify-content: flex-end; ">
+                                            <div class="col-md-6 " style="width: auto; margin-top: 8px; display: flex; justify-content: flex-end;     padding-bottom: 10px;">
                                                 @switch($booking->status)
                                                     @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['enquiry']; @endphp

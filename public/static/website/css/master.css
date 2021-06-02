@@ -10648,12 +10648,11 @@ ul.header-controls li.notifications:hover .dropdown {
     content: attr(data-onboarding-step-text);
   }
 
-  .share-margin {
+  /* .share-margin {
     margin-right: 80px !important;
-  }
+  } */
 
   .btn-booking {
-    min-width: 200px !important;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
     max-width: max-content;

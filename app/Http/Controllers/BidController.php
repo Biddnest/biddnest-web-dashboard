@@ -265,6 +265,10 @@ class BidController extends Controller
                             ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
 //                            ->whereIn("status", [BidEnums::$STATUS['active']])
                             ->first();
+
+        if(!$exist_bid)
+            return Helper::response(false,"This Booking is not to assigned",["refresh_current_activity"=>true]);
+
         if($exist_bid->status == BidEnums::$STATUS['bid_submitted']){
             $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
 

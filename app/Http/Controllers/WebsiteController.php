@@ -145,7 +145,7 @@ class WebsiteController extends Controller
     }
     public function myRequest(Request $request)
     {
-        $tickets=Ticket::where('user_id', Session::get('account')['id'])->paginate(5);
+        $tickets=Ticket::where('user_id', Session::get('account')['id'])->orderBy('id', 'DESC')->paginate(5);
         return view('website.myrequest', ['tickets'=>$tickets]);
     }
 

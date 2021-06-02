@@ -163,13 +163,13 @@ class BookingsController extends Controller
                     break;
             }
         }
-
+        $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
         try {
-            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $web, $created_by_support);
+            $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
-            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $web, $created_by_support);
+            $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
         } catch (Exception $e) {
@@ -187,7 +187,7 @@ class BookingsController extends Controller
             "timings" => null,
             "distance" => $distance]);
         $booking->status = BookingEnums::$STATUS['enquiry'];
-        $booking->zone_id = GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
+        $booking->zone_id = $zone_id;
         $result = $booking->save();
 
         // $bookingstatus = new BookingStatus;

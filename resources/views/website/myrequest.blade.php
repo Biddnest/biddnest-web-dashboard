@@ -84,7 +84,7 @@
                                                 @endswitch
                                             </div>
                                             <h6 class="para-head pl-2 " style="font-size: 16px;">{{ucwords($ticket->heading)}}</h6>
-                                            <p class="para ml-2" style="font-size: 14px;" style="white-space: normal !important;">
+                                            <p class="para ml-2" style="font-size: 14px; white-space: normal !important;">
                                                 {{$ticket->desc}}
                                               {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}
 
@@ -122,6 +122,29 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @if(count($tickets)== 0)
+                                    <div class="row hide-on-data">
+                                        <div class="col-md-12 text-center p-20">
+                                            <p class="font14"><i>. You Are Not Raised Tickets.</i></p>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="pagination">
+                                    <ul>
+                                        <li class="p-1">Page</li>
+                                        <li class="digit">{{$tickets->currentPage()}}</li>
+                                        <li class="label">of</li>
+                                        <li class="digit">{{$tickets->lastPage()}}</li>
+                                        @if(!$tickets->onFirstPage())
+                                            <li class="button"><a href="{{$tickets->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                            </li>
+                                        @endif
+                                        @if($tickets->currentPage() != $tickets->lastPage())
+                                            <li class="button"><a href="{{$tickets->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col-md-4 col-xs-12 col-sm-12 ">
                                 <h5 class="heading mt-4 f-20 mb-3">New Request</h5>

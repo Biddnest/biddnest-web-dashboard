@@ -627,10 +627,10 @@
                 <label>
                     <input type="radio" name="product" value="@{{id}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
 
-                    <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important; text-align: center;">
+                    <div class="panel panel-default card-input disabled check-blue  " style="box-shadow: none !important;  background:none !important; text-align: center;">
                             <div class="panel-heading">
                                 <h3>
-                                    <img src="@{{image}}" class="img-width">
+                                    <img src="@{{image}}" class="img-width  " >
                                 </h3>
                             </div>
                             <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view" style="color: #00000">

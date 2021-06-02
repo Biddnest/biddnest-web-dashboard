@@ -265,6 +265,10 @@ class BidController extends Controller
                             ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
 //                            ->whereIn("status", [BidEnums::$STATUS['active']])
                             ->first();
+
+        if(!$exist_bid)
+            return Helper::response(false,"This Booking is not to assigned",["refresh_current_activity"=>true]);
+
         if($exist_bid->status == BidEnums::$STATUS['bid_submitted']){
             $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
 
@@ -462,16 +466,16 @@ class BidController extends Controller
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                    $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] * round(json_decode($booking->booking->meta, true)['distance']) : 0.00;
+                    $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
                 else
-                    $list_item["price"] = $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * round(json_decode($booking->booking->meta, true)['distance']) : 0.00;
+                    $list_item["price"] = $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
 
                 array_push($price_list, $list_item);
 
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                    $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * round(json_decode($booking->booking->meta, true)['distance']) : 0.00;
+                    $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
                 else
-                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'] * round(json_decode($booking->booking->meta, true)['distance']), true)['max'] : 0.00;
+                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']), true)['max'] : 0.00;
             }
         }
         if($web)

@@ -23,6 +23,10 @@
         font-family: 'Roboto', sans-serif !important;
     }
 
+    .mb-icon:hover{
+        filter: opacity() drop-shadow(0 0 0 #fdc403);
+
+    }
     .card-num {
         font-size: 115px;
         position: absolute;

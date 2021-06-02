@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab active p-15 pt-0" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>
@@ -57,13 +57,13 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="row d-flex mt-1 f-14 pt-1 justify-content-between col-mobile">
-                                            <div class="col-md-6 col-mobile">
+                                        <div class="row d-flex mt-1 f-14 pt-1 justify-content-between row-mobile">
+                                            <div class="col-md-6 col-mobile" style="width: auto;">
                                                 <p class="bold mt-1 pl-2 padding-view d-flex f-direction">
                                                    <span>  #{{$booking->public_booking_id}}  </span> <span class="light">  {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                 </p>
                                             </div>
-                                            <div class="col-md-6 col-mobile" style="margin-top: 10px; display: flex; justify-content: flex-end; ">
+                                            <div class="col-md-6 " style="width: auto; margin-top: 8px; display: flex; justify-content: flex-end; ">
                                                 @switch($booking->status)
                                                     @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['enquiry']; @endphp

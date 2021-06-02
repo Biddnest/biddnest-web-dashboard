@@ -9,19 +9,19 @@
                     <h3 class="f-18">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('website.my-profile')}}">My Profile</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab active p-15" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab active p-15 pt-0" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('order-history')}}">Booking History</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('order-history')}}">Booking History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15" href="{{route('my-request')}}">My Requests</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-request')}}">My Requests</a>
                             </li>
                         </ul>
                     </h3>

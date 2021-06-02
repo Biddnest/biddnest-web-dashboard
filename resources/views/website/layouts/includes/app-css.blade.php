@@ -397,6 +397,10 @@
             flex-direction: column !important;
 
         }
+        .row-mobile {
+            flex-direction: row !important;
+
+        }
 
         .padding-view {
             padding-left: 0 !important;

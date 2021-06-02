@@ -538,7 +538,7 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body add-item-body " style="padding: 2rem !important;">
+                <div class="modal-body add-item-body " style="padding: 2rem !important; overflow-y: scroll !important; max-height: 80vh;">
                     <form class="requirements-modal ">
                         <div class="input-group mt-3 mb-3 search-bar-with-category " style="margin-top: 0rem !important;">
                             <input type="search " class="form-control " style="border: none !important;" placeholder="Search for item.. ">
@@ -549,60 +549,61 @@
                 <!-- modal for desktop -->
                     <div class="row f-row desktop-popup">
                         @foreach($inventories as $inventory)
-                            <div class="col-md-4 col-sm-4 col-xs-4 view-content">
-                            <div class="card f-row pl-0 pr-2 mar-card">
-                                <div class="">
-                                    <img src="{{$inventory->image}}" class="req-search-image" alt="ModalImage" style=" max-width: 70% !important; margin: 15px !important; height: auto !important;">
-                                </div>
-                                <div class="ml-2">
-                                    <p class="spec-name pl-0 pt-2 f-15">{{ucwords($inventory->name)}}</p>
-                                    <div class="view-flex">
-                                        <div class="choose-your-material ">
-                                            <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
-                                                <option value="">--select--</option>
-                                                @foreach(json_decode($inventory->material, true) as $material)
-                                                    <option value="{{$material}}">{{ucwords($material)}}</option>
-                                                @endforeach
-                                            </select>
+                            <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
+                                <div class="item-single-wrapper">
+                                    <div class="item-image" style="">
+                                        <img src="{{$inventory->image}}" />
+                                    </div>
+                                    <div class="item-meta">
+                                        <h5>{{ucwords($inventory->name)}}</h5>
+                                        <div class="info-wrapper d-flex flex-row justify-content-between">
+                                            <span class="info">
+                                                <span>Material</span>
+                                                <input type="hidden" name="" value="@{{meta.material}}" />
+                                                <div class="dropdown-content">
+                                                  <ul class="d-content">
+                                                     @foreach(json_decode($inventory->material, true) as $material)
+                                                          <li class="drop-list" style="padding: 5px 10px;" data-value="{{$material}}">
+                                                              <a class="menu"><span class="ml-1">{{ucwords($material)}}</span></a>
+                                                          </li>
+                                                      @endforeach
+                                                  </ul>
+                                                </div>
+                                            </span>
+                                            <span class="info">
+                                                <span>Size</span>
+                                                <input type="hidden" name="" value="@{{meta.size}}" />
+                                                <div class="dropdown-content">
+                                                  <ul class="d-content">
+                                                       @foreach(json_decode($inventory->size, true) as $size)
+                                                          <li class="drop-list" style="padding: 5px 10px;" data-value="{{$size}}">
+                                                              <a class="menu"><span class="ml-1">{{ucwords($size)}}</span></a>
+                                                          </li>
+                                                      @endforeach
+                                                  </ul>
+                                                </div>
+                                            </span>
                                         </div>
-                                        <div class="choose-your-material pt-3">
-                                            <select class="select-material " style="padding: 4px; width:100px; border-radius: 5px !important;">
-                                                <option value="">--select--</option>
-                                                @foreach(json_decode($inventory->size, true) as $size)
-                                                    <option value="{{$size}}">{{ucwords($size)}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="quantity d-flex justify-content-between">
+                                            <span>-</span>
+                                            <input type="text" readonly value="1" />
+                                            <span>+</span>
                                         </div>
                                     </div>
-                                    <p class="spec-name p-0 mb-0 f-14 mb-1 " style="margin-top: 10px;">Quantity</p>
-                                    <div class="input-group justify-content-between mt-1  mb-2">
-                                        <span class="input-group-btn ">
-                                            <button class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
-                                                <span class="minus-icon "><i class="fa fa-minus "></i></span>
-                                            </button>
-                                        </span>
-                                        <input type="text " class="form-control input-number " value="1 " min="1" max="10" style="padding: 11px 6px!important;">
-                                        <span class="input-group-btn ">
-                                            <button class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="plus " data-field="quant[1] ">
-                                                <span class="plus-icon "><i class="fa fa-plus "></i></span>
-                                            </button>
-                                        </span>
-                                    </div>
-
+                                    <button class="btn btn-block add-btn">Add to list</button>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                     <!-- Modal footer -->
-                    <div class="modal-footer d-flex justify-content-between ">
+                    {{--<div class="modal-footer d-flex justify-content-between ">
                         <a href="{{route('home')}}"><button class="btn cancelBtn " type="button " data-dismiss="modal ">
                                 Cancel
                             </button></a>
                         <button class="btn nextBtn-3" type="button ">
                             Save
                         </button>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </div>
@@ -636,50 +637,63 @@
 
     <script id="entry-templateinventory" type="text/x-handlebars-template">
         @{{#each inventories}}
-            <div class="col-md-4 mt-2 view-content ">
-                <div class="card required-item " style="width: max-content;     border-radius: 10px;">
-                    <div class="container-image-item " style="width: 115px !important; height: 130px !important;">
-                        <img class="card-img-top " src="@{{meta.image}}" alt="image " style="">
-                    </div>
-                    <div class="close-item" style="top: 5px !important;">
-                        <i class="icon-2 dripicons-cross " ></i>
-                    </div>
-                    <div class="card-body requirements-field ">
-                        <p class="card-title required-item-name mb-0 f-16">@{{meta.name}}</p>
-                        <div class="row ">
-                            <div class="col-md-6 requirements d-flex f-16">
-                                <p class="card-text required-item-qty pr-1">@{{material}}
-                                </p> <span>|</span>
-                                <p class="card-text required-item-qty pl-1 ">@{{size}}</p>
+                <div class="col-md-4" style="padding-right: 10px; padding-left: 10px;">
+                    <div class="item-single-wrapper">
+                        <span class="closer" data-parent=".item-single-wrapper"><i class="icon dripicons-cross"></i></span>
+                        <div class="item-image" style="">
+                            <img src="@{{meta.image}}" />
+                        </div>
+                        <div class="item-meta">
+                            <h5>@{{meta.name}}</h5>
+                            <div class="info-wrapper d-flex flex-row justify-content-between">
+                                <span class="info">
+                                    <span>@{{material}}</span>
+                                    <input type="hidden" name="" value="@{{meta.material}}" />
+                                    <div class="dropdown-content">
+                                      <ul class="d-content">
+                                          @{{#each meta.material}}
+                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{this}}">
+                                                  <a class="menu"><span class="ml-1">@{{this}}</span></a>
+                                              </li>
+                                          @{{/each}}
+                                      </ul>
+                                    </div>
+                                </span>
+                                <span class="info">
+                                    <span>@{{size}}</span>
+                                    <input type="hidden" name="" value="@{{meta.size}}" />
+                                    <div class="dropdown-content">
+                                      <ul class="d-content">
+                                           @{{#each meta.size}}
+                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{this}}">
+                                                  <a class="menu"><span class="ml-1">@{{this}}</span></a>
+                                              </li>
+                                           @{{/each}}
+                                      </ul>
+                                    </div>
+                                </span>
                             </div>
-                            <div class="col-md-6 requirements ">
-                                <div class="input-group ">
-                                    <span class="input-group-btn ">
-                                        <button onClick="updateCount( 'dicrement'); " class="btn btn-default btn-number input-number " style="padding: 12px 6px!important;" data-type="minus " data-field="quant[1] ">
-                                            <span class="minus-icon "><i class="fa fa-minus "></i></span>
-                                        </button>
-                                    </span>
-                                    <input type="text " id="inc " class="form-control input-number " style="padding: 11px 6px!important;" value="@{{quantity}}" min="1 " max="10 ">
-                                    <span class="input-group-btn ">
-                                        <button onClick="updateCount( 'increment'); " class="btn btn-default btn-number input-number " data-type="plus " style="padding: 12px 6px!important;" data-field="quant[1] ">
-                                            <span class="plus-icon "><i class="fa fa-plus "></i></span>
-                                        </button>
-                                    </span>
-                                </div>
+                            <div class="quantity d-flex justify-content-between">
+                                <span>-</span>
+                                <input type="text" readonly value="1" />
+                                <span>+</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         @{{/each}}
-
-        <div class="col-md-4  mt-2 ">
+        <div class="col-md-4" data-toggle="modal" data-target="#addItemModal" style="min-height: 40vh !important;">
+            <div class="item-single-wrapper add-more" style="height: 100% !important;">
+                <i class="icon dripicons-plus" ></i>
+            </div>
+        </div>
+        {{--<div class="col-md-4  mt-2 ">
             <div class=" mt-1 view-content border-add">
                 <div class="">
                     <i class="icon-2 mr-1 dripicons-plus add-item-icon  " data-toggle="modal" data-target="#addItemModal"></i>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </script>
 
     <script>

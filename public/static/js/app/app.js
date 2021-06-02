@@ -1037,6 +1037,11 @@ $("body").on('click', ".web-sub-category", function(event) {
         dataType: 'json',
         success: function (response) {
            console.log(response);
+            for(var i=0; i< response.data.length; i++)
+            {
+                response.data[i].meta.material=JSON.parse(response.data[i].meta.material);
+                response.data[i].meta.size=JSON.parse(response.data[i].meta.size);
+            }
             var source = $("#entry-templateinventory").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);

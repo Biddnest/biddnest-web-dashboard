@@ -824,7 +824,7 @@
         font-family: 'Source Sans Pro', sans-serif !important;
     }
     .item-single-wrapper{
-        margin: 10px;
+        margin-bottom:10px;
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
         border: 1px solid #f2f2f2;
         /*border-inline: none;*/

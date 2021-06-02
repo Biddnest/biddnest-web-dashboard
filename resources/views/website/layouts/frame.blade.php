@@ -27,50 +27,17 @@
                         <a class="nav-link f-14" href="{{route('contact_us')}}"><i
                                 class="icon-2 mr-1 pr-1 pt-1 dripicons-headset"></i>CONTACT US</a>
                     </li>
-                    <li class="nav-item  dropdown theme-text mt-1 mr-1 ml-1  ml-20 f-14">
+                    <li class="nav-item  dropdown theme-text  f-14">
                         @if(\Illuminate\Support\Facades\Session::get('account'))
-                            <a class="nav-link f-14">
-                            <i class="icon-2 mr-1 pr-1 pt-1 dripicons-user"></i>
-
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
-                                    <defs>
-                                        <style>
-                                            .a {
-                                                fill: #2a2386;
-                                            }
-
-                                            .b {
-                                                clip-path: url(#a);
-                                            }
-
-                                            .c {
-                                                clip-path: url(#b);
-                                            }
-                                        </style>
-                                        <clipPath id="a">
-                                            <path class="a"
-                                                  d="M61.536-1844.464a2.267,2.267,0,0,0,2.268-2.268A2.267,2.267,0,0,0,61.536-1849a2.267,2.267,0,0,0-2.268,2.268A2.267,2.267,0,0,0,61.536-1844.464Zm0,1.134c-1.514,0-4.536.76-4.536,2.268v1.134h9.071v-1.134C66.071-1842.571,63.049-1843.33,61.536-1843.33Z"
-                                                  transform="translate(-57 1849)" />
-                                        </clipPath>
-                                        <clipPath id="b">
-                                            <path class="a" d="M0-1661.07H1015.959V-2607H0Z"
-                                                  transform="translate(0 2607)" />
-                                        </clipPath>
-                                    </defs>
-                                    <g class="b" transform="translate(0 0)">
-                                        <g class="c" transform="translate(-20.682 -275.035)">
-                                            <path class="a" d="M52-1854H64.7v12.7H52Z"
-                                                  transform="translate(-33.132 2127.22)" />
-                                        </g>
-                                    </g>
-                                </svg> -->
-                                <span class="ml-1">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
+                            <a class="nav-link f-14" >
+                            <i class="icon-2 dripicons-user"></i>
+                                <span class="ml-1 l-cap " style="font-weight: 600;letter-spacing: 1px; ">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                         @else
                             <a data-toggle="modal" data-target="#Login-modal">
                             <i class="icon-2 mr-1 pr-1 pt-1 dripicons-enter"></i>
 
-                                <span class="logged-in-username cursor-pointer l-cap f-14 ml-1 " >login</span>
+                                <span class="logged-in-username cursor-pointer l-cap f-14 ml-1 "  style="font-weight: 600;letter-spacing: 1px;">login</span>
                             </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Session::get('account'))

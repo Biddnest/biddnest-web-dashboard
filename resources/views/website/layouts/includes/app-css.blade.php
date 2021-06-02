@@ -253,6 +253,7 @@
     }
 
     @media (max-width:480px) {
+        
         .view-bottom{
         margin-bottom: 38px;
 
@@ -569,10 +570,34 @@
     }
 
 
+    @media only screen and (max-width: 1680px) and (min-width: 1300px) {
+        .header-controls.ml-30.navbar-collapse.collapse {
+        display: flex !important;
+        justify-content: flex-end ;
+    }
+    }
 
-    @media only screen and (max-width: 1200px) and (min-width: 900px) {
+
+    @media only screen and (max-width: 1280px) and (min-width: 900px) {
+
+    .header-controls.ml-30.navbar-collapse.collapse {
+        display: flex !important;
+        justify-content: flex-end ;
+    }
+
+    .mb-0.f-14.l-cap {
+        font-size: 12px;
+
+    }
+
+    .f-18{
+        font-size: 14px;
+
+    }
+    
+    
         .flow__item__circle:after{
-            top: 636px;
+            /* top: 636px; */
 
         }
         .modal-backdrop {
@@ -694,7 +719,7 @@
 
     }
 
-    
+
 
 
 

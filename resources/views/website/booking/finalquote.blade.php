@@ -75,15 +75,16 @@
                                     <div class="row d-flex center border-bottom mt-4">
                                         <div class="pr-3">
                                             <p>VEHICLE NAME</p>
-                                            <p>@if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
+
+                                            <p >N/A @if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
                                         </div>
                                         <div class="pr-3">
                                             <p>VEHICLE TYPE</p>
-                                            <p>@if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
+                                            <p> N/A @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
                                         </div>
                                         <div class="pr-3">
                                             <p>MANPOWER</p>
-                                            <p>@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
+                                            <p> @if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
                                         </div>
                                     </div>
                                 </div>

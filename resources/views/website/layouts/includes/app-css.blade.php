@@ -217,8 +217,10 @@
     }
 
     .img-width {
-        width: 76px;
+        width: 38px;
         margin: 0 auto;
+        margin-bottom: 10px;
+        margin-bottom: 10px;
 
     }
 
@@ -312,7 +314,7 @@
         }
 
         .upload-image-container i.fa.fa-close.fa-2x {
-            right: -2px !important;
+            right: 6px !important;
             padding: 2px 5px !important;
 
 
@@ -612,8 +614,11 @@
         }
 
         .img-width {
-            width: 54px;
+            width: 39px;
             margin: 0 auto;
+            margin-bottom: 10px;
+            margin-bottom: 10px;
+
 
         }
 

@@ -598,8 +598,10 @@ class BookingsController extends Controller
                 $bid->where("organization_id", $organization_id)->with('vendor');
             }]);
 
-        if (isset($request->from) && isset($request->to))
-            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->where('organization_id', $organization_id);
+        if (isset($request->from) && isset($request->to)) {
+            $booking_ids = MovementDates::whereDate('date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+            $bookings->whereIn('id', $booking_ids)->where('organization_id', $organization_id);
+        }
 
         if (isset($request->status))
             $bookings->orWhere('status', $request->status)->where('organization_id', $organization_id);

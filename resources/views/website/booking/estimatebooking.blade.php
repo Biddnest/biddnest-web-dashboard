@@ -119,7 +119,7 @@
                                                         <div class="card m-20  card-price eco cursor-pointer">
                                                             <div class="p-60 f-32 border-cicle eco-card">
                                                                 <div>
-                                                                    <div class="f-30">₹ {{json_decode($booking->quote_estimate, true)['economic']}}</div>
+                                                                    <div class="f-30">₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                                     <div class="f-16 ">Base price</div>
                                                                 </div>
                                                             </div>
@@ -138,7 +138,7 @@
                                                     <div class="felx-column">
                                                         <div class="card m-20 card-price pre  cursor-pointer ">
                                                             <div class="p-60 f-32  border-cicle pre-card  ">
-                                                                <div class="f-30">₹ {{json_decode($booking->quote_estimate, true)['premium']}}</div>
+                                                                <div class="f-30">₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
                                                                 <div class="f-16 p-1">Base price</div>
                                                             </div>
                                                             <div class=" f-18"> Premium
@@ -154,6 +154,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <div style="text-align: center; padding-bottom: 20px;">
+                                                <a href="#" data-toggle="modal" data-target="#reject-modal">
+                                                    <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn ml-4 " type="button ">
+                                                        Reject
+                                                    </button>
+                                                </a>
+                                                <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded mr-4">
+                                                    Submit
+                                                </button>
                                             </div>
 
                                             <div class=" actionBtn actionBtn-view border-top ">
@@ -172,6 +183,54 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="reject-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+            <div class="modal-dialog para-head input-text-blue" role="document">
+                 <div class="modal-content ml-4 w-90 mt-50 right-25">
+                      <div class="modal-header bg-purple">
+                             <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                                  Reason for Rejection
+                             </h5>
+                             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                             </button>
+                      </div>
+                      <div class="modal-body p-15 margin-topneg-2">
+                           <form>
+                              <div class="col-12">
+                                   <div class="form-input">
+                                              <select id="" class="form-control">
+                                                  <option value="">--Select--</option>
+                                                 @foreach($reasons as $reason)
+                                                      <option value="{{$reason}}">{{$reason}}</option>
+                                                  @endforeach
+                                              </select>
+                                       <span class="error-message">Please enter valid Phone number</span>
+                                   </div>
+                              </div>
+                               <div class="col-12">
+                                   <div class="form-input">
+                                       <textarea class="form-control" rows="3" placeholder="Enter your expected price here"> </textarea>
+                                   </div>
+                               </div>
+                               <div class="col-12 d-flex center mt-2 mb-2">
+                                   <div class="form-groups">
+                                       <label class="container-01 p-1 pl-6 m-0">
+                                              <input type="checkbox" id="Lift1" />
+                                              <span class="checkmark-agree -mt-10"></span>
+                                       </label>
+                                   </div>
+                                   <p class="text-muted f-10" style="padding-left: 20px;">Talk to our agend</p>
+                               </div>
+                               <button type="submit" class="btn btn-theme-bg button-modal ml-5 text-view-center mt-2 padding-btn-res white-bg">
+                                                    Reject Booking
+                                   <a class="white-text" href="#"></a>
+                               </button>
+                           </form>
+                      </div>
+                 </div>
             </div>
         </div>
     </div>

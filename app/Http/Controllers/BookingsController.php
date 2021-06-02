@@ -179,7 +179,7 @@ class BookingsController extends Controller
 
         $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
         $booking->quote_estimate = $estimate_quote;
-        $distance = GeoController::displacement($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
             "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),

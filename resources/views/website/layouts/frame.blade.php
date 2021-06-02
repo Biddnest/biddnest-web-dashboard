@@ -12,7 +12,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="header-controls ml-30 collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="header-controls ml-30 collapse navbar-collapse" id="navbarSupportedContent" >
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item  active" style="margin-right: 24px;">
                         <a class="nav-link bec-vendor-purple f-14" href="{{route('join-vendor')}}"><img src="{{ asset('static/website/images/icons/Artboard – 6.svg')}}" /> Become a Vendor
@@ -113,7 +113,11 @@
                     
                     <div style="width: -webkit-fill-available;   width: 100%; width: -moz-available; width: -webkit-fill-available;  width: fill-available;">
                         <header class="join-as-vendor">
-                            <img src="{{ asset('static/website/images/icons/logo.png')}}" >
+                            <img src="{{ asset('static/website/images/icons/logo.png')}}" style="    margin-left: 14px;" >
+                            <button type="button" class="close text-white p-0" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-22px, 22px);">
+                        <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
+                       
+                        </button>
                         </header>
 
                     </div>
@@ -129,18 +133,18 @@
 
                 </div>
 
-                <div class="modal-body  margin-topneg-7">
+                <div class="modal-body  margin-topneg-7 pt-2">
 
                     <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
                             <h2 class="p-text" style="font-size: 24px !important;">Login</h2>
-                            <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
+                            <div class="col-lg-12 col-xs-12 mt-2 hidden-space pl-0 pr-0">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Phone Number</label>
+                                    <label for="formGroupExampleInput" style="color: #0F0C75 !important;">Phone Number</label>
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden "   id="otp">
+                            <div class="col-lg-12 mb-4 col-xs-12 mt-1 otp hidden pl-0 pr-0"   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="text" class="form-control" name="otp" id="formGroupExampleInput" maxlength="6" minlength="6" placeholder="type otp">
@@ -151,7 +155,7 @@
                                 Next
                             </button>
                             </a>--}}
-                            <div class="col-md-12">
+                            <div class="col-md-12 pl-0 pr-0">
                             <a class="weblogin" >
                                 <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg" style="    width: -webkit-fill-available;">
                                     Send OTP

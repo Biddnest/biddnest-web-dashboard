@@ -96,6 +96,7 @@
                         </div>
                     </div>
                     <div class="col-md-9 book-move-questions-container">
+
                         <form id="wizard" class="move-booking">
                             <div class="row setup-content-3 step-1" id="step-1">
                                 <div class="row ">
@@ -104,6 +105,7 @@
                                         <h4 class=" border-bottom pl-0 pb-3 theme-text ">Lets start with your personal information
                                         </h4>
                                     </div>
+
                                     <div class="col-md-12 ">
                                         <div class="accordion ml-3 " id="customer-details ">
                                             <div class="d-flex row p-20 ">
@@ -419,44 +421,7 @@
                                     <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;">Lets get your requirements</h4>
                                 </div>
                                 <div class="row d-flex justify-content-center row-horizonal subservices">
-                                    <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
-                                        <label>
-                                            <input type="radio" name="product" value="{{id}}" class="card-input-element01" />
-
-                                            <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important">
-                                                <div class="panel-heading">
-                                                    <h3>
-                                                        <img src="{{image}}" class="img-width">
-                                                    </h3>
-                                                </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
-                                                    {{name}}
-                                                </div>
-                                            </div>
-
-                                        </label>
-
-                                    </div>
-                                    <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
-
-                                        <label>
-                                            <input type="radio" name="product" value="{{id}}" class="card-input-element01" />
-
-                                            <div class="panel panel-default card-input disabled" style="box-shadow: none !important;  background:none !important">
-                                                <div class="panel-heading">
-                                                    <h3>
-                                                        <img src="{{image}}" class="img-width">
-                                                    </h3>
-                                                </div>
-                                                <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view">
-                                                    {{name}}
-                                                </div>
-                                            </div>
-
-                                        </label>
-
-                                    </div>
                                 </div>
                                 <div id="filter" class="bg-light">
                                     <ul class="nav nav-tabs " id="myTab " role="tablist ">

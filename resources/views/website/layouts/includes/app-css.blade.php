@@ -19,13 +19,20 @@
 <!-- fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dripicons/2.0.0/webfont.min.css" integrity="sha512-pi7KSLdGMxSE62WWJ62B1R5/H7WNnIsj2f51MikplRt31K0uCZ1lfPSw/0Jb1flSz6Ed2YLSlox6Uulf7CaFiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <!-- custom css -->
 <link rel="stylesheet" href="{{ asset('static/website/css/intlTelInput.css')}}">
 <link rel="stylesheet" href="{{ asset('static/website/css/master.css')}}" />
 
 <style>
     body {
-        font-family: 'Roboto', sans-serif !important;
+        font-family: 'Source Sans Pro', sans-serif !important;
+    }
+    body * {
+        font-family: 'Source Sans Pro', sans-serif;
     }
 
     select {
@@ -256,8 +263,8 @@
 
         .btn-proceed{
             width: 100%;
-    width: -moz-available;         
-    width: -webkit-fill-available;  
+    width: -moz-available;
+    width: -webkit-fill-available;
     width: fill-available;
         }
         .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
@@ -799,8 +806,181 @@
 
     .btn-max{
             width: 100%;
-    width: -moz-available;         
-    width: -webkit-fill-available;  
+    width: -moz-available;
+    width: -webkit-fill-available;
     width: fill-available;
         }
+
+    .item-single-wrapper:hover{
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        border-color: rgba(0,0,0, 0);
+    }
+    .item-single-wrapper *{
+        font-family: 'Source Sans Pro', sans-serif !important;
+    }
+    .item-single-wrapper{
+        margin: 10px;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border: 1px solid #f2f2f2;
+        /*border-inline: none;*/
+
+        /*overflow-x: visible;*/
+        position: relative;
+        padding: 0;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+    .item-single-wrapper .item-image img{
+    max-width: 100%;
+        display: block;
+    }
+    .item-single-wrapper .item-image{
+        height: auto;
+        /*background-color : #000;*/
+        /*background-size: contain !important;*/
+        /*background-repeat: no-repeat !important;*/
+    }
+    .item-single-wrapper h5{
+        padding: 10px;
+        padding-bottom: 5px;
+
+        margin: 0 !important;
+        color: #000;
+        font-size: 18px;
+    }
+    .item-single-wrapper .info-wrapper{
+        border-top: 1px solid #c0c0c0;
+        margin: 0 10px;
+    }
+    .item-single-wrapper select.info:focus{
+        outline: none !important;
+    }
+    .item-single-wrapper select.info option{
+        font-style: italic !important;
+    }
+    .item-single-wrapper select.info{
+        margin: 4px 0;
+        cursor: pointer;
+        border: none !important;
+        text-align: left !important;
+        /*margin-bottom: 5px;*/
+        display: block;
+        font-weight: 500;
+        font-size: 14px;
+
+        /*padding: 10px 0px;*/
+        /*margin-bottom: 8px;*/
+
+        appearance: none !important;
+        -moz-appearance: none !important;
+    }
+    .item-single-wrapper span.info{
+
+        margin: 10px 0;
+        /*margin-bottom: 5px;*/
+        display: block;
+        font-weight: 500;
+        font-size: 14px;
+        position: relative;
+        /*padding: 10px 0px;*/
+        cursor: pointer;
+        border-bottom: 1px dotted #4a2b9a;
+        text-align: left;
+
+    }
+    .item-single-wrapper .quantity{
+display: block;
+        border-top: 1px solid #f2f2f2;
+        padding: 0;
+    }
+    .item-single-wrapper .quantity span:hover {
+        background: #f1f1f1;
+    }
+    .item-single-wrapper .quantity input:focus {
+        outline: none;
+        appearance: none;
+    }
+    .item-single-wrapper .quantity input {
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .item-single-wrapper .quantity span {
+    font-size: 18px;
+        cursor: pointer;
+        background: #f2f2f2;
+        position: relative;
+    }
+
+    .item-single-wrapper .quantity * {
+        height: 5vh;
+        width: 32.4%;
+        display: inline-block;
+        margin: 0;
+        text-align: center;
+    }
+    .item-single-wrapper:hover .add-btn{
+        /*display: block;*/
+        /*transform: scale(1.1);*/
+    }
+    .item-single-wrapper .add-btn{
+        background: #fdc403;
+        border-radius: 0;
+        width: 100%;
+        font-size: 13px;
+        letter-spacing: 1px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0;
+        /*display: none;*/
+        /*position: absolute;*/
+        /*bottom: -40px;*/
+        /*left: 0;*/
+        /*z-index: 999;*/
+    }
+    .item-single-wrapper .closer:hover{
+        background: #4a2b9a;
+        border-radius: 50%;
+    }
+    .item-single-wrapper .closer{
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        cursor: pointer;
+    }
+    .item-single-wrapper .info-wrapper span.info.show-drop .dropdown-content{
+        display: block;
+    }
+    .item-single-wrapper .info-wrapper span.info .dropdown-content ul li {
+        cursor: pointer;
+    }
+
+    .item-single-wrapper .info-wrapper span.info i{
+        background: 0;
+        padding: 0;
+        display: inline-block;
+        margin: 0;
+        color: #000;
+        font-size: 10px;
+    }
+    .item-single-wrapper .info-wrapper span.info .dropdown-content{
+        top: -100% !important;
+        width: auto !important;
+        min-width: auto !important;
+        max-width: auto !important;
+    }
+
+    .item-single-wrapper.add-more i{
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        /*font-size: 48px;*/
+        transform: scale(2) translate(-25%, -50%);
+    }
+    .item-single-wrapper.add-more{
+        border: 2px dashed #c0c0c0;
+        cursor: pointer;
+    }
+
 </style>

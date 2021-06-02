@@ -145,7 +145,7 @@ class WebsiteController extends Controller
     public function myRequest(Request $request)
     {
         $tickets=TicketController::get(Session::get('account')['id'], true);
-        return view('website.myrequest', ['tickets'=>$tickets]);
+        return view('website.myrequest', ['tickets'=>$tickets->paginate(5)]);
     }
 
 }

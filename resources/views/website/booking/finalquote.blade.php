@@ -36,7 +36,7 @@
                                 </p>
                                 <h3 class="f-18 pb-4 bold mt-2 time">Time Left</h3>
 
-                                <span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
+                                <span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="font-size: 20px !important;"></span>
 
 {{--                                <div id="app" style="margin-bottom: 60px;"></div>--}}
                             </div>

@@ -253,6 +253,31 @@
     }
 
     @media (max-width:480px) {
+        .f-40{
+    font-size:20px
+}
+
+
+.desktop-popup{
+    display: none;
+}
+
+
+
+.card.f-row.pl-0.pr-2.mar-card{
+    width: 140px !important;
+    margin: 0 auto;
+
+}
+
+.flex-view{
+    display: flex !important;
+}
+
+    .f-row{
+        flex-direction: column;
+
+    }
         
         .view-bottom{
         margin-bottom: 38px;
@@ -465,10 +490,10 @@
         }
 
 
-        .view-flex {
+        /* .view-flex {
             display: flex;
             justify-content: space-between;
-        }
+        } */
 
         .required-item {
             width: 140px !important;
@@ -498,7 +523,7 @@
         }
 
         .select-material {
-            width: 90px !important;
+            width: 120px !important;
         }
 
         .col-md-6.modal-first-inner-column {
@@ -575,15 +600,29 @@
         display: flex !important;
         justify-content: flex-end ;
     }
+
+    .mobile-popup{
+    display: none !important;
+
+}
     }
 
+.f-40{
+    font-size:40px
+}
+    
 
-    @media only screen and (max-width: 1280px) and (min-width: 900px) {
+
+    @media only screen and (max-width: 1280px) and (min-width: 800px) {
 
     .header-controls.ml-30.navbar-collapse.collapse {
         display: flex !important;
         justify-content: flex-end ;
     }
+    .mobile-popup{
+    display: none !important;
+
+}
 
     .mb-0.f-14.l-cap {
         font-size: 12px;
@@ -594,6 +633,10 @@
         font-size: 14px;
 
     }
+    .f-40{
+    font-size:30px
+}
+   
     
     
         .flow__item__circle:after{

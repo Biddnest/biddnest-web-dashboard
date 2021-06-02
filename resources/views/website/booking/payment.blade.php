@@ -6,9 +6,9 @@
         <div class="container">
             <div class="quote responsive w-70 br-5 ontop bg-white">
                 <div class="card-body ">
-                    <div class="card-title border-bottom d-flex justify-content-between pl-3 mt-4 pb-10">
+                    <div class="card-title border-bottom d-flex justify-content-between  mt-4 pb-10">
                         <h5 style="font-size:24px">Here is your final bill</h5>
-                        <h4 class="f-30" style="font-size:40px">Rs {{$payment_summary['grand_total']}}</h4>
+                        <h4 class="f-40" >Rs {{$payment_summary['grand_total']}}</h4>
                     </div>
                     <div style="font-size: 16px ">
                         <p class="bold" >PAYMENT SUMMARY</p>

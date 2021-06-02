@@ -179,7 +179,7 @@ class BookingsController extends Controller
 
         $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
         $booking->quote_estimate = $estimate_quote;
-        $distance = GeoController::displacement($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
             "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
@@ -598,8 +598,10 @@ class BookingsController extends Controller
                 $bid->where("organization_id", $organization_id)->with('vendor');
             }]);
 
-        if (isset($request->from) && isset($request->to))
-            $bookings->where('created_at', '>=', date("Y-m-d H:i:s", strtotime($request->from)))->where('created_at', '<=', date("Y-m-d H:i:s", strtotime($request->to)))->where('organization_id', $organization_id);
+        if (isset($request->from) && isset($request->to)) {
+            $booking_ids = MovementDates::whereDate('date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+            $bookings->whereIn('id', $booking_ids)->where('organization_id', $organization_id);
+        }
 
         if (isset($request->status))
             $bookings->orWhere('status', $request->status)->where('organization_id', $organization_id);
@@ -671,8 +673,11 @@ class BookingsController extends Controller
                     ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
             }])->with('user')->first();
 
-        if($booking->bid && $booking->bid->status == BidEnums::$STATUS['lost'])
+        if(isset($booking->bid) && $booking->bid->status == BidEnums::$STATUS['lost'])
             $booking->bid->statistics = self::getposition($request->token_payload->id, $request->public_booking_id);
+
+        if(!$booking || !$booking->bid)
+            return Helper::response(false, "Data Not Found", [], 404);
 
         return Helper::response(true, "Show data successfully", ["booking" => $booking]);
     }

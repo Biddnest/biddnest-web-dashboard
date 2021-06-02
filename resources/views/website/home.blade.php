@@ -431,7 +431,7 @@
                     </div>
                     <div>
                         <header class="join-as-vendor">
-                            <img src="{{ asset('static/website/images/icons/logo.png')}}" style="margin-left: 104px;display: flex;">
+                            <img src="{{ asset('static/website/images/icons/logo.png')}}" class="img-mar" style="margin-left: 104px;display: flex;">
                         </header>
 
                     </div>
@@ -461,9 +461,9 @@
                                 Next
                             </button>
                             </a>--}}
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="width: 100%;">
                             <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg" style="    width: -webkit-fill-available;">
+                                <button type="submit" class="btn btn-theme-bg   text-view-center mt-3 mb-4 padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
                                     Send OTP
                                 </button>
                             </a>

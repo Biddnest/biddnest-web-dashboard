@@ -113,7 +113,7 @@
                     
                     <div style="width: -webkit-fill-available;   width: 100%; width: -moz-available; width: -webkit-fill-available;  width: fill-available;">
                         <header class="join-as-vendor">
-                            <img src="{{ asset('static/website/images/icons/logo.png')}}" style="    margin-left: 14px;" >
+                            <img src="{{ asset('static/website/images/icons/logo.png')}}" class="img-mar" style="    margin-left: 14px;" >
                             <button type="button" class="close text-white p-0" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-22px, 22px);">
                         <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
                        

@@ -238,9 +238,27 @@
             left: -67px !important;
             padding: 8px;
 }
+
+.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
+    left: 807px !important;
+
+        }
     }
 
     @media (max-width:480px) {
+        .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
+            width: 96% !important;
+
+        }
+        .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
+            left: 4px !important;
+
+        }
+
+        .img-mar{
+            margin-left: 57px !important;
+
+        }
         .container-top {
             transform: translate(0px, 0px) !important;
         }
@@ -438,6 +456,14 @@
     .hidden {
         display: none;
         margin-bottom: 100px !important;
+    }
+
+
+    .width-max{
+        width: 100%;
+    width: -moz-available;         
+    width: -webkit-fill-available;  
+    width: fill-available;
     }
 
 

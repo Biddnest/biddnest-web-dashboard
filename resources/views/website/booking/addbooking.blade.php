@@ -211,7 +211,7 @@
                                             <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
                                                 <label>
                                                     <input type="radio" name="product" value="{{$category->id}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}"/>
-                                                    <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 bg-turnblue cursor-pointer " style="border-radius: 6px;">
+                                                    <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 card-methord  bg-turnblue cursor-pointer " style="border-radius: 6px;">
                                                         <div class="panel-heading text-white f-direction" style="display: flex; justify-content-center;">
                                                             <img src="{{$category->image}}" class="img-width">
                                                             {{ucwords($category->name)}}

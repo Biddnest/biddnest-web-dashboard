@@ -48,8 +48,8 @@
 
 <script>
 $('.card-methord').click(function() {
-            $('.card-methord02').removeClass('turntheme');
-            $('.card-methord02').removeClass('check-icon02');
+            $('.card-methord').removeClass('turntheme');
+            $('.card-methord').removeClass('check-icon02');
             $(this).addClass('turntheme');
             $(this).addClass('check-icon02');
 
@@ -57,9 +57,7 @@ $('.card-methord').click(function() {
         });
         </script>
 
-        <script>
-
-</script>
+   
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}

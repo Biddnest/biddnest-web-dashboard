@@ -27,10 +27,12 @@
                         <a class="nav-link f-14" href="{{route('contact_us')}}"><i
                                 class="icon-2 mr-1 pr-1 pt-1 dripicons-headset"></i>CONTACT US</a>
                     </li>
-                    <li class="nav-item account-settings dropdown theme-text mt-1 mr-1 ml-1  ml-20 f-14">
+                    <li class="nav-item  dropdown theme-text mt-1 mr-1 ml-1  ml-20 f-14">
                         @if(\Illuminate\Support\Facades\Session::get('account'))
-                            <a>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
+                            <a class="nav-link f-14">
+                            <i class="icon-2 mr-1 pr-1 pt-1 dripicons-user"></i>
+
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.071" height="15.071" viewBox="0 0 9.071 9.071">
                                     <defs>
                                         <style>
                                             .a {
@@ -61,12 +63,13 @@
                                                   transform="translate(-33.132 2127.22)" />
                                         </g>
                                     </g>
-                                </svg>
+                                </svg> -->
                                 <span class="ml-1">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                         @else
                             <a data-toggle="modal" data-target="#Login-modal">
                             <i class="icon-2 mr-1 pr-1 pt-1 dripicons-enter"></i>
+
                                 <span class="logged-in-username cursor-pointer l-cap f-14 ml-1 " >login</span>
                             </a>
                         @endif

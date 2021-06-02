@@ -676,7 +676,7 @@ class BookingsController extends Controller
         if(isset($booking->bid) && $booking->bid->status == BidEnums::$STATUS['lost'])
             $booking->bid->statistics = self::getposition($request->token_payload->id, $request->public_booking_id);
 
-        if(!$booking || $booking->bid)
+        if(!$booking || !$booking->bid)
             return Helper::response(false, "Data Not Found", [], 404);
 
         return Helper::response(true, "Show data successfully", ["booking" => $booking]);

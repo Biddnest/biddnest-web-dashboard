@@ -108,7 +108,7 @@
 
                             <div class="modal fade" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                                 <div class="modal-dialog para-head input-text-blue" role="document">
-                                    <div class="modal-content w-100 w-1000 mt-50 right-25">
+                                    <div class="modal-content w-100 w-1000 mt-10 right-25">
                                         <div class="modal-header bg-purple">
                                             <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
                                                 Edit Profile

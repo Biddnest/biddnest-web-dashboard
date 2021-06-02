@@ -28,6 +28,10 @@ class VerifyJwtToken
 
         try {
             if ($data = JWT::decode($request->bearerToken(), config('jwt.secret'),['HS256'])){
+
+                if($data->iss != config('app.url'))
+                    return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
+
                 if(strpos($request->path(), "vendor") !== false)
                 {
                     if(!isset($data->payload->organization_id))

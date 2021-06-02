@@ -13,6 +13,7 @@ use App\Models\OneSignalPlayer;
 use App\Models\User;
 use App\Models\Vendor;
 use App\PushNotification;
+use http\Env\Response;
 
 class NotificationController extends Controller
 {
@@ -81,7 +82,9 @@ class NotificationController extends Controller
 
     public static function saveCustomerPlayer($player_id, $user_id)
     {
-//        return "hai";
+        $vendor = Vendor::find($user_id);
+        if(!$vendor)
+            return Helper::response(true, "This user doesn't exist.",[],401);
         $player = OneSignalPlayer::where("user_id", $user_id)->where("player_id", $player_id)->first();
 
         if (!$player) {
@@ -105,6 +108,11 @@ class NotificationController extends Controller
 
     public static function saveVendorPlayer($player_id, $vendor_id)
     {
+        $vendor = Vendor::find($vendor_id);
+        if(!$vendor)
+            return Helper::response(true, "This vendor doesnot exist.",[],401);
+
+        if(!Vendor)
         $player = OneSignalPlayer::where("vendor_id", $vendor_id)->where("player_id", $player_id)->first();
 
         OneSignalPlayer::where('player_id', $player_id)

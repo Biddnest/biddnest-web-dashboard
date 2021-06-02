@@ -8,7 +8,7 @@
             <div class="top-cards mt-2">
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
-                    <label class="mr-1">
+                    <label class="mr-2">
                         <input type="radio" name="category" class="card-input-element" />
                         <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
                             <div class="card-body-top">

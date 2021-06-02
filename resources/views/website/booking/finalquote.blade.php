@@ -36,7 +36,9 @@
                                 </p>
                                 <h3 class="f-18 pb-4 bold mt-2 time">Time Left</h3>
 
-                                <div id="app" style="margin-bottom: 60px;"></div>
+                                <span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
+
+{{--                                <div id="app" style="margin-bottom: 60px;"></div>--}}
                             </div>
                         @elseif(($booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending']))
                             <div id="proceed" {{--style="display: none"--}}>

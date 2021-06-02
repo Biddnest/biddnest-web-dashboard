@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="">
                                         @foreach(json_decode($contact_details, true)['contact_no'] as $phone)
-                                            <p class="f-18  mb-0"> 
+                                            <p class="f-18  mb-0">
                                                 {{$phone}}
                                             </p>
                                         @endforeach
@@ -248,7 +248,7 @@
                 }
             }
         </script>
-        <script>
+        {{--<script>
             $(document).ready(function() {
                 var showHeaderAt = 150;
                 var win = $(window),
@@ -263,6 +263,6 @@
                     });
                 }
             });
-        </script>
+        </script>--}}
     </div>
 @endsection

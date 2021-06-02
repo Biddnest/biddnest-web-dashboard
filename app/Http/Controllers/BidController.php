@@ -40,7 +40,7 @@ class BidController extends Controller
                             ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
 
-            if(count($vendorlist) > 0) {
+            if(count($vendorlist) < 0) {
                 return false;
             }
 

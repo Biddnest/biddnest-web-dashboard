@@ -22,7 +22,7 @@ use PUGX\Shortid\Shortid;
 
 class UserController extends Controller
 {
-    private static $publicData =['fname','lname','email','phone','dob','avatar','gender'];
+    private static $publicData =['fname','lname','email','phone','dob','avatar','gender', 'meta'];
 
     function __construct(){
     }

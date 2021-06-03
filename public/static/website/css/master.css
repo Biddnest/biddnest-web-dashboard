@@ -6343,7 +6343,7 @@ h3 {
   margin-left: -22px;
 }
 
-.ontop-book {
+/* .ontop-book {
   position: absolute;
   top: 300px;
   width: 78%;
@@ -6351,7 +6351,7 @@ h3 {
   justify-content: center;
   transform: translate(-14px, -9px) !important;
 
-}
+} */
 
 .mb-0 {
   margin-bottom: 0 !important;
@@ -6630,11 +6630,11 @@ body {
   border-radius: 5px;
 }
 
-.ontop-book {
+/* .ontop-book {
   position: absolute;
   top: 300px;
   width: 78%;
-}
+} */
 
 .pt-100 {
   padding-top: 100px;

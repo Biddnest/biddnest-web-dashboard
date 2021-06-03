@@ -531,7 +531,7 @@
 
     <!-- The Modal -->
     <div class="modal modal-background" id="addItemModal" >
-        <div class="modal-dialog addItemModal " style="max-width: 70%!important;">
+        <div class="modal-dialog addItemModal item-modal-width">
             <div class="modal-content ">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom ">
@@ -551,7 +551,7 @@
                     </form>
 
                 <!-- modal for desktop -->
-                    <div class="row f-row desktop-popup">
+                    <div class="row f-row">
                         @foreach($inventories as $inventory)
                             <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
                                 <div class="item-single-wrapper">

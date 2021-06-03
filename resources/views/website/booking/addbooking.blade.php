@@ -613,7 +613,7 @@
         </div>
     </div>
 
-    <div class="spcae" style=" height: 650px !important; margin-bottom: 100px !important;"></div>
+    <div class="spcae" style=" height: 0px !important; margin-bottom: 50px !important;"></div>
 
     <script id="entry-template" type="text/x-handlebars-template">
         @{{#if subservices}}

@@ -795,7 +795,8 @@ class BookingsController extends Controller
 
                 NotificationController::sendTo("user", [$booking->user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
                     "type" => NotificationEnums::$TYPE['booking'],
-                    "public_booking_id" => $booking->public_booking_id
+                    "public_booking_id" => $booking->public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['in_transit']
                 ]);
 
             })->afterResponse();
@@ -835,7 +836,8 @@ class BookingsController extends Controller
 
                 NotificationController::sendTo("user", [$booking->user_id], "Your booking has been completed.", "Thankyou for choosing Biddnest.", [
                     "type" => NotificationEnums::$TYPE['booking'],
-                    "public_booking_id" => $booking->public_booking_id
+                    "public_booking_id" => $booking->public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['completed']
                 ]);
 
             })->afterResponse();

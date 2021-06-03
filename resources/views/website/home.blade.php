@@ -9,7 +9,7 @@
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="category" class="card-input-element" />
+                        <input type="radio" name="category" value="{{$category->id}}" class="card-input-element" />
                         <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
@@ -35,7 +35,7 @@
                 <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
                     <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: auto;">
                         <p style="font-size: 13px;">TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" name="destination" placeholder="Majestic Villas" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" placeholder="Majestic Villas" readonly>
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: auto;" type="text" placeholder="Gandhinagar, Chennai" readonly>
                         <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
                         <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
@@ -471,7 +471,7 @@
                             </a>
                             <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
                             </div>
-                           
+
 
                         </div>
                     </form>
@@ -494,7 +494,7 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                     <div class="row">
-                        <div class="col-sm-12"> 
+                        <div class="col-sm-12">
                         <label>From Location</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
@@ -507,7 +507,7 @@
                     </div>
                     <span class="error-message">Please enter valid</span>
                         </div>
-                   
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
 
@@ -530,7 +530,7 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                 <div class="row">
-                        <div class="col-sm-12"> 
+                        <div class="col-sm-12">
                         <label>To Location</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
@@ -543,7 +543,7 @@
                     </div>
                     <span class="error-message">Please enter valid</span>
                         </div>
-                   
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>

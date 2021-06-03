@@ -694,7 +694,7 @@ class BookingsController extends Controller
         if ($exist_bid['bookmarked'] == CommonEnums::$YES)
             $bookmark = Bid::where(['id' => $exist_bid['id']])->update(["bookmarked" => CommonEnums::$NO]);
 
-        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "vendor_id" => $vendor_id]);
+        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "rejected_by" => $vendor_id]);
 
         if (!$reject)
             return Helper::response(false, "Couldn't Reject");
@@ -720,7 +720,7 @@ class BookingsController extends Controller
 
 
         $result = Bid::where(['id' => $exist_bid['id']])
-            ->update(["bookmarked" => $bookmarked, "vendor_id" => $vendor_id]);
+            ->update(["bookmarked" => $bookmarked, "bookmarked_by" => $vendor_id]);
 
         if (!$result)
             return Helper::response(false, "Couldn't Add to Bookmark");

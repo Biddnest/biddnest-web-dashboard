@@ -136,7 +136,8 @@ class PaymentController extends Controller
                 $booking = Booking::find($order_id_exist->booking_id);
                 NotificationController::sendTo("user", [$booking->user_id], "We have received your payment for booking id " . $booking->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
                     "type" => NotificationEnums::$TYPE['booking'],
-                    "public_booking_id" => $booking->public_booking_id
+                    "public_booking_id" => $booking->public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
                 ]);
 
             })->afterResponse();

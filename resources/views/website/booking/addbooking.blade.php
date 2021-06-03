@@ -530,7 +530,7 @@
     </div>
 
     <!-- The Modal -->
-    <div class="modal" id="addItemModal">
+    <div class="modal modal-background" id="addItemModal" >
         <div class="modal-dialog addItemModal " style="max-width: 70%!important;">
             <div class="modal-content ">
                 <!-- Modal Header -->

@@ -790,6 +790,7 @@
     .item-single-wrapper:hover {
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         border-color: rgba(0, 0, 0, 0);
+        z-index: 10;
     }
 
     .item-single-wrapper * {

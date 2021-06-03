@@ -528,12 +528,6 @@
             max-width: 100%;
         }
 
-
-        /* .view-flex {
-            display: flex;
-            justify-content: space-between;
-        } */
-
         .required-item {
             width: 140px !important;
             margin: 0 auto;
@@ -678,6 +672,10 @@
             font-size: 30px
         }
 
+        .modal-background{
+            background-color: rgba(0,0,0,.75);
+        }
+
 
 
         .modal-backdrop {
@@ -707,7 +705,7 @@
 
         .ontop-book {
             width: 84% !important;
-            transform: translate(52px, -9px) !important;
+            transform: translate(41px, -9px) !important;
         }
 
         .card.required-item {
@@ -741,45 +739,6 @@
 
     }
 
-
-
-
-    @media (min-width:961px) {
-        .full-width {
-            width: -webkit-fill-available;
-            width: -moz-fit-content;
-
-        }
-    }
-
-    @media (min-width:1025px) {
-        .full-width {
-            width: -webkit-fill-available;
-            width: -moz-fit-content;
-
-
-        }
-    }
-
-    @media (min-width:1281px) {
-        .full-width {
-            width: -webkit-fill-available;
-            width: -moz-fit-content;
-
-
-        }
-
-    }
-
-    @media (min-width:1481px) {
-        .full-width {
-            width: -webkit-fill-available;
-            width: -moz-fit-content;
-
-
-        }
-
-    }
 
     .hidden {
         display: none;
@@ -894,7 +853,7 @@
 
     }
     .item-single-wrapper .quantity{
-display: block;
+        display: block;
         border-top: 1px solid #f2f2f2;
         padding: 0;
     }
@@ -924,10 +883,7 @@ display: block;
         margin: 0;
         text-align: center;
     }
-    .item-single-wrapper:hover .add-btn{
-        /*display: block;*/
-        /*transform: scale(1.1);*/
-    }
+  
     .item-single-wrapper .add-btn{
         background: #fdc403;
         border-radius: 0;
@@ -937,11 +893,7 @@ display: block;
         font-weight: 600;
         text-transform: uppercase;
         margin: 0;
-        /*display: none;*/
-        /*position: absolute;*/
-        /*bottom: -40px;*/
-        /*left: 0;*/
-        /*z-index: 999;*/
+  
     }
     .item-single-wrapper .closer:hover{
         background: #4a2b9a;
@@ -980,7 +932,6 @@ display: block;
         position: absolute;
         left: 50%;
         top: 50%;
-        /*font-size: 48px;*/
         transform: scale(2) translate(-25%, -50%);
     }
     .item-single-wrapper.add-more{

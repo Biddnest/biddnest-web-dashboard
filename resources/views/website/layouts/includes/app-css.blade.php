@@ -112,12 +112,6 @@
         cursor: pointer;
     }
 
-    .card-input-element:checked+.card-input {
-        box-shadow: 0 0 1px 1px #fdc403;
-        background: #2c136c !important;
-    }
-
-
     .card-input-element01:checked+.card-input {
         color: #2c136c !important;
     }
@@ -873,13 +867,13 @@
         cursor: pointer;
         border-bottom: 1px dotted #4a2b9a;
         text-align: left;
-
     }
 
     .item-single-wrapper .quantity {
         display: block;
         border-top: 1px solid #f2f2f2;
         padding: 0;
+        user-select: none;
     }
 
     .item-single-wrapper .quantity span:hover {
@@ -986,7 +980,7 @@
         position: absolute;
         top: -18px;
         right: 1px;
-        background-color: #2e0789;
+        background-color: #fdc403;
         border-radius: 50%;
         padding: 3px 7px;
         font-size: 17px;
@@ -1005,4 +999,58 @@
         padding: 0;
         background: none;
     }
+
+    .switch2 {
+        position: relative;
+        display: inline-block;
+        width: 70px;
+        height: 34px;
+    }
+
+    .switch2 input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider2 {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #fee799;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider2:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider2 {
+        background-color: #fdc403;
+    }
+
+    input:focus + .slider2 {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider2:before {
+        -webkit-transform: translateX(35px);
+        -ms-transform: translateX(35px);
+        transform: translateX(35px);
+    }
+
 </style>

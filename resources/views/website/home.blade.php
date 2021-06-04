@@ -49,10 +49,10 @@
                             <p style="font-size: 13px;">DATE OF MOVEMENT</p>
                             <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="23 March 21" readonly/>
                         </div>
-                        <div class="form-group  mr-1">
+                        {{--<div class="form-group  mr-1">
                             <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
                             </button>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>

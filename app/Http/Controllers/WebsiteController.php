@@ -17,6 +17,7 @@ use App\Models\Settings;
 use App\Models\Testimonials;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -85,19 +86,22 @@ class WebsiteController extends Controller
     {
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('website.booking.addbooking', ['categories'=>$categories, 'inventories'=>$inventories, 'prifill'=>$request->all()]);
+        $zone=(array)Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('name')->toArray();
+        return view('website.booking.addbooking', ['categories'=>$categories, 'inventories'=>$inventories, 'zones'=>$zone, 'prifill'=>$request->all()]);
     }
 
     public function estimateBooking(Request $request)
     {
-        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
+        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
+        if(!$booking)
+            abort(404);
         $reason = json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
         return view('website.booking.estimatebooking',['booking'=>$booking, 'reasons'=>$reason]);
     }
 
     public function placeBooking(Request $request)
     {
-        $booking = Booking::where(["public_booking_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
+        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
         return view('website.booking.placebooking',['booking'=>$booking]);
     }
 
@@ -117,6 +121,8 @@ class WebsiteController extends Controller
     {
         $reject_resions=json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
         $booking=BookingsController::getBookingByPublicIdForApp($request->id, Session::get('account')['id'], true);
+        if(!$booking)
+            abort(404);
         return view('website.booking.finalquote', ['booking'=>$booking, 'resions'=>$reject_resions]);
     }
 

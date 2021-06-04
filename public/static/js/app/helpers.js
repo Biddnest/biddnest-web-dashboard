@@ -27,9 +27,9 @@ export function tinySuccessAlert(title, message){
     toastr.success(message, title, {timeOut: 5000});
 }
 
-export function megaAlert(title, message){
+export function megaAlert(title, message, type="error"){
     Swal.fire({
-        icon: 'error',
+        icon: type,
         title: title,
         text: message,
     })

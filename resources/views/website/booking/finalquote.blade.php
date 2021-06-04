@@ -12,10 +12,10 @@
                                 <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('website.my-profile')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
+                                <a class="nav-link light-nav-tab active p-15 pt-0" href="{{route('my-bookings-enquiries')}}">Enquiries</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link light-nav-tab active p-15 pt-0" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
+                                <a class="nav-link light-nav-tab p-15 pt-0" id="quotation" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Ongoing Booking</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link light-nav-tab p-15 pt-0" href="{{route('order-history')}}">Booking History</a>
@@ -30,7 +30,7 @@
                     <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
                         @if(($booking->status == \App\Enums\BookingEnums::$STATUS['biding']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding']))
                             <div class="text-center" id="timer" data-count="{{\Carbon\Carbon::now()->diffInSeconds($booking->bid_result_at)}}">
-                                <h4 class="border-bottom p-4">ORDER ID <span>#{{$booking->public_booking_id}}</span></h4>
+                                <h4 class="border-bottom p-4">ENQUIRY ID <span>#{{$booking->public_enquiry_id}}</span></h4>
                                 <p class="text-muted pt-4 italic">
                                     You will get the estimated price once the time is up
                                 </p>
@@ -80,11 +80,11 @@
                                         </div>--}}
                                         <div class="pr-3">
                                             <p>VEHICLE TYPE</p>
-                                            <p> N/A @if($booking->vehicle){{ucwords(json_decode($booking->bid->meta, true)['vehicle_type']}}@endif</p>
+                                            <p>@if($booking->bid->meta){{ucwords(json_decode($booking->bid->meta, true)['vehicle_type']) ?? ''}}@endif</p>
                                         </div>
                                         <div class="pr-3">
                                             <p>MANPOWER</p>
-                                            <p> @if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}} - {{json_decode($booking->bid->meta, true)['max_man_power']}}@endif</p>
+                                            <p> @if($booking->bid->meta){{json_decode($booking->bid->meta, true)['min_man_power'] ?? ''}} - {{json_decode($booking->bid->meta, true)['max_man_power'] ?? ''}}@endif</p>
                                         </div>
                                     </div>
                                 </div>

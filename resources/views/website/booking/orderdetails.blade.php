@@ -43,11 +43,11 @@
                                         <button data-toggle="modal" data-target="#order-detail-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
                                                 src="{{asset('static/website/images/icons/page.svg')}}" />Order Details</button>
                                     </div>
-                                    <div>
+                                    {{--<div>
                                         <button class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
                                                 src="{{asset('static/website/images/icons/share.svg')}}"
                                                 class="share-margin" />Share</button>
-                                    </div>
+                                    </div>--}}
                                     @if(\App\Enums\BookingEnums::$STATUS['in_transit'] > $booking->status)
                                         <div>
                                             <button data-toggle="modal" data-target="#manage-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img

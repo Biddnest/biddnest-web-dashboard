@@ -78,7 +78,7 @@
     <div data-barba="wrapper">
         @yield('content')
         <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-dialog theme-text input-text-blue" role="document">
             <div class="modal-content w-80 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
                 <div class="modal-header p-0 br-5 ">
                     <div style="width: -webkit-fill-available;   width: 100%; width: -moz-available; width: -webkit-fill-available;  width: fill-available;">
@@ -113,23 +113,33 @@
                             </button>
                             </a>--}}
                             <div class="col-md-12" style="width: 100%;">
-                            <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</span> </p>
+                                {{--                                <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</p>--}}
 
-                            <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center  padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
-                                    Submit
-                                </button>
-                            </a>
-                            <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
+                                <div class="col-12 d-flex center">
+                                    <div class="form-groups">
+                                        <label class="container-01 m-0">
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-12">I agree to the <b>Terms & conditions</b></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <a class="weblogin" >
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                        Submit
+                                    </button>
+                                </a>
+                                <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p>
                             </div>
-                           
+
 
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     </div>
     @include('website.layouts.includes.app-js')
 </body>

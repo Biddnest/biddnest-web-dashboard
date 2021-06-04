@@ -91,7 +91,7 @@ class UserController extends Controller
 
             if($web)
             {
-                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email]]);
+                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email, 'phone'=>$user->phone]]);
                 Session::put('sessionFor', "user");
 
                 Session::save();

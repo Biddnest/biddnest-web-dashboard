@@ -999,4 +999,10 @@
         transform: translate(0px, -76px);
 
     }
+
+    .unstyled-button {
+        border: none;
+        padding: 0;
+        background: none;
+    }
 </style>

@@ -113,7 +113,7 @@
                                                     <div class="form-group ">
                                                         <label class="phone-num-lable ">Phone Number</label>
                                                         <span class=" ">
-                                                            <input type="tel" id="phone" placeholder="9099090909" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" required>
+                                                            <input type="tel" id="phone" placeholder="9099090909" value="{{\Illuminate\Support\Facades\Session::get('account')['phone']}}" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" readonly>
                                                             <span class="error-message ">Please enter valid Phone
                                                                 number</span>
                                                         </span>
@@ -123,7 +123,7 @@
                                                     <div class="form-group ">
                                                         <label class="full-name">Full Name</label>
                                                         <span class=" ">
-                                                            <input type="text" id="fullname" placeholder="David Jerome" class="form-control" name="contact_details[name]" class="form-control" required>
+                                                            <input type="text" id="fullname" placeholder="David Jerome" value="{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? ''}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}" class="form-control" name="contact_details[name]" class="form-control" required>
                                                             <span class="error-message">Please enter valid
                                                                 name</span>
                                                         </span>
@@ -133,7 +133,7 @@
                                                     <div class="form-group ">
                                                         <label class="email-label">Email</label>
                                                         <span class=" ">
-                                                            <input type="email" placeholder="abc@mail.com" id="email" name="contact_details[email]" id="E-mail" class="form-control" required>
+                                                            <input type="email" placeholder="abc@mail.com" id="email" value="{{\Illuminate\Support\Facades\Session::get('account')['email'] ?? ''}}" name="contact_details[email]" id="E-mail" class="form-control" required>
                                                             <span class="error-message">Please enter valid
                                                                 Email</span>
                                                         </span>
@@ -210,8 +210,8 @@
                                             @foreach($categories as $category)
                                             <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
                                                 <label>
-                                                    <input type="radio" name="product" value="{{$category->id}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}"/>
-                                                    <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 card-methord  bg-turnblue cursor-pointer " style="border-radius: 6px;">
+                                                    <input type="radio" name="product" id="service_{{$category->id}}" value="{{$category->id}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}" @if($prifill['service'] && ($category->id == $prifill['service'])) chaecked @endif/>
+                                                    <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 card-methord  bg-turnblue cursor-pointer  @if($prifill['service'] && ($category->id == $prifill['service']))turntheme check-icon02 @endif" style="border-radius: 6px;">
                                                         <div class="panel-heading text-white f-direction" style="display: flex; justify-content-center;">
                                                             <img src="{{$category->image}}" class="img-width">
                                                             {{ucwords($category->name)}}
@@ -234,8 +234,8 @@
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">From Adress line 1</label>
                                                     <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]" class="form-control" required>
-                                                    <input type="hidden" name="source[lat]" id="source-lat" class="form-control" required>
-                                                    <input type="hidden" name="source[lng]" id="source-lng" class="form-control" required>
+                                                    <input type="hidden" name="source[lat]" id="source-lat" value="{{$prifill['source_lat']}}" class="form-control" required>
+                                                    <input type="hidden" name="source[lng]" id="source-lng" value="{{$prifill['source_lng']}}" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                 </div>
                                             </div>
@@ -285,7 +285,7 @@
 
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group mt-1 ">
-                                                            <label class="form-check-box ml-0" for="Lift1 ">Do you have lift</label>
+                                                            <label class="form-check-box ml-0" for="Lift1 ">Do you have Service lift</label>
                                                             <label class="switch">
                                                                 <input type="hidden" value="0" name="source[meta][lift]" id="letter">
                                                                 <input type="checkbox" name="select_letter" value="1" id="Lift1" onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
@@ -304,8 +304,8 @@
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">To Address</label>
                                                     <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="dest-autocomplete" class="form-control">
-                                                    <input type="hidden" name="destination[lat]" id="dest-lat" class="form-control" required>
-                                                    <input type="hidden" name="destination[lng]" id="dest-lng" class="form-control" required>
+                                                    <input type="hidden" name="destination[lat]" value="{{$prifill['dest_lat']}}" id="dest-lat" class="form-control" required>
+                                                    <input type="hidden" name="destination[lng]" value="{{$prifill['dest_lng']}}" id="dest-lng" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                 </div>
                                             </div>
@@ -360,7 +360,7 @@
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group mt-1">
-                                                            <label class="form-check-box ml-0 " for="Lift1 ">Do you have lift</label>
+                                                            <label class="form-check-box ml-0 " for="Lift1 ">Do you have Service lift</label>
                                                             <label class="switch">
                                                                 <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
                                                                 <input type="checkbox" name="select_letter" value="1" id="Lift2" onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
@@ -378,7 +378,7 @@
                                                 <div class="form-group ">
                                                     <label class="start-date ">Start date</label>
                                                     <div id="my-modal ">
-                                                        <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" name="movement_dates" required />
+                                                        <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" value="{{$prifill['move_date']}}" name="movement_dates" required />
                                                         <span class="error-message ">please enter valid date</span>
                                                     </div>
                                                 </div>
@@ -657,27 +657,27 @@
                             <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
                                     <span>@{{material}}</span>
-                                    <input type="hidden" name="" value="@{{meta.material}}" />
+                                    <input type="hidden" name="" value="@{{material}}" />
                                     <div class="dropdown-content">
                                       <ul class="d-content">
-                                          @{{#each meta.material}}
-                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{this}}">
-                                                  <a class="menu"><span class="ml-1">@{{this}}</span></a>
+                                          @{{#meta.material}}
+                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                  <a class="menu"><span class="ml-1">@{{.}}</span></a>
                                               </li>
-                                          @{{/each}}
+                                          @{{/meta.material}}
                                       </ul>
                                     </div>
                                 </span>
                                 <span class="info">
                                     <span>@{{size}}</span>
-                                    <input type="hidden" name="" value="@{{meta.size}}" />
+                                    <input type="hidden" name="" value="@{{size}}" />
                                     <div class="dropdown-content">
                                       <ul class="d-content">
-                                           @{{#each meta.size}}
-                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{this}}">
-                                                  <a class="menu"><span class="ml-1">@{{this}}</span></a>
+                                           @{{#meta.size}}
+                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                  <a class="menu"><span class="ml-1">@{{.}}</span></a>
                                               </li>
-                                           @{{/each}}
+                                           @{{/meta.size}}
                                       </ul>
                                     </div>
                                 </span>

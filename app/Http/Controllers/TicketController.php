@@ -397,6 +397,24 @@ class TicketController extends Controller
         return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
     }
 
+    public static function createCallBackBooking($sender_id, $booking_id)
+    {
+        $meta=["phone"=>null, "public_booking_id"=>$booking_id];
+        $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+        $body = "Request to call back ".$booking_id;
+        $ticket = new Ticket;
+        $ticket->user_id = $sender_id;
+        $ticket->heading = $title;
+        $ticket->desc = $body;
+        $ticket->type = TicketEnums::$TYPE['call_back'];
+        $ticket->meta = json_encode($meta);
+
+        if(!$ticket->save())
+            return Helper::response(false, "Could'nt create ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+    }
+
     public static function createRejectCall($sender_id, $ticket_type, $data)
     {
         $meta=["Public_booking_id"=>$data];

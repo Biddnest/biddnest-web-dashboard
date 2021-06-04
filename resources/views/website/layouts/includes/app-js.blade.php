@@ -57,7 +57,7 @@ $('.card-methord').click(function() {
         });
         </script>
 
-   
+
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
@@ -88,8 +88,17 @@ $('.card-methord').click(function() {
         $(this).closest("span.info").find("input").val($(this).data("value"));
     });
 
-</script>
+    @isset($prifill['service'])
+    $(document).ready(function (){
+        $('#service_{{$prifill['service']}}').click();
+    });
+    @endisset
 
+    function showDrop(el){
+        console.log("show");
+        el.toggleClass("show-drop");
+    }
+</script>
 
 
 

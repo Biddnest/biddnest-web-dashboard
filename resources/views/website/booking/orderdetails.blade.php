@@ -35,9 +35,9 @@
                                 </div>
                                 <div class="d-flex direction-col desktop-popup view-none">
                                     <div>
-                                        <button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
+                                        <a href="{{route('contact_us')}}"><button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
                                                 src="{{asset('static/website/images/icons/call-button.svg')}}" />Virtual
-                                            Assistance</button>
+                                                Assistance</button></a>
                                     </div>
                                     <div>
                                         <button data-toggle="modal" data-target="#order-detail-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img

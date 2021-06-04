@@ -9,7 +9,7 @@
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="category" value="{{$category->id}}" class="card-input-element" />
+                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" />
                         <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
@@ -275,7 +275,7 @@
             <div class="row">
                 <div class="card">
                     <div class="col-lg-12 text-center mb-2 mt-6">
-                        <h1 style="font-size: 30;">Testimonials</h1>
+                        <h1 style="font-size: 30px;">Testimonials</h1>
                          <p class="section-subheading text-muted mt-2">Lorem Ipsum</p>
                     </div>
                 </div>
@@ -462,16 +462,25 @@
                             </button>
                             </a>--}}
                             <div class="col-md-12" style="width: 100%;">
-                            <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</span> </p>
+{{--                                <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</p>--}}
 
-                            <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center  padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
-                                    Submit
-                                </button>
-                            </a>
-                            <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
+                                <div class="col-12 d-flex center">
+                                    <div class="form-groups">
+                                        <label class="container-01 m-0">
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-12">I agree to the <b>Terms & conditions</b></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <a class="weblogin" >
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                        Submit
+                                    </button>
+                                </a>
+                                <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p>
                             </div>
-
 
                         </div>
                     </form>

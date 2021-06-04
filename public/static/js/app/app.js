@@ -923,7 +923,7 @@ $("body").on('click', ".payment", function(event) {
                 "order_id":response.data.payment.rzp_order_id,
                 "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",
-                "description": "Payment for Moving Date on"+ moving_date,
+                "description": "Movement on"+ moving_date,
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
                 "handler": function (resp){
                     console.log({
@@ -1042,11 +1042,14 @@ $("body").on('click', ".web-sub-category", function(event) {
         dataType: 'json',
         success: function (response) {
            console.log(response);
-            for(var i=0; i< response.data.length; i++)
+           /* for(var i=0; i< response.data.inventories.length; i++)
             {
-                response.data[i].meta.material=JSON.parse(response.data[i].meta.material);
-                response.data[i].meta.size=JSON.parse(response.data[i].meta.size);
-            }
+                console.log(JSON.parse(response.data.inventories[i].meta.material));
+                response.data.inventories[i].meta.material=JSON.parse(response.data.inventories[i].meta.material);
+                response.data.inventories[i].meta.size=JSON.parse(response.data.inventories[i].meta.size);
+
+            }*/
+
             var source = $("#entry-templateinventory").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);

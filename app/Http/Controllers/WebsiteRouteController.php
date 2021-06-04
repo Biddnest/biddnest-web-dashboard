@@ -101,7 +101,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create(Session::get('account')['id'], 2,  ["public_booking_id"=>$request->data]);
+        return TicketController::createCallBackBooking(Session::get('account')['id'], $request->data);
     }
 
     public function addRejectTicket(Request $request)

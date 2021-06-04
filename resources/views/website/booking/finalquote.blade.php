@@ -73,18 +73,18 @@
                                         </div>
                                     </div>
                                     <div class="row d-flex center border-bottom mt-4">
-                                        <div class="pr-3">
+                                        {{--<div class="pr-3">
                                             <p>VEHICLE NAME</p>
 
                                             <p >N/A @if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
-                                        </div>
+                                        </div>--}}
                                         <div class="pr-3">
                                             <p>VEHICLE TYPE</p>
-                                            <p> N/A @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
+                                            <p> N/A @if($booking->vehicle){{ucwords(json_decode($booking->bid->meta, true)['vehicle_type']}}@endif</p>
                                         </div>
                                         <div class="pr-3">
                                             <p>MANPOWER</p>
-                                            <p> @if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
+                                            <p> @if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}} - {{json_decode($booking->bid->meta, true)['max_man_power']}}@endif</p>
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                         <div class="d-flex justify-content-center">
                                             <div class="form-groups">
                                                 <label class="container-01">
-                                                    <input type="checkbox" id="Lift1" readonly/>
+                                                    <input type="checkbox" id="Lift1" required/>
                                                     <span class="checkmark-agree -mt-10"></span>
                                                 </label>
 

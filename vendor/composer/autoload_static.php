@@ -158,6 +158,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Sentiment\\' => 10,
         ),
         'R' => 
         array (
@@ -426,6 +427,10 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Sentiment\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src',
         ),
         'Razorpay\\Tests\\' => 
         array (
@@ -739,6 +744,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Console\\Commands\\BidEnd' => __DIR__ . '/../..' . '/app/Console/Commands/BidEnd.php',
         'App\\Console\\Commands\\Import' => __DIR__ . '/../..' . '/app/Console/Commands/Import.php',
         'App\\Console\\Commands\\Payout' => __DIR__ . '/../..' . '/app/Console/Commands/Payout.php',
+        'App\\Console\\Commands\\SentimentalAnalysis' => __DIR__ . '/../..' . '/app/Console/Commands/SentimentalAnalysis.php',
         'App\\Console\\Commands\\WebSocket' => __DIR__ . '/../..' . '/app/Console/Commands/WebSocket.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Enums\\AdminEnums' => __DIR__ . '/../..' . '/app/Enums/AdminEnums.php',
@@ -799,6 +805,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Http\\Controllers\\VendorWebController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorWebController.php',
         'App\\Http\\Controllers\\Vendor\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Vendor/VendorController.php',
         'App\\Http\\Controllers\\WebController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebController.php',
+        'App\\Http\\Controllers\\WebSocketController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebSocketController.php',
         'App\\Http\\Controllers\\WebsiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebsiteController.php',
         'App\\Http\\Controllers\\WebsiteRouteController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebsiteRouteController.php',
         'App\\Http\\Controllers\\ZoneController' => __DIR__ . '/../..' . '/app/Http/Controllers/ZoneController.php',
@@ -848,6 +855,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\PaymentMethod' => __DIR__ . '/../..' . '/app/Models/PaymentMethod.php',
         'App\\Models\\Payout' => __DIR__ . '/../..' . '/app/Models/Payout.php',
         'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',
+        'App\\Models\\ReviewSentiment' => __DIR__ . '/../..' . '/app/Models/ReviewSentiment.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
         'App\\Models\\ServiceSubservice' => __DIR__ . '/../..' . '/app/Models/ServiceSubservice.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
@@ -6172,6 +6180,9 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'SecurityLib\\Hash' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Hash.php',
         'SecurityLib\\Strength' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Strength.php',
         'SecurityLib\\Util' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Util.php',
+        'Sentiment\\Analyzer' => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src/Analyzer.php',
+        'Sentiment\\Config\\Config' => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src/Config/Config.php',
+        'Sentiment\\Procedures\\SentiText' => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src/Procedures/SentiText.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Color' => __DIR__ . '/..' . '/symfony/console/Color.php',
@@ -6818,7 +6829,6 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Symfony\\Component\\Translation\\MessageCatalogue' => __DIR__ . '/..' . '/symfony/translation/MessageCatalogue.php',
         'Symfony\\Component\\Translation\\MessageCatalogueInterface' => __DIR__ . '/..' . '/symfony/translation/MessageCatalogueInterface.php',
         'Symfony\\Component\\Translation\\MetadataAwareInterface' => __DIR__ . '/..' . '/symfony/translation/MetadataAwareInterface.php',
-        'Symfony\\Component\\Translation\\PluralizationRules' => __DIR__ . '/..' . '/symfony/translation/PluralizationRules.php',
         'Symfony\\Component\\Translation\\PseudoLocalizationTranslator' => __DIR__ . '/..' . '/symfony/translation/PseudoLocalizationTranslator.php',
         'Symfony\\Component\\Translation\\Reader\\TranslationReader' => __DIR__ . '/..' . '/symfony/translation/Reader/TranslationReader.php',
         'Symfony\\Component\\Translation\\Reader\\TranslationReaderInterface' => __DIR__ . '/..' . '/symfony/translation/Reader/TranslationReaderInterface.php',

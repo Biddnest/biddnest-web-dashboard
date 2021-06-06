@@ -4,6 +4,18 @@ Changelog for Razorpay-PHP SDK. Follows [keepachangelog.com](https://keepachange
 
 ## Unreleased
 
+## [2.7.0][2.7.0] - 2021-05-07
+
+### Added
+
+-   Adds support for payment page enity API [[#224](https://github.com/razorpay/razorpay-php/pull/224)]
+
+## [2.6.1][2.6.1] - 2021-04-30
+
+### Changed
+
+-   Upgrades [requests](https://github.com/rmccue/Requests/) to v1.8. [[#221](https://github.com/razorpay/razorpay-php/pull/221)]
+
 ## [2.6.0][2.6.0] - 2021-04-05
 
 ### Added

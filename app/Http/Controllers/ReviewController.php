@@ -9,6 +9,7 @@ use App\Models\Review;
 use App\Models\Booking;
 use App\Enums\ReviewEnums;
 use App\Enums\BookingEnums;
+use Illuminate\Support\Facades\Artisan;
 
 class ReviewController extends Controller
 {
@@ -32,9 +33,13 @@ class ReviewController extends Controller
             $review_result =$reviews->save();
         }
 
+        dispatch(function (){
+            Artisan::command("sentiment:analyze review");
+        })->afterResponse();
+
         if(!$review_result)
             return Helper::response(false, "couldn't add review");
-        
+
         return Helper::response(true, "Review added successfully", ['review'=>Review::findOrFail($reviews->id)]);
     }
 }

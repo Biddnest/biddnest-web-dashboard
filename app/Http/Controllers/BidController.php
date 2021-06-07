@@ -263,6 +263,8 @@ class BidController extends Controller
 
         $exist_bid = Bid::where("organization_id", $org_id)
                             ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
+                            ->with("rejected_by")
+                            ->with("watched_by")
 //                            ->whereIn("status", [BidEnums::$STATUS['active']])
                             ->first();
 
@@ -282,7 +284,7 @@ class BidController extends Controller
         }
 
         if($exist_bid->status == BidEnums::$STATUS['rejected']){
-            $submit_by = Vendor::where("id",$exist_bid->vendor_id)->first();
+            $submit_by = Vendor::where("id",$exist_bid->rejected_by)->first();
 
             if($submit_by->id == $vendor_id)
                 $name = "you";
@@ -315,7 +317,7 @@ class BidController extends Controller
             "bid_amount"=>$data['bid_amount'],
             "meta"=>json_encode($meta),
             "status"=>BidEnums::$STATUS['bid_submitted'],
-            "submit_at"=>Carbon::now()
+            "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
         ]);
 
         if(!$submit_bid)

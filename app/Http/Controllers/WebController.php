@@ -39,6 +39,7 @@ use App\Models\Ticket;
 use App\Models\TicketReply;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -1149,5 +1150,12 @@ class WebController extends Controller
     {
         $reviews=Review::where('id', $request->id)->with('Booking')->with('user')->first();
         return view('sidebar.reviews',['reviews'=>$reviews]);
+    }
+
+    public static function reports_summary(Request $request)
+    {
+        return view('reports.report_summary',[
+            "report"=>Report::orderBy('id', 'DESC')->first()
+        ]);
     }
 }

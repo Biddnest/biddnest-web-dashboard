@@ -359,7 +359,7 @@ class BookingsController extends Controller
             return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
     }
 
-    /*Puplicating above function cos its giving error in mobile app*/
+    /*Duplicating above function cos its giving error in mobile app*/
     public static function getBookingByPublicIdForWeb($public_booking_id, $user_id, $web=false)
     {
         $booking = Booking::where("user_id", $user_id)

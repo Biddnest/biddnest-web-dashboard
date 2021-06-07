@@ -120,7 +120,7 @@ class WebsiteController extends Controller
     public function finalQuote(Request $request)
     {
         $reject_resions=json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
-        $booking=BookingsController::getBookingByPublicIdForApp($request->id, Session::get('account')['id'], true);
+        $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         if(!$booking)
             abort(404);
         return view('website.booking.finalquote', ['booking'=>$booking, 'resions'=>$reject_resions]);
@@ -137,7 +137,7 @@ class WebsiteController extends Controller
 
     public function orderDetails(Request $request)
     {
-        $booking=BookingsController::getBookingByPublicIdForApp($request->id, Session::get('account')['id'], true);
+        $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         return view('website.booking.orderdetails', ['booking'=>$booking]);
     }
 

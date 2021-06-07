@@ -343,6 +343,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/bank',[WebController::class,'createBank'])->name("create-bank");
             Route::get('/details/{id}',[WebController::class,'details_user'])->name('details_user');
         });
+        Route::prefix('reports')->group(function () {
+            Route::get('/',[WebController::class,'reports_sumamry'])->name("report.summary");
+            Route::get('/sales',[WebController::class,'sales_report'])->name("report.sales");
+        });
+
+
 
     });
 

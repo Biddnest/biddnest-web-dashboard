@@ -325,6 +325,43 @@ class BookingsController extends Controller
 
     public static function getBookingByPublicIdForApp($public_booking_id, $user_id, $web=false)
     {
+        $booking = Booking::where("public_booking_id", $public_booking_id)
+            //            ->where("user_id", $user_id)
+            ->where("deleted", CommonEnums::$NO)->orderBy('id', 'DESC')
+            ->with('movement_dates')
+            ->with(['inventories'=>function($query){
+                $query->with('inventory');
+            }])
+            ->with('status_history')
+            ->with('organization')
+            ->with('service')
+            ->with('payment')
+            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+                $movement_specifications->where('booking_id', Booking::where(['public_booking_id' => $public_booking_id])->pluck('id')[0])
+                    ->where('status', BidEnums::$STATUS['won']);
+            }
+            ])
+            ->with('driver')
+            ->with('vehicle')
+            ->with('review')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
+            ->first();
+
+        if (!$booking) {
+            return Helper::response(false, "Invalid Booking id");
+        }
+
+        if($web)
+            return $booking;
+        else
+            return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
+    }
+
+    /*Puplicating above function cos its giving error in mobile app*/
+    public static function getBookingByPublicIdForWeb($public_booking_id, $user_id, $web=false)
+    {
         $booking = Booking::where("user_id", $user_id)
             ->where("deleted", CommonEnums::$NO)->orderBy('id', 'DESC')
             ->with('movement_dates')
@@ -367,7 +404,7 @@ class BookingsController extends Controller
         if($web)
             return  $booking->first();
         else
-            return Helper::response(true, "data fetched successfully", ["booking" =>  $booking->first()]);
+            return Helper::response(true, "Booking fetched.", ["booking" =>  $booking->first()]);
     }
 
     public static function bookingHistoryEnquiry($user_id, $web=false)

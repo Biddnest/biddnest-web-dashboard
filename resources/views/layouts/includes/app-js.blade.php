@@ -79,7 +79,7 @@ crossorigin="anonymous"></script>
     const API_SEARCH_ADMIN = '{{route('search_admin')}}';
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))
-    toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000})
+    toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000});
     @endif
 
 </script>

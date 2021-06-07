@@ -22,7 +22,7 @@ use PUGX\Shortid\Shortid;
 
 class UserController extends Controller
 {
-    private static $publicData =['fname','lname','email','phone','dob','avatar','gender'];
+    private static $publicData =['fname','lname','email','phone','dob','avatar','gender', 'meta'];
 
     function __construct(){
     }
@@ -91,7 +91,7 @@ class UserController extends Controller
 
             if($web)
             {
-                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email]]);
+                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email, 'phone'=>$user->phone]]);
                 Session::put('sessionFor', "user");
 
                 Session::save();

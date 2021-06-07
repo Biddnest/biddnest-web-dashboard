@@ -33,4 +33,19 @@ class Bid extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function bookmarked_by()
+    {
+        return $this->belongsTo(Vendor::class, 'id', 'bookmarked_by');
+    }
+
+    public function rejected_by()
+    {
+        return $this->belongsTo(Vendor::class, 'id', 'rejected_by');
+    }
+
+    public function watched_by()
+    {
+        return $this->belongsTo(Vendor::class, 'id', 'watcher_id');
+    }
 }

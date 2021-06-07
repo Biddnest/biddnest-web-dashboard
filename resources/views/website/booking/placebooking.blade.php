@@ -102,7 +102,6 @@
                             </div>
                         </div>
                         <div class="col-md-9 book-move-questions-container ">
-                            <form id="wizard">
                                 <div class="row setup-content-3 step-palce" id="step-6" >
                                     <div class="col-md-12">
                                         <div>
@@ -114,8 +113,8 @@
                                             <i class="fa fa-thumbs-up center successful-icon mt-2 view-block text-view-center"></i>
                                             <p class="text-muted f-16 center italic order-status-message text-view-center">
                                                 Your Order has been submitted</p>
-                                            <p class=" f-16 para-head center order-num text-view-center">ORDER ID
-                                                <span>: #{{$booking->public_booking_id}}</span>
+                                            <p class=" f-16 para-head center order-num text-view-center">ENQUIRY ID
+                                                <span>: #{{$booking->public_enquiry_id}}</span>
                                             </p>
                                         </div>
                                         <div>
@@ -128,8 +127,8 @@
                                         </div>
                                         <div class="button-bottom d-flex justify-content-center pt-4">
                                             <div class="">
-                                                <a class="white-text " href="{{route('my-bookings')}}">
-                                                    <button type="submit" class="btn btn-theme-bg padding-btn-res white-bg">View my
+                                                <a class="white-text " href="{{route('my-bookings-enquiries')}}">
+                                                    <button type="button" class="btn btn-theme-bg padding-btn-res white-bg">View my
                                                         bookings
                                                     </button>
                                                 </a>
@@ -137,7 +136,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

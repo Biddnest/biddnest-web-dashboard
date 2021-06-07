@@ -57,12 +57,19 @@ $('.card-methord').click(function() {
         });
         </script>
 
-   
+
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
 <script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
 <script>
+    $(document).ready(function () {
+        Handlebars.registerHelper('replace', function (find, replace, options) {
+            var string = options.fn(this);
+            return string.replace(find, replace);
+        });
+    });
+
     $(".timer").each(function(){
         var BID_END_TIME = $(this).data("time");
         // if (typeof BID_END_TIME !== undefined) {
@@ -84,13 +91,147 @@ $('.card-methord').click(function() {
     });*/
 
     $("body").on("click",".item-single-wrapper span.info .dropdown-content ul li",function(e){
+       /*if(!$(this).closest(".item-single-wrapper").hasClass('custom-item')) {
+            let inp = $(this).closest('.item-single-wrapper').find('input');
+            let class_name = inp.eq(1).val() + "-" + inp.eq(2).val() + "-" + inp.eq(3).val() + "-" + inp.eq(0).val();
+            console.log(class_name);
+            if ($("." + class_name).length > 0) {
+                megaAlert("Oops", "This item has been already added");
+                return false;
+            }
+        }*/
         $(this).closest("span.info").find("span").eq(0).html($(this).html());
-        $(this).closest("span.info").find("input").val($(this).data("value"));
+        $(this).closest("span.info").find("input").eq(0).val($(this).data("value"));
     });
 
+    $("body").on("click",".quantity-operator .minus",function(e){
+        let quantity = $(this).parent().find('input').val();
+        quantity--;
+        if(quantity > 0)
+            $(this).parent().find('input').val(quantity);
+    });
+
+    $("body").on("click",".quantity-operator .plus",function(e){
+        let quantity = $(this).parent().find('input').val();
+        quantity++;
+        if(quantity > 0)
+            $(this).parent().find('input').val(quantity);
+    });
+
+    @isset($prifill['service'])
+    $(document).ready(function (){
+        $('#service_{{$prifill['service']}}').click();
+    });
+    @endisset
+
+
 </script>
+<script>
+    $('.source-map-picker_booking').locationpicker({
+        location: {
+            latitude: $("#source-lat").val(),
+            longitude: $("#source-lng").val()
+        },
+        locationName: "",
+        radius: 0,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [],
+        mapOptions: {},
+        scrollwheel: true,
+        inputBinding: {
+            latitudeInput: $("#source-lat"),
+            longitudeInput: $("#source-lng"),
+            radiusInput: null,
+            locationNameInput: $(".source-autocomplete")
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
+            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
+            $.get(url, function (response){
+                console.log(response);
+                let street="";
+                let city="";
+                for(let i=0; i<= response.results[0].address_components.length; i++)
+                {
+                    let addr=response.results[0].address_components[i];
+                    if(addr.types.indexOf('sublocality_level_2')) {
 
+                        // $(".source").val(addr.long_name);
+                        // break;
+                        street +=addr.long_name+", ";
+                    }
+                    if(addr.types.indexOf('locality')) {
 
+                        // $(".source_city").val(addr2.long_name);
+                        city +=addr.long_name;
+                        break;
+                    }
+                }
+                $(".source").val(street);
+                $(".source_city").val(city);
+                /*for(var j=0; j<= response.results[0].address_components.length; j++)
+                {
+                    let addr2=response.results[0].address_components[j];
+                    if(addr2.types.indexOf('locality')) {
+                        console.log(addr2);
+                        $(".source_city").val(addr2.long_name);
+                        break;
+                    }
+                }*/
+                /*response.results[0].address_components.every(function (addr){
+                    // console.log(addr.types);
+
+                });*/
+            });
+        },
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function(component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible: true,
+
+    });
+
+    $('.dest-map-picker_booking').locationpicker({
+        location: {
+            latitude: $("#dest-lat").val(),
+            longitude: $("#dest-lng").val()
+        },
+        locationName: "",
+        radius: 0,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [],
+        mapOptions: {},
+        scrollwheel: true,
+        inputBinding: {
+            latitudeInput: $("#dest-lat"),
+            longitudeInput: $("#dest-lng"),
+            radiusInput: null,
+            locationNameInput: $(".dest-autocomplete")
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function(currentLocation, radius, isMarkerDropped) {},
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function(component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible: true
+    });
+</script>
 
 
 

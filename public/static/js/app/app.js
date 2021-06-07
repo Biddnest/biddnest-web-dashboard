@@ -125,6 +125,12 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                                 redirectTo(url);
                                 return false;
                             }
+                            if (form.hasClass("order_create_web")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.booking.public_enquiry_id);
+                                redirectHard(url);
+                                return false;
+                            }
                             if (form.data('redirect-type') == "hard")
                                 redirectHard(form.data("url")); // data-url="google.com"
                             else
@@ -690,32 +696,44 @@ $('.filterdate').datepicker({
 /* Website js code start */
 
 $("body").on('click', ".next1", function(event) {
-    console.log("step2");
-    $('.step-1').css('display', 'none');
-    $('.step-2').css('display', 'block');
-    $(".completed-step-2").addClass("turntheme");
-    $(".completed-step-1").removeClass("turntheme");
-    $(".steps-step-2").addClass("color-purple");
-    $(".steps-step-1").removeClass("color-purple");
+    $(".step-1").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".step-1").unwrap();
+
+    if (isValid) {
+        $('.step-1').css('display', 'none');
+        $('.step-2').css('display', 'block');
+        $(".completed-step-2").addClass("turntheme");
+        $(".completed-step-1").removeClass("turntheme");
+        $(".steps-step-2").addClass("color-purple");
+        $(".steps-step-1").removeClass("color-purple");
+    }
 });
 
 $("body").on('click', ".back2", function(event) {
-    console.log("step2");
-    $('.step-1').css('display', 'block');
-    $('.step-2').css('display', 'none');
-    $(".completed-step-1").addClass("turntheme");
-    $(".completed-step-2").removeClass("turntheme");
-    $(".steps-step-1").addClass("color-purple");
-    $(".steps-step-2").removeClass("color-purple");
+
+        $('.step-1').css('display', 'block');
+        $('.step-2').css('display', 'none');
+        $(".completed-step-1").addClass("turntheme");
+        $(".completed-step-2").removeClass("turntheme");
+        $(".steps-step-1").addClass("color-purple");
+        $(".steps-step-2").removeClass("color-purple");
+
 });
 
 $("body").on('click', ".next2", function(event) {
-    $('.step-2').css('display', 'none');
-    $('.step-3').css('display', 'block');
-    $(".completed-step-3").addClass("turntheme");
-    $(".completed-step-2").removeClass("turntheme");
-    $(".steps-step-3").addClass("color-purple");
-    $(".steps-step-2").removeClass("color-purple");
+    $(".step-2").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".step-2").unwrap();
+
+    if (isValid) {
+        $('.step-2').css('display', 'none');
+        $('.step-3').css('display', 'block');
+        $(".completed-step-3").addClass("turntheme");
+        $(".completed-step-2").removeClass("turntheme");
+        $(".steps-step-3").addClass("color-purple");
+        $(".steps-step-2").removeClass("color-purple");
+    }
 });
 
 $("body").on('click', ".back3", function(event) {
@@ -728,12 +746,18 @@ $("body").on('click', ".back3", function(event) {
 });
 
 $("body").on('click', ".next3", function(event) {
-    $('.step-3').css('display', 'none');
-    $('.step-4').css('display', 'block');
-    $(".completed-step-4").addClass("turntheme");
-    $(".completed-step-3").removeClass("turntheme");
-    $(".steps-step-4").addClass("color-purple");
-    $(".steps-step-3").removeClass("color-purple");
+    $(".step-3").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".step-3").unwrap();
+
+    if (isValid) {
+        $('.step-3').css('display', 'none');
+        $('.step-4').css('display', 'block');
+        $(".completed-step-4").addClass("turntheme");
+        $(".completed-step-3").removeClass("turntheme");
+        $(".steps-step-4").addClass("color-purple");
+        $(".steps-step-3").removeClass("color-purple");
+    }
 });
 
 $("body").on('click', ".back4", function(event) {
@@ -745,14 +769,40 @@ $("body").on('click', ".back4", function(event) {
     $(".steps-step-4").removeClass("color-purple");
 });
 
-$('.bookdate').datepicker({
+var selectedDates=[];
+var dp = $('.bookdate').datepicker({
     multidate: true,
-    format: 'yyyy-mm-dd',
-    'startDate': '+1d',
+    format: 'd M yy',
+    todayHighlight: true,
+    'startDate': '+2d',
+    'endDate':'+20d',
+});
+dp.on('changeDate', function(e) {
+
+    if(e.dates.length < 6){
+        selectedDates = e.dates
+    }else{
+        dp.data('datepicker').setDates(selectedDates);
+        megaAlert('PLease note','Can only select upto 5 dates', 'info')
+    }
+
 });
 
 $("body").on('change', ".switch", function(event) {
-    $(".toggle-input").toggleClass('diplay-none ');
+    let phone=$(this).data('phone');
+    let name=$(this).data('name');
+    let email=$(this).data('email');
+    if ($(this).val() == $(this).data("value")) {
+        $(this).val("1");
+       $('#phone').val('');
+       $('#fullname').val('');
+       $('#email').val('');
+    } else {
+        $(this).val("0");
+        $('#phone').val(phone);
+        $('#fullname').val(name);
+        $('#email').val(email);
+    }
 });
 
 $("body").on('click', ".reject", function(event) {
@@ -923,7 +973,7 @@ $("body").on('click', ".payment", function(event) {
                 "order_id":response.data.payment.rzp_order_id,
                 "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",
-                "description": "Payment for Moving Date on"+ moving_date,
+                "description": "Movement on"+ moving_date,
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
                 "handler": function (resp){
                     console.log({
@@ -1009,7 +1059,6 @@ $("body").on('click', ".remove", function(event) {
     return false;
 });
 
-
 $("body").on('click', ".web-category", function(event) {
   var url=$(this).data("url");
 
@@ -1035,18 +1084,20 @@ $("body").on('click', ".web-category", function(event) {
 
 $("body").on('click', ".web-sub-category", function(event) {
   var url=$(this).data("url");
-
+   $('#subservice_id').val($(this).val());
     $.ajax({
         url: url,
         type: 'get',
         dataType: 'json',
         success: function (response) {
            console.log(response);
-            for(var i=0; i< response.data.length; i++)
+            for(var i=0; i< response.data.inventories.length; i++)
             {
-                response.data[i].meta.material=JSON.parse(response.data[i].meta.material);
-                response.data[i].meta.size=JSON.parse(response.data[i].meta.size);
+                response.data.inventories[i].meta.material=JSON.parse(response.data.inventories[i].meta.material);
+                response.data.inventories[i].meta.size=JSON.parse(response.data.inventories[i].meta.size);
+
             }
+
             var source = $("#entry-templateinventory").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);
@@ -1078,8 +1129,101 @@ $("body").on('click', ".filter-button", function(event) {
     return false;
 });
 
+$("body").on('click', ".add-item", function(event) {
+    let item = [];
+    $(this).closest(".item-single-wrapper").find("input").each(function(){
+            item[$(this).attr('name')] = $(this).val();
+        });
+    item = Object.assign({}, item);
+    console.log(item);
+    if(item.material == ''){
+        megaAlert("Oops", "Please select Material");
+        return false;
+    }
+    if(item.size == ''){
+        megaAlert("Oops", "Please select Size");
+        return false;
+    }
+    let class_name=item.meta_name+"-"+item.material+"-"+item.size+"-"+item.meta_id;
+    class_name=class_name.replace(' ', '-');
+    console.log(class_name);
+    if($("."+class_name).length > 0)
+    {
+        megaAlert("Oops", "This item has been already added");
+        return false;
+    }
+    item.meta_material=JSON.parse(item.meta_material);
+    item.meta_size=JSON.parse(item.meta_size);
+
+    var source = $("#entry-templateinventory_append").html();
+    var template = Handlebars.compile(source);
+    var html = template(item);
+    $('.inventory .col-md-4:last').before(html);
+});
+
+$("body").on('click', ".add-search-item", function(event) {
+    let item = [];
+    $(this).closest(".item-single-wrapper").find("input").each(function(){
+            item[$(this).attr('name')] = $(this).val();
+        });
+    item = Object.assign({}, item);
+    console.log(item);
+    if(item.material == ''){
+        megaAlert("Oops", "Please select Material");
+        return false;
+    }
+    if(item.size == ''){
+        megaAlert("Oops", "Please select Size");
+        return false;
+    }
+    item.meta_material=item.meta_material.split(',');
+    item.meta_size=item.meta_size.split(',');
+
+    var source = $("#entry-templateinventory_append").html();
+    var template = Handlebars.compile(source);
+    var html = template(item);
+    $('.inventory .col-md-4:last').before(html);
+});
+
+$("body").on('keyup', ".search-item", function(event) {
+        var query = $(this).val();
+        var url = $(this).data('url');
+        if (query.length >= 3) {
+            $.ajax({
+                url: url+ "?search=" + query,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    $('.items-display').html('');
+                    for(var i=0; i< response.data.inventories.length; i++)
+                    {
+                        response.data.inventories[i].material=JSON.parse(response.data.inventories[i].material);
+                        response.data.inventories[i].size=JSON.parse(response.data.inventories[i].size);
+                    }
+                    var source = $("#search_item").html();
+                    var template = Handlebars.compile(source);
+                    var html = template(response.data);
+                    $('.items-display').html(html);
+                }
+            });
+        }
+});
+
+$("body").on('input', ".upload-image", function(event) {
+    // var thiss = $(this);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        $(this).closest('.upload-section').find(".upload-preview").attr("src", reader.result);
+        $(this).parent().find(".base-holder").val(reader.result);
+        let image= {"image":reader.result};
+        var source = $("#image_upload_preview").html();
+        var template = Handlebars.compile(source);
+        var html = template(image);
+        $('.uploaded-image .col-md-2:last').before(html);
+    };
+    reader.readAsDataURL(file);
 
 
-
-
+});
 

@@ -478,12 +478,14 @@ Route::prefix('website/api')->group(function () {
     Route::put('/book-move-estimate', [WebsiteRouter::class, 'bookingConfirmEstimate'])->name("order_estimate");
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
+    Route::post('/add-booking', [WebsiteRouter::class, 'addBookMove'])->name("add-bookmove");
     Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
     Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");
+    Route::get('/inventories/serach',[WebsiteRouter::class,'serachItem'])->name("search_item");
 
     Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");
     Route::post('/raise_support', [WebsiteRouter::class, 'raiseTicket'])->name("raise_support");
@@ -509,8 +511,8 @@ Route::prefix('site')->group(function () {
     Route::get('/page/{slug}', [WebsiteController::class, 'termPage'])->name("terms.page");
 
     Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
-    Route::get('/book-move/{id}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
-    Route::get('/book-move/{id}/place', [WebsiteController::class, 'placeBooking'])->name("place-booking");
+    Route::get('/book-move/{id}/estimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
+    Route::get('/book-move/{id}/status', [WebsiteController::class, 'placeBooking'])->name("place-booking");
     Route::get('/my-bookings', [WebsiteController::class, 'myBookings'])->name("my-bookings");
     Route::get('/my-bookings/enquiry', [WebsiteController::class, 'myBookingsEnquiries'])->name("my-bookings-enquiries");
     Route::get('/my-bookings/{id}/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");

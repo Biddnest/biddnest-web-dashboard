@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-md-9 book-move-questions-container">
 
-                        <form id="wizard" class="move-booking">
+                        <form id="wizard" class="move-booking order_create_web" action="{{route('add-bookmove')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="row setup-content-3 step-1" id="step-1">
                                 <div class="row ">
                                     <div class="col-md-12 ">
@@ -109,21 +109,33 @@
                                     <div class="col-md-12 ">
                                         <div class="accordion ml-3 " id="customer-details ">
                                             <div class="d-flex row p-20 ">
+                                                <div class="col-sm-12 " style="margin-bottom: 20px;">
+                                                    <div class="small-switch ">
+                                                        <label class="phone-num-lable">I am booking For Friend</label>
+                                                        <div>
+                                                            <label class="switch2">
+                                                                <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">
+                                                                <input type="checkbox" class="switch" data-value="0" data-target=".toggle-input" name="select_letter" value="0" id="slef1" onchange="document.getElementById('slef').value = this.checked ? false : true" data-phone="{{\Illuminate\Support\Facades\Session::get('account')['phone']}}" data-name="{{\Illuminate\Support\Facades\Session::get('account')['fname']}} {{\Illuminate\Support\Facades\Session::get('account')['lname']}}" data-email="{{\Illuminate\Support\Facades\Session::get('account')['email']}}">
+                                                                <span class="slider2"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-6 col-xs-12 ">
                                                     <div class="form-group ">
-                                                        <label class="phone-num-lable ">Phone Number</label>
+                                                        <label class="phone-num-lable">Phone Number</label>
                                                         <span class=" ">
-                                                            <input type="tel" id="phone" placeholder="9099090909" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" required>
+                                                            <input type="tel" id="phone" placeholder="9099090909"  class="form-control phone" name="contact_details[phone]" value="{{\Illuminate\Support\Facades\Session::get('account')['phone']}}" maxlength="10" minlength="10" required>
                                                             <span class="error-message ">Please enter valid Phone
                                                                 number</span>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 ">
-                                                    <div class="form-group ">
+                                                    <div class="form-group">
                                                         <label class="full-name">Full Name</label>
                                                         <span class=" ">
-                                                            <input type="text" id="fullname" placeholder="David Jerome" class="form-control" name="contact_details[name]" class="form-control" required>
+                                                            <input type="text" id="fullname" placeholder="David Jerome"  class="form-control" name="contact_details[name]" value="{{\Illuminate\Support\Facades\Session::get('account')['fname']}} {{\Illuminate\Support\Facades\Session::get('account')['lname']}}"  class="form-control" required>
                                                             <span class="error-message">Please enter valid
                                                                 name</span>
                                                         </span>
@@ -133,52 +145,8 @@
                                                     <div class="form-group ">
                                                         <label class="email-label">Email</label>
                                                         <span class=" ">
-                                                            <input type="email" placeholder="abc@mail.com" id="email" name="contact_details[email]" id="E-mail" class="form-control" required>
+                                                            <input type="email" placeholder="abc@mail.com" id="email"  name="contact_details[email]" value="{{\Illuminate\Support\Facades\Session::get('account')['email']}}" id="E-mail" class="form-control" required>
                                                             <span class="error-message">Please enter valid
-                                                                Email</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 ">
-                                                    <div class="d-flex flex-row small-switch ">
-                                                        <h5 class="toggle-text">For Me</h5>
-                                                        <label class="switch">
-                                                            <input type="hidden" value="0" name="meta[self_booking]" id="slef">
-                                                            <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? false : true">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 ">
-                                                    <h4 class="toggle-input border-bottom mt-3 pb-3 theme-sub-text mb-view mt-20 ">
-                                                        Contact Details</h4>
-                                                </div>
-                                                <div class="col-sm-6 col-xs-12 pt-2 toggle-input">
-                                                    <div class="form-group">
-                                                        <label class="phone-num-lable">Friend's Phone Number</label>
-                                                        <span class=" ">
-                                                            <input type="tel" id="phonefriend" placeholder="987654321" class=" form-control" name="friend_details[phone]">
-                                                            <span class="error-message">Please enter valid Phone
-                                                                number</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 pt-2 toggle-input">
-                                                    <div class="form-group ">
-                                                        <label class="full-name">Full Name</label>
-                                                        <span class=" ">
-                                                            <input type="text" id="friendname" placeholder="David Jerome" class="form-control " name="friend_details[name]">
-                                                            <span class="error-message ">Please enter valid name
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 pb-2 toggle-input">
-                                                    <div class="form-group">
-                                                        <label class="email-label">Email</label>
-                                                        <span class=" ">
-                                                            <input type="email" placeholder="abc@mail.com" id="friend-mail" class="form-control " name="friend_details[email]">
-                                                            <span class="error-message ">Please enter valid
                                                                 Email</span>
                                                         </span>
                                                     </div>
@@ -198,6 +166,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- second step -->
                             <div class="row setup-content-3 step-2" id="step-2" style="display: none;">
                                 <div class="col-md-12 col-paddingnon">
@@ -210,8 +179,8 @@
                                             @foreach($categories as $category)
                                             <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
                                                 <label>
-                                                    <input type="radio" name="product" value="{{$category->id}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}"/>
-                                                    <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 card-methord  bg-turnblue cursor-pointer " style="border-radius: 6px;">
+                                                    <input type="radio" name="service_id" id="service_{{$category->id}}" value="{{$category->id}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}" @if($prifill['service'] && ($category->id == $prifill['service'])) chaecked @endif/>
+                                                    <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 card-methord  bg-turnblue cursor-pointer  @if($prifill['service'] && ($category->id == $prifill['service']))turntheme check-icon02 @endif" style="border-radius: 6px;">
                                                         <div class="panel-heading text-white f-direction" style="display: flex; justify-content-center;">
                                                             <img src="{{$category->image}}" class="img-width">
                                                             {{ucwords($category->name)}}
@@ -224,8 +193,8 @@
                                         <div class="d-flex row p-20 ">
                                             <div class="col-sm-6 mt-2">
                                                 <div class="form-group ">
-                                                    <label class="address-details-input ">From Address</label>
-                                                    <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
+                                                    <label class="address-details-input ">Search Near By Location</label>
+                                                    <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="" class="form-control source-autocomplete" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                     </span>
                                                 </div>
@@ -234,22 +203,25 @@
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">From Adress line 1</label>
                                                     <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]" class="form-control" required>
-                                                    <input type="hidden" name="source[lat]" id="source-lat" class="form-control" required>
-                                                    <input type="hidden" name="source[lng]" id="source-lng" class="form-control" required>
+                                                    <input type="hidden" name="source[lat]" id="source-lat" value="{{$prifill['source_lat']}}" class="form-control" required>
+                                                    <input type="hidden" name="source[lng]" id="source-lng" value="{{$prifill['source_lng']}}" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 mtop-22 mb-view ">
-                                                <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
+                                                <div style="width: 100%; height: 280px;" class="source-map-picker_booking"></div>
                                                 {{-- <div id="mapcomponent " class="dest-map-picker " style="width: 100%; height: 155px; "></div>--}}
                                                 <!-- <div id="frommap " ></div> -->
+                                                <div>
+                                                    <label class="address-details-input ">We are Available In {{implode(", ", (array)$zones)}}.</label>
+                                                </div>
                                             </div>
                                             <div class="col-sm-6 ">
                                                 <div class="d-flex row justify-content-between ">
                                                     <div class="col-sm-12">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Adress line 2</label>
-                                                            <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line2]" id="" class="form-control" required>
+                                                            <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line2]" id="" class="form-control source-autocomplete" required>
                                                             <span class="error-message">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -278,18 +250,18 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Floor</label>
-                                                            <input type="number" placeholder="3rd Floor" value="0" name="source[meta][floor]" class="form-control " required>
+                                                            <input type="number" placeholder="3" value="0" min="-3" max="99" name="source[meta][floor]" class="form-control " required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group mt-1 ">
-                                                            <label class="form-check-box ml-0" for="Lift1 ">Do you have lift</label>
-                                                            <label class="switch">
+                                                            <label class="form-check-box ml-0" for="Lift1 ">Do you have Service lift</label>
+                                                            <label class="switch2">
                                                                 <input type="hidden" value="0" name="source[meta][lift]" id="letter">
                                                                 <input type="checkbox" name="select_letter" value="1" id="Lift1" onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
-                                                                <span class="slider"></span>
+                                                                <span class="slider2"></span>
                                                             </label>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
@@ -302,10 +274,10 @@
                                         <div class="d-flex row p-20 mt-2 ">
                                             <div class="col-sm-6 ">
                                                 <div class="form-group ">
-                                                    <label class="address-details-input ">To Address</label>
-                                                    <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="dest-autocomplete" class="form-control">
-                                                    <input type="hidden" name="destination[lat]" id="dest-lat" class="form-control" required>
-                                                    <input type="hidden" name="destination[lng]" id="dest-lng" class="form-control" required>
+                                                    <label class="address-details-input ">Search Near By Location</label>
+                                                    <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="" class="form-control dest-autocomplete">
+                                                    <input type="hidden" name="destination[lat]" value="{{$prifill['dest_lat']}}" id="dest-lat" class="form-control" required>
+                                                    <input type="hidden" name="destination[lng]" value="{{$prifill['dest_lng']}}" id="dest-lng" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                 </div>
                                             </div>
@@ -319,14 +291,14 @@
                                             <div class="col-sm-6 mtop-22 mb-view ">
                                                 {{-- <div id="mapcomponent " class="source-map-picker " style="width: 100%; height: 155px; "></div>--}}
                                                 <!-- <div id="tomap " style="width: 100%; height: 155px; "></div> -->
-                                                <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
+                                                <div style="width: 100%; height: 280px;" class="dest-map-picker_booking"></div>
                                             </div>
                                             <div class="col-sm-6 ">
                                                 <div class="d-flex row justify-content-between ">
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label>From Adress line 2</label>
-                                                            <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control" required>
+                                                            <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control dest-autocomplete" required>
                                                             <span class="error-message">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -354,17 +326,17 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Floor </label>
-                                                            <input type="number" placeholder="1st floor" value="0" name="destination[meta][floor]" id="" class="form-control" required>
+                                                            <input type="number" placeholder="5" value="0" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group mt-1">
-                                                            <label class="form-check-box ml-0 " for="Lift1 ">Do you have lift</label>
-                                                            <label class="switch">
+                                                            <label class="form-check-box ml-0 " for="Lift1 ">Do you have Service lift</label>
+                                                            <label class="switch2">
                                                                 <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
                                                                 <input type="checkbox" name="select_letter" value="1" id="Lift2" onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
-                                                                <span class="slider"></span>
+                                                                <span class="slider2"></span>
                                                             </label>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
@@ -378,7 +350,7 @@
                                                 <div class="form-group ">
                                                     <label class="start-date ">Start date</label>
                                                     <div id="my-modal ">
-                                                        <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" name="movement_dates" required />
+                                                        <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" value="{{$prifill['move_date']}}" name="movement_dates" required />
                                                         <span class="error-message ">please enter valid date</span>
                                                     </div>
                                                 </div>
@@ -387,10 +359,10 @@
                                                 <div class="form-group ">
                                                     <label class="te ">Interested in shared services?</label>
                                                     <div>
-                                                        <label class="switch">
+                                                        <label class="switch2">
                                                             <input type="hidden" value="0" name="source[meta][shared_service]" id="m_type">
                                                             <input type="checkbox" name="select_letter" value="1" id="movemnt" onchange="document.getElementById('m_type').value = this.checked ? true : false">
-                                                            <span class="slider"></span>
+                                                            <span class="slider2"></span>
                                                         </label>
                                                     </div>
                                                     <span class="error-message ">Please enter valid</span>
@@ -414,7 +386,6 @@
                             </div>
 
                             <!-- Third Step -->
-
                             <div class="setup-content-3 step-3" id="step-3" style="display: none;">
                                 <div class="col-md-12 heading-view ">
                                     <p class="text-muted ">Step 3/ 6</p>
@@ -423,6 +394,7 @@
                                 <div class="row d-flex justify-content-center row-horizonal subservices">
 
                                 </div>
+                                <input type="hidden" name="meta[subcategory]" id="subservice_id">
                                 <div id="filter" class="bg-light">
                                     <ul class="nav nav-tabs " id="myTab " role="tablist ">
                                         <li class="nav-item ">
@@ -458,6 +430,7 @@
                                 <!--Add Item Modal-->
 
                             </div>
+
                             <!-- Fourth Step -->
                             <div class=" setup-content-3 step-4" id="step-4" style="display: none;">
                                 <div class="col-md-12 col-paddingnon">
@@ -474,37 +447,9 @@
                                     <h4 class="pl-2 pb-4 pt-3 comments ml-2">Upload Photos</h4>
 
                                     <div class="row d-flex uploaded-image mb-5 ml-2 pl-2 mr-0">
-                                        <div class="col-md-2 pl-0 upload-image-container">
-                                            <input type="hidden" id="custId" name="custId" value="3487">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0 upload-image-container">
-                                            <input type="hidden" id="custId" name="custId" value="3487">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0 upload-image-container">
-                                            <input type="hidden" id="custId" name="custId" value="3487">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0 upload-image-container">
-                                            <input type="hidden" id="custId" name="custId" value="3487">
-                                            <img src="{{asset('static/website/images/images/1.png')}}" alt="uploadedImage" class="image-upload-by-customer" />
-                                            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
-                                        </div>
-                                        <div class="col-md-2 pl-0  add-photos">
-                                            <div class="custom-file" id="customFile">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
-
-                                                <label class="custom-file-label" for="exampleInputFile">
-
-                                                </label>
-                                                <i class="fa fa-plus fa-2x cursor-pointer"></i>
-
-                                            </div>
-
+                                        <div class="col-md-2 pl-0 cursor-pointer">
+                                            <input type="file" class="hidden custom-file-input upload-image">
+                                            <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/plus-square-1179806.png" onclick="$(this).parent().find('input').click();" alt="uploadedImage" class="image-upload-by-customer" style="width: 100%; height: 100%;"/>
                                         </div>
                                     </div>
                                 </div>
@@ -530,8 +475,8 @@
     </div>
 
     <!-- The Modal -->
-    <div class="modal" id="addItemModal">
-        <div class="modal-dialog addItemModal " style="max-width: 70%!important;">
+    <div class="modal modal-background" id="addItemModal" >
+        <div class="modal-dialog addItemModal item-modal-width">
             <div class="modal-content ">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom ">
@@ -542,28 +487,34 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body add-item-body " style="padding: 2rem !important; overflow-y: scroll !important; max-height: 80vh;">
-                    <form class="requirements-modal ">
-                        <div class="input-group mt-3 mb-3 search-bar-with-category " style="margin-top: 0rem !important;">
-                            <input type="search " class="form-control " style="border: none !important;" placeholder="Search for item.. ">
+                <div class="modal-body add-item-body show" style="display:block; padding: 2rem !important; overflow-y: scroll !important; max-height: 80vh;">
 
+                        <div class="input-group mt-3 mb-3 search-bar-with-category " style="margin-top: 0rem !important;">
+                            <input type="search" class="form-control search-item" data-url="{{route('search_item')}}" name="search" style="border: none !important;" placeholder="Search for item.. ">
                         </div>
-                    </form>
 
                 <!-- modal for desktop -->
-                    <div class="row f-row desktop-popup">
+                    <div class="items-display">
+
+                    </div>
+                    <div class="row f-row ">
                         @foreach($inventories as $inventory)
                             <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
                                 <div class="item-single-wrapper">
                                     <div class="item-image" style="">
                                         <img src="{{$inventory->image}}" />
+                                        <input type="hidden" name="meta_image" value="{{$inventory->image}}">
+                                        <input type="hidden" name="meta_category" value="{{$inventory->category}}">
                                     </div>
                                     <div class="item-meta">
                                         <h5>{{ucwords($inventory->name)}}</h5>
+                                        <input type="hidden" name="meta_name" value="{{$inventory->name}}">
+                                        <input type="hidden" name="meta_id" value="{{$inventory->id}}">
                                         <div class="info-wrapper d-flex flex-row justify-content-between">
                                             <span class="info">
                                                 <span>Material</span>
-                                                <input type="hidden" name="" value="@{{meta.material}}" />
+                                                <input type="hidden" name="material" value="" />
+                                                <input type="hidden" name="meta_material" value="{{$inventory->material}}" />
                                                 <div class="dropdown-content">
                                                   <ul class="d-content">
                                                      @foreach(json_decode($inventory->material, true) as $material)
@@ -576,7 +527,8 @@
                                             </span>
                                             <span class="info">
                                                 <span>Size</span>
-                                                <input type="hidden" name="" value="@{{meta.size}}" />
+                                                <input type="hidden" name="size" value="" />
+                                                <input type="hidden" name="meta_size" value="{{$inventory->size}}" />
                                                 <div class="dropdown-content">
                                                   <ul class="d-content">
                                                        @foreach(json_decode($inventory->size, true) as $size)
@@ -588,17 +540,18 @@
                                                 </div>
                                             </span>
                                         </div>
-                                        <div class="quantity d-flex justify-content-between">
-                                            <span>-</span>
-                                            <input type="text" readonly value="1" />
-                                            <span>+</span>
+                                        <div class="quantity d-flex justify-content-between quantity-operator">
+                                            <span class="minus">-</span>
+                                            <input type="text" name="quantity" readonly value="1" />
+                                            <span class="plus">+</span>
                                         </div>
                                     </div>
-                                    <button class="btn btn-block add-btn">Add to list</button>
+                                    <button class="btn btn-block add-btn add-item">Add to list</button>
                                 </div>
                             </div>
                         @endforeach
                     </div>
+
                     <!-- Modal footer -->
                     {{--<div class="modal-footer d-flex justify-content-between ">
                         <a href="{{route('home')}}"><button class="btn cancelBtn " type="button " data-dismiss="modal ">
@@ -613,7 +566,7 @@
         </div>
     </div>
 
-    <div class="spcae" style=" height: 650px !important; margin-bottom: 100px !important;"></div>
+    <div class="spcae" style=" height: 0px !important; margin-bottom: 50px !important;"></div>
 
     <script id="entry-template" type="text/x-handlebars-template">
         @{{#if subservices}}
@@ -625,7 +578,7 @@
             <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                 <label>
-                    <input type="radio" name="product" value="@{{id}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
+                    <input type="radio" name="subcategory" value="@{{id}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
 
                     <div class="panel panel-default card-input disabled check-blue  " style="box-shadow: none !important;  background:none !important; text-align: center;">
                             <div class="panel-heading">
@@ -646,46 +599,48 @@
 
     <script id="entry-templateinventory" type="text/x-handlebars-template">
         @{{#each inventories}}
-                <div class="col-md-4 filter @{{meta.category}}" style="padding-right: 10px; padding-left: 10px;">
+                <div class="col-md-4 filter item-remove @{{meta.category}} @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">
                     <div class="item-single-wrapper">
-                        <span class="closer" data-parent=".item-single-wrapper"><i class="icon dripicons-cross"></i></span>
+                        <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>
                         <div class="item-image" style="">
                             <img src="@{{meta.image}}" />
                         </div>
                         <div class="item-meta">
                             <h5>@{{meta.name}}</h5>
+                            <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta.id}}">
+                            <input type="hidden" name="cutome_name" value="@{{meta.name}}">
                             <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
                                     <span>@{{material}}</span>
-                                    <input type="hidden" name="" value="@{{meta.material}}" />
+                                    <input type="hidden" name="inventory_items[][material]" value="@{{material}}" />
                                     <div class="dropdown-content">
                                       <ul class="d-content">
-                                          @{{#each meta.material}}
-                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{this}}">
-                                                  <a class="menu"><span class="ml-1">@{{this}}</span></a>
+                                          @{{#meta.material}}
+                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                  <a class="menu"><span class="ml-1">@{{.}}</span></a>
                                               </li>
-                                          @{{/each}}
+                                          @{{/meta.material}}
                                       </ul>
                                     </div>
                                 </span>
                                 <span class="info">
                                     <span>@{{size}}</span>
-                                    <input type="hidden" name="" value="@{{meta.size}}" />
+                                    <input type="hidden" name="inventory_items[][size]" value="@{{size}}" />
                                     <div class="dropdown-content">
                                       <ul class="d-content">
-                                           @{{#each meta.size}}
-                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{this}}">
-                                                  <a class="menu"><span class="ml-1">@{{this}}</span></a>
+                                           @{{#meta.size}}
+                                              <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                  <a class="menu"><span class="ml-1">@{{.}}</span></a>
                                               </li>
-                                           @{{/each}}
+                                           @{{/meta.size}}
                                       </ul>
                                     </div>
                                 </span>
                             </div>
-                            <div class="quantity d-flex justify-content-between">
-                                <span>-</span>
-                                <input type="text" readonly value="1" />
-                                <span>+</span>
+                            <div class="quantity d-flex justify-content-between quantity-operator">
+                                <span class="minus">-</span>
+                                <input type="text" name="inventory_items[][quantity]" readonly value="1" />
+                                <span class="plus">+</span>
                             </div>
                         </div>
                     </div>
@@ -705,8 +660,120 @@
         </div>--}}
     </script>
 
+    {{--serialize input show--}}
+    <script id="entry-templateinventory_append" type="text/x-handlebars-template">
+        <div class="col-md-4 item-remove filter custom-item @{{meta_category}} @{{#replace ' ' '-'}}@{{meta_name}}-@{{material}}-@{{size}}-@{{meta_id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">
+            <div class="item-single-wrapper">
+                <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>
+                <div class="item-image" style="">
+                    <img src="@{{meta_image}}" />
+                </div>
+                <div class="item-meta">
+                    <h5>@{{meta_name}}</h5>
+                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta_id}}">
+                    <div class="info-wrapper d-flex flex-row justify-content-between">
+                        <span class="info">
+                            <span>@{{material}}</span>
+                            <input type="hidden" name="inventory_items[][material]" value="@{{material}}" />
+                            <div class="dropdown-content">
+                                <ul class="d-content">
+                                    @{{#meta_material}}
+                                    <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                        <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                    </li>
+                                    @{{/meta_material}}
+                                </ul>
+                            </div>
+                        </span>
+                        <span class="info">
+                            <span>@{{size}}</span>
+                            <input type="hidden" name="inventory_items[][size]" value="@{{size}}" />
+                            <div class="dropdown-content">
+                                <ul class="d-content">
+                                    @{{#meta_size}}
+                                    <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                        <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                    </li>
+                                           @{{/meta_size}}
+                                      </ul>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="quantity d-flex justify-content-between quantity-operator">
+                                <span class="minus">-</span>
+                                <input type="text" name="inventory_items[][quantity]" readonly value="@{{quantity}}" />
+                                <span class="plus">+</span>
+                            </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+
+    <script id="search_item" type="text/x-handlebars-template">
+        @{{#each inventories}}
+            <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
+                <div class="item-single-wrapper">
+                    <div class="item-image" style="">
+                        <img src="@{{image}}" />
+                        <input type="hidden" name="meta_image" value="@{{image}}">
+                    </div>
+                    <div class="item-meta">
+                        <h5>@{{name}}</h5>
+                        <input type="hidden" name="meta_name" value="@{{name}}">
+                        <input type="hidden" name="meta_id" value="@{{id}}">
+                        <div class="info-wrapper d-flex flex-row justify-content-between">
+                                            <span class="info">
+                                                <span>Material</span>
+                                                <input type="hidden" name="material" value="" />
+                                                <input type="hidden" name="meta_material" value="@{{material}}" />
+                                                <div class="dropdown-content">
+                                                  <ul class="d-content">
+                                                     @{{#material}}
+                                                          <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                              <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                                          </li>
+                                                      @{{/material}}
+                                                  </ul>
+                                                </div>
+                                            </span>
+                                            <span class="info">
+                                                <span>Size</span>
+                                                <input type="hidden" name="size" value="" />
+                                                <input type="hidden" name="meta_size" value="@{{size}}" />
+                                                <div class="dropdown-content">
+                                                  <ul class="d-content">
+                                                       @{{#size}}
+                                                          <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                              <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                                          </li>
+                                                      @{{/size}}
+                                                  </ul>
+                                                </div>
+                                            </span>
+                    </div>
+                    <div class="quantity d-flex justify-content-between quantity-operator">
+                        <span class="minus">-</span>
+                        <input type="text" name="quantity" readonly value="1" />
+                        <span class="plus">+</span>
+                    </div>
+                </div>
+                <button class="btn btn-block add-btn add-search-item">Add to list</button>
+            </div>
+        </div>
+        @{{/each}}
+    </script>
+
+    <script id="image_upload_preview" type="text/x-handlebars-template">
+        <div class="col-md-2 pl-0 upload-image-container">
+            <input type="hidden" id="custId" value="@{{image}}" name="meta[images][]">
+            <img src="@{{image}}" alt="uploadedImage" class="image-upload-by-customer" style="width: 100%; height: 100%;"/>
+            <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
+        </div>
+    </script>
+
     <script>
-        function previewImages() {
+        /*function previewImages() {
 
             var preview = document.querySelector('.upload-image-container');
 
@@ -738,7 +805,7 @@
 
         }
 
-        document.querySelector('.custom-file-input').addEventListener("change", previewImages);
+        document.querySelector('.custom-file-input').addEventListener("change", previewImages);*/
 
         function updateCount(type) {
             let currentValue = Number(document.getElementById('inc ').value)

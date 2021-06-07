@@ -9,7 +9,7 @@
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="category" class="card-input-element" />
+                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" />
                         <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
@@ -35,7 +35,7 @@
                 <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
                     <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: auto;">
                         <p style="font-size: 13px;">TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" name="destination" placeholder="Majestic Villas" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" placeholder="Majestic Villas" readonly>
                         <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: auto;" type="text" placeholder="Gandhinagar, Chennai" readonly>
                         <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
                         <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
@@ -49,10 +49,10 @@
                             <p style="font-size: 13px;">DATE OF MOVEMENT</p>
                             <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="23 March 21" readonly/>
                         </div>
-                        <div class="form-group  mr-1">
+                        {{--<div class="form-group  mr-1">
                             <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
                             </button>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -275,7 +275,7 @@
             <div class="row">
                 <div class="card">
                     <div class="col-lg-12 text-center mb-2 mt-6">
-                        <h1 style="font-size: 30;">Testimonials</h1>
+                        <h1 style="font-size: 30px;">Testimonials</h1>
                          <p class="section-subheading text-muted mt-2">Lorem Ipsum</p>
                     </div>
                 </div>
@@ -462,16 +462,25 @@
                             </button>
                             </a>--}}
                             <div class="col-md-12" style="width: 100%;">
-                            <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</span> </p>
+{{--                                <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</p>--}}
 
-                            <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center  padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
-                                    Submit
-                                </button>
-                            </a>
-                            <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
+                                <div class="col-12 d-flex center">
+                                    <div class="form-groups">
+                                        <label class="container-01 m-0">
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-12">I agree to the <b>Terms & conditions</b></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <a class="weblogin" >
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                        Submit
+                                    </button>
+                                </a>
+                                <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p>
                             </div>
-                           
 
                         </div>
                     </form>
@@ -494,7 +503,7 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                     <div class="row">
-                        <div class="col-sm-12"> 
+                        <div class="col-sm-12">
                         <label>From Location</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
@@ -507,7 +516,7 @@
                     </div>
                     <span class="error-message">Please enter valid</span>
                         </div>
-                   
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
 
@@ -530,7 +539,7 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                 <div class="row">
-                        <div class="col-sm-12"> 
+                        <div class="col-sm-12">
                         <label>To Location</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
@@ -543,7 +552,7 @@
                     </div>
                     <span class="error-message">Please enter valid</span>
                         </div>
-                   
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>

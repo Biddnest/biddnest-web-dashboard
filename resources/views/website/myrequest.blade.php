@@ -153,7 +153,7 @@
                                         <label class="phone-num-lable">Category</label>
                                               <select name="category" class="form-control" required>
                                                 <option value="">--Select--</option>
-                                                  @foreach(\App\Enums\TicketEnums::$TYPE as $type=>$key)
+                                                  @foreach(array_slice(\App\Enums\TicketEnums::$TYPE, 0, 5) as $type=>$key)
                                                       <option value="{{$key}}">{{ucwords($type)}}</option>
                                                   @endforeach
                                               </select>

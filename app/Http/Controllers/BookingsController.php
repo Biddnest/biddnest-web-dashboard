@@ -200,7 +200,7 @@ class BookingsController extends Controller
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
-            $movementdates->date = $dates;
+            $movementdates->date = date('y-m-d', strtotime($dates));
             $result_date = $movementdates->save();
         }
 
@@ -325,8 +325,7 @@ class BookingsController extends Controller
 
     public static function getBookingByPublicIdForApp($public_booking_id, $user_id, $web=false)
     {
-        $booking = Booking::where("public_booking_id", $public_booking_id)
-            //            ->where("user_id", $user_id)
+        $booking = Booking::where("user_id", $user_id)
             ->where("deleted", CommonEnums::$NO)->orderBy('id', 'DESC')
             ->with('movement_dates')
             ->with(['inventories'=>function($query){
@@ -336,27 +335,39 @@ class BookingsController extends Controller
             ->with('organization')
             ->with('service')
             ->with('payment')
-            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
-                $movement_specifications->where('booking_id', Booking::where(['public_booking_id' => $public_booking_id])->pluck('id')[0])
-                    ->where('status', BidEnums::$STATUS['won']);
-            }
-            ])
             ->with('driver')
             ->with('vehicle')
-            ->with('review')
-            ->with(['bid'=>function($query){
-                $query->where('status', BidEnums::$STATUS['won']);
-            }])
-            ->first();
+            ->with('review');
+
+            if($web)
+                $booking->where("public_enquiry_id", $public_booking_id)->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+                        $movement_specifications->where('booking_id', Booking::where(['public_enquiry_id' => $public_booking_id])->pluck('id')[0])
+                            ->where('status', BidEnums::$STATUS['won'])
+                            ->with(['bid'=>function($query){
+                                $query->whereNotIn('status', [BidEnums::$STATUS['won'], BidEnums::$STATUS['rejected']]);
+                            }]);
+                    }
+                    ]);
+            else
+                $booking->where("public_booking_id", $public_booking_id)->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+                    $movement_specifications->where('booking_id', Booking::where(['public_booking_id' => $public_booking_id])->pluck('id')[0])
+                        ->where('status', BidEnums::$STATUS['won'])
+                        ->with(['bid'=>function($query){
+                            $query->where('status', BidEnums::$STATUS['won']);
+                        }]);
+                }
+                ]);
+
+
 
         if (!$booking) {
             return Helper::response(false, "Invalid Booking id");
         }
 
         if($web)
-            return $booking;
+            return  $booking->first();
         else
-            return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
+            return Helper::response(true, "data fetched successfully", ["booking" =>  $booking->first()]);
     }
 
     public static function bookingHistoryEnquiry($user_id, $web=false)
@@ -694,7 +705,7 @@ class BookingsController extends Controller
         if ($exist_bid['bookmarked'] == CommonEnums::$YES)
             $bookmark = Bid::where(['id' => $exist_bid['id']])->update(["bookmarked" => CommonEnums::$NO]);
 
-        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "vendor_id" => $vendor_id]);
+        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "rejected_by" => $vendor_id]);
 
         if (!$reject)
             return Helper::response(false, "Couldn't Reject");
@@ -720,7 +731,7 @@ class BookingsController extends Controller
 
 
         $result = Bid::where(['id' => $exist_bid['id']])
-            ->update(["bookmarked" => $bookmarked, "vendor_id" => $vendor_id]);
+            ->update(["bookmarked" => $bookmarked, "bookmarked_by" => $vendor_id]);
 
         if (!$result)
             return Helper::response(false, "Couldn't Add to Bookmark");
@@ -795,7 +806,8 @@ class BookingsController extends Controller
 
                 NotificationController::sendTo("user", [$booking->user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
                     "type" => NotificationEnums::$TYPE['booking'],
-                    "public_booking_id" => $booking->public_booking_id
+                    "public_booking_id" => $booking->public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['in_transit']
                 ]);
 
             })->afterResponse();
@@ -835,7 +847,8 @@ class BookingsController extends Controller
 
                 NotificationController::sendTo("user", [$booking->user_id], "Your booking has been completed.", "Thankyou for choosing Biddnest.", [
                     "type" => NotificationEnums::$TYPE['booking'],
-                    "public_booking_id" => $booking->public_booking_id
+                    "public_booking_id" => $booking->public_booking_id,
+                    "booking_status" => BookingEnums::$STATUS['completed']
                 ]);
 
             })->afterResponse();

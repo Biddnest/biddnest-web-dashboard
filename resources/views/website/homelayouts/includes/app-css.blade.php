@@ -247,9 +247,9 @@
 
 
 
-    
 
-   
+
+
     @media (max-width:480px) {
         .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
             width: 96% !important;
@@ -441,7 +441,7 @@
 
     }
 
-   
+
 
     a:hover {
         color: #fdc403 !important;
@@ -470,8 +470,8 @@
 
     .width-max{
         width: 100%;
-    width: -moz-available;         
-    width: -webkit-fill-available;  
+    width: -moz-available;
+    width: -webkit-fill-available;
     width: fill-available;
     }
 
@@ -482,6 +482,12 @@
     .carousel-control .glyphicon-chevron-right{
         margin-top: -63px;
 
+    }
+
+    .unstyled-button {
+        border: none;
+        padding: 0;
+        background: none;
     }
 
 </style>

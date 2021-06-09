@@ -1158,4 +1158,18 @@ class WebController extends Controller
             "report"=>Report::orderBy('id', 'DESC')->first()
         ]);
     }
+
+    public static function sales_report(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        return view('reports.sales',[
+            "report"=>Report::orderBy('id', 'DESC')->first(),
+            "zones"=>Zone::whereIn("id",$zone)->get(),
+            "services"=>Service::where("deleted",CommonEnums::$NO)->get()
+        ]);
+    }
 }

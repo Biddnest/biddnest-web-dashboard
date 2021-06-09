@@ -727,6 +727,14 @@ export function initDateBookPicker(){
 
         });
     }
+
+    if($(".singledate").length) {
+
+        $('.singledate').datepicker({
+            multidate: false,
+            format: 'dd-mm-yyyy'
+        });
+    }
 }
 
 export function initDatePicker(){

@@ -36,16 +36,16 @@ class Bid extends Model
 
     public function bookmarked_by()
     {
-        return $this->belongsTo(Vendor::class, 'id', 'bookmarked_by');
+        return $this->belongsTo(Vendor::class, 'bookmarked_by');
     }
 
     public function rejected_by()
     {
-        return $this->belongsTo(Vendor::class, 'id', 'rejected_by');
+        return $this->belongsTo(Vendor::class, 'rejected_by');
     }
 
     public function watched_by()
     {
-        return $this->belongsTo(Vendor::class, 'id', 'watcher_id');
+        return $this->belongsTo(Vendor::class, 'watcher_id');
     }
 }

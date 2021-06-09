@@ -643,7 +643,11 @@ class BookingsController extends Controller
         $bookings->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($organization_id) {
-                $bid->where("organization_id", $organization_id)->with('vendor');
+                $bid->where("organization_id", $organization_id)
+                    ->with('watched_by')
+                    ->with('vendor')
+                    ->with('bookmarked_by')
+                    ->with('rejected_by');
             }]);
 
         if (isset($request->from) && isset($request->to)) {
@@ -718,7 +722,10 @@ class BookingsController extends Controller
             ->with('vehicle')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id)
-                    ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
+                    ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']])
+                    ->with('bookmarked_by')
+                    ->with('rejected_by')
+                    ->with('watched_by');
             }])->with('user')->first();
 
         if(isset($booking->bid) && $booking->bid->status == BidEnums::$STATUS['lost'])
@@ -981,5 +988,54 @@ class BookingsController extends Controller
             TicketController::createRejectCall($user_id, 4, $public_booking_id);
 
         return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
+    }
+
+    public static function startVendorWatch($request){
+        $token = Helper::validateAuthToken($request['token']);
+        $vendor = Vendor::find($token->payload->id);
+            if(!$token || !$vendor)
+                return false;
+
+        Bid::where("public_booking_id", $request['data']['public_booking_id'])->update([
+            "watched_by"=>$token->payload->id
+        ]);
+
+        return ["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor];
+
+    }
+
+    public static function stopVendorWatch($request){
+        $token = Helper::validateAuthToken($request['token']);
+        $vendor = Vendor::find($token->payload->id);
+        if(!$token || !$vendor)
+                return false;
+
+        Bid::where("public_booking_id", $request['data']['public_booking_id'])
+            ->where("watched_by",$token->payload->id)
+            ->update([
+            "watched_by"=>null
+        ]);
+
+        return ["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor];;
+
+    }
+
+    public function validateVendorRoom($request){
+        $token = Helper::validateAuthToken($request['token']);
+        $vendor = Vendor::find($token->payload->id);
+        if(!$token || !$vendor)
+            return false;
+
+        $booking = Booking::where("public_booking_id",$request['data']['public_booking_id'])
+            ->with(['bid'=>function($query) use($token){
+                $query->where("organization_id",$token->payload->organization_id);
+            }])
+            ->first();
+
+        if(!$booking || !$booking->bid)
+            return false;
+        else
+            return true;
+
     }
 }

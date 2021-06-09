@@ -141,11 +141,11 @@
                                 aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-bar"></i></span> </span>Reports</a>
                             </li>
                             <ul class="sub-menu" id="reports">
-                                <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
+                                <li class="sub-menu-item"><a href="{{route('report.summary')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Summary</a>
                                 </li>
-                                <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
+                                <li class="sub-menu-item"> <a href="{{route('report.sales')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sales</a></li>
                             </ul>
 
                         <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"

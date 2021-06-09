@@ -163,12 +163,12 @@
                     @yield('content')
                     </div>
                     <!-- footer -->
-                    <footer class="text-center b-purple">
+                    {{--<footer class="text-center b-purple">
                         <hr>
 
                         <p>Copyright © {{ date("Y") }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
                                                                             target="_blank">BIDNEST</a>.</p>
-                    </footer>
+                    </footer>--}}
                 </div>
             </div>
             <div class="side-bar-pop-up">

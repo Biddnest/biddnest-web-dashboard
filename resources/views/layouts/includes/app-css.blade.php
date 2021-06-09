@@ -525,7 +525,7 @@
             }
 
 
-           
+
             body.dragging,
             body.dragging * {
                 cursor: move !important;
@@ -1013,6 +1013,11 @@
 
             .Custom_Cancel{
                 background-color: #DD6B55 !important;
+            }
+
+            .select2-dropdown{
+                width: auto !important;
+                border: 1px solid #c0c0c0;
             }
 
 

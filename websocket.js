@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
 });
 
 /* functions */
-watchStart = (payload) =>{
+watchStart = (payload) => {
 
     return axios({
         method: 'POST',
@@ -43,11 +43,8 @@ watchEnd = (payload) =>{
             'Content-Length': payload.length,
             'Authorization': `Bearer ${payload.token}`
         }
-    }).stat;
+    });
 };
-
-// console.log(`${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`);
-// console.log(watchStart({}));
 
 io.on("connection", (socket) => {
     console.log("Client Connected");

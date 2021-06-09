@@ -29,9 +29,10 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
               "api"=>[
-                  "name"=>"Bidnest",
+                  "name"=>"Bidnest Customer Configurations",
                   "logo"=>env("APP_URL")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
+                  "socket_server_url"=> env("APP_URL").":5000",
                   "version"=>"v1",
                   "environment"=>env("APP_DEBUG") ? "staging" : "production"
               ],

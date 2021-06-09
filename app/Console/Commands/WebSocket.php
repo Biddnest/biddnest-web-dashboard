@@ -45,7 +45,7 @@ class WebSocket extends Command
                     $this->alert('Bidnest Socket server');
                     $this->info('Initiating socket server');
 
-                    $port = $this->option('port') ? $this->option('port') : 3000;
+                    $port = $this->option('port') ? $this->option('port') : env('DEFAULT_SOCKET_SERVER_PORT');
 
                     $io = new SocketIO($port);
 

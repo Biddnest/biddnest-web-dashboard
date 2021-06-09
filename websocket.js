@@ -103,4 +103,4 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(6001);
+server.listen(process.env.DEFAULT_SOCKET_SERVER_PORT);

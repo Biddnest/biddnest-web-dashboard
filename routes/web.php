@@ -29,8 +29,9 @@ Route::get('/', function () {
     return response()->redirectToRoute('login');
 });
 
-Route::get('/debug',function(){
-    abort(500);
+Route::get('/debug/socket',function(){
+//    abort(500);
+    return view("debug.socket");
 });
 
 

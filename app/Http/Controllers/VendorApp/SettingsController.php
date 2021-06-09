@@ -31,7 +31,7 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
                 "api"=>[
-                  "name"=>"Bidnest Vendor Configurations",
+                  "name"=>"Biddnest Vendor Configurations",
                   "logo"=>env("APP_URL")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
                   "socket_server_url"=> env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT'),

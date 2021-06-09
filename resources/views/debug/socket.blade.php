@@ -2,6 +2,6 @@
 <script>
     var socket = io('http://'+document.domain+':5000');
     socket.on('connection', function (){
-        console.log('connected');
+        console.log('connected to server');
     });
 </script>

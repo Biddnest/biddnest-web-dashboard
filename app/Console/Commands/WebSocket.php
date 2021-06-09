@@ -59,6 +59,7 @@ class WebSocket extends Command
                  * booking.rejected
                  * booking.watch.start
                  * booking.watch.end
+                 * info.debug
                 */
 
             /*Structure of any incoming data:
@@ -68,6 +69,8 @@ class WebSocket extends Command
 
                 $io->on('connection', function ($socket) use ($io) {
                     $this->comment("Client Connected");
+                    $socket->emit('info.debug',["status"=>"success","message"=>"You are connected to server now.","data"=>null]);
+
 
                     $socket->on('booking.listen.start', function ($request) use ($io, $socket) {
 

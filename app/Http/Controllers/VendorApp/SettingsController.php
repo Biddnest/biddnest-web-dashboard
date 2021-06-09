@@ -34,7 +34,7 @@ class SettingsController extends Controller
                   "name"=>"Bidnest Vendor Configurations",
                   "logo"=>env("APP_URL")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
-                  "socket_server_url"=> env("APP_URL").":5000",
+                  "socket_server_url"=> env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT'),
                   "version"=>"v1",
                   "environment"=>env("APP_DEBUG") ? "staging" : "production"
                 ],

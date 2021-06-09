@@ -994,13 +994,14 @@ class BookingsController extends Controller
         $token = Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
             if(!$token || !$vendor)
-                return false;
+                return Helper::response(false, "Token validation failed.");
 
         Bid::where("public_booking_id", $request['data']['public_booking_id'])->update([
             "watched_by"=>$token->payload->id
         ]);
 
-        return ["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor];
+        return Helper::response(true, "Watching Started",["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor]);
+
 
     }
 
@@ -1008,7 +1009,7 @@ class BookingsController extends Controller
         $token = Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if(!$token || !$vendor)
-                return false;
+            return Helper::response(false, "Token validation failed.");
 
         Bid::where("public_booking_id", $request['data']['public_booking_id'])
             ->where("watched_by",$token->payload->id)
@@ -1016,7 +1017,7 @@ class BookingsController extends Controller
             "watched_by"=>null
         ]);
 
-        return ["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor];;
+        return Helper::response(true, "Watching ended.", ["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor]);
 
     }
 

@@ -386,4 +386,14 @@ class VendorApiRouteController extends Controller
         return VendorUserController::verifyAuth($request->token_payload->id);
     }
 
+    public function startWatchOnBookingSocket(Request $request)
+    {
+        return BookingController::startVendorWatch($request);
+    }
+
+    public function stopWatchOnBookingSocket(Request $request)
+    {
+        return BookingController::stopVendorWatch($request);
+    }
+
 }

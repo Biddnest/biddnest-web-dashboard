@@ -388,12 +388,12 @@ class VendorApiRouteController extends Controller
 
     public function startWatchOnBookingSocket(Request $request)
     {
-        return BookingController::startVendorWatch($request);
+        return BookingsController::startVendorWatch($request->all());
     }
 
     public function stopWatchOnBookingSocket(Request $request)
     {
-        return BookingController::stopVendorWatch($request);
+        return BookingsController::stopVendorWatch($request->all());
     }
 
 }

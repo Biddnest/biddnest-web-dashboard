@@ -1006,7 +1006,7 @@ class BookingsController extends Controller
     }
 
     public static function stopVendorWatch($request){
-        $token = Helper::validateAuthToken($request['token']);
+        $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if(!$token || !$vendor)
             return Helper::response(false, "Token validation failed.");
@@ -1022,7 +1022,7 @@ class BookingsController extends Controller
     }
 
     public function validateVendorRoom($request){
-        $token = Helper::validateAuthToken($request['token']);
+        $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
         if(!$token || !$vendor)
             return false;

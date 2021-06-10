@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
                 });
 
         }).catch((e)=>{
-            console.log("Exception caught=>", e);
+            console.log("Exception caught=>", e.data);
         });
 
 
@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
                     data: stop_listen.body
                 });
         }).catch((e)=>{
-            console.log("Exception caught=>", e);
+            console.log("Exception caught=>", e.data);
         });
 
 

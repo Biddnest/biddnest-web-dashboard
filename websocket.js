@@ -30,6 +30,8 @@ watchEnd = (payload) =>{
 
 io.on("connection", (socket) => {
     console.log("Client Connected. Socket id: ", socket.id );
+    // console.log("IP: ", socket.request.connection.remoteAddress);
+    console.log("Socket detaisl =>>>>: ", socket);
 
     socket.on("disconnect",function(){
         console.log("Client disconnected");

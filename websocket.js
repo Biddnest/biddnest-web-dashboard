@@ -56,16 +56,19 @@ io.on("connection", (socket) => {
     });
 
     socket.on("booking.listen.start", (request) => {
+        console.log("listen start", request);
         io.join(request.data.public_booking_id);
     });
 
     socket.on("booking.listen.stop", (request) => {
+        console.log("listen stop", request);
         io.leave(request.data.public_booking_id);
     });
 
     socket.on("booking.watch.start", (request) => {
+        console.log("watch start", request);
         let start_listen = watchStart(request);
-        console.log(start_listen);
+        console.log("resp from start api",start_listen);
         io.emit('booking.watch.start',{
             status:"success",
             message: "Booking has been started for this booking.",
@@ -83,9 +86,10 @@ io.on("connection", (socket) => {
     });
 
     socket.on("booking.watch.stop", (request) => {
+        console.log("watch stop", request);
         let stop_listen = watchStop(request);
 
-        console.log(stop_listen);
+        console.log("resp from stop api",stop_listen);
 
         io.emit('booking.watch.start',{
             status:"success",

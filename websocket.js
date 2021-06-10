@@ -67,42 +67,52 @@ io.on("connection", (socket) => {
 
     socket.on("booking.watch.start", (request) => {
         console.log("watch start", request);
-        let start_listen = watchStart(request);
-        console.log("resp from start api",start_listen);
-        io.emit('booking.watch.start',{
-            status:"success",
-            message: "Booking has been started for this booking.",
-            data: null
+        watchStart(request).then((start_listen)=>{
+
+            console.log("resp from start api",start_listen);
+
+            io.to(request.data.public_booking_id).emit('booking.watch.start',{
+                status:"success",
+                message: "Booking has been started for this booking.",
+                data: null
+            });
+
+            if(start_listen.body.status == "success")
+                io.to(request.data.public_booking_id).emit('info.debug',{
+                    status: "success",
+                    message: "You are now connected to the socket server",
+                    data: start_listen.body
+                });
+        }).catch((e)=>{
+            console.log("Exception caught=>", e);
         });
 
-        if(start_listen.body.status == "success")
-            io.to(request.data.public_booking_id).emit('info.debug',{
-                status: "success",
-                message: "You are now connected to the socket server",
-                data: start_listen.body
-            });
 
 
     });
 
     socket.on("booking.watch.stop", (request) => {
         console.log("watch stop", request);
-        let stop_listen = watchStop(request);
+        watchStop(request).then((stop_listen)=>{
+            console.log("resp from stop api",stop_listen);
 
-        console.log("resp from stop api",stop_listen);
+            io.to(request.data.public_booking_id).emit('booking.watch.start',{
+                status:"success",
+                message: "Booking has been started for this booking.",
+                data: null
+            });
 
-        io.emit('booking.watch.start',{
-            status:"success",
-            message: "Booking has been started for this booking.",
-            data: null
+            if(stop_listen.body.status == "success")
+                io.to(request.data.public_booking_id).emit('info.debug',{
+                    status: "success",
+                    message: "You are now connected to the socket server",
+                    data: stop_listen.body
+                });
+        }).catch((e)=>{
+            console.log("Exception caught=>", e);
         });
 
-        if(stop_listen.body.status == "success")
-            io.to(request.data.public_booking_id).emit('info.debug',{
-                status: "success",
-                message: "You are now connected to the socket server",
-                data: stop_listen.body
-            });
+
     });
 });
 

@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
 
             io.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
 
-            if(start_listen.body.status == "success")
+            if(start_listen.data.status == "success")
                 io.to(request.data.public_booking_id).emit('info.debug',start_listen.data);
 
         }).catch((e)=>{
@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
 
             io.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
 
-            if(stop_listen.body.status == "success")
+            if(stop_listen.data.status == "success")
                 io.to(request.data.public_booking_id).emit('info.debug',stop_listen.data);
         }).catch((e)=>{
             console.error("Exception caught=>", e);

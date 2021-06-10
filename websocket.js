@@ -29,7 +29,16 @@ watchEnd = (payload) =>{
 };*/
 
 io.on("connection", (socket) => {
-    console.log("Client Connected");
+    console.log("Client Connected. Socket id: ", socket.id );
+
+    socket.on("disconnect",function(){
+        console.log("Client disconnected");
+        /* Code to remove all watches by the user */
+    });
+
+    socket.on("disconnect",function(){
+        /* Code to remove all watches by the user */
+    });
 
     socket.broadcast.emit("info.debug",{
         status: "success",
@@ -112,7 +121,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("booking.bid.submitted", (request)=>{
-        console.log("booking.rejected triggered", request);
+        console.log("booking.submitted triggered", request);
         socket.to(request.data.public_booking_id).emit("booking.bid.submitted", {
             status:"success",
             message:"Somebody submitted bid for this booking.",

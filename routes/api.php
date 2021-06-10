@@ -165,7 +165,7 @@ Route::prefix('vendors/v1')->group(function () {
     Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
 
     //Webhooks for websocket server
-    Route::post("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'startWatchOnBookingSocket']);
+    Route::post("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'startWatchOnBookingSocket'])->name("startWatchOnBookingSocket");
     Route::delete("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'stopWatchingOnBookingSocket']);
 
 

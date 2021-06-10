@@ -28,11 +28,18 @@ Route::get('/', function () {
 
     return response()->redirectToRoute('login');
 });
-
 Route::get('/debug/socket',function(){
 //    abort(500);
-    return view("debug.socket");
+    echo route('startWatchOnBookingSocket');
+//    return view("debug.socket");
 });
+
+Route::get('/debug/socket-url',function(){
+//    abort(500);
+    echo route('startWatchOnBookingSocket');
+//    return view("debug.socket");
+});
+
 
 
 

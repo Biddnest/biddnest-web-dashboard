@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
         console.log("watch start", request);
         axios({
             method: 'POST',
-            url: `${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`,
+            url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
             data: request,
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
         console.log("watch stop", request);
         axios({
             method: 'DELETE',
-            url: `${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`,
+            url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
             data: request,
             headers: {
                 'Content-Type': 'application/json',

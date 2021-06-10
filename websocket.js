@@ -18,33 +18,15 @@ app.get('/', function(req, res) {
 });
 
 /* functions */
-watchStart = (payload) => {
+/*watchStart = (payload) => {
 
-    return axios({
-        method: 'POST',
-        url: `${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`,
-        data: payload,
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': payload.length,
-            'Authorization': `Bearer ${payload.token}`
-        }
-    });
+    return
 
-};
-
+};*/
+/*
 watchEnd = (payload) =>{
-    return axios({
-        method: 'delete',
-        url: `${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`,
-        data: payload,
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': payload.length,
-            'Authorization': `Bearer ${payload.token}`
-        }
-    });
-};
+    return
+};*/
 
 io.on("connection", (socket) => {
     console.log("Client Connected");
@@ -67,9 +49,18 @@ io.on("connection", (socket) => {
 
     socket.on("booking.watch.start", (request) => {
         console.log("watch start", request);
-        watchStart(request).then((start_listen)=>{
+        axios({
+            method: 'POST',
+            url: `${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`,
+            data: request,
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': request.length,
+                'Authorization': `Bearer ${request.token}`
+            }
+        }).then((start_listen)=>{
 
-            console.log("resp from start api",start_listen);
+            console.log("resp from start api",start_listen.body);
 
             io.to(request.data.public_booking_id).emit('booking.watch.start',{
                 status:"success",
@@ -83,6 +74,7 @@ io.on("connection", (socket) => {
                     message: "You are now connected to the socket server",
                     data: start_listen.body
                 });
+
         }).catch((e)=>{
             console.log("Exception caught=>", e);
         });
@@ -93,10 +85,19 @@ io.on("connection", (socket) => {
 
     socket.on("booking.watch.stop", (request) => {
         console.log("watch stop", request);
-        watchStop(request).then((stop_listen)=>{
-            console.log("resp from stop api",stop_listen);
+        axios({
+            method: 'DELETE',
+            url: `${API_ENDPOINT}/api/vendor/v1/webhook/for-socket/booking/watch`,
+            data: request,
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': request.length,
+                'Authorization': `Bearer ${request.token}`
+            }
+        }).then((stop_listen)=>{
+            console.log("resp from stop api",stop_listen.body);
 
-            io.to(request.data.public_booking_id).emit('booking.watch.start',{
+            io.to(request.data.public_booking_id).emit('booking.watch.stop',{
                 status:"success",
                 message: "Booking has been started for this booking.",
                 data: null

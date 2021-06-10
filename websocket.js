@@ -65,14 +65,14 @@ io.on("connection", (socket) => {
             io.to(request.data.public_booking_id).emit('booking.watch.start',{
                 status:"success",
                 message: "Booking has been started for this booking.",
-                data: null
+                data: start_listen.body.data
             });
 
             if(start_listen.body.status == "success")
                 io.to(request.data.public_booking_id).emit('info.debug',{
                     status: "success",
                     message: "You are now connected to the socket server",
-                    data: start_listen.body
+                    data: start_listen.body.data
                 });
 
         }).catch((e)=>{
@@ -100,14 +100,14 @@ io.on("connection", (socket) => {
             io.to(request.data.public_booking_id).emit('booking.watch.stop',{
                 status:"success",
                 message: "Booking has been started for this booking.",
-                data: null
+                data: stop_listen.body.data
             });
 
             if(stop_listen.body.status == "success")
                 io.to(request.data.public_booking_id).emit('info.debug',{
                     status: "success",
                     message: "You are now connected to the socket server",
-                    data: stop_listen.body
+                    data: stop_listen.body.data
                 });
         }).catch((e)=>{
             console.error("Exception caught=>", e);

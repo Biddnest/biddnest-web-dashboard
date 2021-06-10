@@ -1014,7 +1014,7 @@ class BookingsController extends Controller
             return Helper::response(false, "Token validation failed.");
 
         Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])
-            ->where("watched_by",$token->payload->id)
+            ->where("watcher_id",$token->payload->id)
             ->update([
             "watcher_id"=>null
         ]);

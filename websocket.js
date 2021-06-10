@@ -31,7 +31,7 @@ watchEnd = (payload) =>{
 io.on("connection", (socket) => {
     console.log("Client Connected");
 
-    io.emit("info.debug",{
+    socket.broadcast.emit("info.debug",{
         status: "success",
         message: "You are now connected to the socket server",
         data: null
@@ -62,10 +62,10 @@ io.on("connection", (socket) => {
 
             console.log("resp from start api",start_listen.data);
 
-            io.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
+            socket.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
 
             if(start_listen.data.status == "success")
-                io.to(request.data.public_booking_id).emit('info.debug',start_listen.data);
+                socket.to(request.data.public_booking_id).emit('info.debug',start_listen.data);
 
         }).catch((e)=>{
             console.error("Exception caught=>", e);
@@ -89,10 +89,10 @@ io.on("connection", (socket) => {
         }).then((stop_listen)=>{
             console.log("resp from stop api",stop_listen.data);
 
-            io.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
+            socket.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
 
             if(stop_listen.data.status == "success")
-                io.to(request.data.public_booking_id).emit('info.debug',stop_listen.data);
+                socket.to(request.data.public_booking_id).emit('info.debug',stop_listen.data);
         }).catch((e)=>{
             console.error("Exception caught=>", e);
         });

@@ -57,12 +57,12 @@ io.on("connection", (socket) => {
 
     socket.on("booking.listen.start", (request) => {
         console.log("listen start", request);
-        io.join(request.data.public_booking_id);
+        socket.join(request.data.public_booking_id);
     });
 
     socket.on("booking.listen.stop", (request) => {
         console.log("listen stop", request);
-        io.leave(request.data.public_booking_id);
+        socket.leave(request.data.public_booking_id);
     });
 
     socket.on("booking.watch.start", (request) => {

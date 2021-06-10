@@ -991,16 +991,18 @@ class BookingsController extends Controller
     }
 
     public static function startVendorWatch($request){
-        $token = Helper::validateAuthToken($request['token']);
+        $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
             if(!$token || !$vendor)
                 return Helper::response(false, "Token validation failed.");
 
-        Bid::where("public_booking_id", $request['data']['public_booking_id'])->update([
-            "watched_by"=>$token->payload->id
+        Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])->update([
+            "watcher_id"=>$token->payload->id
         ]);
 
-        return Helper::response(true, "Watching Started",["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor]);
+        return Helper::response(true, "Watching Started",["booking"=>Booking::where('public_booking_id',$request['data']['public_booking_id'])->with(["bid"=>function($query) use($token){
+            $query->where("organization_id", $token->payload->organization_id)->with('watched_by');
+        }])->first()]);
 
 
     }
@@ -1011,13 +1013,15 @@ class BookingsController extends Controller
         if(!$token || !$vendor)
             return Helper::response(false, "Token validation failed.");
 
-        Bid::where("public_booking_id", $request['data']['public_booking_id'])
+        Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])
             ->where("watched_by",$token->payload->id)
             ->update([
-            "watched_by"=>null
+            "watcher_id"=>null
         ]);
 
-        return Helper::response(true, "Watching ended.", ["public_booking_id"=>$request['data']['public_booking_id'],"vendor"=> $vendor]);
+        return Helper::response(true, "Watching Ended",["booking"=>Booking::where('public_booking_id',$request['data']['public_booking_id'])->with(["bid"=>function($query) use($token){
+            $query->where("organization_id", $token->payload->organization_id)->with('watched_by');
+        }])->first()]);
 
     }
 

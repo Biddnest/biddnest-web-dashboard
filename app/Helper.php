@@ -51,7 +51,7 @@ class Helper
 
     public static function validateAuthtoken($token){
         if ($data = JWT::decode($token, config('jwt.secret'),['HS256']))
-            return $token;
+            return $data;
         else
             return false;
     }

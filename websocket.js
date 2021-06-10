@@ -60,20 +60,12 @@ io.on("connection", (socket) => {
             }
         }).then((start_listen)=>{
 
-            console.log("resp from start api",start_listen.body);
+            console.log("resp from start api",start_listen.data);
 
-            io.to(request.data.public_booking_id).emit('booking.watch.start',{
-                status:"success",
-                message: "Booking has been started for this booking.",
-                data: start_listen.body.data
-            });
+            io.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
 
             if(start_listen.body.status == "success")
-                io.to(request.data.public_booking_id).emit('info.debug',{
-                    status: "success",
-                    message: "You are now connected to the socket server",
-                    data: start_listen.body.data
-                });
+                io.to(request.data.public_booking_id).emit('info.debug',start_listen.data);
 
         }).catch((e)=>{
             console.error("Exception caught=>", e);
@@ -95,20 +87,12 @@ io.on("connection", (socket) => {
                 'Authorization': `Bearer ${request.token}`
             }
         }).then((stop_listen)=>{
-            console.log("resp from stop api",stop_listen.body);
+            console.log("resp from stop api",stop_listen.data);
 
-            io.to(request.data.public_booking_id).emit('booking.watch.stop',{
-                status:"success",
-                message: "Booking has been started for this booking.",
-                data: stop_listen.body.data
-            });
+            io.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
 
             if(stop_listen.body.status == "success")
-                io.to(request.data.public_booking_id).emit('info.debug',{
-                    status: "success",
-                    message: "You are now connected to the socket server",
-                    data: stop_listen.body.data
-                });
+                io.to(request.data.public_booking_id).emit('info.debug',stop_listen.data);
         }).catch((e)=>{
             console.error("Exception caught=>", e);
         });

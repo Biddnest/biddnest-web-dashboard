@@ -62,10 +62,11 @@ io.on("connection", (socket) => {
 
             console.log("resp from start api",start_listen.data);
 
-            socket.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
+            socket.in(request.data.public_booking_id).emit('info.debug',start_listen.data);
 
             if(start_listen.data.status == "success")
-                socket.to(request.data.public_booking_id).emit('info.debug',start_listen.data);
+                socket.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
+
 
         }).catch((e)=>{
             console.error("Exception caught=>", e);
@@ -89,16 +90,36 @@ io.on("connection", (socket) => {
         }).then((stop_listen)=>{
             console.log("resp from stop api",stop_listen.data);
 
-            socket.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
+            socket.in(request.data.public_booking_id).emit('info.debug',stop_listen.data);
 
             if(stop_listen.data.status == "success")
-                socket.to(request.data.public_booking_id).emit('info.debug',stop_listen.data);
+                socket.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
+
         }).catch((e)=>{
             console.error("Exception caught=>", e);
         });
 
 
     });
+
+    socket.on("booking.rejected", (request)=>{
+        console.log("booking.rejected triggered", request);
+        socket.to(request.data.public_booking_id).emit("booking.rejected", {
+            status:"success",
+            message:"Somebody rejected this booking.",
+            data: null
+        })
+    });
+
+    socket.on("booking.bid.submitted", (request)=>{
+        console.log("booking.rejected triggered", request);
+        socket.to(request.data.public_booking_id).emit("booking.bid.submitted", {
+            status:"success",
+            message:"Somebody submitted bid for this booking.",
+            data: null
+        })
+    });
+
 });
 
 server.listen(process.env.DEFAULT_SOCKET_SERVER_PORT);

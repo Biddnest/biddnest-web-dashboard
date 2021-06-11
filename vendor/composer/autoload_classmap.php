@@ -121,6 +121,7 @@ return array(
     'App\\Models\\Payment' => $baseDir . '/app/Models/Payment.php',
     'App\\Models\\PaymentMethod' => $baseDir . '/app/Models/PaymentMethod.php',
     'App\\Models\\Payout' => $baseDir . '/app/Models/Payout.php',
+    'App\\Models\\Report' => $baseDir . '/app/Models/Report.php',
     'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
     'App\\Models\\ReviewSentiment' => $baseDir . '/app/Models/ReviewSentiment.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',

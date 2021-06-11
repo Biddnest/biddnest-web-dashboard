@@ -573,4 +573,16 @@ class ApiRouteController extends Controller
     {
         return TestimonialController::get();
     }
+
+    public function updateFreshChatRestoreID(Request $request){
+        $validation = Validator::make($request->all(),[
+            'freshchat_restore_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+
+        return UserController::updateFreshChatId($request->token_payload->id,$request->freshchat_restore_id);
+    }
 }

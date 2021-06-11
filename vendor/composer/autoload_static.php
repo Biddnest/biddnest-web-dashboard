@@ -856,6 +856,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Models\\Payment' => __DIR__ . '/../..' . '/app/Models/Payment.php',
         'App\\Models\\PaymentMethod' => __DIR__ . '/../..' . '/app/Models/PaymentMethod.php',
         'App\\Models\\Payout' => __DIR__ . '/../..' . '/app/Models/Payout.php',
+        'App\\Models\\Report' => __DIR__ . '/../..' . '/app/Models/Report.php',
         'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',
         'App\\Models\\ReviewSentiment' => __DIR__ . '/../..' . '/app/Models/ReviewSentiment.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',

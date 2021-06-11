@@ -22,7 +22,7 @@ use PUGX\Shortid\Shortid;
 
 class UserController extends Controller
 {
-    private static $publicData =['fname','lname','email','phone','dob','avatar','gender', 'meta'];
+    private static $publicData =['fname','lname','email','phone','dob','avatar','gender', 'meta','freshchat_restore_id'];
 
     function __construct(){
     }
@@ -372,5 +372,21 @@ class UserController extends Controller
         else {
             return Helper::response(false, "Incorrect otp provided");
         }
+    }
+
+    public static function updateFreshChatId($id,$freshchat_id)
+    {
+        $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
+
+        if(!$user)
+            return Helper::response(false, "Invalid user id.");
+
+            if(User::where("id",$id)->update(["freshchat_restore_id"=>$freshchat_id]))
+                return Helper::response(true, "FreshChat ID has been updated.",[
+                    "user" => User::select(self::$publicData)->findOrFail($user->id)
+                ]);
+            else
+                return Helper::response(false, "Couldn't update the FreshChat ID. This is a DB error. Please contact admin");
+
     }
 }

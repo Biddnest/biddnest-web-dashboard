@@ -86,6 +86,9 @@ Route::prefix('v1')->group(function () {
     Route::post("/tickets/callback",[ApiRouter::class, 'callBack']);
     Route::post("/tickets/reply",[ApiRouter::class, 'addReply']);
     Route::get("/tickets/details",[ApiRouter::class, 'getDetails']);
+
+    Route::put("/freshchat/restore/id",[ApiRouter::class, 'updateFreshChatId'])->name('freshchat_api');
+
 });
 
 

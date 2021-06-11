@@ -36,7 +36,7 @@ Route::get('/debug/socket',function(){
 
 Route::get('/debug/socket-url',function(){
 //    abort(500);
-    echo route('startWatchOnBookingSocket');
+    echo route('freshchat_api');
 //    return view("debug.socket");
 });
 

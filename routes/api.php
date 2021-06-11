@@ -87,7 +87,7 @@ Route::prefix('v1')->group(function () {
     Route::post("/tickets/reply",[ApiRouter::class, 'addReply']);
     Route::get("/tickets/details",[ApiRouter::class, 'getDetails']);
 
-    Route::put("/freshchat/restore/id",[ApiRouter::class, 'updateFreshChatId'])->name('freshchat_api');
+    Route::put("/freshchat/restore/id",[ApiRouter::class, 'updateFreshChatRestoreID']);
 
 });
 
@@ -168,7 +168,7 @@ Route::prefix('vendors/v1')->group(function () {
     Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
 
     //Webhooks for websocket server
-    Route::post("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'startWatchOnBookingSocket'])->name("startWatchOnBookingSocket");
+    Route::post("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'startWatchOnBookingSocket']);
     Route::delete("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'stopWatchOnBookingSocket']);
 
 

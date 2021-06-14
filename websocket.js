@@ -94,7 +94,7 @@ io.on("connection", (socket) => {
             }
         }).then((start_listen)=>{
 
-            console.log("resp from start api",start_listen.data);
+            // console.log("resp from start api",start_listen.data);
 
             socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',start_listen.data);
 
@@ -122,7 +122,7 @@ io.on("connection", (socket) => {
                 'Authorization': `Bearer ${request.token}`
             }
         }).then((stop_listen)=>{
-            console.log("resp from stop api",stop_listen.data);
+            // console.log("resp from stop api",stop_listen.data);
 
             socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',stop_listen.data);
 

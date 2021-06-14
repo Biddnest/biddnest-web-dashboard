@@ -31,7 +31,7 @@ watchEnd = (payload) =>{
 io.on("connection", (socket) => {
     console.log("Client Connected. Socket id: ", socket.id );
     // console.log("IP: ", socket.request.connection.remoteAddress);
-    console.log("Socket detaisl =>>>>: ", socket);
+    // console.log("Socket detail =>>>>: ", socket);
 
     socket.on("disconnect",function(){
         console.log("Client disconnected");
@@ -50,12 +50,12 @@ io.on("connection", (socket) => {
 
     socket.on("booking.listen.start", (request) => {
         console.log("listen start", request);
-        socket.join(request.data.public_booking_id);
+        socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
     });
 
     socket.on("booking.listen.stop", (request) => {
         console.log("listen stop", request);
-        socket.leave(request.data.public_booking_id);
+        socket.leave(request.data.public_booking_id+"-"+request.data.organization_id);
     });
 
     socket.on("booking.watch.start", (request) => {
@@ -73,10 +73,10 @@ io.on("connection", (socket) => {
 
             console.log("resp from start api",start_listen.data);
 
-            socket.in(request.data.public_booking_id).emit('info.debug',start_listen.data);
+            socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',start_listen.data);
 
             if(start_listen.data.status == "success")
-                socket.to(request.data.public_booking_id).emit('booking.watch.start',start_listen.data);
+                socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit('booking.watch.start',start_listen.data);
 
 
         }).catch((e)=>{
@@ -101,10 +101,10 @@ io.on("connection", (socket) => {
         }).then((stop_listen)=>{
             console.log("resp from stop api",stop_listen.data);
 
-            socket.in(request.data.public_booking_id).emit('info.debug',stop_listen.data);
+            socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',stop_listen.data);
 
             if(stop_listen.data.status == "success")
-                socket.to(request.data.public_booking_id).emit('booking.watch.stop',stop_listen.data);
+                socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit('booking.watch.stop',stop_listen.data);
 
         }).catch((e)=>{
             console.error("Exception caught=>", e);
@@ -115,7 +115,7 @@ io.on("connection", (socket) => {
 
     socket.on("booking.rejected", (request)=>{
         console.log("booking.rejected triggered", request);
-        socket.to(request.data.public_booking_id).emit("booking.rejected", {
+        socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit("booking.rejected", {
             status:"success",
             message:"Somebody rejected this booking.",
             data: null
@@ -124,7 +124,7 @@ io.on("connection", (socket) => {
 
     socket.on("booking.bid.submitted", (request)=>{
         console.log("booking.submitted triggered", request);
-        socket.to(request.data.public_booking_id).emit("booking.bid.submitted", {
+        socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit("booking.bid.submitted", {
             status:"success",
             message:"Somebody submitted bid for this booking.",
             data: null

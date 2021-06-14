@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
                     'Authorization': `Bearer ${req.token}`
                 }
             }).then((stop_listen)=>{
-                console.log("resp from stop api",stop_listen.data);
+                console.log("resp from stop api inside disconnect",stop_listen.data);
 
                 socket.in(req.data.public_booking_id+"-"+req.data.organization_id).emit('info.debug',stop_listen.data);
 

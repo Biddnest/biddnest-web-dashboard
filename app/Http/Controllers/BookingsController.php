@@ -640,7 +640,8 @@ class BookingsController extends Controller
             if($request->type == "scheduled")
                 $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
 
-        $bookings->with('service')
+        $bookings->where("status","!=",BookingEnums::$STATUS['hold'])
+            ->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($organization_id) {
                 $bid->where("organization_id", $organization_id)
@@ -921,7 +922,7 @@ class BookingsController extends Controller
         $result_status = $bookingstatus->save();
 
         if (!$result_status)
-            return Helper::response(false, "couldn'd change status");
+            return Helper::response(false, "Couldn't change status");
 
         return true;
     }

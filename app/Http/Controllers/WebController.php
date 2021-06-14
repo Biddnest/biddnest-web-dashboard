@@ -1161,10 +1161,24 @@ class WebController extends Controller
 
     public static function sales_report(Request $request)
     {
+
         if(Session::get('active_zone'))
             $zone = [Session::get('active_zone')];
         else
             $zone = Session::get('admin_zones');
+
+        $bookings = Booking::whereIn("zone_id",[$zone]);
+        if(isset($request->from) && isset($request->to) && $request->from != "all")
+            $bookings->whereDate("created_at",">",$request->from)->whereDate("created_at",">",$request->to);
+
+        if(isset($request->org) && $request->org != "all")
+        $bookings->where("organization_id",$request->org);
+
+        if(isset($request->zone) && $request->zone != "all")
+            $bookings->where("zone_id",$request->zone);
+
+        if(isset($request->service) && $request->service != "all")
+           $bookings->whereService("zone_id",[$zone]);
 
         return view('reports.sales',[
             "report"=>Report::orderBy('id', 'DESC')->first(),

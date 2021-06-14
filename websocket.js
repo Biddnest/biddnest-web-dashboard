@@ -22,7 +22,7 @@ var connection_data = {};
 io.on("connection", (socket) => {
     console.info("Client Connected. Socket id: ", socket.id);
 
-    socket.to(socket.id).emit("info.debug",{
+    /*socket.to(socket.id).emit("info.debug",{
         status: "success",
         message: "You are now connected to the socket server",
         data: null
@@ -30,10 +30,10 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect",function(){
         console.log("Client disconnected by socket: ", socket.id);
-        /* Code to remove all watches by the user */
+        /!* Code to remove all watches by the user *!/
         let req = connection_data[socket.id];
         // console.log("Con data for this  socket =========>", connection_data);
-       /* if(connection_data[socket.id] !== "undefined"){
+       /!* if(connection_data[socket.id] !== "undefined"){
             // console.log(" i am inside the if block ========>", req);
             axios({
                 method: 'DELETE',
@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
             }).catch((e)=>{
                 console.error("Exception caught=>", e);
             });
-        }*/
+        }*!/
         delete connection_data[socket.id];
     });
 
@@ -152,7 +152,7 @@ io.on("connection", (socket) => {
             message:"Somebody submitted bid for this booking.",
             data: null
         })
-    });
+    });*/
 
 });
 

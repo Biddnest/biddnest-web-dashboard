@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
         console.log("Client disconnected by socket: ", socket.id);
         /* Code to remove all watches by the user */
         let req = connection_data[socket.id];
-        console.log("Con data for this  socket =========>", connection_data[socket.id]);
+        console.log("Con data for this  socket =========>", connection_data);
         if(connection_data[socket.id] !== undefined){
             console.log(" i am inside the if block ========>", req);
             axios({
@@ -62,7 +62,10 @@ io.on("connection", (socket) => {
         console.log("listen start", request);
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
 
+        console.log("Con data before =======>",connection_data);
         connection_data[socket.id] = request;
+
+        console.log("Con data now =======>",connection_data);
     });
 
     socket.on("booking.listen.stop", (request) => {

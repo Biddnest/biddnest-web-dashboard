@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
     res.send("Websocket is up and running");
 });
 
-var connection_data = [];
+var connection_data = {};
 
 io.on("connection", (socket) => {
     socket.to(socket.id).emit("info.debug",{
@@ -30,8 +30,8 @@ io.on("connection", (socket) => {
     socket.on("disconnect",function(){
         console.log("Client disconnected by socket: ", socket.id);
         /* Code to remove all watches by the user */
-        let request = Object.assign({},connection_data[socket.id]);
-        console.log("Con data for this  socket ==========>", connection_data[socket.id]);
+        let request = connection_data[socket.id];
+        console.log("Con data for this  socket =========>", connection_data[socket.id]);
         if(connection_data[socket.id] !== undefined){
             axios({
                 method: 'DELETE',
@@ -61,7 +61,9 @@ io.on("connection", (socket) => {
         console.log("listen start", request);
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
 
-        connection_data[socket.id] = request;
+        connection_data.push({
+            [socket.id]: request
+        });
 
     });
 

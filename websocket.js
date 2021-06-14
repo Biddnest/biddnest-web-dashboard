@@ -32,25 +32,27 @@ io.on("connection", (socket) => {
         /* Code to remove all watches by the user */
         let request = Object.assign({},connection_data[socket.id]);
         console.log("Con data for this  socket ==========>", connection_data[socket.id]);
-        axios({
-            method: 'DELETE',
-            url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
-            data: request,
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': request.length,
-                'Authorization': `Bearer ${request.token}`
-            }
-        }).then((stop_listen)=>{
-            console.log("resp from stop api",stop_listen.data);
+        if(connection_data[socket.id] !== undefined){
+            axios({
+                method: 'DELETE',
+                url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
+                data: request,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': request.length,
+                    'Authorization': `Bearer ${request.token}`
+                }
+            }).then((stop_listen)=>{
+                console.log("resp from stop api",stop_listen.data);
 
-            socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',stop_listen.data);
+                socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',stop_listen.data);
 
-            if(stop_listen.data.status == "success")
-                socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit('booking.watch.stop',stop_listen.data);
-        }).catch((e)=>{
-            console.error("Exception caught=>", e);
-        });
+                if(stop_listen.data.status == "success")
+                    socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit('booking.watch.stop',stop_listen.data);
+            }).catch((e)=>{
+                console.error("Exception caught=>", e);
+            });
+        }
         delete connection_data[socket.id];
     });
 

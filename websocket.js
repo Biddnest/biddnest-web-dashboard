@@ -21,7 +21,9 @@ var connection_data = {};
 
 io.on("connection", (socket) => {
     console.info("Client Connected. Socket id: ", socket.id);
-
+    socket.on("disconnect",function(){
+        console.log("Disconnecting client: Socket ID", socket.id);
+    });
     /*socket.to(socket.id).emit("info.debug",{
         status: "success",
         message: "You are now connected to the socket server",

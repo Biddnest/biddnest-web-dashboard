@@ -17,45 +17,55 @@ app.get('/', function(req, res) {
     res.send("Websocket is up and running");
 });
 
-/* functions */
-/*watchStart = (payload) => {
-
-    return
-
-};*/
-/*
-watchEnd = (payload) =>{
-    return
-};*/
+var connection_data = [];
 
 io.on("connection", (socket) => {
-    console.log("Client Connected. Socket id: ", socket.id );
-    // console.log("IP: ", socket.request.connection.remoteAddress);
-    // console.log("Socket detail =>>>>: ", socket);
-
-    socket.on("disconnect",function(){
-        console.log("Client disconnected");
-        /* Code to remove all watches by the user */
-    });
-
-    socket.on("disconnect",function(){
-        /* Code to remove all watches by the user */
-    });
-
-    socket.broadcast.emit("info.debug",{
+    socket.to(socket.id).emit("info.debug",{
         status: "success",
         message: "You are now connected to the socket server",
         data: null
     });
+    console.log("Client Connected. Socket id: ", socket.id );
+
+    socket.on("disconnect",function(){
+        console.log("Client disconnected by socket: ", socket.id);
+        /* Code to remove all watches by the user */
+        let request = Object.assign({},connection_data[socket.id]);
+        axios({
+            method: 'DELETE',
+            url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
+            data: request,
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': request.length,
+                'Authorization': `Bearer ${request.token}`
+            }
+        }).then((stop_listen)=>{
+            console.log("resp from stop api",stop_listen.data);
+
+            socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',stop_listen.data);
+
+            if(stop_listen.data.status == "success")
+                socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit('booking.watch.stop',stop_listen.data);
+        }).catch((e)=>{
+            console.error("Exception caught=>", e);
+        });
+        delete connection_data[socket.id];
+    });
+
 
     socket.on("booking.listen.start", (request) => {
         console.log("listen start", request);
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
+
+        connection_data[socket.id] = request;
+
     });
 
     socket.on("booking.listen.stop", (request) => {
         console.log("listen stop", request);
         socket.leave(request.data.public_booking_id+"-"+request.data.organization_id);
+        delete connection_data[socket.id];
     });
 
     socket.on("booking.watch.start", (request) => {

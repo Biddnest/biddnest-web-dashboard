@@ -997,7 +997,9 @@ class BookingsController extends Controller
             if(!$token || !$vendor)
                 return Helper::response(false, "Token validation failed.");
 
-        Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])->update([
+        Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])
+            ->where("organization_id", $token->payload->organization_id)
+            ->update([
             "watcher_id"=>$token->payload->id
         ]);
 
@@ -1016,6 +1018,7 @@ class BookingsController extends Controller
 
         Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])
             ->where("watcher_id",$token->payload->id)
+            ->where("organization_id", $token->payload->organization_id)
             ->update([
             "watcher_id"=>null
         ]);

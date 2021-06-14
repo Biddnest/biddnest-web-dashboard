@@ -32,9 +32,9 @@ io.on("connection", (socket) => {
         console.log("Client disconnected by socket: ", socket.id);
         /* Code to remove all watches by the user */
         let req = connection_data[socket.id];
-        console.log("Con data for this  socket =========>", connection_data);
-        if(connection_data[socket.id] !== undefined){
-            console.log(" i am inside the if block ========>", req);
+        // console.log("Con data for this  socket =========>", connection_data);
+        if(connection_data[socket.id] !== "undefined"){
+            // console.log(" i am inside the if block ========>", req);
             axios({
                 method: 'DELETE',
                 url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
@@ -64,10 +64,10 @@ io.on("connection", (socket) => {
 
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
 
-        console.log("Con data before =======>",connection_data);
+        // console.log("Con data before =======>",connection_data);
         connection_data[socket.id] = request;
 
-        console.log("Con data now =======>",connection_data);
+        // console.log("Con data now =======>",connection_data);
     });
 
     socket.on("booking.listen.stop", (request) => {
@@ -79,9 +79,9 @@ io.on("connection", (socket) => {
     socket.on("booking.watch.start", (request) => {
         console.log("watch start", request);
 
-        console.log("Con here in watch block =======>",connection_data);
-        console.log("Scoket ID =======>",socket.id);
-        console.log("Socket data in con =======>", connection_data[socket.id]);
+        // console.log("Con here in watch block =======>",connection_data);
+        // console.log("Scoket ID =======>",socket.id);
+        // console.log("Socket data in con =======>", connection_data[socket.id]);
 
         axios({
             method: 'POST',

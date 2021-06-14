@@ -31,6 +31,7 @@ io.on("connection", (socket) => {
         console.log("Client disconnected by socket: ", socket.id);
         /* Code to remove all watches by the user */
         let request = Object.assign({},connection_data[socket.id]);
+        console.log("Con data for this  socket ==========>", connection_data[socket.id]);
         axios({
             method: 'DELETE',
             url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,

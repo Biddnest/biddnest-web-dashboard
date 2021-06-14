@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
     res.send("Websocket is up and running");
 });
 
-var connection_data = {};
+global.connection_data = {};
 
 io.on("connection", (socket) => {
     socket.to(socket.id).emit("info.debug",{
@@ -75,6 +75,9 @@ io.on("connection", (socket) => {
     });
 
     socket.on("booking.watch.start", (request) => {
+
+        console.log("Con here in watch block =======>",connection_data);
+
         console.log("watch start", request);
         axios({
             method: 'POST',

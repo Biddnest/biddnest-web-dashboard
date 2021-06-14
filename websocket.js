@@ -77,6 +77,8 @@ io.on("connection", (socket) => {
     socket.on("booking.watch.start", (request) => {
 
         console.log("Con here in watch block =======>",connection_data);
+        console.log("Scoket ID =======>",socket.id);
+        console.log("Socket data in con =======>", connection_data[socket.id]);
 
         console.log("watch start", request);
         axios({

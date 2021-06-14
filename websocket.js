@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 var connection_data = {};
 
 io.on("connection", (socket) => {
-    console.log("Client Connected. Socket id: ", socket.id);
+    console.info("Client Connected. Socket id: ", socket.id);
 
     socket.to(socket.id).emit("info.debug",{
         status: "success",

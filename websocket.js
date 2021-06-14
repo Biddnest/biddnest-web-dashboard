@@ -30,25 +30,26 @@ io.on("connection", (socket) => {
     socket.on("disconnect",function(){
         console.log("Client disconnected by socket: ", socket.id);
         /* Code to remove all watches by the user */
-        let request = connection_data[socket.id];
+        let req = connection_data[socket.id];
         console.log("Con data for this  socket =========>", connection_data[socket.id]);
         if(connection_data[socket.id] !== undefined){
+            console.log(" i am inside the if block ========>", req);
             axios({
                 method: 'DELETE',
                 url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,
-                data: request,
+                data: req,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Content-Length': request.length,
-                    'Authorization': `Bearer ${request.token}`
+                    'Content-Length': req.length,
+                    'Authorization': `Bearer ${req.token}`
                 }
             }).then((stop_listen)=>{
                 console.log("resp from stop api",stop_listen.data);
 
-                socket.in(request.data.public_booking_id+"-"+request.data.organization_id).emit('info.debug',stop_listen.data);
+                socket.in(req.data.public_booking_id+"-"+req.data.organization_id).emit('info.debug',stop_listen.data);
 
                 if(stop_listen.data.status == "success")
-                    socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit('booking.watch.stop',stop_listen.data);
+                    socket.to(req.data.public_booking_id+"-"+req.data.organization_id).emit('booking.watch.stop',stop_listen.data);
             }).catch((e)=>{
                 console.error("Exception caught=>", e);
             });

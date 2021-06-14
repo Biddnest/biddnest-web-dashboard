@@ -62,8 +62,6 @@ io.on("connection", (socket) => {
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
 
         connection_data[socket.id] = request;
-        });
-
     });
 
     socket.on("booking.listen.stop", (request) => {

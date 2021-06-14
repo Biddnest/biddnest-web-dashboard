@@ -61,8 +61,7 @@ io.on("connection", (socket) => {
         console.log("listen start", request);
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
 
-        connection_data.push({
-            [socket.id]: request
+        connection_data.[socket.id] = request;
         });
 
     });

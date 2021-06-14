@@ -17,15 +17,16 @@ app.get('/', function(req, res) {
     res.send("Websocket is up and running");
 });
 
-global.connection_data = {};
+var connection_data = {};
 
 io.on("connection", (socket) => {
+    console.log("Client Connected. Socket id: ", socket.id);
+
     socket.to(socket.id).emit("info.debug",{
         status: "success",
         message: "You are now connected to the socket server",
         data: null
     });
-    console.log("Client Connected. Socket id: ", socket.id );
 
     socket.on("disconnect",function(){
         console.log("Client disconnected by socket: ", socket.id);
@@ -60,6 +61,7 @@ io.on("connection", (socket) => {
 
     socket.on("booking.listen.start", (request) => {
         console.log("listen start", request);
+
         socket.join(request.data.public_booking_id+"-"+request.data.organization_id);
 
         console.log("Con data before =======>",connection_data);
@@ -75,12 +77,12 @@ io.on("connection", (socket) => {
     });
 
     socket.on("booking.watch.start", (request) => {
+        console.log("watch start", request);
 
         console.log("Con here in watch block =======>",connection_data);
         console.log("Scoket ID =======>",socket.id);
         console.log("Socket data in con =======>", connection_data[socket.id]);
 
-        console.log("watch start", request);
         axios({
             method: 'POST',
             url: `${API_ENDPOINT}/api/vendors/v1/webhook/for-socket/booking/watch`,

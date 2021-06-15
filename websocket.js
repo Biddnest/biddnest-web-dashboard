@@ -147,7 +147,7 @@ io.on("connection", (socket) => {
         })
     });
 
-    socket.on("booking.bid.submitted", (request)=>{
+    socket.on("booking.bid.submitted", (request) => {
         console.log("booking.submitted triggered", request);
         socket.to(request.data.public_booking_id+"-"+request.data.organization_id).emit("booking.bid.submitted", {
             status:"success",
@@ -155,7 +155,6 @@ io.on("connection", (socket) => {
             data: null
         })
     });
-
 });
 
 server.listen(process.env.DEFAULT_SOCKET_SERVER_PORT);

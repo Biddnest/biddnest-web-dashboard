@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
         /* Code to remove all watches by the user */
         let req = connection_data[socket.id];
         // console.log("Con data for this  socket =========>", connection_data);
-        if(connection_data[socket.id] !== "undefined"){
+        if(connection_data.hasOwnProperty(socket.id)){
             // console.log(" i am inside the if block ========>", req);
             axios({
                 method: 'DELETE',

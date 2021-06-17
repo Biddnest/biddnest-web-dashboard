@@ -275,8 +275,8 @@ class CouponController extends Controller
             ];
         else
            return (array)["coupon" => ["discount" => number_format($discount_amount, 2)], "payment_details" => [
-               "sub_total" => $booking->payment->sub_total,
-               "surge_charge" => $booking->payment->other_charges,
+               "sub_total" => $booking->payment->sub_total + $booking->payment->other_charges,
+//               "surge_charge" => $booking->payment->other_charges,
                "discount" => $discount_amount,
                "tax(" . $tax_percentage . "%)" => $tax,
                "grand_total" => $grand_total
@@ -303,8 +303,8 @@ class CouponController extends Controller
 
 
         return (array)["coupon" => ["discount" => number_format($discount_amount, 2)], "payment_details" => [
-            "sub_total" => $booking->payment->sub_total,
-            "surge_charge" => $booking->payment->other_charges,
+            "sub_total" => $booking->payment->sub_total + $booking->payment->other_charges,
+//            "surge_charge" => $booking->payment->other_charges,
             "discount" => $discount_amount,
             "tax(" . $tax_percentage . "%)" => $tax,
             "grand_total" => $grand_total

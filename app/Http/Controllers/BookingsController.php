@@ -935,11 +935,6 @@ class BookingsController extends Controller
 
         $data = [];
 
-        /*{
-            "amount",
-            "position"
-        }*/
-
         $current_key = true;
         $bid_records = Bid::where('booking_id', $exist_booking['id'])->whereIn('status', [BidEnums::$STATUS['lost'], BidEnums::$STATUS['won']])->orderBy('bid_amount', 'ASC')->get();
         foreach ($bid_records as $key => $value) {

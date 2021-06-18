@@ -4,12 +4,12 @@
 <div class="content-wrapper" data-barba="container" data-barba-namespace="home">
     <div class="d-flex center">
         <div class="container container-top p-50 top-header-card border-top-cards">
-            <form action="{{route('add-booking')}}" class="no-ajax">
+            <form action="{{route('add-booking')}}" class="no-ajax data-parsley-validate">
             <div class="top-cards mt-2">
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" />
+                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required />
                         <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
@@ -23,20 +23,20 @@
             </div>
 
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: auto;">
+                <div class="card top-header-card col-md-4 col-xs-12 pl-8 cursor-pointer" style="cursor: pointer;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: pointer;">
                         <p style="font-size: 13px;">FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: auto;" type="text" placeholder="SMR Apartments " readonly>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: auto;" type="text" placeholder="Mahadevapura, Bangalore" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: pointer;" type="text" placeholder="Choose" readonly required>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: pointer;" type="text" placeholder="Pick location on map" readonly required>
                         <input  type="hidden" id="source-lat" name="source_lat" readonly>
                         <input  type="hidden" id="source-lng" name="source_lng" readonly>
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: auto;">
+                <div class="card top-header-card col-md-4 col-xs-12 pl-8 cursor-pointer" style="cursor: pointer;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: pointer;">
                         <p style="font-size: 13px;">TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" placeholder="Majestic Villas" readonly>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: auto;" type="text" placeholder="Gandhinagar, Chennai" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: pointer;" type="text" placeholder="Choose" readonly required>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: pointer;" type="text" placeholder="Pick destination on map" readonly required>
                         <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
                         <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
                     </div>
@@ -504,10 +504,10 @@
                 <div class="modal-body p-15 margin-topneg-7">
                     <div class="row">
                         <div class="col-sm-12">
-                        <label>From Location</label>
+                        <label>Search your location below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete"  required />
+                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
                                 <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
@@ -540,10 +540,10 @@
                 <div class="modal-body p-15 margin-topneg-7">
                 <div class="row">
                         <div class="col-sm-12">
-                        <label>To Location</label>
+                        <label>Search your destination below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Koramangala, Hsr Layout" id="source-autocomplete"  required />
+                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Search nearby landmark or place" id="dest-autocomplete"  required />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
                                 <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>

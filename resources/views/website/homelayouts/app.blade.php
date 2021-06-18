@@ -78,23 +78,23 @@
         <div class="banner-carousel-container">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner carousel-images">
-                    @php $count=0; @endphp
-
                         @foreach($slider->banners as $banner)
                             <div class="item @if($loop->iteration == 1) active @endif">
                                  <img src="{{$banner->image}}" class="color-overlay" alt="BannerImage1" style="width: 100%" />
                                 <div class="intro-container">
                                     <div class="intro-text pb-10">
-                                        <h1 class="text-center view-small mb-2">{{ucwords($banner->name)}}</h1>
+                                        <h1 class="text-center view-small mb-2" style="font-size: 6rem">{{ucwords($banner->name)}}</h1>
                                         <a href="{{$banner->url}}">
-                                            <p class="mb-4 ml-2 ">
+                                            <p class="mb-4 ml-2" style="font-size: 18px; color: #fff; opacity: 1;">
                                                 {{$banner->desc}}
                                             </p>
                                         </a>
                                         @if($banner->url && $banner->url != "")
-                                        <a href="{{$banner->url}}" class="page-scroll btn btn-xl d-content">
-                                            <button type="button" class="btn btn-primary m-60">Get Started</button>
-                                        </a>
+                                            <div class="text-center">
+                                            <a href="{{$banner->url}}" class="page-scroll btn btn-xl d-content" style="display: block;">
+                                                <button type="button" class="btn btn-primary m-60">Get Started</button>
+                                            </a>
+                                        </div>
                                         @endif
                                         @if(\Illuminate\Support\Facades\Session::get('account'))
                                             <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">

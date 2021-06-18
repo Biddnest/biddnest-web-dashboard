@@ -21,4 +21,11 @@ class NotificationEnums
 
     public static $GENERATE_BY=["system"=>0, "admin"=>1];
 
+    public static $RECEPIENT_TYPE = [
+        "customer"=>1,
+        "vendor"=>2,
+        "active_customers"=>3,
+        "active_vendors"=>4,
+        ];
+
 }

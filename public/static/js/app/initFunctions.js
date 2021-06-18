@@ -812,6 +812,15 @@ export function initToggles() {
     });
 }
 
+export function initSortable() {
+    if($(".sortable-list").length){
+    console.log("Sortable");
+    $(".sortable-list").sortable({
+        handle: '.dragger',
+    });
+    }
+}
+
 export function initSelect() {
 
 

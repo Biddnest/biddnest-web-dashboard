@@ -20,11 +20,27 @@ export function redirectHard(url){
 };
 
 export function tinyAlert(title, message){
-    toastr.error(message, title, {timeOut: 5000});
+    // toastr.error(message, title, {timeOut: 5000});
+    showToast(message, {
+        duration: 3000,
+        background: '#a33a33',
+        color: "#fff",
+        borderRadius: '3px',
+        close: true,
+        progressBar: false
+    });
 }
 
 export function tinySuccessAlert(title, message){
-    toastr.success(message, title, {timeOut: 5000});
+    // toastr.success(message, title, {timeOut: 5000});
+    showToast(message, {
+        duration: 3000,
+        background: '#20b2aa',
+        color: "#fff",
+        borderRadius: '3px',
+        close: true,
+        progressBar: false
+    });
 }
 
 export function megaAlert(title, message, type="error"){

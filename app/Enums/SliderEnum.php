@@ -19,7 +19,7 @@ class SliderEnum
     public static $SIZE = ["wide"=>1, "square"=>2];
 
     public static $BANNER_DIMENSIONS = [
-        "wide"=>[410,180],
+        "wide"=>[420,150],
         "square"=>[256,256]
         ];
 

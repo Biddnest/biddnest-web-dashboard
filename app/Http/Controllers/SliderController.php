@@ -135,10 +135,14 @@ class SliderController extends Controller
             case SliderEnum::$SIZE['square']:
                 $width = SliderEnum::$BANNER_DIMENSIONS["square"][0];
                 $height = SliderEnum::$BANNER_DIMENSIONS["square"][1];
-                break;
+            break;
+            case SliderEnum::$SIZE['web']:
+                $width = SliderEnum::$BANNER_DIMENSIONS["web"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["web"][1];
+            break;
             default:
-                $width = SliderEnum::$BANNER_DIMENSIONS["wide"][0];
-                $height = SliderEnum::$BANNER_DIMENSIONS["wide"][1];
+                $width = SliderEnum::$BANNER_DIMENSIONS["web"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["web"][1];
         }
 
 

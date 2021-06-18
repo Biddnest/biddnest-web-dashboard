@@ -16,7 +16,7 @@ class SliderEnum
     public static $STATUS = ["active"=>1, "suspended"=>2];
 
     public static $POSITION = ["main"=>1, "secondary"=>2];
-    public static $SIZE = ["wide"=>1, "square"=>2];
+    public static $SIZE = ["wide"=>1, "square"=>2, "web"=>3];
 
     public static $BANNER_DIMENSIONS = [
         "wide"=>[376,180],

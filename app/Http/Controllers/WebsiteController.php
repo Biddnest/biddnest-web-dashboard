@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
+use App\Enums\SliderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Bid;
 use App\Models\Booking;
@@ -18,6 +19,7 @@ use App\Models\Testimonials;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Zone;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -29,7 +31,18 @@ class WebsiteController extends Controller
         $testimonial=Testimonials::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
-        return view('website.home', ["testimonials"=>$testimonial, "categories"=>$categories, 'contact_details'=>$contact_details]);
+        $slider= Slider::where(["status"=> CommonEnums::$YES,
+            "deleted"=> CommonEnums::$NO,
+            "platform"=>SliderEnum::$PLATFORM['web'],
+            "size"=>SliderEnum::$SIZE['web']])
+            ->with('banners')
+            ->first();
+        return view('website.home', [
+            "testimonials"=>$testimonial,
+            "categories"=>$categories,
+            'contact_details'=>$contact_details,
+            "slider"=>$slider
+        ]);
     }
 
     public function logout()

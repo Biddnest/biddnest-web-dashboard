@@ -6,7 +6,7 @@
         @include('website.homelayouts.includes.app-css')
     </head>
     <body>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top header-fixed">
             <div class="container">
                 <div class="navbar-header">
@@ -79,22 +79,23 @@
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner carousel-images">
                     @php $count=0; @endphp
-                    @foreach(\App\Models\Slider::where(["status"=>\App\Enums\CommonEnums::$YES, "deleted"=>\App\Enums\CommonEnums::$NO, "platform"=>\App\Enums\SliderEnum::$PLATFORM['web'], "size"=>\App\Enums\SliderEnum::$SIZE['wide']])->with('banners')->get() as $slider )
+
                         @foreach($slider->banners as $banner)
-                            @php $count++; @endphp
-                            <div class="item @if($count == 1) active @endif">
+                            <div class="item @if($loop->iteration == 1) active @endif">
                                  <img src="{{$banner->image}}" class="color-overlay" alt="BannerImage1" style="width: 100%" />
                                 <div class="intro-container">
                                     <div class="intro-text pb-10">
-                                        <h1 class="text-center view-small mb-2">{{ucwords($slider->name)}}</h1>
+                                        <h1 class="text-center view-small mb-2">{{ucwords($banner->name)}}</h1>
                                         <a href="{{$banner->url}}">
                                             <p class="mb-4 ml-2 ">
-                                                {{ucwords($banner->name)}}
+                                                {{$banner->desc}}
                                             </p>
                                         </a>
-                                        {{--<a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
-                                            <button type="button" class="btn btn-primary m-60">Book Now</button>
-                                        </a>--}}
+                                        @if($banner->url && $banner->url != "")
+                                        <a href="{{$banner->url}}" class="page-scroll btn btn-xl d-content">
+                                            <button type="button" class="btn btn-primary m-60">Get Started</button>
+                                        </a>
+                                        @endif
                                         @if(\Illuminate\Support\Facades\Session::get('account'))
                                             <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
                                                 <!-- <button type="button" class="btn btn-primary m-60 view-none">Book Now</button> -->
@@ -108,7 +109,7 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endforeach
+
                 </div>
                 <a class="left carousel-control carousel-arrows" href="#myCarousel" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left carousel-arrows-icon"></span>

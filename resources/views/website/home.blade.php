@@ -4,13 +4,13 @@
 <div class="content-wrapper" data-barba="container" data-barba-namespace="home">
     <div class="d-flex center">
         <div class="container container-top p-50 top-header-card border-top-cards">
-            <form action="{{route('add-booking')}}" class="no-ajax data-parsley-validate">
+            <form action="{{route('add-booking')}}" class="no-ajax hero-booking-form" onsubmit="return false;" method="GET">
             <div class="top-cards mt-2">
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required />
-                        <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
+                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required data-parsley-errors-container="#service-error" />
+                        <div class="card-header card-methord  bg-turnblue  building-type @if($loop->iteration == 1) selected check-icon02 turntheme @endif" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
                                 <p class="building-type-text">{{ucwords($category->name)}}</p>
@@ -26,8 +26,8 @@
                 <div class="card top-header-card col-md-4 col-xs-12 pl-8 cursor-pointer" style="cursor: pointer;">
                     <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: pointer;">
                         <p style="font-size: 13px;">FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: pointer;" type="text" placeholder="Choose" readonly required>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: pointer;" type="text" placeholder="Pick location on map" readonly required>
+                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: pointer;" type="text" placeholder="Choose" readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: pointer;" type="text" placeholder="Pick location on map" readonly>
                         <input  type="hidden" id="source-lat" name="source_lat" readonly>
                         <input  type="hidden" id="source-lng" name="source_lng" readonly>
                     </div>
@@ -35,8 +35,8 @@
                 <div class="card top-header-card col-md-4 col-xs-12 pl-8 cursor-pointer" style="cursor: pointer;">
                     <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: pointer;">
                         <p style="font-size: 13px;">TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: pointer;" type="text" placeholder="Choose" readonly required>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: pointer;" type="text" placeholder="Pick destination on map" readonly required>
+                        <input class="input-overwrite text-heading book-address mb-0 destination dest" style="cursor: pointer;" type="text" placeholder="Choose" readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 dest_city" style="cursor: pointer;" type="text" placeholder="Pick destination on map" readonly>
                         <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
                         <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
                     </div>
@@ -47,7 +47,8 @@
                     <div class="card-body d-flex justify-content-between h-100">
                         <div>
                             <p style="font-size: 13px;">DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="23 March 21" readonly/>
+                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="Choose" readonly/>
+                            <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: pointer;" type="text" placeholder="You can choose upto 5 dates" readonly required>
                         </div>
                         {{--<div class="form-group  mr-1">
                             <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
@@ -57,16 +58,16 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                @if(\Illuminate\Support\Facades\Session::get('account'))
+{{--                @if(\Illuminate\Support\Facades\Session::get('account'))--}}
                 <a href="#" class="page-scroll btn btn-xl mar-top" style="position: relative!important; right: 0px!important; left: 0px!important;">
                         <button type="submit" class="btn btn-primary view-btn ">Book Now</button>
                 </a>
 
-                @else
+                {{--@else
                 <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
                     <button type="button" class="btn btn-primary view-btn">Book Now</button>
                 </a>
-                @endif
+                @endif--}}
             </div>
             </form>
         </div>
@@ -171,7 +172,7 @@
             <img src="{{ asset('static/website/images/icons/google-play-yellow.svg')}}">
         </div>
 
-        <div class="store mb-2 d-flex">
+        <div class="store mb-2 d-flex" style="opacity: 0;">
             <img src="{{ asset('static/website/images/icons/bot.svg')}}">
         </div>
     </div>
@@ -394,7 +395,7 @@
         </div>
     </section>
     <!-- section get offers -->
-    <section>
+    {{--<section>
         <div class="container get-offers">
             <div class="row mt-6 mb-5">
                 <div class="col-sm-7 col-xs-12 " style="padding-left: 8px !important;">
@@ -415,7 +416,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 
     <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
@@ -492,7 +493,7 @@
     <!-- location from picker -->
     <div class="modal fade" id="from_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-1000 mt-50 right-25">
+            <div class="modal-content w-1000" style="margin-top: 15vh">
                 <div class="modal-header  bg-purple">
                     <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
                         From Location
@@ -507,7 +508,7 @@
                         <label>Search your location below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
+                        <input type="text" class="form-control" style="height: 38px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button" type="button">
                                 <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
@@ -518,7 +519,7 @@
                         </div>
 
                     </div>
-                    <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
+                    <div style="width: 100%; height: 280px;" class="source-map-picker" id="source-map-picker"></div>
 
                 </div>
             </div>
@@ -528,7 +529,7 @@
     <!-- location to picker -->
     <div class="modal fade" id="to_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-1000 mt-50 right-25">
+            <div class="modal-content w-1000" style="margin-top: 15vh">
                 <div class="modal-header bg-purple">
                     <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
                         To Location
@@ -560,23 +561,6 @@
         </div>
     </div>
 
-    <script>
-        function openContent(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
 </div>
 @endsection

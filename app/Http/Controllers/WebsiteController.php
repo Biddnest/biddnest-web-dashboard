@@ -105,7 +105,7 @@ class WebsiteController extends Controller
 
     public function estimateBooking(Request $request)
     {
-        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
+        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->all();
         if(!$booking)
             abort(404);
         $reason = json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true);
@@ -150,6 +150,9 @@ class WebsiteController extends Controller
 
     public function orderDetails(Request $request)
     {
+//        exit;
+//        return $booking=Booking::where("public_booking_id",$request->id)->all();
+
         $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         return view('website.booking.orderdetails', ['booking'=>$booking]);
     }

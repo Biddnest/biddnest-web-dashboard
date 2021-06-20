@@ -360,10 +360,10 @@ class BookingsController extends Controller
     }
 
     /*Duplicating above function cos its giving error in mobile app*/
-    public static function getBookingByPublicIdForWeb($public_booking_id, $user_id, $web=false)
+    public static function getBookingByPublicIdForWeb($public_booking_id, $user_id, $web=true)
     {
         $booking = Booking::where("user_id", $user_id)
-            ->where("deleted", CommonEnums::$NO)->orderBy('id', 'DESC')
+            ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
             ->with(['inventories'=>function($query){
                 $query->with('inventory');
@@ -374,37 +374,31 @@ class BookingsController extends Controller
             ->with('payment')
             ->with('driver')
             ->with('vehicle')
-            ->with('review');
-
-            if($web)
-                $booking->where("public_enquiry_id", $public_booking_id)->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+            ->with('review')
+            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
                         $movement_specifications->where('booking_id', Booking::where(['public_enquiry_id' => $public_booking_id])->pluck('id')[0])
-                            ->where('status', BidEnums::$STATUS['won'])
-                            ->with(['bid'=>function($query){
+                            ->where('status', BidEnums::$STATUS['won']);
+                            /*->with(['bid'=>function($query){
                                 $query->whereNotIn('status', [BidEnums::$STATUS['won'], BidEnums::$STATUS['rejected']]);
-                            }]);
+                            }]);*/
                     }
-                    ]);
-            else
-                $booking->where("public_booking_id", $public_booking_id)->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
-                    $movement_specifications->where('booking_id', Booking::where(['public_booking_id' => $public_booking_id])->pluck('id')[0])
-                        ->where('status', BidEnums::$STATUS['won'])
-                        ->with(['bid'=>function($query){
-                            $query->where('status', BidEnums::$STATUS['won']);
-                        }]);
-                }
-                ]);
-
-
+                    ])
+            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+                        $movement_specifications->where('booking_id', Booking::where(['public_enquiry_id' => $public_booking_id])->orWhere("public_booking_id", $public_booking_id)->pluck('id')[0])
+                            ->where('status', BidEnums::$STATUS['won']);
+                    }
+                    ])
+            ->where(function($query) use($public_booking_id){
+                $query->where("public_enquiry_id", $public_booking_id)
+                ->orWhere("public_booking_id", $public_booking_id);
+            })
+            ->first();
 
         if (!$booking) {
-            return Helper::response(false, "Invalid Booking id");
+            return abort(404);
         }
 
-        if($web)
-            return  $booking->first();
-        else
-            return Helper::response(true, "Booking fetched.", ["booking" =>  $booking->first()]);
+            return  $booking;
     }
 
     public static function bookingHistoryEnquiry($user_id, $web=false)

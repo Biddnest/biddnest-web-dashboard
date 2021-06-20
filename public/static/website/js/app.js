@@ -1,5 +1,5 @@
 /* AJAX Universal */
-$("body").on('submit', "form", function() {
+$("body").on('submit', "form:not(.no-ajax)", function() {
     let form = $(this);
     let requestData = form.serializeJSON();
     let button = form.find("button[type=submit]");
@@ -93,3 +93,5 @@ $("body").on('submit', "form", function() {
     return false;
 
 });
+
+

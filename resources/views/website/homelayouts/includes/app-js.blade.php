@@ -45,110 +45,131 @@
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
 <script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
 <script>
-    $('.source-map-picker').locationpicker({
-        location: {
+    /*if ("geolocation" in navigator){
+        navigator.geolocation.getCurrentPosition(function(position){
+            let currentLocation = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+
+        });
+    }else{
+        // console.log("Browser doesn't support geolocation!");
+        let currentLocation = {
             latitude: 12.930621,
             longitude: 80.111410
-        },
-        locationName: "",
-        radius: 500,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: [],
-        mapOptions: {},
-        scrollwheel: true,
-        inputBinding: {
-            latitudeInput: $("#source-lat"),
-            longitudeInput: $("#source-lng"),
-            radiusInput: null,
-            locationNameInput: $("#source-autocomplete")
-        },
-        enableAutocomplete: true,
-        enableAutocompleteBlur: false,
-        autocompleteOptions: null,
-        addressFormat: 'street_address',
-        enableReverseGeocode: true,
-        draggable: true,
-        onchanged: function (currentLocation, radius, isMarkerDropped) {
-            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
-           $.get(url, function (response){
-                console.log(response);
-               let street="";
-               let city="";
-                for(let i=0; i<= response.results[0].address_components.length; i++)
-                {
-                    let addr=response.results[0].address_components[i];
-                    if(addr.types.indexOf('sublocality_level_2')) {
+        }
 
-                        // $(".source").val(addr.long_name);
-                        // break;
-                        street +=addr.long_name+", ";
-                    }
-                    if(addr.types.indexOf('locality')) {
+    }*/
 
-                        // $(".source_city").val(addr2.long_name);
-                        city +=addr.long_name;
-                        break;
-                    }
-                }
-               $(".source").val(street);
-               $(".source_city").val(city);
-                /*for(var j=0; j<= response.results[0].address_components.length; j++)
-                {
-                    let addr2=response.results[0].address_components[j];
-                    if(addr2.types.indexOf('locality')) {
-                        console.log(addr2);
-                        $(".source_city").val(addr2.long_name);
-                        break;
-                    }
-                }*/
-                /*response.results[0].address_components.every(function (addr){
-                    // console.log(addr.types);
+       $('.source-map-picker').locationpicker({
+           location: {
+               latitude: 12.930621,
+               longitude: 80.111410
+           },
+           locationName: "",
+           radius: 500,
+           zoom: 15,
+           mapTypeId: google.maps.MapTypeId.ROADMAP,
+           styles: [],
+           mapOptions: {},
+           scrollwheel: true,
+           inputBinding: {
+               latitudeInput: $("#source-lat"),
+               longitudeInput: $("#source-lng"),
+               radiusInput: null,
+               locationNameInput: $("#source-autocomplete")
+           },
+           enableAutocomplete: true,
+           enableAutocompleteBlur: false,
+           autocompleteOptions: null,
+           addressFormat: 'street_address',
+           enableReverseGeocode: true,
+           draggable: true,
+           onchanged: function (currentLocation, radius, isMarkerDropped) {
+               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
+               $.get(url, function (response){
+                   console.log(response);
+                   let street="";
+                   let city="";
+                   for(let i=0; i<= response.results[0].address_components.length; i++)
+                   {
+                       let addr=response.results[0].address_components[i];
+                       if(addr.types.indexOf('premise')) {
+                           street +=addr.long_name;
+                       }
+                       if(addr.types.indexOf('sublocality_level_2')) {
+                           city +=", "+addr.long_name;
+                           break;
+                       }
+                   }
+                   $(".source").attr("placeholder", street);
+                   $(".source_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+               });
+           },
+           onlocationnotfound: function(locationName) {},
+           oninitialized: function(component) {},
+           // must be undefined to use the default gMaps marker
+           markerIcon: undefined,
+           markerDraggable: true,
+           markerVisible: true,
 
-                });*/
-           });
-        },
-        onlocationnotfound: function(locationName) {},
-        oninitialized: function(component) {},
-        // must be undefined to use the default gMaps marker
-        markerIcon: undefined,
-        markerDraggable: true,
-        markerVisible: true,
+       });
 
-    });
+       $('.dest-map-picker').locationpicker({
+           location: {
+               latitude: 12.930621,
+               longitude: 80.111410
+           },
+           locationName: "",
+           radius: 500,
+           zoom: 15,
+           mapTypeId: google.maps.MapTypeId.ROADMAP,
+           styles: [],
+           mapOptions: {},
+           scrollwheel: true,
+           inputBinding: {
+               latitudeInput: $("#dest-lat"),
+               longitudeInput: $("#dest-lng"),
+               radiusInput: null,
+               locationNameInput: $("#dest-autocomplete")
+           },
+           enableAutocomplete: true,
+           enableAutocompleteBlur: false,
+           autocompleteOptions: null,
+           addressFormat: 'street_address',
+           enableReverseGeocode: true,
+           draggable: true,
+           onchanged: function (currentLocation, radius, isMarkerDropped) {
+               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
+               $.get(url, function (response){
+                   console.log(response);
+                   let street="";
+                   let city="";
+                   for(let i=0; i<= response.results[0].address_components.length; i++)
+                   {
+                       let addr=response.results[0].address_components[i];
+                       if(addr.types.indexOf('premise')) {
+                           street +=addr.long_name;
+                       }
+                       if(addr.types.indexOf('sublocality_level_2')) {
+                           city +=", "+addr.long_name;
+                           break;
+                       }
+                   }
+                   $(".dest").attr("placeholder", street);
+                   $(".dest_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
 
-    $('.dest-map-picker').locationpicker({
-        location: {
-            latitude: 12.930621,
-            longitude: 80.111410
-        },
-        locationName: "",
-        radius: 500,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: [],
-        mapOptions: {},
-        scrollwheel: true,
-        inputBinding: {
-            latitudeInput: $("#dest-lat"),
-            longitudeInput: $("#dest-lng"),
-            radiusInput: null,
-            locationNameInput: $("#dest-autocomplete")
-        },
-        enableAutocomplete: true,
-        enableAutocompleteBlur: false,
-        autocompleteOptions: null,
-        addressFormat: 'street_address',
-        enableReverseGeocode: true,
-        draggable: true,
-        onchanged: function(currentLocation, radius, isMarkerDropped) {},
-        onlocationnotfound: function(locationName) {},
-        oninitialized: function(component) {},
-        // must be undefined to use the default gMaps marker
-        markerIcon: undefined,
-        markerDraggable: true,
-        markerVisible: true
-    });
+               });
+           },
+           onlocationnotfound: function(locationName) {},
+           oninitialized: function(component) {},
+           // must be undefined to use the default gMaps marker
+           markerIcon: undefined,
+           markerDraggable: true,
+           markerVisible: true
+       });
+
 
 
     $('.card-methord').click(function() {
@@ -161,4 +182,38 @@
         });
 
 
+</script>
+<script>
+    function openContent(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+<script>
+    const LOGGED_STATE = @if(\Illuminate\Support\Facades\Session::get('account')) true @else false @endif;
+    $(document).submit(function(){
+        {{-- Temporary fix - else form submti doesnt work --}}
+        setTimeout($(".hero-booking-form input[type=radio]").eq(0).click(),3000)
+    });
+</script>
+<script>
+    function initFreshChat() {
+        window.fcWidget.init({
+            token: "859b3a74-b0c6-46ff-b582-2e42ae7f9f1b",
+            host: "https://wchat.in.freshchat.com"
+        });
+    }
+    function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.in.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
 </script>

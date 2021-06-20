@@ -63,6 +63,47 @@ if (env != "development")
 
 // getLocationPermission();
 
+/*Callback for hero form submit - always keep at top (has conflict issue)*/
+$("body").on("submit",".hero-booking-form",function (event){
+    console.log("parsley called");
+    // $(this).parsley().validate();
+
+    var data = $(this).serializeJSON();
+    console.log(data);
+
+    if(!data.service || data.service == "") {
+        tinyAlert("Incomplete form","Please Choose Service");
+        return false;
+    }
+
+    else if(!data.source_lat || data.source_lat == "") {
+        tinyAlert("Incomplete form","Please choose pickup location");
+        return false;
+    }
+
+    else if(!data.dest_lat || data.dest_lat == "") {
+        tinyAlert("Incomplete form","Please choose destination location");
+        return false;
+    }
+
+    else if(!data.move_date || data.move_date == "") {
+        tinyAlert("Incomplete form","Please choose movement dates");
+        return false;
+    }
+
+    console.log(`${$(this).attr("action")}?${$(this).serialize}`);
+
+    if(LOGGED_STATE)
+        location.assign(`${$(this).attr("action")}?${$(this).serialize()}`);
+    else {
+        $("#Login-modal").modal();
+        $("#Login-modal form").attr("data-redirect",`${$(this).attr("action")}?${$(this).serialize()}`)
+    }
+
+    return false;
+
+});
+
 /* AJAX Universal */
 $("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
@@ -174,6 +215,8 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
         return false;
 
 });
+
+
 
 $("body").on('click', ".file-upload button", function() {
     if ($(this).data('action') == "upload") {

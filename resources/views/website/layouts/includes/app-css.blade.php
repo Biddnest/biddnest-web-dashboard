@@ -1053,4 +1053,14 @@
         transform: translateX(35px);
     }
 
+    .modal-open .modal{
+        background: rgba(0,0,0, 0.5) !important;
+    }
+    .modal.show .modal-dialog{
+        top: -15vh;
+    }
+
+    .fc-widget-normal{
+        right:  10px !important;
+    }
 </style>

@@ -490,4 +490,12 @@
         background: none;
     }
 
+    .hero-booking-form input::placeholder{
+        color: #85827a !important;
+    }
+    .pac-container{z-index:2000 !important;}
+
+    .modal-open .modal{
+        background: rgba(255,255,255, 0.3) !important;
+    }
 </style>

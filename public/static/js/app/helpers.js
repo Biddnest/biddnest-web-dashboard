@@ -26,7 +26,7 @@ export function tinyAlert(title, message){
         background: '#a33a33',
         color: "#fff",
         borderRadius: '3px',
-        close: true,
+        close: false,
         progressBar: false
     });
 }
@@ -38,7 +38,7 @@ export function tinySuccessAlert(title, message){
         background: '#20b2aa',
         color: "#fff",
         borderRadius: '3px',
-        close: true,
+        close: false,
         progressBar: false
     });
 }

@@ -215,7 +215,7 @@ $('.card-methord').click(function() {
             latitudeInput: $("#dest-lat"),
             longitudeInput: $("#dest-lng"),
             radiusInput: null,
-            locationNameInput: $(".dest-autocomplete")
+            locationNameInput: $("#dest-autocomplete")
         },
         enableAutocomplete: true,
         enableAutocompleteBlur: false,

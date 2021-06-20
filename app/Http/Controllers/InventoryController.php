@@ -360,21 +360,24 @@ class InventoryController extends Controller
             $filename = explode("/","$file");
             $imported_files =  DB::table("import_migrations")->pluck('file');
 //            return $file;
-            $return = "No tinitiated yet";
+//            $return = "No tinitiated yet";
                 if(!in_array($file, (array)$imported_files)){
 //                    DB::transaction(function () use ($file) {
 //                        try {
-                            $return = Facades\Excel::import(new InventoryImport, $file);
-//                        } catch (\Exception $e) {
-//                            $return = $e->getMessage();
-//                        }
+                            Facades\Excel::import(new InventoryImport, $file);
+                        /*} catch (\Exception $e) {
+                            $return = $e->getMessage();
+                        }
+                        return $return;*/
 //                    });
 
                     DB::table("import_migrations")->insert([
                         "file"=>$file
                     ]);
+
                 }
-                return $return;
+                else
+                    return "This file is already imported";
 
             }
 

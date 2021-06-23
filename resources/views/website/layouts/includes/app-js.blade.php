@@ -35,6 +35,8 @@
 
 
 <script type="text/javascript" src='https://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/l2ig/jToast@master/jToast.min.js"></script>
 
 <script src="{{ asset('static/website/js/intlTelInput.js')}}"></script>
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
@@ -215,7 +217,7 @@ $('.card-methord').click(function() {
             latitudeInput: $("#dest-lat"),
             longitudeInput: $("#dest-lng"),
             radiusInput: null,
-            locationNameInput: $("#dest-autocomplete")
+            locationNameInput: $(".dest-autocomplete")
         },
         enableAutocomplete: true,
         enableAutocompleteBlur: false,
@@ -230,6 +232,19 @@ $('.card-methord').click(function() {
         markerIcon: undefined,
         markerDraggable: true,
         markerVisible: true
+    });
+    $(".custom_slider").ionRangeSlider({
+        type: $(this).data("type"),
+        min: $(this).data("min"),
+        max: $(this).data("max"),
+        from: $(this).data("from"),
+        to: $(this).data("to"),
+        skin: "round",
+        // grid: false,
+        force_edges: true,
+        step: $(this).data("step"),
+        keyboard: true,
+        hide_min_max: true,
     });
 </script>
 

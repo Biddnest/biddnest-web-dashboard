@@ -65,39 +65,41 @@ if (env != "development")
 
 /*Callback for hero form submit - always keep at top (has conflict issue)*/
 $("body").on("submit",".hero-booking-form",function (event){
-    console.log("parsley called");
-    // $(this).parsley().validate();
 
+    let proceed = true;
     var data = $(this).serializeJSON();
-    console.log(data);
+    Logger.info(data);
 
     if(!data.service || data.service == "") {
         tinyAlert("Incomplete form","Please Choose Service");
-        return false;
+        proceed =  false;
     }
 
-    else if(!data.source_lat || data.source_lat == "") {
+    if(!data.source_lat || data.source_lat == "" || $("input.book-address").eq(0).attr("placeholder") == "Choose") {
         tinyAlert("Incomplete form","Please choose pickup location");
-        return false;
+        proceed =  false;
     }
 
-    else if(!data.dest_lat || data.dest_lat == "") {
+    if(!data.dest_lat || data.dest_lat == "" || $("input.book-address").eq(2).attr("placeholder") == "Choose") {
         tinyAlert("Incomplete form","Please choose destination location");
-        return false;
+        proceed =  false;
     }
 
-    else if(!data.move_date || data.move_date == "") {
+    if(!data.move_date || data.move_date == "") {
         tinyAlert("Incomplete form","Please choose movement dates");
-        return false;
+        proceed =  false;
     }
 
-    console.log(`${$(this).attr("action")}?${$(this).serialize}`);
+    Logger.info(`${$(this).attr("action")}?${$(this).serialize}`);
+
+    if(!proceed)
+        return false;
 
     if(LOGGED_STATE)
         location.assign(`${$(this).attr("action")}?${$(this).serialize()}`);
     else {
         $("#Login-modal").modal();
-        $("#Login-modal form").attr("data-redirect",`${$(this).attr("action")}?${$(this).serialize()}`)
+        $("#Login-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`)
     }
 
     return false;
@@ -122,7 +124,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
             },
             success: (response) => {
 
-                // console.log("Response ",response);
+                // Logger.info("Response ",response);
                 Logger.info("Response ", response);
                 if (response.status == "success") {
                     tinySuccessAlert("Success", response.message);
@@ -261,7 +263,7 @@ $("body").on('change', ".field-toggle", function(event) {
 
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
-    console.log('show');
+    Logger.info('show');
     $(".hide-on-data").fadeOut(100);
     initRangeSlider();
     var id=$(".category-select").val();
@@ -292,26 +294,26 @@ $("body").on('click', ".closer", function(event) {
 });
 
 $("body").on('click', ".modal-toggle", function(event) {
-    console.log("sda");
+    Logger.info("sda");
     $($(this).data("target")).fadeIn(100).show();
     // $($(this).data("modal")).toggleClass("show");
     return false;
 });
 
 $("body").on('click', ".fullscreen-modal-body .close", function(event) {
-    console.log("close");
+    Logger.info("close");
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
     return false;
 });
 
 $("body").on('click', ".fullscreen-modal-body .cancel", function(event) {
-    console.log("close");
+    Logger.info("close");
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
     return false;
 });
 
 $("body").on('change', ".inventory-select", function(event) {
-    console.log("change");
+    Logger.info("change");
     var id=$(this).val();
 
     $(this).closest(".inventory-snip").find(".material").html('<option value="">--Select--</option>');
@@ -330,9 +332,9 @@ $("body").on('change', ".inventory-select", function(event) {
 });
 
 $("body").on('change', ".notification", function(event) {
-    console.log("change");
+    Logger.info("change");
     var id=$(this).val();
-    console.log(id);
+    Logger.info(id);
     if(id == "user")
     {
         $(this).closest(".d-flex").find(".vendor").addClass("hidden");
@@ -359,7 +361,7 @@ $("body").on('change', ".notification", function(event) {
 });
 
 $("body").on('change', ".category-select", function(event) {
-    console.log("change");
+    Logger.info("change");
     var id=$(this).val();
 
     $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
@@ -397,7 +399,7 @@ $("body").on('click', ".delete", function(event) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
         var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
-            console.log(response);
+            Logger.info(response);
             if(response.status == "success")
             {
                 tinySuccessAlert("Deleted Successfully", response.message);
@@ -431,7 +433,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
         $(".side-bar-pop-up").html(response);
     });
     initRevenueChart(
-        console.log('graph')
+        Logger.info('graph')
     );
 });
 
@@ -453,7 +455,7 @@ $("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)"
         $(".side-bar-pop-up").html(response);
     });
     initRevenueChart(
-        console.log('graph')
+        Logger.info('graph')
     );
 });
 
@@ -521,7 +523,7 @@ $("body").on('change', ".change_status", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm('Are you sure want to change status?')) {
         $.update($(this).data("url"), {}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
                 target.hide();
@@ -538,7 +540,7 @@ $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
     if(confirm('Are you sure want to change status?')) {
         $.update($(this).data("url"), {data}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
             } else {
@@ -554,7 +556,7 @@ $("body").on('change', ".reschedule", function(event) {
     var data = document.getElementById("movement_dates").value;
     if(confirm('Are you sure want to reschedule this order?')) {
         $.update($(this).data("url"), {data}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Reschedule Order Successfully", response.message);
             } else {
@@ -568,7 +570,7 @@ $("body").on('change', ".reschedule", function(event) {
 $("body").on('change', ".cancel-booking", function(event) {
     if(confirm('Are you sure want to Cancel this order?')) {
         $.update($(this).data("url"), {data}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Cancelde Order Successfully", response.message);
             } else {
@@ -598,7 +600,7 @@ $("body").on('keydown', ".table-search1", function(event) {
 });
 
 $("body").on('change', ".check-toggle", function(event) {
-console.log($(this).val());
+Logger.info($(this).val());
     if ($(this).val() == $(this).data("value")) {
         $(this).val("0");
         $($(this).data("target")).removeClass("hidden");
@@ -614,7 +616,7 @@ $("body").on('click', ".bookings", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm($(this).data('confirm'))) {
         $.update($(this).data("url"), {}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert($(this).data('success'), response.message);
                 target.hide();
@@ -641,7 +643,7 @@ $("body").on('click', ".rejected", function(event) {
         if (result.isConfirmed) {
             var target = $(this).closest($(this).data("parent"));
             $.update($(this).data("url"), {}, function (response) {
-                console.log(response);
+                Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert($(this).data('success'), response.message);
                     target.hide();
@@ -988,7 +990,7 @@ $("body").on('click', ".card-method", function(event) {
 
 $("body").on('click', ".payment", function(event) {
         var method = $('.check-icon02').data("method");
-        console.log(method);
+        Logger.info(method);
         var amount = $(this).data("amount");
         var booking_id = $(this).data("booking");
         var coupon_code = document.getElementById("coupon").value;
@@ -1019,7 +1021,7 @@ $("body").on('click', ".payment", function(event) {
                 "description": "Movement on"+ moving_date,
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
                 "handler": function (resp){
-                    console.log({
+                    Logger.info({
                         booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                     });
                     $.ajax({
@@ -1078,7 +1080,7 @@ $("body").on('click', ".verify-coupon", function(event) {
     $.add($(this).data("url"), {public_booking_id, coupon}, function (response){
         if(response.status == "success")
         {
-            console.log(response);
+            Logger.info(response);
             tinySuccessAlert("Coupon Verified", response.message);
             $('.discount').html(response.data.discount);
             $('.grand-total').html(response.data.grand_total);
@@ -1110,7 +1112,7 @@ $("body").on('click', ".web-category", function(event) {
         type: 'get',
         dataType: 'json',
         success: function (response) {
-           console.log(response);
+           Logger.info(response);
             var source = $("#entry-template").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);
@@ -1133,7 +1135,7 @@ $("body").on('click', ".web-sub-category", function(event) {
         type: 'get',
         dataType: 'json',
         success: function (response) {
-           console.log(response);
+           Logger.info(response);
             for(var i=0; i< response.data.inventories.length; i++)
             {
                 response.data.inventories[i].meta.material=JSON.parse(response.data.inventories[i].meta.material);
@@ -1178,7 +1180,7 @@ $("body").on('click', ".add-item", function(event) {
             item[$(this).attr('name')] = $(this).val();
         });
     item = Object.assign({}, item);
-    console.log(item);
+    Logger.info(item);
     if(item.material == ''){
         megaAlert("Oops", "Please select Material");
         return false;
@@ -1189,7 +1191,7 @@ $("body").on('click', ".add-item", function(event) {
     }
     let class_name=item.meta_name+"-"+item.material+"-"+item.size+"-"+item.meta_id;
     class_name=class_name.replace(' ', '-');
-    console.log(class_name);
+    Logger.info(class_name);
     if($("."+class_name).length > 0)
     {
         megaAlert("Oops", "This item has been already added");
@@ -1210,7 +1212,7 @@ $("body").on('click', ".add-search-item", function(event) {
             item[$(this).attr('name')] = $(this).val();
         });
     item = Object.assign({}, item);
-    console.log(item);
+    Logger.info(item);
     if(item.material == ''){
         megaAlert("Oops", "Please select Material");
         return false;
@@ -1226,6 +1228,8 @@ $("body").on('click', ".add-search-item", function(event) {
     var template = Handlebars.compile(source);
     var html = template(item);
     $('.inventory .col-md-4:last').before(html);
+
+    tinyAlert("Added", "Item has been added.")
 });
 
 $("body").on('keyup', ".search-item", function(event) {
@@ -1247,6 +1251,8 @@ $("body").on('keyup', ".search-item", function(event) {
                     var template = Handlebars.compile(source);
                     var html = template(response.data);
                     $('.items-display').html(html);
+
+                    initRangeSlider();
                 }
             });
         }

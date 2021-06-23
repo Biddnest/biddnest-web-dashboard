@@ -1167,10 +1167,12 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $bookings = Booking::whereIn("zone_id",[$zone]);
-        if(isset($request->from) && isset($request->to) && $request->from != "all")
-            $bookings->whereDate("created_at",">",$request->from)->whereDate("created_at",">",$request->to);
+        $bookings = Booking::whereIn("zone_id",$zone);
+        if(isset($request->from) && isset($request->to))
+            $bookings->whereDate("created_at",">=", (string) date("Y-m-d", strtotime($request->from)))
+                ->whereDate("created_at","<=", (string) date("Y-m-d", strtotime($request->to)));
 
+//        return date("Y-m-d", strtotime($request->from));
         if(isset($request->org) && $request->org != "all")
         $bookings->where("organization_id",$request->org);
 
@@ -1178,8 +1180,9 @@ class WebController extends Controller
             $bookings->where("zone_id",$request->zone);
 
         if(isset($request->service) && $request->service != "all")
-           $bookings->whereService("zone_id",[$zone]);
+           $bookings->where("service_id",[$zone]);
 
+        $bookings->get();
         return view('reports.sales',[
             "report"=>Report::orderBy('id', 'DESC')->first(),
             "zones"=>Zone::whereIn("id",$zone)->get(),

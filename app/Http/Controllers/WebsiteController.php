@@ -6,6 +6,7 @@ use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
+use App\Enums\ServiceEnums;
 use App\Http\Controllers\Controller;
 use App\Models\Bid;
 use App\Models\Booking;
@@ -35,8 +36,14 @@ class WebsiteController extends Controller
             "deleted"=> CommonEnums::$NO,
             "platform"=>SliderEnum::$PLATFORM['web'],
             "size"=>SliderEnum::$SIZE['web']])
-            ->with('banners')
+            ->with(['banners'=>function($query){
+                $query->whereDate("from_date","<=", date("Y-m-d", time()))
+                ->whereDate("to_date",">=", date("Y-m-d", time()));
+            }])
+            ->whereDate("from_date","<=", date("Y-m-d", time()))
+            ->whereDate("to_date",">=", date("Y-m-d", time()))
             ->first();
+
         return view('website.home', [
             "testimonials"=>$testimonial,
             "categories"=>$categories,
@@ -100,7 +107,14 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $zone=(array)Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('name')->toArray();
-        return view('website.booking.addbooking', ['categories'=>$categories, 'inventories'=>$inventories, 'zones'=>$zone, 'prifill'=>$request->all()]);
+
+        return view('website.booking.addbooking', [
+            'categories'=>$categories,
+            'inventories'=>$inventories,
+            'zones'=>$zone,
+            'prifill'=>$request->all(),
+            'inventory_quantity_type'=>Service::where("id",$request->service)->pluck("inventory_quantity_type")[0]
+        ]);
     }
 
     public function estimateBooking(Request $request)

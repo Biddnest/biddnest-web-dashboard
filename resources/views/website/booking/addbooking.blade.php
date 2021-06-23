@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
-@section('title') Book Move @endsection
-@section('header_title')Book a Move @endsection
+@section('title') Create a booking @endsection
+@section('header_title')Create a booking @endsection
 @section('content')
 <div class="content-wrapper" data-barba="container" data-barba-namespace="addbooking">
     <div class="container ">
@@ -476,7 +476,7 @@
 
     <!-- The Modal -->
     <div class="modal modal-background" id="addItemModal" >
-        <div class="modal-dialog addItemModal item-modal-width">
+        <div class="modal-dialog addItemModal item-modal-width" style=" top: 2vh">
             <div class="modal-content ">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom ">
@@ -540,11 +540,26 @@
                                                 </div>
                                             </span>
                                         </div>
-                                        <div class="quantity d-flex justify-content-between quantity-operator">
-                                            <span class="minus">-</span>
-                                            <input type="text" name="quantity" readonly value="1" />
-                                            <span class="plus">+</span>
-                                        </div>
+                                        @if($inventory_quantity_type == \App\Enums\ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'])
+                                            <div class="quantity d-flex justify-content-between quantity-operator">
+                                                <span class="minus">-</span>
+                                                <input type="text" name="quantity" readonly value="1" />
+                                                <span class="plus">+</span>
+                                            </div>
+                                        @else
+                                            <div class="quantity-2" style="padding: 5px 2px">
+
+                                                <input type="text" class="custom_slider range" name="quantity" value=""
+                                                       data-type="double"
+                                                       data-min="1"
+                                                       data-max="500"
+                                                       data-from="1"
+                                                       data-to="500"
+                                                       data-grid="false"
+                                                />
+
+                                            </div>
+                                        @endif
                                     </div>
                                     <button class="btn btn-block add-btn add-item">Add to list</button>
                                 </div>
@@ -637,11 +652,26 @@
                                     </div>
                                 </span>
                             </div>
-                            <div class="quantity d-flex justify-content-between quantity-operator">
-                                <span class="minus">-</span>
-                                <input type="text" name="inventory_items[][quantity]" readonly value="1" />
-                                <span class="plus">+</span>
-                            </div>
+                            @if($inventory_quantity_type == \App\Enums\ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'])
+                                <div class="quantity d-flex justify-content-between quantity-operator">
+                                    <span class="minus">-</span>
+                                    <input type="text" name="quantity" readonly value="1" />
+                                    <span class="plus">+</span>
+                                </div>
+                            @else
+                                <div class="quantity-2" style="padding: 5px 2px">
+
+                                    <input type="text" class="custom_slider range" name="quantity" value=""
+                                           data-type="double"
+                                           data-min="1"
+                                           data-max="500"
+                                           data-from="1"
+                                           data-to="500"
+                                           data-grid="false"
+                                    />
+
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -752,11 +782,26 @@
                                                 </div>
                                             </span>
                     </div>
-                    <div class="quantity d-flex justify-content-between quantity-operator">
+                    @if($inventory_quantity_type == \App\Enums\ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'])
+                        <div class="quantity d-flex justify-content-between quantity-operator">
                         <span class="minus">-</span>
                         <input type="text" name="quantity" readonly value="1" />
                         <span class="plus">+</span>
                     </div>
+                        @else
+                            <div class="quantity-2" style="padding: 5px 2px">
+
+                                <input type="text" class="custom_slider range" name="quantity" value=""
+                                       data-type="double"
+                                       data-min="1"
+                                       data-max="500"
+                                       data-from="1"
+                                       data-to="500"
+                                       data-grid="false"
+                                />
+
+                            </div>
+                        @endif
                 </div>
                 <button class="btn btn-block add-btn add-search-item">Add to list</button>
             </div>

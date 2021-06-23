@@ -9,7 +9,7 @@
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required data-parsley-errors-container="#service-error" />
+                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required data-parsley-errors-container="#service-error" @if($loop->iteration == 1) checked @endif />
                         <div class="card-header card-methord  bg-turnblue  building-type @if($loop->iteration == 1) selected check-icon02 turntheme @endif" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
@@ -442,16 +442,16 @@
 
                 <div class="modal-body  margin-topneg-7">
 
-                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="redirect" {{--data-url="{{route('home-logged')}}"--}} data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
-                            <h2 class="p-text" style="font-size: 24px !important;">Login</h2>
+{{--                            <h2 class="p-text" style="font-size: 24px !important;">Login</h2>--}}
                             <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
                                     <input type="number" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden "   id="otp">
+                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden"   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="number" class="form-control" name="otp" id="formGroupExampleInput" autocomplete="off" maxlength="6" minlength="6" placeholder="Verify OTP">
@@ -468,9 +468,9 @@
                                 <div class="col-12 d-flex center">
                                     <div class="form-groups">
                                         <label class="container-01 m-0">
-                                            <input type="checkbox" id="Lift1" required/>
-                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
-                                            <p class="text-muted f-12">I agree to the <b>Terms & conditions</b></p>
+{{--                                            <input type="checkbox" id="Lift1" required/>--}}
+{{--                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>--}}
+                                            <p class="text-muted f-12">By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
                                         </label>
                                     </div>
                                 </div>

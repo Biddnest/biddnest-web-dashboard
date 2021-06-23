@@ -47,7 +47,7 @@
                         <div class="col-lg-2" style="padding: 5px">
                             <div class="form-input">
                                 <label class="">Organization</label>
-                                <select id="" class="form-control searchvendor" name="religion[]">
+                                <select id="" class="form-control searchvendor" name="organization_id">
                                 </select>
                             </div>
                         </div>

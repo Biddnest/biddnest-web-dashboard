@@ -130,8 +130,8 @@ class InventoryController extends Controller
     //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
     {
-        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return Helper::response(true,"Data Display successfully", ["inventories"=>$result]);
+        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->get();
+        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result]);
     }
 
     public static function getInventoriesForApp()

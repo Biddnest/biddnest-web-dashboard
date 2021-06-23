@@ -177,7 +177,7 @@ class BookingsController extends Controller
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
 
             /*Rounding to 2 decimals*/
-            $economic_price = number_format($primium_price,2);
+            $premium_price = number_format($primium_price,2);
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);

@@ -819,7 +819,7 @@ var dp = $('.bookdate').datepicker({
     multidate: true,
     format: 'd M yy',
     todayHighlight: true,
-    'startDate': '+2d',
+    'startDate': '+1d',
     'endDate':'+20d',
 });
 dp.on('changeDate', function(e) {
@@ -1106,6 +1106,25 @@ $("body").on('click', ".remove", function(event) {
 
 $("body").on('click', ".web-category", function(event) {
   var url=$(this).data("url");
+    var inventory_quantity_type=$(this).data("quantity-type");
+    $(".inventory-quantity-type").val(inventory_quantity_type);
+    if(inventory_quantity_type == 0){
+        $('.quantity-filed').html('<div class="quantity d-flex justify-content-between quantity-operator">' +
+            '            <span class="minus">-</span>' +
+            '            <input type="text" name="quantity" readOnly value="1"/>' +
+            '            <span class="plus">+</span>' +
+            '        </div>');
+    }else{
+        $('.quantity-filed').html('<div class="quantity-2" style="padding: 5px 2px">' +
+            '            <input type="text" class="custom_slider range" name="quantity" value=""' +
+            '                   data-type="double"' +
+            '                   data-min="1"' +
+            '                   data-max="500"' +
+            '                   data-from="1"' +
+            '                   data-to="500"' +
+            '                   data-grid="false"' +
+            '        </div>');
+    }
 
     $.ajax({
         url: url,
@@ -1113,7 +1132,8 @@ $("body").on('click', ".web-category", function(event) {
         dataType: 'json',
         success: function (response) {
            Logger.info(response);
-            var source = $("#entry-template").html();
+                var source = $("#entry-template").html();
+
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.subservices').html(html);
@@ -1124,11 +1144,13 @@ $("body").on('click', ".web-category", function(event) {
                 '                                    </div>');
         }
     });
+    initRangeSlider();
     return false;
 });
 
 $("body").on('click', ".web-sub-category", function(event) {
   var url=$(this).data("url");
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
    $('#subservice_id').val($(this).val());
     $.ajax({
         url: url,
@@ -1142,13 +1164,20 @@ $("body").on('click', ".web-sub-category", function(event) {
                 response.data.inventories[i].meta.size=JSON.parse(response.data.inventories[i].meta.size);
 
             }
+            if(inventory_quantity_type == 0)
+                var source = $("#entry-templateinventory").html();
+            else {
+                item.quantity_min=item.quantity.split(';')[0];
+                item.quantity_max=item.quantity.split(';')[1];
+                var source = $("#entry-templateinventory_range").html();
+            }
 
-            var source = $("#entry-templateinventory").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.inventory').html(html);
         }
     });
+    initRangeSlider();
     return false;
 });
 
@@ -1176,6 +1205,7 @@ $("body").on('click', ".filter-button", function(event) {
 
 $("body").on('click', ".add-item", function(event) {
     let item = [];
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
     $(this).closest(".item-single-wrapper").find("input").each(function(){
             item[$(this).attr('name')] = $(this).val();
         });
@@ -1200,14 +1230,24 @@ $("body").on('click', ".add-item", function(event) {
     item.meta_material=JSON.parse(item.meta_material);
     item.meta_size=JSON.parse(item.meta_size);
 
-    var source = $("#entry-templateinventory_append").html();
+    if(inventory_quantity_type == 0)
+        var source = $("#entry-templateinventory_append").html();
+    else {
+        item.quantity_min=item.quantity.split(';')[0];
+        item.quantity_max=item.quantity.split(';')[1];
+        var source = $("#entry-templateinventory_append_range").html();
+    }
+
     var template = Handlebars.compile(source);
     var html = template(item);
     $('.inventory .col-md-4:last').before(html);
+    initRangeSlider();
+    tinySuccessAlert("success", "This item has been added");
 });
 
 $("body").on('click', ".add-search-item", function(event) {
     let item = [];
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
     $(this).closest(".item-single-wrapper").find("input").each(function(){
             item[$(this).attr('name')] = $(this).val();
         });
@@ -1224,32 +1264,47 @@ $("body").on('click', ".add-search-item", function(event) {
     item.meta_material=item.meta_material.split(',');
     item.meta_size=item.meta_size.split(',');
 
-    var source = $("#entry-templateinventory_append").html();
+    if(inventory_quantity_type == 0)
+        var source = $("#entry-templateinventory_append").html();
+    else {
+        item.quantity_min=item.quantity.split(';')[0];
+        item.quantity_max=item.quantity.split(';')[1];
+        var source = $("#entry-templateinventory_append_range").html();
+    }
+
     var template = Handlebars.compile(source);
     var html = template(item);
     $('.inventory .col-md-4:last').before(html);
+    initRangeSlider();
 
-    tinyAlert("Added", "Item has been added.")
+    tinySuccessAlert("success", "This item has been added");
 });
 
-$("body").on('keyup', ".search-item", function(event) {
+$("body").on('input', ".search-item", function(event) {
+    console.log("enter");
         var query = $(this).val();
         var url = $(this).data('url');
+
         if (query.length >= 3) {
+            $('.items-display').html('');
             $.ajax({
                 url: url+ "?search=" + query,
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-                    $('.items-display').html('');
+
+
                     for(var i=0; i< response.data.inventories.length; i++)
                     {
                         response.data.inventories[i].material=JSON.parse(response.data.inventories[i].material);
                         response.data.inventories[i].size=JSON.parse(response.data.inventories[i].size);
                     }
-                    var source = $("#search_item").html();
-                    var template = Handlebars.compile(source);
-                    var html = template(response.data);
+                    Logger.info(response.data);
+                    let inventory_quantity_type = $(".inventory-quantity-type").val();
+                   let source = inventory_quantity_type == 0 ? $("#search_item").html() : $("#search_item_range").html();
+
+                    let template = Handlebars.compile(source);
+                    let html = template(response.data);
                     $('.items-display').html(html);
 
                     initRangeSlider();

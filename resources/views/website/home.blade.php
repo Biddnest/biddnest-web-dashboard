@@ -510,8 +510,8 @@
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
                         <input type="text" class="form-control" style="height: 38px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button">
-                                <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
+                            <button class="btn btn-secondary input-button" type="button" data-dismiss="modal" aria-label="Close">
+                                <span class="f-bolder" style="padding: 0 10px;">OK</span>
                             </button>
                         </div>
                     </div>
@@ -546,8 +546,8 @@
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
                         <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Search nearby landmark or place" id="dest-autocomplete"  required />
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button">
-                                <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
+                            <button class="btn btn-secondary input-button" type="button" data-dismiss="modal" aria-label="Close">
+                                <span class="f-bolder" style="padding: 0 10px;">OK</span>
                             </button>
                         </div>
                     </div>

@@ -39,6 +39,7 @@
 <script src="https://cdn.jsdelivr.net/gh/l2ig/jToast@master/jToast.min.js"></script>
 
 <script src="{{ asset('static/website/js/intlTelInput.js')}}"></script>
+
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
 {{--<script src="{{ asset('static/website/js/timer.js')}}"></script>--}}
 <script src="{{ asset('static/website/js/maps.js')}}"></script>
@@ -93,7 +94,7 @@ $('.card-methord').click(function() {
     });*/
 
     $("body").on("click",".item-single-wrapper span.info .dropdown-content ul li",function(e){
-       /*if(!$(this).closest(".item-single-wrapper").hasClass('custom-item')) {
+      /* if(!$(this).closest(".item-single-wrapper").hasClass('custom-item')) {
             let inp = $(this).closest('.item-single-wrapper').find('input');
             let class_name = inp.eq(1).val() + "-" + inp.eq(2).val() + "-" + inp.eq(3).val() + "-" + inp.eq(0).val();
             console.log(class_name);

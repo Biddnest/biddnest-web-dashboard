@@ -762,6 +762,71 @@
         @{{/each}}
     </script>
 
+    <script id="search_item_custome" type="text/html">
+            <div class="col-md-5" style="padding-right: 10px; padding-left: 10px;">
+                <div class="item-single-wrapper">
+                    <div class="item-image" style="">
+                        <input type="hidden" name="meta_image" value="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081">
+                    </div>
+                    <div class="item-meta">
+                        <h5> <input type="text" class="form-control" name="meta_name" value="" placeholder="Enter Items Name"></h5>
+                        <input type="hidden" name="meta_id" value="">
+                        <div class="info-wrapper d-flex flex-row justify-content-between">
+                            <span class="info" style="border-bottom: transparent;">
+                                <span><input type="text" class="form-control" name="material" placeholder="Enter Material" value="" /></span>
+                                <input type="hidden" class="form-control" name="meta_material" placeholder="Enter Material" value="" />
+                            </span>
+                            <span class="info" style="border-bottom: transparent;">
+                                <span><input type="text" class="form-control" name="size" placeholder="Enter Size" value="" /></span>
+                                <input type="hidden" class="form-control" name="meta_size" placeholder="Enter Size" value="" />
+                            </span>
+                        </div>
+                        <div class="quantity d-flex justify-content-between quantity-operator">
+                            <span class="minus">-</span>
+                            <input type="text" name="quantity" readonly value="1" />
+                            <span class="plus">+</span>
+                        </div>
+                    </div>
+                <button class="btn btn-block add-btn add-search-item">Add to list</button>
+            </div>
+        </div>
+    </script>
+
+    <script id="search_item_custome_range" type="text/html">
+            <div class="col-md-5" style="padding-right: 10px; padding-left: 10px;">
+                <div class="item-single-wrapper">
+                    <div class="item-image" style="">
+                        <input type="hidden" name="meta_image" value="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081">
+                    </div>
+                    <div class="item-meta">
+                        <h5> <input type="text" class="form-control" name="meta_name" value="" placeholder="Enter Items Name"></h5>
+                        <input type="hidden" name="meta_id" value="">
+                        <div class="info-wrapper d-flex flex-row justify-content-between">
+                            <span class="info" style="border-bottom: transparent;">
+                                <span><input type="text" class="form-control" name="material" placeholder="Enter Material" value="" /></span>
+                                <input type="hidden" class="form-control" name="meta_material" placeholder="Enter Material" value="" />
+                            </span>
+                            <span class="info" style="border-bottom: transparent;">
+                                <span><input type="text" class="form-control" name="size" placeholder="Enter Size" value="" /></span>
+                                <input type="hidden" class="form-control" name="meta_size" placeholder="Enter Size" value="" />
+                            </span>
+                        </div>
+                        <div class="quantity-2" style="padding: 5px 2px">
+
+                            <input type="text" class="custom_slider range" name="quantity" value=""
+                                   data-type="double"
+                                   data-min="1"
+                                   data-max="500"
+                                   data-from="1"
+                                   data-to="500"
+                                   data-grid="false"/>
+                        </div>
+                    </div>
+                <button class="btn btn-block add-btn add-search-item">Add to list</button>
+            </div>
+        </div>
+    </script>
+
     {{--Range Input--}}
     <script id="entry-templateinventory_range" type="text/x-handlebars-template">
         @{{#each inventories}}

@@ -1261,8 +1261,10 @@ $("body").on('click', ".add-search-item", function(event) {
         megaAlert("Oops", "Please select Size");
         return false;
     }
-    item.meta_material=item.meta_material.split(',');
-    item.meta_size=item.meta_size.split(',');
+    if(item.meta_material != '') {
+        item.meta_material = item.meta_material.split(',');
+        item.meta_size = item.meta_size.split(',');
+    }
 
     if(inventory_quantity_type == 0)
         var source = $("#entry-templateinventory_append").html();
@@ -1280,34 +1282,38 @@ $("body").on('click', ".add-search-item", function(event) {
     tinySuccessAlert("success", "This item has been added");
 });
 
-$("body").on('input', ".search-item", function(event) {
-    console.log("enter");
+$("body").on('keyup', ".search-item", function(event) {
         var query = $(this).val();
         var url = $(this).data('url');
 
         if (query.length >= 3) {
-            $('.items-display').html('');
+
             $.ajax({
                 url: url+ "?search=" + query,
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-
-
-                    for(var i=0; i< response.data.inventories.length; i++)
-                    {
-                        response.data.inventories[i].material=JSON.parse(response.data.inventories[i].material);
-                        response.data.inventories[i].size=JSON.parse(response.data.inventories[i].size);
-                    }
-                    Logger.info(response.data);
+                    $('.items-display').html('');
                     let inventory_quantity_type = $(".inventory-quantity-type").val();
-                   let source = inventory_quantity_type == 0 ? $("#search_item").html() : $("#search_item_range").html();
+                    if(response.data.inventories.length > 0)
+                    {
+                        for (var i = 0; i < response.data.inventories.length; i++) {
+                            response.data.inventories[i].material = JSON.parse(response.data.inventories[i].material);
+                            response.data.inventories[i].size = JSON.parse(response.data.inventories[i].size);
+                        }
 
-                    let template = Handlebars.compile(source);
-                    let html = template(response.data);
-                    $('.items-display').html(html);
+                        let source = inventory_quantity_type == 0 ? $("#search_item").html() : $("#search_item_range").html();
 
-                    initRangeSlider();
+                        let template = Handlebars.compile(source);
+                        let html = template(response.data);
+                        $('.items-display').html(html);
+                    }else{
+                        let html = inventory_quantity_type == 0 ? $("#search_item_custome").html() : $("#search_item_custome_range").html();
+                        $('.items-display').html(html);
+                    }
+
+                    if(inventory_quantity_type != 0)
+                        initRangeSlider();
                 }
             });
         }

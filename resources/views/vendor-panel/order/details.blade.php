@@ -265,7 +265,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="redirect" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}" data-alert="mega" method="POST" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="refresh" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}" data-alert="tiny" method="POST" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex justify-content-center row ">
                             <div class="col-sm-12 bid-amount">

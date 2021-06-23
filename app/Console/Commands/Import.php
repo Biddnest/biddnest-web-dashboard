@@ -42,6 +42,10 @@ class Import extends Command
             case "inventory":
                 $this->info(InventoryController::import());
             break;
+
+            case "inventory-price":
+                $this->info(InventoryController::importPrice());
+            break;
             default:
                 $this->error("That was an invalid option. Get reference from following command:");
                 $this->error('php artisan import:excel [inventory|prices]');

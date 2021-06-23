@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\Inventory;
+use App\Models\InventoryPrice;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class InventoryPriceImport implements ToModel
@@ -15,17 +16,19 @@ class InventoryPriceImport implements ToModel
      */
     public function model(array $row)
     {
-        $inv_id = Inventory::where("name",$row[0])->pluck('id')[0];
+        $inv_id = Inventory::where("name",$row[0])->first();
 
-        $inv_id = $inv_id ? $inv_id : 1;
+        $inv_id = $inv_id ? $inv_id->id : 1;
+        $deleted = $inv_id ? 0 : 1;
 
         return new InventoryPrice([
-        "organization_id"=> $row[0],
+        "organization_id"=> 41,
         "service_type"=>1,
         "inventory_id"=>$inv_id,
-        "material"=>$row[1],
-        "size"=>$row[2],
-        "price_economics"=>$row[3]
+        "material"=>$row[1] != "" ? $row[1] : "regular",
+        "size"=>$row[2] != "" ? $row[2] : "regular",
+        "price_economics"=>number_format((float) $row[3], 2),
+         "deleted"=>$deleted
     ]);
     }
 }

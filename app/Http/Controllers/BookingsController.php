@@ -169,9 +169,15 @@ class BookingsController extends Controller
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
+            /*Rounding to 2 decimals*/
+            $economic_price = number_format($economic_price,2);
+
             $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+
+            /*Rounding to 2 decimals*/
+            $economic_price = number_format($primium_price,2);
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);

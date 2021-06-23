@@ -19,6 +19,7 @@ use App\Enums\ServiceEnums;
 use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Facades;
 use App\Imports\InventoryImport;
+use App\Imports\InventoryPriceImport;
 
 class InventoryController extends Controller
 {

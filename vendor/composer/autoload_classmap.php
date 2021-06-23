@@ -93,6 +93,7 @@ return array(
     'App\\Http\\Middleware\\redirectToDashboard' => $baseDir . '/app/Http/Middleware/redirectToDashboard.php',
     'App\\Http\\Middleware\\redirectToVendorDashboard' => $baseDir . '/app/Http/Middleware/redirectToVendorDashboard.php',
     'App\\Imports\\InventoryImport' => $baseDir . '/app/Imports/InventoryImport.php',
+    'App\\Imports\\InventoryPriceImport' => $baseDir . '/app/Imports/InventoryPriceImport.php',
     'App\\Jobs\\SendOtp' => $baseDir . '/app/Jobs/SendOtp.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\AdminZone' => $baseDir . '/app/Models/AdminZone.php',

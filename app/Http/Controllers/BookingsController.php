@@ -169,9 +169,15 @@ class BookingsController extends Controller
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
+            /*Rounding to 2 decimals*/
+            $economic_price = number_format($economic_price,2);
+
             $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+
+            /*Rounding to 2 decimals*/
+            $primium_price = number_format($primium_price,2);
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
@@ -263,7 +269,7 @@ class BookingsController extends Controller
 
         $confirmestimate = Booking::where(["user_id" => $exist->user_id,
             "public_booking_id" => $exist->public_booking_id])
-            ->update(["final_estimated_quote" => json_decode($exist['quote_estimate'], true)[$service_type], "booking_type" => $booking_type,
+            ->update(["final_estimated_quote" => number_format(json_decode($exist['quote_estimate'], true)[$service_type], 2), "booking_type" => $booking_type,
                 "status" => BookingEnums::$STATUS['placed'],
                 "meta" => json_encode($meta),
                 "bid_result_at" => $complete_time

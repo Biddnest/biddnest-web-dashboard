@@ -105,7 +105,7 @@ class WebsiteController extends Controller
     public function addBooking(Request $request)
     {
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->limit(10)->get();
         $zone=(array)Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('name')->toArray();
 
         return view('website.booking.addbooking', [

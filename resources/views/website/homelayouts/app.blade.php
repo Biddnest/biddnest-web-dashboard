@@ -76,7 +76,7 @@
             </div>
         </nav>
         <div class="banner-carousel-container">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="min-height: 580px">
                 <div class="carousel-inner carousel-images">
                         @foreach($slider->banners as $banner)
                             <div class="item @if($loop->iteration == 1) active @endif">

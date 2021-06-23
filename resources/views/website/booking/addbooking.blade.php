@@ -497,6 +497,7 @@
                     <div class="items-display">
 
                     </div>
+                    <h5 style="margin-top: 20px;">Top Recommended Items</h5>
                     <div class="row f-row ">
                         @foreach($inventories as $inventory)
                             <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
@@ -709,60 +710,64 @@
     </script>
 
     <script id="search_item" type="text/x-handlebars-template">
-        @{{#each inventories}}
-            <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
-                <div class="item-single-wrapper">
-                    <div class="item-image" style="">
-                        <img src="@{{image}}" />
-                        <input type="hidden" name="meta_image" value="@{{image}}">
-                    </div>
-                    <div class="item-meta">
-                        <h5>@{{name}}</h5>
-                        <input type="hidden" name="meta_name" value="@{{name}}">
-                        <input type="hidden" name="meta_id" value="@{{id}}">
-                        <div class="info-wrapper d-flex flex-row justify-content-between">
-                            <span class="info">
-                                <span>Material</span>
-                                <input type="hidden" name="material" value="" />
-                                <input type="hidden" name="meta_material" value="@{{material}}" />
-                                <div class="dropdown-content">
-                                    <ul class="d-content">
-                                        @{{#material}}
-                                        <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
-                                            <a class="menu"><span class="ml-1">@{{.}}</span></a>
-                                        </li>
-                                        @{{/material}}
-                                    </ul>
-                                </div>
-                            </span>
-                            <span class="info">
-                                <span>Size</span>
-                                <input type="hidden" name="size" value="" />
-                                <input type="hidden" name="meta_size" value="@{{size}}" />
-                                <div class="dropdown-content">
-                                    <ul class="d-content">
-                                        @{{#size}}
-                                        <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
-                                            <a class="menu"><span class="ml-1">@{{.}}</span></a>
-                                        </li>
-                                        @{{/size}}
-                                    </ul>
-                                </div>
-                            </span>
+        <h5>Search Results</h5>
+        <div class="row">
+            @{{#each inventories}}
+                <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
+                    <div class="item-single-wrapper">
+                        <div class="item-image" style="">
+                            <img src="@{{image}}" />
+                            <input type="hidden" name="meta_image" value="@{{image}}">
                         </div>
-                        <div class="quantity d-flex justify-content-between quantity-operator">
-                            <span class="minus">-</span>
-                            <input type="text" name="quantity" readonly value="@{{quantity}}" />
-                            <span class="plus">+</span>
+                        <div class="item-meta">
+                            <h5>@{{name}}</h5>
+                            <input type="hidden" name="meta_name" value="@{{name}}">
+                            <input type="hidden" name="meta_id" value="@{{id}}">
+                            <div class="info-wrapper d-flex flex-row justify-content-between">
+                                <span class="info">
+                                    <span>Material</span>
+                                    <input type="hidden" name="material" value="" />
+                                    <input type="hidden" name="meta_material" value="@{{material}}" />
+                                    <div class="dropdown-content">
+                                        <ul class="d-content">
+                                            @{{#material}}
+                                            <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                            </li>
+                                            @{{/material}}
+                                        </ul>
+                                    </div>
+                                </span>
+                                <span class="info">
+                                    <span>Size</span>
+                                    <input type="hidden" name="size" value="" />
+                                    <input type="hidden" name="meta_size" value="@{{size}}" />
+                                    <div class="dropdown-content">
+                                        <ul class="d-content">
+                                            @{{#size}}
+                                            <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                            </li>
+                                            @{{/size}}
+                                        </ul>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="quantity d-flex justify-content-between quantity-operator">
+                                <span class="minus">-</span>
+                                <input type="text" name="quantity" readonly value="1" />
+                                <span class="plus">+</span>
+                            </div>
                         </div>
-                    </div>
-                <button class="btn btn-block add-btn add-search-item">Add to list</button>
+                    <button class="btn btn-block add-btn add-search-item">Add to list</button>
+                </div>
             </div>
+            @{{/each}}
         </div>
-        @{{/each}}
     </script>
 
     <script id="search_item_custome" type="text/html">
+        <h5>No Result Found Add Custome Item</h5>
             <div class="col-md-5" style="padding-right: 10px; padding-left: 10px;">
                 <div class="item-single-wrapper">
                     <div class="item-image" style="">
@@ -793,6 +798,7 @@
     </script>
 
     <script id="search_item_custome_range" type="text/html">
+            <h5>No Result Found Add Custome Item.</h5>
             <div class="col-md-5" style="padding-right: 10px; padding-left: 10px;">
                 <div class="item-single-wrapper">
                     <div class="item-image" style="">
@@ -951,63 +957,66 @@
     </script>
 
     <script id="search_item_range" type="text/x-handlebars-template">
-        @{{#each inventories}}
-        <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
-            <div class="item-single-wrapper">
-                <div class="item-image" style="">
-                    <img src="@{{image}}" />
-                    <input type="hidden" name="meta_image" value="@{{image}}">
-                </div>
-                <div class="item-meta">
-                    <h5>@{{name}}</h5>
-                    <input type="hidden" name="meta_name" value="@{{name}}">
-                    <input type="hidden" name="meta_id" value="@{{id}}">
-                    <div class="info-wrapper d-flex flex-row justify-content-between">
+        <h5>Search Results</h5>
+        <div class="row">
+            @{{#each inventories}}
+            <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
+                <div class="item-single-wrapper">
+                    <div class="item-image" style="">
+                        <img src="@{{image}}" />
+                        <input type="hidden" name="meta_image" value="@{{image}}">
+                    </div>
+                    <div class="item-meta">
+                        <h5>@{{name}}</h5>
+                        <input type="hidden" name="meta_name" value="@{{name}}">
+                        <input type="hidden" name="meta_id" value="@{{id}}">
+                        <div class="info-wrapper d-flex flex-row justify-content-between">
+                                <span class="info">
+                                    <span>Material</span>
+                                    <input type="hidden" name="material" value="" />
+                                    <input type="hidden" name="meta_material" value="@{{material}}" />
+                                    <div class="dropdown-content">
+                                        <ul class="d-content">
+                                            @{{#material}}
+                                            <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                            </li>
+                                            @{{/material}}
+                                        </ul>
+                                    </div>
+                                </span>
                             <span class="info">
-                                <span>Material</span>
-                                <input type="hidden" name="material" value="" />
-                                <input type="hidden" name="meta_material" value="@{{material}}" />
-                                <div class="dropdown-content">
-                                    <ul class="d-content">
-                                        @{{#material}}
-                                        <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
-                                            <a class="menu"><span class="ml-1">@{{.}}</span></a>
-                                        </li>
-                                        @{{/material}}
-                                    </ul>
-                                </div>
-                            </span>
-                        <span class="info">
-                                <span>Size</span>
-                                <input type="hidden" name="size" value="" />
-                                <input type="hidden" name="meta_size" value="@{{size}}" />
-                                <div class="dropdown-content">
-                                    <ul class="d-content">
-                                        @{{#size}}
-                                        <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
-                                            <a class="menu"><span class="ml-1">@{{.}}</span></a>
-                                        </li>
-                                        @{{/size}}
-                                    </ul>
-                                </div>
-                            </span>
-                    </div>
-                    <div class="quantity-2" style="padding: 5px 2px">
+                                    <span>Size</span>
+                                    <input type="hidden" name="size" value="" />
+                                    <input type="hidden" name="meta_size" value="@{{size}}" />
+                                    <div class="dropdown-content">
+                                        <ul class="d-content">
+                                            @{{#size}}
+                                            <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                                <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                            </li>
+                                            @{{/size}}
+                                        </ul>
+                                    </div>
+                                </span>
+                        </div>
+                        <div class="quantity-2" style="padding: 5px 2px">
 
-                        <input type="text" class="custom_slider range" name="quantity" value=""
-                               data-type="double"
-                               data-min="1"
-                               data-max="500"
-                               data-from="1"
-                               data-to="500"
-                               data-grid="false"/>
-                    </div>
+                            <input type="text" class="custom_slider range" name="quantity" value=""
+                                   data-type="double"
+                                   data-min="1"
+                                   data-max="500"
+                                   data-from="1"
+                                   data-to="500"
+                                   data-grid="false"/>
+                        </div>
 
+                    </div>
+                    <button class="btn btn-block add-btn add-search-item">Add to list</button>
                 </div>
-                <button class="btn btn-block add-btn add-search-item">Add to list</button>
             </div>
+            @{{/each}}
         </div>
-        @{{/each}}
     </script>
 
     {{--Image Input--}}

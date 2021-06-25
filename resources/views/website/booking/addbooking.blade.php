@@ -767,7 +767,7 @@
     </script>
 
     <script id="search_item_custome" type="text/html">
-        <h5>No Result Found Add Custome Item</h5>
+        <h5>No Result Found. Try Adding a custom item</h5>
             <div class="col-md-5" style="padding-right: 10px; padding-left: 10px;">
                 <div class="item-single-wrapper">
                     <div class="item-image" style="">
@@ -788,7 +788,7 @@
                         </div>
                         <div class="quantity d-flex justify-content-between quantity-operator">
                             <span class="minus">-</span>
-                            <input type="text" name="quantity" readonly value="1" />
+                            <input type="text" name="quantity:null" readonly value="null" />
                             <span class="plus">+</span>
                         </div>
                     </div>
@@ -798,7 +798,7 @@
     </script>
 
     <script id="search_item_custome_range" type="text/html">
-            <h5>No Result Found Add Custome Item.</h5>
+            <h5>No Result Found. Try Adding Custom Item.</h5>
             <div class="col-md-5" style="padding-right: 10px; padding-left: 10px;">
                 <div class="item-single-wrapper">
                     <div class="item-image" style="">
@@ -819,7 +819,7 @@
                         </div>
                         <div class="quantity-2" style="padding: 5px 2px">
 
-                            <input type="text" class="custom_slider range" name="quantity" value=""
+                            <input type="text" class="custom_slider range" name="quantity:null" value="null"
                                    data-type="double"
                                    data-min="1"
                                    data-max="500"

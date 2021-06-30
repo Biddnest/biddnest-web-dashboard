@@ -25,24 +25,8 @@ use App\Http\Controllers\WebsiteController;
 |
 */
 Route::get('/', function () {
-
-    return response()->redirectToRoute('login');
+    return response()->redirectToRoute('home');
 });
-Route::get('/debug/socket',function(){
-//    abort(500);
-    echo route('startWatchOnBookingSocket');
-//    return view("debug.socket");
-});
-
-Route::get('/debug/socket-url',function(){
-//    abort(500);
-    echo route('freshchat_api');
-//    return view("debug.socket");
-});
-
-
-
-
 Route::prefix('web/api')->group(function () {
 
     Route::prefix('auth')->group(function () {
@@ -376,10 +360,6 @@ Route::prefix('admin')->group(function () {
 
 
 });
-Route::get('/debug/socket', function () {
-    return view("debug.socket");
-});
-
 
 /* Vendor page routes */
 Route::prefix('vendor')->group(function(){
@@ -466,23 +446,6 @@ Route::prefix('vendor')->group(function(){
     });
 });
 
-
-Route::get('/debug/push/booking', function () {
-    return NotificationController::sendTo("vendor", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-        "type" => NotificationEnums::$TYPE['booking'],
-        "public_booking_id" => "BD606AD99B49C69",
-        "booking_status" => BookingEnums::$STATUS['biding']
-    ], null);
-});
-Route::get('/debug/push/url', function () {
-    return NotificationController::sendTo("user", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-        "type" => NotificationEnums::$TYPE['link'],
-        "url" => "https://google.com"
-    ], null);
-
-});
-
-
 Route::prefix('website/api')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post("/login", [WebsiteRouter::class, 'login'])->name('website.login');
@@ -512,7 +475,6 @@ Route::prefix('website/api')->group(function () {
     Route::post('/initiate-payment', [WebsiteRouter::class, 'initiatePayment'])->name("initiate-payment");
     Route::post('/status/complete',[WebsiteRouter::class, 'statusComplete'])->name("complete-status");
 });
-
 
 Route::prefix('site')->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name("home");

@@ -64,7 +64,7 @@ class Reports extends Command
 
         $this->comment("Avg Lead To opportunity: ".$lead_to_opportunity_percentage);
 
-        /*Opportunity to Order*/
+        /*Opportunity to Order*/    
         $enquiry_count = Booking::where("status",'<',BookingEnums::$STATUS['payment_pending'])
             ->count();
 

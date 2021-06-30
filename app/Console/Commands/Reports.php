@@ -95,7 +95,8 @@ class Reports extends Command
         /*Average CSAT*/
         $positive_review_count = ReviewSentiment::where("summary", ReviewSentimentEnum::$REVIEW_SUMMARY['pos'])->count();
         $total_review_count = ReviewSentiment::count();
-        $average_csat = ((float)$positive_review_count/(float)$total_review_count)*100;
+
+        $average_csat = $positive_review_count > 0 && $total_review_count > 0 ? ((float)$positive_review_count/(float)$total_review_count)*100 : 0.00;
         $this->comment("Avg CSAT: ".$average_csat);
 
         /*Inserting  to db*/

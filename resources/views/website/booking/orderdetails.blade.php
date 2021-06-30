@@ -130,8 +130,8 @@
                                             </div>
                                             <div class="">
                                                 <div>
-                                                    <p class="l-cap f-12 mb-0  p-0">Vehicle Name</p>
-                                                    <p class="f-14  p-0">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
+                                                    <p class="l-cap f-12 mb-0  p-0 text-right">Vehicle Name</p>
+                                                    <p class="f-14  p-0 text-right">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} - {{$booking->vehicle->number}}@endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,8 +144,8 @@
                                             </div>
                                             <div class="">
                                                 <div class="pr-1">
-                                                    <p class="l-cap f-12 mb-0  p-0">Vehicle Type </p>
-                                                    <p class="mt-0 f-14  p-0"> @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
+                                                    <p class="l-cap f-12 mb-0  p-0 text-right">Vehicle Type </p>
+                                                    <p class="mt-0 f-14  p-0 text-right"> @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,8 +158,8 @@
                                             </div>
                                             <div class="">
                                                 <div class="pr-3">
-                                                    <p class="l-cap f-12 mb-0  p-0">Manpower</p>
-                                                    <p class="mt-0 f-14  p-0">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
+                                                    <p class="l-cap f-12 mb-0  p-0 text-right">Manpower</p>
+                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -548,22 +548,22 @@
                                         <div class="modal-body p-15 margin-topneg-2">
                                             <div>
                                                 <form>
-                                                    @if(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'] == $booking->status)
+                                                    @if($booking->status == \App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                         <div class="row d-flex justify-content-center">
                                                             @foreach(str_split(json_decode($booking->meta, true)['start_pin']) as $key)
                                                                 <div class="col-lg-2 col-xs-2">
                                                                     <div class="form-group">
-                                                                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
+                                                                        <input type="text" class="form-control text-center" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
                                                                     </div>
                                                                 </div>
                                                             @endforeach
                                                         </div>
-                                                    @elseif(\App\Enums\BookingEnums::$STATUS['in_transit'] == $booking->status)
+                                                    @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['in_transit'])
                                                         <div class="row d-flex justify-content-center">
-                                                            @foreach(str_split(json_decode($booking->meta, true)['start_pin']) as $key)
+                                                            @foreach(str_split(json_decode($booking->meta, true)['end_pin']) as $key)
                                                                 <div class="col-lg-2 col-xs-2">
                                                                     <div class="form-group">
-                                                                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
+                                                                        <input type="text" class="form-control text-center" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
                                                                     </div>
                                                                 </div>
                                                             @endforeach

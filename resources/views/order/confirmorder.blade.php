@@ -52,7 +52,7 @@
                                     <div class="d-flex flex-row justify-content-around f-14 theme-text text-center p-10 quotation">
                                         <div class="flex-column justify-content-center test">
                                             <div class="card m-20  card-price eco cursor-pointer"  >
-                                                <div class="p-60 f-32 border-cicle eco-card" >
+                                                <div class="p-60 f-22 border-cicle eco-card" >
                                                     <div>₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                     <div class="f-14 ">Base price</div>
                                                 </div>

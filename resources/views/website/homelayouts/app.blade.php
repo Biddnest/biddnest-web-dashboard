@@ -4,6 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" max-scale="1">
         <!-- Required meta tags -->
         @include('website.homelayouts.includes.app-css')
+        <style>
+            .dropdown-content{
+    padding: 0 !important;
+}
+
+.d-content .drop-list .menu:hover{
+    color: #fdc403 !important;
+}
+
+
+a.menu:hover{
+    color: #fdc403 !important;
+}
+        </style>
     </head>
     <body>
 
@@ -52,19 +66,19 @@
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">
                                     <ul class="d-content">
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> <span class="ml-1">My Profile</span> </a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /> <span class="ml-1">My Request </span></a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
                                         </li>
                                     </ul>

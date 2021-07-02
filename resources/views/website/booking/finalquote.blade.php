@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
 @section('title')Ongoing Book @endsection
-@section('header_title') Ongoing Book @endsection
+@section('header_title') Ongoing Booking @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="finalbooking">
         <div class="container">
@@ -61,7 +61,7 @@
                                             <h4 class="d-flex center">Final Bidding</h4>
                                             <div class="price-circle mt-2 theme-text">
                                                 <h4 class="m-10">₹ {{$booking->final_quote}}</h4>
-                                                <p>Final Price</p>
+                                                <p class="final-price">Final Price</p>
                                             </div>
                                             <h5 class="theme-text mt-2 f-16">
                                                 @if($booking->booking_type == \App\Enums\BookingEnums::$BOOKING_TYPE['premium'])

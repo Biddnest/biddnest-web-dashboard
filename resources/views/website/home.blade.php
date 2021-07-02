@@ -420,7 +420,7 @@
 
     <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
+            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:28% !important">
                 <div class="modal-header p-0 br-5 ">
                     <div>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">
@@ -467,20 +467,20 @@
 
                                 <div class="col-12 d-flex center">
                                     <div class="form-groups">
-                                        <label class="container-01 m-0">
+                                        <label class="container-01 m-0 p-0">
 {{--                                            <input type="checkbox" id="Lift1" required/>--}}
 {{--                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>--}}
-                                            <p class="text-muted f-12">By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                            <p class="text-muted f-14"> By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
                                         </label>
                                     </div>
                                 </div>
 
                                 <a class="weblogin" >
-                                    <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 mb-5 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
                                         Submit
                                     </button>
                                 </a>
-                                <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p>
+                                <!-- <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p> -->
                             </div>
 
                         </div>
@@ -508,9 +508,9 @@
                         <label>Search your location below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control" style="height: 38px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
+                        <input type="text" class="form-control" style="height: 41px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button" data-dismiss="modal" aria-label="Close">
+                            <button class="btn btn-secondary input-button" type="button" style="margin-left: -10px;" data-dismiss="modal" aria-label="Close">
                                 <span class="f-bolder" style="padding: 0 10px;">OK</span>
                             </button>
                         </div>
@@ -544,9 +544,9 @@
                         <label>Search your destination below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Search nearby landmark or place" id="dest-autocomplete"  required />
+                        <input type="text" class="form-control -mr-4" style="height: 41px;" placeholder="Search nearby landmark or place" id="dest-autocomplete"  required />
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button" data-dismiss="modal" aria-label="Close">
+                            <button class="btn btn-secondary input-button" type="button" style="margin-left: -10px;" data-dismiss="modal" aria-label="Close">
                                 <span class="f-bolder" style="padding: 0 10px;">OK</span>
                             </button>
                         </div>

@@ -1063,4 +1063,32 @@
     .fc-widget-normal{
         right:  10px !important;
     }
+
+    .onactive{
+        color: #2c136c !important;
+        opacity: none !important;
+    }
+    .color-purple .step-text{
+        opacity: 10;
+    }
+
+    .actionBtn.align{
+    margin-left: -22px;
+    margin-right: -26px;
+    }
+.final-price{
+    font-weight: 600 !important;
+    font-size: 16px;
+    margin-top: -6px;
+}
+
+
+
+
+.actionBtn.alignone{
+    margin-left: -30px;
+    margin-right: -43px;
+
+}
+    
 </style>

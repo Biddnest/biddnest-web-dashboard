@@ -3,6 +3,18 @@
     <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" max-scale="1">
         @include('website.layouts.includes.app-css')
+
+        <style>
+
+.navbar-nav .nav-item .nav-link{
+    margin-right: 20px !important;
+}
+.ml-30{
+margin-left: 18%;
+}
+
+
+    </style>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation navigation-top">
@@ -126,11 +138,11 @@
                                 </div>
 
                                 <a class="weblogin" >
-                                    <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 mb-4 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
                                         Submit
                                     </button>
                                 </a>
-                                <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p>
+                                <!-- <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p> -->
                             </div>
 
 

@@ -10,7 +10,7 @@
                     <div class="col-md-3 br-line view-none pt-4">
                         <div class="row steps-form-3 ">
                             <div class="col-md-8 setup-panel-3">
-                                <div class="steps-step-1 ">
+                                <div class="steps-step-1 color-purple">
                                     <p class="step-text text-right ">Customer Details
                                         <span class="text-muted "> Personal Info</span>
                                     </p>
@@ -154,7 +154,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="actionBtn actionBtn-mob-view border-top ">
+                                        <div class="actionBtn alignone  actionBtn-mob-view border-top ">
                                             <a href="{{route('home')}}">
                                                 <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-5 ">
                                                     Cancel
@@ -370,7 +370,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class=" actionBtn actionBtn-view border-top move-btn">
+                                    <div class=" actionBtn align actionBtn-view border-top move-btn">
                                         <a href="{{route('home')}}" class="view-none">
                                             <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-4 ">
                                                 Cancel
@@ -415,13 +415,13 @@
                                     </div>
                                 </div>
 
-                                <div class=" actionBtn actionBtn-view border-top move-btn">
+                                <div class=" actionBtn align actionBtn-view border-top move-btn">
                                     <a href="{{route('home')}}" class="view-none">
-                                        <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 ">
+                                        <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-4 ">
                                             Cancel
                                         </button>
                                     </a>
-                                    <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next3" id="next3">
+                                    <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next3 mr-4" id="next3">
                                         Next
                                     </button>
                                     <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back3 bview-btn">Back
@@ -448,19 +448,19 @@
 
                                     <div class="row d-flex uploaded-image mb-5 ml-2 pl-2 mr-0">
                                         <div class="col-md-2 pl-0 cursor-pointer">
-                                            <input type="file" class="hidden custom-file-input upload-image">
+                                            <input type="file" class="hidden custom-file-input upload-image" accept="image/*">
                                             <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/plus-square-1179806.png" onclick="$(this).parent().find('input').click();" alt="uploadedImage" class="image-upload-by-customer" style="width: 100%; height: 100%;"/>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class=" actionBtn actionBtn-view border-top move-btn">
+                                <div class=" actionBtn align actionBtn-view border-top move-btn">
                                     <a href="{{route('home')}}" class="view-none">
-                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
+                                        <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-4 " type="button" style="margin-left: 40px;">
                                             Cancel
                                         </button>
                                     </a>
-                                    <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4" id="next4">
+                                    <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4 mr-4"  id="next4" style="margin-right: 40px !important;">
                                         Next
                                     </button>
                                     <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back4 bview-btn" type="button">Back
@@ -502,7 +502,7 @@
                         @foreach($inventories as $inventory)
                             <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
                                 <div class="item-single-wrapper">
-                                    <div class="item-image" style="">
+                                    <div class="item-image">
                                         <img src="{{$inventory->image}}" />
                                         <input type="hidden" name="meta_image" value="{{$inventory->image}}">
                                         <input type="hidden" name="meta_category" value="{{$inventory->category}}">
@@ -595,7 +595,7 @@
             </div>
         @{{/each}}
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script id="entry-templateinventory" type="text/x-handlebars-template">
         @{{#each inventories}}
                 <div class="col-md-4 filter item-remove @{{meta.category}} @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">
@@ -1022,7 +1022,7 @@
     {{--Image Input--}}
     <script id="image_upload_preview" type="text/x-handlebars-template">
         <div class="col-md-2 pl-0 upload-image-container">
-            <input type="hidden" id="custId" value="@{{image}}" name="meta[images][]">
+            <input type="hidden" id="custId" value="@{{image}}" name="meta[images][]" >
             <img src="@{{image}}" alt="uploadedImage" class="image-upload-by-customer" style="width: 100%; height: 100%;"/>
             <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
         </div>
@@ -1074,6 +1074,25 @@
             }
                 document.getElementById('inc ').value = currentValue
         }
+
+
+
+
+     
+    </script>
+    <script>
+
+jQuery(document).ready(function($){
+
+$('.panel.panel-default.card-input').on('click', function(){
+            console.log("test")
+    $('panel.panel-default.card-input.check-blue').removeClass('check-blue');
+    $(this).addClass('check-blue');
+});
+
+});
+
+
     </script>
 
 </div>

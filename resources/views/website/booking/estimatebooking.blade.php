@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
 @section('title') Book Move @endsection
-@section('header_title')Book a Move @endsection
+@section('header_title')Estimated Cost @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="estimatebooking">
         <div class="container ">
@@ -117,9 +117,9 @@
                                                 <div class="d-flex flex-row flex-view-col justify-content-around f-14 theme-text text-center  quotation mb-3">
                                                     <div class="flex-column justify-content-center test">
                                                         <div class="card m-20  card-price eco cursor-pointer">
-                                                            <div class="p-60 f-32 border-cicle eco-card">
+                                                            <div class="p-60 f-22 border-cicle eco-card">
                                                                 <div>
-                                                                    <div class="f-30">₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
+                                                                    <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                                     <div class="f-16 ">Base price</div>
                                                                 </div>
                                                             </div>
@@ -129,16 +129,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="radio-group">
-                                                            <div class="form-input radio-item ">
+                                                            <div class="form-input radio-item" >
                                                                 <input type="radio" id="economy" value="economic" name="service_type" class="radio-button__input cursor-pointer" required>
-                                                                <label class="" for="economy"></label>
+                                                                <label class="" for="economy" style="cursor: pointer;"></label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="felx-column">
                                                         <div class="card m-20 card-price pre  cursor-pointer ">
-                                                            <div class="p-60 f-32  border-cicle pre-card  ">
-                                                                <div class="f-30">₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
+                                                            <div class="p-60 f-22  border-cicle pre-card  ">
+                                                                <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
                                                                 <div class="f-16 p-1">Base price</div>
                                                             </div>
                                                             <div class=" f-18"> Premium
@@ -147,9 +147,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="radio-group">
-                                                            <div class="form-input radio-item ">
+                                                            <div class="form-input radio-item" >
                                                                 <input type="radio" id="premium" value="premium" name="service_type" class="radio-button__input " required>
-                                                                <label class="" for="premium"></label>
+                                                                <label class="" for="premium" style="cursor: pointer;"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,7 +167,7 @@
                                                 </button>
                                             </div>
 
-                                            <div class=" actionBtn actionBtn-view border-top ">
+                                            <!-- <div class=" actionBtn actionBtn-view border-top ">
                                                 <a href="{{route('home')}}">
                                                     <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
                                                         Cancel
@@ -176,7 +176,7 @@
                                                 <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right">
                                                     Next
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </form>
                                     </div>
                                 </div>

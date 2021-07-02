@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
 @section('title')Ongoing Book @endsection
-@section('header_title') Ongoing Book @endsection
+@section('header_title') Ongoing Booking @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="ongoingbooking">
         <div class="container">

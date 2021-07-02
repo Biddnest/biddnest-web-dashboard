@@ -498,4 +498,45 @@
     .modal-open .modal{
         background: rgba(255,255,255, 0.3) !important;
     }
+
+    .datepicker .datepicker-dropdown .dropdown-menu .datepicker-orient-left .datepicker-orient-top{
+    position: absolute !important;
+    left: 44% !important;
+    top: 100% !important;
+    margin-left: -96px;
+    margin-top: -73px;
+}
+
+
+/* .datepicker{
+    position: absolute !important;
+    left: 44% !important;
+    top: 100% !important;
+    margin-left: -96px;
+    margin-top: -73px;
+} */
+
+
+.datepicker{
+    position: absolute !important;  
+  left: 0 !important; 
+  right: 0 !important; 
+  margin-left: auto !important; 
+  margin-right: auto !important; 
+  width: fit-content;
+  z-index: 1;
+}
+
+
+.datepicker.dropdown-menu th, .datepicker.dropdown-menu td{
+    padding: 13px 15px;
+}
+
+
+.icon{
+    margin-left: 18px;
+
+}
+
+
 </style>

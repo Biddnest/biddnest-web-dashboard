@@ -990,6 +990,8 @@ class BookingsController extends Controller
         return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }
 
+
+    /*apis for websocket running in websocket.js*/
     public static function startVendorWatch($request){
         $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
@@ -1028,6 +1030,7 @@ class BookingsController extends Controller
 
     }
 
+    /*This following api is not been used*/
     public function validateVendorRoom($request){
         $token = (object)Helper::validateAuthToken($request['token']);
         $vendor = Vendor::find($token->payload->id);
@@ -1045,5 +1048,35 @@ class BookingsController extends Controller
         else
             return true;
 
+    }
+
+    /*End socket apis*/
+
+
+    public function sendDetailsToPhone($public_booking_id, $phone){
+        $booking = Booking::where("public_booking_id", $public_booking_id)
+//            ->with('inventories')
+            ->with('organization')
+            ->with('service')
+            ->with('movement_dates')
+            ->with('driver')
+            ->with('vehicle')
+            ->with('user')
+            ->with(['bid' => function ($bid) {
+                $bid->where("status", BidEnums::$STATUS['won']);
+                    }])
+                ->first();
+
+        if(!$booking)
+            return Helper::response(false, "This booking doesn't exist. Could not proceed.");
+
+        $sms_body = "";
+
+        dispatch(function() use($phone, $sms_body){
+            Sms::send($phone, $sms_body);
+        });
+
+
+        return Helper::response(true, "Booking details have been send to $phone");
     }
 }

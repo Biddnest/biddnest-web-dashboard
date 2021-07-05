@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
-@section('title')Ongoing Book @endsection
-@section('header_title') Ongoing Book @endsection
+@section('title') Booking Details @endsection
+@section('header_title') Booking Details @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="orderdetails">
         <div class="container">
@@ -159,7 +159,7 @@
                                             <div class="">
                                                 <div class="pr-3">
                                                     <p class="l-cap f-12 mb-0  p-0 text-right">Manpower</p>
-                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
+                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
                                     <div class="d-flex justify-content-between" style="width: 94%;">
                                         <div>
                                             <h6 class="l-cap f-14 p-0">Date</h6>
-                                            <h5 class="f-16">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
+                                            <h5 class="f-16">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['movement_date']))}}@endif</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Price </h6>
@@ -372,14 +372,15 @@
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-2">
                                             <div>
-                                                <form>
+                                                <form class="" data-next="null" action="{{route('website.api.send-to-phone')}}" method="POST" data-alert="mega">
                                                     <div class="row d-flex justify-content-center">
 
                                                         <div class="col-lg-10 col-xs-12">
                                                             <div class="form-group">
                                                                 <label for="formGroupExampleInput" class="mb-0">Phone
                                                                     Number</label>
-                                                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="9739912345">
+                                                                <input type="number" name="phone" class="form-control" id="formGroupExampleInput" placeholder="9988776655">
+                                                                <input type="hidden" value="{{$booking->public_booking_id}}" name="public_booking_id" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -393,8 +394,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="mt-1 pt-1">
-                                                    <!-- <p class="center light text-view-center mt-3">Did not receive pin?
-                                                        <span class="theme-text pl-1 f-bolder">Resend</span></p> -->
+                                                    {{--Useless div block this one is -> check and remove if needed --}}
                                                 </div>
                                             </div>
                                         </div>

@@ -268,7 +268,7 @@ class WebsiteRouteController extends Controller
             'source.lng' => 'required|numeric',
 
             'source.meta.geocode' => 'nullable|string',
-            'source.meta.floor' => 'required|integer',
+            'source.meta.floor' => 'required',
             'source.meta.address_line1' => 'required|string',
             'source.meta.address_line2' => 'required|string',
             'source.meta.city' => 'required|string',
@@ -280,7 +280,7 @@ class WebsiteRouteController extends Controller
             'destination.lng' => 'required|numeric',
 
             'destination.meta.geocode' => 'nullable|string',
-            'destination.meta.floor' => 'required|integer',
+            'destination.meta.floor' => 'required',
             'destination.meta.address_line1' => 'required|string',
             'destination.meta.address_line2' => 'required|string',
             'destination.meta.city' => 'required|string',
@@ -312,4 +312,17 @@ class WebsiteRouteController extends Controller
 
         return BookingsController::createEnquiry($req, Session::get('account')['id'], explode(",", $request->movement_dates), true);
     }
+
+    public function sendToPhone(Request $request){
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|min:10|max:10',
+            'public_booking_id' => 'string|required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return BookingController::sendDetailsToPhone($request->public_booking_id, $request->phone);
+    }
+
 }

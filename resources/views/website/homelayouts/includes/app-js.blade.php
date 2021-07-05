@@ -89,7 +89,7 @@
            enableReverseGeocode: true,
            draggable: true,
            onchanged: function (currentLocation, radius, isMarkerDropped) {
-               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
+               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
                $.get(url, function (response){
                    console.log(response);
                    let street="";
@@ -143,7 +143,7 @@
            enableReverseGeocode: true,
            draggable: true,
            onchanged: function (currentLocation, radius, isMarkerDropped) {
-               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key=AIzaSyCvVaeoUidYMQ8cdIJ_cEvrZNJeBeMpC-4";
+               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
                $.get(url, function (response){
                    console.log(response);
                    let street="";

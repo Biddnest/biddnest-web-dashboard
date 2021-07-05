@@ -7,7 +7,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
 use App\Enums\ServiceEnums;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BookingsController;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\Coupon;
@@ -187,8 +187,9 @@ class WebsiteController extends Controller
     }
     public function myRequest(Request $request)
     {
+        $past_bookings = BookingsController::getBookingsByUser(Session::get('account')['id'], 15);
         $tickets=Ticket::where('user_id', Session::get('account')['id'])->orderBy('id', 'DESC')->paginate(5);
-        return view('website.myrequest', ['tickets'=>$tickets]);
+        return view('website.myrequest', ['tickets'=>$tickets, "past_bookings"=>$past_bookings]);
     }
 
 }

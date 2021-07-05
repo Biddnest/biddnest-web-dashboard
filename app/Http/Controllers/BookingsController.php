@@ -13,6 +13,7 @@ use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\BookingController;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingDriver;
@@ -385,14 +386,7 @@ class BookingsController extends Controller
             ->with('driver')
             ->with('vehicle')
             ->with('review')
-            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
-                        $movement_specifications->where('booking_id', Booking::where(['public_enquiry_id' => $public_booking_id])->pluck('id')[0])
-                            ->where('status', BidEnums::$STATUS['won']);
-                            /*->with(['bid'=>function($query){
-                                $query->whereNotIn('status', [BidEnums::$STATUS['won'], BidEnums::$STATUS['rejected']]);
-                            }]);*/
-                    }
-                    ])
+            ->with('payment')
             ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
                         $movement_specifications->where('booking_id', Booking::where(['public_enquiry_id' => $public_booking_id])->orWhere("public_booking_id", $public_booking_id)->pluck('id')[0])
                             ->where('status', BidEnums::$STATUS['won']);
@@ -1053,7 +1047,7 @@ class BookingsController extends Controller
     /*End socket apis*/
 
 
-    public function sendDetailsToPhone($public_booking_id, $phone){
+    public static function sendDetailsToPhone($public_booking_id, $phone){
         $booking = Booking::where("public_booking_id", $public_booking_id)
 //            ->with('inventories')
             ->with('organization')
@@ -1079,4 +1073,9 @@ class BookingsController extends Controller
 
         return Helper::response(true, "Booking details have been send to $phone");
     }
+
+    public static function getBookingsByUser($user_id, $count = 10){
+        return Booking::where("user_id",$user_id)->orderBy("id","DESC")->limit($count)->get();
+    }
+
 }

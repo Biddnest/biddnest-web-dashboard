@@ -420,7 +420,7 @@
 
     <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:28% !important">
+            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="">
                 <div class="modal-header p-0 br-5 ">
                     <div>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">

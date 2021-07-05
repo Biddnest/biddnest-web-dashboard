@@ -78,7 +78,8 @@ class WebsiteRouteController extends Controller
     public function addTicket(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'category'=>'required',
+            'public_booking_id'=>"required|string",
+            'category'=>'required|string',
             'heading' => 'required|string',
             'desc' => 'required|string'
         ]);
@@ -86,7 +87,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::createForUserApp(Session::get('account')['id'], $request->category, ["public_booking_id"=>null], $request->heading, $request->desc);
+        return TicketController::createForWeb(Session::get('account')['id'], $request->category, ["public_booking_id"=>null], $request->heading, $request->desc);
     }
 
     public function raiseTicket(Request $request)

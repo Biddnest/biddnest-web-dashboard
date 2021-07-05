@@ -133,14 +133,14 @@
                                     <ul>
                                         <li class="p-1">Page</li>
                                         <li class="digit">{{$tickets->currentPage()}}</li>
-                                        <li class="label">of</li>
+                                        <li class="label">/</li>
                                         <li class="digit">{{$tickets->lastPage()}}</li>
                                         @if(!$tickets->onFirstPage())
-                                            <li class="button"><a href="{{$tickets->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                            <li class="button" style="transform: translateY(13px);"><a href="{{$tickets->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
                                             </li>
                                         @endif
                                         @if($tickets->currentPage() != $tickets->lastPage())
-                                            <li class="button"><a href="{{$tickets->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                            <li class="button" style="transform: translateY(13px);"><a href="{{$tickets->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
                                             </li>
                                         @endif
                                     </ul>
@@ -148,13 +148,27 @@
                             </div>
                             <div class="col-md-4 col-xs-12 col-sm-12 ">
                                 <h5 class="heading mt-4 f-20 mb-3">New Request</h5>
-                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh" data-alert="mega" class="form-new-order  input-text-blue" data-parsley-validate>
+                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh" data-alert="mega" class="form-new-order  input-text-blue" data-parsley-validate autocomplete="off">
+                                    <div class="form-group">
+                                        <label class="phone-num-lable">Choose Booking</label>
+                                              <select name="public_booking_id" class="form-control" required>
+                                                <option value="">--Select--</option>
+                                                  @foreach($past_bookings as $booking)
+{{--                                                      <optgroup label="{{$booking->public_booking_id}}">--}}
+                                                      <option value="{{$booking->public_booking_id}}">{{ucwords(json_decode($booking->source_meta, true)['city'])}} - {{ucwords(json_decode($booking->destination_meta, true)['city'])}} [#{{$booking->public_booking_id}}]</option>
+{{--                                                      </optgroup>--}}
+                                                  @endforeach
+                                              </select>
+                                              <span class="error-message">Please enter valid
+                                                Designation</span>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="phone-num-lable">Category</label>
                                               <select name="category" class="form-control" required>
                                                 <option value="">--Select--</option>
                                                   @foreach(array_slice(\App\Enums\TicketEnums::$TYPE, 0, 5) as $type=>$key)
-                                                      <option value="{{$key}}">{{ucwords($type)}}</option>
+                                                      <option value="{{$key}}">{{str_replace("_"," ",ucwords($type))}}</option>
                                                   @endforeach
                                               </select>
                                               <span class="error-message">Please enter valid
@@ -170,8 +184,8 @@
                                               <span class="error-message">Please enter valid</span>
                                     </div>
                                     <a class="white-text" href="#">
-                                        <button class="btn mt-4 btn-theme-bg full-width white-bg">
-                                            submit
+                                        <button class="btn mt-4 btn-theme-bg full-width white-bg" type="submit" style="width: 100%; display: block;">
+                                            Raise Ticket
                                         </button>
                                     </a>
                                 </form>

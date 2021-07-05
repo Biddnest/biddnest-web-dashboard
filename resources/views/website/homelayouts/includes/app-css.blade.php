@@ -507,24 +507,15 @@
     margin-top: -73px;
 }
 
-
-/* .datepicker{
-    position: absolute !important;
-    left: 44% !important;
-    top: 100% !important;
-    margin-left: -96px;
-    margin-top: -73px;
-} */
-
-
-.datepicker{
-    position: absolute !important;  
-  left: 0 !important; 
-  right: 0 !important; 
-  margin-left: auto !important; 
-  margin-right: auto !important; 
-  width: fit-content;
-  z-index: 1;
+    .datepicker{
+        position: fixed !important;
+        left: 50% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        z-index: 1;
+        top: 50% !important;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 
@@ -537,6 +528,11 @@
     margin-left: 18px;
 
 }
+
+    .swal2-popup{
+        scale: 1.5;
+    }
+
 
 
 </style>

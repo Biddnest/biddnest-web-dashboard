@@ -125,13 +125,13 @@
                                             <div class="">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 p-0">Driver</p>
-                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}}@endif</p>
+                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}} @else To be assigned @endif</p>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0  p-0 text-right">Vehicle Name</p>
-                                                    <p class="f-14  p-0 text-right">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} - {{$booking->vehicle->number}}@endif</p>
+                                                    <p class="f-14  p-0 text-right">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} - {{$booking->vehicle->number}} @else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,13 +139,13 @@
                                             <div class="">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 p-0">Phone Number</p>
-                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{$booking->driver->phone}}@endif</p>
+                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{$booking->driver->phone}} @else N/A @endif</p>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <div class="pr-1">
                                                     <p class="l-cap f-12 mb-0  p-0 text-right">Vehicle Type </p>
-                                                    <p class="mt-0 f-14  p-0 text-right"> @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
+                                                    <p class="mt-0 f-14  p-0 text-right"> @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}} @else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                             <div class="">
                                                 <div class="pr-3">
                                                     <p class="l-cap f-12 mb-0  p-0 text-right">Manpower</p>
-                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@else N/A @endif</p>
+                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->movement_specifications){{json_decode($booking->movement_specifications->meta, true)['min_man_power']}}@else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,8 +168,9 @@
                                 <div class="col-md-6 col-xs-12  col-sm-12 mt-4 pl-4 text-left">
                                     <div class="d-flex justify-content-between" style="width: 94%;">
                                         <div>
+{{--                                            {{(string)json_decode($booking->bid,true)['meta']}}--}}
                                             <h6 class="l-cap f-14 p-0">Date</h6>
-                                            <h5 class="f-16">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['movement_date']))}}@endif</h5>
+                                            <h5 class="f-16">@if($booking->movement_specifications){{date('d M Y', strtotime(json_decode($booking->movement_specifications->meta, true)['moving_date']))}}@endif</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Price </h6>
@@ -178,8 +179,8 @@
                                     </div>
                                     <div class="d-flex  justify-content-between mt-2 " style="width: 97%;">
                                         <div>
-                                            <h6 class="l-cap f-14">Order ID</h6>
-                                            <h5 class="f-16">#{{$booking->public_booking_id}}</h5>
+                                            <h6 class="l-cap f-14">Booking ID</h6>
+                                            <h5 class="f-16">{{$booking->public_booking_id}}</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Distance</h6>

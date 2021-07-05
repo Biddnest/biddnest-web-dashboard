@@ -477,6 +477,8 @@ Route::prefix('website/api')->group(function () {
     Route::post('/booking/send-to-phone',[WebsiteRouter::class, 'sendToPhone'])->name("website.api.send-to-phone");
     Route::post('/booking/add-review',[WebsiteRouter::class, 'addReview'])->name("website.api.booking.add-review");
 
+    Route::get('/zone/check-serviceability',[WebsiteRouter::class, 'checkServiceable'])->name("website.api.zone.check-serviceability");
+
 });
 
 Route::prefix('site')->group(function () {

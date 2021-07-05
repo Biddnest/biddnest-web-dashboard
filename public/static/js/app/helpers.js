@@ -48,7 +48,7 @@ export function megaAlert(title, message, type="error"){
         icon: type,
         title: title,
         text: message,
-    })
+    });
 }
 
 export function inlineAlert(elem, message){

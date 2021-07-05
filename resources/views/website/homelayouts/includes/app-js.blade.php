@@ -44,9 +44,11 @@
 <script src="{{ asset('static/website/js/helperfunction.js')}}"></script>
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
+{{--<script  type="module" src="{{ asset('static/js/app/helper.js') }}"></script>--}}
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
 <script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
 <script>
+
     /*if ("geolocation" in navigator){
         navigator.geolocation.getCurrentPosition(function(position){
             let currentLocation = {
@@ -66,11 +68,11 @@
 
        $('.source-map-picker').locationpicker({
            location: {
-               latitude: 12.930621,
-               longitude: 80.111410
+               latitude: 12.925162,
+               longitude: 80.100296
            },
            locationName: "",
-           radius: 500,
+           radius: 0,
            zoom: 15,
            mapTypeId: google.maps.MapTypeId.ROADMAP,
            styles: [],
@@ -89,25 +91,43 @@
            enableReverseGeocode: true,
            draggable: true,
            onchanged: function (currentLocation, radius, isMarkerDropped) {
-               var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
-               $.get(url, function (response){
+
+               console.log(currentLocation);
+               $.get(`{{route('website.api.zone.check-serviceability')}}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`,function(response){
                    console.log(response);
-                   let street="";
-                   let city="";
-                   for(let i=0; i<= response.results[0].address_components.length; i++)
-                   {
-                       let addr=response.results[0].address_components[i];
-                       if(addr.types.indexOf('premise')) {
-                           street +=addr.long_name;
-                       }
-                       if(addr.types.indexOf('sublocality_level_2')) {
-                           city +=", "+addr.long_name;
-                           break;
-                       }
+                   if(response.status == "success" && response.data.serviceable === true){
+
+                       var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+                       $.get(url, function (response){
+                           console.log(response);
+                           let street = [];
+                           let city="";
+                           for(let i=0; i<= response.results[0].address_components.length; i++)
+                           {
+                               let addr = response.results[0].address_components[i];
+                               if(typeof addr != "undefined") {
+                                   if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
+                                       // street[] = ", " + addr.long_name;
+                                       // if(!street.indexOf(addr.long_name))
+                                           street.push(addr.long_name);
+                                   }
+                               }
+                           }
+                            // street = street.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+                           $(".source").attr("placeholder", street.join(", "));
+                           $(".source_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+                       });
+
                    }
-                   $(".source").attr("placeholder", street);
-                   $(".source_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+                   else{
+                       Swal.fire({
+                           icon: "warning",
+                           title: "Sorry",
+                           text: "We are currently not serviceable in selected area.",
+                       });
+                   }
                });
+
            },
            onlocationnotfound: function(locationName) {},
            oninitialized: function(component) {},
@@ -124,7 +144,7 @@
                longitude: 80.111410
            },
            locationName: "",
-           radius: 500,
+           radius: 0,
            zoom: 15,
            mapTypeId: google.maps.MapTypeId.ROADMAP,
            styles: [],
@@ -150,16 +170,16 @@
                    let city="";
                    for(let i=0; i<= response.results[0].address_components.length; i++)
                    {
-                       let addr=response.results[0].address_components[i];
-                       if(addr.types.indexOf('premise')) {
-                           street +=addr.long_name;
-                       }
-                       if(addr.types.indexOf('sublocality_level_2')) {
-                           city +=", "+addr.long_name;
-                           break;
+                       let addr = response.results[0].address_components[i];
+                       if(typeof addr != "undefined") {
+                           if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
+                               // street[] = ", " + addr.long_name;
+                               // if(!street.indexOf(addr.long_name))
+                               street.push(addr.long_name);
+                           }
                        }
                    }
-                   $(".dest").attr("placeholder", street);
+                   $(".dest").attr("placeholder", street.join(", "));
                    $(".dest_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
 
                });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\GeoUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -340,4 +341,15 @@ class WebsiteRouteController extends Controller
         return ReviewController::add(Session::get('account')['id'],$request->public_booking_id, $request->review, $request->suggestion);
     }
 
+    public function checkServiceable(Request $request){
+        $validation = Validator::make($request->all(),[
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return Helper::response(true, "Here is the result.",["serviceable"=>GeoController::isServiceable($request->latitude, $request->longitude)]);
+    }
 }

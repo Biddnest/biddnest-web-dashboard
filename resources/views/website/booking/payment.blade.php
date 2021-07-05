@@ -93,7 +93,7 @@
                 </div>
                 <div style="float: right;" class=" mr-2 mt-2 btn-proceed">
                     <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}" data-payment="{{route('initiate-payment')}}" data-status="{{route('complete-status')}}" data-user-name="{{ucwords($user->fname)}} {{ucwords($user->lname)}}" data-user-email="{{$user->email}}" data-user-contact="{{$user->phone}}" , data-moving-date="{{$moving_date}}">
-                        <button class="btn btn-theme-bg btn-proceed white-bg">Proceed</button>
+                        <button type="submit" class="btn btn-theme-bg btn-proceed white-bg">Proceed</button>
                     </a>
                 </div>
             </div>

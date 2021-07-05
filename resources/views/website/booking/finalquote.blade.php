@@ -79,27 +79,27 @@
                                             <p >N/A @if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
                                         </div>--}}
                                         <div class="pr-3">
-                                            <p>VEHICLE TYPE</p>
-                                            <p>@if($booking->bid->meta){{ucwords(json_decode($booking->bid->meta, true)['vehicle_type']) ?? ''}}@endif</p>
+                                            <p><b>VEHICLE TYPE</b></p>
+                                            <p class="text-center">@if($booking->movement_specifications->meta){{ucwords(json_decode($booking->movement_specifications->meta, true)['vehicle_type']) ?? ''}}@endif</p>
                                         </div>
                                         <div class="pr-3">
-                                            <p>MANPOWER</p>
-                                            <p> @if($booking->bid->meta){{json_decode($booking->bid->meta, true)['min_man_power'] ?? ''}} - {{json_decode($booking->bid->meta, true)['max_man_power'] ?? ''}}@endif</p>
+                                            <p><b>MANPOWER</b></p>
+                                            <p class="text-center"> @if($booking->movement_specifications->meta){{json_decode($booking->movement_specifications->meta, true)['min_man_power'] ?? ''}} - {{json_decode($booking->movement_specifications->meta, true)['max_man_power'] ?? ''}}@endif</p>
                                         </div>
                                     </div>
                                 </div>
                                     <div class="accordion" id="comments">
                                         <div class="d-flex justify-content-center">
                                             <div class="form-groups">
-                                                <label class="container-01">
+                                                {{--<label class="container-01">
                                                     <input type="checkbox" id="Lift1" required/>
                                                     <span class="checkmark-agree -mt-10"></span>
-                                                </label>
+                                                </label>--}}
 
                                                 <span class="error-message">Please enter valid</span>
                                             </div>
                                             <p class="text-muted center mt-2 pl-0">
-                                                I agree to the Terms & Conditions
+                                                By proceeding, you agree to our Terms & Conditions
                                             </p>
                                         </div>
 
@@ -111,7 +111,7 @@
                                             <div class="">
                                                 <a href="{{route('payment',['id'=>$booking->public_booking_id])}}">
                                                     <button class="btn btn-theme-bg white-bg">
-                                                        Place Order
+                                                        Pay & Confirm
                                                     </button>
                                                 </a>
                                             </div>
@@ -136,7 +136,7 @@
                                                 <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                                 <div class="form-input">
                                                     <select id="" class="form-control" name="heading" required>
-                                                      <option value="">--Select--</option>
+                                                      <option value="">--Select Reason--</option>
                                                         @foreach($resions as $resion)
                                                             <option value="{{$resion}}">{{ucwords($resion)}}</option>
                                                         @endforeach
@@ -146,8 +146,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-input">
-                                                    <textarea class="form-control" rows="3" placeholder="Description" name="desc">
-                                                    </textarea>
+                                                    <textarea class="form-control" rows="3" placeholder="Please tell more" name="desc"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex center mt-2 mb-2">
@@ -157,7 +156,7 @@
                                                         <span class="checkmark-agree -mt-10"></span>
                                                     </label>
                                                 </div>
-                                                <p class="text-muted f-10" style="padding-left: 20px;">Talk to our agend</p>
+                                                <p class="text-muted" style="padding-left: 20px;">Talk to our agent</p>
                                             </div>
                                             <button type="submit" class="btn btn-theme-bg button-modal ml-5 text-view-center mt-2 padding-btn-res white-bg">
                                                 Cancel Booking

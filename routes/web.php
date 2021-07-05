@@ -475,6 +475,7 @@ Route::prefix('website/api')->group(function () {
     Route::post('/initiate-payment', [WebsiteRouter::class, 'initiatePayment'])->name("initiate-payment");
     Route::post('/status/complete',[WebsiteRouter::class, 'statusComplete'])->name("complete-status");
     Route::post('/booking/send-to-phone',[WebsiteRouter::class, 'sendToPhone'])->name("website.api.send-to-phone");
+    Route::post('/booking/add-review',[WebsiteRouter::class, 'addReview'])->name("website.api.booking.add-review");
 
 });
 

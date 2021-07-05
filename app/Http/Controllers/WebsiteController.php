@@ -7,6 +7,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
 use App\Enums\ServiceEnums;
+use App\Enums\ReviewEnums;
 use App\Http\Controllers\BookingsController;
 use App\Models\Bid;
 use App\Models\Booking;
@@ -176,8 +177,12 @@ class WebsiteController extends Controller
 
     public function bookingHistory(Request $request)
     {
+
         $bookings=BookingsController::bookingHistoryPast(Session::get('account')['id'], true);
-        return view('website.booking.bookinghistory', ['bookings'=>$bookings]);
+        return view('website.booking.bookinghistory', [
+            'bookings'=>$bookings,
+            "review_questionare"=>ReviewEnums::$QUESTIONS
+        ]);
     }
 
     public function myProfile(Request $request)
@@ -185,6 +190,7 @@ class WebsiteController extends Controller
         $user = User::where('id', Session::get('account')['id'])->first();
         return view('website.myprofile', ['user'=>$user]);
     }
+
     public function myRequest(Request $request)
     {
         $past_bookings = BookingsController::getBookingsByUser(Session::get('account')['id'], 15);

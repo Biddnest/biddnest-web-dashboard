@@ -210,7 +210,7 @@ class BookingsController extends Controller
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
-            $movementdates->date = date('Y-m-d', strtotime($dates));
+            $movementdates->date = Carbon::parse($dates)->format('Y-m-d');//date('', strtotime($dates));
             $result_date = $movementdates->save();
         }
 

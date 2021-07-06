@@ -12,6 +12,7 @@ use App\Http\Controllers\VendorWebApiRouteController as VendorApiRouter;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\VendorWebController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
 use App\Http\Controllers\WebsiteController;
 /*
@@ -26,6 +27,22 @@ use App\Http\Controllers\WebsiteController;
 */
 Route::get('/', function () {
     return response()->redirectToRoute('home');
+});
+
+Route::prefix('jobs')->group(function () {
+    Route::get('/hard-reset-cache', function () {
+        echo Artisan::call("optimize:clear");
+
+        echo Artisan::call("view:cache");
+
+        echo Artisan::call("config:cache");
+
+//        echo Artisan::call("route:cache");
+
+        echo Artisan::call("event:cache");
+
+        echo "All cache reseted";
+    });
 });
 Route::prefix('web/api')->group(function () {
 

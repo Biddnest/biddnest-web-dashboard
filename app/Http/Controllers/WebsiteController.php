@@ -81,16 +81,6 @@ class WebsiteController extends Controller
         return view('website.contactus', ['booking'=>$booking, 'contact_details'=>$contact_details, 'ticket_detail'=>$ticket_details]);
     }
 
-    /*public function completeContactUs()
-    {
-        $booking=Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
-        $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
-         $ticket_details=Ticket::where("booking_id", $booking->id)->with(['reply'=>function($query){
-            $query->where("user_id", null)->latest()->limit(1);
-        }])->with('admin')->first();
-        return view('website.completecontactus', ['booking'=>$booking, 'contact_details'=>$contact_details, 'ticket_detail'=>$ticket_details]);
-    }*/
-
     public function faq()
     {
         $faqs=Faq::get();
@@ -168,9 +158,6 @@ class WebsiteController extends Controller
 
     public function orderDetails(Request $request)
     {
-//        exit;
-//        return $booking=Booking::where("public_booking_id",$request->id)->all();
-
         $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         return view('website.booking.orderdetails', ['booking'=>$booking]);
     }

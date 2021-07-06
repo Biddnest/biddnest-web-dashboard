@@ -1116,4 +1116,8 @@
         padding: 13px 15px;
     }
 
+    .flow__item__circle::after{
+        top: 615px;
+    }
+
 </style>

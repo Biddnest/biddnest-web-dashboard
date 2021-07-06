@@ -501,13 +501,14 @@ Route::prefix('website/api')->group(function () {
 Route::prefix('site')->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name("home");
 
-    Route::get("/logout", [WebsiteController::class, 'logout'])->name('logout');
 
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
     Route::get('/page/{slug}', [WebsiteController::class, 'termPage'])->name("terms.page");
 
+    Route::middleware("CheckWebSession")->group(function(){
+    Route::get("/logout", [WebsiteController::class, 'logout'])->name('logout');
     Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
     Route::get('/book-move/{id}/estimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
     Route::get('/book-move/{id}/status', [WebsiteController::class, 'placeBooking'])->name("place-booking");
@@ -520,10 +521,8 @@ Route::prefix('site')->group(function () {
     Route::get('/my-bookings/order-history', [WebsiteController::class, 'bookingHistory'])->name("order-history");
     Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("website.my-profile");
     Route::get('/my-request', [WebsiteController::class, 'myRequest'])->name("my-request");
-
+    });
 //    Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
 
-   /* Route::middleware("CheckWebSession")->group(function(){
-        Route::get('/home', [WebsiteController::class, 'home'])->name("home-logged");
-    });*/
+
 });

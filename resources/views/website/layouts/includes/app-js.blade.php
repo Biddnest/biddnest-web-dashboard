@@ -110,6 +110,12 @@ $('.card-methord').click(function() {
             $(this).parent().find('input').val(quantity);
     });
 
+    $("body").on("click",".subservice-selector",function(e){
+        console.log("called");
+        $(".subservice-selector").removeClass("check-blue");
+        $(this).addClass("check-blue");
+    });
+
     @isset($prifill['service'])
     $(document).ready(function (){
         $('#service_{{$prifill['service']}}').click();

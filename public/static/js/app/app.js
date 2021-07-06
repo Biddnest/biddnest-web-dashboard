@@ -1156,6 +1156,11 @@ $("body").on('click', ".web-sub-category", function(event) {
         url: url,
         type: 'get',
         dataType: 'json',
+        beforeSend: function(){
+            $("div.inventory").css({
+                "opacity": "0.4"
+            });
+        },
         success: function (response) {
            Logger.info(response);
             for(var i=0; i< response.data.inventories.length; i++)
@@ -1175,9 +1180,13 @@ $("body").on('click', ".web-sub-category", function(event) {
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.inventory').html(html);
+            $("div.inventory").css({
+                "opacity": "1"
+            });
         }
     });
     initRangeSlider();
+
     return false;
 });
 
@@ -1292,6 +1301,11 @@ $("body").on('keyup', ".search-item", function(event) {
                 url: url+ "?search=" + query,
                 type: 'GET',
                 dataType: 'json',
+                beforeSend: function(){
+                    $(".fade-enable").css({
+                        "opacity": "0.4"
+                    });
+                },
                 success: function (response) {
                     $('.items-display').html('');
                     let inventory_quantity_type = $(".inventory-quantity-type").val();
@@ -1314,6 +1328,10 @@ $("body").on('keyup', ".search-item", function(event) {
 
                     if(inventory_quantity_type != 0)
                         initRangeSlider();
+
+                    $(".fade-enable").css({
+                        "opacity": "1"
+                    });
                 }
             });
         }

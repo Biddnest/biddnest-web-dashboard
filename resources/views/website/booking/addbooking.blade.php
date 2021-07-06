@@ -494,11 +494,11 @@
                         </div>
 
                 <!-- modal for desktop -->
-                    <div class="items-display">
+                    <div class="items-display fade-enable">
 
                     </div>
-                    <h5 style="margin-top: 20px;">Top Recommended Items</h5>
-                    <div class="row f-row ">
+                    <h5 style="margin-top: 20px;" class="fade-enable">Top Recommended Items</h5>
+                    <div class="row f-row fade-enable">
                         @foreach($inventories as $inventory)
                             <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
                                 <div class="item-single-wrapper">
@@ -579,7 +579,7 @@
                 <label>
                     <input type="radio" name="subcategory" value="@{{id}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
 
-                    <div class="panel panel-default card-input disabled check-blue  " style="box-shadow: none !important;  background:none !important; text-align: center;">
+                    <div class="panel panel-default card-input disabled subservice-selector" style="box-shadow: none !important;  background:none !important; text-align: center;">
                             <div class="panel-heading">
                                 <h3>
                                     <img src="@{{image}}" class="img-width  " >
@@ -788,7 +788,7 @@
                         </div>
                         <div class="quantity d-flex justify-content-between quantity-operator">
                             <span class="minus">-</span>
-                            <input type="text" name="quantity:null" readonly value="null" />
+                            <input type="text" name="quantity:null" readonly value="1" />
                             <span class="plus">+</span>
                         </div>
                     </div>
@@ -1078,7 +1078,7 @@
 
 
 
-     
+
     </script>
     <script>
 

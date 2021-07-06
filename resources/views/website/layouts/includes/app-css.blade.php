@@ -985,6 +985,7 @@
         padding: 3px 7px;
         font-size: 17px;
         font-weight: bolder;
+        color: #fff;
     }
 
 
@@ -1090,5 +1091,5 @@
     margin-right: -43px;
 
 }
-    
+
 </style>

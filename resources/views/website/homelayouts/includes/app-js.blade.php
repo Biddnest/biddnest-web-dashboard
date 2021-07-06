@@ -166,7 +166,7 @@
                var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
                $.get(url, function (response){
                    console.log(response);
-                   let street="";
+                   let street=[];
                    let city="";
                    for(let i=0; i<= response.results[0].address_components.length; i++)
                    {

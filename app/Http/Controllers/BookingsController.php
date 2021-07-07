@@ -248,7 +248,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
     public static function confirmBooking($public_booking_id, $service_type, $user_id)
@@ -299,7 +299,7 @@ class BookingsController extends Controller
             BidController::addvendors($booking_id);
         })->afterResponse();
 
-        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true, "Thankyou for confirming.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
 
     }
 

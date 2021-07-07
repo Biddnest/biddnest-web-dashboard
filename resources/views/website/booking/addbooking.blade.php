@@ -18,7 +18,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 card-block ">
-                                    <a href="#step-1 " type="button " class="btn steps-icon rounded-icons btn-info btn-circle-3 waves-effect ml-0 turntheme text-muted completed-step-1 " data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-user " aria-hidden="true "></i></a>
+                                    <a href="#step-1 " type="button" class="btn steps-icon rounded-icons btn-info btn-circle-3 waves-effect ml-0 turntheme text-muted completed-step-1 " data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-user " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 card-block ">
-                                    <a href="#step-2 " type="button " class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 card-block completed-step-2" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-map-marker " aria-hidden="true "></i></a>
+                                    <a href="#step-2 " type="button" class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 card-block completed-step-2" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-map-marker " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 ">
-                                    <a href="#step-3 " type="button " class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect step-todo completed-step-3" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-list " aria-hidden="true "></i></a>
+                                    <a href="#step-3 " type="button" class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect step-todo completed-step-3" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-list " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 ">
-                                    <a href="#step-4 " type="button " class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 step-todo completed-step-4" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-comments " aria-hidden="true "></i></a>
+                                    <a href="#step-4 " type="submit" class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 step-todo completed-step-4" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-comments " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>

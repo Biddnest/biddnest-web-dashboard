@@ -606,7 +606,7 @@
                         </div>
                         <div class="item-meta">
                             <h5>@{{meta.name}}</h5>
-                            <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta.id}}">
+                            <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta.id}}">
                             <input type="hidden" name="cutome_name" value="@{{meta.name}}">
                             <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
@@ -669,7 +669,8 @@
                 </div>
                 <div class="item-meta">
                     <h5>@{{meta_name}}</h5>
-                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>
@@ -788,7 +789,7 @@
                         </div>
                         <div class="quantity d-flex justify-content-between quantity-operator">
                             <span class="minus">-</span>
-                            <input type="text" name="quantity:null" readonly value="1" />
+                            <input type="text" name="quantity" readonly value="1" />
                             <span class="plus">+</span>
                         </div>
                     </div>
@@ -819,7 +820,7 @@
                         </div>
                         <div class="quantity-2" style="padding: 5px 2px">
 
-                            <input type="text" class="custom_slider range" name="quantity:null" value="null"
+                            <input type="text" class="custom_slider range" name="quantity:null" value=""
                                    data-type="double"
                                    data-min="1"
                                    data-max="500"
@@ -844,7 +845,7 @@
                 </div>
                 <div class="item-meta">
                     <h5>@{{meta.name}}</h5>
-                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta.id}}">
+                    <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta.id}}">
                     <input type="hidden" name="cutome_name" value="@{{meta.name}}">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
@@ -911,7 +912,8 @@
                 </div>
                 <div class="item-meta">
                     <h5>@{{meta_name}}</h5>
-                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>

@@ -1263,11 +1263,11 @@ $("body").on('click', ".add-search-item", function(event) {
     item = Object.assign({}, item);
     Logger.info(item);
     if(item.material == ''){
-        megaAlert("Oops", "Please select Material");
+        tinyAlert("Oops", "Please select Material");
         return false;
     }
     if(item.size == ''){
-        megaAlert("Oops", "Please select Size");
+        tinyAlert("Oops", "Please select Size");
         return false;
     }
     if(item.meta_material != '') {
@@ -1353,5 +1353,35 @@ $("body").on('input', ".upload-image", function(event) {
     reader.readAsDataURL(file);
 
 
+});
+
+/*live search input*/
+$("body").on('keyup', ".live-search-input", function(event) {
+
+    // Retrieve the input field text and reset the count to zero
+    var filter = $(this).val(), count = 0;
+
+    $(".live-search-result").css({"opacity": 0.5});
+    // Loop through the comment list
+    $(".live-search-result").each(function(){
+
+        // If the list item does not contain the text phrase fade it out
+        if ($(this).text().search(new RegExp(filter, "i")) < 0)
+            $(this).fadeOut();
+         else {
+            $(this).show();
+            count++;
+        }
+    });
+    $(".live-search-result").css({"opacity": 1});
+
+    // Update the count
+    var numberItems = count;
+    /*display count*/
+
+    if(numberItems === 0) {
+        if ($(".toast:not(.hidden)").length === 0)
+            tinyAlert("Oops", "No Results found.");
+    }
 });
 

@@ -127,6 +127,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                 // Logger.info("Response ",response);
                 Logger.info("Response ", response);
                 if (response.status == "success") {
+
                     tinySuccessAlert("Success", response.message);
                     if (form.data("next")) { //   data-next="redirect"
                         if (form.data("next") == "redirect") {
@@ -201,6 +202,11 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                 else if(response.status == "await"){
                     $(form.data('await-input')).toggleClass('hidden');
                     revertFormAnim(button, buttonPretext);
+
+                    /*remove in prod*/
+                    if("otp" in response.data)
+                        $(form.data('await-input')).find("input").val(response.data.otp);
+                    /*remove in prod*/
                 }
                 else {
                     Logger.info(response.message);

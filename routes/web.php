@@ -385,6 +385,7 @@ Route::prefix('vendor')->group(function(){
         Route::prefix('/booking')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
             Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
+            Route::get('/reject-booking/{type}',[VendorWebController::class,'bookingRejectType'])->name("vendor.rejectbookings");
             Route::get('/{id}/details',[VendorWebController::class,'bookingDetails'])->name("vendor.detailsbookings");
             Route::get('/{id}/requirment',[VendorWebController::class,'bookingRequirment'])->name("vendor.requirment-order");
             Route::get('/{id}/my-quote',[VendorWebController::class,'myQuote'])->name("vendor.my-quote");

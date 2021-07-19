@@ -610,6 +610,10 @@ class BookingsController extends Controller
             case "past":
                 $bid_id->where("status", BidEnums::$STATUS['won']);
                 break;
+
+            case "rejected":
+                $bid_id->where("status", BidEnums::$STATUS['rejected']);
+                break;
         }
 
         $bookings = Booking::whereIn("id", $bid_id

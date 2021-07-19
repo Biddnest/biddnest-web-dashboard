@@ -38,7 +38,16 @@
 
 
                 <div class="header-wrap">
-                    <h3 class="f-18 mt-0 ml-1 mb-0 theme_text">Past Orders </h1>
+                    <h3 class="f-18 mt-0 ml-1 mb-0 theme_text">
+                        <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link p-15 active"  href="#">Past Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route('vendor.rejectbookings', ['type'=>"rejected"])}}" >Rejected Orders</a>
+                            </li>
+                        </ul>
+                    </h3>
 
                         <div class="header-wrap p-0 filter-dropdown ">
                             {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
@@ -108,8 +117,8 @@
                         <tbody class="mtop-20 f-13">
                             @foreach($bookings as $booking)
                                 <tr class="tb-border">
-                                    <td  scope="row" class="text-left" style="padding: 14px;"> <a href="order-details.html">
-                                            {{$booking->public_booking_id}}</a> </td>
+                                    <td  scope="row" class="text-left" style="padding: 14px;">
+                                            {{$booking->public_booking_id}}</td>
                                     <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
                                     <td style="padding: 14px;" >{{$booking->created_at->format('d M Y')}}</td>

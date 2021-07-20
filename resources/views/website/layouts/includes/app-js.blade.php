@@ -75,34 +75,23 @@ $('.card-methord').click(function() {
 
     $(".timer").each(function(){
         var BID_END_TIME = $(this).data("time");
-        // if (typeof BID_END_TIME !== undefined) {
+
 
         $(this).countdown(BID_END_TIME, function (event) {
             $(this).text(
                 event.strftime('%H:%M:%S')
             );
         });
-        // }
+
     });
 
     $("body").on("click",".item-single-wrapper span.info",function(e){
         $(this).toggleClass("show-drop");
     });
 
-    /*$("body").on("click","*:not('.item-single-wrapper span.info')",function(e){
-        $(this).removeClass("show-drop");
-    });*/
 
     $("body").on("click",".item-single-wrapper span.info .dropdown-content ul li",function(e){
-      /* if(!$(this).closest(".item-single-wrapper").hasClass('custom-item')) {
-            let inp = $(this).closest('.item-single-wrapper').find('input');
-            let class_name = inp.eq(1).val() + "-" + inp.eq(2).val() + "-" + inp.eq(3).val() + "-" + inp.eq(0).val();
-            console.log(class_name);
-            if ($("." + class_name).length > 0) {
-                megaAlert("Oops", "This item has been already added");
-                return false;
-            }
-        }*/
+
         $(this).closest("span.info").find("span").eq(0).html($(this).html());
         $(this).closest("span.info").find("input").eq(0).val($(this).data("value"));
     });
@@ -119,6 +108,12 @@ $('.card-methord').click(function() {
         quantity++;
         if(quantity > 0)
             $(this).parent().find('input').val(quantity);
+    });
+
+    $("body").on("click",".subservice-selector",function(e){
+        console.log("called");
+        $(".subservice-selector").removeClass("check-blue");
+        $(this).addClass("check-blue");
     });
 
     @isset($prifill['service'])
@@ -155,43 +150,43 @@ $('.card-methord').click(function() {
         enableReverseGeocode: true,
         draggable: true,
         onchanged: function (currentLocation, radius, isMarkerDropped) {
-            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
-            $.get(url, function (response){
+
+            console.log(currentLocation);
+            $.get(`{{route('website.api.zone.check-serviceability')}}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`,function(response){
                 console.log(response);
-                let street="";
-                let city="";
-                for(let i=0; i<= response.results[0].address_components.length; i++)
-                {
-                    let addr=response.results[0].address_components[i];
-                    if(addr.types.indexOf('sublocality_level_2')) {
+                if(response.status == "success" && response.data.serviceable === true){
 
-                        // $(".source").val(addr.long_name);
-                        // break;
-                        street +=addr.long_name+", ";
-                    }
-                    if(addr.types.indexOf('locality')) {
+                    var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+                    $.get(url, function (response){
+                        console.log(response);
+                        let street = [];
+                        let city="";
+                        for(let i=0; i<= response.results[0].address_components.length; i++)
+                        {
+                            let addr = response.results[0].address_components[i];
+                            if(typeof addr != "undefined") {
+                                if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
+                                    // street[] = ", " + addr.long_name;
+                                    // if(!street.indexOf(addr.long_name))
+                                    street.push(addr.long_name);
+                                }
+                            }
+                        }
+                        // street = street.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+                        $(".source").attr("placeholder", street.join(", "));
+                        $(".source_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+                    });
 
-                        // $(".source_city").val(addr2.long_name);
-                        city +=addr.long_name;
-                        break;
-                    }
                 }
-                $(".source").val(street);
-                $(".source_city").val(city);
-                /*for(var j=0; j<= response.results[0].address_components.length; j++)
-                {
-                    let addr2=response.results[0].address_components[j];
-                    if(addr2.types.indexOf('locality')) {
-                        console.log(addr2);
-                        $(".source_city").val(addr2.long_name);
-                        break;
-                    }
-                }*/
-                /*response.results[0].address_components.every(function (addr){
-                    // console.log(addr.types);
-
-                });*/
+                else{
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Sorry",
+                        text: "We are currently not serviceable in selected area.",
+                    });
+                }
             });
+
         },
         onlocationnotfound: function(locationName) {},
         oninitialized: function(component) {},
@@ -226,7 +221,26 @@ $('.card-methord').click(function() {
         addressFormat: 'street_address',
         enableReverseGeocode: true,
         draggable: true,
-        onchanged: function(currentLocation, radius, isMarkerDropped) {},
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
+            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+            $.get(url, function (response){
+                console.log(response);
+                let street=[];
+                let city="";
+                for(let i=0; i<= response.results[0].address_components.length; i++)
+                {
+                    let addr = response.results[0].address_components[i];
+                    if(typeof addr != "undefined") {
+                        if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
+                            street.push(addr.long_name);
+                        }
+                    }
+                }
+                $(".dest").attr("placeholder", street.join(", "));
+                $(".dest_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+
+            });
+        },
         onlocationnotfound: function(locationName) {},
         oninitialized: function(component) {},
         // must be undefined to use the default gMaps marker

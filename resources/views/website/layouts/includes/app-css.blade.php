@@ -985,6 +985,7 @@
         padding: 3px 7px;
         font-size: 17px;
         font-weight: bolder;
+        color: #fff;
     }
 
 
@@ -1090,5 +1091,33 @@
     margin-right: -43px;
 
 }
-    
+
+    .datepicker .datepicker-dropdown .dropdown-menu .datepicker-orient-left .datepicker-orient-top{
+        position: absolute !important;
+        left: 44% !important;
+        top: 100% !important;
+        margin-left: -96px;
+        margin-top: -73px;
+    }
+
+    .datepicker{
+        position: fixed !important;
+        left: 50% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        z-index: 1;
+        top: 50% !important;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+
+    .datepicker.dropdown-menu th, .datepicker.dropdown-menu td{
+        padding: 13px 15px;
+    }
+
+    .flow__item__circle::after{
+        top: 615px;
+    }
+
 </style>

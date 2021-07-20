@@ -11,9 +11,10 @@ use App\Enums\CommonEnums;
 use App\Enums\NotificationEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
+use App\Http\Controllers\Controller;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\BookingController;
+//use App\Http\Controllers\BookingController;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingDriver;
@@ -32,6 +33,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 
@@ -206,10 +208,11 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
+        Log::info("Booking Dates recieved from web- ",$movement_dates);
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
-            $movementdates->date = date('y-m-d', strtotime($dates));
+            $movementdates->date = Carbon::parse($dates)->format('Y-m-d');//date('', strtotime($dates));
             $result_date = $movementdates->save();
         }
 
@@ -245,7 +248,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
     public static function confirmBooking($public_booking_id, $service_type, $user_id)
@@ -296,7 +299,7 @@ class BookingsController extends Controller
             BidController::addvendors($booking_id);
         })->afterResponse();
 
-        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true, "Thankyou for confirming.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
 
     }
 

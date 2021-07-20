@@ -47,7 +47,7 @@ $(document).ready(function() {
 
 
 
-    // tabs 
+    // tabs
     function toggle_visibility(id) {
         var e = document.getElementById(id);
         if (e.style.display == 'block') {
@@ -57,7 +57,7 @@ $(document).ready(function() {
         }
     }
 
-    // Card color changes on click 
+    // Card color changes on click
     $(".card-methord").click(function() {
         $(".card-methord").removeClass("turntheme");
         $(this).addClass("turntheme");

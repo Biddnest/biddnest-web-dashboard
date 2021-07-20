@@ -20,6 +20,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
             Logger.info("Response ", response);
             if (response.status == "success") {
                 tinySuccessAlert("Success", response.message);
+                
                 if (form.data("next")) { //   data-next="redirect"
                     if (form.data("next") == "redirect") {
                         if (form.hasClass("add-slider")) {

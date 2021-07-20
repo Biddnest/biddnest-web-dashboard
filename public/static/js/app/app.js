@@ -127,6 +127,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                 // Logger.info("Response ",response);
                 Logger.info("Response ", response);
                 if (response.status == "success") {
+
                     tinySuccessAlert("Success", response.message);
                     if (form.data("next")) { //   data-next="redirect"
                         if (form.data("next") == "redirect") {
@@ -201,6 +202,11 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                 else if(response.status == "await"){
                     $(form.data('await-input')).toggleClass('hidden');
                     revertFormAnim(button, buttonPretext);
+
+                    /*remove in prod*/
+                    if("otp" in response.data)
+                        $(form.data('await-input')).find("input").val(response.data.otp);
+                    /*remove in prod*/
                 }
                 else {
                     Logger.info(response.message);
@@ -1156,6 +1162,11 @@ $("body").on('click', ".web-sub-category", function(event) {
         url: url,
         type: 'get',
         dataType: 'json',
+        beforeSend: function(){
+            $("div.inventory").css({
+                "opacity": "0.4"
+            });
+        },
         success: function (response) {
            Logger.info(response);
             for(var i=0; i< response.data.inventories.length; i++)
@@ -1175,9 +1186,13 @@ $("body").on('click', ".web-sub-category", function(event) {
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.inventory').html(html);
+            $("div.inventory").css({
+                "opacity": "1"
+            });
         }
     });
     initRangeSlider();
+
     return false;
 });
 
@@ -1254,11 +1269,11 @@ $("body").on('click', ".add-search-item", function(event) {
     item = Object.assign({}, item);
     Logger.info(item);
     if(item.material == ''){
-        megaAlert("Oops", "Please select Material");
+        tinyAlert("Oops", "Please select Material");
         return false;
     }
     if(item.size == ''){
-        megaAlert("Oops", "Please select Size");
+        tinyAlert("Oops", "Please select Size");
         return false;
     }
     if(item.meta_material != '') {
@@ -1292,6 +1307,11 @@ $("body").on('keyup', ".search-item", function(event) {
                 url: url+ "?search=" + query,
                 type: 'GET',
                 dataType: 'json',
+                beforeSend: function(){
+                    $(".fade-enable").css({
+                        "opacity": "0.4"
+                    });
+                },
                 success: function (response) {
                     $('.items-display').html('');
                     let inventory_quantity_type = $(".inventory-quantity-type").val();
@@ -1314,6 +1334,10 @@ $("body").on('keyup', ".search-item", function(event) {
 
                     if(inventory_quantity_type != 0)
                         initRangeSlider();
+
+                    $(".fade-enable").css({
+                        "opacity": "1"
+                    });
                 }
             });
         }
@@ -1335,5 +1359,35 @@ $("body").on('input', ".upload-image", function(event) {
     reader.readAsDataURL(file);
 
 
+});
+
+/*live search input*/
+$("body").on('keyup', ".live-search-input", function(event) {
+
+    // Retrieve the input field text and reset the count to zero
+    var filter = $(this).val(), count = 0;
+
+    $(".live-search-result").css({"opacity": 0.5});
+    // Loop through the comment list
+    $(".live-search-result").each(function(){
+
+        // If the list item does not contain the text phrase fade it out
+        if ($(this).text().search(new RegExp(filter, "i")) < 0)
+            $(this).fadeOut();
+         else {
+            $(this).show();
+            count++;
+        }
+    });
+    $(".live-search-result").css({"opacity": 1});
+
+    // Update the count
+    var numberItems = count;
+    /*display count*/
+
+    if(numberItems === 0) {
+        if ($(".toast:not(.hidden)").length === 0)
+            tinyAlert("Oops", "No Results found.");
+    }
 });
 

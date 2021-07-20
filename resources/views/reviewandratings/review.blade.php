@@ -118,7 +118,7 @@
                                     <td>
                                         @php $ratings = 0; @endphp
                                         @foreach(json_decode($review->ratings, true) as $rating)
-                                            @php $ratings += $rating['rating']; @endphp
+                                            @php $ratings += is_numeric($rating['rating']) ? (integer)$rating['rating'] : 0; @endphp
                                         @endforeach
                                         @php $ratings = number_format($ratings/count(json_decode($review->ratings, true)), 2); @endphp
                                         @for($star=$ratings; $star > 0; $star--)

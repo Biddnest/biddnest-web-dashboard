@@ -18,7 +18,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 card-block ">
-                                    <a href="#step-1 " type="button " class="btn steps-icon rounded-icons btn-info btn-circle-3 waves-effect ml-0 turntheme text-muted completed-step-1 " data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-user " aria-hidden="true "></i></a>
+                                    <a href="#step-1 " type="button" class="btn steps-icon rounded-icons btn-info btn-circle-3 waves-effect ml-0 turntheme text-muted completed-step-1 " data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-user " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 card-block ">
-                                    <a href="#step-2 " type="button " class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 card-block completed-step-2" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-map-marker " aria-hidden="true "></i></a>
+                                    <a href="#step-2 " type="button" class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 card-block completed-step-2" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-map-marker " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 ">
-                                    <a href="#step-3 " type="button " class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect step-todo completed-step-3" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-list " aria-hidden="true "></i></a>
+                                    <a href="#step-3 " type="button" class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect step-todo completed-step-3" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-list " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-4 steps-row-3 setup-panel-3">
                                 <div class="steps-step-3 ">
-                                    <a href="#step-4 " type="button " class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 step-todo completed-step-4" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-comments " aria-hidden="true "></i></a>
+                                    <a href="#step-4 " type="submit" class="btn steps-icon rounded-icons btn-pink btn-circle-3 waves-effect p-3 step-todo completed-step-4" data-toggle="tooltip " data-placement="top " title="Basic Information "><i class="fa fa-comments " aria-hidden="true "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -494,11 +494,11 @@
                         </div>
 
                 <!-- modal for desktop -->
-                    <div class="items-display">
+                    <div class="items-display fade-enable">
 
                     </div>
-                    <h5 style="margin-top: 20px;">Top Recommended Items</h5>
-                    <div class="row f-row ">
+                    <h5 style="margin-top: 20px;" class="fade-enable">Top Recommended Items</h5>
+                    <div class="row f-row fade-enable">
                         @foreach($inventories as $inventory)
                             <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
                                 <div class="item-single-wrapper">
@@ -579,7 +579,7 @@
                 <label>
                     <input type="radio" name="subcategory" value="@{{id}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
 
-                    <div class="panel panel-default card-input disabled check-blue  " style="box-shadow: none !important;  background:none !important; text-align: center;">
+                    <div class="panel panel-default card-input disabled subservice-selector" style="box-shadow: none !important;  background:none !important; text-align: center;">
                             <div class="panel-heading">
                                 <h3>
                                     <img src="@{{image}}" class="img-width  " >
@@ -606,7 +606,7 @@
                         </div>
                         <div class="item-meta">
                             <h5>@{{meta.name}}</h5>
-                            <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta.id}}">
+                            <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta.id}}">
                             <input type="hidden" name="cutome_name" value="@{{meta.name}}">
                             <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
@@ -669,7 +669,8 @@
                 </div>
                 <div class="item-meta">
                     <h5>@{{meta_name}}</h5>
-                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>
@@ -788,7 +789,7 @@
                         </div>
                         <div class="quantity d-flex justify-content-between quantity-operator">
                             <span class="minus">-</span>
-                            <input type="text" name="quantity:null" readonly value="null" />
+                            <input type="text" name="quantity" readonly value="1" />
                             <span class="plus">+</span>
                         </div>
                     </div>
@@ -819,7 +820,7 @@
                         </div>
                         <div class="quantity-2" style="padding: 5px 2px">
 
-                            <input type="text" class="custom_slider range" name="quantity:null" value="null"
+                            <input type="text" class="custom_slider range" name="quantity:null" value=""
                                    data-type="double"
                                    data-min="1"
                                    data-max="500"
@@ -844,7 +845,7 @@
                 </div>
                 <div class="item-meta">
                     <h5>@{{meta.name}}</h5>
-                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta.id}}">
+                    <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta.id}}">
                     <input type="hidden" name="cutome_name" value="@{{meta.name}}">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
@@ -911,7 +912,8 @@
                 </div>
                 <div class="item-meta">
                     <h5>@{{meta_name}}</h5>
-                    <input type="hidden" name="inventory_items[][inventory_id]" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
+                    <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>

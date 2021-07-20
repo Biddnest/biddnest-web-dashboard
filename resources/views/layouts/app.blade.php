@@ -11,7 +11,7 @@
                 <!-- top_nav_bar -->
                 <div class="h-auto">
                     <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation header">
-                        <form class="search-bar form-inline col-6 p-0" style="position: relative !important;">
+                        <form class="search-bar form-inline col-6 p-0" style="position: relative !important;opacity: 0;">
                             <input class="form-control w-100 search-bar" type="search" placeholder="Search anything..."
                                 aria-label="Search">
                             <div class="search-sugestion-wrapper hidden">

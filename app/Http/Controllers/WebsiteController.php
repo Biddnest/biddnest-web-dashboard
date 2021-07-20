@@ -7,6 +7,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\SliderEnum;
 use App\Enums\ServiceEnums;
+use App\Enums\ReviewEnums;
 use App\Http\Controllers\BookingsController;
 use App\Models\Bid;
 use App\Models\Booking;
@@ -79,16 +80,6 @@ class WebsiteController extends Controller
         $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
         return view('website.contactus', ['booking'=>$booking, 'contact_details'=>$contact_details, 'ticket_detail'=>$ticket_details]);
     }
-
-    /*public function completeContactUs()
-    {
-        $booking=Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
-        $contact_details=Settings::where("key", "contact_details")->pluck('value')[0];
-         $ticket_details=Ticket::where("booking_id", $booking->id)->with(['reply'=>function($query){
-            $query->where("user_id", null)->latest()->limit(1);
-        }])->with('admin')->first();
-        return view('website.completecontactus', ['booking'=>$booking, 'contact_details'=>$contact_details, 'ticket_detail'=>$ticket_details]);
-    }*/
 
     public function faq()
     {
@@ -167,17 +158,18 @@ class WebsiteController extends Controller
 
     public function orderDetails(Request $request)
     {
-//        exit;
-//        return $booking=Booking::where("public_booking_id",$request->id)->all();
-
         $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         return view('website.booking.orderdetails', ['booking'=>$booking]);
     }
 
     public function bookingHistory(Request $request)
     {
+
         $bookings=BookingsController::bookingHistoryPast(Session::get('account')['id'], true);
-        return view('website.booking.bookinghistory', ['bookings'=>$bookings]);
+        return view('website.booking.bookinghistory', [
+            'bookings'=>$bookings,
+            "review_questionare"=>ReviewEnums::$QUESTIONS
+        ]);
     }
 
     public function myProfile(Request $request)
@@ -185,6 +177,7 @@ class WebsiteController extends Controller
         $user = User::where('id', Session::get('account')['id'])->first();
         return view('website.myprofile', ['user'=>$user]);
     }
+
     public function myRequest(Request $request)
     {
         $past_bookings = BookingsController::getBookingsByUser(Session::get('account')['id'], 15);

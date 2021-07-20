@@ -73,6 +73,7 @@
                                 <th scope="col" style="padding: 14px;">From</th>
                                 <th scope="col" style="padding: 14px;">To</th>
                                 <th scope="col" style="padding: 14px;">Order Date</th>
+                                <th scope="col" style="padding: 14px;">Bid Rejected By</th>
                             </tr>
                             </thead>
                             <tbody class="mtop-20 f-13">
@@ -83,6 +84,7 @@
                                     <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
                                     <td style="padding: 14px;" >{{$booking->created_at->format('d M Y')}}</td>
+                                    <td style="padding: 14px;">@if($booking->bid->vendor){{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} @endif</td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -105,8 +105,8 @@
                                     <div class="dropdown settings" style="height: auto;">
                                         <ul>
                                             <li><a href="{{route('pages')}}">General Pages</a></li>
-                                            <li><a href="{{route('faq')}}">FAQ</a></li>
-                                            <li><a href="{{route('contact_us')}}">Contact-Us</a></li>
+                                            <li><a href="{{route('admin.faq')}}">FAQ</a></li>
+                                            <li><a href="{{route('admin.contact_us')}}">Contact-Us</a></li>
                                             <li><a href="{{route('api-settings')}}">API Settings</a></li>
 
                                         </ul>
@@ -217,7 +217,7 @@
                                         <ul>
                                             <li><a href="{{route('my-profile', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">My Profile</a></li>
                                             <li><a href="{{route('password-reset', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">Change Password</a></li>
-                                            <li><a href="#0" onclick="location.assign('{{route('logout')}}')">Logout</a></li>
+                                            <li><a href="#0" onclick="location.assign('{{route('admin.logout')}}')">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>

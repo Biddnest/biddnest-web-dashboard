@@ -223,7 +223,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/reset-password/{id}',[WebController::class,'resetPassword'])->name("reset-passwords");
         });
             Route::get('/reset-password',[WebController::class,'Passwordreset'])->name("password-reset");
-            Route::get("/logout", [WebController::class, 'logout'])->name('logout');
+            Route::get("/logout", [WebController::class, 'logout'])->name('admin.logout');
             Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 
     Route::middleware("checkSession")->group(function(){
@@ -235,8 +235,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/pages/create',[WebController::class,'createpages'])->name("pages_create");
         Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
 
-        Route::get('/faq',[WebController::class,'faq'])->name("faq");
-        Route::get('/contact-us',[WebController::class,'contact_us'])->name("contact_us");
+        Route::get('/faq',[WebController::class,'faq'])->name("admin.faq");
+        Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
         //booking and orders
         Route::prefix('booking')->group(function () {

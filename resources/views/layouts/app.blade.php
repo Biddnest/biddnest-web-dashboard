@@ -217,7 +217,7 @@
                                         <ul>
                                             <li><a href="{{route('my-profile', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">My Profile</a></li>
                                             <li><a href="{{route('password-reset', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">Change Password</a></li>
-                                            <li><a href="#0" onclick="location.assign('{{route('admin.logout')}}')">Logout !</a></li>
+                                            <li><a href="#0" onclick="location.assign('{{route('admin.logout')}}')">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>

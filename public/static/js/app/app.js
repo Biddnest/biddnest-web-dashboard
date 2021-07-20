@@ -293,10 +293,27 @@ $("body").on('click', ".repeater", function(event) {
 });
 
 $("body").on('click', ".closer", function(event) {
-    if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
+    Swal.fire({
+        title: 'Are sure want to remove this?',
+        text: "If you proceed, you may need to use the save button to save changes permanently.",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonColor: '#FDC403',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        }
+        else{
+            return false;
+        }
+    });
+   /* if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
         $(this).closest($(this).data("parent")).fadeOut(100).remove();
-    }
-    return false;
+    }*/
+
 });
 
 $("body").on('click', ".modal-toggle", function(event) {

@@ -44,6 +44,7 @@ Route::prefix('jobs')->group(function () {
         echo "All cache reseted";
     });
 });
+
 Route::prefix('web/api')->group(function () {
 
     Route::prefix('auth')->group(function () {
@@ -212,6 +213,7 @@ Route::prefix('web/api')->group(function () {
 
 });
 
+/* Admin page routes */
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return response()->redirectToRoute('login');
@@ -499,6 +501,7 @@ Route::prefix('website/api')->group(function () {
 
 });
 
+/* Website page routes */
 Route::prefix('site')->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name("home");
 

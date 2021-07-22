@@ -13,7 +13,7 @@ class AppEnums{
     public static $GENDER = [
         ["label"=>"Male", "value"=>"male"],
         ["label"=>"Female", "value"=>"female"],
-        ["label"=>"Other", "value"=>"other"],
+        ["label"=>"3rd Gender", "value"=>"3rd gender"],
     ];
     public static $STATES = [];
 }

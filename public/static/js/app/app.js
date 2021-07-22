@@ -224,8 +224,6 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
 
 });
 
-
-
 $("body").on('click', ".file-upload button", function() {
     if ($(this).data('action') == "upload") {
         $(this).parent().find("input[type=file]").click();
@@ -418,7 +416,38 @@ $("body").on('change', ".category-select", function(event) {
 });
 
 $("body").on('click', ".delete", function(event) {
-    if(confirm($(this).data('confirm'))) {
+
+    Swal.fire({
+        title: 'Delete User?',
+        text: $(this).data('confirm'),
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var target =  $(this).closest($(this).data("parent"));
+            $.delete($(this).data("url"), {}, function (response){
+                Logger.info(response);
+                if(response.status == "success")
+                {
+                    tinySuccessAlert("Deleted Successfully", response.message);
+                    target.hide();
+                }
+                else
+                {
+                    tinyAlert("Failed", response.message);
+                }
+
+            });
+        }
+        else{
+            return false;
+        }
+    });
+   /* if(confirm($(this).data('confirm'))) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
         var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
@@ -435,7 +464,7 @@ $("body").on('click', ".delete", function(event) {
 
         });
     }
-    return false;
+    return false;*/
 });
 
 $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
@@ -702,7 +731,26 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
     if (isValid) {
         $(this).hide();
         $(this).closest('form').find('.bid-amount-admin').hide();
+        $(this).closest('form').find('.bid-amount-3-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').show();
+        $(this).closest('form').find('.next-btn-2-admin').show();
+    }
+});
+
+$("body").on('click', ".next-btn-2-admin", function(event) {
+
+    let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each( function() {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    Logger.info(isValid);
+    if (isValid) {
+        $(this).hide();
+        $(this).closest('form').find('.bid-amount-admin').hide();
+        $(this).closest('form').find('.bid-amount-2-admin').hide();
+        $(this).closest('form').find('.bid-amount-3-admin').show();
         $(this).closest('form').find('.submitbtn-admin').show();
     }
 });

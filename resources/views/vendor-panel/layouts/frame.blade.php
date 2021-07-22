@@ -139,6 +139,12 @@
         });
 
         window.fcWidget.init({
+                headerProperty: {
+                    "background-color": "#2e0789 !important",
+                    "border-color": "transparent #2e0789 transparent transparent",
+                    "height": "50px !important",
+                    "width": "50px !important"
+            },
             token: "859b3a74-b0c6-46ff-b582-2e42ae7f9f1b",
             host: "https://wchat.in.freshchat.com"
         });

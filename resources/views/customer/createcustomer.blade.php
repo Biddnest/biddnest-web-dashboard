@@ -93,6 +93,7 @@
                                                 <option>--Select--</option>
                                                 <option value="female" @if($users && ($users->gender == "female")) Selected @endif>Female</option>
                                                 <option value="male" @if($users && ($users->gender == "male")) Selected @endif>Male</option>
+                                                <option value="3rd gender" @if($users && ($users->gender == "3rd gender")) Selected @endif>3rd Gender</option>
                                             </select>
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>

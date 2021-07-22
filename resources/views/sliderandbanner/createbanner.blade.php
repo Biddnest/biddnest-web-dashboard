@@ -261,7 +261,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">From date</label>
-                    <input type="text" name="banners[][date][from]" class=" form-control br-5 dateselect" required="required" value="{{$slider->from_date}}" />
+                    <input type="text" name="banners[][date][from]" class=" form-control br-5 dateselect singledate" required="required" value="{{$slider->from_date}}" />
                     <span class="error-message">please enter valid date</span>
                 </div>
             </div>
@@ -269,7 +269,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">To date</label>
-                    <input type="text" name="banners[][date][to]" class=" form-control br-5 dateselect" required="required" value="{{$slider->to_date}}" />
+                    <input type="text" name="banners[][date][to]" class=" form-control br-5 dateselect singledate" required="required" value="{{$slider->to_date}}" />
                     <span class="error-message">please enter valid date</span>
                 </div>
             </div>

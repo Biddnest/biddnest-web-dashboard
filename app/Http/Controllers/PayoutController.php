@@ -172,7 +172,6 @@ class PayoutController extends Controller
        return Helper::response(true, "Payouts scheduled");
     }
 
-
     public static function getByOrganization(Request $request, $web=false)
     {
         if($web)

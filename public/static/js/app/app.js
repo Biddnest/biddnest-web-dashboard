@@ -590,6 +590,7 @@ $("body").on('change', ".change_status", function(event) {
 
 $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
+    console.log(data);
     if(confirm('Are you sure want to change status?')) {
         $.update($(this).data("url"), {data}, function (response) {
             Logger.info(response);

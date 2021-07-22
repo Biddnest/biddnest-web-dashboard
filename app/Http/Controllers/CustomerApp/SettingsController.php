@@ -57,7 +57,7 @@ class SettingsController extends Controller
                     "status"=>MailEnums::$STATUS
                 ],
                 "ticket"=>[
-                    "type"=>array_slice(TicketEnums::$TYPE, 0,5),
+                    "type"=>array_slice(TicketEnums::$TYPE, 0,4),
                     "status"=>TicketEnums::$STATUS
                 ],
                 "vendor"=>[

@@ -356,14 +356,14 @@ $("body").on('change', ".notification", function(event) {
     Logger.info("change");
     var id=$(this).val();
     Logger.info(id);
-    if(id == "user")
+    if(id == "1")
     {
         $(this).closest(".d-flex").find(".vendor").addClass("hidden");
         $(this).closest(".d-flex").find(".user").removeClass("hidden");
         $(this).closest(".d-flex").find(".userselect").attr("required", "required");
         $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
     }
-    if(id == "vendor")
+    if(id == "2")
     {
         $(this).closest(".d-flex").find(".user").addClass("hidden");
         $(this).closest(".d-flex").find(".vendor").removeClass("hidden");
@@ -418,7 +418,7 @@ $("body").on('change', ".category-select", function(event) {
 $("body").on('click', ".delete", function(event) {
 
     Swal.fire({
-        title: 'Delete User?',
+        title: 'Delete?',
         text: $(this).data('confirm'),
         icon: 'warning',
         showCancelButton: true,

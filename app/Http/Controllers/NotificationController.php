@@ -26,9 +26,9 @@ class NotificationController extends Controller
                 foreach ($selected_user as $singleUser){
                     $notification =new Notification;
                     $notification->title=$title;
-                    $notification->for=$for;
+                    $notification->for="customer";
                     $notification->desc=$desc;
-                    $notification->vendor_id=$singleUser;
+                    $notification->user_id=$singleUser;
                     $notification->generated_by = NotificationEnums::$GENERATE_BY['admin'];
                     $push_notification = $notification->save();
 
@@ -36,7 +36,9 @@ class NotificationController extends Controller
                         return Helper::response(false, "Notification could not be added");
                 }
 
-                dispatch(NotificationController::sendTo("user", $selected_user, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();
+                dispatch(function() use($selected_user, $title, $desc){
+                    NotificationController::sendTo("user", $selected_user, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                })->afterResponse();
 
             break;
 
@@ -48,6 +50,7 @@ class NotificationController extends Controller
                 $notification->title=$title;
                 $notification->for="active_customers";
                 $notification->desc=$desc;
+                $notification->user_id=$selected_user;
 //                $notification->vendor_id=null;
                 $notification->generated_by=NotificationEnums::$GENERATE_BY['admin'];
                 $push_notification = $notification->save();
@@ -55,7 +58,10 @@ class NotificationController extends Controller
                 if (!$push_notification)
                     return Helper::response(false, "Notification could not be added");
 
-                dispatch(NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();
+                /*dispatch(NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();*/
+                dispatch(function() use($users, $title, $desc){
+                    NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                })->afterResponse();
             break;
 
             case NotificationEnums::$RECEPIENT_TYPE['vendor']:
@@ -63,7 +69,7 @@ class NotificationController extends Controller
                 foreach ($vendors as $singleVendor){
                     $notification =new Notification;
                     $notification->title=$title;
-                    $notification->for=$for;
+                    $notification->for="vendor";
                     $notification->desc=$desc;
                     $notification->vendor_id=$singleVendor;
                     $notification->generated_by = NotificationEnums::$GENERATE_BY['admin'];
@@ -73,7 +79,10 @@ class NotificationController extends Controller
                         return Helper::response(false, "Notification could not be added");
                 }
 
-                dispatch(NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();
+                /*dispatch(NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();*/
+                dispatch(function() use($vendors, $title, $desc){
+                    NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                })->afterResponse();
             break;
 
             case NotificationEnums::$RECEPIENT_TYPE['active_vendors']:
@@ -90,7 +99,10 @@ class NotificationController extends Controller
                 if (!$push_notification)
                     return Helper::response(false, "Notification could not be added");
 
-                dispatch(NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();
+               /* dispatch(NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();*/
+                dispatch(function() use($vendors, $title, $desc){
+                    NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                })->afterResponse();
             break;
             default:
                 return Helper::response(false, "Incorrect Recipient type",null);

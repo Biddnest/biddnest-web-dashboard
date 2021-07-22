@@ -26,7 +26,7 @@ class ServiceController extends Controller
         $service=new Service;
         $service->name=$name;
         $service->inventory_quantity_type=$inventory_quantity_type;
-        $service->image = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"services");
+        $service->image = Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 100),$image_name,"services");
         $result= $service->save();
 
         if(!$result)
@@ -57,7 +57,7 @@ class ServiceController extends Controller
             "inventory_quantity_type"=>$inventory_quantity_type];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"services");
+            $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(100,100)->encode('png', 100),$image_name,"services");
 
 
         $service=Service::where("id", $id)->update($update_data);

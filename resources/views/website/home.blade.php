@@ -97,7 +97,7 @@
                             Select Destination
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Mention the movement type and confirm your pickup and dropout location as per your convenience.
                         </p>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                             Share Requirements
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Provide your basic requirements and references regarding the move where you can also prefer shared services.
                         </p>
                     </div>
                 </div>
@@ -123,10 +123,10 @@
                         <h5 class="d-flex center theme-text how-work-step">Step 3</h5>
 
                         <h3 class="d-flex center theme-text how-work-title">
-                            Choose Best Price
+                            Serving Best Price
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Get an estimated price while we work with our moving partners to provide the best convenient price for the move.
                         </p>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                             Schedule & Confirm
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Choose a fixed date/Range of dates/Multiple dates and confirm your movement.
                         </p>
                     </div>
                 </div>
@@ -153,10 +153,10 @@
                         <img class="w-150" src="{{ asset('static/website/images/images/gifs/truck.gif')}}" alt="some-picture" />
                         <h5 class="d-flex center theme-text how-work-step">Step 5</h5>
                         <h3 class="d-flex center theme-text how-work-title">
-                            Get Moving!
+                            Move like moxie
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Smooth, simple and swift move beyond borders.
                         </p>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
             <div class="row bg-white br-10 join-view mt-10 mb-10">
                 <div class="col-lg-12 pb-10 mb-2 mt-2 text-center">
                     <h2 class="section-heading pb-0 mt-30" style="font-size: 27px !important;">Join us as a Vendor</h2>
-                    <p class="section-subheading text-muted" style="font-size: 19px !important;">Lorem ipsum</p>
+                    <p class="section-subheading text-muted" style="font-size: 19px !important;">Be with Biddnest as a Vendor</p>
                 </div>
                 <div class="col-lg-6 col-xs-12 tab active">
                     <button class="tablinks vendor " onclick="openContent(event, 'content_accurate')" id="defaultOpen">
@@ -233,9 +233,7 @@
                 <div class="col-lg-6 col-xs-12">
                     <div class="card br-10 bg-white p-1 tabcontent" id="content_accurate">
                         <p class="f-18 mb-2 space">
-                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard
-                            dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy. Dummy text of the printing and typesetting industry. Lorem Ipsum
-                            .
+                            Biddnest provides you the perfect technical assistance and extensive exposure to the logistic industry through a purely technology driven initiative. The direct dealings will promote profit and transparency. Ensure efficient virtual assistance which clear communication barriers and the manipulations according to market trends will elevate your business into an international interface. Biddnest is a virtual companion and neutral platform which provides mutual benefits. Biddnest upscales and updates your endeavours and makes you Unique.
                         </p>
                         <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">

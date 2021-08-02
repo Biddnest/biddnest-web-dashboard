@@ -10,7 +10,7 @@
             <div class="page-head text-left p-4 pt-0 pb-0">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('pages')}}">General Settings</li>
+                        <li class="breadcrumb-item"><a href="{{route('pages')}}">General Settings</a> /</li>
                         <li class="breadcrumb-item active" aria-current="page">Reset Password</li>
                     </ol>
                 </nav>

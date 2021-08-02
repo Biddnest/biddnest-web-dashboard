@@ -952,7 +952,7 @@ class WebController extends Controller
         $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->orWhereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'));
 
         if(isset($request->search)){
-            $complaints=$complaints->where('heading', 'like', "%".$request->search."%");
+             $complaints=$complaints->where('heading', 'like', "%".$request->search."%");
         }
         $complaints->with('user')->with('vendor')->with('booking')->orderBy("id","DESC");
 

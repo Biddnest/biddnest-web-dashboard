@@ -87,12 +87,12 @@
                     <h1 class="side-popup-content">{{ucfirst(trans($organization->zone->name))}}</h1>
                 </div>
             </div>
-            <div class="row pb-3 pl-3">
+           {{-- <div class="row pb-3 pl-3">
                 <h3 class="f-18 mt-0">Revenue Trend</h3>
                 <div class="revenue-chart">
                     <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
                 </div>
-            </div>
+            </div>--}}
 
 
             <div class="d-flex justify-content-center p-20">

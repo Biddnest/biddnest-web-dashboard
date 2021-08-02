@@ -854,7 +854,7 @@ class Route extends Controller
             'phone'=>'required|string',
             'email'=>'required',
             'gender'=>'required|string',
-            'dob'=>'required',
+            'dob'=>'required|date',
             'image'=>'required'
         ]);
 
@@ -1079,7 +1079,7 @@ class Route extends Controller
 
     public function changeStatus(Request $request)
     {
-        return TicketReplyController::changeStatus($request->id, $request->status);
+        return TicketReplyController::changeStatus($request->id, $request->data);
     }
 
     public function changeStatusPrice(Request $request)

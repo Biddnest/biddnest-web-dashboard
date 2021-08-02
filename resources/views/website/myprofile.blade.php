@@ -181,7 +181,7 @@
                                                         <div class="form-group">
                                                             <label class="start-date">Date of Birth</label>
                                                             <div id="my-modal">
-                                                                <input type="text" id="dateselect" name="dob" value="@if($user->dob){{$user->dob}}@endif" class="filterdate dateselect form-control br-5" placeholder=" 15/02/2021" />
+                                                                <input type="text" id="dateselect" name="dob" value="@if($user->dob){{$user->dob}}@endif" class="birthdate dateselect form-control br-5" placeholder=" 15/02/2021" />
                                                                 <span class="error-message">please enter valid date</span>
                                                             </div>
                                                         </div>

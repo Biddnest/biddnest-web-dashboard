@@ -810,6 +810,13 @@ $('.filterdate').datepicker({
 
 });
 
+$('.birthdate').datepicker({
+    // multidateSeparator:",",
+    format: 'yyyy-mm-dd',
+    endDate: '-18y'
+
+});
+
 /* Website js code start */
 
 $("body").on('click', ".next1", function(event) {

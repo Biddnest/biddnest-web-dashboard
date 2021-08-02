@@ -153,7 +153,7 @@
                         <img class="w-150" src="{{ asset('static/website/images/images/gifs/truck.gif')}}" alt="some-picture" />
                         <h5 class="d-flex center theme-text how-work-step">Step 5</h5>
                         <h3 class="d-flex center theme-text how-work-title">
-                            Move like moxie
+                            Move Like Moxie
                         </h3>
                         <p class="center mt-2 text-center">
                             Smooth, simple and swift move beyond borders.

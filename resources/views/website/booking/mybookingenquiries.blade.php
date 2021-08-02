@@ -135,7 +135,7 @@
 
                                     </div>
                                     <div class=" center d-flex">
-                                        <a class="white-text " href="{{route('add-booking')}}">
+                                        <a class="white-text " href="{{route('home')}}">
                                             <button class="btn mt-4 btn-theme-bg white-bg">Book Now</button>
                                         </a>
                                     </div>

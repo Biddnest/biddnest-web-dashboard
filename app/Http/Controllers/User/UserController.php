@@ -194,7 +194,7 @@ class UserController extends Controller
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
 
-        if($user->status == 1)
+        if($user->status != 1)
             return Helper::response(false, "User is not verified or is banned. Invalid action.",null,401);
 
         $emailExists = User::where("email",$email)->where("id","!=",$id)->first();

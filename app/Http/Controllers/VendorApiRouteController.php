@@ -245,6 +245,7 @@ class VendorApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"nullable|string",
             'category' => 'required',
             'heading' => 'required|string',
             'desc' => 'required|string'
@@ -253,7 +254,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category], $request->heading, $request->desc);
+        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category, "public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
 
     public function getUser(Request $request)
@@ -396,4 +397,8 @@ class VendorApiRouteController extends Controller
         return BookingsController::stopVendorWatch($request->all());
     }
 
+    public function getBookingDropdown(Request $request)
+    {
+        return BookingsController::getBookingsByVendor($request->token_payload->id, 10);
+    }
 }

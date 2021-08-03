@@ -81,7 +81,7 @@ Route::prefix('v1')->group(function () {
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
 
     Route::get("/tickets",[ApiRouter::class, 'getTickets']);
-    Route::get("/tickets/bookings",[ApiRouter::class, 'getBookingDropdowm']);
+    Route::get("/tickets/bookings",[ApiRouter::class, 'getBookingDropdown']);
 
     Route::post("/tickets/create",[ApiRouter::class, 'createTickets']);
 
@@ -157,6 +157,7 @@ Route::prefix('vendors/v1')->group(function () {
     Route::post("/notification/player",[VendorApiRouter::class, 'addNotificationVendorPlayer']);
 
     Route::post("/tickets/create",[VendorApiRouter::class, 'createTickets']);
+    Route::get("/tickets/bookings",[VendorApiRouter::class, 'getBookingDropdown']);
 
     Route::get("/page/{slug}",[VendorApiRouter::class, 'getPage']);
 

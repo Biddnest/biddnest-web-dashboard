@@ -286,7 +286,8 @@ class VendorWebController extends Controller
 
     public function serviceRequestAdd()
     {
-        return view('vendor-panel.tickets.add_ticket');
+        $past_bookings = BookingsController::getBookingsByVendor(Session::get('account')['id'], 15, true);
+        return view('vendor-panel.tickets.add_ticket', ["past_bookings"=>$past_bookings]);
     }
 
     public function bookingDetails(Request $request)

@@ -1083,11 +1083,22 @@ class BookingsController extends Controller
     }
 
     public static function getBookingsByUser($user_id, $count = 10, $web=false){
+        $bookings =Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get();
         if($web) {
-            return Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get();
+            return $bookings;
         }
         else{
-            return Helper::response(true, "Dropdown of Booking id's", ["bookings"=>Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get()]);
+            return Helper::response(true, "Dropdown of Booking id's", ["bookings"=>$bookings]);
+        }
+    }
+
+    public static function getBookingsByVendor($org_id, $count = 10, $web=false){
+        $bookings =Booking::where("organization_id", $org_id)->orderBy("id", "DESC")->limit($count)->get();
+        if($web) {
+            return $bookings;
+        }
+        else{
+            return Helper::response(true, "Dropdown of Booking id's", ["bookings"=>$bookings]);
         }
     }
 

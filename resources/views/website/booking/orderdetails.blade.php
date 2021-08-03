@@ -266,7 +266,7 @@
                                         </div>
                                     @endif
                                     <div class="flow__item-line" data-onboarding-step="6"></div>
-                                    @if(\App\Enums\BookingEnums::$STATUS['in_transit'] == $booking->status)
+                                    @if(\App\Enums\BookingEnums::$STATUS['completed'] == $booking->status)
                                         <div class="flow__item">
                                             <div class="flow__item__circle bg-purple u-purple-color" data-onboarding-step="" data-onboarding-step-text="Completed"><img src="{{asset('static/website/images/icons/pin-location1.svg')}}" /></div>
                                         </div>

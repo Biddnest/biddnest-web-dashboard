@@ -1125,7 +1125,7 @@
     }
 
     .flow__item__circle::after{
-        top: 615px;
+        top: 630px;
     }
 
 </style>

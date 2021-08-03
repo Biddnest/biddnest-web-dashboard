@@ -158,11 +158,11 @@
 
                                             <div style="text-align: center; padding-bottom: 20px;">
                                                 <a href="#" data-toggle="modal" data-target="#reject-modal">
-                                                    <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn ml-6 " type="button ">
+                                                    <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn mr-4 " type="button ">
                                                         Reject
                                                     </button>
                                                 </a>
-                                                <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded mr-6">
+                                                <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded ml-4">
                                                     Submit
                                                 </button>
                                             </div>

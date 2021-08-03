@@ -447,6 +447,7 @@ class ApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"required|string",
             'category'=>'required',
             'heading' => 'required|string',
             'desc' => 'required|string'

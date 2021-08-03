@@ -85,6 +85,8 @@ class WebsiteRouteController extends Controller
             'desc' => 'required|string'
         ]);
 
+        print_r($request->public_booking_id); die();
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 

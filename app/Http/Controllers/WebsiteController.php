@@ -180,7 +180,7 @@ class WebsiteController extends Controller
 
     public function myRequest(Request $request)
     {
-        $past_bookings = BookingsController::getBookingsByUser(Session::get('account')['id'], 15);
+        $past_bookings = BookingsController::getBookingsByUser(Session::get('account')['id'], 15, true);
         $tickets=Ticket::where('user_id', Session::get('account')['id'])->orderBy('id', 'DESC')->paginate(5);
         return view('website.myrequest', ['tickets'=>$tickets, "past_bookings"=>$past_bookings]);
     }

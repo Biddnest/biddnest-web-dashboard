@@ -1082,8 +1082,13 @@ class BookingsController extends Controller
         return Helper::response(true, "Booking details have been send to $phone");
     }
 
-    public static function getBookingsByUser($user_id, $count = 10){
-        return Booking::where("user_id",$user_id)->orderBy("id","DESC")->limit($count)->get();
+    public static function getBookingsByUser($user_id, $count = 10, $web=false){
+        if($web) {
+            return Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get();
+        }
+        else{
+            return Helper::response(true, "Dropdown of Booking id's", ["bookings"=>Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get()]);
+        }
     }
 
 }

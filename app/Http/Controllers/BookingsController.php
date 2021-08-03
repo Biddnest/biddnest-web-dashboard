@@ -264,7 +264,7 @@ class BookingsController extends Controller
             return Helper::response(false, "This order is not in Enquiry Status");
         }
 
-        $booking_type = $service_type == 0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
+        $booking_type = $service_type == "economic" ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
 
         $timing = Settings::where("key", "bid_time")->pluck('value')[0];
         $complete_time = Carbon::now()->addMinutes($timing)->roundMinutes()->format("Y-m-d H:i:s");

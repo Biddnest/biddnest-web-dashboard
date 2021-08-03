@@ -723,6 +723,7 @@ class BookingsController extends Controller
         $booking = Booking::where(["public_booking_id" => $request->public_booking_id])
             ->with('inventories')
             ->with('service')
+            ->with('subservices')
             ->with('movement_dates')
             ->with('driver')
             ->with('vehicle')

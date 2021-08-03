@@ -78,7 +78,7 @@
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
                                     <label class="container" style="margin-top: 10px;margin-left:-30px">
-                                        <input type="hidden" value="0" name="meta[self_booking]" id="slef">
+                                        <input type="hidden" value="true" name="meta[self_booking]" id="slef">
                                         <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? true : false">
                                         <!-- <span class="checkmark"></span> -->
                                     </label>

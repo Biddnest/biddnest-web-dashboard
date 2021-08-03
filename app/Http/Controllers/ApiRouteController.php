@@ -585,4 +585,9 @@ class ApiRouteController extends Controller
 
         return UserController::updateFreshChatId($request->token_payload->id,$request->freshchat_restore_id);
     }
+
+    public function getBookingDropdowm(Request $request)
+    {
+        return BookingsController::getBookingsByUser($request->token_payload->id, 10);
+    }
 }

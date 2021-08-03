@@ -81,6 +81,8 @@ Route::prefix('v1')->group(function () {
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
 
     Route::get("/tickets",[ApiRouter::class, 'getTickets']);
+    Route::get("/tickets/bookings",[ApiRouter::class, 'getBookingDropdowm']);
+
     Route::post("/tickets/create",[ApiRouter::class, 'createTickets']);
 
     Route::post("/tickets/callback",[ApiRouter::class, 'callBack']);

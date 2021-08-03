@@ -390,7 +390,7 @@ $("body").on('change', ".category-select", function(event) {
     var materal=$("#sub_"+id).data("subcategory");
 
     materal.map((value)=>{
-        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
+        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['name']+'">'+value['name']+'</option>')
     });
 
     var type=$("#sub_"+id).data("type");

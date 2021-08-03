@@ -577,7 +577,7 @@
             <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                 <label>
-                    <input type="radio" name="subcategory" value="@{{id}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
+                    <input type="radio" name="subcategory" value="@{{name}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
 
                     <div class="panel panel-default card-input disabled subservice-selector" style="box-shadow: none !important;  background:none !important; text-align: center;">
                             <div class="panel-heading">

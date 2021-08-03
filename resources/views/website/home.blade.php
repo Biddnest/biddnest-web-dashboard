@@ -466,9 +466,9 @@
                                 <div class="col-12 d-flex center">
                                     <div class="form-groups">
                                         <label class="container-01 m-0 p-0">
-{{--                                            <input type="checkbox" id="Lift1" required/>--}}
-{{--                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>--}}
-                                            <p class="text-muted f-14"> By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-14" style="margin-left: 20px;"> By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
                                         </label>
                                     </div>
                                 </div>

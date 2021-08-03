@@ -36,6 +36,14 @@
         font-family: 'Source Sans Pro', sans-serif;
     }
 
+    .container-01 .checkmark-agree:after {
+        left: 2px !important;
+        top: -2px !important;
+        width: 6px !important;
+        height: 12px !important;
+        border-width: 0 3px 3px 0 !important;
+    }
+
     select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;

@@ -27,6 +27,14 @@
         filter: opacity() drop-shadow(0 0 0 #fdc403);
 
     }
+    .container-01 .checkmark-agree:after {
+        left: 2px !important;
+        top: -2px !important;
+        width: 6px !important;
+        height: 12px !important;
+        border-width: 0 3px 3px 0 !important;
+    }
+
     .card-num {
         font-size: 115px;
         position: absolute;
@@ -237,12 +245,12 @@
         .dropdown-content {
             left: -67px !important;
             padding: 8px;
-}
-
-.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
-    left: 807px !important;
-
         }
+
+        .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
+            left: 807px !important;
+
+                }
     }
 
 
@@ -413,11 +421,6 @@
             margin-left: 0px !important;
 
         }
-
-
-
-
-
     }
 
 

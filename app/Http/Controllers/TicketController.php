@@ -74,7 +74,7 @@ class TicketController extends Controller
             break;
 
             case TicketEnums::$TYPE['complaint']:
-                        $title = $heading;
+                        $title = $heading." #".$meta["public_booking_id"];
                         $body = $body;
                         $ticket = new Ticket;
                         $ticket->user_id = $sender_id;
@@ -96,7 +96,7 @@ class TicketController extends Controller
             break;
 
             case TicketEnums::$TYPE['service_request']:
-                $title = $heading;
+                $title = $heading." #".$meta["public_booking_id"];
                 $body = $body;
                 $ticket = new Ticket;
                 $ticket->vendor_id = $sender_id;
@@ -177,7 +177,7 @@ class TicketController extends Controller
                 break;
 
             case TicketEnums::$TYPE['complaint']:
-                $title = $heading;
+                $title = $heading." #".$meta["public_booking_id"];
                 $body = $body;
                 $ticket = new Ticket;
                 $ticket->user_id = $sender_id;
@@ -199,7 +199,7 @@ class TicketController extends Controller
                 break;
 
             case TicketEnums::$TYPE['service_request']:
-                $title = $heading;
+                $title = $heading." #".$meta["public_booking_id"];
                 $body = $body;
                 $ticket = new Ticket;
                 $ticket->user_id = $sender_id;

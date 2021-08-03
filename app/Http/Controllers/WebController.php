@@ -990,6 +990,14 @@ class WebController extends Controller
             }
 
         }
+        elseif ($ticket->type == TicketEnums::$TYPE['complaint'])
+        {
+            if(json_decode($ticket->meta, true)['public_booking_id']) {
+                $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
+                $service_status = [];
+            }
+
+        }
 
         return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);
     }

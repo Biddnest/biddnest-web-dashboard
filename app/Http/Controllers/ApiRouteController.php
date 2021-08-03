@@ -232,7 +232,7 @@ class ApiRouteController extends Controller
     public function confirmBooking(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'service_type' => 'required|string',
+            'service_type' => 'required',
             'public_booking_id' => 'required|string'
         ]);
 

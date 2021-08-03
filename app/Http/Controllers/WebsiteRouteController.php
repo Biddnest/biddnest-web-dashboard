@@ -88,7 +88,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::createForWeb(Session::get('account')['id'], $request->category, ["public_booking_id"=>null], $request->heading, $request->desc);
+        return TicketController::createForWeb(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
 
     public function raiseTicket(Request $request)

@@ -739,6 +739,7 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
 });
 
 $("body").on('click', ".next-btn-2-admin", function(event) {
+    var url= $(this).data("url");
 
     let isValid = true;
     $($(this).closest('form').find('input.validate-input')).each( function() {
@@ -746,8 +747,16 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
         if ($(this).parsley().validate() !== true)
             isValid = false;
     });
-    Logger.info(isValid);
+    // Logger.info(isValid);
     if (isValid) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                Logger.info(response);
+            }
+            });
         $(this).hide();
         $(this).closest('form').find('.bid-amount-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').hide();

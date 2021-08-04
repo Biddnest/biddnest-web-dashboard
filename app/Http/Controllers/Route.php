@@ -1228,4 +1228,9 @@ class Route extends Controller
     {
         return BookingsController::cancelBooking($request->id);
     }
+
+    public function send_otp_bid(Request $request)
+    {
+        return OrganisationController::sendOtpForBid($request->id);
+    }
 }

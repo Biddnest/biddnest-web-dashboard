@@ -158,6 +158,10 @@ Route::prefix('vendors/v1')->group(function () {
 
     Route::get("/tickets",[VendorApiRouter::class, 'getTickets']);
     Route::post("/tickets/create",[VendorApiRouter::class, 'createTickets']);
+
+    Route::post("/tickets/reply",[VendorApiRouter::class, 'addReply']);
+    Route::get("/tickets/details",[VendorApiRouter::class, 'getDetails']);
+
     Route::get("/tickets/bookings",[VendorApiRouter::class, 'getBookingDropdown']);
 
     Route::post("/tickets/callback",[VendorApiRouter::class, 'callBack']);

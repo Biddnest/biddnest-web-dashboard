@@ -380,6 +380,15 @@ class TicketController extends Controller
         return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
     }
 
+    public static function getOneForVendorApp($sender_id, $ticket_id)
+    {
+        $tickets = Ticket::where(['id'=>$ticket_id])->with(['reply'=> function($query) {
+           $query->with('admin');
+        }])->get();
+
+        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
+    }
+
     public static function createCallBack($ticket_type, $phone)
     {
         $meta=["phone"=>$phone, "public_booking_id"=>null];
@@ -432,7 +441,6 @@ class TicketController extends Controller
 
         return Helper::response(true, "Ticket raised Successfull",["ticket"=>Ticket::findOrFail($ticket->id)]);
     }
-
 
     public static function createForWeb($sender_id, $ticket_type, $meta, $heading=null, $body=null)
     {

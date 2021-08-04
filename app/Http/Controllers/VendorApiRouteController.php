@@ -411,4 +411,29 @@ class VendorApiRouteController extends Controller
     {
         return TicketController::createForVendor($request->token_payload->id, 4, ["public_booking_id"=>null]);
     }
+
+    public function getDetails(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return TicketController::getOneForVendorApp($request->token_payload->id, $request->id);
+    }
+
+    public function addReply(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return TicketReplyController::addReplyFromVendor($request->token_payload->id, $request->ticket_id, $request->reply);
+    }
 }

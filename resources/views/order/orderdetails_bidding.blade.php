@@ -317,13 +317,11 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 bid-amount-3-admin hidden">
-                                    <div class="d-flex row p-10 text-center">
-                                        <div class="col-lg-6">
-                                            <h4 class="text-center bold">Enter OTP</h4>
-                                            <input class="form-control" name="pin" type="number" maxlength="6" minlength="6" required/>
-                                            <span class="error-message">Please enter valid OTP</span>
-                                        </div>
+                                <div class="col-sm-12 bid-amount-3-admin hidden p60">
+                                    <div class="form-input">
+                                        <h4 class="text-center bold">Enter Vendor's OTP</h4>
+                                        <input class="form-control" name="otp" type="number" maxlength="6" minlength="6" required/>
+                                        <span class="error-message">Please enter valid OTP</span>
                                     </div>
                                 </div>
 

@@ -406,4 +406,9 @@ class VendorApiRouteController extends Controller
     {
         return TicketController::get($request->token_payload->id);
     }
+
+    public function callBack(Request $request)
+    {
+        return TicketController::createForVendor($request->token_payload->id, 4, ["public_booking_id"=>null]);
+    }
 }

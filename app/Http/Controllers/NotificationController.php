@@ -169,11 +169,11 @@ class NotificationController extends Controller
 
     public static function sendTo($type, $user_id, $title, $desc, $data, $url=Null){
         //$type = "user" / "vendor
-           if(count($user_id) < 1)
+//           if(count($user_id) < 1)
                return false;
 
 //           return $user_id;
-           foreach ($user_id as $user)
+          /* foreach ($user_id as $user)
            {
                if($user) {
                    $save_notification = new Notification;
@@ -190,7 +190,7 @@ class NotificationController extends Controller
                    $save_notification->generated_by = NotificationEnums::$GENERATE_BY['system'];
                    $save_notification->save();
                }
-           }
+           }*/
 
         $players=[];
         foreach($user_id as $user) {

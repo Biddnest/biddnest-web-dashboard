@@ -249,6 +249,29 @@ class UserController extends Controller
         return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
+    public static function getAppSliderstab($lat, $lng)
+    {
+        $date = date('Y-m-d');
+        $result=Slider::where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+            ->where('from_date','<=', $date)
+            ->where('to_date','>=', $date)
+            ->where('platform', SliderEnum::$PLATFORM['tab'])->with(["banners"=> function($banner) use($date){
+                $banner->where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+                    ->where('from_date','<=', $date)
+                    ->where('to_date','>=', $date)->orderBy('order');
+            }])->get();
+
+        foreach ($result as $slide_key=>$slide)
+        {
+            foreach ($slide->banners as $banner_key=>$banner)
+            {
+                $result[$slide_key]['banners'][$banner_key]['banner_size']=$slide['size'];
+            }
+        }
+
+        return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
+    }
+
     public static function search(Request $request)
     {
 //        return $request;

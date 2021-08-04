@@ -125,13 +125,24 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'lat' => 'required',
-            'lng' => 'required'
+            'lng' => 'required',
+            "type"=> 'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
-            return UserController::getAppSliders($request->lat, $request->lng);
+        {
+            if($request->type=="app")
+            {
+                return UserController::getAppSliders($request->lat, $request->lng);
+            }
+            else{
+                return UserController::getAppSliderstab($request->lat, $request->lng);
+            }
+
+        }
+
     }
 
     public function getServices(Request $request)

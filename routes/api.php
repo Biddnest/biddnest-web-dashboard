@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function () {
     Route::put("/profile/update-mobile",[ApiRouter::class, 'updateMobile']);
     Route::put("/profile/verify-otp",[ApiRouter::class, 'verifyOtp']);
 
-    Route::get('/sliders',[ApiRouter::class,'getAppSliders']);
+    Route::get('/sliders/{type}',[ApiRouter::class,'getAppSliders']);
     Route::get('/services',[ApiRouter::class,'getServices']);
     Route::get('/subservices',[ApiRouter::class,'getSubServices']);
     Route::get('/inventories',[ApiRouter::class,'getInventories']);

@@ -21,10 +21,11 @@ class SliderEnum
     public static $BANNER_DIMENSIONS = [
         "wide"=>[376,180],
         "square"=>[256,256],
-        "web"=>[1280, 580]
+        "web"=>[1280, 580],
+        "tab"=>[1920, 1080]
         ];
 
-    public static $PLATFORM = ["app"=>0, "web"=>1];
+    public static $PLATFORM = ["app"=>0, "web"=>1, "tab"=>2];
 
     public static $TYPE = ["promo"=>0,"info"=>1];
 

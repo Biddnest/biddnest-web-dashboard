@@ -755,6 +755,7 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
             dataType: 'json',
             success: function (response) {
                 Logger.info(response);
+                $('.otp-bid').val(response.data.OTP);
             }
             });
         $(this).hide();

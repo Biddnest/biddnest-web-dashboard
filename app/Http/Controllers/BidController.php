@@ -330,7 +330,7 @@ class BidController extends Controller
     {
         $verf_otp =Vendor::where(['organization_id'=>$data['organization_id'], 'user_role'=>VendorEnums::$ROLES['admin']])->pluck("verf_code")[0];
 
-        if($data['organization_id'] == $verf_otp)
+        if($data['otp'] == $verf_otp)
         {
             $min_power=explode(";",$data['man_power'])[0];
             $max_power=explode(";",$data['man_power'])[1];

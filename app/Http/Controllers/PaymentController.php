@@ -130,10 +130,8 @@ class PaymentController extends Controller
                         "usage"=>Coupon::where("code", $order_id_exist->coupon_code)->pluck("usage")[0] + 1
                         ]);
 
-
-            dispatch(function () use ($order_id_exist) {
-
-                $booking = Booking::find($order_id_exist->booking_id);
+            $booking = Booking::find($order_id_exist->booking_id);
+            dispatch(function () use ($booking) {
                 NotificationController::sendTo("user", [$booking->user_id], "We have received your payment for booking id #".$booking->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" => $booking->public_booking_id,

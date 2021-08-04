@@ -37,7 +37,7 @@ class NotificationController extends Controller
                 }
 
                 dispatch(function() use($selected_user, $title, $desc){
-                    NotificationController::sendTo("user", $selected_user, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                    NotificationController::sendTo("user", $selected_user, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']], null, "general");
                 })->afterResponse();
 
             break;
@@ -60,7 +60,7 @@ class NotificationController extends Controller
 
                 /*dispatch(NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();*/
                 dispatch(function() use($users, $title, $desc){
-                    NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                    NotificationController::sendTo("user", $users, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']], null, "general");
                 })->afterResponse();
             break;
 
@@ -81,7 +81,7 @@ class NotificationController extends Controller
 
                 /*dispatch(NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();*/
                 dispatch(function() use($vendors, $title, $desc){
-                    NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                    NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']], null, "general");
                 })->afterResponse();
             break;
 
@@ -101,7 +101,7 @@ class NotificationController extends Controller
 
                /* dispatch(NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]))->afterResponse();*/
                 dispatch(function() use($vendors, $title, $desc){
-                    NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']]);
+                    NotificationController::sendTo("vendor", $vendors, $title, $desc, ["type"=>NotificationEnums::$TYPE['general']], null, "general");
                 })->afterResponse();
             break;
             default:
@@ -167,30 +167,31 @@ class NotificationController extends Controller
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
     }
 
-    public static function sendTo($type, $user_id, $title, $desc, $data, $url=null){
+    public static function sendTo($type, $user_id, $title, $desc, $data, $url=null, $op="system"){
         //$type = "user" / "vendor
            if(count($user_id) < 1)
                return false;
 
 //           return $user_id;
-           foreach ($user_id as $user)
-           {
-               if($user) {
-                   $save_notification = new Notification;
+        if($op =="system") {
+            foreach ($user_id as $user) {
+                if ($user) {
+                    $save_notification = new Notification;
 
-                   if ($type == "user")
-                       $save_notification->user_id = $user;
-                   else
-                       $save_notification->vendor_id = $user;
+                    if ($type == "user")
+                        $save_notification->user_id = $user;
+                    else
+                        $save_notification->vendor_id = $user;
 
-                   $save_notification->for = $type;
-                   $save_notification->title = $title;
-                   $save_notification->desc = $desc;
+                    $save_notification->for = $type;
+                    $save_notification->title = $title;
+                    $save_notification->desc = $desc;
 //                   $save_notification->url = $url;
-                   $save_notification->generated_by = NotificationEnums::$GENERATE_BY['system'];
-                   $save_notification->save();
-               }
-           }
+                    $save_notification->generated_by = NotificationEnums::$GENERATE_BY['system'];
+                    $save_notification->save();
+                }
+            }
+        }
 
         $players=[];
         foreach($user_id as $user) {

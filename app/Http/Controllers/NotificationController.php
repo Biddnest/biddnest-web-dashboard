@@ -186,7 +186,7 @@ class NotificationController extends Controller
                    $save_notification->for = $type;
                    $save_notification->title = $title;
                    $save_notification->desc = $desc;
-                   $save_notification->url = $url;
+//                   $save_notification->url = $url;
                    $save_notification->generated_by = NotificationEnums::$GENERATE_BY['system'];
                    $save_notification->save();
                }

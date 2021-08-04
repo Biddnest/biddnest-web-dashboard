@@ -125,8 +125,7 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'lat' => 'required',
-            'lng' => 'required',
-            "type"=> 'required'
+            'lng' => 'required'
         ]);
 
         if($validation->fails())

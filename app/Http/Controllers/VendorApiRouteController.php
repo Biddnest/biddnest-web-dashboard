@@ -401,4 +401,9 @@ class VendorApiRouteController extends Controller
     {
         return BookingsController::getBookingsByVendor($request->token_payload->id, 10);
     }
+
+    public function getTickets(Request $request)
+    {
+        return TicketController::getForVendor($request->token_payload->id);
+    }
 }

@@ -228,7 +228,7 @@ class BidController extends Controller
             "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
         ]);
 
-        $expired_vendor_id =Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['expired'], "bookmarked"=>CommonEnums::$YES])->whereNotNull("vendor_id")->pluck("vendor_id");
+        $expired_vendor_id =Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['expired'], "bookmarked"=>CommonEnums::$YES])->whereNotNull("vendor_id")->pluck("bookmarked_by");
         NotificationController::sendTo("vendor", $expired_vendor_id, "Oops ! This Booking Is Expired.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]

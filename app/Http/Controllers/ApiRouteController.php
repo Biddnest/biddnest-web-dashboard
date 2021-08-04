@@ -5,9 +5,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BidEnums;
+use App\Enums\CommonEnums;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\VerifyJwtToken;
+use App\Models\Bid;
 use App\Models\Testimonials;
 use App\StringFormatter;
 use Illuminate\Http\JsonResponse;
@@ -601,4 +604,5 @@ class ApiRouteController extends Controller
     {
         return BookingsController::getBookingsByUser($request->token_payload->id, 10);
     }
+
 }

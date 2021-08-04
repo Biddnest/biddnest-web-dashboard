@@ -12,6 +12,7 @@ use App\Http\Controllers\VendorWebApiRouteController as VendorApiRouter;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\VendorWebController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
 use App\Http\Controllers\WebsiteController;
 /*
@@ -25,15 +26,24 @@ use App\Http\Controllers\WebsiteController;
 |
 */
 Route::get('/', function () {
-
-    return response()->redirectToRoute('login');
+    return response()->redirectToRoute('home');
 });
 
-Route::get('/debug',function(){
-    abort(500);
+Route::prefix('jobs')->group(function () {
+    Route::get('/hard-reset-cache', function () {
+        echo Artisan::call("optimize:clear");
+
+        echo Artisan::call("view:cache");
+
+        echo Artisan::call("config:cache");
+
+//        echo Artisan::call("route:cache");
+
+        echo Artisan::call("event:cache");
+
+        echo "All cache reseted";
+    });
 });
-
-
 
 Route::prefix('web/api')->group(function () {
 
@@ -77,6 +87,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/confirm',[Router::class,'booking_confirm'])->name("order_confirm");
     Route::put('/reject',[Router::class,'booking_reject'])->name("order_reject");
     Route::post('/add-bid',[Router::class,'booking_add_bid'])->name("add_booking_bid");
+    Route::get('/otp-bid/{id}',[Router::class,'send_otp_bid'])->name("send_bid_otp");
 
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
@@ -203,6 +214,7 @@ Route::prefix('web/api')->group(function () {
 
 });
 
+/* Admin page routes */
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return response()->redirectToRoute('login');
@@ -214,7 +226,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/reset-password/{id}',[WebController::class,'resetPassword'])->name("reset-passwords");
         });
             Route::get('/reset-password',[WebController::class,'Passwordreset'])->name("password-reset");
-            Route::get("/logout", [WebController::class, 'logout'])->name('logout');
+            Route::get("/logout", [WebController::class, 'logout'])->name('admin.logout');
             Route::get("/switch-zone", [WebController::class, 'switchToZone'])->name('switch-zone');
 
     Route::middleware("checkSession")->group(function(){
@@ -226,8 +238,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/pages/create',[WebController::class,'createpages'])->name("pages_create");
         Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
 
-        Route::get('/faq',[WebController::class,'faq'])->name("faq");
-        Route::get('/contact-us',[WebController::class,'contact_us'])->name("contact_us");
+        Route::get('/faq',[WebController::class,'faq'])->name("admin.faq");
+        Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
         //booking and orders
         Route::prefix('booking')->group(function () {
@@ -343,6 +355,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/bank',[WebController::class,'createBank'])->name("create-bank");
             Route::get('/details/{id}',[WebController::class,'details_user'])->name('details_user');
         });
+        Route::prefix('reports')->group(function () {
+            Route::get('/',[WebController::class,'reports_summary'])->name("report.summary");
+            Route::get('/sales',[WebController::class,'sales_report'])->name("report.sales");
+        });
+
+
 
     });
 
@@ -362,10 +380,6 @@ Route::prefix('admin')->group(function () {
 
 
 });
-Route::get('/debug/socket', function () {
-    return view("debug.socket");
-});
-
 
 /* Vendor page routes */
 Route::prefix('vendor')->group(function(){
@@ -391,6 +405,7 @@ Route::prefix('vendor')->group(function(){
         Route::prefix('/booking')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");
             Route::get('/past-booking/{type}',[VendorWebController::class,'bookingPastType'])->name("vendor.pastbookings");
+            Route::get('/reject-booking/{type}',[VendorWebController::class,'bookingRejectType'])->name("vendor.rejectbookings");
             Route::get('/{id}/details',[VendorWebController::class,'bookingDetails'])->name("vendor.detailsbookings");
             Route::get('/{id}/requirment',[VendorWebController::class,'bookingRequirment'])->name("vendor.requirment-order");
             Route::get('/{id}/my-quote',[VendorWebController::class,'myQuote'])->name("vendor.my-quote");
@@ -452,23 +467,6 @@ Route::prefix('vendor')->group(function(){
     });
 });
 
-
-Route::get('/debug/push/booking', function () {
-    return NotificationController::sendTo("vendor", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-        "type" => NotificationEnums::$TYPE['booking'],
-        "public_booking_id" => "BD606AD99B49C69",
-        "booking_status" => BookingEnums::$STATUS['biding']
-    ], null);
-});
-Route::get('/debug/push/url', function () {
-    return NotificationController::sendTo("user", [202], "Your booking has been confirmed.", "We are get the best price you. You will be notified soon.", [
-        "type" => NotificationEnums::$TYPE['link'],
-        "url" => "https://google.com"
-    ], null);
-
-});
-
-
 Route::prefix('website/api')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post("/login", [WebsiteRouter::class, 'login'])->name('website.login');
@@ -478,12 +476,14 @@ Route::prefix('website/api')->group(function () {
     Route::put('/book-move-estimate', [WebsiteRouter::class, 'bookingConfirmEstimate'])->name("order_estimate");
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");
+    Route::post('/add-booking', [WebsiteRouter::class, 'addBookMove'])->name("add-bookmove");
     Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
     Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");
+    Route::get('/inventories/serach',[WebsiteRouter::class,'serachItem'])->name("search_item");
 
     Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");
     Route::post('/raise_support', [WebsiteRouter::class, 'raiseTicket'])->name("raise_support");
@@ -495,22 +495,28 @@ Route::prefix('website/api')->group(function () {
     Route::post('/verified-coupon', [WebsiteRouter::class, 'verifiedCoupon'])->name("verifiedcoupon");
     Route::post('/initiate-payment', [WebsiteRouter::class, 'initiatePayment'])->name("initiate-payment");
     Route::post('/status/complete',[WebsiteRouter::class, 'statusComplete'])->name("complete-status");
+    Route::post('/booking/send-to-phone',[WebsiteRouter::class, 'sendToPhone'])->name("website.api.send-to-phone");
+    Route::post('/booking/add-review',[WebsiteRouter::class, 'addReview'])->name("website.api.booking.add-review");
+
+    Route::get('/zone/check-serviceability',[WebsiteRouter::class, 'checkServiceable'])->name("website.api.zone.check-serviceability");
+
 });
 
-
+/* Website page routes */
 Route::prefix('site')->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name("home");
 
-    Route::get("/logout", [WebsiteController::class, 'logout'])->name('logout');
 
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
     Route::get('/page/{slug}', [WebsiteController::class, 'termPage'])->name("terms.page");
 
+    Route::middleware("CheckWebSession")->group(function(){
+    Route::get("/logout", [WebsiteController::class, 'logout'])->name('logout');
     Route::get('/book-move', [WebsiteController::class, 'addBooking'])->name("add-booking");
-    Route::get('/book-move/{id}/extimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
-    Route::get('/book-move/{id}/place', [WebsiteController::class, 'placeBooking'])->name("place-booking");
+    Route::get('/book-move/{id}/estimate', [WebsiteController::class, 'estimateBooking'])->name("estimate-booking");
+    Route::get('/book-move/{id}/status', [WebsiteController::class, 'placeBooking'])->name("place-booking");
     Route::get('/my-bookings', [WebsiteController::class, 'myBookings'])->name("my-bookings");
     Route::get('/my-bookings/enquiry', [WebsiteController::class, 'myBookingsEnquiries'])->name("my-bookings-enquiries");
     Route::get('/my-bookings/{id}/quote', [WebsiteController::class, 'finalQuote'])->name("final-quote");
@@ -520,10 +526,8 @@ Route::prefix('site')->group(function () {
     Route::get('/my-bookings/order-history', [WebsiteController::class, 'bookingHistory'])->name("order-history");
     Route::get('/my-profile', [WebsiteController::class, 'myProfile'])->name("website.my-profile");
     Route::get('/my-request', [WebsiteController::class, 'myRequest'])->name("my-request");
-
+    });
 //    Route::get('/complete-contact-us', [WebsiteController::class, 'completeContactUs'])->name("complete_contact_us");
 
-   /* Route::middleware("CheckWebSession")->group(function(){
-        Route::get('/home', [WebsiteController::class, 'home'])->name("home-logged");
-    });*/
+
 });

@@ -39,11 +39,11 @@
 
                                       <div class="tab-pane fade show active margin-topneg-15" id="past" role="tabpanel" aria-labelledby="past-tab">
                                           <!-- form starts -->
-                                          <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider"  action="{{route('banners_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>$id])}}" data-alert="mega" method="POST" id="myForm" data-parsley-validate>
+                                          <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue add-slider data-parsley-validate"  action="{{route('banners_add')}}" data-next="redirect" data-url="{{route('create-banner', ['id'=>$id])}}" data-alert="mega" method="POST" id="myForm" data-parsley-validate>
 
                                               <input type="hidden" value="{{$id}}" name="id" />
 
-                                              <div id="banners-add" class="sortable">
+                                              <div id="banners-add" class="sortable-list">
                                               @foreach($banners as $banner)
                                                  <div> <div class="d-flex row p-20 banner-form-wrapper relative">
 
@@ -91,10 +91,10 @@
                                                          <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">Desc/Subtext</label>
-                                                              <textarea id="desc" required
+                                                              <textarea id="desc"
                                                                         rows="3"
                                                                         autocomplete="off"
-                                                                        placeholder="Only for web banner"
+                                                                        placeholder="Only for web banner (optional)"
                                                                         class="form-control br-5"
                                                                         name="banners[][desc]"
                                                                         value="{{$banner->desc}}"></textarea>
@@ -112,7 +112,7 @@
                                                                   type="url"
                                                                   id="url"
                                                                   autocomplete="off"
-                                                                  placeholder="Optional"
+                                                                  placeholder="optional"
                                                                   class="form-control br-5"
                                                                   name="banners[][url]"
                                                                   value="{{$banner->url}}"
@@ -126,7 +126,7 @@
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">From date</label>
-                                                              <input type="text" name="banners[][date][from]" class="form-control br-5 dateselect" required="required" value="{{$banner->from_date}}"/>
+                                                              <input type="text" name="banners[][date][from]" class="form-control br-5 dateselect singledate" required="required" value="{{$banner->from_date}}"/>
                                                               <span class="error-message">please enter valid date</span>
                                                           </div>
                                                       </div>
@@ -134,7 +134,7 @@
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">To date</label>
-                                                              <input type="text" name="banners[][date][to]" class="form-control br-5 dateselect" required="required" value="{{$banner->to_date}}" />
+                                                              <input type="text" name="banners[][date][to]" class="form-control br-5 dateselect singledate" required="required" value="{{$banner->to_date}}" />
                                                               <span class="error-message">please enter valid date</span>
                                                           </div>
                                                       </div>
@@ -226,12 +226,29 @@
 
             <div class="col-lg-6">
                 <div class="form-input">
+                    <label class="full-name">Desc/Subtext</label>
+                    <textarea id="desc"
+                              rows="3"
+                              autocomplete="off"
+                              placeholder="Only for web banner (optional)"
+                              class="form-control br-5"
+                              name="banners[][desc]"
+                              value=""></textarea>
+
+                    <span class="error-message"
+                    >Please enter a valid URL</span
+                    >
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-input">
                     <label class="full-name">Url</label>
                     <input
                         type="url"
-                        id="url" required
+                        id="url"
                         autocomplete="off"
-                        placeholder="http://Diwali.com"
+                        placeholder="optional"
                         class="form-control br-5"
                         name="banners[][url]"
                     />
@@ -244,7 +261,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">From date</label>
-                    <input type="text" name="banners[][date][from]" class=" form-control br-5 dateselect" required="required" value="{{$slider->from_date}}" />
+                    <input type="text" name="banners[][date][from]" class=" form-control br-5 dateselect singledate" required="required" value="{{$slider->from_date}}" />
                     <span class="error-message">please enter valid date</span>
                 </div>
             </div>
@@ -252,7 +269,7 @@
             <div class="col-lg-6">
                 <div class="form-input">
                     <label class="full-name">To date</label>
-                    <input type="text" name="banners[][date][to]" class=" form-control br-5 dateselect" required="required" value="{{$slider->to_date}}" />
+                    <input type="text" name="banners[][date][to]" class=" form-control br-5 dateselect singledate" required="required" value="{{$slider->to_date}}" />
                     <span class="error-message">please enter valid date</span>
                 </div>
             </div>

@@ -624,7 +624,7 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id'=>"required|int",
             'banners.*.name' => 'required|string',
-            'banners.*.desc' => 'required|string',
+            'banners.*.desc' => 'nullable|string',
             'banners.*.date.from' => 'required|date',
             'banners.*.date.to' => 'required|date',
             "banners.*.url" => 'nullable|url',
@@ -854,7 +854,7 @@ class Route extends Controller
             'phone'=>'required|string',
             'email'=>'required',
             'gender'=>'required|string',
-            'dob'=>'required',
+            'dob'=>'required|date',
             'image'=>'required'
         ]);
 
@@ -1079,7 +1079,7 @@ class Route extends Controller
 
     public function changeStatus(Request $request)
     {
-        return TicketReplyController::changeStatus($request->id, $request->status);
+        return TicketReplyController::changeStatus($request->id, $request->data);
     }
 
     public function changeStatusPrice(Request $request)
@@ -1202,7 +1202,8 @@ class Route extends Controller
             'moving_date'=>'required',
             'vehicle_type'=>'required|string',
 
-            'man_power'=>'required'
+            'man_power'=>'required',
+            'otp'=>'required'
         ]);
 
         if($validation->fails())
@@ -1227,5 +1228,10 @@ class Route extends Controller
     public function cancelOrder(Request $request)
     {
         return BookingsController::cancelBooking($request->id);
+    }
+
+    public function send_otp_bid(Request $request)
+    {
+        return OrganisationController::sendOtpForBid($request->id);
     }
 }

@@ -39,7 +39,7 @@
 
                     <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                         <!-- form starts -->
-                        <form action="@if(!$users){{route('user_add')}}@else{{route('user_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="@if(!$users){{route('create-bank', ['id'=>':id'])}}@else{{route('create-bank', ['id'=>$users->id])}}@endif" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue onboard-vendor-form" id="myForm" data-parsley-validate >
+                        <form action="@if(!$users){{route('user_add')}}@else{{route('user_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="@if(!$users){{route('create-bank', ['id'=>':id'])}}@else{{route('create-bank', ['id'=>$users->id])}}@endif" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue user-form" id="myForm" data-parsley-validate >
                             <div class="d-flex row p-20">
                                 <div class="col-sm-6">
                                     <p class="img-label">Image</p>
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 zones hidden">
+                                <div class="col-lg-6 zones @if($users && $users->role ==\App\Enums\AdminEnums::$ROLES['zone_admin']) @else {{"hidden"}} @endif " >
                                     <div class="form-input">
                                         <label class="full-name">Zone</label>
                                         <select id="role" name="zone[]" class="form-control select-box" multiple>
@@ -176,7 +176,7 @@
                                             <option value="">--Select--</option>
                                             <option value="male" @if($users && (json_decode($users->meta, true)['gender'] == "male")) selected @endif>Male</option>
                                             <option value="female" @if($users && (json_decode($users->meta, true)['gender'] == "female")) selected @endif>Female</option>
-                                            <option value="other" @if($users && (json_decode($users->meta, true)['gender'] == "other")) selected @endif>Other</option>
+                                            <option value="3rd gender" @if($users && (json_decode($users->meta, true)['gender'] == "3rd gender")) selected @endif>3rd Gender</option>
                                         </select>
                                         <span class="error-message">Please enter valid Gender</span>
                                     </div>

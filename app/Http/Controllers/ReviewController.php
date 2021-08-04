@@ -9,6 +9,9 @@ use App\Models\Review;
 use App\Models\Booking;
 use App\Enums\ReviewEnums;
 use App\Enums\BookingEnums;
+use App\Models\ReviewSentiment;
+use App\Enums\ReviewSentimentEnum;
+use Illuminate\Support\Facades\Artisan;
 
 class ReviewController extends Controller
 {
@@ -30,11 +33,20 @@ class ReviewController extends Controller
             $reviews->desc =$suggestion;
             $reviews->ratings =json_encode($review);
             $review_result =$reviews->save();
+
+            if(!$review_result)
+                return Helper::response(false, "couldn't add review");
+
+            dispatch(function (){
+                Artisan::call("sentiment:analyze review");
+            })->afterResponse();
+
+            return Helper::response(true, "Thankyou for reviewing us.", ['review'=>Review::findOrFail($reviews->id)]);
+
         }
 
-        if(!$review_result)
-            return Helper::response(false, "couldn't add review");
-        
-        return Helper::response(true, "Review added successfully", ['review'=>Review::findOrFail($reviews->id)]);
+
+
+
     }
 }

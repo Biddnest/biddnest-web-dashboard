@@ -11,9 +11,74 @@
                 <!-- top_nav_bar -->
                 <div class="h-auto">
                     <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation header">
-                        <form class="search-bar form-inline col-6 p-0">
-                            <input class="form-control w-100 search-bar" type="search" placeholder="Search..."
+                        <form class="search-bar form-inline col-6 p-0" style="position: relative !important;opacity: 0;">
+                            <input class="form-control w-100 search-bar" type="search" placeholder="Search anything..."
                                 aria-label="Search">
+                            <div class="search-sugestion-wrapper hidden">
+
+                                <span>Search results</span>
+                                <div class="search-suggestions">
+                                    <div class="suggest-group">
+                                        <h6 class="section-title">Results in Users</h6>
+                                        <ul>
+                                            <li><a href="#" class="suggest-snip d-flex flex-row">
+                                                    <figure class="thumb-nail">
+                                                        <img src="" />
+                                                    </figure>
+                                                    <div class="meta">
+                                                        <p>Order</p>
+                                                        <span class=""></span>
+                                                    </div>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="suggest-group">
+                                        <h6 class="section-title">Results in Inventory</h6>
+                                        <ul>
+                                            <li><a href="#" class="suggest-snip d-flex flex-row">
+                                                    <figure class="thumb-nail">
+                                                        <img src="" />
+                                                    </figure>
+                                                    <div class="meta">
+                                                        <p></p>
+                                                        <span class=""></span>
+                                                    </div>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="suggest-group">
+                                        <h6 class="section-title">Results in Subservices</h6>
+                                        <ul>
+                                            <li><a href="#" class="suggest-snip d-flex flex-row">
+                                                    <figure class="thumb-nail">
+                                                        <img src="" />
+                                                    </figure>
+                                                    <div class="meta">
+                                                        <p></p>
+                                                        <span class=""></span>
+                                                    </div>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="suggest-group">
+                                        <h6 class="section-title">Results in Services</h6>
+                                        <ul>
+                                            <li><a href="#" class="suggest-snip d-flex flex-row">
+                                                    <figure class="thumb-nail">
+                                                        <img src="" />
+                                                    </figure>
+                                                    <div class="meta">
+                                                        <p></p>
+                                                        <span class=""></span>
+                                                    </div>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </form>
                         <div class="col-6">
                             <ul class="header-controls d-flex flex-row justify-content-end">
@@ -40,8 +105,8 @@
                                     <div class="dropdown settings" style="height: auto;">
                                         <ul>
                                             <li><a href="{{route('pages')}}">General Pages</a></li>
-                                            <li><a href="{{route('faq')}}">FAQ</a></li>
-                                            <li><a href="{{route('contact_us')}}">Contact-Us</a></li>
+                                            <li><a href="{{route('admin.faq')}}">FAQ</a></li>
+                                            <li><a href="{{route('admin.contact_us')}}">Contact-Us</a></li>
                                             <li><a href="{{route('api-settings')}}">API Settings</a></li>
 
                                         </ul>
@@ -152,7 +217,7 @@
                                         <ul>
                                             <li><a href="{{route('my-profile', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">My Profile</a></li>
                                             <li><a href="{{route('password-reset', ['id'=>\Illuminate\Support\Facades\Session::get("account")['id']])}}">Change Password</a></li>
-                                            <li><a href="#0" onclick="location.assign('{{route('logout')}}')">Logout</a></li>
+                                            <li><a href="#0" onclick="location.assign('{{route('admin.logout')}}')">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -163,12 +228,12 @@
                     @yield('content')
                     </div>
                     <!-- footer -->
-                    <footer class="text-center b-purple">
+                    {{--<footer class="text-center b-purple">
                         <hr>
 
                         <p>Copyright © {{ date("Y") }} All Rights Reserved by. <a href="https://admin-biddnest.dev.diginnovators.com/"
                                                                             target="_blank">BIDNEST</a>.</p>
-                    </footer>
+                    </footer>--}}
                 </div>
             </div>
             <div class="side-bar-pop-up">

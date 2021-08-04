@@ -16,14 +16,16 @@ class SliderEnum
     public static $STATUS = ["active"=>1, "suspended"=>2];
 
     public static $POSITION = ["main"=>1, "secondary"=>2];
-    public static $SIZE = ["wide"=>1, "square"=>2];
+    public static $SIZE = ["wide"=>1, "square"=>2, "web"=>3];
 
     public static $BANNER_DIMENSIONS = [
-        "wide"=>[343,129],
-        "square"=>[256,256]
+        "wide"=>[376,180],
+        "square"=>[256,256],
+        "web"=>[1280, 580],
+        "tab"=>[1366, 768]
         ];
 
-    public static $PLATFORM = ["app"=>0, "web"=>1];
+    public static $PLATFORM = ["app"=>0, "web"=>1, "tab"=>2];
 
     public static $TYPE = ["promo"=>0,"info"=>1];
 

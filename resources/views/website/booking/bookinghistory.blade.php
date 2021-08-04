@@ -85,6 +85,15 @@
                                                         </a>
                                                         @break
                                                     @endswitch
+
+                                                    @if(!$booking->review)
+                                                            <a class="white-text" href="#" style="margin-left: 10px">
+                                                                <button class="btn f-12 white-bg" data-toggle="modal" data-target="#order-review-modal_{{$booking->id}}" style="background-color:#fdc403; font-weight: 700; color: #FFFFFF;">
+                                                                    Add Review
+                                                                </button>
+                                                            </a>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>
@@ -101,7 +110,7 @@
 
                                         </div>
                                         <div class=" center d-flex">
-                                            <a class="white-text " href="{{route('add-booking')}}">
+                                            <a class="white-text " href="{{route('home')}}">
                                                 <button class="btn mt-4 btn-theme-bg white-bg">Book Now</button>
                                             </a>
                                         </div>
@@ -110,6 +119,77 @@
                         </div>
                     </div>
                     @foreach($bookings as $booking)
+
+                        @if(!$booking->review)
+                            <div class="modal fade" id="order-review-modal_{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+                                <div class="modal-dialog para-head input-text-blue" role="document">
+                                    <div class="modal-content w-100 w-1000 mt-10 right-25">
+                                        <div class="modal-header bg-purple">
+                                            <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                                                Add a review
+                                            </h5>
+                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body p-15 margin-topneg-7">
+                                            <form action="{{route('website.api.booking.add-review')}}" method="POST" data-next="refresh" data-alert="mega" class="form-new-order  input-text-blue" data-parsley-validate >
+                                                <div class="row">
+
+                                                    <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}" />
+                                                    @foreach($review_questionare as $question)
+                                                    <div class="col-lg-12 col-xs-12 mt-1">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">{{$question['question']}}</label>
+                                                            <input type="hidden" name="review[][question]" value="{{$question['question']}}" />
+                                                            @if($question['type'] == "rating")
+                                                            <select name="review[][rating]" class="form-control">
+                                                                <option value="">--Select--</option>
+                                                                <option value="1">Poor</option>
+                                                                <option value="2">Needs Improvement</option>
+                                                                <option value="3">Average</option>
+                                                                <option value="4">Good</option>
+                                                                <option value="5">Excellent</option>
+                                                            </select>
+                                                            @elseif($question['type'] == "text")
+                                                            <textarea class="form-control" rows="3" placeholder="Type your answer here." name="review[][rating]"></textarea>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                        @endforeach
+
+                                                    <div class="col-lg-12 col-xs-12 mt-1">
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">How can we improve?</label>
+                                                            <textarea class="form-control" rows="3" placeholder="Type your answer here" name="suggestion"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="accordion" id="comments">
+                                                    <div class="button-bottom d-flex justify-content-between pt-4">
+                                                        <div class="">
+                                                            <a class="white-text" href="{{route('website.my-profile')}}">
+                                                                <button type="button" class="btn btn-theme-w-bg f-14">
+                                                                    cancel
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                        <div class="">
+                                                            <button type="submit" class="btn btn-theme-bg white-bg f-14">
+                                                                Save
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
                         <div class="modal fade" id="order-history-modal_{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
                         <div class="modal-dialog para-head input-text-blue" role="document">
                             <div class="modal-content w-1000 mt-50 right-25 w-90 ml-4">

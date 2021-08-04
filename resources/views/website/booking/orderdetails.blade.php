@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
-@section('title')Ongoing Book @endsection
-@section('header_title') Ongoing Book @endsection
+@section('title') Booking Details @endsection
+@section('header_title') Booking Details @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="orderdetails">
         <div class="container">
@@ -35,20 +35,20 @@
                                 </div>
                                 <div class="d-flex direction-col desktop-popup view-none">
                                     <div>
-                                        <button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
+                                        <a href="{{route('contact_us')}}"><button class="btn btn-booking d-flex theme-text f-14 center mr-3 "><img
                                                 src="{{asset('static/website/images/icons/call-button.svg')}}" />Virtual
-                                            Assistance</button>
+                                                Assistance</button></a>
                                     </div>
                                     <div>
                                         <button data-toggle="modal" data-target="#order-detail-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
                                                 src="{{asset('static/website/images/icons/page.svg')}}" />Order Details</button>
                                     </div>
-                                    <div>
+                                    {{--<div>
                                         <button class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
                                                 src="{{asset('static/website/images/icons/share.svg')}}"
                                                 class="share-margin" />Share</button>
-                                    </div>
-                                    @if(\App\Enums\BookingEnums::$STATUS['in_transit'] < $booking->status)
+                                    </div>--}}
+                                    @if(\App\Enums\BookingEnums::$STATUS['in_transit'] > $booking->status)
                                         <div>
                                             <button data-toggle="modal" data-target="#manage-modal" class="btn btn-booking d-flex theme-text f-14 center  mr-3"><img
                                                     src="{{asset('static/website/images/icons/cross.svg')}}" />Manage Orders</button>
@@ -99,7 +99,7 @@
                                                 <button data-toggle="modal" data-target="#pin-modal" class="btn btn-theme-bg padding-btn-res btn-padding">End trip</button>
                                             </div>
                                         @endif
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                             <div class="row pb-4 border-bottom">
@@ -125,13 +125,13 @@
                                             <div class="">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 p-0">Driver</p>
-                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}}@endif</p>
+                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{ucwords($booking->driver->fname)}} {{ucwords($booking->driver->lname)}} @else To be assigned @endif</p>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <div>
-                                                    <p class="l-cap f-12 mb-0  p-0">Vehicle Name</p>
-                                                    <p class="f-14  p-0">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
+                                                    <p class="l-cap f-12 mb-0  p-0 text-right">Vehicle Name</p>
+                                                    <p class="f-14  p-0 text-right">@if($booking->vehicle){{ucwords($booking->vehicle->name)}} - {{$booking->vehicle->number}} @else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,13 +139,13 @@
                                             <div class="">
                                                 <div>
                                                     <p class="l-cap f-12 mb-0 p-0">Phone Number</p>
-                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{$booking->driver->phone}}@endif</p>
+                                                    <p class="mt-0 f-14  p-0">@if($booking->driver){{$booking->driver->phone}} @else N/A @endif</p>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <div class="pr-1">
-                                                    <p class="l-cap f-12 mb-0  p-0">Vehicle Type </p>
-                                                    <p class="mt-0 f-14  p-0"> @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}}@endif</p>
+                                                    <p class="l-cap f-12 mb-0  p-0 text-right">Vehicle Type </p>
+                                                    <p class="mt-0 f-14  p-0 text-right"> @if($booking->vehicle){{ucwords($booking->vehicle->vehicle_type)}} @else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,8 +158,8 @@
                                             </div>
                                             <div class="">
                                                 <div class="pr-3">
-                                                    <p class="l-cap f-12 mb-0  p-0">Manpower</p>
-                                                    <p class="mt-0 f-14  p-0">@if($booking->bid){{json_decode($booking->bid->meta, true)['min_man_power']}}@endif</p>
+                                                    <p class="l-cap f-12 mb-0  p-0 text-right">Manpower</p>
+                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->movement_specifications){{json_decode($booking->movement_specifications->meta, true)['min_man_power']}}@else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,8 +168,9 @@
                                 <div class="col-md-6 col-xs-12  col-sm-12 mt-4 pl-4 text-left">
                                     <div class="d-flex justify-content-between" style="width: 94%;">
                                         <div>
+{{--                                            {{(string)json_decode($booking->bid,true)['meta']}}--}}
                                             <h6 class="l-cap f-14 p-0">Date</h6>
-                                            <h5 class="f-16">@if($booking->bid){{date('d M Y', strtotime(json_decode($booking->bid->meta, true)['moving_date']))}}@endif</h5>
+                                            <h5 class="f-16">@if($booking->movement_specifications){{date('d M Y', strtotime(json_decode($booking->movement_specifications->meta, true)['moving_date']))}}@endif</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Price </h6>
@@ -178,8 +179,8 @@
                                     </div>
                                     <div class="d-flex  justify-content-between mt-2 " style="width: 97%;">
                                         <div>
-                                            <h6 class="l-cap f-14">Order ID</h6>
-                                            <h5 class="f-16">#{{$booking->public_booking_id}}</h5>
+                                            <h6 class="l-cap f-14">Booking ID</h6>
+                                            <h5 class="f-16">{{$booking->public_booking_id}}</h5>
                                         </div>
                                         <div>
                                             <h6 class="l-cap f-14">Distance</h6>
@@ -265,7 +266,7 @@
                                         </div>
                                     @endif
                                     <div class="flow__item-line" data-onboarding-step="6"></div>
-                                    @if(\App\Enums\BookingEnums::$STATUS['in_transit'] == $booking->status)
+                                    @if(\App\Enums\BookingEnums::$STATUS['completed'] == $booking->status)
                                         <div class="flow__item">
                                             <div class="flow__item__circle bg-purple u-purple-color" data-onboarding-step="" data-onboarding-step-text="Completed"><img src="{{asset('static/website/images/icons/pin-location1.svg')}}" /></div>
                                         </div>
@@ -372,14 +373,15 @@
                                         </div>
                                         <div class="modal-body p-15 margin-topneg-2">
                                             <div>
-                                                <form>
+                                                <form class="" data-next="null" action="{{route('website.api.send-to-phone')}}" method="POST" data-alert="mega">
                                                     <div class="row d-flex justify-content-center">
 
                                                         <div class="col-lg-10 col-xs-12">
                                                             <div class="form-group">
                                                                 <label for="formGroupExampleInput" class="mb-0">Phone
                                                                     Number</label>
-                                                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="9739912345">
+                                                                <input type="number" name="phone" class="form-control" id="formGroupExampleInput" placeholder="9988776655">
+                                                                <input type="hidden" value="{{$booking->public_booking_id}}" name="public_booking_id" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -393,8 +395,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="mt-1 pt-1">
-                                                    <!-- <p class="center light text-view-center mt-3">Did not receive pin?
-                                                        <span class="theme-text pl-1 f-bolder">Resend</span></p> -->
+                                                    {{--Useless div block this one is -> check and remove if needed --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -548,22 +549,22 @@
                                         <div class="modal-body p-15 margin-topneg-2">
                                             <div>
                                                 <form>
-                                                    @if(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'] == $booking->status)
+                                                    @if($booking->status == \App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
                                                         <div class="row d-flex justify-content-center">
                                                             @foreach(str_split(json_decode($booking->meta, true)['start_pin']) as $key)
                                                                 <div class="col-lg-2 col-xs-2">
                                                                     <div class="form-group">
-                                                                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
+                                                                        <input type="text" class="form-control text-center" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
                                                                     </div>
                                                                 </div>
                                                             @endforeach
                                                         </div>
-                                                    @elseif(\App\Enums\BookingEnums::$STATUS['in_transit'] == $booking->status)
+                                                    @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['in_transit'])
                                                         <div class="row d-flex justify-content-center">
-                                                            @foreach(str_split(json_decode($booking->meta, true)['start_pin']) as $key)
+                                                            @foreach(str_split(json_decode($booking->meta, true)['end_pin']) as $key)
                                                                 <div class="col-lg-2 col-xs-2">
                                                                     <div class="form-group">
-                                                                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
+                                                                        <input type="text" class="form-control text-center" id="formGroupExampleInput" value="{{$key}}" placeholder="3" readonly>
                                                                     </div>
                                                                 </div>
                                                             @endforeach

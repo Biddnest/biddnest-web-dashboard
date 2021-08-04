@@ -60,7 +60,7 @@
                                         <div class="row d-flex mt-1 f-14 pt-1 justify-content-between row-mobile">
                                             <div class="col-md-6 col-mobile" style="width: auto;">
                                                     <p class="bold  pl-4 padding-view d-flex f-direction" >
-                                                        <span> #{{$booking->public_booking_id}} </span>
+                                                        <span> #{{$booking->public_enquiry_id}} </span>
                                                        <span class="light"> {{date('d M Y', strtotime($booking->created_at))}}</span>
                                                     </p>
                                                 </div>
@@ -68,7 +68,7 @@
                                                     @switch($booking->status)
                                                         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['enquiry']; @endphp
-                                                        <a class="white-text" href="{{route('estimate-booking', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('estimate-booking', ['id'=>$booking->public_enquiry_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Enquiry
                                                             </button>
@@ -85,7 +85,7 @@
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['biding'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['biding']; @endphp
-                                                        <a class="white-text" href="{{route('final-quote', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('final-quote', ['id'=>$booking->public_enquiry_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Biding
                                                             </button>
@@ -94,7 +94,7 @@
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['rebiding']; @endphp
-                                                        <a class="white-text" href="{{route('final-quote', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('final-quote', ['id'=>$booking->public_enquiry_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Rebiding
                                                             </button>
@@ -103,36 +103,18 @@
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['payment_pending']; @endphp
-                                                        <a class="white-text" href="{{route('final-quote', ['id'=>$booking->public_booking_id])}}">
+                                                        <a class="white-text" href="{{route('final-quote', ['id'=>$booking->public_enquiry_id])}}">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
                                                                 Payment Pending
                                                             </button>
                                                         </a>
                                                         @break
 
-                                                        @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['pending_driver_assign']; @endphp
-                                                        <a class="white-text" href="{{route('website.order-details', ['id'=>$booking->public_booking_id])}}">
+                                                        @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['biding']; @endphp
+                                                        <a class="white-text" href="#">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
-                                                                Pending Driver Assign
-                                                            </button>
-                                                        </a>
-                                                        @break
-
-                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['awaiting_pickup']; @endphp
-                                                        <a class="white-text" href="{{route('website.order-details', ['id'=>$booking->public_booking_id])}}">
-                                                            <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
-                                                                Awaiting Pickup
-                                                            </button>
-                                                        </a>
-                                                        @break
-
-                                                        @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['in_transit']; @endphp
-                                                        <a class="white-text" href="{{route('website.order-details', ['id'=>$booking->public_booking_id])}}">
-                                                            <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
-                                                                In Transit
+                                                                Bidding
                                                             </button>
                                                         </a>
                                                         @break
@@ -153,7 +135,7 @@
 
                                     </div>
                                     <div class=" center d-flex">
-                                        <a class="white-text " href="{{route('add-booking')}}">
+                                        <a class="white-text " href="{{route('home')}}">
                                             <button class="btn mt-4 btn-theme-bg white-bg">Book Now</button>
                                         </a>
                                     </div>

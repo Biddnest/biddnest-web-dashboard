@@ -74,7 +74,7 @@ class TicketController extends Controller
             break;
 
             case TicketEnums::$TYPE['complaint']:
-                        $title = $heading;
+                        $title = $heading." #".$meta["public_booking_id"];
                         $body = $body;
                         $ticket = new Ticket;
                         $ticket->user_id = $sender_id;
@@ -96,7 +96,7 @@ class TicketController extends Controller
             break;
 
             case TicketEnums::$TYPE['service_request']:
-                $title = $heading;
+                $title = $heading." #".$meta["public_booking_id"];
                 $body = $body;
                 $ticket = new Ticket;
                 $ticket->vendor_id = $sender_id;
@@ -177,7 +177,7 @@ class TicketController extends Controller
                 break;
 
             case TicketEnums::$TYPE['complaint']:
-                $title = $heading;
+                $title = $heading." #".$meta["public_booking_id"];
                 $body = $body;
                 $ticket = new Ticket;
                 $ticket->user_id = $sender_id;
@@ -199,7 +199,7 @@ class TicketController extends Controller
                 break;
 
             case TicketEnums::$TYPE['service_request']:
-                $title = $heading;
+                $title = $heading." #".$meta["public_booking_id"];
                 $body = $body;
                 $ticket = new Ticket;
                 $ticket->user_id = $sender_id;
@@ -380,6 +380,15 @@ class TicketController extends Controller
         return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
     }
 
+    public static function getOneForVendorApp($sender_id, $ticket_id)
+    {
+        $tickets = Ticket::where(['id'=>$ticket_id])->with(['reply'=> function($query) {
+           $query->with('admin');
+        }])->get();
+
+        return Helper::response(true, "Here are the Ticket Details",["ticket"=>$tickets[0]]);
+    }
+
     public static function createCallBack($ticket_type, $phone)
     {
         $meta=["phone"=>$phone, "public_booking_id"=>null];
@@ -389,6 +398,24 @@ class TicketController extends Controller
         $ticket->heading = $title;
         $ticket->desc = $body;
         $ticket->type = $ticket_type;
+        $ticket->meta = json_encode($meta);
+
+        if(!$ticket->save())
+            return Helper::response(false, "Could'nt create ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+    }
+
+    public static function createCallBackBooking($sender_id, $booking_id)
+    {
+        $meta=["phone"=>null, "public_booking_id"=>$booking_id];
+        $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
+        $body = "Request to call back ".$booking_id;
+        $ticket = new Ticket;
+        $ticket->user_id = $sender_id;
+        $ticket->heading = $title;
+        $ticket->desc = $body;
+        $ticket->type = TicketEnums::$TYPE['call_back'];
         $ticket->meta = json_encode($meta);
 
         if(!$ticket->save())
@@ -414,4 +441,116 @@ class TicketController extends Controller
 
         return Helper::response(true, "Ticket raised Successfull",["ticket"=>Ticket::findOrFail($ticket->id)]);
     }
+
+    public static function createForWeb($sender_id, $ticket_type, $meta, $heading=null, $body=null)
+    {
+        switch ($ticket_type) {
+            case TicketEnums::$TYPE['order_reschedule']:
+                $title = $heading ? $heading : TicketEnums::$TEMPLATES['order_reschedule']['title_template'];
+                $body = $body ? $body : TicketEnums::$TEMPLATES['order_reschedule']['body_template'];
+                if (isset($meta['public_booking_id'])) {
+                    $booking = Booking::where("public_booking_id", $meta['public_booking_id'])
+                        ->with('organization')
+                        ->with('payment')
+                        ->with('driver')
+                        ->with('vehicle')
+                        ->with('user')
+                        ->where("user_id", $sender_id)
+                        ->first();
+                    $title = str_replace("{{booking.id}}", "", $title);
+                    $title = str_replace("{{user.name}}", "", $title);
+
+                    $body = str_replace("{{booking.id}}", "", $body);
+                    $body = str_replace("{{user.name}}", "", $body);
+                }
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->booking_id = $booking['id'];
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            case TicketEnums::$TYPE['order_cancellation']:
+                $title = $heading ? $heading : TicketEnums::$TEMPLATES['order_cancellation']['title_template'];
+                $body = $body ? $body :TicketEnums::$TEMPLATES['order_cancellation']['body_template'];
+
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+
+
+                if (isset($meta['public_booking_id'])) {
+                    $booking = Booking::where("public_booking_id", $meta['public_booking_id'])
+                        ->with('organization')
+                        ->with('payment')
+                        ->with('driver')
+                        ->with('vehicle')
+                        ->with('user')
+                        ->where("user_id", $sender_id)
+                        ->first();
+
+
+                    /*registering booking id to ticket*/
+                    $ticket->booking_id = $booking['id'];
+                }
+
+                $title = str_replace("{{booking.id}}", "", $title);
+                $title = str_replace("{{user.name}}", "", $title);
+
+                $body = str_replace("{{booking.id}}", "", $body);
+                $body = str_replace("{{user.name}}", "", $body);
+
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            case TicketEnums::$TYPE['complaint']:
+                $title = $heading;
+                $body = $body;
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            case TicketEnums::$TYPE['call_back']:
+                $title = $heading ? $heading : TicketEnums::$TEMPLATES['call_back']['title_template'];
+                $body = $body ? $body : TicketEnums::$TEMPLATES['call_back']['body_template'];
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            case TicketEnums::$TYPE['service_request']:
+                $title = $heading;
+                $body = $body;
+                $ticket = new Ticket;
+                $ticket->user_id = $sender_id;
+                $ticket->heading = $title;
+                $ticket->desc = $body;
+                $ticket->type = $ticket_type;
+                $ticket->meta = json_encode($meta);
+                break;
+
+            default:
+                $title = "";
+                $desc = "";
+        }
+
+        if(!$ticket->save())
+            return Helper::response(false, "Could'nt create ticket.");
+
+        return Helper::response(true, "Ticket raised",["ticket"=>Ticket::findOrFail($ticket->id)]);
+
+    }
+
 }

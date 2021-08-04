@@ -606,4 +606,19 @@ class OrganisationController extends Controller
         return Helper::response(true,"Status Updated successfully");
     }
 
+    public static function sendOtpForBid($id)
+    {
+         $vendor=Organization::where(["id"=>$id])->orWhere("parent_org_id", $id)->first();
+         $otp = Helper::generateOTP(6);
+        $newvendor =Vendor::where(['phone'=>$vendor->phone, 'organization_id'=>$id, 'user_role'=>VendorEnums::$ROLES['admin']])
+            ->update([
+                'verf_code'=>$otp
+            ]);
+
+        if(!$newvendor)
+            return Helper::response(false,"Couldn't sent OTP");
+
+        return Helper::response(true,"OTP sent successfully", ['OTP'=>$otp]);
+    }
+
 }

@@ -39,6 +39,7 @@ use App\Models\Ticket;
 use App\Models\TicketReply;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -951,7 +952,7 @@ class WebController extends Controller
         $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->orWhereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'));
 
         if(isset($request->search)){
-            $complaints=$complaints->where('heading', 'like', "%".$request->search."%");
+             $complaints=$complaints->where('heading', 'like', "%".$request->search."%");
         }
         $complaints->with('user')->with('vendor')->with('booking')->orderBy("id","DESC");
 
@@ -982,6 +983,14 @@ class WebController extends Controller
             $service_status=$ticket_info->ticket_status;
         }
         elseif ($ticket->type == TicketEnums::$TYPE['call_back'])
+        {
+            if(json_decode($ticket->meta, true)['public_booking_id']) {
+                $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
+                $service_status = [];
+            }
+
+        }
+        elseif ($ticket->type == TicketEnums::$TYPE['complaint'])
         {
             if(json_decode($ticket->meta, true)['public_booking_id']) {
                 $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
@@ -1149,5 +1158,43 @@ class WebController extends Controller
     {
         $reviews=Review::where('id', $request->id)->with('Booking')->with('user')->first();
         return view('sidebar.reviews',['reviews'=>$reviews]);
+    }
+
+    public static function reports_summary(Request $request)
+    {
+        return view('reports.report_summary',[
+            "report"=>Report::orderBy('id', 'DESC')->first()
+        ]);
+    }
+
+    public static function sales_report(Request $request)
+    {
+
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $bookings = Booking::whereIn("zone_id",$zone);
+        if(isset($request->from) && isset($request->to))
+            $bookings->whereDate("created_at",">=", (string) date("Y-m-d", strtotime($request->from)))
+                ->whereDate("created_at","<=", (string) date("Y-m-d", strtotime($request->to)));
+
+//        return date("Y-m-d", strtotime($request->from));
+        if(isset($request->org) && $request->org != "all")
+        $bookings->where("organization_id",$request->org);
+
+        if(isset($request->zone) && $request->zone != "all")
+            $bookings->where("zone_id",$request->zone);
+
+        if(isset($request->service) && $request->service != "all")
+           $bookings->where("service_id",[$zone]);
+
+        $bookings->get();
+        return view('reports.sales',[
+            "report"=>Report::orderBy('id', 'DESC')->first(),
+            "zones"=>Zone::whereIn("id",$zone)->get(),
+            "services"=>Service::where("deleted",CommonEnums::$NO)->get()
+        ]);
     }
 }

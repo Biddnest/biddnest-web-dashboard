@@ -138,7 +138,7 @@
                                 @if($ticket_info)
                                     <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="new-order-tab">
                                         <div class="col-sm-12" style="margin-top: 20px; margin: 0px !important; padding: 0px !important;">
-                                            @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['order_cancellation'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['call_back'])
+                                            @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['order_cancellation'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['call_back'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['complaint'])
                                                 <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                                         Order ID

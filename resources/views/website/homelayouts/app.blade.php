@@ -4,9 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" max-scale="1">
         <!-- Required meta tags -->
         @include('website.homelayouts.includes.app-css')
+        <style>
+            .dropdown-content{
+    padding: 0 !important;
+}
+
+.d-content .drop-list .menu:hover{
+    color: #fdc403 !important;
+}
+
+
+a.menu:hover{
+    color: #fdc403 !important;
+}
+        </style>
     </head>
     <body>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top header-fixed">
             <div class="container">
                 <div class="navbar-header">
@@ -52,19 +66,19 @@
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                                 <div class="dropdown-content col-grey cursor-pointer">
                                     <ul class="d-content">
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> <span class="ml-1">My Profile</span> </a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /> <span class="ml-1">My Request </span></a>
                                         </li>
-                                        <li class="drop-list" style="padding: 5px 10px;">
+                                        <li class="drop-list" style="padding: 6px 15px;">
                                             <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
                                         </li>
                                     </ul>
@@ -76,25 +90,26 @@
             </div>
         </nav>
         <div class="banner-carousel-container">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="min-height: 580px">
                 <div class="carousel-inner carousel-images">
-                    @php $count=0; @endphp
-                    @foreach(\App\Models\Slider::where(["status"=>\App\Enums\CommonEnums::$YES, "deleted"=>\App\Enums\CommonEnums::$NO, "platform"=>\App\Enums\SliderEnum::$PLATFORM['web'], "size"=>\App\Enums\SliderEnum::$SIZE['wide']])->with('banners')->get() as $slider )
                         @foreach($slider->banners as $banner)
-                            @php $count++; @endphp
-                            <div class="item @if($count == 1) active @endif">
+                            <div class="item @if($loop->iteration == 1) active @endif">
                                  <img src="{{$banner->image}}" class="color-overlay" alt="BannerImage1" style="width: 100%" />
                                 <div class="intro-container">
                                     <div class="intro-text pb-10">
-                                        <h1 class="text-center view-small mb-2">{{ucwords($slider->name)}}</h1>
+                                        <h1 class="text-center view-small mb-2" style="font-size: 6rem">{{ucwords($banner->name)}}</h1>
                                         <a href="{{$banner->url}}">
-                                            <p class="mb-4 ml-2 ">
-                                                {{ucwords($banner->name)}}
+                                            <p class="mb-4 ml-2" style="font-size: 18px; color: #fff; opacity: 1;">
+                                                {{$banner->desc}}
                                             </p>
                                         </a>
-                                        {{--<a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
-                                            <button type="button" class="btn btn-primary m-60">Book Now</button>
-                                        </a>--}}
+                                        @if($banner->url && $banner->url != "")
+                                            <div class="text-center">
+                                            <a href="{{$banner->url}}" class="page-scroll btn btn-xl d-content" style="display: block;">
+                                                <button type="button" class="btn btn-primary m-60">Get Started</button>
+                                            </a>
+                                        </div>
+                                        @endif
                                         @if(\Illuminate\Support\Facades\Session::get('account'))
                                             <a href="{{route('add-booking')}}" class="page-scroll btn btn-xl d-content">
                                                 <!-- <button type="button" class="btn btn-primary m-60 view-none">Book Now</button> -->
@@ -108,7 +123,7 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endforeach
+
                 </div>
                 <a class="left carousel-control carousel-arrows" href="#myCarousel" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left carousel-arrows-icon"></span>

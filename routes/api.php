@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function () {
     Route::put("/profile/update-mobile",[ApiRouter::class, 'updateMobile']);
     Route::put("/profile/verify-otp",[ApiRouter::class, 'verifyOtp']);
 
-    Route::get('/sliders',[ApiRouter::class,'getAppSliders']);
+    Route::get('/sliders/{type}',[ApiRouter::class,'getAppSliders']);
     Route::get('/services',[ApiRouter::class,'getServices']);
     Route::get('/subservices',[ApiRouter::class,'getSubServices']);
     Route::get('/inventories',[ApiRouter::class,'getInventories']);
@@ -81,11 +81,16 @@ Route::prefix('v1')->group(function () {
     Route::post("/notification/player",[ApiRouter::class, 'addNotificationUserPlayer']);
 
     Route::get("/tickets",[ApiRouter::class, 'getTickets']);
+    Route::get("/tickets/bookings",[ApiRouter::class, 'getBookingDropdown']);
+
     Route::post("/tickets/create",[ApiRouter::class, 'createTickets']);
 
     Route::post("/tickets/callback",[ApiRouter::class, 'callBack']);
     Route::post("/tickets/reply",[ApiRouter::class, 'addReply']);
     Route::get("/tickets/details",[ApiRouter::class, 'getDetails']);
+
+    Route::put("/freshchat/restore/id",[ApiRouter::class, 'updateFreshChatRestoreID']);
+
 });
 
 
@@ -151,7 +156,15 @@ Route::prefix('vendors/v1')->group(function () {
 
     Route::post("/notification/player",[VendorApiRouter::class, 'addNotificationVendorPlayer']);
 
+    Route::get("/tickets",[VendorApiRouter::class, 'getTickets']);
     Route::post("/tickets/create",[VendorApiRouter::class, 'createTickets']);
+
+    Route::post("/tickets/reply",[VendorApiRouter::class, 'addReply']);
+    Route::get("/tickets/details",[VendorApiRouter::class, 'getDetails']);
+
+    Route::get("/tickets/bookings",[VendorApiRouter::class, 'getBookingDropdown']);
+
+    Route::post("/tickets/callback",[VendorApiRouter::class, 'callBack']);
 
     Route::get("/page/{slug}",[VendorApiRouter::class, 'getPage']);
 
@@ -164,15 +177,9 @@ Route::prefix('vendors/v1')->group(function () {
 
     Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
 
-    //org_kyc API's
-    /*Route::get('/vendors/kyc',[Router::class,'vendors_kyc'])->name("vendors_kyc");
-    Route::post('/vendors/add/kyc',[Router::class,'vendor_add_kyc'])->name("vendor_add_kyc");
-    Route::post('/vendors/edit/kyc/{id}',[Router::class,'vendor_edit_kyc'])->name("vendor_edit_kyc");
-    Route::get('/vendors/fetch/kyc/{id}',[Router::class,'vendor_fetch_kyc'])->name("vendor_fetch_kyc");
-    Route::get('/vendors/delete/kyc/{id}',[Router::class,'vendor_delete_kyc'])->name("vendor_delete_kyc");*/
+    //Webhooks for websocket server
+    Route::post("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'startWatchOnBookingSocket']);
+    Route::delete("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'stopWatchOnBookingSocket']);
 
-    //join API's
-    /*Route::get('/vendors/list',[Router::class,'vendors_list'])->name("vendors_list");
-    Route::get('/vendors/org/fetch/{id}',[Router::class,'vendors_get_record'])->name("vendors_get_record");
-    Route::get('/vendors/org/delete/{id}',[Router::class,'vendors_delete_record'])->name("vendors_delete_record");*/
+
 });

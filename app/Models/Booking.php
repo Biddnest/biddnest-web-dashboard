@@ -83,4 +83,9 @@ class Booking extends Model
     // {
     //     return $this->morphMany(BookingDriver::class, 'driver');
     // }
+
+    public function subservices()
+    {
+        return $this->hasOne(Review::class);
+    }
 }

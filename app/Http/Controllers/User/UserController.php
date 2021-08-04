@@ -22,7 +22,7 @@ use PUGX\Shortid\Shortid;
 
 class UserController extends Controller
 {
-    private static $publicData =['fname','lname','email','phone','dob','avatar','gender', 'meta'];
+    private static $publicData =['fname','lname','email','phone','dob','avatar','gender', 'meta','freshchat_restore_id'];
 
     function __construct(){
     }
@@ -91,7 +91,7 @@ class UserController extends Controller
 
             if($web)
             {
-                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email]]);
+                Session::put(["account" => ['id' => $user->id, 'fname'=>$user->fname, 'lname'=>$user->lname,'email'=>$user->email, 'phone'=>$user->phone]]);
                 Session::put('sessionFor', "user");
 
                 Session::save();
@@ -194,7 +194,7 @@ class UserController extends Controller
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
 
-        if($user->status !== 1)
+        if($user->status == 1)
             return Helper::response(false, "User is not verified or is banned. Invalid action.",null,401);
 
         $emailExists = User::where("email",$email)->where("id","!=",$id)->first();
@@ -233,6 +233,29 @@ class UserController extends Controller
             ->where('from_date','<=', $date)
             ->where('to_date','>=', $date)
             ->where('platform', SliderEnum::$PLATFORM['app'])->with(["banners"=> function($banner) use($date){
+                $banner->where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+                    ->where('from_date','<=', $date)
+                    ->where('to_date','>=', $date)->orderBy('order');
+            }])->get();
+
+        foreach ($result as $slide_key=>$slide)
+        {
+            foreach ($slide->banners as $banner_key=>$banner)
+            {
+                $result[$slide_key]['banners'][$banner_key]['banner_size']=$slide['size'];
+            }
+        }
+
+        return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
+    }
+
+    public static function getAppSliderstab($lat, $lng)
+    {
+        $date = date('Y-m-d');
+        $result=Slider::where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+            ->where('from_date','<=', $date)
+            ->where('to_date','>=', $date)
+            ->where('platform', SliderEnum::$PLATFORM['tab'])->with(["banners"=> function($banner) use($date){
                 $banner->where(['status'=> CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
                     ->where('from_date','<=', $date)
                     ->where('to_date','>=', $date)->orderBy('order');
@@ -295,7 +318,7 @@ class UserController extends Controller
         $user->phone=$phone;
         $user->gender=$gender;
         $user->avatar=$image;
-        $user->dob=$dob;
+        $user->dob=date_format($dob,"Y-m-d");
         $save_result = $user->save();
 
         if(!$save_result)
@@ -372,5 +395,21 @@ class UserController extends Controller
         else {
             return Helper::response(false, "Incorrect otp provided");
         }
+    }
+
+    public static function updateFreshChatId($id,$freshchat_id)
+    {
+        $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
+
+        if(!$user)
+            return Helper::response(false, "Invalid user id.");
+
+            if(User::where("id",$id)->update(["freshchat_restore_id"=>$freshchat_id]))
+                return Helper::response(true, "FreshChat ID has been updated.",[
+                    "user" => User::select(self::$publicData)->findOrFail($user->id)
+                ]);
+            else
+                return Helper::response(false, "Couldn't update the FreshChat ID. This is a DB error. Please contact admin");
+
     }
 }

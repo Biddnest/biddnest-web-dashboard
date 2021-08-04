@@ -38,7 +38,7 @@
                                         </div>
                                     @endif
                             </div>
-                         
+
                             <div class="col-md-9 f-16 mt-1 ">
 
 
@@ -171,7 +171,7 @@
                                                                 <option value="">--Select--</option>
                                                                 <option value="male" @if($user->gender == "male") Selected @endif>Male</option>
                                                                 <option value="female" @if($user->gender == "female") Selected @endif>Female</option>
-                                                                <option value="other" @if($user->gender == "other") Selected @endif>Other</option>
+                                                                <option value="3rd gender" @if($user->gender == "3rd gender") Selected @endif>3rd Gender</option>
                                                             </select>
                                                         <span class="error-message">Please enter valid Gender</span>
                                                         </div>
@@ -181,7 +181,7 @@
                                                         <div class="form-group">
                                                             <label class="start-date">Date of Birth</label>
                                                             <div id="my-modal">
-                                                                <input type="text" id="dateselect" name="dob" value="@if($user->dob){{$user->dob}}@endif" class="filterdate dateselect form-control br-5" placeholder=" 15/02/2021" />
+                                                                <input type="text" id="dateselect" name="dob" value="@if($user->dob){{$user->dob}}@endif" class="birthdate dateselect form-control br-5" placeholder=" 15/02/2021" />
                                                                 <span class="error-message">please enter valid date</span>
                                                             </div>
                                                         </div>

@@ -163,7 +163,7 @@
             width: 12em !important;
             text-align: left;
             vertical-align: baseline;
-            
+
         }
 
 .swal2-popup{
@@ -210,4 +210,18 @@
     margin-top: 23% !important;
 }
 
+    .webchat #ember3.d-hotline.h-btn {
+        height: 50px !important;
+        width: 50px !important;
+    }
+
+    .webchat #ember3.d-hotline{
+        background-color: #2e0789 !important;
+        color: #ffffff !important;
+        border-color: transparent #2e0789 transparent transparent;
+    }
+
+    .margin-topneg-15 {
+        margin-top: 15px !important;
+    }
 </style>

@@ -27,6 +27,14 @@
         filter: opacity() drop-shadow(0 0 0 #fdc403);
 
     }
+    .container-01 .checkmark-agree:after {
+        left: 2px !important;
+        top: -2px !important;
+        width: 6px !important;
+        height: 12px !important;
+        border-width: 0 3px 3px 0 !important;
+    }
+
     .card-num {
         font-size: 115px;
         position: absolute;
@@ -237,19 +245,19 @@
         .dropdown-content {
             left: -67px !important;
             padding: 8px;
-}
-
-.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
-    left: 807px !important;
-
         }
+
+        .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
+            left: 807px !important;
+
+                }
     }
 
 
 
-    
 
-   
+
+
     @media (max-width:480px) {
         .modal-content.w-70.m-0-auto.w-1000.mt-20.right-25{
             width: 96% !important;
@@ -413,11 +421,6 @@
             margin-left: 0px !important;
 
         }
-
-
-
-
-
     }
 
 
@@ -441,7 +444,7 @@
 
     }
 
-   
+
 
     a:hover {
         color: #fdc403 !important;
@@ -470,8 +473,8 @@
 
     .width-max{
         width: 100%;
-    width: -moz-available;         
-    width: -webkit-fill-available;  
+    width: -moz-available;
+    width: -webkit-fill-available;
     width: fill-available;
     }
 
@@ -483,5 +486,56 @@
         margin-top: -63px;
 
     }
+
+    .unstyled-button {
+        border: none;
+        padding: 0;
+        background: none;
+    }
+
+    .hero-booking-form input::placeholder{
+        color: #85827a !important;
+    }
+    .pac-container{z-index:2000 !important;}
+
+    .modal-open .modal{
+        background: rgba(255,255,255, 0.3) !important;
+    }
+
+    .datepicker .datepicker-dropdown .dropdown-menu .datepicker-orient-left .datepicker-orient-top{
+    position: absolute !important;
+    left: 44% !important;
+    top: 100% !important;
+    margin-left: -96px;
+    margin-top: -73px;
+}
+
+    .datepicker{
+        position: fixed !important;
+        left: 50% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        z-index: 1;
+        top: 50% !important;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+.datepicker.dropdown-menu th, .datepicker.dropdown-menu td{
+    padding: 13px 15px;
+}
+
+
+.icon{
+    margin-left: 18px;
+
+}
+
+    .swal2-popup{
+        scale: 1.5;
+    }
+
+
 
 </style>

@@ -137,7 +137,16 @@
                         </li>
                             @endif
 
-                        <li class="menu-item hidden"><a class="regular-nav"> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-pie"></i></span> </span> Reports</a></li>
+                            <li class="menu-item" data-toggle="" href="#reports" role="button" aria-expanded="false"
+                                aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-bar"></i></span> </span>Reports</a>
+                            </li>
+                            <ul class="sub-menu" id="reports">
+                                <li class="sub-menu-item"><a href="{{route('report.summary')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Summary</a>
+                                </li>
+                                <li class="sub-menu-item"> <a href="{{route('report.sales')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sales</a></li>
+                            </ul>
 
                         <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
                             aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>

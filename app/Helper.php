@@ -49,6 +49,13 @@ class Helper
         ], config('jwt.secret'));
     }
 
+    public static function validateAuthtoken($token){
+        if ($data = JWT::decode($token, config('jwt.secret'),['HS256']))
+            return $data;
+        else
+            return false;
+    }
+
     public static function saveFile($file,$filename,$folderName){
         return Storage::disk('local')->put("public/".$folderName."/".$filename, $file) ? asset("storage/".$folderName."/".$filename) : false;
     }

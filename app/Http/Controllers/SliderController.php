@@ -135,10 +135,14 @@ class SliderController extends Controller
             case SliderEnum::$SIZE['square']:
                 $width = SliderEnum::$BANNER_DIMENSIONS["square"][0];
                 $height = SliderEnum::$BANNER_DIMENSIONS["square"][1];
-                break;
+            break;
+            case SliderEnum::$SIZE['web']:
+                $width = SliderEnum::$BANNER_DIMENSIONS["web"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["web"][1];
+            break;
             default:
-                $width = SliderEnum::$BANNER_DIMENSIONS["wide"][0];
-                $height = SliderEnum::$BANNER_DIMENSIONS["wide"][1];
+                $width = SliderEnum::$BANNER_DIMENSIONS["web"][0];
+                $height = SliderEnum::$BANNER_DIMENSIONS["web"][1];
         }
 
 
@@ -148,26 +152,31 @@ class SliderController extends Controller
         $order = 0;
 
         SlideBanner::where("slider_id",$data["id"])->delete();
+        $index = "banners";
+        if (array_key_exists($index, $data)) {
+            foreach ($data['banners'] as $banner) {
+                $banner_file_name = "banner_" . uniqid() . ".png";
+                $banners = new Banners;
+                $banners->slider_id = $data['id'];
+//                $banners->image = filter_var($banner['image'], FILTER_VALIDATE_URL) ? $banner['image'] : Helper::saveFile($image->make($banner['image'])->resize($width, $height)->encode('png', 100), $banner_file_name, "slide-banners");
+                $banners->image = filter_var($banner['image'], FILTER_VALIDATE_URL) ? $banner['image'] :Helper::saveFile($image->make($banner['image'])->resize($width,$height)->encode('png', 100),$banner_file_name,"slide-banners");
+                $banners->name = $banner['name'];
+                $banners->desc = $banner['desc'];
+                $banners->url = $banner['url'];
+                $banners->from_date = $banner['date']['from'];
+                $banners->to_date = $banner['date']['to'];
+                $banners->order = $order;
+                $result = $banners->save();
+                $order++;
+            }
 
-        foreach($data['banners'] as $banner) {
-            $banner_file_name = "banner_".uniqid().".png";
-            $banners=new Banners;
-            $banners->slider_id= $data['id'];
-            $banners->image = filter_var($banner['image'], FILTER_VALIDATE_URL) ? $banner['image'] :Helper::saveFile($image->make($banner['image'])->resize($width,$height)->encode('png', 100),$banner_file_name,"slide-banners");
-            $banners->name= $banner['name'];
-            $banners->desc= $banner['desc'];
-            $banners->url= $banner['url'];
-            $banners->from_date= $banner['date']['from'];
-            $banners->to_date = $banner['date']['to'];
-            $banners->order = $order;
-            $result= $banners->save();
-            $order++;
+            if(!$banner)
+                return Helper::response(false,"Couldn't save data");
+            else
+                return Helper::response(true,"Banner Saved successfully",["slider"=>Slider::with("banners")->findOrFail($data['id'])]);
+        }else{
+            return Helper::response(false,"You dont have any banners here. Add a banner to get started.");
         }
-
-        if(!$banner)
-            return Helper::response(false,"Couldn't save data");
-        else
-            return Helper::response(true,"Banner Saved successfully",["slider"=>Slider::with("banners")->findOrFail($data['id'])]);
     }
 
     public static function deleteBanner($id)

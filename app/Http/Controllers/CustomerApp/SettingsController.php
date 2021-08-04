@@ -29,9 +29,10 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
               "api"=>[
-                  "name"=>"Bidnest",
+                  "name"=>"Biddnest Customer Configurations",
                   "logo"=>env("APP_URL")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
+                  "socket_server_url"=> (env('SECURE_SOCKET') ? "https://" : "http://") . env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT'),
                   "version"=>"v1",
                   "environment"=>env("APP_DEBUG") ? "staging" : "production"
               ],
@@ -56,7 +57,7 @@ class SettingsController extends Controller
                     "status"=>MailEnums::$STATUS
                 ],
                 "ticket"=>[
-                    "type"=>array_slice(TicketEnums::$TYPE, 0,5),
+                    "type"=>array_slice(TicketEnums::$TYPE, 0,4),
                     "status"=>TicketEnums::$STATUS
                 ],
                 "vendor"=>[
@@ -100,6 +101,10 @@ class SettingsController extends Controller
             ],
             "onesignal"=>[
                 "user_app_creds"=>base64_encode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0])
+            ],
+            "timer"=>[
+                "bid_time"=>Settings::where("key", "bid_time")->pluck('value')[0] * 60,
+                "rebid_time"=>Settings::where("key", "rebid_time")->pluck('value')[0] * 60
             ]
         ]);
     }

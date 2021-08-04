@@ -136,6 +136,13 @@ class VendorWebController extends Controller
         return view('vendor-panel.order.pastorders', ['bookings'=>$booking]);
     }
 
+    public function bookingRejectType(Request $request)
+    {
+        $booking=BookingsController::getBookingsForVendorApp($request, true);
+
+        return view('vendor-panel.order.rejectedorders', ['bookings'=>$booking]);
+    }
+
     public function userManagement(Request $request)
     {
         $user=VendorUserController::getUser($request, true);
@@ -279,7 +286,8 @@ class VendorWebController extends Controller
 
     public function serviceRequestAdd()
     {
-        return view('vendor-panel.tickets.add_ticket');
+        $past_bookings = BookingsController::getBookingsByVendor(Session::get('account')['id'], 15, true);
+        return view('vendor-panel.tickets.add_ticket', ["past_bookings"=>$past_bookings]);
     }
 
     public function bookingDetails(Request $request)

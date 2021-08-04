@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
 @section('title')Ongoing Book @endsection
-@section('header_title') Ongoing Book @endsection
+@section('header_title') Ongoing Booking @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="ongoingbooking">
         <div class="container">
@@ -152,7 +152,7 @@
 
                                         </div>
                                         <div class=" center d-flex">
-                                            <a class="white-text " href="{{route('add-booking')}}">
+                                            <a class="white-text " href="{{route('home')}}">
                                                 <button class="btn mt-4 btn-theme-bg white-bg">Book Now</button>
                                             </a>
                                         </div>

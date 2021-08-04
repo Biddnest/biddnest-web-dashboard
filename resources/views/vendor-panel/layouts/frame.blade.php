@@ -11,9 +11,9 @@
 <main class="dashboard grey-bg">
     @include('vendor-panel.layouts.includes.sidebar')
     <div class="content-wrapper" data-barba="wrapper">
-        <div class="floating-btn">
+        {{--<div class="floating-btn">
             <img src="{{asset('static/vendor/images/graph/Group 14372.svg')}}" alt="">
-        </div>
+        </div>--}}
         <!-- top_nav_bar -->
         <div class="h-auto">
             <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation">
@@ -119,11 +119,38 @@
 
 
 <!-- Optional JavaScript -->
+<script>
+    function initFreshChat() {
+        // Copy the below lines under window.fcWidget.init inside initFreshChat function in the above snippet
 
+// To set unique user id in your system when it is available
+        window.fcWidget.setExternalId("{{\Illuminate\Support\Facades\Session::get("account")['id']}}");
 
-{{--
-<script src="./assets/js/sidebarCollapse.js">
+// To set user name
+        window.fcWidget.user.setFirstName("{{\Illuminate\Support\Facades\Session::get("account")['name']}}");
 
-</script>--}}
+// To set user email
+        window.fcWidget.user.setEmail("{{\Illuminate\Support\Facades\Session::get("account")['email']}}");
+
+// To set user properties
+        window.fcWidget.user.setProperties({
+            user_type: "Vendor",
+            status: "active"                // meta property 2
+        });
+
+        window.fcWidget.init({
+                headerProperty: {
+                    "background-color": "#2e0789 !important",
+                    "border-color": "transparent #2e0789 transparent transparent",
+                    "height": "50px !important",
+                    "width": "50px !important"
+            },
+            token: "859b3a74-b0c6-46ff-b582-2e42ae7f9f1b",
+            host: "https://wchat.in.freshchat.com"
+        });
+
+    }
+    function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.in.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+</script>
 </body>
 </html>

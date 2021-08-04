@@ -1,5 +1,5 @@
 /* AJAX Universal */
-$("body").on('submit', "form", function() {
+$("body").on('submit', "form:not(.no-ajax)", function() {
     let form = $(this);
     let requestData = form.serializeJSON();
     let button = form.find("button[type=submit]");
@@ -20,6 +20,7 @@ $("body").on('submit', "form", function() {
             Logger.info("Response ", response);
             if (response.status == "success") {
                 tinySuccessAlert("Success", response.message);
+                
                 if (form.data("next")) { //   data-next="redirect"
                     if (form.data("next") == "redirect") {
                         if (form.hasClass("add-slider")) {
@@ -93,3 +94,5 @@ $("body").on('submit', "form", function() {
     return false;
 
 });
+
+

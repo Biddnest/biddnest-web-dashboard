@@ -65,10 +65,10 @@
             <div class="form-input">
               <label>Coupon Description</label>
               <span class="">
-              <textarea class = "form-control" rows = "2" placeholder = "Enter Coupon Description" required name="desc">@if($coupons){{$coupons->desc}}@endif</textarea>
+              <textarea class = "form-control" rows = "2" placeholder = "Enter Coupon Description" required name="desc">@if($coupons) {!! $coupons->desc !!} @endif</textarea>
 
                 <!-- <textarea  required class="form-control" rows="" cols="" placeholder="hello" name="desc" style="margin: 0 20px 0 0;">
-                    @if($coupons){{$coupons->desc}}@endif
+{{--                    @if($coupons){!! $coupons->desc !!}@endif--}}
                 </textarea> -->
                <span class="error-message">Please enter  valid</span>
               </span>

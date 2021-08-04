@@ -5,9 +5,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BidEnums;
+use App\Enums\CommonEnums;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\VerifyJwtToken;
+use App\Models\Bid;
 use App\Models\Testimonials;
 use App\StringFormatter;
 use Illuminate\Http\JsonResponse;
@@ -131,7 +134,17 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
-            return UserController::getAppSliders($request->lat, $request->lng);
+        {
+            if($request->type=="app")
+            {
+                return UserController::getAppSliders($request->lat, $request->lng);
+            }
+            else{
+                return UserController::getAppSliderstab($request->lat, $request->lng);
+            }
+
+        }
+
     }
 
     public function getServices(Request $request)
@@ -447,6 +460,7 @@ class ApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"required|string",
             'category'=>'required',
             'heading' => 'required|string',
             'desc' => 'required|string'
@@ -573,4 +587,22 @@ class ApiRouteController extends Controller
     {
         return TestimonialController::get();
     }
+
+    public function updateFreshChatRestoreID(Request $request){
+        $validation = Validator::make($request->all(),[
+            'freshchat_restore_id' => 'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+
+        return UserController::updateFreshChatId($request->token_payload->id,$request->freshchat_restore_id);
+    }
+
+    public function getBookingDropdown(Request $request)
+    {
+        return BookingsController::getBookingsByUser($request->token_payload->id, 10);
+    }
+
 }

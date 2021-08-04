@@ -1,6 +1,6 @@
 @extends('website.layouts.frame')
 @section('title') Book Move @endsection
-@section('header_title')Book a Move @endsection
+@section('header_title')Estimated Cost @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="estimatebooking">
         <div class="container ">
@@ -108,7 +108,7 @@
                                             <p class="text-muted">Step 5 / 6</p>
                                             <h5 class="border-bottom theme-text pb-4 text-view-center">Get The Estimated Cost </h5>
                                         </div>
-                                        <form class="form-new-order  input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('place-booking', ['id'=>$booking->public_booking_id])}}" data-alert="mega"  data-parsley-validate>
+                                        <form class="form-new-order  input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('place-booking', ['id'=>$booking->public_enquiry_id])}}" data-alert="mega"  data-parsley-validate>
                                             <div class="p-0  border-top-2 order-cards">
                                                 <div class="d-flex justify-content-center f-14  text-center  mt-2 mb-1">
                                                     Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
@@ -117,9 +117,9 @@
                                                 <div class="d-flex flex-row flex-view-col justify-content-around f-14 theme-text text-center  quotation mb-3">
                                                     <div class="flex-column justify-content-center test">
                                                         <div class="card m-20  card-price eco cursor-pointer">
-                                                            <div class="p-60 f-32 border-cicle eco-card">
+                                                            <div class="p-60 f-22 border-cicle eco-card">
                                                                 <div>
-                                                                    <div class="f-30">₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
+                                                                    <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                                     <div class="f-16 ">Base price</div>
                                                                 </div>
                                                             </div>
@@ -129,16 +129,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="radio-group">
-                                                            <div class="form-input radio-item ">
+                                                            <div class="form-input radio-item" >
                                                                 <input type="radio" id="economy" value="economic" name="service_type" class="radio-button__input cursor-pointer" required>
-                                                                <label class="" for="economy"></label>
+                                                                <label class="" for="economy" style="cursor: pointer;"></label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="felx-column">
                                                         <div class="card m-20 card-price pre  cursor-pointer ">
-                                                            <div class="p-60 f-32  border-cicle pre-card  ">
-                                                                <div class="f-30">₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
+                                                            <div class="p-60 f-22  border-cicle pre-card  ">
+                                                                <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
                                                                 <div class="f-16 p-1">Base price</div>
                                                             </div>
                                                             <div class=" f-18"> Premium
@@ -147,9 +147,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="radio-group">
-                                                            <div class="form-input radio-item ">
+                                                            <div class="form-input radio-item" >
                                                                 <input type="radio" id="premium" value="premium" name="service_type" class="radio-button__input " required>
-                                                                <label class="" for="premium"></label>
+                                                                <label class="" for="premium" style="cursor: pointer;"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -158,16 +158,16 @@
 
                                             <div style="text-align: center; padding-bottom: 20px;">
                                                 <a href="#" data-toggle="modal" data-target="#reject-modal">
-                                                    <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn ml-4 " type="button ">
+                                                    <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn mr-4 " type="button ">
                                                         Reject
                                                     </button>
                                                 </a>
-                                                <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded mr-4">
+                                                <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded ml-4">
                                                     Submit
                                                 </button>
                                             </div>
 
-                                            <div class=" actionBtn actionBtn-view border-top ">
+                                            <!-- <div class=" actionBtn actionBtn-view border-top ">
                                                 <a href="{{route('home')}}">
                                                     <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-2 " type="button ">
                                                         Cancel
@@ -176,7 +176,7 @@
                                                 <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right">
                                                     Next
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </form>
                                     </div>
                                 </div>

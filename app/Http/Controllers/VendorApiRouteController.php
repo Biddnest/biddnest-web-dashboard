@@ -245,6 +245,7 @@ class VendorApiRouteController extends Controller
     public function createTickets(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"nullable|string",
             'category' => 'required',
             'heading' => 'required|string',
             'desc' => 'required|string'
@@ -253,7 +254,7 @@ class VendorApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category], $request->heading, $request->desc);
+        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category, "public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
     }
 
     public function getUser(Request $request)
@@ -386,4 +387,53 @@ class VendorApiRouteController extends Controller
         return VendorUserController::verifyAuth($request->token_payload->id);
     }
 
+    public function startWatchOnBookingSocket(Request $request)
+    {
+        return BookingsController::startVendorWatch($request->all());
+    }
+
+    public function stopWatchOnBookingSocket(Request $request)
+    {
+        return BookingsController::stopVendorWatch($request->all());
+    }
+
+    public function getBookingDropdown(Request $request)
+    {
+        return BookingsController::getBookingsByVendor($request->token_payload->id, 10);
+    }
+
+    public function getTickets(Request $request)
+    {
+        return TicketController::get($request->token_payload->id);
+    }
+
+    public function callBack(Request $request)
+    {
+        return TicketController::createForVendor($request->token_payload->id, 4, ["public_booking_id"=>null]);
+    }
+
+    public function getDetails(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return TicketController::getOneForVendorApp($request->token_payload->id, $request->id);
+    }
+
+    public function addReply(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'ticket_id'=>'required',
+            'reply'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return TicketReplyController::addReplyFromVendor($request->token_payload->id, $request->ticket_id, $request->reply);
+    }
 }

@@ -11,8 +11,10 @@ use App\Enums\CommonEnums;
 use App\Enums\NotificationEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\VendorEnums;
+use App\Http\Controllers\Controller;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
+//use App\Http\Controllers\BookingController;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingDriver;
@@ -31,6 +33,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 
@@ -169,9 +172,17 @@ class BookingsController extends Controller
             $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
             $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
+            /*Rounding to 2 decimals*/
+            $economic_price = number_format($economic_price,2,".","");
+//            $economic_price = str_replace(",","",$economic_price);
+
             $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
             $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-            $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+//            $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+
+            /*Rounding to 2 decimals*/
+            $primium_price = number_format($primium_price,2, ".","");
+//            $primium_price = str_replace(",","",$economic_price);
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
@@ -197,10 +208,11 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
+        Log::info("Booking Dates recieved from web- ",$movement_dates);
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
-            $movementdates->date = $dates;
+            $movementdates->date = Carbon::parse($dates)->format('Y-m-d');//date('', strtotime($dates));
             $result_date = $movementdates->save();
         }
 
@@ -236,7 +248,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "save data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
     public static function confirmBooking($public_booking_id, $service_type, $user_id)
@@ -252,7 +264,7 @@ class BookingsController extends Controller
             return Helper::response(false, "This order is not in Enquiry Status");
         }
 
-        $booking_type = $service_type == 0 ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
+        $booking_type = $service_type == "economic" ? BookingEnums::$BOOKING_TYPE['economic'] : BookingEnums::$BOOKING_TYPE['premium'];
 
         $timing = Settings::where("key", "bid_time")->pluck('value')[0];
         $complete_time = Carbon::now()->addMinutes($timing)->roundMinutes()->format("Y-m-d H:i:s");
@@ -263,7 +275,9 @@ class BookingsController extends Controller
 
         $confirmestimate = Booking::where(["user_id" => $exist->user_id,
             "public_booking_id" => $exist->public_booking_id])
-            ->update(["final_estimated_quote" => json_decode($exist['quote_estimate'], true)[$service_type], "booking_type" => $booking_type,
+            ->update([
+                "final_estimated_quote" => number_format(json_decode($exist['quote_estimate'], true)[$service_type], 2),
+                "booking_type" => $booking_type,
                 "status" => BookingEnums::$STATUS['placed'],
                 "meta" => json_encode($meta),
                 "bid_result_at" => $complete_time
@@ -285,7 +299,7 @@ class BookingsController extends Controller
             BidController::addvendors($booking_id);
         })->afterResponse();
 
-        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+        return Helper::response(true, "Thankyou for confirming.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
 
     }
 
@@ -357,6 +371,41 @@ class BookingsController extends Controller
             return $booking;
         else
             return Helper::response(true, "data fetched successfully", ["booking" => $booking]);
+    }
+
+    /*Duplicating above function cos its giving error in mobile app*/
+    public static function getBookingByPublicIdForWeb($public_booking_id, $user_id, $web=true)
+    {
+        $booking = Booking::where("user_id", $user_id)
+            ->where("deleted", CommonEnums::$NO)
+            ->with('movement_dates')
+            ->with(['inventories'=>function($query){
+                $query->with('inventory');
+            }])
+            ->with('status_history')
+            ->with('organization')
+            ->with('service')
+            ->with('payment')
+            ->with('driver')
+            ->with('vehicle')
+            ->with('review')
+            ->with('payment')
+            ->with(['movement_specifications' => function ($movement_specifications) use ($public_booking_id) {
+                        $movement_specifications->where('booking_id', Booking::where(['public_enquiry_id' => $public_booking_id])->orWhere("public_booking_id", $public_booking_id)->pluck('id')[0])
+                            ->where('status', BidEnums::$STATUS['won']);
+                    }
+                    ])
+            ->where(function($query) use($public_booking_id){
+                $query->where("public_enquiry_id", $public_booking_id)
+                ->orWhere("public_booking_id", $public_booking_id);
+            })
+            ->first();
+
+        if (!$booking) {
+            return abort(404);
+        }
+
+            return  $booking;
     }
 
     public static function bookingHistoryEnquiry($user_id, $web=false)
@@ -564,6 +613,10 @@ class BookingsController extends Controller
             case "past":
                 $bid_id->where("status", BidEnums::$STATUS['won']);
                 break;
+
+            case "rejected":
+                $bid_id->where("status", BidEnums::$STATUS['rejected']);
+                break;
         }
 
         $bookings = Booking::whereIn("id", $bid_id
@@ -592,10 +645,15 @@ class BookingsController extends Controller
             if($request->type == "scheduled")
                 $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
 
-        $bookings->with('service')
+        $bookings->where("status","!=",BookingEnums::$STATUS['hold'])
+            ->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($organization_id) {
-                $bid->where("organization_id", $organization_id)->with('vendor');
+                $bid->where("organization_id", $organization_id)
+                    ->with('watched_by')
+                    ->with('vendor')
+                    ->with('bookmarked_by')
+                    ->with('rejected_by');
             }]);
 
         if (isset($request->from) && isset($request->to)) {
@@ -665,12 +723,16 @@ class BookingsController extends Controller
         $booking = Booking::where(["public_booking_id" => $request->public_booking_id])
             ->with('inventories')
             ->with('service')
+            ->with('subservices')
             ->with('movement_dates')
             ->with('driver')
             ->with('vehicle')
             ->with(['bid' => function ($bid) use ($request) {
                 $bid->where("organization_id", $request->token_payload->organization_id)
-                    ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']]);
+                    ->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['expired']])
+                    ->with('bookmarked_by')
+                    ->with('rejected_by')
+                    ->with('watched_by');
             }])->with('user')->first();
 
         if(isset($booking->bid) && $booking->bid->status == BidEnums::$STATUS['lost'])
@@ -694,7 +756,7 @@ class BookingsController extends Controller
         if ($exist_bid['bookmarked'] == CommonEnums::$YES)
             $bookmark = Bid::where(['id' => $exist_bid['id']])->update(["bookmarked" => CommonEnums::$NO]);
 
-        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "vendor_id" => $vendor_id]);
+        $reject = Bid::where(['id' => $exist_bid['id']])->update(["status" => BidEnums::$STATUS['rejected'], "rejected_by" => $vendor_id]);
 
         if (!$reject)
             return Helper::response(false, "Couldn't Reject");
@@ -720,7 +782,7 @@ class BookingsController extends Controller
 
 
         $result = Bid::where(['id' => $exist_bid['id']])
-            ->update(["bookmarked" => $bookmarked, "vendor_id" => $vendor_id]);
+            ->update(["bookmarked" => $bookmarked, "bookmarked_by" => $vendor_id]);
 
         if (!$result)
             return Helper::response(false, "Couldn't Add to Bookmark");
@@ -866,7 +928,7 @@ class BookingsController extends Controller
         $result_status = $bookingstatus->save();
 
         if (!$result_status)
-            return Helper::response(false, "couldn'd change status");
+            return Helper::response(false, "Couldn't change status");
 
         return true;
     }
@@ -878,11 +940,6 @@ class BookingsController extends Controller
             return Helper::response(false, "Booking is not Exist");
 
         $data = [];
-
-        /*{
-            "amount",
-            "position"
-        }*/
 
         $current_key = true;
         $bid_records = Bid::where('booking_id', $exist_booking['id'])->whereIn('status', [BidEnums::$STATUS['lost'], BidEnums::$STATUS['won']])->orderBy('bid_amount', 'ASC')->get();
@@ -934,4 +991,115 @@ class BookingsController extends Controller
 
         return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }
+
+
+    /*apis for websocket running in websocket.js*/
+    public static function startVendorWatch($request){
+        $token = (object)Helper::validateAuthToken($request['token']);
+        $vendor = Vendor::find($token->payload->id);
+            if(!$token || !$vendor)
+                return Helper::response(false, "Token validation failed.");
+
+        Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])
+            ->where("organization_id", $token->payload->organization_id)
+            ->update([
+            "watcher_id"=>$token->payload->id
+        ]);
+
+        return Helper::response(true, "Watching Started",["booking"=>Booking::where('public_booking_id',$request['data']['public_booking_id'])->with(["bid"=>function($query) use($token){
+            $query->where("organization_id", $token->payload->organization_id)->with('watched_by');
+        }])->first()]);
+
+
+    }
+
+    public static function stopVendorWatch($request){
+        $token = (object)Helper::validateAuthToken($request['token']);
+        $vendor = Vendor::find($token->payload->id);
+        if(!$token || !$vendor)
+            return Helper::response(false, "Token validation failed.");
+
+        Bid::where("booking_id", Booking::where('public_booking_id',$request['data']['public_booking_id'])->pluck('id')[0])
+            ->where("watcher_id",$token->payload->id)
+            ->where("organization_id", $token->payload->organization_id)
+            ->update([
+            "watcher_id"=>null
+        ]);
+
+        return Helper::response(true, "Watching Ended",["booking"=>Booking::where('public_booking_id',$request['data']['public_booking_id'])->with(["bid"=>function($query) use($token){
+            $query->where("organization_id", $token->payload->organization_id)->with('watched_by');
+        }])->first()]);
+
+    }
+
+    /*This following api is not been used*/
+    public function validateVendorRoom($request){
+        $token = (object)Helper::validateAuthToken($request['token']);
+        $vendor = Vendor::find($token->payload->id);
+        if(!$token || !$vendor)
+            return false;
+
+        $booking = Booking::where("public_booking_id",$request['data']['public_booking_id'])
+            ->with(['bid'=>function($query) use($token){
+                $query->where("organization_id",$token->payload->organization_id);
+            }])
+            ->first();
+
+        if(!$booking || !$booking->bid)
+            return false;
+        else
+            return true;
+
+    }
+
+    /*End socket apis*/
+
+
+    public static function sendDetailsToPhone($public_booking_id, $phone){
+        $booking = Booking::where("public_booking_id", $public_booking_id)
+//            ->with('inventories')
+            ->with('organization')
+            ->with('service')
+            ->with('movement_dates')
+            ->with('driver')
+            ->with('vehicle')
+            ->with('user')
+            ->with(['bid' => function ($bid) {
+                $bid->where("status", BidEnums::$STATUS['won']);
+                    }])
+                ->first();
+
+        if(!$booking)
+            return Helper::response(false, "This booking doesn't exist. Could not proceed.");
+
+        $sms_body = "";
+
+        dispatch(function() use($phone, $sms_body){
+            Sms::send($phone, $sms_body);
+        });
+
+
+        return Helper::response(true, "Booking details have been send to $phone");
+    }
+
+    public static function getBookingsByUser($user_id, $count = 10, $web=false){
+        $bookings =Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get();
+        if($web) {
+            return $bookings;
+        }
+        else{
+            return Helper::response(true, "Dropdown of Booking id's", ["bookings"=>$bookings]);
+        }
+    }
+
+    public static function getBookingsByVendor($org_id, $count = 10, $web=false){
+        $bookings =Booking::where("organization_id", $org_id)->orderBy("id", "DESC")->limit($count)->get();
+        if($web) {
+            return $bookings;
+        }
+        else{
+            return Helper::response(true, "Dropdown of Booking id's", ["bookings"=>$bookings]);
+        }
+    }
+
 }

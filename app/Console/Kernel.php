@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('bid:end all')->everyMinute();
+        $schedule->command('reports:generate')->everyThirtyMinutes();
         $schedule->command('payout schedule')->dailyAt(Carbon::parse("6:00:00")->format("H:i:s"));
         $schedule->command('payout dispatch')->dailyAt(Carbon::parse("7:00:00")->format("H:i:s"));
 

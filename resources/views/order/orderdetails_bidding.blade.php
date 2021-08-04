@@ -288,7 +288,7 @@
                                                         <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                     @endforeach
                                                 </div>
-                                                <input type="text" class="form-control br-5 selectdate" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+                                                <input type="text" class="form-control br-5 selectdate singledate " name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
                                                 <span class="error-message">Please enter valid</span>
                                             </div>
                                         </div>
@@ -317,6 +317,14 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-6 bid-amount-3-admin hidden p60">
+                                    <div class="form-input">
+                                        <h4 class="text-center bold">Enter Vendor's OTP</h4>
+                                        <input class="form-control otp-bid" name="otp" type="number" maxlength="6" minlength="6" required/>
+                                        <span class="error-message">Please enter valid OTP</span>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="modal-footer p-15 ">
@@ -324,6 +332,7 @@
                             </div>
                             <div class="w-50 text-right"><a class="white-text p-10" href="#">
                                     <button type="button" class="btn theme-bg white-text w-30 next-btn-1-admin" data-direction="next" id="next-btn-1-admin" {{--onclick="steps_api_{{$org_id->organization_id}}.next();"--}} style="margin-bottom: 20px;">Next</button>
+                                    <button type="button" class="btn theme-bg white-text w-30 next-btn-2-admin" data-direction="next2" id="next-btn-2-admin" data-url="{{route('send_bid_otp', ['id'=>$org_id->organization_id])}}" {{--onclick="steps_api_{{$org_id->organization_id}}.next();"--}} style="margin-bottom: 20px;">Next</button>
                                     <button  class="btn theme-bg white-text w-30 submitbtn-admin" id="submitbtn-admin" style="margin-bottom: 20px;">Submit</button>
                                 </a>
                             </div>

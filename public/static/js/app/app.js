@@ -63,6 +63,49 @@ if (env != "development")
 
 // getLocationPermission();
 
+/*Callback for hero form submit - always keep at top (has conflict issue)*/
+$("body").on("submit",".hero-booking-form",function (event){
+
+    let proceed = true;
+    var data = $(this).serializeJSON();
+    Logger.info(data);
+
+    if(!data.service || data.service == "") {
+        tinyAlert("Incomplete form","Please Choose Service");
+        proceed =  false;
+    }
+
+    if(!data.source_lat || data.source_lat == "" || $("input.book-address").eq(0).attr("placeholder") == "Choose") {
+        tinyAlert("Incomplete form","Please choose pickup location");
+        proceed =  false;
+    }
+
+    if(!data.dest_lat || data.dest_lat == "" || $("input.book-address").eq(2).attr("placeholder") == "Choose") {
+        tinyAlert("Incomplete form","Please choose destination location");
+        proceed =  false;
+    }
+
+    if(!data.move_date || data.move_date == "") {
+        tinyAlert("Incomplete form","Please choose movement dates");
+        proceed =  false;
+    }
+
+    Logger.info(`${$(this).attr("action")}?${$(this).serialize}`);
+
+    if(!proceed)
+        return false;
+
+    if(LOGGED_STATE)
+        location.assign(`${$(this).attr("action")}?${$(this).serialize()}`);
+    else {
+        $("#Login-modal").modal();
+        $("#Login-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`)
+    }
+
+    return false;
+
+});
+
 /* AJAX Universal */
 $("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
@@ -81,9 +124,10 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
             },
             success: (response) => {
 
-                // console.log("Response ",response);
+                // Logger.info("Response ",response);
                 Logger.info("Response ", response);
                 if (response.status == "success") {
+
                     tinySuccessAlert("Success", response.message);
                     if (form.data("next")) { //   data-next="redirect"
                         if (form.data("next") == "redirect") {
@@ -125,6 +169,12 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                                 redirectTo(url);
                                 return false;
                             }
+                            if (form.hasClass("order_create_web")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.booking.public_enquiry_id);
+                                redirectHard(url);
+                                return false;
+                            }
                             if (form.data('redirect-type') == "hard")
                                 redirectHard(form.data("url")); // data-url="google.com"
                             else
@@ -152,6 +202,11 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                 else if(response.status == "await"){
                     $(form.data('await-input')).toggleClass('hidden');
                     revertFormAnim(button, buttonPretext);
+
+                    /*remove in prod*/
+                    if("otp" in response.data)
+                        $(form.data('await-input')).find("input").val(response.data.otp);
+                    /*remove in prod*/
                 }
                 else {
                     Logger.info(response.message);
@@ -212,7 +267,7 @@ $("body").on('change', ".field-toggle", function(event) {
 
 $("body").on('click', ".repeater", function(event) {
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
-    console.log('show');
+    Logger.info('show');
     $(".hide-on-data").fadeOut(100);
     initRangeSlider();
     var id=$(".category-select").val();
@@ -236,33 +291,50 @@ $("body").on('click', ".repeater", function(event) {
 });
 
 $("body").on('click', ".closer", function(event) {
-    if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
+    Swal.fire({
+        title: 'Are sure want to remove this?',
+        text: "If you proceed, you may need to use the save button to save changes permanently.",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonColor: '#FDC403',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        }
+        else{
+            return false;
+        }
+    });
+   /* if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
         $(this).closest($(this).data("parent")).fadeOut(100).remove();
-    }
-    return false;
+    }*/
+
 });
 
 $("body").on('click', ".modal-toggle", function(event) {
-    console.log("sda");
+    Logger.info("sda");
     $($(this).data("target")).fadeIn(100).show();
     // $($(this).data("modal")).toggleClass("show");
     return false;
 });
 
 $("body").on('click', ".fullscreen-modal-body .close", function(event) {
-    console.log("close");
+    Logger.info("close");
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
     return false;
 });
 
 $("body").on('click', ".fullscreen-modal-body .cancel", function(event) {
-    console.log("close");
+    Logger.info("close");
     $($(this).closest(".fullscreen-modal")).fadeOut(100).hide();
     return false;
 });
 
 $("body").on('change', ".inventory-select", function(event) {
-    console.log("change");
+    Logger.info("change");
     var id=$(this).val();
 
     $(this).closest(".inventory-snip").find(".material").html('<option value="">--Select--</option>');
@@ -281,17 +353,17 @@ $("body").on('change', ".inventory-select", function(event) {
 });
 
 $("body").on('change', ".notification", function(event) {
-    console.log("change");
+    Logger.info("change");
     var id=$(this).val();
-    console.log(id);
-    if(id == "user")
+    Logger.info(id);
+    if(id == "1")
     {
         $(this).closest(".d-flex").find(".vendor").addClass("hidden");
         $(this).closest(".d-flex").find(".user").removeClass("hidden");
         $(this).closest(".d-flex").find(".userselect").attr("required", "required");
         $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
     }
-    if(id == "vendor")
+    if(id == "2")
     {
         $(this).closest(".d-flex").find(".user").addClass("hidden");
         $(this).closest(".d-flex").find(".vendor").removeClass("hidden");
@@ -310,7 +382,7 @@ $("body").on('change', ".notification", function(event) {
 });
 
 $("body").on('change', ".category-select", function(event) {
-    console.log("change");
+    Logger.info("change");
     var id=$(this).val();
 
     $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
@@ -318,7 +390,7 @@ $("body").on('change', ".category-select", function(event) {
     var materal=$("#sub_"+id).data("subcategory");
 
     materal.map((value)=>{
-        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['id']+'">'+value['name']+'</option>')
+        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['name']+'">'+value['name']+'</option>')
     });
 
     var type=$("#sub_"+id).data("type");
@@ -344,11 +416,42 @@ $("body").on('change', ".category-select", function(event) {
 });
 
 $("body").on('click', ".delete", function(event) {
-    if(confirm($(this).data('confirm'))) {
+
+    Swal.fire({
+        title: 'Delete?',
+        text: $(this).data('confirm'),
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var target =  $(this).closest($(this).data("parent"));
+            $.delete($(this).data("url"), {}, function (response){
+                Logger.info(response);
+                if(response.status == "success")
+                {
+                    tinySuccessAlert("Deleted Successfully", response.message);
+                    target.hide();
+                }
+                else
+                {
+                    tinyAlert("Failed", response.message);
+                }
+
+            });
+        }
+        else{
+            return false;
+        }
+    });
+   /* if(confirm($(this).data('confirm'))) {
         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
         var target =  $(this).closest($(this).data("parent"));
         $.delete($(this).data("url"), {}, function (response){
-            console.log(response);
+            Logger.info(response);
             if(response.status == "success")
             {
                 tinySuccessAlert("Deleted Successfully", response.message);
@@ -361,7 +464,7 @@ $("body").on('click', ".delete", function(event) {
 
         });
     }
-    return false;
+    return false;*/
 });
 
 $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
@@ -382,7 +485,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
         $(".side-bar-pop-up").html(response);
     });
     initRevenueChart(
-        console.log('graph')
+        Logger.info('graph')
     );
 });
 
@@ -404,7 +507,7 @@ $("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)"
         $(".side-bar-pop-up").html(response);
     });
     initRevenueChart(
-        console.log('graph')
+        Logger.info('graph')
     );
 });
 
@@ -472,7 +575,7 @@ $("body").on('change', ".change_status", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm('Are you sure want to change status?')) {
         $.update($(this).data("url"), {}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
                 target.hide();
@@ -487,9 +590,10 @@ $("body").on('change', ".change_status", function(event) {
 
 $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
+    console.log(data);
     if(confirm('Are you sure want to change status?')) {
         $.update($(this).data("url"), {data}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
             } else {
@@ -505,7 +609,7 @@ $("body").on('change', ".reschedule", function(event) {
     var data = document.getElementById("movement_dates").value;
     if(confirm('Are you sure want to reschedule this order?')) {
         $.update($(this).data("url"), {data}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Reschedule Order Successfully", response.message);
             } else {
@@ -519,7 +623,7 @@ $("body").on('change', ".reschedule", function(event) {
 $("body").on('change', ".cancel-booking", function(event) {
     if(confirm('Are you sure want to Cancel this order?')) {
         $.update($(this).data("url"), {data}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Cancelde Order Successfully", response.message);
             } else {
@@ -549,7 +653,7 @@ $("body").on('keydown', ".table-search1", function(event) {
 });
 
 $("body").on('change', ".check-toggle", function(event) {
-console.log($(this).val());
+Logger.info($(this).val());
     if ($(this).val() == $(this).data("value")) {
         $(this).val("0");
         $($(this).data("target")).removeClass("hidden");
@@ -565,7 +669,7 @@ $("body").on('click', ".bookings", function(event) {
     var target = $(this).closest($(this).data("parent"));
     if(confirm($(this).data('confirm'))) {
         $.update($(this).data("url"), {}, function (response) {
-            console.log(response);
+            Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert($(this).data('success'), response.message);
                 target.hide();
@@ -592,7 +696,7 @@ $("body").on('click', ".rejected", function(event) {
         if (result.isConfirmed) {
             var target = $(this).closest($(this).data("parent"));
             $.update($(this).data("url"), {}, function (response) {
-                console.log(response);
+                Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert($(this).data('success'), response.message);
                     target.hide();
@@ -628,7 +732,37 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
     if (isValid) {
         $(this).hide();
         $(this).closest('form').find('.bid-amount-admin').hide();
+        $(this).closest('form').find('.bid-amount-3-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').show();
+        $(this).closest('form').find('.next-btn-2-admin').show();
+    }
+});
+
+$("body").on('click', ".next-btn-2-admin", function(event) {
+    var url= $(this).data("url");
+
+    let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each( function() {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    // Logger.info(isValid);
+    if (isValid) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                Logger.info(response);
+                $('.otp-bid').val(response.data.OTP);
+            }
+            });
+        $(this).hide();
+        $(this).closest('form').find('.bid-amount-admin').hide();
+        $(this).closest('form').find('.bid-amount-2-admin').hide();
+        $(this).closest('form').find('.bid-amount-3-admin').show();
+        $(this).closest('form').find('.bid-amount-3-admin').removeClass("hidden");
         $(this).closest('form').find('.submitbtn-admin').show();
     }
 });
@@ -687,35 +821,54 @@ $('.filterdate').datepicker({
 
 });
 
+$('.birthdate').datepicker({
+    // multidateSeparator:",",
+    format: 'yyyy-mm-dd',
+    endDate: '-18y'
+
+});
+
 /* Website js code start */
 
 $("body").on('click', ".next1", function(event) {
-    console.log("step2");
-    $('.step-1').css('display', 'none');
-    $('.step-2').css('display', 'block');
-    $(".completed-step-2").addClass("turntheme");
-    $(".completed-step-1").removeClass("turntheme");
-    $(".steps-step-2").addClass("color-purple");
-    $(".steps-step-1").removeClass("color-purple");
+    $(".step-1").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".step-1").unwrap();
+
+    if (isValid) {
+        $('.step-1').css('display', 'none');
+        $('.step-2').css('display', 'block');
+        $(".completed-step-2").addClass("turntheme");
+        $(".completed-step-1").removeClass("turntheme");
+        $(".steps-step-2").addClass("color-purple");
+        $(".steps-step-1").removeClass("color-purple");
+    }
 });
 
 $("body").on('click', ".back2", function(event) {
-    console.log("step2");
-    $('.step-1').css('display', 'block');
-    $('.step-2').css('display', 'none');
-    $(".completed-step-1").addClass("turntheme");
-    $(".completed-step-2").removeClass("turntheme");
-    $(".steps-step-1").addClass("color-purple");
-    $(".steps-step-2").removeClass("color-purple");
+
+        $('.step-1').css('display', 'block');
+        $('.step-2').css('display', 'none');
+        $(".completed-step-1").addClass("turntheme");
+        $(".completed-step-2").removeClass("turntheme");
+        $(".steps-step-1").addClass("color-purple");
+        $(".steps-step-2").removeClass("color-purple");
+
 });
 
 $("body").on('click', ".next2", function(event) {
-    $('.step-2').css('display', 'none');
-    $('.step-3').css('display', 'block');
-    $(".completed-step-3").addClass("turntheme");
-    $(".completed-step-2").removeClass("turntheme");
-    $(".steps-step-3").addClass("color-purple");
-    $(".steps-step-2").removeClass("color-purple");
+    $(".step-2").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".step-2").unwrap();
+
+    if (isValid) {
+        $('.step-2').css('display', 'none');
+        $('.step-3').css('display', 'block');
+        $(".completed-step-3").addClass("turntheme");
+        $(".completed-step-2").removeClass("turntheme");
+        $(".steps-step-3").addClass("color-purple");
+        $(".steps-step-2").removeClass("color-purple");
+    }
 });
 
 $("body").on('click', ".back3", function(event) {
@@ -728,12 +881,18 @@ $("body").on('click', ".back3", function(event) {
 });
 
 $("body").on('click', ".next3", function(event) {
-    $('.step-3').css('display', 'none');
-    $('.step-4').css('display', 'block');
-    $(".completed-step-4").addClass("turntheme");
-    $(".completed-step-3").removeClass("turntheme");
-    $(".steps-step-4").addClass("color-purple");
-    $(".steps-step-3").removeClass("color-purple");
+    $(".step-3").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".step-3").unwrap();
+
+    if (isValid) {
+        $('.step-3').css('display', 'none');
+        $('.step-4').css('display', 'block');
+        $(".completed-step-4").addClass("turntheme");
+        $(".completed-step-3").removeClass("turntheme");
+        $(".steps-step-4").addClass("color-purple");
+        $(".steps-step-3").removeClass("color-purple");
+    }
 });
 
 $("body").on('click', ".back4", function(event) {
@@ -745,14 +904,40 @@ $("body").on('click', ".back4", function(event) {
     $(".steps-step-4").removeClass("color-purple");
 });
 
-$('.bookdate').datepicker({
+var selectedDates=[];
+var dp = $('.bookdate').datepicker({
     multidate: true,
-    format: 'yyyy-mm-dd',
+    format: 'd M yy',
+    todayHighlight: true,
     'startDate': '+1d',
+    'endDate':'+20d',
+});
+dp.on('changeDate', function(e) {
+
+    if(e.dates.length < 6){
+        selectedDates = e.dates
+    }else{
+        dp.data('datepicker').setDates(selectedDates);
+        megaAlert('PLease note','Can only select upto 5 dates', 'info')
+    }
+
 });
 
 $("body").on('change', ".switch", function(event) {
-    $(".toggle-input").toggleClass('diplay-none ');
+    let phone=$(this).data('phone');
+    let name=$(this).data('name');
+    let email=$(this).data('email');
+    if ($(this).val() == $(this).data("value")) {
+        $(this).val("1");
+       $('#phone').val('');
+       $('#fullname').val('');
+       $('#email').val('');
+    } else {
+        $(this).val("0");
+        $('#phone').val(phone);
+        $('#fullname').val(name);
+        $('#email').val(email);
+    }
 });
 
 $("body").on('click', ".reject", function(event) {
@@ -895,7 +1080,7 @@ $("body").on('click', ".card-method", function(event) {
 
 $("body").on('click', ".payment", function(event) {
         var method = $('.check-icon02').data("method");
-        console.log(method);
+        Logger.info(method);
         var amount = $(this).data("amount");
         var booking_id = $(this).data("booking");
         var coupon_code = document.getElementById("coupon").value;
@@ -923,10 +1108,10 @@ $("body").on('click', ".payment", function(event) {
                 "order_id":response.data.payment.rzp_order_id,
                 "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",
-                "description": "Payment for Moving Date on"+ moving_date,
+                "description": "Movement on"+ moving_date,
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
                 "handler": function (resp){
-                    console.log({
+                    Logger.info({
                         booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                     });
                     $.ajax({
@@ -985,7 +1170,7 @@ $("body").on('click', ".verify-coupon", function(event) {
     $.add($(this).data("url"), {public_booking_id, coupon}, function (response){
         if(response.status == "success")
         {
-            console.log(response);
+            Logger.info(response);
             tinySuccessAlert("Coupon Verified", response.message);
             $('.discount').html(response.data.discount);
             $('.grand-total').html(response.data.grand_total);
@@ -1009,17 +1194,36 @@ $("body").on('click', ".remove", function(event) {
     return false;
 });
 
-
 $("body").on('click', ".web-category", function(event) {
   var url=$(this).data("url");
+    var inventory_quantity_type=$(this).data("quantity-type");
+    $(".inventory-quantity-type").val(inventory_quantity_type);
+    if(inventory_quantity_type == 0){
+        $('.quantity-filed').html('<div class="quantity d-flex justify-content-between quantity-operator">' +
+            '            <span class="minus">-</span>' +
+            '            <input type="text" name="quantity" readOnly value="1"/>' +
+            '            <span class="plus">+</span>' +
+            '        </div>');
+    }else{
+        $('.quantity-filed').html('<div class="quantity-2" style="padding: 5px 2px">' +
+            '            <input type="text" class="custom_slider range" name="quantity" value=""' +
+            '                   data-type="double"' +
+            '                   data-min="1"' +
+            '                   data-max="500"' +
+            '                   data-from="1"' +
+            '                   data-to="500"' +
+            '                   data-grid="false"' +
+            '        </div>');
+    }
 
     $.ajax({
         url: url,
         type: 'get',
         dataType: 'json',
         success: function (response) {
-           console.log(response);
-            var source = $("#entry-template").html();
+           Logger.info(response);
+                var source = $("#entry-template").html();
+
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.subservices').html(html);
@@ -1030,29 +1234,49 @@ $("body").on('click', ".web-category", function(event) {
                 '                                    </div>');
         }
     });
+    initRangeSlider();
     return false;
 });
 
 $("body").on('click', ".web-sub-category", function(event) {
   var url=$(this).data("url");
-
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
+   $('#subservice_id').val($(this).val());
     $.ajax({
         url: url,
         type: 'get',
         dataType: 'json',
+        beforeSend: function(){
+            $("div.inventory").css({
+                "opacity": "0.4"
+            });
+        },
         success: function (response) {
-           console.log(response);
-            for(var i=0; i< response.data.length; i++)
+           Logger.info(response);
+            for(var i=0; i< response.data.inventories.length; i++)
             {
-                response.data[i].meta.material=JSON.parse(response.data[i].meta.material);
-                response.data[i].meta.size=JSON.parse(response.data[i].meta.size);
+                response.data.inventories[i].meta.material=JSON.parse(response.data.inventories[i].meta.material);
+                response.data.inventories[i].meta.size=JSON.parse(response.data.inventories[i].meta.size);
+
             }
-            var source = $("#entry-templateinventory").html();
+            if(inventory_quantity_type == 0)
+                var source = $("#entry-templateinventory").html();
+            else {
+                item.quantity_min=item.quantity.split(';')[0];
+                item.quantity_max=item.quantity.split(';')[1];
+                var source = $("#entry-templateinventory_range").html();
+            }
+
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.inventory').html(html);
+            $("div.inventory").css({
+                "opacity": "1"
+            });
         }
     });
+    initRangeSlider();
+
     return false;
 });
 
@@ -1078,8 +1302,176 @@ $("body").on('click', ".filter-button", function(event) {
     return false;
 });
 
+$("body").on('click', ".add-item", function(event) {
+    let item = [];
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
+    $(this).closest(".item-single-wrapper").find("input").each(function(){
+            item[$(this).attr('name')] = $(this).val();
+        });
+    item = Object.assign({}, item);
+    Logger.info(item);
+    if(item.material == ''){
+        megaAlert("Oops", "Please select Material");
+        return false;
+    }
+    if(item.size == ''){
+        megaAlert("Oops", "Please select Size");
+        return false;
+    }
+    let class_name=item.meta_name+"-"+item.material+"-"+item.size+"-"+item.meta_id;
+    class_name=class_name.replace(' ', '-');
+    Logger.info(class_name);
+    if($("."+class_name).length > 0)
+    {
+        megaAlert("Oops", "This item has been already added");
+        return false;
+    }
+    item.meta_material=JSON.parse(item.meta_material);
+    item.meta_size=JSON.parse(item.meta_size);
+
+    if(inventory_quantity_type == 0)
+        var source = $("#entry-templateinventory_append").html();
+    else {
+        item.quantity_min=item.quantity.split(';')[0];
+        item.quantity_max=item.quantity.split(';')[1];
+        var source = $("#entry-templateinventory_append_range").html();
+    }
+
+    var template = Handlebars.compile(source);
+    var html = template(item);
+    $('.inventory .col-md-4:last').before(html);
+    initRangeSlider();
+    tinySuccessAlert("success", "This item has been added");
+});
+
+$("body").on('click', ".add-search-item", function(event) {
+    let item = [];
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
+    $(this).closest(".item-single-wrapper").find("input").each(function(){
+            item[$(this).attr('name')] = $(this).val();
+        });
+    item = Object.assign({}, item);
+    Logger.info(item);
+    if(item.material == ''){
+        tinyAlert("Oops", "Please select Material");
+        return false;
+    }
+    if(item.size == ''){
+        tinyAlert("Oops", "Please select Size");
+        return false;
+    }
+    if(item.meta_material != '') {
+        item.meta_material = item.meta_material.split(',');
+        item.meta_size = item.meta_size.split(',');
+    }
+
+    if(inventory_quantity_type == 0)
+        var source = $("#entry-templateinventory_append").html();
+    else {
+        item.quantity_min=item.quantity.split(';')[0];
+        item.quantity_max=item.quantity.split(';')[1];
+        var source = $("#entry-templateinventory_append_range").html();
+    }
+
+    var template = Handlebars.compile(source);
+    var html = template(item);
+    $('.inventory .col-md-4:last').before(html);
+    initRangeSlider();
+
+    tinySuccessAlert("success", "This item has been added");
+});
+
+$("body").on('keyup', ".search-item", function(event) {
+        var query = $(this).val();
+        var url = $(this).data('url');
+
+        if (query.length >= 3) {
+
+            $.ajax({
+                url: url+ "?search=" + query,
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(){
+                    $(".fade-enable").css({
+                        "opacity": "0.4"
+                    });
+                },
+                success: function (response) {
+                    $('.items-display').html('');
+                    let inventory_quantity_type = $(".inventory-quantity-type").val();
+                    if(response.data.inventories.length > 0)
+                    {
+                        for (var i = 0; i < response.data.inventories.length; i++) {
+                            response.data.inventories[i].material = JSON.parse(response.data.inventories[i].material);
+                            response.data.inventories[i].size = JSON.parse(response.data.inventories[i].size);
+                        }
+
+                        let source = inventory_quantity_type == 0 ? $("#search_item").html() : $("#search_item_range").html();
+
+                        let template = Handlebars.compile(source);
+                        let html = template(response.data);
+                        $('.items-display').html(html);
+                    }else{
+                        let html = inventory_quantity_type == 0 ? $("#search_item_custome").html() : $("#search_item_custome_range").html();
+                        $('.items-display').html(html);
+                    }
+
+                    if(inventory_quantity_type != 0)
+                        initRangeSlider();
+
+                    $(".fade-enable").css({
+                        "opacity": "1"
+                    });
+                }
+            });
+        }
+});
+
+$("body").on('input', ".upload-image", function(event) {
+    // var thiss = $(this);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        $(this).closest('.upload-section').find(".upload-preview").attr("src", reader.result);
+        $(this).parent().find(".base-holder").val(reader.result);
+        let image= {"image":reader.result};
+        var source = $("#image_upload_preview").html();
+        var template = Handlebars.compile(source);
+        var html = template(image);
+        $('.uploaded-image .col-md-2:last').before(html);
+    };
+    reader.readAsDataURL(file);
 
 
+});
 
+/*live search input*/
+$("body").on('keyup', ".live-search-input", function(event) {
 
+    // Retrieve the input field text and reset the count to zero
+    var filter = $(this).val(), count = 0;
+
+    $(".live-search-result").css({"opacity": 0.5});
+    // Loop through the comment list
+    $(".live-search-result").each(function(){
+
+        // If the list item does not contain the text phrase fade it out
+        if ($(this).text().search(new RegExp(filter, "i")) < 0)
+            $(this).fadeOut();
+         else {
+            $(this).show();
+            count++;
+        }
+    });
+    $(".live-search-result").css({"opacity": 1});
+
+    // Update the count
+    var numberItems = count;
+    /*display count*/
+
+    if(numberItems === 0) {
+        if ($(".toast:not(.hidden)").length === 0)
+            tinyAlert("Oops", "No Results found.");
+    }
+});
 

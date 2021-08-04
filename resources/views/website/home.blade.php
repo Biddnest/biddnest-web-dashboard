@@ -4,13 +4,13 @@
 <div class="content-wrapper" data-barba="container" data-barba-namespace="home">
     <div class="d-flex center">
         <div class="container container-top p-50 top-header-card border-top-cards">
-            <form action="{{route('add-booking')}}" class="no-ajax">
+            <form action="{{route('add-booking')}}" class="no-ajax hero-booking-form" onsubmit="return false;" method="GET">
             <div class="top-cards mt-2">
                 <div class="col-lg-4 col-xs-12 d-flex space-between pl-2">
                 @foreach($categories as $category)
                     <label class="mr-2">
-                        <input type="radio" name="category" class="card-input-element" />
-                        <div class="card-header card-methord  bg-turnblue  building-type" style="width: 100%;">
+                        <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required data-parsley-errors-container="#service-error" @if($loop->iteration == 1) checked @endif />
+                        <div class="card-header card-methord  bg-turnblue  building-type @if($loop->iteration == 1) selected check-icon02 turntheme @endif" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
                                 <p class="building-type-text">{{ucwords($category->name)}}</p>
@@ -23,20 +23,20 @@
             </div>
 
             <div class="row ml-22 mr-16 mb-2 mt-1 box-item">
-                <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
-                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: auto;">
+                <div class="card top-header-card col-md-4 col-xs-12 pl-8 cursor-pointer" style="cursor: pointer;">
+                    <div class="card-body" data-toggle="modal" data-target="#from_location" style="cursor: pointer;">
                         <p style="font-size: 13px;">FROM</p>
-                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: auto;" type="text" placeholder="SMR Apartments " readonly>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: auto;" type="text" placeholder="Mahadevapura, Bangalore" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 source" style="cursor: pointer;" type="text" placeholder="Choose" readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 source_city" style="cursor: pointer;" type="text" placeholder="Pick location on map" readonly>
                         <input  type="hidden" id="source-lat" name="source_lat" readonly>
                         <input  type="hidden" id="source-lng" name="source_lng" readonly>
                     </div>
                 </div>
-                <div class="card top-header-card col-md-4 col-xs-12 pl-8" style="cursor: auto;">
-                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: auto;">
+                <div class="card top-header-card col-md-4 col-xs-12 pl-8 cursor-pointer" style="cursor: pointer;">
+                    <div class="card-body" data-toggle="modal" data-target="#to_location" style="cursor: pointer;">
                         <p style="font-size: 13px;">TO</p>
-                        <input class="input-overwrite text-heading book-address mb-0 destination" style="cursor: auto;" type="text" name="destination" placeholder="Majestic Villas" readonly>
-                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: auto;" type="text" placeholder="Gandhinagar, Chennai" readonly>
+                        <input class="input-overwrite text-heading book-address mb-0 destination dest" style="cursor: pointer;" type="text" placeholder="Choose" readonly>
+                        <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0 dest_city" style="cursor: pointer;" type="text" placeholder="Pick destination on map" readonly>
                         <input  type="hidden" id="dest-lat" name="dest_lat" readonly>
                         <input  type="hidden" id="dest-lng" name="dest_lng" readonly>
                     </div>
@@ -47,26 +47,27 @@
                     <div class="card-body d-flex justify-content-between h-100">
                         <div>
                             <p style="font-size: 13px;">DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="23 March 21" readonly/>
+                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="Choose" readonly/>
+                            <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: pointer;" type="text" placeholder="You can choose upto 5 dates" readonly required>
                         </div>
-                        <div class="form-group  mr-1">
+                        {{--<div class="form-group  mr-1">
                             <button id="dateselect bookdate" class="btn btn-theme-w-bg mt-2 p-choose date" type="button"><i class="fa fa-calendar "></i>Choose
                             </button>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
             <div style="text-align: center;">
-                @if(\Illuminate\Support\Facades\Session::get('account'))
+{{--                @if(\Illuminate\Support\Facades\Session::get('account'))--}}
                 <a href="#" class="page-scroll btn btn-xl mar-top" style="position: relative!important; right: 0px!important; left: 0px!important;">
                         <button type="submit" class="btn btn-primary view-btn ">Book Now</button>
                 </a>
 
-                @else
+                {{--@else
                 <a data-toggle="modal" data-target="#Login-modal" class="page-scroll btn btn-xl" style="position: relative!important; right: 0px!important; left: 0px!important;">
                     <button type="button" class="btn btn-primary view-btn">Book Now</button>
                 </a>
-                @endif
+                @endif--}}
             </div>
             </form>
         </div>
@@ -96,7 +97,7 @@
                             Select Destination
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Mention the movement type and confirm your pickup and dropout location as per your convenience.
                         </p>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                             Share Requirements
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Provide your basic requirements and references regarding the move where you can also prefer shared services.
                         </p>
                     </div>
                 </div>
@@ -122,10 +123,10 @@
                         <h5 class="d-flex center theme-text how-work-step">Step 3</h5>
 
                         <h3 class="d-flex center theme-text how-work-title">
-                            Choose Best Price
+                            Serving Best Price
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Get an estimated price while we work with our moving partners to provide the best convenient price for the move.
                         </p>
                     </div>
                 </div>
@@ -141,7 +142,7 @@
                             Schedule & Confirm
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Choose a fixed date/Range of dates/Multiple dates and confirm your movement.
                         </p>
                     </div>
                 </div>
@@ -152,10 +153,10 @@
                         <img class="w-150" src="{{ asset('static/website/images/images/gifs/truck.gif')}}" alt="some-picture" />
                         <h5 class="d-flex center theme-text how-work-step">Step 5</h5>
                         <h3 class="d-flex center theme-text how-work-title">
-                            Get Moving!
+                            Move Like Moxie
                         </h3>
                         <p class="center mt-2 text-center">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum accusantium minus, sapiente earum quaerat repellat?
+                            Smooth, simple and swift move beyond borders.
                         </p>
                     </div>
                 </div>
@@ -171,7 +172,7 @@
             <img src="{{ asset('static/website/images/icons/google-play-yellow.svg')}}">
         </div>
 
-        <div class="store mb-2 d-flex">
+        <div class="store mb-2 d-flex" style="opacity: 0;">
             <img src="{{ asset('static/website/images/icons/bot.svg')}}">
         </div>
     </div>
@@ -181,7 +182,7 @@
             <div class="row bg-white br-10 join-view mt-10 mb-10">
                 <div class="col-lg-12 pb-10 mb-2 mt-2 text-center">
                     <h2 class="section-heading pb-0 mt-30" style="font-size: 27px !important;">Join us as a Vendor</h2>
-                    <p class="section-subheading text-muted" style="font-size: 19px !important;">Lorem ipsum</p>
+                    <p class="section-subheading text-muted" style="font-size: 19px !important;">Be with Biddnest as a Vendor</p>
                 </div>
                 <div class="col-lg-6 col-xs-12 tab active">
                     <button class="tablinks vendor " onclick="openContent(event, 'content_accurate')" id="defaultOpen">
@@ -232,9 +233,7 @@
                 <div class="col-lg-6 col-xs-12">
                     <div class="card br-10 bg-white p-1 tabcontent" id="content_accurate">
                         <p class="f-18 mb-2 space">
-                            Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard
-                            dummy text ever since the 1500s, when an unknown printer.Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy. Dummy text of the printing and typesetting industry. Lorem Ipsum
-                            .
+                            Biddnest provides you the perfect technical assistance and extensive exposure to the logistic industry through a purely technology driven initiative. The direct dealings will promote profit and transparency. Ensure efficient virtual assistance which clear communication barriers and the manipulations according to market trends will elevate your business into an international interface. Biddnest is a virtual companion and neutral platform which provides mutual benefits. Biddnest upscales and updates your endeavours and makes you Unique.
                         </p>
                         <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">
@@ -275,7 +274,7 @@
             <div class="row">
                 <div class="card">
                     <div class="col-lg-12 text-center mb-2 mt-6">
-                        <h1 style="font-size: 30;">Testimonials</h1>
+                        <h1 style="font-size: 30px;">Testimonials</h1>
                          <p class="section-subheading text-muted mt-2">Lorem Ipsum</p>
                     </div>
                 </div>
@@ -394,7 +393,7 @@
         </div>
     </section>
     <!-- section get offers -->
-    <section>
+    {{--<section>
         <div class="container get-offers">
             <div class="row mt-6 mb-5">
                 <div class="col-sm-7 col-xs-12 " style="padding-left: 8px !important;">
@@ -415,11 +414,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 
     <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
+            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="">
                 <div class="modal-header p-0 br-5 ">
                     <div>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">
@@ -441,16 +440,16 @@
 
                 <div class="modal-body  margin-topneg-7">
 
-                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="refresh" {{--data-url="{{route('home-logged')}}"--}} data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                    <form action="{{ route('website.login') }}" data-await-input="#otp" method="POST" data-next="redirect" {{--data-url="{{route('home-logged')}}"--}} data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="d-flex f-direction text-justify center">
-                            <h2 class="p-text" style="font-size: 24px !important;">Login</h2>
+{{--                            <h2 class="p-text" style="font-size: 24px !important;">Login</h2>--}}
                             <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
                                     <input type="number" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden "   id="otp">
+                            <div class="col-lg-12 col-xs-12 mt-1 otp hidden"   id="otp">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">OTP</label>
                                     <input type="number" class="form-control" name="otp" id="formGroupExampleInput" autocomplete="off" maxlength="6" minlength="6" placeholder="Verify OTP">
@@ -462,16 +461,25 @@
                             </button>
                             </a>--}}
                             <div class="col-md-12" style="width: 100%;">
-                            <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</span> </p>
+{{--                                <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</p>--}}
 
-                            <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center  padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
-                                    Submit
-                                </button>
-                            </a>
-                            <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
+                                <div class="col-12 d-flex center">
+                                    <div class="form-groups">
+                                        <label class="container-01 m-0 p-0">
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-14" style="margin-left: 20px;"> By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <a class="weblogin" >
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 mb-5 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                        Submit
+                                    </button>
+                                </a>
+                                <!-- <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p> -->
                             </div>
-                           
 
                         </div>
                     </form>
@@ -483,7 +491,7 @@
     <!-- location from picker -->
     <div class="modal fade" id="from_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-1000 mt-50 right-25">
+            <div class="modal-content w-1000" style="margin-top: 15vh">
                 <div class="modal-header  bg-purple">
                     <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
                         From Location
@@ -494,22 +502,22 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                     <div class="row">
-                        <div class="col-sm-12"> 
-                        <label>From Location</label>
+                        <div class="col-sm-12">
+                        <label>Search your location below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="SVM Complex,indiranagar,Benguluru" id="source-autocomplete"  required />
+                        <input type="text" class="form-control" style="height: 41px;" placeholder="Search nearby landmark or place" id="source-autocomplete"  required />
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button">
-                                <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
+                            <button class="btn btn-secondary input-button" type="button" style="margin-left: -10px;" data-dismiss="modal" aria-label="Close">
+                                <span class="f-bolder" style="padding: 0 10px;">OK</span>
                             </button>
                         </div>
                     </div>
                     <span class="error-message">Please enter valid</span>
                         </div>
-                   
+
                     </div>
-                    <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
+                    <div style="width: 100%; height: 280px;" class="source-map-picker" id="source-map-picker"></div>
 
                 </div>
             </div>
@@ -519,7 +527,7 @@
     <!-- location to picker -->
     <div class="modal fade" id="to_location" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
         <div class="modal-dialog theme-text input-text-blue" role="document">
-            <div class="modal-content w-1000 mt-50 right-25">
+            <div class="modal-content w-1000" style="margin-top: 15vh">
                 <div class="modal-header bg-purple">
                     <h5 class="modal-title d-content br-10 m-0-auto -mr-30 f-18 text-white" id="exampleModalLongTitle ">
                         To Location
@@ -530,20 +538,20 @@
                 </div>
                 <div class="modal-body p-15 margin-topneg-7">
                 <div class="row">
-                        <div class="col-sm-12"> 
-                        <label>To Location</label>
+                        <div class="col-sm-12">
+                        <label>Search your destination below</label>
 
                         <div class="input-group-get-link mb-2 mt-1 view-content-center" style="width: 100%;">
-                        <input type="text" class="form-control -mr-4" style="height: 38px;" placeholder="Koramangala, Hsr Layout" id="source-autocomplete"  required />
+                        <input type="text" class="form-control -mr-4" style="height: 41px;" placeholder="Search nearby landmark or place" id="dest-autocomplete"  required />
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button">
-                                <i class="fa fa-search" style="    font-size: 16px;"><span class="pl-1 f-bolder">Search</span></i>
+                            <button class="btn btn-secondary input-button" type="button" style="margin-left: -10px;" data-dismiss="modal" aria-label="Close">
+                                <span class="f-bolder" style="padding: 0 10px;">OK</span>
                             </button>
                         </div>
                     </div>
                     <span class="error-message">Please enter valid</span>
                         </div>
-                   
+
                     </div>
                     <div style="width: 100%; height: 280px;" class="dest-map-picker"></div>
                 </div>
@@ -551,23 +559,6 @@
         </div>
     </div>
 
-    <script>
-        function openContent(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
 </div>
 @endsection

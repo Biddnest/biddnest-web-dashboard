@@ -3,6 +3,18 @@
     <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" max-scale="1">
         @include('website.layouts.includes.app-css')
+
+        <style>
+
+.navbar-nav .nav-item .nav-link{
+    margin-right: 20px !important;
+}
+.ml-30{
+margin-left: 18%;
+}
+
+
+    </style>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation navigation-top">
@@ -41,25 +53,25 @@
                             </a>
                         @endif
                         @if(\Illuminate\Support\Facades\Session::get('account'))
-                            <div class="dropdown-content">
-                            <ul class="d-content">
-                                <li class="drop-list" style="padding: 5px 10px;">
-                                    <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /><span class="ml-1">My Profile</span></a>
-                                </li>
-                                <li class="drop-list" style="padding: 5px 10px;">
-                                    <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
-                                </li>
-                                <li class="drop-list" style="padding: 5px 10px;">
-                                    <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
-                                </li>
-                                <li class="drop-list" style="padding: 5px 10px;">
-                                    <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /><span class="ml-1">My Request </span></a>
-                                </li>
-                                <li class="drop-list" style="padding: 5px 10px;">
-                                    <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
-                                </li>
-                            </ul>
-                        </div>
+                                <div class="dropdown-content col-grey cursor-pointer">
+                                    <ul class="d-content">
+                                        <li class="drop-list" style="padding: 6px 15px;">
+                                            <a class="menu" href="{{route('website.my-profile')}}"><img src="{{ asset('static/website/images/icons/Artboard – 10.svg')}}" /> <span class="ml-1">My Profile</span> </a>
+                                        </li>
+                                        <li class="drop-list" style="padding: 6px 15px;">
+                                            <a class="menu" href="{{route('order-history')}}"><img src="{{ asset('static/website/images/icons/Artboard – 11.svg')}}" /><span class="ml-1"> Booking history </span></a>
+                                        </li>
+                                        <li class="drop-list" style="padding: 6px 15px;">
+                                            <a class="menu" href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 12.svg')}}" /><span class="ml-1"> Ongoing Booking </span></a>
+                                        </li>
+                                        <li class="drop-list" style="padding: 6px 15px;">
+                                            <a class="menu" href="{{route('my-request')}}"><img src="{{ asset('static/website/images/icons/Artboard – 13.svg')}}" /> <span class="ml-1">My Request </span></a>
+                                        </li>
+                                        <li class="drop-list" style="padding: 6px 15px;">
+                                            <a class="menu" href="#0" onclick="location.assign('{{route('logout')}}')"><img src="{{ asset('static/website/images/icons/Artboard – 14.svg')}}" /> <span class="ml-1">Logout </span></a>
+                                        </li>
+                                    </ul>
+                                </div>
                         @endif
                     </li>
                 </ul>
@@ -78,7 +90,7 @@
     <div data-barba="wrapper">
         @yield('content')
         <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
-        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-dialog theme-text input-text-blue" role="document">
             <div class="modal-content w-80 m-0-auto w-1000 mt-20 right-25" style="margin-top:20% !important">
                 <div class="modal-header p-0 br-5 ">
                     <div style="width: -webkit-fill-available;   width: 100%; width: -moz-available; width: -webkit-fill-available;  width: fill-available;">
@@ -113,23 +125,33 @@
                             </button>
                             </a>--}}
                             <div class="col-md-12" style="width: 100%;">
-                            <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</span> </p>
+                                {{--                                <p class="mt-2 mb-0" style="text-align: center; color:#3B4B58; font-size:14px">Waiting for OTP</p>--}}
 
-                            <a class="weblogin" >
-                                <button type="submit" class="btn btn-theme-bg  mt-2 text-view-center  padding-btn-res white-bg width-max" style="    width: -webkit-fill-available !important; ">
-                                    Submit
-                                </button>
-                            </a>
-                            <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <span class="theme-text bold">Resend</span> </p>
+                                <div class="col-12 d-flex center">
+                                    <div class="form-groups">
+                                        <label class="container-01 m-0">
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-14"> By proceeding, you agree to our <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <a class="weblogin" >
+                                    <button type="submit" class="btn btn-theme-bg  mt-2 mb-4 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                        Submit
+                                    </button>
+                                </a>
+                                <!-- <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p> -->
                             </div>
-                           
+
 
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     </div>
     @include('website.layouts.includes.app-js')
 </body>

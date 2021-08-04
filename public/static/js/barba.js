@@ -51,7 +51,8 @@ import {
     initToggles,
     initSelect,
     initOrderDistributionChart,
-    initOrderDistributionChartVendor
+    initOrderDistributionChartVendor,
+    initSortable
 } from './app/initFunctions.js';
 
 barba.init({
@@ -106,6 +107,7 @@ barba.hooks.after((data) => {
     initOrderDistributionChartVendor();
     InitUserZoneChart();
     initTextAreaEditor();
+    initSortable();
             // return false;
 });
 
@@ -130,5 +132,6 @@ $(document).ready(function(){
     initOrderDistributionChartVendor();
     InitUserZoneChart();
     initTextAreaEditor();
+    initSortable();
 });
 

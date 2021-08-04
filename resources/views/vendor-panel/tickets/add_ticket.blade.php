@@ -26,6 +26,20 @@
                     </div>
                     <form class="form-new-order  onboard-vendor-branch input-text-blue" action="{{route('api.ticket.addticket')}}" data-next="redirect" data-url="{{route('vendor.service_request')}}" data-alert="mega" method="{{"POST"}}" data-parsley-validate>
                         <div class="d-flex pa-20 mr-1 ml-1 row p-10">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6" style="padding-left: 0 !important;">
+                                    <div class="form-input">
+                                        <label class="full-name"> Choose Booking </label>
+                                        <select id="ban-type" class="form-control br-5" name="public_booking_id" required>
+                                            <option value="">--select--</option>
+                                            @foreach($past_bookings as $booking)
+                                                <option value="{{$booking->public_booking_id}}">{{ucwords(json_decode($booking->source_meta, true)['city'])}} - {{ucwords(json_decode($booking->destination_meta, true)['city'])}} [#{{$booking->public_booking_id}}]</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="error-message">Please enter a valid banner type</span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name"> Category </label>

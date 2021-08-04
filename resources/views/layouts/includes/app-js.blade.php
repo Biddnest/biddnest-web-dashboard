@@ -55,6 +55,7 @@ crossorigin="anonymous"></script>
 
   <script src="{{ asset('static/js/froala_editor.min.js')}}"></script>
 <script src="{{ asset('static/js/froala_editor.pkgd.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js" integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw==" crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript -->
 
@@ -64,11 +65,11 @@ crossorigin="anonymous"></script>
 {{--<script src="{{ asset('static/js/main.js') }}"></script>--}}
 
 <script src="https://unpkg.com/js-logger/src/logger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/l2ig/jToast@master/jToast.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.all.min.js" integrity="sha512-TxryOYMwWBRIlZoSkKW+jZvJ834vF3u8mE0jDeTLEDdPplOVNNZfWm9VFtEuW365BFPLK5CEIF/vaHqmAey8XA==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js" integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw==" crossorigin="anonymous"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/jquery.tinymce.min.js" integrity="sha512-0+DXihLxnogmlHWg1hVntlqMiGthwA02YWrzGnOi+yNyoD3IA4yDBzxvm+EwTCZeUM4zNy3deF9CbQqQBQx2Yg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw==" crossorigin="anonymous"></script>
@@ -79,13 +80,11 @@ crossorigin="anonymous"></script>
     const API_SEARCH_ADMIN = '{{route('search_admin')}}';
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))
-    toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000})
+    toastr.success("{{\Illuminate\Support\Facades\Session::get('redirect')}}", "Success", {timeOut: 5000});
     @endif
 
 </script>
 <script type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 <script src="{{ asset('static/js/sidebarCollapse.js') }}"></script>
 <script  type="module" src="{{ asset('static/js/barba.js') }}"></script>
-<script>
 
-</script>

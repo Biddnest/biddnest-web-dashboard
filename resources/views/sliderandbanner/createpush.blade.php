@@ -52,8 +52,8 @@
                             <label class="full-name">Notification For</label>
                               <select class="form-control br-5 notification" name="for">
                                   <option value="">--Select--</option>
-                                  <option value="user" id="1" data-value="customer">Selected Customer</option>
-                                  <option value="vendor" id="2" data-value="vendor">Selected Vendor</option>
+                                  <option value="1" id="1" data-value="customer">Selected Customer</option>
+                                  <option value="2" id="2" data-value="vendor">Selected Vendor</option>
                                   <option value="3"  data-value="customers">All Customers</option>
                                   <option value="4"  data-value="vendors">All Vendors</option>
                               </select>

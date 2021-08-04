@@ -727,6 +727,14 @@ export function initDateBookPicker(){
 
         });
     }
+
+    if($(".singledate").length) {
+
+        $('.singledate').datepicker({
+            multidate: false,
+            format: 'dd-mm-yyyy'
+        });
+    }
 }
 
 export function initDatePicker(){
@@ -802,6 +810,15 @@ export function initToggles() {
         $(this).attr("id", "checkbox_" + index);
         $(this).after(`<label class="custom-check" for="checkbox_${index}">Toggle</label>`);
     });
+}
+
+export function initSortable() {
+    if($(".sortable-list").length){
+    console.log("Sortable");
+    $(".sortable-list").sortable({
+        handle: '.dragger',
+    });
+    }
 }
 
 export function initSelect() {

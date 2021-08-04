@@ -30,7 +30,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form action="{{route('faq_add')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
+                            <form action="{{route('faq_add')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('admin.faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
 
                                 <div class="row p-20">
                                     <div class="col-lg-6">

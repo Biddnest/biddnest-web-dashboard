@@ -35,8 +35,11 @@
 
 
 <script type="text/javascript" src='https://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/l2ig/jToast@master/jToast.min.js"></script>
 
 <script src="{{ asset('static/website/js/intlTelInput.js')}}"></script>
+
 <script src="{{ asset('static/website/js/locationpicker.jquery.js')}}"></script>
 {{--<script src="{{ asset('static/website/js/timer.js')}}"></script>--}}
 <script src="{{ asset('static/website/js/maps.js')}}"></script>
@@ -57,40 +60,208 @@ $('.card-methord').click(function() {
         });
         </script>
 
-   
+
 
 <script  type="module" src="{{ asset('static/js/app/app.js') }}"></script>
 {{--<script  type="module" src="{{ asset('static/js/barba.js') }}"></script>--}}
 <script type="module" src="{{ asset('static/js/app/initFunctions.js') }}"></script>
 <script>
+    $(document).ready(function () {
+        Handlebars.registerHelper('replace', function (find, replace, options) {
+            var string = options.fn(this);
+            return string.replace(find, replace);
+        });
+    });
+
     $(".timer").each(function(){
         var BID_END_TIME = $(this).data("time");
-        // if (typeof BID_END_TIME !== undefined) {
+
 
         $(this).countdown(BID_END_TIME, function (event) {
             $(this).text(
                 event.strftime('%H:%M:%S')
             );
         });
-        // }
+
     });
 
     $("body").on("click",".item-single-wrapper span.info",function(e){
         $(this).toggleClass("show-drop");
     });
 
-    /*$("body").on("click","*:not('.item-single-wrapper span.info')",function(e){
-        $(this).removeClass("show-drop");
-    });*/
 
     $("body").on("click",".item-single-wrapper span.info .dropdown-content ul li",function(e){
+
         $(this).closest("span.info").find("span").eq(0).html($(this).html());
-        $(this).closest("span.info").find("input").val($(this).data("value"));
+        $(this).closest("span.info").find("input").eq(0).val($(this).data("value"));
     });
 
+    $("body").on("click",".quantity-operator .minus",function(e){
+        let quantity = $(this).parent().find('input').val();
+        quantity--;
+        if(quantity > 0)
+            $(this).parent().find('input').val(quantity);
+    });
+
+    $("body").on("click",".quantity-operator .plus",function(e){
+        let quantity = $(this).parent().find('input').val();
+        quantity++;
+        if(quantity > 0)
+            $(this).parent().find('input').val(quantity);
+    });
+
+    $("body").on("click",".subservice-selector",function(e){
+        console.log("called");
+        $(".subservice-selector").removeClass("check-blue");
+        $(this).addClass("check-blue");
+    });
+
+    @isset($prifill['service'])
+    $(document).ready(function (){
+        $('#service_{{$prifill['service']}}').click();
+    });
+    @endisset
+
+
 </script>
+<script>
+    $('.source-map-picker_booking').locationpicker({
+        location: {
+            latitude: $("#source-lat").val(),
+            longitude: $("#source-lng").val()
+        },
+        locationName: "",
+        radius: 0,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [],
+        mapOptions: {},
+        scrollwheel: true,
+        inputBinding: {
+            latitudeInput: $("#source-lat"),
+            longitudeInput: $("#source-lng"),
+            radiusInput: null,
+            locationNameInput: $(".source-autocomplete")
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
 
+            console.log(currentLocation);
+            $.get(`{{route('website.api.zone.check-serviceability')}}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`,function(response){
+                console.log(response);
+                if(response.status == "success" && response.data.serviceable === true){
 
+                    var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+                    $.get(url, function (response){
+                        console.log(response);
+                        let street = [];
+                        let city="";
+                        for(let i=0; i<= response.results[0].address_components.length; i++)
+                        {
+                            let addr = response.results[0].address_components[i];
+                            if(typeof addr != "undefined") {
+                                if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
+                                    // street[] = ", " + addr.long_name;
+                                    // if(!street.indexOf(addr.long_name))
+                                    street.push(addr.long_name);
+                                }
+                            }
+                        }
+                        // street = street.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+                        $(".source").attr("placeholder", street.join(", "));
+                        $(".source_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+                    });
+
+                }
+                else{
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Sorry",
+                        text: "We are currently not serviceable in selected area.",
+                    });
+                }
+            });
+
+        },
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function(component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible: true,
+
+    });
+
+    $('.dest-map-picker_booking').locationpicker({
+        location: {
+            latitude: $("#dest-lat").val(),
+            longitude: $("#dest-lng").val()
+        },
+        locationName: "",
+        radius: 0,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [],
+        mapOptions: {},
+        scrollwheel: true,
+        inputBinding: {
+            latitudeInput: $("#dest-lat"),
+            longitudeInput: $("#dest-lng"),
+            radiusInput: null,
+            locationNameInput: $(".dest-autocomplete")
+        },
+        enableAutocomplete: true,
+        enableAutocompleteBlur: false,
+        autocompleteOptions: null,
+        addressFormat: 'street_address',
+        enableReverseGeocode: true,
+        draggable: true,
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
+            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+            $.get(url, function (response){
+                console.log(response);
+                let street=[];
+                let city="";
+                for(let i=0; i<= response.results[0].address_components.length; i++)
+                {
+                    let addr = response.results[0].address_components[i];
+                    if(typeof addr != "undefined") {
+                        if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
+                            street.push(addr.long_name);
+                        }
+                    }
+                }
+                $(".dest").attr("placeholder", street.join(", "));
+                $(".dest_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+
+            });
+        },
+        onlocationnotfound: function(locationName) {},
+        oninitialized: function(component) {},
+        // must be undefined to use the default gMaps marker
+        markerIcon: undefined,
+        markerDraggable: true,
+        markerVisible: true
+    });
+    $(".custom_slider").ionRangeSlider({
+        type: $(this).data("type"),
+        min: $(this).data("min"),
+        max: $(this).data("max"),
+        from: $(this).data("from"),
+        to: $(this).data("to"),
+        skin: "round",
+        // grid: false,
+        force_edges: true,
+        step: $(this).data("step"),
+        keyboard: true,
+        hide_min_max: true,
+    });
+</script>
 
 
 

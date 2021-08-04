@@ -31,9 +31,12 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
                 "api"=>[
-                    "base_url"=> env("APP_URL"),
-                    "version"=>"v1",
-                    "environment"=>env("APP_DEBUG") ? "staging" : "production"
+                  "name"=>"Biddnest Vendor Configurations",
+                  "logo"=>env("APP_URL")."/static/images/favicon.svg",
+                  "base_url"=> env("APP_URL"),
+                  "socket_server_url"=> (env('SECURE_SOCKET') ? "https://" : "http://") . env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT'),
+                  "version"=>"v1",
+                  "environment"=>env("APP_DEBUG") ? "staging" : "production"
                 ],
                 "app"=>[
                     "version_code"=>(int)Settings::where("key", "app_version_code")->pluck('value')[0],
@@ -56,7 +59,9 @@ class SettingsController extends Controller
                     "status"=>MailEnums::$STATUS
                 ],
                 "ticket"=>[
-                    "type"=>TicketEnums::$TYPE
+//                    "type"=>TicketEnums::$TYPE
+                     "type"=>array_slice(TicketEnums::$TYPE, 5,2),
+                    "status"=>TicketEnums::$STATUS
                 ],
                 "vendor"=>[
                     "roles"=>VendorEnums::$ROLES,

@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                             @endif
-                            <form action="{{route('api.driver.assign')}}" method="POST" data-next="refresh" data-alert="mega" data-parsley-validate>
+                            <form action="{{route('api.driver.assign')}}" method="POST" redirect-type="hard" data-next="refresh" data-alert="mega" data-parsley-validate>
                                 <div class="d-flex row" style="padding: 20px 25px;">
                                     <div class="col-lg-6 driver-input">
                                         <input type="hidden" name="public_booking_id" value="{{$id}}">

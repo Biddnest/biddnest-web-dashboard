@@ -20,7 +20,7 @@ class GeoController extends Controller
 
             $distance_in_km = $data['rows'][0]['elements'][0]['distance']['value'];
             $distance_in_km = $distance_in_km/1000;
-            return str_replace(',','', number_format($distance_in_km, 2));
+            return (double)$distance_in_km;
 //            return (float)number_format($distance_in_km, 2);
         }
         else
@@ -34,7 +34,7 @@ class GeoController extends Controller
         $dist = acos($dist);
         $dist = rad2deg($dist);
         $kms = $dist * 60 * 1.1515 * 1.609344;
-        return number_format($kms, 2);
+        return (double)$kms;
     }
 
     public static function getNearestZone($lat, $lng){
@@ -47,12 +47,19 @@ class GeoController extends Controller
             $distance =$tempDis;
         }
         return $zone_id;
-//        return 1;
     }
 
-    //need to verify and remove this useless function
-    public function getZones($lat, $lng){
+    public static function isServiceable($lat, $lng){
 
+        $serviceable = false;
+        $activeZones = Zone::where("status", CommonEnums::$YES)->get();
+
+        foreach ( $activeZones as $zone){
+                $tempDis = self::distance($lat, $lng, $zone['lat'], $zone['lng']);
+                if ((double)$tempDis <= (double)$zone['service_radius'])
+                    return $serviceable = true;
+        }
+        return $serviceable;
     }
 
 }

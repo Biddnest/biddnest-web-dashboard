@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\BookingInventoryEnums;
 use App\Enums\InventoryEnums;
 use App\Enums\NotificationEnums;
+use App\Enums\VendorEnums;
 use App\Http\Controllers\BookingsController;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
@@ -327,52 +328,60 @@ class BidController extends Controller
 
     public static function submitBidAdmin($data)
     {
+        $verf_otp =Vendor::where(['organization_id'=>$data['organization_id'], 'user_role'=>VendorEnums::$ROLES['admin']])->pluck("verf_code")[0];
 
+        if($data['organization_id'] == $verf_otp)
+        {
             $min_power=explode(";",$data['man_power'])[0];
             $max_power=explode(";",$data['man_power'])[1];
 
 
-        $exist_bid = Bid::where("organization_id", $data['organization_id'])
-                            ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
-                            ->whereIn("status", [BidEnums::$STATUS['active']])
-                            ->first();
-        if(!$exist_bid)
-            return Helper::response(false,"Not in active state");
+            $exist_bid = Bid::where("organization_id", $data['organization_id'])
+                                ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
+                                ->whereIn("status", [BidEnums::$STATUS['active']])
+                                ->first();
+            if(!$exist_bid)
+                return Helper::response(false,"Not in active state");
 
-        $startTime = Carbon::now();
-        $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
-        $totalDuration = $finishTime->diffInSeconds($startTime);
-        if($totalDuration <= 3 || $startTime >= $finishTime)
-            return Helper::response(false,"Bidding has been closed for this booking");
+            $startTime = Carbon::now();
+            $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
+            $totalDuration = $finishTime->diffInSeconds($startTime);
+            if($totalDuration <= 3 || $startTime >= $finishTime)
+                return Helper::response(false,"Bidding has been closed for this booking");
 
-        foreach($data['inventory'] as $key)
-        {
-            $inventory_price = new BidInventory;
-            $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
-            $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
-            $inventory_price->amount=$key['amount'];
-            $inventory_result = $inventory_price->save();
+            foreach($data['inventory'] as $key)
+            {
+                $inventory_price = new BidInventory;
+                $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
+                $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
+                $inventory_price->amount=$key['amount'];
+                $inventory_result = $inventory_price->save();
+            }
+
+            $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
+
+            $submit_bid = Bid::where(["organization_id"=>$data['organization_id'], "id"=>$exist_bid['id']])
+                ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
+                ->update([
+                    "vendor_id"=>$data['vendor_id'],
+                    "bid_amount"=>$data['bid_amount'],
+                    "meta"=>json_encode($meta),
+                    "status"=>BidEnums::$STATUS['bid_submitted'],
+                    "submit_at"=>Carbon::now()
+            ]);
+
+            if($submit_bid)
+                $bid_end = self::bidEndByAdmin($exist_bid['booking_id'], $data['organization_id'], $data['vendor_id'], $data['bid_amount']);
+
+            if(!$submit_bid)
+                return Helper::response(false,"Couldn't Submit Quotaion");
+
+            return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+
         }
-
-        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
-
-        $submit_bid = Bid::where(["organization_id"=>$data['organization_id'], "id"=>$exist_bid['id']])
-            ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
-            ->update([
-                "vendor_id"=>$data['vendor_id'],
-                "bid_amount"=>$data['bid_amount'],
-                "meta"=>json_encode($meta),
-                "status"=>BidEnums::$STATUS['bid_submitted'],
-                "submit_at"=>Carbon::now()
-        ]);
-
-        if($submit_bid)
-            $bid_end = self::bidEndByAdmin($exist_bid['booking_id'], $data['organization_id'], $data['vendor_id'], $data['bid_amount']);
-
-        if(!$submit_bid)
-            return Helper::response(false,"Couldn't Submit Quotaion");
-
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+        else{
+            return Helper::response(false,"OTP is incorrect");
+        }
     }
 
     private static function bidEndByAdmin($booking_id, $org_id, $vendor_id, $amount)

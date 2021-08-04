@@ -1202,7 +1202,8 @@ class Route extends Controller
             'moving_date'=>'required',
             'vehicle_type'=>'required|string',
 
-            'man_power'=>'required'
+            'man_power'=>'required',
+            'otp'=>'required'
         ]);
 
         if($validation->fails())

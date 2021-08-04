@@ -332,7 +332,7 @@
                             </div>
                             <div class="w-50 text-right"><a class="white-text p-10" href="#">
                                     <button type="button" class="btn theme-bg white-text w-30 next-btn-1-admin" data-direction="next" id="next-btn-1-admin" {{--onclick="steps_api_{{$org_id->organization_id}}.next();"--}} style="margin-bottom: 20px;">Next</button>
-                                    <button type="button" class="btn theme-bg white-text w-30 next-btn-2-admin" data-direction="next2" id="next-btn-2-admin" data-url="{{route('send_otp', ['id'=>$org_id->organization_id])}}" {{--onclick="steps_api_{{$org_id->organization_id}}.next();"--}} style="margin-bottom: 20px;">Next</button>
+                                    <button type="button" class="btn theme-bg white-text w-30 next-btn-2-admin" data-direction="next2" id="next-btn-2-admin" data-url="{{route('send_bid_otp', ['id'=>$org_id->organization_id])}}" {{--onclick="steps_api_{{$org_id->organization_id}}.next();"--}} style="margin-bottom: 20px;">Next</button>
                                     <button  class="btn theme-bg white-text w-30 submitbtn-admin" id="submitbtn-admin" style="margin-bottom: 20px;">Submit</button>
                                 </a>
                             </div>

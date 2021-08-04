@@ -167,7 +167,7 @@ class NotificationController extends Controller
         return Helper::response(true, "Player already exists.", ["player_id" => $player_id]);
     }
 
-    public static function sendTo($type, $user_id, $title, $desc, $data, $url = null){
+    public static function sendTo($type, $user_id, $title, $desc, $data, $url=Null){
         //$type = "user" / "vendor
            if(count($user_id) < 1)
                return false;

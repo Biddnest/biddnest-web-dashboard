@@ -101,6 +101,10 @@ class SettingsController extends Controller
             ],
             "onesignal"=>[
                 "user_app_creds"=>base64_encode(Settings::where("key", "onesignal_user_app_creds")->pluck('value')[0])
+            ],
+            "timer"=>[
+                "bid_time"=>Settings::where("key", "bid_time")->pluck('value')[0] * 60,
+                "rebid_time"=>Settings::where("key", "rebid_time")->pluck('value')[0] * 60
             ]
         ]);
     }

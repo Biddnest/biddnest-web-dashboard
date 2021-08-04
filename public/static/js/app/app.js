@@ -752,6 +752,7 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
         $(this).closest('form').find('.bid-amount-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').hide();
         $(this).closest('form').find('.bid-amount-3-admin').show();
+        $(this).closest('form').find('.bid-amount-3-admin').removeClass("hidden");
         $(this).closest('form').find('.submitbtn-admin').show();
     }
 });

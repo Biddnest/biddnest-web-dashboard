@@ -1060,6 +1060,9 @@ class BookingsController extends Controller
 //            ->with('inventories')
             ->with('organization')
             ->with('service')
+            ->with(['inventories'=>function($inve){
+                $inve->with('inventory');
+            }])
             ->with('movement_dates')
             ->with('driver')
             ->with('vehicle')
@@ -1071,15 +1074,22 @@ class BookingsController extends Controller
 
         if(!$booking)
             return Helper::response(false, "This booking doesn't exist. Could not proceed.");
+        $inve=[];  $inve1=[];
+        foreach ($booking->inventories as $key=>$inventory){
+           $inve['0']=$inventory->name;
+           $inve['1']=$inventory->size;
+            $inve['2']=$inventory->material;
+            array_push($inve1, $inve);
+        }
 
-        $sms_body = "";
-
-        dispatch(function() use($phone, $sms_body){
+        $sms_body = "Hey there, I am shifting form ".json_decode($booking->source_meta, true)['address']." ".json_decode($booking->source_meta, true)['geocode']." to ".json_decode($booking->destination_meta, true)['address']." ".json_decode($booking->destination_meta, true)['geocode']." on ".json_decode($booking->bid->meta,true)['moving_date']."<br> Here are the details:  Vendor: ".$booking->organization->org_name;
+//        $sms_body ="";
+            dispatch(function() use($phone, $sms_body){
             Sms::send($phone, $sms_body);
         });
 
 
-        return Helper::response(true, "Booking details have been send to $phone");
+        return Helper::response(true, "Booking details have been send to $phone", ['sms'=>$sms_body]);
     }
 
     public static function getBookingsByUser($user_id, $count = 10, $web=false){

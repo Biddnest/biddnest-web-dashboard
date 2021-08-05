@@ -380,20 +380,28 @@
                                                             <div class="form-group">
                                                                 <label for="formGroupExampleInput" class="mb-0">Phone
                                                                     Number</label>
-                                                                <input type="number" name="phone" class="form-control" id="formGroupExampleInput" placeholder="9988776655">
+{{--                                                                <input type="number" name="phone" class="form-control" id="formGroupExampleInput" placeholder="9988776655" minlength="10" maxlength="10">--}}
+                                                                <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
+
                                                                 <input type="hidden" value="{{$booking->public_booking_id}}" name="public_booking_id" />
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="white-text " href="#">
+                                                            <button type="submit" class="btn mt-2 mt-1 btn-theme-bg full-width white-bg padding-btn-res">Send
+                                                                Details</button>
+                                                        </a>
+                                                    </div>
 
                                                 </form>
 
-                                                <div class="d-flex justify-content-center">
-                                                    <a class="white-text " href="#">
-                                                        <button class="btn mt-2 mt-1 btn-theme-bg full-width white-bg padding-btn-res">Send
-                                                            Details</button>
-                                                    </a>
-                                                </div>
+
                                                 <div class="mt-1 pt-1">
                                                     {{--Useless div block this one is -> check and remove if needed --}}
                                                 </div>

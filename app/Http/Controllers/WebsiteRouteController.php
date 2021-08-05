@@ -326,7 +326,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return BookingController::sendDetailsToPhone($request->public_booking_id, $request->phone);
+        return BookingsController::sendDetailsToPhone($request->public_booking_id, $request->phone);
     }
 
     public function addReview(Request $request){

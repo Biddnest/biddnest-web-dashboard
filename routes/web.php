@@ -248,6 +248,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
             Route::get('/hold',[WebController::class,'ordersBookingsHold'])->name("orders-booking-hold");
             Route::get('/bounced',[WebController::class,'ordersBookingsBounced'])->name("orders-booking-bounced");
+            Route::get('/cancelled',[WebController::class,'ordersBookingsCancelled'])->name("orders-booking-cancelled");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");

@@ -992,7 +992,6 @@ class BookingsController extends Controller
         return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }
 
-
     /*apis for websocket running in websocket.js*/
     public static function startVendorWatch($request){
         $token = (object)Helper::validateAuthToken($request['token']);
@@ -1053,7 +1052,6 @@ class BookingsController extends Controller
     }
 
     /*End socket apis*/
-
 
     public static function sendDetailsToPhone($public_booking_id, $phone){
         $booking = Booking::where("public_booking_id", $public_booking_id)

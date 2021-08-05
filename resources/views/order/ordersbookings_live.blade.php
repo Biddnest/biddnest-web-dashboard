@@ -33,16 +33,19 @@
                                     <a class="nav-link p-15" id="live-tab"  href="{{route('enquiry-booking')}}" aria-controls="home" aria-selected="true">Enquiries</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Confirmed Orders</a>
+                                    <a class="nav-link active p-15" id="live-tab" data-toggle="tab" href="#live" role="tab" aria-controls="home" aria-selected="true">Confirmed</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past Orders</a>
+                                    <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-hold')}}" aria-controls="home" aria-selected="true">On Hold</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-bounced')}}" aria-controls="home" aria-selected="true">Bounced Orders</a>
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-bounced')}}" aria-controls="home" aria-selected="true">Bounced</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="live-tab"  href="{{route('orders-booking-cancelled')}}" aria-controls="home" aria-selected="true">Cancelled</a>
                                 </li>
                             </ul>
                         </h3>

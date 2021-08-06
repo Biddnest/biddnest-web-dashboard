@@ -6,6 +6,7 @@ use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\GeoUserController;
+use App\StringFormatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,29 @@ class WebsiteRouteController extends Controller
             return UserController::login($request->phone, true);
         else
             return UserController::verifyLoginOtp($request->phone, $request->otp, true);
+    }
+
+    public function signup(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'fname' => 'required|string|max:50',
+            'lname' => 'required|string|max:50',
+            'email' => 'required|email|max:50',
+            'gender' => 'required|string|max:6'
+        ]);
+
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'fname' => 'capitalizeFirst',
+            'lname' => 'capitalizeFirst',
+            'gender' => 'lowercase',
+            'email' => 'lowercase'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return UserController::signupUser(Session::get('account')['id'], $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $request->referral_code);
+
     }
 
     public function addVendor(Request $request)

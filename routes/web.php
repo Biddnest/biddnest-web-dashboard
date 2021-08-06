@@ -474,6 +474,8 @@ Route::prefix('website/api')->group(function () {
         Route::post("/otp", [WebsiteRouter::class, 'verifyOtp'])->name('website.otp');
 
     });
+    Route::put("/signup", [WebsiteRouter::class, 'signup'])->name('website.signup');
+
     Route::put('/book-move-estimate', [WebsiteRouter::class, 'bookingConfirmEstimate'])->name("order_estimate");
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");

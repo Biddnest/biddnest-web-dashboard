@@ -432,10 +432,7 @@
                         <header class="join-as-vendor">
                             <img src="{{ asset('static/website/images/icons/logo.png')}}" class="img-mar" style="margin-left: 104px;display: flex;">
                         </header>
-
                     </div>
-
-
                 </div>
 
                 <div class="modal-body  margin-topneg-7">
@@ -495,12 +492,12 @@
             <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="">
                 <div class="modal-header p-0 br-5 ">
                     <div>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">
+                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);" onclick="location.assign('{{route('home')}}')">
                             <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
                             <!-- <i class="icon dripiconmeter " style="color: #FFF !important;"></i> -->
                             <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
                             <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
-                        </button>
+                           </button>
                     </div>
                     <div>
                         <header class="join-as-vendor">
@@ -514,7 +511,7 @@
 
                 <div class="modal-body  margin-topneg-7">
 
-                    <form action="#" data-await-input="#otp" method="POST" data-next="redirect" {{--data-url="{{route('home-logged')}}"--}} data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                    <form action="{{ route('website.signup') }}" data-await-input="#otp" method="PUT" data-next="redirect" {{--data-url="{{route('home-logged')}}"--}} data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
                         <div class="row">
                             <h2 class="p-text" style="font-size: 16px !important;padding-left: 130px;padding-bottom: 20px;">CREATE AN ACCOUNT</h2>
                             <div class="col-lg-6 hidden-space">
@@ -549,7 +546,7 @@
                             <div class="col-lg-6 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Referral Code</label>
-                                    <input type="text" class="form-control" name="refcode" id="refcode" autocomplete="off" placeholder="ABC123">
+                                    <input type="text" class="form-control" name="referral_code" id="referral_code" autocomplete="off" placeholder="ABC123">
                                 </div>
                             </div>
 

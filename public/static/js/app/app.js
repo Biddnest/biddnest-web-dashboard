@@ -213,12 +213,16 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     if(response.data.user.new == false){
                         if (form.data("next")) { //   data-next="redirect"
                             if (form.data("next") == "redirect") {
-
+                                if (form.data('redirect-type') == "hard")
+                                    redirectHard(form.data("url")); // data-url="google.com"
+                                else
+                                    redirectTo(form.data("url"));
                             }
                         }
                     }
                     else if(response.data.user.new == true){
-                        console.log("open");
+                        $('#Login-modal').modal('hide');
+                        $('#Signup-modal').modal('show');
                     }
                 }
 

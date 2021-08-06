@@ -94,6 +94,9 @@ class UserController extends Controller
             if($user->fname){
                 $data = $user;
             }
+            else{
+                $data = $user;
+            }
 
             if($web)
             {
@@ -175,10 +178,16 @@ class UserController extends Controller
             'lname'=>$lname,
             'email'=>$email,
             'gender'=>$gender,
-            'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
+//            'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
             'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
             "status"=>1
         ]);
+
+        $user1 = User::where("id",$id)->where([ 'deleted'=>0])->first();
+        Session::put(["account" => ['id' => $user1->id, 'fname'=>$user1->fname, 'lname'=>$user1->lname,'email'=>$user1->email, 'phone'=>$user1->phone]]);
+        Session::put('sessionFor', "user");
+
+        Session::save();
 
         return Helper::response(true, "User has been signed up",[
             "user"=>User::select(self::$publicData)->findOrFail($user->id)

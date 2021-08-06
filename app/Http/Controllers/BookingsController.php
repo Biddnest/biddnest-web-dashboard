@@ -435,7 +435,7 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])
+            ->whereIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelrequest']])
             ->where("deleted", CommonEnums::$NO)
             ->orderBy('id', 'DESC')
             ->with('movement_dates')
@@ -463,7 +463,7 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold']])
+            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancelrequest']])
             ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
@@ -992,7 +992,6 @@ class BookingsController extends Controller
         return Helper::response(true, "Booking Rejected Successfully",["booking"=>Booking::findOrFail($booking_id)]);
     }
 
-
     /*apis for websocket running in websocket.js*/
     public static function startVendorWatch($request){
         $token = (object)Helper::validateAuthToken($request['token']);
@@ -1054,12 +1053,14 @@ class BookingsController extends Controller
 
     /*End socket apis*/
 
-
     public static function sendDetailsToPhone($public_booking_id, $phone){
         $booking = Booking::where("public_booking_id", $public_booking_id)
 //            ->with('inventories')
             ->with('organization')
             ->with('service')
+            ->with(['inventories'=>function($inve){
+                $inve->with('inventory');
+            }])
             ->with('movement_dates')
             ->with('driver')
             ->with('vehicle')
@@ -1071,15 +1072,22 @@ class BookingsController extends Controller
 
         if(!$booking)
             return Helper::response(false, "This booking doesn't exist. Could not proceed.");
+        $inve=[];  $inve1=[];
+        foreach ($booking->inventories as $key=>$inventory){
+           $inve['0']=$inventory->name;
+           $inve['1']=$inventory->size;
+            $inve['2']=$inventory->material;
+            array_push($inve1, $inve);
+        }
 
-        $sms_body = "";
-
-        dispatch(function() use($phone, $sms_body){
+        $sms_body = "Hey there, I am shifting form ".json_decode($booking->source_meta, true)['address']." ".json_decode($booking->source_meta, true)['geocode']." to ".json_decode($booking->destination_meta, true)['address']." ".json_decode($booking->destination_meta, true)['geocode']." on ".json_decode($booking->bid->meta,true)['moving_date']."<br> Here are the details:  Vendor: ".$booking->organization->org_name;
+//        $sms_body ="";
+            dispatch(function() use($phone, $sms_body){
             Sms::send($phone, $sms_body);
         });
 
 
-        return Helper::response(true, "Booking details have been send to $phone");
+        return Helper::response(true, "Booking details have been send to $phone", ['sms'=>$sms_body]);
     }
 
     public static function getBookingsByUser($user_id, $count = 10, $web=false){

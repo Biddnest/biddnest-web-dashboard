@@ -84,14 +84,25 @@
                                                             </button>
                                                         </a>
                                                         @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['cancelrequest'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['cancelled']; @endphp
+                                                        <a class="white-text" href="#">
+                                                            <button class="btn f-12 white-bg" data-toggle="modal" data-target="#order-history-modal_{{$booking->id}}" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
+                                                                Request To Cancel
+                                                            </button>
+                                                        </a>
+                                                        @break
                                                     @endswitch
 
                                                     @if(!$booking->review)
+                                                        @if($booking->status != \App\Enums\BookingEnums::$STATUS['cancelrequest'] || $booking->status != \App\Enums\BookingEnums::$STATUS['cancelled'])
                                                             <a class="white-text" href="#" style="margin-left: 10px">
                                                                 <button class="btn f-12 white-bg" data-toggle="modal" data-target="#order-review-modal_{{$booking->id}}" style="background-color:#fdc403; font-weight: 700; color: #FFFFFF;">
                                                                     Add Review
                                                                 </button>
                                                             </a>
+                                                        @endif
                                                     @endif
 
                                                 </div>

@@ -248,6 +248,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/past',[WebController::class,'ordersBookingsPast'])->name("orders-booking-past");
             Route::get('/hold',[WebController::class,'ordersBookingsHold'])->name("orders-booking-hold");
             Route::get('/bounced',[WebController::class,'ordersBookingsBounced'])->name("orders-booking-bounced");
+            Route::get('/cancelled',[WebController::class,'ordersBookingsCancelled'])->name("orders-booking-cancelled");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");
@@ -473,6 +474,8 @@ Route::prefix('website/api')->group(function () {
         Route::post("/otp", [WebsiteRouter::class, 'verifyOtp'])->name('website.otp');
 
     });
+    Route::put("/signup", [WebsiteRouter::class, 'signup'])->name('website.signup');
+
     Route::put('/book-move-estimate', [WebsiteRouter::class, 'bookingConfirmEstimate'])->name("order_estimate");
 
     Route::post('/add-vendor', [WebsiteRouter::class, 'addVendor'])->name("add_vendor");

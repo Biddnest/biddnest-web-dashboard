@@ -26,6 +26,9 @@ class Helper
         if($status === "await")
            $stat = "await";
 
+        if($status === "login")
+           $stat = "login";
+
         return response()->json(["status" => $stat, "message"=>ucwords($message), "data"=>$data])->setStatusCode($http_code);
     }
 

@@ -80,12 +80,21 @@ class UserController extends Controller
         if($user->verf_code == null){
             return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
         } else if($user->verf_code == $otp) {
+
             User::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
 
             $data = null;
+            if($user->status === 0)
+                $user["new"]=true;
+            else
+                $user["new"]=false;
+
             if($user->fname){
+                $data = $user;
+            }
+            else{
                 $data = $user;
             }
 
@@ -95,7 +104,7 @@ class UserController extends Controller
                 Session::put('sessionFor', "user");
 
                 Session::save();
-                return Helper::response(true, "Otp has been verified", ["user" => $data]);
+                return Helper::response("login", "Otp has been verified", ["user" => $data]);
             }
             else{
                 return Helper::response(true, "Otp has been verified",[
@@ -169,10 +178,16 @@ class UserController extends Controller
             'lname'=>$lname,
             'email'=>$email,
             'gender'=>$gender,
-            'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
+//            'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
             'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
             "status"=>1
         ]);
+
+        $user1 = User::where("id",$id)->where([ 'deleted'=>0])->first();
+        Session::put(["account" => ['id' => $user1->id, 'fname'=>$user1->fname, 'lname'=>$user1->lname,'email'=>$user1->email, 'phone'=>$user1->phone]]);
+        Session::put('sessionFor', "user");
+
+        Session::save();
 
         return Helper::response(true, "User has been signed up",[
             "user"=>User::select(self::$publicData)->findOrFail($user->id)
@@ -194,7 +209,7 @@ class UserController extends Controller
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
 
-        if($user->status == 1)
+        if($user->status != 1)
             return Helper::response(false, "User is not verified or is banned. Invalid action.",null,401);
 
         $emailExists = User::where("email",$email)->where("id","!=",$id)->first();

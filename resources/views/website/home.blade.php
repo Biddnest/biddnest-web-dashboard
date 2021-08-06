@@ -484,6 +484,99 @@
                         </div>
                     </form>
                 </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Signup-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+        <div class="modal-dialog theme-text input-text-blue" role="document">
+            <div class="modal-content w-70 m-0-auto w-1000 mt-20 right-25" style="">
+                <div class="modal-header p-0 br-5 ">
+                    <div>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="color: #FFF !important; transform: translate(-13px, 26px);">
+                            <span>                         <i class="dripicons-cross" style="font-size: 25px;"></i></span>
+                            <!-- <i class="icon dripiconmeter " style="color: #FFF !important;"></i> -->
+                            <!-- <i class="fa fa-times mt-1 mr-1" ></i> -->
+                            <!-- <span aria-hidden="true" style="color:#fff !important; font-size:30px !important; margin-right: 7px !important;" >&times;</span> -->
+                        </button>
+                    </div>
+                    <div>
+                        <header class="join-as-vendor">
+                            <img src="{{ asset('static/website/images/icons/logo.png')}}" class="img-mar" style="margin-left: 104px;display: flex;">
+                        </header>
+
+                    </div>
+
+
+                </div>
+
+                <div class="modal-body  margin-topneg-7">
+
+                    <form action="#" data-await-input="#otp" method="POST" data-next="redirect" {{--data-url="{{route('home-logged')}}"--}} data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" class="form-new-order mt-1 input-text-blue" data-parsley-validate>
+                        <div class="row">
+                            <h2 class="p-text" style="font-size: 16px !important;padding-left: 130px;padding-bottom: 20px;">CREATE AN ACCOUNT</h2>
+                            <div class="col-lg-6 hidden-space">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">First Name*</label>
+                                    <input type="text" class="form-control" name="fname" id="fname" autocomplete="off" placeholder="John" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 hidden-space">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Last Name*</label>
+                                    <input type="text" class="form-control" name="lname" id="lname" autocomplete="off" placeholder="Doe" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 hidden-space">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Email ID*</label>
+                                    <input type="email" class="form-control" name="email" id="email" autocomplete="off" placeholder="example@domain.com" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 hidden-space">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Gender*</label>
+                                    <select id="" class="form-control" name="gender" required>
+                                        <option value="">--Select--</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="3rd gender">3rd Gender</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 hidden-space">
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Referral Code</label>
+                                    <input type="text" class="form-control" name="refcode" id="refcode" autocomplete="off" placeholder="ABC123">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" style="width: 100%;">
+                                <div class="col-12 d-flex center">
+                                    <div class="form-groups">
+                                        <label class="container-01 m-0 p-0" style="margin-top: 30px !important;">
+                                            <input type="checkbox" id="Lift1" required/>
+                                            <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;"></span>
+                                            <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <a class="weblogin" >
+                                    <button type="submit" class="btn btn-theme-bg mb-5 text-view-center padding-btn-res white-bg width-max login-web" style="width: -webkit-fill-available !important; ">
+                                        GET STARTED
+                                    </button>
+                                </a>
+                                <!-- <p class="mt-2 " style="text-align: center; color:#3B4B58; font-size:14px">Did not receive OTP? <button class="unstyled-button login-web"><span class="theme-text bold"> Resend</span></button></p> -->
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
             </div>
         </div>
     </div>

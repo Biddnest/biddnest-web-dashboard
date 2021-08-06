@@ -80,11 +80,17 @@ class UserController extends Controller
         if($user->verf_code == null){
             return Helper::response(false, "No otp code was generated. This is an invalid action.", null, 401);
         } else if($user->verf_code == $otp) {
+
             User::where("phone",$phone)->update(["verf_code"=>null,"otp_verified"=>1]);
 
             $jwt_token = Helper::generateAuthToken(["phone"=>$user->phone,"id"=>$user->id]);
 
             $data = null;
+            if($user->status === 0)
+                $user["new"]=true;
+            else
+                $user["new"]=false;
+
             if($user->fname){
                 $data = $user;
             }
@@ -95,7 +101,7 @@ class UserController extends Controller
                 Session::put('sessionFor', "user");
 
                 Session::save();
-                return Helper::response(true, "Otp has been verified", ["user" => $data]);
+                return Helper::response("login", "Otp has been verified", ["user" => $data]);
             }
             else{
                 return Helper::response(true, "Otp has been verified",[

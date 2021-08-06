@@ -208,6 +208,20 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                         $(form.data('await-input')).find("input").val(response.data.otp);
                     /*remove in prod*/
                 }
+                else if(response.status == "login"){
+                    tinySuccessAlert("Success", response.message);
+                    if(response.data.user.new == false){
+                        if (form.data("next")) { //   data-next="redirect"
+                            if (form.data("next") == "redirect") {
+
+                            }
+                        }
+                    }
+                    else if(response.data.user.new == true){
+                        console.log("open");
+                    }
+                }
+
                 else {
                     Logger.info(response.message);
                     revertFormAnim(button, buttonPretext);
@@ -911,17 +925,21 @@ var dp = $('.bookdate').datepicker({
     todayHighlight: true,
     'startDate': '+1d',
     'endDate':'+20d',
+
 });
 dp.on('changeDate', function(e) {
-
     if(e.dates.length < 6){
-        selectedDates = e.dates
+        selectedDates = e.dates;
     }else{
         dp.data('datepicker').setDates(selectedDates);
         megaAlert('PLease note','Can only select upto 5 dates', 'info')
     }
-
+    selectedDates.sort(function(a, b){
+        return new Date(a.date) - new Date(b.date);
+    });
+    console.log(selectedDates);
 });
+
 
 $("body").on('change', ".switch", function(event) {
     let phone=$(this).data('phone');

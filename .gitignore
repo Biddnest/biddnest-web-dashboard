@@ -16,3 +16,4 @@ yarn-error.log
 /public/inventory
 .idea/
 /vendor
+/public/storage

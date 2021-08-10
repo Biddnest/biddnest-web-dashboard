@@ -160,21 +160,31 @@ $('.card-methord').click(function() {
                     $.get(url, function (response){
                         console.log(response);
                         let street = [];
-                        let city="";
+                        let city, state, pincode =null;
                         for(let i=0; i<= response.results[0].address_components.length; i++)
                         {
                             let addr = response.results[0].address_components[i];
                             if(typeof addr != "undefined") {
-                                if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
-                                    // street[] = ", " + addr.long_name;
-                                    // if(!street.indexOf(addr.long_name))
-                                    street.push(addr.long_name);
+
+                                if (addr.types.includes('locality') && addr.types.includes('political')) {
+                                    console.log(addr.long_name);
+                                    if(!city)
+                                        city=addr.long_name;
+                                }
+                                if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                                    if(!state)
+                                        state=addr.long_name;
+                                }
+                                if (addr.types.includes('postal_code')) {
+                                    if(!pincode)
+                                        pincode=addr.long_name;
                                 }
                             }
                         }
-                        // street = street.replace(/(^[,\s]+)|([,\s]+$)/g, '');
-                        $(".source").attr("placeholder", street.join(", "));
-                        $(".source_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+                        $("#source-city").val(city);
+                        $("#source-state").val(state);
+                        $("#source-pin").val(pincode);
+                        console.log(city, state, pincode);
                     });
 
                 }
@@ -226,18 +236,29 @@ $('.card-methord').click(function() {
             $.get(url, function (response){
                 console.log(response);
                 let street=[];
-                let city="";
+                let city, state, pincode =null;
                 for(let i=0; i<= response.results[0].address_components.length; i++)
                 {
                     let addr = response.results[0].address_components[i];
                     if(typeof addr != "undefined") {
-                        if (addr.types.indexOf('premise') || addr.types.indexOf('neighborhood')) {
-                            street.push(addr.long_name);
+                        if (addr.types.includes('locality') && addr.types.includes('political')) {
+                            console.log(addr.long_name);
+                            if(!city)
+                                city=addr.long_name;
+                        }
+                        if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                            if(!state)
+                                state=addr.long_name;
+                        }
+                        if (addr.types.includes('postal_code')) {
+                            if(!pincode)
+                                pincode=addr.long_name;
                         }
                     }
                 }
-                $(".dest").attr("placeholder", street.join(", "));
-                $(".dest_city").attr("placeholder", response.results[0].formatted_address.replace(street, ""));
+                $("#dest-city").val(city);
+                $("#dest-state").val(state);
+                $("#dest-pin").val(pincode);
 
             });
         },
@@ -261,6 +282,83 @@ $('.card-methord').click(function() {
         keyboard: true,
         hide_min_max: true,
     });
+
+    $(document).ready(function(){
+        $.get(`{{route('website.api.zone.check-serviceability')}}?latitude=${$("#source-lat").val()}&longitude=${$("#source-lng").val()}`,function(response){
+            if(response.status == "success" && response.data.serviceable === true){
+
+                var url="https://maps.googleapis.com/maps/api/geocode/json?address="+$("#source-lat").val()+","+$("#source-lng").val()+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+                $.get(url, function (response){
+                    console.log(response);
+                    let street = [];
+                    let city, state, pincode =null;
+                    for(let i=0; i<= response.results[0].address_components.length; i++)
+                    {
+                        let addr = response.results[0].address_components[i];
+                        if(typeof addr != "undefined") {
+
+                            if (addr.types.includes('locality') && addr.types.includes('political')) {
+                                console.log(addr.long_name);
+                                if(!city)
+                                    city=addr.long_name;
+                            }
+                            if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                                if(!state)
+                                    state=addr.long_name;
+                            }
+                            if (addr.types.includes('postal_code')) {
+                                if(!pincode)
+                                    pincode=addr.long_name;
+                            }
+                        }
+                    }
+                    $("#source-city").val(city);
+                    $("#source-state").val(state);
+                    $("#source-pin").val(pincode);
+                    console.log(city, state, pincode);
+                });
+
+            }
+            else{
+                Swal.fire({
+                    icon: "warning",
+                    title: "Sorry",
+                    text: "We are currently not serviceable in selected area.",
+                });
+            }
+        });
+
+        var url="https://maps.googleapis.com/maps/api/geocode/json?address="+$("#dest-lat").val()+","+$("#dest-lng").val()+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+        $.get(url, function (response){
+            console.log(response);
+            let street=[];
+            let city, state, pincode =null;
+            for(let i=0; i<= response.results[0].address_components.length; i++)
+            {
+                let addr = response.results[0].address_components[i];
+                if(typeof addr != "undefined") {
+                    if (addr.types.includes('locality') && addr.types.includes('political')) {
+                        console.log(addr.long_name);
+                        if(!city)
+                            city=addr.long_name;
+                    }
+                    if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                        if(!state)
+                            state=addr.long_name;
+                    }
+                    if (addr.types.includes('postal_code')) {
+                        if(!pincode)
+                            pincode=addr.long_name;
+                    }
+                }
+            }
+            $("#dest-city").val(city);
+            $("#dest-state").val(state);
+            $("#dest-pin").val(pincode);
+
+        });
+    });
+
 </script>
 
 

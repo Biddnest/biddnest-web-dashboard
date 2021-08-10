@@ -32,7 +32,12 @@
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label class="phone-num-lable">Phone Number</label>
-                                        <input type="number" id="phone" placeholder="9990009900" name="phone[primary]" class=" form-control form-control-tel" maxlength="10" minlength="10" required>
+                                        <input type="text" id="phone" placeholder="9990009900" name="phone[primary]" class=" form-control form-control-tel" required maxlength="10" minlength="10" onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
@@ -138,7 +143,12 @@
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Pincode</label>
-                                        <input type="number" class="form-control" name="address[pincode]" maxlength="6" minlength="6" id="formGroupExampleInput2" required>
+                                        <input type="text" class="form-control" name="address[pincode]" maxlength="6" minlength="6" id="formGroupExampleInput2" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                     </div>
                                 </div>
                             </div>

@@ -178,7 +178,12 @@ a.menu:hover{
                                 </p>
                             </div>
                             <div class="input-group pl-2 mt-30 m-auto-view">
-                                <input type="tel" class="form-control -mr-4" id="contact_no" placeholder="Request a call back" maxlength="10" minlength="10"/>
+                                <input type="tel" class="form-control -mr-4" id="contact_no" placeholder="Request a call back" maxlength="10" minlength="10" onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary input-button f-4 call-request" type="button" data-url="{{route('request-callback')}}">
                                         <i class="fa fa f-12 p-0"><span class="p-1 f-14">Submit</span></i>

@@ -194,7 +194,7 @@
                                             <div class="col-sm-6 mt-2">
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">Search Near By Location</label>
-                                                    <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="" class="form-control source-autocomplete" required>
+                                                    <input type="text" placeholder="Choose on map" name="source[meta][geocode]" id="" class="form-control source-autocomplete" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                     </span>
                                                 </div>
@@ -202,7 +202,7 @@
                                             <div class="col-sm-6 mt-2">
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">From Adress line 1</label>
-                                                    <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]" class="form-control" required>
+                                                    <input type="text" placeholder="Flat no, Street no" name="source[meta][address_line1]" class="form-control" required>
                                                     <input type="hidden" name="source[lat]" id="source-lat" value="{{$prifill['source_lat']}}" class="form-control" required>
                                                     <input type="hidden" name="source[lng]" id="source-lng" value="{{$prifill['source_lng']}}" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
@@ -221,28 +221,33 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Adress line 2</label>
-                                                            <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line2]" id="" class="form-control source-autocomplete" required>
+                                                            <input type="text" placeholder="Landmark, Area" name="source[meta][address_line2]" id="" class="form-control source-autocomplete" required readonly>
                                                             <span class="error-message">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From City</label>
-                                                            <input type="text" id="source-city" placeholder="Benguluru" class="form-control" name="source[meta][city]" required>
+                                                            <input type="text" id="source-city" placeholder="City" class="form-control" name="source[meta][city]" required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From State</label>
-                                                            <input type="text" placeholder="Karnataka" id="source-state" class="form-control " name="source[meta][state]" required />
+                                                            <input type="text" placeholder="State" id="source-state" class="form-control " name="source[meta][state]" required />
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Pincode</label>
-                                                            <input type="text " placeholder="530000" maxlength="6" minlength="6" id="source-pin" class="form-control" name="source[meta][pincode]" required />
+                                                            <input type="text" placeholder="560097" maxlength="6" minlength="6" id="source-pin" class="form-control" name="source[meta][pincode]" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )"/>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -250,7 +255,7 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Floor</label>
-                                                            <input type="number" placeholder="3" value="0" min="-3" max="99" name="source[meta][floor]" class="form-control " required>
+                                                            <input type="number" placeholder="3" min="-3" max="99" name="source[meta][floor]" class="form-control " required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -275,7 +280,7 @@
                                             <div class="col-sm-6 ">
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">Search Near By Location</label>
-                                                    <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="" class="form-control dest-autocomplete">
+                                                    <input type="text" placeholder="Choose on map" name="destination[meta][geocode]" id="" class="form-control dest-autocomplete">
                                                     <input type="hidden" name="destination[lat]" value="{{$prifill['dest_lat']}}" id="dest-lat" class="form-control" required>
                                                     <input type="hidden" name="destination[lng]" value="{{$prifill['dest_lng']}}" id="dest-lng" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
@@ -284,7 +289,7 @@
                                             <div class="col-sm-6 ">
                                                 <div class="form-group ">
                                                     <label class="address-details-input ">To Address line 1</label>
-                                                    <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][address_line1]" id="" class="form-control" required>
+                                                    <input type="text" placeholder="Flat no, Street no" name="destination[meta][address_line1]" id="" class="form-control" required>
                                                     <span class="error-message ">Please enter valid</span>
                                                 </div>
                                             </div>
@@ -298,35 +303,40 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label>From Adress line 2</label>
-                                                            <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control dest-autocomplete" required>
+                                                            <input type="text" name="destination[meta][address_line2]" placeholder="Landmark, Area" id="" class="form-control dest-autocomplete" required readonly>
                                                             <span class="error-message">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To City</label>
-                                                            <input type="text" placeholder="Chennai" id="dest-city" name="destination[meta][city]" class="form-control" required>
+                                                            <input type="text" placeholder="City" id="dest-city" name="destination[meta][city]" class="form-control" required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To State</label>
-                                                            <input type="text" placeholder="Chennai" id="dest-state" name="destination[meta][state]" class="form-control" required>
+                                                            <input type="text" placeholder="State" id="dest-state" name="destination[meta][state]" class="form-control" required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Pincode</label>
-                                                            <input type="text" placeholder="530001" name="destination[meta][pincode]" id="dest-pin" class="form-control" maxlength="6" minlength="6" required>
+                                                            <input type="text" data-parsley-type="number" placeholder="620001" name="destination[meta][pincode]" id="dest-pin" class="form-control" maxlength="6" minlength="6" required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Floor </label>
-                                                            <input type="number" placeholder="5" value="0" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required>
+                                                            <input type="number" placeholder="5" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>

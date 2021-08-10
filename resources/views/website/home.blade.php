@@ -443,7 +443,12 @@
                             <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
-                                    <input type="number" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                    <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xs-12 mt-1 otp hidden"   id="otp">
@@ -463,7 +468,7 @@
                                 <div class="col-12 d-flex center">
                                     <div class="form-groups">
                                         <label class="container-01 m-0 p-0">
-                                            <input type="checkbox" id="Lift1" required/>
+                                            <input type="checkbox" id="Lift1" data-parsley-error-message="Please Agree to the Terms & Conditions" required/>
                                             <span class="checkmark-agree" style="height: 14px !important; width: 14px !important; top: 2px !important;"></span>
                                             <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
                                         </label>
@@ -554,7 +559,7 @@
                                 <div class="col-12 d-flex center">
                                     <div class="form-groups">
                                         <label class="container-01 m-0 p-0" style="margin-top: 30px !important;">
-                                            <input type="checkbox" id="Lift1" required/>
+                                            <input type="checkbox" id="Lift1" data-parsley-errors-messages="Please Agree to the Terms & Conditions" required/>
                                             <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;top: 2px !important;"></span>
                                             <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
                                         </label>

@@ -925,7 +925,7 @@ $("body").on('click', ".back4", function(event) {
 var selectedDates=[];
 var dp = $('.bookdate').datepicker({
     multidate: true,
-    format: 'd M yy',
+    format: 'd M',
     todayHighlight: true,
     'startDate': '+1d',
     'endDate':'+20d',
@@ -936,7 +936,7 @@ dp.on('changeDate', function(e) {
         selectedDates = e.dates;
     }else{
         dp.data('datepicker').setDates(selectedDates);
-        megaAlert('Please note','Can only select upto 5 dates', 'info')
+        tinyAlert('Please note','Can only select upto 5 dates', 'info')
     }
     selectedDates.sort(function(a, b){
         return new Date(a.date) - new Date(b.date);
@@ -1399,7 +1399,13 @@ $("body").on('click', ".add-search-item", function(event) {
     $('.inventory .col-md-4:last').before(html);
     initRangeSlider();
 
-    tinySuccessAlert("success", "This item has been added");
+    Swal.fire({
+        icon: "info",
+        title: "Success",
+        text: "This item has been added.",
+    });
+    $('.items-display').hide();
+
 });
 
 $("body").on('keyup', ".search-item", function(event) {

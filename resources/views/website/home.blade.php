@@ -10,7 +10,7 @@
                 @foreach($categories as $category)
                     <label class="mr-2">
                         <input type="radio" name="service" value="{{$category->id}}" class="card-input-element" required data-parsley-errors-container="#service-error" @if($loop->iteration == 1) checked @endif />
-                        <div class="card-header card-methord  bg-turnblue  building-type @if($loop->iteration == 1) selected check-icon02 turntheme @endif" style="width: 100%;">
+                        <div class="card-header card-methord  bg-turnblue  building-type {{--@if($loop->iteration == 1) selected turntheme @endif--}}" style="width: 100%;">
                             <div class="card-body-top">
                                 <img class="icon-cards" src="{{$category->image}}" />
                                 <p class="building-type-text">{{ucwords($category->name)}}</p>

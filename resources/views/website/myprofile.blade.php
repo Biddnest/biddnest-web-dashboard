@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="col-md-5" style="width: auto;">
                                             <p class="mt-2 mb-0  l-cap">Date of Birth </p>
-                                            <p class="fw-500 f-20">{{date('d M Y', strtotime($user->dob))}}</p>
+                                            <p class="fw-500 f-20">@if($user->dob){{date('d M Y', strtotime($user->dob))}}@endif</p>
                                         </div>
 
                                 </div>
@@ -127,9 +127,9 @@
                                                                 <img style="border-radius: 50%; margin-left: 10px; margin-bottom: 10px;" src="@if($user->avatar){{$user->avatar}}@else{{asset('static/website/images/icons/profile-circle.svg')}}@endif" />
                                                                 <div class="ml-1">
                                                                     <div class="file-upload">
-                                                                        <input type="hidden" class="base-holder" id="image" name="image" value="{{$user->avatar}}" required/>
+                                                                        <input type="hidden" class="base-holder" id="image" name="image" value="{{$user->avatar}}"/>
                                                                         <button class="btn f-10 btn-theme-bg white-text my-0"> UPLOAD IMAGE</button>
-                                                                        <input type="file" accept=".png,.jpg,.jpeg" @if(!$user->avatar) required @endif/>
+                                                                        <input type="file" accept=".png,.jpg,.jpeg" @if(!$user->avatar) @endif/>
                                                                     </div>
 
                                                                     <p class="text-muted pl-0">Max File size: 1MB</p>
@@ -181,7 +181,7 @@
                                                         <div class="form-group">
                                                             <label class="start-date">Date of Birth</label>
                                                             <div id="my-modal">
-                                                                <input type="text" id="dateselect" name="dob" value="@if($user->dob){{$user->dob}}@endif" class="birthdate dateselect form-control br-5" placeholder=" 15/02/2021" />
+                                                                <input type="text" id="dateselect" name="dob" value="@if($user->dob){{$user->dob}}@endif" class="birthdate dateselect form-control br-5" placeholder="Enter date of birth" />
                                                                 <span class="error-message">please enter valid date</span>
                                                             </div>
                                                         </div>

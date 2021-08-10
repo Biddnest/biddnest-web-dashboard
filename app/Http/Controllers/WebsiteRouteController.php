@@ -91,7 +91,7 @@ class WebsiteRouteController extends Controller
             'email'=>'required',
             'gender'=>'required|string',
             'dob'=>'required',
-            'image'=>'required'
+//            'image'=>'required'
         ]);
 
         if($validation->fails())
@@ -108,8 +108,6 @@ class WebsiteRouteController extends Controller
             'heading' => 'required|string',
             'desc' => 'required|string'
         ]);
-
-        print_r($request->public_booking_id); die();
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);

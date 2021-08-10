@@ -936,12 +936,11 @@ dp.on('changeDate', function(e) {
         selectedDates = e.dates;
     }else{
         dp.data('datepicker').setDates(selectedDates);
-        megaAlert('PLease note','Can only select upto 5 dates', 'info')
+        megaAlert('Please note','Can only select upto 5 dates', 'info')
     }
     selectedDates.sort(function(a, b){
         return new Date(a.date) - new Date(b.date);
     });
-    console.log(selectedDates);
 });
 
 

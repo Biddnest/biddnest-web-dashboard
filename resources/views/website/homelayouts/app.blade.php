@@ -30,7 +30,7 @@ a.menu:hover{
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand -mt-10" href="{{route('home')}}"><img class="logo-small" src="{{ asset('static/website/images/images/logo.png')}}" /></a>
+                    <a class="navbar-brand -mt-10" href="{{route('home')}}"><img class="logo-small" src="{{ asset('static/website/images/images/splash_logo (1).png')}}" /></a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -42,14 +42,17 @@ a.menu:hover{
                         </li>
                         @if(\Illuminate\Support\Facades\Session::get('account'))
                             <li>
-                               <a href="{{route('my-bookings')}}"><img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />
-                                    <span class="nav-menu-link l-cap">My Bookings</span></a>
+                               <a href="{{route('my-bookings')}}">
+{{--                                   <img src="{{ asset('static/website/images/icons/Artboard – 7.svg')}}" />--}}
+                                   <i class="fa fa-truck" aria-hidden="true"></i>
+                                    <span class="nav-menu-link l-cap pl-1">My Bookings</span></a>
                             </li>
                         @endif
                         <li>
                             <a href="{{route('contact_us')}}">
-                                <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />
-                                <span class="nav-menu-link l-cap">Contact Us</span></a>
+                                {{--  <img src="{{ asset('static/website/images/icons/Artboard – 8.svg')}}" class="mb-icon" />--}}
+                                <i class="icon-2  dripicons-headset"></i>
+                                <span class="nav-menu-link l-cap pl-1">Contact Us</span></a>
                         </li>
                         <li class=" nav-item  dropdown theme-text  f-14  m-dropdown cursor-pointer">
                             @if(\Illuminate\Support\Facades\Session::get('account'))
@@ -125,12 +128,12 @@ a.menu:hover{
                         @endforeach
 
                 </div>
-                <a class="left carousel-control carousel-arrows" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left carousel-arrows-icon"></span>
+                <a class="left carousel-control carousel-arrows" href="#myCarousel" data-slide="prev" style="cursor: auto !important;">
+                    <span class="glyphicon glyphicon-chevron-left carousel-arrows-icon" style="cursor: pointer !important;"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="right carousel-control carousel-arrows" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right carousel-arrows-icon"></span>
+                <a class="right carousel-control carousel-arrows" href="#myCarousel" data-slide="next" style="cursor: auto !important;">
+                    <span class="glyphicon glyphicon-chevron-right carousel-arrows-icon" style="cursor: pointer !important;"></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
@@ -160,8 +163,8 @@ a.menu:hover{
                     <div class="row mt-30 footer-row border-bottom border-top pt-3 pb-3">
                         <div class="col-md-4 col-sm-12 br-r" style="padding-left: 0px !important;">
                             <div class="footer-text text-view-center -m-36">
-                                <img class="-mb-20" style="transform: translate(-16px, 10px);" src="{{ asset('static/website/images/icons/logo.png')}}" />
-                                <p>
+                                <img class="-mb-20" style="transform: translate(-16px, 10px); width: 180px;height: 80px;padding-left: 34px;padding-bottom: 30px;margin-top: 65px;margin-bottom: 30px;" src="{{ asset('static/website/images/icons/splash_logo (1).png')}}" />
+                                <p style="margin-top: 30px;">
                                     @foreach(json_decode($contact_details, true)['email_id'] as $email)
                                         <i class="fa fa-envelope pl-2 pr-25 f-18 mb-1"></i>{{$email}}
                                         @break
@@ -240,7 +243,10 @@ a.menu:hover{
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><img class="y-icon" src="{{ asset('static/website/images/icons/youtube.svg')}}" /></a>
+                                    <a href="#">
+{{--                                        <img class="y-icon" src="{{ asset('static/website/images/icons/youtube.svg')}}" />--}}
+                                        <i class="fa fa-youtube"></i>
+                                    </a>
                                 </li>
                             </ul>
                         </div>

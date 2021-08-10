@@ -235,6 +235,12 @@ class UserController extends Controller
 
         User::where("id",$id)->update($updateColumns);
 
+        $user1 = User::where("id",$id)->where([ 'deleted'=>0])->first();
+        Session::put(["account" => ['id' => $user1->id, 'fname'=>$user1->fname, 'lname'=>$user1->lname,'email'=>$user1->email, 'phone'=>$user1->phone]]);
+        Session::put('sessionFor', "user");
+
+        Session::save();
+
         return Helper::response(true, "Profile has been updated.",[
             "user"=>User::select(self::$publicData)->findOrFail($user->id)
         ]);

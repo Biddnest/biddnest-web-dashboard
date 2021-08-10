@@ -446,9 +446,22 @@
 
 
 
+    .carousel-arrows-icon:hover {
+        color: #fdc403 !important;
+    }
+
     a:hover {
         color: #fdc403 !important;
     }
+
+    .left:hover {
+        color: #ffffff !important;
+    }
+
+    .right:hover {
+        color: #ffffff !important;
+    }
+
 
     .dripicons-cross.f-30 {
         color: #fff !important;

@@ -6,13 +6,14 @@
 namespace App;
 use App\Models\Notification;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class PushNotification
 {
     private static $user_app_creds = ["6b33862a-ec91-44bd-bf29-1c8ae35317d1", "MjlhNjhlZWQtNzE3ZS00YjNjLTg5NzQtOTY0ZDIxYjg1ZDIy"];
     private static $vendor_app_creds = ["42d0f367-a40c-41e2-a9e3-95d62e38ad99", "NTkyMTU3ODUtMWM3OS00N2YyLTgzMWItOTZhMjNlY2E4ODFk"];
 
-    public static function sendToUsers($user_type = "user", $title, $desc, $players, $data, $url=null){
+    public static function sendToUsers($user_type, $title, $desc, $players, $data, $url=null){
 
         if(count($players)<1)
             return Helper::response(false, "No players registered yet.");
@@ -59,7 +60,7 @@ class PushNotification
 //                'include_external_user_ids'=>$players
             ],
         ]);
-
+        Log::info($response->getBody());
         return Helper::response(true,"Push sent",["response"=>$response]);
 
     }

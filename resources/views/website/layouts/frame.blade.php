@@ -19,7 +19,7 @@ margin-left: 18%;
     <body>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation navigation-top">
         <div class="container">
-            <a class="navbar-brand" style="" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/b.png')}}" style="width: 122px; height: 46px;"/></a>
+            <a class="navbar-brand" style="" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/Group 12527.png')}}" style="width: 122px; height: 46px;"/></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -137,7 +137,7 @@ margin-left: 18%;
                                         <label class="container-01 m-0">
                                             <input type="checkbox" id="Lift1" data-parsley-error-message="Please Agree to the Terms & Conditions" required/>
                                             <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;top: 2px !important;"></span>
-                                            <p class="text-muted f-14"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                            <p class="text-muted f-14"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & Conditions</b></p>
                                         </label>
                                     </div>
                                 </div>
@@ -218,7 +218,7 @@ margin-left: 18%;
                                             <label class="container-01 m-0 p-0" style="margin-top: 30px !important;">
                                                 <input type="checkbox" id="Lift1" data-parsley-error-message="Please Agree to the Terms & Conditions" required/>
                                                 <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;top: 2px !important;"></span>
-                                                <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                                <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & Conditions</b></p>
                                             </label>
                                         </div>
                                     </div>

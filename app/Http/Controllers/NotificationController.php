@@ -209,7 +209,7 @@ class NotificationController extends Controller
             }
         }
 
-        return PushNotification::sendToUsers("$type", $title, $desc, $players, $data,$url);
+        return PushNotification::sendToUsers($type, $title, $desc, $players, $data,$url);
     }
 
 

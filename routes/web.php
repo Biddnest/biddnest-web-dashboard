@@ -494,12 +494,15 @@ Route::prefix('website/api')->group(function () {
     Route::post('/cancel-ticket', [WebsiteRouter::class, 'addCancelTicket'])->name("cancel_ticket");
     Route::post('/add-reschedule-ticket', [WebsiteRouter::class, 'addReschedulTicket'])->name("reshcedulel_ticket");
     Route::post('/request-callback', [WebsiteRouter::class, 'requestCallback'])->name("request-callback");
+    Route::post('/request-link', [WebsiteRouter::class, 'requestLink'])->name("request-link");
 
     Route::post('/verified-coupon', [WebsiteRouter::class, 'verifiedCoupon'])->name("verifiedcoupon");
     Route::post('/initiate-payment', [WebsiteRouter::class, 'initiatePayment'])->name("initiate-payment");
     Route::post('/status/complete',[WebsiteRouter::class, 'statusComplete'])->name("complete-status");
     Route::post('/booking/send-to-phone',[WebsiteRouter::class, 'sendToPhone'])->name("website.api.send-to-phone");
     Route::post('/booking/add-review',[WebsiteRouter::class, 'addReview'])->name("website.api.booking.add-review");
+
+    Route::post('/referal/send-to-phone',[WebsiteRouter::class, 'referalSend'])->name("website.api.reffrel_send-to-phone");
 
     Route::get('/zone/check-serviceability',[WebsiteRouter::class, 'checkServiceable'])->name("website.api.zone.check-serviceability");
 

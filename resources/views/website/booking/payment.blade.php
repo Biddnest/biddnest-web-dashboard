@@ -16,10 +16,10 @@
                         <p class="text-muted">Sub Total </p>
                         <p>{{$payment_summary['sub_total']}}</p>
                     </div>
-                    <div class="d-flex justify-content-between">
+                   {{-- <div class="d-flex justify-content-between">
                         <p class="text-muted">Surge Charges</p>
                         <p>{{$payment_summary['surge_charge']}}</p>
-                    </div>
+                    </div>--}}
                     <div class="d-flex justify-content-between ">
                         <p class="text-muted"> Discount</p>
                         -<p class="discount">{{$payment_summary['discount']}}</p>

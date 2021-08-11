@@ -208,7 +208,7 @@ class BookingsController extends Controller
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 
-        Log::info("Booking Dates recieved from web- ",$movement_dates);
+//        Log::info("Booking Dates recieved from web- ",$movement_dates);
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking->id;
@@ -558,8 +558,8 @@ class BookingsController extends Controller
 
         if($web) {
             $summary = [
-                "sub_total" => $booking->payment->sub_total,
-                "surge_charge" => $booking->payment->other_charges,
+                "sub_total" => $booking->payment->sub_total + $booking->payment->other_charges,
+//                "surge_charge" => $booking->payment->other_charges,
                 "discount" => $discount_amount,
                 "tax" => $tax,
                 "tax_percentage" => $tax_percentage,
@@ -569,8 +569,8 @@ class BookingsController extends Controller
         }
         else
             return Helper::response(true, "Get payment data successfully", ["payment_details" => [
-                "sub_total" => $booking->payment->sub_total,
-                "surge_charge" => $booking->payment->other_charges,
+                "sub_total" => $booking->payment->sub_total + $booking->payment->other_charges,
+//                "surge_charge" => $booking->payment->other_charges,
                 "discount" => $discount_amount,
                 "tax(" . $tax_percentage . "%)" => $tax,
                 "grand_total" => $grand_total

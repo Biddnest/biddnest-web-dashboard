@@ -103,7 +103,7 @@ class WebsiteRouteController extends Controller
     public function addTicket(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'public_booking_id'=>"required|string",
+//            'public_booking_id'=>"required|string",
             'category'=>'required|string',
             'heading' => 'required|string',
             'desc' => 'required|string'
@@ -264,6 +264,7 @@ class WebsiteRouteController extends Controller
         else
             return SubServiceController::getSubservicesForApp($request->service_id);
     }
+
     public function getInventories(Request $request){
         $validation = Validator::make($request->all(),[
             'subservice_id' => 'required|integer'
@@ -375,5 +376,27 @@ class WebsiteRouteController extends Controller
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return Helper::response(true, "Here is the result.",["serviceable"=>GeoController::isServiceable($request->latitude, $request->longitude)]);
+    }
+
+    public function referalSend(Request $request){
+        $validation = Validator::make($request->all(),[
+            'phone' => 'required|min:10|max:10',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return UserController::sendReferalToPhone(Session::get('account')['id'], $request->phone);
+    }
+
+    public function requestLink(Request $request){
+        $validation = Validator::make($request->all(),[
+            'data' => 'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::sendLink($request->data);
     }
 }

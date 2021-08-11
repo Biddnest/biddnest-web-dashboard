@@ -446,4 +446,14 @@ class UserController extends Controller
 
         return Helper::response(true, "Refferal code have been send to $phone", ['sms'=>$sms_body]);
     }
+
+    public static function sendLink($phone){
+        $sms_body ="Hey there, I invite you to install. Click here to install For Android APP:- https://play.google.com/store, IOS APP:- https://play.google.com/store";
+
+        dispatch(function() use($phone, $sms_body){
+            Sms::send($phone, $sms_body);
+        });
+
+        return Helper::response(true, "Links have been send to $phone", ['sms'=>$sms_body]);
+    }
 }

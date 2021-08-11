@@ -388,4 +388,15 @@ class WebsiteRouteController extends Controller
 
         return UserController::sendReferalToPhone(Session::get('account')['id'], $request->phone);
     }
+
+    public function requestLink(Request $request){
+        $validation = Validator::make($request->all(),[
+            'data' => 'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::sendLink($request->data);
+    }
 }

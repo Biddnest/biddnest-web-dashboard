@@ -494,6 +494,7 @@ Route::prefix('website/api')->group(function () {
     Route::post('/cancel-ticket', [WebsiteRouter::class, 'addCancelTicket'])->name("cancel_ticket");
     Route::post('/add-reschedule-ticket', [WebsiteRouter::class, 'addReschedulTicket'])->name("reshcedulel_ticket");
     Route::post('/request-callback', [WebsiteRouter::class, 'requestCallback'])->name("request-callback");
+    Route::post('/request-link', [WebsiteRouter::class, 'requestLink'])->name("request-link");
 
     Route::post('/verified-coupon', [WebsiteRouter::class, 'verifiedCoupon'])->name("verifiedcoupon");
     Route::post('/initiate-payment', [WebsiteRouter::class, 'initiatePayment'])->name("initiate-payment");

@@ -365,9 +365,14 @@
                     </div>
 
                     <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 79%;">
-                        <input type="text" class="form-control -mr-4" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" />
+                        <input type="tel" class="form-control -mr-4" id="contact_no" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" maxlength="10" minlength="10" onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )"/>
                         <div class="input-group-get">
-                            <button class="btn btn-secondary input-button" type="button">
+                            <button class="btn btn-secondary input-button call-request" type="button" data-url="{{route('request-link')}}">
                                 <i class="fa fa-paper-plane"><span class="pl-1 f-bolder">GET LINK</span></i>
                             </button>
                         </div>
@@ -477,7 +482,7 @@
                                         <label class="container-01 m-0 p-0">
                                             <input type="checkbox" id="Lift1" data-parsley-error-message="Please Agree to the Terms & Conditions" required/>
                                             <span class="checkmark-agree" style="height: 14px !important; width: 14px !important; top: 2px !important;"></span>
-                                            <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                            <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & Conditions</b></p>
                                         </label>
                                     </div>
                                 </div>
@@ -568,7 +573,7 @@
                                         <label class="container-01 m-0 p-0" style="margin-top: 30px !important;">
                                             <input type="checkbox" id="Lift1" data-parsley-errors-messages="Please Agree to the Terms & Conditions" required/>
                                             <span class="checkmark-agree" style="height: 14px !important; width: 14px !important;top: 2px !important;"></span>
-                                            <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & conditions</b></p>
+                                            <p class="text-muted f-14" style="margin-left: 20px;"> I agree to the <b style="cursor: pointer;" onclick="location.assign('{{route('terms.page', ["slug"=>"terms-and-conditions"])}}')">Terms & Conditions</b></p>
                                         </label>
                                     </div>
                                 </div>

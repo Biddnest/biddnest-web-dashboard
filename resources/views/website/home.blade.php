@@ -314,9 +314,16 @@
                         Dummy Text of the printing and typesetting industry. Lorem Ipsum has been the industry's started dummy text
                     </div>
                     <div class="btn-refer" >
-                        <a href="#services" class="page-scroll btn join-now">
-                            <button type="button" class="btn join-now redem">Refer Now</button>
-                        </a>
+                        @if(\Illuminate\Support\Facades\Session::get('account'))
+                            <a href="#" class="page-scroll btn join-now" data-toggle="modal" data-target="#reffer-modal">
+                                <button type="button" class="btn join-now redem">Refer Now</button>
+                            </a>
+
+                        @else
+                            <a href="#" class="page-scroll btn join-now" data-toggle="modal" data-target="#Login-modal">
+                                <button type="button" class="btn join-now redem">Refer Now</button>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-6" style="display: flex; justify-content: flex-end;" >
@@ -654,6 +661,53 @@
         </div>
     </div>
 
+    <div class="modal fade" id="reffer-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+        <div class="modal-dialog para-head input-text-blue" role="document">
+            <div class="modal-content  w-1000 mt-50  right-25">
+                <div class="modal-header  bg-purple">
+                    <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                        Send Referal Code on phone</h5>
+                    <button type="button" class="close text-white  " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-15 margin-topneg-2">
+                    <div>
+                        <form class="" data-next="null" action="{{route('website.api.reffrel_send-to-phone')}}" method="POST" data-alert="mega" data-next="redirect" data-redirect-type="hard" data-url="{{route('home')}}">
+                            <div class="row d-flex justify-content-center">
+
+                                <div class="col-lg-10 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput" class="mb-0">Phone
+                                            Number</label>
+                                        {{--                                                                <input type="number" name="phone" class="form-control" id="formGroupExampleInput" placeholder="9988776655" minlength="10" maxlength="10">--}}
+                                        <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a class="white-text " href="#">
+                                    <button type="submit" class="btn mt-2 mt-1 btn-theme-bg full-width white-bg padding-btn-res">Send
+                                        REFFERAL CODE</button>
+                                </a>
+                            </div>
+
+                        </form>
+
+
+                        <div class="mt-1 pt-1">
+                            {{--Useless div block this one is -> check and remove if needed --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 @endsection

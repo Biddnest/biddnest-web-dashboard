@@ -233,7 +233,10 @@
 
     }
 
+    #reffer-modal .modal-header .close{
+        margin-top: -35px;
 
+    }
 
     @media only screen and (max-width: 1200px) and (min-width: 900px)  {
         .container {

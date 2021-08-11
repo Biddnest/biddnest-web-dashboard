@@ -366,6 +366,7 @@ class UserController extends Controller
 
         return $user;
     }
+
     public static function directupdate($phone, $fname, $lname, $email, $user_id, $gender=null, $refby_code=null){
 
         $avatar_file_name = $fname."-".$lname."-".uniqid().".png";
@@ -432,5 +433,17 @@ class UserController extends Controller
             else
                 return Helper::response(false, "Couldn't update the FreshChat ID. This is a DB error. Please contact admin");
 
+    }
+
+    public static function sendReferalToPhone($id, $phone){
+        $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
+
+        $sms_body ="Hey there, I invite you to install this application using my refferal code-".json_decode($user->meta, true)['refferal_code']." to get ₹100 off on your first booking. Click here to install https://play.google.com/store";
+
+        dispatch(function() use($phone, $sms_body){
+            Sms::send($phone, $sms_body);
+        });
+
+        return Helper::response(true, "Refferal code have been send to $phone", ['sms'=>$sms_body]);
     }
 }

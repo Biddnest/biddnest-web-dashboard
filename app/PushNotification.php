@@ -6,6 +6,7 @@
 namespace App;
 use App\Models\Notification;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class PushNotification
 {
@@ -59,7 +60,7 @@ class PushNotification
 //                'include_external_user_ids'=>$players
             ],
         ]);
-
+        Log::info($response);
         return Helper::response(true,"Push sent",["response"=>$response]);
 
     }

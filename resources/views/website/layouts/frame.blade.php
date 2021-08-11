@@ -19,7 +19,7 @@ margin-left: 18%;
     <body>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation navigation-top">
         <div class="container">
-            <a class="navbar-brand" style="" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/b.png')}}" style="width: 122px; height: 46px;"/></a>
+            <a class="navbar-brand" style="" href="{{route('home')}}"><img src="{{ asset('static/website/images/images/Group 12527.png')}}" style="width: 122px; height: 46px;"/></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

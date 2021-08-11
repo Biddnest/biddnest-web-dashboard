@@ -60,7 +60,7 @@ class PushNotification
 //                'include_external_user_ids'=>$players
             ],
         ]);
-        Log::info(json_encode($response));
+        Log::info($response->getBody());
         return Helper::response(true,"Push sent",["response"=>$response]);
 
     }

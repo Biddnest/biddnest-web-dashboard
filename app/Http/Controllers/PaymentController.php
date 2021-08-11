@@ -17,6 +17,8 @@ use App\Models\Payment;
 use App\Models\Settings;
 use App\Razorpay;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use http\Exception;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -85,13 +87,18 @@ class PaymentController extends Controller
     {
         $client = new client();
         $request_url = 'https://api.razorpay.com/v1/orders/';
-        $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]], 'json'=>[
-            'receipt' => $receipt,
-            'amount' => $amount*100,
-            'currency' => 'INR',
-            'notes'=>$meta,
-            'payment_capture'=>CommonEnums::$YES
-        ]]);
+        try{
+            $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]], 'json'=>[
+                'receipt' => $receipt,
+                'amount' => $amount*100,
+                'currency' => 'INR',
+                'notes'=>$meta,
+                'payment_capture'=>CommonEnums::$YES
+            ]]);
+        }
+        catch(ClientException $e){
+            return $e->getMessage();
+        }
         return json_decode($response->getBody(), true);
     }
 

@@ -244,7 +244,11 @@
                     </div>
                     <div class="card br-10 bg-white p-1 tabcontent" id="content_cost">
                         <p class="f-18 mb-2 space">
-                            2. hello world! lets build somethings intresting
+                                <li  class="f-18 mb-2 space">Makes you adaptable and amiable.</li>
+                                <li  class="f-18 mb-2 space">Makes you unique.</li>
+                                <li  class="f-18 mb-2 space">Expose you to the customers in just a click.</li>
+                                <li  class="f-18 mb-2 space">A virtual companion and neutral platform giving mutual benefits.</li>
+                                <li  class="f-18 mb-2 space">Exposure to international interface.</li>
                         </p>
                         <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">
@@ -255,7 +259,12 @@
                     </div>
                     <div class="card br-10 bg-white p-1 tabcontent" id="content_quality">
                         <p class="f-18 mb-2 space">
-                            3. dummy text.
+                            <li  class="f-18 mb-2 space">Elevate revenue of small-scale business</li>
+                            <li  class="f-18 mb-2 space">Consistent market reviews promote business opportunities.</li>
+                            <li  class="f-18 mb-2 space">Brings Price fluctuations under control.</li>
+                            <li  class="f-18 mb-2 space">Upscales and updates you</li>
+                            <li  class="f-18 mb-2 space">Makes you competent</li>
+                            <li  class="f-18 mb-2 space">No adverse impacts on environment</li>
                         </p>
                         <a href="{{route('join-vendor')}}" class="page-scroll mb-view btn join-now mt-1">
                             <button type="button" class="btn join-now">

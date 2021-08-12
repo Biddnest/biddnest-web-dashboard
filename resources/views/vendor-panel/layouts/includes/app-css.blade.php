@@ -64,6 +64,10 @@
         height: auto;
     }
 
+    ul.header-controls li.notifications .dropdown ul li {
+        height: 60px !important;
+    }
+
     .fullscreen-modal-body .modal-header::before{
         display: none;
     }

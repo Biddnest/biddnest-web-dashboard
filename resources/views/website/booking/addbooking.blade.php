@@ -174,7 +174,7 @@
                                     <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move  " style="margin-bottom: 10px !important;">Lets get the delivery details
                                     </h4>
                                     <div class="accordion mt-2" id="delivery-details ">
-                                        <p class="address-category pl-0  ">Category</p>
+                                        <p class="address-category pl-0  ">Movement Type</p>
                                         <div class="row row-horizonal ml-0 border-bottom pb-3">
                                             @foreach($categories as $category)
                                             <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
@@ -260,15 +260,22 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-6 ">
+                                                    <div class="col-sm-12 ">
                                                         <div class="form-group mt-1 ">
-                                                            <label class="form-check-box ml-0" for="Lift1 ">Do you have Service lift</label>
-                                                            <label class="switch2">
-                                                                <input type="hidden" value="0" name="source[meta][lift]" id="letter">
-                                                                <input type="checkbox" name="select_letter" value="1" id="Lift1" onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
-                                                                <span class="slider2"></span>
-                                                            </label>
-                                                            <span class="error-message ">Please enter valid</span>
+                                                            <label class="form-check-box ml-0" for="Lift1 ">My Flat/APARTMENT has SERVICE Lift?</label>
+                                                            <div style="display:flex;">
+                                                            <div class="col-sm-3">
+                                                                <label class="switch2">
+                                                                    <input type="hidden" value="0" name="source[meta][lift]" id="letter">
+                                                                    <input type="checkbox" name="select_letter" value="1" id="Lift1" onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
+                                                                    <span class="slider2"></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-9">
+                                                                <span class="error-message ">Please enter valid</span>
+                                                                <span class="text-muted">(This will help us to move your things in a better way.)</span>
+                                                            </div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -340,15 +347,22 @@
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 ">
+                                                    <div class="col-sm-12">
                                                         <div class="form-group mt-1">
-                                                            <label class="form-check-box ml-0 " for="Lift1 ">Do you have Service lift</label>
-                                                            <label class="switch2">
-                                                                <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
-                                                                <input type="checkbox" name="select_letter" value="1" id="Lift2" onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
-                                                                <span class="slider2"></span>
-                                                            </label>
-                                                            <span class="error-message ">Please enter valid</span>
+                                                            <label class="form-check-box ml-0 " for="Lift1 ">My Flat/APARTMENT has SERVICE Lift?</label>
+                                                            <div style="display:flex;">
+                                                                <div class="col-sm-3">
+                                                                    <label class="switch2">
+                                                                        <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
+                                                                        <input type="checkbox" name="select_letter" value="1" id="Lift2" onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
+                                                                        <span class="slider2"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-9">
+                                                                    <span class="error-message ">Please enter valid</span>
+                                                                    <span class="text-muted">(This will help us to move your things in a better way.)</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -358,7 +372,7 @@
                                         <div class="d-flex row p-20 pt-2 ">
                                             <div class="col-sm-6 ">
                                                 <div class="form-group ">
-                                                    <label class="start-date ">Start date</label>
+                                                    <label class="start-date ">Choose a Date</label>
                                                     <div id="my-modal ">
                                                         <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" value="{{$prifill['move_date']}}" name="movement_dates" required />
                                                         <span class="error-message ">please enter valid date</span>
@@ -448,7 +462,7 @@
                                     <h4 class=" border-bottom pl-0 pb-4 theme-text ">Add Comments and Upload Photos
                                     </h4>
                                     <div class="form-group ">
-                                        <label for="comments-area " class="comments ">Comments from Customer</label>
+                                        <label for="comments-area " class="comments ">Comments/Instructions</label>
                                         <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4" cols="50"></textarea>
                                     </div>
                                 </div>
@@ -605,7 +619,9 @@
             </div>
         @{{/each}}
     </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
     <script id="entry-templateinventory" type="text/x-handlebars-template">
         @{{#each inventories}}
                 <div class="col-md-4 filter item-remove @{{meta.category}} @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">

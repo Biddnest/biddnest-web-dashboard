@@ -106,7 +106,7 @@
                                     <div class="col-md-12">
                                         <div>
                                             <p class="text-muted">Step 5 / 6</p>
-                                            <h5 class="border-bottom theme-text pb-4 text-view-center">Get The Estimated Cost </h5>
+                                            <h5 class="border-bottom theme-text pb-4 text-view-center">Price Estimation</h5>
                                         </div>
                                         <form class="form-new-order  input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('place-booking', ['id'=>$booking->public_enquiry_id])}}" data-alert="mega"  data-parsley-validate>
                                             <div class="p-0  border-top-2 order-cards">

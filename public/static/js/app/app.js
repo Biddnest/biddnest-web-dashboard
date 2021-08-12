@@ -1502,3 +1502,13 @@ $("body").on('keyup', ".live-search-input", function(event) {
     }
 });
 
+$("body").on('change', ".category-change", function(event) {
+    var filter = $(this).val()
+    if (filter == 2 || filter == 3){
+        $('.booking-id').attr("required","required");
+    }
+    else{
+        $('.booking-id').removeAttr("required","required");
+    }
+});
+

@@ -148,10 +148,10 @@
                             </div>
                             <div class="col-md-4 col-xs-12 col-sm-12 ">
                                 <h5 class="heading mt-4 f-20 mb-3">New Request</h5>
-                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh" data-alert="mega" class="form-new-order  input-text-blue" data-parsley-validate autocomplete="off">
+                                <form action="{{route('add_ticket')}}" method="POST" data-next="refresh" data-alert="mega" class="form-new-order input-text-blue" data-parsley-validate autocomplete="off">
                                     <div class="form-group">
                                         <label class="phone-num-lable">Choose Booking</label>
-                                              <select name="public_booking_id" class="form-control" required>
+                                              <select name="public_booking_id" class="form-control booking-id">
                                                 <option value="">--Select--</option>
                                                   @foreach($past_bookings as $booking)
 {{--                                                      <optgroup label="{{$booking->public_booking_id}}">--}}
@@ -165,7 +165,7 @@
 
                                     <div class="form-group">
                                         <label class="phone-num-lable">Category</label>
-                                              <select name="category" class="form-control" required>
+                                              <select name="category" class="form-control category-change" required>
                                                 <option value="">--Select--</option>
                                                   @foreach(array_slice(\App\Enums\TicketEnums::$TYPE, 0, 5) as $type=>$key)
                                                       <option value="{{$key}}">{{str_replace("_"," ",ucwords($type))}}</option>

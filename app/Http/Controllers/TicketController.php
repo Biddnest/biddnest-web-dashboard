@@ -145,7 +145,9 @@ class TicketController extends Controller
                 $ticket->user_id = $sender_id;
                 $ticket->heading = $title;
                 $ticket->desc = $body;
-                $ticket->booking_id = $booking['id'];
+                if (isset($meta['public_booking_id'])) {
+                    $ticket->booking_id = $booking['id'];
+                }
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
                 break;

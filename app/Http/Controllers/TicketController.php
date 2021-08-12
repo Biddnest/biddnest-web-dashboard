@@ -413,12 +413,14 @@ class TicketController extends Controller
     public static function createCallBackBooking($sender_id, $booking_id)
     {
         $meta=["phone"=>null, "public_booking_id"=>$booking_id];
+        $booking_id_id = Booking::where('public_booking_id', $booking_id)->pluck('id')[0];
         $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
         $body = "Request to call back ".$booking_id;
         $ticket = new Ticket;
         $ticket->user_id = $sender_id;
         $ticket->heading = $title;
         $ticket->desc = $body;
+        $ticket->booking_id = $booking_id_id;
         $ticket->type = TicketEnums::$TYPE['call_back'];
         $ticket->meta = json_encode($meta);
 

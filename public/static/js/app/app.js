@@ -1032,7 +1032,7 @@ $("body").on('click', ".raised", function(event) {
             if(response.status == "success")
             {
                 tinySuccessAlert("Ticket Raised Successfully", response.message);
-                // window.location.href = href;
+                window.location.href = href;
             }
             else
             {
@@ -1499,6 +1499,16 @@ $("body").on('keyup', ".live-search-input", function(event) {
     if(numberItems === 0) {
         if ($(".toast:not(.hidden)").length === 0)
             tinyAlert("Oops", "No Results found.");
+    }
+});
+
+$("body").on('change', ".category-change", function(event) {
+    var filter = $(this).val()
+    if (filter == 2 || filter == 3){
+        $('.booking-id').attr("required","required");
+    }
+    else{
+        $('.booking-id').removeAttr("required","required");
     }
 });
 

@@ -57,6 +57,11 @@
         margin-right: 0rem !important;
     }
 
+    .profile-name {
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        font-family: "Roboto", sans-serif;
+    }
 
     .ontop {
         position: absolute;

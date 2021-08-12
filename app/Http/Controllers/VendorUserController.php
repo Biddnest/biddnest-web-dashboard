@@ -94,6 +94,7 @@ class VendorUserController extends Controller
         }
 
     }
+
     public static function phoneVerification($phone)
     {
         $user = Vendor::where(['phone'=>$phone])

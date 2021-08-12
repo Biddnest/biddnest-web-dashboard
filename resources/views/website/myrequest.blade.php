@@ -83,7 +83,7 @@
                                                     @break;
                                                 @endswitch
                                             </div>
-                                            <h6 class="para-head pl-2 " style="font-size: 16px;">{{ucwords($ticket->heading)}}</h6>
+                                            <h6 class="para-head pl-2 " style="font-size: 16px;">{{ucwords($ticket->heading)}} @if(json_decode($ticket->meta, true)['public_booking_id']), Booking ID : <span> #{{json_decode($ticket->meta, true)['public_booking_id']}}</span> @endif </h6>
                                             <p class="para ml-2" style="font-size: 14px; white-space: normal !important;">
                                                 {{$ticket->desc}}
                                               {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}

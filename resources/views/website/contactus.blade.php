@@ -235,7 +235,7 @@
                                                 <div class=""><a class="white-text" href="{{route('contact_us')}}"><button
                                                             class="btn btn-theme-w-bg btn-confirm-padding padding-btn-res">No</button></a>
                                                 </div>
-                                                <div class=""><a class="white-text raised" data-booking="{{$booking->public_booking_id}}" data-url="{{route('raise_support')}}" href="#"><button
+                                                <div class=""><a class="white-text raised" data-booking="{{$booking->public_booking_id}}" data-url="{{route('raise_support')}}" href="{{route('contact_us')}}"><button
                                                             class="btn btn-theme-bg  white-bg btn-confirm-padding padding-btn-res">Yes</button></a>
                                                 </div>
                                             </div>
@@ -258,21 +258,6 @@
                 }
             }
         </script>
-        <script>
-            $(document).ready(function() {
-                var showHeaderAt = 150;
-                var win = $(window),
-                    body = $('body');
-                if (win.width() > 400) {
-                    win.on('scroll', function(e) {
-                        if (win.scrollTop() > showHeaderAt) {
-                            body.addClass('fixed');
-                        } else {
-                            body.removeClass('fixed');
-                        }
-                    });
-                }
-            });
-        </script>
+
     </div>
 @endsection

@@ -912,7 +912,7 @@ class BookingsController extends Controller
     public static function getRecentBooking($user_id)
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO, "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["enquiry"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed']])->with('driver')->orderBy('id', 'DESC')->first();
+            ->whereNotIn("status", [BookingEnums::$STATUS["enquiry"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS["cancelrequest"], BookingEnums::$STATUS['completed']])->with('driver')->orderBy('id', 'DESC')->first();
 
         if (!$bookingorder)
             return Helper::response(false, "No Booking Found");

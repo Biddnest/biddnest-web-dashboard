@@ -1032,7 +1032,7 @@ $("body").on('click', ".raised", function(event) {
             if(response.status == "success")
             {
                 tinySuccessAlert("Ticket Raised Successfully", response.message);
-                // window.location.href = href;
+                window.location.href = href;
             }
             else
             {

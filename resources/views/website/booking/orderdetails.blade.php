@@ -304,10 +304,10 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-3 text-center">
                                                     <p>{{$inventory->material}}</p>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-3 text-center">
                                                     <p class="bg-blur bg-blur-num">X
                                                         @if(\App\Enums\BookingInventoryEnums::$QUANTITY['fixed'] == $inventory->quantity_type)
                                                             {{$inventory->quantity}}
@@ -393,7 +393,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-center">
-                                                        <a class="white-text " href="#">
+                                                        <a class="white-text " href="#" data-dismiss="modal" aria-label="Close">
                                                             <button type="submit" class="btn mt-2 mt-1 btn-theme-bg full-width white-bg padding-btn-res">Send
                                                                 Details</button>
                                                         </a>

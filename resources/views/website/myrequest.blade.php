@@ -41,6 +41,7 @@
                                                         REQUEST ID <span class="bold">: #{{$ticket->id}}</span>
                                                     </h6>
                                                 </div>
+                                                @if(json_decode($ticket->meta, true)['public_booking_id'])<span class="ticket-id pt-2" style="font-size: 14px;"> #{{json_decode($ticket->meta, true)['public_booking_id']}}</span> @endif
                                                 @switch($ticket->status)
                                                     @case(\App\Enums\TicketEnums::$STATUS['open'])
                                                         <div class="status-badge bg-green white-text mt-1 h-content" style="min-width: auto!important;">
@@ -83,7 +84,7 @@
                                                     @break;
                                                 @endswitch
                                             </div>
-                                            <h6 class="para-head pl-2 " style="font-size: 16px;">{{ucwords($ticket->heading)}} @if(json_decode($ticket->meta, true)['public_booking_id']), Booking ID : <span> #{{json_decode($ticket->meta, true)['public_booking_id']}}</span> @endif </h6>
+                                            <h6 class="para-head pl-2 " style="font-size: 16px;">{{ucwords($ticket->heading)}}  </h6>
                                             <p class="para ml-2" style="font-size: 14px; white-space: normal !important;">
                                                 {{$ticket->desc}}
                                               {{--  <span id="more" class="cursor-pointer" href="#" onclick="toggle_visibility('view_more_content');">.....View more </span>--}}

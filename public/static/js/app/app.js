@@ -99,7 +99,48 @@ $("body").on("submit",".hero-booking-form",function (event){
         location.assign(`${$(this).attr("action")}?${$(this).serialize()}`);
     else {
         $("#Login-modal").modal();
-        $("#Login-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`)
+        $("#Login-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`);
+    }
+
+    return false;
+
+});
+
+$("body").on("submit",".hero-booking-form",function (event){
+
+    let proceed = true;
+    var data = $(this).serializeJSON();
+    Logger.info(data);
+
+    if(!data.service || data.service == "") {
+        tinyAlert("Incomplete form","Please Choose Service");
+        proceed =  false;
+    }
+
+    if(!data.source_lat || data.source_lat == "" || $("input.book-address").eq(0).attr("placeholder") == "Choose") {
+        tinyAlert("Incomplete form","Please choose pickup location");
+        proceed =  false;
+    }
+
+    if(!data.dest_lat || data.dest_lat == "" || $("input.book-address").eq(2).attr("placeholder") == "Choose") {
+        tinyAlert("Incomplete form","Please choose destination location");
+        proceed =  false;
+    }
+
+    if(!data.move_date || data.move_date == "") {
+        tinyAlert("Incomplete form","Please choose movement dates");
+        proceed =  false;
+    }
+
+    Logger.info(`${$(this).attr("action")}?${$(this).serialize}`);
+
+    if(!proceed)
+        return false;
+
+    if(LOGGED_STATE)
+        location.assign(`${$(this).attr("action")}?${$(this).serialize()}`);
+    else {
+        $("#Signup-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`)
     }
 
     return false;
@@ -1051,8 +1092,8 @@ $("body").on('click', ".reshcedule", function(event) {
             if(response.status == "success")
             {
                 tinySuccessAlert("Ticket Raised Successfully", response.message);
-                // window.location.href = href;
-                redirectTo(href);
+                window.location.href = href;
+                // redirectTo(href);
             }
             else
             {
@@ -1071,8 +1112,8 @@ $("body").on('click', ".reject-booking", function(event) {
             if(response.status == "success")
             {
                 tinySuccessAlert("Ticket Raised Successfully", response.message);
-                // window.location.href = href;
-                redirectTo(href);
+                window.location.href = href;
+                // redirectTo(href);
             }
             else
             {

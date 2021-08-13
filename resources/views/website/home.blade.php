@@ -705,7 +705,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <a class="white-text " href="#">
+                                <a class="white-text " href="#" data-dismiss="modal" aria-label="Close">
                                     <button type="submit" class="btn mt-2 mt-1 btn-theme-bg full-width white-bg padding-btn-res">Send
                                         REFFERAL CODE</button>
                                 </a>

@@ -44,6 +44,11 @@
         border-width: 0 3px 3px 0 !important;
     }
 
+    .checkmark-agree {
+        height: 15px !important;
+        width: 15px !important;
+    }
+
     select {
         -webkit-appearance: none !important;
         -moz-appearance: none !important;

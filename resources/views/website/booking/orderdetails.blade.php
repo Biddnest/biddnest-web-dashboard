@@ -304,10 +304,10 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-3 text-center">
                                                     <p>{{$inventory->material}}</p>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-3 text-center">
                                                     <p class="bg-blur bg-blur-num">X
                                                         @if(\App\Enums\BookingInventoryEnums::$QUANTITY['fixed'] == $inventory->quantity_type)
                                                             {{$inventory->quantity}}

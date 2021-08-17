@@ -46,7 +46,6 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.5/sweetalert2.min.css" integrity="sha512-gX6K9e/4ewXjtn8Q/oePzgIxs2KPrksR4S2NNMYLxenvF7n7eNon9XbqQxb+5jcqYBVCcncIxqF6fXJYgQtoAg==" crossorigin="anonymous" />
 
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 <link rel="stylesheet" href="{{ asset('static/vendor/css/master.css') }}">
@@ -141,10 +140,10 @@
             display: none !important;
         }
     .status-3 {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 300;
         background-color: #fff;
-        min-width: 120px;
+        min-width: 110px;
         display: inline-block;
         text-align: center;
         color: #2E0789;
@@ -227,5 +226,15 @@
 
     .margin-topneg-15 {
         margin-top: 15px !important;
+    }
+
+    .radio-color{
+        background-color:#2E0789;
+        color:#ffffff;
+    }
+
+    .swal2-icon-warning{
+        display: grid !important;
+        height: 250px !important;
     }
 </style>

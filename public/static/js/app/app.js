@@ -789,12 +789,37 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
     });
     Logger.info(isValid);
     if (isValid) {
-        $(this).hide();
-        $(this).closest('form').find('.bid-amount-admin').hide();
-        $(this).closest('form').find('.bid-amount-3-admin').hide();
-        $(this).closest('form').find('.bid-amount-2-admin').show();
-        $(this).closest('form').find('.next-btn-2-admin').show();
+        var est = $(".calc-result").data("est-quote");
+        var quote = $(".calc-result").val();
+        est = est.replace(/\,/g,'');
+
+        var high = parseInt(est)+parseInt(est/2);
+        var low = parseInt(est)-parseInt(est/2);
+
+        if(low >= quote) {
+            tinyAlert("Warning", "This Quote is to low for bidding!");
+        }
+         else if(high <= quote){
+            tinyAlert("Warning", "This Quote is to high for bidding!");
+        }
+         else{
+            $(this).hide();
+            $(this).closest('form').find('.bid-amount-admin').hide();
+            $(this).closest('form').find('.bid-amount-3-admin').hide();
+            $(this).closest('form').find('.bid-amount-2-admin').show();
+            $(this).closest('form').find('.next-btn-2-admin').show();
+            $(this).closest('form').find('.next-btn-back-2-admin').removeClass("hidden");
+        }
     }
+});
+
+$("body").on('click', ".next-btn-back-2-admin", function(event) {
+    $(this).addClass("hidden");
+    $(this).closest('form').find('.bid-amount-admin').show();
+    $(this).closest('form').find('.bid-amount-3-admin').show();
+    $(this).closest('form').find('.bid-amount-2-admin').hide();
+    $(this).closest('form').find('.next-btn-2-admin').hide();
+    $(this).closest('form').find('.next-btn-1-admin').show();
 });
 
 $("body").on('click', ".next-btn-2-admin", function(event) {
@@ -823,25 +848,61 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
         $(this).closest('form').find('.bid-amount-3-admin').show();
         $(this).closest('form').find('.bid-amount-3-admin').removeClass("hidden");
         $(this).closest('form').find('.submitbtn-admin').show();
+        $(this).closest('form').find('.next-btn-back-2-admin').addClass("hidden");
     }
 });
 
 $("body").on('click', ".next-btn-1", function(event) {
 
-    /*let isValid = true;
+    let isValid = true;
     $($(this).closest('form').find('input.validate-input')).each( function() {
-        Logger.info(isValid);
         if ($(this).parsley().validate() !== true)
             isValid = false;
     });
-    Logger.info(isValid);
-    if (isValid) {*/
-        $(this).hide();
-        $(this).closest('form').find('.bid-amount').hide();
-        $(this).closest('form').find('.bid-amount-2').show();
-        $(this).closest('form').find('.next-btn-2').show();
-    // }
+    if (isValid) {
+        var est = $(".calc-result").data("est-quote");
+        var quote = $(".calc-result").val();
+        est = est.replace(/\,/g, '');
 
+        var high = parseInt(est) + parseInt(est / 2);
+        var low = parseInt(est) - parseInt(est / 2);
+
+        if (low >= quote) {
+            // megaAlert("Warning", "This Quote is to low for bidding!");
+            Swal.fire({
+                title: 'Warning',
+                text: "This Quote is to low for bidding!",
+                icon: 'warning',
+                confirmButtonColor: '#FDC403',
+                confirmButtonText: 'Ok',
+
+            });
+        } else if (high <= quote) {
+            Swal.fire({
+                title: 'Warning',
+                text: "This Quote is to high for bidding!",
+                icon: 'warning',
+                confirmButtonColor: '#FDC403',
+                confirmButtonText: 'Ok',
+
+            });
+            // megaAlert("Warning", "This Quote is to high for bidding!");
+        } else {
+            $(this).hide();
+            $(this).closest('form').find('.bid-amount').hide();
+            $(this).closest('form').find('.bid-amount-2').show();
+            $(this).closest('form').find('.next-btn-2').show();
+            $(this).closest('form').find('.next-btn-back-2').removeClass("hidden");
+        }
+    }
+});
+
+$("body").on('click', ".next-btn-back-2", function(event) {
+    $(this).addClass("hidden");
+    $(this).closest('form').find('.bid-amount').show();
+    $(this).closest('form').find('.bid-amount-2').hide();
+    $(this).closest('form').find('.next-btn-2').hide();
+    $(this).closest('form').find('.next-btn-1').show();
 });
 
 $("body").on('click', ".next-btn-2", function(event) {
@@ -859,6 +920,7 @@ $("body").on('click', ".next-btn-2", function(event) {
         $(this).closest('form').find('.bid-amount-2').hide();
         $(this).closest('form').find('.submitbtn').show();
         $(this).closest('form').find('.enter-pin').show();
+        $(this).closest('form').find('.next-btn-back-2').addClass("hidden");
     // }
 });
 
@@ -872,6 +934,13 @@ $("body").on('keyup', ".calc-total", function(event) {
 
    // $($(this).data("result")).val(total);
    $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
+});
+
+$("body").on('click', ".move-date", function(event) {
+    $(this).closest(".select-date").find("input[type=radio]").removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-date").attr("checked", "checked");
+    $(".move-date").removeClass("radio-color");
+    $(this).toggleClass("radio-color");
 });
 
 $('.filterdate').datepicker({
@@ -1553,3 +1622,12 @@ $("body").on('change', ".category-change", function(event) {
     }
 });
 
+$("body").on('click', ".", function(event) {
+
+       /* Swal.fire({
+            icon: "info",
+            title: "Warning",
+            text: "This Quote is to low for bidding!",
+        });*/
+
+});

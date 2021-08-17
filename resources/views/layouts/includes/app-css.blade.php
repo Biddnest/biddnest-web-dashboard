@@ -955,10 +955,10 @@
                 display: none !important;
             }
             .status-3 {
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 300;
                 background-color: #fff;
-                min-width: 120px;
+                min-width: 110px;
                 display: inline-block;
                 text-align: center;
                 color: #2E0789;
@@ -1059,5 +1059,8 @@
                 width:80%;
             }
 
-
+            .radio-color{
+                background-color:#2E0789;
+                color:#ffffff;
+            }
         </style>

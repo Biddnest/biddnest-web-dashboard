@@ -322,7 +322,7 @@
                                 <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                     <div><p class="mt-2">Total Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" />
+                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{$booking->final_estimated_quote}}" />
                                     </div>
                                 </div>
                             </div>
@@ -353,12 +353,16 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Moving Date</label>
-                                            <div>
+                                            <div class="select-date">
                                                 @foreach($booking->movement_dates as $mdate)
-                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
+{{--                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>--}}
+                                                    <label class="mr-2 move-add-date">
+                                                        <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                                        <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                    </label>
                                                 @endforeach
                                             </div>
-                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">
+{{--                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}
                                             <span class="error-message">Please enter valid</span>
                                         </div>
                                     </div>
@@ -407,6 +411,8 @@
                         </div>
                         <div class="w-50 text-right"><a class="white-text p-10" href="#"><button
                                     type="button" class="btn theme-bg white-text w-30 next-btn-1" id="next-btn-1" style="margin-bottom: 20px;">Next</button>
+                                <button type="button"
+                                        class="btn theme-bg white-text w-30 hidden next-btn-back-2" id="next-btn-back-2" style="margin-bottom: 20px;">Back</button>
                                 <button type="button"
                                         class="btn theme-bg white-text w-30 next-btn-2" id="next-btn-2" style="margin-bottom: 20px;">Next</button>
                                 <button

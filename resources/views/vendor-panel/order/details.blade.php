@@ -62,7 +62,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">Item List</a>
                                 </li>
-                                @if($booking->bid->status = \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'])
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>
@@ -72,25 +72,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Schedule</a>
                                     </li>
-                                @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['payment_pending'])
-                                        <li class="nav-item">
-                                            <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
-                                        </li>
-                                    {{--<li class="nav-item">
-                                        <a class="nav-link disabled" id="requirments-tab" href="#">Driver Details</a>
+                                @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'])
+                                    <li class="nav-item">
+                                        <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link disabled" id="requirments-tab" href="#">In Transit</a>
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link disabled" id="requirments-tab" href="#">Complete/Cancel</a>
-                                    </li>--}}
+                                        <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
+                                    </li>
                                 @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'] ))
                                    {{-- <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">My Quote</a>
@@ -238,11 +229,9 @@
                                             <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                 <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
                                             </a>
-                                        @endif
-                                        <a class="modal-toggle" data-toggle="modal" data-target="#add-role">
-                                            <button class="btn theme-br theme-text">Accept</button>
-                                        </a>
-                                        @if($booking->bid->status != \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                            <a class="modal-toggle" data-toggle="modal" data-target="#add-role">
+                                                <button class="btn theme-br theme-text">Accept</button>
+                                            </a>
                                             <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.reject', ['id'=>$booking->public_booking_id])}}" data-confirm="Are you sure, you want reject this Booking? You won't be able to undo this.">
                                                 <button class="btn">Reject</button>
                                             </a>

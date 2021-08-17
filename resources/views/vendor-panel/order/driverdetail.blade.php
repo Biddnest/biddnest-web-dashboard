@@ -51,7 +51,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">Item List</a>
                                 </li>
-                                @if($booking->bid->status = \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'])
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>
@@ -62,7 +62,7 @@
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Schedule</a>
                                     </li>
 
-                                @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['payment_pending'])
+                                @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'])
                                     <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>
@@ -108,10 +108,16 @@
                                 @endif
                             </ul>
                         </div>
-
                         <div class="not-assign">
                             @if($assigned_driver)
-                                <div class="d-flex  row margin-topneg-15" style="margin-left: 40px;">
+                                @if($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])
+                                    <div class="row margin-topneg-15" style="float: right; margin-right: 30px;">
+                                        <a href="#" class="modal-toggle" data-toggle="modal" data-target="#start-trip-modal">
+                                            <button class="btn">Start Trip</button>
+                                        </a>
+                                    </div>
+                                @endif
+                                <div class="d-flex row margin-topneg-15" style="margin-left: 40px; margin-bottom: 20px;">
                                 <div class="col-sm-4  secondg-bg   pt-10">
                                     <div class="theme-text f-14 bold p-8">
                                         Driver
@@ -144,7 +150,8 @@
                                     </div>
                                 </div>
                             @endif
-                            <form action="{{route('api.driver.assign')}}" method="POST" redirect-type="hard" data-next="refresh" data-alert="mega" data-parsley-validate>
+                            @if($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])
+                                <form action="{{route('api.driver.assign')}}" method="POST" redirect-type="hard" data-next="refresh" data-alert="mega" data-parsley-validate>
                                 <div class="d-flex row" style="padding: 20px 25px;">
                                     <div class="col-lg-6 driver-input">
                                         <input type="hidden" name="public_booking_id" value="{{$id}}">
@@ -175,14 +182,49 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="w-100 mt-3" style="text-align: center;">
-                                            <button class="btn assign-btn">assign</button>
+                                            <button class="btn assign-btn">@if($assigned_driver) Change @else Assign @endif</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="fullscreen-modal" id="start-trip-modal">
+            <div class="fullscreen-modal-body" role="document">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Start your trip</h5>
+                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.vendor.start-pin')}}"  data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.in-transit',['id'=>$booking->public_booking_id])}}"  method="PUT" data-alert="mega" data-parsley-validate>
+                    <div class="modal-body" style="padding: 10px 9px;">
+                        <div class="d-flex justify-content-center row ">
+                            <div class="col-sm-6 p-60">
+                                <div class="form-input">
+                                    <h4 class="text-center bold">Enter Customer's Start Pin</h4>
+                                    <input class="form-control" name="pin" id="pin" type="number" maxlength="4" minlength="4" required/>
+                                    <input class="form-control" name="public_booking_id" id="pin" type="hidden" value="{{$booking->public_booking_id}}"/>
+                                    <span class="error-message">Please enter valid OTP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-15 ">
+                        <div class="w-50">
+                        </div>
+                        <div class="w-50 text-right">
+                            <a class="white-text p-10" href="#">
+                                <button class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">START</button>
+                            </a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

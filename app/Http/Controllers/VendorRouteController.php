@@ -389,4 +389,26 @@ class VendorRouteController extends Controller
         return VendorUserController::resetPin($request->pin, $request->password, Session::get('account')['id']);
     }
 
+    public function startTrip(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' => 'required',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::startTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
+    }
+
+    public function endTrip(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'required',
+            'pin' => 'required',
+        ]);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::endTrip($request->public_booking_id, Session::get('organization_id'), $request->pin);
+    }
+
 }

@@ -169,18 +169,16 @@
                                                 {{json_decode($booking->meta, true)['distance']}} KM
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)Dedicated @else Shared @endif
+                                                {{ucwords(json_decode($booking->bid->meta, true)['type_of_movement'])}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 {{$booking->service->name}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                Rs. {{$booking->final_estimated_quote}}
+                                                Rs. {{$booking->final_quote}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @foreach($booking->movement_dates as $mdate)
-                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
-                                                @endforeach
+                                                <span class="status-3">{{json_decode($booking->bid->meta, true)['moving_date']}}</span>
                                             </div>
                                         </div>
                                     </div>

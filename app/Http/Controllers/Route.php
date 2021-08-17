@@ -604,7 +604,7 @@ class Route extends Controller
             return SliderController::edit($request->id, $request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
      }
 
-    public function slider_status_update(Request $request)
+     public function slider_status_update(Request $request)
     {
         return SliderController::statusUpdate($request->id);
     }
@@ -1233,5 +1233,10 @@ class Route extends Controller
     public function send_otp_bid(Request $request)
     {
         return OrganisationController::sendOtpForBid($request->id);
+    }
+
+    public function sendInvoiceMail(Request $request)
+    {
+        return MailController::invoice_email();
     }
 }

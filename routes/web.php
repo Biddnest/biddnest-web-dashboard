@@ -128,6 +128,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/notification',[Router::class,'notification_add'])->name("notification_add");
 
+    Route::get('/mail',[Router::class,'sendInvoiceMail']);
+
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
     Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
     Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");

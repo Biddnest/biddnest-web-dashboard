@@ -635,9 +635,10 @@ $("body").on('change', ".change_status", function(event) {
         title: 'Are you sure want to change status?',
         icon: 'warning',
         showCancelButton: true,
-        cancelButtonColor: '#d33',
-        confirmButtonColor: '#FDC403',
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
         confirmButtonText: 'Yes!',
+
     }).then((result) => {
         if (result.isConfirmed) {
             var target = $(this).closest($(this).data("parent"));
@@ -649,11 +650,12 @@ $("body").on('change', ".change_status", function(event) {
                 } else {
                     tinyAlert("Failed", response.message);
                 }
-
             });
         }
-    })
-    return false;
+        else{
+            return false;
+        }
+    });
 });
 
 $("body").on('change', ".reply_status", function(event) {
@@ -811,14 +813,12 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
          else if(high <= quote){
             tinyAlert("Warning", "This Quote is to high for bidding!");
         }
-         else{
             $(this).hide();
             $(this).closest('form').find('.bid-amount-admin').hide();
             $(this).closest('form').find('.bid-amount-3-admin').hide();
             $(this).closest('form').find('.bid-amount-2-admin').show();
             $(this).closest('form').find('.next-btn-2-admin').show();
             $(this).closest('form').find('.next-btn-back-2-admin').removeClass("hidden");
-        }
     }
 });
 
@@ -896,13 +896,13 @@ $("body").on('click', ".next-btn-1", function(event) {
 
             });
             // megaAlert("Warning", "This Quote is to high for bidding!");
-        } else {
+        }
             $(this).hide();
             $(this).closest('form').find('.bid-amount').hide();
             $(this).closest('form').find('.bid-amount-2').show();
             $(this).closest('form').find('.next-btn-2').show();
             $(this).closest('form').find('.next-btn-back-2').removeClass("hidden");
-        }
+
     }
 });
 

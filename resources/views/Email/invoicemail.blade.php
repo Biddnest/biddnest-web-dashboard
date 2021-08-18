@@ -7,12 +7,9 @@
     <meta name="viewport" content="width=455">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,600,700" rel="stylesheet" type="text/css">
 
-    <!--[if mso]>
-    <style type=”text/css”>
+    @component('style')
         td{font-family: Arial, sans-serif !important;}
-    </style>
-    <![endif]-->
-    <style type="text/css">
+
         a {
             outline: none;
             color: #00baf2;
@@ -70,10 +67,10 @@
         .tpl-repeatmovewrap>.tpl-repeatmove {
             top: -15px !important;
         }
-    </style>
+    @endcomponent
 </head>
 <body style="margin:0; padding:0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; background-color:#edf1f2;">
-<table width="100%" cellspacing="0" cellpadding="0">
+    <table width="100%" cellspacing="0" cellpadding="0">
 
     <!-- fix for gmail -->
     <tr>
@@ -286,7 +283,7 @@
             </table>
         </td>
     </tr>
-</table>
+    </table>
 
 </body>
 </html>

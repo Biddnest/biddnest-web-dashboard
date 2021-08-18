@@ -71,7 +71,8 @@
                     </div>
                     <div class="tab-content border-top margin-topneg-7" id="myTabContent">
                         <div class="tab-pane fade show active " id="bidding" role="tabpanel" aria-labelledby="quotation-tab">
-                            <div class="view-more">
+                            @if($booking->status >= \App\Enums\BookingEnums::$STATUS['biding'])
+                                <div class="view-more">
                                 <div class="d-flex row p-15  ">
                                     <div class="col-sm-4 p-10 d-felx justify-content-center">
                                         <div class="text-center ">
@@ -165,6 +166,13 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. Confirmation Pending From Customer.</i></p>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="border-top-3">
                                 <div class="d-flex justify-content-start">

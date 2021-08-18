@@ -631,19 +631,28 @@ $("body").on('keyup', "#amount", function(event) {
 });
 
 $("body").on('change', ".change_status", function(event) {
-    var target = $(this).closest($(this).data("parent"));
-    if(confirm('Are you sure want to change status?')) {
-        $.update($(this).data("url"), {}, function (response) {
-            Logger.info(response);
-            if (response.status == "success") {
-                tinySuccessAlert("Status changed Successfully", response.message);
-                target.hide();
-            } else {
-                tinyAlert("Failed", response.message);
-            }
+    Swal.fire({
+        title: 'Are you sure want to change status?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonColor: '#FDC403',
+        confirmButtonText: 'Yes!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var target = $(this).closest($(this).data("parent"));
+            $.update($(this).data("url"), {}, function (response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    tinySuccessAlert("Status changed Successfully", response.message);
+                    target.hide();
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
 
-        });
-    }
+            });
+        }
+    })
     return false;
 });
 

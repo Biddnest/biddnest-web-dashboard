@@ -1237,7 +1237,7 @@ class Route extends Controller
 
     public function sendInvoiceMail(Request $request)
     {
-        return MailController::invoice_email();
+        return MailController::invoice_email($request->booking_id);
     }
 
     public function checkServiceable(Request $request){

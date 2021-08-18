@@ -331,19 +331,19 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Pincode</label>
-                                                            <input type="text" data-parsley-type="number" placeholder="620001" name="destination[meta][pincode]" id="dest-pin" class="form-control" maxlength="6" minlength="6" required>
+                                                            <input type="text" data-parsley-type="number" placeholder="620001" name="destination[meta][pincode]" id="dest-pin" class="form-control" maxlength="6" minlength="6" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Floor </label>
-                                                            <input type="number" placeholder="5" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                                            <input type="number" placeholder="5" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required >
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>

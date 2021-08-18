@@ -78,7 +78,7 @@
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
                                     <label class="container" style="margin-top: 10px;margin-left:-30px">
-                                        <input type="hidden" value="true" name="meta[self_booking]" id="slef">
+                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">
                                         <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? true : false">
                                         <!-- <span class="checkmark"></span> -->
                                     </label>
@@ -119,14 +119,14 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>From Address </label>
-                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][geocode]" id="source-autocomplete" class="form-control" required>
+                              <input type="text" placeholder="Choose on map" name="source[meta][geocode]" class="form-control source-autocomplete" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>From Adress line 1</label>
-                              <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line1]"  class="form-control" required>
+                              <input type="text" placeholder="Flat no, Street no" name="source[meta][address_line1]"  class="form-control" required>
                               <input type="hidden"  name="source[lat]" id="source-lat" class="form-control" required>
                               <input type="hidden"  name="source[lng]" id="source-lng" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
@@ -143,43 +143,46 @@
                                 <div class="col-sm-12">
                                     <div class="form-input">
                                         <label>From Adress line 2</label>
-                                        <input type="text" placeholder="SVM Complex,indiranagar,Benguluru" name="source[meta][address_line2]" id="" class="form-control" required>
+                                        <input type="text" placeholder="Landmark, Area" name="source[meta][address_line2]" class="form-control source-autocomplete" required readonly>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="Benguluru" id="source-city" class="form-control" name="source[meta][city]" required>
+                                    <input type="text" placeholder="City" id="source-city" class="form-control" name="source[meta][city]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From State</label>
-                                    <input type="text" placeholder="Karnataka" id="source-state" class="form-control" name="source[meta][state]" required>
+                                    <input type="text" placeholder="State" id="source-state" class="form-control" name="source[meta][state]" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="530000" id="source-pin" class="form-control" name="source[meta][pincode]" required>
+                                  <input type="text" placeholder="560097" id="source-pin" class="form-control" name="source[meta][pincode]" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
-                                <div class="col-sm-6">
-                                </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Floor</label>
-                                  <input type="number" placeholder="3rd Floor" id="" value="0" name="source[meta][floor]" class="form-control" required>
+                                  <input type="number" placeholder="3rd Floor" id="" value="0" min="-3" max="99" name="source[meta][floor]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-group">
-                                <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Do you have lift</label>
+                                <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Flat/APARTMENT has SERVICE Lift?</label>
                                     <label class="container" style="margin-top: 10px; margin-left:-30px">
                                         <input type="hidden" value="0" name="source[meta][lift]" id="letter">
                                         <input type="checkbox" name="select_letter" value="1" id="Lift1"
@@ -198,7 +201,7 @@
                             <div class="col-sm-6">
                                 <div class="form-input">
                                 <label>To  Address</label>
-                                <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][geocode]" id="dest-autocomplete" class="form-control">
+                                <input type="text" placeholder="Choose on map" name="destination[meta][geocode]" class="form-control dest-autocomplete">
                                     <input type="hidden"  name="destination[lat]" id="dest-lat" class="form-control" required>
                                     <input type="hidden"  name="destination[lng]" id="dest-lng" class="form-control" required>
                                 <span class="error-message">Please enter valid</span>
@@ -207,7 +210,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>To Adress line 1</label>
-                              <input type="text" placeholder="Srm colony,Chennai" name="destination[meta][address_line1]" id="" class="form-control" required>
+                              <input type="text" placeholder="Flat no, Street no" name="destination[meta][address_line1]" id="" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -220,44 +223,48 @@
                             <div class="d-flex row justify-content-between">
                                 <div class="col-sm-12">
                                     <div class="form-input">
-                                        <label>From Adress line 2</label>
-                                        <input type="text" name="destination[meta][address_line2]" placeholder="SVM Complex,indiranagar,Benguluru" id="" class="form-control" required>
+                                        <label>To Adress line 2</label>
+                                        <input type="text" name="destination[meta][address_line2]" placeholder="Landmark, Area" id="" class="form-control dest-autocomplete" required readonly>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="Chennai" id="dest-city"  name="destination[meta][city]" class="form-control" required>
+                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="Chennai" id="dest-state"  name="destination[meta][state]" class="form-control" required>
+                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" class="form-control" required>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="530001" name="destination[meta][pincode]"  id="dest-pin" class="form-control" required>
+                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control" maxlength="6" minlength="6" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
-                                <div class="col-sm-6">
-                                </div>
+
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
-                                    <input type="number" placeholder="1st floor" value="0" name="destination[meta][floor]" id="" class="form-control" required>
+                                    <input type="number" placeholder="5" min="-3" max="99" value="0" name="destination[meta][floor]" id="" class="form-control" required>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-inputs">
-                                <label class="form-check-box"   style="margin-top: 10px; margin-left:8px" for="Lift2">Do you have lift</label>
+                                <label class="form-check-box"   style="margin-top: 10px; margin-left:8px" for="Lift2">Flat/APARTMENT has SERVICE Lift?</label>
                                   <label class="container " style="margin-top: 10px; margin-left:-30px">
                                       <input type="hidden" value="0" name="destination[meta][lift]" id="letter2">
                                       <input type="checkbox" name="select_letter" value="1" id="Lift2"
@@ -275,9 +282,9 @@
                         <div class="d-flex  row  p-20" >
                           <div class="col-sm-6" >
                             <div class="form-input" >
-                              <label class="start-date">Start date</label>
+                              <label class="start-date">Choose a Date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date dateselect" required="required" placeholder="15 Jan"  />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date bookdate cursor-pointer" required="required" placeholder="15 Jan"  />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>
@@ -285,7 +292,7 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="form-inputs">
-                            <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Need dedicated movement</label>
+                            <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Interested in shared services?</label>
                                 <label class="container"  style="margin-top: 10px; margin-left:-30px">
                                     <input type="hidden" value="0" name="source[meta][shared_service]" id="m_type">
                                     <input type="checkbox" name="select_letter" value="1" id="movemnt"
@@ -306,8 +313,8 @@
                         <div class="d-flex  row p-20">
                           <div class="col-sm-6">
                             <div class="form-input">
-                            <label>Category</label>
-                                <select  id="" name="service_id" class="form-control category-select" data-target=".range" required>
+                            <label>Movement Type</label>
+                                <select  id="" name="service_id" class="form-control category-select " data-target=".range" required>
                                     <option value="">--select--</option>
                                  @foreach($categories as $category)
 
@@ -352,14 +359,14 @@
 
                                     <td class="">
                                         <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">Choose Item</option>
+                                            <option value="">-- Select --</option>
 
                                         </select>
                                     </td>
 
                                     <td class="">
                                         <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">Choose Item</option>
+                                            <option value="">-- Select --</option>
 
                                         </select>
                                     </td>
@@ -393,7 +400,7 @@
                         <div class="d-flex  flex-row  p-10 border-bottom">
                           <div class="col-sm-12" style="margin-left: -5px;">
                             <div class="form-input">
-                              <label>Comments from Customers</label>
+                              <label>Comments/Instructions from Customers</label>
                               <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50"></textarea>
                               <span class="error-message">Please enter valid</span>
@@ -436,13 +443,13 @@
 
             <td class="">
                 <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                    <option value="">Choose Item</option>
+                    <option value="">-- Select --</option>
                 </select>
             </td>
 
             <td class="">
                 <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                    <option value="">Choose Item</option>
+                    <option value="">-- Select --</option>
                 </select>
             </td>
 

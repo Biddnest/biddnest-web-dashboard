@@ -359,8 +359,8 @@
                                     <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->other_charges ?? 'Not generated'}}</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: left; padding-left: 14px !important;">Discount <br /> @if( $booking->payment && $booking->payment->coupon) {{ $booking->payment->coupon ?? 'Not generated' }} @endif</td>
-                                    <td style="text-align: left; padding-left: 14px !important;">{{$booking->payment->discount_amount ?? 'Not generated'}}</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">Discount <br /> @if($booking->payment && $booking->payment->coupon) {{$booking->payment->coupon->name}} @else {{'Not generated' }} @endif</td>
+                                    <td style="text-align: left; padding-left: 14px !important;">@if($booking->payment && $booking->payment->discount_amount) {{$booking->payment->discount_amount}} @else {{'Not generated'}} @endif</td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left; padding-left: 14px !important;">Tax</td>

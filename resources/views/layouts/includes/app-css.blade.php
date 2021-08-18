@@ -1063,4 +1063,11 @@
                 background-color:#2E0789;
                 color:#ffffff;
             }
+
+            select:hover{
+                cursor: pointer;
+            }
+            option:hover{
+                cursor: pointer !important;
+            }
         </style>

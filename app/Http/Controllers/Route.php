@@ -1239,4 +1239,16 @@ class Route extends Controller
     {
         return MailController::invoice_email();
     }
+
+    public function checkServiceable(Request $request){
+        $validation = Validator::make($request->all(),[
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return Helper::response(true, "Here is the result.",["serviceable"=>GeoController::isServiceable($request->latitude, $request->longitude)]);
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class invoice extends Mailable
+class EmailDemo extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,10 @@ class invoice extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $order_details;
+    public function __construct($order_details)
     {
-        //
+        $this->order_details=$order_details;
     }
 
     /**
@@ -28,6 +29,7 @@ class invoice extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('Email.demoEmail')
+            ->with('details', $this->order_details);
     }
 }

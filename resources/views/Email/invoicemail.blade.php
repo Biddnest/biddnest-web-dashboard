@@ -123,17 +123,6 @@
                             <tr>
                                 <td class="no-link" align="center" width="50">
                                 </td>
-                                <td align="left" style="font: 400 0px/0px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none;">
-                                </td>
-                                <td align="right" valign="top" style="vertical-align: top; font: 400 0px/0px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding:0px 0px 40px; border-width: 1px 0px 0px;  border-color: #979797; border-style: solid none none none;">
-                                    <br>
-                                </td>
-                                <td class="no-link" align="center" width="50">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="no-link" align="center" width="50">
-                                </td>
                                 <td align="left" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none; ">Subtotal
                                 </td>
                                 <td align="right" valign="top" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none;">
@@ -197,9 +186,8 @@
                                 <td align="left" colspan="2" bgcolor="#F7F7F7" style="font: lighter 18px/24px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 55px 50px; background-color: #F7F7F7;">
                                     We’re getting your order ready and we’ll notify you with the tracking information as soon as Driver assigned. Here’s where it’s headed.
                                     <p style="font: 400 24px/30px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #4A4A4A; margin:0px; padding: 20px 0px 0px">Shipping address:</p>
-                                    <p>{{json_decode($details->destination_meta, true)['floor']}}</p>
-                                    <p>{{json_decode($details->destination_meta, true)['address']}}</p>
-                                    <p>{{json_decode($details->destination_meta, true)['geocode']}}</p>
+                                    <br>{{json_decode($details->destination_meta, true)['floor']}}, {{json_decode($details->destination_meta, true)['address']}} </br>
+                                    {{json_decode($details->destination_meta, true)['geocode']}}</p>
                                 </td>
                                 <td class="no-link" align="center" width="50">
                                 </td>

@@ -181,6 +181,8 @@ class PaymentController extends Controller
         if(!$order_exist)
             return Helper::response(false, "Payment order is not exist");
 
+        MailController::invoice_email($public_booking_id);
+
         $payment_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])
                                 ->update([
                                     'rzp_payment_id'=>$payment_id,

@@ -15,7 +15,7 @@ use Monolog\Logger;
 class MailController extends Controller
 {
     public static function invoice_email($booking_id) {
-        $details = Booking::where('public_booking_id', $booking_id)->with('payment')->with(['bid'=>function($query){
+       $details = Booking::where('public_booking_id', $booking_id)->with('payment')->with(['bid'=>function($query){
             $query->where('status', BidEnums::$STATUS['won']);
         }])->first();
 

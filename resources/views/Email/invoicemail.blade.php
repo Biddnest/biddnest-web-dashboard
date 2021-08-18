@@ -82,7 +82,7 @@
     </tr>
     <tr>
         <td style="padding: 0px 10px;">
-            <table width="480" align="center" style="margin:0 auto; margin-top: 20px; margin-bottom: 20px;" cellpadding="0" cellspacing="0">
+            <table width="480" align="center" style="margin:0 auto; margin-top: 40px; margin-bottom: 20px;" cellpadding="0" cellspacing="0">
 
                 <!-- fix for gmail -->
                 <tr>
@@ -116,8 +116,8 @@
                     <td bgcolor="#ffffff" style="padding: 0px 0px; background-color: #ffffff;">
                         <table width="100%" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td align="center" colspan="4" style="font: lighter 35px/40px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #4A4A4A; padding: 0px 50px 40px;">
-                                    Order number:  #65005056005
+                                <td align="center" colspan="4" style="font: lighter 35px/40px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #4A4A4A; padding: 0px 50px 40px; font-size: 20px;">
+                                    Order number:  #{{$details->public_booking_id}}
                                 </td>
                             </tr>
                             <tr>
@@ -137,7 +137,31 @@
                                 <td align="left" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none; ">Subtotal
                                 </td>
                                 <td align="right" valign="top" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none;">
-                                    $279.00
+                                    ₹{{$details->payment->sub_total}}
+                                    <br>
+                                </td>
+                                <td class="no-link" align="center" width="50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="no-link" align="center" width="50">
+                                </td>
+                                <td align="left" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none; ">Surge Charges
+                                </td>
+                                <td align="right" valign="top" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 0px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none;">
+                                    ₹{{$details->payment->other_charges}}
+                                    <br>
+                                </td>
+                                <td class="no-link" align="center" width="50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="no-link" align="center" width="50">
+                                </td>
+                                <td align="left" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 20px 0px 0px;">Discount
+                                </td>
+                                <td align="right" valign="top" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 20px 0px 0px;">
+                                   - ₹{{$details->payment->discount_amount}}
                                     <br>
                                 </td>
                                 <td class="no-link" align="center" width="50">
@@ -149,7 +173,7 @@
                                 <td align="left" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 20px 0px 0px;">Tax
                                 </td>
                                 <td align="right" valign="top" style="vertical-align: top; font: 300 21px/25px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 20px 0px 0px;">
-                                    $16.74
+                                    ₹{{$details->payment->tax}}
                                     <br>
                                 </td>
                                 <td class="no-link" align="center" width="50">
@@ -161,7 +185,7 @@
                                 <td align="left" style="font: 400 24px/29px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 60px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none;">Total
                                 </td>
                                 <td align="right" valign="top" style="vertical-align: top; font: 400 24px/29px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 40px 0px 60px; border-width: 1px 0px 0px; border-color: #979797; border-style: solid none none none;">
-                                    $295.74
+                                    ₹{{$details->payment->grand_total}}
                                     <br>
                                 </td>
                                 <td class="no-link" align="center" width="50">
@@ -173,16 +197,17 @@
                                 <td align="left" colspan="2" bgcolor="#F7F7F7" style="font: lighter 18px/24px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; padding: 55px 50px; background-color: #F7F7F7;">
                                     We’re getting your order ready and we’ll notify you with the tracking information as soon as Driver assigned. Here’s where it’s headed.
                                     <p style="font: 400 24px/30px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #4A4A4A; margin:0px; padding: 20px 0px 0px">Shipping address:</p>
-                                    <br>
-                                    <p>If you included an eero 6 or eero Pro 6 product on this order, the entire order will ship on or after November 2, 2020.</p>
+                                    <p>{{json_decode($details->destination_meta, true)['floor']}}</p>
+                                    <p>{{json_decode($details->destination_meta, true)['address']}}</p>
+                                    <p>{{json_decode($details->destination_meta, true)['geocode']}}</p>
                                 </td>
                                 <td class="no-link" align="center" width="50">
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4" align="center" bgcolor="#fff" style="font: 400 24px/29px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #4A4A4A; padding: 55px 50px; background-color: #fff;">Questions about your order?
-                                    <p style="font: lighter 18px/24px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; margin:0px; padding: 20px 0px 0px">Give us a call at <a href="tel:8776592347">(877) 659-2347</a> or
-                                        <br> email us at <a href="mailto:support@eero.com">support@eero.com</a>.
+                                    <p style="font: lighter 18px/24px Roboto, Source Sans Pro, Helvetica, Arial, sans-serif; color: #5D5D5D; margin:0px; padding: 20px 0px 0px">Give us a call at <a href="tel:9000000000">(+91) 9000000000</a> or
+                                        <br> email us at <a href="mailto:support@biddnest.com">support@biddnest.com</a>.
                                     </p>
                                 </td>
                             </tr>

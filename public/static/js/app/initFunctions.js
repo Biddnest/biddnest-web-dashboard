@@ -451,7 +451,7 @@ export function initOrderDistributionChart(){
 
                             legendHtml.push('<li>');
                             legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
-                            legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
+                            legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div>`);
                             legendHtml.push('</li>');
                         }
 
@@ -551,6 +551,16 @@ export function initOrderDistributionChartVendor(){
                     tooltips: {
                         enabled: true,
                         mode: 'label',
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var indice = tooltipItem.index;
+                                return  data.labels[indice] ;
+                            }
+                        }
+                    },
+                    /*tooltips: {
+                        enabled: true,
+                        mode: 'label',
                         yAlign: 'bottom',
 
 
@@ -560,7 +570,7 @@ export function initOrderDistributionChartVendor(){
                                 return  data.labels[indice] ;
                             }
                         }
-                    },
+                    },*/
                 }
             });
         }

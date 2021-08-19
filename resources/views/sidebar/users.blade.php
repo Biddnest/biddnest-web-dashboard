@@ -35,7 +35,7 @@
                                     <a href="{{route('edit-users', ["id"=>$users->id])}}"><i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i></a>
                                 </div>
                                 <label class="switch-small">
-                                    <input type="checkbox" id="switch" {{($users->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('user_status_update',['id'=>$users->id])}}">
+                                    <input type="checkbox" id="switch" {{($users->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('user_status_update',['id'=>$users->id])}}">
                                     <span class="slider"></span>
                                 </label>
                             </div>

@@ -631,6 +631,10 @@ $("body").on('keyup', "#amount", function(event) {
 });
 
 $("body").on('change', ".change_status", function(event) {
+    let el = $(this);
+    if(el.hasClass('change-click')){
+        return false;
+    }
     Swal.fire({
         title: 'Are you sure want to change status?',
         icon: 'warning',
@@ -653,6 +657,9 @@ $("body").on('change', ".change_status", function(event) {
             });
         }
         else{
+                el.addClass('change-click');
+                el.click();
+                el.removeClass('change-click');
             return false;
         }
     });
@@ -1631,12 +1638,18 @@ $("body").on('change', ".category-change", function(event) {
     }
 });
 
-$("body").on('click', ".", function(event) {
-
-       /* Swal.fire({
-            icon: "info",
-            title: "Warning",
-            text: "This Quote is to low for bidding!",
-        });*/
-
+$("body").on('click', ".csv", function(event){
+let _url = $(this).data('href');
+    $.ajax({
+        url: _url,
+        type: 'get',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if(response.status == "success")
+            {
+                tinySuccessAlert("Export Successfully", response.message);
+            }
+        }
+    });
 });

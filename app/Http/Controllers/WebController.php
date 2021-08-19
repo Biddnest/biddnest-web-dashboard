@@ -1205,6 +1205,7 @@ class WebController extends Controller
             $bookings->whereDate("created_at",">=", (string) date("Y-m-d", strtotime($request->from)))
                 ->whereDate("created_at","<=", (string) date("Y-m-d", strtotime($request->to)));
 
+
 //        return date("Y-m-d", strtotime($request->from));
         if(isset($request->org) && $request->org != "all")
         $bookings->where("organization_id",$request->org);
@@ -1215,9 +1216,24 @@ class WebController extends Controller
         if(isset($request->service) && $request->service != "all")
            $bookings->where("service_id",[$zone]);
 
-        $bookings->get();
+       /* if(isset($request)){
+            $from=$request->from;
+            $to=$request->to;
+            $organization_id =$request->org;
+            $zone = $request->zone;
+            $service= $request->service;
+        }
+        else{
+            $from="";
+            $to="";
+            $organization_id ="";
+            $zone ="";
+            $service="";
+        "from"=>$from, "to"=>$to, "org"=>$organization_id, "zone"=>$zone, "service"=>$service,
+   }*/
+
         return view('reports.sales',[
-            "report"=>Report::orderBy('id', 'DESC')->first(),
+            "booking"=>$bookings->get(),
             "zones"=>Zone::whereIn("id",$zone)->get(),
             "services"=>Service::where("deleted",CommonEnums::$NO)->get()
         ]);

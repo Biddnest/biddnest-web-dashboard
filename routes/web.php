@@ -169,7 +169,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/{id}/reschedule-order',[Router::class,'rescheduleOrder'])->name("web.reschedule-order");
     Route::put('/{id}/cancel-order',[Router::class,'cancelOrder'])->name("cancel-order");
 
-    Route::get('/reports/csv',[ExportController::class,'exoprtSale'])->name("export.csv");
+    Route::post('/reports/csv',[ExportController::class,'exoprtSale'])->name("export.csv");
     Route::get('/download/csv',[ExportController::class,'downloadCsv'])->name("download.csv");
 
     /*vendor web apis start*/

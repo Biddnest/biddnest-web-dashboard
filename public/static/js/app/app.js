@@ -1642,15 +1642,19 @@ $("body").on('click', ".csv", function(event){
     console.log($(this).data('url'));
 
     let _url = $(this).data('url');
-    let dwonload_url = $(this).data('dwonload_url');
+    let url = $(this).data('dwonload_url');
+    var data = JSON.stringify($(this).closest('form').serializeJSON());
     $.ajax({
         url: _url,
-        type: 'get',
+        type: 'POST',
         dataType: 'json',
+        data:data,
         success: function (response) {
             console.log(response);
             if(response.status == "success")
             {
+                console.log(url);
+                window.open(url+'?file=app/'+response.data.file_name, '_blank');
                 tinySuccessAlert("Export Successfully", response.message);
             }
         }

@@ -1216,14 +1216,16 @@ class WebController extends Controller
             $bookings->where("zone_id",$request->zone);
 
         if(isset($request->service) && $request->service != "all")
-           $bookings->where("service_id",[$zone]);
+           $bookings->where("service_id",$request->service);
+
         if(isset($request->from))
             extract($request->all());
 
         return view('reports.sales',[
             "booking"=>$bookings->get(),  "params"=>isset($request->from) ? compact('from', 'to', 'organization_id', 'zone', 'service') : null,
-            "zones"=>Zone::whereIn("id",$zone)->get(),
-            "services"=>Service::where("deleted",CommonEnums::$NO)->get()
+            "zones"=>Zone::get(),
+            "services"=>Service::where("deleted",CommonEnums::$NO)->get(),
+            "organization"=>Organization::get()
         ]);
     }
 }

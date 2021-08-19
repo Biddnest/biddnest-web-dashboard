@@ -96,16 +96,11 @@
             <div class="card  h-auto p-0 pt-10">
                 <form class="no-ajax">
                     <div class="d-flex pl-1  filter-menus  mt-1">
-                                <input type="hidden" class="form-control" name="from" placeholder="Pick">
-                                <input type="hidden" class="form-control" name="to" placeholder="Pick">
-                                <input type="hidden" class="form-control" name="organization_id" placeholder="organization_id">
-                                <input type="hidden" class="form-control" name="zone" placeholder="zone">
-                                <input type="hidden" class="form-control" name="service" placeholder="service">
                         <div class="col-lg-12 text-center">
                             <div class="form-input">
                                 <label class=""></label>
 {{--                                <button class="btn theme-bg white-text" type="button" data-form="{{$from}}" data-to="{{$to}}" data-org="{{$org}}" data-zone="{{$zone}}" data-service="{{$service}}">Export CSV</button>--}}
-                               <button class="btn theme-bg white-text csv" data-url="{{route('export.csv')}}"  type="button">Export CSV</button>
+                               <button class="btn theme-bg white-text csv" data-url="{{route('export.csv')}}" data-dwonload_url="{{route('download.csv')}}"  type="button">Export CSV</button>
                             </div>
                         </div>
 
@@ -121,7 +116,7 @@
         <div class="col-sm-12 pr-0 pl-0">
             <div class="card  h-auto p-0">
                 <div class="theme-text f-14 bold text-center">
-                    <img src="{{asset('static/images/graph/graph-lg.svg')}}" width="95%">
+{{--                    <img src="{{asset('static/images/graph/graph-lg.svg')}}" width="95%">--}}
                    {{-- <div class="sale-revenue-chart">
                         <canvas id="saleRevenueChart" height="230px" width="700px"></canvas>
                     </div>--}}

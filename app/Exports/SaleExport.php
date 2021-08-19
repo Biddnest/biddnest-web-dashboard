@@ -10,8 +10,10 @@ class SaleExport implements FromCollection
     /**
     * @return \Illuminate\Support\Collection
     */
+
     public function collection()
     {
         return Booking::all();
+        //date, sale
     }
 }

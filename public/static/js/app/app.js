@@ -1640,7 +1640,9 @@ $("body").on('change', ".category-change", function(event) {
 
 $("body").on('click', ".csv", function(event){
     console.log($(this).data('url'));
+
     let _url = $(this).data('url');
+    let dwonload_url = $(this).data('dwonload_url');
     $.ajax({
         url: _url,
         type: 'get',

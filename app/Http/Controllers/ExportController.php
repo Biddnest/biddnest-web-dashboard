@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ExportController extends Controller
 {
     public function exoprtSale(){
-      $export = Excel::download(new SaleExport, 'export.csv');
+      $export = Excel::store(new SaleExport(), 'public/sale-reports/export.csv');
 
        if($export)
            return Helper::response(true, "Successfully Downloaded");

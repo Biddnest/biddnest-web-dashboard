@@ -43,11 +43,13 @@ use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use App\Helper;
+use Monolog\Logger;
 
 class WebController extends Controller
 {
@@ -1196,7 +1198,7 @@ class WebController extends Controller
     {
 
         if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+            $zone = Session::get('active_zone');
         else
             $zone = Session::get('admin_zones');
 
@@ -1215,25 +1217,11 @@ class WebController extends Controller
 
         if(isset($request->service) && $request->service != "all")
            $bookings->where("service_id",[$zone]);
-
-       /* if(isset($request)){
-            $from=$request->from;
-            $to=$request->to;
-            $organization_id =$request->org;
-            $zone = $request->zone;
-            $service= $request->service;
-        }
-        else{
-            $from="";
-            $to="";
-            $organization_id ="";
-            $zone ="";
-            $service="";
-        "from"=>$from, "to"=>$to, "org"=>$organization_id, "zone"=>$zone, "service"=>$service,
-   }*/
+        if(isset($request->from))
+            extract($request->all());
 
         return view('reports.sales',[
-            "booking"=>$bookings->get(),
+            "booking"=>$bookings->get(),  "params"=>isset($request->from) ? compact('from', 'to', 'organization_id', 'zone', 'service') : null,
             "zones"=>Zone::whereIn("id",$zone)->get(),
             "services"=>Service::where("deleted",CommonEnums::$NO)->get()
         ]);

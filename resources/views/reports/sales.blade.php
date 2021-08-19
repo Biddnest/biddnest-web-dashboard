@@ -35,13 +35,13 @@
                         <div class="col-lg-2" style="padding: 5px">
                             <div class="form-input">
                                 <label class="">From</label>
-                                <input type="text" class="form-control dateselect singledate" name="from" placeholder="Pick">
+                                <input type="text" class="form-control dateselect singledate" value="@if($params){{$params->from}}@endif" name="from" placeholder="Pick">
                             </div>
                         </div>
                         <div class="col-lg-2" style="padding: 5px">
                             <div class="form-input">
                                 <label class="">To</label>
-                                <input type="text" class="form-control dateselect singledate" name="to" placeholder="Pick">
+                                <input type="text" class="form-control dateselect singledate" name="to" value="@if($params){{$params->to}}@endif" placeholder="Pick">
 
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <select id="" class="form-control " name="zone">
                                     <option value="all">All</option>
                                     @foreach($zones as $zone)
-                                        <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                        <option value="{{$zone->id}}" @if($params && $params->zone == $zone->id) selected @endif>{{$zone->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -99,8 +99,7 @@
                         <div class="col-lg-12 text-center">
                             <div class="form-input">
                                 <label class=""></label>
-{{--                                <button class="btn theme-bg white-text" type="button" data-form="{{$from}}" data-to="{{$to}}" data-org="{{$org}}" data-zone="{{$zone}}" data-service="{{$service}}">Export CSV</button>--}}
-                               <button class="btn theme-bg white-text csv" data-url="{{route('export.csv')}}" data-dwonload_url="{{route('download.csv')}}"  type="button">Export CSV</button>
+                                <button class="btn theme-bg white-text" type="button" data-url="{{route('export.csv')}}" data-dwonload_url="{{route('download.csv')}}">Export CSV</button>
                             </div>
                         </div>
 

@@ -1639,7 +1639,8 @@ $("body").on('change', ".category-change", function(event) {
 });
 
 $("body").on('click', ".csv", function(event){
-let _url = $(this).data('href');
+    console.log($(this).data('url'));
+    let _url = $(this).data('url');
     $.ajax({
         url: _url,
         type: 'get',

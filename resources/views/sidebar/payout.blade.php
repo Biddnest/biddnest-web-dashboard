@@ -1,7 +1,17 @@
 <div class="modal-header pb-0  pt-1">
-    <div class="theme-text heading f-18">
+   {{-- <div class="theme-text heading f-18">
         <a class="nav-link active pl-4 p-15" id="new-order-tab">Vendor Payout</a>
-    </div>
+    </div>--}}
+    <h3 class="f-14">
+        <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active p-15"  data-toggle="tab" href="#customer" role="tab" aria-controls="home" aria-selected="true">Vendor Payout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-15" data-toggle="tab" href="#vendor" role="tab" aria-controls="profile" aria-selected="false">Price List</a>
+            </li>
+        </ul>
+    </h3>
     <button type="button" class="close theme-text  mt-4 p-0" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <!-- <span aria-hidden="true" >&times;</span> -->
         <i class="fa fa-times theme-text" aria-hidden="true"></i>
@@ -134,5 +144,6 @@
 
             </div>--}}
         </div>
+
     </div>
 </div>

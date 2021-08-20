@@ -51,7 +51,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
-import { initRangeSlider, initRevenueChart } from "./initFunctions.js";
+import { initRangeSlider, initRevenueChart, InitBarChart } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 

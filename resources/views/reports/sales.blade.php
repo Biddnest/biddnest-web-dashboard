@@ -115,16 +115,17 @@
         <div class="col-sm-12 pr-0 pl-0">
             <div class="card  h-auto p-0">
                 <div class="theme-text f-14 bold text-center">
-{{--                    <img src="{{asset('static/images/graph/graph-lg.svg')}}" width="95%">--}}
-                   {{-- <div class="sale-revenue-chart">
-                        <canvas id="saleRevenueChart" height="230px" width="700px"></canvas>
-                    </div>--}}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <div class="chart has-fixed-height" id="bars_basic"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 
 @endsection

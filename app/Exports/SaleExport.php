@@ -12,12 +12,12 @@ class SaleExport implements FromCollection
     * @return \Illuminate\Support\Collection
     */
 
-    protected $from;
-    protected  $to;
-    protected $org;
-    protected $zone;
-    protected $service;
-    function __construct($from, $to, $org, $zone, $service)
+    public $from;
+    public  $to;
+    public $org;
+    public $zone;
+    public $service;
+    public function __construct($from, $to, $org, $zone, $service)
     {
         $this->from=$from;
         $this->to=$to;
@@ -44,7 +44,8 @@ class SaleExport implements FromCollection
        /* $bookings->with(["payment"=>function($query){
             $query->select(['other_charges', 'discount_amount', 'tax', 'sub_total', 'grand_total', ]);
         }]);*/
-        $output = $bookings->get();
+//        $output = $bookings->get();
+        $output = Booking::get();
         Log::info($this->from);
         return $output;
         //date, sale

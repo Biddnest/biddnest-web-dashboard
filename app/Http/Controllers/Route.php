@@ -1252,6 +1252,10 @@ class Route extends Controller
         return Helper::response(true, "Here is the result.",["serviceable"=>GeoController::isServiceable($request->latitude, $request->longitude)]);
     }
 
+    public function addContact(Request $request){
+        return PayoutController::registerFundAccount($request->id);
+    }
+
    /* public function export_csv(Request $request){
         return ExportController::exoprtSale();
     }*/

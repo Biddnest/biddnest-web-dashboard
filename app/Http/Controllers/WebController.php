@@ -7,6 +7,7 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Enums\NotificationEnums;
+use App\Enums\PaymentEnums;
 use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
@@ -26,6 +27,7 @@ use App\Models\InventoryPrice;
 use App\Models\Notification;
 use App\Models\Org_kyc;
 use App\Models\Page;
+use App\Models\Payment;
 use App\Models\Payout;
 use App\Models\Review;
 use App\Models\Service;
@@ -563,8 +565,9 @@ class WebController extends Controller
                 ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
                 ->sum("final_quote");
         }
+        $inventory=InventoryPrice::where(['organization_id'=>$request->id])->with('inventory')->with('service')->get();
 
-        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts,
+        return view('sidebar.vendors', ['organization'=>$vendor, 'branch'=>$branch, 'payouts'=>$payouts, 'inventories'=>$inventory, "service_types"=>$inventory,
             'graph'=>[
                 "revenue"=>[
                     "this_week"=>[
@@ -806,7 +809,7 @@ class WebController extends Controller
         }
 
 
-//        $coupons->with('zones')->orderBy('id','DESC');
+        //        $coupons->with('zones')->orderBy('id','DESC');
 
         return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH), "coupons_active"=>$coupons_active->paginate(CommonEnums::$PAGE_LENGTH), "coupons_inactive"=>$coupons_inactive->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
@@ -1204,11 +1207,11 @@ class WebController extends Controller
 
         $bookings = Booking::whereIn("zone_id",$zone);
         if(isset($request->from) && isset($request->to))
-            $bookings->whereDate("created_at",">=", (string) date("Y-m-d", strtotime($request->from)))
+            $bookings->whereIn("status", [BookingEnums::$STATUS['pending_driver_assign'], BookingEnums::$STATUS['in_transit'], BookingEnums::$STATUS['completed']])
+                ->whereDate("created_at",">=", (string) date("Y-m-d", strtotime($request->from)))
                 ->whereDate("created_at","<=", (string) date("Y-m-d", strtotime($request->to)));
 
-
-//        return date("Y-m-d", strtotime($request->from));
+        //return date("Y-m-d", strtotime($request->from));
         if(isset($request->org) && $request->org != "all")
         $bookings->where("organization_id",$request->org);
 
@@ -1218,6 +1221,30 @@ class WebController extends Controller
         if(isset($request->service) && $request->service != "all")
            $bookings->where("service_id",$request->service);
 
+        $this_week_sale = [];
+        $this_week=[];
+
+        $this_week_sale1 = [];
+        $this_week1=[];
+
+        if(isset($request->from) && isset($request->to))
+        {
+            $this_week = CarbonPeriod::create( Carbon::parse($request->from)->format("Y-m-d"),Carbon::parse($request->to)->format("Y-m-d"))->toArray();
+
+            foreach ($this_week as $key=>$date){
+                $this_week[$key] = $date->format('d M');
+                $this_week_sale[] = Payment::where("status", PaymentEnums::$STATUS['completed'])
+                    ->whereDate("created_at", (string) date("Y-m-d", strtotime($date)))->sum('grand_total');
+            }
+
+            foreach ($this_week_sale as $k=>$sale){
+                if($sale != 0){
+                    array_push($this_week_sale1, $this_week_sale[$k]);
+                    array_push($this_week1, $this_week[$k]);
+                }
+            }
+        }
+
         if(isset($request->from))
             extract($request->all());
 
@@ -1225,7 +1252,15 @@ class WebController extends Controller
             "booking"=>$bookings->get(),  "params"=>isset($request->from) ? compact('from', 'to', 'organization_id', 'zone', 'service') : null,
             "zones"=>Zone::get(),
             "services"=>Service::where("deleted",CommonEnums::$NO)->get(),
-            "organization"=>Organization::get()
+            "organization"=>Organization::get(),
+            'graph'=>[
+                "revenue"=>[
+                    "this_week"=>[
+                        "dates"=>$this_week1,
+                        "sales"=>$this_week_sale1
+                    ],
+                ]
+            ]
         ]);
     }
 }

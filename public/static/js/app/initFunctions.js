@@ -330,7 +330,7 @@ export function initRevenueChart() {
             data: {
                 labels: dataset.revenue.this_week.dates,
                 datasets: [{
-                        label: 'Last Week',
+                        label: 'This Week',
                         data: dataset.revenue.last_week.sales,
 
                         backgroundColor: [
@@ -350,7 +350,7 @@ export function initRevenueChart() {
                         ],
                         borderWidth: 1
                     },
-                    {
+                    /*{
                         label: 'This Week',
                         data: dataset.revenue.this_week.sales,
                         borderDash: [10, 5],
@@ -370,7 +370,7 @@ export function initRevenueChart() {
 
                         ],
                         borderWidth: 1
-                    }
+                    }*/
                 ]
             },
             options: {
@@ -750,50 +750,33 @@ export function InitUserZoneChart() {
 
 }
 
-export function InitBarChart() {
-    var bars_basic_element = document.getElementById('bars_basic');
-    if (bars_basic_element) {
-        var bars_basic = echarts.init(bars_basic_element);
-        bars_basic.setOption({
-            color: ['#3398DB'],
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
+export function initBarChart() {
+    console.log('barchart');
+    if ($("#bar_dataset").length) {
+        var dataset = JSON.parse($("#bar_dataset").val());
+        console.log(dataset.revenue.this_week.dates);
+        console.log(dataset.revenue.this_week.sales);
+
+        var ctx = document.getElementById('myBarChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dataset.revenue.this_week.dates,
+                datasets: [{
+                    label: 'Reports',
+                    data: dataset.revenue.this_week.sales,
+                    backgroundColor: '#5a27cead',
+                   borderColor:  '#251055',
+                    borderWidth: 1
+                }]
             },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: ['Fruit', 'Vegitable','Grains'],
-                    axisTick: {
-                        alignWithLabel: true
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    name: 'Total Products',
-                    type: 'bar',
-                    barWidth: '20%',
-                    data: [
-                        20,
-                        50,
-                        40
-                    ]
-                }
-            ]
+            }
         });
     }
 }

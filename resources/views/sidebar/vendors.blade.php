@@ -10,7 +10,10 @@
                 <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#customer" role="tab"
                    aria-controls="profile" aria-selected="false">Vendor Insights</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link p-15" id="quotation" data-toggle="tab" href="#price" role="tab"
+                   aria-controls="profile" aria-selected="false">Item Price List</a>
+            </li>
         </ul>
     </h3>
 
@@ -107,8 +110,7 @@
 
 
         </div>
-        <div class="tab-pane fade  margin-topneg-15" id="customer" role="tabpanel"
-             aria-labelledby="new-order-tab">
+        <div class="tab-pane fade  margin-topneg-15" id="customer" role="tabpanel" aria-labelledby="past-tab">
             <!-- form starts -->
 
             <div class="row d-flex  pb-3 pt-3 pl-3">
@@ -207,6 +209,50 @@
             </div>
         </div>
 
+        <div class="tab-pane fade  margin-topneg-15" id="price" role="tabpanel" aria-labelledby="past-tab"
+             aria-labelledby="new-order-tab">
+            <div class="row d-flex  pb-3 pt-3 pl-3">
+                <div class="col-lg-6 align-items-center">
+                    <h1 class="f-14  bold">Item Price List</h1>
+                </div>
+            </div>
+            <div class="col-sm-12 p-0">
+                    <table class="table  p-0">
+                        <thead class="secondg-bg border-none p-0">
+                        <tr class="text-left">
+                            <th scope="col" >Item Details</th>
+                            <th scope="col" class="text-center">Economic Price</th>
+                            <th scope="col" class="text-center">Primium Price</th>
+                        </tr>
+                        </thead>
+                        @foreach($service_types as $service_type)
+                            <tbody class="mtop-20 ">
+                            <tr class="tb-border"><td scope="row" style="font-size: 14px; font-weight: 700;">{{$service_type->service->name}}</td></tr>
+                            @foreach($inventories as $inventory)
+                                @if($service_type->service->id == $inventory->service_type)
+                                    <tr class="tb-border">
+                                        <td scope="row"> Size :{{$inventory->size}}
+                                            <br>
+                                            Material :{{$inventory->material}}
+                                        </td>
+
+                                        <td class="text-center">@if($inventory->price_economics)₹ {{$inventory->price_economics}} @else NA @endif</td>
+                                        <td class="text-center">@if($inventory->price_premium)₹ {{$inventory->price_premium}} @else NA @endif</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        @endforeach
+                    </table>
+                    @if(count($inventories) == 0)
+                        <div class="row hide-on-data">
+                            <div class="col-md-12 text-center p-20">
+                                <p class="font14"><i>. You didn't add any price on this Inventory.</i></p>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+        </div>
 
         <!--  -->
     </div>

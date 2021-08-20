@@ -17,6 +17,8 @@ use App\Models\Payout;
 use App\Models\Settings;
 use App\RazorpayX;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use App\Helper;
 use Illuminate\Support\Facades\Log;
@@ -27,8 +29,8 @@ class PayoutController extends Controller
 {
     public static function disburse()
     {
-//        $schedule_from = Carbon::parse('last sunday')->format("Y-m-d H:i:s");
-//        $schedule_to = Carbon::parse('last saturday')->format("Y-m-d H:i:s");
+        // $schedule_from = Carbon::parse('last sunday')->format("Y-m-d H:i:s");
+        // $schedule_to = Carbon::parse('last saturday')->format("Y-m-d H:i:s");
 
       $payouts = Payout::where("dispatch_at", "<=", Carbon::now())
             ->where("status", ">=", PayoutEnums::$STATUS['scheduled'])
@@ -39,9 +41,7 @@ class PayoutController extends Controller
 
         if($payouts){
 
-
-
-        $rx = new RazorpayX(Settings::where("key","razor_key")->pluck('value')[0], Settings::where("key","razor_secret")->pluck('value')[0]);
+//        $rx = new RazorpayX(Settings::where("key","razor_key")->pluck('value')[0], Settings::where("key","razor_secret")->pluck('value')[0]);
 
             foreach($payouts as $payout){
 
@@ -54,9 +54,8 @@ class PayoutController extends Controller
                     $fa = Organization::where('id',$payout->organization->parent_org_id)->pluck("rzp_fund_account_id");
                 }
 
-
                 $payload = [
-                    "account_number"=> "7878780080316316",
+                    "account_number"=> "2323230021246890",
                     "fund_account_id"=> $fa,
                     "amount"=> $payout->final_payout * 100,
                     "currency"=> "INR",
@@ -68,29 +67,34 @@ class PayoutController extends Controller
                     "notes"=> $payout->meta
                 ];
 
-                 $rx->payout();
-                return $create = $rx->create($payload);
+                 /*$rx->payout();
+                return $create = $rx->create($payload);*/
+                $client = new client();
+                $request_url = 'https://api.razorpay.com/v1/payouts/';
+                try{
+                    $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key","razorpayx_key")->pluck('value')[0], Settings::where("key","razorpayx_secret")->pluck('value')[0]], 'json'=>$payload]);
 
-                if($create['status']){
+                    if(json_decode($response->getBody(), true)['status']){
 
-                    switch($create['status']){
-                        case "queued":
-                            $status = PayoutEnums::$STATUS['queued'];
-                        break;
-                        default:
-                            $status = PayoutEnums::$STATUS['processing'];
-                        break;
+                        switch(json_decode($response->getBody(), true)['status']){
+                            case "queued":
+                                $status = PayoutEnums::$STATUS['queued'];
+                                break;
+                            default:
+                                $status = PayoutEnums::$STATUS['processing'];
+                                break;
+
+                        }
+
+                        $update_status = Payout::where("id",$payout->id)->update([
+                            "status"=>$status
+                        ]);
 
                     }
-
-                    $update_status = Payout::where("id",$payout->id)->update([
-                        "status"=>$status
-                    ]);
-
+                } catch(ClientException $e){
+                    return $e->getMessage();
                 }
-
             }
-
             Helper::response(true, "payouts processed");
         }
 
@@ -263,18 +267,23 @@ class PayoutController extends Controller
             "name"=>$org->org_name,
             "email"=>$org->email,
             "contact"=>$org->phone,
-            "type"=>"vendor_organization",
+            "type"=>"employee",
             "reference_id" => "Vendor Organization ID #".$id,
             "notes" => json_decode($org->meta, true)
         ];
 
-        $rx = new RazorpayX(Settings::where("key","razorpayx_key")->pluck('value')[0], Settings::where("key","razorpayx_secret")->pluck('value')[0]);
-        $contact = $rx->contact->create($payload);
-        Log::info("======= Dumping razorpayX addContact response =======");
-        Log::info($contact);
-        Organization::where("id",$id)->update([
-            "rzp_contact_id"=>$contact['id']
-        ]);
+        $client = new client();
+        $request_url = 'https://api.razorpay.com/v1/contacts/';
+        try{
+            $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key","razorpayx_key")->pluck('value')[0], Settings::where("key","razorpayx_secret")->pluck('value')[0]], 'json'=>$payload]);
+
+            Organization::where("id",$id)->update([
+                "rzp_contact_id"=>json_decode($response->getBody(), true)['id']
+            ]);
+
+        } catch(ClientException $e){
+            return $e->getMessage();
+        }
     }
 
     public static function registerFundAccount($id){
@@ -283,20 +292,24 @@ class PayoutController extends Controller
         $payload = [
             "contact_id"=>$org->rzp_contact_id,
             "account_type"=>"bank_account",
-            "contact"=>$org->phone,
             "bank_account"=>[
-                "name"=>json_decode($org->banking_details, true)['holder_name'],
-                "ifsc"=>json_decode($org->banking_details, true)['ifsc'],
-                "account_number"=>json_decode($org->banking_details, true)['account_no']
+                "name"=>json_decode($org->bank->banking_details, true)['holder_name'],
+                "ifsc"=>json_decode($org->bank->banking_details, true)['ifcscode'],
+                "account_number"=>json_decode($org->bank->banking_details, true)['account_no']
             ],
         ];
 
-        $rx = new RazorpayX(Settings::where("key","razorpayx_key")->pluck('value')[0], Settings::where("key","razorpayx_secret")->pluck('value')[0]);
-        $contact = $rx->fund_account->create($payload);
-        Log::info("======= Dumping razorpayX addFundAccount response =======");
-        Log::info($contact);
-        Organization::where("id",$id)->update([
-            "rzp_contact_id"=>$contact['id']
-        ]);
+        $client = new client();
+        $request_url = 'https://api.razorpay.com/v1/fund_accounts/';
+        try{
+            $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key","razorpayx_key")->pluck('value')[0], Settings::where("key","razorpayx_secret")->pluck('value')[0]], 'json'=>$payload]);
+
+            Organization::where("id",$id)->update([
+                "rzp_fund_account_id"=>json_decode($response->getBody(), true)['id']
+            ]);
+
+        } catch(ClientException $e){
+            return $e->getMessage();
+        }
     }
 }

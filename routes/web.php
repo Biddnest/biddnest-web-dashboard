@@ -147,6 +147,7 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/payout',[Router::class,'payout_add'])->name("payout_add");
     Route::put('/payout',[Router::class,'payout_edit'])->name("payout_edit");
+    Route::get('/contact/{id}',[Router::class,'addContact'])->name("payout_contact");
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 

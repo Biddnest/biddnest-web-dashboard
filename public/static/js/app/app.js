@@ -51,7 +51,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
-import { initRangeSlider, initRevenueChart, InitBarChart } from "./initFunctions.js";
+import { initRangeSlider, initRevenueChart, initBarChart } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -1644,10 +1644,11 @@ $("body").on('click', ".csv", function(event){
     let _url = $(this).data('url');
     let url = $(this).data('dwonload_url');
     var data = JSON.stringify($(this).closest('form').serializeJSON());
+    console.log(data);
     $.ajax({
         url: _url,
         type: 'POST',
-        dataType: 'json',
+        contentType: "application/json",
         data:data,
         success: function (response) {
             console.log(response);

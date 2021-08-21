@@ -91,26 +91,6 @@
 
     </div>
 
-    {{--<div class="d-flex flex-row justify-content-between Dashboard-lcards ">
-        <div class="col-sm-12 pr-0 pl-0">
-            <div class="card  h-auto p-0 pt-10">
-                <form class="no-ajax">
-                    <div class="d-flex pl-1  filter-menus  mt-1">
-                        <div class="col-lg-12 text-center">
-                            <div class="form-input">
-                                <label class=""></label>
-                                <button class="btn theme-bg white-text" type="button" >Export CSV</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </div>
-        </div>
-    </div>--}}
-
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
         <div class="col-sm-12 pr-0 pl-0">
             <div class="card  h-auto p-0">

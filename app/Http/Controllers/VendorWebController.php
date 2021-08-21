@@ -359,9 +359,19 @@ class VendorWebController extends Controller
         $bidding=Bid::where(['booking_id'=>$booking->id, 'organization_id'=>Session::get('organization_id')])->first();
 
         if($bidding->status == BidEnums::$STATUS['lost'])
-            $bidding_graph=BookingsController::getposition(Session::get('account')['id'], $request->id);
+            $bidding_graph_x=BookingsController::getposition(Session::get('account')['id'], $request->id)['axis']['x'];
+            $bidding_graph_y=BookingsController::getposition(Session::get('account')['id'], $request->id)['axis']['y'];
+            $rank=BookingsController::getposition(Session::get('account')['id'], $request->id)['rank'];
 
-        return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'bidding_graph'=>$bidding_graph]);
+        return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'rank'=>$rank,
+            'graph'=>[
+                "revenue"=>[
+                    "this_week"=>[
+                        "dates"=>$bidding_graph_x,
+                        "sales"=>$bidding_graph_y
+                    ],
+                ]
+            ]]);
     }
 
     public function scheduleOrder(Request $request)

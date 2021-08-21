@@ -119,12 +119,15 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex  justify-content-center ">
+                                                <input type="hidden" value='@json($graph)' id="bar_dataset">
                                                 <div class="position-graph">
                                                     <h5>Below chart shows your position along with others</h5>
-                                                    <img src="{{asset('static/vendor/images/Group 14409.svg')}}">
+                                                    <div class="revenue-chart">
+                                                        <canvas id="myBarChart" height="230px" width="700px"></canvas>
+                                                    </div>
                                                     <div class="d-flex justify-content-between status-badge secondg-bg current-position">
                                                         <div > Your Position</div>
-                                                        <div class="bold">4th </div>
+                                                        <div class="bold">{{$rank}}</div>
                                                     </div>
                                                 </div>
                                             </div>

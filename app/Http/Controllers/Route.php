@@ -604,7 +604,7 @@ class Route extends Controller
             return SliderController::edit($request->id, $request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
      }
 
-    public function slider_status_update(Request $request)
+     public function slider_status_update(Request $request)
     {
         return SliderController::statusUpdate($request->id);
     }
@@ -1234,4 +1234,29 @@ class Route extends Controller
     {
         return OrganisationController::sendOtpForBid($request->id);
     }
+
+    public function sendInvoiceMail(Request $request)
+    {
+        return MailController::invoice_email($request->booking_id);
+    }
+
+    public function checkServiceable(Request $request){
+        $validation = Validator::make($request->all(),[
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return Helper::response(true, "Here is the result.",["serviceable"=>GeoController::isServiceable($request->latitude, $request->longitude)]);
+    }
+
+    public function addContact(Request $request){
+        return PayoutController::registerFundAccount($request->id);
+    }
+
+   /* public function export_csv(Request $request){
+        return ExportController::exoprtSale();
+    }*/
 }

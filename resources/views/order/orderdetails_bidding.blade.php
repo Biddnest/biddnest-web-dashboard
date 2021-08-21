@@ -71,21 +71,22 @@
                     </div>
                     <div class="tab-content border-top margin-topneg-7" id="myTabContent">
                         <div class="tab-pane fade show active " id="bidding" role="tabpanel" aria-labelledby="quotation-tab">
-                            <div class="view-more">
+                            @if($booking->status >= \App\Enums\BookingEnums::$STATUS['biding'])
+                                <div class="view-more">
                                 <div class="d-flex row p-15  ">
-                                    <div class="col-sm-4 p-10 d-felx justify-content-center">
+                                    <div class="col-sm-12 p-10 d-felx justify-content-center">
                                         <div class="text-center ">
                                             <h3 class="f-18 theme-text bold p-10">Time Left</h3>
                                             {{--<h1 class="timer" data-time="{{\Carbon\Carbon::parse($booking->bid_result_at)->format('Y-m-d h:i:s')}}"></h1>--}}
                                             <h1><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h1>
                                         </div>
                                     </div>
-                                    <div class="col-sm-7 p-10">
+                                    {{--<div class="col-sm-7 p-10">
                                         <div class=" text-center border-left-blue">
                                             <h3 class="text-center f-18 theme-text bold p-10">Quotation statitics</h3>
                                             <img src="{{asset('static/images/graph/graphbid.svg')}}" alt="" srcset="">
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
                                 <div class="d-flex  row  p-10 theme-text ml-20">
                                     @if($booking->status == \App\Enums\BookingEnums::$STATUS['biding'])
@@ -124,7 +125,7 @@
                                                 </thead>
                                                 <tbody class="mtop-15">
                                                     @foreach($booking->biddings as $bidding)
-                                                        <tr class="tb-border  cursor-pointer">
+                                                        <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>$bidding->organization->id]) }}">
                                                             <td  class="text-center">{{$bidding->organization->org_name ?? "Vendor Name"}}</td>
                                                             <td class="">{{$bidding->organization->commission ?? 10}}%</td>
                                                             <td class="">&#8377;{{$bidding->bid_amount}}</td>
@@ -165,6 +166,13 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. Confirmation Pending From Customer.</i></p>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="border-top-3">
                                 <div class="d-flex justify-content-start">

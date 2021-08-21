@@ -19,7 +19,7 @@ export function initMapPicker() {
             latitudeInput: $("#source-lat"),
             longitudeInput: $("#source-lng"),
             radiusInput: null,
-            locationNameInput: $("#source-autocomplete")
+            locationNameInput: $(".source-autocomplete")
         },
         enableAutocomplete: true,
         enableAutocompleteBlur: false,
@@ -27,7 +27,52 @@ export function initMapPicker() {
         addressFormat: 'street_address',
         enableReverseGeocode: true,
         draggable: true,
-        onchanged: function(currentLocation, radius, isMarkerDropped) {},
+        onchanged: function(currentLocation, radius, isMarkerDropped) {
+           /* $.get(`{{route('admin.zone.check-serviceability')}}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`,function(response){
+                console.log(response);
+                if(response.status == "success" && response.data.serviceable === true){
+
+                    var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+                    $.get(url, function (response){
+                        console.log(response);
+                        let street = [];
+                        let city, state, pincode =null;
+                        for(let i=0; i<= response.results[0].address_components.length; i++)
+                        {
+                            let addr = response.results[0].address_components[i];
+                            if(typeof addr != "undefined") {
+
+                                if (addr.types.includes('locality') && addr.types.includes('political')) {
+                                    console.log(addr.long_name);
+                                    if(!city)
+                                        city=addr.long_name;
+                                }
+                                if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                                    if(!state)
+                                        state=addr.long_name;
+                                }
+                                if (addr.types.includes('postal_code')) {
+                                    if(!pincode)
+                                        pincode=addr.long_name;
+                                }
+                            }
+                        }
+                        $("#source-city").val(city);
+                        $("#source-state").val(state);
+                        $("#source-pin").val(pincode);
+                        console.log(city, state, pincode);
+                    });
+
+                }
+                else{
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Sorry",
+                        text: "We are currently not serviceable in selected area.",
+                    });
+                }
+            });*/
+        },
         onlocationnotfound: function(locationName) {},
         oninitialized: function(component) {},
         // must be undefined to use the default gMaps marker
@@ -53,7 +98,7 @@ export function initMapPicker() {
             latitudeInput: $("#dest-lat"),
             longitudeInput: $("#dest-lng"),
             radiusInput: null,
-            locationNameInput: $("#dest-autocomplete")
+            locationNameInput: $(".dest-autocomplete")
         },
         enableAutocomplete: true,
         enableAutocompleteBlur: false,
@@ -285,7 +330,7 @@ export function initRevenueChart() {
             data: {
                 labels: dataset.revenue.this_week.dates,
                 datasets: [{
-                        label: 'Last Week',
+                        label: 'This Week',
                         data: dataset.revenue.last_week.sales,
 
                         backgroundColor: [
@@ -305,7 +350,7 @@ export function initRevenueChart() {
                         ],
                         borderWidth: 1
                     },
-                    {
+                    /*{
                         label: 'This Week',
                         data: dataset.revenue.this_week.sales,
                         borderDash: [10, 5],
@@ -325,7 +370,7 @@ export function initRevenueChart() {
 
                         ],
                         borderWidth: 1
-                    }
+                    }*/
                 ]
             },
             options: {
@@ -406,7 +451,7 @@ export function initOrderDistributionChart(){
 
                             legendHtml.push('<li>');
                             legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
-                            legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
+                            legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div>`);
                             legendHtml.push('</li>');
                         }
 
@@ -506,6 +551,16 @@ export function initOrderDistributionChartVendor(){
                     tooltips: {
                         enabled: true,
                         mode: 'label',
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var indice = tooltipItem.index;
+                                return  data.labels[indice] ;
+                            }
+                        }
+                    },
+                    /*tooltips: {
+                        enabled: true,
+                        mode: 'label',
                         yAlign: 'bottom',
 
 
@@ -515,7 +570,7 @@ export function initOrderDistributionChartVendor(){
                                 return  data.labels[indice] ;
                             }
                         }
-                    },
+                    },*/
                 }
             });
         }
@@ -693,6 +748,37 @@ export function InitUserZoneChart() {
         });
     }
 
+}
+
+export function initBarChart() {
+    console.log('barchart');
+    if ($("#bar_dataset").length) {
+        var dataset = JSON.parse($("#bar_dataset").val());
+        console.log(dataset.revenue.this_week.dates);
+        console.log(dataset.revenue.this_week.sales);
+
+        var ctx = document.getElementById('myBarChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dataset.revenue.this_week.dates,
+                datasets: [{
+                    label: 'Reports',
+                    data: dataset.revenue.this_week.sales,
+                    backgroundColor: '#5a27cead',
+                   borderColor:  '#251055',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
 }
 
 export function initCountdown() {

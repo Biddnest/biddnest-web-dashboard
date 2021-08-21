@@ -394,6 +394,8 @@ class OrganisationController extends Controller
             $result_bank = $bank->save();
 
             Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
+            PayoutController::registerContact($id);
+            PayoutController::registerFundAccount($id);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't save data");

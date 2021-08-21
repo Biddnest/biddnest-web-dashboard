@@ -59,7 +59,7 @@
                                         <span class="status-badge red-bg text-black-50 text-center">Open</span>
                                         @break
 
-                                        @case(\App\Enums\CommonEnums::$TICKET_STATUS['aprove'])
+                                        @case(\App\Enums\CommonEnums::$TICKET_STATUS['approve'])
                                         <span class="status-badge green-bg text-black-50 text-center">Aprooved</span>
                                         @break
 

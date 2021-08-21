@@ -70,7 +70,7 @@
                                             @default
                                                 <span class="status-badge info-bg text-center">Unknown</span>
                                         @endswitch--}}
-                                        <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}">
+                                        <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}">
                                     </td>
                                     {{--<td class="">
                                         <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}">

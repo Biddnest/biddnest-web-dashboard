@@ -11,6 +11,7 @@ use App\Http\Controllers\VendorRouteController as VendorRouter;
 use App\Http\Controllers\VendorWebApiRouteController as VendorApiRouter;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\VendorWebController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
@@ -128,6 +129,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/notification',[Router::class,'notification_add'])->name("notification_add");
 
+    Route::get('/mail/{booking_id}',[Router::class,'sendInvoiceMail']);
+
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
     Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
     Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
@@ -144,6 +147,7 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/payout',[Router::class,'payout_add'])->name("payout_add");
     Route::put('/payout',[Router::class,'payout_edit'])->name("payout_edit");
+    Route::get('/contact/{id}',[Router::class,'addContact'])->name("payout_contact");
 
     Route::get('/endbid',[Router::class,'end_bid'])->name("end_bid");
 
@@ -166,6 +170,8 @@ Route::prefix('web/api')->group(function () {
     Route::put('/{id}/reschedule-order',[Router::class,'rescheduleOrder'])->name("web.reschedule-order");
     Route::put('/{id}/cancel-order',[Router::class,'cancelOrder'])->name("cancel-order");
 
+    Route::post('/reports/csv',[ExportController::class,'exoprtSale'])->name("export.csv");
+    Route::get('/download/csv',[ExportController::class,'downloadCsv'])->name("download.csv");
 
     /*vendor web apis start*/
     Route::prefix('vendor')->group(function () {
@@ -242,6 +248,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/faq',[WebController::class,'faq'])->name("admin.faq");
         Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
+
+        Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");
 
         //booking and orders
         Route::prefix('booking')->group(function () {

@@ -48,6 +48,7 @@ import {
     initRangeSlider,
     initRevenueChart,
     InitUserZoneChart,
+    initBarChart,
     initToggles,
     initSelect,
     initOrderDistributionChart,
@@ -103,6 +104,7 @@ barba.hooks.after((data) => {
     initRangeSlider();
     //keep charts at end
     initRevenueChart();
+    initBarChart();
     initOrderDistributionChart();
     initOrderDistributionChartVendor();
     InitUserZoneChart();
@@ -133,5 +135,6 @@ $(document).ready(function(){
     InitUserZoneChart();
     initTextAreaEditor();
     initSortable();
+    initBarChart();
 });
 

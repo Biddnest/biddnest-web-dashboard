@@ -99,7 +99,7 @@
                                             @default
                                             <span class="status-badge info-bg">Unknown</span>
                                         @endswitch--}}
-                                        <input type="checkbox" {{($category->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer" data-url="{{route('status_update',['id'=>$category->id])}}">
+                                        <input type="checkbox" {{($category->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('status_update',['id'=>$category->id])}}">
                                         {{-- <input type="checkbox" {{($category->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}} data-toggle="toggle" data-size="xs" data-width="110" data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="{{($category->status == \App\Enums\CommonEnums::$YES) ? "Active" : "Inactive"}}" data-off="{{($category->status == \App\Enums\CommonEnums::$NO) ? "Active" : "Inactive"}}" id="category_{{$category->id}}" class="change_status" data-url="{{route('status_update',['id'=>$category->id])}}">--}}
                                     </td>
                                     {{--<td class="cursor-pointer">

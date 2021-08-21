@@ -51,7 +51,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
-import { initRangeSlider, initRevenueChart } from "./initFunctions.js";
+import { initRangeSlider, initRevenueChart, initBarChart } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -631,20 +631,38 @@ $("body").on('keyup', "#amount", function(event) {
 });
 
 $("body").on('change', ".change_status", function(event) {
-    var target = $(this).closest($(this).data("parent"));
-    if(confirm('Are you sure want to change status?')) {
-        $.update($(this).data("url"), {}, function (response) {
-            Logger.info(response);
-            if (response.status == "success") {
-                tinySuccessAlert("Status changed Successfully", response.message);
-                target.hide();
-            } else {
-                tinyAlert("Failed", response.message);
-            }
-
-        });
+    let el = $(this);
+    if(el.hasClass('change-click')){
+        return false;
     }
-    return false;
+    Swal.fire({
+        title: 'Are you sure want to change status?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var target = $(this).closest($(this).data("parent"));
+            $.update($(this).data("url"), {}, function (response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    tinySuccessAlert("Status changed Successfully", response.message);
+                    target.hide();
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
+            });
+        }
+        else{
+                el.addClass('change-click');
+                el.click();
+                el.removeClass('change-click');
+            return false;
+        }
+    });
 });
 
 $("body").on('change', ".reply_status", function(event) {
@@ -802,14 +820,12 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
          else if(high <= quote){
             tinyAlert("Warning", "This Quote is to high for bidding!");
         }
-         else{
             $(this).hide();
             $(this).closest('form').find('.bid-amount-admin').hide();
             $(this).closest('form').find('.bid-amount-3-admin').hide();
             $(this).closest('form').find('.bid-amount-2-admin').show();
             $(this).closest('form').find('.next-btn-2-admin').show();
             $(this).closest('form').find('.next-btn-back-2-admin').removeClass("hidden");
-        }
     }
 });
 
@@ -887,13 +903,13 @@ $("body").on('click', ".next-btn-1", function(event) {
 
             });
             // megaAlert("Warning", "This Quote is to high for bidding!");
-        } else {
+        }
             $(this).hide();
             $(this).closest('form').find('.bid-amount').hide();
             $(this).closest('form').find('.bid-amount-2').show();
             $(this).closest('form').find('.next-btn-2').show();
             $(this).closest('form').find('.next-btn-back-2').removeClass("hidden");
-        }
+
     }
 });
 
@@ -1622,12 +1638,26 @@ $("body").on('change', ".category-change", function(event) {
     }
 });
 
-$("body").on('click', ".", function(event) {
+$("body").on('click', ".csv", function(event){
+    console.log($(this).data('url'));
 
-       /* Swal.fire({
-            icon: "info",
-            title: "Warning",
-            text: "This Quote is to low for bidding!",
-        });*/
-
+    let _url = $(this).data('url');
+    let url = $(this).data('dwonload_url');
+    var data = JSON.stringify($(this).closest('form').serializeJSON());
+    console.log(data);
+    $.ajax({
+        url: _url,
+        type: 'POST',
+        contentType: "application/json",
+        data:data,
+        success: function (response) {
+            console.log(response);
+            if(response.status == "success")
+            {
+                console.log(url);
+                window.open(url+'?file=app/'+response.data.file_name, '_blank');
+                tinySuccessAlert("Export Successfully", response.message);
+            }
+        }
+    });
 });

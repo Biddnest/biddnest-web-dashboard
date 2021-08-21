@@ -16,9 +16,9 @@ class CommonResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        $response = $next($request);
-        $response->header('Author', "Diginnovators Private Limited");
+        return $response = $next($request);
+        /* $response->header('Author', "Diginnovators Private Limited");
         $response->header('Author-Url', "www.diginnovators.com");
-        return $response;
+        return $response;*/
     }
 }

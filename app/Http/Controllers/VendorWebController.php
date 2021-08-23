@@ -381,7 +381,7 @@ class VendorWebController extends Controller
 
     public function scheduleOrder(Request $request)
     {
-        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+        $booking=Booking::where('public_booking_id', $request->id)->whereInNot('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['cancelled']])->with('inventories')->with('service')->with(['movement_dates'=>function($query){
             $query->pluck('date');
         }])->with(['bid'=>function($q){
             $q->where(['organization_id'=>Session::get('organization_id')]);

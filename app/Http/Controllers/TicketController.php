@@ -432,7 +432,7 @@ class TicketController extends Controller
 
     public static function createRejectCall($sender_id, $ticket_type, $data)
     {
-        $meta=["Public_booking_id"=>$data];
+        $meta=["public_booking_id"=>$data];
         $title = TicketEnums::$TEMPLATES['call_back']['title_template'];
         $body = "Request to Cancel this Oreder ".$data;
         $ticket = new Ticket;

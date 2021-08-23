@@ -620,7 +620,8 @@ class BookingsController extends Controller
         }
 
         $bookings = Booking::whereIn("id", $bid_id
-            ->pluck('booking_id'));
+            ->pluck('booking_id'))->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest']])
+        ;
 
         if($web)
         {

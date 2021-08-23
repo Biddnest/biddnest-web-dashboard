@@ -268,7 +268,7 @@ class VendorWebController extends Controller
         return view('vendor-panel.dashboard.myprofile', ['user'=>$user, 'branch'=>$parentbranch]);
     }
 
-    public function userAdd(Request $request)
+   public function userAdd(Request $request)
     {
         $users = Vendor::where("id", $request->id)->first();
         $branch = Organization::where(["parent_org_id"=>Session::get('organization_id'), "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", Session::get('organization_id'))->get();
@@ -381,7 +381,7 @@ class VendorWebController extends Controller
 
     public function scheduleOrder(Request $request)
     {
-        $booking=Booking::where('public_booking_id', $request->id)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['cancelled']])->with('inventories')->with('service')->with(['movement_dates'=>function($query){
+        $booking=Booking::where('public_booking_id', $request->id)->with('inventories')->with('service')->with(['movement_dates'=>function($query){
             $query->pluck('date');
         }])->with(['bid'=>function($q){
             $q->where(['organization_id'=>Session::get('organization_id')]);

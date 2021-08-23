@@ -358,10 +358,15 @@ class VendorWebController extends Controller
 
         $bidding=Bid::where(['booking_id'=>$booking->id, 'organization_id'=>Session::get('organization_id')])->first();
 
+        $bidding_graph_x=[];
+        $bidding_graph_y=[];
+        $rank=[];
         if($bidding->status == BidEnums::$STATUS['lost'])
+        {
             $bidding_graph_x=BookingsController::getposition(Session::get('account')['id'], $request->id)['axis']['x'];
             $bidding_graph_y=BookingsController::getposition(Session::get('account')['id'], $request->id)['axis']['y'];
             $rank=BookingsController::getposition(Session::get('account')['id'], $request->id)['rank'];
+        }
 
         return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'rank'=>$rank,
             'graph'=>[

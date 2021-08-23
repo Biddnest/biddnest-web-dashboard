@@ -948,7 +948,7 @@ class BookingsController extends Controller
                 $current_key = $key;
                 break;
             }
-        }
+
 
         $x = [];
         $y = [];
@@ -963,6 +963,7 @@ class BookingsController extends Controller
                 ]);
             } else
                 break;
+        }
         }
 
         $data = array_reverse($data);

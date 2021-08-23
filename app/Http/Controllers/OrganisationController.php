@@ -121,7 +121,7 @@ class OrganisationController extends Controller
         $organizations->org_type=$data['organization']['org_type'];
         $organizations->lat =0;
         $organizations->lng =0;
-        $organizations->zone_id =1;
+        $organizations->zone_id =null;
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
         $organizations->state =$data['address']['state'];

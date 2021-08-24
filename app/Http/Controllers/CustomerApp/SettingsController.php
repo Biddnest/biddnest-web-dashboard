@@ -18,8 +18,6 @@ use App\Enums\ReviewEnums;
 use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
 class SettingsController extends Controller
 {
@@ -29,8 +27,8 @@ class SettingsController extends Controller
                 "service_live"=> true,
                 "message"=>null,
               "api"=>[
-                  "name"=>"Biddnest Customer Configurations",
-                  "logo"=>env("APP_URL")."/static/images/favicon.svg",
+                  "name"=>"Biddnest",
+                  "logo"=>env("APP_URL","https://uat-dashboard-biddnest.dev.diginnovators.com")."/static/images/favicon.svg",
                   "base_url"=> env("APP_URL"),
                   "socket_server_url"=> (env('SECURE_SOCKET') ? "https://" : "http://") . env("APP_IP").":".env('DEFAULT_SOCKET_SERVER_PORT'),
                   "version"=>"v1",
@@ -38,11 +36,11 @@ class SettingsController extends Controller
               ],
                "app"=>[
                    "version_code"=>(int)Settings::where("key", "app_version_code")->pluck('value')[0],
-                   "version"=>(int)Settings::where("key", "app_version")->pluck('value')[0],
+                   "version"=>Settings::where("key", "app_version")->pluck('value')[0],
                ]
             ],
             "keys"=>[
-                "google_api_key"=>base64_encode(Settings::where("key", "google_api_key")->pluck('value')[0]),
+//                "google_api_key"=>base64_encode(Settings::where("key", "google_api_key")->pluck('value')[0]),
                 "cancellation_reason_options"=>json_decode(Settings::where("key", "cancellation_reason_options")->pluck('value')[0], true)
             ],
             "enums"=>[

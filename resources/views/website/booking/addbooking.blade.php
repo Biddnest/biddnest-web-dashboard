@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="actionBtn alignone  actionBtn-mob-view border-top ">
                                             <a href="{{route('home')}}">
-                                                <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-5 ">
+                                                <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-5 ">
                                                     Cancel
                                                 </button>
                                             </a>
@@ -396,7 +396,7 @@
                                     </div>
                                     <div class=" actionBtn align actionBtn-view border-top move-btn">
                                         <a href="{{route('home')}}" class="view-none">
-                                            <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-4 ">
+                                            <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-left ml-4 ">
                                                 Cancel
                                             </button>
                                         </a>

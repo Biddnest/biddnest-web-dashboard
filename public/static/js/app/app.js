@@ -989,6 +989,15 @@ $("body").on('click', ".back3", function(event) {
 $("body").on('click', ".next3", function(event) {
     $(".step-3").wrap("<form id='parsley-form'></form>");
     let isValid = $('#parsley-form').parsley().validate();
+    var length = $('.inventory').children().length;
+    if(length == 1){
+        isValid = false;
+        if($('.subservices').children().length > 0){
+            tinyAlert("Failed", "Select service type and Add items!");
+        }else{
+            tinyAlert("Failed", "Add items!");
+        }
+    }
     $(".step-3").unwrap();
 
     if (isValid) {
@@ -1050,14 +1059,14 @@ $("body").on('change', ".switch", function(event) {
 });
 
 $("body").on('click', ".reject", function(event) {
-    $('.rejection-message ').toggleClass("diplay-none");
-    $('.order-cards ').toggleClass("diplay-none");
+    $('.rejection-message ').toggleClass("display-none");
+    $('.order-cards ').toggleClass("display-none");
     $('.reject-btn ').html('Submit ');
 });
 
 $("body").on('click', "#backbtn", function(event) {
-    $('.rejection-message ').addClass("diplay-none");
-    $('.order-cards ').removeClass("diplay-none");
+    $('.rejection-message ').addClass("display-none");
+    $('.order-cards ').removeClass("display-none");
 });
 
 $("body").on('change', ".economy", function(event) {
@@ -1172,9 +1181,16 @@ $("body").on('click', ".reject-booking", function(event) {
 });
 
 $("body").on('click', ".copy", function(event) {
+    var coupon_code = document.getElementById("coupon").value;
+    if(coupon_code == ""){
         var code = $(this).data("code");
         document.getElementById("coupon").value = code;
-    return false;
+    }
+    else{
+        tinyAlert("Failed", "Coupon already added!");
+        return false;
+    }
+
 });
 
 $("body").on('click', ".card-method", function(event) {
@@ -1280,12 +1296,17 @@ $("body").on('click', ".verify-coupon", function(event) {
         if(response.status == "success")
         {
             Logger.info(response);
+            var grand_total =response.data.grand_total;
+            grand_total = grand_total.replace(/\,/g, '');
+
             tinySuccessAlert("Coupon Verified", response.message);
+
             $('.discount').html(response.data.discount);
-            $('.grand-total').html(response.data.grand_total);
-            $('.payment').attr("data-amount",response.data.grand_total);
+            $('.grand-total').html(grand_total);
+            $('.payment').attr("data-amount",grand_total);
             $(".verify-coupon").addClass("remove");
             $(".verify-coupon").text("Remove");
+            $(".verify-coupon").attr("data-app",response.data.grand_total);
             $(".verify-coupon").removeClass("verify-coupon");
         }
         else

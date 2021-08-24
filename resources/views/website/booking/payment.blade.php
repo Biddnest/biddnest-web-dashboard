@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2 ">
-                        <button type="button" class="btn btn-theme-bg  white-bg verify-coupon" id="padding-apply" data-url="{{route('verifiedcoupon')}}" data-remove-url="{{route('payment',['id'=>$public_booking_id])}}">Apply
+                        <button type="button" class="btn btn-theme-bg white-bg verify-coupon" data-app="" id="padding-apply" data-url="{{route('verifiedcoupon')}}" data-remove-url="{{route('payment',['id'=>$public_booking_id])}}">Apply
                         </button>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                             <p class=" center p-1 text-white" style="text-align: center;">Debit Card</p>
                         </div>
                         <div class="card col-md-2.5   bg-turnblue card-method mt-2 " data-method="card" style="width: 22%; height:110px">
-                            <img class="mt-1 pt-2" src="{{asset('static/website/images/icons/upi3.svg')}}" />
+                            <img class="mt-1 pt-2" src="{{asset('static/website/images/icons/upi2.svg')}}" />
                             <p class=" center p-1 text-white" style="text-align: center;">Credit Card</p>
                         </div>
                     </div>

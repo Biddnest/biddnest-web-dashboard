@@ -302,7 +302,8 @@
                                     </div>
                                 @endif
 
-                                <div class="tab-pane fade @if(!$ticket_info) show active @endif " id="order" role="tabpanel" aria-labelledby="new-order-tab">
+                                @if($tickets->status == \App\Enums\CommonEnums::$TICKET_STATUS['open'])
+                                    <div class="tab-pane fade @if(!$ticket_info) show active @endif " id="order" role="tabpanel" aria-labelledby="new-order-tab">
                                     <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
                                         <div class="col-sm-12">
                                             <div class="form-input">
@@ -314,7 +315,13 @@
                                             <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
                                         </div>
                                     </form>
-                                </div>
+                                    </div>
+                                    @else
+                                        <div class="tab-pane fade @if(!$ticket_info) show active @endif " id="order" role="tabpanel" aria-labelledby="new-order-tab">
+                                            <p style="font-size: 14px;padding: 0 10px">This ticket no more open. You cannot add any more replies to this thread.</p>
+                                        </div>
+                                @endif
+
                                 <div class="tab-pane fade " id="past" role="tabpanel" aria-labelledby="quotation">
                                     <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                         <div class="form-input">

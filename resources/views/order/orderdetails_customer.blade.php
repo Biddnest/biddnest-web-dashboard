@@ -180,6 +180,10 @@
                                         @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                         <span class="status-badge red-bg  text-center td-padding" style="font-weight:bold !important">Cancelled</span>
                                         @break
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                        <span class="status-badge red-bg  text-center td-padding" style="font-weight:bold !important">On Hold</span>
+                                        @break
                                     @endswitch
                                 </div>
 

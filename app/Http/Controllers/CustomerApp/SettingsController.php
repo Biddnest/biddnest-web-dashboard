@@ -24,8 +24,8 @@ class SettingsController extends Controller
     public static function getSettings(){
         return Helper::response(true, "Here are the settings.",[
             "config"=>[
-                "service_live"=> true,
-                "message"=>null,
+                "service_live"=> false,
+                "message"=>"We are under maintenance. Please come back later.",
                 "api"=>[
                     "name"=>"Biddnest",
                     "logo"=>env("APP_URL","https://uat-dashboard-biddnest.dev.diginnovators.com")."/static/images/favicon.svg",

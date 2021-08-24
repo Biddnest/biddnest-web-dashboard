@@ -245,7 +245,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     revertFormAnim(button, buttonPretext);
 
                     /*remove in prod*/
-                    if("otp" in response.data)
+                    if("otp" in response.data && env == "development")
                         $(form.data('await-input')).find("input").val(response.data.otp);
                     /*remove in prod*/
                 }
@@ -813,6 +813,11 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
 
         var high = parseInt(est)+parseInt(est/2);
         var low = parseInt(est)-parseInt(est/2);
+
+        if(quote <= 0) {
+            tinyAlert("Warning", "Quote cannot be zero.");
+            return false;
+        }
 
         if(low >= quote) {
             tinyAlert("Warning", "This Quote is to low for bidding!");
@@ -1585,6 +1590,7 @@ $("body").on('input', ".upload-image", function(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
+        $(this).closest('.upload-section').find(".upload-preview").css({ "max-width": "120px"});
         $(this).closest('.upload-section').find(".upload-preview").attr("src", reader.result);
         $(this).parent().find(".base-holder").val(reader.result);
         let image= {"image":reader.result};
@@ -1659,5 +1665,39 @@ $("body").on('click', ".csv", function(event){
                 tinySuccessAlert("Export Successfully", response.message);
             }
         }
+    });
+});
+$("body").on('click', ".calc-result", function(event){
+    if($(this).hasAttribute("disabled")){
+        if (confirm("Are you sure want to edit the total quote? You wont be able to edit the individual items prices.")) {
+
+            if (!$(this).data("confirmed")) {
+                $(this).attr("data-confirmed", "true");
+                $(this).closest("form").find(".calc-total-input").attr("readonly", true);
+            }
+        } else {
+            $(this).blur();
+        }
+    }
+});
+
+$("body").on('click', ".calc-total-input", function(event){
+    if($(this).hasAttribute("disabled")) {
+        if (confirm("Are you sure want to edit the individual item quote? You wont be able to edit the total quote.")) {
+            if (!$(this).data("confirmed")) {
+                $(this).closest("form").find(".calc-total-input").attr("data-confirmed", "true");
+                $(this).closest("form").find(".calc-result").attr("readonly", true);
+            }
+        } else {
+            $(this).blur();
+        }
+    }
+});
+
+$("form").find("input").attr("autcomplete", "false");
+
+$(".match-item").eq(2).find("div").each(function(){
+    $(".match-item").eq(1).find("div").eq($(this).index()).css({
+        height: $(this).height()
     });
 });

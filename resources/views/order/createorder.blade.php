@@ -176,7 +176,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Floor</label>
-                                  <input type="number" placeholder="3rd Floor" id="" value="0" min="-3" max="99" name="source[meta][floor]" class="form-control" required>
+                                  <input type="number" placeholder="3rd Floor" id="" value="0" min="-3" max="99" name="source[meta][floor]" class="form-control" required oninput="$(this).val(parseInt($(this).val()));">
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -258,7 +258,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
-                                    <input type="number" placeholder="5" min="-3" max="99" value="0" name="destination[meta][floor]" id="" class="form-control" required>
+                                    <input type="number" placeholder="5" min="-3" max="99" value="0" name="destination[meta][floor]" id="" class="form-control" required oninput="$(this).val(parseInt($(this).val()));">
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>

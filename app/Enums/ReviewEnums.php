@@ -9,7 +9,7 @@ class ReviewEnums{
                                 ['type'=>"rating",'question'=>"How did you like our Service?"],
                                 ['type'=>"rating", 'question'=>"How did you like our Driver?"],
                                 ['type'=>"rating", 'question'=>"How did you like our Experience?"],
-                                ['type'=>"text", 'question'=>"Do you have any Suggestions?"]
+//                                ['type'=>"text", 'question'=>"Do you have any Suggestions?"]
                             ];
 
     public static $STATUS=['draft'=>0, 'active'=>1];

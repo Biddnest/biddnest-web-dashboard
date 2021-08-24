@@ -1070,4 +1070,12 @@
             option:hover{
                 cursor: pointer !important;
             }
+
+            .card-method svg{
+
+            }
+
+            .Dashboard-lcards .card{
+                height: 350px;
+            }
         </style>

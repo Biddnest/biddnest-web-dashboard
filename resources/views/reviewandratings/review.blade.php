@@ -111,7 +111,7 @@
                                             @if(\App\Enums\ReviewEnums::$STATUS['active'] == $review->status)
                                                 Active
                                             @else
-                                                Dreft
+                                                Draft
                                             @endif
                                         </div>
                                     </td>

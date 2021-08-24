@@ -632,19 +632,11 @@ class BookingsController extends Controller
             }
         }
 
-        $bookings ->orderBy('id', 'DESC')
-            ->with('user');
+        $bookings->orderBy('id', 'DESC')->with('user');
             if($request->type == "participated" || $request->type == "past")
                 $bookings->with('status_history');
 
-           if($request->type == "live")
-                $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);
 
-            if($request->type == "past")
-                $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
-
-            if($request->type == "scheduled")
-                $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
 
         $bookings->where("status","!=",BookingEnums::$STATUS['hold'])
             ->with('service')
@@ -663,7 +655,17 @@ class BookingsController extends Controller
         }
 
         if (isset($request->status))
-            $bookings->orWhere('status', $request->status)->where('organization_id', $organization_id);
+            $bookings->where('status', $request->status)->where('organization_id', $organization_id);
+        else{
+                if($request->type == "live")
+                    $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);
+
+                if($request->type == "past")
+                    $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+
+                if($request->type == "scheduled")
+                    $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+        }
 
         if (isset($request->service_id))
             $bookings->where('service_id', $request->service_id)->where('organization_id', $organization_id);

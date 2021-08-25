@@ -28,16 +28,13 @@ export function initMapPicker() {
         enableReverseGeocode: true,
         draggable: true,
         onchanged: function(currentLocation, radius, isMarkerDropped) {
-           /* $.get(`{{route('admin.zone.check-serviceability')}}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`,function(response){
-                console.log(response);
-                if(response.status == "success" && response.data.serviceable === true){
 
-                    var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}";
+                    var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key="+API_google_key;
                     $.get(url, function (response){
                         console.log(response);
                         let street = [];
                         let city, state, pincode =null;
-                        for(let i=0; i<= response.results[0].address_components.length; i++)
+                       for(let i=0; i<= response.results[0].address_components.length; i++)
                         {
                             let addr = response.results[0].address_components[i];
                             if(typeof addr != "undefined") {
@@ -63,15 +60,7 @@ export function initMapPicker() {
                         console.log(city, state, pincode);
                     });
 
-                }
-                else{
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Sorry",
-                        text: "We are currently not serviceable in selected area.",
-                    });
-                }
-            });*/
+
         },
         onlocationnotfound: function(locationName) {},
         oninitialized: function(component) {},
@@ -106,9 +95,39 @@ export function initMapPicker() {
         addressFormat: 'street_address',
         enableReverseGeocode: true,
         draggable: true,
-        onchanged: function(currentLocation, radius, isMarkerDropped) {},
+        onchanged: function(currentLocation, radius, isMarkerDropped) {
+            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key="+API_google_key;
+            $.get(url, function (response){
+                console.log(response);
+                let street=[];
+                let city, state, pincode =null;
+                for(let i=0; i<= response.results[0].address_components.length; i++)
+                {
+                    let addr = response.results[0].address_components[i];
+                    if(typeof addr != "undefined") {
+                        if (addr.types.includes('locality') && addr.types.includes('political')) {
+                            console.log(addr.long_name);
+                            if(!city)
+                                city=addr.long_name;
+                        }
+                        if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                            if(!state)
+                                state=addr.long_name;
+                        }
+                        if (addr.types.includes('postal_code')) {
+                            if(!pincode)
+                                pincode=addr.long_name;
+                        }
+                    }
+                }
+                $("#dest-city").val(city);
+                $("#dest-state").val(state);
+                $("#dest-pin").val(pincode);
+
+            });
+        },
         onlocationnotfound: function(locationName) {},
-        oninitialized: function(component) {},
+        oninitialized: function(component) { },
         // must be undefined to use the default gMaps marker
         markerIcon: undefined,
         markerDraggable: true,

@@ -148,7 +148,7 @@
                             <div class="tab-content w-100" id="myTabContent">
                                 <div class="tab-pane fade active show" id="order-details" role="tabpanel" aria-labelledby="order-details-tab">
                                     <div class="d-flex  row pt-3 pr-4 pl-3 margin-topneg-15">
-                                        <div class="col-sm-4  secondg-bg  mt-2 ml-2 pt-10">
+                                        <div class="col-sm-4 match-item  secondg-bg  mt-2 ml-2 pt-10">
                                             <div class="theme-text f-14 bold p-8">
                                                 From
                                             </div>
@@ -184,7 +184,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-5 mt-2  pt-10">
+                                        <div class="col-sm-5 match-item mt-2  pt-10">
                                             <div class="theme-text f-14 p-8">
                                                {{json_decode($booking->source_meta, true)['address']}}
                                             </div>

@@ -323,7 +323,7 @@ class BidController extends Controller
         if(!$submit_bid)
             return Helper::response(false,"Couldn't Submit Quotaion");
 
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+        return Helper::response(true,"Bid successfully submitted",["bid"=>Bid::findOrFail($exist_bid['id'])]);
     }
 
     public static function submitBidAdmin($data)

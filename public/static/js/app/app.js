@@ -808,12 +808,9 @@ $("body").on('click', ".next-btn-back-2-admin", function(event) {
 $("body").on('click', ".next-btn-2-admin", function(event) {
     var url= $(this).data("url");
 
-    let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each( function() {
-        Logger.info(isValid);
-        if ($(this).parsley().validate() !== true)
-            isValid = false;
-    });
+    $(".bid-amount-2-admin").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".bid-amount-2-admin").unwrap();
     // Logger.info(isValid);
     if (isValid) {
         $.ajax({
@@ -890,21 +887,18 @@ $("body").on('click', ".next-btn-back-2", function(event) {
 
 $("body").on('click', ".next-btn-2", function(event) {
 
-    /*let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each( function() {
-        Logger.info(isValid);
-        if ($(this).parsley().validate() !== true)
-            isValid = false;
-    });
-    Logger.info(isValid);
-    if (isValid) {*/
+    $(".bid-amount-2").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".bid-amount-2").unwrap();
+
+    if (isValid) {
         $(this).hide();
         $(this).closest('form').find('.bid-amount').hide();
         $(this).closest('form').find('.bid-amount-2').hide();
         $(this).closest('form').find('.submitbtn').show();
         $(this).closest('form').find('.enter-pin').show();
         $(this).closest('form').find('.next-btn-back-2').addClass("hidden");
-    // }
+     }
 });
 
 $("body").on('keyup', ".calc-total", function(event) {

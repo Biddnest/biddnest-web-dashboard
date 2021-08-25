@@ -650,7 +650,19 @@ class BookingsController extends Controller
             }]);
 
         if (isset($request->from) && isset($request->to)) {
-            $booking_ids = MovementDates::whereDate('date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+            switch ($request->type) {
+                case "live":
+                    $booking_ids = MovementDates::whereDate('date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+                    break;
+
+                case "scheduled":
+                    $booking_ids = Booking::whereDate('final_moving_date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('final_moving_date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+                    break;
+
+                case "bookmarked":
+                    $booking_ids = MovementDates::whereDate('date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+                    break;
+            }
             $bookings->whereIn('id', $booking_ids)->where('organization_id', $organization_id);
         }
 

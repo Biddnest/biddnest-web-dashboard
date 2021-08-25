@@ -138,14 +138,7 @@ class PaymentController extends Controller
                         ]);
 
             $booking = Booking::find($order_id_exist->booking_id);
-            dispatch(function () use ($booking) {
-                NotificationController::sendTo("user", [$booking->user_id], "We have received your payment for booking id #".$booking->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
-                    "type" => NotificationEnums::$TYPE['booking'],
-                    "public_booking_id" => $booking->public_booking_id,
-                    "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
-                ]);
 
-            })->afterResponse();
             return Helper::response(true, "Payment successfull");
         }
         else
@@ -182,6 +175,15 @@ class PaymentController extends Controller
             return Helper::response(false, "Payment order is not exist");
 
         MailController::invoice_email($public_booking_id);
+
+        dispatch(function () use ($booking_exist) {
+            NotificationController::sendTo("user", [$booking_exist->user_id], "We have received your payment for booking id #".$booking_exist->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
+                "type" => NotificationEnums::$TYPE['booking'],
+                "public_booking_id" => $booking_exist->public_booking_id,
+                "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
+            ]);
+
+        })->afterResponse();
 
         $payment_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])
                                 ->update([

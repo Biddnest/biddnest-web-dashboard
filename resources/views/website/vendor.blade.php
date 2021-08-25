@@ -8,7 +8,7 @@
                 <div class="quote responsive w-70 ontop p-4 bg-white">
                     <div class="card-body">
                         <h5 class="card-title border-bottom theme-text fw-500 pb-10">Your Details</h5>
-                        <form class="form-new-order mt-2 onboard-vendor-form input-text-blue" action="{{route('add_vendor')}}" method="POST" data-next="refresh" data-redirect-type="hard" data-url="{{route('home')}}" data-alert="mega" data-parsley-validate>
+                        <form class="form-new-order mt-2 onboard-vendor-form input-text-blue" action="{{route('add_vendor')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('web.vendor.success')}}" data-alert="mega" data-parsley-validate>
                             <div class="row">
 
                                 <div class="col-lg-6 col-xs-12">

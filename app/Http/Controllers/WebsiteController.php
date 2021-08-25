@@ -185,4 +185,8 @@ class WebsiteController extends Controller
         return view('website.myrequest', ['tickets'=>$tickets, "past_bookings"=>$past_bookings]);
     }
 
+    public function getVendor(){
+        return view('website.vendorsuccess');
+    }
+
 }

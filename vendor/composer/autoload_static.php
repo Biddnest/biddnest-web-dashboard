@@ -158,7 +158,6 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
-            'Sentiment\\' => 10,
         ),
         'R' => 
         array (
@@ -427,10 +426,6 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
-        ),
-        'Sentiment\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src',
         ),
         'Razorpay\\Tests\\' => 
         array (
@@ -770,6 +765,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Enums\\UserEnums' => __DIR__ . '/../..' . '/app/Enums/UserEnums.php',
         'App\\Enums\\VendorEnums' => __DIR__ . '/../..' . '/app/Enums/VendorEnums.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\SaleExport' => __DIR__ . '/../..' . '/app/Exports/SaleExport.php',
         'App\\Helper' => __DIR__ . '/../..' . '/app/Helper.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\ApiRouteController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiRouteController.php',
@@ -780,9 +776,11 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Http\\Controllers\\CustomerApp\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomerApp/SettingsController.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\EmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmailController.php',
+        'App\\Http\\Controllers\\ExportController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExportController.php',
         'App\\Http\\Controllers\\FaqController' => __DIR__ . '/../..' . '/app/Http/Controllers/FaqController.php',
         'App\\Http\\Controllers\\GeoController' => __DIR__ . '/../..' . '/app/Http/Controllers/GeoController.php',
         'App\\Http\\Controllers\\InventoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventoryController.php',
+        'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
         'App\\Http\\Controllers\\NotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NotificationController.php',
         'App\\Http\\Controllers\\OrganisationController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrganisationController.php',
         'App\\Http\\Controllers\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/PageController.php',
@@ -830,6 +828,7 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'App\\Imports\\InventoryImport' => __DIR__ . '/../..' . '/app/Imports/InventoryImport.php',
         'App\\Imports\\InventoryPriceImport' => __DIR__ . '/../..' . '/app/Imports/InventoryPriceImport.php',
         'App\\Jobs\\SendOtp' => __DIR__ . '/../..' . '/app/Jobs/SendOtp.php',
+        'App\\Mail\\InvoiceMail' => __DIR__ . '/../..' . '/app/Mail/InvoiceMail.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\AdminZone' => __DIR__ . '/../..' . '/app/Models/AdminZone.php',
         'App\\Models\\Banners' => __DIR__ . '/../..' . '/app/Models/Banners.php',
@@ -1642,7 +1641,6 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
-        'Fabito\\AvatarGenerator\\Avatar' => __DIR__ . '/..' . '/fabian-tomischka/php-avatar-generator/src/Fabito/AvatarGenerator/Avatar.php',
         'Facade\\FlareClient\\Api' => __DIR__ . '/..' . '/facade/flare-client-php/src/Api.php',
         'Facade\\FlareClient\\Concerns\\HasContext' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/HasContext.php',
         'Facade\\FlareClient\\Concerns\\UsesTime' => __DIR__ . '/..' . '/facade/flare-client-php/src/Concerns/UsesTime.php',
@@ -6184,9 +6182,6 @@ class ComposerStaticInit43dfaa835ba4e21ba93de4fa148c656d
         'SecurityLib\\Hash' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Hash.php',
         'SecurityLib\\Strength' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Strength.php',
         'SecurityLib\\Util' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/Util.php',
-        'Sentiment\\Analyzer' => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src/Analyzer.php',
-        'Sentiment\\Config\\Config' => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src/Config/Config.php',
-        'Sentiment\\Procedures\\SentiText' => __DIR__ . '/..' . '/davmixcool/php-sentiment-analyzer/src/Procedures/SentiText.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Color' => __DIR__ . '/..' . '/symfony/console/Color.php',

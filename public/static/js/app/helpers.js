@@ -10,8 +10,13 @@ export function redirectTo(url){
     $("main").append(link);
     $("#"+id).click();*/
     Logger.info("redirect-soft");
+    try{
+        barba.go(url);
+    }
+    catch{
+        location.assign(url);
+    }
 
-    barba.go(url);
 };
 
 export function redirectHard(url){

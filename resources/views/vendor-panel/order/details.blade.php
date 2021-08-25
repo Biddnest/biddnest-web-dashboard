@@ -209,7 +209,7 @@
                                                 {{json_decode($booking->meta, true)['distance']}} KM
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)Dedicated @else Shared @endif
+                                                @if(json_decode($booking->source_meta, true)['shared_service']== false)Dedicated @else Shared @endif
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 {{$booking->service->name}}

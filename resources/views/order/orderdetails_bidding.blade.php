@@ -278,7 +278,7 @@
                                                 <label class="full-name">Type of Movement</label>
                                                 <select id="" class="form-control" name="type_of_movement" required>
                                                     <option value="">--select--</option>
-                                                    @if(json_decode($booking->source_meta, true)['shared_service']== true)
+                                                    @if(json_decode($booking->source_meta, true)['shared_service']== false)
                                                         <option value="dedicated">Dedicated</option>
                                                     @else
                                                         <option value="shared">Shared</option>

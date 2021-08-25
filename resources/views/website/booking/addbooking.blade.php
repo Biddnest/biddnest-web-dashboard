@@ -384,7 +384,7 @@
                                                     <label class="te ">Interested in shared services?</label>
                                                     <div>
                                                         <label class="switch2">
-                                                            <input type="hidden" value="0" name="source[meta][shared_service]" id="m_type">
+                                                            <input type="hidden" value="false" name="source[meta][shared_service]:boolean" id="m_type">
                                                             <input type="checkbox" name="select_letter" value="1" id="movemnt" onchange="document.getElementById('m_type').value = this.checked ? true : false">
                                                             <span class="slider2"></span>
                                                         </label>

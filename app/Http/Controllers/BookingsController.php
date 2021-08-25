@@ -656,7 +656,7 @@ class BookingsController extends Controller
                     break;
 
                 case "scheduled":
-                    $booking_ids = Booking::whereDate('final_moving_date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('final_moving_date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('booking_id')->pluck('booking_id');
+                    $booking_ids = Booking::whereDate('final_moving_date', '>=', date("Y-m-d", strtotime($request->from)))->whereDate('final_moving_date', '>=', date("Y-m-d", strtotime($request->to)))->groupBy('id')->pluck('id');
                     break;
 
                 case "bookmarked":

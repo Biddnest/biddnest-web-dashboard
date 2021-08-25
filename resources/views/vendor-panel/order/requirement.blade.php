@@ -176,7 +176,7 @@
                                                             @if($inventory->quantity_type != \App\Enums\CommonEnums::$YES)
                                                                 {{$inventory->quantity}}
                                                             @else
-                                                                {{$inventory->quantity->min}}-{{$inventory->quantity->max}}
+                                                                {{json_decode($inventory->quantity, true)['min']}}-{{json_decode($inventory->quantity, true)['max']}}
                                                             @endif
                                                         </td>
                                                         <td class=""><span class=" text-center w-100  ">{{$inventory->size}}</span></td>

@@ -992,9 +992,9 @@ $("body").on('click', ".next3", function(event) {
     if(length == 1){
         isValid = false;
         if($('.subservices').children().length > 0){
-            tinyAlert("Failed", "Select service type and Add items!");
+            tinyAlert("Failed", "Select moving type and Add items before proceeding.");
         }else{
-            tinyAlert("Failed", "Add items!");
+            tinyAlert("Failed", "Please add items before proceeding.");
         }
     }
     $(".step-3").unwrap();

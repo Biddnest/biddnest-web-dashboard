@@ -846,7 +846,7 @@
                         </div>
                         <div class="quantity-2" style="padding: 5px 2px">
 
-                            <input type="text" class="custom_slider range" name="quantity:null" value=""
+                            <input type="text" class="custom_slider range" name="quantity" value=""
                                    data-type="double"
                                    data-min="1"
                                    data-max="500"

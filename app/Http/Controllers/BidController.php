@@ -486,7 +486,7 @@ class BidController extends Controller
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
                     $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
                 else
-                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']), true)['max'] : 0.00;
+                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
             }
         }
         if($web)

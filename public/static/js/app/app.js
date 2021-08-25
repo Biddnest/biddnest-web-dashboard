@@ -691,6 +691,15 @@ $("body").on('keydown', ".table-search1", function(event) {
     }
 });
 
+$("body").on('click', ".searchButton", function(event) {
+
+        var query = $('.table-search1').val();
+        if (query.length >= 15) {
+            redirectTo(window.location.href + "?search=" + query);
+        }
+
+});
+
 $("body").on('change', ".check-toggle", function(event) {
 Logger.info($(this).val());
     if ($(this).val() == $(this).data("value")) {

@@ -87,7 +87,7 @@ class SubServiceController extends Controller
 
         $subservice=Subservice::where("id", $id)->update($update_data);
 
-        $subservice_exist=ServiceSubservice::where("id", $id)->first();
+        $subservice_exist=ServiceSubservice::where(["subservice_id"=>$id, "service_id"=>$service_id])->first();
         if($subservice_exist)
             $service_result=ServiceSubservice::where('subservice_id', $id)->update([
                 'service_id'=>$service_id

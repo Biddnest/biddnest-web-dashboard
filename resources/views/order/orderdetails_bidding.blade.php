@@ -278,7 +278,7 @@
                                                 <label class="full-name">Type of Movement</label>
                                                 <select id="" class="form-control" name="type_of_movement" required>
                                                     <option value="">--select--</option>
-                                                    @if(json_decode($booking->source_meta, true)['shared_service']== true)
+                                                    @if(json_decode($booking->source_meta, true)['shared_service']== false)
                                                         <option value="dedicated">Dedicated</option>
                                                     @else
                                                         <option value="shared">Shared</option>
@@ -294,13 +294,16 @@
                                                 <div class="select-date">
                                                     @foreach($booking->movement_dates as $mdate)
                                                         <label class="mr-2 move-add-date">
-                                                            <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                                            <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" data-parsley-errors-container="#err-date"
+                                                                   required
+                                                                   data-parsley-error-message="Mandatory Field. Please enter the value" style="display: none"/>
                                                             <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                         </label>
                                                     @endforeach
                                                 </div>
                                                 {{--<input type="text" class="form-control br-5" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}
-                                                <span class="error-message">Please enter valid</span>
+                                                <div class="error-wrapper" id="err-date">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -316,7 +319,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-input">
                                                 <label class="full-name">Name of Vehicle</label>
-                                                <select id="" class="form-control" name="vehicle_type">
+                                                <select id="" class="form-control" name="vehicle_type" required>
                                                     <option value="">--select--</option>
                                                     @foreach($org_id->organization->vehicle as $vehicle)
                                                         <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>

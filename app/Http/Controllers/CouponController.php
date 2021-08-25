@@ -271,7 +271,7 @@ class CouponController extends Controller
                 "discount" => $discount_amount,
                 "tax_percentage"=>$tax_percentage,
                 "tax" => $tax,
-                "grand_total" => $grand_total
+                "grand_total" => number_format($grand_total, 2)
             ];
         else
            return (array)["coupon" => ["discount" => number_format((float)$discount_amount, 2)], "payment_details" => [

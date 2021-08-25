@@ -399,4 +399,5 @@ class WebsiteRouteController extends Controller
 
         return UserController::sendLink($request->data);
     }
+
 }

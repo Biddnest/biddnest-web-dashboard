@@ -691,6 +691,18 @@ $("body").on('keydown', ".table-search1", function(event) {
     }
 });
 
+$("body").on('click', ".searchButton", function(event) {
+        var query = $('.table-search1').val();
+        var query1 = $('.table-search').val();
+        if (query1.length >= 3) {
+            redirectTo(window.location.href + "?search=" + query1);
+        }
+
+        if (query.length >= 15) {
+            redirectTo(window.location.href + "?search=" + query);
+        }
+});
+
 $("body").on('change', ".check-toggle", function(event) {
 Logger.info($(this).val());
     if ($(this).val() == $(this).data("value")) {
@@ -771,11 +783,13 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
     if (isValid) {
         var est = $(".calc-result").data("est-quote");
         var quote = $(".calc-result").val();
+
         est = est.replace(/\,/g,'');
 
         var high = parseInt(est)+parseInt(est/2);
         var low = parseInt(est)-parseInt(est/2);
 
+        console.log(quote);
         if(quote <= 0) {
             tinyAlert("Warning", "Quote cannot be zero.");
             return false;
@@ -808,12 +822,9 @@ $("body").on('click', ".next-btn-back-2-admin", function(event) {
 $("body").on('click', ".next-btn-2-admin", function(event) {
     var url= $(this).data("url");
 
-    let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each( function() {
-        Logger.info(isValid);
-        if ($(this).parsley().validate() !== true)
-            isValid = false;
-    });
+    $(".bid-amount-2-admin").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".bid-amount-2-admin").unwrap();
     // Logger.info(isValid);
     if (isValid) {
         $.ajax({
@@ -899,21 +910,18 @@ $("body").on('click', ".next-btn-back-2", function(event) {
 
 $("body").on('click', ".next-btn-2", function(event) {
 
-    /*let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each( function() {
-        Logger.info(isValid);
-        if ($(this).parsley().validate() !== true)
-            isValid = false;
-    });
-    Logger.info(isValid);
-    if (isValid) {*/
+    $(".bid-amount-2").wrap("<form id='parsley-form'></form>");
+    let isValid = $('#parsley-form').parsley().validate();
+    $(".bid-amount-2").unwrap();
+
+    if (isValid) {
         $(this).hide();
         $(this).closest('form').find('.bid-amount').hide();
         $(this).closest('form').find('.bid-amount-2').hide();
         $(this).closest('form').find('.submitbtn').show();
         $(this).closest('form').find('.enter-pin').show();
         $(this).closest('form').find('.next-btn-back-2').addClass("hidden");
-    // }
+     }
 });
 
 $("body").on('keyup', ".calc-total", function(event) {
@@ -1003,6 +1011,15 @@ $("body").on('click', ".back3", function(event) {
 $("body").on('click', ".next3", function(event) {
     $(".step-3").wrap("<form id='parsley-form'></form>");
     let isValid = $('#parsley-form').parsley().validate();
+    var length = $('.inventory').children().length;
+    if(length == 1){
+        isValid = false;
+        if($('.subservices').children().length > 0){
+            tinyAlert("Failed", "Select moving type and Add items before proceeding.");
+        }else{
+            tinyAlert("Failed", "Please add items before proceeding.");
+        }
+    }
     $(".step-3").unwrap();
 
     if (isValid) {
@@ -1064,14 +1081,14 @@ $("body").on('change', ".switch", function(event) {
 });
 
 $("body").on('click', ".reject", function(event) {
-    $('.rejection-message ').toggleClass("diplay-none");
-    $('.order-cards ').toggleClass("diplay-none");
+    $('.rejection-message ').toggleClass("display-none");
+    $('.order-cards ').toggleClass("display-none");
     $('.reject-btn ').html('Submit ');
 });
 
 $("body").on('click', "#backbtn", function(event) {
-    $('.rejection-message ').addClass("diplay-none");
-    $('.order-cards ').removeClass("diplay-none");
+    $('.rejection-message ').addClass("display-none");
+    $('.order-cards ').removeClass("display-none");
 });
 
 $("body").on('change', ".economy", function(event) {
@@ -1186,9 +1203,16 @@ $("body").on('click', ".reject-booking", function(event) {
 });
 
 $("body").on('click', ".copy", function(event) {
+    var coupon_code = document.getElementById("coupon").value;
+    if(coupon_code == ""){
         var code = $(this).data("code");
         document.getElementById("coupon").value = code;
-    return false;
+    }
+    else{
+        tinyAlert("Failed", "Coupon already added!");
+        return false;
+    }
+
 });
 
 $("body").on('click', ".card-method", function(event) {
@@ -1294,12 +1318,17 @@ $("body").on('click', ".verify-coupon", function(event) {
         if(response.status == "success")
         {
             Logger.info(response);
+            var grand_total =response.data.grand_total;
+            grand_total = grand_total.replace(/\,/g, '');
+
             tinySuccessAlert("Coupon Verified", response.message);
+
             $('.discount').html(response.data.discount);
-            $('.grand-total').html(response.data.grand_total);
-            $('.payment').attr("data-amount",response.data.grand_total);
+            $('.grand-total').html(grand_total);
+            $('.payment').attr("data-amount",grand_total);
             $(".verify-coupon").addClass("remove");
             $(".verify-coupon").text("Remove");
+            $(".verify-coupon").attr("data-app",response.data.grand_total);
             $(".verify-coupon").removeClass("verify-coupon");
         }
         else

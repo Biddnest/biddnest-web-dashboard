@@ -461,7 +461,10 @@ class WebController extends Controller
 
     public function createOrder()
     {
-        $category =Service::where(['status'=>\App\Enums\CommonEnums::$YES, 'deleted'=>\App\Enums\CommonEnums::$NO])->with('subservices')->get();
+        $category =Service::where(['status'=>\App\Enums\CommonEnums::$YES, 'deleted'=>\App\Enums\CommonEnums::$NO])
+            ->with(['subservices'=>function($query){
+            $query->where(['subservices.status'=>\App\Enums\CommonEnums::$YES, 'subservices.deleted'=>\App\Enums\CommonEnums::$NO]);
+        }])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('order.createorder', ['categories'=>$category, 'inventories'=>$inventory]);
     }

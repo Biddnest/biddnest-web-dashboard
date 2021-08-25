@@ -78,15 +78,16 @@ class SubServiceController extends Controller
     public static function update($id, $service_id, $name, $image, $data)
     {
         $image_man = new ImageManager(array('driver' => 'gd'));
-        $image_name = "subservice".$name."-".$id.".png";
+        $image_name = "subservice".$name.uniqid()."-".$id.".png";
 
         $update_data = ["name"=>$name];
-        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
+
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 75),$image_name,"subservices");
 
         $subservice=Subservice::where("id", $id)->update($update_data);
 
-        $subservice_exist=ServiceSubservice::where("id", $id)->first();
+        $subservice_exist=ServiceSubservice::where(["subservice_id"=>$id, "service_id"=>$service_id])->first();
         if($subservice_exist)
             $service_result=ServiceSubservice::where('subservice_id', $id)->update([
                 'service_id'=>$service_id

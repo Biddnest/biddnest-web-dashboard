@@ -183,6 +183,7 @@ class BidController extends Controller
         $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
+        $won_bid_details = Bid::where(["booking_id"=>$book_id, "organization_id"=>$won_org_id])->first();
         $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
                             ->update(["status"=>BidEnums::$STATUS['won']]);
 
@@ -197,6 +198,7 @@ class BidController extends Controller
                                         ->update([
                                             "organization_id"=>$won_org_id,
                                             "final_quote"=>$min_amount,
+                                            "final_moving_date"=>json_decode($won_bid_details->meta, true)['moving_date'],
                                             "status"=>BookingEnums::$STATUS['payment_pending']
                                         ]);
 
@@ -323,7 +325,7 @@ class BidController extends Controller
         if(!$submit_bid)
             return Helper::response(false,"Couldn't Submit Quotaion");
 
-        return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+        return Helper::response(true,"Bid successfully submitted",["bid"=>Bid::findOrFail($exist_bid['id'])]);
     }
 
     public static function submitBidAdmin($data)
@@ -399,13 +401,14 @@ class BidController extends Controller
         $expire_vendor = Bid::where(["booking_id"=>$booking_id, "status"=>BidEnums::$STATUS['active']])
             ->update(["status"=>BidEnums::$STATUS['expired']]);
 
-
+        $bid_details = Bid::where(["booking_id"=>$booking_id, "organization_id"=>$org_id])->first();
 
         $booking_update_status = Booking::where("id", $booking_id)
             ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
             ->update([
                 "organization_id"=>$org_id,
                 "final_quote"=>$amount,
+                "final_moving_date"=>json_decode($bid_details->meta, true)['moving_date'],
                 "status"=>BookingEnums::$STATUS['payment_pending']
             ]);
 
@@ -486,7 +489,7 @@ class BidController extends Controller
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
                     $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
                 else
-                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']), true)['max'] : 0.00;
+                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
             }
         }
         if($web)

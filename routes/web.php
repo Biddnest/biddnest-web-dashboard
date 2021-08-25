@@ -524,6 +524,7 @@ Route::prefix('site')->group(function () {
 
 
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
+    Route::get('/vendor/success', [WebsiteController::class, 'getVendor'])->name("web.vendor.success");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");
     Route::get('/FAQ', [WebsiteController::class, 'faq'])->name("faq");
     Route::get('/page/{slug}', [WebsiteController::class, 'termPage'])->name("terms.page");

@@ -110,11 +110,10 @@
                             <div class="tab-content w-100" id="myTabContent">
                                 <div class="tab-pane fade active show" id="order-details" role="tabpanel" aria-labelledby="order-details-tab">
                                     <div class="d-flex  row margin-topneg-15">
-                                        <div class="col-sm-4  secondg-bg   pt-10">
+                                        <div class="col-sm-4 match-item  secondg-bg   pt-10">
                                             <div class="theme-text f-14 bold p-8">
                                                 From
                                             </div>
-                                            <div class="theme-text f-14 bold p-8"></div>
                                             <div class="theme-text f-14 bold p-8">
                                                 From Pincode
                                             </div>
@@ -124,7 +123,6 @@
                                             <div class="theme-text f-14 bold p-8">
                                                 To
                                             </div>
-                                            <div class="theme-text f-14 bold p-8"></div>
                                             <div class="theme-text f-14 bold p-8">
                                                 To Pincode
                                             </div>
@@ -148,7 +146,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-7 white-bg  pt-10">
+                                        <div class="col-sm-5 match-item white-bg  pt-10">
                                             <div class="theme-text f-14 p-8">
                                                 {{json_decode($booking->source_meta, true)['address']}}
                                             </div>

@@ -148,11 +148,10 @@
                             <div class="tab-content w-100" id="myTabContent">
                                 <div class="tab-pane fade active show" id="order-details" role="tabpanel" aria-labelledby="order-details-tab">
                                     <div class="d-flex  row pt-3 pr-4 pl-3 margin-topneg-15">
-                                        <div class="col-sm-4  secondg-bg  mt-2 ml-2 pt-10">
+                                        <div class="col-sm-4 match-item  secondg-bg  mt-2 ml-2 pt-10">
                                             <div class="theme-text f-14 bold p-8">
                                                 From
                                             </div>
-                                            <div class="theme-text f-14 bold p-8"></div>
                                             <div class="theme-text f-14 bold p-8">
                                                 From Pincode
                                             </div>
@@ -162,7 +161,6 @@
                                             <div class="theme-text f-14 bold p-8">
                                                 To
                                             </div>
-                                            <div class="theme-text f-14 bold p-8"></div>
                                             <div class="theme-text f-14 bold p-8">
                                                 To Pincode
                                             </div>
@@ -186,7 +184,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-7 mt-2  pt-10">
+                                        <div class="col-sm-5 match-item mt-2  pt-10">
                                             <div class="theme-text f-14 p-8">
                                                {{json_decode($booking->source_meta, true)['address']}}
                                             </div>
@@ -209,7 +207,7 @@
                                                 {{json_decode($booking->meta, true)['distance']}} KM
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== false)Dedicated @else Shared @endif
+                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)Dedicated @else Shared @endif
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 {{$booking->service->name}}
@@ -331,7 +329,7 @@
                                             <label class="full-name mb-4">Type of Movement</label>
                                             <select id="" class="form-control mt-2" name="type_of_movement" required>
                                                 <option value="">--select--</option>
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== false)
+                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)
                                                     <option value="dedicated">Dedicated</option>
                                                 @else
                                                     <option value="shared">Shared</option>
@@ -348,16 +346,13 @@
                                                 @foreach($booking->movement_dates as $mdate)
 {{--                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>--}}
                                                     <label class="mr-2 move-add-date">
-                                                        <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" data-parsley-errors-container="#err-date"
-                                                               required
-                                                               data-parsley-error-message="Mandatory Field. Please enter the value" style="display: none"/>
+                                                        <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" required data-parsley-errors-container="#service-error" style="display: none"/>
                                                         <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                     </label>
                                                 @endforeach
                                             </div>
 {{--                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}
-                                            <div class="error-wrapper" id="err-date">
-                                            </div>
+                                            <span class="error-message">Please enter valid</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -374,7 +369,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input mt-5">
                                             <label class="full-name mb-4">Name of Vehicle</label>
-                                            <select id="" class="form-control mt-2" name="vehicle_type" required>
+                                            <select id="" class="form-control mt-2" name="vehicle_type">
                                                 <option value="">--select--</option>
                                                 @foreach($vehicles as $vehicle)
                                                     <option value="{{$vehicle->vehicle_type}}">{{$vehicle->name}}-{{$vehicle->vehicle_type}}</option>

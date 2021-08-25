@@ -860,25 +860,34 @@ $("body").on('click', ".next-btn-1", function(event) {
 
         var high = parseInt(est) + parseInt(est / 2);
         var low = parseInt(est) - parseInt(est / 2);
-
-        if (low >= quote) {
-            // megaAlert("Warning", "This Quote is to low for bidding!");
+        if(parseFloat(quote) <= 0.00){
             Swal.fire({
-                title: 'Warning',
-                text: "This Quote is to low for bidding!",
+                title: 'Incorrect Quote',
+                text: "The quote cannot be zero.",
                 icon: 'warning',
                 confirmButtonColor: '#FDC403',
                 confirmButtonText: 'Ok',
 
             });
-        } else if (high <= quote) {
+            return false;
+        }
+        if (low >= quote) {
+            // megaAlert("Warning", "This Quote is to low for bidding!");
+            // megaAlert("Warning", "This Quote is to low for bidding!");
             Swal.fire({
-                title: 'Warning',
-                text: "This Quote is to high for bidding!",
+                title: 'Please Note',
+                text: "This quote is to low than the estimated price for this booking. We recommend keeping the quote close to the estimated price to increase the chances of winning this bid.",
                 icon: 'warning',
                 confirmButtonColor: '#FDC403',
-                confirmButtonText: 'Ok',
-
+                confirmButtonText: 'PROCEED'
+            });
+        } else if (high <= quote) {
+            Swal.fire({
+                title: 'Please Note',
+                text: "This quote is to high than the estimated price for this booking. We recommend keeping the quote close to the estimated price to increase the chances of winning this bid.",
+                icon: 'warning',
+                confirmButtonColor: '#FDC403',
+                confirmButtonText: 'PROCEED'
             });
             // megaAlert("Warning", "This Quote is to high for bidding!");
         }
@@ -1659,11 +1668,12 @@ $("body").on('click', ".csv", function(event){
     });
 });
 $("body").on('click', ".calc-result", function(event){
-    if($(this).hasAttribute("disabled")){
+    if(!$(this).data("confirmed")){
         if (confirm("Are you sure want to edit the total quote? You wont be able to edit the individual items prices.")) {
 
-            if (!$(this).data("confirmed")) {
+            if (true) {
                 $(this).attr("data-confirmed", "true");
+                $(this).closest("form").find(".calc-total-input").attr("data-confirmed", "true");
                 $(this).closest("form").find(".calc-total-input").attr("readonly", true);
             }
         } else {
@@ -1673,10 +1683,11 @@ $("body").on('click', ".calc-result", function(event){
 });
 
 $("body").on('click', ".calc-total-input", function(event){
-    if($(this).hasAttribute("disabled")) {
+    if(!$(this).data("confirmed")) {
         if (confirm("Are you sure want to edit the individual item quote? You wont be able to edit the total quote.")) {
-            if (!$(this).data("confirmed")) {
+            if (true) {
                 $(this).closest("form").find(".calc-total-input").attr("data-confirmed", "true");
+                $(this).closest("form").find(".calc-result").attr("data-confirmed", "true");
                 $(this).closest("form").find(".calc-result").attr("readonly", true);
             }
         } else {
@@ -1686,9 +1697,6 @@ $("body").on('click', ".calc-total-input", function(event){
 });
 
 $("form").find("input").attr("autcomplete", "false");
-
-$(".match-item").eq(2).find("div").each(function(){
-    $(".match-item").eq(1).find("div").eq($(this).index()).css({
-        height: $(this).height()
-    });
+$(".match-item").eq(1).find("div").each(function(index){
+    $(".match-item").eq(0).find("div").eq(index).height($(this).height());
 });

@@ -39,7 +39,7 @@ export function initMapPicker() {
                             let addr = response.results[0].address_components[i];
                             if(typeof addr != "undefined") {
 
-                                if (addr.types.includes('locality') && addr.types.includes('political')) {
+                                if ((addr.types.includes('locality') && addr.types.includes('political')) || addr.types.includes('administrative_area_level_2')) {
                                     console.log(addr.long_name);
                                     if(!city)
                                         city=addr.long_name;
@@ -105,7 +105,7 @@ export function initMapPicker() {
                 {
                     let addr = response.results[0].address_components[i];
                     if(typeof addr != "undefined") {
-                        if (addr.types.includes('locality') && addr.types.includes('political')) {
+                        if ((addr.types.includes('locality') && addr.types.includes('political')) || addr.types.includes('administrative_area_level_2')) {
                             console.log(addr.long_name);
                             if(!city)
                                 city=addr.long_name;

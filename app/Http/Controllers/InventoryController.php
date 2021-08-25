@@ -438,7 +438,7 @@ class InventoryController extends Controller
     }
 
     public static function search($search){
-        $inventory = Inventory::where('name', 'LIKE', $search."%")->limit(20)->get();
+        $inventory = Inventory::where('name', 'LIKE', "%".$search."%")->limit(20)->get();
 
         return Helper::response(true,"Here are the Matching Items", ['inventories'=>$inventory]);
     }

@@ -100,20 +100,20 @@
                           @else
                           <div class="d-flex  row p-15 pb-0 " >
                               <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
-                              <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Amount
+                                  <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                      Quote By Vendor
                                   </div>
                                   <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                       Buffer Amount
                                   </div>
                                   <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Total
+                                      Sub Total
                                   </div>
                                   <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                       Discount
                                   </div>
                                   <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Grand Total
+                                      Final Payable
                                   </div>
 
                               </div>
@@ -130,7 +130,7 @@
                                       ₹{{number_format($booking->payment->sub_total + $booking->payment->other_charges, 2)}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
-                                      ₹{{$booking->payment->discount_amount}}
+                                      - ₹{{$booking->payment->discount_amount}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
                                       ₹{{$booking->payment->grand_total}}

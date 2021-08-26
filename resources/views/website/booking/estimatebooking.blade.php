@@ -201,7 +201,7 @@
                            <form action="{{route('add_cancel_ticket')}}" method="POST" data-next="redirect" data-url="{{route('my-bookings')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate >
                               <div class="col-12">
                                    <div class="form-input">
-                                       <input class="hidden"name="public_booking_id" value="{{$booking->public_booking_id}}">
+                                       <input class="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
                                               <select id="" class="form-control" name="heading">
                                                   <option value="">--Select--</option>
                                                  @foreach($reasons as $reason)

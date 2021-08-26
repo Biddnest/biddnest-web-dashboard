@@ -13,7 +13,6 @@ use App\Models\OneSignalPlayer;
 use App\Models\User;
 use App\Models\Vendor;
 use App\PushNotification;
-use http\Env\Response;
 
 class NotificationController extends Controller
 {

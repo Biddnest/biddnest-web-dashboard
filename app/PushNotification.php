@@ -4,7 +4,6 @@
  */
 
 namespace App;
-use App\Models\Notification;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 

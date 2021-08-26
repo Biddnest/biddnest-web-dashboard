@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CommonEnums;
 use App\Helper;
-use App\Http\Controllers\Controller;
 use App\Models\Testimonials;
-use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 
 class TestimonialController extends Controller

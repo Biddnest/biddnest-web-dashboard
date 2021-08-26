@@ -3,28 +3,16 @@ namespace App\Http\Controllers;
 
 use App\Enums\AdminEnums;
 use App\Enums\CommonEnums;
-use App\Enums\CouponEnums;
+use App\Helper;
+use App\Models\Admin;
 use App\Models\AdminZone;
 use App\Models\Zone;
-use Carbon\Carbon;
-use Carbon\CarbonImmutable;
-use Illuminate\Encryption\Encrypter;
+use App\Sms;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use App\Models\Admin;
-use App\Models\Service;
-use App\Models\Subservice;
-use App\Models\Inventory;
-use App\Models\Organization;
-use App\Models\Org_kyc;
-use App\Helper;
-use App\Sms;
-
-
-use  App\Jobs\SendOtp;
 use Intervention\Image\ImageManager;
 
 
@@ -33,7 +21,7 @@ class AdminController extends Controller
     /**
      * @param $username
      * @param $password
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function login($username, $password)
     {
@@ -75,7 +63,7 @@ class AdminController extends Controller
 
     /**
      * @param $phone
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function forgotPasswordSendOtp($phone)
     {
@@ -96,7 +84,7 @@ class AdminController extends Controller
     /**
      * @param $otp
      * @param $bearer
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function verifyOtp($otp, $bearer)
     {
@@ -113,7 +101,7 @@ class AdminController extends Controller
     /**
      * @param $password
      * @param $bearer
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return JsonResponse|object
      */
     public static function resetPassword($password, $bearer)
     {

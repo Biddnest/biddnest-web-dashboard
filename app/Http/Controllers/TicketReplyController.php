@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\NotificationEnums;
 use App\Enums\TicketEnums;
 use App\Helper;
-use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use App\Models\TicketReply;
-use Illuminate\Http\Request;
 
 class TicketReplyController extends Controller
 {

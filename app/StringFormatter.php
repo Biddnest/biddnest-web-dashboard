@@ -3,7 +3,7 @@
 
 namespace App;
 
-use PhpParser\Builder\Class_;
+use stdClass;
 
 class StringFormatter
 {
@@ -13,7 +13,7 @@ class StringFormatter
     }
 
     public static function format($input,$rules){
-        $formattedData = new \stdClass();
+        $formattedData = new stdClass();
 
         foreach($rules as $key=>$rule){
             switch ($rule){

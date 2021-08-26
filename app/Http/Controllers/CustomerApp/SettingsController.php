@@ -4,24 +4,25 @@ namespace App\Http\Controllers\CustomerApp;
 
 
 use App\Enums\AppEnums;
+use App\Enums\BidEnums;
+use App\Enums\BookingEnums;
+use App\Enums\CommonEnums;
+use App\Enums\FaqEnums;
+use App\Enums\MailEnums;
 use App\Enums\NotificationEnums;
+use App\Enums\ReviewEnums;
+use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
-use App\Enums\MailEnums;
 use App\Enums\VendorEnums;
-use App\Enums\CommonEnums;
-use App\Enums\ServiceEnums;
-use App\Enums\BookingEnums;
-use App\Enums\BidEnums;
-use App\Enums\FaqEnums;
-use App\Enums\ReviewEnums;
-use App\Models\Settings;
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Settings;
 
 class SettingsController extends Controller
 {
-    public static function getSettings(){
+    public static function getSettings()
+    {
         return Helper::response(true, "Here are the settings.",[
             "config"=>[
                 "service_live"=> true,

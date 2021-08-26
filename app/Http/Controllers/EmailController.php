@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class EmailController extends Controller
 {
     public static function sendSimpleMailToUser($user_id){}

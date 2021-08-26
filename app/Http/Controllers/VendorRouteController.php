@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\VendorEnums;
-use App\Http\Controllers\Controller;
-use App\Models\Vehicle;
-use App\Models\Vendor;
+use App\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\StringFormatter;
-use App\Helper;
 
 class VendorRouteController extends Controller
 {
@@ -243,7 +238,7 @@ class VendorRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketReplyController::addReplyFromVendor(\Illuminate\Support\Facades\Session::get('account')['id'], $request->ticket_id, $request->reply);
+        return TicketReplyController::addReplyFromVendor(Session::get('account')['id'], $request->ticket_id, $request->reply);
     }
 
     public function adduser(Request $request)

@@ -7,51 +7,46 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Enums\NotificationEnums;
+use App\Enums\OrganizationEnums;
 use App\Enums\PaymentEnums;
-use App\Enums\PayoutEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
-use App\Enums\OrganizationEnums;
 use App\Models\Admin;
 use App\Models\AdminZone;
 use App\Models\Banners;
 use App\Models\Booking;
-use App\Models\BookingStatus;
 use App\Models\Coupon;
 use App\Models\CouponZone;
 use App\Models\Inventory;
 use App\Models\InventoryPrice;
 use App\Models\Notification;
 use App\Models\Org_kyc;
+use App\Models\Organization;
 use App\Models\Page;
 use App\Models\Payment;
 use App\Models\Payout;
+use App\Models\Report;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\SliderZone;
 use App\Models\Subservice;
-use App\Models\Organization;
 use App\Models\Testimonials;
 use App\Models\Ticket;
 use App\Models\TicketReply;
+use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Zone;
-use App\Models\Report;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use App\Models\User;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
-use App\Helper;
-use Monolog\Logger;
 
 class WebController extends Controller
 {
@@ -461,10 +456,10 @@ class WebController extends Controller
 
     public function createOrder()
     {
-        $category =Service::where(['status'=>\App\Enums\CommonEnums::$YES, 'deleted'=>\App\Enums\CommonEnums::$NO])
-            ->with(['subservices'=>function($query){
-            $query->where(['subservices.status'=>\App\Enums\CommonEnums::$YES, 'subservices.deleted'=>\App\Enums\CommonEnums::$NO]);
-        }])->get();
+        $category = Service::where(['status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO])
+            ->with(['subservices' => function ($query) {
+                $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO]);
+            }])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('order.createorder', ['categories'=>$category, 'inventories'=>$inventory]);
     }

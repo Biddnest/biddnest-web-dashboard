@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helper;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\GeoUserController;
+use App\Http\Controllers\User\UserController;
 use App\StringFormatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;

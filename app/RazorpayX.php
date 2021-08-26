@@ -6,8 +6,6 @@
 namespace App;
 
 
-use App\Enums\CommonEnums;
-use App\Models\Settings;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 

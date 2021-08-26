@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Booking;
-use App\Models\Bid;
-use App\Enums\BookingEnums;
 use App\Enums\BidEnums;
 use App\Helper;
+use App\Models\Bid;
 
 class ReportController extends Controller
 {

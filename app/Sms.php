@@ -1,9 +1,11 @@
-<?php 
+<?php
 
 namespace App;
-use Craftsys\Msg91\Facade\Msg91;
 
-use App\Helper;
+use Craftsys\Msg91\Exceptions\ResponseErrorException;
+use Craftsys\Msg91\Exceptions\ValidationException;
+use Craftsys\Msg91\Facade\Msg91;
+use Exception;
 
 class Sms
 {
@@ -12,16 +14,15 @@ class Sms
         try {
             Msg91::otp($otp)->to($phone)->send();
             return true;
-        } catch (\Craftsys\Msg91\Exceptions\ValidationException $e) {
-            return [false, "error"=>$e->getMessage()];
-        } catch (\Craftsys\Msg91\Exceptions\ResponseErrorException $e) {
-            return [false, "error"=>$e->getMessage()];
-        } catch (\Exception $e) {
-            return [false, "error"=>$e->getMessage()];
+        } catch (ValidationException $e) {
+            return [false, "error" => $e->getMessage()];
+        } catch (ResponseErrorException $e) {
+            return [false, "error" => $e->getMessage()];
+        } catch (Exception $e) {
+            return [false, "error" => $e->getMessage()];
         }
-        
-    }  
+
+    }
 
 
-    
 }

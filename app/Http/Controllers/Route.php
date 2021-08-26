@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\User\UserController;
-use App\Models\Inventory;
-use App\StringFormatter;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
 use App\Helper;
-use phpDocumentor\Reflection\Types\Nullable;
+use App\Http\Controllers\User\UserController;
+use App\StringFormatter;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Session;
-use App\Http\Middleware\VerifyJwtToken;
 
 class Route extends Controller
 {
@@ -49,9 +46,9 @@ class Route extends Controller
             'otp' => 'required'
         ]);
         if($validation->fails())
-          return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-         return AdminController::verifyOtp($request->otp, $request->phone);
+            return AdminController::verifyOtp($request->otp, $request->phone);
     }
 
     public function reset_password(Request $request)
@@ -61,7 +58,7 @@ class Route extends Controller
             'password_confirmation' => 'required_with:password|same:password'
         ]);
         if($validation->fails())
-          return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return AdminController::resetPassword($request->password, $request->bearer);
     }
@@ -74,7 +71,7 @@ class Route extends Controller
             'password_confirmation' => 'required_with:password|same:password'
         ]);
         if($validation->fails())
-          return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return AdminController::OldResetPassword($request->old_password, $request->password, $request->bearer);
     }
@@ -89,14 +86,14 @@ class Route extends Controller
         ]);
 
         if($validation->fails())
-          return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return ServiceController::add(ucwords($request->name), $request->image, $request->inventory_quantity_type);
     }
 
     public function service(Request $request)
     {
-            return ServiceController::get();
+        return ServiceController::get();
     }
 
     public function service_get(Request $request)
@@ -117,7 +114,7 @@ class Route extends Controller
         ]);
 
         if($validation->fails())
-          return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return ServiceController::update($request->id, ucwords($request->name), $request->image, $request->inventory_quantity_type);
     }
@@ -218,7 +215,7 @@ class Route extends Controller
     public function inventories_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
-                    //  'subservice_id' => 'required',
+            //  'subservice_id' => 'required',
             'name' => 'required',
             'material' => 'required',
             'size' => 'required',
@@ -226,7 +223,6 @@ class Route extends Controller
             'category'=> 'required|string',
             'icon' => 'required|string'
         ]);
-
 
 
         if($validation->fails())
@@ -237,7 +233,7 @@ class Route extends Controller
             'material' => 'json',
             'size' => 'json'
         ]);
-            return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
+        return InventoryController::add($formatedRequest->name, $formatedRequest->material, $formatedRequest->size, $request->image, $request->category, $request->icon);
     }
 
     public function inventories_edit(Request $request)
@@ -539,7 +535,7 @@ class Route extends Controller
 
     public function role_delete(Request $request)
     {
-       return OrganisationController::deleteRole($request->vendor_id, $request->organization_id);
+        return OrganisationController::deleteRole($request->vendor_id, $request->organization_id);
     }
 
     /*Vendor login*/
@@ -555,14 +551,14 @@ class Route extends Controller
             return VendorController::login($request->email, $request->password);
     }
 
-     /*Sliders And Banners*/
-     public function sliders()
-     {
+    /*Sliders And Banners*/
+    public function sliders()
+    {
         return SliderController::get();
-     }
+    }
 
-     public function sliders_add(Request $request)
-     {
+    public function sliders_add(Request $request)
+    {
         $validation = Validator::make($request->all(),[
             'name' => 'required|string', 'type' => 'required',
             'position' => 'required', 'platform' => 'required',
@@ -571,19 +567,19 @@ class Route extends Controller
             'zones'=>"nullable"
         ]);
 
-         $formatedRequest = StringFormatter::format($request->all(),[
-             'to_date' => 'date',
-             'from_date' => 'date',
-         ]);
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'to_date' => 'date',
+            'from_date' => 'date',
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return SliderController::add($request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
-     }
+    }
 
-     public function sliders_edit(Request $request)
-     {
+    public function sliders_edit(Request $request)
+    {
         $validation = Validator::make($request->all(),[
             'id'=>'required|integer',
             'name' => 'required|string', 'type' => 'required',
@@ -593,34 +589,34 @@ class Route extends Controller
             'zones'=>"nullable"
         ]);
 
-         $formatedRequest = StringFormatter::format($request->all(),[
-             'to_date' => 'date',
-             'from_date' => 'date',
-         ]);
+        $formatedRequest = StringFormatter::format($request->all(),[
+            'to_date' => 'date',
+            'from_date' => 'date',
+        ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return SliderController::edit($request->id, $request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
-     }
+    }
 
-     public function slider_status_update(Request $request)
+    public function slider_status_update(Request $request)
     {
         return SliderController::statusUpdate($request->id);
     }
 
-     public function sliders_delete($id)
-     {
+    public function sliders_delete($id)
+    {
         return SliderController::delete($id);
-     }
+    }
 
-     public function banners()
-     {
+    public function banners()
+    {
         return SliderController::banners();
-     }
+    }
 
-     public function banners_add(Request $request)
-     {
+    public function banners_add(Request $request)
+    {
         $validation = Validator::make($request->all(),[
             'id'=>"required|int",
             'banners.*.name' => 'required|string',
@@ -635,15 +631,15 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
             return SliderController::addBanner($request->all());
-     }
+    }
 
-     public function banners_delete($id)
-     {
+    public function banners_delete($id)
+    {
         return SliderController::deleteBanner($id);
-     }
+    }
 
-     public function coupon_add(Request $request)
-     {
+    public function coupon_add(Request $request)
+    {
         $validation = Validator::make($request->all(),[
             'name'=>'required|string',
             'desc'=>'required|string',
@@ -670,94 +666,94 @@ class Route extends Controller
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return CouponController::add($request->all());
-     }
+    }
 
-     public function coupon_edit(Request $request)
-     {
-         $validation = Validator::make($request->all(),[
-             'id'=>'required',
-             'name'=>'required|string',
-             'desc'=>'required|string',
-             'code'=>'required|string',
-             'type'=>'required|integer',
-             'discount_type'=>'required|integer',
-             'discount_amount'=>'required',
-             'max_discount_amount'=>'required',
-             'min_order_amount'=>'required',
-             'deduction_source'=>'required|integer',
-             'max_usage'=>'required|integer',
-             'max_usage_per_user'=>'required|integer',
-             'organization_scope'=>'required|integer',
-             'zone_scope'=>'required|integer',
-             'user_scope'=>'required|integer',
-             'valid_from'=>'required',
-             'valid_to'=>'required',
-             'organizations.*'=>'required',
-             'zones.*'=>'required',
-             'users.*'=>'required',
-             'status'=>'required'
-         ]);
+    public function coupon_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required|string',
+            'desc'=>'required|string',
+            'code'=>'required|string',
+            'type'=>'required|integer',
+            'discount_type'=>'required|integer',
+            'discount_amount'=>'required',
+            'max_discount_amount'=>'required',
+            'min_order_amount'=>'required',
+            'deduction_source'=>'required|integer',
+            'max_usage'=>'required|integer',
+            'max_usage_per_user'=>'required|integer',
+            'organization_scope'=>'required|integer',
+            'zone_scope'=>'required|integer',
+            'user_scope'=>'required|integer',
+            'valid_from'=>'required',
+            'valid_to'=>'required',
+            'organizations.*'=>'required',
+            'zones.*'=>'required',
+            'users.*'=>'required',
+            'status'=>'required'
+        ]);
 
-         if($validation->fails())
-             return Helper::response(false,"validation failed", $validation->errors(), 400);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return CouponController::update($request->all(), $request->id);
-     }
+        return CouponController::update($request->all(), $request->id);
+    }
 
-     public function coupon_delete(Request $request)
-     {
-         return CouponController::delete($request->id);
-     }
+    public function coupon_delete(Request $request)
+    {
+        return CouponController::delete($request->id);
+    }
 
-     public function zones_add(Request $request)
-     {
-         $validation = Validator::make($request->all(),[
-             'name'=>'required|string',
-             'lat'=>'required|numeric',
-             'lng'=>'required|numeric',
-             'city'=>'required|string',
-             'district'=>'required|string',
-             'state'=>'required|string',
-             'area'=>'required'
-         ]);
+    public function zones_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name'=>'required|string',
+            'lat'=>'required|numeric',
+            'lng'=>'required|numeric',
+            'city'=>'required|string',
+            'district'=>'required|string',
+            'state'=>'required|string',
+            'area'=>'required'
+        ]);
 
-         if($validation->fails())
-             return Helper::response(false,"validation failed", $validation->errors(), 400);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return ZoneController::add($request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
-     }
+        return ZoneController::add($request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
+    }
 
-     public function zones_edit(Request $request)
-     {
-         $validation = Validator::make($request->all(),[
-             'id'=>'required',
-             'name'=>'required|string',
-             'lat'=>'required|numeric',
-             'lng'=>'required|numeric',
-             'city'=>'required|string',
-             'district'=>'required|string',
-             'state'=>'required|string',
-             'area'=>'required'
-         ]);
+    public function zones_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required|string',
+            'lat'=>'required|numeric',
+            'lng'=>'required|numeric',
+            'city'=>'required|string',
+            'district'=>'required|string',
+            'state'=>'required|string',
+            'area'=>'required'
+        ]);
 
-         if($validation->fails())
-             return Helper::response(false,"validation failed", $validation->errors(), 400);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
-     }
+        return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
+    }
 
     public function zone_status_update(Request $request)
     {
         return ZoneController::statusUpdate($request->id);
     }
 
-     public function zones_delete(Request $request)
-     {
-         return ZoneController::delete($request->id);
-     }
+    public function zones_delete(Request $request)
+    {
+        return ZoneController::delete($request->id);
+    }
 
-     public function end_bid(Request $request)
-     {
+    public function end_bid(Request $request)
+    {
         $validation = Validator::make($request->all(),[
             'public_booking_id'=> 'string'
         ]);
@@ -767,42 +763,42 @@ class Route extends Controller
 
         return BidController::getbookings($request->public_booking_id);
 
-     }
+    }
 
-     public function searchUser(Request $request)
-     {
+    public function searchUser(Request $request)
+    {
 //         return $request->query;
-         return UserController::search($request);
-     }
+        return UserController::search($request);
+    }
 
-     public function searchVendor(Request $request)
-     {
+    public function searchVendor(Request $request)
+    {
 //         return $request->query;
-         return OrganisationController::search($request);
-     }
+        return OrganisationController::search($request);
+    }
 
-     public function searchadmin(Request $request)
-     {
+    public function searchadmin(Request $request)
+    {
 //         return $request->query;
-         return AdminController::search($request);
-     }
+        return AdminController::search($request);
+    }
 
-     public function testimonial_add(Request $request)
-     {
-         $validation = Validator::make($request->all(),[
-             'name'=>'required|string',
-             'designation'=>'required|string',
-             'image'=>'required',
-             'heading'=>'required|string',
-             'desc'=>'required|string',
-             'rating'=>'required'
-         ]);
+    public function testimonial_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name'=>'required|string',
+            'designation'=>'required|string',
+            'image'=>'required',
+            'heading'=>'required|string',
+            'desc'=>'required|string',
+            'rating'=>'required'
+        ]);
 
-         if($validation->fails())
-             return Helper::response(false,"validation failed", $validation->errors(), 400);
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc, $request->rating);
-     }
+        return TestimonialController::add($request->name, $request->designation, $request->image, $request->heading, $request->desc, $request->rating);
+    }
 
     public function testimonial_edit(Request $request)
     {
@@ -1061,7 +1057,7 @@ class Route extends Controller
 
     public function api_settings_update(Request $request)
     {
-       return SettingController::update_api($request->all());
+        return SettingController::update_api($request->all());
     }
 
     public function reply_add(Request $request)
@@ -1174,19 +1170,19 @@ class Route extends Controller
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->id);
     }
 
-   /* public function booking_reject(Request $request)
-    {
-        $validation = Validator::make($request->all(),[
-            'reason' => 'required|string',
-            'desc' => 'required|string',
-            'public_booking_id' => 'required|string'
-        ]);
+    /* public function booking_reject(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'reason' => 'required|string',
+             'desc' => 'required|string',
+             'public_booking_id' => 'required|string'
+         ]);
 
-        if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
-        else
-            return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->id);
-    }*/
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+         else
+             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->id);
+     }*/
 
     public function booking_add_bid(Request $request)
     {
@@ -1256,7 +1252,7 @@ class Route extends Controller
         return PayoutController::registerFundAccount($request->id);
     }
 
-   /* public function export_csv(Request $request){
-        return ExportController::exoprtSale();
-    }*/
+    /* public function export_csv(Request $request){
+         return ExportController::exoprtSale();
+     }*/
 }

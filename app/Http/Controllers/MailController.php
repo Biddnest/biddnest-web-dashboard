@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BidEnums;
-use App\Helper;
-use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\Booking;
-use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Mail;
-use Monolog\Logger;
 
 class MailController extends Controller
 {

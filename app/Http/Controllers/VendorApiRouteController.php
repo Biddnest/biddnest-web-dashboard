@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Helper;
+use App\Http\Middleware\VerifyJwtToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Middleware\VerifyJwtToken;
-use App\StringFormatter;
-use App\Helper;
 
 class VendorApiRouteController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware(VerifyJwtToken::class)->except(['config','login','loginForApp','phoneVerification','verifyOtp','resetPassword']);
+    public function __construct()
+    {
+        $this->middleware(VerifyJwtToken::class)->except(['config', 'login', 'loginForApp', 'phoneVerification', 'verifyOtp', 'resetPassword']);
     }
 
     public function loginForApp(Request $request)

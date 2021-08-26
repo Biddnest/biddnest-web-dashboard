@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper;
-use App\Models\Inventory;
-use App\Models\Service;
-use App\Models\Subservice;
-use App\Models\ServiceSubservice;
-use App\Models\SubserviceInventory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManager;
 use App\Enums\CommonEnums;
+use App\Helper;
+use App\Models\ServiceSubservice;
+use App\Models\Subservice;
+use App\Models\SubserviceInventory;
+use Intervention\Image\ImageManager;
 
 class SubServiceController extends Controller
 {
     private static $public_data = ["id","name","image"];
+
     public function __construct()
     {
     }
@@ -143,9 +140,9 @@ class SubServiceController extends Controller
     public static function getSubservicesForApp($id, $web=false)
     {
         $subservice=Subservice::select(self::$public_data)
-        ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
-        ->whereIn("id", ServiceSubservice::where('service_id', $id)->pluck('subservice_id'))
-        ->get();
+            ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+            ->whereIn("id", ServiceSubservice::where('service_id', $id)->pluck('subservice_id'))
+            ->get();
 
         if(!$subservice)
             return Helper::response(false,"Records not exist");

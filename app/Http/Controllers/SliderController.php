@@ -3,18 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CommonEnums;
+use App\Enums\SliderEnum;
+use App\Helper;
+use App\Models\Banners;
 use App\Models\SlideBanner;
+use App\Models\Slider;
 use App\Models\SliderZone;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use App\Models\Slider;
-use App\Models\Banners;
-use App\Helper;
-use App\Sms;
 use Intervention\Image\ImageManager;
-use App\Enums\SliderEnum;
 
 class SliderController extends Controller
 {

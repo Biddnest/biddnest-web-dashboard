@@ -10,18 +10,16 @@ use App\Enums\FaqEnums;
 use App\Enums\MailEnums;
 use App\Enums\NotificationEnums;
 use App\Enums\OrganizationEnums;
+use App\Enums\PayoutEnums;
 use App\Enums\ReviewEnums;
 use App\Enums\ServiceEnums;
 use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\VendorEnums;
-use App\Enums\PayoutEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
-use App\Models\Settings;
 use App\Models\Service;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
+use App\Models\Settings;
 
 class SettingsController extends Controller
 {

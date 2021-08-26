@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
+use App\Enums\InventoryEnums;
+use App\Enums\ServiceEnums;
 use App\Helper;
+use App\Imports\InventoryImport;
+use App\Imports\InventoryPriceImport;
+use App\Models\Inventory;
+use App\Models\InventoryPrice;
+use App\Models\Organization;
+use App\Models\Service;
 use App\Models\SubserviceInventory;
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
-use App\Models\Inventory;
-use App\Models\InventoryPrice;
-use App\Models\Organization;
-use App\Models\Service;
-use App\Enums\CommonEnums;
-use App\Enums\InventoryEnums;
-use App\Enums\ServiceEnums;
-use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Facades;
-use App\Imports\InventoryImport;
-use App\Imports\InventoryPriceImport;
 
 class InventoryController extends Controller
 {
     private static $public_data = ["id","name","image","icon","size","material","category"];
+
     public static function get()
     {
         $inventories=Inventory::all();
@@ -60,7 +60,7 @@ class InventoryController extends Controller
                 "inventory_id"=>$inventory->id
             ]);
         }*/
-            return Helper::response(true,"save data successfully",["inventory"=>Inventory::select(self::$public_data)->findOrFail($inventory->id)]);
+        return Helper::response(true,"save data successfully",["inventory"=>Inventory::select(self::$public_data)->findOrFail($inventory->id)]);
     }
 
     public static function update($id, $name, $material, $size, $image, $category, $icon)
@@ -181,15 +181,14 @@ class InventoryController extends Controller
             TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
 
             return Helper::response(true, "Price Saved successfully");
-        }
-        else
+        } else
             return Helper::response(true,"Price Saved successfully",["Price"=>Inventory::with("inventoryprice")->findOrFail($data['inventory_id'])]);
     }
 
     public static function getByInventory($id)
     {
         $result=InventoryPrice::whereIn("inventory_id", Inventory::where('id', $id)->pluck('id'))
-        ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+            ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
 
         if(!$result)
             return Helper::response(false,"Couldn't Display data");
@@ -203,9 +202,9 @@ class InventoryController extends Controller
         // if(!$Organization)
         //     return Helper::response(false,"Incorrect Organization id.");
 
-       /* $Service = Service::findOrFail($data["service_type"]);
-        if(!$Service)
-            return Helper::response(false,"Incorrect service type.");*/
+        /* $Service = Service::findOrFail($data["service_type"]);
+         if(!$Service)
+             return Helper::response(false,"Incorrect service type.");*/
 
         $Inventory = Inventory::findOrFail($data["inventory_id"]);
 
@@ -252,17 +251,16 @@ class InventoryController extends Controller
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
             $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
-                                                "size"=>$item['size'],
-                                                "material"=>$item['material'], "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
-                                                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_economics');
-            if($web || $created_by_support)
-            {
-            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
+                "size"=>$item['size'],
+                "material"=>$item['material'], "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
+                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_economics');
+            if($web || $created_by_support) {
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
             }else{
-            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] :  $item['quantity']['max'];
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] :  $item['quantity']['max'];
             }
             Log::info(GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']));
-           $finalprice += $minprice ?  (double)$minprice * (integer)$quantity * (double)GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
+            $finalprice += $minprice ?  (double)$minprice * (integer)$quantity * (double)GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
         }
 
         return $finalprice;
@@ -274,18 +272,17 @@ class InventoryController extends Controller
         $finalprice=0.00;
         foreach($data['inventory_items'] as $item) {
             $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
-                                                "size"=>$item['size'],
-                                                "material"=>$item['material']])
-                                                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_premium');
+                "size"=>$item['size'],
+                "material"=>$item['material']])
+                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_premium');
 
 //            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
-            if($web == true || $created_by_support == true)
-            {
+            if($web == true || $created_by_support == true) {
                 $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
             }else{
                 $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
             }
-           $finalprice += $minprice ? (double)$minprice * (int)$quantity * (double)GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
+            $finalprice += $minprice ? (double)$minprice * (int)$quantity * (double)GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
         }
 
         return $finalprice;
@@ -347,43 +344,40 @@ class InventoryController extends Controller
 
                 try {
                     Facades\Excel::import(new InventoryImport, $fileContent);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     return $e->getMessage();
                 }
             });
             return "done";
-        }
-        else{
+        } else{
 //            return (string)json_encode(Storage::files("/public/imports/inventories"));
             foreach (Storage::files("/public/imports/inventories") as $file){
 
 
-            $filename = explode("/","$file");
-            $imported_files =  DB::table("import_migrations")->pluck('file');
+                $filename = explode("/","$file");
+                $imported_files =  DB::table("import_migrations")->pluck('file');
 //            return $file;
 //            $return = "No tinitiated yet";
                 if(!in_array($file, (array)$imported_files)){
 //                    DB::transaction(function () use ($file) {
 //                        try {
-                            Facades\Excel::import(new InventoryImport, $file);
-                        /*} catch (\Exception $e) {
-                            $return = $e->getMessage();
-                        }
-                        return $return;*/
+                    Facades\Excel::import(new InventoryImport, $file);
+                    /*} catch (\Exception $e) {
+                        $return = $e->getMessage();
+                    }
+                    return $return;*/
 //                    });
 
                     DB::table("import_migrations")->insert([
                         "file"=>$file
                     ]);
 
-                }
-                else
+                } else
                     return "This file is already imported";
 
             }
 
         }
-
 
 
     }
@@ -396,13 +390,12 @@ class InventoryController extends Controller
 
                 try {
                     Facades\Excel::import(new InventoryImport, $fileContent);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     return $e->getMessage();
                 }
             });
             return "done";
-        }
-        else{
+        } else{
 //            return (string)json_encode(Storage::files("/public/imports/inventories"));
             foreach (Storage::files("/public/imports/inventory_prices") as $file){
 
@@ -425,14 +418,12 @@ class InventoryController extends Controller
                         "file"=>$file
                     ]);
 
-                }
-                else
+                } else
                     return "This file is already imported";
 
             }
 
         }
-
 
 
     }

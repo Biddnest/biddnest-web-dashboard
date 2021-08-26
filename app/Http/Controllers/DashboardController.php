@@ -6,7 +6,6 @@ use App\Enums\AdminEnums;
 use App\Helper;
 use App\Models\Booking;
 use App\Models\Organization;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller

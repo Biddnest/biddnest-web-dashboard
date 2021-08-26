@@ -3,19 +3,16 @@
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
 
-use App\Enums\BookingEnums;
-use App\Enums\NotificationEnums;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\Route as Router;
 use App\Http\Controllers\VendorRouteController as VendorRouter;
-use App\Http\Controllers\VendorWebApiRouteController as VendorApiRouter;
-use App\Http\Controllers\WebController;
 use App\Http\Controllers\VendorWebController;
-use App\Http\Controllers\ExportController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
+use App\Http\Controllers\WebController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

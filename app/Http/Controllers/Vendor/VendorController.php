@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers\Vendor;
 
-use App\Enums\OrganizationEnums;
 use App\Enums\VendorEnums;
 use App\Helper;
-use App\Models\Organization;
-use App\VendorRoles;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
-use App\Sms;
-use Carbon\CarbonImmutable;
-use Illuminate\Http\Request;
-use Intervention\Image\Image;
-use Intervention\Image\ImageManager;
+use App\VendorRoles;
 use Session;
 
 class VendorController extends Controller

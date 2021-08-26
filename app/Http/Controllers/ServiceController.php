@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper;
-use App\Models\Inventory;
-use App\Models\Service;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManager;
 use App\Enums\CommonEnums;
+use App\Helper;
+use App\Models\Service;
+use Intervention\Image\ImageManager;
 
 class ServiceController extends Controller
 {
     private static $public_data = ["id","name","image","inventory_quantity_type"];
+
     public function __construct()
     {
     }

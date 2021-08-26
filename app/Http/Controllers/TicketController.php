@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingEnums;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Helper;
-use App\Models\Ticket;
-use App\Models\Booking;
-use App\Models\User;
 use App\Enums\TicketEnums;
+use App\Helper;
+use App\Models\Booking;
+use App\Models\Ticket;
 use App\Models\TicketReply;
 
 

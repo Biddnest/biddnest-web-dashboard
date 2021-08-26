@@ -6,18 +6,18 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Firebase\JWT\JWT;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
-use App\Helper;
 
 class VerifyJwtToken
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
@@ -32,19 +32,18 @@ class VerifyJwtToken
                 if($data->iss != config('app.url'))
                     return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
 
-                if(strpos($request->path(), "vendor") !== false)
-                {
-                    if(!isset($data->payload->organization_id))
-                        return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
-                }else{
-                    if(isset($data->payload->organization_id))
-                        return response()->json(["status"=>"fail", "message"=>"You are not authorized. Better have a quote from us: ".Inspiring::quote(),"data"=>null])->setStatusCode(401);
+                if(strpos($request->path(), "vendor") !== false) {
+                    if (!isset($data->payload->organization_id))
+                        return response()->json(["status" => "fail", "message" => "You are not authorized. Better have a quote from us: " . Inspiring::quote(), "data" => null])->setStatusCode(401);
+                } else {
+                    if (isset($data->payload->organization_id))
+                        return response()->json(["status" => "fail", "message" => "You are not authorized. Better have a quote from us: " . Inspiring::quote(), "data" => null])->setStatusCode(401);
                 }
                 $request->token_payload = $data->payload;
                 return $next($request);
             }
-        } catch (\Exception $e) {
-            return response()->json(["status"=>"fail", "message"=>"You are not authorized to access this application.","data"=>["error"=>$e->getMessage()]])->setStatusCode(401);
+        } catch (Exception $e) {
+            return response()->json(["status" => "fail", "message" => "You are not authorized to access this application.", "data" => ["error" => $e->getMessage()]])->setStatusCode(401);
         }
 
     }

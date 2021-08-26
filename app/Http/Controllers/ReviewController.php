@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Helper;
-use App\Models\Review;
-use App\Models\Booking;
-use App\Enums\ReviewEnums;
 use App\Enums\BookingEnums;
-use App\Models\ReviewSentiment;
-use App\Enums\ReviewSentimentEnum;
+use App\Helper;
+use App\Models\Booking;
+use App\Models\Review;
 use Illuminate\Support\Facades\Artisan;
 
 class ReviewController extends Controller

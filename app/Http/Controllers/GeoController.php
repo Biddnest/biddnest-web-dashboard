@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CommonEnums;
-use App\Models\Zone;
-use Illuminate\Http\Request;
 use App\Models\Settings;
-use Illuminate\Support\Facades\Log;
+use App\Models\Zone;
 
 class GeoController extends Controller
 {

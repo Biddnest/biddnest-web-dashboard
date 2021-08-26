@@ -7,7 +7,6 @@ use App\Enums\VendorEnums;
 use App\Helper;
 use App\Models\Vehicle;
 use App\Models\Vendor;
-use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {

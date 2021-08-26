@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\OrganizationEnums;
-use App\Helper;
-use App\Models\Organization;
-use App\Models\Vendor;
-use App\Models\OrganizationService;
-use App\Models\Org_kyc;
-use App\Enums\VendorEnums;
 use App\Enums\CommonEnums;
+use App\Enums\OrganizationEnums;
+use App\Enums\VendorEnums;
+use App\Helper;
+use App\Models\Org_kyc;
+use App\Models\Organization;
+use App\Models\OrganizationService;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -64,8 +64,7 @@ class OrganisationController extends Controller
         $organizations->commission = $data['commission'];
         $result_organization= $organizations->save();
 
-        foreach($data['service'] as $value)
-        {
+        foreach($data['service'] as $value) {
             $service=new OrganizationService;
             $service->organization_id=$organizations->id;
             $service->service_id=$value;
@@ -198,8 +197,7 @@ class OrganisationController extends Controller
         $result_organization =Organization::where(["id"=>$id])->update($update_data);
 
         OrganizationService::where("organization_id", $id)->delete();
-        foreach($data['service'] as $value)
-        {
+        foreach($data['service'] as $value) {
             $service=new OrganizationService;
             $service->organization_id=$id;
             $service->service_id =$value;
@@ -269,18 +267,15 @@ class OrganisationController extends Controller
         $organizations->meta =json_encode($meta);
         $organizations->commission =$exist['commission'];
         $organizations->verification_status = $exist['verification_status'];
-        if($vendor)
-        {
+        if($vendor) {
             $organizations->status =OrganizationEnums::$STATUS['pending_approval'];
             $organizations->ticket_status = CommonEnums::$TICKET_STATUS['open'];
-        }
-        else
+        } else
             $organizations->status =$exist['status'];
 
         $result_organization= $organizations->save();
 
-        foreach($data['service'] as $value)
-        {
+        foreach($data['service'] as $value) {
             $service=new OrganizationService;
             $service->organization_id=$organizations->id;
             $service->service_id=$value;
@@ -290,8 +285,7 @@ class OrganisationController extends Controller
         if(!$result_organization && !$result_service)
             return Helper::response(false,"Couldn't save data");
 
-        if($vendor)
-        {
+        if($vendor) {
             TicketController::createForVendor(Session::get('account')['id'], 5,  ["Branch_id"=>$organizations->id]);
         }
 
@@ -333,8 +327,7 @@ class OrganisationController extends Controller
                 "meta" =>json_encode($meta)
             ]);
 
-        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKET_STATUS['modify']))
-        {
+        if($vendor && ($exist['ticket_status'] != CommonEnums::$TICKET_STATUS['modify'])) {
             Organization::where(["id" => $id])
                 ->update([
                     'ticket_status' => CommonEnums::$TICKET_STATUS['open'],
@@ -343,8 +336,7 @@ class OrganisationController extends Controller
         }
 
         OrganizationService::where("organization_id", $id)->delete();
-        foreach($data['service'] as $value)
-        {
+        foreach($data['service'] as $value) {
             $service=new OrganizationService;
             $service->organization_id=$id;
             $service->service_id =$value;
@@ -374,8 +366,7 @@ class OrganisationController extends Controller
     public static function addBank($data, $id, $bank_id)
     {
         $exist = Organization::findOrFail($id);
-        if(!$bank_id)
-        {
+        if(!$bank_id) {
             if(!$exist)
                 return Helper::response(false,"Incorrect Organization id.");
 
@@ -401,9 +392,7 @@ class OrganisationController extends Controller
                 return Helper::response(false,"Couldn't save data");
 
             return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('services')->with('bank')->findOrFail($id)]);
-        }
-        else
-        {
+        } else {
             $exist = Org_kyc::where(["id"=>$bank_id, "organization_id"=>$id])->first();
             if(!$exist)
                 return Helper::response(false,"Invalide or incorrect Organization id or Bank id ");
@@ -610,8 +599,8 @@ class OrganisationController extends Controller
 
     public static function sendOtpForBid($id)
     {
-         $vendor=Organization::where(["id"=>$id])->orWhere("parent_org_id", $id)->first();
-         $otp = Helper::generateOTP(6);
+        $vendor=Organization::where(["id"=>$id])->orWhere("parent_org_id", $id)->first();
+        $otp = Helper::generateOTP(6);
         $newvendor =Vendor::where(['phone'=>$vendor->phone, 'organization_id'=>$id, 'user_role'=>VendorEnums::$ROLES['admin']])
             ->update([
                 'verf_code'=>$otp

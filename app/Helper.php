@@ -4,21 +4,18 @@ namespace App;
 use App\Enums\AdminEnums;
 use App\Enums\VendorEnums;
 use Carbon\CarbonImmutable;
-use Faker\Provider\File;
-use \Firebase\JWT\JWT;
-use http\Env\Request;
-use Carbon\Carbon;
+use Fabito\AvatarGenerator\Avatar;
+use Firebase\JWT\JWT;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Fabito\AvatarGenerator\Avatar;
-use Illuminate\Foundation\Inspiring;
 
 class Helper
 {
-    public static function response($status, $message, $data=null, $http_code=200){
+    public static function response($status, $message, $data = null, $http_code = 200)
+    {
 //        $stat =$status ? "success" : "fail";
-        if($status === true)
-           $stat = "success";
+        if ($status === true)
+            $stat = "success";
 
         if($status === false)
            $stat = "fail";

@@ -10,11 +10,8 @@ use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\NotificationEnums;
 use App\Enums\ServiceEnums;
-use App\Enums\VendorEnums;
-use App\Http\Controllers\Controller;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
-//use App\Http\Controllers\BookingController;
 use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingDriver;
@@ -25,25 +22,25 @@ use App\Models\MovementDates;
 use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Settings;
-use App\Models\Ticket;
 use App\Models\User;
-use App\Models\Vehicle;
 use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
+
+//use App\Http\Controllers\BookingController;
 
 class BookingsController extends Controller
 {
 
-    public static function createEnquiryForAdmin(Request $request){
-        $user = User::where("phone",$request->phone)
-                ->orWhere("email",$request->email)
-                ->first();
+    public static function createEnquiryForAdmin(Request $request)
+    {
+        $user = User::where("phone", $request->phone)
+            ->orWhere("email", $request->email)
+            ->first();
         if($user) {
             $user_id = $user->id;
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Enums\FaqEnums;
 use App\Helper;
 use App\Models\Faq;
-use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {

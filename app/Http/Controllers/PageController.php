@@ -6,7 +6,6 @@ use App\Enums\CommonEnums;
 use App\Helper;
 use App\Models\Page;
 use App\Models\Settings;
-use Illuminate\Http\Request;
 
 class PageController extends Controller
 {

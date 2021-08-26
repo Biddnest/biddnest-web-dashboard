@@ -18,7 +18,6 @@ use App\Models\Settings;
 use App\Razorpay;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use http\Exception;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller

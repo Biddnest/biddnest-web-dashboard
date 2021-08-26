@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\FaqEnums;
 use App\Helper;
 use App\Models\Settings;
 

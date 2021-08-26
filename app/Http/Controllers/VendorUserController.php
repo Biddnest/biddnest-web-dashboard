@@ -3,28 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CommonEnums;
+use App\Enums\VendorEnums;
 use App\Helper;
-use App\Models\Admin;
-use App\Models\Vehicle;
-use App\Models\Vendor;
 use App\Models\Organization;
 use App\Models\OrganizationService;
-use App\Enums\VendorEnums;
+use App\Models\Vendor;
+use App\Sms;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
-use App\Sms;
-use App\Models\Bid;
-use App\Models\BidInventory;
-use App\Enums\BidEnums;
 use Illuminate\Support\Facades\Session;
-use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
 class VendorUserController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
 
     }
 

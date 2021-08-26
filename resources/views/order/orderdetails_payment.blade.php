@@ -127,7 +127,7 @@
                                       ₹{{$booking->payment->other_charges}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
-                                      ₹{{$booking->payment->sub_total}}
+                                      ₹{{$booking->payment->sub_total + $booking->payment->other_charges}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
                                       ₹{{$booking->payment->discount_amount}}

@@ -207,7 +207,7 @@
                                                 {{json_decode($booking->meta, true)['distance']}} KM
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)Dedicated @else Shared @endif
+                                                @if(json_decode($booking->source_meta, true)['shared_service']== false)Dedicated @else Shared @endif
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 {{$booking->service->name}}
@@ -329,7 +329,7 @@
                                             <label class="full-name mb-4">Type of Movement</label>
                                             <select id="" class="form-control mt-2" name="type_of_movement" required>
                                                 <option value="">--select--</option>
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== true)
+                                                @if(json_decode($booking->source_meta, true)['shared_service']== false)
                                                     <option value="dedicated">Dedicated</option>
                                                 @else
                                                     <option value="shared">Shared</option>

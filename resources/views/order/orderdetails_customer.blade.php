@@ -91,11 +91,9 @@
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   From Address
                                 </div>
-                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;"></div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   To Address
                                 </div>
-                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;"></div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                     Delivery Distance
                                 </div>

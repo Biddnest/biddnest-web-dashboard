@@ -239,7 +239,7 @@
     }
 
     .searchButton, .searchButton1{
-        outline: none;
-        border: none;
+        outline: none !important;
+        border: none !important;
     }
 </style>

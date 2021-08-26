@@ -53,7 +53,7 @@
                         <div class="p-1 card-head left col-sm-3">
                             <div class="search">
                                 <input type="text" class="searchTerm table-search1" data-url="{{route('orders-booking')}}" placeholder="Search...">
-                                <button type="submit" class="searchButton">
+                                <button type="submit" class="searchButton1">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>

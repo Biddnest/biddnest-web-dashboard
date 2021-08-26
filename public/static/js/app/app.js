@@ -692,15 +692,17 @@ $("body").on('keydown', ".table-search1", function(event) {
 });
 
 $("body").on('click', ".searchButton", function(event) {
-        var query = $('.table-search1').val();
         var query1 = $('.table-search').val();
         if (query1.length >= 3) {
             redirectTo(window.location.href + "?search=" + query1);
         }
+});
 
-        if (query.length >= 15) {
-            redirectTo(window.location.href + "?search=" + query);
-        }
+$("body").on('click', ".searchButton1", function(event) {
+    var query = $('.table-search1').val();
+    if (query.length >= 3) {
+        redirectTo(window.location.href + "?search=" + query);
+    }
 });
 
 $("body").on('change', ".check-toggle", function(event) {

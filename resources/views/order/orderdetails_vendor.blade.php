@@ -134,10 +134,10 @@
                                    @if($booking->driver) +91 -{{ucfirst(trans($booking->driver->phone))}} @else Driver is not assigned @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->payment) ₹{{ucfirst(trans($booking->payment->grand_total))}}@else Payment Pending @endif
+                                    @if($booking->payment) ₹{{number_format($booking->payment->grand_total*($booking->organization->commission/100), 2)}}@else Payment Pending @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->payment)@if($booking->payment->coupon)@if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed'])₹@endif{{ucfirst(trans($booking->payment->coupon->discount_amount))}} @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['percentage'])% Off @endif @else Coupon not Applied @endif @else Payment Pending @endif
+                                    @if($booking->payment)@if($booking->payment->coupon) @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed'])₹ {{number_format($booking->payment->coupon->discount_amount, 2)}} @endif @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['percentage']){{ucfirst(trans($booking->payment->coupon->discount_amount))}}%  @endif Off @else Coupon not Applied @endif @else Payment Pending @endif
                                 </div>
 
                             </div>

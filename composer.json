@@ -10,12 +10,12 @@
     "require": {
         "php": "^7.3|^8.0",
         "craftsys/msg91-laravel": "^0.12.0",
+        "dipeshsukhia/laravel-html-minify": "^1.1",
         "fabian-tomischka/php-avatar-generator": "dev-master",
         "fideloper/proxy": "^4.4",
         "firebase/php-jwt": "^5.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
-        "htmlmin/htmlmin": "^8.0",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",

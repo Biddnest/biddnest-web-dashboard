@@ -73,11 +73,12 @@ class BookingsController extends Controller
             $exsist = Booking::where(["user_id" => $user_id,
                 "deleted" => CommonEnums::$NO])
                 ->where("status", "!=", BookingEnums::$STATUS["cancelled"])
+                ->where("service_id", $data['service_id'])
                 ->whereBetween("created_at", [Carbon::now()->subMinutes(30), Carbon::now()])
                 ->get();
 
             if ($exsist) {
-                return Helper::response(false, "You have pending order");
+                return Helper::response(false, "You already have a pending order. You can not place further bookings in this service category.");
             }
         }
         DB::beginTransaction();

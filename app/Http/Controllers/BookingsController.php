@@ -66,7 +66,7 @@ class BookingsController extends Controller
 
     public static function createEnquiry($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
     {
-        if (App::environment('production')) {
+        /*if (App::environment('production')) {
             $exsist = Booking::where(["user_id" => $user_id,
                 "deleted" => CommonEnums::$NO])
                 ->where("status", "!=", BookingEnums::$STATUS["cancelled"])
@@ -77,7 +77,7 @@ class BookingsController extends Controller
             if ($exsist) {
                 return Helper::response(false, "You already have a pending order. You can not place further bookings in this service category.");
             }
-        }
+        }*/
         DB::beginTransaction();
 
         $inventory_quantity_type = Service::where("id", $data['service_id'])->pluck('inventory_quantity_type')[0];

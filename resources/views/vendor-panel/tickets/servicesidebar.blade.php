@@ -81,7 +81,7 @@
                             <div class="col-sm-9 p-8">
                                 <div class="theme-text f-14 bold" style="float: right">
                                     <div>@if($reply->vendor_id){{$reply->vendor->fname}} {{$reply->vendor->lname}}@endif</div>
-                                    <span class="text-muted">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</span>
+                                    <span class="text-muted">{{\Carbon\Carbon::parse($reply->created_at)->diffForHumans()}}</span>
                                     <p class="p-1">{!! $reply->chat !!}</p>
                                 </div>
 
@@ -89,19 +89,19 @@
                             </div>
                             <div class="col-sm-3 p-8">
                                 <div class="theme-text f-14 bold">
-                                    <img src="@if($reply->vendor_id){{$reply->vendor->image}}@else{{$reply->user->avatar}}@endif" alt="" srcset="" style="border-radius: 50px">
+                                    <img src="@if($reply->vendor_id){{$reply->vendor->image}}@else{{$reply->user->avatar}}@endif" alt="" srcset="" style="border-radius: 50px; width: 70px !important;">
                                 </div>
                             </div>
                         @else
                             <div class="col-sm-3 p-8">
                                 <div class="theme-text f-14 bold">
-                                    <img src="{{$reply->admin->image}}" alt="" srcset="" style="border-radius: 50px; width: 70px;">
+                                    <img src="{{$reply->admin->image}}" alt="" srcset="" style="border-radius: 50px; width: 70px !important;">
                                 </div>
                             </div>
                             <div class="col-sm-9 p-8">
                                 <div class="theme-text f-14 bold" style="text-align: right;">
                                     <div>{{$reply->admin->fname}} {{$reply->admin->lname}}</div>
-                                    <span class="text-muted" style="font-size: 10px">{{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</span>
+                                    <span class="text-muted" style="font-size: 10px">{{\Carbon\Carbon::parse($reply->created_at)->diffForHumans()}}</span>
                                     <p class="p-1">{!! $reply->chat !!}</p>
                                 </div>
 

@@ -101,22 +101,19 @@
                           <div class="d-flex  row p-15 pb-0 " >
                               <div class="col-sm-4  secondg-bg  margin-topneg-15 pt-10">
                               <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Sub Total - 1
-                                  </div>
-                                  <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Sub Total - 1
+                                      Amount
                                   </div>
                                   <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                       Buffer Amount
                                   </div>
                                   <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Grand Total - 1
-                                  </div>
-                                  <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                      Commission
-                                  </div>
-                                  <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                       Total
+                                  </div>
+                                  <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                      Discount
+                                  </div>
+                                  <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                      Grand Total
                                   </div>
 
                               </div>
@@ -124,24 +121,27 @@
                               <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
-                                  <br/>
-                                  </div>
-                                  <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
                                       ₹{{$booking->payment->sub_total}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
                                       ₹{{$booking->payment->other_charges}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
-                                      ₹{{$booking->payment->grand_total}}
+                                      ₹{{$booking->payment->sub_total}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
+                                      ₹{{$booking->payment->discount_amount}}
+                                  </div>
+                                  <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
+                                      ₹{{$booking->payment->grand_total}}
+                                  </div>
+                                 {{-- <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
                                       @php $commision_amount = ($booking->organization->commission/100)* $booking->payment->grand_total; @endphp
                                       ₹ {{$commision_amount}}
                                   </div>
                                   <div class="theme-text f-14 p-15 pl-0" style="padding-top: 5px;">
                                       ₹{{$booking->payment->grand_total + $commision_amount}}
-                                  </div>
+                                  </div>--}}
 
                               </div>
 

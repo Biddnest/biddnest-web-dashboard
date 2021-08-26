@@ -85,7 +85,7 @@
                                                     </div>
                                                     <div class="text" style="padding-bottom: 5px;">
                                                         <div class="name">@if($reply->vendor_id){{$reply->vendor->fname}} {{$reply->vendor->lname}}@else{{$reply->user->fname}} {{$reply->user->lname}}@endif</div>
-                                                        <div class="text time" style="padding-left: 0px;"> {{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</div>
+                                                        <div class="text time" style="padding-left: 0px;"> {{\Carbon\Carbon::parse($reply->created_at)->diffForHumans()}}</div>
                                                         {!! $reply->chat !!}
                                                     </div>
                                                 </div>
@@ -96,7 +96,7 @@
                                                     </div>
                                                     <div class="text" style="padding-bottom: 5px;">
                                                         <div class="name">{{$reply->admin->fname}} {{$reply->admin->lname}}</div>
-                                                        <div class="white-text time" style="padding-right: 0px;"> {{\Carbon\Carbon::now()->diffForHumans($reply->created_at)}}</div>
+                                                        <div class="white-text time" style="padding-right: 0px;"> {{\Carbon\Carbon::parse($reply->created_at)->diffForHumans()}}</div>
                                                         {!! $reply->chat !!}
                                                     </div>
                                                 </div>

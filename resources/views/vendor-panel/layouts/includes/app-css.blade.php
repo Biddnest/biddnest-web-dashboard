@@ -237,4 +237,9 @@
         display: grid !important;
         height: 250px !important;
     }
+
+    .searchButton, .searchButton1{
+        outline: none;
+        border: none;
+    }
 </style>

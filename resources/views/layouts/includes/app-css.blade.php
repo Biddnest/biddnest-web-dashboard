@@ -1078,4 +1078,8 @@
             .Dashboard-lcards .card{
                 height: 350px;
             }
+            .searchButton, .searchButton1{
+                outline: none;
+                border: none;
+            }
         </style>

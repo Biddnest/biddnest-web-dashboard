@@ -61,7 +61,7 @@
                                     <div class="upload-section p-20 pt-0">
                                         <img class="upload-preview"
                                              src="@if(!$roles){{asset('static/images/upload-image.svg')}}@else{{$roles->image}}@endif"
-                                             alt=""/>
+                                             alt="" style="width: 63px !important;"/>
                                         <div class="ml-1">
                                             <div class="file-upload">
                                                 <input type="hidden" class="base-holder" name="image" value="@if(!$roles){{asset('static/images/upload-image.svg')}}@else{{$roles->image}}@endif" required />

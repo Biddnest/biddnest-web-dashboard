@@ -254,15 +254,12 @@ class VendorUserController extends Controller
             return Helper::response(false, "Invalid organization id.");
 
         if (isset($request->branch)) {
-            $user_id = Vendor::where('organization_id', Organization::where("id", $request->branch)->pluck("id"));
+            $user_id = Vendor::where('organization_id', Organization::where("id", $request->branch)->pluck("id")[0]);
         }
         else {
-            if (!$org->parent_org_id) {
+            if ($org->parent_org_id) {
                 $organization_id = $organization_id;
-                $user_id = Vendor::where(function ($query) use ($organization_id) {
-                    $query->where("organization_id", $organization_id);
-                    $query->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
-                });
+                $user_id = Vendor::where("organization_id", $organization_id)->orWhereIn('organization_id', Organization::where("parent_org_id", $organization_id)->pluck("id"));
             }
             else
                 $user_id = Vendor::where("organization_id", $organization_id);
@@ -270,9 +267,11 @@ class VendorUserController extends Controller
 
         if($web){
             if(isset($request->search)){
-                $user_id->where('phone', 'like', $request->search."%")
-                    ->orWhere('fname', 'like', "%".$request->search."%")
-                    ->orWhere('lname', 'like', "%".$request->search."%");
+                $user_id->where(function($query) use($request){
+                    $query->where('phone', 'like', $request->search . "%")
+                        ->orWhere('fname', 'like', "%" . $request->search . "%")
+                        ->orWhere('lname', 'like', "%" . $request->search . "%");
+                });
             }
         }
 

@@ -69,6 +69,7 @@ $('.card-methord').click(function() {
     $(document).ready(function () {
         Handlebars.registerHelper('replace', function (find, replace, options) {
             var string = options.fn(this);
+            string= string.replace(/[^a-zA-Z0-9]/g, '');
             return string.replace(find, replace);
         });
     });
@@ -269,6 +270,7 @@ $('.card-methord').click(function() {
         markerDraggable: true,
         markerVisible: true
     });
+
     $(".custom_slider").ionRangeSlider({
         type: $(this).data("type"),
         min: $(this).data("min"),

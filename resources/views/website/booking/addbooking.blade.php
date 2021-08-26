@@ -624,7 +624,7 @@
 
     <script id="entry-templateinventory" type="text/x-handlebars-template">
         @{{#each inventories}}
-                <div class="col-md-4 filter item-remove @{{meta.category}} @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">
+                <div class="col-md-4 filter item-remove  @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}a @{{meta.category}}" style="padding-right: 10px; padding-left: 10px;">
                     <div class="item-single-wrapper">
                         <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>
                         <div class="item-image" style="">
@@ -687,7 +687,7 @@
 
     {{--serialize input show--}}
     <script id="entry-templateinventory_append" type="text/x-handlebars-template">
-        <div class="col-md-4 item-remove filter custom-item @{{meta_category}} @{{#replace ' ' '-'}}@{{meta_name}}-@{{material}}-@{{size}}-@{{meta_id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">
+        <div class="col-md-4 item-remove filter custom-item  @{{#replace ' ' '-'}}@{{meta_name}}-@{{material}}-@{{size}}-@{{meta_id}}@{{/replace}}a @{{meta_category}}" style="padding-right: 10px; padding-left: 10px;">
             <div class="item-single-wrapper">
                 <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>
                 <div class="item-image" style="">

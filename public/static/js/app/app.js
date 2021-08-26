@@ -1472,8 +1472,13 @@ $("body").on('click', ".add-item", function(event) {
         megaAlert("Oops", "Please select Size");
         return false;
     }
-    let class_name=item.meta_name+"-"+item.material+"-"+item.size+"-"+item.meta_id;
+    let class_name=item.meta_name+"-"+item.material+"-"+item.size+"-"+item.meta_id+"a";
+    class_name = class_name.replace(/[^a-zA-Z0-9]/g, '');
+
     class_name=class_name.replace(' ', '-');
+
+
+
     Logger.info(class_name);
     if($("."+class_name).length > 0)
     {
@@ -1669,6 +1674,7 @@ $("body").on('click', ".csv", function(event){
         }
     });
 });
+
 $("body").on('click', ".calc-result", function(event){
     if(!$(this).data("confirmed")){
         if (confirm("Are you sure want to edit the total quote? You wont be able to edit the individual items prices.")) {

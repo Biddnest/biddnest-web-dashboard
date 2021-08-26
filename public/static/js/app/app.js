@@ -1698,7 +1698,4 @@ $("body").on('click', ".calc-total-input", function(event){
     }
 });
 
-$("form").find("input").attr("autcomplete", "false");
-$(".match-item").eq(1).find("div").each(function(index){
-    $(".match-item").eq(0).find("div").eq(index).height($(this).height());
-});
+

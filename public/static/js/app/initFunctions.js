@@ -338,6 +338,13 @@ export function initTooltip(){
         });
 }
 
+export function initequalheights(){
+    $("form").find("input").attr("autcomplete", "false");
+    $(".match-item").eq(1).find("div").each(function(index){
+        $(".match-item").eq(0).find("div").eq(index).height($(this).height());
+    });
+}
+
 /*Charts*/
 export function initRevenueChart() {
     // console.log("icam called");

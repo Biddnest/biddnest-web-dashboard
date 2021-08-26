@@ -41,6 +41,7 @@ import {
     initSlick,
     initTextAreaEditor,
     initTooltip,
+    initequalheights,
     initDatePicker,
     initDateBookPicker,
     initPopUp,
@@ -96,6 +97,7 @@ barba.hooks.after((data) => {
     initDatePicker();
     initDateBookPicker();
     initPopUp();
+    initequalheights();
     initPopUpAdmin();
     initTooltip();
     initSlick();
@@ -123,6 +125,7 @@ $(document).ready(function(){
     initCountdown();
     initDatePicker();
     initDateBookPicker();
+    initequalheights();
     initPopUp();
     initPopUpAdmin();
     initTooltip();

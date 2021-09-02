@@ -50,7 +50,7 @@ class ServiceController extends Controller
             return Helper::response(false,"Incorrect Service Id");
 
         $image_man = new ImageManager(array('driver' => 'gd'));
-        $image_name = "service".$name."-".$id.".png";
+        $image_name = "service".$name."-".uniqid().".png";
 
         $update_data=  ["name"=>$name,
             "inventory_quantity_type"=>$inventory_quantity_type];

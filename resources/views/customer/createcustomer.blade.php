@@ -53,25 +53,18 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Customer First Name</label>
-                                            <input type="text" id="fullname" placeholder="David" class="form-control" value="@if($users){{$users->fname}}@endif" name="fname" required>
+                                            <input type="text" id="fullname" placeholder="David" class="form-control" value="@if($users){{$users->fname}}@endif" name="fname" pattern="[a-zA-Z]+" required>
                                             <span class="error-message">Please enter valid Customer First Name</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Customer Last Name</label>
-                                            <input type="text" id="fullname" placeholder="Luis" class="form-control" value="@if($users){{$users->lname}}@endif" name="lname" required>
+                                            <input type="text" id="fullname" placeholder="Luis" class="form-control" value="@if($users){{$users->lname}}@endif" name="lname" pattern="[a-zA-Z]+" required>
                                             <span class="error-message">Please enter valid Customer Last Name</span>
                                         </div>
                                     </div>
-                                   {{-- <div class="col-lg-6">
-                                       <div class="form-input">
-                                            <label class="full-name">Status</label>
-                                            <div class="d-flex justify-content-start   margin-topneg-20 white-text small-switch">
-                                                <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="100" data-height="35" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">
-                                            </div>
-                                        </div>
-                                    </div>--}}
+
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>

@@ -657,7 +657,7 @@ class Route extends Controller
             'user_scope'=>'required|integer',
             'valid_from'=>'required',
             'valid_to'=>'required',
-            'organizations.*'=>'required',
+            'orgnizations.*'=>'required',
             'zones.*'=>'required',
             'users.*'=>'required'
         ]);
@@ -688,7 +688,7 @@ class Route extends Controller
             'user_scope'=>'required|integer',
             'valid_from'=>'required',
             'valid_to'=>'required',
-            'organizations.*'=>'required',
+            'orgnizations.*'=>'required',
             'zones.*'=>'required',
             'users.*'=>'required',
             'status'=>'required'

@@ -54,8 +54,8 @@ class CouponController extends Controller
         return Helper::response(false, "couldn't save");
 
     if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']){
-        if(count($data['organizations']) > 0){
-            foreach($data['organizations'] as $organization) {
+        if(count($data['orgnizations']) > 0){
+            foreach($data['orgnizations'] as $organization) {
                 $coupon_organizaton = new CouponOrganization;
                 $coupon_organizaton->organization_id = $organization;
                 $coupon_organizaton->coupon_id = $coupon->id;

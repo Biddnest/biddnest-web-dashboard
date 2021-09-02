@@ -435,4 +435,9 @@ class VendorApiRouteController extends Controller
 
         return TicketReplyController::addReplyFromVendor($request->token_payload->id, $request->ticket_id, $request->reply);
     }
+
+    public function getNotifications(Request $request)
+    {
+        return NotificationController::getNotifications($request->token_payload->organization_id, "vendor");
+    }
 }

@@ -601,4 +601,9 @@ class ApiRouteController extends Controller
         return BookingsController::getBookingsByUser($request->token_payload->id, 10);
     }
 
+    public function getNotifications(Request $request)
+    {
+        return NotificationController::getNotifications($request->token_payload->id);
+    }
+
 }

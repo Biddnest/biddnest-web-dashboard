@@ -75,7 +75,12 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>
-                                            <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="phone" value="@if($users){{$users->phone}}@endif" minlength="10" maxlength="10" required>
+                                            <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="phone" value="@if($users){{$users->phone}}@endif" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
+												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+												|| (95<event.keyCode && event.keyCode<106)
+												|| (event.keyCode==8) || (event.keyCode==9)
+												|| (event.keyCode>34 && event.keyCode<40)
+												|| (event.keyCode==46) )">
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -101,7 +106,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Date of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" placeholder="dd/mm/yyyy" class="form-control dateselect filterdate" required>
+                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control dateselect birthdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>

@@ -198,7 +198,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="">Date Of Birth</label>
-                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" autocomplete="off" class="form-control filterdate dateselect" required>
+                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" autocomplete="off" class="form-control birthdate dateselect" required>
                                 <span class="error-message">Please enter valid Date of Birth</span>
                             </div>
                         </div>
@@ -416,7 +416,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Birth</label>
-                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control birthdate dateselect" required>
                                     <span class="error-message">Please enter valid Date of Birth</span>
                                 </div>
                             </div>

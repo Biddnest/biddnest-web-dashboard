@@ -339,7 +339,7 @@ class UserController extends Controller
         $user->phone=$phone;
         $user->gender=$gender;
         $user->avatar=$image;
-        $user->dob=date_format($dob,"Y-m-d");
+        $user->dob=date("Y-m-d", strtotime($dob));
         $save_result = $user->save();
 
         if(!$save_result)

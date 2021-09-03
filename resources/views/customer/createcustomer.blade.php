@@ -53,14 +53,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Customer First Name</label>
-                                            <input type="text" id="fullname" placeholder="David" class="form-control" value="@if($users){{$users->fname}}@endif" name="fname" pattern="[a-zA-Z]+" required>
+                                            <input type="text" id="fullname" placeholder="David" class="form-control alphabet" value="@if($users){{$users->fname}}@endif" name="fname" pattern="[a-zA-Z]+" required>
                                             <span class="error-message">Please enter valid Customer First Name</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Customer Last Name</label>
-                                            <input type="text" id="fullname" placeholder="Luis" class="form-control" value="@if($users){{$users->lname}}@endif" name="lname" pattern="[a-zA-Z]+" required>
+                                            <input type="text" id="fullname" placeholder="Luis" class="form-control alphabet" value="@if($users){{$users->lname}}@endif" name="lname" pattern="[a-zA-Z]+" required>
                                             <span class="error-message">Please enter valid Customer Last Name</span>
                                         </div>
                                     </div>
@@ -68,19 +68,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>
-                                            <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="phone" value="@if($users){{$users->phone}}@endif" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                            <input type="tel" id="phone" placeholder="987654321" class="form-control phone" name="phone" value="@if($users){{$users->phone}}@endif" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Email ID</label>
-                                            <input type="email" id="fullname" placeholder="David" class="form-control" value="@if($users){{$users->email}}@endif" name="email" required>
+                                            <input type="email" id="fullname" placeholder="David" class="form-control" value="@if($users){{$users->email}}@endif" autocomplete="off" name="email" required>
                                             <span class="error-message">Please enter valid Email ID</span>
                                         </div>
                                     </div>

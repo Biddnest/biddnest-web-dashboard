@@ -228,7 +228,7 @@
                                                     <div class="col-lg-12 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="formGroupExampleInput">Phone Number</label>
-                                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
+                                                            <input type="text" class="form-control phone" name="phone" id="phone" placeholder="9990009990" maxlength="10" minlength="10" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-xs-12 mt-1 otp hidden" id="otp">

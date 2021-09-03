@@ -374,12 +374,7 @@
                     </div>
 
                     <div class="input-group-get-link mb-3 mt-3 view-content-center" style="width: 79%;">
-                        <input type="tel" class="form-control -mr-4" id="contact_no" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" maxlength="10" minlength="10" onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )"/>
+                        <input type="tel" class="form-control -mr-4 phone" id="contact_no" style="border: none !important;" placeholder="Enter your mobile number to get link on phone" maxlength="10" minlength="10" />
                         <div class="input-group-get">
                             <button class="btn btn-secondary input-button call-request" type="button" data-url="{{route('request-link')}}">
                                 <i class="fa fa-paper-plane"><span class="pl-1 f-bolder">GET LINK</span></i>
@@ -464,12 +459,7 @@
                             <div class="col-lg-12 col-xs-12 mt-3 hidden-space">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Phone Number</label>
-                                    <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                    <input type="text" class="form-control phone" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xs-12 mt-1 otp hidden"   id="otp">
@@ -695,12 +685,7 @@
                                         <label for="formGroupExampleInput" class="mb-0">Phone
                                             Number</label>
                                         {{--                                                                <input type="number" name="phone" class="form-control" id="formGroupExampleInput" placeholder="9988776655" minlength="10" maxlength="10">--}}
-                                        <input type="text" class="form-control" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                        <input type="text" class="form-control phone" name="phone" id="phone" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required >
                                     </div>
                                 </div>
                             </div>

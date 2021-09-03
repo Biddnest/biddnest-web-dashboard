@@ -479,12 +479,22 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
-        $user=User::where("deleted", CommonEnums::$NO)->whereNotIn("status", [UserEnums::$STATUS['verification_pending']]);
-            if(isset($request->search)){
-                $user=$user->where('fname', 'like', "%".$request->search."%")
-                    ->orWhere('lname', 'like', "%".$request->search."%")
-                    ->orWhere('phone', 'like', $request->search."%");
-            }
+        $user=User::where("deleted", CommonEnums::$NO);
+
+        if(!isset($request->sort)) {
+             $user=$user->whereNotIn("status", [UserEnums::$STATUS['verification_pending']]);
+        }
+
+        if(isset($request->search)){
+            $user=$user->where('fname', 'like', "%".$request->search."%")
+                ->orWhere('lname', 'like', "%".$request->search."%")
+                ->orWhere('phone', 'like', $request->search."%");
+        }
+
+        if(isset($request->sort)){
+            $user=$user->where('status', UserEnums::$STATUS[$request->sort]);
+        }
+
         $user->orderBy("id","DESC");
         $total_user =User::where("deleted", CommonEnums::$NO)->count();
         $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
@@ -526,14 +536,17 @@ class WebController extends Controller
             $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
         }
 
+        if(isset($request->sort)){
+            $vendors=$vendors->where('status', OrganizationEnums::$STATUS[$request->sort]);
+        }
+
         $vendors->with('admin');
 
-
         $count_vendors = Organization::where(["deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
-        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES])->whereIn("zone_id", $zone)->count();
-        $count_active_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
-        $count_lead_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['lead'], "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
-        $count_suspended_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['suspended'], "deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
+        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_active_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_lead_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['lead'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_suspended_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['suspended'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
         return view('vendor.vendor',['vendors'=>$vendors ->paginate(CommonEnums::$PAGE_LENGTH), 'vendors_count'=>$count_vendors, 'verifide_vendors'=>$count_verified_vendors, 'active_vendors'=>$count_active_vendors, 'lead_vendors'=>$count_lead_vendors, 'suspended_vendors'=>$count_suspended_vendors]);
     }
 

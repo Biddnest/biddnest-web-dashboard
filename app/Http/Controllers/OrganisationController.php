@@ -53,8 +53,10 @@ class OrganisationController extends Controller
         $organizations->phone=$data['phone']['primary'];
         $organizations->org_name=$data['organization']['org_name'];
         $organizations->org_type=$data['organization']['org_type'];
-        $organizations->lat =$data['address']['lat'];
-        $organizations->lng =$data['address']['lng'];
+       /* $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng'];*/
+        $organizations->lat =0;
+        $organizations->lng =0;
         $organizations->zone_id =$data['zone'];
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
@@ -183,8 +185,10 @@ class OrganisationController extends Controller
             "phone"=>$data['phone']['primary'],
             "org_name"=>$data['organization']['org_name'],
             "org_type"=>$data['organization']['org_type'],
-            "lat"=>$data['address']['lat'],
-            "lng"=>$data['address']['lng'],
+          /*  "lat"=>$data['address']['lat'],
+            "lng"=>$data['address']['lng'],*/
+            "lat"=>0,
+            "lng"=>0,
             "zone_id"=>$data['zone'],
             "pincode"=>$data['address']['pincode'],
             "city"=>$data['address']['city'],
@@ -257,8 +261,10 @@ class OrganisationController extends Controller
         $organizations->org_name =$data['organization']['org_name'];
         $organizations->org_type =$data['organization']['org_type'];
         $organizations->phone =$data['phone']['primary'];
-        $organizations->lat =$data['address']['lat'];
-        $organizations->lng =$data['address']['lng'];
+       /* $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng']; */
+        $organizations->lat =0;
+        $organizations->lng =0;
         $organizations->zone_id =$data['zone'];
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
@@ -317,8 +323,10 @@ class OrganisationController extends Controller
                 "org_name"=>$data['organization']['org_name'],
                 "org_type"=>$data['organization']['org_type'],
                 "phone"=>$data['phone']['primary'],
-                "lat"=>$data['address']['lat'],
-                "lng"=>$data['address']['lng'],
+                /*"lat"=>$data['address']['lat'],
+                "lng"=>$data['address']['lng'],*/
+                "lat"=>0,
+                "lng"=>0,
                 "zone_id"=>$data['zone'],
                 "pincode"=>$data['address']['pincode'],
                 "city"=>$data['address']['city'],
@@ -370,7 +378,7 @@ class OrganisationController extends Controller
             if(!$exist)
                 return Helper::response(false,"Incorrect Organization id.");
 
-//            $imageman = new ImageManager(array('driver' => 'gd'));
+            //   $imageman = new ImageManager(array('driver' => 'gd'));
 
 
             $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
@@ -569,13 +577,13 @@ class OrganisationController extends Controller
 
     public static function search(Request $request)
     {
-//        return $request;
-//        $query = $request->all()['query'];
+        //        return $request;
+        //        $query = $request->all()['query'];
         $query = $request->q;
 
         if (empty($query))
             return Helper::response(true, "Data fetched successfully", ["users" => []]);
-//        return $query;
+        //        return $query;
         $users = Organization::where("org_name", "LIKE", $query . '%')->paginate(5);
         return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
     }

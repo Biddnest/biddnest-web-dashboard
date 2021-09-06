@@ -152,7 +152,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Organization Description</label>
-                                            <textarea placeholder="Need to Include bike" style="resize: none;" id="" class="form-control " rows="4" cols="50" spellcheck="false" name="organization[description]" required>{{json_decode($organization->meta, true)['org_description'] ?? ''}}</textarea>
+                                            <textarea placeholder="Need to Include bike" style="resize: none;" id="" class="form-control " rows="4" cols="50" spellcheck="false" name="organization[description]" required>{!! json_decode($organization->meta, true)['org_description'] ?? '' !!}</textarea>
                                             <span class="error-message">Please enter valid Description</span>
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
+                                   {{-- <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Lattitude</label>
                                             <input type="text" id="fullname" value="{{$organization->lat}}" placeholder="Lattitude" class="form-control" name="address[lat]" required>
@@ -178,7 +178,7 @@
                                             <input type="text" id="fullname" value="{{$organization->lng}}" placeholder="Longitude" class="form-control" name="address[lng]" required>
                                             <span class="error-message">Please enter valid Longitude</span>
                                         </div>
-                                    </div>
+                                    </div>--}}
 
                                     <div class="col-lg-6">
                                         <div class="form-input">

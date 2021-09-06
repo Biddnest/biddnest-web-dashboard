@@ -217,7 +217,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    {{--<div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Lattitude</label>
                                             <input type="text" id="fullname" placeholder="13.0332428"
@@ -234,7 +234,7 @@
                                             <span class="error-message">Please enter valid
                                                                 Longitude</span>
                                         </div>
-                                    </div>
+                                    </div>--}}
 
                                     <div class="col-lg-6">
                                         <div class="form-input">

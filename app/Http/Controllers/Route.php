@@ -305,8 +305,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+           /* 'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -346,8 +346,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+           /* 'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -396,8 +396,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+            /*'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -425,8 +425,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+            /*'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',

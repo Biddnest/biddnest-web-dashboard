@@ -170,7 +170,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        {{--<div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Lattitude</label>
                                 <input type="text" id="fullname" placeholder="57.2046° N" value=""
@@ -187,7 +187,7 @@
                                 <span class="error-message">Please enter valid
                                             Longitude</span>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Landmark</label>
@@ -256,7 +256,8 @@
                             <div class="form-input">
                                 <label class="full-name">Pincode</label>
                                 <input type="text" id="fullname" placeholder="560097" value=""
-                                       class="form-control" name="address[pincode]" required>
+                                       class="form-control number" name="address[pincode]" maxlength="6"
+                                       minlength="6" required>
                                 <span class="error-message">Please enter valid
                                             Pincode</span>
                             </div>
@@ -291,7 +292,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Commision</label>
-                                <input type="text" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
+                                <input type="number" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
                                        class="form-control" readonly>
                             </div>
                         </div>
@@ -386,7 +387,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            {{--<div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Lattitude</label>
                                     <input type="text" id="fullname" placeholder="57.2046° N" value="{{$branch->lat}}"
@@ -403,7 +404,7 @@
                                     <span class="error-message">Please enter valid
                                             Longitude</span>
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Landmark</label>
@@ -509,7 +510,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Commision</label>
-                                    <input type="text" id="fullname" placeholder="Commission" value="{{$branch->commission}}"
+                                    <input type="number" id="fullname" placeholder="Commission" value="{{$branch->commission}}"
                                            class="form-control" name="commission" required>
                                 </div>
                             </div>

@@ -26,25 +26,37 @@
 
                             </div>
         <div class="vender-all-details">
+
+                                    <div class="simple-card" >
+                                        <a href="{{route('vendors')}}">
+                                            <p>TOTAL VENDORS</p>
+                                            <h1>{{$vendors_count }}</h1>
+                                        </a>
+                                    </div>
+
+                                    <div class="simple-card" >
+                                        <a href="{{route('vendors')}}?sort=active">
+                                            <p> ACTIVE VENDORS</p>
+                                            <h1>{{$active_vendors}}</h1>
+                                        </a>
+                                    </div>
                                 <div class="simple-card" >
-                                    <p>TOTAL VENDORS</p>
-                                    <h1>{{$vendors_count }}</h1>
-                                </div>
-                                <div class="simple-card" >
-                                    <p> ACTIVE VENDORS</p>
-                                    <h1>{{$active_vendors}}</h1>
-                                </div>
-                                <div class="simple-card" >
-                                    <p> VERIFIED VENDORS</p>
-                                    <h1>{{$verifide_vendors}}</h1>
+                                    <a href="{{route('vendors')}}?sort=pending_approval">
+                                        <p> VERIFIED VENDORS</p>
+                                        <h1>{{$verifide_vendors}}</h1>
+                                    </a>
                                 </div>
                                 <div class="simple-card">
-                                    <p> Leads</p>
-                                    <h1>{{$lead_vendors}}</h1>
+                                    <a href="{{route('vendors')}}?sort=lead">
+                                        <p> Leads</p>
+                                        <h1>{{$lead_vendors}}</h1>
+                                    </a>
                                 </div>
                                 <div class="simple-card">
-                                    <p>SUSPENDED VENDORS</p>
-                                    <h1>{{$suspended_vendors}}</h1>
+                                    <a href="{{route('vendors')}}?sort=suspended">
+                                        <p>SUSPENDED VENDORS</p>
+                                        <h1>{{$suspended_vendors}}</h1>
+                                    </a>
                                 </div>
                             </div>
         <!-- Dashboard cards -->
@@ -151,7 +163,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            @if($vendors_count == 0)
+                                            @if(count($vendors) <= 0)
                                                 <div class="row hide-on-data">
                                                     <div class="col-md-12 text-center p-20">
                                                         <p class="font14"><i>. You don't have any Vendors here.</i></p>

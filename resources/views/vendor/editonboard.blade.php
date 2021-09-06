@@ -84,14 +84,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer First Name</label>
-                                            <input type="text" id="fullname" name="fname" placeholder="David" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_fname'])) ?? ''}}" class="form-control" required>
+                                            <input type="text" id="fullname" name="fname" placeholder="David" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_fname'])) ?? ''}}" class="form-control alphabet" required>
                                             <span class="error-message">Please enter valid First Name</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer Last Name</label>
-                                            <input type="text" id="fullname" name="lname" placeholder="Jerome" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_lname'])) ?? ''}}" class="form-control" required>
+                                            <input type="text" id="fullname" name="lname" placeholder="Jerome" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_lname'])) ?? ''}}" class="form-control alphabet" required>
                                             <span class="error-message">Please enter valid Last Name</span>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Primary Contact Number</label>
-                                            <input type="tel" id="phone" placeholder="9876543210" name="phone[primary]" value="{{$organization->phone}}" class=" form-control" maxlength="10" minlength="10" required>
+                                            <input type="tel" id="phone" placeholder="9876543210" name="phone[primary]" value="{{$organization->phone}}" class=" form-control phone" maxlength="10" minlength="10" required>
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Secondary Contact Number</label>
-                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control" name="phone[secondory]" maxlength="10" minlength="10" required>
+                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10" required>
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -257,7 +257,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Pincode</label>
-                                            <input type="text" id="fullname" value="{{$organization->pincode}}" placeholder="530000" class="form-control" name="address[pincode]" maxlength="6" minlength="6" required>
+                                            <input type="text" id="fullname" value="{{$organization->pincode}}" placeholder="530000" class="form-control number" name="address[pincode]" maxlength="6" minlength="6" required>
                                             <span class="error-message">Please enter valid Pincode</span>
                                         </div>
                                     </div>

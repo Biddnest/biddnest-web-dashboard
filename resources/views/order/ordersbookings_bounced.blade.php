@@ -21,6 +21,44 @@
             </nav>
         </div>
     </div>
+    <div class="vender-all-details">
+        <div class="simple-card" >
+            <a href="{{route('enquiry-booking')}}">
+                <p>ENQUIRY ORDERS</p>
+                <h1>{{$booking_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card" >
+            <a href="{{route('orders-booking')}}">
+                <p>CONFIRMED ORDERS</p>
+                <h1>{{$confirm_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card" >
+            <a href="{{route('orders-booking-past')}}">
+                <p>PAST ORDERS</p>
+                <h1>{{$past_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card">
+            <a href="{{route('orders-booking-hold')}}">
+                <p>ON HOLD ORDERS</p>
+                <h1>{{$hold_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card">
+            <a href="{{route('orders-booking-bounced')}}">
+                <p>BOUNCED ORDERS</p>
+                <h1>{{$bounced_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card">
+            <a href="{{route('orders-booking-cancelled')}}">
+                <p>CANCELLED ORDERS</p>
+                <h1>{{$cancelled_count}}</h1>
+            </a>
+        </div>
+    </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
         <div class="col-sm-12">
@@ -39,7 +77,7 @@
                                     <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">Past</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-past')}}">On Hold</a>
+                                    <a class="nav-link p-15" id="past-tab" href="{{route('orders-booking-hold')}}">On Hold</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="profile" aria-selected="false">Bounced</a>

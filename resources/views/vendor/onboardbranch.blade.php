@@ -143,7 +143,7 @@
                             <div class="form-input">
                                 <label class="phone-num-lable"> Contact Number</label>
                                 <input type="tel" id="input-blue" placeholder="9876543210" value=""
-                                       class=" form-control" name="phone[primary]" maxlength="10" minlength="10" required>
+                                       class=" form-control phone" name="phone[primary]" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid
                                             Phone number</span>
                             </div>
@@ -278,9 +278,10 @@
                             <div class="form-input">
                                 <label class="full-name">Service</label>
                                 <select id="" class="form-control select-box" name="service[]" multiple required>
-                                    <option value=""> -Select- </option>
+                                    <option value=""> -Select-</option>
                                     @foreach($services as $service=>$value)
-                                        <option value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
+                                        <option
+                                            value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
                                     @endforeach
                                 </select>
                                 <span class="error-message">Please enter valid
@@ -358,7 +359,7 @@
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Contact Number</label>
                                     <input type="tel" id="input-blue" placeholder="9876543210" value="{{$branch->phone}}"
-                                           class="form-control" name="phone[primary]" maxlength="10" minlength="10" required>
+                                           class="form-control phone" name="phone[primary]" maxlength="10" minlength="10" required>
                                     <span class="error-message">Please enter valid
                                             Phone number</span>
                                 </div>
@@ -471,7 +472,7 @@
                                 <div class="form-input">
                                     <label class="full-name">Pincode</label>
                                     <input type="text" id="fullname" placeholder="560097" value="{{$branch->pincode}}"
-                                           class="form-control" name="address[pincode]" required>
+                                           class="form-control number" maxlength="6" minlength="6" name="address[pincode]" required>
                                     <span class="error-message">Please enter valid
                                             Pincode</span>
                                 </div>

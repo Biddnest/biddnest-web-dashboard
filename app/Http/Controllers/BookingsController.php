@@ -1226,7 +1226,7 @@ class BookingsController extends Controller
             }
         }
 
-        $zone_id =($data['destination']['meta']['geocode']) ? GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']) : 1;
+        $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
 
 
         try {
@@ -1256,7 +1256,7 @@ class BookingsController extends Controller
                 return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
         }
 
-        $distance = ($data['destination']['meta']['geocode']) ? GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0;
+        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
 
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],

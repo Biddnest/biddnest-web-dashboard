@@ -286,6 +286,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
             Route::get('/{id}/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
             Route::get('/{id}/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
+            Route::get('/{id}/action',[WebController::class,'onbaordAction'])->name("onboard-action");
             Route::get('/{id}/role',[WebController::class,'onbaordUserRole'])->name("onboard-userrole-vendors");
         });
 

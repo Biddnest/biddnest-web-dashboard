@@ -38,6 +38,10 @@
                                 <a class="nav-link active p-15" id="quotation" href="#">Vendor Banking Details</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
+                                >Actions</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors",['id'=> $id])}}">Vendor Roles</a>
                             </li>
                         </ul>

@@ -54,6 +54,10 @@
                                     >Vendor Banking Details</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link p-15 disabled" id="quotation" href="#"
+                                    >Actions</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link p-15 disabled" id="quotation" href="#">Vendor Roles</a>
                                 </li>
                             </ul>

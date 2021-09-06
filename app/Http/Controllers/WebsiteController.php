@@ -119,7 +119,7 @@ class WebsiteController extends Controller
 
     public function placeBooking(Request $request)
     {
-//        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
+        //        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
         $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         return view('website.booking.placebooking',['booking'=>$booking]);
     }

@@ -1326,4 +1326,9 @@ class WebController extends Controller
             ]
         ]);
     }
+
+    public function onbaordAction(Request $request){
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->first();
+        return view('vendor.action', ['id'=>$request->id, 'organization'=>$organization]);
+    }
 }

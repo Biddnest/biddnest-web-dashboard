@@ -46,6 +46,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('bookings')->group(function () {
         Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
+        Route::post('/track',[ApiRouter::class,'createBookingTrack']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
 //        Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);

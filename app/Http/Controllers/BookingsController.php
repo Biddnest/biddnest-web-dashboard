@@ -1226,8 +1226,9 @@ class BookingsController extends Controller
             }
         }
 
+        $zone_id =($data['source']['lat'] && $data['destination']['lat']) ? GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']) : 1;
+
         if(!$data['source']['lat'] && !$data['source']['lng']){
-            $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
             try {
                 if($data['inventory_items'])
                 {

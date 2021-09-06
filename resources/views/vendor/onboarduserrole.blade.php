@@ -136,21 +136,21 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Employee First Name</label>
-                                <input type="text" id="fullname" placeholder="First Name" name="fname" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="First Name" name="fname" class="form-control alphabet" required>
                                 <span class="error-message">Please enter valid First Name</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Employee Last Name</label>
-                                <input type="text" id="fullname" placeholder="Last Name" name="lname" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="Last Name" name="lname" class="form-control alphabet" required>
                                 <span class="error-message">Please enter valid Last Name</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Employee Contact Number</label>
-                                <input type="tel" id="Employee" placeholder="9876543210" name="phone" class=" form-control" required>
+                                <input type="tel" id="Employee" placeholder="9876543210" name="phone" class=" form-control phone" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                         </div>
@@ -354,21 +354,21 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Employee First Name</label>
-                                    <input type="text" id="fullname" placeholder="First Name" name="fname" value="{{$role->fname}}" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="First Name" name="fname" value="{{$role->fname}}" class="form-control alphabet" required>
                                     <span class="error-message">Please enter valid First Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Employee Last Name</label>
-                                    <input type="text" id="fullname" placeholder="Last Name" value="{{$role->lname}}" name="lname" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="Last Name" value="{{$role->lname}}" name="lname" class="form-control alphabet" required>
                                     <span class="error-message">Please enter valid Last Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="phone-num-lable">Employee Contact Number</label>
-                                    <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control" required>
+                                    <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control phone" maxlength="10" minlength="10" required>
                                     <span class="error-message">Please enter valid Phone number</span>
                                 </div>
                             </div>

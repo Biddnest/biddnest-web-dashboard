@@ -73,14 +73,14 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">IFSC Code </label>
-                                    <input type="text" id="fullname" placeholder="ICI0012145" value="@if($bank) {{json_decode($bank->banking_details, true)['ifcscode']}}@endif" pattern="^[a-zA-Z0-9_\-]*$" name="ifcscode" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="ICI0012145" value="@if($bank) {{json_decode($bank->banking_details, true)['ifcscode']}}@endif" pattern="[a-zA-Z0-9\s]+" name="ifcscode" class="form-control" required>
                                     <span class="error-message">Please enter valid IFSC Code</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Branch Name </label>
-                                    <input type="text" id="fullname" placeholder="Indiranagar" value="@if($bank) {{json_decode($bank->banking_details, true)['branch_name']}}@endif" name="branch_name" pattern="[a-zA-Z0-9]" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="Indiranagar" value="@if($bank) {{json_decode($bank->banking_details, true)['branch_name']}}@endif" name="branch_name" pattern="[a-zA-Z0-9\s]+" class="form-control" required>
                                     <span class="error-message">Please enter valid Branch Name</span>
                                 </div>
                             </div>

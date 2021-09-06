@@ -488,9 +488,9 @@ class OrganisationController extends Controller
         $vendor->meta = json_encode($meta);
         $vendor->user_role = $data['role'];
         $vendor->password = $password;
-        $vendor->dob = $data['dob'];
-        $vendor->doj = $data['doj'];
-        $vendor->dor = $data['dor'];
+        $vendor->dob = date("Y-m-d", strtotime($data['dob']));
+        $vendor->doj = date("Y-m-d", strtotime($data['doj']));
+        $vendor->dor = date("Y-m-d", strtotime($data['dor']));
         $vendor->state = $data['state'];
         $vendor->city = $data['city'];
         $vendor_result = $vendor->save();
@@ -540,9 +540,9 @@ class OrganisationController extends Controller
             "password"=>$password,
             "user_role"=>$data['role'],
             "organization_id"=>$data['branch'],
-            "dob"=>$data['dob'],
-            "doj"=>$data['doj'],
-            "dor"=>$data['dor'],
+            "dob"=>date("Y-m-d", strtotime($data['dob'])),
+            "doj"=>date("Y-m-d", strtotime($data['doj'])),
+            "dor"=>date("Y-m-d", strtotime($data['dor'])),
             "state"=>$data['state'],
             "city"=>$data['city']
         ];

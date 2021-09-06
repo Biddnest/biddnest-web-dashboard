@@ -1254,7 +1254,7 @@ class BookingsController extends Controller
                 DB::rollBack();
                 return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
             }
-            $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+            $distance = ($data['source']['lat'] && $data['destination']['lat']) ? GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0;
         }
 
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],

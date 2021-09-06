@@ -148,7 +148,7 @@ class AdminController extends Controller
         $admin->role=$data['role'];
         $admin->phone=$data['phone'];
         $admin->email=$data['email'];
-        $admin->dob=$data['dob'];
+        $admin->dob=date("Y-m-d", strtotime($data['dob']));
         $admin->state=$data['state'];
         $admin->city=$data['city'];
         $admin->pincode=$data['pincode'];
@@ -199,7 +199,7 @@ class AdminController extends Controller
            "role"=>$data['role'],
            "phone"=>$data['phone'],
            "email"=>$data['email'],
-           "dob"=>$data['dob'],
+           "dob"=>date("Y-m-d", strtotime($data['dob'])),
            "state"=>$data['state'],
            "city"=>$data['city'],
            "pincode"=>$data['pincode'],

@@ -1226,12 +1226,12 @@ class BookingsController extends Controller
             }
         }
 
-        $zone_id =($data['source']['lat'] && $data['destination']['lat']) ? GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']) : 1;
+        $zone_id =($data['destination']['meta']['geocode']) ? GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']) : 1;
 
-        if(!$data['source']['lat'] && !$data['source']['lng']){
-            try {
-                if($data['inventory_items'])
-                {
+
+        try {
+            if($data['inventory_items'])
+            {
                     $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
                     $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
                     $economic_price += $economic_price * ($cost_structure["tax"] / 100);
@@ -1250,13 +1250,13 @@ class BookingsController extends Controller
 
                     $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
                     $booking->quote_estimate = $estimate_quote;
-                }
-            } catch (Exception $e) {
+            }
+        } catch (Exception $e) {
                 DB::rollBack();
                 return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
-            }
         }
-        $distance = ($data['source']['lat'] && $data['destination']['lat']) ? GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0;
+
+        $distance = ($data['destination']['meta']['geocode']) ? GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0;
 
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],

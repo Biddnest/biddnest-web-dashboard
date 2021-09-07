@@ -57,7 +57,7 @@ class BidController extends Controller
             }
         }
 
-        NotificationController::sendTo("vendor", $vendor_ids, "New booking request received.", "Tap to respond.", [
+        NotificationController::sendTo("vendor", $vendor_notification_id, "New booking request received.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>$public_booking_id
         ]);

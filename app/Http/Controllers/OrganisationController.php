@@ -433,7 +433,7 @@ class OrganisationController extends Controller
             $result_bank= Org_kyc::where("id", $bank_id)
                 ->update($update_data);
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['pending_approval']]);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't Update data");
@@ -620,4 +620,10 @@ class OrganisationController extends Controller
         return Helper::response(true,"OTP sent successfully", ['OTP'=>$otp]);
     }
 
+    public static function changeStatusVendor($id, $status){
+        $vendor_exist=Organization::where("id", $id)->first();
+        $vendor_kyc = Org_kyc::where("organization_id", $id)->first();
+
+
+    }
 }

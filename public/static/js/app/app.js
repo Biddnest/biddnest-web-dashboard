@@ -411,7 +411,7 @@ $("body").on('change', ".category-select", function(event) {
     var materal=$("#sub_"+id).data("subcategory");
 
     materal.map((value)=>{
-        $(this).closest(".d-flex").find(".subservices").append('<option value="'+value['name']+'">'+value['name']+'</option>')
+        $(this).closest(".d-flex").find(".subservices").append('<option id="item_'+value['id']+'" data-id="'+value['id']+'" value="'+value['name']+'" data-items="'+value['items']+'">'+value['name']+'</option>')
     });
 
     var type=$("#sub_"+id).data("type");
@@ -433,6 +433,44 @@ $("body").on('change', ".category-select", function(event) {
         $(this).closest(".d-flex").find(".fixed").removeAttr("required");
         $(this).closest(".d-flex").find(".fixed").removeAttr("name");
     }
+    return false;
+});
+
+$("body").on('change', ".subcategory-select", function(event) {
+    var id=$(this).data("id");
+
+    $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
+
+    var materal=$("#item_"+id).data("items");
+
+    materal.map((value)=>{
+        $(this).closest(".d-flex").find(".items").append('<tr class="inventory-snip">'+
+            +'<td scope="row" class="text-left">'+
+                value['name']
+            +'</td>'+
+
+            +'<td class="">'+
+                +'<select class="form-control br-5 material" name="inventory_items[][material]" required>'+
+                    +'<option value="">'+value['material']+'</option>'+
+                +'</select>'+
+            +'</td>'+
+
+            +'<td class="">'+
+                +'<select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>'+
+                    +'<option value="">'+value['size']+'</option>'+
+                +'</select>'+
+            +'</td>'+
+
+            +'<td class="" style="width: 20%;">'+
+                +'<input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >'+
+                +'<span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]" value="'+value['quantity']+'"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>'+
+            +'</td>'+
+            +'<td>'+
+                +'<span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>'+
+            +'</td>'+
+        +'</tr>')
+    });
+
     return false;
 });
 
@@ -622,6 +660,32 @@ $("body").on('change', ".change_status", function(event) {
                 el.addClass('change-click');
                 el.click();
                 el.removeClass('change-click');
+            return false;
+        }
+    });
+});
+
+$("body").on('change', ".status-change", function(event) {
+    Swal.fire({
+        title: 'Are you sure want to change status?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.update($(this).data("url"), {}, function (response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    tinySuccessAlert("Status changed Successfully", response.message);
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
+            });
+        }
+        else{
             return false;
         }
     });

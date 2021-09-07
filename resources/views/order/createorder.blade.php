@@ -327,7 +327,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>Room Selection</label>
-                                <select name="meta[subcategory]" class="form-control subservices">
+                                <select name="meta[subcategory]" class="form-control subservices subcategory-select">
                                 </select>
                                 <span class="error-message">Please enter valid</span>
                             </div>
@@ -346,43 +346,41 @@
                                     <th scope="col">Actions</th>
                                   </tr>
                                 </thead>
-                                <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
+                                <tbody class="mtop-20 f-13" id="add-inventory-wrapper items">
                                     <tr class="inventory-snip">
-                                    <td scope="row" class="text-left">
-                                        <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
-                                            <option value="">--Select--</option>
-                                            @foreach($inventories as $inventory)
-                                                <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
+                                        <td scope="row" class="text-left">
+                                            <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
+                                                <option value="">--Select--</option>
+                                                @foreach($inventories as $inventory)
+                                                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
 
-                                    <td class="">
-                                        <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">-- Select --</option>
+                                        <td class="">
+                                            <select class="form-control br-5 material" name="inventory_items[][material]" required>
+                                                <option value="">-- Select --</option>
 
-                                        </select>
-                                    </td>
+                                            </select>
+                                        </td>
 
-                                    <td class="">
-                                        <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">-- Select --</option>
+                                        <td class="">
+                                            <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
+                                                <option value="">-- Select --</option>
 
-                                        </select>
-                                    </td>
+                                            </select>
+                                        </td>
 
-                                    <td class="" style="width: 20%;">
-                                        <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
-                                        <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
+                                        <td class="" style="width: 20%;">
+                                            <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
+                                            <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
 
-                                    </td>
+                                        </td>
 
-                                    <td>
-                                        <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                                    </td>
-                                </tr>
-
-
+                                        <td>
+                                            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                           </div>

@@ -42,13 +42,14 @@
                                     </div>
                                 <div class="simple-card" >
                                     <a href="{{route('vendors')}}?sort=pending_approval">
-                                        <p> VERIFIED VENDORS</p>
+{{--                                        <p> VERIFIED VENDORS</p>--}}
+                                        <p>PENDING APPROVAL</p>
                                         <h1>{{$verifide_vendors}}</h1>
                                     </a>
                                 </div>
                                 <div class="simple-card">
                                     <a href="{{route('vendors')}}?sort=lead">
-                                        <p> Leads</p>
+                                        <p> LEADS</p>
                                         <h1>{{$lead_vendors}}</h1>
                                     </a>
                                 </div>

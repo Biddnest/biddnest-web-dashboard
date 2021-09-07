@@ -53,9 +53,40 @@
                     <div class="tab-content " id="myTabContent">
                         <!-- form starts -->
                         <div class="w-100">
-                            <div class="tab-pane show text-center" style="min-height: 50vh">
-                                <a class="white-text p-10" href="{{route("onboard-bank-vendors", ['id'=>$id])}}">
-                                    <button type="button" class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
+                            <div class="tab-pane show text-center" style="min-height: 50vh; padding-top: 35px;">
+                                @if($organization->status == \App\Enums\OrganizationEnums::$STATUS["lead"])
+                                    <i class="icon dripicons-information" style="font-size: 100px; color: #2e0789;"></i>
+                                    <p class="font14"><i>
+                                        Details are not updated for this lead, Please update and visit this page again to convert this lead.</i>
+                                    </p>
+                                   {{-- <a class="white-text p-10" href="{{route("onboard-bank-vendors", ['id'=>$id])}}">
+                                        <button type="button" class="btn theme-bg theme-text w-30 white-bg">Convert To Vendor</button></a>--}}
+
+                                @elseif($organization->status == \App\Enums\OrganizationEnums::$STATUS["active"])
+                                    <i class="icon dripicons-thumbs-up" style="font-size: 100px; color: #0c6e41;"></i>
+                                    <p class="font14"><i>
+                                            This vendor account is activated, You may suspend this vendor below.</i>
+                                    </p>
+                                    <a class="white-text p-10 status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["suspended"]])}}">
+                                        <button type="button" class="btn theme-bg theme-text w-30 white-bg">Suspend This Vendor</button></a>
+
+                                @elseif($organization->status == \App\Enums\OrganizationEnums::$STATUS["pending_approval"])
+                                    <i class="fa fa-check-circle-o" style="font-size: 100px; color: #fdc403;"></i>
+                                    <p class="font14"><i>
+                                            This vendor is ready to be activated.</i>
+                                    </p>
+                                    <a class="white-text p-10 status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
+                                        <button type="button" class="btn theme-bg theme-text w-30 white-bg">Approve This Vendor</button></a>
+
+                                @elseif($organization->status == \App\Enums\OrganizationEnums::$STATUS["suspended"])
+                                    <i class="icon dripicons-warning" style="font-size: 100px; color: #fdc403;"></i>
+                                    <p class="font14"><i>
+                                            This vendor account is suspended, You may activate this vendor below.</i>
+                                    </p>
+                                    <a class="white-text p-10 status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
+                                        <button type="button" class="btn theme-bg theme-text w-30 white-bg">Activate This Vendor</button></a>
+
+                                @endif
                             </div>
                             <div class="d-flex  justify-content-between flex-row  p-10 py-0"
                                  style="border-top: 1px solid #70707040;">
@@ -66,11 +97,11 @@
                         </div>
                     </div>
                     <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
-                        <div class="w-50"><a class="white-text p-10" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">
+                        <div class="w-50"><a class="white-text p-10" href="{{route("onboard-bank-vendors", ['id'=>$id])}}">
                                 <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                         </div>
                         <div class="w-50 text-right">
-                            <a class="white-text p-10" href="{{route("onboard-bank-vendors", ['id'=>$id])}}">
+                            <a class="white-text p-10" href="{{route("onboard-userrole-vendors",['id'=> $id])}}">
                                 <button type="button" class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                         </div>
                     </div>

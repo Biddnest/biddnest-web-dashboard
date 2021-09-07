@@ -166,9 +166,9 @@
                                     <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                             </div>
                             <div class="w-50 text-right">
-                                    <button class="btn theme-br white-text w-30">Next</button>
-                               {{-- <a class="white-text p-10" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">
-                                    <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>--}}
+{{--                                    <button class="btn theme-br white-text w-30">Next</button>--}}
+                                <a class="white-text p-10" href="{{route("onboard-action", ['id'=>$id])}}">
+                                    <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                             </div>
                         </div>
                     </form>

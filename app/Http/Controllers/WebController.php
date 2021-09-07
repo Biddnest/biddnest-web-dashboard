@@ -510,7 +510,9 @@ class WebController extends Controller
     {
         $category = Service::where(['status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO])
             ->with(['subservices' => function ($query) {
-                $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO]);
+                $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO])->with(["inventories"=>function ($query1) {
+                    $query1->where(['inventories.status' => CommonEnums::$YES, 'inventories.deleted' => CommonEnums::$NO]);
+                }]);
             }])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('order.createorder', ['categories'=>$category, 'inventories'=>$inventory]);
@@ -595,7 +597,7 @@ class WebController extends Controller
         $vendors->with('admin');
 
         $count_vendors = Organization::where(["deleted"=>CommonEnums::$NO])->whereIn("zone_id", $zone)->count();
-        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "verification_status"=>CommonEnums::$YES, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "status"=>OrganizationEnums::$STATUS['pending_approval'], "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
         $count_active_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
         $count_lead_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['lead'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
         $count_suspended_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['suspended'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
@@ -722,6 +724,11 @@ class WebController extends Controller
     {
         $bank=Org_kyc::where("organization_id", $request->id)->first();
         return view('vendor.onboardbank', ['bank'=>$bank, 'id'=>$request->id]);
+    }
+
+    public function onbaordAction(Request $request){
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->first();
+        return view('vendor.action', ['id'=>$request->id, 'organization'=>$organization]);
     }
 
     public function leadVendors()
@@ -1327,8 +1334,5 @@ class WebController extends Controller
         ]);
     }
 
-    public function onbaordAction(Request $request){
-        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->first();
-        return view('vendor.action', ['id'=>$request->id, 'organization'=>$organization]);
-    }
+
 }

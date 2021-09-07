@@ -14,20 +14,6 @@ class InventoryImport implements ToModel
     */
     public function model(array $row)
     {
-
-        /*$inv = Inventory::where("name",$row[0])->first();
-
-        if($inv){
-            $material = json_decode($inv->material, true);
-            $size = json_decode($inv->size, true);
-        }
-        else{
-            $material = [];
-            $size = [];
-        }
-        $material = !in_array($row[1],$material) ? array_push($material, $row[1]) : $material;
-        $size = !in_array($row[2], $size) ? array_push($size, $row[2]) : $size;*/
-
         return new Inventory([
             "name"=>$row[0] && trim($row[0]) !== "" ? ucfirst(strtolower($row[0])) : "Item Id ".uniqid(),
             "material"=>$row[1] != "" ? json_encode(explode(",",$row[1])) : json_encode(["Material not provided"]),

@@ -336,7 +336,7 @@ class InventoryController extends Controller
         return Helper::response(true,"Status Updated successfully");
     }
 
-    public static function import($file = false){
+    public static function import($file = false, $decode_base64 = false){
 
         if($file){
             $fileContent = $file;
@@ -350,28 +350,14 @@ class InventoryController extends Controller
             });
             return "done";
         } else{
-//            return (string)json_encode(Storage::files("/public/imports/inventories"));
             foreach (Storage::files("/public/imports/inventories") as $file){
-
-
                 $filename = explode("/","$file");
                 $imported_files =  DB::table("import_migrations")->pluck('file');
-//            return $file;
-//            $return = "No tinitiated yet";
                 if(!in_array($file, (array)$imported_files)){
-//                    DB::transaction(function () use ($file) {
-//                        try {
                     Facades\Excel::import(new InventoryImport, $file);
-                    /*} catch (\Exception $e) {
-                        $return = $e->getMessage();
-                    }
-                    return $return;*/
-//                    });
-
                     DB::table("import_migrations")->insert([
                         "file"=>$file
                     ]);
-
                 } else
                     return "This file is already imported";
 
@@ -382,37 +368,26 @@ class InventoryController extends Controller
 
     }
 
-    public static function importPrice($file = false){
+    public static function importPrice($file = false, $decode_base64 = false){
 
         if($file){
             $fileContent = $file;
             DB::transaction(function () use ($fileContent){
-
                 try {
-                    Facades\Excel::import(new InventoryImport, $fileContent);
+                    Facades\Excel::import(new InventoryPriceImport, $fileContent);
                 } catch (Exception $e) {
                     return $e->getMessage();
                 }
             });
             return "done";
         } else{
-//            return (string)json_encode(Storage::files("/public/imports/inventories"));
             foreach (Storage::files("/public/imports/inventory_prices") as $file){
-
 
                 $filename = explode("/","$file");
                 $imported_files =  DB::table("import_migrations")->pluck('file');
-//            return $file;
-//            $return = "No tinitiated yet";
                 if(!in_array($file, (array)$imported_files)){
-//                    DB::transaction(function () use ($file) {
-//                        try {
+
                     Facades\Excel::import(new InventoryPriceImport, $file);
-                    /*} catch (\Exception $e) {
-                        $return = $e->getMessage();
-                    }
-                    return $return;*/
-//                    });
 
                     DB::table("import_migrations")->insert([
                         "file"=>$file

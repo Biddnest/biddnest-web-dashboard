@@ -1252,6 +1252,10 @@ class Route extends Controller
         return PayoutController::registerFundAccount($request->id);
     }
 
+    public function vendor_action(Request $request){
+        return OrganisationController::changeStatusVendor($request->id, $request->status);
+    }
+
     /* public function export_csv(Request $request){
          return ExportController::exoprtSale();
      }*/

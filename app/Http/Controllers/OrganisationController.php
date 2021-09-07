@@ -624,6 +624,23 @@ class OrganisationController extends Controller
         $vendor_exist=Organization::where("id", $id)->first();
         $vendor_kyc = Org_kyc::where("organization_id", $id)->first();
 
+        if(!$vendor_exist){
+            return Helper::response(false,"Vendor is not exist.");
+        }
+        if(!$vendor_kyc){
+            return Helper::response(false,"Details are not updated for this vendor, Please update bank details.");
+        }
 
+        if($status == OrganizationEnums::$STATUS['active']){
+            $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['active']]);
+        }
+        if($status == OrganizationEnums::$STATUS['suspended']){
+            $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['suspended']]);
+        }
+
+        if($result)
+            return Helper::response(true,"Updated status successfully.");
+        else
+            return Helper::response(false,"Updated status fail.");
     }
 }

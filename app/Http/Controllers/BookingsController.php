@@ -414,7 +414,9 @@ class BookingsController extends Controller
             ->where("status", "<=", [BookingEnums::$STATUS["payment_pending"]])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
-            ->with('bid')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
 //            ->with('status_history')
             ->with('service')
             ->orderBy('id', 'DESC')

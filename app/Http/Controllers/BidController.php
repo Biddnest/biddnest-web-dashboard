@@ -38,6 +38,7 @@ class BidController extends Controller
         Booking::where("id", $booking_id)->update(["status"=>BookingEnums::$STATUS['biding']]);
 
         $vendor_ids = [];
+        $vendor_notification_id=[];
 
         $public_booking_id = Booking::where('id', $booking_id)->pluck('public_booking_id')[0];
         $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['biding']);
@@ -50,8 +51,6 @@ class BidController extends Controller
             $bid->status=BidEnums::$STATUS['active'];
             $bid_result = $bid->save();
             $vendor_ids[] = $vendor['id'];
-
-            $vendor_notification_id=[];
 
             foreach (Vendor::where('organization_id', $vendor['id'])->pluck('id') as $vendor_id) {
                 $vendor_notification_id[]=$vendor_id;

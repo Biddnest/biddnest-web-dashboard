@@ -54,6 +54,8 @@ Route::prefix('web/api')->group(function () {
 
     });
 
+    Route::post('/add/vendors',[Router::class,'addvendors']);
+
     Route::post('/password/reset',[Router::class,'old_reset_password'])->name("old_reset_password");
     //services APIs
     Route::get('/services',[Router::class,'service'])->name("service");

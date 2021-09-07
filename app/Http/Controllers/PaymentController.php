@@ -65,7 +65,7 @@ class PaymentController extends Controller
         $bid_exist = Bid::where(["organization_id"=>$booking_exist->organization_id, "booking_id"=>$booking_exist->id])->first();
         $meta_bid = json_decode($bid_exist['meta'], true);
         $meta_bid['moving_date']= date("Y-m-d", strtotime($moving_date));
-        $add_date =["$meta"=>json_encode($meta_bid)];
+        $add_date =["meta"=>json_encode($meta_bid)];
 
         Bid::where(["organization_id"=>$booking_exist->organization_id, "booking_id"=>$booking_exist->id])
         ->update($add_date);

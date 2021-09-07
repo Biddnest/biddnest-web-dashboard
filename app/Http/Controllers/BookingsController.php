@@ -414,7 +414,9 @@ class BookingsController extends Controller
             ->where("status", "<=", [BookingEnums::$STATUS["payment_pending"]])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
-//            ->with('inventories')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
 //            ->with('status_history')
             ->with('service')
             ->orderBy('id', 'DESC')
@@ -461,13 +463,16 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancelrequest']])
+            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['process']])
             ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
 //            ->with('inventories')
 //            ->with('status_history')
             ->with('service')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -548,6 +553,8 @@ class BookingsController extends Controller
         $tax = $booking->payment->tax;
         $grand_total = $booking->payment->grand_total;
 
+        $dates = Bid::where(["organization_id"=>$booking->organization_id, "booking_id"=>$booking->id])->pluck("moving_dates")[0];
+
         if ($discount_amount > 0.00) {
             $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
             $tax = $grand_total * ($tax_percentage / 100);
@@ -572,7 +579,7 @@ class BookingsController extends Controller
                 "discount" => $discount_amount,
                 "tax(" . $tax_percentage . "%)" => $tax,
                 "grand_total" => $grand_total
-            ]]);
+            ], "dates"=>$dates]);
 
     }
 
@@ -617,9 +624,8 @@ class BookingsController extends Controller
                 break;
         }
 
-        $bookings = Booking::whereIn("id", $bid_id
-            ->pluck('booking_id'))->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest']])
-        ;
+        $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
+            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['process']]);
 
         if($web)
         {

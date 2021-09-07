@@ -10,6 +10,7 @@ use App\Enums\CommonEnums;
 use App\Enums\NotificationEnums;
 use App\Enums\PaymentEnums;
 use App\Helper;
+use App\Models\Bid;
 use App\Models\Booking;
 use App\Models\BookingStatus;
 use App\Models\Coupon;
@@ -23,7 +24,7 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
 
-    public static function intiatePayment($public_booking_id, $coupon_code = null)
+    public static function intiatePayment($public_booking_id, $moving_date, $coupon_code = null)
     {
         $booking_exist = Booking::where(["public_booking_id" => $public_booking_id, "status" => BookingEnums::$STATUS['payment_pending']])->with('payment')->first();
 
@@ -60,6 +61,16 @@ class PaymentController extends Controller
             $order_id = $booking_exist->payment->rzp_order_id;
         else
             $order_id = self::createOrder($booking_exist->payment->public_transaction_id, $meta, $grand_total)['id'];
+
+        $bid_exist = Bid::where(["organization_id"=>$booking_exist->organization_id, "booking_id"=>$booking_exist->id])->first();
+        $meta_bid = json_decode($bid_exist['meta'], true);
+        $meta_bid['moving_date']= date("Y-m-d", strtotime($moving_date));
+        $add_date =["meta"=>json_encode($meta_bid)];
+
+        Bid::where(["organization_id"=>$booking_exist->organization_id, "booking_id"=>$booking_exist->id])
+        ->update($add_date);
+
+        Booking::where("id", $booking_exist->id)->update(["final_moving_date"=>date("Y-m-d", strtotime($moving_date))]);
 
         $update_data =[
             'discount_amount'=>$discount_value,
@@ -175,11 +186,18 @@ class PaymentController extends Controller
 
         MailController::invoice_email($public_booking_id);
 
-        dispatch(function () use ($booking_exist) {
+        $bid_exist = Bid::where(["organization_id"=>$booking_exist->organization_id, "booking_id"=>$booking_exist->id])->firts();
+
+        dispatch(function () use ($booking_exist, $bid_exist) {
             NotificationController::sendTo("user", [$booking_exist->user_id], "We have received your payment for booking id #".$booking_exist->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $booking_exist->public_booking_id,
                 "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
+            ]);
+
+            NotificationController::sendTo("vendor", [$bid_exist->vendor_id], "Customer coinfirmed for booking id #".$booking_exist->public_booking_id." on moving date :".$bid_exist->meta->moving_date, "This order has been confirmed.", [
+                "type" => NotificationEnums::$TYPE['booking'],
+                "public_booking_id" => $booking_exist->public_booking_id
             ]);
 
         })->afterResponse();

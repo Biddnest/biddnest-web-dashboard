@@ -29,7 +29,7 @@ class BidController extends Controller
     public static function addvendors($booking_id)
     {
 //        try {
-        $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
+           $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
             ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
         if(!$vendorlist)
@@ -57,7 +57,7 @@ class BidController extends Controller
             }
         }
 
-        NotificationController::sendTo("vendor", $vendor_ids, "New booking request received.", "Tap to respond.", [
+        NotificationController::sendTo("vendor", $vendor_notification_id, "New booking request received.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>$public_booking_id
         ]);
@@ -183,7 +183,7 @@ class BidController extends Controller
             ->update([
                 "organization_id"=>$won_org_id,
                 "final_quote"=>$min_amount,
-                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
+//                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
                 "status"=>BookingEnums::$STATUS['payment_pending']
             ]);
 
@@ -293,14 +293,15 @@ class BidController extends Controller
             $inventory_result = $inventory_price->save();
         }
 
-        $meta = ["type_of_movement"=>null, "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
+        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>null, "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
 
         $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id']])
             ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
             ->update([
                 "vendor_id"=>$vendor_id,
                 "bid_amount"=>$data['bid_amount'],
-                "meta"=>json_encode($data['type_of_movement']),
+                "moving_dates"=>json_encode($data['moving_date']),
+                "meta"=>json_encode($meta),
                 "status"=>BidEnums::$STATUS['bid_submitted'],
                 "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
             ]);

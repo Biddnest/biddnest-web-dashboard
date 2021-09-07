@@ -1252,10 +1252,6 @@ class Route extends Controller
         return PayoutController::registerFundAccount($request->id);
     }
 
-    public function addvendors(Request $request){
-        return BidController::addvendors($request->id);
-    }
-
     /* public function export_csv(Request $request){
          return ExportController::exoprtSale();
      }*/

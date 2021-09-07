@@ -548,6 +548,8 @@ class BookingsController extends Controller
         $tax = $booking->payment->tax;
         $grand_total = $booking->payment->grand_total;
 
+        $dates = Bid::where(["organization_id"=>$booking->organization_id, "booking_id"=>$booking->id])->pluck("moving_dates")[0];
+
         if ($discount_amount > 0.00) {
             $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
             $tax = $grand_total * ($tax_percentage / 100);
@@ -572,7 +574,7 @@ class BookingsController extends Controller
                 "discount" => $discount_amount,
                 "tax(" . $tax_percentage . "%)" => $tax,
                 "grand_total" => $grand_total
-            ]]);
+            ], "dates"=>$dates]);
 
     }
 

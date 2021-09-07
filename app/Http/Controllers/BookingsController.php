@@ -470,6 +470,9 @@ class BookingsController extends Controller
 //            ->with('inventories')
 //            ->with('status_history')
             ->with('service')
+            ->with(['bid'=>function($query){
+                $query->where('status', BidEnums::$STATUS['won']);
+            }])
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -621,9 +624,8 @@ class BookingsController extends Controller
                 break;
         }
 
-        $bookings = Booking::whereIn("id", $bid_id
-            ->pluck('booking_id'))->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest']])
-        ;
+        $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
+            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['process']]);
 
         if($web)
         {

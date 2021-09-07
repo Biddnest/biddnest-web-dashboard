@@ -53,11 +53,11 @@ class BidController extends Controller
             $vendor_ids[] = $vendor['id'];
 
             foreach (Vendor::where('organization_id', $vendor['id'])->pluck('id') as $vendor_id) {
-                $vendor_notification_id[]=$vendor_id;
+                $vendor_notification_id[]=$vendor_id->id;
             }
         }
 
-        NotificationController::sendTo("vendor", $vendor_ids, "New booking request received.", "Tap to respond.", [
+        NotificationController::sendTo("vendor", $vendor_notification_id, "New booking request received.", "Tap to respond.", [
             "type" => NotificationEnums::$TYPE['booking'],
             "public_booking_id" =>$public_booking_id
         ]);

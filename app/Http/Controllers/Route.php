@@ -1259,4 +1259,8 @@ class Route extends Controller
     /* public function export_csv(Request $request){
          return ExportController::exoprtSale();
      }*/
+
+     public function inventory_import(Request $request){
+         return InventoryController::import($request->file);
+     }
 }

@@ -183,7 +183,7 @@ class BidController extends Controller
             ->update([
                 "organization_id"=>$won_org_id,
                 "final_quote"=>$min_amount,
-                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
+//                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
                 "status"=>BookingEnums::$STATUS['payment_pending']
             ]);
 

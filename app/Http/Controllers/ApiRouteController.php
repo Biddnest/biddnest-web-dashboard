@@ -351,13 +351,14 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            'coupon_code' =>'string|nullable'
+            'coupon_code' =>'string|nullable',
+            'moving_date' =>'date'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
+        return PaymentController::intiatePayment($request->public_booking_id, $request->moving_date, $request->coupon_code);
     }
 
     public function config(Request $request){

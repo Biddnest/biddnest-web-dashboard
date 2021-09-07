@@ -51,6 +51,8 @@ class BidController extends Controller
             $bid_result = $bid->save();
             $vendor_ids[] = $vendor['id'];
 
+            $vendor_notification_id=[];
+
             foreach (Vendor::where('organization_id', $vendor['id'])->pluck('id') as $vendor_id) {
                 $vendor_notification_id[]=$vendor_id;
             }
@@ -292,14 +294,14 @@ class BidController extends Controller
             $inventory_result = $inventory_price->save();
         }
 
-        $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
+        $meta = ["type_of_movement"=>null, "moving_date"=>$data['moving_date'], "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
 
         $submit_bid = Bid::where(["organization_id"=>$org_id, "id"=>$exist_bid['id']])
             ->whereIn("status", [BidEnums::$STATUS['active'], BidEnums::$STATUS['bid_submitted']])
             ->update([
                 "vendor_id"=>$vendor_id,
                 "bid_amount"=>$data['bid_amount'],
-                "meta"=>json_encode($meta),
+                "meta"=>json_encode($data['type_of_movement']),
                 "status"=>BidEnums::$STATUS['bid_submitted'],
                 "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
             ]);

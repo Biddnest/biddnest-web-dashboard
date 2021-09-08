@@ -186,7 +186,7 @@ class PaymentController extends Controller
 
         MailController::invoice_email($public_booking_id);
 
-        $bid_exist = Bid::where(["organization_id"=>$booking_exist['organization_id'], "booking_id"=>$booking_exist['id']])->firts();
+        $bid_exist = Bid::where(["organization_id"=>$booking_exist['organization_id'], "booking_id"=>$booking_exist['id']])->pluck("vendor_id");
 
         dispatch(function () use ($booking_exist, $bid_exist) {
             NotificationController::sendTo("user", [$booking_exist->user_id], "We have received your payment for booking id #".$booking_exist->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [

@@ -986,3 +986,21 @@ export function initSelect() {
 // table-select
 
 }
+
+export function initInventoryDropzone() {
+    if($(".dropzone-import").length){
+        console.log("init dropzone");
+        let url = $(".dropzone-import").attr('action');
+        $('.dropzone-import').dropzone({
+            url: url,
+            paramName: "file",
+            acceptedFiles: ".csv,.xls",
+            complete: function(response){
+                console.log(response);
+            },
+            cancelled: function (response){
+                console.log(response);
+            }
+        });
+    }
+}

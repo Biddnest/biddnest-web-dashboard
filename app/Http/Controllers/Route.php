@@ -1260,8 +1260,8 @@ class Route extends Controller
          return ExportController::exoprtSale();
      }*/
 
-     public function inventory_import(Request $request){
-         return InventoryController::import($request->file);
+     public function inventories_import(Request $request){
+         return InventoryController::import($request->file('file'));
      }
 
      public function subservice_items(Request $request){

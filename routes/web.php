@@ -81,7 +81,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/inventories/{id}',[Router::class,'inventory_status_update'])->name("inventory_status_update");
     Route::get('/inventories/{id}',[Router::class,'inventories_get'])->name("inventories_get");
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
-    Route::delete('/inventories/import',[Router::class,'inventories_import'])->name("inventories_import");
+    Route::post('/inventories/import',[Router::class,'inventories_import'])->name("inventories_import");
 
     Route::post('/booking',[Router::class,'booking_add'])->name("add_booking");
     Route::put('/confirm',[Router::class,'booking_confirm'])->name("order_confirm");

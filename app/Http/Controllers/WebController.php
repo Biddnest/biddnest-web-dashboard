@@ -382,6 +382,31 @@ class WebController extends Controller
         ]);
     }
 
+    public function ordersBookingsInProgress(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');
+
+        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["in_progress"]])
+            ->where("deleted", CommonEnums::$NO)->where("zone_id", $zone);
+
+        if(isset($request->search)){
+            $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('source_meta', 'like', "%".$request->search."%")
+                ->orWhere('destination_meta', 'like', "%".$request->search."%");
+        }
+
+        $bookings->with("service")
+            ->with('organization')
+            ->orderBy("id","DESC");
+
+        return view('order.ordersbookings_progress',[
+            "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH)
+        ]);
+    }
+
     public function orderDetailsCustomer(Request $request)
     {
 
@@ -437,6 +462,25 @@ class WebController extends Controller
 
         $booking->status_ids = $hist;
         return view('order.orderdetails_vendor',[
+            "booking" => $booking
+        ]);
+    }
+
+    public function orderDetailsAction(Request $request)
+    {
+        $booking = Booking::where("id", $request->id)->with(['status_history'])->with(['status_hist'=>function($query){
+            $query->limit(1)->orderBy("id","DESC");
+        }])->with('inventories')->first();
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('order.orderdetails_action',[
             "booking" => $booking
         ]);
     }

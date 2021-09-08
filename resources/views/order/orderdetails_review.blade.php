@@ -66,6 +66,11 @@
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
                                 </li>
+                                @if($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry'])
+                                    <li class="nav-item">
+                                        <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-estimate', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Action</a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor Details</a>
                                 </li>

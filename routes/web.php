@@ -259,10 +259,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/hold',[WebController::class,'ordersBookingsHold'])->name("orders-booking-hold");
             Route::get('/bounced',[WebController::class,'ordersBookingsBounced'])->name("orders-booking-bounced");
             Route::get('/cancelled',[WebController::class,'ordersBookingsCancelled'])->name("orders-booking-cancelled");
+            Route::get('/inprogress',[WebController::class,'ordersBookingsInProgress'])->name("orders-booking-inprogress");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");
             Route::get('/{id}/details/vendor',[WebController::class,'orderDetailsVendor'])->name("order-details-vendor");
+            Route::get('/{id}/details/action',[WebController::class,'orderDetailsAction'])->name("order-details-estimate");
             Route::get('/{id}/details/quotation',[WebController::class,'orderDetailsQuotation'])->name("order-details-quotation");
             Route::get('/{id}/details/bidding',[WebController::class,'orderDetailsBidding'])->name("order-details-bidding");
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");

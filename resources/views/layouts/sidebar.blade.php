@@ -25,6 +25,9 @@
                             <li class="sub-menu-item"><a href="{{route('create-order')}}"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Create New Order</a></li>
+                            <li class="sub-menu-item"><a href="{{route('orders-booking-inprogress')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                    In Progress Orders</a></li>
                             <!-- <li class="sub-menu-item"><a href="edit-order.html"><i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
                                     Edit Order</a></li> -->

@@ -195,7 +195,7 @@ class PaymentController extends Controller
                 "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
             ]);
 
-            NotificationController::sendTo("vendor", [$bid_exist->vendor_id], "Customer coinfirmed for booking id #".$booking_exist->public_booking_id." on moving date :".$booking_exist->final_moving_date, "This order has been confirmed.", [
+            NotificationController::sendTo("vendor", $bid_exist, "Customer coinfirmed for booking id #".$booking_exist->public_booking_id." on moving date :".$booking_exist->final_moving_date, "This order has been confirmed.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $booking_exist->public_booking_id
             ]);

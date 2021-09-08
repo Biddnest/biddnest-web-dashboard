@@ -445,6 +445,8 @@ $("body").on('change', ".subservices", function(event) {
     var service = $("#item_"+name).data("service");
     var url = $(this).data("url");
 
+    $('.item-subservice').html("");
+
     $.ajax({
         url: url+"?id="+id+"&&service="+service,
         type: 'GET',
@@ -464,7 +466,7 @@ $("body").on('change', ".subservices", function(event) {
 
                     let template = Handlebars.compile(source);
                     let html = template(response.data);
-                    $('.item-subservice:last').before(html);
+                    $('.item-subservice').html(html);
                 }
             }
         }

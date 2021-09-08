@@ -1125,6 +1125,15 @@ dp.on('changeDate', function(e) {
         dp.data('datepicker').setDates(selectedDates);
         tinyAlert('Please note','Can only select upto 5 dates', 'info')
     }
+
+    if(e.dates.length > 1){
+        $('.share').val(true);
+        $('.share_check').attr("checked", "checked");
+    }
+    else{
+        $('.share').val(false);
+        $('.share_check').removeAttr("checked", "checked");
+    }
     selectedDates.sort(function(a, b){
         return new Date(a.date) - new Date(b.date);
     });

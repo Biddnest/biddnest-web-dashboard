@@ -96,12 +96,13 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->limit(10)->get();
         $zone=(array)Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('name')->toArray();
-
+        $shared = explode(",", $request->move_date);
         return view('website.booking.addbooking', [
             'categories'=>$categories,
             'inventories'=>$inventories,
             'zones'=>$zone,
             'prifill'=>$request->all(),
+            'share'=>$shared,
             'inventory_quantity_type'=>Service::where("id",$request->service)->pluck("inventory_quantity_type")[0]
         ]);
     }

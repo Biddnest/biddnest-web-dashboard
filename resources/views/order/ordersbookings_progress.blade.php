@@ -5,11 +5,7 @@
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderBookingspast">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4 f-20">Bookings & Orders</h3>
-            <div class="mr-20">
-                <a href="{{ route('create-order')}}">
-                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New order</button>
-                </a>
-            </div>
+
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left  pt-0 pb-0 p-2">
@@ -26,20 +22,58 @@
         <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
             <div class="col-sm-12">
                 <div class="card  h-auto p-0 pt-10">
-                    <div class="d-flex flex-row justify-content-between p-10">
+                    <div class="row no-gutters">
+                        <div class="col-sm-8 p-3 ">
+                            <h3 class="f-18 pl-8 title" > In Progress Bookings</h3 >
 
-                        <div class="p-1 card-head left col-sm-3">
+                        </div>
+                        <div class="col-sm-1 -mr-4 pt-4 pl-8 ">
+                        </div>
+                        {{--<div class="col-sm-1 -mr-4 pt-4 pl-8 " >
+                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+                            </a>
+                            <div class="dropdown-menu ">
+
+                                <a class="dropdown-item border-top-bottom" href="#">
+                                    <div class="form-check f-14">
+                                        <input class="form-check-input" type="checkbox" value="" id="city">
+                                        <label class="form-check-label" for="city">
+                                            City
+                                        </label>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item border-top-bottom" href="#">
+                                    <div class="form-check f-14">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="Customer">
+                                        <label class="form-check-label" for=" Customer">
+                                            Customer Status
+                                        </label>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item border-top-bottom" href="#">
+                                    <div class="form-check f-14">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="customerType">
+                                        <label class="form-check-label" for="customerType">
+                                            Customer Type
+                                        </label>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>--}}
+                        {{--<div class="p-1 card-head left col-sm-3">
                             <div class="search">
-                                <input type="text" class="searchTerm table-search1" data-url="{{route('orders-booking-past')}}" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search1" data-url="{{route('orders-booking-inprogress')}}" placeholder="Search...">
                                 <button type="submit" class="searchButton1">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                     <!-- Table -->
-                    <div class="tab-content margin-topneg-42" id="myTabContent">
-                        <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
+                    <div class="all-vender-details">
                             <table class="table text-center p-0   theme-text  ">
                                 <thead class="secondg-bg  p-0 f-14">
                                 <tr>
@@ -126,7 +160,7 @@
                             @if(count($bookings)== 0)
                                 <div class="row hide-on-data">
                                     <div class="col-md-12 text-center p-20">
-                                        <p class="font14"><i>. No Orders Are Bounced.</i></p>
+                                        <p class="font14"><i>. No Orders Are in Progress.</i></p>
                                     </div>
                                 </div>
                             @endif
@@ -146,7 +180,6 @@
                                     @endif
                                 </ul>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

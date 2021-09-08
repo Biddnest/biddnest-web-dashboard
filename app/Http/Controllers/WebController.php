@@ -394,6 +394,7 @@ class WebController extends Controller
 
         if(isset($request->search)){
             $bookings=$bookings->where('public_booking_id', 'like', $request->search."%")
+                ->orWhere('public_enquiry_id', 'like', $request->search."%")
                 ->orWhere('source_meta', 'like', "%".$request->search."%")
                 ->orWhere('destination_meta', 'like', "%".$request->search."%");
         }

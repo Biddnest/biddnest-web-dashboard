@@ -403,7 +403,7 @@ $("body").on('change', ".notification", function(event) {
 });
 
 $("body").on('change', ".category-select", function(event) {
-    Logger.info("change");
+
     var id=$(this).val();
 
     $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
@@ -411,7 +411,8 @@ $("body").on('change', ".category-select", function(event) {
     var materal=$("#sub_"+id).data("subcategory");
 
     materal.map((value)=>{
-        $(this).closest(".d-flex").find(".subservices").append('<option id="item_'+value['id']+'" data-id="'+value['id']+'" value="'+value['name']+'" data-items="'+value['items']+'">'+value['name']+'</option>')
+        var name=value['name'].replace(" ", "_");
+        $(this).closest(".d-flex").find(".subservices").append('<option data-service="'+id+'" id="item_'+name+'" data-id="'+value['id']+'" value="'+value['name']+'">'+value['name']+'</option>')
     });
 
     var type=$("#sub_"+id).data("type");
@@ -436,43 +437,42 @@ $("body").on('change', ".category-select", function(event) {
     return false;
 });
 
-/*$("body").on('change', ".subcategory-select", function(event) {
-    var id=$(this).data("id");
+$("body").on('change', ".subservices", function(event) {
 
-    $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
+    var subcategory= $(this).val()
+    var name=subcategory.replace(" ", "_");
+    var id= $("#item_"+name).data("id");
+    var service = $("#item_"+name).data("service");
+    var url = $(this).data("url");
 
-    var materal=$("#item_"+id).data("items");
+    $.ajax({
+        url: url+"?id="+id+"&&service="+service,
+        type: 'GET',
+        contentType: "application/json",
+        success: function (response) {
+            if(response.status == "success")
+            {
+                console.log(response.data.items);
+                if(response.data.items.length > 0)
+                {
+                    for (var i = 0; i < response.data.items.length; i++) {
+                        response.data.items[i].meta.material = JSON.parse(response.data.items[i].meta.material);
+                        response.data.items[i].meta.size = JSON.parse(response.data.items[i].meta.size);
+                    }
 
-    materal.map((value)=>{
-        $(this).closest(".d-flex").find(".items").append('<tr class="inventory-snip">'+
-            +'<td scope="row" class="text-left">'+
-                value['name']
-            +'</td>'+
+                    let source = $("#default_item").html();
 
-            +'<td class="">'+
-                +'<select class="form-control br-5 material" name="inventory_items[][material]" required>'+
-                    +'<option value="">'+value['material']+'</option>'+
-                +'</select>'+
-            +'</td>'+
-
-            +'<td class="">'+
-                +'<select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>'+
-                    +'<option value="">'+value['size']+'</option>'+
-                +'</select>'+
-            +'</td>'+
-
-            +'<td class="" style="width: 20%;">'+
-                +'<input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >'+
-                +'<span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]" value="'+value['quantity']+'"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>'+
-            +'</td>'+
-            +'<td>'+
-                +'<span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>'+
-            +'</td>'+
-        +'</tr>')
+                    let template = Handlebars.compile(source);
+                    let html = template(response.data);
+                    $('.item-subservice:last').before(html);
+                }
+            }
+        }
     });
 
+
     return false;
-});*/
+});
 
 $("body").on('click', ".delete", function(event) {
 

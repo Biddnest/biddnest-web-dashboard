@@ -510,10 +510,9 @@ class WebController extends Controller
     {
         $category = Service::where(['status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO])
             ->with(['subservices' => function ($query) {
-                $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO])->with(["inventories"=>function ($query1) {
-                    $query1->where(['inventories.status' => CommonEnums::$YES, 'inventories.deleted' => CommonEnums::$NO]);
-                }]);
+                $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO]);
             }])->get();
+
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('order.createorder', ['categories'=>$category, 'inventories'=>$inventory]);
     }

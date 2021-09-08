@@ -174,4 +174,18 @@ class SubServiceController extends Controller
 
         return Helper::response(true, "status updated successfully");
     }
+
+    public static function getDefaultItems($id, $service){
+        $subservice_exist = Subservice::where("id", $id)->first();
+
+        if(!$subservice_exist)
+            return Helper::response(false,"Sub-Services is not exist.");
+
+        $get_items = SubserviceInventory::where(["subservice_id"=>$id])->with("meta")->get();
+
+        if($get_items)
+            return Helper::response(true,"Defalt Inventories.", ["items"=>$get_items]);
+        else
+            return Helper::response(false,"Defalt Inventories are not exist.");
+    }
 }

@@ -1263,4 +1263,8 @@ class Route extends Controller
      public function inventory_import(Request $request){
          return InventoryController::import($request->file);
      }
+
+     public function subservice_items(Request $request){
+         return SubServiceController::getDefaultItems($request->id, $request->service);
+     }
 }

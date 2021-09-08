@@ -436,7 +436,7 @@ $("body").on('change', ".category-select", function(event) {
     return false;
 });
 
-$("body").on('change', ".subcategory-select", function(event) {
+/*$("body").on('change', ".subcategory-select", function(event) {
     var id=$(this).data("id");
 
     $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
@@ -472,7 +472,7 @@ $("body").on('change', ".subcategory-select", function(event) {
     });
 
     return false;
-});
+});*/
 
 $("body").on('click', ".delete", function(event) {
 

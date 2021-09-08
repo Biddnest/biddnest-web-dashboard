@@ -186,7 +186,7 @@ class PaymentController extends Controller
 
         MailController::invoice_email($public_booking_id);
 
-        $bid_exist = Bid::where(["organization_id"=>$booking_exist->organization_id, "booking_id"=>$booking_exist->id])->firts();
+        $bid_exist = Bid::where(["organization_id"=>$booking_exist['organization_id'], "booking_id"=>$booking_exist['id']])->firts();
 
         dispatch(function () use ($booking_exist, $bid_exist) {
             NotificationController::sendTo("user", [$booking_exist->user_id], "We have received your payment for booking id #".$booking_exist->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
@@ -195,7 +195,7 @@ class PaymentController extends Controller
                 "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
             ]);
 
-            NotificationController::sendTo("vendor", [$bid_exist->vendor_id], "Customer coinfirmed for booking id #".$booking_exist->public_booking_id." on moving date :".$bid_exist->meta->moving_date, "This order has been confirmed.", [
+            NotificationController::sendTo("vendor", [$bid_exist->vendor_id], "Customer coinfirmed for booking id #".$booking_exist->public_booking_id." on moving date :".$booking_exist->final_moving_date, "This order has been confirmed.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $booking_exist->public_booking_id
             ]);

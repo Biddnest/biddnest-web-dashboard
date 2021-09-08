@@ -6,7 +6,13 @@
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="inventories">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head theme-text text-left p-4 f-20">Inventories</h3>
+
         <div class="mr-20">
+            <a href="#" class="modal-toggle mr-20" data-toggle="modal" data-target="#import">
+                <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
+                                                           aria-hidden="true"></i> IMPORT
+                </button>
+            </a>
             <a href="{{route('create-inventories')}}">
                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
                                         aria-hidden="true"></i> CREATE NEW
@@ -24,6 +30,7 @@
                 </ol>
             </nav>
         </div>
+
     </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
@@ -120,6 +127,33 @@
                             </div>
                         </div>
                     </div>
+
+    <div class="fullscreen-modal" id="import">
+        <div class="fullscreen-modal-body" role="document">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Import CSV</h5>
+                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="#" method="PUT" data-next="modal" data-modal-id="#reset-pin" data-alert="mega" data-parsley-validate>
+                <div class="modal-body" style="padding: 10px 9px;">
+                    <div class="d-flex justify-content-center row ">
+
+                    </div>
+                </div>
+                <div class="modal-footer p-15 ">
+                    <div class="w-50">
+                    </div>
+                    <div class="w-50 text-right">
+                        <a class="white-text p-10" href="#">
+                            <button class="btn theme-bg white-text w-30 " id="submitbtn" style="margin-bottom: 20px;">Submit</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @endsection

@@ -463,7 +463,7 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['process']])
+            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['in_progress']])
             ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
@@ -625,7 +625,7 @@ class BookingsController extends Controller
         }
 
         $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
-            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['process']]);
+            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['in_progress']]);
 
         if($web)
         {
@@ -1258,11 +1258,11 @@ class BookingsController extends Controller
             "images" => $images,
             "timings" => null,
             "distance" => $distance]);
-        $booking->status = BookingEnums::$STATUS['enquiry'];
+        $booking->status = BookingEnums::$STATUS['in_progress'];
         $booking->zone_id = $zone_id;
         $result = $booking->save();
 
-        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['process']);
+        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_progress']);
 
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;

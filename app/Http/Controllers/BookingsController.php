@@ -1131,6 +1131,7 @@ class BookingsController extends Controller
         }
     }
 
+    /* old Track Booking API's for Customer App */
     public static function createTrack($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
     {
         DB::beginTransaction();
@@ -1306,7 +1307,7 @@ class BookingsController extends Controller
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
     }
 
-
+    /* Track Booking API's for Customer App */
     public static function trackCustomerData($data, $user_id, $web=false, $created_by_support=false)
     {
         DB::beginTransaction();
@@ -1354,6 +1355,7 @@ class BookingsController extends Controller
         $booking->status = BookingEnums::$STATUS['in_progress'];
         $result = $booking->save();
 
+        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_progress']);
 
         if (!$result) {
             DB::rollBack();
@@ -1437,7 +1439,6 @@ class BookingsController extends Controller
                     "state" => $data['destination']['meta']['state'],
                     "pincode" => $data['destination']['meta']['pincode'],
                     "lift" => $data['destination']['meta']['lift']]),
-                "timings" => null,
                 "meta"=>json_encode($meta)
             ]);
 
@@ -1602,4 +1603,61 @@ class BookingsController extends Controller
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
 
+    /* Track Booking API's for Customer Website */
+    public static function trackCustomerDataForWeb($data, $user_id, $web=false, $created_by_support=false)
+    {
+        DB::beginTransaction();
+
+        /*
+        $inventory_quantity_type = Service::where("id", $data['service_id'])->pluck('inventory_quantity_type')[0];
+         if ($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]) {
+             DB::rollBack();
+             return Helper::response(false, "Unkown Service Type, Couldn't Proceed");
+         }
+        */
+
+        $booking = new Booking;
+        $booking_id = "BDO-" . uniqid();
+        $enquiry_id = "ENQ-" . uniqid();
+        $booking->public_booking_id = strtoupper($booking_id);
+        $booking->public_enquiry_id = strtoupper($enquiry_id);
+        $booking->user_id = (int) $user_id;
+        if ($data['meta']['self_booking'] === true) {
+            $user = User::findOrfail($user_id);
+            $booking->contact_details = json_encode(["name" => $user['fname'] . ' ' . $user['lname'],
+                "phone" => $user['phone'],
+                'email' => $user['email']]);
+        } else {
+            $booking->contact_details = json_encode(["name" => $data['contact_details']['name'],
+                "phone" => $data['contact_details']['phone'],
+                'email' => $data['contact_details']['email']]);
+        }
+
+        if($web)
+            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['web'];
+
+        if($created_by_support)
+            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['support'];
+
+
+        $booking->meta = json_encode([
+            "self_booking" => $data['meta']['self_booking'],
+            "subcategory" => null,
+            "customer" => null,
+            "images" => [],
+            "timings" => null,
+            "distance" => null
+        ]);
+        $booking->status = BookingEnums::$STATUS['in_progress'];
+        $result = $booking->save();
+
+
+        if (!$result) {
+            DB::rollBack();
+            return Helper::response(false, "Couldn't save data");
+        }
+
+        DB::commit();
+        return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking->id)]);
+    }
 }

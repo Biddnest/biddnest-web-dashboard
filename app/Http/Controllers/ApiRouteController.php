@@ -743,6 +743,8 @@ class ApiRouteController extends Controller
     public function trackInventory(Request $request)
     {
         $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'string',
+
             'meta.subcategory' => 'nullable|string',
             'meta.images.*' => 'string',
 

@@ -1485,7 +1485,7 @@ class BookingsController extends Controller
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('status_history')->findOrFail($booking_exist->id)]);
     }
 
-    public static function trackInventoryData($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
+    public static function trackInventoryData($data, $user_id, $web=false, $created_by_support=false)
     {
         $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
 
@@ -1500,7 +1500,7 @@ class BookingsController extends Controller
         $imageman = new ImageManager(array('driver' => 'gd'));
 
         foreach ($data['meta']['images'] as $key => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
         }
 
         $cost_structure = [];

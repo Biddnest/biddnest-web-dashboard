@@ -1017,12 +1017,7 @@ $('.filterdate').datepicker({
 
 });
 
-$('.birthdate').datepicker({
-    // multidateSeparator:",",
-    format: 'yyyy-mm-dd',
-    endDate: '-18y'
 
-});
 
 /* Website js code start */
 
@@ -1794,5 +1789,12 @@ $("body").on('keypress', ".alphabet", function(event) {
         return false;
 
     return true;
+
+});
+
+$('.birthdate').datepicker({
+    // multidateSeparator:",",
+    format: 'yyyy-mm-dd',
+    endDate: '-18y'
 
 });

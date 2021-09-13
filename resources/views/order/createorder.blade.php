@@ -470,38 +470,39 @@
     <script id="default_item" type="text/x-handlebars-template">
         @{{#each items}}
             <tr class="inventory-snip">
-            <th scope="row" class="text-left">
-               @{{meta.name}}
-            </th>
+                <th scope="row" class="text-left">
+                    <input class="form-control br-5 fixed" type="hidden" value="@{{meta.id}}" name="inventory_items[][inventory_id]" >
+                   @{{meta.name}}
+                </th>
 
-            <td class="">
-                <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                    <option value=""> @{{material}}</option>
-                    @{{#meta.material}}
-                    <option value="@{{.}}">@{{.}}</option>
-                    @{{/meta.material}}
-                </select>
-            </td>
+                <td class="">
+                    <select class="form-control br-5 material" name="inventory_items[][material]" required>
+                        <option value="@{{material}}"> @{{material}}</option>
+                        @{{#meta.material}}
+                        <option value="@{{.}}">@{{.}}</option>
+                        @{{/meta.material}}
+                    </select>
+                </td>
 
-            <td class="">
-                <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                    <option value=""> @{{size}}</option>
-                    @{{#meta.size}}
-                    <option value="@{{.}}">@{{.}}</option>
-                    @{{/meta.size}}
-                </select>
-            </td>
+                <td class="">
+                    <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
+                        <option value="@{{size}}"> @{{size}}</option>
+                        @{{#meta.size}}
+                        <option value="@{{.}}">@{{.}}</option>
+                        @{{/meta.size}}
+                    </select>
+                </td>
 
-            <td class="" style="width: 20%;">
-                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" value="@{{quantity}}" placeholder="0" >
+                <td class="" style="width: 20%;">
+                    <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" value="@{{quantity}}" placeholder="0" >
 
-                <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="@{{quantity.min}}" data-to="@{{quantity.max}}" data-type="double" data-step="1" /></span>
-            </td>
+{{--                    <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="@{{quantity.min}}" data-to="@{{quantity.max}}" data-type="double" data-step="1" /></span>--}}
+                </td>
 
-            <td>
-                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-            </td>
-        </tr>
+                <td>
+                    <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                </td>
+            </tr>
         @{{/each}}
     </script>
 </div>

@@ -1633,12 +1633,8 @@ class BookingsController extends Controller
                 'email' => $data['contact_details']['email']]);
         }
 
-        if($web)
-            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['web'];
 
-        if($created_by_support)
-            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['support'];
-
+        $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['web'];
 
         $booking->meta = json_encode([
             "self_booking" => $data['meta']['self_booking'],
@@ -1651,13 +1647,78 @@ class BookingsController extends Controller
         $booking->status = BookingEnums::$STATUS['in_progress'];
         $result = $booking->save();
 
+        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_progress']);
 
-        if (!$result) {
+        if (!$result && !$result_status) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data");
         }
 
         DB::commit();
         return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking->id)]);
+    }
+
+    public static function trackDeliveryDataForWeb($data, $user_id, $web=false, $created_by_support=false)
+    {
+        $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
+
+        if(!$booking_exist)
+            return Helper::response(false, "Booking is not exist");
+
+        DB::beginTransaction();
+
+        $inventory_quantity_type = Service::where("id", $data['service_id'])->pluck('inventory_quantity_type')[0];
+        if ($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]) {
+            DB::rollBack();
+            return Helper::response(false, "Unkown Service Type, Couldn't Proceed");
+        }
+
+        $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
+
+        $distance = GeoController::distance($booking_exist->source_lat, $booking_exist->source_lng, $data['destination']['lat'], $data['destination']['lng']);
+
+        $meta = json_decode($booking_exist->meta, true);
+        $meta['distance']= $distance;
+
+        $update_source = Booking::where("public_booking_id", $data['public_booking_id'])
+            ->update([
+                "service_id"=>$data['service_id'],
+                "source_lat"=> $data['source']['lat'],
+                "source_lng"=>$data['source']['lng'],
+                "source_meta"=>json_encode(["geocode" => $data['source']['meta']['geocode'],
+                    "floor" => $data['source']['meta']['floor'],
+                    "address" => $data['source']['meta']['address_line1']." ".$data['source']['meta']['address_line2'],
+                    "address_line1" => $data['source']['meta']['address_line1'],
+                    "address_line2" => $data['source']['meta']['address_line2'],
+                    "city" => $data['source']['meta']['city'],
+                    "state" => $data['source']['meta']['state'],
+                    "pincode" => $data['source']['meta']['pincode'],
+                    "lift" => $data['source']['meta']['lift'],
+                    "shared_service" =>null]),
+
+                "destination_lat"=> $data['destination']['lat'],
+                "destination_lng"=> $data['destination']['lng'],
+                "destination_meta"=>json_encode(["geocode" => $data['destination']['meta']['geocode'],
+                    "floor" => $data['destination']['meta']['floor'],
+                    "address" => $data['destination']['meta']['address_line1']." ".$data['destination']['meta']['address_line2'],
+                    "address_line1" => $data['destination']['meta']['address_line1'],
+                    "address_line2" => $data['destination']['meta']['address_line2'],
+                    "city" => $data['destination']['meta']['city'],
+                    "state" => $data['destination']['meta']['state'],
+                    "pincode" => $data['destination']['meta']['pincode'],
+                    "lift" => $data['destination']['meta']['lift']]),
+                "meta"=>json_encode($meta),
+
+                "zone_id"=>$zone_id
+            ]);
+
+
+        if (!$update_source) {
+            DB::rollBack();
+            return Helper::response(false, "Couldn't save data");
+        }
+
+        DB::commit();
+        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('status_history')->findOrFail($booking_exist->id)]);
     }
 }

@@ -392,7 +392,7 @@ class OrganisationController extends Controller
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['pending_approval']]);
             PayoutController::registerContact($id);
             PayoutController::registerFundAccount($id);
 

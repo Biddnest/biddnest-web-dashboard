@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="tab-content" id="myTabContent">
-                    <form class="form-new-order input-text-blue" action="{{route('bank_add')}}" data-next="redirect" data-url="{{route("onboard-userrole-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
+                    <form class="form-new-order input-text-blue" action="{{route('bank_add')}}" data-next="redirect" data-url="{{route("onboard-action", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                         <input type="hidden" name="bank_id" value="{{$bank->id ?? ''}}">
                         <input type="hidden" name="id" value="{{$id}}">
                         <div class="row p-20">
@@ -163,11 +163,11 @@
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
                             <div class="w-50"><a class="white-text p-10" href="{{route("onboard-branch-vendors",['id'=> $id])}}">
-                                    <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
+                                    <button type="button" class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                             </div>
                             <div class="w-50 text-right">
 {{--                                    <button class="btn theme-br white-text w-30">Next</button>--}}
-                                <a class="white-text p-10" href="{{route("onboard-action", ['id'=>$id])}}">
+                                <a class="white-text p-10" href="#">
                                     <button type="submit" class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                             </div>
                         </div>

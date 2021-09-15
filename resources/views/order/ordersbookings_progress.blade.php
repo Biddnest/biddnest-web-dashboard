@@ -84,7 +84,7 @@
                                     <th scope="col">Order Date</th>
 
                                     <th scope="col" style="text-align: center !important;">Order Status</th>
-                                    <th scope="col">Operations</th>
+{{--                                    <th scope="col">Operations</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20  f-13">
@@ -149,10 +149,10 @@
                                             @endswitch
                                         </td>
 
-                                        <td class="no-toggle">
-                                            <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
-                                            {{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
-                                        </td>
+{{--                                        <td class="no-toggle">--}}
+{{--                                            <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>--}}
+{{--                                            --}}{{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
+{{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

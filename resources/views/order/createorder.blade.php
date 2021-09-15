@@ -73,12 +73,12 @@
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
-
-                            <div class="col-sm-6">
+                            <input type="hidden" value="true" name="meta[self_booking]:boolean">
+                            <div class="col-sm-6" hidden>
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
                                     <label class="container" style="margin-top: 10px;margin-left:-30px">
-                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">
+{{--                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">--}}
                                         <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? true : false">
                                         <!-- <span class="checkmark"></span> -->
                                     </label>
@@ -150,26 +150,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="City" id="source-city" class="form-control" name="source[meta][city]" required>
+                                    <input type="text" placeholder="City" id="source-city" class="form-control" name="source[meta][city]" required readonly>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From State</label>
-                                    <input type="text" placeholder="State" id="source-state" class="form-control" name="source[meta][state]" required>
+                                    <input type="text" placeholder="State" id="source-state" class="form-control" name="source[meta][state]" required readonly>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="560097" id="source-pin" class="form-control" name="source[meta][pincode]" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                  <input type="text" placeholder="560097" id="source-pin" class="form-control number" name="source[meta][pincode]" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -231,26 +226,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" class="form-control" required>
+                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" class="form-control" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" class="form-control" required>
+                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" class="form-control" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control" maxlength="6" minlength="6" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control number" maxlength="6" minlength="6" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -294,9 +284,9 @@
                             <div class="form-inputs">
                             <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Interested in shared services?</label>
                                 <label class="container"  style="margin-top: 10px; margin-left:-30px">
-                                    <input type="hidden" value="false" name="source[meta][shared_service]:boolean" id="m_type">
-                                    <input type="checkbox" name="select_letter" value="1" id="movemnt"
-                                           onchange="document.getElementById('m_type').value = this.checked ? true : false">
+                                    <input type="hidden" class="share" value="false" name="source[meta][shared_service]:boolean" id="m_type">
+                                    <input type="checkbox" class="share_check" name="select_letter" value="1" id="movemnt"
+                                           onchange="document.getElementById('m_type').value = this.checked ? true : false" disabled>
                                     <!-- <span class="checkmark"></span> -->
                                   <!-- <span class="checkmark"></span> -->
                                 </label>

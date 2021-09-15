@@ -1608,14 +1608,6 @@ class BookingsController extends Controller
     {
         DB::beginTransaction();
 
-        /*
-        $inventory_quantity_type = Service::where("id", $data['service_id'])->pluck('inventory_quantity_type')[0];
-         if ($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]) {
-             DB::rollBack();
-             return Helper::response(false, "Unkown Service Type, Couldn't Proceed");
-         }
-        */
-
         $booking = new Booking;
         $booking_id = "BDO-" . uniqid();
         $enquiry_id = "ENQ-" . uniqid();
@@ -1658,7 +1650,7 @@ class BookingsController extends Controller
         return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking->id)]);
     }
 
-    public static function trackDeliveryDataForWeb($data, $user_id, $web=false, $created_by_support=false)
+    public static function trackDeliveryDataForWeb($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
     {
         $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
 
@@ -1694,7 +1686,7 @@ class BookingsController extends Controller
                     "state" => $data['source']['meta']['state'],
                     "pincode" => $data['source']['meta']['pincode'],
                     "lift" => $data['source']['meta']['lift'],
-                    "shared_service" =>null]),
+                    "shared_service" =>$data['source']['meta']['shared_service']]),
 
                 "destination_lat"=> $data['destination']['lat'],
                 "destination_lng"=> $data['destination']['lng'],
@@ -1712,8 +1704,14 @@ class BookingsController extends Controller
                 "zone_id"=>$zone_id
             ]);
 
+        foreach ($movement_dates as $dates) {
+            $movementdates = new MovementDates;
+            $movementdates->booking_id = $booking_exist->id;
+            $movementdates->date = Carbon::parse($dates)->format('Y-m-d');//date('', strtotime($dates));
+            $result_date = $movementdates->save();
+        }
 
-        if (!$update_source) {
+        if (!$update_source && !$result_date) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data");
         }
@@ -1721,4 +1719,157 @@ class BookingsController extends Controller
         DB::commit();
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('status_history')->findOrFail($booking_exist->id)]);
     }
+
+    public static function trackInventoryDataForWeb($data, $user_id, $web=false, $created_by_support=false)
+    {
+        $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
+
+        if(!$booking_exist)
+            return Helper::response(false, "Booking is not exist");
+
+        DB::beginTransaction();
+
+        $inventory_quantity_type = Service::where("id", $booking_exist->service_id)->pluck('inventory_quantity_type')[0];
+
+        $cost_structure = [];
+        foreach (Settings::get() as $setting) {
+            switch ($setting['key']) {
+                case "tax":
+                    $cost_structure['tax'] = $setting['value'];
+                    break;
+
+                case "surge_charge":
+                    $cost_structure['surge_charge'] = $setting['value'];
+                    break;
+
+                case "buffer_amount":
+                    $cost_structure['buffer_amount'] = $setting['value'];
+                    break;
+            }
+        }
+
+        try {
+            if($data['inventory_items'])
+            {
+                $data['source']['lat']=$booking_exist->source_lat;
+                $data['source']['lng']=$booking_exist->source_lng;
+                $data['destination']['lat']=$booking_exist->destination_lat;
+                $data['destination']['lng']=$booking_exist->destination_lng;
+
+                $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $booking_exist->zone_id, $web, $created_by_support);
+                $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+                $economic_price += $economic_price * ($cost_structure["tax"] / 100);
+
+                /*Rounding to 2 decimals*/
+                $economic_price = number_format($economic_price,2,".","");
+                //  $economic_price = str_replace(",","",$economic_price);
+
+                $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $booking_exist->zone_id, $web, $created_by_support);
+                $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+                // $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+
+                /*Rounding to 2 decimals*/
+                $primium_price = number_format($primium_price,2, ".","");
+                //  $primium_price = str_replace(",","",$economic_price);
+
+                $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
+            return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
+        }
+
+        $distance = json_decode($booking_exist->meta, true)['distance'];
+        $self_booking = json_decode($booking_exist->meta, true)['self_booking'];
+
+        $update_inventory = Booking::where("public_booking_id", $data['public_booking_id'])
+            ->update([
+                "quote_estimate"=>$estimate_quote,
+                "meta"=>json_encode(["self_booking" => $self_booking,
+                    "subcategory" => $data['meta']['subcategory'],
+                    "customer" => null,
+                    "images" => null,
+                    "timings" => null,
+                    "distance" => $distance])
+            ]);
+
+        foreach ($data["inventory_items"] as $items) {
+
+            if($web || $created_by_support)
+            {
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => explode(";",$items['quantity'])[0], "max" => explode(";",$items['quantity'])[1]]);
+            }else{
+                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
+            }
+
+            $bookinginventory = new BookingInventory;
+            $bookinginventory->booking_id = $booking_exist->id;
+            $bookinginventory->inventory_id = $items["inventory_id"];
+
+            if($items["inventory_id"] !== null)
+                $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
+            else
+                $bookinginventory->name = $items["name"];
+
+            $bookinginventory->material = $items["material"];
+            $bookinginventory->size = $items["size"];
+            $bookinginventory->quantity = $quantity;
+            $bookinginventory->quantity_type = $inventory_quantity_type;
+            $result_items = $bookinginventory->save();
+        }
+
+        if (!$update_inventory || !$result_items) {
+            DB::rollBack();
+            return Helper::response(false, "Couldn't save data");
+        }
+
+        DB::commit();
+        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
+    }
+
+    public static function trackImgDataForWeb($data, $user_id, $web=false, $created_by_support=false)
+    {
+        $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
+
+        if(!$booking_exist)
+            return Helper::response(false, "Booking is not exist");
+
+        DB::beginTransaction();
+
+        $inventory_quantity_type = Service::where("id", $booking_exist->service_id)->pluck('inventory_quantity_type')[0];
+
+        $images = [];
+        $imageman = new ImageManager(array('driver' => 'gd'));
+
+        foreach ($data['meta']['images'] as $key => $image) {
+            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
+        }
+
+
+        $distance = json_decode($booking_exist->meta, true)['distance'];
+        $self_booking = json_decode($booking_exist->meta, true)['self_booking'];
+        $sub_cat = json_decode($booking_exist->meta, true)['subcategory'];
+
+        $update_img = Booking::where("public_booking_id", $data['public_booking_id'])
+            ->update([
+                "meta"=>json_encode(["self_booking" => $self_booking,
+                    "subcategory" => $sub_cat,
+                    "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
+                    "images" => $images,
+                    "timings" => null,
+                    "distance" => $distance]),
+                "status"=>BookingEnums::$STATUS['enquiry']
+            ]);
+
+        $result_status = self::statusChange($booking_exist->id, BookingEnums::$STATUS['enquiry']);
+
+        if (!$update_img || !$result_status) {
+            DB::rollBack();
+            return Helper::response(false, "Couldn't save data");
+        }
+
+        DB::commit();
+        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
+    }
+
 }

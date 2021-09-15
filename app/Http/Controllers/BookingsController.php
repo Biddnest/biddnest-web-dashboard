@@ -1608,38 +1608,66 @@ class BookingsController extends Controller
     {
         DB::beginTransaction();
 
-        $booking = new Booking;
-        $booking_id = "BDO-" . uniqid();
-        $enquiry_id = "ENQ-" . uniqid();
-        $booking->public_booking_id = strtoupper($booking_id);
-        $booking->public_enquiry_id = strtoupper($enquiry_id);
-        $booking->user_id = (int) $user_id;
-        if ($data['meta']['self_booking'] === true) {
-            $user = User::findOrfail($user_id);
-            $booking->contact_details = json_encode(["name" => $user['fname'] . ' ' . $user['lname'],
-                "phone" => $user['phone'],
-                'email' => $user['email']]);
-        } else {
-            $booking->contact_details = json_encode(["name" => $data['contact_details']['name'],
-                "phone" => $data['contact_details']['phone'],
-                'email' => $data['contact_details']['email']]);
+        if(!$data['public_booking_id']){
+            $booking = new Booking;
+            $booking_id = "BDO-" . uniqid();
+            $enquiry_id = "ENQ-" . uniqid();
+            $booking->public_booking_id = strtoupper($booking_id);
+            $booking->public_enquiry_id = strtoupper($enquiry_id);
+            $booking->user_id = (int) $user_id;
+            if ($data['meta']['self_booking'] === true) {
+                $user = User::findOrfail($user_id);
+                $booking->contact_details = json_encode(["name" => $user['fname'] . ' ' . $user['lname'],
+                    "phone" => $user['phone'],
+                    'email' => $user['email']]);
+            } else {
+                $booking->contact_details = json_encode(["name" => $data['contact_details']['name'],
+                    "phone" => $data['contact_details']['phone'],
+                    'email' => $data['contact_details']['email']]);
+            }
+
+
+            $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['web'];
+
+            $booking->meta = json_encode([
+                "self_booking" => $data['meta']['self_booking'],
+                "subcategory" => null,
+                "customer" => null,
+                "images" => [],
+                "timings" => null,
+                "distance" => null
+            ]);
+            $booking->status = BookingEnums::$STATUS['in_progress'];
+            $result = $booking->save();
+
+            $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_progress']);
+            $id = $booking->id;
         }
+        else{
+            $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
+            if ($data['meta']['self_booking'] === true) {
+                $user = User::findOrfail($user_id);
+               $name = $user['fname'] . ' ' . $user['lname'];
+                    $phone = $user['phone'];
+                    $email = $user['email'];
+            } else {
+               $name = $data['contact_details']['name'];
+                    $phone = $data['contact_details']['phone'];
+                    $email = $data['contact_details']['email'];
+            }
+            $meta = json_decode($booking_exist->meta, true);
+            $meta['self_booking']= $data['meta']['self_booking'];
 
+            $result = Booking::where("public_booking_id", $data['public_booking_id'])
+                ->update([
+                    "contact_details" => json_encode(["name" => $name,
+                                                    "phone" => $phone,
+                                                    "email" => $email]),
+                    "meta"=>json_encode($meta)
+                ]);
 
-        $booking->created_through_channel = BookingEnums::$CREATED_THROUGH_CHANNEL['web'];
-
-        $booking->meta = json_encode([
-            "self_booking" => $data['meta']['self_booking'],
-            "subcategory" => null,
-            "customer" => null,
-            "images" => [],
-            "timings" => null,
-            "distance" => null
-        ]);
-        $booking->status = BookingEnums::$STATUS['in_progress'];
-        $result = $booking->save();
-
-        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_progress']);
+            $id = $data['id'];
+        }
 
         if (!$result && !$result_status) {
             DB::rollBack();
@@ -1647,7 +1675,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($id)]);
     }
 
     public static function trackDeliveryDataForWeb($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
@@ -1717,7 +1745,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('status_history')->findOrFail($booking_exist->id)]);
+        return Helper::response(true, "adding details in booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking_exist->id)]);
     }
 
     public static function trackInventoryDataForWeb($data, $user_id, $web=false, $created_by_support=false)
@@ -1824,7 +1852,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
+        return Helper::response(true, "adding details in booking tracking form successfully.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
 
     public static function trackImgDataForWeb($data, $user_id, $web=false, $created_by_support=false)
@@ -1844,7 +1872,6 @@ class BookingsController extends Controller
         foreach ($data['meta']['images'] as $key => $image) {
             $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
         }
-
 
         $distance = json_decode($booking_exist->meta, true)['distance'];
         $self_booking = json_decode($booking_exist->meta, true)['self_booking'];

@@ -172,6 +172,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                                 redirectTo(url);
                                 return false;
                             }
+
                             if (form.hasClass("order_create_web")) {
                                 var url = form.data('url');
                                 url = url.replace(':id', response.data.booking.public_enquiry_id);
@@ -187,6 +188,11 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                         }else if (form.data("next") == "modal") {
                             $(form.data(".modal-id")).modal();
                         }
+                    }
+                    if (form.hasClass("order_track_web")) {
+                        var enq_id = response.data.booking.public_booking_id;
+                        $('.enq-id').val(enq_id);
+                        return false;
                     }
                 }
 

@@ -497,6 +497,11 @@ Route::prefix('website/api')->group(function () {
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
+    Route::post("/track/customer",[WebsiteRouter::class, 'trackCustomerData'])->name("customer-bookmove");
+    Route::post("/track/delivery",[WebsiteRouter::class, 'trackDeliveryData'])->name("delivery-bookmove");
+    Route::post("/track/inventory",[WebsiteRouter::class, 'trackInventoryData'])->name("inventory-bookmove");
+    Route::post("/track/img",[WebsiteRouter::class, 'trackImgData'])->name("img-bookmove");
+
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
     Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");
     Route::get('/inventories/serach',[WebsiteRouter::class,'serachItem'])->name("search_item");

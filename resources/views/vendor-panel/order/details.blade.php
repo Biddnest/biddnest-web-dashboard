@@ -346,7 +346,7 @@
                                                 @foreach($booking->movement_dates as $mdate)
 {{--                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>--}}
                                                     <label class="mr-2 move-add-date">
-                                                        <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                                        <input type="checkbox" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" required data-parsley-errors-container="#service-error" style="display: none"/>
                                                         <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                     </label>
                                                 @endforeach

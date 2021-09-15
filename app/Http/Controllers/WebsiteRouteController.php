@@ -452,4 +452,97 @@ class WebsiteRouteController extends Controller
         return BookingsController::createEnquiry($req, Session::get('account')['id'], explode(",", $request->movement_dates), true);
     }
 
+    public function trackCustomerData(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"nullable",
+            'contact_details' => "nullable",
+            'contact_details.name'  => 'nullable|string',
+            'contact_details.phone'  => 'nullable|min:10|max:10',
+            'contact_details.email'  => 'nullable|string',
+
+            'meta.self_booking' => 'required|boolean',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        $req=$request->all();
+
+        return BookingsController::trackCustomerDataForWeb($req, Session::get('account')['id'], true);
+    }
+
+    public function trackDeliveryData(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"required",
+            'service_id' => 'required|integer',
+
+            'source.lat' => 'required|numeric',
+            'source.lng' => 'required|numeric',
+
+            'source.meta.geocode' => 'nullable|string',
+            'source.meta.floor' => 'required',
+            'source.meta.address_line1' => 'required|string',
+            'source.meta.address_line2' => 'required|string',
+            'source.meta.city' => 'required|string',
+            'source.meta.state' => 'required|string',
+            'source.meta.pincode' => 'required|min:6|max:6',
+            'source.meta.lift' => 'required|boolean',
+
+            'destination.lat' => 'required|numeric',
+            'destination.lng' => 'required|numeric',
+
+            'destination.meta.geocode' => 'nullable|string',
+            'destination.meta.floor' => 'required',
+            'destination.meta.address_line1' => 'required|string',
+            'destination.meta.address_line2' => 'required|string',
+            'destination.meta.city' => 'required|string',
+            'destination.meta.state' => 'required|string',
+            'destination.meta.pincode' => 'required|min:6|max:6',
+            'destination.meta.lift' => 'required|boolean',
+
+            'movement_dates.*' =>'required|date',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        $req=$request->all();
+        $req['meta']['images']=!isset($req['meta']['images']) ? [''] : $req['meta']['images'];
+
+        return BookingsController::trackDeliveryDataForWeb($req, Session::get('account')['id'], explode(",", $request->movement_dates), true);
+    }
+
+    public function trackInventoryData(Request $request){
+        $validation = Validator::make($request->all(),[
+            'public_booking_id'=>"required",
+
+            'meta.subcategory' => 'nullable|string',
+
+            'inventory_items.*.inventory_id' =>'nullable|integer',
+            'inventory_items.*.name' =>'nullable|string',
+            'inventory_items.*.material' =>'required|string',
+            'inventory_items.*.size' =>'required|string',
+            'inventory_items.*.quantity' =>'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        $req=$request->all();
+        $req['meta']['images']=!isset($req['meta']['images']) ? [''] : $req['meta']['images'];
+
+        return BookingsController::trackInventoryDataForWeb($req, Session::get('account')['id'], true);
+    }
+
+    public function trackImgData(Request $request){
+        $validation = Validator::make($request->all(),[
+            'meta.images.*' => 'nullable',
+            'meta.customer.remarks' => 'nullable',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        $req=$request->all();
+        $req['meta']['images']=!isset($req['meta']['images']) ? [''] : $req['meta']['images'];
+
+        return BookingsController::trackImgDataForWeb($req, Session::get('account')['id'], true);
+    }
 }

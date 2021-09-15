@@ -1869,9 +1869,13 @@ class BookingsController extends Controller
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
 
-        foreach ($data['meta']['images'] as $key => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
+
+        if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+            foreach ($data['meta']['images'] as $key => $image) {
+                    $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+            }
         }
+
 
         $distance = json_decode($booking_exist->meta, true)['distance'];
         $self_booking = json_decode($booking_exist->meta, true)['self_booking'];

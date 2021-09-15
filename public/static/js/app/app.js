@@ -1016,9 +1016,13 @@ $("body").on('keyup', ".calc-total", function(event) {
 });
 
 $("body").on('click', ".move-date", function(event) {
-    $(this).closest(".select-date").find("input[type=radio]").removeAttr("checked");
-    $(this).closest(".move-add-date").find(".moving-date").attr("checked", "checked");
-    $(".move-date").removeClass("radio-color");
+    var id = $(this).data("id");
+    // $(this).closest(".select-date").find("input[type=checkbox]").removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-date_"+id).removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-date_"+id).attr("checked", "checked");
+
+    // $(".move-date").removeClass("radio-color");
+    $(".mdate_"+id).removeClass("radio-color");
     $(this).toggleClass("radio-color");
 });
 

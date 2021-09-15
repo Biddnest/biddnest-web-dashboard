@@ -1092,4 +1092,8 @@
                 padding: 60px 20px;
                 min-height: 200px;
             }
+
+            .custom-check{
+                display: none;
+            }
         </style>

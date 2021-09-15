@@ -297,13 +297,15 @@
                                             <div class="form-input">
                                                 <label class="full-name">Moving Date</label>
                                                 <div class="select-date">
+                                                    @php $count=1; @endphp
                                                     @foreach($booking->movement_dates as $mdate)
                                                         <label class="mr-2 move-add-date">
-                                                            <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" data-parsley-errors-container="#err-date"
+                                                            <input type="checkbox" name="moving_date[]" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date_{{$count}}" data-parsley-errors-container="#err-date"
                                                                    required
                                                                    data-parsley-error-message="Mandatory Field. Please enter the value" style="display: none"/>
-                                                            <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                            <span class="status-3 move-date mdate_{{$count}} cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                         </label>
+                                                        @php $count++; @endphp
                                                     @endforeach
                                                 </div>
                                                 {{--<input type="text" class="form-control br-5" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}

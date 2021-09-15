@@ -242,4 +242,7 @@
         outline: none !important;
         border: none !important;
     }
+    .custom-check{
+        display: none;
+    }
 </style>

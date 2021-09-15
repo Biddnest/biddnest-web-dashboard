@@ -191,6 +191,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     }
                     if (form.hasClass("order_track_web")) {
                         var enq_id = response.data.booking.public_booking_id;
+                        console.log(enq_id);
                         $('.enq-id').val(enq_id);
                         return false;
                     }

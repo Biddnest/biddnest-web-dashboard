@@ -295,6 +295,32 @@
         max-width: 70%!important;
         }
 
+    .icon-estimate {
+        height: 20px;
+        width: 20px;
+        border-radius: 30px;
+        color: #f6f6fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d6d6ef;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .status-est {
+        font-size: 14px;
+        font-weight: 300;
+        background-color: #fff;
+        min-width: 40px;
+        /* display: inline-block; */
+        /* text-align: center; */
+        color: #2E0789;
+        /* font-weight: 700; */
+        font-family: "Gilroy";
+        letter-spacing: 1px;
+    }
+
     @media (max-width:480px) {
         .item-modal-width {
             max-width: 100% !important;

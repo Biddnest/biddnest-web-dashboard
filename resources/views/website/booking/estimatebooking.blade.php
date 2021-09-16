@@ -109,12 +109,12 @@
                                             <h5 class="border-bottom theme-text pb-4 text-view-center">Price Estimation</h5>
                                         </div>
                                         <form class="form-new-order  input-text-blue" action="{{route('order_estimate')}}" method="PUT" data-next="redirect" data-redirect-type="hard" data-url="{{route('place-booking', ['id'=>$booking->public_enquiry_id])}}" data-alert="mega"  data-parsley-validate>
-                                            <div class="p-0  border-top-2 order-cards">
+                                            <div class="p-0  border-top-2 order-cards select-date">
                                                 <div class="d-flex justify-content-center f-14  text-center  mt-2 mb-1">
                                                     Please note that this is the baseline price, you will be receiving the <br>Vendor bid list with the final quotations
                                                 </div>
                                                 <input type="hidden" name="public_booking_id" value="{{$booking->public_booking_id}}">
-                                                <div class="d-flex flex-row flex-view-col justify-content-around f-14 theme-text text-center  quotation mb-3">
+                                               {{-- <div class="d-flex flex-row flex-view-col justify-content-around f-14 theme-text text-center  quotation mb-3">
                                                     <div class="flex-column justify-content-center test">
                                                         <div class="card m-20  card-price eco cursor-pointer">
                                                             <div class="p-60 f-22 border-cicle eco-card">
@@ -153,11 +153,64 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>--}}
+                                                <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer ">
+                                                    <div class="row col-sm-10 move-add-date" style="height: 90px; border: 1px solid;border-radius: 5px; padding-right: 0;">
+                                                        <input type="radio" id="economy" value="economic" name="service_type" class="card-input-element moving-dates" required>
+                                                        <div class="col-3" style="padding: 0 !important;">
+                                                            <img src="{{ asset('static/website/images/images/Group 14563.svg')}}" style="height: 80%; padding: 5%;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">ECONOMY<i class="icon-estimate fa fa-info" aria-hidden="true"></i></label>
+                                                            <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['economic']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span></div>
+                                                            <div class="text-muted"><i>Economy services includes moving only</i></div>
+                                                        </div>
+                                                        <div class="col-1 status3 move-dates cursor-pointer" style="padding-top: 20px;height: 88px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 50px;"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
+                                                    <div class="row col-sm-10 move-add-date" style="height: 110px; border: 1px solid;border-radius: 5px; padding-right: 0;">
+                                                        <input type="radio" id="premium" value="premium" name="service_type" class="card-input-element moving-dates" required>
+                                                        <div class="col-3" style="padding: 0 !important;">
+                                                            <img src="{{ asset('static/website/images/images/Group 14564.svg')}}" style="height: 80%; padding: 5%; margin-top: 8px;">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">PREMIUM<i class="icon-estimate fa fa-info" aria-hidden="true"></i></label>
+                                                            <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['premium']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span></div>
+                                                            <div class="text-muted"><i>Premium services includes packing and moving only</i></div>
+                                                        </div>
+                                                        <div class="col-1 status3 move-dates cursor-pointer" style="padding-top: 20px;height: 108px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 50px;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer" data-toggle="modal" data-target="#reject-modal">
+                                                    <div class="row col-sm-10" style="height: 90px; border: 1px solid;border-radius: 5px;">
+                                                        <div class="col-11">
+                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: 1.5rem">NOT SATISFIED WITH THIS PRICES? </label>
+                                                             <div class="text-muted"><i>Talk to our agent</i></div>
+                                                        </div>
+                                                        <div class="col-1" style="padding-top: 20px;">
+                                                            <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 50px;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
 
-                                            <div style="text-align: center; padding-bottom: 20px;">
-                                                <a href="#" data-toggle="modal" data-target="#reject-modal">
+                                            <div class="actionBtn-view border-top move-btn">
+                                                <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded ml-4" style="float: right;">
+                                                    PLACE ORDER
+                                                </button>
+                                            </div>
+
+                                            {{--<div style="text-align: center; padding-bottom: 20px;">
+                                               <a href="#" data-toggle="modal" data-target="#reject-modal">
                                                     <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn mr-4 " type="button ">
                                                         Reject
                                                     </button>
@@ -165,7 +218,7 @@
                                                 <button class="btn btn-mdb-color mt-2 nextBtn-3 btn-rounded ml-4">
                                                     Submit
                                                 </button>
-                                            </div>
+                                            </div>--}}
 
                                             <!-- <div class=" actionBtn actionBtn-view border-top ">
                                                 <a href="{{route('home')}}">

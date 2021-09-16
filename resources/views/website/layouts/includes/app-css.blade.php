@@ -313,6 +313,7 @@
         border: 1px solid;
         border-radius: 5px;
         padding-right: 0;
+        padding-left: 0;
     }
     .est-select{
         padding-top: 20px;

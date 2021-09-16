@@ -1029,7 +1029,12 @@ $("body").on('click', ".move-date", function(event) {
 
 $("body").on('click', ".move-dates", function(event) {
     $(this).closest(".select-date").find("input[type=radio]").removeAttr("checked");
+    $(this).closest(".select-date").find(".blue-img").show();
+    $(this).closest(".select-date").find(".white-img").hide();
     $(this).closest(".move-add-date").find(".moving-dates").attr("checked", "checked");
+    $(this).closest(".move-add-date").find(".blue-img").hide();
+    $(this).closest(".move-add-date").find(".white-img").removeClass("hidden");
+    $(this).closest(".move-add-date").find(".white-img").show();
 
     $(".move-dates").removeClass("radio-color");
     $(this).toggleClass("radio-color");

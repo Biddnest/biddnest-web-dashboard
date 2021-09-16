@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('title') Orders And Bookings @endsection
 @section('content')
+    <style>
+        #moving_date .custom-check{
+            display: none !important;
+        }
+    </style>
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails" style="position: relative">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4">Order Details</h3>

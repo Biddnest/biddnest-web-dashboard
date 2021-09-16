@@ -568,7 +568,8 @@ class BookingsController extends Controller
                 "discount" => $discount_amount,
                 "tax" => $tax,
                 "tax_percentage" => $tax_percentage,
-                "grand_total" => $grand_total
+                "grand_total" => $grand_total,
+                "dates"=>$dates
             ];
             return $summary;
         }

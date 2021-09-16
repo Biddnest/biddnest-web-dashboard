@@ -37,6 +37,19 @@
                 {{-- <form action="{{route('verifiedcoupon')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('verifiedpayment', ['id'=>$public_booking_id])}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>--}}
                 <div class="row d-flex justify-content-between mt-2">
                     <div class="col-md-2 col-sm-12 col-xs-12 mt-1 pt-1">
+                        <p class=" mb-view pl-0 f-14">Confirm moving date</p>
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-8 select-date" style="display:flex !important;">
+                        @foreach(json_decode($payment_summary['dates']) as $dates)
+                           <label class="mr-2 move-add-date" style="margin-right: 0 !important; width: 20% !important;">
+                                <input type="radio" name="moving_date" id="moving_date" value="{{date("d M Y", strtotime($dates))}}" class="card-input-element moving-dates" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                <span class="status-3 move-dates cursor-pointer">{{date("d M Y", strtotime($dates))}}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-between mt-2">
+                    <div class="col-md-2 col-sm-12 col-xs-12 mt-1 pt-1">
                         <p class=" mb-view pl-0 f-14">Apply Coupon Code</p>
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8">
@@ -92,7 +105,7 @@
                     </div>
                 </div>
                 <div style="float: right;" class=" mr-2 mt-2 btn-proceed">
-                    <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}" data-payment="{{route('initiate-payment')}}" data-status="{{route('complete-status')}}" data-user-name="{{ucwords($user->fname)}} {{ucwords($user->lname)}}" data-user-email="{{$user->email}}" data-user-contact="{{$user->phone}}" , data-moving-date="{{$moving_date}}">
+                    <a class="payment" data-url="{{route('my-bookings')}}" data-amount="{{$payment_summary['grand_total']}}" data-booking="{{$public_booking_id}}" data-payment="{{route('initiate-payment')}}" data-status="{{route('complete-status')}}" data-user-name="{{ucwords($user->fname)}} {{ucwords($user->lname)}}" data-user-email="{{$user->email}}" data-user-contact="{{$user->phone}}">
                         <button type="submit" class="btn btn-theme-bg btn-proceed white-bg">Proceed</button>
                     </a>
                 </div>

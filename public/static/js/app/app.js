@@ -1026,6 +1026,15 @@ $("body").on('click', ".move-date", function(event) {
     $(this).toggleClass("radio-color");
 });
 
+
+$("body").on('click', ".move-dates", function(event) {
+    $(this).closest(".select-date").find("input[type=radio]").removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-dates").attr("checked", "checked");
+
+    $(".move-dates").removeClass("radio-color");
+    $(this).toggleClass("radio-color");
+});
+
 $('.filterdate').datepicker({
     // multidateSeparator:",",
     format: 'yyyy-mm-dd',
@@ -1324,8 +1333,8 @@ $("body").on('click', ".payment", function(event) {
         var name = $(this).data("user-name");
         var email = $(this).data("user-email");
         var contact = $(this).data("user-contact");
-        var moving_date = $(this).data("moving-date");
-
+        var moving_date = $('#moving_date').val();
+        console.log(moving_date);
 
 
     $.ajax({
@@ -1333,7 +1342,7 @@ $("body").on('click', ".payment", function(event) {
         type: 'post',
         dataType: 'json',
         data: {
-            id:booking_id ,code : coupon_code,
+            id:booking_id ,code : coupon_code ,moving_date : moving_date
         },
         success: function (response) {
             // options.order_id=response.data.payment.rzp_order_id;

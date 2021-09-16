@@ -112,7 +112,10 @@
 
     }
 
-
+    .radio-color{
+        background-color:#2E0789 !important;
+        color:#ffffff !important;
+    }
 
     label {
         width: 100%;
@@ -156,7 +159,22 @@
     }
 
 
-
+    .status-3 {
+        font-size: 14px;
+        font-weight: 300;
+        background-color: #fff;
+        min-width: 110px;
+        display: inline-block;
+        text-align: center;
+        color: #2E0789;
+        font-weight: 700;
+        font-family: "Gilroy";
+        letter-spacing: 1px;
+        border: 1px solid #2E0789;
+        border-radius: 5px !important;
+        margin-bottom: 10px;
+        margin-top: -5px;
+    }
 
 
 

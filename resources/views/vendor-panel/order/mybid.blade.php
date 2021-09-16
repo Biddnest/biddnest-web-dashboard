@@ -171,7 +171,13 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">MOVING DATE</div>
-                                                    <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                    @if(json_decode($bidding->meta, true)['moving_date'])
+                                                        <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                    @else
+                                                        @foreach($bidding->moving_dates as $mdate)
+                                                        <span class="status-3">{{date("d M Y", strtotime($mdate))}}</span>
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">CATEGORY</div>

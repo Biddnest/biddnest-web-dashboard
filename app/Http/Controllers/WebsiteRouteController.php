@@ -216,13 +216,14 @@ class WebsiteRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'id' => 'required|string',
-            'code' =>'string|nullable'
+            'code' =>'string|nullable',
+            'moving_date' =>'date'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return PaymentController::intiatePayment($request->id, $request->code);
+        return PaymentController::intiatePayment($request->id, $request->moving_date, $request->code);
     }
 
     public function statusComplete(Request $request)

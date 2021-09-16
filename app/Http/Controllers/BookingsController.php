@@ -435,7 +435,7 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelrequest']])
+            ->whereIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancel_request']])
             ->where("deleted", CommonEnums::$NO)
             ->orderBy('id', 'DESC')
             ->with('movement_dates')
@@ -463,7 +463,7 @@ class BookingsController extends Controller
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['in_progress']])
+            ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']])
             ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
@@ -626,7 +626,7 @@ class BookingsController extends Controller
         }
 
         $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
-            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancelrequest'], BookingEnums::$STATUS['in_progress']]);
+            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']]);
 
         if($web)
         {
@@ -933,7 +933,7 @@ class BookingsController extends Controller
     public static function getRecentBooking($user_id)
     {
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO, "user_id" => $user_id])
-            ->whereNotIn("status", [BookingEnums::$STATUS["bounced"], BookingEnums::$STATUS["hold"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS["cancelrequest"], BookingEnums::$STATUS['completed']])->with('driver')->orderBy('id', 'DESC')->first();
+            ->whereNotIn("status", [BookingEnums::$STATUS["bounced"], BookingEnums::$STATUS["hold"], BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS["cancel_request"], BookingEnums::$STATUS['completed']])->with('driver')->orderBy('id', 'DESC')->first();
 
         if (!$bookingorder)
             return Helper::response(false, "No Booking Found");

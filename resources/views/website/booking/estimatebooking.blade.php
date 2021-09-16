@@ -154,8 +154,9 @@
                                                         </div>
                                                     </div>
                                                 </div>--}}
-                                                <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer ">
-                                                    <div class="row col-sm-10 move-add-date" style="height: 90px; border: 1px solid;border-radius: 5px; padding-right: 0;">
+
+                                                <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
+                                                    <div class="row col-sm-10 move-add-date est-box move-dates">
                                                         <input type="radio" id="economy" value="economic" name="service_type" class="card-input-element moving-dates" required>
                                                         <div class="col-3" style="padding: 0 !important;">
                                                             <img src="{{ asset('static/website/images/images/Group 14563.svg')}}" style="height: 80%; padding: 5%;">
@@ -165,14 +166,14 @@
                                                             <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['economic']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span></div>
                                                             <div class="text-muted"><i>Economy services includes moving only</i></div>
                                                         </div>
-                                                        <div class="col-1 status3 move-dates cursor-pointer" style="padding-top: 20px;height: 88px;">
+                                                        <div class="col-1 status3  cursor-pointer est-select">
                                                             <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 50px;"></i>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
-                                                    <div class="row col-sm-10 move-add-date" style="height: 90px; border: 1px solid;border-radius: 5px; padding-right: 0;">
+                                                    <div class="row col-sm-10 move-add-date est-box move-dates">
                                                         <input type="radio" id="premium" value="premium" name="service_type" class="card-input-element moving-dates" required>
                                                         <div class="col-3" style="padding: 0 !important;">
                                                             <img src="{{ asset('static/website/images/images/Group 14564.svg')}}" style="height: 80%; padding: 5%;">
@@ -182,14 +183,14 @@
                                                             <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['premium']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span></div>
                                                             <div class="text-muted"><i>Premium services includes packing and moving only</i></div>
                                                         </div>
-                                                        <div class="col-1 status3 move-dates cursor-pointer" style="padding-top: 20px;height: 108px;">
+                                                        <div class="col-1 status3 cursor-pointer est-select">
                                                             <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 50px;"></i>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer" data-toggle="modal" data-target="#reject-modal">
-                                                    <div class="row col-sm-10" style="height: 90px; border: 1px solid;border-radius: 5px;padding-right: 0;">
+                                                    <div class="row col-sm-10 est-box" >
                                                         <div class="col-11">
                                                             <label class="d-flex" style="margin-bottom: 0; margin-top: 1.5rem">NOT SATISFIED WITH THIS PRICES? </label>
                                                              <div class="text-muted"><i>Talk to our agent</i></div>

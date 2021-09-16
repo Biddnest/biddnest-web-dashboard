@@ -308,17 +308,15 @@
         margin-left: 10px;
     }
 
-    .status-est {
-        font-size: 14px;
-        font-weight: 300;
-        background-color: #fff;
-        min-width: 40px;
-        /* display: inline-block; */
-        /* text-align: center; */
-        color: #2E0789;
-        /* font-weight: 700; */
-        font-family: "Gilroy";
-        letter-spacing: 1px;
+    .est-box {
+        height: 90px;
+        border: 1px solid;
+        border-radius: 5px;
+        padding-right: 0;
+    }
+    .est-select{
+        padding-top: 20px;
+        height: 88px;
     }
 
     @media (max-width:480px) {

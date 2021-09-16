@@ -29,18 +29,21 @@
                     <hr class="dash-line">
                     <div class="steps-container">
                         @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
-                            <div class="steps-status " style="width: 10%; text-align: center;">
-                                <div class="step-dot">
-                                    {{--                                @foreach($booking->status_ids as $status_history)--}}
-                                    @if(in_array($status, $booking->status_ids))
+                            @if(in_array($status, $booking->status_ids) && $key != "in_progress" )
+                                <div class="steps-status " style="width: 10%; text-align: center;">
+                                    <div class="step-dot">
                                         <img src="{{ asset('static/images/tick.png')}}" />
-                                    @else
-                                        <div class="child-dot"></div>
-                                    @endif
-                                    {{--                                @endforeach--}}
+                                    </div>
+                                    <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
                                 </div>
-                                <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
-                            </div>
+                            @elseif($key != "in_progress" && $key != "rebiding" && $key != "cancelled" && $key != "bounced" && $key != "hold" && $key != "cancel_request" )
+                                <div class="steps-status " style="width: 10%; text-align: center;">
+                                    <div class="step-dot">
+                                        <div class="child-dot"></div>
+                                    </div>
+                                    <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

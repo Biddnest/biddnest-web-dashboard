@@ -204,7 +204,7 @@ class WebController extends Controller
         $past_count =  Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $hold_count= Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $bounced_count = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
-        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancelrequest"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
+        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
 
         return view('order.ordersbookings_live',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH), "booking_count"=>$booking_count, "confirm_count"=>$confirm_count, "past_count"=>$past_count, "hold_count"=>$hold_count, "bounced_count"=>$bounced_count, "cancelled_count"=>$cancelled_count
@@ -239,7 +239,7 @@ class WebController extends Controller
         $past_count =  Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $hold_count= Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $bounced_count = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
-        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancelrequest"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
+        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
 
         return view('order.ordersbooking_enquiry',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH), "booking_count"=>$booking_count, "confirm_count"=>$confirm_count, "past_count"=>$past_count, "hold_count"=>$hold_count, "bounced_count"=>$bounced_count, "cancelled_count"=>$cancelled_count
@@ -273,7 +273,7 @@ class WebController extends Controller
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone)->count();
         $hold_count= Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $bounced_count = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
-        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancelrequest"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
+        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
 
         return view('order.ordersbookings_past',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH), "booking_count"=>$booking_count, "confirm_count"=>$confirm_count, "past_count"=>$past_count, "hold_count"=>$hold_count, "bounced_count"=>$bounced_count, "cancelled_count"=>$cancelled_count
@@ -307,7 +307,7 @@ class WebController extends Controller
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone)->count();
         $past_count =  Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $bounced_count = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
-        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancelrequest"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
+        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
 
         return view('order.ordersbookings_hold',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH), "booking_count"=>$booking_count, "confirm_count"=>$confirm_count, "past_count"=>$past_count, "hold_count"=>$hold_count, "bounced_count"=>$bounced_count, "cancelled_count"=>$cancelled_count
@@ -341,7 +341,7 @@ class WebController extends Controller
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone)->count();
         $past_count =  Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $hold_count= Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
-        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancelrequest"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
+        $cancelled_count = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"]])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
 
         return view('order.ordersbookings_bounced',[
             "bookings" => $bookings->paginate(CommonEnums::$PAGE_LENGTH), "booking_count"=>$booking_count, "confirm_count"=>$confirm_count, "past_count"=>$past_count, "hold_count"=>$hold_count, "bounced_count"=>$bounced_count, "cancelled_count"=>$cancelled_count
@@ -355,7 +355,7 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
-        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelrequest"]])
+        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"]])
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
         $cancelled_count=$bookings->count();

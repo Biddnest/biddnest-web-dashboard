@@ -172,10 +172,10 @@
                                                 </div>
 
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
-                                                    <div class="row col-sm-10 move-add-date" style="height: 110px; border: 1px solid;border-radius: 5px; padding-right: 0;">
+                                                    <div class="row col-sm-10 move-add-date" style="height: 90px; border: 1px solid;border-radius: 5px; padding-right: 0;">
                                                         <input type="radio" id="premium" value="premium" name="service_type" class="card-input-element moving-dates" required>
                                                         <div class="col-3" style="padding: 0 !important;">
-                                                            <img src="{{ asset('static/website/images/images/Group 14564.svg')}}" style="height: 80%; padding: 5%; margin-top: 8px;">
+                                                            <img src="{{ asset('static/website/images/images/Group 14564.svg')}}" style="height: 80%; padding: 5%;">
                                                         </div>
                                                         <div class="col-8">
                                                             <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">PREMIUM<i class="icon-estimate fa fa-info" aria-hidden="true"></i></label>
@@ -189,7 +189,7 @@
                                                 </div>
 
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer" data-toggle="modal" data-target="#reject-modal">
-                                                    <div class="row col-sm-10" style="height: 90px; border: 1px solid;border-radius: 5px;">
+                                                    <div class="row col-sm-10" style="height: 90px; border: 1px solid;border-radius: 5px;padding-right: 0;">
                                                         <div class="col-11">
                                                             <label class="d-flex" style="margin-bottom: 0; margin-top: 1.5rem">NOT SATISFIED WITH THIS PRICES? </label>
                                                              <div class="text-muted"><i>Talk to our agent</i></div>

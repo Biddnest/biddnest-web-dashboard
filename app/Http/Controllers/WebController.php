@@ -1378,5 +1378,14 @@ class WebController extends Controller
         ]);
     }
 
+    public function editOrder(Request $request){
+        $booking = Booking::where("public_booking_id", $request->id)->get();
+        $category = Service::where(['status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO])
+            ->with(['subservices' => function ($query) {
+                $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO]);
+            }])->get();
 
+        $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('order.editorder', ['categories'=>$category, 'inventories'=>$inventory]);
+    }
 }

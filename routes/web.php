@@ -270,6 +270,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
+            Route::get('/edit/{id}',[WebController::class,'editOrder'])->name("edit-order");
             Route::get('/{id}/confirm',[WebController::class,'confirmOrder'])->name("confirm-order");
             Route::get('/{id}/reject',[WebController::class,'rejectOrder'])->name("reject-order");
         });

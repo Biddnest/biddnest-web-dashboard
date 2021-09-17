@@ -46,7 +46,7 @@
                 <div class="tab-content  margin-topneg-15" id="myTabContent">
                   <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                     <!-- form starts -->
-                      <form class="form-new-order order_create input-text-blue" action="{{route('edit_booking')}}" method="POST" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate autocomplete="off" onsubmit="return false">
+                      <form class="form-new-order order_create input-text-blue" action="{{route('edit_booking')}}" method="PUT" data-next="redirect" data-url="{{route('confirm-order', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate autocomplete="off" onsubmit="return false">
                       <div class="d-flex flex-row p-10  secondg-bg heading">
                         <div> Customer Details</div>
                       </div>
@@ -74,7 +74,7 @@
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
-{{--                            <input type="hidden" value="{{json_decode($booking->meta, true)['self_booking']}}" name="meta[self_booking]:boolean">--}}
+                            <input type="hidden" value="{{json_decode($booking->meta, true)['self_booking']}}" name="meta[self_booking]:boolean">
                             <div class="col-sm-6" hidden>
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>

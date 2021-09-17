@@ -1923,9 +1923,9 @@ class BookingsController extends Controller
         {
             DB::beginTransaction();
 
-            $booking =  Booking::where("public_booking_id", $data->public_booking_id)->first();
+            $booking =  Booking::where("public_booking_id", $data['public_booking_id'])->first();
 
-            if($booking)
+            if(!$booking)
                 return Helper::response(false, "Booking is not exist.");
 
             $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
@@ -1935,21 +1935,9 @@ class BookingsController extends Controller
                 DB::rollBack();
                 return Helper::response(false, "Unkown Service Type, Couldn't Proceed");
             }
-
-            $images = [];
-            $imageman = new ImageManager(array('driver' => 'gd'));
-            if($web || $created_by_support) {
-                if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
-                    foreach ($data['meta']['images'] as $key => $image) {
-                        $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
-                    }
-                }
-            }
-            else{
-                foreach ($data['meta']['images'] as $key => $image) {
-                    $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
-                }
-            }
+            $images=[];
+            if(json_decode($booking->meta, true)['images'])
+                $images = json_decode($booking->meta, true)['images'];
 
             $cost_structure = [];
             foreach (Settings::get() as $setting) {
@@ -2001,7 +1989,7 @@ class BookingsController extends Controller
 
             $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
 
-            $result = Booking::where("public_booking_id", $data->public_booking_id)
+            $result = Booking::where("public_booking_id", $data['public_booking_id'])
                 ->update([
                     "service_id"=>$data['service_id'],
                     "source_lat"=>$data['source']['lat'],

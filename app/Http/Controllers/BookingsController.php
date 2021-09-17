@@ -191,7 +191,7 @@ class BookingsController extends Controller
         $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
-            "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
+            "customer" => ["remarks" => $data['meta']['customer']['remarks']],
             "images" => $images,
             "timings" => null,
             "distance" => $distance]);
@@ -1256,7 +1256,7 @@ class BookingsController extends Controller
 
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
             "subcategory" => $data['meta']['subcategory'],
-            "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
+            "customer" => ["remarks" => $data['meta']['customer']['remarks']],
             "images" => $images,
             "timings" => null,
             "distance" => $distance]);
@@ -1561,7 +1561,7 @@ class BookingsController extends Controller
                "quote_estimate"=>$estimate_quote,
                 "meta"=>json_encode(["self_booking" => $self_booking,
                     "subcategory" => $data['meta']['subcategory'],
-                    "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
+                    "customer" => ["remarks" => $data['meta']['customer']['remarks']],
                     "images" => $images,
                     "timings" => null,
                     "distance" => $distance]),
@@ -1886,7 +1886,7 @@ class BookingsController extends Controller
             ->update([
                 "meta"=>json_encode(["self_booking" => $self_booking,
                     "subcategory" => $sub_cat,
-                    "customer" => json_encode(["remarks" => $data['meta']['customer']['remarks']]),
+                    "customer" => ["remarks" => $data['meta']['customer']['remarks']],
                     "images" => $images,
                     "timings" => null,
                     "distance" => $distance]),
@@ -1904,4 +1904,183 @@ class BookingsController extends Controller
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
 
-}
+
+    public static function editEnquiryForAdmin(Request $request)
+    {
+        $user = User::where("phone", $request->phone)
+            ->orWhere("email", $request->email)
+            ->first();
+
+        $user_id = $user->id;
+
+        $movement_dates = explode(",",$request->movement_dates);
+
+        return self::editEnquiry($request->all(), $user_id, $movement_dates);
+
+    }
+
+    public static function editEnquiry($data, $user_id, $movement_dates, $web=false, $created_by_support=false)
+        {
+            DB::beginTransaction();
+
+            $booking =  Booking::where("public_booking_id", $data->public_booking_id)->first();
+
+            if($booking)
+                return Helper::response(false, "Booking is not exist.");
+
+            $zone_id =GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
+
+            $inventory_quantity_type = Service::where("id", $data['service_id'])->pluck('inventory_quantity_type')[0];
+            if ($inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["fixed"] && $inventory_quantity_type != ServiceEnums::$INVENTORY_QUANTITY_TYPE["range"]) {
+                DB::rollBack();
+                return Helper::response(false, "Unkown Service Type, Couldn't Proceed");
+            }
+
+            $images = [];
+            $imageman = new ImageManager(array('driver' => 'gd'));
+            if($web || $created_by_support) {
+                if ($data['meta']['images'][0] != "") { //need to remove [0]==> temp fixed
+                    foreach ($data['meta']['images'] as $key => $image) {
+                        $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+                    }
+                }
+            }
+            else{
+                foreach ($data['meta']['images'] as $key => $image) {
+                    $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $booking_id);
+                }
+            }
+
+            $cost_structure = [];
+            foreach (Settings::get() as $setting) {
+                switch ($setting['key']) {
+                    case "tax":
+                        $cost_structure['tax'] = $setting['value'];
+                        break;
+
+                    case "surge_charge":
+                        $cost_structure['surge_charge'] = $setting['value'];
+                        break;
+
+                    case "buffer_amount":
+                        $cost_structure['buffer_amount'] = $setting['value'];
+                        break;
+                }
+            }
+
+            try {
+                $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
+                $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+                $economic_price += $economic_price * ($cost_structure["tax"] / 100);
+
+                /*Rounding to 2 decimals*/
+                $economic_price = number_format($economic_price,2,".","");
+
+                $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support);
+                $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+
+                /*Rounding to 2 decimals*/
+                $primium_price = number_format($primium_price,2, ".","");
+            } catch (Exception $e) {
+                DB::rollBack();
+                return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
+            }
+
+            $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
+
+            if ($data['meta']['self_booking'] === true) {
+                $user = User::findOrfail($user_id);
+                $name = $user['fname'] . ' ' . $user['lname'];
+                    $phone = $user['phone'];
+                    $email = $user['email'];
+            } else {
+                $name = $data['contact_details']['name'];
+                $phone = $data['contact_details']['phone'];
+                $email = $data['contact_details']['email'];
+            }
+
+            $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+
+            $result = Booking::where("public_booking_id", $data->public_booking_id)
+                ->update([
+                    "service_id"=>$data['service_id'],
+                    "source_lat"=>$data['source']['lat'],
+                    "source_lng"=>$data['source']['lng'],
+                    "source_meta"=>json_encode(["geocode" => $data['source']['meta']['geocode'],
+                        "floor" => $data['source']['meta']['floor'],
+                        "address" => $data['source']['meta']['address_line1']." ".$data['source']['meta']['address_line2'],
+                        "address_line1" => $data['source']['meta']['address_line1'],
+                        "address_line2" => $data['source']['meta']['address_line2'],
+                        "city" => $data['source']['meta']['city'],
+                        "state" => $data['source']['meta']['state'],
+                        "pincode" => $data['source']['meta']['pincode'],
+                        "lift" => $data['source']['meta']['lift'],
+                        "shared_service" => $data['source']['meta']['shared_service']]),
+                    "destination_lat"=>$data['destination']['lat'],
+                    "destination_lng"=>$data['destination']['lng'],
+                    "destination_meta"=>json_encode(["geocode" => $data['destination']['meta']['geocode'],
+                        "floor" => $data['destination']['meta']['floor'],
+                        "address" => $data['destination']['meta']['address_line1']." ".$data['destination']['meta']['address_line2'],
+                        "address_line1" => $data['destination']['meta']['address_line1'],
+                        "address_line2" => $data['destination']['meta']['address_line2'],
+                        "city" => $data['destination']['meta']['city'],
+                        "state" => $data['destination']['meta']['state'],
+                        "pincode" => $data['destination']['meta']['pincode'],
+                        "lift" => $data['destination']['meta']['lift']]),
+                    "contact_details"=>json_encode(["name" => $name,
+                        "phone" => $phone,
+                        'email' => $email]),
+                    "quote_estimate"=>$estimate_quote,
+                    "meta"=>json_encode(["self_booking" => $data['meta']['self_booking'],
+                        "subcategory" => $data['meta']['subcategory'],
+                        "customer" => ["remarks" => $data['meta']['customer']['remarks']],
+                        "images" => $images,
+                        "timings" => null,
+                        "distance" => $distance]),
+                    "zone_id"=>$zone_id
+                ]);
+
+            MovementDates::where("booking_id", $booking->id)->delete();
+            foreach ($movement_dates as $dates) {
+                $movementdates = new MovementDates;
+                $movementdates->booking_id = $booking->id;
+                $movementdates->date = Carbon::parse($dates)->format('Y-m-d');//date('', strtotime($dates));
+                $result_date = $movementdates->save();
+            }
+
+            BookingInventory::where("booking_id", $booking->id)->delete();
+            foreach ($data["inventory_items"] as $items) {
+
+                if($web || $created_by_support)
+                {
+                    $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => explode(";",$items['quantity'])[0], "max" => explode(";",$items['quantity'])[1]]);
+                }else{
+                    $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $items['quantity'] : json_encode(["min" => $items['quantity']['min'], "max" => $items['quantity']['max']]);
+                }
+
+                $bookinginventory = new BookingInventory;
+                $bookinginventory->booking_id = $booking->id;
+                $bookinginventory->inventory_id = $items["inventory_id"];
+
+                if($items["inventory_id"] !== null)
+                    $bookinginventory->name = Inventory::where("id", $items['inventory_id'])->pluck('name')[0];
+                else
+                    $bookinginventory->name = $items["name"];
+
+                $bookinginventory->material = $items["material"];
+                $bookinginventory->size = $items["size"];
+                $bookinginventory->quantity = $quantity;
+                $bookinginventory->quantity_type = $inventory_quantity_type;
+                $result_items = $bookinginventory->save();
+            }
+
+            if (!$result || !$result_date || !$result_items) {
+                DB::rollBack();
+                return Helper::response(false, "Couldn't save data");
+            }
+
+            DB::commit();
+            return Helper::response(true, "Booking updated successful.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking->id)]);
+        }
+
+    }

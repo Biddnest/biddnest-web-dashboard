@@ -89,6 +89,8 @@ Route::prefix('web/api')->group(function () {
     Route::post('/add-bid',[Router::class,'booking_add_bid'])->name("add_booking_bid");
     Route::get('/otp-bid/{id}',[Router::class,'send_otp_bid'])->name("send_bid_otp");
 
+    Route::put('/book/edit',[Router::class,'booking_edit'])->name("edit_booking");
+
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");

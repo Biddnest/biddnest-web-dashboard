@@ -1379,13 +1379,19 @@ class WebController extends Controller
     }
 
     public function editOrder(Request $request){
-        $booking = Booking::where("public_booking_id", $request->id)->get();
+        $moving_dates=[];
+        $booking = Booking::where("public_booking_id", $request->id)->with(['inventories' => function ($q){
+            $q->with('inventory');
+        }])->with('movement_dates')->with('status_history')->with('service')->first();
         $category = Service::where(['status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO])
             ->with(['subservices' => function ($query) {
                 $query->where(['subservices.status' => CommonEnums::$YES, 'subservices.deleted' => CommonEnums::$NO]);
             }])->get();
-
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('order.editorder', ['categories'=>$category, 'inventories'=>$inventory]);
+        foreach ($booking->movement_dates as $key=>$dates){
+           array_push($moving_dates, date("d M", strtotime($dates->date)));
+        }
+        $moving_dates = implode(",", $moving_dates);
+        return view('order.editorder', ['categories'=>$category, 'inventories'=>$inventory, 'booking'=>$booking, 'moving_dates'=>$moving_dates]);
     }
 }

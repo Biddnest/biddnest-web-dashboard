@@ -1267,4 +1267,59 @@ class Route extends Controller
      public function subservice_items(Request $request){
          return SubServiceController::getDefaultItems($request->id, $request->service);
      }
+
+     public function booking_edit(Request $request){
+         $validation = Validator::make($request->all(),[
+             'public_booking_id'=>'required',
+             'service_id' => 'required|integer',
+
+             'source.lat' => 'required|numeric',
+             'source.lng' => 'required|numeric',
+
+             'source.meta.geocode' => 'nullable|string',
+             'source.meta.floor' => 'required|integer',
+             'source.meta.address_line1' => 'required|string',
+             'source.meta.address_line2' => 'required|string',
+             'source.meta.city' => 'required|string',
+             'source.meta.state' => 'required|string',
+             'source.meta.pincode' => 'required|min:6|max:6',
+             'source.meta.lift' => 'required|boolean',
+
+             'destination.lat' => 'required|numeric',
+             'destination.lng' => 'required|numeric',
+
+             'destination.meta.geocode' => 'nullable|string',
+             'destination.meta.floor' => 'required|integer',
+             'destination.meta.address_line1' => 'required|string',
+             'destination.meta.address_line2' => 'required|string',
+             'destination.meta.city' => 'required|string',
+             'destination.meta.state' => 'required|string',
+             'destination.meta.pincode' => 'required|min:6|max:6',
+             'destination.meta.lift' => 'required|boolean',
+
+             'contact_details.name'  => 'required|string',
+             'contact_details.phone'  => 'required|min:10|max:10',
+             'contact_details.email'  => 'required|string',
+
+             'friend_details' => "nullable",
+             'friend_details.name'  => 'nullable|string',
+             'friend_details.phone'  => 'nullable|min:10|max:10',
+             'friend_details.email'  => 'nullable|string',
+
+             'meta.self_booking' => 'required|boolean',
+             'meta.subcategory' => 'nullable|string',
+
+             'movement_dates' =>'required',
+
+             'inventory_items.*.inventory_id' =>'required|integer',
+             'inventory_items.*.material' =>'required|string',
+             'inventory_items.*.size' =>'required|string',
+             'inventory_items.*.quantity' =>'required',
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return BookingsController::editEnquiryForAdmin($request);
+     }
 }

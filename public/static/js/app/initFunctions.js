@@ -3,10 +3,22 @@
  */
 
 export function initMapPicker() {
+    var lat = $('#source-lat').val();
+    var lng = $('#source-lng').val();
+    if(lat == "" && lng == ""){
+        lat = 12.930621;
+        lng = 80.111410;
+    }
+    var dlat = $('#dest-lat').val();
+    var dlng = $('#dest-lng').val();
+    if(dlat == "" && dlng == ""){
+        dlat = 12.930621;
+        dlng = 80.111410;
+    }
     $('.source-map-picker').locationpicker({
         location: {
-            latitude: 12.930621,
-            longitude: 80.111410
+            latitude: lat,
+            longitude: lng
         },
         locationName: "",
         radius: 500,
@@ -73,8 +85,8 @@ export function initMapPicker() {
 
     $('.dest-map-picker').locationpicker({
         location: {
-            latitude: 12.930621,
-            longitude: 80.111410
+            latitude: dlat,
+            longitude: dlng
         },
         locationName: "",
         radius: 500,
@@ -330,7 +342,6 @@ export function initTextAreaEditor() {
     }
 
 }
-
 
 export function initTooltip(){
         $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });

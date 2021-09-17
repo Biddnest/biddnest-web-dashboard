@@ -9,11 +9,13 @@
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails" style="position: relative">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4">Order Details</h3>
-            <div class="mr-20">
-                <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
-                    <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
-                </a>
-            </div>
+            @if(($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['in_progress']))
+                <div class="mr-20">
+                    <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
+                        <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left p-4 pt-0 pb-0">

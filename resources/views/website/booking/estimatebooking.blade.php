@@ -163,7 +163,7 @@
                                                             <img src="{{ asset('static/website/images/images/Group 14563_white.svg')}}" class="white-img hidden" style="height: 80%; padding: 5%;">
                                                         </div>
                                                         <div class="col-8">
-                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">ECONOMY<i class="icon-estimate fa fa-info" aria-hidden="true"></i></label>
+                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">ECONOMY<i class="icon-estimate fa fa-info cursor-pointer" aria-hidden="true" data-toggle="modal" data-target="#economy-modal"></i></label>
                                                             <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['economic']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span></div>
                                                             <div><i>Economy services includes moving only</i></div>
                                                         </div>
@@ -181,7 +181,7 @@
                                                             <img src="{{ asset('static/website/images/images/Group 14564_white.svg')}}" class="white-img hidden" style="height: 80%; padding: 5%;">
                                                         </div>
                                                         <div class="col-8">
-                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">PREMIUM<i class="icon-estimate fa fa-info" aria-hidden="true"></i></label>
+                                                            <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">PREMIUM<i class="icon-estimate fa fa-info cursor-pointer" aria-hidden="true" data-toggle="modal" data-target="#premium-modal"></i></label>
                                                             <div class="f-22">₹{{json_decode($booking->quote_estimate, true)['premium']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span></div>
                                                             <div><i>Premium services includes packing and moving only</i></div>
                                                         </div>
@@ -290,5 +290,54 @@
                  </div>
             </div>
         </div>
+
+        <div class="modal fade" id="economy-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+            <div class="modal-dialog para-head input-text-blue" role="document">
+                <div class="modal-content ml-4 w-90 mt-50 right-25">
+                    <div class="modal-header bg-purple">
+                        <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                            Economic Pricing
+                        </h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-15 margin-topneg-2 text-center">
+                         <div class="col-12">
+                                <h4 style="font-size: 16px;">Economic Pricing only includes the cost of moving your items to the destination</h4>
+                            </div>
+
+                        <button class="btn btn-theme-bg button-modal text-view-center mt-2 padding-btn-res white-bg" data-dismiss="modal" aria-label="Close">
+                                OKAY
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="premium-modal" tabindex="-1" role="dialog" aria-labelledby="for-friend" aria-hidden="true">
+            <div class="modal-dialog para-head input-text-blue" role="document">
+                <div class="modal-content ml-4 w-90 mt-50 right-25">
+                    <div class="modal-header bg-purple">
+                        <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
+                            Premium Pricing
+                        </h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-15 margin-topneg-2  text-center">
+                        <div class="col-12">
+                            <h4 style="font-size: 16px;">Premium Pricing includes the cost of packaging and moving your items to the destination.</h4>
+                        </div>
+
+                        <button class="btn btn-theme-bg button-modal text-view-center mt-2 padding-btn-res white-bg" data-dismiss="modal" aria-label="Close">
+                            OKAY
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection

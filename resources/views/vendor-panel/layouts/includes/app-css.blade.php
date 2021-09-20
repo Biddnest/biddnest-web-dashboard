@@ -68,6 +68,10 @@
         height: 60px !important;
     }
 
+   .custom-check{
+        display: none !important;
+    }
+
     .fullscreen-modal-body .modal-header::before{
         display: none;
     }

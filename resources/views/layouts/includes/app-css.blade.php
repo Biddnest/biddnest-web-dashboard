@@ -79,6 +79,10 @@
                 /* margin-left: -4px; */
             }
 
+           /* #moving_date .custom-check{
+                display: none !important;
+            }*/
+
             main .menu-sidebar {
                 margin-top: 70px;
             }

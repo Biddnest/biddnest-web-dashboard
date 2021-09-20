@@ -102,7 +102,7 @@
                         <tbody class="mtop-20 f-12">
                             @foreach($reviews as $review)
                                 <tr class="tb-border cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.reviews',['id'=>$review->id]) }}">
-                                    <td scope="row">{{$review->booking->public_booking_id}}</td>
+                                    <td scope="row">{{$review->booking['public_booking_id']}}</td>
                                     <td>{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</td>
                                     <td>{{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}</td>
                                     <td>{{$review->desc}}</td>

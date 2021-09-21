@@ -912,6 +912,7 @@ export function initPopUpAdmin(){
 
 export function initRangeSlider(){
     if($(".custom_slider").length) {
+        console.log("slider");
         $(".custom_slider").ionRangeSlider({
             type: $(this).data("type"),
             min: $(this).data("min"),

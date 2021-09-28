@@ -222,8 +222,11 @@ class InventoryController extends Controller
                 "mp_premium" => $price['market']['price']['premium'],
             ];
 
-            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))
-                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open'], "status"=>InventoryEnums::$STATUS['pending_approval']];
+
+            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification'])){
+                $updateColumns['ticket_status']= CommonEnums::$TICKET_STATUS['open'];
+                $updateColumns['status']= InventoryEnums::$STATUS['pending_approval'];
+            }
 
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }

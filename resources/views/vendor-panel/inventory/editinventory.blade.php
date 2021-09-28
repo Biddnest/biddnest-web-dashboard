@@ -54,11 +54,9 @@
                                                             </td>
                                                             <td style="padding-top: 24px;">
                                                                 <span>{{$inventory->size}}</span>
-                                                                <input type="hidden" value="{{$inventory->size}}" name="price[][size]">
                                                             </td>
                                                             <td class="text-center" style="padding-top: 24px;">
                                                                 <span>{{$inventory->material}}</span>
-                                                                <input type="hidden" value="{{$inventory->material}}" name="price[][material]">
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="d-flex justify-content-center inventroy-price">

@@ -253,7 +253,7 @@
     }
 
     .inventroy-price .table-input {
-        width: 50% !important;
+        width: 60% !important;
     }
 
     .inventroy-price .distance {

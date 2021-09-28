@@ -109,8 +109,6 @@ class VendorRouteController extends Controller
             // 'organization_id'=>"required|int",
 //            'service_type'=>"required|int",
             'price.*.id' => 'required|string',
-            'price.*.size' => 'required|string',
-            'price.*.material' => 'required|string',
             'price.*.bidnest.price.economics' => 'nullable',
             'price.*.bidnest.price.premium' => 'nullable',
             'price.*.market.price.economics' => 'nullable',

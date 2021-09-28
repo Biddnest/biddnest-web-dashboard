@@ -165,8 +165,10 @@ class InventoryController extends Controller
             $inventoryprice->inventory_id= $data['inventory_id'];
             $inventoryprice->size= $price['size'];
             $inventoryprice->material= $price['material'];
-            $inventoryprice->price_economics= $price['price']['economics'];
-            $inventoryprice->price_premium= $price['price']['premium'];
+            $inventoryprice->bp_economic= $price['bidnest']['price']['economics'];
+            $inventoryprice->bp_premium= $price['bidnest']['price']['premium'];
+            $inventoryprice->mp_economic= $price['market']['price']['economics'];
+            $inventoryprice->mp_premium= $price['market']['price']['premium'];
             if($web) {
                 $inventoryprice->ticket_status = CommonEnums::$TICKET_STATUS['open'];
                 $inventoryprice->status = InventoryEnums::$STATUS['pending_approval'];
@@ -214,8 +216,10 @@ class InventoryController extends Controller
         $service_type=$Inventory->service_type;
         foreach($data['price'] as $price) {
             $updateColumns = [
-                "price_economics" => $price['price']['economics'],
-                "price_premium" => $price['price']['premium'],
+                "bp_economic" => $price['bidnest']['price']['economics'],
+                "bp_premium" => $price['bidnest']['price']['premium'],
+                "mp_economic" => $price['market']['price']['economics'],
+                "mp_premium" => $price['market']['price']['premium'],
             ];
 
             if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))

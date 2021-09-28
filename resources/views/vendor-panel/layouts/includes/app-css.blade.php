@@ -248,4 +248,15 @@
         border: none !important;
     }
 
+    .inventroy-price .currancy {
+        padding: 6px 1px !important;
+    }
+
+    .inventroy-price .table-input {
+        width: 50% !important;
+    }
+
+    .inventroy-price .distance {
+        width: 50px !important;
+    }
 </style>

@@ -29,7 +29,7 @@
                         @foreach($services as $service)
                             <div class="simple-card category-card mt-3 mb-4">
                                 <a href="{{route('vendor.inventory.add',['id'=>$service->id])}}">
-                                    <img src="{{$service->image}}">
+                                    <img src="{{$service->image}}" style="width: 50%;">
                                     <p class="p-1">{{ucwords($service->name)}}</p>
                                 </a>
                             </div>

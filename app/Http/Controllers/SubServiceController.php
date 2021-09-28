@@ -33,13 +33,14 @@ class SubServiceController extends Controller
         $service=new ServiceSubservice;
         $service->service_id = $data['category'];
         $service->subservice_id = $subservice->id;
+        $service->max_extra_items = $subservice->id;
         $service_result = $service->save();
 
         if($data['inventories']) {
             foreach ($data['inventories'] as $filds) {
                 $inventory =new SubserviceInventory();
                 $inventory->subservice_id=$subservice->id;
-                $inventory->inventory_id=$filds["name"];
+                $inventory->inventory_id=$filds["id"];
                 $inventory->size=$filds['size'];
                 $inventory->material=$filds['material'];
                 $inventory->quantity=$filds['quantity'];
@@ -47,10 +48,21 @@ class SubServiceController extends Controller
             }
         }
 
+        if($data['extra_inventories']) {
+            foreach ($data['extra_inventories'] as $inv_id) {
+                $extra_inventory =new SubServiceExtraInventory();
+                $extra_inventory->subservice_id=$subservice->id;
+                $extra_inventory->inventory_id=$inv_id;
+                $extra_inventory_result=$inventory->save();
+            }
+        }
+
         if(!$result && !$service_result && !$inventory_result)
             return Helper::response(false,"Couldn't save data");
         else
-            return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->with("inventories")->findOrFail($subservice->id)]);
+            return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->with("inventories")
+                ->with(['extra_inventories'=>function($query){ $query->with('meta'); }])
+                ->findOrFail($subservice->id)]);
     }
 
     public static function get()
@@ -72,12 +84,12 @@ class SubServiceController extends Controller
             return Helper::response(true,"Data displayed successfully", $subservice);
     }
 
-    public static function update($id, $service_id, $name, $image, $data)
+    public static function update($id, $service_id, $name, $image, $data, $max_extra_items, $extra_inventories)
     {
         $image_man = new ImageManager(array('driver' => 'gd'));
         $image_name = "subservice".$name.uniqid()."-".$id.".png";
 
-        $update_data = ["name"=>$name];
+        $update_data = ["name"=>$name,"max_extra_items"=>$max_extra_items];
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 75),$image_name,"subservices");
@@ -110,6 +122,16 @@ class SubServiceController extends Controller
                 $inventory->save();
             }
         }
+        if($data['extra_inventories']) {
+            SubServiceExtraInventory::where('subservice_id', $id)->delete();
+            foreach ($extra_inventories as $inv_id) {
+                $extra_inventory =new SubServiceExtraInventory();
+                $extra_inventory->subservice_id=$subservice->id;
+                $extra_inventory->inventory_id=$inv_id;
+                $extra_inventory_result=$inventory->save();
+            }
+        }
+
 
         if(!$subservice && !$service_result)
             return Helper::response(false,"Couldn't Update data");

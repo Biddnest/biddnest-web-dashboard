@@ -139,7 +139,9 @@ class Route extends Controller
             'inventories.*.name'=>'required',
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
-            'inventories.*.quantity'=>'required'
+            'inventories.*.quantity'=>'required',
+            'extra_inventories.*'=>'required',
+            'max_extra_items'=>'required',
         ]);
 
         if($validation->fails())
@@ -192,13 +194,15 @@ class Route extends Controller
             'inventories.*.name'=>'required',
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
-            'inventories.*.quantity'=>'required'
+            'inventories.*.quantity'=>'required',
+            'extra_inventories.*'=>'required',
+            'max_extra_items'=>'required',
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image, $request->inventories);
+        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image, $request->inventories, $request->max_extra_items, $request->extra_inventories);
     }
 
     public function subservice_delete(Request $request)

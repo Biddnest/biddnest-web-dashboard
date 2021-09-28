@@ -116,7 +116,7 @@
                                 </thead>
                                 <tbody class="mtop-20  f-13">
                                 @foreach($bookings as $booking)
-                                    <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
+                                    <tr class="tb-border  cursor-pointer sidebar-toggle_details" data-url="{{route('order-details',["id"=>$booking->id])}}"   {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
                                         <td scope="row">{{$booking->public_booking_id}}</td>
                                         <td>{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
@@ -166,14 +166,14 @@
                                                 <span class="status-badge red-bg  text-center td-padding">Bounced</span>
                                                 @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['cancelrequest'])
+                                                @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
                                                 <span class="status-badge red-bg  text-center td-padding">Request To Cancel</span>
                                                 @break
                                             @endswitch
                                         </td>
 
-                                        <td class="no-toggle">
-                                            <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
+                                        <td class="no-toggle sidebar-toggle_booking" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
+                                            <a href="#" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
                                             {{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
                                         </td>
                                     </tr>

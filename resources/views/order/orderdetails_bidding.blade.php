@@ -4,6 +4,13 @@
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails" style="position: relative">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4">Order Details</h3>
+            @if(($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['in_progress']))
+                <div class="mr-20">
+                    <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
+                        <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left p-4 pt-0 pb-0">
@@ -22,18 +29,21 @@
                         <hr class="dash-line">
                         <div class="steps-container">
                             @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
-                                <div class="steps-status " style="width: 10%; text-align: center;">
-                                    <div class="step-dot">
-                                        {{-- @foreach($booking->status_ids as $status_history)--}}
-                                        @if(in_array($status, $booking->status_ids))
+                                @if(in_array($status, $booking->status_ids) && $key != "in_progress" )
+                                    <div class="steps-status " style="width: 10%; text-align: center;">
+                                        <div class="step-dot">
                                             <img src="{{ asset('static/images/tick.png')}}" />
-                                        @else
-                                            <div class="child-dot"></div>
-                                        @endif
-                                        {{--@endforeach--}}
+                                        </div>
+                                        <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
                                     </div>
-                                    <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
-                                </div>
+                                @elseif($key != "in_progress" && $key != "rebiding" && $key != "cancelled" && $key != "bounced" && $key != "hold" && $key != "cancel_request" )
+                                    <div class="steps-status " style="width: 10%; text-align: center;">
+                                        <div class="step-dot">
+                                            <div class="child-dot"></div>
+                                        </div>
+                                        <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -297,13 +307,15 @@
                                             <div class="form-input">
                                                 <label class="full-name">Moving Date</label>
                                                 <div class="select-date">
+                                                    @php $count=1; @endphp
                                                     @foreach($booking->movement_dates as $mdate)
-                                                        <label class="mr-2 move-add-date">
-                                                            <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" data-parsley-errors-container="#err-date"
+                                                        <label class="mr-2 move-add-date" id="moving_date">
+                                                            <input type="checkbox" name="moving_date[]" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date_{{$count}}" data-parsley-errors-container="#err-date"
                                                                    required
                                                                    data-parsley-error-message="Mandatory Field. Please enter the value" style="display: none"/>
-                                                            <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                            <span class="status-3 move-date mdate_{{$count}} cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                         </label>
+                                                        @php $count++; @endphp
                                                     @endforeach
                                                 </div>
                                                 {{--<input type="text" class="form-control br-5" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}

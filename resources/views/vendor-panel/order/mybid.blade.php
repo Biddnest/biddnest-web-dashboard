@@ -171,7 +171,15 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">MOVING DATE</div>
-                                                    <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                        <div class="value">
+                                                            @foreach($bidding->moving_dates as $mdate)
+                                                                <span class="status-3">{{date("d M Y", strtotime($mdate))}}</span>
+                                                            @endforeach
+                                                        </div>
+                                                    @else
+                                                        <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">CATEGORY</div>

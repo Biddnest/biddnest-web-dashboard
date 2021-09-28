@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="150" height="96" viewBox="0 0 150 96">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" y1="0.5" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#49039b"/>
+      <stop offset="1" stop-color="#0f0c75"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_14563" data-name="Group 14563" transform="translate(-530 -531)">
+    <rect id="Rectangle_5668" data-name="Rectangle 5668" width="150" height="96" rx="10" transform="translate(530 531)" fill="url(#linear-gradient)"/>
+    <g id="Group_14550" data-name="Group 14550" transform="translate(-89 -155.616)">
+      <circle id="Ellipse_518" data-name="Ellipse 518" cx="32.5" cy="32.5" r="32.5" transform="translate(662 702.616)" fill="#fdc403"/>
+      <text id="_" data-name="₹" transform="translate(682 752.616)" fill="#1f1173" font-size="48" font-family="Roboto-Medium, Roboto" font-weight="500" letter-spacing="-0.018em"><tspan x="0" y="0">₹</tspan></text>
+    </g>
+  </g>
+</svg>

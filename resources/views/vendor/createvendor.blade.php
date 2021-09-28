@@ -47,7 +47,10 @@
                                        aria-selected="true">Onboard Vendor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15 disabled" id="quotation" href="#">Add Branch</a>
+                                    <a class="nav-link p-15" id="quotation" href="#">Pricing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15 disabled" id="quotation" href="#">Branch</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15 disabled" id="quotation" href="#"
@@ -58,7 +61,7 @@
                                     >Actions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15 disabled" id="quotation" href="#">Vendor Roles</a>
+                                    <a class="nav-link p-15 disabled" id="quotation" href="#">Roles</a>
                                 </li>
                             </ul>
                         </h3>
@@ -70,7 +73,7 @@
                             <!-- form starts -->
                             <form class="form-new-order pt-4 mt-3 onboard-vendor-form input-text-blue"
                                   action="{{route('add_onvoard_vendor')}}" method="POST" data-next="redirect"
-                                  data-url="{{route('onboard-branch-vendors', ['id'=>':id'])}}" data-alert="mega"
+                                  data-url="{{route("onboard-base-price", ['id'=>':id'])}}" data-alert="mega"
                                   id="myForm" data-parsley-validate>
 
                                 <div class="d-flex row p-20">
@@ -362,20 +365,26 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="basedist" placeholder="Distance"
+                                                   class="form-control number">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="comments">
                                     <div class="d-flex  justify-content-between flex-row  p-10 py-0 "
                                          style="border-top: 1px solid #70707040;">
                                         <div class="w-50"><a class="white-text p-10 cancel" href="{{route('vendors')}}">
-                                                <button
-                                                    class="btn theme-br theme-text w-30 white-bg">Cancel
-                                                </button>
+                                                <button class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                                             </a>
                                         </div>
                                         <div class="w-50 text-right"><a class="white-text p-10">
-                                                <button
-                                                    class="btn theme-bg white-text w-30">Next
-                                                </button>
+                                                <button class="btn theme-bg white-text w-30">Next</button>
                                             </a>
                                         </div>
                                     </div>

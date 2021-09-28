@@ -44,8 +44,8 @@ class SliderController extends Controller
         $slider->position = $position;
         $slider->platform = $platform;
         $slider->size = $size;
-        $slider->from_date = $from_date;
-        $slider->to_date = $to_date;
+        $slider->from_date = date("Y-m-d", strtotime($from_date));
+        $slider->to_date = date("Y-m-d", strtotime($to_date));
         $slider->zone_scope = $zone_scope;
         $result= $slider->save();
 
@@ -74,8 +74,8 @@ class SliderController extends Controller
             'position'=>$position,
             'platform' => $platform,
             'size' => $size,
-            'from_date' => $from_date,
-            'to_date' => $to_date,
+            'from_date' => date("Y-m-d", strtotime($from_date)),
+            'to_date' => date("Y-m-d", strtotime($to_date)),
             'zone_scope' => $zone_scope,
         ]);
 
@@ -159,8 +159,8 @@ class SliderController extends Controller
                 $banners->name = $banner['name'];
                 $banners->desc = $banner['desc'];
                 $banners->url = $banner['url'];
-                $banners->from_date = $banner['date']['from'];
-                $banners->to_date = $banner['date']['to'];
+                $banners->from_date = date("Y-m-d", strtotime($banner['date']['from']));
+                $banners->to_date = date("Y-m-d", strtotime($banner['date']['to']));
                 $banners->order = $order;
                 $result = $banners->save();
                 $order++;

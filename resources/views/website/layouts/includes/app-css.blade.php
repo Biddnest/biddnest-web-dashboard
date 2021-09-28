@@ -112,7 +112,10 @@
 
     }
 
-
+    .radio-color{
+        background-color:#2E0789 !important;
+        color:#ffffff !important;
+    }
 
     label {
         width: 100%;
@@ -156,7 +159,22 @@
     }
 
 
-
+    .status-3 {
+        font-size: 14px;
+        font-weight: 300;
+        background-color: #fff;
+        min-width: 110px;
+        display: inline-block;
+        text-align: center;
+        color: #2E0789;
+        font-weight: 700;
+        font-family: "Gilroy";
+        letter-spacing: 1px;
+        border: 1px solid #2E0789;
+        border-radius: 5px !important;
+        margin-bottom: 10px;
+        margin-top: -5px;
+    }
 
 
 
@@ -276,6 +294,31 @@
     .item-modal-width {
         max-width: 70%!important;
         }
+
+    .icon-estimate {
+        height: 20px;
+        width: 20px;
+        border-radius: 30px;
+        color: #f6f6fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d6d6ef;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .est-box {
+        height: 90px;
+        border: 1px solid;
+        border-radius: 5px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .est-select{
+        padding-top: 20px;
+        height: 88px;
+    }
 
     @media (max-width:480px) {
         .item-modal-width {

@@ -156,7 +156,7 @@
                                                 <option value="">--Select--</option>
                                                   @foreach($past_bookings as $booking)
 {{--                                                      <optgroup label="{{$booking->public_booking_id}}">--}}
-                                                      <option value="{{$booking->public_booking_id}}">{{ucwords(json_decode($booking->source_meta, true)['city'])}} - {{ucwords(json_decode($booking->destination_meta, true)['city'])}} [#{{$booking->public_booking_id}}]</option>
+                                                      <option value="{{$booking->public_booking_id}}">@if($booking->source_meta && $booking->destination_meta){{ucwords(json_decode($booking->source_meta, true)['city'])}} - {{ucwords(json_decode($booking->destination_meta, true)['city'])}}@endif [#{{$booking->public_booking_id}}]</option>
 {{--                                                      </optgroup>--}}
                                                   @endforeach
                                               </select>

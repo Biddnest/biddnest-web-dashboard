@@ -52,6 +52,7 @@
 <link rel="stylesheet" href="{{ asset('static/css/chat.css')}}" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
+
     .dateselect{
         cursor: pointer;
     }
@@ -65,6 +66,10 @@
 
     ul.header-controls li.notifications .dropdown ul li {
         height: 60px !important;
+    }
+
+   .custom-check{
+        display: none !important;
     }
 
     .fullscreen-modal-body .modal-header::before{
@@ -241,5 +246,17 @@
     .searchButton, .searchButton1{
         outline: none !important;
         border: none !important;
+    }
+
+    .inventroy-price .currancy {
+        padding: 6px 1px !important;
+    }
+
+    .inventroy-price .table-input {
+        width: 60% !important;
+    }
+
+    .inventroy-price .distance {
+        width: 50px !important;
     }
 </style>

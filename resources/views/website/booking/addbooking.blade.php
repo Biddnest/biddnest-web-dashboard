@@ -95,9 +95,10 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-9 book-move-questions-container">
 
-                        <form id="wizard" class="move-booking order_create_web" action="{{route('add-bookmove')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate>
+                        <form id="wizard" class="move-booking order_track_web track_next1" action="{{route('customer-bookmove')}}" method="POST"  {{-- data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="row setup-content-3 step-1" id="step-1">
                                 <div class="row ">
                                     <div class="col-md-12 ">
@@ -107,6 +108,7 @@
                                     </div>
 
                                     <div class="col-md-12 ">
+                                        <input type="hidden" class="enq-id" name="public_booking_id">
                                         <div class="accordion ml-3 " id="customer-details ">
                                             <div class="d-flex row p-20 ">
                                                 <div class="col-sm-12 " style="margin-bottom: 20px;">
@@ -160,14 +162,16 @@
                                                     Cancel
                                                 </button>
                                             </a>
-                                            <button type="button" class="btn btn-mdb-color btn-rounded nextBtn-3 float-right mt-2 mr-5 next1 " id="next1">Next
+                                            <button type="submit" class="btn btn-mdb-color btn-rounded nextBtn-3 float-right mt-2 mr-5 next1 " id="next1">Next
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </form>
 
                             <!-- second step -->
+                        <form id="wizard" class="move-booking order_track_web track_next2" action="{{route('delivery-bookmove')}}" method="POST" {{--data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="row setup-content-3 step-2" id="step-2" style="display: none;">
                                 <div class="col-md-12 col-paddingnon">
                                     <p class="text-muted ">Step 2 / 6</p>
@@ -176,6 +180,7 @@
                                     <div class="accordion mt-2" id="delivery-details ">
                                         <p class="address-category pl-0  ">Movement Type</p>
                                         <div class="row row-horizonal ml-0 border-bottom pb-3">
+                                            <input type="hidden" class="enq-id" name="public_booking_id">
                                             @foreach($categories as $category)
                                             <div class="col-md-4 col-lg-4 col-sm-4 col-paddingnon pl-0">
                                                 <label>
@@ -242,12 +247,7 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Pincode</label>
-                                                            <input type="text" placeholder="560097" maxlength="6" minlength="6" id="source-pin" class="form-control" name="source[meta][pincode]" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )"/>
+                                                            <input type="text" placeholder="560097" maxlength="6" minlength="6" id="source-pin" class="form-control number" name="source[meta][pincode]" required />
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -331,12 +331,7 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Pincode</label>
-                                                            <input type="text" data-parsley-type="number" placeholder="620001" name="destination[meta][pincode]" id="dest-pin" class="form-control" maxlength="6" minlength="6" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                                            <input type="text" data-parsley-type="number" placeholder="620001" name="destination[meta][pincode]" id="dest-pin" class="form-control number" maxlength="6" minlength="6" required>
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -400,7 +395,7 @@
                                                 Cancel
                                             </button>
                                         </a>
-                                        <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right mr-4 next2" id="next2">
+                                        <button type="submit" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right mr-4 next2" id="next2">
                                             Next
                                         </button>
                                         <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back2 bview-btn">Back
@@ -408,9 +403,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
 
                             <!-- Third Step -->
+                        <form id="wizard" class="move-booking order_track_web track_next3" action="{{route('inventory-bookmove')}}" method="POST" {{--data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="setup-content-3 step-3" id="step-3" style="display: none;">
+                                <input type="hidden" class="enq-id" name="public_booking_id">
                                 <div class="col-md-12 heading-view ">
                                     <p class="text-muted ">Step 3/ 6</p>
                                     <h4 class=" border-bottom pl-0 pb-4 theme-text head-book-move " style="margin-bottom: 10px !important;">Lets get your requirements</h4>
@@ -445,7 +443,7 @@
                                             Cancel
                                         </button>
                                     </a>
-                                    <button type="button" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next3 mr-4" id="next3">
+                                    <button type="submit" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next3 mr-4" id="next3">
                                         Next
                                     </button>
                                     <button type="button" class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back3 bview-btn">Back
@@ -454,14 +452,17 @@
                                 <!--Add Item Modal-->
 
                             </div>
+                        </form>
 
                             <!-- Fourth Step -->
+                        <form id="wizard" class="move-booking order_create_web" action="{{route('img-bookmove')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}" data-alert="mega" id="myForm" data-parsley-validate>
                             <div class=" setup-content-3 step-4" id="step-4" style="display: none;">
                                 <div class="col-md-12 col-paddingnon">
                                     <p class="text-muted ">Step 4 / 6</p>
                                     <h4 class=" border-bottom pl-0 pb-4 theme-text ">Add Comments and Upload Photos
                                     </h4>
                                     <div class="form-group ">
+                                        <input type="hidden" class="enq-id" name="public_booking_id">
                                         <label for="comments-area " class="comments ">Comments/Instructions</label>
                                         <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4" cols="50"></textarea>
                                     </div>
@@ -484,7 +485,7 @@
                                             Cancel
                                         </button>
                                     </a>
-                                    <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4 mr-4"  id="next4" style="margin-right: 40px !important;">
+                                    <button type="submit" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4 mr-4"  id="next4" style="margin-right: 40px !important;">
                                         Next
                                     </button>
                                     <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back4 bview-btn" type="button">Back

@@ -78,8 +78,10 @@ class VendorRouteController extends Controller
             'service_type'=>"required|int",
             'price.*.size' => 'required|string',
             'price.*.material' => 'required|string',
-            'price.*.price.economics' => 'nullable',
-            'price.*.price.premium' => 'nullable'
+            'price.*.bidnest.price.economics' => 'nullable',
+            'price.*.bidnest.price.premium' => 'nullable',
+            'price.*.market.price.economics' => 'nullable',
+            'price.*.market.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())
@@ -107,10 +109,10 @@ class VendorRouteController extends Controller
             // 'organization_id'=>"required|int",
 //            'service_type'=>"required|int",
             'price.*.id' => 'required|string',
-            'price.*.size' => 'required|string',
-            'price.*.material' => 'required|string',
-            'price.*.price.economics' => 'nullable',
-            'price.*.price.premium' => 'nullable'
+            'price.*.bidnest.price.economics' => 'nullable',
+            'price.*.bidnest.price.premium' => 'nullable',
+            'price.*.market.price.economics' => 'nullable',
+            'price.*.market.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())

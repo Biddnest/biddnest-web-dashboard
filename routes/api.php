@@ -46,7 +46,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('bookings')->group(function () {
         Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
-        Route::post('/track',[ApiRouter::class,'createBookingTrack']);
+        Route::post('/booking_track',[ApiRouter::class,'createBookingTrack']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
 //        Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);
@@ -70,6 +70,14 @@ Route::prefix('v1')->group(function () {
             Route::post('/reschedule',[ApiRouter::class,'createRescheduleTicket']);
             Route::post('/canceled',[ApiRouter::class,'createCancellationTicket']);
             Route::post('/rejected',[ApiRouter::class,'createRejectedTicket']);
+        });
+
+        Route::prefix('track')->group(function () {
+            Route::post('/customer',[ApiRouter::class,'trackCustomer']);
+            Route::put('/source',[ApiRouter::class,'trackSource']);
+            Route::put('/destination',[ApiRouter::class,'trackDestination']);
+            Route::put('/dates',[ApiRouter::class,'trackDates']);
+            Route::put('/inventory',[ApiRouter::class,'trackInventory']);
         });
     });
 

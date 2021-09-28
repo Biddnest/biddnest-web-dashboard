@@ -35,43 +35,7 @@
                                     <span class="error-message">Please select valid Item</span>
                                 </div>
                             </div>
-                            {{--<div class="header-wrap p-0  mtop-20">
-                                <a href="#" class="mr-2 filter-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="filter-dropdown "><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
-                                </a>
-                            </div>--}}
                         </div>
-                        {{--<div class="row header-wraps pt-0 pb-0 filter-menu">
-                            <div class="col-lg-6 toggle-input">
-                                <div class="form-input">
-                                    <span class="">
-                                                    <select  id="" class="form-control js-example-basic-hide-search select-hidden">
-                                                        <option >Size</option>
-                                                        <option>Small </option>
-                                                        <option>Medium</option>
-                                                        <option>Large</option>
-                                                        </select>
-                                                    <span class="error-message">Please enter valid
-                                                        Phone number</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 toggle-input ">
-                                <div class="form-input">
-
-                                                <span class="">
-                                                    <select  id="" class="form-control js-example-basic-hide-search select-hidden">
-                                                        <option > Material</option>
-                                                        <option>Male </option>
-                                                        <option>Female</option>
-                                                        </select>
-                                                    <span class="error-message">Please enter valid
-                                                        Phone number</span>
-                                                </span>
-                                </div>
-                            </div>
-                        </div>--}}
-
                         <div class="header-wraps p-0" >
                             <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
                                 <thead class="secondg-bg p-0">
@@ -79,8 +43,10 @@
                                     <th scope="col" style="width: 132px; padding:14px">Item</th>
                                     <th scope="col">Size</th>
                                     <th scope="col" class="text-center" style="padding:14px">Material</th>
-                                    <th scope="col" class="text-center" style="padding:14px">Economic Price</th>
-                                    <th scope="col" class="text-center" style="padding:14px">Premium Price</th>
+                                    <th scope="col" class="text-center" style="padding:14px">BD Economic Price</th>
+                                    <th scope="col" class="text-center" style="padding:14px">BD Premium Price</th>
+                                    <th scope="col" class="text-center" style="padding:14px">MP Economic Price</th>
+                                    <th scope="col" class="text-center" style="padding:14px">MP Premium Price</th>
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20 inventory-snip">
@@ -102,15 +68,25 @@
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][price][economics]" id="" placeholder="400"></div>
-                                                        <div class="currancy distance">/km</div>
+                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][price][economics]" id="" placeholder="400"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][price][premium]" id="" placeholder="500"></div>
-                                                        <div class="currancy distance">/km</div>
+                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][price][premium]" id="" placeholder="500"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center inventroy-price">
+                                                        <div class="currancy">₹</div>
+                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][price][economics]" id="" placeholder="400"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center inventroy-price">
+                                                        <div class="currancy">₹</div>
+                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][price][premium]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                             </tr>

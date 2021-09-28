@@ -89,6 +89,8 @@ Route::prefix('web/api')->group(function () {
     Route::post('/add-bid',[Router::class,'booking_add_bid'])->name("add_booking_bid");
     Route::get('/otp-bid/{id}',[Router::class,'send_otp_bid'])->name("send_bid_otp");
 
+    Route::put('/book/edit',[Router::class,'booking_edit'])->name("edit_booking");
+
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
@@ -99,7 +101,7 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/vendors/{parent_id}/branches/{organization_id}',[Router::class,'branch_delete'])->name("delete_branch");
 
     Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
-    Route::post('/vendors/action/{id}/{status}',[Router::class,'vendor_action'])->name("onboard-action-status");
+    Route::put('/vendors/action/{id}/{status}',[Router::class,'vendor_action'])->name("onboard-action-status");
 
     Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add");
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
@@ -270,6 +272,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
+            Route::get('/edit/{id}',[WebController::class,'editOrder'])->name("edit-order");
             Route::get('/{id}/confirm',[WebController::class,'confirmOrder'])->name("confirm-order");
             Route::get('/{id}/reject',[WebController::class,'rejectOrder'])->name("reject-order");
         });
@@ -289,6 +292,7 @@ Route::prefix('admin')->group(function () {
 
             Route::get('/onboard',[WebController::class,'createOnboardVendors'])->name("create-vendors");
             Route::get('/{id}/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
+            Route::get('/{id}/base-price',[WebController::class,'onbaordBasePrice'])->name("onboard-base-price");
             Route::get('/{id}/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
             Route::get('/{id}/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
             Route::get('/{id}/action',[WebController::class,'onbaordAction'])->name("onboard-action");
@@ -496,6 +500,11 @@ Route::prefix('website/api')->group(function () {
     Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
+
+    Route::post("/track/customer",[WebsiteRouter::class, 'trackCustomerData'])->name("customer-bookmove");
+    Route::post("/track/delivery",[WebsiteRouter::class, 'trackDeliveryData'])->name("delivery-bookmove");
+    Route::post("/track/inventory",[WebsiteRouter::class, 'trackInventoryData'])->name("inventory-bookmove");
+    Route::post("/track/img",[WebsiteRouter::class, 'trackImgData'])->name("img-bookmove");
 
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
     Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");

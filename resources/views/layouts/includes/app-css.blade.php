@@ -79,6 +79,10 @@
                 /* margin-left: -4px; */
             }
 
+           /* #moving_date .custom-check{
+                display: none !important;
+            }*/
+
             main .menu-sidebar {
                 margin-top: 70px;
             }
@@ -1091,5 +1095,30 @@
                 background: #f0f0f0;
                 padding: 60px 20px;
                 min-height: 200px;
+            }
+
+            .custom-check{
+                display: none;
+            }
+
+            .base-price .currancy {
+                border: 1px solid #DFE6EC;
+                border-radius: 5px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                align-items: center;
+                width: 20%;
+                text-align: center;
+                padding: 6px 1px;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                background-color: #F4F6F7;
+                margin: auto;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .base-price .border-left {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
             }
         </style>

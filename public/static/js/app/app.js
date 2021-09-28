@@ -114,6 +114,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
+        console.log(button);
         let buttonPretext = button.html();
         Logger.info("Loggin request payload", requestData);
 
@@ -172,6 +173,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                                 redirectTo(url);
                                 return false;
                             }
+
                             if (form.hasClass("order_create_web")) {
                                 var url = form.data('url');
                                 url = url.replace(':id', response.data.booking.public_enquiry_id);
@@ -187,6 +189,39 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                         }else if (form.data("next") == "modal") {
                             $(form.data(".modal-id")).modal();
                         }
+                    }
+                    if (form.hasClass("order_track_web")) {
+                        var enq_id = response.data.booking.public_booking_id;
+                        console.log(enq_id);
+                        $('.enq-id').val(enq_id);
+                    }
+
+                    if (form.hasClass("track_next1")) {
+                        console.log('entered');
+                            $('.step-1').css('display', 'none');
+                            $('.step-2').css('display', 'block');
+                            $(".completed-step-2").addClass("turntheme");
+                            $(".completed-step-1").removeClass("turntheme");
+                            $(".steps-step-2").addClass("color-purple");
+                            $(".steps-step-1").removeClass("color-purple");
+                    }
+
+                    if (form.hasClass("track_next2")) {
+                        $('.step-2').css('display', 'none');
+                        $('.step-3').css('display', 'block');
+                        $(".completed-step-3").addClass("turntheme");
+                        $(".completed-step-2").removeClass("turntheme");
+                        $(".steps-step-3").addClass("color-purple");
+                        $(".steps-step-2").removeClass("color-purple");
+                    }
+
+                    if (form.hasClass("track_next3")) {
+                        $('.step-3').css('display', 'none');
+                        $('.step-4').css('display', 'block');
+                        $(".completed-step-4").addClass("turntheme");
+                        $(".completed-step-3").removeClass("turntheme");
+                        $(".steps-step-4").addClass("color-purple");
+                        $(".steps-step-3").removeClass("color-purple");
                     }
                 }
 
@@ -693,6 +728,33 @@ $("body").on('change', ".status-change", function(event) {
     });
 });
 
+$("body").on('click', ".vendor-status-change", function(event) {
+    Swal.fire({
+        title: 'Are you sure want to change status?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.update($(this).data("url"), {}, function (response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    tinySuccessAlert("Status changed Successfully", response.message);
+                    location.reload();
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
+            });
+        }
+        else{
+            return false;
+        }
+    });
+});
+
 $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
     console.log(data);
@@ -743,7 +805,8 @@ $("body").on('keydown', ".table-search", function(event) {
     if(event.keyCode == 13){
         var query = $(this).val();
         if (query.length >= 3) {
-            redirectTo(window.location.href + "?search=" + query);
+            var url = window.location.href.split("?")[0];
+            redirectTo(url + "?search=" + query);
         }
     }
 });
@@ -752,7 +815,8 @@ $("body").on('keydown', ".table-search1", function(event) {
     if(event.keyCode == 13){
         var query = $(this).val();
         if (query.length >= 15) {
-            redirectTo(window.location.href + "?search=" + query);
+            var url = window.location.href.split("?")[0];
+            redirectTo(url + "?search=" + query);
         }
     }
 });
@@ -760,14 +824,16 @@ $("body").on('keydown', ".table-search1", function(event) {
 $("body").on('click', ".searchButton", function(event) {
         var query1 = $('.table-search').val();
         if (query1.length >= 3) {
-            redirectTo(window.location.href + "?search=" + query1);
+            var url = window.location.href.split("?")[0];
+            redirectTo(url + "?search=" + query1);
         }
 });
 
 $("body").on('click', ".searchButton1", function(event) {
     var query = $('.table-search1').val();
     if (query.length >= 3) {
-        redirectTo(window.location.href + "?search=" + query);
+        var url = window.location.href.split("?")[0];
+        redirectTo(url + "?search=" + query);
     }
 });
 
@@ -1005,9 +1071,27 @@ $("body").on('keyup', ".calc-total", function(event) {
 });
 
 $("body").on('click', ".move-date", function(event) {
+    var id = $(this).data("id");
+    // $(this).closest(".select-date").find("input[type=checkbox]").removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-date_"+id).removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-date_"+id).attr("checked", "checked");
+
+    // $(".move-date").removeClass("radio-color");
+    $(".mdate_"+id).removeClass("radio-color");
+    $(this).toggleClass("radio-color");
+});
+
+
+$("body").on('click', ".move-dates", function(event) {
     $(this).closest(".select-date").find("input[type=radio]").removeAttr("checked");
-    $(this).closest(".move-add-date").find(".moving-date").attr("checked", "checked");
-    $(".move-date").removeClass("radio-color");
+    $(this).closest(".select-date").find(".blue-img").show();
+    $(this).closest(".select-date").find(".white-img").hide();
+    $(this).closest(".move-add-date").find(".moving-dates").attr("checked", "checked");
+    $(this).closest(".move-add-date").find(".blue-img").hide();
+    $(this).closest(".move-add-date").find(".white-img").removeClass("hidden");
+    $(this).closest(".move-add-date").find(".white-img").show();
+
+    $(".move-dates").removeClass("radio-color");
     $(this).toggleClass("radio-color");
 });
 
@@ -1017,16 +1101,10 @@ $('.filterdate').datepicker({
 
 });
 
-$('.birthdate').datepicker({
-    // multidateSeparator:",",
-    format: 'yyyy-mm-dd',
-    endDate: '-18y'
 
-});
 
 /* Website js code start */
-
-$("body").on('click', ".next1", function(event) {
+/*$("body").on('click', ".next1", function(event) {
     $(".step-1").wrap("<form id='parsley-form'></form>");
     let isValid = $('#parsley-form').parsley().validate();
     $(".step-1").unwrap();
@@ -1039,17 +1117,6 @@ $("body").on('click', ".next1", function(event) {
         $(".steps-step-2").addClass("color-purple");
         $(".steps-step-1").removeClass("color-purple");
     }
-});
-
-$("body").on('click', ".back2", function(event) {
-
-        $('.step-1').css('display', 'block');
-        $('.step-2').css('display', 'none');
-        $(".completed-step-1").addClass("turntheme");
-        $(".completed-step-2").removeClass("turntheme");
-        $(".steps-step-1").addClass("color-purple");
-        $(".steps-step-2").removeClass("color-purple");
-
 });
 
 $("body").on('click', ".next2", function(event) {
@@ -1065,15 +1132,6 @@ $("body").on('click', ".next2", function(event) {
         $(".steps-step-3").addClass("color-purple");
         $(".steps-step-2").removeClass("color-purple");
     }
-});
-
-$("body").on('click', ".back3", function(event) {
-    $('.step-2').css('display', 'block');
-    $('.step-3').css('display', 'none');
-    $(".completed-step-2").addClass("turntheme");
-    $(".completed-step-3").removeClass("turntheme");
-    $(".steps-step-2").addClass("color-purple");
-    $(".steps-step-3").removeClass("color-purple");
 });
 
 $("body").on('click', ".next3", function(event) {
@@ -1098,6 +1156,26 @@ $("body").on('click', ".next3", function(event) {
         $(".steps-step-4").addClass("color-purple");
         $(".steps-step-3").removeClass("color-purple");
     }
+});*/
+
+$("body").on('click', ".back2", function(event) {
+
+    $('.step-1').css('display', 'block');
+    $('.step-2').css('display', 'none');
+    $(".completed-step-1").addClass("turntheme");
+    $(".completed-step-2").removeClass("turntheme");
+    $(".steps-step-1").addClass("color-purple");
+    $(".steps-step-2").removeClass("color-purple");
+
+});
+
+$("body").on('click', ".back3", function(event) {
+    $('.step-2').css('display', 'block');
+    $('.step-3').css('display', 'none');
+    $(".completed-step-2").addClass("turntheme");
+    $(".completed-step-3").removeClass("turntheme");
+    $(".steps-step-2").addClass("color-purple");
+    $(".steps-step-3").removeClass("color-purple");
 });
 
 $("body").on('click', ".back4", function(event) {
@@ -1314,8 +1392,8 @@ $("body").on('click', ".payment", function(event) {
         var name = $(this).data("user-name");
         var email = $(this).data("user-email");
         var contact = $(this).data("user-contact");
-        var moving_date = $(this).data("moving-date");
-
+        var moving_date = $('#moving_date').val();
+        console.log(moving_date);
 
 
     $.ajax({
@@ -1323,7 +1401,7 @@ $("body").on('click', ".payment", function(event) {
         type: 'post',
         dataType: 'json',
         data: {
-            id:booking_id ,code : coupon_code,
+            id:booking_id ,code : coupon_code ,moving_date : moving_date
         },
         success: function (response) {
             // options.order_id=response.data.payment.rzp_order_id;
@@ -1796,3 +1874,40 @@ $("body").on('keypress', ".alphabet", function(event) {
     return true;
 
 });
+
+$('.birthdate').datepicker({
+    // multidateSeparator:",",
+    format: 'yyyy-mm-dd',
+    endDate: '-18y'
+
+});
+
+
+
+$("body").on('click', ".sidebar-toggle_booking", function(event) {
+    var $this = $(this);
+
+    // if($(this).hasClass('no-toggle'))
+    // return false;
+
+    $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
+        '                    <svg class="circular" height="50" width="50">\n' +
+        '                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="6" stroke-miterlimit="10" />\n' +
+        '                    </svg>\n' +
+        '                </div>');
+
+    $('.side-bar-pop-up').addClass('display-pop-up');
+    $.get($(this).data("sidebar"), {}, function(response){
+
+        $(".side-bar-pop-up").html(response);
+    });
+    initRevenueChart(
+        Logger.info('graph')
+    );
+});
+$("body").on('click', ".sidebar-toggle_details td:not(:last-child)", function(event) {
+    var url = $(this).parent().data("url");
+    window.location.href = url;
+});
+
+

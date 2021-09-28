@@ -13,7 +13,7 @@ class SubCategoryItems extends Migration
      */
     public function up()
     {
-        Schema::create('subservices_inventory',function (Blueprint $table){
+        Schema::create('subservices_extra_inventory',function (Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('subservice_id')->index('subservice_id');
             $table->foreign('subservice_id')->references('id')->on('subservices');
@@ -35,7 +35,7 @@ class SubCategoryItems extends Migration
      */
     public function down()
     {
-        
+
 
     }
 }

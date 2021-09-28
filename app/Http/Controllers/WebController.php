@@ -1295,7 +1295,8 @@ class WebController extends Controller
     public function sidebar_inventory(Request $request)
     {
         $inventory=InventoryPrice::where(['inventory_id'=>$request->id, 'organization_id'=>$request->org_id, 'service_type'=>$request->cat_id])->with('inventory')->get();
-        $service_types=InventoryPrice::select('service_type')->where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->groupBy('service_type')->with('service')->get();
+        $service_types=InventoryPrice::select('service_type')->where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', $request->org_id)->groupBy('service_type')->with('service')->get();
+
         return view('sidebar.inventory',['inventories'=>$inventory, "service_types"=>$service_types]);
     }
 

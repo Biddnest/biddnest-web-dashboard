@@ -314,7 +314,8 @@ class Route extends Controller
             'zone' => 'required|integer',
             'service_type' =>'required|string',
             'service.*' =>'required',
-            'commission' =>'required'
+            'commission' =>'required',
+            'basedist'=>'required|numeric'
         ]);
 
         if($validation->fails())
@@ -355,7 +356,8 @@ class Route extends Controller
             'zone' => 'required|integer',
             'service_type' =>'required',
             'service.*' =>'required',
-            'commission' =>'required'
+            'commission' =>'required',
+            'basedist'=>'required|integer'
         ]);
 
         if($validation->fails())

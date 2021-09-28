@@ -296,7 +296,7 @@
                                         <label class="full-name">Pincode</label>
                                         <span class="">
                                             <input type="text" id="fullname" placeholder="530000"
-                                                                class="form-control">
+                                                                class="form-control number">
                                             <span class="error-message">Please enter valid
                                                                 Pincode</span>
                                         </span>
@@ -350,6 +350,7 @@
                                         </span>
                                     </div>
                                 </div>
+
                             </div>
 
 

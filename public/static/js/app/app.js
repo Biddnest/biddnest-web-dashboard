@@ -114,6 +114,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
+        console.log(button);
         let buttonPretext = button.html();
         Logger.info("Loggin request payload", requestData);
 
@@ -193,7 +194,34 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                         var enq_id = response.data.booking.public_booking_id;
                         console.log(enq_id);
                         $('.enq-id').val(enq_id);
-                        return false;
+                    }
+
+                    if (form.hasClass("track_next1")) {
+                        console.log('entered');
+                            $('.step-1').css('display', 'none');
+                            $('.step-2').css('display', 'block');
+                            $(".completed-step-2").addClass("turntheme");
+                            $(".completed-step-1").removeClass("turntheme");
+                            $(".steps-step-2").addClass("color-purple");
+                            $(".steps-step-1").removeClass("color-purple");
+                    }
+
+                    if (form.hasClass("track_next2")) {
+                        $('.step-2').css('display', 'none');
+                        $('.step-3').css('display', 'block');
+                        $(".completed-step-3").addClass("turntheme");
+                        $(".completed-step-2").removeClass("turntheme");
+                        $(".steps-step-3").addClass("color-purple");
+                        $(".steps-step-2").removeClass("color-purple");
+                    }
+
+                    if (form.hasClass("track_next3")) {
+                        $('.step-3').css('display', 'none');
+                        $('.step-4').css('display', 'block');
+                        $(".completed-step-4").addClass("turntheme");
+                        $(".completed-step-3").removeClass("turntheme");
+                        $(".steps-step-4").addClass("color-purple");
+                        $(".steps-step-3").removeClass("color-purple");
                     }
                 }
 
@@ -1076,8 +1104,7 @@ $('.filterdate').datepicker({
 
 
 /* Website js code start */
-
-$("body").on('click', ".next1", function(event) {
+/*$("body").on('click', ".next1", function(event) {
     $(".step-1").wrap("<form id='parsley-form'></form>");
     let isValid = $('#parsley-form').parsley().validate();
     $(".step-1").unwrap();
@@ -1090,17 +1117,6 @@ $("body").on('click', ".next1", function(event) {
         $(".steps-step-2").addClass("color-purple");
         $(".steps-step-1").removeClass("color-purple");
     }
-});
-
-$("body").on('click', ".back2", function(event) {
-
-        $('.step-1').css('display', 'block');
-        $('.step-2').css('display', 'none');
-        $(".completed-step-1").addClass("turntheme");
-        $(".completed-step-2").removeClass("turntheme");
-        $(".steps-step-1").addClass("color-purple");
-        $(".steps-step-2").removeClass("color-purple");
-
 });
 
 $("body").on('click', ".next2", function(event) {
@@ -1116,15 +1132,6 @@ $("body").on('click', ".next2", function(event) {
         $(".steps-step-3").addClass("color-purple");
         $(".steps-step-2").removeClass("color-purple");
     }
-});
-
-$("body").on('click', ".back3", function(event) {
-    $('.step-2').css('display', 'block');
-    $('.step-3').css('display', 'none');
-    $(".completed-step-2").addClass("turntheme");
-    $(".completed-step-3").removeClass("turntheme");
-    $(".steps-step-2").addClass("color-purple");
-    $(".steps-step-3").removeClass("color-purple");
 });
 
 $("body").on('click', ".next3", function(event) {
@@ -1149,6 +1156,26 @@ $("body").on('click', ".next3", function(event) {
         $(".steps-step-4").addClass("color-purple");
         $(".steps-step-3").removeClass("color-purple");
     }
+});*/
+
+$("body").on('click', ".back2", function(event) {
+
+    $('.step-1').css('display', 'block');
+    $('.step-2').css('display', 'none');
+    $(".completed-step-1").addClass("turntheme");
+    $(".completed-step-2").removeClass("turntheme");
+    $(".steps-step-1").addClass("color-purple");
+    $(".steps-step-2").removeClass("color-purple");
+
+});
+
+$("body").on('click', ".back3", function(event) {
+    $('.step-2').css('display', 'block');
+    $('.step-3').css('display', 'none');
+    $(".completed-step-2").addClass("turntheme");
+    $(".completed-step-3").removeClass("turntheme");
+    $(".steps-step-2").addClass("color-purple");
+    $(".steps-step-3").removeClass("color-purple");
 });
 
 $("body").on('click', ".back4", function(event) {
@@ -1882,3 +1909,5 @@ $("body").on('click', ".sidebar-toggle_details td:not(:last-child)", function(ev
     var url = $(this).parent().data("url");
     window.location.href = url;
 });
+
+

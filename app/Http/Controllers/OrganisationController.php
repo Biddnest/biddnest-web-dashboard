@@ -64,6 +64,7 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission = $data['commission'];
+        $organizations->base_distance = $data['basedist'];
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value) {
@@ -195,7 +196,8 @@ class OrganisationController extends Controller
             "state"=>$data['address']['state'],
             "service_type"=>$data['service_type'],
             "meta"=>json_encode($meta),
-            "commission"=>$data['commission']
+            "commission"=>$data['commission'],
+            "base_distance"=>$data['basedist']
         ];
 
         $result_organization =Organization::where(["id"=>$id])->update($update_data);

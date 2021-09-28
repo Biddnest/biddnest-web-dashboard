@@ -1667,7 +1667,7 @@ class BookingsController extends Controller
                     "meta"=>json_encode($meta)
                 ]);
 
-            $id = $data['id'];
+            $id = $booking_exist->id;
         }
 
         if (!$result && !$result_status) {

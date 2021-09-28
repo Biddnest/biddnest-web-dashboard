@@ -41,6 +41,10 @@
                                        aria-selected="true">Edit Onboard Vendor</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                    >Base Prices</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Add Branch</a>
                                 </li>
                                 <li class="nav-item">
@@ -299,11 +303,20 @@
                                         <div class="form-input">
                                             <label class="full-name">Commission</label>
                                             <input type="text" id="commission" value="{{$organization->commission}}" placeholder="Commission" class="form-control" name="commission" required>
-                                            <span class="error-message">Please enter valid
-                                                                Commission</span>
+                                            <span class="error-message">Please enter valid Commission</span>
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="basedist" placeholder="Distance" value="{{$organization->base_distance}}"
+                                                   class="form-control number">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div id="comments">
@@ -312,12 +325,12 @@
                                         <div class="w-50"><a class="white-text p-10 cancel" href="{{route('vendors')}}"><button
                                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                         </div>
-                                        <div class="w-50 text-right"><button
-                                                    class="btn theme-bg white-text w-30">Update</button>
-
+                                        <div class="w-50 text-right">
+                                            <button class="btn theme-bg white-text w-30">Update</button>
                                         </div>
                                     </div>
                                 </div>
+
                             </form>
 
                         </div>
@@ -329,9 +342,6 @@
             </div>
 
         </div>
-
-
-
 
     </div>
 

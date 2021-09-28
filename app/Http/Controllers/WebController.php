@@ -748,6 +748,12 @@ class WebController extends Controller
         return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }
 
+    public function onbaordBasePrice(Request $request){
+        $prices =
+        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor.onboardbaseprice', ['id'=>$request->id, 'subservices'=>$subservices]);
+    }
+
     public function onbaordBranch(Request $request)
     {
         $branch = Organization::where(["parent_org_id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->get();

@@ -95,9 +95,10 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-9 book-move-questions-container">
 
-                        <form id="wizard" class="move-booking order_track_web" action="{{route('customer-bookmove')}}" method="POST"  {{-- data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
+                        <form id="wizard" class="move-booking order_track_web track_next1" action="{{route('customer-bookmove')}}" method="POST"  {{-- data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="row setup-content-3 step-1" id="step-1">
                                 <div class="row ">
                                     <div class="col-md-12 ">
@@ -161,7 +162,7 @@
                                                     Cancel
                                                 </button>
                                             </a>
-                                            <button class="btn btn-mdb-color btn-rounded nextBtn-3 float-right mt-2 mr-5 next1 " id="next1">Next
+                                            <button type="submit" class="btn btn-mdb-color btn-rounded nextBtn-3 float-right mt-2 mr-5 next1 " id="next1">Next
                                             </button>
                                         </div>
                                     </div>
@@ -170,7 +171,7 @@
                         </form>
 
                             <!-- second step -->
-                        <form id="wizard" class="move-booking order_track_web" action="{{route('delivery-bookmove')}}" method="POST" {{--data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
+                        <form id="wizard" class="move-booking order_track_web track_next2" action="{{route('delivery-bookmove')}}" method="POST" {{--data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="row setup-content-3 step-2" id="step-2" style="display: none;">
                                 <div class="col-md-12 col-paddingnon">
                                     <p class="text-muted ">Step 2 / 6</p>
@@ -405,7 +406,7 @@
                         </form>
 
                             <!-- Third Step -->
-                        <form id="wizard" class="move-booking order_track_web" action="{{route('inventory-bookmove')}}" method="POST" {{--data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
+                        <form id="wizard" class="move-booking order_track_web track_next3" action="{{route('inventory-bookmove')}}" method="POST" {{--data-next="redirect" data-redirect-type="hard" data-url="{{route('estimate-booking', ['id'=>':id'])}}"--}} data-alert="mega" id="myForm" data-parsley-validate>
                             <div class="setup-content-3 step-3" id="step-3" style="display: none;">
                                 <input type="hidden" class="enq-id" name="public_booking_id">
                                 <div class="col-md-12 heading-view ">
@@ -484,7 +485,7 @@
                                             Cancel
                                         </button>
                                     </a>
-                                    <button class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4 mr-4"  id="next4" style="margin-right: 40px !important;">
+                                    <button type="submit" class="btn btn-mdb-color mt-2 btn-rounded nextBtn-3 float-right next4 mr-4"  id="next4" style="margin-right: 40px !important;">
                                         Next
                                     </button>
                                     <button class="btn btn-mdb-color mt-2 btn-rounded cancelBtn float-right mr-3 back4 bview-btn" type="button">Back

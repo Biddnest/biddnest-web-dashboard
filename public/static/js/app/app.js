@@ -700,6 +700,33 @@ $("body").on('change', ".status-change", function(event) {
     });
 });
 
+$("body").on('click', ".vendor-status-change", function(event) {
+    Swal.fire({
+        title: 'Are you sure want to change status?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.update($(this).data("url"), {}, function (response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    tinySuccessAlert("Status changed Successfully", response.message);
+                    location.reload();
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
+            });
+        }
+        else{
+            return false;
+        }
+    });
+});
+
 $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
     console.log(data);

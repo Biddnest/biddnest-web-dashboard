@@ -631,9 +631,14 @@ class OrganisationController extends Controller
             return Helper::response(false,"Details are not updated for this vendor, Please update bank details.");
         }
 
+        if($status == OrganizationEnums::$STATUS['pending_approval']){
+            $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['pending_approval']]);
+        }
+
         if($status == OrganizationEnums::$STATUS['active']){
             $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['active']]);
         }
+
         if($status == OrganizationEnums::$STATUS['suspended']){
             $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['suspended']]);
         }

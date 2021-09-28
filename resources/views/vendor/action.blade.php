@@ -67,7 +67,7 @@
                                     <p class="font14"><i>
                                             This vendor account is activated, You may suspend this vendor below.</i>
                                     </p>
-                                    <a class="white-text p-10 status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["suspended"]])}}">
+                                    <a class="white-text p-10 vendor-status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["suspended"]])}}">
                                         <button type="button" class="btn theme-bg theme-text w-30 white-bg">Suspend This Vendor</button></a>
 
                                 @elseif($organization->status == \App\Enums\OrganizationEnums::$STATUS["pending_approval"])
@@ -75,7 +75,7 @@
                                     <p class="font14"><i>
                                             This vendor is ready to be activated.</i>
                                     </p>
-                                    <a class="white-text p-10 status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
+                                    <a class="white-text p-10 vendor-status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
                                         <button type="button" class="btn theme-bg theme-text w-30 white-bg">Approve This Vendor</button></a>
 
                                 @elseif($organization->status == \App\Enums\OrganizationEnums::$STATUS["suspended"])
@@ -83,7 +83,7 @@
                                     <p class="font14"><i>
                                             This vendor account is suspended, You may activate this vendor below.</i>
                                     </p>
-                                    <a class="white-text p-10 status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
+                                    <a class="white-text p-10 vendor-status-change" data-url="{{route("onboard-action-status", ['id'=>$id, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
                                         <button type="button" class="btn theme-bg theme-text w-30 white-bg">Activate This Vendor</button></a>
 
                                 @endif

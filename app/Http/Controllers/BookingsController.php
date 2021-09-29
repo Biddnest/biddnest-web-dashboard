@@ -1530,22 +1530,25 @@ class BookingsController extends Controller
                 $data['destination']['lat']=$booking_exist->destination_lat;
                 $data['destination']['lng']=$booking_exist->destination_lng;
 
-                $economic_price = InventoryController::getEconomicPrice($data, $inventory_quantity_type, $booking_exist->zone_id, $web, $created_by_support);
-                $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-                $economic_price += $economic_price * ($cost_structure["tax"] / 100);
+                $economic_price = $data['movement_type'] != "custom" ? InventoryController::getEconomicPrice($data, $inventory_quantity_type, $booking_exist->zone_id, $web, $created_by_support) : null;
+                if($economic_price){
+                    $economic_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+                    $economic_price += $economic_price * ($cost_structure["tax"] / 100);
 
-                /*Rounding to 2 decimals*/
-                $economic_price = number_format($economic_price,2,".","");
-                //  $economic_price = str_replace(",","",$economic_price);
+                    /*Rounding to 2 decimals*/
+                    $economic_price = number_format($economic_price, 2, ".", "");
+                    //  $economic_price = str_replace(",","",$economic_price);
+                    }
 
-                $primium_price = InventoryController::getPremiumPrice($data, $inventory_quantity_type, $booking_exist->zone_id, $web, $created_by_support);
-                $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
-                // $primium_price += $primium_price * ($cost_structure["tax"] / 100);
+                $primium_price = $data['movement_type'] != "custom" ? InventoryController::getPremiumPrice($data, $inventory_quantity_type, $booking_exist->zone_id, $web, $created_by_support) : null;
+                if($primium_price){
+                    $primium_price += $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+                    // $primium_price += $primium_price * ($cost_structure["tax"] / 100);
 
-                /*Rounding to 2 decimals*/
-                $primium_price = number_format($primium_price,2, ".","");
-                //  $primium_price = str_replace(",","",$economic_price);
-
+                    /*Rounding to 2 decimals*/
+                    $primium_price = number_format($primium_price, 2, ".", "");
+                    //  $primium_price = str_replace(",","",$economic_price);
+                }
                 $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
             }
         } catch (Exception $e) {

@@ -12,6 +12,7 @@ use App\StringFormatter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Nullable;
 
 
 /**
@@ -460,13 +461,14 @@ class ApiRouteController extends Controller
 //            'public_booking_id'=>"required|string",
             'category'=>'required',
             'heading' => 'required|string',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'images.*'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::createForUserApp($request->token_payload->id, $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::createForUserApp($request->token_payload->id, $request->category, ["public_booking_id"=>$request->public_booking_id], $request->images, $request->heading, $request->desc);
     }
 
     public function getRecentBooking(Request $request)

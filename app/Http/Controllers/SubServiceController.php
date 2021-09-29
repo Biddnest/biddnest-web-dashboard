@@ -33,7 +33,7 @@ class SubServiceController extends Controller
         $service=new ServiceSubservice;
         $service->service_id = $data['category'];
         $service->subservice_id = $subservice->id;
-        $service->max_extra_items = $subservice->id;
+        $service->max_extra_items = $subservice['max_extra_items'];
         $service_result = $service->save();
 
         if($data['inventories']) {
@@ -52,7 +52,7 @@ class SubServiceController extends Controller
             foreach ($data['extra_inventories'] as $inv_id) {
                 $extra_inventory =new SubServiceExtraInventory();
                 $extra_inventory->subservice_id=$subservice->id;
-                $extra_inventory->inventory_id=$inv_id;
+                $extra_inventory->inventory_id=$inv_id['id'];
                 $extra_inventory_result=$inventory->save();
             }
         }
@@ -115,14 +115,14 @@ class SubServiceController extends Controller
             foreach ($data as $filds) {
                 $inventory =new SubserviceInventory();
                 $inventory->subservice_id=$id;
-                $inventory->inventory_id=$filds["name"];
+                $inventory->inventory_id=$filds["id"];
                 $inventory->size=$filds['size'];
                 $inventory->material=$filds['material'];
                 $inventory->quantity=$filds['quantity'];
                 $inventory->save();
             }
         }
-        if($data['extra_inventories']) {
+        if($extra_inventories) {
             SubServiceExtraInventory::where('subservice_id', $id)->delete();
             foreach ($extra_inventories as $inv_id) {
                 $extra_inventory =new SubServiceExtraInventory();

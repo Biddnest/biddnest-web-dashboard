@@ -35,6 +35,7 @@ use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\SliderZone;
 use App\Models\Subservice;
+use App\Models\SubserviceInventory;
 use App\Models\Testimonials;
 use App\Models\Ticket;
 use App\Models\TicketReply;
@@ -851,10 +852,18 @@ class WebController extends Controller
     {
         $sub_category = Subservice::where('id', $request->id)->with('services')->with(['inventorymap'=>function($query){
             $query->with('meta');
+        }])->with(['extraitems'=>function($query){
+            $query->with('meta');
         }])->first();
         $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category]);
+
+        $inventory_extra =$inventory;
+        $inv_extra = SubserviceInventory::where('subservice_id', $request->id)->pluck('inventory_id');
+        if($inv_extra)
+            $inventory_extra = Inventory::whereNotIn('id', $inv_extra)->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+
+        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category, 'inventories_extra'=>$inventory_extra]);
     }
 
     public function sidebar_subcategory(Request $request)

@@ -136,11 +136,11 @@ class Route extends Controller
             'name' => 'required',
             'image' => 'required',
             'category'=>'required|integer',
-            'inventories.*.name'=>'required',
+            'inventories.*.id'=>'required',
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
             'inventories.*.quantity'=>'required',
-            'extra_inventories.*'=>'required',
+            'extra_inventories.*.id'=>'required',
             'max_extra_items'=>'required',
         ]);
 
@@ -191,11 +191,11 @@ class Route extends Controller
             'image' => 'required',
             'id' => 'required|integer',
             'category'=>'required|integer',
-            'inventories.*.name'=>'required',
+            'inventories.*.id'=>'required',
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
             'inventories.*.quantity'=>'required',
-            'extra_inventories.*'=>'required',
+            'extra_inventories.*.id'=>'required',
             'max_extra_items'=>'required',
         ]);
 

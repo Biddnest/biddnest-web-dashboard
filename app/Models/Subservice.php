@@ -26,4 +26,8 @@ class Subservice extends Model
     public function items(){
         return $this->hasManyThrough(Inventory::class, SubserviceInventory::class, 'inventory_id','id','id','subservice_id');
     }
+
+    public function extraitems(){
+        return $this->hasManyThrough(Inventory::class, SubServiceExtraInventory::class, 'inventory_id','id','id','subservice_id');
+    }
 }

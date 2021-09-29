@@ -9,8 +9,8 @@ class SubServiceExtraInventory extends Model
 {
     use HasFactory;
     protected $table="subservices_extra_inventory";
-    
+
     public function meta(){
-        return $this->hasMany(Inventory::class);
+        return $this->hasOne(Inventory::class,"id","inventory_id");
     }
 }

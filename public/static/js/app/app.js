@@ -329,16 +329,6 @@ $("body").on('click', ".repeater", function(event) {
     var id=$(".category-select").val();
     var type=$("#sub_"+id).data("type");
 
-    var rows = 0;
-    rows = document.getElementById("extra-itms").rows.length;
-    var count_extra = $(".count").val();
-    var count = parseInt(document.getElementById("count").value) + parseInt(1);
-
-    if(rows >= count){
-        $(".repeater-count").parent().addClass("hidden");
-        $(".repeater-count").addClass("hidden");
-    }
-
     if(type == 0)
     {
         $(".fixed").removeClass("hidden");
@@ -1916,17 +1906,6 @@ $("body").on('click', ".sidebar-toggle_booking", function(event) {
 $("body").on('click', ".sidebar-toggle_details td:not(:last-child)", function(event) {
     var url = $(this).parent().data("url");
     window.location.href = url;
-});
-
-$("body").on('keyup', ".extra-inv-count", function(event) {
-    var rows = 0;
-    rows = document.getElementById("extra-itms").rows.length;
-    var count = parseInt(document.getElementById("count").value) + parseInt(1);
-    console.log(count);
-    if(rows <= count) {
-        $(".repeater-count").parent().removeClass("hidden");
-        $(".repeater-count").removeClass("hidden");
-    }
 });
 
 

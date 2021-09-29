@@ -8,7 +8,9 @@ use App\Helper;
 use App\Models\Booking;
 use App\Models\Ticket;
 use App\Models\TicketReply;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManager;
+use Monolog\Logger;
 
 
 class TicketController extends Controller
@@ -122,8 +124,9 @@ class TicketController extends Controller
     {
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        foreach ($ticket_images as $key => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "tickets/" . $sender_id);
+        foreach ($ticket_images as $key_img => $image) {
+            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
+           Log::info($images);
         }
 
         switch ($ticket_type) {
@@ -152,7 +155,7 @@ class TicketController extends Controller
                 $ticket->booking_id = $booking['id'];
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
-                $ticket->image = $images;
+                $ticket->image = json_encode($images);
                 break;
 
             case TicketEnums::$TYPE['order_cancellation']:
@@ -183,7 +186,7 @@ class TicketController extends Controller
                 $ticket->booking_id = $booking['id'];
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
-                $ticket->image = $images;
+                $ticket->image = json_encode($images);
                 break;
 
             case TicketEnums::$TYPE['complaint']:
@@ -195,7 +198,7 @@ class TicketController extends Controller
                 $ticket->desc = $body;
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
-                $ticket->image = $images;
+                $ticket->image = json_encode($images);
                 break;
 
             case TicketEnums::$TYPE['call_back']:
@@ -207,7 +210,7 @@ class TicketController extends Controller
                 $ticket->desc = $body;
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
-                $ticket->image = $images;
+                $ticket->image = json_encode($images);
                 break;
 
             case TicketEnums::$TYPE['service_request']:
@@ -219,7 +222,7 @@ class TicketController extends Controller
                 $ticket->desc = $body;
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
-                $ticket->image = $images;
+                $ticket->image = json_encode($images);
                 break;
 
             default:

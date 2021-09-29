@@ -31,21 +31,25 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edit Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edit Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active p-15" id="quotation" href="#">Add Branch</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                >Pricing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active p-15" id="quotation" href="#">Branch</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
-                                >Vendor Banking Details</a>
+                                >Banking Details</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
                                 >Actions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Vendor Roles</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Roles</a>
                             </li>
                         </ul>
                     </h3>
@@ -101,7 +105,7 @@
                     </div>
                 </div>
                 <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
-                    <div class="w-50"><a class="white-text p-10" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">
+                    <div class="w-50"><a class="white-text p-10" href="{{route("onboard-base-price", ['id'=>$id])}}">
                             <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                     </div>
                     <div class="w-50 text-right">

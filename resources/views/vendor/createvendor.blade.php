@@ -54,7 +54,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15 disabled" id="quotation" href="#"
-                                    >Vendor Banking Details</a>
+                                    >Banking Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15 disabled" id="quotation" href="#"
@@ -370,6 +370,17 @@
                                             <label class="full-name">Base distance in km</label>
                                             <span class="">
                                             <input type="text" name="basedist" placeholder="Distance"
+                                                   class="form-control number">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Extra Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="extrabasedist" placeholder="Extra Distance"
                                                    class="form-control number">
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>

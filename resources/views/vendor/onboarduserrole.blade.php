@@ -30,21 +30,25 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",["id"=>$id])}}">Edit Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",["id"=>$id])}}">Edit Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id])}}">Add Branch</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                >Pricing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id])}}">Branch</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors",["id"=>$id])}}"
-                                >Vendor Banking Details</a>
+                                >Banking Details</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
                                 >Actions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active p-15" id="quotation" href="#">Vendor Roles</a>
+                                <a class="nav-link active p-15" id="quotation" href="#">Roles</a>
                             </li>
                         </ul>
                     </h3>

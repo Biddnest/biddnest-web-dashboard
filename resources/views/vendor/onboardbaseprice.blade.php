@@ -41,7 +41,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
-                                >Vendor Banking Details</a>
+                                >Banking Details</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
@@ -59,7 +59,7 @@
                         <input type="hidden" name="id" value="{{$id}}">
                         <div class="w-100">
                             <div class="tab-pane show" style="min-height: 50vh">
-                                <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
+                                <table class="table  text-left p-0 theme-text mb-0 primary-table p-15 distance-price">
                                     <thead class="secondg-bg p-0">
                                     <tr>
                                         <th scope="col" style="padding:14px">Category</th>
@@ -67,6 +67,8 @@
                                         <th scope="col" class="text-center" style="padding:14px">BP Premium</th>
                                         <th scope="col" class="text-center" style="padding:14px">MP Economic</th>
                                         <th scope="col" class="text-center" style="padding:14px">MP Premium</th>
+                                        <th scope="col" class="text-center" style="padding:14px">AP Economic</th>
+                                        <th scope="col" class="text-center" style="padding:14px">AP Premium</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -100,6 +102,18 @@
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
                                                         <div class="form-input table-input"><input type="number" value="{{$prices['mp_premium'] ?? 0.00}}" class="form-control border-left" name="subservice[][market][price][premium]" id="" placeholder="500"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center base-price">
+                                                        <div class="currancy text-center">₹</div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['additional_distance_economic_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][additional][price][economy]" id="" placeholder="500"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center base-price">
+                                                        <div class="currancy text-center">₹</div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['additional_distance_premium_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][additional][price][premium]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                             </tr>

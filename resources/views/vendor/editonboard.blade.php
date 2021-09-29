@@ -38,25 +38,25 @@
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
                                        href="#order" role="tab" aria-controls="home"
-                                       aria-selected="true">Edit Onboard Vendor</a>
+                                       aria-selected="true">Edit Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
-                                    >Base Prices</a>
+                                    >Pricing</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Add Branch</a>
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Branch</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
-                                    >Vendor Banking Details</a>
+                                    >Banking Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
                                     >Actions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Vendor Roles</a>
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Roles</a>
                                 </li>
                             </ul>
                         </h3>
@@ -312,6 +312,17 @@
                                             <label class="full-name">Base distance in km</label>
                                             <span class="">
                                             <input type="text" name="basedist" placeholder="Distance" value="{{$organization->base_distance}}"
+                                                   class="form-control number">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Extra Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="extrabasedist" placeholder="Extra Distance" value="{{$organization->additional_distance}}"
                                                    class="form-control number">
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>

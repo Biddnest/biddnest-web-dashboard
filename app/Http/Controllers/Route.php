@@ -319,7 +319,8 @@ class Route extends Controller
             'service_type' =>'required|string',
             'service.*' =>'required',
             'commission' =>'required',
-            'basedist'=>'required|numeric'
+            'basedist'=>'required|numeric',
+            'extrabasedist'=>'required|numeric'
         ]);
 
         if($validation->fails())
@@ -361,7 +362,8 @@ class Route extends Controller
             'service_type' =>'required',
             'service.*' =>'required',
             'commission' =>'required',
-            'basedist'=>'required|integer'
+            'basedist'=>'required|integer',
+            'extrabasedist'=>'required|numeric'
         ]);
 
         if($validation->fails())
@@ -472,6 +474,8 @@ class Route extends Controller
             'subservice.*.bidnest.price.premium'=>'required',
             'subservice.*.market.price.economy'=>'required',
             'subservice.*.market.price.premium'=>'required',
+            'subservice.*.additional.price.economy'=>'required',
+            'subservice.*.additional.price.premium'=>'required',
         ]);
 
         if($validation->fails())

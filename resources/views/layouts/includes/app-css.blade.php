@@ -1121,4 +1121,12 @@
                 border-top-left-radius: 0px !important;
                 border-bottom-left-radius: 0px !important;
             }
+
+            .distance-price .text-center{
+                padding: 0.60rem !important;
+            }
+
+            .Dashboard-lcards .table .distance-price td{
+                padding-left: 0 !important;
+            }
         </style>

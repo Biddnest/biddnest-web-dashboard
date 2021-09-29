@@ -66,6 +66,7 @@ class OrganisationController extends Controller
         $organizations->meta =json_encode($meta);
         $organizations->commission = $data['commission'];
         $organizations->base_distance = $data['basedist'];
+        $organizations->additional_distance = $data['extrabasedist'];
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value) {
@@ -198,7 +199,8 @@ class OrganisationController extends Controller
             "service_type"=>$data['service_type'],
             "meta"=>json_encode($meta),
             "commission"=>$data['commission'],
-            "base_distance"=>$data['basedist']
+            "base_distance"=>$data['basedist'],
+            "additional_distance"=>$data['extrabasedist']
         ];
 
         $result_organization =Organization::where(["id"=>$id])->update($update_data);
@@ -680,6 +682,8 @@ class OrganisationController extends Controller
             $pricing->mp_premium = $subservice['market']['price']['premium'];
             $pricing->economic_margin_percentage = $economic_margin_percentage;
             $pricing->premium_margin_percentag = $premium_margin_percentag;
+            $pricing->additional_distance_economic_price = $subservice['additional']['price']['economy'];
+            $pricing->additional_distance_premium_price = $subservice['additional']['price']['premium'];
             $result_pricing = $pricing->save();
         }
 

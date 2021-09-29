@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterRenameColumnSubserviceprice extends Migration
+class AlterAddColumnExtraDistanceSubservicePrice extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AlterRenameColumnSubserviceprice extends Migration
     public function up()
     {
         Schema::table('subservice_price', function (Blueprint $table) {
-            $table->renameColumn('mp_economic_margin_percentage','economic_margin_percentage');
-            $table->renameColumn('bp_premium_margin_percentage','premium_margin_percentage');
+            $table->tinyInteger('additional_distance_economic_price')->nullable()->after('premium_margin_percentage');
+            $table->tinyInteger('additional_distance_premium_price')->nullable()->after('additional_distance_economic_price');
         });
     }
 

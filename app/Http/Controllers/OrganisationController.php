@@ -655,71 +655,38 @@ class OrganisationController extends Controller
     public static function addPrices($data, $id){
         $exist = Organization::findOrFail($id);
         $pricing = SubservicePrice::where("organization_id", $id)->get();
-        if(!$pricing) {
-            if(!$exist)
-                return Helper::response(false,"Incorrect Organization id.");
+        if($pricing)
+            $delete = SubservicePrice::where("organization_id", $id)->delete();
 
+        if(!$exist)
+            return Helper::response(false,"Incorrect Organization id.");
+
+        foreach ($data['subservice'] as $subservice){
             $pricing = new SubservicePrice();
-            foreach ($data['subservice'] as $subservice){
+
+            if($subservice['market']['price']['economy'] == 0 && $subservice['market']['price']['premium']== 0)
+            {
+                $economic_margin_percentage = 0;
+                $premium_margin_percentag = 0;
+            }else{
                 $economic_margin_percentage = (($subservice['market']['price']['economy'] - $subservice['bidnest']['price']['economy'])/$subservice['market']['price']['economy'])*100;
                 $premium_margin_percentag = (($subservice['market']['price']['premium'] - $subservice['bidnest']['price']['premium'])/$subservice['market']['price']['premium'])*100;
-                $pricing->vendor_id = $id;
-                $pricing->subservice_id = $subservice['id'];
-                $pricing->bp_economic = $subservice['bidnest']['price']['economy'];
-                $pricing->bp_premium = $subservice['bidnest']['price']['premium'];
-                $pricing->mp_economic = $subservice['market']['price']['economy'];
-                $pricing->mp_premium = $subservice['market']['price']['premium'];
-                $pricing->economic_margin_percentage = $economic_margin_percentage;
-                $pricing->premium_margin_percentag = $premium_margin_percentag;
-                $result_pricing = $pricing->save();
             }
-
-            if(!$result_pricing)
-                return Helper::response(false,"Couldn't save data");
-
-            return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
-        } else {
-            foreach ($pricing as $price){
-                foreach ($data['subservice'] as $subservice){
-                    if($pricing->subservice_id == $subservice['id']){
-                        $economic_margin_percentage = (($subservice['market']['price']['economy'] - $subservice['bidnest']['price']['economy'])/$subservice['market']['price']['economy'])*100;
-                        $premium_margin_percentag = (($subservice['market']['price']['premium'] - $subservice['bidnest']['price']['premium'])/$subservice['market']['price']['premium'])*100;
-
-                        $update_data=[
-                            "subservice_id"=>$subservice['id'],
-                            "bp_economic"=>$subservice['bidnest']['price']['economy'],
-                            "bp_premium"=>$subservice['bidnest']['price']['premium'],
-                            "mp_economic"=>$subservice['market']['price']['economy'],
-                            "mp_premium"=>$subservice['market']['price']['premium'],
-                            "economic_margin_percentage"=>$economic_margin_percentage,
-                            "premium_margin_percentag"=>$premium_margin_percentag
-                        ];
-
-                        $result_pricing= SubservicePrice::where("id", $subservice['pricing_id'])->update($update_data);
-                    }
-                    else{
-                        $pricing = new SubservicePrice();
-                        foreach ($data['subservice'] as $subservice){
-                            $economic_margin_percentage = (($subservice['market']['price']['economy'] - $subservice['bidnest']['price']['economy'])/$subservice['market']['price']['economy'])*100;
-                            $premium_margin_percentag = (($subservice['market']['price']['premium'] - $subservice['bidnest']['price']['premium'])/$subservice['market']['price']['premium'])*100;
-                            $pricing->vendor_id = $id;
-                            $pricing->subservice_id = $subservice['id'];
-                            $pricing->bp_economic = $subservice['bidnest']['price']['economy'];
-                            $pricing->bp_premium = $subservice['bidnest']['price']['premium'];
-                            $pricing->mp_economic = $subservice['market']['price']['economy'];
-                            $pricing->mp_premium = $subservice['market']['price']['premium'];
-                            $pricing->economic_margin_percentage = $economic_margin_percentage;
-                            $pricing->premium_margin_percentag = $premium_margin_percentag;
-                            $result_pricing = $pricing->save();
-                        }
-                    }
-                }
-            }
-
-            if(!$result_pricing)
-                return Helper::response(false,"Couldn't Update data");
-
-            return Helper::response(true,"Update data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
+            $pricing->organization_id = $id;
+            $pricing->subservice_id = $subservice['id'];
+            $pricing->bp_economic = $subservice['bidnest']['price']['economy'];
+            $pricing->bp_premium = $subservice['bidnest']['price']['premium'];
+            $pricing->mp_economic = $subservice['market']['price']['economy'];
+            $pricing->mp_premium = $subservice['market']['price']['premium'];
+            $pricing->economic_margin_percentage = $economic_margin_percentage;
+            $pricing->premium_margin_percentag = $premium_margin_percentag;
+            $result_pricing = $pricing->save();
         }
+
+        if(!$result_pricing)
+            return Helper::response(false,"Couldn't save data");
+
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
+
     }
 }

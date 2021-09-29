@@ -463,6 +463,23 @@ class Route extends Controller
 
     }
 
+    public function prices_add(Request $request){
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'subservice.*.pricing_id'=>'nullable',
+            'subservice.*.id'=>'required',
+            'subservice.*.bidnest.price.economy'=>'required',
+            'subservice.*.bidnest.price.premium'=>'required',
+            'subservice.*.market.price.economy'=>'required',
+            'subservice.*.market.price.premium'=>'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addPrices($request->all(), $request->id, $request->pricing_id);
+    }
+
     public function bank_add(Request $request)
     {
         $validation = Validator::make($request->all(),[

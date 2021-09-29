@@ -62,4 +62,7 @@ class Organization extends Model
         return $this->hasMany(Booking::class);
     }
 
+    public function subservicePrice(){
+        return $this->hasMany(SubservicePrice::class);
+    }
 }

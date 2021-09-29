@@ -31,7 +31,7 @@ class BidEngineCumulativeDBUpdates extends Migration
             $table->foreign("subservice_id")->references("id")->on("subservices");
 
             $table->unsignedBigInteger("vendor_id")->index("vendor_id");
-            $table->foreign("vendor_id")->references("id")->on("vendors");
+            $table->foreign("vendor_id")->references("id")->on("organizations");
 
             $table->decimal("mp_economic",10,2)->nullable();
             $table->decimal("mp_premium",10,2)->nullable();

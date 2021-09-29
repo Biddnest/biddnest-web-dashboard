@@ -53,9 +53,10 @@
                         </ul>
                     </h3>
                 </div>
-                <form>
+                <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-branch-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                     <div class="tab-content " id="myTabContent">
                         <!-- form starts -->
+                        <input type="hidden" name="id" value="{{$id}}">
                         <div class="w-100">
                             <div class="tab-pane show" style="min-height: 50vh">
                                 <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
@@ -70,7 +71,9 @@
                                     </thead>
                                     <tbody>
                                         @foreach($subservices as $category)
+                                            @php $prices = \App\Models\SubservicePrice::where(["subservice_id"=>$category->id, "organization_id"=>$id])->first(); @endphp
                                             <tr class="tb-border">
+                                                <input type="hidden" name="subservice[][pricing_id]" value="{{$prices['id'] ?? ''}}">
                                                 <td scope="row">
                                                     <span>{{ucwords($category->name)}}</span>
                                                     <input type="hidden" value="{{$category->id}}" name="subservice[][id]">
@@ -78,25 +81,25 @@
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control border-left" name="subservice[][bidnest][price][economy]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_economic'] ?? 0.00}}" class="form-control border-left" name="subservice[][bidnest][price][economy]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control border-left" name="subservice[][bidnest][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_premium'] ?? 0.00}}" class="form-control border-left" name="subservice[][bidnest][price][premium]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control border-left" name="subservice[][market][price][economy]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_economic'] ?? 0.00}}" class="form-control border-left" name="subservice[][market][price][economy]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control border-left" name="subservice[][market][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_premium'] ?? 0.00}}" class="form-control border-left" name="subservice[][market][price][premium]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                             </tr>

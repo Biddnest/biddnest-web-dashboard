@@ -1055,7 +1055,7 @@ export function initInventoryDropzone() {
         $('.dropzone-import').dropzone({
             url: url,
             paramName: "file",
-            acceptedFiles: ".csv,.xls",
+            acceptedFiles: ".csv,.xls, .xlsx",
             complete: function(response){
                 console.log(response);
             },

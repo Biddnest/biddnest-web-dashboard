@@ -15,6 +15,7 @@ use App\Models\InventoryPrice;
 use App\Models\Organization;
 use App\Models\Service;
 use App\Models\SubserviceInventory;
+use App\Models\BookingOrganizationGeneratedPrice;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -255,206 +256,131 @@ class InventoryController extends Controller
             return Helper::response(true,"Service deleted successfully");
     }
 
-    public static function getEconomicPrice($data, $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
+    public static function generateOrganizationBasePrices($data, $booking_data){
+        $output =[];
+
+        $vendors = Organization::where("zone_id",$booking_data['zone_id'])
+            ->where('status',OrganizationEnums::$STATUS['active'])
+            ->get();
+
+        $total_distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+
+        foreach($vendors as $vendor)
+        {
+
+            $additional_distance = $total_distance - $vendor['base_distance'];
+
+            $mp_economic = 0.00;
+            $bp_economic = 0.00;
+            $mp_premium = 0.00;
+            $bp_premium = 0.00;
+
+            if(!$data['custom_movement']){
+                $query = SubservicePrice::where(
+                    "organization_id",$vendor['id'])
+                    ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])
+                        ->pluck('id')[0])->first();
+
+                $mp_economic = $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']);
+
+                $bp_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']);
+
+                $mp_premium = $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']);
+
+                $bp_premium = $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']);
+
+            }
+
+            /*Slot for items*/
+
+            /*Slot for items*/
+
+
+            $economic_percent = (($mp_economic - $bp_economic)/$mp_economic)*100;
+            $premium_percent = (($mp_premium - $bp_premium)/$mp_premium)*100;
+
+            $price_calc = new BookingOrganizationGeneratedPrice();
+            $price_calc->booking_id = $booking_data['id'];
+            $price_calc->organization_id = $vendor['id'];
+            $price_calc->mp_economic = $mp_economic;
+            $price_calc->mp_premium = $mp_premium;
+            $price_calc->bp_economic = $bp_economic;
+            $price_calc->bp_premium = $bp_premium;
+            $price_calc->economic_margin_percentage = $economic_percent;
+            $price_calc->premium_margin_percentage = $premium_percent;
+
+
+            if($price_calc->save())
+                return true;
+            else
+                return false;
+        }
+    }
+
+
+    public static function getEconomicPrice($data, $booking_data, $vendor_price=false, $web=false, $created_by_support=false)
     {
 
-        $least_agent_price = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-                ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min('bp_economic');
 
-        $average_margin_percentage = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->avg('economic_margin_percentage');
-        //extra_km * extra rate -> average
 
-        /* s -> d = 100 | b -> 25, extra-> 75
-         * va | ed -> 5, edp -> 100 | extp -> 15*100 = 1500 | finalest = base_price +1500
-         * vb | ed -> 3, edp -> 70 | extp -> 25*70 = 1750 | finalest = base_price +1750
-         * vb | ed -> 20, edp -> 200 | extp -> 4*200 = 800 | finalest = base_price +800
-         * avrextraprice = 1500+1750+800/3 = 4050/3 = 1350rs
-         * */
-
-        $total_distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
-
-
-
-        $eligible_vendors = Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-        ->get();
-
-        $all_vendor_extra_price=[];
-        foreach($eligible_vendors as $vendor){
-            $extra_distance = $total_distance - $vendor['base_distance'];
-
-            $extra_distance_price = SubservicePrice::where(
-                "organization_id",$vendor['id'])
-                ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])
-                ->pluck('id')[0])
-                ->pluck('additional_distance_economic_price')[0];
-
-            $all_vendor_extra_price[] = ceil($extra_distance/$vendor['additional_distance']) * $extra_distance_price;
-        }
-
-        $avg_extra_km_price = array_sum($all_vendor_extra_price) ?: 0.00;
-
-
-        return $initial_customer_quote = $least_agent_price+(($average_margin_percentage/100)*$least_agent_price) + $avg_extra_km_price;
+        if(!$vendor_price)
+            return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);
+        else
+            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 
     }
 
-    public static function getPremiumPrice($data , $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
+    public static function getPremiumPrice($data , $booking_data, $vendor_price=false, $web=false, $created_by_support=false)
     {
-
-
-        $least_agent_price = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min('bp_premium');
 
-        $average_margin_percentage = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->avg('premium_margin_percentage');
 
-       /* //extra_km * extra rate -> average
-
-        /* s -> d = 100 | b -> 25, extra-> 75
-         * va | ed -> 5, edp -> 100 | extp -> 15*100 = 1500 | finalest = base_price +1500
-         * vb | ed -> 3, edp -> 70 | extp -> 25*70 = 1750 | finalest = base_price +1750
-         * vb | ed -> 20, edp -> 200 | extp -> 4*200 = 800 | finalest = base_price +800
-         * avrextraprice = 1500+1750+800/3 = 4050/3 = 1350rs
-         * */
-
-        $total_distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
-
-
-
-        $eligible_vendors = Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->get();
-
-        $all_vendor_extra_price=[];
-        foreach($eligible_vendors as $vendor){
-            $extra_distance = $total_distance - $vendor['base_distance'];
-
-            $extra_distance_price = SubservicePrice::where(
-                "organization_id",$vendor['id'])
-                ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])
-                    ->pluck('id')[0])
-                ->pluck('additional_distance_premium_price')[0];
-
-            $all_vendor_extra_price[] = ceil($extra_distance/$vendor['additional_distance']) * $extra_distance_price;
-        }
-
-        $avg_extra_km_price = array_sum($all_vendor_extra_price) ?: 0.00;
-
-        return $initial_customer_quote = $least_agent_price+(($average_margin_percentage/100)*$least_agent_price) + $avg_extra_km_price;
+            if(!$vendor_price)
+                return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);
+            else
+                return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 
     }
 
-    public static function getOrganizationEconomicPrice($data, $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
+    public static function getOrganizationEconomicPrice($data, $booking_data,  $zone_id, $web=false, $created_by_support=false)
     {
+        if(!$data['custom_movement']){
+            $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->min('bp_economic');
 
-        $least_agent_price = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
-            ->min('bp_economic');
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->avg('economic_margin_percentage');
 
-        $average_margin_percentage = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
-            ->avg('economic_margin_percentage');
-        //extra_km * extra rate -> average
+            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 
-        /* s -> d = 100 | b -> 25, extra-> 75
-         * va | ed -> 5, edp -> 100 | extp -> 15*100 = 1500 | finalest = base_price +1500
-         * vb | ed -> 3, edp -> 70 | extp -> 25*70 = 1750 | finalest = base_price +1750
-         * vb | ed -> 20, edp -> 200 | extp -> 4*200 = 800 | finalest = base_price +800
-         * avrextraprice = 1500+1750+800/3 = 4050/3 = 1350rs
-         * */
-
-        $total_distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
-
-
-
-        $eligible_vendors = Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->get();
-
-        $all_vendor_extra_price=[];
-        foreach($eligible_vendors as $vendor){
-            $extra_distance = $total_distance - $vendor['base_distance'];
-
-            $extra_distance_price = SubservicePrice::where(
-                "organization_id",$vendor['id'])
-                ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])
-                    ->pluck('id')[0])
-                ->pluck('additional_distance_economic_price')[0];
-
-            $all_vendor_extra_price[] = ceil($extra_distance/$vendor['additional_distance']) * $extra_distance_price;
         }
-
-        $avg_extra_km_price = array_sum($all_vendor_extra_price) ?: 0.00;
-
-
-        return $initial_org_quote = $least_agent_price+((0.25 * (($average_margin_percentage/100)*$least_agent_price)) - 1) + $avg_extra_km_price;
-
+        else
+            return null;
     }
 
-    public static function getOrganizationPremiumPrice($data, $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
+    public static function getOrganizationPremiumPrice($data, $booking_data, $web=false, $created_by_support=false)
     {
+        if(!$data['custom_movement']){
+            $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->min('bp_premium');
 
-        $least_agent_price = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
-            ->min('bp_premium');
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->avg('premium_margin_percentage');
 
-        $average_margin_percentage = SubservicePrice::whereIn(
-            "organization_id",Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->pluck('id'))
-            ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])->pluck('id')[0])
-            ->avg('premium_margin_percentage');
-        //extra_km * extra rate -> average
-
-        /* s -> d = 100 | b -> 25, extra-> 75
-         * va | ed -> 5, edp -> 100 | extp -> 15*100 = 1500 | finalest = base_price +1500
-         * vb | ed -> 3, edp -> 70 | extp -> 25*70 = 1750 | finalest = base_price +1750
-         * vb | ed -> 20, edp -> 200 | extp -> 4*200 = 800 | finalest = base_price +800
-         * avrextraprice = 1500+1750+800/3 = 4050/3 = 1350rs
-         * */
-
-        $total_distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
-
-
-
-        $eligible_vendors = Organization::where("zone_id",GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']))->where('status',OrganizationEnums::$STATUS['active'])
-            ->get();
-
-        $all_vendor_extra_price=[];
-        foreach($eligible_vendors as $vendor){
-            $extra_distance = $total_distance - $vendor['base_distance'];
-
-            $extra_distance_price = SubservicePrice::where(
-                "organization_id",$vendor['id'])
-                ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])
-                    ->pluck('id')[0])
-                ->pluck('additional_distance_premium_price')[0];
-
-            $all_vendor_extra_price[] = ceil($extra_distance/$vendor['additional_distance']) * $extra_distance_price;
+            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
         }
-
-        $avg_extra_km_price = array_sum($all_vendor_extra_price) ?: 0.00;
-
-
-        return $initial_org_quote = $least_agent_price+((0.25 * (($average_margin_percentage/100)*$least_agent_price)) - 1) + $avg_extra_km_price;
-
+        else
+            return null;
     }
+
+
 
     public static function statusUpdate($id)
     {

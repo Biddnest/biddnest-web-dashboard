@@ -28,7 +28,7 @@ class InventoryPriceImport implements ToModel
         "material"=>$row[1] != "" ? $row[1] : "regular",
         "size"=>$row[2] != "" ? $row[2] : "regular",
         "price_economics"=>number_format((float) $row[3], 2),
-         "deleted"=>$deleted
+        "deleted"=>$deleted
     ]);
     }
 }

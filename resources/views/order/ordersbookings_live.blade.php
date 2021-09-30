@@ -164,6 +164,10 @@
                                             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
                                             <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
                                             @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
+                                            <span class="status-badge red-bg  text-center td-padding">Request To Cancel</span>
+                                            @break
                                         @endswitch
                                     </td>
 

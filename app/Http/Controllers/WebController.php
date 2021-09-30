@@ -187,7 +187,7 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
-        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced']])
+        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request']])
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone);
 
         $confirm_count = $bookings->count();

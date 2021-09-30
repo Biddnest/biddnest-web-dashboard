@@ -202,7 +202,7 @@
                                         <span class="status-badge red-bg  text-center td-padding" style="font-weight:bold !important">Bounced</span>
                                         @break
 
-                                        @case(\App\Enums\BookingEnums::$STATUS['cancelrequest'])
+                                        @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
                                         <span class="status-badge red-bg  text-center td-padding" style="font-weight:bold !important">Request To Cancel</span>
                                         @break
                                     @endswitch

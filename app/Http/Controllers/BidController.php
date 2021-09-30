@@ -166,9 +166,9 @@ class BidController extends Controller
         }*/
 
 
-        if($min_amount < ){
+        /*if($min_amount < ){
 
-        }
+        }*/
 
         $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 

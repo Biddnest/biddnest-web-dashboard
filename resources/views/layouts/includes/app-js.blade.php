@@ -82,6 +82,8 @@ crossorigin="anonymous"></script>
     const API_SEARCH_USERS = '{{route('search_user')}}';
     const API_SEARCH_VENDOR = '{{route('search_vendor')}}';
     const API_SEARCH_ADMIN = '{{route('search_admin')}}';
+    const API_SEARCH_ITEM = '{{route('search_inventory')}}';
+    console.log(API_SEARCH_ITEM);
     const API_google_key = '{{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}';
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))

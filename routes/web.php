@@ -157,6 +157,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
     Route::get('vendor/search', [Router::class, 'searchVendor'])->name("search_vendor");
     Route::get('admin/search', [Router::class, 'searchadmin'])->name("search_admin");
+    Route::get('inventory/search', [Router::class, 'searchitem'])->name("search_inventory");
 
     Route::post('/pages',[Router::class,'page_add'])->name("page_add");
     Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");

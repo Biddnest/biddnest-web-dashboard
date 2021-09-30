@@ -175,6 +175,7 @@ export function initAllSelectBoxes() {
             // minimumInputLength: 3,
         });
     }
+
     if ($(".searchuser").length) {
 
         $(".searchuser").select2({
@@ -322,6 +323,54 @@ export function initAllSelectBoxes() {
         });
     }
 
+    if ($(".searchitem").length) {
+
+        $(".searchitem").select2({
+            multiple: true,
+            tags: false,
+            minimumResultsForSearch: 3,
+            minimumInputLength: 3,
+            closeOnSelect: false,
+            debug: true,
+            placeholder: 'Search for items',
+            // allowClear: true,
+            ajax: {
+                url: API_SEARCH_ITEM,
+                method: "GET",
+                data: function(params) {
+
+                    var query = {
+                        q: params.term,
+                        page: params.page || 1
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    return query;
+                },
+                error: (a, b, c) => {
+                    Logger.error(a.responseText, b, c);
+                },
+
+                processResults: function(data) {
+
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+
+                    var output = [];
+                    for (var i = 0; i < data.data.items.length; i++) {
+                        output.push({
+                            id: data.data.items[i].id,
+                            text: data.data.items[i].name
+                        })
+                    }
+
+                    return {
+                        results: output
+                    };
+                }
+
+            }
+        });
+    }
 }
 
 export function initSlick(){

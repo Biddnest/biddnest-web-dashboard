@@ -810,6 +810,12 @@ class Route extends Controller
         return AdminController::search($request);
     }
 
+    public function searchitem(Request $request)
+    {
+//         return $request->query;
+        return InventoryController::searchItem($request);
+    }
+
     public function testimonial_add(Request $request)
     {
         $validation = Validator::make($request->all(),[

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
 use App\Enums\OrganizationEnums;
@@ -573,5 +574,16 @@ class InventoryController extends Controller
         $inventory = Inventory::where('name', 'LIKE', "%".$search."%")->limit(20)->get();
 
         return Helper::response(true,"Here are the Matching Items", ['inventories'=>$inventory]);
+    }
+
+    public static function searchItem(Request $request)
+    {
+        $query = $request->q;
+
+        if (empty($query))
+            return Helper::response(true, "Data fetched successfully", ["items" => []]);
+
+        $items = Inventory::where("name", "LIKE", $query . '%')->paginate(5);
+        return Helper::response(true, "Data fetched successfully", ["items" => $items->items()]);
     }
 }

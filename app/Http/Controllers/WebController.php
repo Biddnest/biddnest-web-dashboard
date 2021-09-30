@@ -858,12 +858,7 @@ class WebController extends Controller
         $categories = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventory = Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
 
-        $inventory_extra =$inventory;
-        $inv_extra = SubserviceInventory::where('subservice_id', $request->id)->pluck('inventory_id');
-        if($inv_extra)
-            $inventory_extra = Inventory::whereNotIn('id', $inv_extra)->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-
-        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category, 'inventories_extra'=>$inventory_extra]);
+        return view('categories.createsubcateories', ['categories'=>$categories, 'inventories'=>$inventory, 'subcategory'=>$sub_category]);
     }
 
     public function sidebar_subcategory(Request $request)

@@ -85,18 +85,12 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Extra Inventory List</label>
-                                    <select class="form-control br-5 field-toggle select-box" name="extra_inventories[]" multiple required>
-                                        <option value="">--Select--</option>
-                                        @foreach($inventories_extra as $inventory_extra)
-                                            <option value="{{$inventory_extra->id}}"
-                                               @if(isset($sub_category))
-                                                    @foreach($sub_category->extraitems as $extraitems)
-                                                        @if($extraitems->inventory_id == $inventory_extra->id)
-                                                            selected
-                                                        @endif
-                                                    @endforeach
-                                               @endif>{{$inventory_extra->name}}</option>
-                                        @endforeach
+                                    <select class="form-control searchitem" name="extra_inventories[]" multiple>
+                                        @if(isset($sub_category))
+                                            @foreach($sub_category->extraitems as $extraitems)
+                                                <option value="{{$extraitems->id}}" selected>{{ucfirst(trans($user->meta->name))}}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>

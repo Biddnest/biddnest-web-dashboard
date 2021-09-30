@@ -295,6 +295,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/onboard',[WebController::class,'createOnboardVendors'])->name("create-vendors");
             Route::get('/{id}/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
             Route::get('/{id}/base-price',[WebController::class,'onbaordBasePrice'])->name("onboard-base-price");
+            Route::get('/{id}/extra-base-price',[WebController::class,'onbaordExtraBasePrice'])->name("onboard-base-extra-price");
             Route::get('/{id}/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
             Route::get('/{id}/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
             Route::get('/{id}/action',[WebController::class,'onbaordAction'])->name("onboard-action");

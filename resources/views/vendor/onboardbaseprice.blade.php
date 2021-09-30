@@ -37,6 +37,9 @@
                                 <a class="nav-link active p-15" id="quotation" href="#">Pricing</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-extra-price", ['id'=>$id])}}">Extra Pricing</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id])}}">Branch</a>
                             </li>
                             <li class="nav-item">
@@ -62,24 +65,27 @@
                                 <table class="table  text-left p-0 theme-text mb-0 primary-table p-15 distance-price">
                                     <thead class="secondg-bg p-0">
                                     <tr>
-                                        <th scope="col" style="padding:14px">Category</th>
                                         <th scope="col" class="text-center" style="padding:14px">BP Economic</th>
                                         <th scope="col" class="text-center" style="padding:14px">BP Premium</th>
                                         <th scope="col" class="text-center" style="padding:14px">MP Economic</th>
                                         <th scope="col" class="text-center" style="padding:14px">MP Premium</th>
-                                        <th scope="col" class="text-center" style="padding:14px">AP Economic</th>
-                                        <th scope="col" class="text-center" style="padding:14px">AP Premium</th>
+                                        <th scope="col" class="text-center" style="padding:14px">BP AP Economic</th>
+                                        <th scope="col" class="text-center" style="padding:14px">BP AP Premium</th>
+                                        <th scope="col" class="text-center" style="padding:14px">MP AP Economic</th>
+                                        <th scope="col" class="text-center" style="padding:14px">MP AP Premium</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($subservices as $category)
                                             @php $prices = \App\Models\SubservicePrice::where(["subservice_id"=>$category->id, "organization_id"=>$id])->first(); @endphp
-                                            <tr class="tb-border">
-                                                <input type="hidden" name="subservice[][pricing_id]" value="{{$prices['id'] ?? ''}}">
-                                                <td scope="row">
-                                                    <span>{{ucwords($category->name)}}</span>
+                                            <tr>
+                                                <td scope="row" style="padding-bottom: 0 !important;">
+                                                    <span style="font-weight: 500; font-size: 15px !important;">{{ucwords($category->name)}}</span>
                                                     <input type="hidden" value="{{$category->id}}" name="subservice[][id]">
                                                 </td>
+                                            </tr>
+                                            <tr class="tb-border">
+                                                <input type="hidden" name="subservice[][pricing_id]" value="{{$prices['id'] ?? ''}}">
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
@@ -107,13 +113,25 @@
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['additional_distance_economic_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][additional][price][economy]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_additional_distance_economic_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][bp_additional][price][economy]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center base-price">
                                                         <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['additional_distance_premium_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][additional][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_additional_distance_premium_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][bp_additional][price][premium]" id="" placeholder="500"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center base-price">
+                                                        <div class="currancy text-center">₹</div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_additional_distance_economic_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][mp_additional][price][economy]" id="" placeholder="500"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center base-price">
+                                                        <div class="currancy text-center">₹</div>
+                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_additional_distance_premium_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][mp_additional][price][premium]" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                             </tr>

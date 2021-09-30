@@ -1126,7 +1126,11 @@
                 padding: 0.60rem !important;
             }
 
-            .Dashboard-lcards .table .distance-price td{
-                padding-left: 0 !important;
+            .Dashboard-lcards .distance-price td{
+                padding-left: 5px !important;
+                text-align: center !important;
+            }
+            .distance-price .form-control {
+                padding: 6px 6px !important;
             }
         </style>

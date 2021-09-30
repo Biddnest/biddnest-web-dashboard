@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterBookingAddColumn extends Migration
+class AlertAddColumnOrgRecommandedBookings extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AlterBookingAddColumn extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->timestamp("bid_end_at")->nullable()->after('bid_result_at');
+            $table->decimal("organization_rec_quote")->default(0.00)->after('final_estimated_quote');
         });
     }
 

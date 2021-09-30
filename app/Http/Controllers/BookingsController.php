@@ -181,12 +181,18 @@ class BookingsController extends Controller
             /*Rounding to 2 decimals*/
             $primium_price = number_format($primium_price,2, ".","");
 //            $primium_price = str_replace(",","",$economic_price);
+
+            $vendor_primium_price = InventoryController::getOrganizationPremiumPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support) + $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+            $vendor_economic_price = InventoryController::getOrganizationEconomicPrice($data, $inventory_quantity_type, $zone_id, $web, $created_by_support) + $cost_structure["surge_charge"] + $cost_structure["buffer_amount"];
+
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
         }
 
         $estimate_quote = json_encode(["economic" => $economic_price, "premium" => $primium_price]);
+        $org_estimate_quote = json_encode(["economic" => number_format($vendor_economic_price,2), "premium" => number_format($vendor_primium_price,2)]);
+
         $booking->quote_estimate = $estimate_quote;
         $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
         $booking->meta = json_encode(["self_booking" => $data['meta']['self_booking'],
@@ -197,12 +203,8 @@ class BookingsController extends Controller
             "distance" => $distance]);
         $booking->status = BookingEnums::$STATUS['enquiry'];
         $booking->zone_id = $zone_id;
+        $booking->organization_quote_estimate = $org_estimate_quote;
         $result = $booking->save();
-
-        // $bookingstatus = new BookingStatus;
-        // $bookingstatus->booking_id = $booking->id;
-        // $bookingstatus->status=BookingEnums::$STATUS['enquiry'];
-        // $result_status = $bookingstatus->save();
 
         $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['enquiry']);
 

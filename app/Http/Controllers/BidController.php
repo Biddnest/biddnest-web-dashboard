@@ -108,7 +108,7 @@ class BidController extends Controller
             ->where("status", BidEnums::$STATUS['bid_submitted'])
             ->count();
 
-        if(!$min_amount || $low_quoted_vendors > 1) {
+        /*if(!$min_amount || $low_quoted_vendors > 1) {
             $count_rebid=BookingStatus::where(["booking_id"=>$book_id, "status"=>BookingEnums::$STATUS['biding']])->count();
             if($count_rebid >= (int)Settings::where('key', 'max_rebid_count')->pluck('value')[0]) {
                 BookingsController::statusChange($book_id, BookingEnums::$STATUS['hold']);
@@ -163,22 +163,28 @@ class BidController extends Controller
 
 
             return true;
+        }*/
+
+
+        if($min_amount < ){
+
         }
 
         $public_booking_id = Booking::where('id', $book_id)->pluck('public_booking_id')[0];
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
         $won_bid_details = Bid::where(["booking_id"=>$book_id, "organization_id"=>$won_org_id])->first();
-        $won_vendor = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
+
+        Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])
             ->update(["status"=>BidEnums::$STATUS['won']]);
 
-        $lost_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
+        Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['bid_submitted']])
             ->update(["status"=>BidEnums::$STATUS['lost']]);
 
-        $expire_vendor = Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
+        Bid::where(["booking_id"=>$book_id, "status"=>BidEnums::$STATUS['active']])
             ->update(["status"=>BidEnums::$STATUS['expired']]);
 
-        $booking_update_status = Booking::where("id", $book_id)
+        Booking::where("id", $book_id)
             ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
             ->update([
                 "organization_id"=>$won_org_id,

@@ -6,6 +6,7 @@ use App\Enums\CommonEnums;
 use App\Helper;
 use App\Models\ServiceSubservice;
 use App\Models\Subservice;
+use App\Models\SubServiceExtraInventory;
 use App\Models\SubserviceInventory;
 use Intervention\Image\ImageManager;
 
@@ -52,8 +53,8 @@ class SubServiceController extends Controller
             foreach ($data['extra_inventories'] as $inv_id) {
                 $extra_inventory =new SubServiceExtraInventory();
                 $extra_inventory->subservice_id=$subservice->id;
-                $extra_inventory->inventory_id=$inv_id['id'];
-                $extra_inventory_result=$inventory->save();
+                $extra_inventory->inventory_id=$inv_id;
+                $extra_inventory_result=$extra_inventory->save();
             }
         }
 
@@ -126,9 +127,9 @@ class SubServiceController extends Controller
             SubServiceExtraInventory::where('subservice_id', $id)->delete();
             foreach ($extra_inventories as $inv_id) {
                 $extra_inventory =new SubServiceExtraInventory();
-                $extra_inventory->subservice_id=$subservice->id;
+                $extra_inventory->subservice_id=$id;
                 $extra_inventory->inventory_id=$inv_id;
-                $extra_inventory_result=$inventory->save();
+                $extra_inventory_result=$extra_inventory->save();
             }
         }
 

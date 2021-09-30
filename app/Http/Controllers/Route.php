@@ -140,7 +140,7 @@ class Route extends Controller
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
             'inventories.*.quantity'=>'required',
-            'extra_inventories.*.id'=>'required',
+            'extra_inventories.*'=>'required',
             'max_extra_items'=>'required',
         ]);
 
@@ -195,7 +195,7 @@ class Route extends Controller
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
             'inventories.*.quantity'=>'required',
-            'extra_inventories.*.id'=>'required',
+            'extra_inventories.*'=>'required',
             'max_extra_items'=>'required',
         ]);
 

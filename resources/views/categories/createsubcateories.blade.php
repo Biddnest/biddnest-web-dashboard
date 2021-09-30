@@ -82,64 +82,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
-                                <div class="heading p-10 pl-4 border-around ">
-                                    Extra Inventory List
-                                </div>
-
-                                <table class="table text-center p-10 theme-text tb-border2" id="extra-itms">
-                                    <thead class="secondg-bg bx-shadowg p-0 f-14">
-                                    <tr class="">
-                                        <th scope="col  " class="text-left"  style="padding-left: 16px !important;">Item Name</th>
-
-                                        <th scope="col ">Operations</th>
-                                    </tr>
-
-
-                                    </thead>
-                                    <tbody class="mtop-20 f-13" id="add-extra-inventory-wrapper">
-                                    @if($subcategory && $subcategory->extraitems)
-                                        @foreach($subcategory->extraitems as $inventory_extra)
-                                            <tr class="inventory-snip">
-                                                <td scope="row" class="text-left"  style="padding-left: 14px !important;">
-                                                    <select class="form-control br-5 inventory-select" name="extra_inventories[][id]" required>
-                                                        <option value="">--Select--</option>
-                                                        @foreach($inventories as $inventory)
-                                                            <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" @if(isset($subcategory) && ($inventory->id == $inventory_extra->inventory_id)) selected @endif>{{$inventory->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-
-                                                <td>
-                                                    <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr class="inventory-snip">
-                                            <td scope="row" class="text-left" style="padding-left: 14px !important;">
-                                                <select class="form-control br-5 inventory-select" name="extra_inventories[][id]" required>
-                                                    <option value="">--Select--</option>
-                                                    @foreach($inventories_extra as $inventory_extra)
-                                                        <option id="inventory_{{$inventory_extra->id}}" value="{{$inventory_extra->id}}" >{{$inventory_extra->name}}</option>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="phone-num-lable"> Extra Inventory List</label>
+                                    <select class="form-control br-5 field-toggle select-box" name="extra_inventories[]" multiple required>
+                                        <option value="">--Select--</option>
+                                        @foreach($inventories_extra as $inventory_extra)
+                                            <option value="{{$inventory_extra->id}}"
+                                               @if(isset($sub_category))
+                                                    @foreach($sub_category->extraitems as $extraitems)
+                                                        @if($extraitems->inventory_id == $inventory_extra->id)
+                                                            selected
+                                                        @endif
                                                     @endforeach
-                                                </select>
-                                            </td>
-
-                                            <td>
-                                                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                                            </td>
-                                        </tr>
-                                    @endif
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-sm-12 mtop-20 w-30">
-                                <a class="float-right btn theme-bg white-text repeater repeater-count" data-content="#add-extra-inventory-row" data-container="#add-extra-inventory-wrapper"  id="addnew-btn" >
-                                    <i class="fa fa-plus  m-1" aria-hidden="true"></i>
-                                    Add Extra Inventory</a>
-
+                                               @endif>{{$inventory_extra->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >

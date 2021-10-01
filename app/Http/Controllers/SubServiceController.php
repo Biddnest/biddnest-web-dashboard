@@ -62,7 +62,7 @@ class SubServiceController extends Controller
             return Helper::response(false,"Couldn't save data");
         else
             return Helper::response(true,"Save data successfully",["subservice"=>Subservice::select(self::$public_data)->with("inventories")
-                ->with(['extra_inventories'=>function($query){ $query->with('meta'); }])
+                ->with(['extraitems'=>function($query){ $query->with('meta'); }])
                 ->findOrFail($subservice->id)]);
     }
 

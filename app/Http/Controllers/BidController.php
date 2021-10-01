@@ -166,7 +166,7 @@ class BidController extends Controller
         }*/
 
 
-        /*if($min_amount < ){
+       /* if($min_amount < ){
 
         }*/
 

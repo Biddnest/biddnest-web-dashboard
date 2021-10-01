@@ -324,8 +324,8 @@ class InventoryController extends Controller
         $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min('bp_economic');
 
-        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
-            ->avg('economic_margin_percentage');
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->avg('economic_margin_percentage');
 
         if(!$vendor_price)
             return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);

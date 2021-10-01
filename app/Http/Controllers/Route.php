@@ -474,8 +474,10 @@ class Route extends Controller
             'subservice.*.bidnest.price.premium'=>'required',
             'subservice.*.market.price.economy'=>'required',
             'subservice.*.market.price.premium'=>'required',
-            'subservice.*.additional.price.economy'=>'required',
-            'subservice.*.additional.price.premium'=>'required',
+            'subservice.*.mp_additional.price.economy'=>'required',
+            'subservice.*.mp_additional.price.premium'=>'required',
+            'subservice.*.bp_additional.price.economy'=>'required',
+            'subservice.*.bp_additional.price.premium'=>'required',
         ]);
 
         if($validation->fails())

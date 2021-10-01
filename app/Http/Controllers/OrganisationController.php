@@ -682,8 +682,10 @@ class OrganisationController extends Controller
             $pricing->mp_premium = $subservice['market']['price']['premium'];
             $pricing->economic_margin_percentage = $economic_margin_percentage;
             $pricing->premium_margin_percentag = $premium_margin_percentag;
-            $pricing->additional_distance_economic_price = $subservice['additional']['price']['economy'];
-            $pricing->additional_distance_premium_price = $subservice['additional']['price']['premium'];
+            $pricing->mp_additional_distance_economic_price = $subservice['mp_additional']['price']['economy'];
+            $pricing->mp_additional_distance_premium_price = $subservice['mp_additional']['price']['premium'];
+            $pricing->bp_additional_distance_economic_price = $subservice['bp_additional']['price']['economy'];
+            $pricing->bp_additional_distance_premium_price = $subservice['bp_additional']['price']['premium'];
             $result_pricing = $pricing->save();
         }
 
@@ -693,4 +695,5 @@ class OrganisationController extends Controller
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
 
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubServiceExtraInventory;
 use Illuminate\Http\Request;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
@@ -135,7 +136,9 @@ class InventoryController extends Controller
     public static function getBySubserviceForApp($id)
     {
         $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result]);
+       $extra_inv = SubServiceExtraInventory::where("subservice_id", $id)->with("meta")->get();
+
+        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
     }
 
     public static function getInventoriesForApp()
@@ -586,4 +589,5 @@ class InventoryController extends Controller
         $items = Inventory::where("name", "LIKE", $query . '%')->paginate(5);
         return Helper::response(true, "Data fetched successfully", ["items" => $items->items()]);
     }
+
 }

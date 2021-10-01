@@ -27,6 +27,7 @@ class SubServiceController extends Controller
         $image_name = "subservice".$data['name']."-".uniqid().".png";
         $subservice=new Subservice();
         $subservice->name=$data['name'];
+        $subservice->max_extra_items = $data['max_extra_items'];
         // $subservice->service_id=$service_id;
         $subservice->image = Helper::saveFile($imageman->make($data['image'])->resize(256,256)->encode('png', 100),$image_name,"subservices");
         $result= $subservice->save();
@@ -34,7 +35,6 @@ class SubServiceController extends Controller
         $service=new ServiceSubservice;
         $service->service_id = $data['category'];
         $service->subservice_id = $subservice->id;
-        $service->max_extra_items = $subservice['max_extra_items'];
         $service_result = $service->save();
 
         if($data['inventories']) {
@@ -162,8 +162,7 @@ class SubServiceController extends Controller
 
     public static function getSubservicesForApp($id, $web=false)
     {
-        $subservice=Subservice::select(self::$public_data)
-            ->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
+        $subservice=Subservice::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])
             ->whereIn("id", ServiceSubservice::where('service_id', $id)->pluck('subservice_id'))
             ->get();
 

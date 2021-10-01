@@ -197,6 +197,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     }
 
                     if (form.hasClass("track_next1")) {
+                        revertFormAnim(button, "NEXT");
                         console.log('entered');
                             $('.step-1').css('display', 'none');
                             $('.step-2').css('display', 'block');
@@ -207,6 +208,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     }
 
                     if (form.hasClass("track_next2")) {
+                        revertFormAnim(button, "NEXT");
                         $('.step-2').css('display', 'none');
                         $('.step-3').css('display', 'block');
                         $(".completed-step-3").addClass("turntheme");
@@ -216,6 +218,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     }
 
                     if (form.hasClass("track_next3")) {
+                        revertFormAnim(button, "NEXT");
                         $('.step-3').css('display', 'none');
                         $('.step-4').css('display', 'block');
                         $(".completed-step-4").addClass("turntheme");

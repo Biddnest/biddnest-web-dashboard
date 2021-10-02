@@ -807,7 +807,11 @@ class BookingsController extends Controller
         if (!$result)
             return Helper::response(false, "Couldn't Add to Bookmark");
 
-        return Helper::response(true, "Book mark status changed to $bookmarked", ["bookmark" => Bid::where("id", $exist_bid['id'])->first()]);
+        if ($exist_bid->bookmarked == CommonEnums::$YES)
+            return Helper::response(true, "Book mark status removed successfully", ["bookmark" => Bid::where("id", $exist_bid['id'])->first()]);
+        else
+            return Helper::response(true, "Book mark status changed successfully", ["bookmark" => Bid::where("id", $exist_bid['id'])->first()]);
+
     }
 
     public static function assignDriver($public_booking_id, $driver_id, $vehicle_id)

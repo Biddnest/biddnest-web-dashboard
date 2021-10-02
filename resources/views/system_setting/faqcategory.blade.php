@@ -32,16 +32,16 @@
                 <div class="card h-auto p-0 p-10">
                     <div  class="card-head right text-left border-bottom-2 p-8">
                         <h3 class="f-18 mb-4 theme-text">
-                           FAQ
+                            FAQ
                         </h3>
                     </div>
                     <ul class="nav nav-tabs p-15 secondg-bg pt-0 pb-0 f-16" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active p-15" id="live-tab" href="{{route('admin.faq')}}">All</a>
+                            <a class="nav-link p-15" id="live-tab" href="{{route('admin.faq')}}">All</a>
                         </li>
                         @foreach(\App\Enums\FaqEnums::$TYPE as $type_faq)
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="past-tab"  href="{{route('admin.type.faq', ['type'=>$type_faq])}}">{{ucfirst(trans($type_faq))}}</a>
+                                <a class="nav-link @if($type == $type_faq) active @endif p-15" id="past-tab"  href="{{route('admin.type.faq', ['type'=>$type_faq])}}">{{ucfirst(trans($type_faq))}}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -49,16 +49,8 @@
                         <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
                             <div class="d-flex  row p-20 justify-content-start" style="margin-left: -2px; margin-right: -90px;">
                                 @foreach($faqs as $faq)
-                                    <div class="live-search-result">
-                                        <div class="accor-item d-flex justify-content-between  row card p-3 br-0" style="flex-direction: row;">
-                                            <a>{{$faq->title}}</a>
-                                            <i class="fa fa-angle-down mt-1" ></i>
-                                        </div>
-                                        <div class="content answer pt-2">
-                                            <p class="pl-2 pr-2" style="white-space: normal !important; text-align:justify " style="flex-direction: row;">
-                                                {{$faq->desc}}
-                                            </p>
-                                        </div>
+                                    <div class="simple-card category-cards col-sm-12">
+                                        {{$faq}}
                                     </div>
                                 @endforeach
                             </div>

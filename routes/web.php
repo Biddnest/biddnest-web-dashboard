@@ -251,6 +251,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
 
         Route::get('/faq',[WebController::class,'faq'])->name("admin.faq");
+        Route::get('/faq/{type}',[WebController::class,'faq_by_category'])->name("admin.type.faq");
+        Route::get('/add/faq',[WebController::class,'addfaq'])->name("admin.addfaq");
+        Route::get('/edit/{id}/faq',[WebController::class,'editfaq'])->name("admin.editfaq");
         Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
         Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");

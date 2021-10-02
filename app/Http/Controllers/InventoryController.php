@@ -139,7 +139,8 @@ class InventoryController extends Controller
     public static function getBySubserviceForApp($id)
     {
        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->first();
-       $extra_inv = SubServiceExtraInventory::where("subservice_id", $id)->with("meta")->get();
+       $extra_inv_id = SubServiceExtraInventory::where("subservice_id", $id)->pluck("inventory_id");
+       $extra_inv = Inventory::whereIn("id", $extra_inv_id)->get();
 
        $custome_result = Subservice::where("id", $id)->first();
        if(strtolower($custome_result->name) == "custom"){

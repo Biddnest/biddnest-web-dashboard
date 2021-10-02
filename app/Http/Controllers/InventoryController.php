@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subservice;
 use App\Models\SubServiceExtraInventory;
+use App\Models\SubservicePrice;
 use Illuminate\Http\Request;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
@@ -136,9 +138,12 @@ class InventoryController extends Controller
     //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
     {
-        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+       $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
        $extra_inv = SubServiceExtraInventory::where("subservice_id", $id)->with("meta")->get();
 
+       if(strtolower($result->name) == "custome"){
+           $extra_inv = Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->get();
+       }
         return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
     }
 
@@ -266,7 +271,7 @@ class InventoryController extends Controller
             ->where('status',OrganizationEnums::$STATUS['active'])
             ->get();
 
-        $total_distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
+        $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
 
         foreach($vendors as $vendor)
         {
@@ -278,10 +283,10 @@ class InventoryController extends Controller
             $mp_premium = 0.00;
             $bp_premium = 0.00;
 
-            if(!$data['custom_movement']){
+            if(strtolower($data['meta']['subcategory']) != "custom"){
                 $query = SubservicePrice::where(
                     "organization_id",$vendor['id'])
-                    ->where('subservice_id',Subservice::where('name',$data['meta']['subcategory'])
+                    ->where('subservice_id', Subservice::where('name',$data['meta']['subcategory'])
                         ->pluck('id')[0])->first();
 
                 $mp_economic = $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']);
@@ -354,7 +359,7 @@ class InventoryController extends Controller
 
     public static function getOrganizationEconomicPrice($data, $booking_data,  $zone_id, $web=false, $created_by_support=false)
     {
-        if(!$data['custom_movement']){
+        if(strtolower($data['meta']['subcategory']) != "custom"){
             $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
                 ->min('bp_economic');
 
@@ -370,7 +375,7 @@ class InventoryController extends Controller
 
     public static function getOrganizationPremiumPrice($data, $booking_data, $web=false, $created_by_support=false)
     {
-        if(!$data['custom_movement']){
+        if(strtolower($data['meta']['subcategory']) != "custom"){
             $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
                 ->min('bp_premium');
 

@@ -1319,8 +1319,10 @@ class BookingsController extends Controller
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
 
-        foreach ($data['meta']['images'] as $key => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
+        if($data['meta']['images']) {
+            foreach ($data['meta']['images'] as $key => $image) {
+                $images[] = Helper::saveFile($imageman->make($image)->encode('png', 75), "BD" . uniqid() . $key . ".png", "bookings/" . $data['public_booking_id']);
+            }
         }
 
         try {

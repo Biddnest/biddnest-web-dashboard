@@ -13,7 +13,7 @@ class CreateSubserviceGeneratedPrice extends Migration
      */
     public function up()
     {
-        Schema::create('booking_organization_generated_price', function (Blueprint $table) {
+        Schema::create('booking_organization_generated_prices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id')->index('booking_id');
             $table->foreign('booking_id')->references('id')->on('bookings');

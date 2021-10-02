@@ -302,9 +302,26 @@ class InventoryController extends Controller
             }
 
             /*Slot for items*/
+            foreach ($data[inventory_items] as $items){
+                if($items['is_custom']){
+                    $inv_price = InventoryPrice::where([
+                        "inventory_id"=>$items["inventory_id"],
+                        "material"=>$items["material"],
+                        "size"=>$items["size"],
+                        "organization_id"=>$vendor['id']
+                    ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
+
+                    $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
+
+                    $bp_economic += $inv_price['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_economic']);
+
+                    $mp_premium += $inv_price['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_premium']);
+
+                    $bp_premium += $inv_price['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_premium']);
+                }
+            }
 
             /*Slot for items*/
-
 
             $economic_percent = (($mp_economic - $bp_economic)/$mp_economic)*100;
             $premium_percent = (($mp_premium - $bp_premium)/$mp_premium)*100;
@@ -359,7 +376,7 @@ class InventoryController extends Controller
 
     }
 
-    public static function getOrganizationEconomicPrice($data, $booking_data,  $zone_id, $web=false, $created_by_support=false)
+    /*public static function getOrganizationEconomicPrice($data, $booking_data,  $zone_id, $web=false, $created_by_support=false)
     {
         if(strtolower($data['meta']['subcategory']) != "custom"){
             $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
@@ -389,7 +406,7 @@ class InventoryController extends Controller
         else
             return null;
     }
-
+*/
 
 
     public static function statusUpdate($id)

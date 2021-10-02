@@ -1336,8 +1336,8 @@ class BookingsController extends Controller
                 "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_exist, $web, $created_by_support)
             ]);
             $org_estimate_quote = json_encode([
-                "economic" => InventoryController::getOrganizationEconomicPrice($data, $booking_exist, true, $web, $created_by_support),
-                "premium" => InventoryController::getOrganizationPremiumPrice($data, $booking_exist, true, $web, $created_by_support)
+                "economic" => InventoryController::getEconomicPrice($data, $booking_exist, true, $web, $created_by_support),
+                "premium" => InventoryController::getPremiumPrice($data, $booking_exist, true, $web, $created_by_support)
             ]);
 
 

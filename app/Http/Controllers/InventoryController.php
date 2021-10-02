@@ -138,10 +138,11 @@ class InventoryController extends Controller
     //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
     {
-       $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+       $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->first();
        $extra_inv = SubServiceExtraInventory::where("subservice_id", $id)->with("meta")->get();
 
-       if(strtolower($result->name) == "custome"){
+       $custome_result = Subservice::where("id", $id)->first();
+       if(strtolower($custome_result->name) == "custom"){
            $extra_inv = Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->get();
        }
         return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);

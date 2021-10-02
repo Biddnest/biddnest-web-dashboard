@@ -207,7 +207,7 @@
         </div>
         <script id="image_upload_preview" type="text/x-handlebars-template">
             <div class="col-md-2 pl-0 upload-image-container">
-                <input type="hidden" id="custId" value="@{{image}}" name="meta[images][]" >
+                <input type="hidden" id="custId" value="@{{image}}" name="images[]" >
                 <img src="@{{image}}" alt="uploadedImage" class="image-upload-by-customer" style="width: 100%; height: 100%;"/>
                 <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
             </div>

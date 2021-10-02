@@ -985,7 +985,7 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
 });
 
 $("body").on('click', ".next-btn-1", function(event) {
-
+ console.log("next");
     let isValid = true;
     $($(this).closest('form').find('input.validate-input')).each( function() {
         if ($(this).parsley().validate() !== true)
@@ -994,7 +994,6 @@ $("body").on('click', ".next-btn-1", function(event) {
     if (isValid) {
         var est = $(".calc-result").data("est-quote");
         var quote = $(".calc-result").val();
-        est = est.replace(/\,/g, '');
 
         var high = parseInt(est) + parseInt(est / 2);
         var low = parseInt(est) - parseInt(est / 2);

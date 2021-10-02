@@ -371,13 +371,14 @@ class VendorRouteController extends Controller
             'public_booking_id'=>"nullable|string",
             'category' => 'required',
             'heading' => 'required|string',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'images.*'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::createForVendor(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::createForVendor(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->images, $request->heading, $request->desc);
     }
 
     public function addPin(Request $request)

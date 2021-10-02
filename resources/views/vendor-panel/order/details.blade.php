@@ -311,7 +311,7 @@
                                 <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                     <div><p class="mt-2">Total Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{$booking->final_estimated_quote}}" />
+                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
                                     </div>
                                 </div>
                             </div>
@@ -426,7 +426,7 @@
                 <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.vendor.reset-pine')}}" method="PUT" data-next="modal" data-modal-id="#reset-pin" data-alert="mega" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex justify-content-center row ">
-                            <div class="col-sm-6 enter-pin p-60">
+                            <div class="col-sm-6 p-60" style="display:block !important;">
                                 <div class="form-input">
                                     <h4 class="text-center bold">Enter Your Password</h4>
                                     <input class="form-control" name="password" id="password" type="password" required/>

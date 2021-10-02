@@ -106,13 +106,13 @@ class WebsiteRouteController extends Controller
             'category'=>'required|string',
             'heading' => 'required|string',
             'desc' => 'required|string',
-            'images.*'=>'nullable|string'
+            'images.*'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::createForWeb(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::createForWeb(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->images, $request->heading, $request->desc);
     }
 
     public function raiseTicket(Request $request)

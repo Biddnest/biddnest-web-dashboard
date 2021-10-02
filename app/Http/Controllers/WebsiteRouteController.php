@@ -105,7 +105,8 @@ class WebsiteRouteController extends Controller
 //            'public_booking_id'=>"required|string",
             'category'=>'required|string',
             'heading' => 'required|string',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'images.*'=>'nullable|string'
         ]);
 
         if($validation->fails())
@@ -523,6 +524,7 @@ class WebsiteRouteController extends Controller
             'inventory_items.*.material' =>'required|string',
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',
+            'inventory_items.*.is_custom' =>'required',
         ]);
 
         if($validation->fails())

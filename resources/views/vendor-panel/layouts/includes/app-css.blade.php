@@ -253,10 +253,15 @@
     }
 
     .inventroy-price .table-input {
-        width: 60% !important;
+        width: 70% !important;
     }
 
     .inventroy-price .distance {
         width: 50px !important;
+    }
+
+    .Dashboard-lcards .distance-price td{
+        padding-left: 5px !important;
+        text-align: center !important;
     }
 </style>

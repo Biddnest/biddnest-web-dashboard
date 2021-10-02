@@ -182,6 +182,10 @@ class InventoryController extends Controller
             $inventoryprice->bp_premium= $price['bidnest']['price']['premium'];
             $inventoryprice->mp_economic= $price['market']['price']['economics'];
             $inventoryprice->mp_premium= $price['market']['price']['premium'];
+            $inventoryprice->bp_additional_economic= $price['bidnest']['additional']['price']['economics'];
+            $inventoryprice->bp_additional_premium= $price['bidnest']['additional']['price']['premium'];
+            $inventoryprice->mp_additional_economic= $price['market']['additional']['price']['economics'];
+            $inventoryprice->mp_additional_premium= $price['market']['additional']['price']['premium'];
             if($web) {
                 $inventoryprice->ticket_status = CommonEnums::$TICKET_STATUS['open'];
                 $inventoryprice->status = InventoryEnums::$STATUS['pending_approval'];
@@ -233,6 +237,10 @@ class InventoryController extends Controller
                 "bp_premium" => $price['bidnest']['price']['premium'],
                 "mp_economic" => $price['market']['price']['economics'],
                 "mp_premium" => $price['market']['price']['premium'],
+                "bp_additional_economic"=> $price['bidnest']['additional']['price']['economics'],
+                "bp_additional_premium"=> $price['bidnest']['additional']['price']['premium'],
+                "mp_additional_economic"=> $price['market']['additional']['price']['economics'],
+                "mp_additional_premium" => $price['market']['additional']['price']['premium']
             ];
 
 
@@ -302,7 +310,7 @@ class InventoryController extends Controller
             }
 
             /*Slot for items*/
-            foreach ($data[inventory_items] as $items){
+            foreach ($data['inventory_items'] as $items){
                 if($items['is_custom']){
                     $inv_price = InventoryPrice::where([
                         "inventory_id"=>$items["inventory_id"],

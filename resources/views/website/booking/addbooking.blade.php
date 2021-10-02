@@ -698,6 +698,7 @@
                     <h5>@{{meta_name}}</h5>
                     <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
                     <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
+                    <input type="hidden" name="inventory_items[][is_custom]" value="true">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>
@@ -878,6 +879,7 @@
                                 <span class="info">
                                     <span>@{{material}}</span>
                                     <input type="hidden" name="inventory_items[][material]" value="@{{material}}" />
+                                    <input type="hidden" name="inventory_items[][is_custom]" value="true">
                                     <div class="dropdown-content">
                                       <ul class="d-content">
                                           @{{#meta.material}}
@@ -941,6 +943,7 @@
                     <h5>@{{meta_name}}</h5>
                     <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
                     <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
+                    <input type="hidden" name="inventory_items[][is_custom]" value="true">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>
@@ -1051,7 +1054,7 @@
     {{--Image Input--}}
     <script id="image_upload_preview" type="text/x-handlebars-template">
         <div class="col-md-2 pl-0 upload-image-container">
-            <input type="hidden" id="custId" value="@{{image}}" name="meta[images][]" >
+            <input type="hidden" id="custId" value="@{{image}}" name="images[]" >
             <img src="@{{image}}" alt="uploadedImage" class="image-upload-by-customer" style="width: 100%; height: 100%;"/>
             <i class="fa fa-close fa-2x" onclick="console.log('hello'); $(this).closest('.upload-image-container').fadeOut(100).remove()"></i>
         </div>

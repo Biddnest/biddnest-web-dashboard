@@ -1184,6 +1184,7 @@ class Route extends Controller
             'inventory_items.*.material' =>'required|string',
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',
+            'inventory_items.*.is_custom' =>'required|boolean',
         ]);
 
         if($validation->fails())

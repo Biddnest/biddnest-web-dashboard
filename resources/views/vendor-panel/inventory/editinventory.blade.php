@@ -31,16 +31,20 @@
                                 </li>
                             </ul>
 
-                            <table class="table  text-left p-0 theme-text mb-0 primary-table p-15">
+                            <table class="table  text-left p-0 theme-text mb-0 primary-table distance-price p-15">
                                 <thead class="secondg-bg p-0">
                                     <tr>
-                                        <th scope="col" style="padding:14px">Item</th>
+                                        {{--<th scope="col" style="padding:14px">Item</th>
                                         <th scope="col" style="padding:14px">Size</th>
-                                        <th scope="col" class="text-center" style="padding:14px">Material</th>
+                                        <th scope="col" class="text-center" style="padding:14px">Material</th>--}}
                                         <th scope="col" class="text-center" style="padding:14px">BD Economic Price</th>
                                         <th scope="col" class="text-center" style="padding:14px">BD Premium Price</th>
                                         <th scope="col" class="text-center" style="padding:14px">MP Economic Price</th>
                                         <th scope="col" class="text-center" style="padding:14px">MP Premium Price</th>
+                                        <th scope="col" class="text-center" style="padding:14px">BP AP Economic</th>
+                                        <th scope="col" class="text-center" style="padding:14px">BP AP Premium</th>
+                                        <th scope="col" class="text-center" style="padding:14px">MP AP Economic</th>
+                                        <th scope="col" class="text-center" style="padding:14px">MP AP Premium</th>
                                     </tr>
                                 </thead>
                                 <tbody class="mtop-20 inventory-snip">
@@ -49,15 +53,17 @@
                                             @if($service_type->service->id == $inventory->service_type)
                                                         <tr class="tb-border">
                                                             <td scope="row" style="padding-top: 24px;">
-                                                                <span>{{$item->name}}</span>
+                                                                <span>Item : {{$item->name}}</span>
                                                                 <input type="hidden" value="{{$inventory->id}}" name="price[][id]">
                                                             </td>
                                                             <td style="padding-top: 24px;">
-                                                                <span>{{$inventory->size}}</span>
+                                                                <span>Size : {{$inventory->size}}</span>
                                                             </td>
                                                             <td class="text-center" style="padding-top: 24px;">
-                                                                <span>{{$inventory->material}}</span>
+                                                                <span>Material : {{$inventory->material}}</span>
                                                             </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td class="text-center">
                                                                 <div class="d-flex justify-content-center inventroy-price">
                                                                     <div class="currancy">₹</div>
@@ -80,6 +86,31 @@
                                                                 <div class="d-flex justify-content-center inventroy-price">
                                                                     <div class="currancy">₹</div>
                                                                     <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][price][premium]" value="{{$inventory->mp_premium}}" id="" placeholder="500"></div>
+                                                                </div>
+                                                            </td>
+
+                                                            <td class="text-center">
+                                                                <div class="d-flex justify-content-center inventroy-price">
+                                                                    <div class="currancy">₹</div>
+                                                                    <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][additional][price][economics]" value="{{$inventory->bp_additional_economic}}" id="" placeholder="400"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="d-flex justify-content-center inventroy-price">
+                                                                    <div class="currancy">₹</div>
+                                                                    <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][additional][price][premium]" value="{{$inventory->bp_additional_premium}}" id="" placeholder="500"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="d-flex justify-content-center inventroy-price">
+                                                                    <div class="currancy">₹</div>
+                                                                    <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][additional][price][economics]" value="{{$inventory->mp_additional_economic}}" id="" placeholder="400"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="d-flex justify-content-center inventroy-price">
+                                                                    <div class="currancy">₹</div>
+                                                                    <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][additional][price][premium]" value="{{$inventory->mp_additional_premium}}" id="" placeholder="500"></div>
                                                                 </div>
                                                             </td>
                                                         </tr>

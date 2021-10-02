@@ -81,7 +81,11 @@ class VendorRouteController extends Controller
             'price.*.bidnest.price.economics' => 'nullable',
             'price.*.bidnest.price.premium' => 'nullable',
             'price.*.market.price.economics' => 'nullable',
-            'price.*.market.price.premium' => 'nullable'
+            'price.*.market.price.premium' => 'nullable',
+            'price.*.bidnest.additional.price.economics' => 'nullable',
+            'price.*.bidnest.additional.price.premium' => 'nullable',
+            'price.*.market.additional.price.economics' => 'nullable',
+            'price.*.market.additional.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())
@@ -112,7 +116,11 @@ class VendorRouteController extends Controller
             'price.*.bidnest.price.economics' => 'nullable',
             'price.*.bidnest.price.premium' => 'nullable',
             'price.*.market.price.economics' => 'nullable',
-            'price.*.market.price.premium' => 'nullable'
+            'price.*.market.price.premium' => 'nullable',
+            'price.*.bidnest.additional.price.economics' => 'nullable',
+            'price.*.bidnest.additional.price.premium' => 'nullable',
+            'price.*.market.additional.price.economics' => 'nullable',
+            'price.*.market.additional.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())

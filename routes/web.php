@@ -164,6 +164,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/pages/{id}',[Router::class,'page_delete'])->name("page_delete");
 
     Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
+    Route::post('/edit/faq',[Router::class,'faq_edit'])->name("faq_edit");
+    Route::post('/delete/faq',[Router::class,'faq_delete'])->name("faq_delete");
     Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
 

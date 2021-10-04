@@ -46,29 +46,37 @@
                         @endforeach
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="live" role="tabpanel" aria-labelledby="live-tab">
-                            <div class="d-flex  row p-20 justify-content-start" style="margin-left: -2px; margin-right: -90px;">
-                                @foreach($faqs as $faq)
-                                    <div class="live-search-result">
-                                        <div class="accor-item d-flex justify-content-between  row card p-3 br-0" style="flex-direction: row;">
-                                            <a>{{$faq->title}}</a>
-                                            <i class="fa fa-angle-down mt-1" ></i>
-                                        </div>
-                                        <div class="content answer pt-2">
-                                            <p class="pl-2 pr-2" style="white-space: normal !important; text-align:justify " style="flex-direction: row;">
-                                                {{$faq->desc}}
-                                            </p>
-                                        </div>
+                            <table class="table  p-0 theme-text mb-0 f-14">
+                                <thead class="secondg-bg p-0">
+                                <tr>
+                                    <th scope="col" >Qusetions</th>
+                                    <th scope="col">Answers</th>
+                                    <th scope="col">Operations</th>
+                                </tr>
+                                </thead>
+                                <tbody class="mtop-20 f-13">
+                                    @foreach($faqs as $faq)
+                                        <tr class="tb-border faq_{{$faq->id}}">
+                                            <td>{{$faq->title}}</td>
+                                            <td>{{$faq->desc}}</td>
+                                            <td class="cursor-pointer">
+                                                <a class ="inline-icon-button mr-4" href="{{route('admin.editfaq', ['id'=>$faq->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                <a href="#" class="delete inline-icon-button" data-parent=".faq_{{$faq->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('faq_delete',['id'=>$faq->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @if(count($faqs)== 0)
+                                <div class="row hide-on-data">
+                                    <div class="col-md-12 text-center p-20">
+                                        <p class="font14"><i>. No Any FAQ added here.</i></p>
                                     </div>
-                                @endforeach
-                            </div>
-                        </div>
+                                </div>
+                            @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 @endsection

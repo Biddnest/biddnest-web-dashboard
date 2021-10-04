@@ -13,6 +13,7 @@ use App\Helper;
 use App\Models\Bid;
 use App\Models\BidInventory;
 use App\Models\Booking;
+use App\Models\BookingOrganizationGeneratedPrice;
 use App\Models\BookingStatus;
 use App\Models\Inventory;
 use App\Models\InventoryPrice;

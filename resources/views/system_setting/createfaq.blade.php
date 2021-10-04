@@ -58,8 +58,6 @@
                                             <textarea id="" class = "form-control" rows = "5" name="answer" placeholder ="Write Answer" required></textarea>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div class="" id="comments">

@@ -74,13 +74,6 @@ class InventoryController extends Controller
         $image_man = new ImageManager(array('driver' => 'gd'));
         $image_name = "inventory-image-".$name."-".uniqid().".png";
         $icon_name = "inventory-icon-".$name."-".uniqid().".png";
-        /*$imageman = new ImageManager(array('driver' => 'gd'));
-
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 100),$image_name,"inventories");
-
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["icon"] = Helper::saveFile($imageman->make($icon)->resize(256,256)->encode('png', 100),$icon_name,"inventories");*/
 
         $update_data = [
             "name"=>$name,
@@ -301,11 +294,11 @@ class InventoryController extends Controller
 
                 $mp_economic = $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']);
 
-                $bp_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']);
+                $bp_economic = $base_price_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']);
 
                 $mp_premium = $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']);
 
-                $bp_premium = $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']);
+                $bp_premium = $base_price_premium = $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']);
 
             }
 
@@ -343,6 +336,9 @@ class InventoryController extends Controller
             $price_calc->bp_premium = $bp_premium;
             $price_calc->economic_margin_percentage = $economic_percent;
             $price_calc->premium_margin_percentage = $premium_percent;
+
+            $price_calc->base_price_economic = $base_price_economic;
+            $price_calc->base_price_premium = $base_price_premium;
 
 
             if($price_calc->save())

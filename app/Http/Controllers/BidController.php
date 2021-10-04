@@ -286,7 +286,7 @@ class BidController extends Controller
             return Helper::response(false,"Incorrect Pin entered");
 
         $startTime = Carbon::now();
-        $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
+        $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_end_at')[0]);
         $totalDuration = $finishTime->diffInSeconds($startTime);
         if($totalDuration <= 3 || $startTime >= $finishTime)
             return Helper::response(false,"Bidding time has finished for this booking. Could not place your bid.");
@@ -299,6 +299,7 @@ class BidController extends Controller
 //                            ->whereIn("status", [BidEnums::$STATUS['active']])
             ->first();
 
+        /* here refresh_current_activity will refresh the page in mobile app if vendor tries to submit bid for an order her is not listed for */
         if(!$exist_bid)
             return Helper::response(false,"This Booking is not to assigned",["refresh_current_activity"=>true]);
 
@@ -330,12 +331,14 @@ class BidController extends Controller
             return Helper::response(false,"Bidding has been closed for this order.",["refresh_current_activity"=>true]);
 
         foreach($data['inventory'] as $key) {
-            $inventory_price = new BidInventory;
-            $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
-//            $inventory_price->bid_id= Bid::where(['id'=>Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0], 'organization_id'=>$org_id])->pluck('id')[0];
-            $inventory_price->bid_id= Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0];
-            $inventory_price->amount=$key['amount'];
-            $inventory_result = $inventory_price->save();
+
+                $inventory_price = new BidInventory;
+                $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
+                $inventory_price->bid_id= Bid::where(['id'=>Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0], 'organization_id'=>$org_id])->pluck('id')[0];
+                $inventory_price->amount = !$key['is_custom'] ? 0.00 : $key['amount'];
+
+                $inventory_price->save();
+
         }
 
         $meta = ["type_of_movement"=>$data['type_of_movement'], "moving_date"=>null, "vehicle_type"=>$data['vehicle_type'], "min_man_power"=>$min_power, "max_man_power"=>$max_power];
@@ -485,7 +488,7 @@ class BidController extends Controller
 
         $price_list = [];
         $total = 0;
-        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium" ;
+        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium";
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
@@ -495,7 +498,6 @@ class BidController extends Controller
                     "size"=>$booking_inventory["size"],
                     "organization_id"=>$organization_id
                 ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
-
 
                 $list_item["bid_inventory_id"] = $booking_inventory["id"];
 
@@ -511,20 +513,31 @@ class BidController extends Controller
                 else
                     $list_item["price"] = $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
 
+                /*custom item flag*/
+                $list_item["is_custom"] = $booking_inventory->is_custom ? true : false;
+
                 array_push($price_list, $list_item);
 
                 if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
                     $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
                 else
-                    $total += $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+                    $total += $inv && !$booking_inventory['is_custom'] ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
             }
         }
+
+        $booking_type = Booking::where("public_booking_id", $public_booking_id)->pluck('booking_type')[0];
+
+        $column = $booking_type == BookingEnums::$BOOKING_STATUS['economic'] ? 'base_price_economic' : 'base_price_premium';
+
+        $base_price = BookingOrganizationGeneratedPrice::where()->pluck($column)[0];
+
         if($web)
-            return [ "inventories" => $price_list, "total"=>$total ];
+            return [ "inventories" => $price_list, "total"=>$total,"base_price"=> $base_price];
         else
             return Helper::response(true,"Here is the pricelist",["price_list"=>[
                 "inventories" => $price_list,
-                "total"=>$total
+                "total"=>$total,
+                "base_price"=> $base_price
             ]]);
 
     }

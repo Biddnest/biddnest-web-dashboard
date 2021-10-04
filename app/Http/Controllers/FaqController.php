@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Enums\FaqEnums;
 use App\Helper;
 use App\Models\Faq;
@@ -54,5 +55,19 @@ class FaqController extends Controller
         return Helper::response(true,"Here is the category.",["faqs"=>Faq::where("category",$category)->get()]);
     }
 
-    public static function delete(){}
+    public static function delete($id){
+        $faq = Faq::find($id);
+
+        if(!$faq)
+            return Helper::response(false,"Invalid FAQ Id.");
+
+        $update = Faq::where("id",$id)->update([
+            "deleted"=>CommonEnums::$YES
+        ]);
+
+        if(!$update)
+            return Helper::response(false,"Couldn't delete faq. Something went wrong. Contact Administrator");
+
+        return Helper::response(true,"Faq has been deleted.");
+    }
 }

@@ -164,6 +164,8 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/pages/{id}',[Router::class,'page_delete'])->name("page_delete");
 
     Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
+    Route::put('/edit/faq',[Router::class,'faq_edit'])->name("faq_edit");
+    Route::delete('/delete/{id}/faq',[Router::class,'faq_delete'])->name("faq_delete");
     Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
 
@@ -251,6 +253,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
 
         Route::get('/faq',[WebController::class,'faq'])->name("admin.faq");
+        Route::get('/faq/{type}',[WebController::class,'faq_by_category'])->name("admin.type.faq");
+        Route::get('/add/faq',[WebController::class,'addfaq'])->name("admin.addfaq");
+        Route::get('/edit/{id}/faq',[WebController::class,'editfaq'])->name("admin.editfaq");
         Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
         Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");

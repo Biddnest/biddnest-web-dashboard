@@ -879,7 +879,7 @@
                                 <span class="info">
                                     <span>@{{material}}</span>
                                     <input type="hidden" name="inventory_items[][material]" value="@{{material}}" />
-                                    <input type="hidden" name="inventory_items[][is_custom]" value="true">
+                                    <input type="hidden" name="inventory_items[][is_custom]:boolean" value="true">
                                     <div class="dropdown-content">
                                       <ul class="d-content">
                                           @{{#meta.material}}
@@ -943,7 +943,7 @@
                     <h5>@{{meta_name}}</h5>
                     <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
                     <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
-                    <input type="hidden" name="inventory_items[][is_custom]" value="true">
+                    <input type="hidden" name="inventory_items[][is_custom]:boolean" value="true">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>

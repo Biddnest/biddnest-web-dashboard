@@ -32,16 +32,16 @@
                 <div class="card h-auto p-0 p-10">
                     <div  class="card-head right text-left border-bottom-2 p-8">
                         <h3 class="f-18 mb-4 theme-text">
-                           FAQ
+                            FAQ
                         </h3>
                     </div>
                     <ul class="nav nav-tabs p-15 secondg-bg pt-0 pb-0 f-16" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active p-15" id="live-tab" href="{{route('admin.faq')}}">All</a>
+                            <a class="nav-link p-15" id="live-tab" href="{{route('admin.faq')}}">All</a>
                         </li>
                         @foreach(\App\Enums\FaqEnums::$TYPE as $type_faq)
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="past-tab"  href="{{route('admin.type.faq', ['type'=>$type_faq])}}">{{ucfirst(trans($type_faq))}}</a>
+                                <a class="nav-link @if($type == $type_faq) active @endif p-15" id="past-tab"  href="{{route('admin.type.faq', ['type'=>$type_faq])}}">{{ucfirst(trans($type_faq))}}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -62,11 +62,10 @@
                                                 {{implode(" ", array_splice($word, 0, 50))}}
                                                 @if(count($word) >= 50)
                                                     ...
-                                                @endif
-                                            </td>
+                                                @endif</td>
                                             <td class="cursor-pointer">
                                                 <a class ="inline-icon-button mr-4" href="{{route('admin.editfaq', ['id'=>$faq->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                                <a href="#" class="delete inline-icon-button" data-parent=".faq_{{$faq->id}}" data-confirm="Are you sure, you want delete this FAQ permenently? You won't be able to undo this." data-url="{{route('faq_delete',['id'=>$faq->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                <a href="#" class="delete inline-icon-button" data-parent=".faq_{{$faq->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('faq_delete',['id'=>$faq->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -84,4 +83,7 @@
             </div>
         </div>
     </div>
+
+
+
 @endsection

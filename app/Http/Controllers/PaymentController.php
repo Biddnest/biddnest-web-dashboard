@@ -20,6 +20,7 @@ use App\Razorpay;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -233,15 +234,20 @@ class PaymentController extends Controller
         return Helper::response(true, "Payment successful");
     }
 
-    public static function updateBookingPaymentData($booking_id, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00){
-
-        Payment::where("booking_id", Booking::where("booking_id", $booking_id))->update([
+    public static function updateBookingPaymentData($booking_id, $bid_amount, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00){
+        Log::info($commission);
+        Payment::where("booking_id", $booking_id)->update([
+            "vendor_quote"=>$bid_amount,
             "sub_total"=> $subtotal,
             "other_charges"=> $other_charges,
             "grand_total"=> $grand_total,
-            "discount"=> $discount,
+            "discount_amount"=> $discount,
             "tax"=> $tax,
             "commission"=>$commission,
+        ]);
+
+        Booking::where('id', $booking_id)->update([
+            "final_quote"=>$subtotal
         ]);
         return Helper::response(true, "Payment details have been updated.");
     }

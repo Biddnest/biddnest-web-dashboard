@@ -1383,6 +1383,7 @@ class Route extends Controller
          $validation = Validator::make($request->all(),[
              'booking_id'=>'required',
 
+             'bid_amount'=>'required|numeric',
              'commission' => 'required|numeric',
              'sub_total' => 'required|numeric',
 
@@ -1395,6 +1396,6 @@ class Route extends Controller
          if($validation->fails())
              return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-         return PaymentController::updateBookingPaymentData($request->booking_id, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total);
+         return PaymentController::updateBookingPaymentData($request->booking_id, $request->bid_amount, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total);
      }
 }

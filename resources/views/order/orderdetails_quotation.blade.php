@@ -167,7 +167,7 @@
 
                                     <div class="theme-text f-14  p-15" style="padding-top: 5px;">
                                         @if($booking->payment)
-                                            ₹ {{$booking->payment->sub_total - $booking->payment->commission}}
+                                            ₹ {{$booking->payment->vendor_quote}}
                                         @else Payment Pending @endif
 
                                     </div>
@@ -248,8 +248,8 @@
                                                         </div>
                                                         <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                             <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                                               <input type="text" class="form-control number" value="{{$booking->payment->sub_total - $booking->payment->commission}}" name="bid_amount" required>
-                                                               <input type="hidden" value="{{$booking->id}}" name="booking_id" required>
+                                                               <input type="text" class="form-control number" value="{{$booking->payment->vendor_quote}}" name="bid_amount" required>
+                                                               <input type="hidden" class="form-control" value="{{$booking->id}}" name="booking_id" required>
                                                             </div>
                                                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                                                 <input type="text" class="form-control number" value="{{$booking->payment->commission}}" name="commission" required>

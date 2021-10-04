@@ -557,7 +557,7 @@ class BidController extends Controller
 
                 $query = SubservicePrice::where(
                     "organization_id", $organization_id)
-                    ->where('subservice_id', Subservice::where(json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
+                    ->where('subservice_id', Subservice::where("name",json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
                     ->first();
 
                 $additional_distance =

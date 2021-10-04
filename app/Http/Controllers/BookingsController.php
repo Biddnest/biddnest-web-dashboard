@@ -1290,7 +1290,7 @@ class BookingsController extends Controller
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking_exist->id;
-            $movementdates->date = Carbon::parse($dates)->format('Y-m-d');//date('', strtotime($dates));
+            $movementdates->date = Carbon::parse($dates)->format('Y-m-d');
             $result_date = $movementdates->save();
         }
 
@@ -1381,7 +1381,7 @@ class BookingsController extends Controller
             $bookinginventory->size = $items["size"];
             $bookinginventory->quantity = $quantity;
             $bookinginventory->quantity_type = $inventory_quantity_type;
-            $bookinginventory->is_custom = $items['is_custom'] ? 1 : 0;
+            $bookinginventory->is_custom = $items['is_custom'] ? CommonEnums::$YES : CommonEnums::$NO;
             $result_items = $bookinginventory->save();
         }
 

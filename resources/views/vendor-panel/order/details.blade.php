@@ -286,8 +286,17 @@
                                             $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true);
 Debugbar::info($price);
                                         @endphp
+                                        <tr>
+                                            <td>Base Price</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>
+                                                <input class="form-control disabled border-purple w-88 validate-input calc-result validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$price['base_price']}}" type="number" placeholder="0.00" readonly/>
+                                            </td>
+                                        </tr>
                                         @foreach($booking->inventories as $inventory)
                                             <tr class="">
+
                                                 <th scope="row">{{$inventory->name}}</th>
                                                 <td class="">
                                                     @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
@@ -301,14 +310,21 @@ Debugbar::info($price);
 
                                                     <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
 
+                                                    <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
+
+
+
+                                                    <input class="form-control border-purple w-88 calc-total-input validate-input" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
+
                                                     @if(!$inventory->is_custom)
                                                     @foreach($price['inventories'] as $inv_price)
+
                                                         @if($inv_price['bid_inventory_id'] == $inventory->id)
-                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
+                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
                                                         @endif
                                                     @endforeach
                                                     @else
-                                                        <input class="form-control disabled border-purple w-88 validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="N/A" type="number" placeholder="0.00" readonly/>
+                                                        <input class="form-control disabled border-purple w-88 validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="0.00" type="number" placeholder="0.00" readonly/>
                                                     @endif
                                                 </td>
                                             </tr>

@@ -119,11 +119,24 @@ class BidController extends Controller
 
             $order = Booking::where("id", $book_id)->first();
 
+            $timing = Settings::where("key", "bid_time")->pluck('value')[0];
+            $buffer = Settings::where("key", "buffer_time")->pluck('value')[0];
+            $complete_time = Carbon::now()
+                ->addMinutes($timing)
+                ->addMinutes($buffer)
+                ->roundMinutes()->format("Y-m-d H:i:s");
+
+            $bid_end_time = Carbon::now()
+                ->addMinutes($timing)
+                ->roundMinutes()
+                ->format("Y-m-d H:i:s");
+
             $timming = Settings::where("key", "rebid_time")->pluck('value')[0];
             $complete_time = Carbon::now()->addMinutes($timming)->roundMinutes();
 
             $meta = json_decode($order['meta'], true);
-            $meta['timings']['bid_result']= $complete_time->format("Y-m-d H:i:s");
+            $meta['timings']['bid_result']= $bid_end_time;
+
 
             if(!$min_amount) {
                 $addrebidtime = Booking::where(["user_id" => $order->user_id,
@@ -131,7 +144,8 @@ class BidController extends Controller
                     ->update([
                         "status" => BookingEnums::$STATUS['biding'],
                         "meta" => json_encode($meta),
-                        "bid_result_at" => $complete_time->format("Y-m-d H:i:s")
+                        "bid_result_at" => $complete_time,
+                        "bid_end_at" =>  $bid_end_time
                     ]);
                 $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['biding']);
             }
@@ -141,7 +155,8 @@ class BidController extends Controller
                     ->update([
                         "status" => BookingEnums::$STATUS['rebiding'],
                         "meta" => json_encode($meta),
-                        "bid_result_at" => $complete_time->format("Y-m-d H:i:s")
+                        "bid_result_at" => $complete_time,
+                        "bid_end_at" =>  $bid_end_time
                     ]);
                 $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
             }

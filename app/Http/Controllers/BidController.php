@@ -564,21 +564,27 @@ class BidController extends Controller
                 $additional_distance =
                     json_decode($booking->booking->meta, true)['distance'] - $vendor['base_distance'];
 
+                $base_price = 0.00;
+                if($inv)
+                    $base_price = $inv->$price_type;
+
+
                     if ($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                        $list_item["price"] = $booking_inventory['quantity'] * ($inv->$price_type + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
+                        $list_item["price"] = $booking_inventory['quantity'] * ( $base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
                     else
-                        $list_item["price"] = json_decode($booking_inventory['quantity'], true)['max'] * ($inv->$price_type + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
+                        $list_item["price"] = json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
 
 
                 /*custom item flag*/
                 $list_item["is_custom"] = $booking_inventory->is_custom ? true : false;
 
+                $total += $list_item['price'];
                 array_push($price_list, $list_item);
 
-                if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                    $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+               /* if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
+                    $total +=  !$booking_inventory['is_custom'] ? json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type])) : 0.00;
                 else
-                    $total += $inv && !$booking_inventory['is_custom'] ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+                    $total += !$booking_inventory['is_custom'] ? json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type])) : 0.00;*/
             }
         }
 

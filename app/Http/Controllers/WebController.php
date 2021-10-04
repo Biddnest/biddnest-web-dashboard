@@ -522,6 +522,7 @@ class WebController extends Controller
         }
 
         $booking->status_ids = $hist;
+
         return view('order.orderdetails_quotation',[
             "booking" => $booking
         ]);
@@ -543,6 +544,7 @@ class WebController extends Controller
         }
 
         $booking->status_ids = $hist;
+
         return view('order.orderdetails_bidding',[
             "booking" => $booking
         ]);

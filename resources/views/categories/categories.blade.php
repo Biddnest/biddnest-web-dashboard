@@ -107,7 +107,8 @@
                                             Add</div>
                                     </td>--}}
 
-                                    <td class="cursor-pointer"> <a class ="inline-icon-button mr-4" href="{{route('edit-categories', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                    <td class="cursor-pointer">
+                                        <a class ="inline-icon-button mr-4" href="{{route('edit-categories', ['id'=>$category->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                         <a href="#" class="delete inline-icon-button" data-parent=".cat_{{$category->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('service_delete',['id'=>$category->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>

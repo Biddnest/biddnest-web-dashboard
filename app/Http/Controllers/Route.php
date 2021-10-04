@@ -1377,4 +1377,24 @@ class Route extends Controller
 
          return BookingsController::editEnquiryForAdmin($request);
      }
+
+     public function booking_fianl_bid_edit(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'booking_id'=>'required',
+
+             'commission' => 'required|numeric',
+             'sub_total' => 'required|numeric',
+
+             'other_charges' => 'nullable|numeric',
+             'discount_amount' => 'required|numeric',
+             'tax' => 'required|numeric',
+             'grand_total' => 'required|numeric'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return PaymentController::updateBookingPaymentData($request->booking_id, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total);
+     }
 }

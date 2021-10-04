@@ -141,25 +141,22 @@
 
                                 <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
-                                        Assigned Vendor
+                                        Vendor amount
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
-                                        Sub Amount
+                                        Commision
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
+                                        <b>Sub Total</b>
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Other Charges
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
+                                       Discount
+                                    </div>
+                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Tax
-                                    </div>
-                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
-                                        Discount
-                                    </div>
-                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
-                                        Total Amount
-                                    </div>
-                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
-                                        Commision
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Grant Amount
@@ -169,12 +166,20 @@
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
                                     <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                        {{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}
+                                        @if($booking->payment)
+                                            ₹ {{$booking->payment->sub_total - $booking->payment->commission}}
+                                        @else Payment Pending @endif
+
                                     </div>
 
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
-                                            ₹ {{$booking->payment->sub_total}}
+                                            ₹ {{$booking->payment->commission}}
+                                        @else Payment Pending @endif
+                                    </div>
+                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                        @if($booking->payment)
+                                            <b>₹ {{$booking->payment->sub_total}}</b>
                                         @else Payment Pending @endif
                                     </div>
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
@@ -182,37 +187,103 @@
                                             ₹ {{$booking->payment->other_charges}}
                                         @else Payment Pending @endif
                                     </div>
+
+                                    <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
+                                        @if($booking->payment)
+                                        - ₹ {{$booking->payment->discount_amount}}
+                                        @else Payment Pending @endif
+                                    </div>
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
                                             ₹ {{$booking->payment->tax}}
                                         @else Payment Pending @endif
-                                    </div>
-                                    <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                       - @if($booking->payment)@if($booking->payment->coupon)@if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed'])₹@endif{{ucfirst(trans($booking->payment->coupon->discount_amount))}} @if($booking->payment->coupon->coupon_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['percentage'])% Off @endif @else Coupon not Applied @endif @else Payment Pending @endif
                                     </div>
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
                                             ₹ {{$booking->payment->grand_total}}
                                         @else Payment Pending @endif
                                     </div>
-                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                        @if($booking->payment)
-                                           - ₹ {{$booking->payment->commission}}
-                                        @else Payment Pending @endif
-                                    </div>
-                                    <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                        @if($booking->payment)
-                                            ₹ {{$booking->payment->grand_total - $booking->payment->commission}}
-                                        @else Payment Pending @endif
-                                    </div>
-
                                 </div>
 
-                                <div class="col-sm-1 secondg-bg margin-topneg-15 pt-10">
-                                    <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                        Assigned Vendor
+                                @if(($booking->status <= \App\Enums\BookingEnums::$STATUS['payment_pending']) || ($booking->status <= \App\Enums\BookingEnums::$STATUS['awaiting_bid_result']) || ($booking->status <= \App\Enums\BookingEnums::$STATUS['price_review_pending']))
+                                    <div class="col-sm-1 white-bg margin-topneg-15 pt-10">
+                                        <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                                            <a href="#" class="modal-toggle" data-target="#change_bid_amt"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <div class="fullscreen-modal" id="change_bid_amt" >
+                                        <div class="fullscreen-modal-body" role="document" style="width: 60% !important; transform: translateX(30%) !important;">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title  ml-4 pl-2" id="exampleModalLongTitle">Edit Bid Amount</h5>
+                                                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('edit_booking_final_bid')}}" data-next="redirect" data-redirect-type="hard"  data-url="{{route('order-details-quotation', ['id'=>$booking->id])}}" data-alert="mega" method="POST" data-parsley-validate>
+                                                <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
+                                                    <div class="d-flex match-height row p-15 quotation-main pb-0" >
+                                                        <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                                                Vendor amount
+                                                            </div>
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                                                Commision
+                                                            </div>
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                                                <b>Sub Total</b>
+                                                            </div>
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                                                Other Charges
+                                                            </div>
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                                                Discount
+                                                            </div>
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                                                Tax
+                                                            </div>
+                                                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                                                Grant Amount
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                                                            <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                                                               <input type="text" class="form-control number" value="{{$booking->payment->sub_total - $booking->payment->commission}}" name="bid_amount" required>
+                                                               <input type="hidden" value="{{$booking->id}}" name="booking_id" required>
+                                                            </div>
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                                                <input type="text" class="form-control number" value="{{$booking->payment->commission}}" name="commission" required>
+                                                            </div>
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                                                <input type="text" class="form-control number" value="{{$booking->payment->sub_total}}" name="sub_total" required readonly>
+                                                            </div>
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                                                <input type="text" class="form-control number" value="{{$booking->payment->other_charges}}" name="other_charges" required>
+                                                            </div>
+                                                            <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
+                                                                <input type="text" class="form-control number" value="{{$booking->payment->discount_amount}}" name="discount_amount" required>
+                                                            </div>
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                                                <input type="text" class="form-control number" value="{{$booking->payment->tax}}" name="tax" required>
+                                                            </div>
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                                                <input type="text" class="form-control number" value="{{$booking->payment->grand_total}}" name="grand_total" readonly required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer p-15 ">
+                                                    <div class="w-50">
+                                                    </div>
+                                                    <div class="w-50 text-right"><a class="white-text p-10" href="#">
+                                                            <button  class="btn theme-bg white-text w-40" style="margin-bottom: 20px;">Submit</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             @endif
 

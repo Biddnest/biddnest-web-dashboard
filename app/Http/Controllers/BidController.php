@@ -532,7 +532,8 @@ class BidController extends Controller
 
         $price_list = [];
         $total = 0;
-        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_economics" : "bp_premium";
+        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_economic" : "bp_premium";
+        $ad_price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_additional_distance_economic_price" : "bp_additional_distance_premium_price";
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
@@ -564,9 +565,9 @@ class BidController extends Controller
                     json_decode($booking->booking->meta, true)['distance'] - $vendor['base_distance'];
 
                     if ($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                        $list_item["price"] = $booking_inventory['quantity'] * ($inv->$price_type + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']));
+                        $list_item["price"] = $booking_inventory['quantity'] * ($inv->$price_type + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
                     else
-                        $list_item["price"] = json_decode($booking_inventory['quantity'], true)['max'] * ($inv->$price_type + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']));
+                        $list_item["price"] = json_decode($booking_inventory['quantity'], true)['max'] * ($inv->$price_type + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
 
 
                 /*custom item flag*/

@@ -21,6 +21,8 @@ use App\Models\Organization;
 use App\Models\Payment;
 use App\Models\Settings;
 use App\Models\Vendor;
+use App\Models\SubservicePrice;
+use App\Models\Subservice;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
@@ -545,7 +547,8 @@ class BidController extends Controller
 
         $price_list = [];
         $total = 0;
-        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium";
+        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_economic" : "bp_premium";
+        $ad_price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_additional_distance_economic_price" : "bp_additional_distance_premium_price";
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
@@ -565,20 +568,38 @@ class BidController extends Controller
 
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
-                if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                    $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
-                else
-                    $list_item["price"] = $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+
+                $vendor = Organization::find($organization_id);
+
+                $query = SubservicePrice::where(
+                    "organization_id", $organization_id)
+                    ->where('subservice_id', Subservice::where("name",json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
+                    ->first();
+
+                $additional_distance =
+                    json_decode($booking->booking->meta, true)['distance'] - $vendor['base_distance'];
+
+                $base_price = 0.00;
+                if($inv)
+                    $base_price = $inv->$price_type;
+
+
+                    if ($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
+                        $list_item["price"] = $booking_inventory['quantity'] * ( $base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
+                    else
+                        $list_item["price"] = json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
+
 
                 /*custom item flag*/
                 $list_item["is_custom"] = $booking_inventory->is_custom ? true : false;
 
+                $total += $list_item['price'];
                 array_push($price_list, $list_item);
 
-                if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                    $total += $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+               /* if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
+                    $total +=  !$booking_inventory['is_custom'] ? json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type])) : 0.00;
                 else
-                    $total += $inv && !$booking_inventory['is_custom'] ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+                    $total += !$booking_inventory['is_custom'] ? json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type])) : 0.00;*/
             }
         }
 

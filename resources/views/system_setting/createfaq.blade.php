@@ -30,7 +30,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form action="{{route('faq_add')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('admin.faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
+                            <form action="@if($faq){{route('faq_add')}}@else{{route('faq_add')}}@endif" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('admin.faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
 
                                 <div class="row p-20">
                                     <div class="col-lg-6">
@@ -39,7 +39,7 @@
                                             <select class="form-control br-5 inventory-select" name="category" required>
                                                 <option value="">--Select--</option>
                                                 @foreach(\App\Enums\FaqEnums::$TYPE as $category)
-                                                    <option value="{{$category}}">{{$category}}</option>
+                                                    <option value="{{$category}}" @if($faq && $faq->category)  selected @endif>{{$category}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -48,14 +48,14 @@
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Question</label>
-                                            <input name="ques" type="text" id="banner_name" placeholder="Question" class="form-control br-5" required/>
+                                            <input name="ques" type="text" id="banner_name" value="@if($faq && $faq->title){{$faq->title}}@endif" placeholder="Question" class="form-control br-5" required/>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Answer</label>
-                                            <textarea id="" class = "form-control" rows = "5" name="answer" placeholder ="Write Answer" required></textarea>
+                                            <textarea id="" class = "form-control" rows = "5" name="answer" value="@if($faq && $faq->desc){{$faq->desc}}@endif" placeholder ="Write Answer" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                         <div class="w-50 text-right">
                                             <a class="white-text p-10">
                                                 <button class="btn theme-bg white-text w-30 br-5 text-center" style="padding: 10px 10px !important;">
-                                                    ADD QUESTION
+                                                    @if($faq) UPDATE @else ADD @endif QUESTION
                                                 </button>
                                             </a>
                                         </div>

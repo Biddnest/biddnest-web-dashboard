@@ -174,8 +174,9 @@ class WebController extends Controller
         return view('system_setting.createfaq');
     }
 
-    public function editfaq(){
-        return view('system_setting.createfaq');
+    public function editfaq(Request $request){
+        $faqs = Faq::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->first();
+        return view('system_setting.createfaq', ['faq'=>$faqs]);
     }
 
     public function contact_us()

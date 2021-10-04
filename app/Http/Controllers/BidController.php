@@ -470,7 +470,7 @@ class BidController extends Controller
         $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min($booking_type_column);
 
-        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $book_id)
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->avg($booking_type_percentage_column);
 
         $average_margin_value = ($average_margin_percentage / 100) * $least_agent_price;
@@ -586,7 +586,7 @@ class BidController extends Controller
 
         $column = $booking_type == BookingEnums::$BOOKING_TYPE['economic'] ? 'base_price_economic' : 'base_price_premium';
 
-        $base_price = BookingOrganizationGeneratedPrice::where("organization_id",$organization_id)->pluck($column)[0];
+        $base_price = BookingOrganizationGeneratedPrice::where("organization_id",$organization_id)->pluck($column);
 
         if($web)
             return [ "inventories" => $price_list, "total"=>$total,"base_price"=> $base_price];

@@ -569,7 +569,7 @@ class BidController extends Controller
 
         $booking_type = Booking::where("public_booking_id", $public_booking_id)->pluck('booking_type')[0];
 
-        $column = $booking_type == BookingEnums::$BOOKING_STATUS['economic'] ? 'base_price_economic' : 'base_price_premium';
+        $column = $booking_type == BookingEnums::$BOOKING_TYPE['economic'] ? 'base_price_economic' : 'base_price_premium';
 
         $base_price = BookingOrganizationGeneratedPrice::where()->pluck($column)[0];
 

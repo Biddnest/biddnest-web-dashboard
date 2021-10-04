@@ -25,52 +25,9 @@
                     <div class="row no-gutters">
                         <div class="col-sm-8 p-3 ">
                             <h3 class="f-18 pl-8 title" > In Progress Bookings</h3 >
-
                         </div>
                         <div class="col-sm-1 -mr-4 pt-4 pl-8 ">
                         </div>
-                        {{--<div class="col-sm-1 -mr-4 pt-4 pl-8 " >
-                            <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                            </a>
-                            <div class="dropdown-menu ">
-
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check f-14">
-                                        <input class="form-check-input" type="checkbox" value="" id="city">
-                                        <label class="form-check-label" for="city">
-                                            City
-                                        </label>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check f-14">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="Customer">
-                                        <label class="form-check-label" for=" Customer">
-                                            Customer Status
-                                        </label>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check f-14">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="customerType">
-                                        <label class="form-check-label" for="customerType">
-                                            Customer Type
-                                        </label>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>--}}
-                        {{--<div class="p-1 card-head left col-sm-3">
-                            <div class="search">
-                                <input type="text" class="searchTerm table-search1" data-url="{{route('orders-booking-inprogress')}}" placeholder="Search...">
-                                <button type="submit" class="searchButton1">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>--}}
                     </div>
                     <!-- Table -->
                     <div class="all-vender-details">
@@ -80,24 +37,18 @@
                                     <th scope="col">Enquiry ID</th>
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
-
                                     <th scope="col">Order Date</th>
-
                                     <th scope="col" style="text-align: center !important;">Order Status</th>
-{{--                                    <th scope="col">Operations</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20  f-13">
                                 @foreach($bookings as $booking)
                                     <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
                                         <td scope="row">{{$booking->public_enquiry_id}}</td>
-                                        <td>{{json_decode($booking->source_meta, true)['city']}}</td>
-                                        <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
-
+                                        <td>@if($booking->source_meta){{json_decode($booking->source_meta, true)['city']}}@endif</td>
+                                        <td>@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['city']}}@endif</td>
                                         <td>{{$booking->created_at->format('d M Y')}}</td>
-
                                         <td class="">
-
                                             @switch($booking->status)
                                                 @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                 <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
@@ -148,11 +99,6 @@
                                                 @break
                                             @endswitch
                                         </td>
-
-{{--                                        <td class="no-toggle">--}}
-{{--                                            <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>--}}
-{{--                                            --}}{{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
-{{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

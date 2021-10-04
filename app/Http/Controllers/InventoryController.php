@@ -312,13 +312,15 @@ class InventoryController extends Controller
                         "organization_id"=>$vendor['id']
                     ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
 
-                    $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
+                    if($inv_price){
+                        $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
 
-                    $bp_economic += $inv_price['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_economic']);
+                        $bp_economic += $inv_price['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_economic']);
 
-                    $mp_premium += $inv_price['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_premium']);
+                        $mp_premium += $inv_price['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_premium']);
 
-                    $bp_premium += $inv_price['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_premium']);
+                        $bp_premium += $inv_price['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_premium']);
+                    }
                 }
             }
 

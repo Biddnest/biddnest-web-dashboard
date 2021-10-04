@@ -109,8 +109,6 @@ class BidController extends Controller
             ->where("status", BidEnums::$STATUS['bid_submitted'])
             ->count();
 
-
-
         if(!$min_amount || $low_quoted_vendors > 1) {
             $count_rebid=BookingStatus::where(["booking_id"=>$book_id, "status"=>BookingEnums::$STATUS['biding']])->count();
             if($count_rebid >= (int)Settings::where('key', 'max_rebid_count')->pluck('value')[0]) {
@@ -187,16 +185,23 @@ class BidController extends Controller
         $average_margin_value = ($average_margin_percentage / 100) * $least_agent_price;
 
         $final_bid_amount = 0.00;
+        $commission = 0.00;
         if($min_amount <= $least_agent_price){
             /* BID CASE 1 */
-            $final_bid_amount = $least_agent_price + (0.7 * $average_margin_value);
+            $commission = (0.7 * $average_margin_value);
+            $final_bid_amount = $least_agent_price + $commission;
+
         }else if($min_amount > $least_agent_price && $min_amount <= $booking_data->organization_rec_quote){
-            $final_bid_amount = $least_agent_price + (0.6 * $average_margin_value);
+            $commission = (0.6 * $average_margin_value);
+            $final_bid_amount = $least_agent_price + $commission;
         }else{
             $final_bid_amount = null;
         }
 
         $public_booking_id = $booking_data->public_booking_id;
+
+
+
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
         $won_bid_details = Bid::where(["booking_id"=>$book_id, "organization_id"=>$won_org_id])->first();
@@ -235,6 +240,7 @@ class BidController extends Controller
         $payment->booking_id = $book_id;
         $payment->other_charges = $other_charges;
         $payment->tax = $tax;
+        $payment->commission = $commission;
         $payment->sub_total= $sub_total;
         $payment->grand_total = $grand_total;
         $payment_result = $payment->save();
@@ -377,7 +383,7 @@ class BidController extends Controller
                 return Helper::response(false,"Not in active state");
 
             $startTime = Carbon::now();
-            $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_result_at')[0]);
+            $finishTime = Carbon::parse(Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('bid_end_at')[0]);
             $totalDuration = $finishTime->diffInSeconds($startTime);
             /* if($totalDuration <= 3 || $startTime >= $finishTime)
                  return Helper::response(false,"Bidding has been closed for this booking");*/
@@ -433,16 +439,42 @@ class BidController extends Controller
 
         $bid_details = Bid::where(["booking_id"=>$booking_id, "organization_id"=>$org_id])->first();
 
-        $booking_update_status = Booking::where("id", $booking_id)
-            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
-            ->update([
-                "organization_id"=>$org_id,
-                "final_quote"=>$amount,
-                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($bid_details->meta, true)['moving_date'])),
-                "status"=>BookingEnums::$STATUS['payment_pending']
-            ]);
 
-        $sub_total = (float) $amount;
+
+        $booking_data = Booking::find($booking_id);
+        if($booking_data->booking_type == BookingEnums::$BOOKING_TYPE['economic']) {
+            $booking_type_column = 'bp_economic';
+            $booking_type_percentage_column = 'economic_margin_percentage';
+        }
+        else {
+            $booking_type_column = 'bp_premium';
+            $booking_type_percentage_column = 'premium_margin_percentage';
+        }
+
+
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+            ->min($booking_type_column);
+
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $book_id)
+            ->avg($booking_type_percentage_column);
+
+        $average_margin_value = ($average_margin_percentage / 100) * $least_agent_price;
+
+        $final_bid_amount = 0.00;
+        $commission = 0.00;
+        if($amount <= $least_agent_price){
+            /* BID CASE 1 */
+            $commission = (0.7 * $average_margin_value);
+            $final_bid_amount = $least_agent_price + $commission;
+
+        }else if($amount > $least_agent_price && $amount <= $booking_data->organization_rec_quote){
+            $commission = (0.6 * $average_margin_value);
+            $final_bid_amount = $least_agent_price + $commission;
+        }else{
+            $final_bid_amount = null;
+        }
+
+        $sub_total = (float) $final_bid_amount;
         $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
         $tax_percentage = (float) Settings::where("key", "tax")->pluck('value')[0];
         $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
@@ -454,8 +486,18 @@ class BidController extends Controller
         $payment->other_charges = $other_charges;
         $payment->tax = $tax;
         $payment->sub_total= $sub_total;
+        $payment->commission = $commission;
         $payment->grand_total = $grand_total;
         $payment_result = $payment->save();
+
+        $booking_update_status = Booking::where("id", $booking_id)
+            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->update([
+                "organization_id"=>$org_id,
+                "final_quote"=>$final_bid_amount,
+                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($bid_details->meta, true)['moving_date'])),
+                "status"=>BookingEnums::$STATUS['payment_pending']
+            ]);
 
         $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['payment_pending']);
 

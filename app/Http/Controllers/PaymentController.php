@@ -233,5 +233,17 @@ class PaymentController extends Controller
         return Helper::response(true, "Payment successful");
     }
 
+    public static function updateBookingPaymentData($booking_id, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00){
+
+        Payment::where("booking_id", Booking::where("booking_id", $booking_id))->update([
+            "sub_total"=> $subtotal,
+            "other_charges"=> $other_charges,
+            "grand_total"=> $grand_total,
+            "discount"=> $discount,
+            "tax"=> $tax,
+            "commission"=>$commission,
+        ]);
+        return Helper::response(true, "Payment details have been updated.");
+    }
 
 }

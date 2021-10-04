@@ -275,8 +275,8 @@ class BookingsController extends Controller
         $confirmestimate = Booking::where(["user_id" => $exist->user_id,
             "public_booking_id" => $exist->public_booking_id])
             ->update([
-                "final_estimated_quote" => json_decode($exist['quote_estimate'], true)[$service_type],
-                "organization_rec_quote" => json_decode($exist['organization_quote_estimate'], true)[$service_type],
+                "final_estimated_quote" => round(json_decode($exist['quote_estimate'], true)[$service_type],2),
+                "organization_rec_quote" => round(json_decode($exist['organization_quote_estimate'], true)[$service_type], 2),
                 "booking_type" => $booking_type,
                 "status" => BookingEnums::$STATUS['placed'],
                 "meta" => json_encode($meta),

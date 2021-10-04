@@ -58,10 +58,15 @@
                                     @foreach($faqs as $faq)
                                         <tr class="tb-border faq_{{$faq->id}}">
                                             <td>{{$faq->title}}</td>
-                                            <td>{{$faq->desc}}</td>
+                                            <td style="width: 60%">@php $word = explode(" ", $faq->desc);@endphp
+                                                {{implode(" ", array_splice($word, 0, 50))}}
+                                                @if(count($word) >= 50)
+                                                    ...
+                                                @endif
+                                            </td>
                                             <td class="cursor-pointer">
                                                 <a class ="inline-icon-button mr-4" href="{{route('admin.editfaq', ['id'=>$faq->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                                <a href="#" class="delete inline-icon-button" data-parent=".faq_{{$faq->id}}" data-confirm="Are you sure, you want delete this Category permenently? You won't be able to undo this." data-url="{{route('faq_delete',['id'=>$faq->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                <a href="#" class="delete inline-icon-button" data-parent=".faq_{{$faq->id}}" data-confirm="Are you sure, you want delete this FAQ permenently? You won't be able to undo this." data-url="{{route('faq_delete',['id'=>$faq->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -1076,6 +1076,25 @@ class Route extends Controller
         return FaqController::add($request->ques, $request->answer, $request->category);
     }
 
+    public function faq_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'category'=>'required',
+            'ques'=>'required',
+            'answer'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return FaqController::update($request->id, $request->ques, $request->answer, $request->category);
+    }
+
+    public function faq_delete(Request $request){
+        return FaqController::delete($request->id);
+    }
+
     public function contact_us(Request $request)
     {
         $validation = Validator::make($request->all(),[

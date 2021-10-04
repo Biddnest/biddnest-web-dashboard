@@ -171,7 +171,7 @@ class WebController extends Controller
     }
 
     public function addfaq(){
-        return view('system_setting.createfaq');
+        return view('system_setting.createfaq', ['faq'=>[]]);
     }
 
     public function editfaq(Request $request){

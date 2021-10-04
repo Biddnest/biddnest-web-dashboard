@@ -30,8 +30,10 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form action="@if($faq){{route('faq_add')}}@else{{route('faq_add')}}@endif" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('admin.faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
-
+                            <form action="@if($faq){{route('faq_edit')}}@else{{route('faq_add')}}@endif" method="@if(isset($faq)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('admin.faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
+                                @if($faq)
+                                    <input type="hidden" name="id" value="{{$faq->id}}">
+                                @endif
                                 <div class="row p-20">
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -55,7 +57,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Answer</label>
-                                            <textarea id="" class = "form-control" rows = "5" name="answer" value="@if($faq && $faq->desc){{$faq->desc}}@endif" placeholder ="Write Answer" required></textarea>
+                                            <textarea id="" class = "form-control" rows = "5" name="answer" placeholder ="Write Answer" required>@if($faq && $faq->desc){{$faq->desc}}@endif</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +69,7 @@
                                         <div class="w-50 text-right">
                                             <a class="white-text p-10">
                                                 <button class="btn theme-bg white-text w-30 br-5 text-center" style="padding: 10px 10px !important;">
-                                                    @if($faq) UPDATE @else ADD @endif QUESTION
+                                                    @if($faq) UPDATE @else ADD @endif
                                                 </button>
                                             </a>
                                         </div>

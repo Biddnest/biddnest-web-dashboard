@@ -484,7 +484,7 @@ class BidController extends Controller
 
         $price_list = [];
         $total = 0;
-        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium" ;
+        $price_type = $booking->booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "price_economics" : "price_premium";
         if($booking->booking_inventories){
             foreach($booking->booking_inventories as $booking_inventory){
                 $list_item = [];
@@ -494,7 +494,6 @@ class BidController extends Controller
                     "size"=>$booking_inventory["size"],
                     "organization_id"=>$organization_id
                 ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
-
 
                 $list_item["bid_inventory_id"] = $booking_inventory["id"];
 
@@ -509,6 +508,9 @@ class BidController extends Controller
                     $list_item["price"] = $inv ? $inv->$price_type * $booking_inventory['quantity'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
                 else
                     $list_item["price"] = $inv ? $inv->$price_type * json_decode($booking_inventory['quantity'], true)['max'] * ceil((float)json_decode($booking->booking->meta, true)['distance']) : 0.00;
+
+                /*custom item flag*/
+                $list_item["is_custom"] = $booking_inventory->is_custom ? true : false;
 
                 array_push($price_list, $list_item);
 

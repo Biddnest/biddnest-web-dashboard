@@ -1381,6 +1381,7 @@ class BookingsController extends Controller
             $bookinginventory->size = $items["size"];
             $bookinginventory->quantity = $quantity;
             $bookinginventory->quantity_type = $inventory_quantity_type;
+            $bookinginventory->is_custom = $items['is_custom'] ? 1 : 0;
             $result_items = $bookinginventory->save();
         }
 

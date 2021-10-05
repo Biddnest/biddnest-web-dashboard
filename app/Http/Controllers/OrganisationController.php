@@ -681,7 +681,7 @@ class OrganisationController extends Controller
             $pricing->mp_economic = $subservice['market']['price']['economy'];
             $pricing->mp_premium = $subservice['market']['price']['premium'];
             $pricing->economic_margin_percentage = $economic_margin_percentage;
-            $pricing->premium_margin_percentag = $premium_margin_percentag;
+            $pricing->premium_margin_percentage = $premium_margin_percentag;
             $pricing->mp_additional_distance_economic_price = $subservice['mp_additional']['price']['economy'];
             $pricing->mp_additional_distance_premium_price = $subservice['mp_additional']['price']['premium'];
             $pricing->bp_additional_distance_economic_price = $subservice['bp_additional']['price']['economy'];

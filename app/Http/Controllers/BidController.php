@@ -196,7 +196,7 @@ class BidController extends Controller
         $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min($booking_type_column);
 
-        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $book_id)
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->avg($booking_type_percentage_column);
 
         $average_margin_value = ($average_margin_percentage / 100) * $least_agent_price;
@@ -577,32 +577,30 @@ class BidController extends Controller
                     ->where('subservice_id', Subservice::where("name",json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
                     ->first();
 
-                $additional_distance =json_decode($booking->booking->meta, true)['distance'] - $vendor['base_distance'];
+                $additional_distance = (float) json_decode($booking->booking->meta, true)['distance'] - $vendor['base_distance'];
 
-                if($additional_distance < 0)
-                    $additional_distance = 0;
+                if($additional_distance < 0.00)
+                    $additional_distance = 0.00;
 
                 $base_price = 0.00;
+                $ad_price = 0.00;
                 if($inv)
-                    $base_price = $inv->$price_type;
+                    $base_price = (float)$inv->$price_type;
+
+                if($query)
+                    $ad_price = (float) $query->$ad_price_type;
 
 
                     if ($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                        $list_item["price"] = $booking_inventory['quantity'] * ( $base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
+                        $list_item["price"] = round($booking_inventory['quantity'] * ( $base_price + (($additional_distance / (float) $vendor['additional_distance']) * $ad_price)),2);
                     else
-                        $list_item["price"] = json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type]));
-
+                        $list_item["price"] = round(json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)),2);
 
                 /*custom item flag*/
                 $list_item["is_custom"] = $booking_inventory->is_custom ? true : false;
 
-                $total += $list_item['price'];
+                $total += (float)$list_item['price'];
                 array_push($price_list, $list_item);
-
-               /* if($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                    $total +=  !$booking_inventory['is_custom'] ? json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type])) : 0.00;
-                else
-                    $total += !$booking_inventory['is_custom'] ? json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / $vendor['additional_distance']) * $query[$ad_price_type])) : 0.00;*/
             }
         }
 
@@ -618,8 +616,8 @@ class BidController extends Controller
         else
             return Helper::response(true,"Here is the pricelist",["price_list"=>[
                 "inventories" => $price_list,
-                "total"=>$total,
-                "base_price"=> $base_price
+                "total" => round((float)$total,2),
+                "base_price" => round((float)$base_price,2)
             ]]);
 
     }

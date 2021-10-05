@@ -1182,7 +1182,6 @@ class BookingsController extends Controller
     }
 
     /* Track Booking API's for Customer App */
-
     public static function trackSourceData($data, $user_id, $web = false, $created_by_support = false)
     {
         $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
@@ -1337,8 +1336,6 @@ class BookingsController extends Controller
                 "economic" => InventoryController::getEconomicPrice($data, $booking_exist, true, $web, $created_by_support),
                 "premium" => InventoryController::getPremiumPrice($data, $booking_exist, true, $web, $created_by_support)
             ]);
-
-
         } catch (Exception $e) {
             DB::rollBack();
             return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
@@ -1396,6 +1393,8 @@ class BookingsController extends Controller
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
 
+
+    /*Track APIs for website*/
     public static function trackCustomerDataForWeb($data, $user_id, $web = false, $created_by_support = false)
     {
         DB::beginTransaction();
@@ -1470,7 +1469,6 @@ class BookingsController extends Controller
     }
 
     /* Track Booking API's for Customer Website */
-
     public static function trackDeliveryDataForWeb($data, $user_id, $movement_dates, $web = false, $created_by_support = false)
     {
         $booking_exist = Booking::where("public_booking_id", $data['public_booking_id'])->first();
@@ -1668,7 +1666,6 @@ class BookingsController extends Controller
         DB::commit();
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
-
 
     public static function editEnquiryForAdmin(Request $request)
     {

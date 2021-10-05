@@ -290,8 +290,7 @@ class InventoryController extends Controller
             $bp_premium = 0.00;
 
             if(strtolower($data['meta']['subcategory']) != "custom"){
-                $query = SubservicePrice::where(
-                    "organization_id",$vendor['id'])
+                $query = SubservicePrice::where("organization_id",$vendor['id'])
                     ->where('subservice_id', Subservice::where('name',$data['meta']['subcategory'])
                         ->pluck('id')[0])->first();
 

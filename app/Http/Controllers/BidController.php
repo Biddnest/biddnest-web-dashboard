@@ -566,7 +566,7 @@ class BidController extends Controller
 
         $vendor_base_price = 0.00;
 
-//        Log::info("Booking data", $booking);
+
         if(strtolower(json_decode($booking->booking->meta, true)['subcategory']) != "custom"){
             $vendor_base_price = $query->$price_type + (($additional_distance / $vendor->additional_distance) * $query->$ad_price_type);
         }
@@ -637,7 +637,13 @@ class BidController extends Controller
             return Helper::response(true,"Here is the pricelist",["price_list"=>[
                 "inventories" => $price_list,
                 "total" => round((float)$total,2),
-                "base_price" => round((float)$vendor_base_price,2)
+                "base_price" => round((float)$vendor_base_price,2),
+                "grand_total"=>round((float)$total + (float)$vendor_base_price,2)
+                /*"distance"=>[
+                    "total"=>(float)json_decode($booking->booking->meta, true)['distance'],
+                    "additional"=>$additional_distance
+                ],
+                "vendor"=>$vendor*/
             ]]);
 
     }

@@ -566,7 +566,7 @@ class BidController extends Controller
 
         $vendor_base_price = 0.00;
 
-        Log::info("Booking data", $booking);
+//        Log::info("Booking data", $booking);
         if(strtolower(json_decode($booking->booking->meta, true)['subcategory']) != "custom"){
             $vendor_base_price = $query->$price_type + (($additional_distance / $vendor->additional_distance) * $query->$ad_price_type);
         }

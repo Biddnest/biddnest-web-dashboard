@@ -1025,7 +1025,7 @@
                                         <ul class="d-content">
                                             @{{#size}}
                                             <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
-                                                <a class="menu"><span class="ml-1">@}}</span></a>
+                                                <a class="menu"><span class="ml-1">@{{.}}</span></a>
                                             </li>
                                             @{{/size}}
                                         </ul>

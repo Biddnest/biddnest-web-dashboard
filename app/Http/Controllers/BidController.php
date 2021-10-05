@@ -604,10 +604,11 @@ class BidController extends Controller
         }
 
         $booking_type = Booking::where("public_booking_id", $public_booking_id)->pluck('booking_type')[0];
+        $booking_id = Booking::where("public_booking_id", $public_booking_id)->pluck('id')[0];
 
         $column = $booking_type == BookingEnums::$BOOKING_TYPE['economic'] ? 'base_price_economic' : 'base_price_premium';
 
-        $base_price = BookingOrganizationGeneratedPrice::where(["organization_id"=>$organization_id, "booking_id"=>$booking->id])->pluck($column);
+        $base_price = BookingOrganizationGeneratedPrice::where(["organization_id"=>$organization_id, "booking_id"=>$booking_id])->pluck($column);
 
         if($web)
             return [ "inventories" => $price_list, "total"=>$total,"base_price"=> $base_price];

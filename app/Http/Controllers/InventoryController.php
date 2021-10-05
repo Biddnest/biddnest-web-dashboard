@@ -281,6 +281,8 @@ class InventoryController extends Controller
         {
 
             $additional_distance = $total_distance - $vendor['base_distance'];
+            if($additional_distance < 0)
+                $additional_distance = 0;
 
             $mp_economic = 0.00;
             $bp_economic = 0.00;

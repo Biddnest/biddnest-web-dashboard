@@ -24,6 +24,7 @@ use App\Models\Vendor;
 use App\Models\SubservicePrice;
 use App\Models\Subservice;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 
 
@@ -565,7 +566,8 @@ class BidController extends Controller
 
         $vendor_base_price = 0.00;
 
-        if(strtolower(json_decode($booking->meta, true)['subcategory']) != "custom"){
+        Log::info("Booking data", $booking);
+        if(strtolower(json_decode($booking->booking->meta, true)['subcategory']) != "custom"){
             $vendor_base_price = $query->$price_type + (($additional_distance / $vendor->additional_distance) * $query->$ad_price_type);
         }
 

@@ -12,3 +12,4 @@ yarn-error.log
 /public
 .idea/
 /vendor
+/storage/app/public/

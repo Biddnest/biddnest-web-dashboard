@@ -53,10 +53,10 @@
 $('.card-methord').click(function() {
             $('.card-methord').removeClass('turntheme');
             $('.card-methord').removeClass('check-icon02');
+            $('.card-methord').removeClass('check-blue');
             $(this).addClass('turntheme');
             $(this).addClass('check-icon02');
-
-
+            $(this).addClass('check-blue');
         });
         </script>
 

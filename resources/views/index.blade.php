@@ -80,8 +80,9 @@
      <input type="hidden" value='@json($final)' id="order_dist_dataset">
 
      @php $datasetzing = []; $finalzing = []; $zing_count=0; @endphp
+
      @foreach($graph['vendor_statewise'] as $zing)
-         @switch($od['state'])
+         @switch($zing['state'])
              @case('Maharashtra')
              @php
                  $dataset['label'] = "Maharashtra";
@@ -118,7 +119,8 @@
              @endphp
              @break
          @endswitch
-         @if(count($datasetzing)>0) @php array_push($finalzing, $datasetzing); $datasetzing = []; @endphp @endif
+         @if(count($datasetzing)>0) @php array_push($finalzing, $datasetzing); $datasetzing = []; @endphp
+             @endif
 
      @endforeach
      <input type="hidden" value='@json($finalzing)' id="vendor_dist_dataset">

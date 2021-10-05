@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subservice extends Model
 {
     use HasFactory;
-    protected $hidden = ['laravel_through_key'];
+    protected $hidden = ['laravel_through_key','created_at', 'updated_at','deleted'];
 
     public function inventories(){
        return $this->hasManyThrough(Inventory::class,SubserviceInventory::class,'subservice_id','id','id','inventory_id');
@@ -21,5 +21,13 @@ class Subservice extends Model
     public function services()
     {
         return $this->hasOneThrough(Service::class,ServiceSubservice::class,'subservice_id','id','id','service_id');
+    }
+
+    public function items(){
+        return $this->hasManyThrough(Inventory::class, SubserviceInventory::class, 'inventory_id','id','id','subservice_id');
+    }
+
+    public function extraitems(){
+        return $this->hasMany(SubServiceExtraInventory::class);
     }
 }

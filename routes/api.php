@@ -40,10 +40,13 @@ Route::prefix('v1')->group(function () {
     Route::get('/testimonials',[ApiRouter::class,'getTestimonials']);
 
     Route::get('/zone',[ApiRouter::class,'getZones']);
+
+    Route::get('/notifications',[ApiRouter::class,'getNotifications']);
     //bookings APIs
     Route::prefix('bookings')->group(function () {
         Route::get('/',[ApiRouter::class,'getBookingByPublicId']);
         Route::post('/enquiry',[ApiRouter::class,'createEnquiry']);
+        Route::post('/booking_track',[ApiRouter::class,'createBookingTrack']);
         Route::post('/confirm',[ApiRouter::class,'confirmBooking']);
 //        Route::delete('/cancel',[ApiRouter::class,'cancelBooking']);
         Route::get('/finalquote',[ApiRouter::class,'finalquote']);
@@ -67,6 +70,14 @@ Route::prefix('v1')->group(function () {
             Route::post('/reschedule',[ApiRouter::class,'createRescheduleTicket']);
             Route::post('/canceled',[ApiRouter::class,'createCancellationTicket']);
             Route::post('/rejected',[ApiRouter::class,'createRejectedTicket']);
+        });
+
+        Route::prefix('track')->group(function () {
+            Route::post('/customer',[ApiRouter::class,'trackCustomer']);
+            Route::put('/source',[ApiRouter::class,'trackSource']);
+            Route::put('/destination',[ApiRouter::class,'trackDestination']);
+            Route::put('/dates',[ApiRouter::class,'trackDates']);
+            Route::put('/inventory',[ApiRouter::class,'trackInventory']);
         });
     });
 
@@ -150,6 +161,8 @@ Route::prefix('vendors/v1')->group(function () {
         Route::get('/',[VendorApiRouter::class,'getPayout']);
     });
 
+    Route::get('/notifications',[VendorApiRouter::class,'getNotifications']);
+
     Route::get('/drivers',[VendorApiRouter::class,'getDrivers']);
 
     Route::get('/vehicles',[VendorApiRouter::class,'getVehicles']);
@@ -176,6 +189,7 @@ Route::prefix('vendors/v1')->group(function () {
     Route::put("/details/update",[VendorApiRouter::class, 'updateDetails']);
 
     Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
+
 
     //Webhooks for websocket server
     Route::post("/webhook/for-socket/booking/watch",[VendorApiRouter::class, 'startWatchOnBookingSocket']);

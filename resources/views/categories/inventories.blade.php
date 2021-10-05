@@ -6,14 +6,20 @@
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="inventories">
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head theme-text text-left p-4 f-20">Inventories</h3>
+
         <div class="mr-20">
-            <a href="{{route('create-inventories')}}">
+            <a href="#" class="modal-toggle mr-20" data-toggle="modal" data-target="#import">
                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
-                                        aria-hidden="true"></i> CREATE NEW
+                                                           aria-hidden="true"></i> Import
+                </button>
+            </a>
+            <a href="{{route('create-inventories')}}">
+                <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"  aria-hidden="true"></i> CREATE NEW
                 </button>
             </a>
         </div>
     </div>
+
     <div class="d-flex  flex-row justify-content-between">
         <div class="page-head text-left  pt-0 pb-0 p-2">
             <nav aria-label="breadcrumb">
@@ -25,6 +31,7 @@
             </nav>
         </div>
     </div>
+
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
         <div class="col-sm-12" style="padding-right: 0px;">
@@ -120,6 +127,36 @@
                             </div>
                         </div>
                     </div>
+
+    <div class="fullscreen-modal" id="import">
+        <div class="fullscreen-modal-body" role="document">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Import CSV</h5>
+                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" id="imodalclose">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+                <div class="modal-body" style="padding: 10px 10px; margin-bottom: 0;">
+                    <div id="dropzone"><form action="{{route('inventories_import')}}" class="dropzone dropzone-import needsclick">
+
+                            <div class="dz-message needsclick">
+                                <button type="button" class="dz-button">Drop files here or click to upload.</button><br />
+                                <span class="note needsclick">(You can upload multiple files. Allowed extensions: <strong>.csv, .xls</strong></span>
+                            </div>
+
+                        </form></div>
+                </div>
+                <div class="modal-footer p-15">
+                    <div class="w-50 text-right">
+                        <a class="white-text p-10" href="#">
+                            <button data-dismiss="modal" aria-label="Close" type="button" class="btn theme-bg white-text w-30 " style="margin-bottom: 20px;" onclick="$('#imodalclose').click();">Close</button>
+                        </a>
+                    </div>
+                </div>
+
+        </div>
+    </div>
 </div>
 
 @endsection

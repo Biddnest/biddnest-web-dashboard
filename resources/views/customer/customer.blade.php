@@ -26,20 +26,28 @@
 
     <div class="vender-all-details">
         <div class="simple-card w-24">
-            <p>TOTAL CUSTOMERS</p>
-            <h1>{{$total_user}}</h1>
+            <a href="{{route('customers')}}">
+                <p>TOTAL CUSTOMERS</p>
+                <h1>{{$total_user}}</h1>
+            </a>
         </div>
         <div class="simple-card w-24">
-            <p>ACTIVE CUSTOMERS</p>
-            <h1>{{$active_user}}</h1>
+            <a href="{{route('customers')}}?sort=active">
+                <p>ACTIVE CUSTOMERS</p>
+                <h1>{{$active_user}}</h1>
+            </a>
         </div>
         <div class="simple-card w-24">
-            <p> INACTIVE CUSTOMERS</p>
-            <h1>{{$inactive_user}}</h1>
+            <a href="{{route('customers')}}?sort=suspended">
+                <p> INACTIVE CUSTOMERS</p>
+                <h1>{{$inactive_user}}</h1>
+            </a>
         </div>
         <div class="simple-card w-24">
-            <p> SIGNUP PENDING CUSTOMERS</p>
-            <h1>{{$pending_user}}</h1>
+            <a href="{{route('customers')}}?sort=verification_pending">
+                <p> SIGNUP PENDING CUSTOMERS</p>
+                <h1>{{$pending_user}}</h1>
+            </a>
         </div>
     </div>
     <!-- Dashboard cards -->

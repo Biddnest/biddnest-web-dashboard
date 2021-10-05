@@ -73,12 +73,12 @@
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
-
-                            <div class="col-sm-6">
+                            <input type="hidden" value="true" name="meta[self_booking]:boolean">
+                            <div class="col-sm-6" hidden>
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
                                     <label class="container" style="margin-top: 10px;margin-left:-30px">
-                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">
+{{--                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">--}}
                                         <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? true : false">
                                         <!-- <span class="checkmark"></span> -->
                                     </label>
@@ -150,26 +150,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="City" id="source-city" class="form-control" name="source[meta][city]" required>
+                                    <input type="text" placeholder="City" id="source-city" class="form-control" name="source[meta][city]" required readonly>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From State</label>
-                                    <input type="text" placeholder="State" id="source-state" class="form-control" name="source[meta][state]" required>
+                                    <input type="text" placeholder="State" id="source-state" class="form-control" name="source[meta][state]" required readonly>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="560097" id="source-pin" class="form-control" name="source[meta][pincode]" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                  <input type="text" placeholder="560097" id="source-pin" class="form-control number" name="source[meta][pincode]" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -231,26 +226,21 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" class="form-control" required>
+                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" class="form-control" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" class="form-control" required>
+                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" class="form-control" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control" maxlength="6" minlength="6" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control number" maxlength="6" minlength="6" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -294,9 +284,9 @@
                             <div class="form-inputs">
                             <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Interested in shared services?</label>
                                 <label class="container"  style="margin-top: 10px; margin-left:-30px">
-                                    <input type="hidden" value="false" name="source[meta][shared_service]:boolean" id="m_type">
-                                    <input type="checkbox" name="select_letter" value="1" id="movemnt"
-                                           onchange="document.getElementById('m_type').value = this.checked ? true : false">
+                                    <input type="hidden" class="share" value="false" name="source[meta][shared_service]:boolean" id="m_type">
+                                    <input type="checkbox" class="share_check" name="select_letter" value="1" id="movemnt"
+                                           onchange="document.getElementById('m_type').value = this.checked ? true : false" disabled>
                                     <!-- <span class="checkmark"></span> -->
                                   <!-- <span class="checkmark"></span> -->
                                 </label>
@@ -327,7 +317,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>Room Selection</label>
-                                <select name="meta[subcategory]" class="form-control subservices">
+                                <select name="meta[subcategory]" class="form-control subservices" data-url="{{route('subservice-items')}}" data-container="#add-inventory-wrapper">
                                 </select>
                                 <span class="error-message">Please enter valid</span>
                             </div>
@@ -336,6 +326,7 @@
                             <div class="heading p-10 border-around " style="padding-left: 26px;">
                               Item List
                             </div>
+
                             <table class="table text-center p-10  theme-text tb-border2" id="items" >
                                 <thead class="secondg-bg bx-shadowg p-0 f-14">
                                   <tr class="">
@@ -346,43 +337,42 @@
                                     <th scope="col">Actions</th>
                                   </tr>
                                 </thead>
-                                <tbody class="mtop-20 f-13" id="add-inventory-wrapper">
+                                <tbody class="mtop-20 f-13 item-subservice" id="add-inventory-wrapper">
                                     <tr class="inventory-snip">
-                                    <td scope="row" class="text-left">
-                                        <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
-                                            <option value="">--Select--</option>
-                                            @foreach($inventories as $inventory)
-                                                <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
+                                        <td scope="row" class="text-left">
+                                            <select class="form-control br-5 inventory-select" name="inventory_items[][inventory_id]" required>
+                                                <option value="">--Select--</option>
+                                                @foreach($inventories as $inventory)
+                                                    <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}">{{$inventory->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
 
-                                    <td class="">
-                                        <select class="form-control br-5 material" name="inventory_items[][material]" required>
-                                            <option value="">-- Select --</option>
+                                        <td class="">
+                                            <select class="form-control br-5 material" name="inventory_items[][material]" required>
+                                                <option value="">-- Select --</option>
 
-                                        </select>
-                                    </td>
+                                            </select>
+                                        </td>
 
-                                    <td class="">
-                                        <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
-                                            <option value="">-- Select --</option>
+                                        <td class="">
+                                            <select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
+                                                <option value="">-- Select --</option>
 
-                                        </select>
-                                    </td>
+                                            </select>
+                                        </td>
 
-                                    <td class="" style="width: 20%;">
-                                        <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
-                                        <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
+                                        <td class="" style="width: 20%;">
+                                            <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
+                                            <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
 
-                                    </td>
+                                        </td>
 
-                                    <td>
-                                        <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                                    </td>
-                                </tr>
-
-
+                                        <td>
+                                            <input class="form-control br-5 fixed" type="hidden" name="inventory_items[][is_custom]:boolean" value="true" placeholder="0" >
+                                            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                           </div>
@@ -460,10 +450,55 @@
             </td>
 
             <td>
+                <input class="form-control br-5" type="hidden" name="inventory_items[][is_custom]:boolean" value="true" placeholder="0" >
                 <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
             </td>
         </tr>
 
+    </script>
+
+    <script id="default_item" type="text/x-handlebars-template">
+        @{{#each items}}
+            <tr class="inventory-snip">
+                <th scope="row" class="text-left">
+                    <input class="form-control br-5" type="hidden" value="@{{meta.id}}" name="inventory_items[][inventory_id]" >
+                   @{{meta.name}}
+                </th>
+
+                <td class="">
+                    <input class="form-control br-5" type="hidden" value="@{{material}}" name="inventory_items[][material]" >
+                    @{{material}}
+                   {{-- <select class="form-control br-5 material" name="inventory_items[][material]" required>
+                        <option value="@{{material}}"> @{{material}}</option>
+                        @{{#meta.material}}
+                        <option value="@{{.}}">@{{.}}</option>
+                        @{{/meta.material}}
+                    </select>--}}
+                </td>
+
+                <td class="">
+                    <input class="form-control br-5" type="hidden" value="@{{size}}" name="inventory_items[][size]" >
+                    @{{size}}
+                    {{--<select class="form-control br-5 size" name="inventory_items[][size]" id="size" required>
+                        <option value="@{{size}}"> @{{size}}</option>
+                        @{{#meta.size}}
+                        <option value="@{{.}}">@{{.}}</option>
+                        @{{/meta.size}}
+                    </select>--}}
+                </td>
+
+                <td class="" style="width: 20%;">
+                    <input class="form-control br-5" type="hidden" name="inventory_items[][quantity]" value="@{{quantity}}" placeholder="0" >
+                    @{{quantity}}
+                    {{-- <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="@{{quantity.min}}" data-to="@{{quantity.max}}" data-type="double" data-step="1" /></span>--}}
+                </td>
+
+                <td>
+                    <input class="form-control br-5" type="hidden" name="inventory_items[][is_custom]:boolean" value="false" placeholder="0" >
+                    {{--<span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>--}}
+                </td>
+            </tr>
+        @{{/each}}
     </script>
 </div>
 

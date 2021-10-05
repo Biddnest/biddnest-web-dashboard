@@ -1,5 +1,5 @@
 /node_modules
-/public/storage
+/public/storage/
 /public/hot
 .env.backup
 .env
@@ -9,11 +9,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/public/bidnest_agreement
-/public/adhaar_card
-/public/pan_card
-/public/gst_certificate
-/public/company_reg_certificate
-/public/inventory
+/public
 .idea/
 /vendor
+/storage/app/public/

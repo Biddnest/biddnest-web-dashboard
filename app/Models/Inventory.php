@@ -20,4 +20,8 @@ class Inventory extends Model
     public function prices(){
         return $this->hasMany(InventoryPrice::class);
     }
+
+    public function extra_inventories(){
+        return $this->belongsToMany(SubServiceExtraInventory::class);
+    }
 }

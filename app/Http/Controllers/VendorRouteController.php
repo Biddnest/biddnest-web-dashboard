@@ -78,8 +78,14 @@ class VendorRouteController extends Controller
             'service_type'=>"required|int",
             'price.*.size' => 'required|string',
             'price.*.material' => 'required|string',
-            'price.*.price.economics' => 'nullable',
-            'price.*.price.premium' => 'nullable'
+            'price.*.bidnest.price.economics' => 'nullable',
+            'price.*.bidnest.price.premium' => 'nullable',
+            'price.*.market.price.economics' => 'nullable',
+            'price.*.market.price.premium' => 'nullable',
+            'price.*.bidnest.additional.price.economics' => 'nullable',
+            'price.*.bidnest.additional.price.premium' => 'nullable',
+            'price.*.market.additional.price.economics' => 'nullable',
+            'price.*.market.additional.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())
@@ -107,10 +113,14 @@ class VendorRouteController extends Controller
             // 'organization_id'=>"required|int",
 //            'service_type'=>"required|int",
             'price.*.id' => 'required|string',
-            'price.*.size' => 'required|string',
-            'price.*.material' => 'required|string',
-            'price.*.price.economics' => 'nullable',
-            'price.*.price.premium' => 'nullable'
+            'price.*.bidnest.price.economics' => 'nullable',
+            'price.*.bidnest.price.premium' => 'nullable',
+            'price.*.market.price.economics' => 'nullable',
+            'price.*.market.price.premium' => 'nullable',
+            'price.*.bidnest.additional.price.economics' => 'nullable',
+            'price.*.bidnest.additional.price.premium' => 'nullable',
+            'price.*.market.additional.price.economics' => 'nullable',
+            'price.*.market.additional.price.premium' => 'nullable'
         ]);
 
         if($validation->fails())
@@ -361,13 +371,14 @@ class VendorRouteController extends Controller
             'public_booking_id'=>"nullable|string",
             'category' => 'required',
             'heading' => 'required|string',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'images.*'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::createForVendor(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::createForVendor(Session::get('account')['id'], $request->category, ["public_booking_id"=>$request->public_booking_id], $request->images, $request->heading, $request->desc);
     }
 
     public function addPin(Request $request)

@@ -301,27 +301,39 @@
                                         </div>
                                     </div>
                                 @endif
-
-                                @if($tickets->status == \App\Enums\CommonEnums::$TICKET_STATUS['open'])
                                     <div class="tab-pane fade @if(!$ticket_info) show active @endif " id="order" role="tabpanel" aria-labelledby="new-order-tab">
-                                    <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
-                                        <div class="col-sm-12">
-                                            <div class="form-input">
-                                                <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
-                                                <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                        @if($tickets->status == \App\Enums\CommonEnums::$TICKET_STATUS['open'])
+                                      <form action="{{route('add_reply')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('reply',['id'=>$tickets->id])}}" data-alert="tiny" class="create-coupon" id="myForm" data-parsley-validate style="width: 100%;">
+                                            <div class="col-sm-12">
+                                                <div class="form-input">
+                                                    <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
+                                                    <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
-                                        </div>
-                                    </form>
-                                    </div>
+                                            <div class="col-sm-12">
+                                                <button class="btn theme-bg white-text w-100" type="submit">ADD REPLY</button>
+                                            </div>
+                                        </form>
+
                                     @else
                                         <div class="tab-pane fade @if(!$ticket_info) show active @endif " id="order" role="tabpanel" aria-labelledby="new-order-tab">
                                             <p style="font-size: 14px;padding: 0 10px">This ticket no more open. You cannot add any more replies to this thread.</p>
                                         </div>
-                                @endif
+                                    @endif
+                                        @if($tickets->image)
+                                            <div class="col-sm-12"  style="margin-top: 20px; margin: 0px !important; padding: 0px !important;">
+                                                <h4 class="text-center"><b>Pictures uploaded by the User</b></h4>
+                                                <div class="row d-flex mr-2 justify-content-start  mt-2">
+                                                    @foreach(json_decode($tickets->image, true) as $image)
+                                                        <div class="col-sm-3">
+                                                            <a href="{{$image}}" data-lightbox="image"><img src="{{$image}}" style="width: 100%;"></a>
 
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
                                 <div class="tab-pane fade " id="past" role="tabpanel" aria-labelledby="quotation">
                                     <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                         <div class="form-input">

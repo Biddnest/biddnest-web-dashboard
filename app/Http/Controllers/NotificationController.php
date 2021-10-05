@@ -211,5 +211,18 @@ class NotificationController extends Controller
         return PushNotification::sendToUsers($type, $title, $desc, $players, $data,$url);
     }
 
+    public static function getNotifications($id, $type="user"){
+        if ($type == "user")
+        {
+            $results=Notification::where("user_id", $id) ->orderBy('id', 'DESC')->paginate(CommonEnums::$PAGE_LENGTH);
+        }
+        if ($type == "vendor"){
+            $results=Notification::where("vendor_id", $id) ->orderBy('id', 'DESC')->paginate(CommonEnums::$PAGE_LENGTH);
+        }
+
+        return Helper::response(true, "Show data successfully", ["notifications" => $results->items(), "paging" => [
+            "current_page" => $results->currentPage(), "total_pages" => $results->lastPage(), "next_page" => $results->nextPageUrl(), "previous_page" => $results->previousPageUrl()
+        ]]);
+    }
 
 }

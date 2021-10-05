@@ -3,10 +3,22 @@
  */
 
 export function initMapPicker() {
+    var lat = $('#source-lat').val();
+    var lng = $('#source-lng').val();
+    if(lat == "" && lng == ""){
+        lat = 12.930621;
+        lng = 80.111410;
+    }
+    var dlat = $('#dest-lat').val();
+    var dlng = $('#dest-lng').val();
+    if(dlat == "" && dlng == ""){
+        dlat = 12.930621;
+        dlng = 80.111410;
+    }
     $('.source-map-picker').locationpicker({
         location: {
-            latitude: 12.930621,
-            longitude: 80.111410
+            latitude: lat,
+            longitude: lng
         },
         locationName: "",
         radius: 500,
@@ -73,8 +85,8 @@ export function initMapPicker() {
 
     $('.dest-map-picker').locationpicker({
         location: {
-            latitude: 12.930621,
-            longitude: 80.111410
+            latitude: dlat,
+            longitude: dlng
         },
         locationName: "",
         radius: 500,
@@ -163,6 +175,7 @@ export function initAllSelectBoxes() {
             // minimumInputLength: 3,
         });
     }
+
     if ($(".searchuser").length) {
 
         $(".searchuser").select2({
@@ -310,6 +323,54 @@ export function initAllSelectBoxes() {
         });
     }
 
+    if ($(".searchitem").length) {
+
+        $(".searchitem").select2({
+            multiple: true,
+            tags: false,
+            minimumResultsForSearch: 3,
+            minimumInputLength: 3,
+            closeOnSelect: false,
+            debug: true,
+            placeholder: 'Search for items',
+            // allowClear: true,
+            ajax: {
+                url: API_SEARCH_ITEM,
+                method: "GET",
+                data: function(params) {
+
+                    var query = {
+                        q: params.term,
+                        page: params.page || 1
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    return query;
+                },
+                error: (a, b, c) => {
+                    Logger.error(a.responseText, b, c);
+                },
+
+                processResults: function(data) {
+
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+
+                    var output = [];
+                    for (var i = 0; i < data.data.items.length; i++) {
+                        output.push({
+                            id: data.data.items[i].id,
+                            text: data.data.items[i].name
+                        })
+                    }
+
+                    return {
+                        results: output
+                    };
+                }
+
+            }
+        });
+    }
 }
 
 export function initSlick(){
@@ -900,6 +961,7 @@ export function initPopUpAdmin(){
 
 export function initRangeSlider(){
     if($(".custom_slider").length) {
+        console.log("slider");
         $(".custom_slider").ionRangeSlider({
             type: $(this).data("type"),
             min: $(this).data("min"),
@@ -984,4 +1046,22 @@ export function initSelect() {
     });*/
 // table-select
 
+}
+
+export function initInventoryDropzone() {
+    if($(".dropzone-import").length){
+        console.log("init dropzone");
+        let url = $(".dropzone-import").attr('action');
+        $('.dropzone-import').dropzone({
+            url: url,
+            paramName: "file",
+            acceptedFiles: ".csv,.xls, .xlsx",
+            complete: function(response){
+                console.log(response);
+            },
+            cancelled: function (response){
+                console.log(response);
+            }
+        });
+    }
 }

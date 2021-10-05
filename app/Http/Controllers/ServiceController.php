@@ -25,7 +25,7 @@ class ServiceController extends Controller
         $service->name=$name;
         $service->inventory_quantity_type=$inventory_quantity_type;
 //        $service->image = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"services");
-        $service->image = Helper::saveFile($imageman->make($image)->resize(256,256),$image_name,"services");
+        $service->image =Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"services");
         $result= $service->save();
 
         if(!$result)
@@ -50,7 +50,7 @@ class ServiceController extends Controller
             return Helper::response(false,"Incorrect Service Id");
 
         $image_man = new ImageManager(array('driver' => 'gd'));
-        $image_name = "service".$name."-".$id.".png";
+        $image_name = "service".$name."-".uniqid().".png";
 
         $update_data=  ["name"=>$name,
             "inventory_quantity_type"=>$inventory_quantity_type];

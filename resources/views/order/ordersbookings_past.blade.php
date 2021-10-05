@@ -21,6 +21,44 @@
             </nav>
         </div>
     </div>
+    <div class="vender-all-details">
+        <div class="simple-card" >
+            <a href="{{route('enquiry-booking')}}">
+                <p>ENQUIRY ORDERS</p>
+                <h1>{{$booking_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card" >
+            <a href="{{route('orders-booking')}}">
+                <p>CONFIRMED ORDERS</p>
+                <h1>{{$confirm_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card" >
+            <a href="{{route('orders-booking-past')}}">
+                <p>PAST ORDERS</p>
+                <h1>{{$past_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card">
+            <a href="{{route('orders-booking-hold')}}">
+                <p>ON HOLD ORDERS</p>
+                <h1>{{$hold_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card">
+            <a href="{{route('orders-booking-bounced')}}">
+                <p>BOUNCED ORDERS</p>
+                <h1>{{$bounced_count}}</h1>
+            </a>
+        </div>
+        <div class="simple-card">
+            <a href="{{route('orders-booking-cancelled')}}">
+                <p>CANCELLED ORDERS</p>
+                <h1>{{$cancelled_count}}</h1>
+            </a>
+        </div>
+    </div>
     <!-- Dashboard cards -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
         <div class="col-sm-12">
@@ -77,7 +115,7 @@
                             </thead>
                             <tbody class="mtop-20  f-13">
                             @foreach($bookings as $booking)
-                                <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
+                                <tr class="tb-border  cursor-pointer sidebar-toggle_details" data-url="{{route('order-details',["id"=>$booking->id])}}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
                                     <td scope="row">{{$booking->public_booking_id}}</td>
                                     <td>{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td>{{json_decode($booking->destination_meta, true)['city']}}</td>
@@ -144,8 +182,8 @@
                                         @endswitch
                                     </td>
 
-                                    <td class="no-toggle">
-                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
+                                    <td class="no-toggle sidebar-toggle_booking" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
+                                        <a href="#" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
 {{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
                                     </td>
                                 </tr>

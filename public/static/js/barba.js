@@ -33,7 +33,6 @@ function changeMenu(){
     });
 }
 
-
 import {
     initCountdown,
     initMapPicker,
@@ -54,7 +53,8 @@ import {
     initSelect,
     initOrderDistributionChart,
     initOrderDistributionChartVendor,
-    initSortable
+    initSortable,
+    initInventoryDropzone
 } from './app/initFunctions.js';
 
 barba.init({
@@ -112,6 +112,7 @@ barba.hooks.after((data) => {
     InitUserZoneChart();
     initTextAreaEditor();
     initSortable();
+    initInventoryDropzone();
             // return false;
 });
 
@@ -139,5 +140,6 @@ $(document).ready(function(){
     initTextAreaEditor();
     initSortable();
     initBarChart();
+    initInventoryDropzone();
 });
 

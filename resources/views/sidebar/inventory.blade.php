@@ -17,33 +17,37 @@
             <!-- form starts -->
             <div class="d-flex  row justify-content-between p-8">
                 <div class="col-sm-12 p-0">
-                    <table class="table  p-0">
-                        <thead class="secondg-bg border-none p-0">
-                        <tr class="text-left">
-                            <th scope="col" >Item Details</th>
-                            <th scope="col" class="text-center">Economic Price</th>
-                            <th scope="col" class="text-center">Primium Price</th>
-                        </tr>
-                        </thead>
-                        @foreach($service_types as $service_type)
+                    @foreach($service_types as $service_type)
+                        <label style="font-size: 14px; font-weight: 700;">{{ucwords($service_type->service->name)}}</label>
+                        <table class="table  p-0">
+                            <thead class="secondg-bg border-none p-0">
+                                <tr class="text-left">
+                                    <th scope="col" >Item Details</th>
+                                    <th scope="col" class="text-center">BD Economic Price</th>
+                                    <th scope="col" class="text-center">BD Primium Price</th>
+                                    <th scope="col" class="text-center">MP Economic Price</th>
+                                    <th scope="col" class="text-center">MP Primium Price</th>
+                                </tr>
+                            </thead>
                             <tbody class="mtop-20 ">
-                                <tr class="tb-border"><td scope="row" style="font-size: 14px; font-weight: 700;">{{$service_type->service->name}}</td></tr>
                                 @foreach($inventories as $inventory)
                                     @if($service_type->service->id == $inventory->service_type)
                                         <tr class="tb-border">
-                                            <td scope="row"> Size :{{$inventory->size}}
+                                            <td scope="row" style="font-weight: 500"> {{--Size :--}}{{ucwords($inventory->size)}}
                                                 <br>
-                                                Material :{{$inventory->material}}
+                                                {{--Material :--}}{{ucwords($inventory->material)}}
                                             </td>
 
-                                            <td class="text-center">@if($inventory->price_economics)₹ {{$inventory->price_economics}} @else NA @endif</td>
-                                            <td class="text-center">@if($inventory->price_premium)₹ {{$inventory->price_premium}} @else NA @endif</td>
+                                            <td class="text-center">@if($inventory->bp_economic)₹ {{$inventory->bp_economic}} @else NA @endif</td>
+                                            <td class="text-center">@if($inventory->bp_premium)₹ {{$inventory->bp_premium}} @else NA @endif</td>
+                                            <td class="text-center">@if($inventory->mp_economic)₹ {{$inventory->mp_economic}} @else NA @endif</td>
+                                            <td class="text-center">@if($inventory->mp_premium)₹ {{$inventory->price_premium}} @else NA @endif</td>
                                         </tr>
                                     @endif
                                 @endforeach
                             </tbody>
-                        @endforeach
-                    </table>
+                        </table>
+                    @endforeach
                     @if(count($inventories) == 0)
                         <div class="row hide-on-data">
                             <div class="col-md-12 text-center p-20">

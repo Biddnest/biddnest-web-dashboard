@@ -279,12 +279,7 @@
                                 <div class="col-lg-12 col-xs-12 mt-2 hidden-space pl-0 pr-0">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput" style="color: #0F0C75 !important;">Phone Number</label>
-                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="9990009990" autocomplete="off" maxlength="10" minlength="10" required onkeydown="return ( event.ctrlKey || event.altKey
-												|| (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
-												|| (95<event.keyCode && event.keyCode<106)
-												|| (event.keyCode==8) || (event.keyCode==9)
-												|| (event.keyCode>34 && event.keyCode<40)
-												|| (event.keyCode==46) )">
+                                        <input type="text" class="form-control phone" name="phone" id="phone" placeholder="9990009990" autocomplete="off" maxlength="10" minlength="10" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12  col-xs-12 mt-1 otp hidden pl-0 pr-0"   id="otp">

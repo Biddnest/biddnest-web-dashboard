@@ -38,17 +38,25 @@
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
                                        href="#order" role="tab" aria-controls="home"
-                                       aria-selected="true">Edit Onboard Vendor</a>
+                                       aria-selected="true">Edit Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Add Branch</a>
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                    >Pricing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors", ['id'=>$id])}}">Branch</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
-                                    >Vendor Banking Details</a>
+                                    >Banking Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Vendor Roles</a>
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
+                                    >Actions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Roles</a>
                                 </li>
                             </ul>
                         </h3>
@@ -84,14 +92,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer First Name</label>
-                                            <input type="text" id="fullname" name="fname" placeholder="David" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_fname'])) ?? ''}}" class="form-control" required>
+                                            <input type="text" id="fullname" name="fname" placeholder="David" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_fname'])) ?? ''}}" class="form-control alphabet" required>
                                             <span class="error-message">Please enter valid First Name</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer Last Name</label>
-                                            <input type="text" id="fullname" name="lname" placeholder="Jerome" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_lname'])) ?? ''}}" class="form-control" required>
+                                            <input type="text" id="fullname" name="lname" placeholder="Jerome" value="{{ucfirst(trans(json_decode($organization->meta, true)['auth_lname'])) ?? ''}}" class="form-control alphabet" required>
                                             <span class="error-message">Please enter valid Last Name</span>
                                         </div>
                                     </div>
@@ -108,7 +116,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Primary Contact Number</label>
-                                            <input type="tel" id="phone" placeholder="9876543210" name="phone[primary]" value="{{$organization->phone}}" class=" form-control" maxlength="10" minlength="10" required>
+                                            <input type="tel" id="phone" placeholder="9876543210" name="phone[primary]" value="{{$organization->phone}}" class=" form-control phone" maxlength="10" minlength="10" required>
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -117,7 +125,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Secondary Contact Number</label>
-                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control" name="phone[secondory]" maxlength="10" minlength="10" required>
+                                            <input type="tel" id="phone-pop-up" value="{{json_decode($organization->meta, true)['secondory_phone'] ?? ''}}" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10" required>
                                             <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
@@ -152,7 +160,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Organization Description</label>
-                                            <textarea placeholder="Need to Include bike" style="resize: none;" id="" class="form-control " rows="4" cols="50" spellcheck="false" name="organization[description]" required>{{json_decode($organization->meta, true)['org_description'] ?? ''}}</textarea>
+                                            <textarea placeholder="Need to Include bike" style="resize: none;" id="" class="form-control " rows="4" cols="50" spellcheck="false" name="organization[description]" required>{!! json_decode($organization->meta, true)['org_description'] ?? '' !!}</textarea>
                                             <span class="error-message">Please enter valid Description</span>
                                         </div>
                                     </div>
@@ -165,7 +173,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
+                                   {{-- <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Lattitude</label>
                                             <input type="text" id="fullname" value="{{$organization->lat}}" placeholder="Lattitude" class="form-control" name="address[lat]" required>
@@ -178,7 +186,7 @@
                                             <input type="text" id="fullname" value="{{$organization->lng}}" placeholder="Longitude" class="form-control" name="address[lng]" required>
                                             <span class="error-message">Please enter valid Longitude</span>
                                         </div>
-                                    </div>
+                                    </div>--}}
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -257,7 +265,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Pincode</label>
-                                            <input type="text" id="fullname" value="{{$organization->pincode}}" placeholder="530000" class="form-control" name="address[pincode]" maxlength="6" minlength="6" required>
+                                            <input type="text" id="fullname" value="{{$organization->pincode}}" placeholder="530000" class="form-control number" name="address[pincode]" maxlength="6" minlength="6" required>
                                             <span class="error-message">Please enter valid Pincode</span>
                                         </div>
                                     </div>
@@ -295,11 +303,31 @@
                                         <div class="form-input">
                                             <label class="full-name">Commission</label>
                                             <input type="text" id="commission" value="{{$organization->commission}}" placeholder="Commission" class="form-control" name="commission" required>
-                                            <span class="error-message">Please enter valid
-                                                                Commission</span>
+                                            <span class="error-message">Please enter valid Commission</span>
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="basedist" placeholder="Distance" value="{{$organization->base_distance}}"
+                                                   class="form-control number">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Extra Base distance in km</label>
+                                            <span class="">
+                                            <input type="text" name="extrabasedist" placeholder="Extra Distance" value="{{$organization->additional_distance}}"
+                                                   class="form-control number">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div id="comments">
@@ -308,12 +336,12 @@
                                         <div class="w-50"><a class="white-text p-10 cancel" href="{{route('vendors')}}"><button
                                                     class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                         </div>
-                                        <div class="w-50 text-right"><button
-                                                    class="btn theme-bg white-text w-30">Update</button>
-
+                                        <div class="w-50 text-right">
+                                            <button class="btn theme-bg white-text w-30">Update</button>
                                         </div>
                                     </div>
                                 </div>
+
                             </form>
 
                         </div>
@@ -325,9 +353,6 @@
             </div>
 
         </div>
-
-
-
 
     </div>
 

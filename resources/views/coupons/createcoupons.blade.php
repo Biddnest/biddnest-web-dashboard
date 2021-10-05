@@ -270,7 +270,6 @@
                           @endforeach
                       @endif
                   </select>
-
               </div>
             </div>
           </div>

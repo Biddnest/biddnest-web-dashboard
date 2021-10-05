@@ -31,17 +31,25 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edit Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">Edit Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active p-15" id="quotation" href="#">Add Branch</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                >Pricing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active p-15" id="quotation" href="#">Branch</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors", ['id'=>$id])}}"
-                                >Vendor Banking Details</a>
+                                >Banking Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Vendor Roles</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
+                                >Actions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">Roles</a>
                             </li>
                         </ul>
                     </h3>
@@ -97,7 +105,7 @@
                     </div>
                 </div>
                 <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
-                    <div class="w-50"><a class="white-text p-10" href="{{route("onboard-edit-vendors", ['id'=>$id])}}">
+                    <div class="w-50"><a class="white-text p-10" href="{{route("onboard-base-price", ['id'=>$id])}}">
                             <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                     </div>
                     <div class="w-50 text-right">
@@ -143,7 +151,7 @@
                             <div class="form-input">
                                 <label class="phone-num-lable"> Contact Number</label>
                                 <input type="tel" id="input-blue" placeholder="9876543210" value=""
-                                       class=" form-control" name="phone[primary]" maxlength="10" minlength="10" required>
+                                       class=" form-control phone" name="phone[primary]" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid
                                             Phone number</span>
                             </div>
@@ -170,7 +178,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        {{--<div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Lattitude</label>
                                 <input type="text" id="fullname" placeholder="57.2046° N" value=""
@@ -187,7 +195,7 @@
                                 <span class="error-message">Please enter valid
                                             Longitude</span>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Landmark</label>
@@ -256,7 +264,8 @@
                             <div class="form-input">
                                 <label class="full-name">Pincode</label>
                                 <input type="text" id="fullname" placeholder="560097" value=""
-                                       class="form-control" name="address[pincode]" required>
+                                       class="form-control number" name="address[pincode]" maxlength="6"
+                                       minlength="6" required>
                                 <span class="error-message">Please enter valid
                                             Pincode</span>
                             </div>
@@ -278,9 +287,10 @@
                             <div class="form-input">
                                 <label class="full-name">Service</label>
                                 <select id="" class="form-control select-box" name="service[]" multiple required>
-                                    <option value=""> -Select- </option>
+                                    <option value=""> -Select-</option>
                                     @foreach($services as $service=>$value)
-                                        <option value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
+                                        <option
+                                            value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
                                     @endforeach
                                 </select>
                                 <span class="error-message">Please enter valid
@@ -290,7 +300,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Commision</label>
-                                <input type="text" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
+                                <input type="number" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
                                        class="form-control" readonly>
                             </div>
                         </div>
@@ -358,7 +368,7 @@
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Contact Number</label>
                                     <input type="tel" id="input-blue" placeholder="9876543210" value="{{$branch->phone}}"
-                                           class="form-control" name="phone[primary]" maxlength="10" minlength="10" required>
+                                           class="form-control phone" name="phone[primary]" maxlength="10" minlength="10" required>
                                     <span class="error-message">Please enter valid
                                             Phone number</span>
                                 </div>
@@ -385,7 +395,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            {{--<div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Lattitude</label>
                                     <input type="text" id="fullname" placeholder="57.2046° N" value="{{$branch->lat}}"
@@ -402,7 +412,7 @@
                                     <span class="error-message">Please enter valid
                                             Longitude</span>
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Landmark</label>
@@ -471,7 +481,7 @@
                                 <div class="form-input">
                                     <label class="full-name">Pincode</label>
                                     <input type="text" id="fullname" placeholder="560097" value="{{$branch->pincode}}"
-                                           class="form-control" name="address[pincode]" required>
+                                           class="form-control number" maxlength="6" minlength="6" name="address[pincode]" required>
                                     <span class="error-message">Please enter valid
                                             Pincode</span>
                                 </div>
@@ -508,7 +518,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Commision</label>
-                                    <input type="text" id="fullname" placeholder="Commission" value="{{$branch->commission}}"
+                                    <input type="number" id="fullname" placeholder="Commission" value="{{$branch->commission}}"
                                            class="form-control" name="commission" required>
                                 </div>
                             </div>

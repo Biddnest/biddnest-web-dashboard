@@ -30,17 +30,25 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",["id"=>$id])}}">Edit Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",["id"=>$id])}}">Edit Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id])}}">Add Branch</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                >Pricing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id])}}">Branch</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-bank-vendors",["id"=>$id])}}"
-                                >Vendor Banking Details</a>
+                                >Banking Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active p-15" id="quotation" href="#">Vendor Roles</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
+                                >Actions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active p-15" id="quotation" href="#">Roles</a>
                             </li>
                         </ul>
                     </h3>
@@ -136,21 +144,21 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Employee First Name</label>
-                                <input type="text" id="fullname" placeholder="First Name" name="fname" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="First Name" name="fname" class="form-control alphabet" required>
                                 <span class="error-message">Please enter valid First Name</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Employee Last Name</label>
-                                <input type="text" id="fullname" placeholder="Last Name" name="lname" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="Last Name" name="lname" class="form-control alphabet" required>
                                 <span class="error-message">Please enter valid Last Name</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Employee Contact Number</label>
-                                <input type="tel" id="Employee" placeholder="9876543210" name="phone" class=" form-control" required>
+                                <input type="tel" id="Employee" placeholder="9876543210" name="phone" class=" form-control phone" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                         </div>
@@ -198,7 +206,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="">Date Of Birth</label>
-                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" autocomplete="off" class="form-control filterdate dateselect" required>
+                                <input type="text" id="fullname" name="dob" placeholder="dd/mm/yyyy" autocomplete="off" class="form-control birthdate dateselect" required>
                                 <span class="error-message">Please enter valid Date of Birth</span>
                             </div>
                         </div>
@@ -354,21 +362,21 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Employee First Name</label>
-                                    <input type="text" id="fullname" placeholder="First Name" name="fname" value="{{$role->fname}}" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="First Name" name="fname" value="{{$role->fname}}" class="form-control alphabet" required>
                                     <span class="error-message">Please enter valid First Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Employee Last Name</label>
-                                    <input type="text" id="fullname" placeholder="Last Name" value="{{$role->lname}}" name="lname" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="Last Name" value="{{$role->lname}}" name="lname" class="form-control alphabet" required>
                                     <span class="error-message">Please enter valid Last Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="phone-num-lable">Employee Contact Number</label>
-                                    <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control" required>
+                                    <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control phone" maxlength="10" minlength="10" required>
                                     <span class="error-message">Please enter valid Phone number</span>
                                 </div>
                             </div>
@@ -416,7 +424,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Birth</label>
-                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control birthdate dateselect" required>
                                     <span class="error-message">Please enter valid Date of Birth</span>
                                 </div>
                             </div>

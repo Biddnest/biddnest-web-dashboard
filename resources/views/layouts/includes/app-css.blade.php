@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
         <!-- Font -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
@@ -30,6 +31,9 @@
         <!-- date-time picker -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 
+        <!-- light box2 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <!-- Custom css -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
         <!-- <link rel="stylesheet" href="{{ asset('static/css/tagify.css')}}" /> -->
@@ -46,6 +50,8 @@
         <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
+
+
         <link rel="stylesheet" href="{{ asset('static/css/master.css')}}" />
         <link rel="stylesheet" href="{{ asset('static/css/multidatepicker.css')}}" />
         <link rel="stylesheet" href="{{ asset('static/css/chat.css')}}" />
@@ -55,6 +61,8 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.1/skins/content/default/content.min.css" integrity="sha512-KYlPDsJE6wqDev6smrRzaH8VwjoFV9Xj4VzyoUok3vzkVZe0g32WFiVawEiAD77EI2tSoruKNJCedUSCrk5E/Q==" crossorigin="anonymous" />--}}
 
+{{--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/basic.min.css" integrity="sha512-MeagJSJBgWB9n+Sggsr/vKMRFJWs+OUphiDV7TJiYu+TNQD9RtVJaPDYP8hA/PAjwRnkdvU+NsTncYTKlltgiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <style>
             .dateselect{
                 cursor: pointer;
@@ -74,6 +82,10 @@
             #myTab {
                 /* margin-left: -4px; */
             }
+
+           /* #moving_date .custom-check{
+                display: none !important;
+            }*/
 
             main .menu-sidebar {
                 margin-top: 70px;
@@ -1081,5 +1093,48 @@
             .searchButton, .searchButton1{
                 outline: none !important;
                 border: none !important;
+            }
+            .dropzone{
+                border: 2px dashed rgb(46, 7, 137);
+                background: #f0f0f0;
+                padding: 60px 20px;
+                min-height: 200px;
+            }
+
+            .custom-check{
+                display: none;
+            }
+
+            .base-price .currancy {
+                border: 1px solid #DFE6EC;
+                border-radius: 5px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                align-items: center;
+                width: 20%;
+                text-align: center;
+                padding: 6px 1px;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                background-color: #F4F6F7;
+                margin: auto;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .base-price .border-left {
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+            }
+
+            .distance-price .text-center{
+                padding: 0.60rem !important;
+            }
+
+            .Dashboard-lcards .distance-price td{
+                padding-left: 5px !important;
+                text-align: center !important;
+            }
+            .distance-price .form-control {
+                padding: 6px 6px !important;
             }
         </style>

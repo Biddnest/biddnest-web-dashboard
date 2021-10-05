@@ -29,58 +29,66 @@
                     <h3 class="f-18 mb-0">
                         <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",['id'=> $id])}}">Edit Onboard Vendor</a>
+                                <a class="nav-link p-15" href="{{route("onboard-edit-vendors",['id'=> $id])}}">Edit Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",['id'=> $id])}}">Add Branch</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-price", ['id'=>$id])}}"
+                                >Pricing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active p-15" id="quotation" href="#">Vendor Banking Details</a>
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",['id'=> $id])}}">Branch</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors",['id'=> $id])}}">Vendor Roles</a>
+                                <a class="nav-link active p-15" id="quotation" href="#">Banking Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-action", ['id'=>$id])}}"
+                                >Actions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-userrole-vendors",['id'=> $id])}}">Roles</a>
                             </li>
                         </ul>
                     </h3>
                 </div>
 
                 <div class="tab-content" id="myTabContent">
-                    <form class="form-new-order input-text-blue" action="{{route('bank_add')}}" data-next="redirect" data-url="{{route("onboard-userrole-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
+                    <form class="form-new-order input-text-blue" action="{{route('bank_add')}}" data-next="redirect" data-url="{{route("onboard-action", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                         <input type="hidden" name="bank_id" value="{{$bank->id ?? ''}}">
                         <input type="hidden" name="id" value="{{$id}}">
                         <div class="row p-20">
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Account Number </label>
-                                    <input type="text" id="fullname" placeholder="BANK123456" value="@if($bank) {{ json_decode($bank->banking_details, true)['account_no']}}@endif" name="acc_no" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="BANK123456" value="@if($bank) {{ json_decode($bank->banking_details, true)['account_no']}}@endif" name="acc_no" class="form-control number" required>
                                     <span class="error-message">Please enter valid Account Number</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Bank Name </label>
-                                    <input type="text" id="fullname" placeholder="ICICI Bank" value="@if($bank) {{json_decode($bank->banking_details, true)['bank_name']}}@endif" name="bank_name" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="ICICI Bank" value="@if($bank) {{json_decode($bank->banking_details, true)['bank_name']}}@endif" name="bank_name" class="form-control alphabet" required>
                                     <span class="error-message">Please enter valid Bank Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Account Holder Name </label>
-                                    <input type="text" id="fullname" placeholder="David Jerome" value="@if($bank) {{json_decode($bank->banking_details, true)['holder_name']}}@endif" name="holder_name" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="David Jerome" value="@if($bank) {{json_decode($bank->banking_details, true)['holder_name']}}@endif" name="holder_name" class="form-control alphabet" required>
                                     <span class="error-message">Please enter valid Account Holder Name</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">IFSC Code </label>
-                                    <input type="text" id="fullname" placeholder="ICI0012145" value="@if($bank) {{json_decode($bank->banking_details, true)['ifcscode']}}@endif" name="ifcscode" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="ICI0012145" value="@if($bank) {{json_decode($bank->banking_details, true)['ifcscode']}}@endif" pattern="[a-zA-Z0-9\s]+" name="ifcscode" class="form-control" required>
                                     <span class="error-message">Please enter valid IFSC Code</span>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Branch Name </label>
-                                    <input type="text" id="fullname" placeholder="Indiranagar" value="@if($bank) {{json_decode($bank->banking_details, true)['branch_name']}}@endif" name="branch_name" class="form-control" required>
+                                    <input type="text" id="fullname" placeholder="Indiranagar" value="@if($bank) {{json_decode($bank->banking_details, true)['branch_name']}}@endif" name="branch_name" pattern="[a-zA-Z0-9\s]+" class="form-control" required>
                                     <span class="error-message">Please enter valid Branch Name</span>
                                 </div>
                             </div>
@@ -159,12 +167,12 @@
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
                             <div class="w-50"><a class="white-text p-10" href="{{route("onboard-branch-vendors",['id'=> $id])}}">
-                                    <button class="btn theme-br theme-text w-30 white-bg">Back</button></a>
+                                    <button type="button" class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                             </div>
                             <div class="w-50 text-right">
-                                    <button class="btn theme-br white-text w-30">Next</button>
-                               {{-- <a class="white-text p-10" href="{{route("onboard-userrole-vendors", ['id'=>$id])}}">
-                                    <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>--}}
+{{--                                    <button class="btn theme-br white-text w-30">Next</button>--}}
+                                <a class="white-text p-10" href="#">
+                                    <button type="submit" class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                             </div>
                         </div>
                     </form>

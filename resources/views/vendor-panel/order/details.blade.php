@@ -254,7 +254,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="refresh" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}" data-alert="tiny" method="POST" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="refresh" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id]) }}" data-alert="tiny" method="POST" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex justify-content-center row ">
                             <div class="col-sm-12 bid-amount">
@@ -282,8 +282,21 @@
                                         </tr>
                                         </thead>
                                         <tbody class="mtop-20 f-13 calc-total" data-result=".calc-result">
+                                        @php
+                                            $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true);
+Debugbar::info($price);
+                                        @endphp
+                                        <tr>
+                                            <td>Base Price</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>
+                                                <input class="form-control disabled border-purple w-88 validate-input calc-result validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$price['base_price']}}" type="number" placeholder="0.00" readonly/>
+                                            </td>
+                                        </tr>
                                         @foreach($booking->inventories as $inventory)
                                             <tr class="">
+
                                                 <th scope="row">{{$inventory->name}}</th>
                                                 <td class="">
                                                     @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
@@ -293,14 +306,26 @@
                                                     @endif
                                                 </td>
                                                 <td class="">{{$inventory->size}}</td>
-                                                <td> <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                <td>
 
-                                                    @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true); @endphp
+                                                    <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+
+                                                    <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
+
+
+
+                                                    <input class="form-control border-purple w-88 calc-total-input validate-input" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
+
+                                                    @if(!$inventory->is_custom)
                                                     @foreach($price['inventories'] as $inv_price)
+
                                                         @if($inv_price['bid_inventory_id'] == $inventory->id)
-                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
+                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
                                                         @endif
                                                     @endforeach
+                                                    @else
+                                                        <input class="form-control disabled border-purple w-88 validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="0.00" type="number" placeholder="0.00" readonly/>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -311,7 +336,7 @@
                                 <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                     <div><p class="mt-2">Total Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{$booking->final_estimated_quote}}" />
+                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
                                     </div>
                                 </div>
                             </div>
@@ -343,12 +368,14 @@
                                         <div class="form-input">
                                             <label class="full-name">Moving Date</label>
                                             <div class="select-date">
+                                                @php $count=1; @endphp
                                                 @foreach($booking->movement_dates as $mdate)
 {{--                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>--}}
                                                     <label class="mr-2 move-add-date">
-                                                        <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" required data-parsley-errors-container="#service-error" style="display: none"/>
-                                                        <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                        <input type="checkbox" name="moving_date[]" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date_{{$count}}" data-id="{{$count}}" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                                        <span class="status-3 move-date mdate_{{$count}} cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                     </label>
+                                                    @php $count++; @endphp
                                                 @endforeach
                                             </div>
 {{--                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}
@@ -424,7 +451,7 @@
                 <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.vendor.reset-pine')}}" method="PUT" data-next="modal" data-modal-id="#reset-pin" data-alert="mega" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex justify-content-center row ">
-                            <div class="col-sm-6 enter-pin p-60">
+                            <div class="col-sm-6 p-60" style="display:block !important;">
                                 <div class="form-input">
                                     <h4 class="text-center bold">Enter Your Password</h4>
                                     <input class="form-control" name="password" id="password" type="password" required/>

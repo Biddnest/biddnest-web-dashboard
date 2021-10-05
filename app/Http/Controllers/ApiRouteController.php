@@ -12,6 +12,7 @@ use App\StringFormatter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Nullable;
 
 
 /**
@@ -351,13 +352,14 @@ class ApiRouteController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'public_booking_id' => 'required|string',
-            'coupon_code' =>'string|nullable'
+            'coupon_code' =>'string|nullable',
+            'moving_date' =>'date'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return PaymentController::intiatePayment($request->public_booking_id, $request->coupon_code);
+        return PaymentController::intiatePayment($request->public_booking_id, $request->moving_date, $request->coupon_code);
     }
 
     public function config(Request $request){
@@ -459,13 +461,14 @@ class ApiRouteController extends Controller
 //            'public_booking_id'=>"required|string",
             'category'=>'required',
             'heading' => 'required|string',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'images.*'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::createForUserApp($request->token_payload->id, $request->category, ["public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::createForUserApp($request->token_payload->id, $request->category, ["public_booking_id"=>$request->public_booking_id], $request->images, $request->heading, $request->desc);
     }
 
     public function getRecentBooking(Request $request)
@@ -601,4 +604,162 @@ class ApiRouteController extends Controller
         return BookingsController::getBookingsByUser($request->token_payload->id, 10);
     }
 
+    public function getNotifications(Request $request)
+    {
+        return NotificationController::getNotifications($request->token_payload->id);
+    }
+
+    public function createBookingTrack(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'service_id' => 'integer',
+
+            'source.lat' => 'nullable|numeric',
+            'source.lng' => 'nullable|numeric',
+
+            'source.meta.geocode' => 'nullable|string',
+            'source.meta.floor' => 'nullable|integer',
+            'source.meta.address_line1' => 'nullable|string',
+            'source.meta.address_line2' => 'nullable|string',
+            'source.meta.city' => 'nullable|string',
+            'source.meta.state' => 'nullable|string',
+            'source.meta.pincode' => 'nullable|min:6|max:6',
+            'source.meta.lift' => 'nullable|boolean',
+
+            'destination.lat' => 'nullable|numeric',
+            'destination.lng' => 'nullable|numeric',
+
+            'destination.meta.geocode' => 'nullable|string',
+            'destination.meta.floor' => 'nullable|integer',
+            'destination.meta.address_line1' => 'nullable|string',
+            'destination.meta.address_line2' => 'nullable|string',
+            'destination.meta.city' => 'nullable|string',
+            'destination.meta.state' => 'nullable|string',
+            'destination.meta.pincode' => 'nullable|min:6|max:6',
+            'destination.meta.lift' => 'nullable|boolean',
+
+            'contact_details' => "nullable",
+            'contact_details.name'  => 'nullable|string',
+            'contact_details.phone'  => 'nullable|min:10|max:10',
+            'contact_details.email'  => 'nullable|string',
+
+            'meta.self_booking' => 'required|boolean',
+            'meta.subcategory' => 'nullable|string',
+            'meta.images.*' => 'string',
+
+            'movement_dates.*' =>'nullable|date',
+
+            'inventory_items.*.inventory_id' =>'nullable|integer',
+            'inventory_items.*.name' =>'nullable|string',
+            'inventory_items.*.material' =>'nullable|string',
+            'inventory_items.*.size' =>'nullable|string',
+            'inventory_items.*.quantity' =>'nullable|integer',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return BookingsController::createTrack($request->all(), $request->token_payload->id, $request->movement_dates);
+    }
+
+    public function trackCustomer(Request $request){
+        $validation = Validator::make($request->all(),[
+            'contact_details' => "nullable",
+            'contact_details.name'  => 'nullable|string',
+            'contact_details.phone'  => 'nullable|min:10|max:10',
+            'contact_details.email'  => 'nullable|string',
+
+            'meta.self_booking' => 'required|boolean',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return BookingsController::trackCustomerData($request->all(), $request->token_payload->id);
+    }
+
+    public function trackSource(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'string',
+            'service_id' => 'integer',
+
+            'source.lat' => 'nullable|numeric',
+            'source.lng' => 'nullable|numeric',
+
+            'source.meta.geocode' => 'nullable|string',
+            'source.meta.floor' => 'nullable|integer',
+            'source.meta.address_line1' => 'nullable|string',
+            'source.meta.address_line2' => 'nullable|string',
+            'source.meta.city' => 'nullable|string',
+            'source.meta.state' => 'nullable|string',
+            'source.meta.pincode' => 'nullable|min:6|max:6',
+            'source.meta.lift' => 'nullable|boolean',
+
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return BookingsController::trackSourceData($request->all(), $request->token_payload->id);
+    }
+
+    public function trackDestination(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'string',
+
+            'destination.lat' => 'nullable|numeric',
+            'destination.lng' => 'nullable|numeric',
+
+            'destination.meta.geocode' => 'nullable|string',
+            'destination.meta.floor' => 'nullable|integer',
+            'destination.meta.address_line1' => 'nullable|string',
+            'destination.meta.address_line2' => 'nullable|string',
+            'destination.meta.city' => 'nullable|string',
+            'destination.meta.state' => 'nullable|string',
+            'destination.meta.pincode' => 'nullable|min:6|max:6',
+            'destination.meta.lift' => 'nullable|boolean',
+
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return BookingsController::trackDestinationData($request->all(), $request->token_payload->id);
+    }
+
+    public function trackDates(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'string',
+            'movement_dates.*' =>'nullable|date'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return BookingsController::getDateTrack($request->all(), $request->token_payload->id, $request->movement_dates);
+    }
+
+    public function trackInventory(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'public_booking_id' => 'string',
+
+            'meta.subcategory' => 'nullable|string',
+            'meta.images.*' => 'string',
+
+            'inventory_items.*.inventory_id' =>'nullable|integer',
+            'inventory_items.*.name' =>'nullable|string',
+            'inventory_items.*.material' =>'nullable|string',
+            'inventory_items.*.size' =>'nullable|string',
+            'inventory_items.*.quantity' =>'nullable|integer',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+        else
+            return BookingsController::trackInventoryData($request->all(), $request->token_payload->id);
+    }
 }

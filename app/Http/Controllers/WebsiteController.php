@@ -96,12 +96,13 @@ class WebsiteController extends Controller
         $categories=Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $inventories=Inventory::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->limit(10)->get();
         $zone=(array)Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->pluck('name')->toArray();
-
+        $shared = explode(",", $request->move_date);
         return view('website.booking.addbooking', [
             'categories'=>$categories,
             'inventories'=>$inventories,
             'zones'=>$zone,
             'prifill'=>$request->all(),
+            'share'=>$shared,
             'inventory_quantity_type'=>Service::where("id",$request->service)->pluck("inventory_quantity_type")[0]
         ]);
     }
@@ -119,7 +120,7 @@ class WebsiteController extends Controller
 
     public function placeBooking(Request $request)
     {
-//        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
+        //        $booking = Booking::where(["public_enquiry_id"=>$request->id, "user_id"=>Session::get('account')['id']])->first();
         $booking=BookingsController::getBookingByPublicIdForWeb($request->id, Session::get('account')['id'], true);
         return view('website.booking.placebooking',['booking'=>$booking]);
     }

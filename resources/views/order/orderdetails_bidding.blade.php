@@ -4,6 +4,13 @@
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails" style="position: relative">
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4">Order Details</h3>
+            @if(($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['in_progress']))
+                <div class="mr-20">
+                    <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
+                        <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left p-4 pt-0 pb-0">
@@ -22,18 +29,21 @@
                         <hr class="dash-line">
                         <div class="steps-container">
                             @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
-                                <div class="steps-status " style="width: 10%; text-align: center;">
-                                    <div class="step-dot">
-                                        {{-- @foreach($booking->status_ids as $status_history)--}}
-                                        @if(in_array($status, $booking->status_ids))
+                                @if(in_array($status, $booking->status_ids) && $key != "in_progress" )
+                                    <div class="steps-status " style="width: 10%; text-align: center;">
+                                        <div class="step-dot">
                                             <img src="{{ asset('static/images/tick.png')}}" />
-                                        @else
-                                            <div class="child-dot"></div>
-                                        @endif
-                                        {{--@endforeach--}}
+                                        </div>
+                                        <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
                                     </div>
-                                    <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
-                                </div>
+                                @elseif($key != "in_progress" && $key != "rebiding" && $key != "cancelled" && $key != "bounced" && $key != "hold" && $key != "cancel_request" )
+                                    <div class="steps-status " style="width: 10%; text-align: center;">
+                                        <div class="step-dot">
+                                            <div class="child-dot"></div>
+                                        </div>
+                                        <p class="step-title">{{ ucwords(str_replace("_"," ", $key))  }}</p>
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -51,6 +61,11 @@
                                 <li class="nav-item ">
                                     <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
                                 </li>
+                                @if($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry'])
+                                    <li class="nav-item">
+                                        <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-estimate', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Action</a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor Details</a>
                                 </li>
@@ -60,6 +75,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="bidding-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
                                 </li>
+                                @if($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                    <li class="nav-item">
+                                        <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-bidding-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding Review</a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
@@ -244,12 +264,12 @@
                                                     <td class="text-left" >{{$inventory->size}}</td>
                                                     <td> <input class="form-control border-purple " style="width: 106px;" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
 
-                                                        @php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, $org_id->organization_id, true); @endphp
+                                                        {{--@php $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, $org_id->organization_id, true); @endphp
                                                         @foreach($price['inventories'] as $inv_price)
                                                             @if($inv_price['bid_inventory_id'] == $inventory->id)
                                                                 <input class="form-control border-purple calc-total-input validate-input" style="width: 106px;" name="inventory[][amount]" value="{{$inv_price['price'] ?? '0'}}" id="amount_{{$inventory->id}}" type="number" placeholder="2000" required/>
                                                             @endif
-                                                        @endforeach
+                                                        @endforeach--}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -260,7 +280,7 @@
                                     <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                         <div><p class="mt-2">Total Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple ml-2 calc-result validate-input" type="text" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{$booking->final_estimated_quote}}" />
+{{--                                            <input class="form-control border-purple ml-2 calc-result validate-input" type="text" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{$booking->final_estimated_quote}}" />--}}
                                         </div>
                                     </div>
                                 </div>
@@ -292,13 +312,15 @@
                                             <div class="form-input">
                                                 <label class="full-name">Moving Date</label>
                                                 <div class="select-date">
+                                                    @php $count=1; @endphp
                                                     @foreach($booking->movement_dates as $mdate)
-                                                        <label class="mr-2 move-add-date">
-                                                            <input type="radio" name="moving_date" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date" data-parsley-errors-container="#err-date"
+                                                        <label class="mr-2 move-add-date" id="moving_date">
+                                                            <input type="checkbox" name="moving_date[]" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date_{{$count}}" data-parsley-errors-container="#err-date"
                                                                    required
                                                                    data-parsley-error-message="Mandatory Field. Please enter the value" style="display: none"/>
-                                                            <span class="status-3 move-date cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                            <span class="status-3 move-date mdate_{{$count}} cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                         </label>
+                                                        @php $count++; @endphp
                                                     @endforeach
                                                 </div>
                                                 {{--<input type="text" class="form-control br-5" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}

@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketEnums;
+use App\Models\Subservice;
+use App\Models\SubServiceExtraInventory;
+use App\Models\SubservicePrice;
+use Illuminate\Http\Request;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
+use App\Enums\OrganizationEnums;
 use App\Enums\ServiceEnums;
 use App\Helper;
 use App\Imports\InventoryImport;
@@ -13,6 +19,7 @@ use App\Models\InventoryPrice;
 use App\Models\Organization;
 use App\Models\Service;
 use App\Models\SubserviceInventory;
+use App\Models\BookingOrganizationGeneratedPrice;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -68,13 +75,6 @@ class InventoryController extends Controller
         $image_man = new ImageManager(array('driver' => 'gd'));
         $image_name = "inventory-image-".$name."-".uniqid().".png";
         $icon_name = "inventory-icon-".$name."-".uniqid().".png";
-        /*$imageman = new ImageManager(array('driver' => 'gd'));
-
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($imageman->make($image)->resize(480,480)->encode('png', 100),$image_name,"inventories");
-
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["icon"] = Helper::saveFile($imageman->make($icon)->resize(256,256)->encode('png', 100),$icon_name,"inventories");*/
 
         $update_data = [
             "name"=>$name,
@@ -132,8 +132,15 @@ class InventoryController extends Controller
     //route controller => ApiRouteController
     public static function getBySubserviceForApp($id)
     {
-        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result]);
+       $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+       $extra_inv_id = SubServiceExtraInventory::where("subservice_id", $id)->pluck("inventory_id");
+       $extra_inv = Inventory::whereIn("id", $extra_inv_id)->get();
+
+       $custome_result = Subservice::where("id", $id)->first();
+       if(strtolower($custome_result->name) == "custom"){
+           $extra_inv = Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->get();
+       }
+        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
     }
 
     public static function getInventoriesForApp()
@@ -165,8 +172,14 @@ class InventoryController extends Controller
             $inventoryprice->inventory_id= $data['inventory_id'];
             $inventoryprice->size= $price['size'];
             $inventoryprice->material= $price['material'];
-            $inventoryprice->price_economics= $price['price']['economics'];
-            $inventoryprice->price_premium= $price['price']['premium'];
+            $inventoryprice->bp_economic= $price['bidnest']['price']['economics'];
+            $inventoryprice->bp_premium= $price['bidnest']['price']['premium'];
+            $inventoryprice->mp_economic= $price['market']['price']['economics'];
+            $inventoryprice->mp_premium= $price['market']['price']['premium'];
+            $inventoryprice->bp_additional_economic= $price['bidnest']['additional']['price']['economics'];
+            $inventoryprice->bp_additional_premium= $price['bidnest']['additional']['price']['premium'];
+            $inventoryprice->mp_additional_economic= $price['market']['additional']['price']['economics'];
+            $inventoryprice->mp_additional_premium= $price['market']['additional']['price']['premium'];
             if($web) {
                 $inventoryprice->ticket_status = CommonEnums::$TICKET_STATUS['open'];
                 $inventoryprice->status = InventoryEnums::$STATUS['pending_approval'];
@@ -178,7 +191,7 @@ class InventoryController extends Controller
             return Helper::response(false,"Couldn't save data");
 
         if($web) {
-            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+            TicketController::createForVendor(Session::get('account')['id'], TicketEnums::$TYPE['price_update'], ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']], [],);
 
             return Helper::response(true, "Price Saved successfully");
         } else
@@ -214,12 +227,21 @@ class InventoryController extends Controller
         $service_type=$Inventory->service_type;
         foreach($data['price'] as $price) {
             $updateColumns = [
-                "price_economics" => $price['price']['economics'],
-                "price_premium" => $price['price']['premium'],
+                "bp_economic" => $price['bidnest']['price']['economics'],
+                "bp_premium" => $price['bidnest']['price']['premium'],
+                "mp_economic" => $price['market']['price']['economics'],
+                "mp_premium" => $price['market']['price']['premium'],
+                "bp_additional_economic"=> $price['bidnest']['additional']['price']['economics'],
+                "bp_additional_premium"=> $price['bidnest']['additional']['price']['premium'],
+                "mp_additional_economic"=> $price['market']['additional']['price']['economics'],
+                "mp_additional_premium" => $price['market']['additional']['price']['premium']
             ];
 
-            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))
-                $updateColumns = ["ticket_status" => CommonEnums::$TICKET_STATUS['open'], "status"=>InventoryEnums::$STATUS['pending_approval']];
+
+            if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification'])){
+                $updateColumns['ticket_status']= CommonEnums::$TICKET_STATUS['open'];
+                $updateColumns['status']= InventoryEnums::$STATUS['pending_approval'];
+            }
 
             $InventoryPrice = InventoryPrice::where(['id'=>$price['id'], 'inventory_id'=>$data["inventory_id"], 'organization_id'=>Session::get('organization_id')])->update($updateColumns);
         }
@@ -246,48 +268,154 @@ class InventoryController extends Controller
             return Helper::response(true,"Service deleted successfully");
     }
 
-    public static function getEconomicPrice($data, $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
-    {
-        $finalprice=0.00;
-        foreach($data['inventory_items'] as $item) {
-            $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
-                "size"=>$item['size'],
-                "material"=>$item['material'], "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
-                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_economics');
-            if($web || $created_by_support) {
-                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
-            }else{
-                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] :  $item['quantity']['max'];
-            }
-            Log::info(GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']));
-            $finalprice += $minprice ?  (double)$minprice * (integer)$quantity * (double)GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
-        }
+    public static function generateOrganizationBasePrices($data, $booking_data){
+        $output =[];
 
-        return $finalprice;
+        $vendors = Organization::where("zone_id",$booking_data['zone_id'])
+            ->where('status',OrganizationEnums::$STATUS['active'])
+            ->get();
+
+        $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
+
+        foreach($vendors as $vendor)
+        {
+
+            $additional_distance = $total_distance - $vendor['base_distance'];
+            if($additional_distance < 0)
+                $additional_distance = 0;
+
+            $mp_economic = 0.00;
+            $bp_economic = 0.00;
+            $mp_premium = 0.00;
+            $bp_premium = 0.00;
+
+            if(strtolower($data['meta']['subcategory']) != "custom"){
+                $query = SubservicePrice::where("organization_id",$vendor['id'])
+                    ->where('subservice_id', Subservice::where('name',$data['meta']['subcategory'])
+                        ->pluck('id')[0])->first();
+
+                $mp_economic = $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']);
+
+                $bp_economic = $base_price_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']);
+
+                $mp_premium = $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']);
+
+                $bp_premium = $base_price_premium = $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']);
+
+            }
+
+            /*Slot for items*/
+            foreach ($data['inventory_items'] as $items){
+                if($items['is_custom']){
+                    $inv_price = InventoryPrice::where([
+                        "inventory_id"=>$items["inventory_id"],
+                        "material"=>$items["material"],
+                        "size"=>$items["size"],
+                        "organization_id"=>$vendor['id']
+                    ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
+
+                    if($inv_price){
+                        $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
+
+                        $bp_economic += $inv_price['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_economic']);
+
+                        $mp_premium += $inv_price['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_premium']);
+
+                        $bp_premium += $inv_price['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_premium']);
+                    }
+                }
+            }
+
+            /*Slot for items*/
+
+            $economic_percent = (($mp_economic - $bp_economic)/$mp_economic)*100;
+            $premium_percent = (($mp_premium - $bp_premium)/$mp_premium)*100;
+
+            $price_calc = new BookingOrganizationGeneratedPrice();
+            $price_calc->booking_id = $booking_data['id'];
+            $price_calc->organization_id = $vendor['id'];
+            $price_calc->mp_economic = $mp_economic;
+            $price_calc->mp_premium = $mp_premium;
+            $price_calc->bp_economic = $bp_economic;
+            $price_calc->bp_premium = $bp_premium;
+            $price_calc->economic_margin_percentage = $economic_percent;
+            $price_calc->premium_margin_percentage = $premium_percent;
+
+            $price_calc->base_price_economic = $base_price_economic;
+            $price_calc->base_price_premium = $base_price_premium;
+
+
+            if($price_calc->save())
+                return true;
+            else
+                return false;
+        }
+    }
+
+
+    public static function getEconomicPrice($data, $booking_data, $vendor_price=false, $web=false, $created_by_support=false)
+    {
+
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+            ->min('bp_economic');
+
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->avg('economic_margin_percentage');
+
+        if(!$vendor_price)
+            return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);
+        else
+            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 
     }
 
-    public static function getPremiumPrice($data , $inventory_quantity_type,  $zone_id, $web=false, $created_by_support=false)
+    public static function getPremiumPrice($data , $booking_data, $vendor_price=false, $web=false, $created_by_support=false)
     {
-        $finalprice=0.00;
-        foreach($data['inventory_items'] as $item) {
-            $minprice= InventoryPrice::where(["inventory_id"=>$item['inventory_id'],
-                "size"=>$item['size'],
-                "material"=>$item['material']])
-                ->whereIn("organization_id", Organization::where("zone_id", $zone_id)->pluck('id'))->min('price_premium');
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+            ->min('bp_premium');
 
-//            $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
-            if($web == true || $created_by_support == true) {
-                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : json_encode(["max" => explode(";",$item['quantity'])[1]]);
-            }else{
-                $quantity = $inventory_quantity_type == ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'] ? $item['quantity'] : $item['quantity']['max'];
-            }
-            $finalprice += $minprice ? (double)$minprice * (int)$quantity * (double)GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']) : 0.00;
-        }
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+            ->avg('premium_margin_percentage');
 
-        return $finalprice;
+            if(!$vendor_price)
+                return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);
+            else
+                return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 
     }
+
+    /*public static function getOrganizationEconomicPrice($data, $booking_data,  $zone_id, $web=false, $created_by_support=false)
+    {
+        if(strtolower($data['meta']['subcategory']) != "custom"){
+            $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->min('bp_economic');
+
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->avg('economic_margin_percentage');
+
+            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
+
+        }
+        else
+            return null;
+    }
+
+    public static function getOrganizationPremiumPrice($data, $booking_data, $web=false, $created_by_support=false)
+    {
+        if(strtolower($data['meta']['subcategory']) != "custom"){
+            $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->min('bp_premium');
+
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+                ->avg('premium_margin_percentage');
+
+            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
+        }
+        else
+            return null;
+    }
+*/
+
 
     public static function statusUpdate($id)
     {
@@ -336,7 +464,7 @@ class InventoryController extends Controller
         return Helper::response(true,"Status Updated successfully");
     }
 
-    public static function import($file = false){
+    public static function import($file = false, $decode_base64 = false){
 
         if($file){
             $fileContent = $file;
@@ -350,28 +478,14 @@ class InventoryController extends Controller
             });
             return "done";
         } else{
-//            return (string)json_encode(Storage::files("/public/imports/inventories"));
             foreach (Storage::files("/public/imports/inventories") as $file){
-
-
                 $filename = explode("/","$file");
                 $imported_files =  DB::table("import_migrations")->pluck('file');
-//            return $file;
-//            $return = "No tinitiated yet";
                 if(!in_array($file, (array)$imported_files)){
-//                    DB::transaction(function () use ($file) {
-//                        try {
                     Facades\Excel::import(new InventoryImport, $file);
-                    /*} catch (\Exception $e) {
-                        $return = $e->getMessage();
-                    }
-                    return $return;*/
-//                    });
-
                     DB::table("import_migrations")->insert([
                         "file"=>$file
                     ]);
-
                 } else
                     return "This file is already imported";
 
@@ -382,37 +496,26 @@ class InventoryController extends Controller
 
     }
 
-    public static function importPrice($file = false){
+    public static function importPrice($file = false, $decode_base64 = false){
 
         if($file){
             $fileContent = $file;
             DB::transaction(function () use ($fileContent){
-
                 try {
-                    Facades\Excel::import(new InventoryImport, $fileContent);
+                    Facades\Excel::import(new InventoryPriceImport, $fileContent);
                 } catch (Exception $e) {
                     return $e->getMessage();
                 }
             });
             return "done";
         } else{
-//            return (string)json_encode(Storage::files("/public/imports/inventories"));
             foreach (Storage::files("/public/imports/inventory_prices") as $file){
-
 
                 $filename = explode("/","$file");
                 $imported_files =  DB::table("import_migrations")->pluck('file');
-//            return $file;
-//            $return = "No tinitiated yet";
                 if(!in_array($file, (array)$imported_files)){
-//                    DB::transaction(function () use ($file) {
-//                        try {
+
                     Facades\Excel::import(new InventoryPriceImport, $file);
-                    /*} catch (\Exception $e) {
-                        $return = $e->getMessage();
-                    }
-                    return $return;*/
-//                    });
 
                     DB::table("import_migrations")->insert([
                         "file"=>$file
@@ -433,4 +536,16 @@ class InventoryController extends Controller
 
         return Helper::response(true,"Here are the Matching Items", ['inventories'=>$inventory]);
     }
+
+    public static function searchItem(Request $request)
+    {
+        $query = $request->q;
+
+        if (empty($query))
+            return Helper::response(true, "Data fetched successfully", ["items" => []]);
+
+        $items = Inventory::where("name", "LIKE", $query . '%')->paginate(5);
+        return Helper::response(true, "Data fetched successfully", ["items" => $items->items()]);
+    }
+
 }

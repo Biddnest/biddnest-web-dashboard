@@ -9,6 +9,7 @@ use App\Helper;
 use App\Models\Org_kyc;
 use App\Models\Organization;
 use App\Models\OrganizationService;
+use App\Models\SubservicePrice;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,8 +54,10 @@ class OrganisationController extends Controller
         $organizations->phone=$data['phone']['primary'];
         $organizations->org_name=$data['organization']['org_name'];
         $organizations->org_type=$data['organization']['org_type'];
-        $organizations->lat =$data['address']['lat'];
-        $organizations->lng =$data['address']['lng'];
+       /* $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng'];*/
+        $organizations->lat =0;
+        $organizations->lng =0;
         $organizations->zone_id =$data['zone'];
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
@@ -62,6 +65,8 @@ class OrganisationController extends Controller
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission = $data['commission'];
+        $organizations->base_distance = $data['basedist'];
+        $organizations->additional_distance = $data['extrabasedist'];
         $result_organization= $organizations->save();
 
         foreach($data['service'] as $value) {
@@ -183,15 +188,19 @@ class OrganisationController extends Controller
             "phone"=>$data['phone']['primary'],
             "org_name"=>$data['organization']['org_name'],
             "org_type"=>$data['organization']['org_type'],
-            "lat"=>$data['address']['lat'],
-            "lng"=>$data['address']['lng'],
+          /*  "lat"=>$data['address']['lat'],
+            "lng"=>$data['address']['lng'],*/
+            "lat"=>0,
+            "lng"=>0,
             "zone_id"=>$data['zone'],
             "pincode"=>$data['address']['pincode'],
             "city"=>$data['address']['city'],
             "state"=>$data['address']['state'],
             "service_type"=>$data['service_type'],
             "meta"=>json_encode($meta),
-            "commission"=>$data['commission']
+            "commission"=>$data['commission'],
+            "base_distance"=>$data['basedist'],
+            "additional_distance"=>$data['extrabasedist']
         ];
 
         $result_organization =Organization::where(["id"=>$id])->update($update_data);
@@ -257,8 +266,10 @@ class OrganisationController extends Controller
         $organizations->org_name =$data['organization']['org_name'];
         $organizations->org_type =$data['organization']['org_type'];
         $organizations->phone =$data['phone']['primary'];
-        $organizations->lat =$data['address']['lat'];
-        $organizations->lng =$data['address']['lng'];
+       /* $organizations->lat =$data['address']['lat'];
+        $organizations->lng =$data['address']['lng']; */
+        $organizations->lat =0;
+        $organizations->lng =0;
         $organizations->zone_id =$data['zone'];
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
@@ -317,8 +328,10 @@ class OrganisationController extends Controller
                 "org_name"=>$data['organization']['org_name'],
                 "org_type"=>$data['organization']['org_type'],
                 "phone"=>$data['phone']['primary'],
-                "lat"=>$data['address']['lat'],
-                "lng"=>$data['address']['lng'],
+                /*"lat"=>$data['address']['lat'],
+                "lng"=>$data['address']['lng'],*/
+                "lat"=>0,
+                "lng"=>0,
                 "zone_id"=>$data['zone'],
                 "pincode"=>$data['address']['pincode'],
                 "city"=>$data['address']['city'],
@@ -370,7 +383,7 @@ class OrganisationController extends Controller
             if(!$exist)
                 return Helper::response(false,"Incorrect Organization id.");
 
-//            $imageman = new ImageManager(array('driver' => 'gd'));
+            //   $imageman = new ImageManager(array('driver' => 'gd'));
 
 
             $meta =["account_no"=>$data['acc_no'],"bank_name"=>$data['bank_name'], "holder_name"=>$data['holder_name'], "ifcscode"=>$data['ifcscode'], "branch_name"=>$data['branch_name']];
@@ -384,7 +397,7 @@ class OrganisationController extends Controller
             $bank->banking_details = json_encode($meta);
             $result_bank = $bank->save();
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['pending_approval']]);
             PayoutController::registerContact($id);
             PayoutController::registerFundAccount($id);
 
@@ -425,7 +438,7 @@ class OrganisationController extends Controller
             $result_bank= Org_kyc::where("id", $bank_id)
                 ->update($update_data);
 
-            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['active']]);
+            Organization::where("id", $id)->orWhere("parent_org_id", $id)->update(["verification_status"=>CommonEnums::$YES, "status"=>OrganizationEnums::$STATUS['pending_approval']]);
 
             if(!$result_bank)
                 return Helper::response(false,"Couldn't Update data");
@@ -480,9 +493,9 @@ class OrganisationController extends Controller
         $vendor->meta = json_encode($meta);
         $vendor->user_role = $data['role'];
         $vendor->password = $password;
-        $vendor->dob = $data['dob'];
-        $vendor->doj = $data['doj'];
-        $vendor->dor = $data['dor'];
+        $vendor->dob = date("Y-m-d", strtotime($data['dob']));
+        $vendor->doj = date("Y-m-d", strtotime($data['doj']));
+        $vendor->dor = date("Y-m-d", strtotime($data['dor']));
         $vendor->state = $data['state'];
         $vendor->city = $data['city'];
         $vendor_result = $vendor->save();
@@ -532,9 +545,9 @@ class OrganisationController extends Controller
             "password"=>$password,
             "user_role"=>$data['role'],
             "organization_id"=>$data['branch'],
-            "dob"=>$data['dob'],
-            "doj"=>$data['doj'],
-            "dor"=>$data['dor'],
+            "dob"=>date("Y-m-d", strtotime($data['dob'])),
+            "doj"=>date("Y-m-d", strtotime($data['doj'])),
+            "dor"=>date("Y-m-d", strtotime($data['dor'])),
             "state"=>$data['state'],
             "city"=>$data['city']
         ];
@@ -569,13 +582,13 @@ class OrganisationController extends Controller
 
     public static function search(Request $request)
     {
-//        return $request;
-//        $query = $request->all()['query'];
+        //        return $request;
+        //        $query = $request->all()['query'];
         $query = $request->q;
 
         if (empty($query))
             return Helper::response(true, "Data fetched successfully", ["users" => []]);
-//        return $query;
+        //        return $query;
         $users = Organization::where("org_name", "LIKE", $query . '%')->paginate(5);
         return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
     }
@@ -610,6 +623,77 @@ class OrganisationController extends Controller
             return Helper::response(false,"Couldn't sent OTP");
 
         return Helper::response(true,"OTP sent successfully", ['OTP'=>$otp]);
+    }
+
+    public static function changeStatusVendor($id, $status){
+        $vendor_exist=Organization::where("id", $id)->first();
+        $vendor_kyc = Org_kyc::where("organization_id", $id)->first();
+
+        if(!$vendor_exist){
+            return Helper::response(false,"Vendor is not exist.");
+        }
+        if(!$vendor_kyc){
+            return Helper::response(false,"Details are not updated for this vendor, Please update bank details.");
+        }
+
+        if($status == OrganizationEnums::$STATUS['pending_approval']){
+            $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['pending_approval']]);
+        }
+
+        if($status == OrganizationEnums::$STATUS['active']){
+            $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['active']]);
+        }
+
+        if($status == OrganizationEnums::$STATUS['suspended']){
+            $result=Organization::where("id", $id)->update(["status"=>OrganizationEnums::$STATUS['suspended']]);
+        }
+
+        if($result)
+            return Helper::response(true,"Updated status successfully.");
+        else
+            return Helper::response(false,"Updated status fail.");
+    }
+
+    public static function addPrices($data, $id){
+        $exist = Organization::findOrFail($id);
+        $pricing = SubservicePrice::where("organization_id", $id)->get();
+        if($pricing)
+            $delete = SubservicePrice::where("organization_id", $id)->delete();
+
+        if(!$exist)
+            return Helper::response(false,"Incorrect Organization id.");
+
+        foreach ($data['subservice'] as $subservice){
+            $pricing = new SubservicePrice();
+
+            if($subservice['market']['price']['economy'] == 0 && $subservice['market']['price']['premium']== 0)
+            {
+                $economic_margin_percentage = 0;
+                $premium_margin_percentag = 0;
+            }else{
+                $economic_margin_percentage = (($subservice['market']['price']['economy'] - $subservice['bidnest']['price']['economy'])/$subservice['market']['price']['economy'])*100;
+                $premium_margin_percentag = (($subservice['market']['price']['premium'] - $subservice['bidnest']['price']['premium'])/$subservice['market']['price']['premium'])*100;
+            }
+            $pricing->organization_id = $id;
+            $pricing->subservice_id = $subservice['id'];
+            $pricing->bp_economic = $subservice['bidnest']['price']['economy'];
+            $pricing->bp_premium = $subservice['bidnest']['price']['premium'];
+            $pricing->mp_economic = $subservice['market']['price']['economy'];
+            $pricing->mp_premium = $subservice['market']['price']['premium'];
+            $pricing->economic_margin_percentage = $economic_margin_percentage;
+            $pricing->premium_margin_percentage = $premium_margin_percentag;
+            $pricing->mp_additional_distance_economic_price = $subservice['mp_additional']['price']['economy'];
+            $pricing->mp_additional_distance_premium_price = $subservice['mp_additional']['price']['premium'];
+            $pricing->bp_additional_distance_economic_price = $subservice['bp_additional']['price']['economy'];
+            $pricing->bp_additional_distance_premium_price = $subservice['bp_additional']['price']['premium'];
+            $result_pricing = $pricing->save();
+        }
+
+        if(!$result_pricing)
+            return Helper::response(false,"Couldn't save data");
+
+        return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
+
     }
 
 }

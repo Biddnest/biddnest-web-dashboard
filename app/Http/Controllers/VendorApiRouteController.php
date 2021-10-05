@@ -247,13 +247,14 @@ class VendorApiRouteController extends Controller
             'public_booking_id'=>"nullable|string",
             'category' => 'required',
             'heading' => 'required|string',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'images.*'=>'nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category, "public_booking_id"=>$request->public_booking_id], $request->heading, $request->desc);
+        return TicketController::create($request->token_payload->id, 1, ["category"=>$request->category, "public_booking_id"=>$request->public_booking_id], $request->images, $request->heading, $request->desc);
     }
 
     public function getUser(Request $request)
@@ -434,5 +435,10 @@ class VendorApiRouteController extends Controller
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
         return TicketReplyController::addReplyFromVendor($request->token_payload->id, $request->ticket_id, $request->reply);
+    }
+
+    public function getNotifications(Request $request)
+    {
+        return NotificationController::getNotifications($request->token_payload->organization_id, "vendor");
     }
 }

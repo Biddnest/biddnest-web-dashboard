@@ -136,10 +136,12 @@ class Route extends Controller
             'name' => 'required',
             'image' => 'required',
             'category'=>'required|integer',
-            'inventories.*.name'=>'required',
+            'inventories.*.id'=>'required',
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
-            'inventories.*.quantity'=>'required'
+            'inventories.*.quantity'=>'required',
+            'extra_inventories.*'=>'required',
+            'max_extra_items'=>'required',
         ]);
 
         if($validation->fails())
@@ -189,16 +191,18 @@ class Route extends Controller
             'image' => 'required',
             'id' => 'required|integer',
             'category'=>'required|integer',
-            'inventories.*.name'=>'required',
+            'inventories.*.id'=>'required',
             'inventories.*.material'=>'required',
             'inventories.*.size'=>'required',
-            'inventories.*.quantity'=>'required'
+            'inventories.*.quantity'=>'required',
+            'extra_inventories.*'=>'required',
+            'max_extra_items'=>'required',
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image, $request->inventories);
+        return SubServiceController::update($request->id, $request->category, ucwords($request->name), $request->image, $request->inventories, $request->max_extra_items, $request->extra_inventories);
     }
 
     public function subservice_delete(Request $request)
@@ -305,8 +309,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+           /* 'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -314,7 +318,9 @@ class Route extends Controller
             'zone' => 'required|integer',
             'service_type' =>'required|string',
             'service.*' =>'required',
-            'commission' =>'required'
+            'commission' =>'required',
+            'basedist'=>'required|numeric',
+            'extrabasedist'=>'required|numeric'
         ]);
 
         if($validation->fails())
@@ -346,8 +352,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+           /* 'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -355,7 +361,9 @@ class Route extends Controller
             'zone' => 'required|integer',
             'service_type' =>'required',
             'service.*' =>'required',
-            'commission' =>'required'
+            'commission' =>'required',
+            'basedist'=>'required|integer',
+            'extrabasedist'=>'required|numeric'
         ]);
 
         if($validation->fails())
@@ -396,8 +404,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+            /*'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -425,8 +433,8 @@ class Route extends Controller
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
-            'address.lat' => 'required|numeric',
-            'address.lng' => 'required|numeric',
+            /*'address.lat' => 'required|numeric',
+            'address.lng' => 'required|numeric',*/
             'address.landmark'=> 'required|string',
             'address.state' => 'required|string',
             'address.city' => 'required|string',
@@ -455,6 +463,27 @@ class Route extends Controller
 
         return OrganisationController::deleteBranch($request->organization_id, $request->parent_id);
 
+    }
+
+    public function prices_add(Request $request){
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'subservice.*.pricing_id'=>'nullable',
+            'subservice.*.id'=>'required',
+            'subservice.*.bidnest.price.economy'=>'required',
+            'subservice.*.bidnest.price.premium'=>'required',
+            'subservice.*.market.price.economy'=>'required',
+            'subservice.*.market.price.premium'=>'required',
+            'subservice.*.mp_additional.price.economy'=>'required',
+            'subservice.*.mp_additional.price.premium'=>'required',
+            'subservice.*.bp_additional.price.economy'=>'required',
+            'subservice.*.bp_additional.price.premium'=>'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::addPrices($request->all(), $request->id, $request->pricing_id);
     }
 
     public function bank_add(Request $request)
@@ -657,7 +686,7 @@ class Route extends Controller
             'user_scope'=>'required|integer',
             'valid_from'=>'required',
             'valid_to'=>'required',
-            'organizations.*'=>'required',
+            'orgnizations.*'=>'required',
             'zones.*'=>'required',
             'users.*'=>'required'
         ]);
@@ -688,7 +717,7 @@ class Route extends Controller
             'user_scope'=>'required|integer',
             'valid_from'=>'required',
             'valid_to'=>'required',
-            'organizations.*'=>'required',
+            'orgnizations.*'=>'required',
             'zones.*'=>'required',
             'users.*'=>'required',
             'status'=>'required'
@@ -781,6 +810,12 @@ class Route extends Controller
     {
 //         return $request->query;
         return AdminController::search($request);
+    }
+
+    public function searchitem(Request $request)
+    {
+//         return $request->query;
+        return InventoryController::searchItem($request);
     }
 
     public function testimonial_add(Request $request)
@@ -1041,6 +1076,25 @@ class Route extends Controller
         return FaqController::add($request->ques, $request->answer, $request->category);
     }
 
+    public function faq_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'category'=>'required',
+            'ques'=>'required',
+            'answer'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return FaqController::update($request->id, $request->ques, $request->answer, $request->category);
+    }
+
+    public function faq_delete(Request $request){
+        return FaqController::delete($request->id);
+    }
+
     public function contact_us(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -1149,6 +1203,7 @@ class Route extends Controller
             'inventory_items.*.material' =>'required|string',
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',
+            'inventory_items.*.is_custom' =>'required|boolean',
         ]);
 
         if($validation->fails())
@@ -1252,7 +1307,95 @@ class Route extends Controller
         return PayoutController::registerFundAccount($request->id);
     }
 
+    public function vendor_action(Request $request){
+        return OrganisationController::changeStatusVendor($request->id, $request->status);
+    }
+
     /* public function export_csv(Request $request){
          return ExportController::exoprtSale();
      }*/
+
+     public function inventories_import(Request $request){
+         return InventoryController::import($request->file('file'));
+     }
+
+     public function subservice_items(Request $request){
+         return SubServiceController::getDefaultItems($request->id, $request->service);
+     }
+
+     public function booking_edit(Request $request){
+         $validation = Validator::make($request->all(),[
+             'public_booking_id'=>'required',
+             'service_id' => 'required|integer',
+
+             'source.lat' => 'required|numeric',
+             'source.lng' => 'required|numeric',
+
+             'source.meta.geocode' => 'nullable|string',
+             'source.meta.floor' => 'required|integer',
+             'source.meta.address_line1' => 'required|string',
+             'source.meta.address_line2' => 'required|string',
+             'source.meta.city' => 'required|string',
+             'source.meta.state' => 'required|string',
+             'source.meta.pincode' => 'required|min:6|max:6',
+             'source.meta.lift' => 'required|boolean',
+
+             'destination.lat' => 'required|numeric',
+             'destination.lng' => 'required|numeric',
+
+             'destination.meta.geocode' => 'nullable|string',
+             'destination.meta.floor' => 'required|integer',
+             'destination.meta.address_line1' => 'required|string',
+             'destination.meta.address_line2' => 'required|string',
+             'destination.meta.city' => 'required|string',
+             'destination.meta.state' => 'required|string',
+             'destination.meta.pincode' => 'required|min:6|max:6',
+             'destination.meta.lift' => 'required|boolean',
+
+             'contact_details.name'  => 'required|string',
+             'contact_details.phone'  => 'required|min:10|max:10',
+             'contact_details.email'  => 'required|string',
+
+             'friend_details' => "nullable",
+             'friend_details.name'  => 'nullable|string',
+             'friend_details.phone'  => 'nullable|min:10|max:10',
+             'friend_details.email'  => 'nullable|string',
+
+             'meta.self_booking' => 'required|boolean',
+             'meta.subcategory' => 'nullable|string',
+
+             'movement_dates' =>'required',
+
+             'inventory_items.*.inventory_id' =>'required|integer',
+             'inventory_items.*.material' =>'required|string',
+             'inventory_items.*.size' =>'required|string',
+             'inventory_items.*.quantity' =>'required',
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return BookingsController::editEnquiryForAdmin($request);
+     }
+
+     public function booking_fianl_bid_edit(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'booking_id'=>'required',
+
+             'bid_amount'=>'required|numeric',
+             'commission' => 'required|numeric',
+             'sub_total' => 'required|numeric',
+
+             'other_charges' => 'nullable|numeric',
+             'discount_amount' => 'required|numeric',
+             'tax' => 'required|numeric',
+             'grand_total' => 'required|numeric'
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return PaymentController::updateBookingPaymentData($request->booking_id, $request->bid_amount, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total);
+     }
 }

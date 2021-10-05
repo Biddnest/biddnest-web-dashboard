@@ -72,6 +72,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/sub-services/{id}',[Router::class,'subservice_status_update'])->name("sub_service_status_update");
     Route::get('/sub-services',[Router::class,'subservice_get'])->name("sub_service_get");
     Route::delete('/sub-services/{id}',[Router::class,'subservice_delete'])->name("sub_service_delete");
+    Route::get('/sub-services/items',[Router::class,'subservice_items'])->name("subservice-items");
 
     //inventory APIs
     Route::get('/inventories',[Router::class,'inventories'])->name("inventories");
@@ -80,6 +81,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/inventories/{id}',[Router::class,'inventory_status_update'])->name("inventory_status_update");
     Route::get('/inventories/{id}',[Router::class,'inventories_get'])->name("inventories_get");
     Route::delete('/inventories/{id}',[Router::class,'inventories_delete'])->name("inventories_delete");
+    Route::post('/inventories/import',[Router::class,'inventories_import'])->name("inventories_import");
 
     Route::post('/booking',[Router::class,'booking_add'])->name("add_booking");
     Route::put('/confirm',[Router::class,'booking_confirm'])->name("order_confirm");
@@ -87,9 +89,13 @@ Route::prefix('web/api')->group(function () {
     Route::post('/add-bid',[Router::class,'booking_add_bid'])->name("add_booking_bid");
     Route::get('/otp-bid/{id}',[Router::class,'send_otp_bid'])->name("send_bid_otp");
 
+    Route::put('/book/edit',[Router::class,'booking_edit'])->name("edit_booking");
+    Route::post('/bid/edit',[Router::class,'booking_fianl_bid_edit'])->name("edit_booking_final_bid");
+
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
     Route::put('/vendors',[Router::class,'vendor_edit'])->name("edit_onvoard_vendor");
+    Route::post('/prices',[Router::class,'prices_add'])->name("add_pricing");
     Route::delete('/vendors/{id}',[Router::class,'vendor_delete'])->name("vendor_delete");
 
     Route::post('/vendors/branches',[Router::class,'branch_add'])->name("add_branch_vendor");
@@ -97,6 +103,7 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/vendors/{parent_id}/branches/{organization_id}',[Router::class,'branch_delete'])->name("delete_branch");
 
     Route::post('/vendors/banking-details',[Router::class,'bank_add'])->name("bank_add");
+    Route::put('/vendors/action/{id}/{status}',[Router::class,'vendor_action'])->name("onboard-action-status");
 
     Route::post('/vendors/roles',[Router::class,'role_add'])->name("role_add");
     Route::put('/vendors/roles',[Router::class,'role_edit'])->name("role_edit");
@@ -151,12 +158,15 @@ Route::prefix('web/api')->group(function () {
     Route::get('user/search', [Router::class, 'searchUser'])->name("search_user");
     Route::get('vendor/search', [Router::class, 'searchVendor'])->name("search_vendor");
     Route::get('admin/search', [Router::class, 'searchadmin'])->name("search_admin");
+    Route::get('inventory/search', [Router::class, 'searchitem'])->name("search_inventory");
 
     Route::post('/pages',[Router::class,'page_add'])->name("page_add");
     Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");
     Route::delete('/pages/{id}',[Router::class,'page_delete'])->name("page_delete");
 
     Route::post('/faq',[Router::class,'faq_add'])->name("faq_add");
+    Route::put('/edit/faq',[Router::class,'faq_edit'])->name("faq_edit");
+    Route::delete('/delete/{id}/faq',[Router::class,'faq_delete'])->name("faq_delete");
     Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
 
@@ -244,6 +254,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/pages',[WebController::class,'createpages'])->name("pages_edit");
 
         Route::get('/faq',[WebController::class,'faq'])->name("admin.faq");
+        Route::get('/faq/{type}',[WebController::class,'faq_by_category'])->name("admin.type.faq");
+        Route::get('/add/faq',[WebController::class,'addfaq'])->name("admin.addfaq");
+        Route::get('/edit/{id}/faq',[WebController::class,'editfaq'])->name("admin.editfaq");
         Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
         Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");
@@ -256,15 +269,19 @@ Route::prefix('admin')->group(function () {
             Route::get('/hold',[WebController::class,'ordersBookingsHold'])->name("orders-booking-hold");
             Route::get('/bounced',[WebController::class,'ordersBookingsBounced'])->name("orders-booking-bounced");
             Route::get('/cancelled',[WebController::class,'ordersBookingsCancelled'])->name("orders-booking-cancelled");
+            Route::get('/inprogress',[WebController::class,'ordersBookingsInProgress'])->name("orders-booking-inprogress");
 
             Route::get('/{id}/details',[WebController::class,'orderDetailsCustomer'])->name("order-details");
             Route::get('/{id}/details/payment',[WebController::class,'orderDetailsPayment'])->name("order-details-payment");
             Route::get('/{id}/details/vendor',[WebController::class,'orderDetailsVendor'])->name("order-details-vendor");
+            Route::get('/{id}/details/action',[WebController::class,'orderDetailsAction'])->name("order-details-estimate");
             Route::get('/{id}/details/quotation',[WebController::class,'orderDetailsQuotation'])->name("order-details-quotation");
             Route::get('/{id}/details/bidding',[WebController::class,'orderDetailsBidding'])->name("order-details-bidding");
+            Route::get('/{id}/details/bidding/review',[WebController::class,'orderBiddingReview'])->name("order-bidding-review");
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
+            Route::get('/edit/{id}',[WebController::class,'editOrder'])->name("edit-order");
             Route::get('/{id}/confirm',[WebController::class,'confirmOrder'])->name("confirm-order");
             Route::get('/{id}/reject',[WebController::class,'rejectOrder'])->name("reject-order");
         });
@@ -284,8 +301,11 @@ Route::prefix('admin')->group(function () {
 
             Route::get('/onboard',[WebController::class,'createOnboardVendors'])->name("create-vendors");
             Route::get('/{id}/edit',[WebController::class,'onbaordEdit'])->name("onboard-edit-vendors");
+            Route::get('/{id}/base-price',[WebController::class,'onbaordBasePrice'])->name("onboard-base-price");
+            Route::get('/{id}/extra-base-price',[WebController::class,'onbaordExtraBasePrice'])->name("onboard-base-extra-price");
             Route::get('/{id}/branch',[WebController::class,'onbaordBranch'])->name("onboard-branch-vendors");
             Route::get('/{id}/bank',[WebController::class,'onbaordBank'])->name("onboard-bank-vendors");
+            Route::get('/{id}/action',[WebController::class,'onbaordAction'])->name("onboard-action");
             Route::get('/{id}/role',[WebController::class,'onbaordUserRole'])->name("onboard-userrole-vendors");
         });
 
@@ -490,6 +510,11 @@ Route::prefix('website/api')->group(function () {
     Route::put('/my-profile', [WebsiteRouter::class, 'editProfile'])->name("profile_edit");
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
+
+    Route::post("/track/customer",[WebsiteRouter::class, 'trackCustomerData'])->name("customer-bookmove");
+    Route::post("/track/delivery",[WebsiteRouter::class, 'trackDeliveryData'])->name("delivery-bookmove");
+    Route::post("/track/inventory",[WebsiteRouter::class, 'trackInventoryData'])->name("inventory-bookmove");
+    Route::post("/track/img",[WebsiteRouter::class, 'trackImgData'])->name("img-bookmove");
 
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
     Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");

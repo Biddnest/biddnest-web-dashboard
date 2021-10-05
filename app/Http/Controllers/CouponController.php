@@ -54,8 +54,8 @@ class CouponController extends Controller
         return Helper::response(false, "couldn't save");
 
     if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']){
-        if(count($data['organizations']) > 0){
-            foreach($data['organizations'] as $organization) {
+        if(count($data['orgnizations']) > 0){
+            foreach($data['orgnizations'] as $organization) {
                 $coupon_organizaton = new CouponOrganization;
                 $coupon_organizaton->organization_id = $organization;
                 $coupon_organizaton->coupon_id = $coupon->id;
@@ -123,7 +123,7 @@ class CouponController extends Controller
 
        if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']) {
            if (count($data['organizations']) > 0) {
-               CouponOrganization::where("coupon_id", $exist_coupon->id)->dalete();
+               CouponOrganization::where("coupon_id", $exist_coupon->id)->delete();
                foreach ($data['organizations'] as $organization) {
                    $coupon_organizaton = new CouponOrganization;
                    $coupon_organizaton->organization_id = $organization;
@@ -135,7 +135,7 @@ class CouponController extends Controller
 
        if($data['zone_scope']== CouponEnums::$ZONE_SCOPE['custom']){
            if(count($data['zones']) > 0){
-               CouponZone::where("coupon_id", $exist_coupon->id)->dalete();
+               CouponZone::where("coupon_id", $exist_coupon->id)->delete();
                foreach($data['zones'] as $zone) {
                    $coupon_zone = new CouponZone;
                    $coupon_zone->zone_id = $zone;
@@ -147,7 +147,7 @@ class CouponController extends Controller
 
        if($data['user_scope']== CouponEnums::$USER_SCOPE['custom']){
            if(count($data['users']) > 0){
-               CouponUser::where("coupon_id", $exist_coupon->id)->dalete();
+               CouponUser::where("coupon_id", $exist_coupon->id)->delete();
                foreach($data['users'] as $user) {
                    $coupon_user = new CouponUser;
                    $coupon_user->user_id = $user;

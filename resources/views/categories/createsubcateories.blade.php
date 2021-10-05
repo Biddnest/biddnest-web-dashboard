@@ -60,18 +60,7 @@
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
                             </div>
-{{--                            <div class="col-lg-6">--}}
-{{--                                <div class="form-input">--}}
-{{--                                  <label class="phone-num-lable">Zone</label>--}}
-{{--                                    <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>--}}
 
-{{--                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)--}}
-{{--                                            <option value="{{$zone->id}}">{{$zone->name}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                  <span class="error-message">Please enter valid Phone number</span>--}}
-{{--                                </div>--}}
-{{--                              </div>--}}
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="phone-num-lable">Main Category Name</label>
@@ -84,15 +73,32 @@
                                   <span class="error-message">Please enter valid Service</span>
                                 </div>
                               </div>
-                              <!-- <div class="col-sm-12   border-top-pop mtop-20">
-                                <div class="theme-text f-14 bold pt-10">
-                                   List
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="phone-num-lable">Max Extra Item Count</label>
+                                    <input type="number" placeholder="Item Count" id="count" name="max_extra_items" value="@if(isset($subcategory)){{$subcategory->max_extra_items}}@endif" class="form-control br-5 extra-inv-count" required/>
+                                    <span class="error-message">Please enter a valid Item Count</span>
                                 </div>
-                              </div> -->
-                            <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
-                            <div class="heading p-10 pl-4 border-around ">
-                              Inventory List
                             </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="phone-num-lable"> Extra Inventory List</label>
+                                    <select class="form-control searchitem" name="extra_inventories[]" multiple>
+                                        @if(isset($sub_category))
+                                            @foreach($sub_category->extraitems as $extraitems)
+                                                <option value="{{$extraitems->id}}" selected>{{ucfirst(trans($user->meta->name))}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
+                                <div class="heading p-10 pl-4 border-around ">
+                                  Inventory List
+                                </div>
 
                                 <table class="table text-center p-10 theme-text tb-border2" id="itms">
                                     <thead class="secondg-bg bx-shadowg p-0 f-14">
@@ -115,7 +121,7 @@
                                             @foreach($subcategory->inventorymap as $inventory_key)
                                                 <tr class="inventory-snip">
                                                     <td scope="row" class="text-left"  style="padding-left: 14px !important;">
-                                                        <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                                        <select class="form-control br-5 inventory-select" name="inventories[][id]" required>
                                                             <option value="">--Select--</option>
                                                             @foreach($inventories as $inventory)
                                                                 <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" @if(isset($subcategory) && ($inventory->id == $inventory_key->inventory_id)) data-materials="{{$inventory_key->material}}" data-sizes="{{$inventory_key->size}}" selected @endif>{{$inventory->name}}</option>
@@ -153,7 +159,7 @@
                                        @else
                                            <tr class="inventory-snip">
                                                <td scope="row" class="text-left" style="padding-left: 14px !important;">
-                                                   <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                                                   <select class="form-control br-5 inventory-select" name="inventories[][id]" required>
                                                        <option value="">--Select--</option>
                                                        @foreach($inventories as $inventory)
                                                            <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>
@@ -222,7 +228,7 @@
     <script type="text/html" id="add-inventory-row">
         <tr class="inventory-snip">
             <th scope="row" class="text-left " style="padding-left: 14px !important;">
-                <select class="form-control br-5 inventory-select" name="inventories[][name]" required>
+                <select class="form-control br-5 inventory-select" name="inventories[][id]" required>
                     <option value="">--Select--</option>
                     @foreach($inventories as $inventory)
                         <option id="inventory_{{$inventory->id}}" value="{{$inventory->id}}" data-size="{{$inventory->size}}" data-material="{{$inventory->material}}" >{{$inventory->name}}</option>

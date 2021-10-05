@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketEnums;
 use App\Models\Subservice;
 use App\Models\SubServiceExtraInventory;
 use App\Models\SubservicePrice;
@@ -190,7 +191,7 @@ class InventoryController extends Controller
             return Helper::response(false,"Couldn't save data");
 
         if($web) {
-            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']]);
+            TicketController::createForVendor(Session::get('account')['id'], TicketEnums::$TYPE['price_update'], ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $data['service_type']], [],);
 
             return Helper::response(true, "Price Saved successfully");
         } else

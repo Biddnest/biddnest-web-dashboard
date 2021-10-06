@@ -227,14 +227,14 @@ class InventoryController extends Controller
         $service_type=$Inventory->service_type;
         foreach($data['price'] as $price) {
             $updateColumns = [
-                "bp_economic" => $price['bidnest']['price']['economics'],
-                "bp_premium" => $price['bidnest']['price']['premium'],
-                "mp_economic" => $price['market']['price']['economics'],
-                "mp_premium" => $price['market']['price']['premium'],
-                "bp_additional_economic"=> $price['bidnest']['additional']['price']['economics'],
-                "bp_additional_premium"=> $price['bidnest']['additional']['price']['premium'],
-                "mp_additional_economic"=> $price['market']['additional']['price']['economics'],
-                "mp_additional_premium" => $price['market']['additional']['price']['premium']
+                "bp_economic" => round($price['bidnest']['price']['economics'],2),
+                "bp_premium" => round($price['bidnest']['price']['premium'],2),
+                "mp_economic" => round($price['market']['price']['economics'],2),
+                "mp_premium" => round($price['market']['price']['premium'],2),
+                "bp_additional_economic"=> round($price['bidnest']['additional']['price']['economics'],2),
+                "bp_additional_premium"=> round($price['bidnest']['additional']['price']['premium'],2),
+                "mp_additional_economic"=> round($price['market']['additional']['price']['economics'],2),
+                "mp_additional_premium" => round($price['market']['additional']['price']['premium'],2)
             ];
 
 
@@ -334,15 +334,15 @@ class InventoryController extends Controller
             $price_calc = new BookingOrganizationGeneratedPrice();
             $price_calc->booking_id = $booking_data['id'];
             $price_calc->organization_id = $vendor['id'];
-            $price_calc->mp_economic = $mp_economic;
-            $price_calc->mp_premium = $mp_premium;
-            $price_calc->bp_economic = $bp_economic;
-            $price_calc->bp_premium = $bp_premium;
-            $price_calc->economic_margin_percentage = $economic_percent;
-            $price_calc->premium_margin_percentage = $premium_percent;
+            $price_calc->mp_economic = round($mp_economic,2);
+            $price_calc->mp_premium = round($mp_premium,2);
+            $price_calc->bp_economic = round($bp_economic,2);
+            $price_calc->bp_premium = round($bp_premium,2);
+            $price_calc->economic_margin_percentage = round($economic_percent,2);
+            $price_calc->premium_margin_percentage = round($premium_percent,2);
 
-            $price_calc->base_price_economic = $base_price_economic;
-            $price_calc->base_price_premium = $base_price_premium;
+            $price_calc->base_price_economic = round($base_price_economic,2);
+            $price_calc->base_price_premium = round($base_price_premium,2);
 
 
             if($price_calc->save())

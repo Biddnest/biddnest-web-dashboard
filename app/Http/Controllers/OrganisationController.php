@@ -676,16 +676,16 @@ class OrganisationController extends Controller
             }
             $pricing->organization_id = $id;
             $pricing->subservice_id = $subservice['id'];
-            $pricing->bp_economic = $subservice['bidnest']['price']['economy'];
-            $pricing->bp_premium = $subservice['bidnest']['price']['premium'];
-            $pricing->mp_economic = $subservice['market']['price']['economy'];
-            $pricing->mp_premium = $subservice['market']['price']['premium'];
-            $pricing->economic_margin_percentage = $economic_margin_percentage;
-            $pricing->premium_margin_percentage = $premium_margin_percentag;
-            $pricing->mp_additional_distance_economic_price = $subservice['mp_additional']['price']['economy'];
-            $pricing->mp_additional_distance_premium_price = $subservice['mp_additional']['price']['premium'];
-            $pricing->bp_additional_distance_economic_price = $subservice['bp_additional']['price']['economy'];
-            $pricing->bp_additional_distance_premium_price = $subservice['bp_additional']['price']['premium'];
+            $pricing->bp_economic = round($subservice['bidnest']['price']['economy'],2);
+            $pricing->bp_premium = round($subservice['bidnest']['price']['premium'],2);
+            $pricing->mp_economic = round($subservice['market']['price']['economy'],2);
+            $pricing->mp_premium = round($subservice['market']['price']['premium'],2);
+            $pricing->economic_margin_percentage = round($economic_margin_percentage,2);
+            $pricing->premium_margin_percentage = round($premium_margin_percentag,2);
+            $pricing->mp_additional_distance_economic_price = round($subservice['mp_additional']['price']['economy'],2);
+            $pricing->mp_additional_distance_premium_price = round($subservice['mp_additional']['price']['premium'],2);
+            $pricing->bp_additional_distance_economic_price = round($subservice['bp_additional']['price']['economy'],2);
+            $pricing->bp_additional_distance_premium_price = round($subservice['bp_additional']['price']['premium'],2);
             $result_pricing = $pricing->save();
         }
 

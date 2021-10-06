@@ -296,7 +296,7 @@ class InventoryController extends Controller
 
                 $mp_economic = $query ? $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']) : 0.00;
 
-                $bp_economic = $query ? $base_price_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
+                $bp_economic = $base_price_economic = $query ? $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
 
                 $mp_premium = $query ? $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']) : 0.00;
 

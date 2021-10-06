@@ -327,8 +327,8 @@ class InventoryController extends Controller
 
             /*Slot for items*/
 
-            $economic_percent = (($mp_economic - $bp_economic)/$mp_economic)*100;
-            $premium_percent = (($mp_premium - $bp_premium)/$mp_premium)*100;
+            $economic_percent = $mp_economic > 0.00 ? (($mp_economic - $bp_economic)/$mp_economic)* 100 : 0.00;
+            $premium_percent =  $mp_premium > 0.00 ? (($mp_premium - $bp_premium)/$mp_premium) * 100 : 0.00;
 
             $price_calc = new BookingOrganizationGeneratedPrice();
             $price_calc->booking_id = $booking_data['id'];

@@ -294,14 +294,13 @@ class InventoryController extends Controller
                     ->where('subservice_id', Subservice::where('name',$data['meta']['subcategory'])
                         ->pluck('id')[0])->first();
 
-                $mp_economic = $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']);
+                $mp_economic = $query ? $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']) : 0.00;
 
-                $bp_economic = $base_price_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']);
+                $bp_economic = $query ? $base_price_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
 
-                $mp_premium = $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']);
+                $mp_premium = $query ? $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']) : 0.00;
 
-                $bp_premium = $base_price_premium = $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']);
-
+                $bp_premium = $base_price_premium = $query ? $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']) : 0.00;
             }
 
             /*Slot for items*/

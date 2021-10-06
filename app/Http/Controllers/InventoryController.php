@@ -247,7 +247,7 @@ class InventoryController extends Controller
         }
 
         if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))
-            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $service_type]);
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $service_type], []);
 
         if(!$InventoryPrice)
             return Helper::response(false, "Couldn't Update Price");

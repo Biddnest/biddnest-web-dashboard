@@ -597,7 +597,8 @@ class BidController extends Controller
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
 
-                if($booking_inventory['is_custom']){
+
+                if($booking_inventory['is_custom'] == 1){
                     $inv = InventoryPrice::where([
                         "inventory_id"=>$booking_inventory["inventory_id"],
                         "material"=>$booking_inventory["material"],
@@ -605,8 +606,6 @@ class BidController extends Controller
                         "service_type"=> $booking->service_id,
                         "organization_id"=>$organization_id
                     ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
-
-
 
 
                     $base_price = 0.00;

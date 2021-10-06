@@ -579,7 +579,7 @@ class BidController extends Controller
 
 
         if(strtolower(json_decode($booking->booking->meta, true)['subcategory']) != "custom"){
-            $vendor_base_price = $query->$price_type + (($additional_distance / $vendor->additional_distance) * $query->$ad_price_type);
+            $vendor_base_price = $query ? $query->$price_type + (($additional_distance / $vendor->additional_distance) * $query->$ad_price_type) : 0.00;
         }
 
         if($booking->booking_inventories){

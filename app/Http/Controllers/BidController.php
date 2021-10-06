@@ -74,7 +74,8 @@ class BidController extends Controller
 
     }
 
-    public static function getbookings($public_booking_id = Null)
+
+    public static function getbookings($public_booking_id = null)
     {
 
         $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
@@ -100,6 +101,16 @@ class BidController extends Controller
         }
 
         return ['total_bookings'=> count($bookings), 'booking_id'=>$id];
+    }
+
+    public static function endTimer(){
+        Booking::where(
+            "bid_end_at",Carbon::now()->roundMinutes()->format("Y-m-d H:i:s")
+        )
+            ->whereIn("status",[BookingEnums::$STATUS['biding'],BookingEnums::$STATUS['rebiding']])
+            ->update(['status'=>BookingEnums::$STATUS['awaiting_bid_result']]);
+
+        return true;
     }
 
     private static function updateStatus($book_id)

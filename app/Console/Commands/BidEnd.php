@@ -43,11 +43,20 @@ class BidEnd extends Command
         if($this->argument('id')=='all')
         {
             $output = BidController::getbookings();
-            $cron_log = new CronLog;
+            /*$cron_log = new CronLog;
             $cron_log->output = json_encode($output);
-            $cron_log->save();
+            $cron_log->save();*/
             $this->comment('Total orders '.$output['total_bookings']);
             $this->comment('Affected orders '.json_encode($output['booking_id']));
+        }
+        else if($this->argument('id') == 'timer')
+        {
+            $output = BidController::endTimer();
+            /*$cron_log = new CronLog;
+            $cron_log->output = json_encode($output);
+            $cron_log->save();*/
+            /*$this->comment('Total orders '.$output['total_bookings']);
+            $this->comment('Affected orders '.json_encode($output['booking_id']));*/
         }
         else{
             $output = BidController::getbookings($this->argument('id'));

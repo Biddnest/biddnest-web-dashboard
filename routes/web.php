@@ -513,6 +513,8 @@ Route::prefix('website/api')->group(function () {
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
+    Route::post("/booking/status",[WebsiteRouter::class, 'bookinStatusChange'])->name("status-change-booking");
+
     Route::post("/track/customer",[WebsiteRouter::class, 'trackCustomerData'])->name("customer-bookmove");
     Route::post("/track/delivery",[WebsiteRouter::class, 'trackDeliveryData'])->name("delivery-bookmove");
     Route::post("/track/inventory",[WebsiteRouter::class, 'trackInventoryData'])->name("inventory-bookmove");

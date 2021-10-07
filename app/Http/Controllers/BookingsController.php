@@ -569,8 +569,8 @@ class BookingsController extends Controller
 
         if ($web) {
             $summary = [
-                "sub_total" => $booking->payment->sub_total + $booking->payment->other_charges,
-//                "surge_charge" => $booking->payment->other_charges,
+                "sub_total" => $booking->payment->sub_total,
+                // "surge_charge" => $booking->payment->other_charges,
                 "discount" => $discount_amount,
                 "tax" => $tax,
                 "tax_percentage" => $tax_percentage,
@@ -1841,5 +1841,23 @@ class BookingsController extends Controller
             return true;
 
     }
+
+    public static function changeStatusBooking($id, $status){
+        $booking_exist=Booking::where("id", $id)->first();
+
+        if(!$booking_exist){
+            return Helper::response(false,"Booking is not exist.");
+        }
+
+        $result=Booking::where("id", $id)->update(["status"=>$status]);
+
+        $result_status = self::statusChange($booking_exist->id, $status);
+
+        if($result)
+            return Helper::response(true,"Updated status successfully.");
+        else
+            return Helper::response(false,"Confirmation failed.");
+    }
+
 
 }

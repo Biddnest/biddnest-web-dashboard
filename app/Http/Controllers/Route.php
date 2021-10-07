@@ -1400,6 +1400,12 @@ class Route extends Controller
      }
 
 
+
+     public function bookinStatusChange(Request $request){
+         return BookingsController::changeStatusBooking($request->id, $request->status);
+     }
+
+
      public function getSubserviceInventories(Request $request)
      {
          $validation = Validator::make($request->all(),[

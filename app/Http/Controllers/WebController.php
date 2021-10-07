@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AdminEnums;
+use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
 use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
@@ -554,11 +555,9 @@ class WebController extends Controller
     {
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
-        }])->with('inventories')->with('driver')
-            ->with('vehicle')->with('organization')
-            ->with(['payment'=>function($q){
-                $q->with('coupon');
-            }])->findOrFail($request->id);
+        }])->with(['bid'=>function($q){
+            $q->where('status', BidEnums::$STATUS['won']);
+        }])->findOrFail($request->id);
 
         $hist = [];
 
@@ -794,7 +793,7 @@ class WebController extends Controller
     }
 
     public function onbaordBasePrice(Request $request){
-        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->whereNotIn("name", ["custom"])->get();
         return view('vendor.onboardbaseprice', ['id'=>$request->id, 'subservices'=>$subservices]);
     }
 

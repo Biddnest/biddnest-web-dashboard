@@ -247,7 +247,7 @@ class InventoryController extends Controller
         }
 
         if($web && ($Inventory['ticket_status'] != CommonEnums::$TICKET_STATUS['need_modification']))
-            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $service_type]);
+            TicketController::createForVendor(Session::get('account')['id'], 6, ["parent_org_id" => Session::get('organization_id'), "inventory_id" => $data['inventory_id'], "service_type" => $service_type], []);
 
         if(!$InventoryPrice)
             return Helper::response(false, "Couldn't Update Price");
@@ -296,7 +296,7 @@ class InventoryController extends Controller
 
                 $mp_economic = $query ? $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']) : 0.00;
 
-                $bp_economic = $query ? $base_price_economic = $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
+                $bp_economic = $base_price_economic = $query ? $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
 
                 $mp_premium = $query ? $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']) : 0.00;
 

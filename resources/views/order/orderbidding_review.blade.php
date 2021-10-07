@@ -87,52 +87,42 @@
                             </ul>
                         </h3>
                     </div>
-                    <div class="tab-content border-top margin-topneg-7" id="myTabContent">
-                        <div class="tab-pane fade show active " id="quotation" role="tabpanel" aria-labelledby="quotation-tab">
-                                <div class="d-flex  row p-15 quotation-main pb-0" >
-                                    <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
-                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                            Booking Type
-                                        </div>
-                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                            Estimate Amount
-                                        </div>
-                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                            Created At
-                                        </div>
+                    <div class="tab-content " id="myTabContent">
+                        <!-- form starts -->
+                        <div class="w-100">
+                            <div class="tab-pane show text-center" style="min-height: 50vh; padding-top: 35px;">
+                                    <div class="text-center ">
+                                        <h3 class="f-18 theme-text bold p-10">Final Bid Amount</h3>
+                                        <h1><span class="text-center" style="min-width: 0px !important;">₹{{$booking->bid->bid_amount}}</span></h1>
                                     </div>
+                                    <p class="font14">
+                                        <i>To change this amount, you may edit the price in the Quotation tab and come back to confirtm here.</i>
+                                    </p>
+                                    <a class="white-text p-10 booking-status-change" data-url="{{route('status-change-booking', ['id'=>$booking->id, 'status'=>\App\Enums\BookingEnums::$STATUS['payment_pending']])}}">
+                                        <button type="button" class="btn theme-bg theme-text w-30 white-bg">Confirm This Amount</button>
+                                    </a>
 
-                                    <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
-                                        <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                            @foreach(\App\Enums\BookingEnums::$BOOKING_TYPE as $type=>$key)
-                                                @if($key == $booking->booking_type)
-                                                    {{ucwords($type)}}
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                        <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                            ₹ {{$booking->final_estimated_quote}}
-                                        </div>
-                                        <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                            {{$booking->created_at->format('d M Y')}}
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="d-flex  justify-content-between flex-row  p-10 py-0"
+                                 style="border-top: 1px solid #70707040;">
+                            </div>
+                            <div class="w-100 text-right">
 
-                            <div class="border-top-3">
-                                <div class="d-flex justify-content-start">
-                                    <div class="w-50">
-                                    </div>
-                                    <div class="w-50 margin-r-20">
-                                        <div class="d-flex justify-content-end">
-                                            <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
-                                            <a href="{{route('order-details-payment', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
+                            <div class="w-50">
+                                {{--                                        <a class="white-text p-10" href="#"><button class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>--}}
+                            </div>
+                            <div class="w-50 margin-r-20">
+                                <div class="d-flex justify-content-end">
+                                    <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
+                                    <a href="{{route('order-details-payment', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
+                                </div>
+                            </div>
+                    </div>
+
                 </div>
             </div>
         </div>

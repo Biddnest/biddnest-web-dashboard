@@ -104,9 +104,9 @@ class BidController extends Controller
     }
 
     public static function endTimer(){
-        Booking::where(
-            "bid_end_at",Carbon::now()->roundMinutes()->format("Y-m-d H:i:s")
-        )
+        $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
+
+        Booking::where("bid_end_at", "<=", "$current_time")
             ->whereIn("status",[BookingEnums::$STATUS['biding'],BookingEnums::$STATUS['rebiding']])
             ->update(['status'=>BookingEnums::$STATUS['awaiting_bid_result']]);
 
@@ -133,7 +133,7 @@ class BidController extends Controller
 
             $order = Booking::where("id", $book_id)->first();
 
-            $timing = Settings::where("key", "bid_time")->pluck('value')[0];
+            $timing = Settings::where("key", "rebid_time")->pluck('value')[0];
             $buffer = Settings::where("key", "buffer_time")->pluck('value')[0];
             $complete_time = Carbon::now()
                 ->addMinutes($timing)
@@ -144,9 +144,6 @@ class BidController extends Controller
                 ->addMinutes($timing)
                 ->roundMinutes()
                 ->format("Y-m-d H:i:s");
-
-            $timming = Settings::where("key", "rebid_time")->pluck('value')[0];
-            $complete_time = Carbon::now()->addMinutes($timming)->roundMinutes();
 
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $bid_end_time;
@@ -194,6 +191,7 @@ class BidController extends Controller
 
             return true;
         }
+
         $booking_data = Booking::find($book_id);
         if($booking_data->booking_type == BookingEnums::$BOOKING_TYPE['economic']) {
             $booking_type_column = 'bp_economic';
@@ -204,7 +202,6 @@ class BidController extends Controller
             $booking_type_percentage_column = 'premium_margin_percentage';
         }
 
-
         $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min($booking_type_column);
 
@@ -213,23 +210,22 @@ class BidController extends Controller
 
         $average_margin_value = ($average_margin_percentage / 100) * $least_agent_price;
 
+        $search_percentage = Settings::where("key", "tax")->pluck('value')[0];
         $final_bid_amount = 0.00;
         $commission = 0.00;
         if($min_amount <= $least_agent_price){
             /* BID CASE 1 */
             $commission = (0.7 * $average_margin_value);
-            $final_bid_amount = $least_agent_price + $commission;
+            $final_bid_amount = $min_amount + $commission + $search_percentage;
 
         }else if($min_amount > $least_agent_price && $min_amount <= $booking_data->organization_rec_quote){
             $commission = (0.6 * $average_margin_value);
-            $final_bid_amount = $least_agent_price + $commission;
+            $final_bid_amount = $min_amount + $commission + $search_percentage;
         }else{
             $final_bid_amount = null;
         }
 
         $public_booking_id = $booking_data->public_booking_id;
-
-
 
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
@@ -250,7 +246,7 @@ class BidController extends Controller
             $final_status = BookingEnums::$STATUS['price_review_pending'];
 
         Booking::where("id", $book_id)
-            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result']])
             ->update([
                 "organization_id"=>$won_org_id,
                 "final_quote"=>$final_bid_amount,
@@ -270,7 +266,7 @@ class BidController extends Controller
         $payment->other_charges = $other_charges;
         $payment->tax = $tax;
         $payment->commission = $commission;
-        $payment->sub_total= $sub_total;
+        $payment->sub_total= $sub_total - $other_charges;
         $payment->grand_total = $grand_total;
         $payment_result = $payment->save();
 
@@ -597,7 +593,8 @@ class BidController extends Controller
                 $list_item["material"] = $booking_inventory["material"];
                 $list_item["size"] = $booking_inventory["size"];
 
-                if($booking_inventory['is_custom']){
+
+                if($booking_inventory['is_custom'] == 1){
                     $inv = InventoryPrice::where([
                         "inventory_id"=>$booking_inventory["inventory_id"],
                         "material"=>$booking_inventory["material"],
@@ -605,8 +602,6 @@ class BidController extends Controller
                         "service_type"=> $booking->service_id,
                         "organization_id"=>$organization_id
                     ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
-
-
 
 
                     $base_price = 0.00;

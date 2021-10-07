@@ -632,8 +632,10 @@ class OrganisationController extends Controller
         if(!$vendor_exist){
             return Helper::response(false,"Vendor is not exist.");
         }
-        if(!$vendor_kyc){
-            return Helper::response(false,"Details are not updated for this vendor, Please update bank details.");
+        if($status != OrganizationEnums::$STATUS['suspended']) {
+            if (!$vendor_kyc) {
+                return Helper::response(false, "Details are not updated for this vendor, Please update bank details.");
+            }
         }
 
         if($status == OrganizationEnums::$STATUS['pending_approval']){

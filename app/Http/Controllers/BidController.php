@@ -191,6 +191,7 @@ class BidController extends Controller
 
             return true;
         }
+
         $booking_data = Booking::find($book_id);
         if($booking_data->booking_type == BookingEnums::$BOOKING_TYPE['economic']) {
             $booking_type_column = 'bp_economic';
@@ -215,11 +216,11 @@ class BidController extends Controller
         if($min_amount <= $least_agent_price){
             /* BID CASE 1 */
             $commission = (0.7 * $average_margin_value);
-            $final_bid_amount = $least_agent_price + $commission;
+            $final_bid_amount = $min_amount + $commission;
 
         }else if($min_amount > $least_agent_price && $min_amount <= $booking_data->organization_rec_quote){
             $commission = (0.6 * $average_margin_value);
-            $final_bid_amount = $least_agent_price + $commission;
+            $final_bid_amount = $min_amount + $commission;
         }else{
             $final_bid_amount = null;
         }

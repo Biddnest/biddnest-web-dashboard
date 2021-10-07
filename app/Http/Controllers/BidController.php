@@ -104,9 +104,9 @@ class BidController extends Controller
     }
 
     public static function endTimer(){
-        Booking::where(
-            "bid_end_at",Carbon::now()->roundMinutes()->format("Y-m-d H:i:s")
-        )
+        $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
+
+        Booking::where("bid_end_at", "<=", "$current_time")
             ->whereIn("status",[BookingEnums::$STATUS['biding'],BookingEnums::$STATUS['rebiding']])
             ->update(['status'=>BookingEnums::$STATUS['awaiting_bid_result']]);
 

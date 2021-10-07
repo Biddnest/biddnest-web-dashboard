@@ -202,7 +202,6 @@ class BidController extends Controller
             $booking_type_percentage_column = 'premium_margin_percentage';
         }
 
-
         $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->min($booking_type_column);
 
@@ -211,23 +210,22 @@ class BidController extends Controller
 
         $average_margin_value = ($average_margin_percentage / 100) * $least_agent_price;
 
+        $search_percentage = Settings::where("key", "tax")->pluck('value')[0];
         $final_bid_amount = 0.00;
         $commission = 0.00;
         if($min_amount <= $least_agent_price){
             /* BID CASE 1 */
             $commission = (0.7 * $average_margin_value);
-            $final_bid_amount = $min_amount + $commission;
+            $final_bid_amount = $min_amount + $commission + $search_percentage;
 
         }else if($min_amount > $least_agent_price && $min_amount <= $booking_data->organization_rec_quote){
             $commission = (0.6 * $average_margin_value);
-            $final_bid_amount = $min_amount + $commission;
+            $final_bid_amount = $min_amount + $commission + $search_percentage;
         }else{
             $final_bid_amount = null;
         }
 
         $public_booking_id = $booking_data->public_booking_id;
-
-
 
 
         $won_org_id = Bid::where(["booking_id"=>$book_id, "bid_amount"=>$min_amount])->pluck("organization_id")[0];
@@ -268,7 +266,7 @@ class BidController extends Controller
         $payment->other_charges = $other_charges;
         $payment->tax = $tax;
         $payment->commission = $commission;
-        $payment->sub_total= $sub_total;
+        $payment->sub_total= $sub_total - $other_charges;
         $payment->grand_total = $grand_total;
         $payment_result = $payment->save();
 

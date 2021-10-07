@@ -1137,4 +1137,7 @@
             .distance-price .form-control {
                 padding: 6px 6px !important;
             }
+            .swal2-popup{
+                transform: scale(1.3) !important;
+            }
         </style>

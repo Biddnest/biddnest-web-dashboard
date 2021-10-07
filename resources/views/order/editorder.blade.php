@@ -383,7 +383,7 @@
                             </table>
                           </div>
                           <div class="col-sm-12 mtop-20 w-30">
-                              <a class="float-right btn theme-bg white-text repeater" data-content="#add-inventory-row" data-container="#add-inventory-wrapper"  id="addnew-btn" >
+                              <a class="float-right btn theme-bg white-text repeater load-extra-inventories" data-content="#add-inventory-row" data-container="#add-inventory-wrapper"  id="addnew-btn" data-url="{{route('subservice-category-inventories')}}">
                                   <i class="fa fa-plus  m-1" aria-hidden="true"></i>
                                   Add New Item</a>
                           </div>
@@ -420,7 +420,6 @@
                           </div>
                         </div>
                       </div>
-
                     </form>
                     <!-- Tab-1 form -->
                   </div>
@@ -454,9 +453,9 @@
             </td>
 
             <td class="" style="width: 20%;">
-                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" >
+                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" value="1" min="1" >
 
-                <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
+                <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" value="1" /></span>
             </td>
 
             <td>

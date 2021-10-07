@@ -53,6 +53,7 @@ export function megaAlert(title, message, type="error"){
         icon: type,
         title: title,
         text: message,
+        confirmButtonText: "close message"
     });
 }
 

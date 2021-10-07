@@ -1398,4 +1398,18 @@ class Route extends Controller
 
          return PaymentController::updateBookingPaymentData($request->booking_id, $request->bid_amount, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total);
      }
+
+
+     public function getSubserviceInventories(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'subservice_id'=>'required',
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return InventoryController::getBySubserviceForApp($request->subservice_id);
+     }
+
 }

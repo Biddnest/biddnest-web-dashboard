@@ -325,6 +325,14 @@ $("body").on('change', ".field-toggle", function(event) {
 });
 
 $("body").on('click', ".repeater", function(event) {
+    if($(this).hasClass("load-extra-inventories") && $(".subservices").val()){
+        let max_extra_inv_count = parseInt($(".subservices option:selected").data('max-items'));
+        if($(".is_custom").length == max_extra_inv_count){
+            megaAlert("Limit Reached", `You can only add upto ${max_extra_inv_count} inventories to this subcategory.`);
+            return false;
+        }
+    }
+
     $($(this).data("container")).slideDown(200).append($($(this).data('content')).html());
     Logger.info('show');
     $(".hide-on-data").fadeOut(100);
@@ -348,6 +356,23 @@ $("body").on('click', ".repeater", function(event) {
         $(".range").attr("name", "inventory_items[][quantity]");
         $(".fixed").removeAttr("name");
     }
+
+    if($(this).hasClass("load-extra-inventories") && $(".subservices").val()){
+        $.get(`${$(this).data('url')}?subservice_id=${$(".subservices").val()}`,function(response){
+            Logger.info(response);
+            let options = `<option value="">--Select--</option>`;
+            let inventory;
+
+            for(let i = 0; i < response.data.extra_inventories.length; i++){
+                inventory = response.data.extra_inventories[i];
+                options += `<option id='inventory_${inventory.id}' value="${inventory.id}" data-size='${inventory.size}' data-material='${inventory.material}'>${inventory.name}</option>`;
+            }
+
+            $(".inventory-snip:last-child").find(".inventory-select").html(options);
+            $(`.inventory-snip:last-child`).closest(".inventory-snip").addClass("is_custom");
+        });
+    }
+
 });
 
 $("body").on('click', ".closer", function(event) {
@@ -451,7 +476,7 @@ $("body").on('change', ".category-select", function(event) {
 
     materal.map((value)=>{
         var name=value['name'].replace(" ", "_");
-        $(this).closest(".d-flex").find(".subservices").append('<option data-service="'+id+'" id="item_'+name+'" data-id="'+value['id']+'" value="'+value['name']+'">'+value['name']+'</option>')
+        $(this).closest(".d-flex").find(".subservices").append('<option data-max-items="'+value['max_extra_items']+'" data-service="'+id+'" id="item_'+name+'" data-id="'+value['id']+'" value="'+value['name']+'">'+value['name']+'</option>')
     });
 
     var type=$("#sub_"+id).data("type");
@@ -484,10 +509,10 @@ $("body").on('change', ".subservices", function(event) {
     var service = $("#item_"+name).data("service");
     var url = $(this).data("url");
 
-    $('.item-subservice').html("");
+    // $('.item-subservice').html("");
 
     $.ajax({
-        url: url+"?id="+id+"&&service="+service,
+        url: url+"?id="+id+"&service="+service,
         type: 'GET',
         contentType: "application/json",
         success: function (response) {
@@ -505,7 +530,21 @@ $("body").on('change', ".subservices", function(event) {
 
                     let template = Handlebars.compile(source);
                     let html = template(response.data);
+
                     $('.item-subservice').html(html);
+                   /* $('.item-subservice').find("tr").not(".is_custom").remove();
+                    $('.item-subservice').prepend(html);
+
+                    let max_extra_inv_count = parseInt($(".subservices option:selected").data('max-items'));
+                        let custom_items_count = $(".is_custom").length;
+                    if(custom_items_count > max_extra_inv_count){
+
+                        let diff = custom_items_count - max_extra_inv_count;
+                        $(".is_custom").slice(-diff).remove();
+
+                        megaAlert(`${diff} items removed.`, `You can only add upto ${max_extra_inv_count} items to this subcategory but you had ${custom_items_count} items added. Last ${diff} items have been removed.`);
+                        return false;
+                    }*/
                 }
             }
         }

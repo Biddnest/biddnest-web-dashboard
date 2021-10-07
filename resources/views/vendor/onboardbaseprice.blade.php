@@ -37,9 +37,6 @@
                                 <a class="nav-link active p-15" id="quotation" href="#">Pricing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p-15" id="quotation" href="{{route("onboard-base-extra-price", ['id'=>$id])}}">Extra Pricing</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route("onboard-branch-vendors",["id"=>$id])}}">Branch</a>
                             </li>
                             <li class="nav-item">

@@ -1937,4 +1937,18 @@ $("body").on('click', ".sidebar-toggle_details td:not(:last-child)", function(ev
     window.location.href = url;
 });
 
+$("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amount", function(event) {
+    var bid_amount =$('.bid-amount').val();
+    var commission =$('.commission').val();
+    var other_charges =$('.other_charges').val();
+    var discount_amount =$('.discount_amount').val();
+    var tax =$('.tax').val();
+
+    var sub_total = parseFloat(bid_amount) + parseFloat(commission);
+    var grand_amount = parseFloat(sub_total) + parseFloat(other_charges) + parseFloat(tax) - parseFloat(discount_amount);
+
+    $('.sub-total').val(sub_total);
+    $('.grand_total').val(grand_amount);
+    return false;
+});
 

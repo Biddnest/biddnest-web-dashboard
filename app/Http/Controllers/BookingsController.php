@@ -562,7 +562,7 @@ class BookingsController extends Controller
         $dates = Bid::where(["organization_id" => $booking->organization_id, "booking_id" => $booking->id])->pluck("moving_dates")[0];
 
         if ($discount_amount > 0.00) {
-            $grand_total = ($booking->payment->sub_total + $booking->payment->other_charges) - $discount_amount;
+            $grand_total = $booking->payment->sub_total - $discount_amount;
             $tax = $grand_total * ($tax_percentage / 100);
             $grand_total += $tax;
         }
@@ -1848,12 +1848,13 @@ class BookingsController extends Controller
         if(!$booking_exist){
             return Helper::response(false,"Booking is not exist.");
         }
+        $result_status = $result =false;
+        if(($booking_exist < BookingEnums::$STATUS['payment_pending']) || $booking_exist < BookingEnums::$STATUS['awaiting_bid_result'] || $booking_exist < BookingEnums::$STATUS['price_review_pending']) {
+            $result = Booking::where("id", $id)->update(["status" => $status]);
+            $result_status = self::statusChange($booking_exist->id, $status);
+        }
 
-        $result=Booking::where("id", $id)->update(["status"=>$status]);
-
-        $result_status = self::statusChange($booking_exist->id, $status);
-
-        if($result)
+        if($result || $result_status)
             return Helper::response(true,"Updated status successfully.");
         else
             return Helper::response(false,"Confirmation failed.");

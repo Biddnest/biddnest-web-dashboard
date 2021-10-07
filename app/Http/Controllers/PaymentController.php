@@ -236,19 +236,25 @@ class PaymentController extends Controller
 
     public static function updateBookingPaymentData($booking_id, $bid_amount, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00){
         Log::info($commission);
+        $booking_exist = Booking::where("id", $booking_id)->first();
+
+        if(!$booking_exist)
+            return Helper::response(false, "Booking is not exist");
+
         Payment::where("booking_id", $booking_id)->update([
-            "vendor_quote"=>$bid_amount,
-            "sub_total"=> $subtotal,
-            "other_charges"=> $other_charges,
-            "grand_total"=> $grand_total,
-            "discount_amount"=> $discount,
-            "tax"=> $tax,
-            "commission"=>$commission,
+            "vendor_quote"=>round((float)$bid_amount, 2),
+            "sub_total"=> round((float)$subtotal,2),
+            "other_charges"=> round((float)$other_charges, 2),
+            "grand_total"=> round((float)$grand_total, 2),
+            "discount_amount"=> round((float)$discount, 2),
+            "tax"=> round((float)$tax,2),
+            "commission"=>round((float)$commission,2),
         ]);
 
         Booking::where('id', $booking_id)->update([
-            "final_quote"=>$subtotal
+            "final_quote"=>round((float)$subtotal+$other_charges, 2)
         ]);
+
         return Helper::response(true, "Payment details have been updated.");
     }
 

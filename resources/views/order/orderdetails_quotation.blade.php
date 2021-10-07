@@ -159,7 +159,7 @@
                                         Tax
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
-                                        Grant Amount
+                                        Grand Amount
                                     </div>
                                 </div>
 
@@ -243,31 +243,31 @@
                                                                 Tax
                                                             </div>
                                                             <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
-                                                                Grant Amount
+                                                                Grand Amount
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                             <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                                               <input type="text" class="form-control number" value="{{$booking->payment->vendor_quote}}" name="bid_amount" required>
+                                                               <input type="number" class="form-control bid-amount" value="{{$booking->payment->vendor_quote}}" name="bid_amount" min="0.00" required>
                                                                <input type="hidden" class="form-control" value="{{$booking->id}}" name="booking_id" required>
                                                             </div>
                                                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                                                <input type="text" class="form-control number" value="{{$booking->payment->commission}}" name="commission" required>
+                                                                <input type="text" class="form-control  commission" value="{{$booking->payment->commission}}" name="commission" min="0.00" required>
                                                             </div>
                                                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                                                <input type="text" class="form-control number" value="{{$booking->payment->sub_total}}" name="sub_total" required readonly>
+                                                                <input type="number" class="form-control  sub-total" value="{{$booking->payment->sub_total}}" name="sub_total" min="0.00" required readonly>
                                                             </div>
                                                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                                                <input type="text" class="form-control number" value="{{$booking->payment->other_charges}}" name="other_charges" required>
+                                                                <input type="number" class="form-control  other_charges" value="{{$booking->payment->other_charges}}" name="other_charges" min="0.00" required>
                                                             </div>
                                                             <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                                                <input type="text" class="form-control number" value="{{$booking->payment->discount_amount}}" name="discount_amount" required>
+                                                                <input type="number" class="form-control  discount_amount" value="{{$booking->payment->discount_amount}}" name="discount_amount" min="0.00" required>
                                                             </div>
                                                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                                                <input type="text" class="form-control number" value="{{$booking->payment->tax}}" name="tax" required>
+                                                                <input type="number" class="form-control  tax" value="{{$booking->payment->tax}}" name="tax" min="0.00" required readonly>
                                                             </div>
                                                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                                                <input type="text" class="form-control number" value="{{$booking->payment->grand_total}}" name="grand_total" readonly required>
+                                                                <input type="number" class="form-control  grand_total" value="{{$booking->payment->grand_total}}" name="grand_total" min="0.00" readonly required>
                                                             </div>
                                                         </div>
                                                     </div>

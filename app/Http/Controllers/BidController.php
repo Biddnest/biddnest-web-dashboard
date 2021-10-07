@@ -217,12 +217,15 @@ class BidController extends Controller
             /* BID CASE 1 */
             $commission = (0.7 * $average_margin_value);
             $final_bid_amount = $min_amount + $commission + $search_percentage;
+            $sub_amount = (float) $min_amount + $commission;
 
         }else if($min_amount > $least_agent_price && $min_amount <= $booking_data->organization_rec_quote){
             $commission = (0.6 * $average_margin_value);
             $final_bid_amount = $min_amount + $commission + $search_percentage;
+            $sub_amount = (float) $min_amount + $commission;
         }else{
             $final_bid_amount = null;
+            $sub_amount = null;
         }
 
         $public_booking_id = $booking_data->public_booking_id;
@@ -263,10 +266,11 @@ class BidController extends Controller
         $payment = new Payment;
         $payment->public_transaction_id = Uuid::uuid4();
         $payment->booking_id = $book_id;
+        $payment->vendor_quote = $min_amount;
         $payment->other_charges = $other_charges;
         $payment->tax = $tax;
         $payment->commission = $commission;
-        $payment->sub_total= $sub_total - $other_charges;
+        $payment->sub_total= $sub_amount;
         $payment->grand_total = $grand_total;
         $payment_result = $payment->save();
 

@@ -91,6 +91,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::put('/book/edit',[Router::class,'booking_edit'])->name("edit_booking");
     Route::post('/bid/edit',[Router::class,'booking_fianl_bid_edit'])->name("edit_booking_final_bid");
+    Route::put("/booking/status",[Router::class, 'bookinStatusChange'])->name("status-change-booking");
+
 
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
@@ -511,7 +513,6 @@ Route::prefix('website/api')->group(function () {
     Route::post("/my-profile/update-mobile",[WebsiteRouter::class, 'updateMobile'])->name("update_phone");
     Route::post("/my-profile/verify-otp",[WebsiteRouter::class, 'verifyOtp'])->name("verify_phone");
 
-    Route::post("/booking/status",[WebsiteRouter::class, 'bookinStatusChange'])->name("status-change-booking");
 
     Route::post("/track/customer",[WebsiteRouter::class, 'trackCustomerData'])->name("customer-bookmove");
     Route::post("/track/delivery",[WebsiteRouter::class, 'trackDeliveryData'])->name("delivery-bookmove");

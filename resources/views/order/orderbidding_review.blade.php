@@ -93,7 +93,7 @@
                             <div class="tab-pane show text-center" style="min-height: 50vh; padding-top: 35px;">
                                     <div class="text-center ">
                                         <h3 class="f-18 theme-text bold p-10">Final Bid Amount</h3>
-                                        <h1><span class="text-center" style="min-width: 0px !important;">₹{{$booking->bid->bid_amount}}</span></h1>
+                                        <h1><span class="text-center" style="min-width: 0px !important;">₹{{$booking->payment->vendor_quote}}</span></h1>
                                     </div>
                                     <p class="font14">
                                         <i>To change this amount, you may edit the price in the Quotation tab and come back to confirtm here.</i>

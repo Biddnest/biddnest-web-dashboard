@@ -555,9 +555,7 @@ class WebController extends Controller
     {
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
-        }])->with(['bid'=>function($q){
-            $q->where('status', BidEnums::$STATUS['won']);
-        }])->findOrFail($request->id);
+        }])->with('payment')->findOrFail($request->id);
 
         $hist = [];
 

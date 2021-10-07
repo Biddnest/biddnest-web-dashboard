@@ -133,7 +133,7 @@ class BidController extends Controller
 
             $order = Booking::where("id", $book_id)->first();
 
-            $timing = Settings::where("key", "bid_time")->pluck('value')[0];
+            $timing = Settings::where("key", "rebid_time")->pluck('value')[0];
             $buffer = Settings::where("key", "buffer_time")->pluck('value')[0];
             $complete_time = Carbon::now()
                 ->addMinutes($timing)
@@ -144,9 +144,6 @@ class BidController extends Controller
                 ->addMinutes($timing)
                 ->roundMinutes()
                 ->format("Y-m-d H:i:s");
-
-            $timming = Settings::where("key", "rebid_time")->pluck('value')[0];
-            $complete_time = Carbon::now()->addMinutes($timming)->roundMinutes();
 
             $meta = json_decode($order['meta'], true);
             $meta['timings']['bid_result']= $bid_end_time;
@@ -250,7 +247,7 @@ class BidController extends Controller
             $final_status = BookingEnums::$STATUS['price_review_pending'];
 
         Booking::where("id", $book_id)
-            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result']])
             ->update([
                 "organization_id"=>$won_org_id,
                 "final_quote"=>$final_bid_amount,

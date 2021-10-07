@@ -1842,4 +1842,22 @@ class BookingsController extends Controller
 
     }
 
+    public static function changeStatusBooking($id, $status){
+        $booking_exist=Booking::where("id", $id)->first();
+
+        if(!$booking_exist){
+            return Helper::response(false,"Booking is not exist.");
+        }
+
+        $result=Booking::where("id", $id)->update(["status"=>$status]);
+
+        $result_status = self::statusChange($booking_exist->id, $status);
+
+        if($result)
+            return Helper::response(true,"Updated status successfully.");
+        else
+            return Helper::response(false,"Confirmation failed.");
+    }
+
+
 }

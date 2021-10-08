@@ -248,17 +248,18 @@ class BidController extends Controller
         else
             $final_status = BookingEnums::$STATUS['price_review_pending'];
 
+        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+
         Booking::where("id", $book_id)
             ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result']])
             ->update([
                 "organization_id"=>$won_org_id,
-                "final_quote"=>$final_bid_amount,
+                "final_quote"=>$final_bid_amount + $other_charges,
 //                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
                 "status"=>$final_status
             ]);
 
         $sub_total = (float) $final_bid_amount;
-        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
         $tax_percentage = (float) Settings::where("key", "tax")->pluck('value')[0];
         $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
         $grand_total = (float) $sub_total+$other_charges+$tax;

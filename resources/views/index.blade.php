@@ -9,71 +9,71 @@
 
          @php $dataset = []; $final = []; @endphp
          @foreach($graph['order_distribution'] as $od)
-         @switch($od['status'])
-         @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
-         @php
-             $dataset['label'] = "Enquiry";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break
+             @switch($od['status'])
+             @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+             @php
+                 $dataset['label'] = "Enquiry";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break
 
-         {{--@case(\App\Enums\BookingEnums::$STATUS['placed'])
-         @php
-             $dataset['label'] = "Placed";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break--}}
+             {{--@case(\App\Enums\BookingEnums::$STATUS['placed'])
+             @php
+                 $dataset['label'] = "Placed";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break--}}
 
-         @case(\App\Enums\BookingEnums::$STATUS['biding'])
-         @php
-             $dataset['label'] = "Biding";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break
+             @case(\App\Enums\BookingEnums::$STATUS['biding'])
+             @php
+                 $dataset['label'] = "Biding";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break
 
-         {{--@case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-         @php
-             $dataset['label'] = "Rebiding";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break--}}
+             {{--@case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+             @php
+                 $dataset['label'] = "Rebiding";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break--}}
 
-         {{--@case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-         @php
-             $dataset['label'] = "Payment Pending";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break--}}
+             {{--@case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+             @php
+                 $dataset['label'] = "Payment Pending";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break--}}
 
-         @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-         @php
-             $dataset['label'] = "Awaiting Pickup";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break
+             @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+             @php
+                 $dataset['label'] = "Awaiting Pickup";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break
 
-         {{--@case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-         @php
-             $dataset['label'] = "In Transit";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break--}}
+             {{--@case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+             @php
+                 $dataset['label'] = "In Transit";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break--}}
 
-         @case(\App\Enums\BookingEnums::$STATUS['completed'])
-         @php
-             $dataset['label'] = "Completed";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break
+             @case(\App\Enums\BookingEnums::$STATUS['completed'])
+             @php
+                 $dataset['label'] = "Completed";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break
 
-         @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-         @php
-             $dataset['label'] = "Cancelled";
-             $dataset['value'] = $od['count'];
-         @endphp
-         @break
-         @endswitch
-         @if(count($dataset)>0) @php array_push($final, $dataset); $dataset = []; @endphp @endif
+             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+             @php
+                 $dataset['label'] = "Cancelled";
+                 $dataset['value'] = $od['count'];
+             @endphp
+             @break
+             @endswitch
+             @if(count($dataset)>0) @php array_push($final, $dataset); $dataset = []; @endphp @endif
 
          @endforeach
 
@@ -273,14 +273,33 @@
                                         @case(\App\Enums\BookingEnums::$STATUS['bounced'])
                                         <span class=" text-center status-badge red-bg">Bounced</span>
                                         @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
+                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['in_progress'])
+                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        @break;
+
                                     @endswitch
                                 </td>
                                 <td class="text-center" style="text-align: center !important; ">
                                     @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
                                         {{--{{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}--}}
                                         <span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
-                                    @else
+                                    @elseif(\App\Enums\BookingEnums::$STATUS['rebidding'] < $booking->status || (\App\Enums\BookingEnums::$STATUS['rebidding'] < $booking->status && \App\Enums\BookingEnums::$STATUS['in_progress']!=$booking->status))
                                         Bidding Done
+                                    @else
+                                        --:--:--
                                     @endif
                                 </td>
                                 <td class="text-center" style="text-align: center !important; ">₹ @if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif</td>

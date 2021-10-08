@@ -213,16 +213,17 @@ class BidController extends Controller
         $search_percentage = Settings::where("key", "tax")->pluck('value')[0];
         $final_bid_amount = 0.00;
         $commission = 0.00;
+        $search_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
         if($min_amount <= $least_agent_price){
             /* BID CASE 1 */
             $commission = (0.7 * $average_margin_value);
             $final_bid_amount = $min_amount + $commission + $search_percentage;
-            $sub_amount = (float) $min_amount + $commission;
+            $sub_amount = (float) $min_amount + $commission + $search_charges;
 
         }else if($min_amount > $least_agent_price && $min_amount <= $booking_data->organization_rec_quote){
             $commission = (0.6 * $average_margin_value);
             $final_bid_amount = $min_amount + $commission + $search_percentage;
-            $sub_amount = (float) $min_amount + $commission;
+            $sub_amount = (float) $min_amount + $commission + $search_charges;
         }else{
             $final_bid_amount = null;
             $sub_amount = null;
@@ -248,21 +249,21 @@ class BidController extends Controller
         else
             $final_status = BookingEnums::$STATUS['price_review_pending'];
 
-        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+
 
         Booking::where("id", $book_id)
             ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result']])
             ->update([
                 "organization_id"=>$won_org_id,
-                "final_quote"=>$final_bid_amount + $other_charges,
+                "final_quote"=>$final_bid_amount,
 //                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
                 "status"=>$final_status
             ]);
-
+        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
         $sub_total = (float) $final_bid_amount;
         $tax_percentage = (float) Settings::where("key", "tax")->pluck('value')[0];
         $tax = (float) ($tax_percentage/100) *  (float) ($sub_total + $other_charges);
-        $grand_total = (float) $sub_total+$other_charges+$tax;
+        $grand_total = (float) $sub_total+$tax;
 
         $payment = new Payment;
         $payment->public_transaction_id = Uuid::uuid4();

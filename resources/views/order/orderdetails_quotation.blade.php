@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
 
-                                @if(($booking->status <= \App\Enums\BookingEnums::$STATUS['price_review_pending']))
+                                @if(($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending']))
                                     <div class="col-sm-1 white-bg margin-topneg-15 pt-10">
                                         <div class="theme-text f-14  p-15" style="padding-top: 5px;">
                                             <a href="#" class="modal-toggle" data-target="#change_bid_amt"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>

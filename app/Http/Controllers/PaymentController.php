@@ -252,7 +252,7 @@ class PaymentController extends Controller
         ]);
 
         Booking::where('id', $booking_id)->update([
-            "final_quote"=>round((float)$subtotal+$other_charges, 2)
+            "final_quote"=>round((float)$subtotal, 2)
         ]);
 
         return Helper::response(true, "Payment details have been updated.");

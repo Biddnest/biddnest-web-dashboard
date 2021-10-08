@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketEnums;
+use App\Models\Booking;
 use App\Models\Settings;
 use App\Models\Subservice;
 use App\Models\SubServiceExtraInventory;
@@ -271,10 +272,12 @@ class InventoryController extends Controller
 
     public static function generateOrganizationBasePrices($data, $booking_data){
         $output =[];
+        $vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
+            ->where('zone_id',$booking_data['zone_id'])->get();
 
-        $vendors = Organization::where("zone_id",$booking_data['zone_id'])
+        /*$vendors = Organization::where("zone_id",$booking_data['zone_id'])
             ->where('status',OrganizationEnums::$STATUS['active'])
-            ->get();
+            ->get();*/
 
         Log::info("vendors");
         Log::info($vendors);

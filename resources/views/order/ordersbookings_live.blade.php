@@ -162,12 +162,32 @@
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-                                            <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
+                                            <span class="status-badge green-bg  text-center td-padding">Cancelled</span>
                                             @break
 
+                                            @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                            <span class=" text-center status-badge red-bg">On Hold</span>
+                                            @break;
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                            <span class=" text-center status-badge red-bg">Bounced</span>
+                                            @break;
+
                                             @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
-                                            <span class="status-badge red-bg  text-center td-padding">Request To Cancel</span>
-                                            @break
+                                            <span class=" text-center status-badge red-bg">Request To Cancel</span>
+                                            @break;
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['in_progress'])
+                                            <span class="status-badge green-bg  text-center td-padding">In Progress</span>
+                                            @break;
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                            <span class="status-badge green-bg  text-center td-padding">Awaiting Bid Result</span>
+                                            @break;
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                            <span class="status-badge green-bg  text-center td-padding">Price Review Pending</span>
+                                            @break;
                                         @endswitch
                                     </td>
 

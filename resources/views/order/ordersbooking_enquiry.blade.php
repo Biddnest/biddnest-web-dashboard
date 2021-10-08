@@ -163,6 +163,15 @@
                                                 @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
                                                 <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
                                                 @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                <span class="status-badge green-bg  text-center td-padding">Awaiting Bid Result</span>
+                                                @break;
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                <span class="status-badge green-bg  text-center td-padding">Price Review Pending</span>
+                                                @break;
+
                                             @endswitch
                                         </td>
 

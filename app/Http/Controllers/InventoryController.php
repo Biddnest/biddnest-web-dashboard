@@ -272,15 +272,10 @@ class InventoryController extends Controller
 
     public static function generateOrganizationBasePrices($data, $booking_data){
         $output =[];
-        $vendors = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
-            ->where('zone_id',$booking_data['zone_id'])->get();
 
-        /*$vendors = Organization::where("zone_id",$booking_data['zone_id'])
+        $vendors = Organization::where("zone_id",$booking_data['zone_id'])
             ->where('status',OrganizationEnums::$STATUS['active'])
-            ->get();*/
-
-        Log::info("vendors");
-        Log::info($vendors);
+            ->get();
 
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
 
@@ -349,13 +344,13 @@ class InventoryController extends Controller
 
             $price_calc->base_price_economic = round($base_price_economic,2);
             $price_calc->base_price_premium = round($base_price_premium,2);
-
-
-            if($price_calc->save())
-                return true;
-            else
-                return false;
+            $result = $price_calc->save();
         }
+
+        if($result)
+            return true;
+        else
+            return false;
     }
 
 

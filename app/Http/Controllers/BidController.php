@@ -8,6 +8,7 @@ use App\Enums\BookingInventoryEnums;
 use App\Enums\CommonEnums;
 use App\Enums\InventoryEnums;
 use App\Enums\NotificationEnums;
+use App\Enums\OrganizationEnums;
 use App\Enums\VendorEnums;
 use App\Helper;
 use App\Models\Bid;
@@ -33,7 +34,7 @@ class BidController extends Controller
     public static function addvendors($booking_id)
     {
 //        try {
-           $vendorlist = Organization::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])
+           $vendorlist = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])
             ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
 
         if(!$vendorlist)

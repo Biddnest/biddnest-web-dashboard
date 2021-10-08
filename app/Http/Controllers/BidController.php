@@ -226,7 +226,7 @@ class BidController extends Controller
             $sub_amount = (float) $min_amount + $commission + $search_charges;
         }else{
             $final_bid_amount = null;
-            $sub_amount = null;
+            $sub_amount = 0.00;
         }
 
         $public_booking_id = $booking_data->public_booking_id;

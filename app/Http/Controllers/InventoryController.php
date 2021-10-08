@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketEnums;
+use App\Models\Settings;
 use App\Models\Subservice;
 use App\Models\SubServiceExtraInventory;
 use App\Models\SubservicePrice;
@@ -361,8 +362,10 @@ class InventoryController extends Controller
             $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
                 ->avg('economic_margin_percentage');
 
+        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+
         if(!$vendor_price)
-            return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);
+            return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges;
         else
             return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 
@@ -376,8 +379,10 @@ class InventoryController extends Controller
         $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
             ->avg('premium_margin_percentage');
 
+        $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
+
             if(!$vendor_price)
-                return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price);
+                return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges;
             else
                 return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
 

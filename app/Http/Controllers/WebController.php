@@ -205,7 +205,7 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
-        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS])
+        $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']])
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone);
 
         $confirm_count = $bookings->count();
@@ -238,6 +238,7 @@ class WebController extends Controller
             $zone = [Session::get('admin_zones')];
 
         $bookings = Booking::where("status", "<=", BookingEnums::$STATUS['payment_pending'])
+            ->orWhereIn('status', [BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']])
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
         $booking_count = $bookings->count();

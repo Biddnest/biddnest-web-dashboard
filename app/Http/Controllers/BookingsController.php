@@ -416,7 +416,7 @@ class BookingsController extends Controller
             "user_id" => $user_id])
             ->where(function($query){
             $query->where("status", "<=", BookingEnums::$STATUS["payment_pending"])
-            ->orWhere("status", BookingEnums::$STATUS['awaiting_bid_result']);
+            ->orWhereIn("status", [BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['awaiting_bid_result']]);
             })
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')

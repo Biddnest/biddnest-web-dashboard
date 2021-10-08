@@ -275,19 +275,19 @@
                                         @break;
 
                                         @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
-                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        <span class=" text-center status-badge red-bg">Request To Cancel</span>
                                         @break;
 
                                         @case(\App\Enums\BookingEnums::$STATUS['in_progress'])
-                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        <span class=" text-center status-badge red-bg">In Progress</span>
                                         @break;
 
                                         @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
-                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        <span class=" text-center status-badge red-bg">Awaiting Bid Result</span>
                                         @break;
 
                                         @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
-                                        <span class=" text-center status-badge red-bg">Bounced</span>
+                                        <span class=" text-center status-badge red-bg">Price Review Pending</span>
                                         @break;
 
                                     @endswitch

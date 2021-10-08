@@ -1848,7 +1848,7 @@ class BookingsController extends Controller
         if(!$booking_exist){
             return Helper::response(false,"Booking is not exist.");
         }
-        $result_status = $result =false;
+        $result_status = $result =0;
         if(($booking_exist < BookingEnums::$STATUS['payment_pending']) || $booking_exist < BookingEnums::$STATUS['awaiting_bid_result'] || $booking_exist < BookingEnums::$STATUS['price_review_pending']) {
             $result = Booking::where("id", $id)->update(["status" => $status]);
             $result_status = self::statusChange($booking_exist->id, $status);

@@ -296,7 +296,7 @@
                                     @if(\App\Enums\BookingEnums::$STATUS['biding']==$booking->status ||  \App\Enums\BookingEnums::$STATUS['rebiding']==$booking->status)
                                         {{--{{\Carbon\Carbon::now()->diffForHumans($booking->bid_result_at)}}--}}
                                         <span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
-                                    @elseif(\App\Enums\BookingEnums::$STATUS['rebiding'] < $booking->status || (\App\Enums\BookingEnums::$STATUS['rebiding'] < $booking->status && \App\Enums\BookingEnums::$STATUS['in_progress']!=$booking->status))
+                                    @elseif(\App\Enums\BookingEnums::$STATUS['rebiding'] < $booking->status && \App\Enums\BookingEnums::$STATUS['in_progress']!=$booking->status)
                                         Bidding Done
                                     @else
                                         --:--:--

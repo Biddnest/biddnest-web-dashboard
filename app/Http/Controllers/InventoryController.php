@@ -346,11 +346,11 @@ class InventoryController extends Controller
             $price_calc->base_price_premium = round($base_price_premium,2);
             $result = $price_calc->save();
 
-            if($result)
-                return true;
-            else
-                return false;
         }
+        if($result)
+            return true;
+        else
+            return false;
 
     }
 

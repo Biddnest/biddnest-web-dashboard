@@ -283,6 +283,7 @@ class InventoryController extends Controller
         {
 
             $additional_distance = $total_distance - $vendor['base_distance'];
+
             if($additional_distance < 0)
                 $additional_distance = 0;
 
@@ -342,8 +343,11 @@ class InventoryController extends Controller
             $price_calc->economic_margin_percentage = round($economic_percent,2);
             $price_calc->premium_margin_percentage = round($premium_percent,2);
 
-            $price_calc->base_price_economic = round($base_price_economic,2);
-            $price_calc->base_price_premium = round($base_price_premium,2);
+            if(strtolower($data['meta']['subcategory']) != "custom") {
+                $price_calc->base_price_economic = round($base_price_economic, 2);
+                $price_calc->base_price_premium = round($base_price_premium, 2);
+            }
+
             $result = $price_calc->save();
 
         }

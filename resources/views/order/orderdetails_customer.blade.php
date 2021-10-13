@@ -8,7 +8,7 @@
         @if(($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['in_progress']))
             <div class="mr-20">
                 <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
-                    <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
+                    <button class="btn theme-bg white-text" ><i class="fa fa-pencil p-1" aria-hidden="true"></i> Edit order</button>
                 </a>
             </div>
         @endif
@@ -89,6 +89,11 @@
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="review-tab" data-toggle="tab" href="{{route('order-details-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Review</a>
                             </li>
+
+                            <li class="nav-item">
+                              <a class="nav-link p-15" id="cancel-tab" data-toggle="tab" href="{{route('order-details-cancel', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Cancel</a>
+                          </li>
+
                         </ul>
                     </h3>
                 </div>

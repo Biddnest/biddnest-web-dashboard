@@ -652,11 +652,6 @@ class BidController extends Controller
                 "total" => round((float)$total,2),
                 "base_price" => round((float)$vendor_base_price,2),
                 "grand_total"=>round((float)$total + (float)$vendor_base_price,2)
-                /*"distance"=>[
-                    "total"=>(float)json_decode($booking->booking->meta, true)['distance'],
-                    "additional"=>$additional_distance
-                ],
-                "vendor"=>$vendor*/
             ]]);
 
     }

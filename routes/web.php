@@ -283,6 +283,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/details/bidding',[WebController::class,'orderDetailsBidding'])->name("order-details-bidding");
             Route::get('/{id}/details/bidding/review',[WebController::class,'orderBiddingReview'])->name("order-bidding-review");
             Route::get('/{id}/details/review',[WebController::class,'orderDetailsReview'])->name("order-details-review");
+            Route::get('/{id}/details/cancel',[WebController::class,'orderDetailsCancel'])->name("order-details-cancel");
 
             Route::get('/create',[WebController::class,'createOrder'])->name("create-order");
             Route::get('/edit/{id}',[WebController::class,'editOrder'])->name("edit-order");

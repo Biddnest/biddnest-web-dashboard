@@ -453,7 +453,7 @@
             </td>
 
             <td class="" style="width: 20%;">
-                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" value="1" min="1" >
+                <input class="form-control br-5 fixed" type="number" name="inventory_items[][quantity]" placeholder="0" value="1" min="1">
 
                 <span class="hidden"><input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" value="1" /></span>
             </td>

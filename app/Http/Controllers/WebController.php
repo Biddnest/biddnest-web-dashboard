@@ -506,6 +506,25 @@ class WebController extends Controller
         ]);
     }
 
+    public function orderDetailsCancel(Request $request)
+    {
+        $booking = Booking::where("id", $request->id)->with(['status_history'])->with(['status_hist'=>function($query){
+            $query->limit(1)->orderBy("id","DESC");
+        }])->with('inventories')->first();
+
+        $hist = [];
+
+        foreach ($booking->status_history as $status){
+            if(!in_array($status->status, $hist))
+                $hist[] = $status->status;
+        }
+
+        $booking->status_ids = $hist;
+        return view('order.orderdetails_cancel',[
+            "booking" => $booking
+        ]);
+    }
+
     public function orderDetailsQuotation(Request $request)
     {
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){

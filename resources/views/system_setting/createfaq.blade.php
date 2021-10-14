@@ -31,6 +31,7 @@
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                             <!-- form starts -->
                             <form action="@if($faq){{route('faq_edit')}}@else{{route('faq_add')}}@endif" method="@if(isset($faq)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('admin.faq')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
+                                {{$faq}}
                                 @if($faq)
                                     <input type="hidden" name="id" value="{{$faq->id}}">
                                 @endif

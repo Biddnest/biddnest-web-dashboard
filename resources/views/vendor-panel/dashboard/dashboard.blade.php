@@ -155,7 +155,7 @@
                         <tbody class="mtop-20">
                             @foreach($booking_live as $booking)
                                 <tr class="tb-border">
-                                    <th scope="row" style="text-decoration: underline; padding: 14px;">{{$booking->public_booking_id}}</th>
+                                    <th scope="row" style="text-decoration: underline; padding: 14px;"><a  href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">{{$booking->public_booking_id}}</a></th>
 
                                     <td class="text-center " style="padding: 14px;"><span class="timer-bg text-center timer" data-time="{{$booking->bid_result_at}}"></span></td>
                                     <td class="text-center" style="padding: 14px;">₹{{$booking->final_estimated_quote}}</td>

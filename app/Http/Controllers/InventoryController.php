@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\TicketEnums;
 use App\Models\Booking;
+use App\Models\ServiceSubservice;
 use App\Models\Settings;
 use App\Models\Subservice;
 use App\Models\SubServiceExtraInventory;
@@ -145,17 +146,25 @@ class InventoryController extends Controller
         return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
     }
 
-    public static function getBySubserviceForWeb($id)
+    public static function getBySubserviceForWeb($id=null)
     {
-        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
-        $extra_inv_id = SubServiceExtraInventory::where("subservice_id", $id)->pluck("inventory_id");
-        $extra_inv = Inventory::whereIn("id", $extra_inv_id)->limit(15)->get();
+        if($id != null){
+            $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+            $extra_inv_id = SubServiceExtraInventory::where("subservice_id", $id)->pluck("inventory_id");
+            $extra_inv = Inventory::whereIn("id", $extra_inv_id)->limit(15)->get();
 
-        $custome_result = Subservice::where("id", $id)->first();
-        if(strtolower($custome_result->name) == "custom"){
+            $custome_result = Subservice::where("id", $id)->first();
+            $max_custom = $custome_result->max_extra_items;
+            if(strtolower($custome_result->name) == "custom"){
+                $extra_inv = Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->limit(15)->get();
+            }
+        }else{
+            $max_custom =[];
+            $result =[];
             $extra_inv = Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->limit(15)->get();
         }
-        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
+
+        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv, 'max_custom'=>$max_custom]);
     }
 
     public static function getInventoriesForApp()
@@ -289,7 +298,7 @@ class InventoryController extends Controller
         $vendors = Organization::where("zone_id",$booking_data['zone_id'])
             ->where('status',OrganizationEnums::$STATUS['active'])
             ->get();
-        Log::info($vendors);
+
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
 
         foreach($vendors as $vendor)

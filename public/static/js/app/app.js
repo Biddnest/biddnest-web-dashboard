@@ -1634,8 +1634,14 @@ $("body").on('click', ".web-inventory", function(event) {
             });
         },
         success: async function (response) {
-            console.log('extra-inventories');
-            console.log(response.data.extra_inventories);
+            if(!response.data.max_custom.length){
+                $('.max_count').val(0);
+            }else{
+                console.log(response.data.max_custom);
+                $('.max_count').val(response.data.max_custom);
+                $('.count-max').html(response.data.max_custom+' Extra');
+            }
+
             Logger.info(response);
             for(var i=0; i< response.data.extra_inventories.length; i++)
             {
@@ -1643,7 +1649,6 @@ $("body").on('click', ".web-inventory", function(event) {
                 response.data.extra_inventories[i].size=JSON.parse(response.data.extra_inventories[i].size);
             }
             var source = $("#extra-templateinventory").html();
-
             var template = Handlebars.compile(source);
             var html = await template(response.data);
             $('.inventory-popup').html(html);
@@ -1759,8 +1764,6 @@ $("body").on('click', ".add-item", function(event) {
     class_name = class_name.replace(/[^a-zA-Z0-9]/g, '');
 
     class_name=class_name.replace(' ', '-');
-
-
 
     Logger.info(class_name);
     if($("."+class_name).length > 0)

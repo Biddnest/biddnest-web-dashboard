@@ -147,6 +147,7 @@ class VendorRouteController extends Controller
             'pin' =>'required|integer',
             'inventory.*.booking_inventory_id'=>'required|integer',
             'inventory.*.amount'=>'required',
+            'inventory.*.is_custom'=>'required',
 
             'bid_amount'=>'required',
             'type_of_movement'=>'required|string',

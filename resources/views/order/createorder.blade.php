@@ -274,7 +274,7 @@
                             <div class="form-input" >
                               <label class="start-date">Choose a Date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 date bookdate cursor-pointer" required="required" placeholder="15 Jan"  />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 bookdate dateselect cursor-pointer" required="required" placeholder="15 Jan"  />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>

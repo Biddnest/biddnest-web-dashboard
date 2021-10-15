@@ -140,7 +140,9 @@
                                                         <th scope="col">Commission %</th>
                                                         <th scope="col">Quote</th>
                                                         <th scope="col">Bid Status</th>
-                                                        <th scope="col">Action</th>
+                                                        @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
+                                                            <th scope="col">Action</th>
+                                                        @endif
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mtop-15">
@@ -171,13 +173,13 @@
                                                                 @break;
                                                                 @endswitch
                                                             </td>
-                                                            <td class="">
-                                                                @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
+                                                            @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
+                                                                <td class="">
                                                                     <a class="modal-toggle" data-target="#add-role_{{$bidding->organization_id}}">
                                                                         <button class="btn white-text theme-bg">Assign</button>
                                                                     </a>
-                                                                @endif
-                                                            </td>
+                                                                </td>
+                                                            @endif
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

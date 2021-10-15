@@ -145,6 +145,19 @@ class InventoryController extends Controller
         return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
     }
 
+    public static function getBySubserviceForWeb($id)
+    {
+        $result = SubserviceInventory::where("subservice_id", $id)->with("meta")->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        $extra_inv_id = SubServiceExtraInventory::where("subservice_id", $id)->pluck("inventory_id");
+        $extra_inv = Inventory::whereIn("id", $extra_inv_id)->limit(15)->get();
+
+        $custome_result = Subservice::where("id", $id)->first();
+        if(strtolower($custome_result->name) == "custom"){
+            $extra_inv = Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->limit(15)->get();
+        }
+        return Helper::response(true,"Here are the inventories.", ["inventories"=>$result, "extra_inventories"=>$extra_inv]);
+    }
+
     public static function getInventoriesForApp()
     {
         $result=Inventory::select(self::$public_data)->where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->orderBy("name", "ASC")->get();
@@ -291,6 +304,8 @@ class InventoryController extends Controller
             $bp_economic = 0.00;
             $mp_premium = 0.00;
             $bp_premium = 0.00;
+            $base_price_economic = 0.00;
+            $base_price_premium = 0.00;
 
             if(strtolower($data['meta']['subcategory']) != "custom"){
                 $query = SubservicePrice::where("organization_id",$vendor['id'])
@@ -343,10 +358,8 @@ class InventoryController extends Controller
             $price_calc->economic_margin_percentage = round($economic_percent,2);
             $price_calc->premium_margin_percentage = round($premium_percent,2);
 
-            if(strtolower($data['meta']['subcategory']) != "custom") {
                 $price_calc->base_price_economic = round($base_price_economic, 2);
                 $price_calc->base_price_premium = round($base_price_premium, 2);
-            }
 
             $result = $price_calc->save();
 

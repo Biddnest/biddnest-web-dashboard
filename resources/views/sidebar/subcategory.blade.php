@@ -24,7 +24,7 @@
                                             <li>
                                                     <h2>{{ucfirst(trans($subcategory->services->name))}}</h2>
                                                     <label class="switch mb-0" style="transform: scale(0.7);">
-                                                        <input type="checkbox" id="switch">
+                                                        <input type="checkbox" id="switch"  @if($subcategory->custom_flag == \App\Enums\CommonEnums::$YES) disabled @endif>
                                                         <span class="slider"></span>
                                                     </label>
                                             </li>
@@ -34,7 +34,8 @@
                             </div>
                         </div>
                     </div>
-                    @if(isset($subcategory->inventories))
+                    @if($subcategory->custom_flag == \App\Enums\CommonEnums::$NO)
+                        @if(isset($subcategory->inventories))
                         <div class="d-flex  row  p-10 border-top-pop">
                             <div class="col-sm-6  pl-0">
                                 <div class="theme-text f-14 bold ">
@@ -76,13 +77,14 @@
                             </div>
                         @endif
                     @endif
-                    <div class="d-flex justify-content-center p-20">
-                        <div class="">
-                            <a class="white-text p-10" href="{{ route('details-inventories')}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
-                                <button class="btn theme-bg white-text my-0" style="width: 127px;
-                                border-radius: 6px;">View More</button>
-                            </a>
+                        <div class="d-flex justify-content-center p-20">
+                            <div class="">
+                                <a class="white-text p-10" href="{{ route('details-inventories')}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
+                                    <button class="btn theme-bg white-text my-0" style="width: 127px;
+                                    border-radius: 6px;">View More</button>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>

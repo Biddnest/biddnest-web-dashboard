@@ -70,7 +70,8 @@
                                             @default
                                                 <span class="status-badge info-bg text-center">Unknown</span>
                                         @endswitch--}}
-                                        <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}">
+
+                                        <input type="checkbox" {{($subcategory->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('sub_service_status_update',['id'=>$subcategory->id])}}" @if($subcategory->custom_flag == \App\Enums\CommonEnums::$YES) disabled @endif>
                                     </td>
                                     {{--<td class="">
                                         <a href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}">
@@ -82,7 +83,7 @@
                                     </td>--}}
                                     <td>
                                         <a class="inline-icon-button mr-4" href="{{route('edit-subcateories', ['id'=>$subcategory->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                        <a href="#" class="delete inline-icon-button" data-parent=".sub_{{$subcategory->id}}" data-confirm="Are you sure, you want delete this Sub-Category permenently? You won't be able to undo this." data-url="{{route('sub_service_delete', ['id'=>$subcategory->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                        <a href="#" class="delete inline-icon-button" data-parent=".sub_{{$subcategory->id}}" data-confirm="Are you sure, you want delete this Sub-Category permenently? You won't be able to undo this." data-url="{{route('sub_service_delete', ['id'=>$subcategory->id])}}" @if($subcategory->custom_flag == \App\Enums\CommonEnums::$YES) style="pointer-events: none;" @endif><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

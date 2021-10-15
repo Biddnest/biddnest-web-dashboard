@@ -285,7 +285,7 @@ class InventoryController extends Controller
 
     public static function generateOrganizationBasePrices($data, $booking_data){
         $output =[];
-
+        $result = [];
         $vendors = Organization::where("zone_id",$booking_data['zone_id'])
             ->where('status',OrganizationEnums::$STATUS['active'])
             ->get();
@@ -364,6 +364,7 @@ class InventoryController extends Controller
             $result = $price_calc->save();
 
         }
+
         if($result)
             return true;
         else

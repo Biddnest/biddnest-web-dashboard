@@ -289,7 +289,7 @@ class InventoryController extends Controller
         $vendors = Organization::where("zone_id",$booking_data['zone_id'])
             ->where('status',OrganizationEnums::$STATUS['active'])
             ->get();
-        Log::info();
+        Log::info($vendors);
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
 
         foreach($vendors as $vendor)

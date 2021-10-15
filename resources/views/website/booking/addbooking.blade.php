@@ -523,66 +523,9 @@
 
                     </div>
                     <h5 style="margin-top: 20px;" class="fade-enable">Top Recommended Items</h5>
-                    <div class="row f-row fade-enable">
-                        @foreach($inventories as $inventory)
-                            <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
-                                <div class="item-single-wrapper">
-                                    <div class="item-image">
-                                        <img src="{{$inventory->image}}" />
-                                        <input type="hidden" name="meta_image" value="{{$inventory->image}}">
-                                        <input type="hidden" name="meta_category" value="{{$inventory->category}}">
-                                    </div>
-                                    <div class="item-meta">
-                                        <h5>{{ucwords($inventory->name)}}</h5>
-                                        <input type="hidden" name="meta_name" value="{{$inventory->name}}">
-                                        <input type="hidden" name="meta_id" value="{{$inventory->id}}">
-                                        <div class="info-wrapper d-flex flex-row justify-content-between">
-                                            <span class="info">
-                                                <span>Material</span>
-                                                <input type="hidden" name="material" value="" />
-                                                <input type="hidden" name="meta_material" value="{{$inventory->material}}" />
-                                                <div class="dropdown-content">
-                                                  <ul class="d-content">
-                                                     @foreach(json_decode($inventory->material, true) as $material)
-                                                          <li class="drop-list" style="padding: 5px 10px;" data-value="{{$material}}">
-                                                              <a class="menu"><span class="ml-1">{{ucwords($material)}}</span></a>
-                                                          </li>
-                                                      @endforeach
-                                                  </ul>
-                                                </div>
-                                            </span>
-                                            <span class="info">
-                                                <span>Size</span>
-                                                <input type="hidden" name="size" value="" />
-                                                <input type="hidden" name="meta_size" value="{{$inventory->size}}" />
-                                                <div class="dropdown-content">
-                                                  <ul class="d-content">
-                                                       @foreach(json_decode($inventory->size, true) as $size)
-                                                          <li class="drop-list" style="padding: 5px 10px;" data-value="{{$size}}">
-                                                              <a class="menu"><span class="ml-1">{{ucwords($size)}}</span></a>
-                                                          </li>
-                                                      @endforeach
-                                                  </ul>
-                                                </div>
-                                            </span>
-                                        </div>
-                                        <div class="quantity-filed"></div>
-                                    </div>
-                                    <button class="btn btn-block add-btn add-item">Add to list</button>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    <div class="row f-row fade-enable inventory-popup">
 
-                    <!-- Modal footer -->
-                    {{--<div class="modal-footer d-flex justify-content-between ">
-                        <a href="{{route('home')}}"><button class="btn cancelBtn " type="button " data-dismiss="modal ">
-                                Cancel
-                            </button></a>
-                        <button class="btn nextBtn-3" type="button ">
-                            Save
-                        </button>
-                    </div>--}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -597,24 +540,25 @@
         <div class="col-md-12" style="margin: 20px !important;">
             <h6 class="text-center">What are you moving</h6>
         </div>
+        @{{else}}
+            <input type="hidden" name="subcategory" value="custom" class="card-input-element01 web-inventory" data-inv-url="{{route('get_inventories')}}?subservice_id=18"/>
         @{{/if}}
         @{{#each subservices}}
             <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                 <label>
-                    <input type="radio" name="subcategory" value="@{{name}}" class="card-input-element01 web-sub-category" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
+                    <input type="radio" name="subcategory" value="@{{name}}" class="card-input-element01 web-sub-category web-inventory" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}" data-inv-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
 
                     <div class="panel panel-default card-input disabled subservice-selector" style="box-shadow: none !important;  background:none !important; text-align: center;">
-                            <div class="panel-heading">
-                                <h3>
-                                    <img src="@{{image}}" class="img-width  " >
-                                </h3>
-                            </div>
-                            <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view" style="color: #00000">
+                        <div class="panel-heading">
+                            <h3>
+                                <img src="@{{image}}" class="img-width" >
+                            </h3>
+                        </div>
+                        <div class="panel-body card-title room-type pl-0 l-cap cursor-pointer ml-1 margin-view" style="color: #00000">
                             @{{name}}
-                            </div>
+                        </div>
                     </div>
-
                 </label>
 
             </div>
@@ -627,7 +571,7 @@
         @{{#each inventories}}
                 <div class="col-md-4 filter item-remove  @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}a @{{meta.category}}" style="padding-right: 10px; padding-left: 10px;">
                     <div class="item-single-wrapper">
-                        <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>
+{{--                        <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>--}}
                         <div class="item-image" style="">
                             <img src="@{{meta.image}}" />
                         </div>
@@ -639,7 +583,7 @@
                                 <span class="info">
                                     <span>@{{material}}</span>
                                     <input type="hidden" name="inventory_items[][material]" value="@{{material}}" />
-                                    <div class="dropdown-content">
+                                    {{--<div class="dropdown-content">
                                       <ul class="d-content">
                                           @{{#meta.material}}
                                               <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
@@ -647,12 +591,12 @@
                                               </li>
                                           @{{/meta.material}}
                                       </ul>
-                                    </div>
+                                    </div>--}}
                                 </span>
                                 <span class="info">
                                     <span>@{{size}}</span>
                                     <input type="hidden" name="inventory_items[][size]" value="@{{size}}" />
-                                    <div class="dropdown-content">
+                                    {{--<div class="dropdown-content">
                                       <ul class="d-content">
                                            @{{#meta.size}}
                                               <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
@@ -660,13 +604,13 @@
                                               </li>
                                            @{{/meta.size}}
                                       </ul>
-                                    </div>
+                                    </div>--}}
                                 </span>
                             </div>
                             <div class="quantity d-flex justify-content-between quantity-operator">
-                                <span class="minus">-</span>
+                                <span class="">-</span>
                                 <input type="text" name="inventory_items[][quantity]" readonly value="@{{quantity}}" />
-                                <span class="plus">+</span>
+                                <span class="">+</span>
                             </div>
                         </div>
                     </div>
@@ -867,7 +811,7 @@
         @{{#each inventories}}
         <div class="col-md-4 filter item-remove @{{meta.category}} @{{#replace ' ' '-'}}@{{meta.name}}-@{{material}}-@{{size}}-@{{meta.id}}@{{/replace}}" style="padding-right: 10px; padding-left: 10px;">
             <div class="item-single-wrapper">
-                <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>
+{{--                <span class="closer" data-parent=".item-remove"><i class="icon dripicons-cross"></i></span>--}}
                 <div class="item-image" style="">
                     <img src="@{{meta.image}}" />
                 </div>
@@ -879,8 +823,7 @@
                                 <span class="info">
                                     <span>@{{material}}</span>
                                     <input type="hidden" name="inventory_items[][material]" value="@{{material}}" />
-                                    <input type="hidden" name="inventory_items[][is_custom]:boolean" value="true">
-                                    <div class="dropdown-content">
+                                    {{--<div class="dropdown-content">
                                       <ul class="d-content">
                                           @{{#meta.material}}
                                               <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
@@ -888,12 +831,12 @@
                                               </li>
                                           @{{/meta.material}}
                                       </ul>
-                                    </div>
+                                    </div>--}}
                                 </span>
                         <span class="info">
                                     <span>@{{size}}</span>
                                     <input type="hidden" name="inventory_items[][size]" value="@{{size}}" />
-                                    <div class="dropdown-content">
+                                    {{--<div class="dropdown-content">
                                       <ul class="d-content">
                                            @{{#meta.size}}
                                               <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
@@ -901,7 +844,7 @@
                                               </li>
                                            @{{/meta.size}}
                                       </ul>
-                                    </div>
+                                    </div>--}}
                                 </span>
                     </div>
                     <div class="quantity-2" style="padding: 5px 2px">
@@ -911,7 +854,7 @@
                                data-max="500"
                                data-from="@{{quantity_min}}"
                                data-to="@{{quantity_max}}"
-                               data-grid="false"
+                               data-grid="false" readonly
                         />
                     </div>
                 </div>
@@ -988,6 +931,57 @@
 
     </script>
 
+    <script id="extra-templateinventory" type="text/x-handlebars-template">
+        @{{#each extra_inventories}}
+            <div class="col-md-3" style="padding-right: 10px; padding-left: 10px;">
+            <div class="item-single-wrapper">
+                <div class="item-image">
+                    <img src="@{{image}}" />
+                    <input type="hidden" name="meta_image" value="@{{image}}">
+                    <input type="hidden" name="meta_category" value="@{{category}}">
+                </div>
+                <div class="item-meta">
+                    <h5>@{{name}}</h5>
+                    <input type="hidden" name="meta_name" value="@{{name}}">
+                    <input type="hidden" name="meta_id" value="@{{id}}">
+                    <div class="info-wrapper d-flex flex-row justify-content-between">
+                        <span class="info">
+                            <span>Material</span>
+                            <input type="hidden" name="material" value="" />
+                            <input type="hidden" name="meta_material" value="@{{material}}" />
+                            <div class="dropdown-content">
+                                <ul class="d-content">
+                                    @{{#material}}
+                                        <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                            <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                        </li>
+                                    @{{/material}}
+                                </ul>
+                            </div>
+                        </span>
+                        <span class="info">
+                            <span>Size</span>
+                            <input type="hidden" name="size" value="" />
+                            <input type="hidden" name="meta_size" value="@{{size}}" />
+                            <div class="dropdown-content">
+                                <ul class="d-content">
+                                    @{{#size}}
+                                        <li class="drop-list" style="padding: 5px 10px;" data-value="@{{.}}">
+                                            <a class="menu"><span class="ml-1">@{{.}}</span></a>
+                                        </li>
+                                    @{{/size}}
+                                </ul>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="quantity-filed"></div>
+                </div>
+                <button class="btn btn-block add-btn add-item">Add to list</button>
+            </div>
+        </div>
+        @{{/each}}
+    </script>
+
     <script id="search_item_range" type="text/x-handlebars-template">
         <h5>Search Results</h5>
         <div class="row">
@@ -1061,39 +1055,6 @@
     </script>
 
     <script>
-        /*function previewImages() {
-
-            var preview = document.querySelector('.upload-image-container');
-
-            if (this.files) {
-                    [].forEach.call(this.files, readAndPreview);
-            }
-
-            function readAndPreview(file) {
-
-                // Make sure `file.name` matches our extensions criteria
-                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                    return alert(file.name + " is not an image");
-                } // else...
-
-                var reader = new FileReader();
-                reader.addEventListener("load", function() {
-                        var image = new Image();
-                        image.height = 100;
-                        image.marginleft = '10px';
-                        image.paddingleft = '10px';
-                        image.title = file.name;
-                        image.src = this.result;
-                        preview.appendChild(image);
-                });
-
-                reader.readAsDataURL(file);
-
-            }
-
-        }
-
-        document.querySelector('.custom-file-input').addEventListener("change", previewImages);*/
 
         function updateCount(type) {
             let currentValue = Number(document.getElementById('inc ').value)
@@ -1106,25 +1067,18 @@
             }
                 document.getElementById('inc ').value = currentValue
         }
-
-
-
-
-
     </script>
+
     <script>
+        jQuery(document).ready(function($){
 
-jQuery(document).ready(function($){
+        $('.panel.panel-default.card-input').on('click', function(){
+                    console.log("test")
+            $('panel.panel-default.card-input.check-blue').removeClass('check-blue');
+            $(this).addClass('check-blue');
+        });
 
-$('.panel.panel-default.card-input').on('click', function(){
-            console.log("test")
-    $('panel.panel-default.card-input.check-blue').removeClass('check-blue');
-    $(this).addClass('check-blue');
-});
-
-});
-
-
+        });
     </script>
 
 </div>

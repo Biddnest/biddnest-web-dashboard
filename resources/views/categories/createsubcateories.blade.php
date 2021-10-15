@@ -56,7 +56,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Subcategory Name</label>
-                                  <input type="text" id="banner_name" placeholder="Name" name="name" value="@if(isset($subcategory)){{$subcategory->name}}@endif" class="form-control br-5" required/>
+                                  <input type="text" id="banner_name" placeholder="Name" name="name" value="@if(isset($subcategory)){{$subcategory->name}}@endif" class="form-control br-5" @if( isset($subcategory) && ($subcategory->custom_flag == \App\Enums\CommonEnums::$YES)) readonly @endif required/>
                                   <span class="error-message">Please enter a valid banner name</span>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="phone-num-lable">Main Category Name</label>
-                                    <select class="form-control br-5 field-toggle" name="category" required>
+                                    <select class="form-control br-5 field-toggle" name="category" required @if( isset($subcategory) && ($subcategory->custom_flag == \App\Enums\CommonEnums::$YES)) disabled @endif>
                                         <option value="">--Select--</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" @if(isset($subcategory)) @if(isset($subcategory->services) && ($category->id == $subcategory->services->id)) selected @endif @endif>{{$category->name}}</option>
@@ -85,7 +85,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Extra Inventory List</label>
-                                    <select class="form-control searchitem" name="extra_inventories[]" multiple>
+                                    <select class="form-control searchitem" name="extra_inventories[]" multiple @if( isset($subcategory) && ($subcategory->custom_flag == \App\Enums\CommonEnums::$YES)) disabled @endif>
                                         @if(isset($sub_category))
                                             @foreach($sub_category->extraitems as $extraitems)
                                                 <option value="{{$extraitems->id}}" selected>{{ucfirst(trans($user->meta->name))}}</option>
@@ -95,7 +95,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mtop-20  p-2 pb-0 " style="padding: 10px 11px !important;" >
+
+                            <div class="col-sm-12 mtop-20  p-2 pb-0  @if( isset($subcategory) && ($subcategory->custom_flag == \App\Enums\CommonEnums::$YES)) hidden @endif" style="padding: 10px 11px !important;" >
                                 <div class="heading p-10 pl-4 border-around ">
                                   Inventory List
                                 </div>
@@ -194,11 +195,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-sm-12 mtop-20 w-30">
+                            <div class="col-sm-12 mtop-20 w-30  @if( isset($subcategory) && ($subcategory->custom_flag == \App\Enums\CommonEnums::$YES)) hidden @endif">
                                 <a class="float-right btn theme-bg white-text repeater" data-content="#add-inventory-row" data-container="#add-inventory-wrapper"  id="addnew-btn" >
                                     <i class="fa fa-plus  m-1" aria-hidden="true"></i>
                                     Add Inventory</a>
-
                             </div>
                         </div>
                         <div>

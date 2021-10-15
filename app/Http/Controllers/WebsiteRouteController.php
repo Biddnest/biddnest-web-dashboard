@@ -274,7 +274,7 @@ class WebsiteRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
         else
-            return InventoryController::getBySubserviceForApp($request->subservice_id);
+            return InventoryController::getBySubserviceForWeb($request->subservice_id);
     }
 
     public function serachItem(Request $request){

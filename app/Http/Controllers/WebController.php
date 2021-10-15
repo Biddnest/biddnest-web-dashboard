@@ -698,6 +698,7 @@ class WebController extends Controller
         }
 
         if(isset($request->sort)){
+            print_r($request->sort); die();
             $vendors=$vendors->where('status', OrganizationEnums::$STATUS[$request->sort]);
         }
 

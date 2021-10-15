@@ -1597,12 +1597,18 @@ $("body").on('click', ".web-category", function(event) {
         type: 'get',
         dataType: 'json',
         success: function (response) {
-           Logger.info(response);
-                var source = $("#entry-template").html();
+           // Logger.info(response);
 
+            var source = $("#entry-template").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.subservices').html(html);
+
+            if(!response.data.subservices.length){
+                console.log("custom");
+                $('#subservice_id').val('custom');
+                $('.web-inventory').click();
+            }
             $('.inventory').html('<div class="col-md-4" data-toggle="modal" data-target="#addItemModal" style="min-height: 40vh !important;">' +
                 '                                        <div class="item-single-wrapper add-more" style="height: 100% !important;">' +
                 '                                            <i class="icon dripicons-plus" ></i>' +
@@ -1611,6 +1617,61 @@ $("body").on('click', ".web-category", function(event) {
         }
     });
     initRangeSlider();
+    return false;
+});
+
+$("body").on('click', ".web-inventory", function(event) {
+    var url=$(this).data("inv-url");
+    let inventory_quantity_type = $(".inventory-quantity-type").val();
+    console.log(inventory_quantity_type);
+    $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'json',
+        beforeSend: function(){
+            $("div.inventory-popup").css({
+                "opacity": "0.4"
+            });
+        },
+        success: async function (response) {
+            console.log('extra-inventories');
+            console.log(response.data.extra_inventories);
+            Logger.info(response);
+            for(var i=0; i< response.data.extra_inventories.length; i++)
+            {
+                response.data.extra_inventories[i].material=JSON.parse(response.data.extra_inventories[i].material);
+                response.data.extra_inventories[i].size=JSON.parse(response.data.extra_inventories[i].size);
+            }
+            var source = $("#extra-templateinventory").html();
+
+            var template = Handlebars.compile(source);
+            var html = await template(response.data);
+            $('.inventory-popup').html(html);
+            $("div.inventory-popup").css({
+                "opacity": "1"
+            });
+
+            if(inventory_quantity_type == 0){
+                $('.quantity-filed').html('<div class="quantity d-flex justify-content-between quantity-operator">' +
+                    '            <span class="minus">-</span>' +
+                    '            <input type="text" name="quantity" readOnly value="1"/>' +
+                    '            <span class="plus">+</span>' +
+                    '        </div>');
+            }else{
+                $('.quantity-filed').html('<div class="quantity-2" style="padding: 5px 2px">' +
+                    '            <input type="text" class="custom_slider range" name="quantity" value=""' +
+                    '                   data-type="double"' +
+                    '                   data-min="1"' +
+                    '                   data-max="500"' +
+                    '                   data-from="1"' +
+                    '                   data-to="500"' +
+                    '                   data-grid="false"' +
+                    '        </div>');
+                initRangeSlider();
+            }
+        }
+    });
+
     return false;
 });
 
@@ -1707,8 +1768,9 @@ $("body").on('click', ".add-item", function(event) {
         megaAlert("Oops", "This item has been already added");
         return false;
     }
-    item.meta_material=JSON.parse(item.meta_material);
-    item.meta_size=JSON.parse(item.meta_size);
+
+    item.meta_material=item.meta_material;
+    item.meta_size=item.meta_size;
 
     if(inventory_quantity_type == 0)
         var source = $("#entry-templateinventory_append").html();

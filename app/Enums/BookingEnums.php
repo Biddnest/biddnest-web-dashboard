@@ -14,5 +14,7 @@ class BookingEnums{
     public static $CREATED_THROUGH_CHANNEL=["app"=>0, "web"=>1, "support"=>2];
 
     public static $BOOKING_FETCH_TYPE=["live","scheduled","bookmarked","participated"];
+
+    public static $AGENT = ["admin"=>1, "user"=>2, "virtual_manager"=>3, "zone_admin"=>4];
 }
 

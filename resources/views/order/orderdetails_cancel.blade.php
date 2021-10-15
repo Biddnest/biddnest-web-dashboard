@@ -125,20 +125,24 @@
                                         @else
                                         <i>This enquiry can be cancelled. Since no payment was done yet, no refund will be issued.</i>
                                         @endif
-                                    @endif
+
+                                        @else
+                                            <i>This booking is already cancelled. No more further actions needed.</i>
+                                        @endif
 
                                     </p>
                                     {{-- <a class="white-text p-10" href="{{route("onboard-bank-vendors", ['id'=>$id])}}">
                                          <button type="button" class="btn theme-bg theme-text w-30 white-bg">Convert To Vendor</button></a>--}}
 
                                 @if(!in_array($booking->status, [\App\Enums\BookingEnums::$STATUS['cancelled'],\App\Enums\BookingEnums::$STATUS['bounced']]))
-                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status > \App\Enums\BookingEnums::$STATUS['completed'])
-                                        <a class="white-text p-10 vendor-status-change" data-url="{{route("onboard-action-status", ['id'=>$id?? 0, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
-                                            <button type="button" class="btn theme-bg theme-text w-30 white-bg">Cancel and refund</button>
+                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status < \App\Enums\BookingEnums::$STATUS['completed'])
+                                        <a class="white-text p-10">
+                                            <button type="button" class="btn theme-bg theme-text w-30 white-bg modal-toggle" data-target="#cancel-modal">Cancel and refund</button>
                                         </a>
                                     @else
-                                        <a class="white-text p-10 vendor-status-change" data-url="{{route("onboard-action-status", ['id'=>$id?? 0, 'status'=>\App\Enums\OrganizationEnums::$STATUS["active"]])}}">
-                                            <button type="button" class="btn theme-bg theme-text w-30 white-bg">Cancel this enquiry</button></a>
+                                        <a class="white-text p-10 modal-toggle"  data-target="#cancel-modal">
+                                            <button type="button" class="btn theme-bg theme-text w-30 white-bg modal-toggle" data-target="#cancel-modal">Cancel this enquiry</button>
+                                        </a>
                                     @endif
                                 @endif
 
@@ -167,7 +171,69 @@
 
     </div>
     </div>
+    </div>
 
+    <div class="fullscreen-modal fade" id="cancel-modal" style="opacity:1 !important;z-index: 99999">
+        <div class="fullscreen-modal-body" role="document" style="width: 80% !important; transform: translateX(10%) !important;">
+            <div class="modal-header">
+                <h5 class="modal-title  ml-4 pl-2" id="exampleModalLongTitle">Cancel Booking</h5>
+                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('cancel-order',["id"=>$booking->public_booking_id])}}" data-next="refresh" data-alert="tiny" method="PUT" data-parsley-validate>
+                <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
+                    <div class="d-flex match-height row p-15 quotation-main pb-0" >
+                        <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                Reason
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                Description
+                            </div>
+                            <br />
+                            <br />
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                <b>Refund</b>
+                            </div>
+                        </div>
+                        <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                            <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                                <select required name="reason" class="form-control">
+                                    <option value="">--Choose--</option>
+                                    @foreach($cancellation_reasons as $reason)
+                                        <option value="{{$reason}}">{{$reason}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <textarea placeholder="Optional" name="desc" class="form-control">
 
+                                    </textarea>
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="text" data-parsley-type="number" class="form-control" value="{{$booking->payment->grand_total ?? 0.00}}" @if(!$booking->payment) disabled @else required @endif name="amount" min="0.00" max="{{$booking->payment->grand_total ?? 0.00}}">
+                                <p class="text-muted">
+                                    @if($booking->payment)
+                                        Max refund amount is {{$booking->payment->grand_total ?? 0.00}}
+                                    @else
+                                        This booking is not eligible for a refund as no payment is done yet.
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-15 ">
+                    <div class="w-50">
+                    </div>
+                    <div class="w-50 text-right"><a class="white-text p-10" href="#">
+                            <button  class="btn theme-bg white-text w-40" style="margin-bottom: 20px;">Submit</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
 @endsection

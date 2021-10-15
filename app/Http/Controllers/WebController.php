@@ -510,7 +510,7 @@ class WebController extends Controller
     {
         $booking = Booking::where("id", $request->id)->with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
-        }])->with('inventories')->first();
+        }])->with('inventories')->with('payment')->first();
 
         $hist = [];
 
@@ -521,7 +521,8 @@ class WebController extends Controller
 
         $booking->status_ids = $hist;
         return view('order.orderdetails_cancel',[
-            "booking" => $booking
+            "booking" => $booking,
+            "cancellation_reasons"=>json_decode(Settings::where("key","cancellation_reason_options")->pluck('value')[0], true)
         ]);
     }
 

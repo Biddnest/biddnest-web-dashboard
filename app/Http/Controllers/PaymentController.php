@@ -113,6 +113,40 @@ class PaymentController extends Controller
         return json_decode($response->getBody(), true);
     }
 
+    public static function initBookingRefund($booking_id, $refund_amount){
+
+        $payment = Payment::where("booking_id", $booking_id)->first();
+
+        if($payment) {
+            Payment::where("booking_id", $booking_id)->update([
+                'status' => PaymentEnums::$STATUS['refund_initiated'],
+                'refund_amount'=>round($refund_amount,2),
+                "refunded_at"=>Carbon::now()->format("Y-m-d H:i:s")
+            ]);
+
+        if ($refund_amount > 0.00 && round($refund_amount, 2) <= round($payment->grand_total,2))
+            self::createRefund($payment->rzp_payment_id, round((float)$refund_amount, 2));
+        }
+
+        return true;
+    }
+
+    private static function createRefund($rzp_payment_id, $amount)
+    {
+        $client = new client();
+        $request_url = "https://api.razorpay.com/v1/payment/{$rzp_payment_id}/refund";
+        try{
+            $response = $client->request('POST', $request_url, ['auth' => [Settings::where("key", "razor_key")->pluck('value')[0], Settings::where("key", "razor_secret")->pluck('value')[0]], 'json'=>[
+                'amount' => $amount*100,
+                'speed' => 'normal', // pass "optimum" for instant refund but with extra charges - see rzp docs
+            ]]);
+        }
+        catch(ClientException $e){
+            return $e->getMessage();
+        }
+        return json_decode($response->getBody(), true);
+    }
+
     public function webhook(Request $request)
     {
         $body = $request->all();
@@ -152,15 +186,31 @@ class PaymentController extends Controller
 
             return Helper::response(true, "Payment successfull");
         }
+        else if ($body['entity'] == 'event' && $body['event'] == 'refund.processed'){
+            Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
+                ->update([
+                    'status'=> PaymentEnums::$STATUS['refunded'],
+                    "meta" => null
+                ]);
+            return Helper::response(true, "Refund data updated");
+        }
+        else if ($body['entity'] == 'event' && $body['event'] == 'refund.failed'){
+            Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
+                ->update([
+                    'status'=> PaymentEnums::$STATUS['refund_failed'],
+                    "meta" => null
+                ]);
+            return Helper::response(true, "Refund data updated");
+        }
         else
         {
-            $update_webhook = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
+            /*$update_webhook = Payment::where(["rzp_order_id"=>$body['payload']['payment']['entity']['order_id']])
             ->update([
                 'rzp_payment_id'=>$body['payload']['payment']['entity']['id'],
                 'status'=> PaymentEnums::$STATUS['failed']
-            ]);
+            ]);*/
 
-            return Helper::response(true, "Payment failed");
+            return Helper::response(true, "This event is not yet supported in biddnest api.");
         }
     }
 

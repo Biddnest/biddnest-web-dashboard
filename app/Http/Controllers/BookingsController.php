@@ -304,40 +304,6 @@ class BookingsController extends Controller
 
     }
 
-    public static function cancelBooking($public_booking_id)
-    {
-        $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
-        if (!$exist) {
-            return Helper::response(false, "Order is not Exist");
-        }
-
-        if ($exist['status'] == BookingEnums::$STATUS['cancelled']) {
-            return Helper::response(false, "This order is already cancelled");
-        }
-
-        $cancelbooking = Booking::where(["user_id" => $exist->user_id,
-            "public_booking_id" => $exist->public_booking_id])
-            ->update(["status" => BookingEnums::$STATUS['cancelled']]);
-
-        $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
-
-        if (!$cancelbooking && !$result_status) {
-            return Helper::response(false, "Couldn't Cancel Order");
-        }
-
-        dispatch(function () use ($exist) {
-
-            NotificationController::sendTo("user", [$exist->user_id], "Your booking has been cancelled.", "You may place another request anytime.", [
-                "type" => NotificationEnums::$TYPE['general'],
-                "public_booking_id" => $exist->public_booking_id,
-                "booking_status" => BookingEnums::$STATUS['cancelled']
-            ]);
-
-        })->afterResponse();
-
-        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
-    }
-
     public static function getBookingByPublicIdForApp($public_booking_id, $user_id, $web = false)
     {
         $booking = Booking::where("public_booking_id", $public_booking_id)
@@ -1860,5 +1826,89 @@ class BookingsController extends Controller
             return Helper::response(false,"Confirmation failed.");
     }
 
+    public static function cancelBooking($public_booking_id)
+    {
+        $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
+        if (!$exist) {
+            return Helper::response(false, "Order is not Exist");
+        }
+
+        if ($exist['status'] == BookingEnums::$STATUS['cancelled']) {
+            return Helper::response(false, "This order is already cancelled");
+        }
+
+        $cancelbooking = Booking::where(["user_id" => $exist->user_id,
+            "public_booking_id" => $exist->public_booking_id])
+            ->update(["status" => BookingEnums::$STATUS['cancelled']]);
+
+        $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
+
+        if (!$cancelbooking && !$result_status) {
+            return Helper::response(false, "Couldn't Cancel Order");
+        }
+
+        dispatch(function () use ($exist) {
+
+            NotificationController::sendTo("user", [$exist->user_id], "Your booking has been cancelled.", "You may place another request anytime.", [
+                "type" => NotificationEnums::$TYPE['general'],
+                "public_booking_id" => $exist->public_booking_id,
+                "booking_status" => BookingEnums::$STATUS['cancelled']
+            ]);
+
+        })->afterResponse();
+
+        return Helper::response(true, "updated data successfully", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
+    }
+
+    public static function cancelByAdmin($public_booking_id, $refund_amount = 0.00, $reason = null, $desc=null){
+        $booking = Booking::where("public_booking_id",$public_booking_id)->with('payment')->first();
+        if(!$booking)
+            return Helper::response(false, "No booking found with this ID.");
+
+        if(in_array($booking->status,[
+            BookingEnums::$STATUS['completed'],
+            BookingEnums::$STATUS['cancelled'],
+            BookingEnums::$STATUS['bounced']
+        ]))
+            return Helper::response(false, "This booking cannot be cancelled as its is either cancelled or completed already.");
+
+        if(round($refund_amount,2) > round($booking->payment->grand_total,2))
+            return Helper::response(false, "The refund amount cannot be greater than the total payment amount.");
+
+
+        DB::beginTransaction();
+        try {
+        if(in_array($booking->status,[
+            BookingEnums::$STATUS['biding'],
+            BookingEnums::$STATUS['rebiding'],
+            BookingEnums::$STATUS['hold']
+        ]))
+            Bid::where("booking_id",$booking->id)->update(["status"=>BidEnums::$STATUS['expired']]);
+
+        if(in_array($booking->status,[
+            BookingEnums::$STATUS['pending_driver_assign'],
+            BookingEnums::$STATUS['awaiting_pickup'],
+            BookingEnums::$STATUS['in_transit']
+        ]))
+            PaymentController::initBookingRefund($booking->id, $refund_amount);
+
+
+        Booking::where("id",$booking->id)->update([
+            "status" => BookingEnums::$STATUS['cancelled'],
+            "cancelled_by" => BookingEnums::$AGENT['admin'],
+            "cancelled_by_admin_id" => Session::get('account')['id'],
+            "cancelled_meta" => json_encode(["reason"=>$reason, "desc"=>$desc])
+            ]);
+       }
+        catch(Exception $e){
+            DB::rollBack();
+            return Helper::response(false, "Couldn't save data", ["error" => $e->getMessage()]);
+        }
+
+        $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['cancelled']);
+        DB::commit();
+        return Helper::response(true, "Booking has been cancelled now.");
+
+    }
 
 }

@@ -1278,7 +1278,16 @@ class Route extends Controller
 
     public function cancelOrder(Request $request)
     {
-        return BookingsController::cancelBooking($request->id);
+        $validation = Validator::make($request->all(),[
+            'amount' => 'numeric|nullable',
+            'reason' => 'string|nullable',
+            'desc' => 'string|nullable',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return BookingsController::cancelByAdmin($request->id, $request->amount, $request->reason, $request->desc);
     }
 
     public function send_otp_bid(Request $request)

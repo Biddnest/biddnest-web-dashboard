@@ -30,15 +30,10 @@ Route::get('/', function () {
 Route::prefix('jobs')->group(function () {
     Route::get('/hard-reset-cache', function () {
         echo Artisan::call("optimize:clear");
-
         echo Artisan::call("view:cache");
-
         echo Artisan::call("config:cache");
-
 //        echo Artisan::call("route:cache");
-
         echo Artisan::call("event:cache");
-
         echo "All cache reseted";
     });
 });

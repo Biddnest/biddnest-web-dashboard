@@ -289,7 +289,7 @@ class InventoryController extends Controller
         $vendors = Organization::where("zone_id",$booking_data['zone_id'])
             ->where('status',OrganizationEnums::$STATUS['active'])
             ->get();
-
+        Log::info();
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
 
         foreach($vendors as $vendor)
@@ -358,8 +358,8 @@ class InventoryController extends Controller
             $price_calc->economic_margin_percentage = round($economic_percent,2);
             $price_calc->premium_margin_percentage = round($premium_percent,2);
 
-                $price_calc->base_price_economic = round($base_price_economic, 2);
-                $price_calc->base_price_premium = round($base_price_premium, 2);
+            $price_calc->base_price_economic = round($base_price_economic, 2);
+            $price_calc->base_price_premium = round($base_price_premium, 2);
 
             $result = $price_calc->save();
 

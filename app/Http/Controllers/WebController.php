@@ -690,7 +690,7 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
-        return $vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->get();
+        $vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
 
         if(isset($request->search)){
             $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");

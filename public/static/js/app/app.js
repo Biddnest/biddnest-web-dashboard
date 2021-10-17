@@ -988,7 +988,7 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
         var est = $(".calc-result").data("est-quote");
         var quote = $(".calc-result").val();
 
-        est = est.replace(/\,/g,'');
+        // est = est.replace(/,/g, "");
 
         var high = parseInt(est)+parseInt(est/2);
         var low = parseInt(est)-parseInt(est/2);

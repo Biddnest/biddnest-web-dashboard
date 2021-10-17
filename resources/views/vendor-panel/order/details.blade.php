@@ -308,12 +308,11 @@ Debugbar::info($price);
                                                 <td class="">{{$inventory->size}}</td>
                                                 <td>
 
-                                                    <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                    <input class="form-control border-purple calc-total-input w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
                                                     @if($inventory->is_custom)
                                                         @foreach($price['inventories'] as $inv_price)
                                                             @if($inv_price['bid_inventory_id'] == $inventory->id)
-                                                                <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
-                                                                    <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
+                                                                 <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
 
                                                                     <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
                                                            @endif

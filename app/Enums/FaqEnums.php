@@ -12,12 +12,12 @@ use Fabito\AvatarGenerator\Avatar;
 
 class FaqEnums
 {
-    public static $CATEGORY_POOL = [["name"=>"Delivery", "value"=>"delivery","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/delivery.svg"],
-                                    ["name"=>"Packaging", "value"=>"packaging","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/packaging.svg"],
-                                    ["name"=>"Vendor", "value"=>"organization","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/vendor.svg"],
-                                    ["name"=>"Bidding", "value"=>"bidding","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/bidding.svg"],
-                                    ["name"=>"Safety", "value"=>"safety","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/safety.svg"],
-                                    ["name"=>"Payment", "value"=>"payment","image"=>"https://dashboard-biddnest.dev.diginnovators.com/storage/misc/pricing.svg"],
+    public static $CATEGORY_POOL = [["name"=>"Delivery", "value"=>"delivery","image"=>"https://via.placeholder.com/48x48.png"],
+                                    ["name"=>"Packaging", "value"=>"packaging","image"=>"https://via.placeholder.com/48x48.png"],
+                                    ["name"=>"Vendor", "value"=>"organization","image"=>"https://via.placeholder.com/48x48.png"],
+                                    ["name"=>"Bidding", "value"=>"bidding","image"=>"https://via.placeholder.com/48x48.png"],
+                                    ["name"=>"Safety", "value"=>"safety","image"=>"https://via.placeholder.com/48x48.png"],
+                                    ["name"=>"Payment", "value"=>"payment","image"=>"https://via.placeholder.com/48x48.png"],
                                     ];
 
     public static $TYPE = ["delivery", "packaging", "organization", "bidding", "safety", "payment"];

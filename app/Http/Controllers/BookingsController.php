@@ -596,7 +596,10 @@ class BookingsController extends Controller
         }
 
         $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
-            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']]);
+            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['cancel_request'],
+//                BookingEnums::$STATUS['awaiting_bid_result'],
+                BookingEnums::$STATUS['price_review_pending']
+            ]);
 
         if ($web) {
             if (isset($request->search)) {
@@ -1872,7 +1875,7 @@ class BookingsController extends Controller
         ]))
             return Helper::response(false, "This booking cannot be cancelled as its is either cancelled or completed already.");
 
-        if(round($refund_amount,2) > round($booking->payment->grand_total,2))
+        if(isset($booking->payment->grand_total) && round($refund_amount,2) > round($booking->payment->grand_total,2))
             return Helper::response(false, "The refund amount cannot be greater than the total payment amount.");
 
 

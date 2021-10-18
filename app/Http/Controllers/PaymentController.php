@@ -117,7 +117,6 @@ class PaymentController extends Controller
     public static function initBookingRefund($booking_id, $refund_amount){
 
         $payment = Payment::where("booking_id", $booking_id)->first();
-
         if($payment) {
             Payment::where("booking_id", $booking_id)->update([
                 'status' => PaymentEnums::$STATUS['refund_initiated'],
@@ -125,8 +124,9 @@ class PaymentController extends Controller
                 "refunded_at"=>Carbon::now()->format("Y-m-d H:i:s")
             ]);
 
-        if ($refund_amount > 0.00 && round($refund_amount, 2) <= round($payment->grand_total,2))
-            self::createRefund($payment->rzp_payment_id, round((float)$refund_amount, 2));
+        /*if ($refund_amount > 0.00 && round($refund_amount, 2) <= round($payment->grand_total,2))*/
+            if($payment->rzp_payment_id)
+                self::createRefund($payment->rzp_payment_id, round((float)$refund_amount, 2));
         }
 
         return true;

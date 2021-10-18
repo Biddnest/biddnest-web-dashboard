@@ -79,10 +79,12 @@
                                     <div class="form-input">
 
                                         <div class="d-flex justify-content-start vertical-center theme-text margin-topneg-15">
-{{--                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs" data-width="80" data-height="30" data-onstyle="outline-primary" data-offstyle="outline-secondary" data-on="Active" data-off="Inactive" id="">--}}
+                                            <input type="checkbox" {{($users->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('zone_status_update',['id'=>$users->id])}}">
                                         </div>
                                     </div>
                                 </div>
+                                <br />
+                                <br style="margin-bottom: 8px;" />
 
                                 <div class="theme-text f-14 p-10">
                                     @foreach(\App\Enums\AdminEnums::$ROLES as $roles=>$key)

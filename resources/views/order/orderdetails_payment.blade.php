@@ -75,7 +75,7 @@
                         <h3 class="f-18" style="margin-top: 0;">
                             <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600; margin-left: -6px;">
                                 <li class="nav-item ">
-                                    <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer Details</a>
+                                    <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer</a>
                                 </li>
                                 @if($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry'])
                                     <li class="nav-item">
@@ -83,7 +83,7 @@
                                     </li>
                                 @endif
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor Details</a>
+                                    <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
@@ -101,6 +101,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="review-tab" data-toggle="tab" href="{{route('order-details-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Review</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="cancel-tab" data-toggle="tab" href="{{route('order-details-cancel', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Cancel</a>
                                 </li>
 
                             </ul>

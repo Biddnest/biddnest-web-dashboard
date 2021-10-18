@@ -291,7 +291,7 @@ Debugbar::info($price);
                                             <td>-</td>
                                             <td>-</td>
                                             <td>
-                                                <input class="form-control disabled border-purple w-88 validate-input calc-result validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$price['base_price']}}" type="number" placeholder="0.00" readonly/>
+                                                <input class="form-control disabled border-purple w-88 validate-input calc-result validate-input" name="base_amount:number" id="amount_base" value="{{$price['base_price']}}" type="number" placeholder="0.00"/>
                                             </td>
                                         </tr>
                                         @foreach($booking->inventories as $inventory)
@@ -308,22 +308,18 @@ Debugbar::info($price);
                                                 <td class="">{{$inventory->size}}</td>
                                                 <td>
 
-                                                    <input class="form-control border-purple w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                    <input class="form-control border-purple calc-total-input w-88" type="hidden" name="inventory[][booking_inventory_id]" value="{{$inventory->id}}" type="text" placeholder="2000"/>
+                                                    @if($inventory->is_custom)
+                                                        @foreach($price['inventories'] as $inv_price)
+                                                            @if($inv_price['bid_inventory_id'] == $inventory->id)
+                                                                 <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
 
-                                                    <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
-
-
-
-                                                    <input class="form-control border-purple w-88 calc-total-input validate-input" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
-
-                                                    @if(!$inventory->is_custom)
-                                                    @foreach($price['inventories'] as $inv_price)
-
-                                                        @if($inv_price['bid_inventory_id'] == $inventory->id)
-                                                            <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
-                                                        @endif
-                                                    @endforeach
+                                                                    <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
+                                                           @endif
+                                                        @endforeach
                                                     @else
+                                                        <input type="hidden" name="inventory[][is_custom]:boolean" value="false"/>
+
                                                         <input class="form-control disabled border-purple w-88 validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="0.00" type="number" placeholder="0.00" readonly/>
                                                     @endif
                                                 </td>

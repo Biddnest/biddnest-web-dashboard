@@ -519,6 +519,7 @@ Route::prefix('website/api')->group(function () {
 
     Route::get('/subservices',[WebsiteRouter::class,'getSubServices'])->name("get_subservices");
     Route::get('/inventories',[WebsiteRouter::class,'getInventories'])->name("get_inventories");
+    Route::get('/inventories/range',[WebsiteRouter::class,'getInventoriesRange'])->name("get_inventories_range");
     Route::get('/inventories/serach',[WebsiteRouter::class,'serachItem'])->name("search_item");
 
     Route::post('/add-ticket', [WebsiteRouter::class, 'addTicket'])->name("add_ticket");

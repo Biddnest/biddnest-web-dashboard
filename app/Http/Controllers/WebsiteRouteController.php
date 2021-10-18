@@ -277,6 +277,10 @@ class WebsiteRouteController extends Controller
             return InventoryController::getBySubserviceForWeb($request->subservice_id);
     }
 
+    public function getInventoriesRange(Request $request){
+       return InventoryController::getBySubserviceForWeb();
+    }
+
     public function serachItem(Request $request){
         $validation = Validator::make($request->all(),[
             'search' => 'required'

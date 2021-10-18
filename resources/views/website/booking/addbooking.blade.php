@@ -505,7 +505,7 @@
             <div class="modal-content ">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom ">
-                    <h4 class="modal-title add-item-title theme-text ">Add Item</h4>
+                    <h4 class="modal-title add-item-title theme-text ">Add <span class="count-max"></span> Item</h4>
                     <button type="button" class="close " data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -523,6 +523,7 @@
 
                     </div>
                     <h5 style="margin-top: 20px;" class="fade-enable">Top Recommended Items</h5>
+                    <input type="hidden" class="max_count" id="max_count">
                     <div class="row f-row fade-enable inventory-popup">
 
                     </div>
@@ -541,7 +542,7 @@
             <h6 class="text-center">What are you moving</h6>
         </div>
         @{{else}}
-            <input type="hidden" name="subcategory" value="custom" class="card-input-element01 web-inventory" data-inv-url="{{route('get_inventories')}}?subservice_id=18"/>
+            <input type="hidden" name="subcategory" value="custom" class="card-input-element01 web-inventory" data-inv-url="{{route('get_inventories_range')}}"/>
         @{{/if}}
         @{{#each subservices}}
             <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
@@ -579,6 +580,7 @@
                             <h5>@{{meta.name}}</h5>
                             <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta.id}}">
                             <input type="hidden" name="cutome_name" value="@{{meta.name}}">
+                            <input type="hidden" name="inventory_items[][is_custom]:boolean" value="false">
                             <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
                                     <span>@{{material}}</span>
@@ -642,7 +644,7 @@
                     <h5>@{{meta_name}}</h5>
                     <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta_id}}">
                     <input type="hidden" name="inventory_items[][name]" value="@{{meta_name}}">
-                    <input type="hidden" name="inventory_items[][is_custom]" value="true">
+                    <input type="hidden" name="inventory_items[][is_custom]:boolean" value="true">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                         <span class="info">
                             <span>@{{material}}</span>
@@ -819,6 +821,7 @@
                     <h5>@{{meta.name}}</h5>
                     <input type="hidden" name="inventory_items[][inventory_id]:null" value="@{{meta.id}}">
                     <input type="hidden" name="cutome_name" value="@{{meta.name}}">
+                    <input type="hidden" name="inventory_items[][is_custom]:boolean" value="false">
                     <div class="info-wrapper d-flex flex-row justify-content-between">
                                 <span class="info">
                                     <span>@{{material}}</span>

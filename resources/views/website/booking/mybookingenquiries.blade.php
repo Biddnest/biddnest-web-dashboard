@@ -118,6 +118,24 @@
                                                             </button>
                                                         </a>
                                                         @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['biding']; @endphp
+                                                        <a class="white-text" href="#">
+                                                            <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
+                                                                Bidding
+                                                            </button>
+                                                        </a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                        @php $color = \App\Enums\BookingEnums::$COLOR_CODE['payment_pending']; @endphp
+                                                        <a class="white-text" href="#">
+                                                            <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
+                                                                Price Review Pending
+                                                            </button>
+                                                        </a>
+                                                        @break
                                                     @endswitch
                                                 </div>
                                             </div>

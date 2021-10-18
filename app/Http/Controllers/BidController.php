@@ -256,7 +256,7 @@ class BidController extends Controller
             ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result']])
             ->update([
                 "organization_id"=>$won_org_id,
-                "final_quote"=>$final_bid_amount,
+                "final_quote"=>round($final_bid_amount,2),
 //                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($won_bid_details->meta, true)['moving_date'])),
                 "status"=>$final_status
             ]);
@@ -269,12 +269,12 @@ class BidController extends Controller
         $payment = new Payment;
         $payment->public_transaction_id = Uuid::uuid4();
         $payment->booking_id = $book_id;
-        $payment->vendor_quote = $min_amount;
-        $payment->other_charges = $other_charges;
-        $payment->tax = $tax;
-        $payment->commission = $commission;
-        $payment->sub_total= $sub_amount;
-        $payment->grand_total = $grand_total;
+        $payment->vendor_quote = round($min_amount,2);
+        $payment->other_charges = round($other_charges,2);
+        $payment->tax = round($tax,2);
+        $payment->commission = round($commission,2);
+        $payment->sub_total= round($sub_amount,2);
+        $payment->grand_total = round($grand_total,2);
         $payment_result = $payment->save();
 
         $result_status = BookingsController::statusChange($book_id, $final_status);
@@ -373,7 +373,7 @@ class BidController extends Controller
                 $inventory_price = new BidInventory;
                 $inventory_price->booking_inventory_id = $key['booking_inventory_id'];
                 $inventory_price->bid_id= Bid::where(['booking_id'=>Booking::where('public_booking_id', $data['public_booking_id'])->pluck('id')[0], 'organization_id'=>$org_id])->pluck('id')[0];
-                $inventory_price->amount = !$key['is_custom'] ? 0.00 : $key['amount'];
+                $inventory_price->amount = !$key['is_custom'] ? 0.00 : round($key['amount'],2);
 
                 $inventory_price->save();
 
@@ -515,18 +515,18 @@ class BidController extends Controller
         $payment = new Payment;
         $payment->public_transaction_id = Uuid::uuid4();
         $payment->booking_id = $booking_id;
-        $payment->other_charges = $other_charges;
-        $payment->tax = $tax;
-        $payment->sub_total= $sub_total;
-        $payment->commission = $commission;
-        $payment->grand_total = $grand_total;
+        $payment->other_charges = round($other_charges,2);
+        $payment->tax = round($tax,2);
+        $payment->sub_total= round($sub_total,2);
+        $payment->commission = round($commission,2);
+        $payment->grand_total = round($grand_total,2);
         $payment_result = $payment->save();
 
         $booking_update_status = Booking::where("id", $booking_id)
             ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
             ->update([
                 "organization_id"=>$org_id,
-                "final_quote"=>$final_bid_amount,
+                "final_quote"=>round($final_bid_amount,2),
                 "final_moving_date"=>date("Y-m-d", strtotime(json_decode($bid_details->meta, true)['moving_date'])),
                 "status"=>BookingEnums::$STATUS['payment_pending']
             ]);

@@ -236,7 +236,7 @@
             <div class="form-input">
               <label>Select Organization</label>
               <div>
-                <select class="form-control br-5 select-box" name="orgnizations[]" multiple>
+                <select class="form-control br-5 select-box" name="organizations[]" multiple>
                     @foreach($organizations as $org)
                       <option value="{{$org->id}}" @if($coupons) @foreach($coupons->organizations as $organizations)  @if($organizations->id == $org->id) selected @endif @endforeach @endif>{{ucfirst(trans($org->org_name))}}</option>
                     @endforeach

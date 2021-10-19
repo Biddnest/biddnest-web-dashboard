@@ -8,6 +8,7 @@ use App\Http\Controllers\Route as Router;
 use App\Http\Controllers\VendorRouteController as VendorRouter;
 use App\Http\Controllers\VendorWebController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\WebsiteRouteController as WebsiteRouter;
 use Illuminate\Support\Facades\Artisan;
@@ -30,7 +31,7 @@ Route::get('/', function () {
 Route::prefix('jobs')->group(function () {
     Route::get('/debug/vendor-notification', function () {
         NotificationController::sendTo("vendor", [40,41,42,1], "Your booking has been recieved.", "We are getting the best price for you. You will be notified soon.", [
-            "type" => NotificationEnums::$TYPE['booking'],
+            "type" => 1,
             "public_booking_id" => "BDO-616EC45796669",
             "booking_status" => 2
         ]);

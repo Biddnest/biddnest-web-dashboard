@@ -184,7 +184,7 @@
                                                                 </td>
                                                             @else
                                                                 <td class="">
-                                                                    <a class="modal-toggle disabled" aria-disabled="true" disabled>
+                                                                    <a class="modal-toggle disabled" aria-disabled="true" disabled style="background: #9f9f9f;opacity:0.5;cursor: not-allowed">
                                                                         <button class="btn white-text theme-bg">Assign</button>
                                                                     </a>
                                                                 </td>

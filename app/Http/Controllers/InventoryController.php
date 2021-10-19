@@ -300,80 +300,83 @@ class InventoryController extends Controller
             ->get();
 
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
+        try {
+            foreach ($vendors as $vendor) {
 
-        foreach($vendors as $vendor)
-        {
+                $additional_distance = $total_distance - $vendor['base_distance'];
 
-            $additional_distance = $total_distance - $vendor['base_distance'];
+                if ($additional_distance < 0)
+                    $additional_distance = 0;
 
-            if($additional_distance < 0)
-                $additional_distance = 0;
+                $mp_economic = 0.00;
+                $bp_economic = 0.00;
+                $mp_premium = 0.00;
+                $bp_premium = 0.00;
+                $base_price_economic = 0.00;
+                $base_price_premium = 0.00;
 
-            $mp_economic = 0.00;
-            $bp_economic = 0.00;
-            $mp_premium = 0.00;
-            $bp_premium = 0.00;
-            $base_price_economic = 0.00;
-            $base_price_premium = 0.00;
+                if (strtolower($data['meta']['subcategory']) != "custom") {
+                    $query = SubservicePrice::where("organization_id", $vendor['id'])
+                        ->where('subservice_id', Subservice::where('name', $data['meta']['subcategory'])
+                            ->pluck('id')[0])->first();
 
-            if(strtolower($data['meta']['subcategory']) != "custom"){
-                $query = SubservicePrice::where("organization_id",$vendor['id'])
-                    ->where('subservice_id', Subservice::where('name',$data['meta']['subcategory'])
-                        ->pluck('id')[0])->first();
+                    $mp_economic = $query ? $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']) : 0.00;
 
-                $mp_economic = $query ? $query['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_economic_price']) : 0.00;
+                    $bp_economic = $base_price_economic = $query ? $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
 
-                $bp_economic = $base_price_economic = $query ? $query['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_economic_price']) : 0.00;
+                    $mp_premium = $query ? $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']) : 0.00;
 
-                $mp_premium = $query ? $query['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['mp_additional_distance_premium_price']) : 0.00;
+                    $bp_premium = $base_price_premium = $query ? $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']) : 0.00;
+                }
 
-                $bp_premium = $base_price_premium = $query ? $query['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $query['bp_additional_distance_premium_price']) : 0.00;
-            }
+                /*Slot for items*/
+                foreach ($data['inventory_items'] as $items) {
+                    if ($items['is_custom']) {
+                        $inv_price = InventoryPrice::where([
+                            "inventory_id" => $items["inventory_id"],
+                            "material" => $items["material"],
+                            "size" => $items["size"],
+                            "organization_id" => $vendor['id']
+                        ])->where(["status" => InventoryEnums::$STATUS['active'], "deleted" => CommonEnums::$NO])->first();
 
-            /*Slot for items*/
-            foreach ($data['inventory_items'] as $items){
-                if($items['is_custom']){
-                    $inv_price = InventoryPrice::where([
-                        "inventory_id"=>$items["inventory_id"],
-                        "material"=>$items["material"],
-                        "size"=>$items["size"],
-                        "organization_id"=>$vendor['id']
-                    ])->where(["status"=>InventoryEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->first();
+                        if ($inv_price) {
+                            $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
 
-                    if($inv_price){
-                        $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
+                            $bp_economic += $inv_price['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_economic']);
 
-                        $bp_economic += $inv_price['bp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_economic']);
+                            $mp_premium += $inv_price['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_premium']);
 
-                        $mp_premium += $inv_price['mp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_premium']);
-
-                        $bp_premium += $inv_price['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_premium']);
+                            $bp_premium += $inv_price['bp_premium'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['bp_additional_premium']);
+                        }
                     }
                 }
+
+                /*Slot for items*/
+
+                $economic_percent = $mp_economic > 0.00 ? (($mp_economic - $bp_economic) / $mp_economic) * 100 : 0.00;
+                $premium_percent = $mp_premium > 0.00 ? (($mp_premium - $bp_premium) / $mp_premium) * 100 : 0.00;
+
+                $price_calc = new BookingOrganizationGeneratedPrice();
+                $price_calc->booking_id = $booking_data['id'];
+                $price_calc->organization_id = $vendor['id'];
+                $price_calc->mp_economic = round($mp_economic, 2);
+                $price_calc->mp_premium = round($mp_premium, 2);
+                $price_calc->bp_economic = round($bp_economic, 2);
+                $price_calc->bp_premium = round($bp_premium, 2);
+                $price_calc->economic_margin_percentage = round($economic_percent, 2);
+                $price_calc->premium_margin_percentage = round($premium_percent, 2);
+
+                $price_calc->base_price_economic = round($base_price_economic, 2);
+                $price_calc->base_price_premium = round($base_price_premium, 2);
+
+                $result = $price_calc->save();
+
             }
-
-            /*Slot for items*/
-
-            $economic_percent = $mp_economic > 0.00 ? (($mp_economic - $bp_economic)/$mp_economic)* 100 : 0.00;
-            $premium_percent =  $mp_premium > 0.00 ? (($mp_premium - $bp_premium)/$mp_premium) * 100 : 0.00;
-
-            $price_calc = new BookingOrganizationGeneratedPrice();
-            $price_calc->booking_id = $booking_data['id'];
-            $price_calc->organization_id = $vendor['id'];
-            $price_calc->mp_economic = round($mp_economic,2);
-            $price_calc->mp_premium = round($mp_premium,2);
-            $price_calc->bp_economic = round($bp_economic,2);
-            $price_calc->bp_premium = round($bp_premium,2);
-            $price_calc->economic_margin_percentage = round($economic_percent,2);
-            $price_calc->premium_margin_percentage = round($premium_percent,2);
-
-            $price_calc->base_price_economic = round($base_price_economic, 2);
-            $price_calc->base_price_premium = round($base_price_premium, 2);
-
-            $result = $price_calc->save();
-
         }
-
+        catch(Exception $e){
+            Log::error($e->getMessage());
+            DB::rollBack();
+        }
         if($result)
             return true;
         else

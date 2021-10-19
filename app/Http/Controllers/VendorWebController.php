@@ -176,12 +176,17 @@ class VendorWebController extends Controller
         return view('vendor-panel.user.userrole_sidebar', ['user'=>$user]);
     }
 
-    public function inventoryManagement()
+    public function inventoryManagement(Request $request)
     {
         $inventory = Inventory::where([ 'status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO ])
             ->whereIn("id", InventoryPrice::where("organization_id",Session::get('organization_id'))->groupBy("inventory_id")
-                ->pluck("inventory_id"))
-            ->get();
+                ->pluck("inventory_id"));
+
+            if($request->search){
+                $inventory =$inventory->where("name", 'like', "%".$request->search."%");
+            }
+        $inventory =$inventory->get();
+
         return view('vendor-panel.inventory.inventorymanagement', ['inventories'=>$inventory]);
     }
 
@@ -190,8 +195,14 @@ class VendorWebController extends Controller
         $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'category'=>$request->type])
             ->whereIn("id", InventoryPrice::where("organization_id",Session::get('organization_id'))
             ->groupBy("inventory_id")
-            ->pluck("inventory_id"))
-            ->get();
+            ->pluck("inventory_id"));
+
+        if($request->search){
+            $inventory =$inventory->where("name", 'like', "%".$request->search."%");
+        }
+
+        $inventory =$inventory->get();
+
         return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
     }
 

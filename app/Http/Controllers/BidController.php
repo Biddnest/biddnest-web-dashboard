@@ -108,7 +108,7 @@ class BidController extends Controller
         $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
 
         Booking::where("bid_end_at", "<=", "$current_time")
-            ->where("bid_end_at","!=","bid_result_at")
+            ->where("bid_result_at",">","$current_time")
             ->whereIn("status",[BookingEnums::$STATUS['biding'],BookingEnums::$STATUS['rebiding']])
             ->update(['status'=>BookingEnums::$STATUS['awaiting_bid_result']]);
 

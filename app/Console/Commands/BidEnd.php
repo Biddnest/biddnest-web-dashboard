@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\BookingsController;
+
 use App\Models\CronLog;
 
 class BidEnd extends Command
@@ -57,6 +59,9 @@ class BidEnd extends Command
             $cron_log->save();*/
             /*$this->comment('Total orders '.$output['total_bookings']);
             $this->comment('Affected orders '.json_encode($output['booking_id']));*/
+        }
+        else if($this->argument('id') == 'init'){
+            BookingsController::initiateBidding();
         }
         else{
             $output = BidController::getbookings($this->argument('id'));

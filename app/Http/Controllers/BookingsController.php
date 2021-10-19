@@ -1916,4 +1916,17 @@ class BookingsController extends Controller
 
     }
 
+    public static function initiateBidding(){
+
+        $bookings = Booking::where("status", BookingEnums::$STATUS['placed'])->get();
+        foreach($bookings as $booking){
+            NotificationController::sendTo("user", [$booking['user_id']], "Your booking has been recieved.", "We are getting the best price for you. You will be notified soon.", [
+                "type" => NotificationEnums::$TYPE['booking'],
+                "public_booking_id" => $booking['public_booking_id'],
+                "booking_status" => BookingEnums::$STATUS['biding']
+            ]);
+            BidController::addvendors($booking['id']);
+        }
+        return true;
+    }
 }

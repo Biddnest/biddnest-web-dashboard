@@ -56,6 +56,23 @@ class VendorUserController extends Controller
         }
     }
 
+    public static function impersonate($organization_id)
+    {
+        $vendor_user=Vendor::where(['id'=>$organization_id])
+//            ->where([ 'role'=>VendorEnums::$ROLES['admin']])
+            ->with("organization")
+            ->first();
+
+            Session::flush();
+            Session::put(["account"=>['id'=>$vendor_user->id,
+                'name'=>$vendor_user->fname.' '.$vendor_user->lname,
+                'email'=>$vendor_user->email]]);
+            Session::put('sessionFor', "vendor");
+            Session::put('user_role', $vendor_user->user_role);
+            Session::put('organization_id', $vendor_user->organization->id);
+            return response()->redirectToRoute('vendor.dashboard');
+    }
+
     public static function loginForApp($username, $password)
     {
         // $vendor_user=Vendor::where(['username'=>$username])

@@ -88,6 +88,7 @@
                                             <div class="action">
                                                 <a class="modal-toggle inline-icon-button" data-target="#role_{{$role->id}}"><i class="icon dripicons-pencil"></i></a>
                                                 <a href="#" class="delete inline-icon-button" data-parent="role_{{$role->id}}" data-confirm="Are you sure, you want delete this User Role permenently? You won't be able to undo this." data-url="{{route('delete-role', ["organization_id"=>$id, "vendor_id"=>$role->id])}}"><i class="icon dripicons-trash"></i></a>
+                                                <a href="#" class="impersonate inline-icon-button" data-parent="role_{{$role->id}}" data-confirm="You are about to login into vendor panel as this user?" data-url="{{route('impersonate.vendor')."?org=".$role->id}}"><i class="icon dripicons-enter"></i></a>
                                             </div>
                                         </div>
                                     </div>

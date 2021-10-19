@@ -416,6 +416,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/inventory_price/{id}/{org_id}/{cat_id}',[WebController::class,'sidebar_inventory'])->name('sidebar.inventory');
     });
 
+    Route::get('/impersonate',[WebController::class,'impersonateVendor'])->name('impersonate.vendor');
+
 
 });
 

@@ -396,10 +396,14 @@ class InventoryController extends Controller
 
         $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
 
-        if(!$vendor_price)
-            return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges;
-        else
-            return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
+        if(!$vendor_price) {
+            return $initial_customer_quote = round($least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges, 2);
+        }
+        else {
+            $initial_vendor_quote = $least_agent_price + ((0.25 * (($average_margin_percentage / 100) * $least_agent_price)) - 1);
+
+            return round($initial_vendor_quote,2) >= 0.00 ?: 0.00;
+        }
 
     }
 
@@ -414,9 +418,11 @@ class InventoryController extends Controller
         $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
 
             if(!$vendor_price)
-                return $initial_customer_quote = $least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges;
-            else
-                return $initial_vendor_quote = $least_agent_price + ((0.25*(($average_margin_percentage / 100) * $least_agent_price))-1);
+                return $initial_customer_quote = round($least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges,2);
+            else {
+                $initial_vendor_quote = $least_agent_price + ((0.25 * (($average_margin_percentage / 100) * $least_agent_price)) - 1);
+                return $initial_vendor_quote  < 0 ? round($initial_vendor_quote,2) : 0.00;
+            }
 
     }
 

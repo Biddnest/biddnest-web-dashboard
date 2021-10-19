@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\VendorUserController;
 use App\Enums\AdminEnums;
 use App\Enums\BidEnums;
 use App\Enums\BookingEnums;
@@ -50,6 +51,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class WebController extends Controller
 {
@@ -1477,5 +1479,17 @@ class WebController extends Controller
         }
         $moving_dates = implode(",", $moving_dates);
         return view('order.editorder', ['categories'=>$category, 'inventories'=>$inventory, 'booking'=>$booking, 'moving_dates'=>$moving_dates]);
+    }
+
+    public function impersonateVendor(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'org'=>'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VendorUserController::impersonate($request->org);
     }
 }

@@ -609,6 +609,29 @@ $("body").on('click', ".delete", function(event) {
     return false;*/
 });
 
+$("body").on('click', ".impersonate", function(event) {
+
+    Swal.fire({
+        title: 'Proceed?',
+        text: $(this).data('confirm'),
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let vendorpanel = window.open($(this).data("url"),"vendor-panel","height=640,width=720,resizable=yes,scrollbars=yes,status=yes");
+            vendorpanel.focus();
+            return false;
+        }
+        else{
+            return false;
+        }
+    });
+});
+
 $("body").on('click', ".sidebar-toggle td:not(:last-child), .sidebar-toggle-link", function(event) {
     var $this = $(this);
 

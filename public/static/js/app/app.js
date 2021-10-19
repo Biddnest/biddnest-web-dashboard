@@ -931,19 +931,30 @@ Logger.info($(this).val());
 
 $("body").on('click', ".bookings", function(event) {
     var target = $(this).closest($(this).data("parent"));
-    if(confirm($(this).data('confirm'))) {
-        $.update($(this).data("url"), {}, function (response) {
-            Logger.info(response);
-            if (response.status == "success") {
-                tinySuccessAlert($(this).data('success'), response.message);
-                target.hide();
-            } else {
-                tinyAlert("Failed", response.message);
-            }
+    Swal.fire({
+        title: $(this).data('confirm'),
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#4D34B8',
+        confirmButtonColor: '#CA1F1F',
+        confirmButtonText: 'Yes!',
 
-        });
-    }
-    return false;
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.update($(this).data("url"), {}, function (response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    tinySuccessAlert($(this).data('success'), response.message);
+                    target.hide();
+                } else {
+                    tinyAlert("Failed", response.message);
+                }
+            });
+        }
+        else{
+            return false;
+        }
+    });
 });
 
 $("body").on('click', ".rejected", function(event) {

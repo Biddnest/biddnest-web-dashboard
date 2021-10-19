@@ -24,7 +24,7 @@
                                 Create Service
                         </h3>
                     </div>
-                    <form class="form-new-order  onboard-vendor-branch input-text-blue" action="{{route('api.ticket.addticket')}}" data-next="redirect" data-url="{{route('vendor.service_request')}}" data-alert="mega" method="{{"POST"}}" data-parsley-validate>
+                    <form class="form-new-order  onboard-vendor-branch input-text-blue" action="{{route('api.ticket.addticket')}}" data-next="redirect" data-url="{{route('vendor.service_request')}}" data-alert="mega" method="POST" data-parsley-validate>
                         <div class="d-flex pa-20 mr-1 ml-1 row p-10">
 
                             <div class="col-lg-6" style="padding-left: 0 !important;">

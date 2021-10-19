@@ -1175,16 +1175,17 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint'])->orWhereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'));
+        $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint']);
 
         if(isset($request->search)){
              $complaints=$complaints->where('heading', 'like', "%".$request->search."%");
         }
         $complaints->with('user')->with('vendor')->with('booking')->orderBy("id","DESC");
 
-        $resolved_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['resolved']])->orWhereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->count();
-        $open_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['open']])->orWhereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->count();
-        return view('reviewandratings.complaints', ['complaints'=>$complaints->paginate(CommonEnums::$PAGE_LENGTH), 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints]);
+        $resolved_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['resolved']])->count();
+        $open_complaints=Ticket::where(["type"=>TicketEnums::$TYPE['complaint'], "status"=>TicketEnums::$STATUS['open']])->count();
+        $total_complaints= Ticket::where(["type"=>TicketEnums::$TYPE['complaint']])->count();
+        return view('reviewandratings.complaints', ['complaints'=>$complaints->paginate(CommonEnums::$PAGE_LENGTH), 'resolved_complaints'=>$resolved_complaints, 'open_complaints'=>$open_complaints, 'total_complaints'=>$total_complaints]);
     }
 
     public function reply(Request $request)

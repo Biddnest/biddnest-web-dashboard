@@ -216,11 +216,11 @@
                                                             @if($booking->bid && ($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO))
                                                                 <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
-                                                                     title="Quote Later">
+                                                                     title="Add To Bookmark">
                                                             @else
                                                                 <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
-                                                                     title="Quote Later">
+                                                                     title="Add To Bookmark">
                                                             @endif
                                                         </i>
                                                     </a>
@@ -246,11 +246,11 @@
                                                             @if($booking->bid && ($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO))
                                                                 <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                             data-toggle="tooltip" data-placement="top"
-                                                            title="Quote Later">
+                                                            title="Add To Bookmark">
                                                             @else
                                                                 <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
-                                                                     title="Quote Later">
+                                                                     title="Add To Bookmark">
                                                             @endif
                                                     </i>
                                                 </a>

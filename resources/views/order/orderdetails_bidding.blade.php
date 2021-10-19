@@ -143,9 +143,9 @@
                                                         <th scope="col">Submitted At</th>
                                                         <th scope="col">Quote</th>
                                                         <th scope="col">Bid Status</th>
-                                                        @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
+
                                                             <th scope="col">Action</th>
-                                                        @endif
+
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mtop-15">
@@ -179,6 +179,12 @@
                                                             @if($bidding->status == \App\Enums\BidEnums::$STATUS['active'])
                                                                 <td class="">
                                                                     <a class="modal-toggle" data-target="#add-role_{{$bidding->organization_id}}">
+                                                                        <button class="btn white-text theme-bg">Assign</button>
+                                                                    </a>
+                                                                </td>
+                                                            @else
+                                                                <td class="">
+                                                                    <a class="modal-toggle disabled" aria-disabled="true" disabled>
                                                                         <button class="btn white-text theme-bg">Assign</button>
                                                                     </a>
                                                                 </td>

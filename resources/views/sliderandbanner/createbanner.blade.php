@@ -126,7 +126,7 @@
                                                       <div class="col-lg-6">
                                                           <div class="form-input">
                                                               <label class="full-name">From date</label>
-                                                              <input type="text" name="banners[][date][from]" class="form-control br-5 dateselect singledate" required="required" value="{{$banner->from_date}}"/>
+                                                              <input type="text" name="banners[][date][from]" class="form-control br-5 dateselect singledate" required="required" value="{{$banner->from_date}}" />
                                                               <span class="error-message">please enter valid date</span>
                                                           </div>
                                                       </div>
@@ -147,7 +147,7 @@
                                                       @if(count($banners) == 0)
                                               <div class="row hide-on-data">
                                                   <div class="col-md-12 text-center p-20">
-                                                          <p class="font14"><i>. You dont have any banners here. <br />Add a banner to get started.</i></p>
+                                                          <p class="font14"><i>. You dont have any banners here. <br/>Add a banner to get started.</i></p>
                                                   </div></div>
                                                       @endif
                                               <div class="row"><div class="col-md-12 text-center p-20">

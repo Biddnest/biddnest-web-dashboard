@@ -32,8 +32,8 @@
             <h1>{{$open_complaints}}</h1>
         </div>
         <div class="simple-card min-width-30">
-            <p>CREATE COMPLAINT</p>
-            <h1>{{$open_complaints}}</h1>
+            <p>TOTAL COMPLAINT</p>
+            <h1>{{$total_complaints}}</h1>
         </div>
     </div>
     <!-- Dashboard cards -->

@@ -108,6 +108,7 @@ class BidController extends Controller
         $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
 
         Booking::where("bid_end_at", "<=", "$current_time")
+            ->where("bid_end_at","!=","bid_result_at")
             ->whereIn("status",[BookingEnums::$STATUS['biding'],BookingEnums::$STATUS['rebiding']])
             ->update(['status'=>BookingEnums::$STATUS['awaiting_bid_result']]);
 
@@ -227,7 +228,8 @@ class BidController extends Controller
             $sub_amount = (float) $min_amount + $commission + $search_charges;
         }else{
             $final_bid_amount = null;
-            $sub_amount = 0.00;
+//            $sub_amount = 0.00;
+            $sub_amount = (float) $min_amount + $commission + $search_charges;
         }
 
         $public_booking_id = $booking_data->public_booking_id;

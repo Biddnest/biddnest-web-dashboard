@@ -208,8 +208,10 @@ class BookingsController extends Controller
     try {
 
         $generate_prices = InventoryController::generateOrganizationBasePrices($data, $booking_added);
-        if (!$generate_prices)
+        if (!$generate_prices) {
             return Helper::response(false, "Couldn't generate prices.");
+            DB::rollBack();
+        }
 
         $estimate_quote = json_encode([
             "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_added, $web, $created_by_support),

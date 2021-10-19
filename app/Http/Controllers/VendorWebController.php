@@ -178,13 +178,20 @@ class VendorWebController extends Controller
 
     public function inventoryManagement()
     {
-        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->get();
+        $inventory = Inventory::where([ 'status' => CommonEnums::$YES, 'deleted' => CommonEnums::$NO ])
+            ->whereIn("id", InventoryPrice::where("organization_id",Session::get('organization_id'))->groupBy("inventory_id")
+                ->pluck("inventory_id"))
+            ->get();
         return view('vendor-panel.inventory.inventorymanagement', ['inventories'=>$inventory]);
     }
 
     public function inventoryCetegory(Request $request)
     {
-        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'category'=>$request->type])->get();
+        $inventory=Inventory::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO, 'category'=>$request->type])
+            ->whereIn("id", InventoryPrice::where("organization_id",Session::get('organization_id'))
+            ->groupBy("inventory_id")
+            ->pluck("inventory_id"))
+            ->get();
         return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
     }
 

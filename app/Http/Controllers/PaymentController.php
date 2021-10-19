@@ -118,15 +118,22 @@ class PaymentController extends Controller
 
         $payment = Payment::where("booking_id", $booking_id)->first();
         if($payment) {
+
+
+        /*if ($refund_amount > 0.00 && round($refund_amount, 2) <= round($payment->grand_total,2))*/
+            $refund_data = true;
+//            if($payment->rzp_payment_id)
+                $refund_data = self::createRefund($payment->rzp_payment_id, round((float)$refund_amount, 2));
+
+            Log::error($refund_data);
+
             Payment::where("booking_id", $booking_id)->update([
                 'status' => PaymentEnums::$STATUS['refund_initiated'],
                 'refund_amount'=>round($refund_amount,2),
                 "refunded_at"=>Carbon::now()->format("Y-m-d H:i:s")
             ]);
 
-        /*if ($refund_amount > 0.00 && round($refund_amount, 2) <= round($payment->grand_total,2))*/
-            if($payment->rzp_payment_id)
-                self::createRefund($payment->rzp_payment_id, round((float)$refund_amount, 2));
+
         }
 
         return true;

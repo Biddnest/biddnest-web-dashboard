@@ -1156,7 +1156,7 @@ class WebController extends Controller
         $review->with(['Booking'=>function($query){
             $query->with('organization');
         }])->with('user')->orderBy("id","DESC");
-
+//        return $review->paginate(CommonEnums::$PAGE_LENGTH);
         $total_review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where("deleted", CommonEnums::$NO)->count();
         $active_review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();

@@ -232,11 +232,11 @@
             </div>
           </div>
 
-          <div class="col-sm-6 orgnization hidden" >
+          <div class="col-sm-6 orgnization @if($coupons && ($coupons->organization_scope == \App\Enums\CouponEnums::$ORGANIZATION_SCOPE['custom'])) @else hidden @endif" >
             <div class="form-input">
               <label>Select Organization</label>
               <div>
-                <select class="form-control br-5 select-box" name="orgnizations[]" multiple>
+                <select class="form-control br-5 select-box" name="organizations[]" multiple>
                     @foreach($organizations as $org)
                       <option value="{{$org->id}}" @if($coupons) @foreach($coupons->organizations as $organizations)  @if($organizations->id == $org->id) selected @endif @endforeach @endif>{{ucfirst(trans($org->org_name))}}</option>
                     @endforeach
@@ -259,7 +259,7 @@
             </div>
           </div>
 
-          <div class="col-sm-6 user hidden" >
+          <div class="col-sm-6 user @if($coupons && ($coupons->user_scope == \App\Enums\CouponEnums::$USER_SCOPE['custom'])) @else hidden @endif" >
             <div class="form-input">
               <label>Select Users</label>
               <div>

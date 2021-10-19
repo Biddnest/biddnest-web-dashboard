@@ -366,9 +366,10 @@ Debugbar::info($price);
                                             <div class="select-date">
                                                 @php $count=1; @endphp
                                                 @foreach($booking->movement_dates as $mdate)
-{{--                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>--}}
-                                                    <label class="mr-2 move-add-date">
-                                                        <input type="checkbox" name="moving_date[]" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date_{{$count}}" data-id="{{$count}}" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                                    <label class="mr-2 move-add-date" id="moving_date">
+                                                        <input type="checkbox" name="moving_date[]" value="{{date("d M Y", strtotime($mdate->date))}}" class="card-input-element moving-date_{{$count}}" data-parsley-errors-container="#err-date"
+                                                               required
+                                                               data-parsley-error-message="Mandatory Field. Please enter the value" style="display: none"/>
                                                         <span class="status-3 move-date mdate_{{$count}} cursor-pointer">{{date("d M Y", strtotime($mdate->date))}}</span>
                                                     </label>
                                                     @php $count++; @endphp

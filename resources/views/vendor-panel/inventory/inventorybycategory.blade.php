@@ -31,6 +31,14 @@
                             Select Category
                         </h3>
                     </div>
+                    <div class="card-head  pt-2  left col-lg-4" style="padding: 8px 10px; flex: 0 0 30% !important;">
+                        <div class="search">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('vendor.inventorycat', ['type'=>$type])}}" placeholder="Search...">
+                            <button type="submit" class="searchButton">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <ul class="nav nav-tabs p-15 secondg-bg pt-0 pb-0 f-16" id="myTab" role="tablist">
                     <li class="nav-item">

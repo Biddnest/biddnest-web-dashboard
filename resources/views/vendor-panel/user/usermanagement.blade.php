@@ -80,7 +80,7 @@
                                                 @endif
                                             </td>
                                             @if(\App\Helper::is("admin", true))
-                                                <td class="text-center"style="padding-top: 20px;">
+                                                <td class="text-center" style="padding-top: 20px;">
                                                     <a href="{{route('vendor.editusermgt', ['id'=>$user->id])}}"><i class="icon dripicons-pencil p-1" aria-hidden="true"></i></a>
                                                     <a href="#" class="delete inline-icon-button" data-parent=".user_{{$user->id}}" data-confirm="Are you sure, you want delete this User permenently? You won't be able to undo this." data-url="{{route('api.user.delete',['id'=>$user->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i>
                                                 </td>

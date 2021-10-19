@@ -232,7 +232,7 @@
             </div>
           </div>
 
-          <div class="col-sm-6 orgnization hidden" >
+          <div class="col-sm-6 orgnization @if($coupons && ($coupons->organization_scope == \App\Enums\CouponEnums::$ORGANIZATION_SCOPE['custom'])) @else hidden @endif" >
             <div class="form-input">
               <label>Select Organization</label>
               <div>
@@ -259,7 +259,7 @@
             </div>
           </div>
 
-          <div class="col-sm-6 user hidden" >
+          <div class="col-sm-6 user @if($coupons && ($coupons->user_scope == \App\Enums\CouponEnums::$USER_SCOPE['custom'])) @else hidden @endif" >
             <div class="form-input">
               <label>Select Users</label>
               <div>

@@ -1038,12 +1038,14 @@ class WebController extends Controller
             $zones=$zones->where('name', 'like', "%".$request->search."%");
         }
 
-
+            $total=Zone::where(["deleted"=>CommonEnums::$NO])->count();
+            $active=Zone::where(["deleted"=>CommonEnums::$NO])->where(["status"=>CommonEnums::$YES])->count();
+            $inactive=Zone::where(["deleted"=>CommonEnums::$NO])->where(["status"=>CommonEnums::$NO])->count();
         return view('zones.zones',[
             "zones"=>$zones->paginate(CommonEnums::$PAGE_LENGTH),
-            'total'=>$zones->count(),
-            'active'=>$zones->where(["status"=>CommonEnums::$YES])->count(),
-            'inactive'=>$zones->count() - $zones->where(["status"=>CommonEnums::$YES])->count()
+            'total'=>$total,
+            'active'=>$active,
+            'inactive'=>$inactive
         ]);
     }
 

@@ -421,7 +421,7 @@ class InventoryController extends Controller
                 return $initial_customer_quote = round($least_agent_price + (($average_margin_percentage / 100) * $least_agent_price) + $other_charges,2);
             else {
                 $initial_vendor_quote = $least_agent_price + ((0.25 * (($average_margin_percentage / 100) * $least_agent_price)) - 1);
-                return $initial_vendor_quote  < 0 ? round($initial_vendor_quote,2) : 0.00;
+                return $initial_vendor_quote  > 0 ? round($initial_vendor_quote,2) : 0.00;
             }
 
     }

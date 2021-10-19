@@ -264,4 +264,10 @@
         padding-left: 5px !important;
         text-align: center !important;
     }
+
+    .underline{
+        text-decoration: underline !important;
+        color: #2E0789;
+        cursor: pointer;
+    }
 </style>

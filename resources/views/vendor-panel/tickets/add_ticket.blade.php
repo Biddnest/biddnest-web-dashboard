@@ -75,7 +75,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group theme-text">
                                     <label class="pt-4">Description</label>
-                                    <textarea class="form-control  br-5" id="testim-description" name="desc" rows="3" required>                                                     </textarea>
+                                    <textarea class="form-control  br-5" id="testim-description" name="desc" rows="3" required></textarea>
                                     <span class="error-message">Please enter valid
                                                 Description</span>
                                 </div>

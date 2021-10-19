@@ -100,6 +100,7 @@ class VendorWebController extends Controller
                 ->sum("final_quote");
         }
 
+        $order_dist =  Booking::select('status', DB::raw("count(*) AS count"))->where('organization_id', Session::get('organization_id'))->groupBy('status')->get();
         return view('vendor-panel.dashboard.dashboard',['count_live'=>$count_live, 'count_ongoing'=>$count_ongoing, 'count_won'=>$count_won, 'count_branch'=>$count_branch, 'count_emp'=>$count_emp, 'total_revenue'=>$total_revenue, 'booking_live'=>$booking_live,
             'graph'=>[
                 "revenue"=>[
@@ -112,7 +113,26 @@ class VendorWebController extends Controller
                         "sales"=>$last_week_sale
                     ],
                 ],
-                "order_distribution"=>Booking::select('status', DB::raw("count(*) AS count"))->where('organization_id', Session::get('organization_id'))->groupBy('status')->get()
+                "order_distribution" => count($order_dist) ? $order_dist :
+                    [
+                        [
+                    "status"=>5,
+                    "count"=>0
+                        ],[
+                    "status"=>6,
+                    "count"=>0
+                        ],[
+                    "status"=>7,
+                    "count"=>0
+                        ],[
+                    "status"=>8,
+                    "count"=>0
+                        ],
+                        [
+                            "status"=>8,
+                    "count"=>0
+                        ]
+                    ]
             ]]);
     }
 

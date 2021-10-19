@@ -110,7 +110,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-input">
                                                 <input type="hidden" name="ticket_id" value="{{$tickets->id}}">
-                                                <textarea name="reply" class = "form-control editor" rows="2"></textarea>
+                                                <textarea name="reply" class = "form-control editor" rows="2" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">

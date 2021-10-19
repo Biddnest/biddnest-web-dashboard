@@ -105,6 +105,9 @@
                                   Order ID
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Booked By
+                                </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Customer Name
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
@@ -123,7 +126,10 @@
                                     Delivery Distance
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
-                                  Order Amount
+                                  Movement Type
+                                </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Suggested to Customer
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Booking Status
@@ -137,6 +143,13 @@
                                     @else
                                         {{$booking->public_enquiry_id}}
                                     @endif
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                 @if((bool)json_decode($booking->meta,true)['self_booking'])
+                                 <a href="#0" data-sidebar="{{ route('sidebar.customer',['id'=>$booking->user->id]) }}" class="sidebar-toggle-link cursor-pointer underline">{{$booking->user->fname}} {{$booking->user->lname}}</a> (self)
+                                 @else
+                                        <a href="#0" data-sidebar="{{ route('sidebar.customer',['id'=>$booking->user->id]) }}" class="sidebar-toggle-link cursor-pointer underline">{{$booking->user->fname}} {{$booking->user->lname}}</a> (booked for friend)
+                                 @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                  {{json_decode($booking->contact_details,true)['name'] }}
@@ -157,6 +170,13 @@
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     {{ json_decode($booking->meta, true)['distance'] }}Kms
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    @if($booking->booking_type == \App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
+                                        Economic
+                                    @else
+                                    Premium
+                                    @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     &#8377;@if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif
@@ -215,6 +235,17 @@
                                         @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
                                         <span class="status-badge red-bg  text-center td-padding" style="font-weight:bold !important">Request To Cancel</span>
                                         @break
+                                        @case(\App\Enums\BookingEnums::$STATUS['in_progress'])
+                                        <span class=" text-center status-badge red-bg">In Progress</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                        <span class=" text-center status-badge red-bg">Awaiting Bid Result</span>
+                                        @break;
+
+                                        @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                        <span class=" text-center status-badge red-bg">Price Review Pending</span>
+                                        @break;
                                     @endswitch
                                 </div>
 

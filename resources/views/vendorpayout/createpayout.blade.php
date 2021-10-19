@@ -4,7 +4,7 @@
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="createvendorpayout">
     <div class="d-flex  flex-row justify-content-between">
-        <h3 class="page-head f-28 text-left p-4 theme-text">Create Payout</h3>
+        <h3 class="page-head f-28 text-left p-4 theme-text">@if($payout) Edit @else Create @endif Payout</h3>
     </div>
     <div class="d-flex  flex-row justify-content-between">
       <div class="page-head text-left p-4 pt-0 pb-0">
@@ -46,7 +46,7 @@
                             <div class="form-input" >
                                 <label class="start-date">Payout date</label>
                                 <div id="my-modal">
-                                    <input type="datetime-local" id="dateselect" name="payout_date" value="@if($payout){{date('m/d/Y h:i A', strtotime($payout->dispatch_at))}}@endif" class="form-control br-5" required="required" placeholder="23/Dec/2020" />
+                                    <input type="text" id="dateselect" name="payout_date" value="@if($payout){{date('Y-m-d', strtotime($payout->dispatch_at))}}@endif" class="date form-control br-5" required="required" placeholder="23/Dec/2020" />
                                     <span class="error-message">please enter valid date</span>
                                 </div>
                             </div>

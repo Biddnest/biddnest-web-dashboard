@@ -110,12 +110,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="d-felx justify-content-start p-15 pt-0">
-                                <button class="btn white-bg btn-padding">
-                                    Cancel
-                                </button>
-                            </div>
-
                         </div>
 
                         </form>

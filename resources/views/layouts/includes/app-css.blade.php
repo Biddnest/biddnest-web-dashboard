@@ -1140,4 +1140,10 @@
             .swal2-popup{
                 transform: scale(1.3) !important;
             }
+
+            .underline{
+                text-decoration: underline !important;
+                color: #2E0789;
+                cursor: pointer;
+            }
         </style>

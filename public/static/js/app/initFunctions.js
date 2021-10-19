@@ -585,6 +585,7 @@ export function initOrderDistributionChartVendor(){
         });
         if($("#order_dist_dataset_vendor").length){
             var chartData = JSON.parse($("#order_dist_dataset_vendor").val());
+            console.log(chartData);
             var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
             var textInside = sum.toString()+" "+
                 "Orders";

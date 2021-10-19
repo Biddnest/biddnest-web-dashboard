@@ -145,7 +145,7 @@
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
 
                               <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                  {{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}
+                                  <a href="#0"  class="underline sidebar-toggle-link" data-sidebar="{{ route('sidebar.vendors',['id'=>$booking->organization->id]) }}">{{ucfirst(trans($booking->organization->org_name))}} {{ucfirst(trans($booking->organization->org_type))}}</a>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->vehicle){{ucfirst(trans($booking->vehicle->name))}} {{ucfirst(trans($booking->vehicle->number))}} @else Vehicle is not assigned @endif

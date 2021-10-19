@@ -272,9 +272,12 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     revertFormAnim(button, buttonPretext);
                 }
             },
-            error: (error, b, c) => {
+            error: (error, ajaxOptions, thrownError) => {
                 Logger.info(error.responseText);
-                megaAlert("Oops", "Something went wrong in server. Please try again later.");
+                if(error.status === 400)
+                    megaAlert("Incorrect Data", "Please make sure to fill all fields with valid input.");
+                else
+                    megaAlert("Oops", "Something went wrong in server. This action couldn't be processed.");
                 revertFormAnim(button, buttonPretext);
             },
         });
@@ -606,7 +609,7 @@ $("body").on('click', ".delete", function(event) {
     return false;*/
 });
 
-$("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
+$("body").on('click', ".sidebar-toggle td:not(:last-child), .sidebar-toggle-link", function(event) {
     var $this = $(this);
 
     // if($(this).hasClass('no-toggle'))
@@ -619,7 +622,13 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child)", function(event) {
         '                </div>');
 
     $('.side-bar-pop-up').addClass('display-pop-up');
-    $.get($(this).parent().data("sidebar"), {}, function(response){
+
+    let url;
+    if($(this).hasClass("sidebar-toggle-link"))
+        url = $(this).data("sidebar");
+    else
+        url = $(this).parent().data("sidebar");
+    $.get(url, {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
@@ -2056,3 +2065,8 @@ $("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amoun
     return false;
 });
 
+
+$("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
+    console.log("called");
+    $(this).closest(".side-bar-pop-up").removeClass("display-pop-up");
+});

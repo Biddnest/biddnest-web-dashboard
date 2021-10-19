@@ -433,7 +433,7 @@ class WebController extends Controller
 
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
-        }])->with('inventories')->with('driver')->with('organization')->findOrFail($request->id);
+        }])->with('inventories')->with('driver')->with('organization')->with('user')->findOrFail($request->id);
 
         $hist = [];
 
@@ -1037,11 +1037,13 @@ class WebController extends Controller
         if(isset($request->search)){
             $zones=$zones->where('name', 'like', "%".$request->search."%");
         }
-        $total = Zone::where(["deleted"=>CommonEnums::$NO])->whereIn('id', $zone)->count();
-        $active = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->whereIn('id', $zone)->count();
-        $inactive = Zone::where(["status"=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO])->whereIn('id', $zone)->count();
+
+
         return view('zones.zones',[
-            "zones"=>$zones->paginate(CommonEnums::$PAGE_LENGTH), 'total'=>$total, 'active'=>$active, 'inactive'=>$inactive
+            "zones"=>$zones->paginate(CommonEnums::$PAGE_LENGTH),
+            'total'=>$zones->count(),
+            'active'=>$zones->where(["status"=>CommonEnums::$YES])->count(),
+            'inactive'=>$zones->count() - $zones->where(["status"=>CommonEnums::$YES])->count()
         ]);
     }
 

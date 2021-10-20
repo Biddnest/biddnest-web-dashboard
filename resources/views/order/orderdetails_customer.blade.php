@@ -161,25 +161,35 @@
                                  {{json_decode($booking->contact_details,true)['email'] }}
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @php $source =  json_decode($booking->source_meta,true); @endphp
-                                    Floor: {{$source['floor']}}, {{$source['address']}}. @if($source['lift'] == 1) Lift is available.@else Lift is not available. @endif
-                                </div>
-                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @php $source =  json_decode($booking->destination_meta,true); @endphp
-                                    Floor: {{$source['floor']}}, {{$source['address']}}. @if($source['lift'] == 1) Lift is available. @else Lift is not available. @endif
-                                </div>
-                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    {{ json_decode($booking->meta, true)['distance'] }}Kms
-                                </div>
-                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->booking_type == \App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
-                                        Economic
+                                    @if($booking->source_meta)
+                                        @php $source =  json_decode($booking->source_meta,true); @endphp
+                                        Floor: {{$source['floor'] ?? ''}}, {{$source['address'] ?? ''}}. @if($source['lift'] && $source['lift'] == 1) Lift is available.@else Lift is not available. @endif
                                     @else
-                                    Premium
+                                    -
                                     @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    &#8377;@if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif
+                                    @if($booking->destination_meta)
+                                        @php $dest =  json_decode($booking->destination_meta,true); @endphp
+                                        Floor: {{$dest['floor'] ?? ''}}, {{$dest['address'] ?? ''}}. @if($dest['lift'] && $dest['lift'] == 1) Lift is available. @else Lift is not available. @endif
+                                    @else - @endif
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    {{ json_decode($booking->meta, true)['distance'] ?? '-'}}Kms
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    @if($booking->booking_type)
+                                        @if($booking->booking_type == \App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
+                                            Economic
+                                        @else
+                                            Premium
+                                        @endif
+                                    @else - @endif
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    @if($booking->final_quote)
+                                        &#8377;@if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif
+                                    @else - @endif
                                 </div>
 
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">

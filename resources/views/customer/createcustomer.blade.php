@@ -94,7 +94,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Date of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control dateselect birthdate date" required>
+                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control dateselect birthdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>

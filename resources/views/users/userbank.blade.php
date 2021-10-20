@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="d-flex  justify-content-between flex-row ml-20 p-10 py-0" style="border-top: 1px solid #70707040;">
                                     <div class="w-50">
-                                        <a class="white-text p-10" href="#"><button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
+                                        <a class="white-text p-10" href="{{route('users')}}"><button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button></a>
                                     </div>
                                     <div class="w-50 text-right">
                                         <a class="white-text p-10"><button class="btn theme-bg white-text w-30">Save</button></a>

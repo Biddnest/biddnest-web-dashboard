@@ -111,7 +111,7 @@
                     </div>
                     <div class="d-flex  justify-content-between flex-row  p-10 border-top " >
                         <div class="w-50">
-                            <a class="white-text p-10 cancel" href="#">
+                            <a class="white-text p-10 cancel" href="{{route('vendor-payout')}}">
                                 <button type="button" class="btn theme-br theme-text w-30 white-bg">Cancel</button>
                             </a>
                         </div>

@@ -146,7 +146,7 @@
                                     style="border-top: 1px solid #70707040"
                                   >
                                     <div class="w-50">
-                                      <a class="white-text p-10 cancel" href="#"
+                                      <a class="white-text p-10 cancel" href="{{route('inventories')}}"
                                         ><button
                                           class="btn theme-br theme-text w-30 white-bg br-5"
                                         >

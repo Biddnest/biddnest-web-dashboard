@@ -277,6 +277,14 @@
                                                         <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;"> In Transit</span>
                                                         @break
 
+                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                        <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Awaiting Bid Result</span>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                        <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Price Review Pending</span>
+                                                        @break
+
                                                     @endswitch
                                                 </td>
                                             <td class="">
@@ -316,6 +324,24 @@
                                                                          alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
                                                                 </i>
                                                             </a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                        <a href="{{route('vendor.in-transit', ['id'=>$booking->public_booking_id])}}">
+                                                            <i class="tooltip-trigger">
+                                                                <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                     alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                            </i>
+                                                        </a>
+                                                        @break
+
+                                                        @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                        <a href="{{route('vendor.in-transit', ['id'=>$booking->public_booking_id])}}">
+                                                            <i class="tooltip-trigger">
+                                                                <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
+                                                                     alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                            </i>
+                                                        </a>
                                                         @break
 
                                                     @endswitch

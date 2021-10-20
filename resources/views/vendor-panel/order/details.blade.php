@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10" style="margin-bottom: 30px; margin-left: -54px;">
                                 <div class="steps-container p-15 mr-5 pr-5">
-                                    <hr class="dash-line" style="width: 90%;     margin-left: 50px;" >
+                                    <hr class="dash-line" style="width: 85%;     margin-left: 50px;" >
                                     @foreach(array_slice(\App\Enums\BookingEnums::$STATUS, 0, 9) as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">
@@ -216,8 +216,8 @@
                                                 Rs. {{$booking->final_estimated_quote}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @foreach($booking->movement_dates as $mdate)
-                                                    <span class="status-3">{{date("d M Y", strtotime($mdate->date))}}</span>
+                                                @foreach(json_decode($booking->movement_dates, true) as $mdate)
+                                                    <span class="status-3">{{date("d M Y", strtotime($mdate['date']))}}</span>
                                                 @endforeach
                                             </div>
                                         </div>

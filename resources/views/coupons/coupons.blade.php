@@ -133,7 +133,7 @@
                                                 Fixed
                                             @break
 
-                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
+                                            @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["percentage"])
                                                 Percentage
                                             @break
 

@@ -327,7 +327,6 @@
                                                     @foreach(json_decode($tickets->image, true) as $image)
                                                         <div class="col-sm-3">
                                                             <a href="{{$image}}" data-lightbox="image"><img src="{{$image}}" style="width: 100%;"></a>
-
                                                         </div>
                                                     @endforeach
                                                 </div>

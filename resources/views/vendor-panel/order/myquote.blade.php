@@ -24,7 +24,7 @@
                         <div class="p-15">
                             <div class="d-flex p-10">
                                 <div class="steps-container mr-4 justify-content-center">
-                                    <hr class="dash-line" style="margin-left: 5%; width: 86%;">
+                                    <hr class="dash-line" style="margin-left: 5%; width: 85%;">
                                     @foreach(array_slice(\App\Enums\BookingEnums::$STATUS, 0, 9) as $key=>$status)
                                         <div class="steps-status " style="width: 10%; text-align: center; padding-left: 35px;">
                                             <div class="step-dot">

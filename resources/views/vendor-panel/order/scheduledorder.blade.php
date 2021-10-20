@@ -178,7 +178,9 @@
                                                 Rs. {{$booking->final_quote}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                <span class="status-3">{{json_decode($booking->bid->meta, true)['moving_date']}}</span>
+                                                @foreach(json_decode($booking->bid->moving_dates, true) as $mdates)
+                                                    <span class="status-3">{{$mdates}}</span>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>

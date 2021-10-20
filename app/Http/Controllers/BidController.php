@@ -562,11 +562,14 @@ class BidController extends Controller
             return Helper::response(false,"Invalied Booking Id");
 
         $vendor = Organization::find($organization_id);
+        $query = [];
+        if(json_decode($booking->booking->meta, true)['subcategory']){
+            $query = SubservicePrice::where(
+                "organization_id", $organization_id)
+                ->where('subservice_id', Subservice::where("name", json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
+                ->first();
+        }
 
-        $query = SubservicePrice::where(
-            "organization_id", $organization_id)
-            ->where('subservice_id', Subservice::where("name", json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
-            ->first();
 
         $price_list = [];
         $total = 0.00;

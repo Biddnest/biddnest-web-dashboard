@@ -365,11 +365,10 @@
                                         <td class="" style="width: 20%;">
                                             <input class="form-control br-5 fixed " type="number" placeholder="0" name="inventory_items[][quantity]" >
                                             <span class="hidden"> <input type="text" class="custom_slider custom_slider_1 range" name="inventory_items[][quantity]"  data-min="0" data-max="1000" data-from="0" data-to="1000" data-type="double" data-step="1" /></span>
-
                                         </td>
 
                                         <td>
-                                            <input class="form-control br-5 fixed" type="hidden" name="inventory_items[][is_custom]:boolean" value="true" placeholder="0" >
+                                            <input class="form-control br-5" type="hidden" name="inventory_items[][is_custom]:boolean" value="true" placeholder="0" >
                                             <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
                                         </td>
                                     </tr>

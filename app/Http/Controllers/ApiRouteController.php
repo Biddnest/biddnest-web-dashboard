@@ -754,7 +754,7 @@ class ApiRouteController extends Controller
             'inventory_items.*.name' =>'nullable|string',
             'inventory_items.*.material' =>'nullable|string',
             'inventory_items.*.size' =>'nullable|string',
-            'inventory_items.*.quantity' =>'nullable|integer',
+            'inventory_items.*.quantity' =>'nullable',
         ]);
 
         if($validation->fails())

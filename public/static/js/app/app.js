@@ -2114,3 +2114,7 @@ $("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
     console.log("called");
     $(this).closest(".side-bar-pop-up").removeClass("display-pop-up");
 });
+
+$("body").on("keydown",".bid-submit-amt",function(){
+   $('.bid-expt').val($(this).val());
+});

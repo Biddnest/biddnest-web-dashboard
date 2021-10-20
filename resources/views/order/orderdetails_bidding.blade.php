@@ -239,7 +239,7 @@
                                     <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
                                         <div><p class="mt-2">Expected Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple" type="text" value="{{$booking->organization_rec_quote}}" placeholder="6000" readonly/>
                                             <input class="form-control border-purple" type="hidden" type="text" value="{{$booking->public_booking_id}}" name="public_booking_id" placeholder="6000" readonly/>
                                             <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$org_id->organization_id}}" name="organization_id" readonly/>
                                             <input class="form-control border-purple ml-2" type="hidden" type="text" value="{{$org_id->organization->admin->id ?? ''}}" name="vendor_id" readonly/>
@@ -314,7 +314,7 @@
                                     <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                         <div><p class="mt-2">Total Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
+                                            <input class="form-control border-purple calc-result validate-input bid-submit-amt" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -323,7 +323,7 @@
                                     <div class="d-flex flex-row p-10 justify-content-between secondg-bg heading status-badge">
                                         <div><p class="mt-2">Expected Price</p></div>
                                         <div class="col-2">
-                                            <input class="form-control border-purple" type="text" value="{{$booking->final_estimated_quote}}" placeholder="6000" readonly/>
+                                            <input class="form-control border-purple calc-result bid-expt" type="text" value="{{$price['total']}}" placeholder="6000" readonly/>
                                         </div>
                                     </div>
                                     <div class="d-flex row p-10">

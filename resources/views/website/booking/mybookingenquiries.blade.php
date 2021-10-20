@@ -132,7 +132,7 @@
                                                         @php $color = \App\Enums\BookingEnums::$COLOR_CODE['payment_pending']; @endphp
                                                         <a class="white-text" href="#">
                                                             <button class="btn f-12 white-bg" style="background-color:{{$color}}; font-weight: 700; color: #FFFFFF;">
-                                                                Price Review Pending
+                                                                Bidding
                                                             </button>
                                                         </a>
                                                         @break

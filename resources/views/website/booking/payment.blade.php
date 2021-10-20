@@ -35,19 +35,25 @@
                     </div>
                 </div>
                 {{-- <form action="{{route('verifiedcoupon')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('verifiedpayment', ['id'=>$public_booking_id])}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" data-parsley-validate>--}}
-                <div class="row d-flex justify-content-between mt-2">
-                    <div class="col-md-2 col-sm-12 col-xs-12 mt-1 pt-1">
-                        <p class=" mb-view pl-0 f-14">Confirm moving date</p>
+                @if(count(json_decode($payment_summary['dates'], true)) ==1)
+                    @foreach(json_decode($payment_summary['dates']) as $date_count)
+                            <input type="hidden" name="moving_date" value="{{date("d M Y", strtotime($date_count))}}" />
+                    @endforeach
+                @else
+                    <div class="row d-flex justify-content-between mt-2">
+                        <div class="col-md-2 col-sm-12 col-xs-12 mt-1 pt-1">
+                            <p class=" mb-view pl-0 f-14">Confirm moving date</p>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-8 select-date" style="display:flex !important;">
+                            @foreach(json_decode($payment_summary['dates']) as $dates)
+                               <label class="mr-2 move-add-date" style="margin-right: 0 !important; width: 20% !important;">
+                                    <input type="radio" name="moving_date" id="moving_date" value="{{date("d M Y", strtotime($dates))}}" class="card-input-element moving-dates" required data-parsley-errors-container="#service-error" style="display: none"/>
+                                    <span class="status-3 move-dates cursor-pointer">{{date("d M Y", strtotime($dates))}}</span>
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="col-md-8 col-sm-12 col-xs-8 select-date" style="display:flex !important;">
-                        @foreach(json_decode($payment_summary['dates']) as $dates)
-                           <label class="mr-2 move-add-date" style="margin-right: 0 !important; width: 20% !important;">
-                                <input type="radio" name="moving_date" id="moving_date" value="{{date("d M Y", strtotime($dates))}}" class="card-input-element moving-dates" required data-parsley-errors-container="#service-error" style="display: none"/>
-                                <span class="status-3 move-dates cursor-pointer">{{date("d M Y", strtotime($dates))}}</span>
-                            </label>
-                        @endforeach
-                    </div>
-                </div>
+                @endif
                 <div class="row d-flex justify-content-between mt-2">
                     <div class="col-md-2 col-sm-12 col-xs-12 mt-1 pt-1">
                         <p class=" mb-view pl-0 f-14">Apply Coupon Code</p>

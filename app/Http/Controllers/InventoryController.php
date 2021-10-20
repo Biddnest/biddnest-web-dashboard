@@ -301,6 +301,10 @@ class InventoryController extends Controller
 
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
         try {
+            BookingOrganizationGeneratedPrice::where([
+                "booking_id" => $booking_data['id']
+            ])->delete();
+
             foreach ($vendors as $vendor) {
 
                 $additional_distance = $total_distance - $vendor['base_distance'];
@@ -356,6 +360,9 @@ class InventoryController extends Controller
                 $economic_percent = $mp_economic > 0.00 ? (($mp_economic - $bp_economic) / $mp_economic) * 100 : 0.00;
                 $premium_percent = $mp_premium > 0.00 ? (($mp_premium - $bp_premium) / $mp_premium) * 100 : 0.00;
 
+
+
+
                 $price_calc = new BookingOrganizationGeneratedPrice();
                 $price_calc->booking_id = $booking_data['id'];
                 $price_calc->organization_id = $vendor['id'];
@@ -365,10 +372,8 @@ class InventoryController extends Controller
                 $price_calc->bp_premium = round($bp_premium, 2);
                 $price_calc->economic_margin_percentage = round($economic_percent, 2);
                 $price_calc->premium_margin_percentage = round($premium_percent, 2);
-
                 $price_calc->base_price_economic = round($base_price_economic, 2);
                 $price_calc->base_price_premium = round($base_price_premium, 2);
-
                 $result = $price_calc->save();
 
             }
@@ -402,7 +407,7 @@ class InventoryController extends Controller
         else {
             $initial_vendor_quote = $least_agent_price + ((0.25 * (($average_margin_percentage / 100) * $least_agent_price)) - 1);
 
-            return round($initial_vendor_quote,2) >= 0.00 ?: 0.00;
+            return $initial_vendor_quote  > 0 ? round($initial_vendor_quote,2) : 0.00;
         }
 
     }

@@ -563,10 +563,13 @@ class BidController extends Controller
 
         $vendor = Organization::find($organization_id);
 
+        if(json_decode($booking->booking->meta, true)['subcategory'] != "" && json_decode($booking->booking->meta, true)['subcategory'] != null)
         $query = SubservicePrice::where(
             "organization_id", $organization_id)
             ->where('subservice_id', Subservice::where("name", json_decode($booking->booking->meta, true)['subcategory'])->pluck('id')[0])
             ->first();
+        else
+            $query = null;
 
         $price_list = [];
         $total = 0.00;

@@ -277,10 +277,6 @@
                                                         <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;"> In Transit</span>
                                                         @break
 
-                                                        @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
-                                                        <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Awaiting Bid Result</span>
-                                                        @break
-
                                                         @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
                                                         <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Price Review Pending</span>
                                                         @break

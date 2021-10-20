@@ -544,11 +544,12 @@
         @{{else}}
             <input type="hidden" name="subcategory" value="custom" class="card-input-element01 web-inventory" data-inv-url="{{route('get_inventories_range')}}"/>
         @{{/if}}
+        <input type="hidden" class="max-inv-count" value="100" />
         @{{#each subservices}}
             <div class="col-md-2 col-lg-2 col-sm-4 col-paddingnon">
 
                 <label>
-                    <input type="radio" name="subcategory" value="@{{name}}" class="card-input-element01 web-sub-category web-inventory" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}" data-inv-url="{{route('get_inventories')}}?subservice_id=@{{id}}"/>
+                    <input type="radio" name="subcategory" value="@{{name}}" class="card-input-element01 web-sub-category web-inventory" data-url="{{route('get_inventories')}}?subservice_id=@{{id}}" data-inv-url="{{route('get_inventories')}}?subservice_id=@{{id}}" onclick="$('.max-inv-count').val(`@{{ max_extra_items}}`)" />
 
                     <div class="panel panel-default card-input disabled subservice-selector" style="box-shadow: none !important;  background:none !important; text-align: center;">
                         <div class="panel-heading">

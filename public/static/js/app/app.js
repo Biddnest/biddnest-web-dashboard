@@ -1788,6 +1788,12 @@ $("body").on('click', ".filter-button", function(event) {
 });
 
 $("body").on('click', ".add-item", function(event) {
+
+    if($(".custom-item").length >= $(".max-inv-count").val()){
+        megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
+        return false;
+    }
+
     let item = [];
     let inventory_quantity_type = $(".inventory-quantity-type").val();
     $(this).closest(".item-single-wrapper").find("input").each(function(){
@@ -1834,6 +1840,10 @@ $("body").on('click', ".add-item", function(event) {
 });
 
 $("body").on('click', ".add-search-item", function(event) {
+    if($(".custom-item").length >= $(".max-inv-count").val()){
+        megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
+        return false;
+    }
     let item = [];
     let inventory_quantity_type = $(".inventory-quantity-type").val();
     $(this).closest(".item-single-wrapper").find("input").each(function(){

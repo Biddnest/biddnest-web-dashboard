@@ -105,6 +105,9 @@
                                   Order ID
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Booked On
+                                </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Booked By
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
@@ -138,11 +141,20 @@
 
                             <div class="col-sm-8  match-item white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                    @if(in_array($booking->status,[
+            \App\Enums\BookingEnums::$STATUS['pending_driver_assign'],
+            \App\Enums\BookingEnums::$STATUS['awaiting_pickup'],
+            \App\Enums\BookingEnums::$STATUS['in_transit'],
+            \App\Enums\BookingEnums::$STATUS['completed'],
+            \App\Enums\BookingEnums::$STATUS['cancelled'],
+        ]))
                                         {{$booking->public_booking_id}}
                                     @else
                                         {{$booking->public_enquiry_id}}
                                     @endif
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                  {{\Carbon\Carbon::parse($booking->created_at)->format("h:i A, d M Y")}}
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                  @if((bool)json_decode($booking->meta,true)['self_booking'])

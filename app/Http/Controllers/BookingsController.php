@@ -1460,7 +1460,7 @@ class BookingsController extends Controller
 
         $zone_id = GeoController::getNearestZone($data['source']['lat'], $data['source']['lng']);
 
-        $distance = GeoController::distance($booking_exist->source_lat, $booking_exist->source_lng, $data['destination']['lat'], $data['destination']['lng']);
+        $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
 
         $meta = json_decode($booking_exist->meta, true);
         $meta['distance'] = $distance;
@@ -1581,6 +1581,7 @@ class BookingsController extends Controller
             $bookinginventory->size = $items["size"];
             $bookinginventory->quantity = $quantity;
             $bookinginventory->quantity_type = $inventory_quantity_type;
+            $bookinginventory->is_custom = $items["is_custom"];
             $result_items = $bookinginventory->save();
         }
 

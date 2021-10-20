@@ -75,7 +75,6 @@ class BidController extends Controller
 
     }
 
-
     public static function getbookings($public_booking_id = null)
     {
 
@@ -255,7 +254,7 @@ class BidController extends Controller
 
 
         Booking::where("id", $book_id)
-            ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result']])
+            ->whereIn("status", [BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['biding']])
             ->update([
                 "organization_id"=>$won_org_id,
                 "final_quote"=>round($final_bid_amount,2),

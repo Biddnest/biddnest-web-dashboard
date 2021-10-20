@@ -190,7 +190,7 @@
                                             <div class="row d-felx mr-2 justify-content-start  mt-2">
                                                 @foreach(json_decode($booking->meta, true)['images'] as $image)
                                                     <div class="col-sm-3">
-                                                        <img src="{{$image}}" style="width: 100%;">
+                                                        <a href="{{$image}}" data-lightbox="image"><img src="{{$image}}" style="width: 100%;"></a>
                                                     </div>
                                                 @endforeach
                                                 @if(count(json_decode($booking->meta, true)['images'])== 0)

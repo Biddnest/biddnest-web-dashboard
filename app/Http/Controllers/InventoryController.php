@@ -300,7 +300,7 @@ class InventoryController extends Controller
             ->get();
 
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
-        try {
+//        try {
             BookingOrganizationGeneratedPrice::where([
                 "booking_id" => $booking_data['id']
             ])->delete();
@@ -319,7 +319,7 @@ class InventoryController extends Controller
                 $base_price_economic = 0.00;
                 $base_price_premium = 0.00;
 
-                if (strtolower($data['meta']['subcategory']) != "custom") {
+                if ($data['meta']['subcategory'] && strtolower($data['meta']['subcategory']) != "custom") {
                     $query = SubservicePrice::where("organization_id", $vendor['id'])
                         ->where('subservice_id', Subservice::where('name', $data['meta']['subcategory'])
                             ->pluck('id')[0])->first();
@@ -377,11 +377,11 @@ class InventoryController extends Controller
                 $result = $price_calc->save();
 
             }
-        }
-        catch(Exception $e){
+//        }
+       /* catch(Exception $e){
             Log::error($e->getMessage());
             DB::rollBack();
-        }
+        }*/
         if($result)
             return true;
         else

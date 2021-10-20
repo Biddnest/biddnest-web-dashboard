@@ -53,8 +53,12 @@
                                         <div class="flex-column justify-content-center test">
                                             <div class="card m-20  card-price eco cursor-pointer"  >
                                                 <div class="p-60 f-32 border-cicle eco-card" >
+                                                    @if((bool)json_decode($booking->quote_estimate, true)['economic'])
                                                     <div>₹{{json_decode($booking->quote_estimate, true)['economic']}}</div>
                                                     <div class="f-14 ">Base price</div>
+                                                    @else
+                                                        <div class="f-24 ">Choose</div>
+                                                    @endif
                                                 </div>
                                                 <div class="p-10 f-18">  Economy</div>
                                             </div>
@@ -68,8 +72,12 @@
                                         <div class="felx-column">
                                             <div class="card m-20 card-price pre  cursor-pointer ">
                                                 <div class="p-60 f-32  border-cicle pre-card  " >
-                                                    <div>₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
-                                                    <div class="f-14 p-1">Base price</div>
+                                                    @if((bool)json_decode($booking->quote_estimate, true)['premium'])
+                                                        <div>₹{{json_decode($booking->quote_estimate, true)['premium']}}</div>
+                                                        <div class="f-14 p-1">Base price</div>
+                                                    @else
+                                                        <div class="f-24 ">Choose</div>
+                                                    @endif
                                                 </div>
                                                 <div class="p-10 f-18">  Premium</div>
                                             </div>

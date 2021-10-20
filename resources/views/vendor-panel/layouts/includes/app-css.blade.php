@@ -270,4 +270,7 @@
         color: #2E0789;
         cursor: pointer;
     }
+    .error-message{
+        color:red;
+    }
 </style>

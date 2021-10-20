@@ -44,7 +44,7 @@
                             @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'] || $booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
                                 <div class="d-felx justify-content-center pt-4 border-top row">
                                     <div class="bid-badge mr-4">
-                                        <h4 class="step-title" style="padding: 12px 34px;">₹ {{$booking->final_estimated_quote}}</h4>
+                                        <h4 class="step-title" style="padding: 12px 34px;">₹ {{$booking->organization_rec_quote}}</h4>
                                         <p>Estimated Price</p>
                                     </div>
                                     <div class="bid-badge mr-4">
@@ -213,7 +213,7 @@
                                                 {{$booking->service->name}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                Rs. {{$booking->final_estimated_quote}}
+                                                Rs. {{$booking->organization_rec_quote}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 @foreach(json_decode($booking->movement_dates, true) as $mdate)
@@ -334,7 +334,7 @@ Debugbar::info($price);
                                 <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                     <div><p class="mt-2">Total Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple calc-result validate-input bid-submit-amt" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
+                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
                                     </div>
                                 </div>
                             </div>
@@ -378,7 +378,7 @@ Debugbar::info($price);
                                                 @endforeach
                                             </div>
 {{--                                            <input type="text" class="form-control br-5 selectdate filterdate validate-input" name="moving_date" id="date" data-selecteddate="{{$booking->movement_dates}}" required placeholder="15/02/2021">--}}
-                                            <span class="error-message">Please enter valid</span>
+                                            <span class="error-message" id="err-date"></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

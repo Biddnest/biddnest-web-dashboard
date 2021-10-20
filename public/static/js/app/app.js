@@ -1030,7 +1030,7 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
     if (isValid) {
         var est = $(".calc-result").data("est-quote");
         var quote = $(".calc-result").val();
-
+        $('.bid-expt').val(quote);
         // est = est.replace(/,/g, "");
 
         var high = parseInt(est)+parseInt(est/2);
@@ -1103,6 +1103,7 @@ $("body").on('click', ".next-btn-1", function(event) {
     if (isValid) {
         var est = $(".calc-result").data("est-quote");
         var quote = $(".calc-result").val();
+        $('.bid-expt').val(quote);
 
         var high = parseInt(est) + parseInt(est / 2);
         var low = parseInt(est) - parseInt(est / 2);
@@ -2113,8 +2114,4 @@ $("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amoun
 $("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
     console.log("called");
     $(this).closest(".side-bar-pop-up").removeClass("display-pop-up");
-});
-
-$("body").on("keydown",".bid-submit-amt",function(){
-   $('.bid-expt').val($(this).val());
 });

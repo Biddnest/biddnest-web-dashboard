@@ -91,10 +91,10 @@
                                     <div class="accordion" id="comments">
                                         <div class="d-flex justify-content-center">
                                             <div class="form-groups">
-                                                {{--<label class="container-01">
+                                                <label class="container-01">
                                                     <input type="checkbox" id="Lift1" required/>
                                                     <span class="checkmark-agree -mt-10"></span>
-                                                </label>--}}
+                                                </label>
 
                                                 <span class="error-message">Please enter valid</span>
                                             </div>

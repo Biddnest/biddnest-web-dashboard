@@ -56,25 +56,25 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Phone Number</label>
-                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" value="{{json_decode($booking->contact_details, true)['phone']}}" name="contact_details[phone]" maxlength="10" minlength="10" required>
+                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" value="@if($booking->contact_details){{json_decode($booking->contact_details, true)['phone']}}@endif" name="contact_details[phone]" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="full-name">Full Name</label>
-                                <input type="text" id="fullname" placeholder="David Jerome" name="contact_details[name]" value="{{json_decode($booking->contact_details, true)['name']}}" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="David Jerome" name="contact_details[name]" value="@if($booking->contact_details){{json_decode($booking->contact_details, true)['name']}}@endif" class="form-control" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="email-label">Email</label>
-                                <input type="email" placeholder="abc@mail.com" name="contact_details[email]" value="{{json_decode($booking->contact_details, true)['email']}}" id="E-mail" class="form-control" required>
+                                <input type="email" placeholder="abc@mail.com" name="contact_details[email]" value="@if($booking->contact_details){{json_decode($booking->contact_details, true)['email']}}@endif" id="E-mail" class="form-control" required>
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
-                            <input type="hidden" value="{{json_decode($booking->meta, true)['self_booking']}}" name="meta[self_booking]:boolean">
+                            <input type="hidden" value="@if($booking->meta){{json_decode($booking->meta, true)['self_booking'] ?? ''}}@endif" name="meta[self_booking]:boolean">
                             <div class="col-sm-6" hidden>
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
@@ -120,16 +120,16 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>From Address </label>
-                              <input type="text" placeholder="Choose on map" name="source[meta][geocode]" value="{{json_decode($booking->source_meta, true)['geocode']}}" class="form-control source-autocomplete" required>
+                              <input type="text" placeholder="Choose on map" name="source[meta][geocode]" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['geocode'] ?? ''}}@endif" class="form-control source-autocomplete" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>From Adress line 1</label>
-                              <input type="text" placeholder="Flat no, Street no" name="source[meta][address_line1]" value="{{json_decode($booking->source_meta, true)['address_line1']}}"  class="form-control" required>
-                              <input type="hidden" value="{{$booking->source_lat}}"  name="source[lat]" id="source-lat" class="form-control" required>
-                              <input type="hidden" value="{{$booking->source_lng}}"  name="source[lng]" id="source-lng" class="form-control" required>
+                              <input type="text" placeholder="Flat no, Street no" name="source[meta][address_line1]" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['address_line1'] ?? ''}}@endif"  class="form-control" required>
+                              <input type="hidden" value="@if($booking->source_lat){{$booking->source_lat ?? ''}}@endif"  name="source[lat]" id="source-lat" class="form-control" required>
+                              <input type="hidden" value="@if($booking->source_lng){{$booking->source_lng ?? ''}}@endif"  name="source[lng]" id="source-lng" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -144,35 +144,35 @@
                                 <div class="col-sm-12">
                                     <div class="form-input">
                                         <label>From Adress line 2</label>
-                                        <input type="text" placeholder="Landmark, Area" value="{{json_decode($booking->source_meta, true)['address_line2']}}" name="source[meta][address_line2]" class="form-control source-autocomplete" required readonly>
+                                        <input type="text" placeholder="Landmark, Area" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['address_line2'] ?? ''}}@endif" name="source[meta][address_line2]" class="form-control source-autocomplete" required readonly>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From City</label>
-                                    <input type="text" placeholder="City" id="source-city" class="form-control" value="{{json_decode($booking->source_meta, true)['city']}}" name="source[meta][city]" required readonly>
+                                    <input type="text" placeholder="City" id="source-city" class="form-control" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['city'] ?? ''}}@endif" name="source[meta][city]" required readonly>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From State</label>
-                                    <input type="text" placeholder="State" id="source-state" class="form-control" value="{{json_decode($booking->source_meta, true)['state']}}" name="source[meta][state]" required readonly>
+                                    <input type="text" placeholder="State" id="source-state" class="form-control" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['state'] ?? ''}}@endif" name="source[meta][state]" required readonly>
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Pincode</label>
-                                  <input type="text" placeholder="560097" id="source-pin" class="form-control number" value="{{json_decode($booking->source_meta, true)['pincode']}}" name="source[meta][pincode]" required readonly>
+                                  <input type="text" placeholder="560097" id="source-pin" class="form-control number" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['pincode'] ?? ''}}@endif" name="source[meta][pincode]" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>From Floor</label>
-                                  <input type="number" placeholder="3rd Floor" id="" value="{{json_decode($booking->source_meta, true)['floor']}}" min="-3" max="99" name="source[meta][floor]" class="form-control" required oninput="$(this).val(parseInt($(this).val()));">
+                                  <input type="number" placeholder="3rd Floor" id="" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['floor'] ?? ''}}@endif" min="-3" max="99" name="source[meta][floor]" class="form-control" required oninput="$(this).val(parseInt($(this).val()));">
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -180,8 +180,8 @@
                                 <div class="form-group">
                                 <label class="form-check-box mb-0" style="margin-top: 10px; margin-left:8px" for="Lift1">Flat/APARTMENT has SERVICE Lift?</label>
                                     <label class="container" style="margin-top: 10px; margin-left:-30px">
-                                        <input type="hidden" value="{{json_decode($booking->source_meta, true)['lift']}}" name="source[meta][lift]" id="letter">
-                                        <input type="checkbox" name="select_letter" value="1" id="Lift1" @if(json_decode($booking->source_meta, true)['lift'] == 1) checked @endif
+                                        <input type="hidden" value="@if($booking->source_meta){{json_decode($booking->source_meta, true)['lift'] ?? ''}}@endif" name="source[meta][lift]" id="letter">
+                                        <input type="checkbox" name="select_letter" value="1" id="Lift1" @if($booking->source_meta && json_decode($booking->source_meta, true)['lift'] == 1) checked @endif
                                                onchange="document.getElementById('letter').value = this.checked ? 1 : 0">
                                         <!-- <span class="checkmark"></span> -->
                                     </label>
@@ -197,16 +197,16 @@
                             <div class="col-sm-6">
                                 <div class="form-input">
                                 <label>To  Address</label>
-                                <input type="text" placeholder="Choose on map" name="destination[meta][geocode]" value="{{json_decode($booking->destination_meta, true)['geocode']}}" class="form-control dest-autocomplete">
-                                    <input type="hidden"  name="destination[lat]" id="dest-lat" class="form-control" value="{{$booking->destination_lat}}" required>
-                                    <input type="hidden"  name="destination[lng]" id="dest-lng" class="form-control" value="{{$booking->destination_lng}}" required>
+                                <input type="text" placeholder="Choose on map" name="destination[meta][geocode]" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['geocode'] ?? ''}}@endif" class="form-control dest-autocomplete">
+                                    <input type="hidden"  name="destination[lat]" id="dest-lat" class="form-control" value="@if($booking->destination_lat){{$booking->destination_lat ?? ''}}@endif" required>
+                                    <input type="hidden"  name="destination[lng]" id="dest-lng" class="form-control" value="@if($booking->destination_lng){{$booking->destination_lng ?? ''}}@endif" required>
                                 <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>To Adress line 1</label>
-                              <input type="text" placeholder="Flat no, Street no" name="destination[meta][address_line1]" value="{{json_decode($booking->destination_meta, true)['address_line1']}}" id="" class="form-control" required>
+                              <input type="text" placeholder="Flat no, Street no" name="destination[meta][address_line1]" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['address_line1'] ?? ''}}@endif" id="" class="form-control" required>
                               <span class="error-message">Please enter valid</span>
                             </div>
                           </div>
@@ -220,28 +220,28 @@
                                 <div class="col-sm-12">
                                     <div class="form-input">
                                         <label>To Adress line 2</label>
-                                        <input type="text" name="destination[meta][address_line2]" placeholder="Landmark, Area" id="" value="{{json_decode($booking->destination_meta, true)['address_line2']}}" class="form-control dest-autocomplete" required readonly>
+                                        <input type="text" name="destination[meta][address_line2]" placeholder="Landmark, Area" id="" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['address_line2'] ?? ''}}@endif" class="form-control dest-autocomplete" required readonly>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To City</label>
-                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" value="{{json_decode($booking->destination_meta, true)['city']}}" class="form-control" required readonly>
+                                  <input type="text" placeholder="City" id="dest-city"  name="destination[meta][city]" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['city'] ?? ''}}@endif" class="form-control" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                                 <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To State</label>
-                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" value="{{json_decode($booking->destination_meta, true)['state']}}" class="form-control" required readonly>
+                                    <input type="text" placeholder="State" id="dest-state"  name="destination[meta][state]" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['state'] ?? ''}}@endif" class="form-control" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Pincode</label>
-                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control number" maxlength="6" minlength="6" value="{{json_decode($booking->destination_meta, true)['pincode']}}" required readonly>
+                                  <input type="text" placeholder="620001" name="destination[meta][pincode]"  id="dest-pin" class="form-control number" maxlength="6" minlength="6" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['pincode'] ?? ''}}@endif" required readonly>
                                   <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -249,7 +249,7 @@
                               <div class="col-sm-6">
                                 <div class="form-input">
                                   <label>To Floor </label>
-                                    <input type="number" placeholder="5" min="-3" max="99" value="{{json_decode($booking->destination_meta, true)['floor']}}" name="destination[meta][floor]" id="" class="form-control" required oninput="$(this).val(parseInt($(this).val()));">
+                                    <input type="number" placeholder="5" min="-3" max="99" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['floor'] ?? ''}}@endif" name="destination[meta][floor]" id="" class="form-control" required oninput="$(this).val(parseInt($(this).val()));">
                                     <span class="error-message">Please enter valid</span>
                                 </div>
                               </div>
@@ -257,8 +257,8 @@
                                 <div class="form-inputs">
                                 <label class="form-check-box"   style="margin-top: 10px; margin-left:8px" for="Lift2">Flat/APARTMENT has SERVICE Lift?</label>
                                   <label class="container " style="margin-top: 10px; margin-left:-30px">
-                                      <input type="hidden" value="{{json_decode($booking->destination_meta, true)['lift']}}" name="destination[meta][lift]" id="letter2">
-                                      <input type="checkbox" name="select_letter" value="1" id="Lift2" @if(json_decode($booking->destination_meta, true)['lift'] == 1) checked @endif
+                                      <input type="hidden" value="@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['lift'] ?? ''}}@endif" name="destination[meta][lift]" id="letter2">
+                                      <input type="checkbox" name="select_letter" value="1" id="Lift2" @if($booking->destination_meta && json_decode($booking->destination_meta, true)['lift'] == 1) checked @endif
                                              onchange="document.getElementById('letter2').value = this.checked ? 1 : 0">
                                     <!-- <span class="checkmark"></span> -->
                                   </label>
@@ -275,7 +275,7 @@
                             <div class="form-input" >
                               <label class="start-date">Choose a Date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" value="{{$moving_dates}}" class="form-control br-5 selectdate bookdate cursor-pointer" required="required" placeholder="15 Jan"  />
+                                <input type="text" id="dateselect" name="movement_dates" value="{{$moving_dates ?? ''}}" class="form-control br-5 selectdate bookdate cursor-pointer" required="required" placeholder="15 Jan"  />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>
@@ -285,8 +285,8 @@
                             <div class="form-inputs">
                             <label class="form-check-box" for="need1"  style="margin-top: 10px;margin-left:8px">Interested in shared services?</label>
                                 <label class="container"  style="margin-top: 10px; margin-left:-30px">
-                                    <input type="hidden" class="share" value="{{json_decode($booking->source_meta, true)['shared_service']}}" name="source[meta][shared_service]:boolean" id="m_type">
-                                    <input type="checkbox" class="share_check" name="select_letter" value="1" id="movemnt" @if(json_decode($booking->source_meta, true)['shared_service'] == true) checked @endif
+                                    <input type="hidden" class="share" value="@if($booking->destination_meta){{json_decode($booking->source_meta, true)['shared_service'] ?? ''}}@endif" name="source[meta][shared_service]:boolean" id="m_type">
+                                    <input type="checkbox" class="share_check" name="select_letter" value="1" id="movemnt" @if($booking->source_meta && json_decode($booking->source_meta, true)['shared_service'] == true) checked @endif
                                            onchange="document.getElementById('m_type').value = this.checked ? true : false" disabled>
                                     <!-- <span class="checkmark"></span> -->
                                   <!-- <span class="checkmark"></span> -->
@@ -308,7 +308,7 @@
                                 <select  id="" name="service_id" class="form-control category-select " data-target=".range" required>
                                     <option value="">--select--</option>
                                     @foreach($categories as $category)
-                                        <option id="sub_{{$category->id}}" data-type="{{$category->inventory_quantity_type}}" value="{{$category->id}}" data-subcategory="{{$category->subservices}}" @if($booking->service_id == $category->id) selected @endif>{{$category->name}}</option>
+                                        <option id="sub_{{$category->id}}" data-type="{{$category->inventory_quantity_type}}" value="{{$category->id}}" data-subcategory="{{$category->subservices}}" @if($booking && $booking->service_id == $category->id) selected @endif>{{$category->name}}</option>
                                     @endforeach
                                   </select>
                               <span class="error-message">Please enter  valid</span>
@@ -317,9 +317,9 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label>Room Selection</label>
-                                <select name="meta[subcategory]" class="form-control subservices" data-url="{{route('subservice-items')}}" data-container="#add-inventory-wrapper" data-items="{{$booking->inventories}}">
-                                    @if(json_decode($booking->meta, true)['subcategory'])
-                                        <option value="{{json_decode($booking->meta, true)['subcategory']}}" selected>{{json_decode($booking->meta, true)['subcategory']}}</option>
+                                <select name="meta[subcategory]" class="form-control subservices" data-url="{{route('subservice-items')}}" data-container="#add-inventory-wrapper" data-items="@if($booking){{$booking->inventories}}@endif">
+                                    @if($booking->meta && json_decode($booking->meta, true)['subcategory'])
+                                        <option value="{{json_decode($booking->meta, true)['subcategory'] ?? ''}}" selected>{{json_decode($booking->meta, true)['subcategory'] ?? ''}}</option>
                                     @endif
                                 </select>
                                 <span class="error-message">Please enter valid</span>
@@ -340,6 +340,7 @@
                                   </tr>
                                 </thead>
                                 <tbody class="mtop-20 f-13 item-subservice" id="add-inventory-wrapper">
+                                @if($booking->inventories)
                                     @foreach($booking->inventories as $items)
                                         <tr class="inventory-snip">
                                             <td scope="row" class="text-left">
@@ -379,6 +380,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @endif
                                 </tbody>
                             </table>
                           </div>
@@ -399,7 +401,7 @@
                               <label>Comments/Instructions from Customers</label>
                               <textarea placeholder="Add note/comment here..." id="" name="meta[customer][remarks]" class="form-control" rows="4"
                                   cols="50">
-                                  @if(json_decode($booking->meta, true)['customer'] && json_decode($booking->meta, true)['customer']['remarks'])
+                                  @if($booking->meta && json_decode($booking->meta, true)['customer'] && json_decode($booking->meta, true)['customer']['remarks'])
                                     {!! json_decode($booking->meta, true)['customer']['remarks'] !!}
                                   @endif
                               </textarea>

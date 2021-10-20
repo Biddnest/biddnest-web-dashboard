@@ -266,14 +266,16 @@
                                                 $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, $org_id->organization_id, true);
     Debugbar::info($price);
                                             @endphp
-                                            <tr>
-                                                <td>Base Price</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>
-                                                    <input class="form-control disabled border-purple w-88 calc-total-input validate-input" name="base_amount:number" id="amount_0" value="{{$price['base_price']}}" type="number" placeholder="0.00"/>
-                                                </td>
-                                            </tr>
+                                            @if($price['base_price'] != 0)
+                                                <tr>
+                                                    <td>Base Price</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>
+                                                        <input class="form-control disabled border-purple w-88 calc-total-input validate-input" name="base_amount:number" id="amount_0" value="{{$price['base_price']}}" type="number" placeholder="0.00"/>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                             @foreach($booking->inventories as $inventory)
                                                 <tr class="">
 

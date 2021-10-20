@@ -164,7 +164,7 @@
                                                         </div>
                                                         <div class="col-8">
                                                             <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">ECONOMY<i class="icon-estimate fa fa-info cursor-pointer" aria-hidden="true" data-toggle="modal" data-target="#economy-modal"></i></label>
-                                                            <div class="f-22">@if($booking->quote_estimate)₹{{json_decode($booking->quote_estimate, true)['economic']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span>@else <span style="font-size: 14px; font-weight: 700;">Choose</span> @endif</div>
+                                                            <div class="f-22">@if((bool) json_decode($booking->quote_estimate, true)['economic'])₹{{json_decode($booking->quote_estimate, true)['economic']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span>@else Choose this service type @endif</div>
                                                             <div><i>Economy services includes moving only</i></div>
                                                         </div>
                                                         <div class="col-1 status3  cursor-pointer est-select">
@@ -182,7 +182,7 @@
                                                         </div>
                                                         <div class="col-8">
                                                             <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">PREMIUM<i class="icon-estimate fa fa-info cursor-pointer" aria-hidden="true" data-toggle="modal" data-target="#premium-modal"></i></label>
-                                                            <div class="f-22">@if($booking->quote_estimate)₹{{json_decode($booking->quote_estimate, true)['premium']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span>@else <span style="font-size: 14px; font-weight: 700;">Choose</span> @endif </div>
+                                                            <div class="f-22">@if((bool)json_decode($booking->quote_estimate, true)['premium'])₹{{json_decode($booking->quote_estimate, true)['premium']}}*<span style="font-size: 12px; font-weight: 700;">Base price</span>@else Choose this service type @endif </div>
                                                             <div><i>Premium services includes packing and moving only</i></div>
                                                         </div>
                                                         <div class="col-1 status3 cursor-pointer est-select">
@@ -195,7 +195,7 @@
                                                     <div class="row col-sm-10 est-box" >
                                                         <div class="col-11">
                                                             <label class="d-flex" style="margin-bottom: 0; margin-top: 1.5rem">NOT SATISFIED WITH THIS PRICES? </label>
-                                                             <div class="text-muted"><i>Talk to our agent</i></div>
+                                                             <div class="text-muted"><i>Reject this pricing</i></div>
                                                         </div>
                                                         <div class="col-1" style="padding-top: 20px;">
                                                             <i class="fa fa-angle-right" aria-hidden="true" style="font-size: 50px;"></i>

@@ -108,7 +108,7 @@
                             <th scope="col" style="padding: 14px;">From</th>
                             <th scope="col" style="padding: 14px;">To</th>
                             <th scope="col" style="padding: 14px;">Order Date</th>
-                            <th scope="col" style="padding-left: 36px !important; padding: 14px;">Date of Movement</th>
+{{--                            <th scope="col" style="padding-left: 36px !important; padding: 14px;">Date of Movement</th>--}}
                             <th scope="col" style="padding-left: 36px !important; padding: 14px;">Amount</th>
                             <th scope="col" style="text-align: center !important; padding: 14px;">Order Status</th>
                             <th scope="col" style="padding: 14px;">Action</th>
@@ -122,7 +122,7 @@
                                     <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                     <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
                                     <td style="padding: 14px;" >{{$booking->created_at->format('d M Y')}}</td>
-                                    <td style="text-align: center !important; padding: 14px;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>
+{{--                                    <td style="text-align: center !important; padding: 14px;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>--}}
                                     <td style="text-align: center !important; padding: 14px;">{{$booking->final_quote}}</td>
                                     <td class="" style="padding: 14px;"><span class="complete-bg  text-center td-padding">
                                             @if($booking->status == \App\Enums\BookingEnums::$STATUS['completed'])

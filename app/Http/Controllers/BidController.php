@@ -75,7 +75,6 @@ class BidController extends Controller
 
     }
 
-
     public static function getbookings($public_booking_id = null)
     {
 

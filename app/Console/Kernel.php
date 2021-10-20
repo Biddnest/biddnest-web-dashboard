@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('bid:end init')->everyMinute();
 
         // ends bidding and pushes order to awaiting bid result status
-        $schedule->command('bid:end timer')->everyMinute();
+//        $schedule->command('bid:end timer')->everyMinute();
 
         // generates bid result
         $schedule->command('bid:end all')->everyMinute();

@@ -1463,7 +1463,7 @@ class BookingsController extends Controller
         $distance = GeoController::distance($data['source']['lat'], $data['source']['lng'], $data['destination']['lat'], $data['destination']['lng']);
 
         $meta = json_decode($booking_exist->meta, true);
-        return $meta['distance'] = $distance;
+        $meta['distance'] = $distance;
 
         $update_source = Booking::where("public_booking_id", $data['public_booking_id'])
             ->update([

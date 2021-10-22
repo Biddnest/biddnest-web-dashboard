@@ -7,7 +7,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="nav-links">
+                <div class="nav-links" style="overflow-x: hidden;">
                     <ul class="menu p-1">
                             <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('vendor.dashboard')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active.svg')}}" alt=""></i></span> </span> Dashboard</a>
                             </li>
@@ -46,9 +46,9 @@
                             aria-controls="Customer"> <a class="" href="{{route('vendor.service_request')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 7.svg')}}" alt=""></i></span> </span>Service Requests</a>
                         </li>
 
-                        <li class="menu-item" data-toggle="" href="#Reports" role="button" aria-expanded="false"
+                        {{--<li class="menu-item" data-toggle="" href="#Reports" role="button" aria-expanded="false"
                             aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 8.svg')}}" alt=""></i></span> </span>Reports</a>
-                        </li>
+                        </li>--}}
 
                     </ul>
                 </div>

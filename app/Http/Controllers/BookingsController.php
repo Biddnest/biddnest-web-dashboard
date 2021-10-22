@@ -1152,7 +1152,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking->id)]);
+        return Helper::response(true, "Customer details has been received.", ["booking" => Booking::with('status_history')->findOrFail($booking->id)]);
     }
 
     /* Track Booking API's for Customer App */
@@ -1439,7 +1439,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "Started booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($id)]);
+        return Helper::response(true, "Customer details has been received.", ["booking" => Booking::with('status_history')->findOrFail($id)]);
     }
 
     /* Track Booking API's for Customer Website */
@@ -1510,7 +1510,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "adding details in booking tracking form successfully.", ["booking" => Booking::with('status_history')->findOrFail($booking_exist->id)]);
+        return Helper::response(true, "Delivery details received.", ["booking" => Booking::with('status_history')->findOrFail($booking_exist->id)]);
     }
 
     public static function trackInventoryDataForWeb($data, $user_id, $web = false, $created_by_support = false)
@@ -1519,6 +1519,9 @@ class BookingsController extends Controller
 
         if (!$booking_exist)
             return Helper::response(false, "Booking is not exist");
+
+        if(!isset($data['inventory_items']))
+            return Helper::response(false, "Please provide the inventories you want to move before proceeding.");
 
         DB::beginTransaction();
 
@@ -1591,7 +1594,7 @@ class BookingsController extends Controller
         }
 
         DB::commit();
-        return Helper::response(true, "adding details in booking tracking form successfully.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
+        return Helper::response(true, "Requirements has been Received.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
 
     public static function trackImgDataForWeb($data, $user_id, $web = false, $created_by_support = false)

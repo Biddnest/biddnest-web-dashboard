@@ -1,9 +1,9 @@
 @extends('website.layouts.frame')
-@section('title') Contact Us @endsection
+@section('title') Frequently Asked Questions @endsection
 @section('header_title') Frequently Asked Questions @endsection
 @section('content')
     <div class="content-wrapper" data-barba="container" data-barba-namespace="faq">
-        <div class="container" style="white-space: normal !important;">
+        <div class="container" style="white-space: normal !important; margin-bottom: 50px">
             <div class="quote responsive br-5 w-70 ontop bg-white">
                 <div class="card-body">
                     <h5 class="card-title light center mt-1 pb-10">HOW CAN WE HELP YOU?</h5>
@@ -21,7 +21,7 @@
                 <div class="container">
                     @foreach($faqs as $faq)
                         <div class="live-search-result">
-                            <div class="accor-item d-flex justify-content-between  row card p-3 br-0" style="flex-direction: row;">
+                            <div class="accor-item d-flex justify-content-between cursor-pointer  row card p-3 br-0" style="flex-direction: row;">
                                 <a>{{$faq->title}}</a>
                                 <i class="fa fa-angle-down mt-1" ></i>
                             </div>
@@ -36,7 +36,10 @@
 
             </div>
         </div>
-        <div class="space"></div>
+        <br />
+        <br />
+        <br />
+        <div class="space" style="height: 10vh !important;display: block"></div>
 
 
         <script>

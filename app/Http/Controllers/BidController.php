@@ -624,8 +624,15 @@ class BidController extends Controller
                         $ad_price = (float)$query->$ad_price_type;
 
 
-                    if ($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed'])
-                        $list_item["price"] = round($booking_inventory['quantity'] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)), 2);
+                    if ($booking_inventory["quantity_type"] == BookingInventoryEnums::$QUANTITY['fixed']) {
+                        if(!is_string($booking_inventory['quantity'])){
+                            $list_item["price"] = round($booking_inventory['quantity'] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)), 2);
+                        }
+                        else{
+//                            $list_item["price"] = 0.00;
+                            $list_item["price"] = round(explode(";",$booking_inventory['quantity'])[0] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)), 2);
+                        }
+                    }
                     else
                         $list_item["price"] = round(json_decode($booking_inventory['quantity'], true)['max'] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)), 2);
                 }

@@ -146,14 +146,14 @@ class VendorWebController extends Controller
         $past_booking=Booking::whereIn('id', Bid::where(['organization_id'=>Session::get('organization_id'), 'status'=>BidEnums::$STATUS['won']])->pluck('booking_id'))->whereIn('status', [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
 
         $booking=BookingsController::getBookingsForVendorApp($request, true);
-        return view('vendor-panel.order.liveorders', ['bookings'=>$booking, 'type'=>$request->type, 'count_booking'=>$count_booking, 'participated_booking'=>$participated_booking, 'schedul_booking'=>$schedul_booking, 'save_booking'=>$save_booking, 'past_booking'=>$past_booking]);
+        return view('vendor-panel.order.liveorders', ['bookings'=>$booking, 'type'=>$request->type, 'count_booking'=>$count_booking, 'participated_booking'=>$participated_booking, 'schedul_booking'=>$schedul_booking, 'save_booking'=>$save_booking, 'past_booking'=>$past_booking, "search"=>$request->search ?: ""]);
     }
 
     public function bookingPastType(Request $request)
     {
         $booking=BookingsController::getBookingsForVendorApp($request, true);
 
-        return view('vendor-panel.order.pastorders', ['bookings'=>$booking]);
+        return view('vendor-panel.order.pastorders', ['bookings'=>$booking, "search"=>$request->search ?: ""]);
     }
 
     public function bookingRejectType(Request $request)
@@ -167,7 +167,7 @@ class VendorWebController extends Controller
     {
         $user=VendorUserController::getUser($request, true);
 
-        return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type]);
+        return view('vendor-panel.user.usermanagement', ['users'=>$user, 'role'=>$request->type, "search"=>$request->search ?: ""]);
     }
 
     public function sidebar_userManagement(Request $request)
@@ -187,7 +187,7 @@ class VendorWebController extends Controller
             }
         $inventory =$inventory->get();
 
-        return view('vendor-panel.inventory.inventorymanagement', ['inventories'=>$inventory]);
+        return view('vendor-panel.inventory.inventorymanagement', ['inventories'=>$inventory,"search"=>$request->search ?: ""]);
     }
 
     public function inventoryCetegory(Request $request)
@@ -203,7 +203,7 @@ class VendorWebController extends Controller
 
         $inventory =$inventory->get();
 
-        return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type]);
+        return view('vendor-panel.inventory.inventorybycategory', ['inventories'=>$inventory, 'type'=>$request->type, "search"=>$request->search ?: ""]);
     }
 
     public function inventorySidebar(Request $request)
@@ -236,7 +236,7 @@ class VendorWebController extends Controller
             $branch = $branch->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
         }
 
-        return view('vendor-panel.branch.getbranch', ['branches'=>$branch, 'home_branch'=>$home_branch]);
+        return view('vendor-panel.branch.getbranch', ['branches'=>$branch, 'home_branch'=>$home_branch,"search"=>$request->search ?: ""]);
     }
 
     public function getVehicle(Request $request)
@@ -255,7 +255,7 @@ class VendorWebController extends Controller
         $payout=PayoutController::getByOrganization($request, true);
         $payout_schedule=Payout::where(["organization_id"=>Session::get('organization_id'), "status"=>PayoutEnums::$STATUS['scheduled']])->count();
         $payout_fail=Payout::where(["organization_id"=>Session::get('organization_id'), "status"=>PayoutEnums::$STATUS['suspended']])->count();
-        return view('vendor-panel.payout.payout', ['payouts'=>$payout, 'payout_schedule'=>$payout_schedule, 'payout_fail'=>$payout_fail]);
+        return view('vendor-panel.payout.payout', ['payouts'=>$payout, 'payout_schedule'=>$payout_schedule, 'payout_fail'=>$payout_fail, "search"=>$request->search ?: ""]);
     }
 
     public function payoutSidebar(Request $request)
@@ -273,7 +273,9 @@ class VendorWebController extends Controller
             $tickets=$tickets->where('heading', 'like',"%".$request->search."%");
         }
         $tickets=$tickets->paginate(CommonEnums::$PAGE_LENGTH);
-        return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type]);
+        return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type,
+            "search"=>$request->search ?: ""
+        ]);
     }
 
     public function serviceSidebar(Request $request)

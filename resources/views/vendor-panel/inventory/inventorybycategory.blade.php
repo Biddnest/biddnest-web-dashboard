@@ -33,7 +33,7 @@
                     </div>
                     <div class="card-head  pt-2  left col-lg-4" style="padding: 8px 10px; flex: 0 0 30% !important;">
                         <div class="search">
-                            <input type="text" class="searchTerm table-search" data-url="{{route('vendor.inventorycat', ['type'=>$type])}}" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('vendor.inventorycat', ['type'=>$type])}}" value="{{$search}}" placeholder="Search...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>

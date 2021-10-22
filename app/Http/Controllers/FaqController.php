@@ -45,7 +45,7 @@ class FaqController extends Controller
     }
 
     public static function get(){
-        return Helper::response(true,"Here are the FAQs",["faqs"=>Faq::all()]);
+        return Helper::response(true,"Here are the FAQs",["faqs"=>Faq::where("deleted", CommonEnums::$NO)->get()]);
     }
     public static function getCategories(){
         return Helper::response(true,"Here are the FAQs",["faqs"=>["categories"=>FaqEnums::$CATEGORY_POOL]]);
@@ -61,9 +61,7 @@ class FaqController extends Controller
         if(!$faq)
             return Helper::response(false,"Invalid FAQ Id.");
 
-        $update = Faq::where("id",$id)->update([
-            "deleted"=>CommonEnums::$YES
-        ]);
+        $update = Faq::where("id",$id)->delete();
 
         if(!$update)
             return Helper::response(false,"Couldn't delete faq. Something went wrong. Contact Administrator");

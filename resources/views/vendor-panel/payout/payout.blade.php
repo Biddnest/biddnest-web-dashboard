@@ -23,62 +23,18 @@
             <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
                 <div class="col-sm-12">
                     <div class="card  h-auto p-0 pt-10">
-                        <div class="row no-gutters">
-                            <div class="col-sm-8 p-3 ml-4 ">
-                                <h3 class="f-18 mt-3 ml-4">Vendor Payout </h3>
-                            </div>
-                            <div class="col-sm-1 -mr-4 pt-3 pl-8 ">
-                               {{-- <a href="#" class="margin-r-20 relative" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i><img class="" src="./assets/images/filter.svg" alt="" srcset=""></i>
-                                </a>
-                                <div class="dropdown-menu f-14">
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="fdate">
-                                            <label class="form-check-label" for="fdate">
-                                                From Date
-                                            </label>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="todate">
-                                            <label class="form-check-label" for="todate">
-                                                To Date
-                                            </label>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="vendorName">
-                                            <label class="form-check-label" for="vendorName">
-                                                Vender Name
-                                            </label>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="Status">
-                                            <label class="form-check-label" for="Status">
-                                                Status
-                                            </label>
-                                        </div>
-                                    </a>
-                                </div>--}}
-                            </div>
-                            <div class="card-head ml-4 pl-4 pt-2 mt-1 ">
+                        <div class="header-wrap toal-header">
+                            <h3 class="f-18 mt-0 mb-0 ml-1">Payouts</h3>
+                            <div class="header-wrap p-0 ">
                                 <div class="search">
-                                    <input type="text" class="searchTerm table-search" data-url="{{route('vendor.payout')}}" placeholder="Search...">
+                                    <input type="text" value="{{$search}}" class="searchTerm table-search" data-url="{{route('vendor.payout')}}" placeholder="Search...">
                                     <button type="submit" class="searchButton">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
+
                         <div class="all-vender-details">
                             <table class="table text-left p-0 theme-text mb-0 primary-table">
                                 <thead class="secondg-bg  p-0">
@@ -156,7 +112,7 @@
                     </div>
                     </div>
 
-                  
+
 
                 </div>
 

@@ -216,7 +216,7 @@
                                     <div class="modal-content w-100 w-1000 mt-50 right-25">
                                         <div class="modal-header bg-purple">
                                             <h5 class="modal-title m-0-auto -mr-30 text-white" id="exampleModalLongTitle ">
-                                                Update Phone Number
+                                                Enter New Phone Number
                                             </h5>
                                             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>

@@ -78,7 +78,7 @@
 
                             </a>--}}
                             <div class="search">
-                                <input type="text" class="searchTerm table-search" data-url="{{route('vendor.branches')}}" placeholder="Search...">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('vendor.branches')}}" value="{{$search}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                         <i class="fa fa-search"></i>
                                 </button>
@@ -156,6 +156,10 @@
                                                 @case(\App\Enums\OrganizationEnums::$STATUS['suspended'])
                                                 <div class="status-badge light-bg light-bg">Suspended</div>
                                                 @break
+
+                                                @case(\App\Enums\OrganizationEnums::$STATUS['pending_approval'])
+                                                <div class="status-badge light-bg light-bg">Pending Approval</div>
+                                                @break
                                             @endswitch
                                         </td>
                                         @if(\App\Helper::is("admin", true))
@@ -192,7 +196,7 @@
                     </ul>
                 </div>
                 </div>
-              
+
 
             </div>
 

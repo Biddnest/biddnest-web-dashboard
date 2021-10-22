@@ -51,7 +51,7 @@
 
                             <div class="header-wrap p-0 filter-dropdown ">
                                 <div class="search">
-                                    <input type="text" class="searchTerm table-search" data-url="{{route('vendor.pastbookings', ['type'=>"past"])}}" placeholder="Search...">
+                                    <input type="text" value="{{$search}}" class="searchTerm table-search" data-url="{{route('vendor.pastbookings', ['type'=>"past"])}}" placeholder="Search...">
                                     <button type="submit" class="searchButton">
                                         <i class="fa fa-search"></i>
                                     </button>

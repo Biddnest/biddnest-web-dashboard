@@ -301,10 +301,10 @@ Debugbar::info($price);
 
                                                 <th scope="row">{{$inventory->name}}</th>
                                                 <td class="">
-                                                    @if($inventory->quantity_type == \App\Enums\CommonEnums::$NO)
-                                                        {{$inventory->quantity ?? ''}}
+                                                    @if($inventory->quantity_type == \App\Enums\ServiceEnums::$INVENTORY_QUANTITY_TYPE['fixed'])
+                                                        {{str_replace(";"," - ",$inventory->quantity) ?? ''}}
                                                     @else
-                                                        {{$inventory->quantity->min ?? ''}}-{{$inventory->quantity->max ?? ''}}
+                                                        {{json_decode($inventory->quantity, true)['min'] ?? ''}} - {{json_decode($inventory->quantity, true)['max'] ?? ''}}
                                                     @endif
                                                 </td>
                                                 <td class="">{{$inventory->size}}</td>

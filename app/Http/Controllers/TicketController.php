@@ -249,7 +249,7 @@ class TicketController extends Controller
 
     }
 
-    public static function createForVendor($sender_id, $ticket_type, $meta, $ticket_images, $heading=null, $body=null)
+    public static function createForVendor($sender_id, $ticket_type, $meta, $ticket_images = [], $heading=null, $body=null)
     {
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));

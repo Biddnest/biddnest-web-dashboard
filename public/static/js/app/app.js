@@ -318,6 +318,7 @@ $("body").on('input', "input[type=file]", function(event) {
 });
 
 $("body").on('change', ".field-toggle", function(event) {
+    Logger.info($(this).val());
     if ($(this).val() == $(this).data("value")) {
         $($(this).data("target")).removeClass("hidden");
         $($(this).data("target")).find(".form-control").attr("required", "required");

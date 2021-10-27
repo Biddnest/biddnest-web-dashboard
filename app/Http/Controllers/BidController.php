@@ -438,17 +438,18 @@ class BidController extends Controller
                     "bid_amount"=>$data['bid_amount'],
                     "moving_dates"=>json_encode($data['moving_date']),
                     "meta"=>json_encode($meta),
-                    "status"=>BidEnums::$STATUS['bid_submitted'],
+//                    "status"=>BidEnums::$STATUS['bid_submitted'],
                     "submit_at"=>Carbon::now()
                 ]);
 
-            if($submit_bid)
+//            Booking::where()->update();
+
                 $bid_end = self::bidEndByAdmin($exist_bid['booking_id'], $data['organization_id'], $data['vendor_id'], $data['bid_amount']);
 
             if(!$submit_bid)
                 return Helper::response(false,"Couldn't Submit Quotaion");
 
-            return Helper::response(true,"updated data successfully",["bid"=>Bid::findOrFail($exist_bid['id'])]);
+            return Helper::response(true,"Booking assigned to this vendor.",["bid"=>Bid::findOrFail($exist_bid['id'])]);
 
         } else{
             return Helper::response(false,"OTP is incorrect");
@@ -524,7 +525,7 @@ class BidController extends Controller
         $payment_result = $payment->save();
 
         $booking_update_status = Booking::where("id", $booking_id)
-            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding'], BookingEnums::$STATUS['hold']])
             ->update([
                 "organization_id"=>$org_id,
                 "final_quote"=>round($final_bid_amount,2),

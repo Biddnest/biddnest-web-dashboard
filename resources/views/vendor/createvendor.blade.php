@@ -168,8 +168,15 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Organisation Type</label>
-                                            <input type="text" id="fullname" placeholder="Pvt Ltd"
-                                                   class="form-control" name="organization[org_type]" required>
+                                            {{--<input type="text" id="fullname" placeholder="Pvt Ltd"
+                                                   class="form-control" name="organization[org_type]" required>--}}
+                                            <select class="form-control" name="organization[org_type]">
+                                                <option value="">--Select--</option>
+
+                                                @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)
+                                                <option value="{{$type}}">{{$type}}</option>
+                                                @endforeach
+                                            </select>
                                             <span class="error-message">Please enter valid
                                                                 Organization Type</span>
                                         </div>
@@ -327,12 +334,28 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Service</label>
-                                            <select id="" class="form-control select-box" name="service[]" multiple
+                                            <select id="" class="form-control select-box field-toggle" name="service[]" data-target=".subservices" multiple
                                                     required>
                                                 <option value=""> -Select-</option>
                                                 @foreach($services as $service=>$value)
                                                     <option
                                                         value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid
+                                                                Service</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 subservices hidden">
+                                        <div class="form-input">
+                                            <label class="full-name">Subservice Service</label>
+                                            <select id="" class="form-control select-box" name="subservice[]" multiple
+                                                    required>
+                                                <option value=""> -Select-</option>
+                                                @foreach($subservices as $subservice=>$subservicevalue)
+                                                    <option
+                                                        value="{{$subservicevalue->id}}">{{ucfirst(trans($subservicevalue->name))}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid
@@ -355,11 +378,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 d-none" >
                                         <div class="form-input">
                                             <label class="full-name">Commission</label>
-                                            <input type="number" id="commission" placeholder="Commission"
-                                                   class="form-control" name="commission" min="1" required>
+                                            <input type="hidden" id="commission" placeholder="Commission"
+                                                   class="form-control" name="commission" min="1" required value="0">
                                             <span class="error-message">Please enter valid
                                                                 Commission</span>
                                         </div>

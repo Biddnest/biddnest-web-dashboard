@@ -810,7 +810,8 @@ class WebController extends Controller
     public function createOnboardVendors()
     {
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('vendor.createvendor', ['services'=>$services]);
+        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor.createvendor', ['services'=>$services, 'subservices'=>$subservices]);
     }
 
     public function onbaordEdit(Request  $request)

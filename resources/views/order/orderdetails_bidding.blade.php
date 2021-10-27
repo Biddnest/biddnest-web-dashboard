@@ -97,17 +97,23 @@
                             @if($booking->status >= \App\Enums\BookingEnums::$STATUS['biding'])
                                 <div class="view-more">
                                 <div class="d-flex row p-15  ">
-                                    <div class="col-sm-6 p-10 d-felx justify-content-center">
+                                    <div class="col-sm-4 p-10 d-felx justify-content-center">
                                         <div class="text-center ">
                                             <h3 class="f-18 theme-text bold p-10">Time Left</h3>
                                             {{--<h1 class="timer" data-time="{{\Carbon\Carbon::parse($booking->bid_result_at)->format('Y-m-d h:i:s')}}"></h1>--}}
                                             <h1><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h1>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 p-10">
+                                    <div class="col-sm-4 p-10">
                                         <div class=" text-center border-left-blue">
                                             <h3 class="text-center f-18 theme-text bold p-10">Recommended to Vendors</h3>
                                             <h1><span class="text-center" style="min-width: 0px !important;">&#8377;{{$booking->organization_rec_quote}}</span></h1>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 p-10">
+                                        <div class=" text-center border-left-blue">
+                                            <h3 class="text-center f-18 theme-text bold p-10">Recommended to Customer</h3>
+                                            <h1><span class="text-center" style="min-width: 0px !important;">&#8377;{{$booking->final_estimated_quote}}</span></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -365,8 +371,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-input">
                                                 <label class="full-name">Minimum and  Maximum Number Of Man Power</label>
-                                                <div class="d-flex range-input-group justify-content-between flex-row" style="margin-top: 20px;">
-                                                        <input type="text" class="custom_slider custom_slider_1 range validate-input" name="man_power"  data-min="0" data-max="100" data-from="0" data-to="100" data-type="double" data-step="1" />
+                                                <div class="" style="margin-top: 20px;">
+                                                        <input type="text" class="custom_slider range validate-input" name="man_power"  data-min="0" data-max="100" data-from="0" data-to="100" data-type="double" data-step="1" />
 
                                                 </div>
                                                 <span class="error-message">Please enter valid </span>

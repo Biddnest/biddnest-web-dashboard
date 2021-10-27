@@ -214,8 +214,8 @@ class BookingsController extends Controller
         }
 
         $estimate_quote = json_encode([
-            "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_added, $web, $created_by_support),
-            "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_added, $web, $created_by_support)
+            "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_added, false, $web, $created_by_support),
+            "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_added, false, $web, $created_by_support)
         ]);
         $org_estimate_quote = json_encode([
             "economic" => InventoryController::getEconomicPrice($data, $booking_added, true, $web, $created_by_support),
@@ -1303,8 +1303,8 @@ class BookingsController extends Controller
                 return Helper::response(false, "Couldn't generate prices.");
 
             $estimate_quote = json_encode([
-                "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_exist, $web, $created_by_support),
-                "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_exist, $web, $created_by_support)
+                "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_exist, false, $web, $created_by_support),
+                "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_exist, false, $web, $created_by_support)
             ]);
             $org_estimate_quote = json_encode([
                 "economic" => InventoryController::getEconomicPrice($data, $booking_exist, true, $web, $created_by_support),
@@ -1534,8 +1534,8 @@ class BookingsController extends Controller
                 return Helper::response(false, "Couldn't generate prices.");
 
             $estimate_quote = json_encode([
-                "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_exist, $web, $created_by_support),
-                "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_exist, $web, $created_by_support)
+                "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking_exist, false, $web, $created_by_support),
+                "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking_exist, false, $web, $created_by_support)
             ]);
             $org_estimate_quote = json_encode([
                 "economic" => InventoryController::getEconomicPrice($data, $booking_exist, true, $web, $created_by_support),
@@ -1687,8 +1687,8 @@ class BookingsController extends Controller
                 return Helper::response(false, "Couldn't generate prices.");
 
             $estimate_quote = json_encode([
-                "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking, $web, $created_by_support),
-                "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking, $web, $created_by_support)
+                "economic" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getEconomicPrice($data, $booking, false, $web, $created_by_support),
+                "premium" => strtolower($data['meta']['subcategory']) == "custom" ? null : InventoryController::getPremiumPrice($data, $booking, false, $web, $created_by_support)
             ]);
             $org_estimate_quote = json_encode([
                 "economic" => InventoryController::getEconomicPrice($data, $booking, true, $web, $created_by_support),

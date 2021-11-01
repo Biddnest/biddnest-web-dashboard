@@ -300,7 +300,7 @@ class InventoryController extends Controller
             ->get();
 
         $total_distance = GeoController::distance($booking_data->source_lat, $booking_data->source_lng, $booking_data->destination_lat, $booking_data->destination_lng);
-        try {
+//        try {
             BookingOrganizationGeneratedPrice::where([
                 "booking_id" => $booking_data['id']
             ])->delete();
@@ -361,8 +361,6 @@ class InventoryController extends Controller
                 $premium_percent = $mp_premium > 0.00 ? (($mp_premium - $bp_premium) / $mp_premium) * 100 : 0.00;
 
 
-
-
                 $price_calc = new BookingOrganizationGeneratedPrice();
                 $price_calc->booking_id = $booking_data['id'];
                 $price_calc->organization_id = $vendor['id'];
@@ -377,11 +375,11 @@ class InventoryController extends Controller
                 $result = $price_calc->save();
 
             }
-        }
-        catch(Exception $e){
+//        }
+        /*catch(Exception $e){
             Log::error($e->getMessage());
             DB::rollBack();
-        }
+        }*/
         if($result)
             return true;
         else

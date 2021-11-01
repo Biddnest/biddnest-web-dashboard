@@ -39,6 +39,7 @@ use App\Models\Slider;
 use App\Models\SliderZone;
 use App\Models\Subservice;
 use App\Models\SubserviceInventory;
+use App\Models\SubservicePrice;
 use App\Models\Testimonials;
 use App\Models\Ticket;
 use App\Models\TicketReply;
@@ -565,7 +566,9 @@ class WebController extends Controller
             $bid->orderBy('updated_at')->orderBy('status')->with(['organization'=>function($query){
                 $query->with('vehicle')->with('admin');
             }]);
-        }])->findOrFail($request->id);
+        }])->with(['payment'=>function($q){
+           $q->with('coupon');
+       }])->findOrFail($request->id);
 
         $hist = [];
 
@@ -822,8 +825,12 @@ class WebController extends Controller
     }
 
     public function onbaordBasePrice(Request $request){
-        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->whereNotIn("name", ["custom"])->get();
-        return view('vendor.onboardbaseprice', ['id'=>$request->id, 'subservices'=>$subservices]);
+        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])                ->whereNotIn("name", ["custom"])
+             ->get();
+
+        $vendor_price = SubservicePrice::where("organization_id", $request->id)->with('subservice')->get();
+
+        return view('vendor.onboardbaseprice', ['id'=>$request->id, 'subservices'=>$subservices, "prices"=>$vendor_price]);
     }
 
     public function onbaordExtraBasePrice(Request $request){

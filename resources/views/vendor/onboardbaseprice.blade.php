@@ -18,7 +18,7 @@
         </div>
         <div class="mr-20">
             <a class="modal-toggle" data-toggle="modal" data-target="#add-branch">
-                <button class="btn theme-bg white-text w-10">Add Branch</button>
+                <button class="btn theme-bg white-text w-10">Add Price</button>
             </a>
         </div>
     </div>
@@ -53,88 +53,56 @@
                         </ul>
                     </h3>
                 </div>
-                <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-branch-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                     <div class="tab-content " id="myTabContent">
                         <!-- form starts -->
                         <input type="hidden" name="id" value="{{$id}}">
                         <div class="w-100">
                             <div class="tab-pane show" style="min-height: 50vh">
-                                <table class="table  text-left p-0 theme-text mb-0 primary-table p-15 distance-price">
-                                    <thead class="secondg-bg p-0">
-                                    <tr>
-                                        <th scope="col" class="text-center" style="padding:14px">BP Economic</th>
-                                        <th scope="col" class="text-center" style="padding:14px">BP Premium</th>
-                                        <th scope="col" class="text-center" style="padding:14px">MP Economic</th>
-                                        <th scope="col" class="text-center" style="padding:14px">MP Premium</th>
-                                        <th scope="col" class="text-center" style="padding:14px">BP AP Economic</th>
-                                        <th scope="col" class="text-center" style="padding:14px">BP AP Premium</th>
-                                        <th scope="col" class="text-center" style="padding:14px">MP AP Economic</th>
-                                        <th scope="col" class="text-center" style="padding:14px">MP AP Premium</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($subservices as $category)
-                                            @php $prices = \App\Models\SubservicePrice::where(["subservice_id"=>$category->id, "organization_id"=>$id])->first(); @endphp
-                                            <tr>
-                                                <td scope="row" style="padding-bottom: 0 !important;">
-                                                    <span style="font-weight: 500; font-size: 15px !important;">{{ucwords($category->name)}}</span>
-                                                    <input type="hidden" value="{{$category->id}}" name="subservice[][id]">
-                                                </td>
-                                            </tr>
-                                            <tr class="tb-border">
-                                                <input type="hidden" name="subservice[][pricing_id]" value="{{$prices['id'] ?? ''}}">
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_economic'] ?? 0.00}}" class="form-control border-left" name="subservice[][bidnest][price][economy]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_premium'] ?? 0.00}}" class="form-control border-left" name="subservice[][bidnest][price][premium]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_economic'] ?? 0.00}}" class="form-control border-left" name="subservice[][market][price][economy]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_premium'] ?? 0.00}}" class="form-control border-left" name="subservice[][market][price][premium]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_additional_distance_economic_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][bp_additional][price][economy]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['bp_additional_distance_premium_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][bp_additional][price][premium]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_additional_distance_economic_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][mp_additional][price][economy]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center base-price">
-                                                        <div class="currancy text-center">₹</div>
-                                                        <div class="form-input table-input"><input type="number" value="{{$prices['mp_additional_distance_premium_price'] ?? 0.00}}" class="form-control border-left" name="subservice[][mp_additional][price][premium]" id="" placeholder="500"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    <tbody>
-                                </table>
+
+                                @foreach($prices as $price)
+                                <div class="branch-wrapper price_{{$price->id}}">
+                                    <div class="branch-snip d-flex flex-row justify-content-around">
+                                        <div class="data-group border-right" style="min-width: 18%">
+                                            <h1 style="font-size: 18px;text-align: center">{{$price->subservice->name}}</h1>
+                                            <p style="text-align: center; color: #2E0789"><i class="icon dripicons-document-edit" style="font-size: 10px"></i><span class="cursor-pointer modal-toggle" data-target="#price_{{$price->id}}" style="color: #2E0789"> change</span></p>
+                                        </div>
+                                        <div class="data-group">
+                                            <h5 style="font-size: 14px;">Market Price Economic</h5>
+                                            <p>&#8377; {{ $price->mp_economic  }}</p>
+
+                                            <br />
+                                            <h5 style="font-size: 14px;">Biddnest Price Economic</h5>
+                                            <p>&#8377; {{ $price->bp_economic  }}</p>
+                                        </div>
+                                        <div class="data-group">
+                                            <h5 style="font-size: 14px;">Market Price Premium</h5>
+                                            <p>&#8377; {{ $price->mp_premium }}</p>
+
+                                            <br />
+                                            <h5 style="font-size: 14px;">Biddest Price Premium</h5>
+                                            <p>&#8377; {{ $price->bp_premium }}</p>
+                                        </div>
+                                        <div class="data-group">
+                                            <h5 style="font-size: 14px;">Add. Market Price Economic</h5>
+                                            <p>&#8377; {{ $price->mp_additional_distance_economic_price }}</p>
+
+                                            <br />
+                                            <h5 style="font-size: 14px;">Add. Biddnest Price Economic</h5>
+                                            <p>&#8377; {{ $price->bp_additional_distance_economic_price }}</p>
+                                        </div>
+                                        <div class="data-group">
+
+                                            <h5 style="font-size: 14px;">Add. Market Price Premium</h5>
+                                            <p>&#8377; {{ $price->mp_additional_distance_premium_price }}</p>
+
+                                            <br />
+                                            <h5 style="font-size: 14px;">Add. Biddnest Price Premium</h5>
+                                            <p>&#8377; {{ $price->bp_additional_distance_premium_price }}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -147,10 +115,90 @@
                             <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                         </div>
                     </div>
-                </form>
+
             </div>
         </div>
     </div>
 </div>
+    @foreach($prices as $price)
+        <div class="fullscreen-modal" id="price_{{$price->id}}" >
+            <div class="fullscreen-modal-body" role="document" style="width: 100% !important;">
+                <div class="modal-header">
+                    <h5 class="modal-title  ml-4 pl-2" id="exampleModalLongTitle">Edit {{$price->subservice->name}} Price</h5>
+                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-branch-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
+                    <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
+                        <div class="d-flex match-height row p-15 quotation-main pb-0" >
+
+                            <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                    Market Price Economy
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                    Biddnest Price Economy
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                    <b>Market Price Premium</b>
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                    <b>Biddnest Price Premium</b>
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                    Add. Market Price Economy
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                    Add. Biddnest Price Economy
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                    Add. Market Price Premium
+                                </div>
+                                <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                    Add. Biddnest Price Premium
+                                </div>
+                            </div>
+                            <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                                <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                                    <input type="text" class="form-control bid-amount" value="{{$price-> 	mp_economic}}" name="bid_amount" min="0.00" required>
+                                    <input type="hidden" class="form-control" value="{{$price->id}}" name="id" required>
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="text" class="form-control  commission" value="{{$price-> 	bp_economic}}" name="commission" min="0.00" required>
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="number" class="form-control  sub-total" value="{{$price-> 	mp_premium}}" name="sub_total" min="0.00" required readonly>
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="text" class="form-control  other_charges" value="{{$price->bp_premium}}" name="other_charges" min="0.00" required>
+                                </div>
+                                <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
+                                    <input type="text" class="form-control  discount_amount" value="{{$price->mp_additional_distance_economic_price }}" name="discount_amount" min="0.00" required>
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="text" class="form-control  tax" value="{{$price->bp_additional_distance_economic_price}}" name="tax" min="0.00" required readonly>
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="text" class="form-control  grand_total" value="{{$price->mp_additional_distance_premium_price}}" name="grand_total" min="0.00" readonly required>
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="text" class="form-control  grand_total" value="{{$price->bp_additional_distance_premium_price}}" name="grand_total" min="0.00" readonly required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-15 ">
+                        <div class="w-50">
+                        </div>
+                        <div class="w-50 text-right"><a class="white-text p-10" href="#">
+                                <button  class="btn theme-bg white-text w-40" style="margin-bottom: 20px;">Update</button>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
 @endsection
 

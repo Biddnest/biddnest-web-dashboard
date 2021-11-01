@@ -129,10 +129,16 @@
                                     Delivery Distance
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Package
+                                </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Movement Type
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
-                                  Suggested to Customer
+                                    Movement Dates
+                                </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Price suggested to Customer
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Booking Status
@@ -142,12 +148,12 @@
                             <div class="col-sm-8  match-item white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if(in_array($booking->status,[
-            \App\Enums\BookingEnums::$STATUS['pending_driver_assign'],
-            \App\Enums\BookingEnums::$STATUS['awaiting_pickup'],
-            \App\Enums\BookingEnums::$STATUS['in_transit'],
-            \App\Enums\BookingEnums::$STATUS['completed'],
-            \App\Enums\BookingEnums::$STATUS['cancelled'],
-        ]))
+                                        \App\Enums\BookingEnums::$STATUS['pending_driver_assign'],
+                                        \App\Enums\BookingEnums::$STATUS['awaiting_pickup'],
+                                        \App\Enums\BookingEnums::$STATUS['in_transit'],
+                                        \App\Enums\BookingEnums::$STATUS['completed'],
+                                        \App\Enums\BookingEnums::$STATUS['cancelled'],
+                                    ]))
                                         {{$booking->public_booking_id}}
                                     @else
                                         {{$booking->public_enquiry_id}}
@@ -199,6 +205,16 @@
                                     @else - @endif
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    @if(json_decode($booking->source_meta, true)['shared_service']== false)Dedicated @else Shared @endif
+                                </div>
+
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    @foreach(json_decode($booking->movement_dates, true) as $mdate)
+                                        <span class="status-3" style="margin-right: 5px;">{{date("d M Y", strtotime($mdate['date']))}}</span>
+                                    @endforeach
+                                </div>
+
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->final_quote)
                                         &#8377;@if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif
                                     @else - @endif
@@ -235,7 +251,7 @@
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                        <span class="status-badge icon-bg  text-center td-padding" style="font-weight:bold !important">In Transit</span>
+                                        <span class="status-badge text-center td-padding" style="font-weight:bold !important">In Transit</span>
                                         @break
 
                                         @case(\App\Enums\BookingEnums::$STATUS['completed'])
@@ -271,8 +287,6 @@
                                     @endswitch
                                 </div>
 
-
-
                            {{-- <div class="d-flex  mtop-5">
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
                             </div>--}}
@@ -284,9 +298,9 @@
                         <table class="table text-center p-10 theme-text tb-border2">
                             <thead class="secondg-bg bx-shadowg p-0 f-14">
                                 <tr>
-                                  <th scope="col" style="    width: 50%; padding-left: 15px !important;">Item Name</th>
-                                  <th scope="col" style="    width: 50%;" >Quantity</th>
-                                  <th scope="col" style="    text-align: center !important;">Size</th>
+                                  <th scope="col" style="width: 50%; padding-left: 15px !important;">Item Name</th>
+                                  <th scope="col" style="width: 50%;" >Quantity</th>
+                                  <th scope="col" style="text-align: center !important;">Size</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-15">
@@ -300,7 +314,7 @@
                                             {{json_decode($inventory->quantity, true)['min']}}-{{json_decode($inventory->quantity, true)['max']}}
                                           @endif
                                       </td>
-                                      <td class=""><span class=" status-badge text-center f-14" style="font-weight: bold !important;text-transform: capitalize;">{{$inventory->size}}</span></td>
+                                      <td class=""><span class="status-badge text-center f-14" style="font-weight: bold !important;text-transform: capitalize;">{{$inventory->size}}</span></td>
                                     </tr>
                                 @endforeach
                             </tbody>

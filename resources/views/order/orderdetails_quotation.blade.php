@@ -80,7 +80,7 @@
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
+                                    <a class="nav-link active p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15 " id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
@@ -90,9 +90,9 @@
                                         <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-bidding-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding Review</a>
                                     </li>
                                 @endif
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="review-tab" data-toggle="tab" href="{{route('order-details-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Review</a>
                                 </li>
@@ -121,6 +121,7 @@
                                         <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                             Created At
                                         </div>
+
                                     </div>
                                     <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                         <div class="theme-text f-14  p-15" style="padding-top: 5px;">
@@ -146,24 +147,32 @@
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Vendor amount
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
+                                   {{-- <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Commision
-                                    </div>
+                                    </div>--}}
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         <b>Sub Total</b>
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Other Charges
                                     </div>
-                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
+                                    {{--<div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                        Discount
-                                    </div>
+                                    </div>--}}
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Tax
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
                                         Grand Amount
                                     </div>
+                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
+                                        Status
+                                    </div>
+                                    @if(\App\Enums\PaymentEnums::$STATUS['refunded'] == $booking->payment->status)
+                                        <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 5px;">
+                                           Refunded Amount
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
@@ -175,11 +184,11 @@
 
                                     </div>
 
-                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    {{--<div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
                                             ₹ {{$booking->payment->commission}}
                                         @else Payment Pending @endif
-                                    </div>
+                                    </div>--}}
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
                                             <b>₹ {{$booking->payment->sub_total}}</b>
@@ -191,11 +200,11 @@
                                         @else Payment Pending @endif
                                     </div>
 
-                                    <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
+                                   {{-- <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
                                         @if($booking->payment)
                                         - ₹ {{$booking->payment->discount_amount}}
                                         @else Payment Pending @endif
-                                    </div>
+                                    </div>--}}
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         @if($booking->payment)
                                             ₹ {{$booking->payment->tax}}
@@ -206,6 +215,47 @@
                                             ₹ {{$booking->payment->grand_total}}
                                         @else Payment Pending @endif
                                     </div>
+                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                        @switch($booking->payment->status)
+                                            @case(\App\Enums\PaymentEnums::$STATUS['pending'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Pending</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['failed'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Failed</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['transferred'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Transferred</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['completed'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Completed</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['refund_initiated'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Refund Initiated</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['refunded'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Refunded</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['queued'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Queued</span>
+                                            @break
+
+                                            @case(\App\Enums\PaymentEnums::$STATUS['refund_failed'])
+                                            <span class="status-badge secondg-bg  text-center td-padding" style="font-weight:bold !important">Refund Failed</span>
+                                            @break
+
+                                        @endswitch
+                                    </div>
+                                    @if(\App\Enums\PaymentEnums::$STATUS['refunded'] == $booking->payment->status)
+                                        <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                            ₹ {{$booking->payment->refund_amount}}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             @endif

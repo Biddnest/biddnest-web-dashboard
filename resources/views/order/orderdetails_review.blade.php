@@ -85,7 +85,7 @@
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-vendor', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Vendor</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
+                                    <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="bid-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
@@ -95,9 +95,9 @@
                                         <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-bidding-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding Review</a>
                                     </li>
                                 @endif
-                                <li class="nav-item">
+                                {{--<li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="review-tab" data-toggle="tab" href="{{route('order-details-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Review</a>
                                 </li>
@@ -203,7 +203,7 @@
                               </div>
                               <div class="w-50 margin-r-20">
                                   <div class="d-flex justify-content-end">
-                                      <a   href="{{route('order-details-payment', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
+                                      <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
 
                                       {{--                                      <button  class="btn white-text theme-bg w-30" >Next</button>--}}
                                   </div>

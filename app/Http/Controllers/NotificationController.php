@@ -214,10 +214,10 @@ class NotificationController extends Controller
     public static function getNotifications($id, $type="user"){
         if ($type == "user")
         {
-            $results=Notification::where("user_id", $id) ->orderBy('id', 'DESC')->paginate(CommonEnums::$PAGE_LENGTH);
+            $results=Notification::where(["user_id"=>$id, "generated_by"=>NotificationEnums::$GENERATE_BY['admin']]) ->orderBy('id', 'DESC')->paginate(CommonEnums::$PAGE_LENGTH);
         }
         if ($type == "vendor"){
-            $results=Notification::where("vendor_id", $id) ->orderBy('id', 'DESC')->paginate(CommonEnums::$PAGE_LENGTH);
+            $results=Notification::where(["vendor_id"=>$id, "generated_by"=>NotificationEnums::$GENERATE_BY['admin']]) ->orderBy('id', 'DESC')->paginate(CommonEnums::$PAGE_LENGTH);
         }
 
         return Helper::response(true, "Show data successfully", ["notifications" => $results->items(), "paging" => [

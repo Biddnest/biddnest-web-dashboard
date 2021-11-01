@@ -84,7 +84,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Quotation</a>
+                                    <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-quotation', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>
 
                                 <li class="nav-item">
@@ -97,9 +97,9 @@
                                     </li>
                                 @endif
 
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
-                                </li>
+                                </li>--}}
 
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="review-tab" data-toggle="tab" href="{{route('order-details-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Review</a>

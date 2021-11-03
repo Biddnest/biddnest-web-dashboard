@@ -129,10 +129,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-branch-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
+                <form class="form-new-order input-text-blue" action="{{route('update_pricing')}}" data-next="redirect" data-url="{{route("onboard-base-extra-price", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
                         <div class="d-flex match-height row p-15 quotation-main pb-0" >
-
                             <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
                                     Market Price Economy
@@ -161,29 +160,30 @@
                             </div>
                             <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                 <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                    <input type="text" class="form-control bid-amount" value="{{$price-> 	mp_economic}}" name="bid_amount" min="0.00" required>
-                                    <input type="hidden" class="form-control" value="{{$price->id}}" name="id" required>
+                                    <input type="text" class="form-control bid-amount" value="{{$price->mp_economic}}" name="subservice['market']['price']['economy']" min="0.00" required>
+                                    <input type="hidden" class="form-control" value="{{$price->organization_id}}" name="id" required>
+                                    <input type="hidden" class="form-control" value="{{$price->id}}" name="subservice['id']" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control" value="{{$price-> 	bp_economic}}" name="commission" min="0.00" required>
+                                    <input type="text" class="form-control" value="{{$price->bp_economic}}" name="subservice['bidnest']['price']['economy']" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="number" class="form-control" value="{{$price-> 	mp_premium}}" name="sub_total" min="0.00" required>
+                                    <input type="number" class="form-control" value="{{$price->mp_premium}}" name="subservice['market']['price']['premium']" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control" value="{{$price->bp_premium}}" name="other_charges" min="0.00" required>
+                                    <input type="text" class="form-control" value="{{$price->bp_premium}}" name="subservice['market']['price']['premium']" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                    <input type="text" class="form-control " value="{{$price->mp_additional_distance_economic_price }}" name="discount_amount" min="0.00" required>
+                                    <input type="text" class="form-control " value="{{$price->mp_additional_distance_economic_price }}" name="subservice['mp_additional']['price']['economy']" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_economic_price}}" name="tax" min="0.00" required>
+                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_economic_price}}" name="subservice['bp_additional']['price']['economy']" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="grand_total" min="0.00" required>
+                                    <input type="text" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="subservice['mp_additional']['price']['premium']" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="grand_total" min="0.00" required>
+                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="subservice['bp_additional']['price']['premium']" min="0.00" required>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-branch-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
+            <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-base-extra-price", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                 <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
                     <div class="d-flex match-height row p-15 quotation-main pb-0" >
                         <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
@@ -243,7 +243,7 @@
                         </div>
                         <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                             <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                               <select name="id" class="form-control" required>
+                               <select name="subservice[]['id']" class="form-control" required>
                                    <option value="">Select</option>
                                    @foreach($add_subservices as $subservice)
                                        <option value="{{$subservice->id}}">{{ucwords($subservice->name)}}</option>
@@ -251,28 +251,29 @@
                                </select>
                             </div>
                             <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                <input type="text" class="form-control" value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                                <input type="text" class="form-control" value="0.00" name="subservice['market']['price']['economy']" min="0.00" required>
+                                <input type="text" class="form-control" value="{{$id}}" name="id" min="0.00" required>
                             </div>
                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                                <input type="text" class="form-control " value="0.00" name="subservice['bidnest']['price']['economy']" min="0.00" required>
                             </div>
                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                <input type="number" class="form-control" value="0.00" name="subservice[]['pricing_id']" min="0.00" required >
+                                <input type="number" class="form-control" value="0.00" name="subservice['market']['price']['premium']" min="0.00" required >
                             </div>
                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                                <input type="text" class="form-control " value="0.00" name="subservice['bidnest']['price']['premium']" min="0.00" required>
                             </div>
                             <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                                <input type="text" class="form-control " value="0.00" name="subservice['mp_additional']['price']['economy']" min="0.00" required>
                             </div>
                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required >
+                                <input type="text" class="form-control " value="0.00" name="subservice['bp_additional']['price']['economy']" min="0.00" required >
                             </div>
                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                <input type="text" class="form-control" value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                                <input type="text" class="form-control" value="0.00" name="subservice['mp_additional']['price']['premium']" min="0.00" required>
                             </div>
                             <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                                <input type="text" class="form-control " value="0.00" name="subservice['bp_additional']['price']['premium']" min="0.00" required>
                             </div>
                         </div>
                     </div>

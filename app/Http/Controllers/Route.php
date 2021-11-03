@@ -468,22 +468,41 @@ class Route extends Controller
     public function prices_add(Request $request){
         $validation = Validator::make($request->all(),[
             'id'=>'required',
-            'subservice.*.pricing_id'=>'nullable',
-            'subservice.*.id'=>'required',
-            'subservice.*.bidnest.price.economy'=>'required',
-            'subservice.*.bidnest.price.premium'=>'required',
-            'subservice.*.market.price.economy'=>'required',
-            'subservice.*.market.price.premium'=>'required',
-            'subservice.*.mp_additional.price.economy'=>'required',
-            'subservice.*.mp_additional.price.premium'=>'required',
-            'subservice.*.bp_additional.price.economy'=>'required',
-            'subservice.*.bp_additional.price.premium'=>'required',
+            'subservice.id'=>'required',
+            'subservice.bidnest.price.economy'=>'required',
+            'subservice.bidnest.price.premium'=>'required',
+            'subservice.market.price.economy'=>'required',
+            'subservice.market.price.premium'=>'required',
+            'subservice.mp_additional.price.economy'=>'required',
+            'subservice.mp_additional.price.premium'=>'required',
+            'subservice.bp_additional.price.economy'=>'required',
+            'subservice.bp_additional.price.premium'=>'required',
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
         return OrganisationController::addPrices($request->all(), $request->id, $request->pricing_id);
+    }
+
+    public function prices_update(Request $request){
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'subservice.id'=>'required',
+            'subservice.bidnest.price.economy'=>'required',
+            'subservice.bidnest.price.premium'=>'required',
+            'subservice.market.price.economy'=>'required',
+            'subservice.market.price.premium'=>'required',
+            'subservice.mp_additional.price.economy'=>'required',
+            'subservice.mp_additional.price.premium'=>'required',
+            'subservice.bp_additional.price.economy'=>'required',
+            'subservice.bp_additional.price.premium'=>'required',
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return OrganisationController::updatePrices($request->all(), $request->id, $request->subservice->id);
     }
 
     public function bank_add(Request $request)

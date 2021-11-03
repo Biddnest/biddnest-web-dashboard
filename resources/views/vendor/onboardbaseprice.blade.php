@@ -18,7 +18,7 @@
         </div>
         <div class="mr-20">
             <a class="modal-toggle" data-toggle="modal" data-target="#add-branch">
-                <button class="btn theme-bg white-text w-10">Add Price</button>
+                <button class="btn theme-bg white-text w-10 modal-toggle" data-target="#base_price">Add Price</button>
             </a>
         </div>
     </div>
@@ -165,25 +165,25 @@
                                     <input type="hidden" class="form-control" value="{{$price->id}}" name="id" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control  commission" value="{{$price-> 	bp_economic}}" name="commission" min="0.00" required>
+                                    <input type="text" class="form-control" value="{{$price-> 	bp_economic}}" name="commission" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="number" class="form-control  sub-total" value="{{$price-> 	mp_premium}}" name="sub_total" min="0.00" required readonly>
+                                    <input type="number" class="form-control" value="{{$price-> 	mp_premium}}" name="sub_total" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control  other_charges" value="{{$price->bp_premium}}" name="other_charges" min="0.00" required>
+                                    <input type="text" class="form-control" value="{{$price->bp_premium}}" name="other_charges" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
-                                    <input type="text" class="form-control  discount_amount" value="{{$price->mp_additional_distance_economic_price }}" name="discount_amount" min="0.00" required>
+                                    <input type="text" class="form-control " value="{{$price->mp_additional_distance_economic_price }}" name="discount_amount" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control  tax" value="{{$price->bp_additional_distance_economic_price}}" name="tax" min="0.00" required readonly>
+                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_economic_price}}" name="tax" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control  grand_total" value="{{$price->mp_additional_distance_premium_price}}" name="grand_total" min="0.00" readonly required>
+                                    <input type="text" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="grand_total" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
-                                    <input type="text" class="form-control  grand_total" value="{{$price->bp_additional_distance_premium_price}}" name="grand_total" min="0.00" readonly required>
+                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="grand_total" min="0.00" required>
                                 </div>
                             </div>
                         </div>
@@ -200,5 +200,93 @@
             </div>
         </div>
     @endforeach
+
+    <div class="fullscreen-modal" id="base_price" >
+        <div class="fullscreen-modal-body" role="document" style="width: 100% !important;">
+            <div class="modal-header">
+                <h5 class="modal-title  ml-4 pl-2" id="exampleModalLongTitle">Add Prices</h5>
+                <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-new-order input-text-blue" action="{{route('add_pricing')}}" data-next="redirect" data-url="{{route("onboard-branch-vendors", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
+                <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
+                    <div class="d-flex match-height row p-15 quotation-main pb-0" >
+                        <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                Sub-Category
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                Market Price Economy
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                Biddnest Price Economy
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                <b>Market Price Premium</b>
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                <b>Biddnest Price Premium</b>
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                Add. Market Price Economy
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
+                                Add. Biddnest Price Economy
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                Add. Market Price Premium
+                            </div>
+                            <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                Add. Biddnest Price Premium
+                            </div>
+                        </div>
+                        <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                            <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                               <select name="id" class="form-control" required>
+                                   <option value="">Select</option>
+                                   @foreach($add_subservices as $subservice)
+                                       <option value="{{$subservice->id}}">{{ucwords($subservice->name)}}</option>
+                                   @endforeach
+                               </select>
+                            </div>
+                            <div class="theme-text f-14  p-15" style="padding-top: 5px;">
+                                <input type="text" class="form-control" value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="number" class="form-control" value="0.00" name="subservice[]['pricing_id']" min="0.00" required >
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                            </div>
+                            <div class="theme-text f-14 p-15"  style="padding-top: 5px;">
+                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required >
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="text" class="form-control" value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                            </div>
+                            <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                <input type="text" class="form-control " value="0.00" name="subservice[]['pricing_id']" min="0.00" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-15 ">
+                    <div class="w-50">
+                    </div>
+                    <div class="w-50 text-right"><a class="white-text p-10" href="#">
+                            <button  class="btn theme-bg white-text w-40" style="margin-bottom: 20px;">Add</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 

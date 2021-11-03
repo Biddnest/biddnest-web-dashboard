@@ -825,12 +825,14 @@ class WebController extends Controller
     }
 
     public function onbaordBasePrice(Request $request){
-        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])                ->whereNotIn("name", ["custom"])
+        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->whereNotIn("name", ["custom"])
              ->get();
 
         $vendor_price = SubservicePrice::where("organization_id", $request->id)->with('subservice')->get();
 
-        return view('vendor.onboardbaseprice', ['id'=>$request->id, 'subservices'=>$subservices, "prices"=>$vendor_price]);
+        $add_subservices = Subservice::whereNotIn("id", SubservicePrice::where("organization_id", $request->id)->pluck('subservice_id'))->whereNotIn("name", ["custom"])->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+
+        return view('vendor.onboardbaseprice', ['id'=>$request->id, 'subservices'=>$subservices, "prices"=>$vendor_price, "add_subservices"=>$add_subservices]);
     }
 
     public function onbaordExtraBasePrice(Request $request){

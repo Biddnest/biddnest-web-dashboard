@@ -74,7 +74,7 @@
                         <h3 class="f-18" style="margin-top: 0;">
                             <ul class="nav nav-tabs p-0 flex-row" id="myTab" role="tablist" style="font-weight: 600;  margin-left: -6px;">
                                 <li class="nav-item ">
-                                    <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Customer</a>
+                                    <a class="nav-link p-15" id="customer-details-tab" data-toggle="tab" href="{{route('order-details', ['id'=>$booking->id])}}" role="tab" aria-controls="home" aria-selected="true">Details</a>
                                 </li>
                                 @if($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry'])
                                     <li class="nav-item">
@@ -135,9 +135,6 @@
                                       Review Description
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
-                                      Status
-                                    </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Ratings
                                     </div>
                                 </div>
@@ -159,13 +156,6 @@
                                     </div>
                                     <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
                                       {{$booking->review->desc}}
-                                    </div>
-                                    <div class="theme-text f-14  text-center status-badge mt-1">
-                                      @foreach(\App\Enums\BookingEnums::$STATUS as $status=>$key)
-                                          @if($key == $booking->$status)
-                                            {{ucfirst(trans($status))}}
-                                          @endif
-                                      @endforeach
                                     </div>
                                     <div class="theme-text f-14 p-15 pl-0  mt-3" style="padding-top: 5px;">
                                         @php $ratings = 0; @endphp
@@ -203,9 +193,9 @@
                               </div>
                               <div class="w-50 margin-r-20">
                                   <div class="d-flex justify-content-end">
-                                      <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
+                                      <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
 
-                                      {{--                                      <button  class="btn white-text theme-bg w-30" >Next</button>--}}
+                                      <a href="{{route('order-details-cancel', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                   </div>
 
                               </div>

@@ -658,43 +658,83 @@ class OrganisationController extends Controller
 
     public static function addPrices($data, $id){
         $exist = Organization::findOrFail($id);
-        $pricing = SubservicePrice::where("organization_id", $id)->get();
-        if($pricing)
-            $delete = SubservicePrice::where("organization_id", $id)->delete();
 
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
-        foreach ($data['subservice'] as $subservice){
+
             $pricing = new SubservicePrice();
 
-            if($subservice['market']['price']['economy'] == 0 && $subservice['market']['price']['premium']== 0)
+            if($data['subservice']['market']['price']['economy'] == 0 && $data['subservice']['market']['price']['premium']== 0)
             {
                 $economic_margin_percentage = 0;
                 $premium_margin_percentag = 0;
             }else{
-                $economic_margin_percentage = (($subservice['market']['price']['economy'] - $subservice['bidnest']['price']['economy'])/$subservice['market']['price']['economy'])*100;
-                $premium_margin_percentag = (($subservice['market']['price']['premium'] - $subservice['bidnest']['price']['premium'])/$subservice['market']['price']['premium'])*100;
+                $economic_margin_percentage = (($data['subservice']['market']['price']['economy'] - $data['subservice']['bidnest']['price']['economy'])/$data['subservice']['market']['price']['economy'])*100;
+                $premium_margin_percentag = (($data['subservice']['market']['price']['premium'] - $data['subservice']['bidnest']['price']['premium'])/$data['subservice']['market']['price']['premium'])*100;
             }
             $pricing->organization_id = $id;
-            $pricing->subservice_id = $subservice['id'];
-            $pricing->bp_economic = round($subservice['bidnest']['price']['economy'],2);
-            $pricing->bp_premium = round($subservice['bidnest']['price']['premium'],2);
-            $pricing->mp_economic = round($subservice['market']['price']['economy'],2);
-            $pricing->mp_premium = round($subservice['market']['price']['premium'],2);
+            $pricing->subservice_id = $data['subservice']['id'];
+            $pricing->bp_economic = round($data['subservice']['bidnest']['price']['economy'],2);
+            $pricing->bp_premium = round($data['subservice']['bidnest']['price']['premium'],2);
+            $pricing->mp_economic = round($data['subservice']['market']['price']['economy'],2);
+            $pricing->mp_premium = round($data['subservice']['market']['price']['premium'],2);
             $pricing->economic_margin_percentage = round($economic_margin_percentage,2);
             $pricing->premium_margin_percentage = round($premium_margin_percentag,2);
-            $pricing->mp_additional_distance_economic_price = round($subservice['mp_additional']['price']['economy'],2);
-            $pricing->mp_additional_distance_premium_price = round($subservice['mp_additional']['price']['premium'],2);
-            $pricing->bp_additional_distance_economic_price = round($subservice['bp_additional']['price']['economy'],2);
-            $pricing->bp_additional_distance_premium_price = round($subservice['bp_additional']['price']['premium'],2);
+            $pricing->mp_additional_distance_economic_price = round($data['subservice']['mp_additional']['price']['economy'],2);
+            $pricing->mp_additional_distance_premium_price = round($data['subservice']['mp_additional']['price']['premium'],2);
+            $pricing->bp_additional_distance_economic_price = round($data['subservice']['bp_additional']['price']['economy'],2);
+            $pricing->bp_additional_distance_premium_price = round($data['subservice']['bp_additional']['price']['premium'],2);
             $result_pricing = $pricing->save();
-        }
+
 
         if(!$result_pricing)
             return Helper::response(false,"Couldn't save data");
 
         return Helper::response(true,"save data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
+
+    }
+
+    public static function updatePrices($data, $id, $service_id){
+        $exist = Organization::findOrFail($id);
+
+        $pricing = SubservicePrice::where(["organization_id"=>$id, "id"=>$service_id])->first();
+        if(!$pricing)
+            return Helper::response(false,"Subservice prices dosen't exist.");
+
+        if(!$exist)
+            return Helper::response(false,"Incorrect Organization id.");
+
+
+
+            if($data['subservice']['market']['price']['economy'] == 0 && $data['subservice']['market']['price']['premium']== 0)
+            {
+                $economic_margin_percentage = 0;
+                $premium_margin_percentag = 0;
+            }else{
+                $economic_margin_percentage = (($data['subservice']['market']['price']['economy'] - $data['subservice']['bidnest']['price']['economy'])/$data['subservice']['market']['price']['economy'])*100;
+                $premium_margin_percentag = (($data['subservice']['market']['price']['premium'] - $data['subservice']['bidnest']['price']['premium'])/$data['subservice']['market']['price']['premium'])*100;
+            }
+
+            $pricing_update = SubservicePrice::where(["organization_id"=>$id, "id"=>$service_id])
+                ->update([
+                    "bp_economic"=>round($data['subservice']['bidnest']['price']['economy'],2),
+                    "bp_premium"=>round($data['subservice']['bidnest']['price']['premium'],2),
+                    "mp_economic"=> round($data['subservice']['market']['price']['economy'],2),
+                    "mp_premium"=>round($data['subservice']['market']['price']['premium'],2),
+                    "economic_margin_percentage"=>round($economic_margin_percentage,2),
+                    "premium_margin_percentage"=>round($premium_margin_percentag,2),
+                    "mp_additional_distance_economic_price"=>round($data['subservice']['mp_additional']['price']['economy'],2),
+                    "mp_additional_distance_premium_price"=>round($data['subservice']['mp_additional']['price']['premium'],2),
+                    "bp_additional_distance_economic_price"=>round($data['subservice']['bp_additional']['price']['economy'],2),
+                    "bp_additional_distance_premium_price"=>round($data['subservice']['bp_additional']['price']['premium'],2)
+                ]);
+
+
+        if(!$pricing_update)
+            return Helper::response(false,"Couldn't update data");
+
+        return Helper::response(true,"update data successfully", ["Orgnization"=>Organization::with('subservicePrice')->findOrFail($id)]);
 
     }
 

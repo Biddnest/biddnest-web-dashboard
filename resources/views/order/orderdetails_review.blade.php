@@ -135,9 +135,6 @@
                                       Review Description
                                     </div>
                                     <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
-                                      Status
-                                    </div>
-                                    <div class="theme-text f-14 bold p-15 pl-0"  style="padding-top: 5px;">
                                       Ratings
                                     </div>
                                 </div>
@@ -159,13 +156,6 @@
                                     </div>
                                     <div class="theme-text f-14 p-15 pl-0"style="padding-top: 5px;" >
                                       {{$booking->review->desc}}
-                                    </div>
-                                    <div class="theme-text f-14  text-center status-badge mt-1">
-                                      @foreach(\App\Enums\BookingEnums::$STATUS as $status=>$key)
-                                          @if($key == $booking->$status)
-                                            {{ucfirst(trans($status))}}
-                                          @endif
-                                      @endforeach
                                     </div>
                                     <div class="theme-text f-14 p-15 pl-0  mt-3" style="padding-top: 5px;">
                                         @php $ratings = 0; @endphp

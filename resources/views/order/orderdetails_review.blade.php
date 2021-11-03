@@ -195,7 +195,7 @@
                                   <div class="d-flex justify-content-end">
                                       <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
 
-                                      <a href="{{route('order-details-cancel', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg w-30" >Next</button></a>
+                                      <a href="{{route('order-details-cancel', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                   </div>
 
                               </div>

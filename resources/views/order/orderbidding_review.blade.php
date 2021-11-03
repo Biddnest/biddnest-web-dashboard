@@ -121,7 +121,7 @@
                             <div class="w-50 margin-r-20">
                                 <div class="d-flex justify-content-end">
                                     <a   href="{{route('order-details-bidding', ['id'=>$booking->id])}}" ><button  class="btn theme-text white-bg theme-br mr-20" style="padding: 10px 60px;">Back</button></a>
-                                    <a href="{{route('order-details-payment', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
+                                    <a href="{{route('order-details-review', ['id'=>$booking->id])}}" ><button  class="btn white-text theme-bg" style="padding: 10px 60px;">Next</button></a>
                                 </div>
                             </div>
                     </div>

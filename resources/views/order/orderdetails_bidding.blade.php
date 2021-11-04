@@ -123,9 +123,71 @@
                                     @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding'])
                                         <h4>Rebidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("H:iA")}}</h4>
                                     @endif
+
+
+
                                     @foreach($booking->biddings as $bidding)
                                         @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
-                                                <h4> Won Vendor: <b>{{$bidding->organization->org_name}}</b> | Quote Submitted: <b>₹{{$bidding->bid_amount}}</b></h4>
+                                                <div class="branch-wrapper col-lg-12">
+
+                                                    <div class="alert alert-success" role="alert">
+                                                        @if($bidding->bid_amount <= $least_agent_price)
+                                                        The submitted price (&#8377; {{$bidding->bid_amount}}) is less than the least agent price (&#8377; {{$least_agent_price}}). So this booking has been confirmed based on CASE 1 formulae.
+                                                        @elseif($bidding->bid_amount > $least_agent_price && $bidding->bid_amount <= $booking->organization_rec_quote)
+                                                            The submitted price (&#8377; {{$bidding->bid_amount}}) is more than the least agent price (&#8377; {{$least_agent_price}}) but less than recommended price to vendors (&#8377; {{$booking->organization_rec_quote}}). So this booking has been confirmed based on CASE 1 formulae.
+                                                        @elseif($bidding->bid_amount > $booking->organization_rec_quote)
+                                                            The submitted price (&#8377; {{$bidding->bid_amount}}) is more than the recommended price to vendors (&#8377; {{$booking->organization_rec_quote}}). So this booking is temporarily held and a price review is required.
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="branch-snip d-flex flex-row justify-content-around" style="border-color: #02ad5a !important">
+                                                        <div class="data-group" style="border-color: #02ad5a !important">
+                                                            <h1 style="font-size: 18px;text-align: center">Won by:</h1>
+                                                            <p style="text-align: center; color: #2E0789">
+                                                                <img src="{{$bidding->organization->image}}" style="max-height: 80px" />
+                                                                <br />
+                                                                <br />
+                                                                <span class="cursor-pointer modal-toggle" style="color: #2E0789">{{$bidding->organization->org_name}}</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="data-group">
+                                                            <h5 style="font-size: 14px;">Final Bid Amount</h5>
+                                                            <p>&#8377; {{ $bidding->bid_amount  }}</p>
+
+                                                            <br />
+                                                            <h5 style="font-size: 14px;">Submitted At</h5>
+                                                            <p>{{ $bidding->submit_at }}</p>
+                                                        </div>
+
+                                                        <div class="data-group">
+                                                            <h5 style="font-size: 14px;">Submitted by</h5>
+                                                            <p>{{$bidding->vendor->fname}} {{$bidding->vendor->lname}}</p>
+                                                            <br />
+                                                            <h5 style="font-size: 14px;">Least Agent Price</h5>
+                                                            <p>&#8377; {{ $least_agent_price }}</p>
+                                                        </div>
+
+                                                        <div class="data-group">
+
+                                                            <h5 style="font-size: 14px;">Type Of Movement</h5>
+                                                            <p>{{json_decode($bidding->meta,true)['type_of_movement']}}</p>
+                                                            <br />
+                                                            <h5 style="font-size: 14px;">Man Power</h5>
+                                                            <p>{{json_decode($bidding->meta,true)['min_man_power']}} - {{json_decode($bidding->meta,true)['max_man_power']}}</p>
+                                                        </div>
+                                                        <div class="data-group">
+
+                                                            <h5 style="font-size: 14px;">Moving Date</h5>
+                                                            <p>{{json_decode($bidding->meta,true)['moving_date'] ?: implode(", ",json_decode($bidding->moving_dates, true))}}</p>
+
+                                                            <br />
+                                                            <h5 style="font-size: 14px;">Vehicle Type</h5>
+                                                            <p>{{json_decode($bidding->meta,true)['vehicle_type']}}</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{--<h4> Won Vendor: <b>{{$bidding->organization->org_name}}</b> | Quote Submitted: <b>₹{{$bidding->bid_amount}}</b></h4>--}}
                                         @endif
                                     @endforeach
                                 </div>
@@ -135,7 +197,7 @@
                                             <div class="d-flex  p-10  justify-content-between ">
                                                 <div class="vertical-center">
                                                     <div class="theme-text f-18 bold">
-                                                        Vendors Bid List
+                                                        All vendor quotes
                                                     </div>
                                                 </div>
                                                 {{--<div class="vertical-center">

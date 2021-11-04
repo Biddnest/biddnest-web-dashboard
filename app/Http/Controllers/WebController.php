@@ -46,6 +46,7 @@ use App\Models\TicketReply;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\BookingOrganizationGeneratedPrice;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -565,10 +566,11 @@ class WebController extends Controller
        $booking = Booking::with('status_history')->with(['biddings'=>function($bid){
             $bid->orderBy('updated_at')->orderBy('status')->with(['organization'=>function($query){
                 $query->with('vehicle')->with('admin');
-            }]);
+            }])->with('vendor');
         }])->with(['payment'=>function($q){
            $q->with('coupon');
-       }])->findOrFail($request->id);
+       }])
+           ->findOrFail($request->id);
 
         $hist = [];
 
@@ -579,8 +581,14 @@ class WebController extends Controller
 
         $booking->status_ids = $hist;
 
+        $price_type = $booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_economic" : "bp_premium";
+
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $request->id)
+            ->min($price_type);
+
         return view('order.orderdetails_bidding',[
-            "booking" => $booking
+            "booking" => $booking,
+            "least_agent_price"=> $least_agent_price
         ]);
     }
 

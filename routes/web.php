@@ -445,6 +445,7 @@ Route::prefix('vendor')->group(function(){
 
         Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
         Route::get('/{id}/my-profile',[VendorWebController::class,'profile'])->name("vendor.myprofile");
+        Route::get('/search/result/',[VendorWebController::class,'searchResult'])->name("vendor.searchresult");
 
         Route::prefix('/booking')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");

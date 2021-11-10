@@ -341,7 +341,7 @@ class InventoryController extends Controller
                             "material" => $items["material"],
                             "size" => $items["size"],
                             "organization_id" => $vendor['id']
-                        ])->where(["status" => InventoryEnums::$STATUS['active'], "deleted" => CommonEnums::$NO])->first();
+                        ])->where(["status" => InventoryEnums::$STATUS['active'], "deleted" => CommonEnums::$NO, "ticket_status"=>CommenENums::$YES])->first();
 
                         if ($inv_price) {
                             $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);
@@ -391,10 +391,10 @@ class InventoryController extends Controller
     public static function getEconomicPrice($data, $booking_data, $vendor_price=false, $web=false, $created_by_support=false)
     {
 
-        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])->where("bp_economic", ">", 0.00)
             ->min('bp_economic');
 
-            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+            $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])->where("economic_margin_percentage", ">", 0.00)
                 ->avg('economic_margin_percentage');
 
         $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];
@@ -412,10 +412,10 @@ class InventoryController extends Controller
 
     public static function getPremiumPrice($data , $booking_data, $vendor_price=false, $web=false, $created_by_support=false)
     {
-        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])->where("bp_premium", ">", 0.00)
             ->min('bp_premium');
 
-        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+        $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])->where("premium_margin_percentage", ">", 0.00)
             ->avg('premium_margin_percentage');
 
         $other_charges = (float) Settings::where("key", "surge_charge")->pluck('value')[0];

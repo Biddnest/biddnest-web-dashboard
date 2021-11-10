@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
-$.delete = function(url, data, callback, type){
+    $.delete = function(url, data, callback, type){
     if ( $.isFunction(data) ){
         type = type || callback,
             callback = data,
@@ -943,6 +943,15 @@ $("body").on('click', ".searchButton1", function(event) {
         redirectTo(url + "?search=" + query);
     }
 });
+
+$("body").on('click', ".searchResultButton", function(event) {
+    var query = $('.table-search').val();
+    if (query.length >= 3) {
+        var url = $('.table-search').data('url');
+        redirectTo(url + "?search=" + query);
+    }
+});
+
 
 $("body").on('change', ".check-toggle", function(event) {
 Logger.info($(this).val());
@@ -2125,21 +2134,7 @@ $("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
     $(this).parsley().validate();
 });*/
 
-$("body").on("input change focusout","form input",function(){
+$("body").on("input change focusout",".main-content form input",function(){
     Logger.info("Validating Input");
     $(this).parsley().validate();
 });
-
-/*
-/!*$("body").on("click",".side-bar-pop-up",function(e){
-        e.stopPropagation;
-});*!/
-
-$("body").on("click",".main-content",function(e){
-
-    if($(this).closest(".side-bar-pop-up").length)
-        $(".side-bar-pop-up").removeClass("display-pop-up");
-
-        Logger.info("Sidebar autoclose");
-});
-*/

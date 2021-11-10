@@ -41,7 +41,7 @@
                     <h3 class="f-18 mt-0 ml-1 mb-0 theme_text">
                         <ul class="nav nav-tabs pt-10 p-0" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link p-15 active"  href="#">Past Orders</a>
+                                <a class="nav-link p-15 active"  href="{{route('vendor.pastbookings', ['type'=>"past"])}}">Past Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation" href="{{route('vendor.rejectbookings', ['type'=>"rejected"])}}" >Rejected Orders</a>

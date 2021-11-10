@@ -44,25 +44,20 @@
                                     <a class="nav-link p-15"  href="{{route('vendor.pastbookings', ['type'=>"past"])}}">Past Orders</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15 active" id="quotation" href="#" >Rejected Orders</a>
+                                    <a class="nav-link p-15 active" id="quotation" href="{{route('vendor.rejectbookings', ['type'=>"rejected"])}}" >Rejected Orders</a>
                                 </li>
                             </ul>
                         </h3>
 
                             <div class="header-wrap p-0 filter-dropdown ">
                                 <div class="search">
-                                    <input type="text" value="{{$search}}" class="searchTerm table-search" data-url="{{route('vendor.pastbookings', ['type'=>"past"])}}" placeholder="Search...">
+                                    <input type="text" class="searchTerm table-search" data-url="{{route('vendor.rejectbookings', ['type'=>"rejected"])}}" placeholder="Search...">
                                     <button type="submit" class="searchButton">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
                             </div>
-
-
                     </div>
-
-
-
 
 
                     <div class="all-vender-details">

@@ -70,8 +70,8 @@ class VendorWebController extends Controller
 
     public function dashboard()
     {
-        $count_live=Bid::where(['status'=>BidEnums::$STATUS['active'], 'organization_id'=>Session::get('organization_id')])->count();
-        $count_ongoing= Bid::where(['status'=>BidEnums::$STATUS['bid_submitted'], 'vendor_id'=>Session::get('account')['id']])->count();
+        $count_live=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereNotIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
+        $count_ongoing=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
         $count_won= Bid::where(['status'=>BidEnums::$STATUS['won'], 'vendor_id'=>Session::get('account')['id']])->count();
         $count_branch=Organization::where("id", Session::get('account')['id'])->orWhere("parent_org_id", Session::get('account')['id'])->count();
         $count_emp=Vendor::where('organization_id', Session::get('organization_id'))->count();
@@ -138,13 +138,13 @@ class VendorWebController extends Controller
 
     public function bookingType(Request $request)
     {
-        $count_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->count();
+        $count_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereNotIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
         $participated_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->count();
-        $schedul_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->count();
+        $schedul_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
         $save_booking=Bid::where(['organization_id'=>Session::get('organization_id'), 'bookmarked'=>CommonEnums::$YES])->count();
 
-        $past_booking=Booking::whereIn('id', Bid::where(['organization_id'=>Session::get('organization_id'), 'status'=>BidEnums::$STATUS['won']])->pluck('booking_id'))->whereIn('status', [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->count();
-
+        $past_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereIn('status', [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
+        
         $booking=BookingsController::getBookingsForVendorApp($request, true);
         return view('vendor-panel.order.liveorders', ['bookings'=>$booking, 'type'=>$request->type, 'count_booking'=>$count_booking, 'participated_booking'=>$participated_booking, 'schedul_booking'=>$schedul_booking, 'save_booking'=>$save_booking, 'past_booking'=>$past_booking, "search"=>$request->search ?: ""]);
     }
@@ -153,7 +153,7 @@ class VendorWebController extends Controller
     {
         $booking=BookingsController::getBookingsForVendorApp($request, true);
 
-        return view('vendor-panel.order.pastorders', ['bookings'=>$booking, "search"=>$request->search ?: ""]);
+        return view('vendor-panel.order.pastorders', ['bookings'=>$booking]);
     }
 
     public function bookingRejectType(Request $request)
@@ -508,5 +508,11 @@ class VendorWebController extends Controller
         $inventory_item=Inventory::where('id', $request->id)->first();
         $service_types=InventoryPrice::select('service_type')->where(['inventory_id'=>$request->id, 'deleted'=>CommonEnums::$NO])->where('organization_id', Session::get('organization_id'))->groupBy('service_type')->with('service')->get();
         return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory, 'item'=>$inventory_item, 'service_types'=>$service_types, 'inventory_id'=>$request->id]);
+    }
+
+
+    public function searchResult(Request $request){
+        $bookings=$booking=BookingsController::getBookingsForVendorApp($request, true);;
+        return view('vendor-panel.layouts.searchresult', ['bookings'=>$bookings]);
     }
 }

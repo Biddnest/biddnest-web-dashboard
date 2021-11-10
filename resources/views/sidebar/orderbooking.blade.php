@@ -89,6 +89,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="theme-text f-14">
+
                                         @switch($booking->status)
                                             @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                             <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
@@ -155,6 +156,7 @@
                                             @break;
 
                                         @endswitch
+
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +204,9 @@
                                 </div>
                             @endif
                             <div class="d-flex   justify-content-center p-10">
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @if($booking->status != \App\Enums\BookingEnums::$STATUS['in_progress'])
+                                    <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="vendor">
@@ -214,16 +218,12 @@
                                     </div>
 
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-6">
                                     <div class="theme-text f-14">
                                        {{$booking->organization->org_name ?? 'Not Assigned'}}
                                     </div>
                                 </div>
-                                <div class="col-sm-1">
-                                    <div class="theme-text f-14">
-                                        <i class="icon dripicons-pencil p-1 cursor-pointer" aria-hidden="true"></i>
-                                    </div>
-                                </div>
+
 
 
                             </div>
@@ -282,7 +282,9 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @if($booking->status != \App\Enums\BookingEnums::$STATUS['in_progress'])
+                                    <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @endif
 
 
 
@@ -300,31 +302,77 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="theme-text f-14">
-                                        @if($booking->payment) @switch($booking->payment->status)
-                                            @case(\App\Enums\PaymentEnums::$STATUS['pending'])
-                                            <span class="status-badge info-bg  text-center td-padding">Pending</span>
-                                            @break
+                                        @if($booking->payment)
+                                            @switch($booking->payment->status)
+                                                @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                                <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
+                                                @break
 
-                                            @case(\App\Enums\PaymentEnums::$STATUS['completed'])
-                                            <span class="status-badge green-bg  text-center td-padding">Completed</span>
-                                            @break
+                                                @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                                <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
+                                                @break
 
-                                            @case(\App\Enums\PaymentEnums::$STATUS['failed'])
-                                            <span class="status-badge red-bg  text-center td-padding">Failed</span>
-                                            @break
+                                                @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                                <span class="status-badge green-bg  text-center td-padding">Bidding</span>
+                                                @break
 
-                                            @case(\App\Enums\PaymentEnums::$STATUS['refund_initiated'])
-                                            <span class="status-badge red-bg  text-center td-padding">Refund Initiated</span>
-                                            @break
+                                                @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                                <span class="status-badge light-bg text-center td-padding">Rebidding</span>
+                                                @break
 
-                                            @case(\App\Enums\PaymentEnums::$STATUS['refunded'])
-                                            <span class="status-badge red-bg  text-center td-padding">Refunded</span>
-                                            @break
+                                                @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
+                                                @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
+                                                @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
+                                                @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
+                                                @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                <span class="status-badge green-bg  text-center td-padding">Completed</span>
+                                                @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
+                                                @break
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                                <span class=" text-center status-badge red-bg">On Hold</span>
+                                                @break;
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                                <span class=" text-center status-badge red-bg">Bounced</span>
+                                                @break;
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
+                                                <span class=" text-center status-badge red-bg">Request To Cancel</span>
+                                                @break;
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['in_progress'])
+                                                <span class=" text-center status-badge red-bg">In Progress</span>
+                                                @break;
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                <span class=" text-center status-badge red-bg">Awaiting Bid Result</span>
+                                                @break;
+
+                                                @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                <span class=" text-center status-badge red-bg">Price Review Pending</span>
+                                                @break;
 
                                             @default
                                             <span class="status-badge red-bg  text-center td-padding">Unknown</span>
 
-                                        @endswitch @else Payment data will be generated after bidding is completed. @endif
+                                        @endswitch
+                                        @else Payment data will be generated after bidding is completed. @endif
                                     </div>
                                 </div>
                             </div>
@@ -399,7 +447,9 @@
                                 </tbody>
                             </table>
                             <div class="d-flex   justify-content-center p-10">
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @if($booking->status != \App\Enums\BookingEnums::$STATUS['in_progress'])
+                                    <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @endif
                             </div>
                         </div>
 
@@ -428,72 +478,81 @@
                                     </tr>
                                     </thead>
                                     <tbody class="mtop-20">
-
                                     @foreach($booking->status_history as $status)
 
                                         <tr class="tb-border  cursor-pointer">
 
+                                           <td>
+                                               @switch($status->status)
+                                                   @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
+                                                   <span class="status-badge info-bg  text-center td-padding">Enquiry</span>
+                                                   @break
 
+                                                   @case(\App\Enums\BookingEnums::$STATUS['placed'])
+                                                   <span class="status-badge yellow-bg  text-center td-padding">Placed</span>
+                                                   @break
 
-                                            @switch($status->status)
-                                                    @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
-                                                    <td class="text-center">Enquiry</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['biding'])
+                                                   <span class="status-badge green-bg  text-center td-padding">Bidding</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['placed'])
-                                                    <td class="text-center">Placed</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
+                                                   <span class="status-badge light-bg text-center td-padding">Rebidding</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['biding'])
-                                                    <td class="text-center">Bidding</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                   <span class="status-badge secondg-bg  text-center td-padding">Payment Pending</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                                    <td class="text-center">Rebidding</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                                   <span class="status-badge secondg-bg  text-center td-padding">Pending Driver Assign</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                                    <td class="text-center">Pending User Confirmation</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                                   <span class="status-badge blue-bg  text-center td-padding">Awaiting Pickup</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                                    <td class="text-center">Pending Driver Assign</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                   <span class="status-badge icon-bg  text-center td-padding">In Transit</span>
+                                                   @break
 
-                                                @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                                <td class="text-center">Pendign Driver Assign</td>
-                                                <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d/m H:i A", strtotime($status->created_at))}}</span></td>
-                                                @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                   <span class="status-badge green-bg  text-center td-padding">Completed</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-                                                    <td class="text-center">Awaiting Pickup</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                   <span class="status-badge red-bg  text-center td-padding">Cancelled</span>
+                                                   @break
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                                    <td class="text-center">In transit</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['hold'])
+                                                   <span class=" text-center status-badge red-bg">On Hold</span>
+                                                   @break;
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['completed'])
-                                                    <td class="text-center">Delivered</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
+                                                   @case(\App\Enums\BookingEnums::$STATUS['bounced'])
+                                                   <span class=" text-center status-badge red-bg">Bounced</span>
+                                                   @break;
 
-                                                    @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-                                                    <td class="text-center">Cancelled</td>
-                                                    <td class=""><span class="red-bg text-center w-100  td-padding">{{date("d M H:i A", strtotime($status->created_at))}}</span></td>
-                                                    @break
-                                                @endswitch
+                                                   @case(\App\Enums\BookingEnums::$STATUS['cancel_request'])
+                                                   <span class=" text-center status-badge red-bg">Request To Cancel</span>
+                                                   @break;
+
+                                                   @case(\App\Enums\BookingEnums::$STATUS['in_progress'])
+                                                   <span class=" text-center status-badge red-bg">In Progress</span>
+                                                   @break;
+
+                                                   @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                   <span class=" text-center status-badge red-bg">Awaiting Bid Result</span>
+                                                   @break;
+
+                                                   @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                   <span class=" text-center status-badge red-bg">Price Review Pending</span>
+                                                   @break;
+                                               @endswitch
+                                           </td>
+                                            <td>{{\Carbon\Carbon::parse($status->created_at)->format("H:i A, D m Y")}}</td>
                                         </tr>
-                                    @endforeach
 
+                                    @endforeach
                                     </tbody>
                                 </table>
                                 @if(count($booking->status_history)== 0)
@@ -509,7 +568,9 @@
 
                             <div class="d-flex   justify-content-center p-10">
 
-                                <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                @if($booking->status != \App\Enums\BookingEnums::$STATUS['in_progress'])
+                                    <div class=""><a class="white-text p-10" href="{{route('order-details',["id"=>$booking->id])}}" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"><button class="btn theme-bg white-text">View More</button></a></div>
+                                    @endif
 
 
 

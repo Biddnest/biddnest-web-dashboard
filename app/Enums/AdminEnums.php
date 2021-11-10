@@ -11,6 +11,6 @@ use Fabito\AvatarGenerator\Avatar;
 
 
 class AdminEnums{
-    public static $ROLES = ["admin"=>1, "zone_admin"=>2, "marketing"=>3];
+    public static $ROLES = ["admin"=>1, "zone_admin"=>2, "marketing"=>3, "virtual_assistant"=>4];
     public static $STATUS = ["active"=>1, "suspended"=>2];
 }

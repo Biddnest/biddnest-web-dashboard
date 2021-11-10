@@ -341,7 +341,7 @@ class InventoryController extends Controller
                             "material" => $items["material"],
                             "size" => $items["size"],
                             "organization_id" => $vendor['id']
-                        ])->where(["status" => InventoryEnums::$STATUS['active'], "deleted" => CommonEnums::$NO])->first();
+                        ])->where(["status" => InventoryEnums::$STATUS['active'], "deleted" => CommonEnums::$NO, "ticket_status"=>CommenENums::$YES])->first();
 
                         if ($inv_price) {
                             $mp_economic += $inv_price['mp_economic'] + (($additional_distance / $vendor['additional_distance']) * $inv_price['mp_additional_economic']);

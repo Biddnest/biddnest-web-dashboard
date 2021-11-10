@@ -119,7 +119,6 @@
             </div>
         </div>
     </div>
-</div>
     @foreach($prices as $price)
         <div class="fullscreen-modal" id="price_{{$price->id}}" >
             <div class="fullscreen-modal-body" role="document" style="width: 100% !important;">
@@ -243,12 +242,12 @@
                         </div>
                         <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                             <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                               <select name="subservice[id]" class="form-control" required>
-                                   <option value="">Select</option>
-                                   @foreach($add_subservices as $subservice)
-                                       <option value="{{$subservice->id}}">{{ucwords($subservice->name)}}</option>
-                                   @endforeach
-                               </select>
+                                <select name="subservice[id]" class="form-control" required>
+                                    <option value="">Select</option>
+                                    @foreach($add_subservices as $subservice)
+                                        <option value="{{$subservice->id}}">{{ucwords($subservice->name)}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="theme-text f-14  p-15" style="padding-top: 5px;">
                                 <input type="text" class="form-control" value="0.00" name="subservice[market][price][economy]" min="0.00" required>
@@ -289,5 +288,7 @@
             </form>
         </div>
     </div>
+</div>
+
 @endsection
 

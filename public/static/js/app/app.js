@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2021. This Project was built and maintained by Diginnovators Private Limited.
  */
-$.delete = function(url, data, callback, type) {
-    if ($.isFunction(data)) {
+    $.delete = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
         type = type || callback,
             callback = data,
             data = {}
@@ -16,8 +16,8 @@ $.delete = function(url, data, callback, type) {
     });
 }
 
-$.update = function(url, data, callback, type) {
-    if ($.isFunction(data)) {
+$.update = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
         type = type || callback,
             callback = data,
             data = {}
@@ -31,8 +31,8 @@ $.update = function(url, data, callback, type) {
     });
 }
 
-$.add = function(url, data, callback, type) {
-    if ($.isFunction(data)) {
+$.add = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
         type = type || callback,
             callback = data,
             data = {}
@@ -64,45 +64,45 @@ if (env != "development")
 // getLocationPermission();
 
 /*Callback for hero form submit - always keep at top (has conflict issue)*/
-$("body").on("submit", ".hero-booking-form", function(event) {
+$("body").on("submit",".hero-booking-form",function (event){
 
     let proceed = true;
     var data = $(this).serializeJSON();
     Logger.info(data);
 
-    if (!data.service || data.service == "") {
-        tinyAlert("Incomplete form", "Please Choose Service");
-        proceed = false;
+    if(!data.service || data.service == "") {
+        tinyAlert("Incomplete form","Please Choose Service");
+        proceed =  false;
     }
 
-    if (!data.source_lat || data.source_lat == "" || $("input.book-address").eq(0).attr("placeholder") == "Choose") {
-        tinyAlert("Incomplete form", "Please choose pickup location");
-        proceed = false;
+    if(!data.source_lat || data.source_lat == "" || $("input.book-address").eq(0).attr("placeholder") == "Choose") {
+        tinyAlert("Incomplete form","Please choose pickup location");
+        proceed =  false;
     }
 
-    if (!data.dest_lat || data.dest_lat == "" || $("input.book-address").eq(2).attr("placeholder") == "Choose") {
-        tinyAlert("Incomplete form", "Please choose destination location");
-        proceed = false;
+    if(!data.dest_lat || data.dest_lat == "" || $("input.book-address").eq(2).attr("placeholder") == "Choose") {
+        tinyAlert("Incomplete form","Please choose destination location");
+        proceed =  false;
     }
 
-    if (!data.move_date || data.move_date == "") {
-        tinyAlert("Incomplete form", "Please choose movement dates");
-        proceed = false;
+    if(!data.move_date || data.move_date == "") {
+        tinyAlert("Incomplete form","Please choose movement dates");
+        proceed =  false;
     }
 
     Logger.info(`${$(this).attr("action")}?${$(this).serialize}`);
 
-    if (!proceed)
+    if(!proceed)
         return false;
 
-    if (LOGGED_STATE)
+    if(LOGGED_STATE)
         location.assign(`${$(this).attr("action")}?${$(this).serialize()}`);
     else {
 
         $("#Login-modal").modal();
-        $("#Login-modal form").attr("data-url", `${$(this).attr("action")}?${$(this).serialize()}`);
+        $("#Login-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`);
 
-        $("#Signup-modal form").attr("data-url", `${$(this).attr("action")}?${$(this).serialize()}`);
+        $("#Signup-modal form").attr("data-url",`${$(this).attr("action")}?${$(this).serialize()}`);
     }
 
     return false;
@@ -111,174 +111,182 @@ $("body").on("submit", ".hero-booking-form", function(event) {
 
 /* AJAX Universal */
 $("body").on('submit', "form:not(.no-ajax)", function() {
-    let form = $(this);
-    let requestData = form.serializeJSON();
-    let button = form.find("button[type=submit]");
-    Logger.info(button);
-    let buttonPretext = button.html();
-    Logger.info("Loggin request payload", requestData);
+        let form = $(this);
+        let requestData = form.serializeJSON();
+        let button = form.find("button[type=submit]");
+        Logger.info(button);
+        let buttonPretext = button.html();
+        Logger.info("Loggin request payload", requestData);
 
-    $.ajax({
-        url: form.attr("action"),
-        method: form.attr("method"),
-        data: JSON.stringify(requestData),
-        contentType: "application/json",
-        beforeSend: () => {
-            triggerFormAnim(button);
-        },
-        success: (response) => {
+        $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: JSON.stringify(requestData),
+            contentType: "application/json",
+            beforeSend: () => {
+                triggerFormAnim(button);
+            },
+            success: (response) => {
 
-            // Logger.info("Response ",response);
-            Logger.info("Response ", response);
-            if (response.status == "success") {
+                // Logger.info("Response ",response);
+                Logger.info("Response ", response);
+                if (response.status == "success") {
 
-                tinySuccessAlert("Success", response.message);
-                if (form.data("next")) { //   data-next="redirect"
-                    if (form.data("next") == "nothing") {
-                        revertFormAnim(button, buttonPretext);
-                        return false;
-                    }
-                    if (form.data("next") == "redirect") {
-                        if (form.hasClass("add-slider")) {
-                            var url = form.data('url');
-                            url = url.replace(':id', response.data.slider.id);
-                            redirectTo(url);
-                            return false;
-                        }
-                        if (form.hasClass("vendor-pass-reset")) {
-                            var url = form.data('url');
-                            // Logger.info(url);
-                            url = url.replace(':phone', response.data.vendor.phone);
-                            // Logger.info(url);
-                            redirectTo(url);
-                            return false;
-                        }
-                        if (form.hasClass("onboard-vendor-form")) {
-                            var url = form.data('url');
-                            url = url.replace(':id', response.data.organization.id);
-                            redirectTo(url);
-                            return false;
-                        }
-                        if (form.hasClass("user-form")) {
-                            var url = form.data('url');
-                            url = url.replace(':id', response.data.admin.id);
-                            redirectTo(url);
-                            return false;
-                        }
-                        if (form.hasClass("verify-otp-form")) {
-                            var url = form.data('url');
-                            url = url.replace(':id', response.data.otp.id);
-                            redirectTo(url);
-                            return false;
-                        }
-                        if (form.hasClass("order_create")) {
-                            var url = form.data('url');
-                            url = url.replace(':id', response.data.booking.id);
-                            redirectTo(url);
-                            return false;
-                        }
-
-                        if (form.hasClass("order_create_web")) {
-                            var url = form.data('url');
-                            url = url.replace(':id', response.data.booking.public_enquiry_id);
-                            redirectHard(url);
-                            return false;
-                        }
-                        if (form.data('redirect-type') == "hard")
-                            redirectHard(form.data("url")); // data-url="google.com"
-                        else
-                            redirectTo(form.data("url"));
-                    } else if (form.data("next") == "refresh") {
-                        location.reload();
-                    } else if (form.data("next") == "modal") {
-                        $(form.data(".modal-id")).modal();
-                    }
-                }
-                if (form.hasClass("order_track_web")) {
-                    var enq_id = response.data.booking.public_booking_id;
-                    Logger.info(enq_id);
-                    $('.enq-id').val(enq_id);
-                }
-
-                if (form.hasClass("track_next1")) {
-                    revertFormAnim(button, "NEXT");
-                    Logger.info('entered');
-                    $('.step-1').css('display', 'none');
-                    $('.step-2').css('display', 'block');
-                    $(".completed-step-2").addClass("turntheme");
-                    $(".completed-step-1").removeClass("turntheme");
-                    $(".steps-step-2").addClass("color-purple");
-                    $(".steps-step-1").removeClass("color-purple");
-                }
-
-                if (form.hasClass("track_next2")) {
-                    revertFormAnim(button, "NEXT");
-                    $('.step-2').css('display', 'none');
-                    $('.step-3').css('display', 'block');
-                    $(".completed-step-3").addClass("turntheme");
-                    $(".completed-step-2").removeClass("turntheme");
-                    $(".steps-step-3").addClass("color-purple");
-                    $(".steps-step-2").removeClass("color-purple");
-                }
-
-                if (form.hasClass("track_next3")) {
-                    revertFormAnim(button, "NEXT");
-                    $('.step-3').css('display', 'none');
-                    $('.step-4').css('display', 'block');
-                    $(".completed-step-4").addClass("turntheme");
-                    $(".completed-step-3").removeClass("turntheme");
-                    $(".steps-step-4").addClass("color-purple");
-                    $(".steps-step-3").removeClass("color-purple");
-                }
-            } else if (response.status == "fail") {
-
-                if (form.data("alert") == "tiny")
-                    tinyAlert("Oops", response.message);
-                else if (form.data("alert") == "inline")
-                    inlineAlert(form, response.message);
-                else
-                    megaAlert("Oops", response.message);
-
-                revertFormAnim(button, buttonPretext);
-            } else if (response.status == "await") {
-                $(form.data('await-input')).toggleClass('hidden');
-                revertFormAnim(button, buttonPretext);
-
-                /*remove in prod*/
-                if ("otp" in response.data && env == "development")
-                    $(form.data('await-input')).find("input").val(response.data.otp);
-                /*remove in prod*/
-            } else if (response.status == "login") {
-                tinySuccessAlert("Success", response.message);
-                if (response.data.user.new == false) {
+                    tinySuccessAlert("Success", response.message);
                     if (form.data("next")) { //   data-next="redirect"
+                        if(form.data("next") == "nothing") {
+                            revertFormAnim(button, buttonPretext);
+                            return false;
+                        }
                         if (form.data("next") == "redirect") {
+                            if (form.hasClass("add-slider")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.slider.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("vendor-pass-reset")) {
+                                var url = form.data('url');
+                                // Logger.info(url);
+                                url = url.replace(':phone', response.data.vendor.phone);
+                                // Logger.info(url);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("onboard-vendor-form")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.organization.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("user-form")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.admin.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("verify-otp-form")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.otp.id);
+                                redirectTo(url);
+                                return false;
+                            }
+                            if (form.hasClass("order_create")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.booking.id);
+                                redirectTo(url);
+                                return false;
+                            }
+
+                            if (form.hasClass("order_create_web")) {
+                                var url = form.data('url');
+                                url = url.replace(':id', response.data.booking.public_enquiry_id);
+                                redirectHard(url);
+                                return false;
+                            }
                             if (form.data('redirect-type') == "hard")
                                 redirectHard(form.data("url")); // data-url="google.com"
                             else
                                 redirectTo(form.data("url"));
+                        } else if (form.data("next") == "refresh") {
+                            location.reload();
+                        }else if (form.data("next") == "modal") {
+                            $(form.data(".modal-id")).modal();
                         }
                     }
-                } else if (response.data.user.new == true) {
-                    $('#Login-modal').modal('hide');
-                    $('#Signup-modal').modal('show');
-                }
-            } else {
-                Logger.info(response.message);
-                revertFormAnim(button, buttonPretext);
-            }
-        },
-        error: (error, ajaxOptions, thrownError) => {
-            Logger.info(error.responseText);
-            if (error.status === 400)
-                megaAlert("Fill all fields", "Please make sure to fill all fields with valid input.");
-            else
-                megaAlert("Oops", "Something went wrong in server. This action couldn't be processed.");
-            revertFormAnim(button, buttonPretext);
-        },
-    });
+                    if (form.hasClass("order_track_web")) {
+                        var enq_id = response.data.booking.public_booking_id;
+                        Logger.info(enq_id);
+                        $('.enq-id').val(enq_id);
+                    }
 
-    return false;
+                    if (form.hasClass("track_next1")) {
+                        revertFormAnim(button, "NEXT");
+                        Logger.info('entered');
+                            $('.step-1').css('display', 'none');
+                            $('.step-2').css('display', 'block');
+                            $(".completed-step-2").addClass("turntheme");
+                            $(".completed-step-1").removeClass("turntheme");
+                            $(".steps-step-2").addClass("color-purple");
+                            $(".steps-step-1").removeClass("color-purple");
+                    }
+
+                    if (form.hasClass("track_next2")) {
+                        revertFormAnim(button, "NEXT");
+                        $('.step-2').css('display', 'none');
+                        $('.step-3').css('display', 'block');
+                        $(".completed-step-3").addClass("turntheme");
+                        $(".completed-step-2").removeClass("turntheme");
+                        $(".steps-step-3").addClass("color-purple");
+                        $(".steps-step-2").removeClass("color-purple");
+                    }
+
+                    if (form.hasClass("track_next3")) {
+                        revertFormAnim(button, "NEXT");
+                        $('.step-3').css('display', 'none');
+                        $('.step-4').css('display', 'block');
+                        $(".completed-step-4").addClass("turntheme");
+                        $(".completed-step-3").removeClass("turntheme");
+                        $(".steps-step-4").addClass("color-purple");
+                        $(".steps-step-3").removeClass("color-purple");
+                    }
+                }
+
+                else if (response.status == "fail") {
+
+                    if (form.data("alert") == "tiny")
+                        tinyAlert("Oops", response.message);
+                    else if (form.data("alert") == "inline")
+                        inlineAlert(form, response.message);
+                    else
+                        megaAlert("Oops", response.message);
+
+                    revertFormAnim(button, buttonPretext);
+                }
+
+                else if(response.status == "await"){
+                    $(form.data('await-input')).toggleClass('hidden');
+                    revertFormAnim(button, buttonPretext);
+
+                    /*remove in prod*/
+                    if("otp" in response.data && env == "development")
+                        $(form.data('await-input')).find("input").val(response.data.otp);
+                    /*remove in prod*/
+                }
+                else if(response.status == "login"){
+                    tinySuccessAlert("Success", response.message);
+                    if(response.data.user.new == false){
+                        if (form.data("next")) { //   data-next="redirect"
+                            if (form.data("next") == "redirect") {
+                                if (form.data('redirect-type') == "hard")
+                                    redirectHard(form.data("url")); // data-url="google.com"
+                                else
+                                    redirectTo(form.data("url"));
+                            }
+                        }
+                    }
+                    else if(response.data.user.new == true){
+                        $('#Login-modal').modal('hide');
+                        $('#Signup-modal').modal('show');
+                    }
+                }
+
+                else {
+                    Logger.info(response.message);
+                    revertFormAnim(button, buttonPretext);
+                }
+            },
+            error: (error, ajaxOptions, thrownError) => {
+                Logger.info(error.responseText);
+                if(error.status === 400)
+                    megaAlert("Fill all fields", "Please make sure to fill all fields with valid input.");
+                else
+                    megaAlert("Oops", "Something went wrong in server. This action couldn't be processed.");
+                revertFormAnim(button, buttonPretext);
+            },
+        });
+
+        return false;
 
 });
 
@@ -325,9 +333,9 @@ $("body").on('change', ".field-toggle", function(event) {
 });
 
 $("body").on('click', ".repeater", function(event) {
-    if ($(this).hasClass("load-extra-inventories") && $(".subservices").val()) {
+    if($(this).hasClass("load-extra-inventories") && $(".subservices").val()){
         let max_extra_inv_count = parseInt($(".subservices option:selected").data('max-items'));
-        if ($(".is_custom").length == max_extra_inv_count) {
+        if($(".is_custom").length == max_extra_inv_count){
             megaAlert("Limit Reached", `You can only add upto ${max_extra_inv_count} inventories to this subcategory.`);
             return false;
         }
@@ -337,17 +345,19 @@ $("body").on('click', ".repeater", function(event) {
     Logger.info('show');
     $(".hide-on-data").fadeOut(100);
     initRangeSlider();
-    var id = $(".category-select").val();
-    var type = $("#sub_" + id).data("type");
+    var id=$(".category-select").val();
+    var type=$("#sub_"+id).data("type");
 
-    if (type == 0) {
+    if(type == 0)
+    {
         $(".fixed").removeClass("hidden");
         $(".range").parent().addClass("hidden");
         $(".fixed").attr("required", "required");
         $(".fixed").attr("name", "inventory_items[][quantity]");
         $(".range").removeAttr("name");
     }
-    if (type == 1) {
+    if(type == 1)
+    {
         $(".fixed").addClass("hidden");
         $(".range").parent().removeClass("hidden");
         $(".range").attr("required", "required");
@@ -355,13 +365,13 @@ $("body").on('click', ".repeater", function(event) {
         $(".fixed").removeAttr("name");
     }
 
-    if ($(this).hasClass("load-extra-inventories") && $(".subservices").val()) {
-        $.get(`${$(this).data('url')}?subservice_id=${$(".subservices").val()}`, function(response) {
+    if($(this).hasClass("load-extra-inventories") && $(".subservices").val()){
+        $.get(`${$(this).data('url')}?subservice_id=${$(".subservices").val()}`,function(response){
             Logger.info(response);
             let options = `<option value="">--Select--</option>`;
             let inventory;
 
-            for (let i = 0; i < response.data.extra_inventories.length; i++) {
+            for(let i = 0; i < response.data.extra_inventories.length; i++){
                 inventory = response.data.extra_inventories[i];
                 options += `<option id='inventory_${inventory.id}' value="${inventory.id}" data-size='${inventory.size}' data-material='${inventory.material}'>${inventory.name}</option>`;
             }
@@ -386,13 +396,14 @@ $("body").on('click', ".closer", function(event) {
     }).then((result) => {
         if (result.isConfirmed) {
             $(this).closest($(this).data("parent")).fadeOut(100).remove();
-        } else {
+        }
+        else{
             return false;
         }
     });
-    /* if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
-         $(this).closest($(this).data("parent")).fadeOut(100).remove();
-     }*/
+   /* if(confirm('Are sure want to remove this? If you proceed, you may need to use the save button to save changes permanently.')) {
+        $(this).closest($(this).data("parent")).fadeOut(100).remove();
+    }*/
 
 });
 
@@ -417,40 +428,43 @@ $("body").on('click', ".fullscreen-modal-body .cancel", function(event) {
 
 $("body").on('change', ".inventory-select", function(event) {
     Logger.info("change");
-    var id = $(this).val();
+    var id=$(this).val();
 
     $(this).closest(".inventory-snip").find(".material").html('<option value="">--Select--</option>');
     $(this).closest(".inventory-snip").find(".size").html('<option value="">--Select--</option>');
 
-    var materal = $("#inventory_" + id).data("material");
-    var size = $("#inventory_" + id).data("size");
+    var materal=$("#inventory_"+id).data("material");
+    var size=$("#inventory_"+id).data("size");
 
-    materal.map((value) => {
-        $(this).closest(".inventory-snip").find(".material").append('<option value="' + value + '">' + value + '</option>')
+    materal.map((value)=>{
+        $(this).closest(".inventory-snip").find(".material").append('<option value="'+value+'">'+value+'</option>')
     });
-    size.map((value) => {
-        $(this).closest(".inventory-snip").find(".size").append('<option value="' + value + '">' + value + '</option>')
+    size.map((value)=>{
+        $(this).closest(".inventory-snip").find(".size").append('<option value="'+value+'">'+value+'</option>')
     });
     return false;
 });
 
 $("body").on('change', ".notification", function(event) {
     Logger.info("change");
-    var id = $(this).val();
+    var id=$(this).val();
     Logger.info(id);
-    if (id == "1") {
+    if(id == "1")
+    {
         $(this).closest(".d-flex").find(".vendor").addClass("hidden");
         $(this).closest(".d-flex").find(".user").removeClass("hidden");
         $(this).closest(".d-flex").find(".userselect").attr("required", "required");
         $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
     }
-    if (id == "2") {
+    if(id == "2")
+    {
         $(this).closest(".d-flex").find(".user").addClass("hidden");
         $(this).closest(".d-flex").find(".vendor").removeClass("hidden");
         $(this).closest(".d-flex").find(".vendorselect").attr("required", "required");
         $(this).closest(".d-flex").find(".userselect").removeAttr("required", "required");
     }
-    if (id == 3 || id == 4) {
+    if(id == 3 || id == 4)
+    {
         $(this).closest(".d-flex").find(".vendor").addClass("hidden");
         $(this).closest(".d-flex").find(".user").addClass("hidden");
         $(this).closest(".d-flex").find(".vendorselect").removeAttr("required", "required");
@@ -462,19 +476,20 @@ $("body").on('change', ".notification", function(event) {
 
 $("body").on('change', ".category-select", function(event) {
 
-    var id = $(this).val();
+    var id=$(this).val();
 
     $(this).closest(".d-flex").find(".subservices").html('<option value="">--Select--</option>');
 
-    var materal = $("#sub_" + id).data("subcategory");
+    var materal=$("#sub_"+id).data("subcategory");
 
-    materal.map((value) => {
-        var name = value['name'].replace(" ", "_");
-        $(this).closest(".d-flex").find(".subservices").append('<option data-max-items="' + value['max_extra_items'] + '" data-service="' + id + '" id="item_' + name + '" data-id="' + value['id'] + '" value="' + value['name'] + '">' + value['name'] + '</option>')
+    materal.map((value)=>{
+        var name=value['name'].replace(" ", "_");
+        $(this).closest(".d-flex").find(".subservices").append('<option data-max-items="'+value['max_extra_items']+'" data-service="'+id+'" id="item_'+name+'" data-id="'+value['id']+'" value="'+value['name']+'">'+value['name']+'</option>')
     });
 
-    var type = $("#sub_" + id).data("type");
-    if (type == 0) {
+    var type=$("#sub_"+id).data("type");
+    if(type == 0)
+    {
         $(this).closest(".d-flex").find(".fixed").removeClass("hidden");
         $(this).closest(".d-flex").find(".range").parent().addClass("hidden");
         $(this).closest(".d-flex").find(".fixed").attr("required", "required");
@@ -482,7 +497,8 @@ $("body").on('change', ".category-select", function(event) {
         $(this).closest(".d-flex").find(".range").removeAttr("required");
         $(this).closest(".d-flex").find(".range").removeAttr("name");
     }
-    if (type == 1) {
+    if(type == 1)
+    {
         $(this).closest(".d-flex").find(".fixed").addClass("hidden");
         $(this).closest(".d-flex").find(".range").parent().removeClass("hidden");
         $(this).closest(".d-flex").find(".range").attr("required", "required");
@@ -495,22 +511,24 @@ $("body").on('change', ".category-select", function(event) {
 
 $("body").on('change', ".subservices", function(event) {
 
-    var subcategory = $(this).val()
-    var name = subcategory.replace(" ", "_");
-    var id = $("#item_" + name).data("id");
-    var service = $("#item_" + name).data("service");
+    var subcategory= $(this).val()
+    var name=subcategory.replace(" ", "_");
+    var id= $("#item_"+name).data("id");
+    var service = $("#item_"+name).data("service");
     var url = $(this).data("url");
 
     // $('.item-subservice').html("");
 
     $.ajax({
-        url: url + "?id=" + id + "&service=" + service,
+        url: url+"?id="+id+"&service="+service,
         type: 'GET',
         contentType: "application/json",
-        success: function(response) {
-            if (response.status == "success") {
+        success: function (response) {
+            if(response.status == "success")
+            {
                 Logger.info(response.data.items);
-                if (response.data.items.length > 0) {
+                if(response.data.items.length > 0)
+                {
                     for (var i = 0; i < response.data.items.length; i++) {
                         response.data.items[i].meta.material = JSON.parse(response.data.items[i].meta.material);
                         response.data.items[i].meta.size = JSON.parse(response.data.items[i].meta.size);
@@ -522,19 +540,19 @@ $("body").on('change', ".subservices", function(event) {
                     let html = template(response.data);
 
                     $('.item-subservice').html(html);
-                    /* $('.item-subservice').find("tr").not(".is_custom").remove();
-                     $('.item-subservice').prepend(html);
+                   /* $('.item-subservice').find("tr").not(".is_custom").remove();
+                    $('.item-subservice').prepend(html);
 
-                     let max_extra_inv_count = parseInt($(".subservices option:selected").data('max-items'));
-                         let custom_items_count = $(".is_custom").length;
-                     if(custom_items_count > max_extra_inv_count){
+                    let max_extra_inv_count = parseInt($(".subservices option:selected").data('max-items'));
+                        let custom_items_count = $(".is_custom").length;
+                    if(custom_items_count > max_extra_inv_count){
 
-                         let diff = custom_items_count - max_extra_inv_count;
-                         $(".is_custom").slice(-diff).remove();
+                        let diff = custom_items_count - max_extra_inv_count;
+                        $(".is_custom").slice(-diff).remove();
 
-                         megaAlert(`${diff} items removed.`, `You can only add upto ${max_extra_inv_count} items to this subcategory but you had ${custom_items_count} items added. Last ${diff} items have been removed.`);
-                         return false;
-                     }*/
+                        megaAlert(`${diff} items removed.`, `You can only add upto ${max_extra_inv_count} items to this subcategory but you had ${custom_items_count} items added. Last ${diff} items have been removed.`);
+                        return false;
+                    }*/
                 }
             }
         }
@@ -557,39 +575,43 @@ $("body").on('click', ".delete", function(event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            var target = $(this).closest($(this).data("parent"));
-            $.delete($(this).data("url"), {}, function(response) {
+            var target =  $(this).closest($(this).data("parent"));
+            $.delete($(this).data("url"), {}, function (response){
                 Logger.info(response);
-                if (response.status == "success") {
+                if(response.status == "success")
+                {
                     tinySuccessAlert("Deleted Successfully", response.message);
                     target.hide();
-                } else {
+                }
+                else
+                {
                     tinyAlert("Failed", response.message);
                 }
 
             });
-        } else {
+        }
+        else{
             return false;
         }
     });
-    /* if(confirm($(this).data('confirm'))) {
-         // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-         var target =  $(this).closest($(this).data("parent"));
-         $.delete($(this).data("url"), {}, function (response){
-             Logger.info(response);
-             if(response.status == "success")
-             {
-                 tinySuccessAlert("Deleted Successfully", response.message);
-                 target.hide();
-             }
-             else
-             {
-                 tinyAlert("Failed", response.message);
-             }
+   /* if(confirm($(this).data('confirm'))) {
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var target =  $(this).closest($(this).data("parent"));
+        $.delete($(this).data("url"), {}, function (response){
+            Logger.info(response);
+            if(response.status == "success")
+            {
+                tinySuccessAlert("Deleted Successfully", response.message);
+                target.hide();
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
 
-         });
-     }
-     return false;*/
+        });
+    }
+    return false;*/
 });
 
 $("body").on('click', ".impersonate", function(event) {
@@ -605,10 +627,11 @@ $("body").on('click', ".impersonate", function(event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            let vendorpanel = window.open($(this).data("url"), "vendor-panel", "height=640,width=720,resizable=yes,scrollbars=yes,status=yes");
+            let vendorpanel = window.open($(this).data("url"),"vendor-panel","height=640,width=720,resizable=yes,scrollbars=yes,status=yes");
             vendorpanel.focus();
             return false;
-        } else {
+        }
+        else{
             return false;
         }
     });
@@ -618,7 +641,7 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child), .sidebar-toggle-link
     var $this = $(this);
 
     // if($(this).hasClass('no-toggle'))
-    // return false;
+        // return false;
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
         '                    <svg class="circular" height="50" width="50">\n' +
@@ -629,11 +652,11 @@ $("body").on('click', ".sidebar-toggle td:not(:last-child), .sidebar-toggle-link
     $('.side-bar-pop-up').addClass('display-pop-up');
 
     let url;
-    if ($(this).hasClass("sidebar-toggle-link"))
+    if($(this).hasClass("sidebar-toggle-link"))
         url = $(this).data("sidebar");
     else
         url = $(this).parent().data("sidebar");
-    $.get(url, {}, function(response) {
+    $.get(url, {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
@@ -646,7 +669,7 @@ $("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)"
     var $this = $(this);
 
     // if($(this).hasClass('no-toggle'))
-    // return false;
+        // return false;
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
         '                    <svg class="circular" height="50" width="50">\n' +
@@ -655,7 +678,7 @@ $("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)"
         '                </div>');
 
     $('.side-bar-pop-up').addClass('display-pop-up');
-    $.get($(this).parent().data("sidebar"), {}, function(response) {
+    $.get($(this).parent().data("sidebar"), {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
@@ -674,7 +697,7 @@ $("body").on('click', ".invsidebar", function(event) {
         '                </div>');
 
     $('.side-bar-pop-up').addClass('display-pop-up');
-    $.get($(this).data("sidebar"), {}, function(response) {
+    $.get($(this).data("sidebar"), {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
@@ -686,7 +709,7 @@ $("body").on('click', ".category-sidebar-toggle td:not(:nth-last-child(-n+2))", 
     var $this = $(this);
 
     // if($(this).hasClass('no-toggle'))
-    // return false;
+        // return false;
 
     $(".side-bar-pop-up").html('<div class="pop-up-preloader">\n' +
         '                    <svg class="circular" height="50" width="50">\n' +
@@ -695,7 +718,7 @@ $("body").on('click', ".category-sidebar-toggle td:not(:nth-last-child(-n+2))", 
         '                </div>');
 
     $('.side-bar-pop-up').addClass('display-pop-up');
-    $.get($(this).parent().data("sidebar"), {}, function(response) {
+    $.get($(this).parent().data("sidebar"), {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
@@ -703,21 +726,22 @@ $("body").on('click', ".category-sidebar-toggle td:not(:nth-last-child(-n+2))", 
 });
 
 $("body").on('change', ".vendor-select", function(event) {
-    var id = $(this).val();
-    var commision = $("#org_" + id).data("comission");
-    if (commision > 0) {
+    var id=$(this).val();
+    var commision=$("#org_"+id).data("comission");
+    if(commision > 0)
+    {
         document.getElementById("commission").value = commision;
     }
     return false;
 });
 
 $("body").on('keyup', "#amount", function(event) {
-    var id = $(this).val();
+    var id=$(this).val();
 
     var org_id = document.getElementById("orgnizations").value;
-    var commision = $("#org_" + org_id).data("comission");
-    var discount = (id * commision) / 100;
-    var afterDiscount = id - discount;
+    var commision=$("#org_"+org_id).data("comission");
+    var discount = (id * commision)/ 100;
+    var afterDiscount =id - discount;
     document.getElementById("payout_amount").value = afterDiscount;
     document.getElementById("commission_amount").value = discount;
     return false;
@@ -725,7 +749,7 @@ $("body").on('keyup', "#amount", function(event) {
 
 $("body").on('change', ".change_status", function(event) {
     let el = $(this);
-    if (el.hasClass('change-click')) {
+    if(el.hasClass('change-click')){
         return false;
     }
     Swal.fire({
@@ -739,7 +763,7 @@ $("body").on('change', ".change_status", function(event) {
     }).then((result) => {
         if (result.isConfirmed) {
             var target = $(this).closest($(this).data("parent"));
-            $.update($(this).data("url"), {}, function(response) {
+            $.update($(this).data("url"), {}, function (response) {
                 Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert("Status changed Successfully", response.message);
@@ -748,10 +772,11 @@ $("body").on('change', ".change_status", function(event) {
                     tinyAlert("Failed", response.message);
                 }
             });
-        } else {
-            el.addClass('change-click');
-            el.click();
-            el.removeClass('change-click');
+        }
+        else{
+                el.addClass('change-click');
+                el.click();
+                el.removeClass('change-click');
             return false;
         }
     });
@@ -768,7 +793,7 @@ $("body").on('change', ".status-change", function(event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            $.update($(this).data("url"), {}, function(response) {
+            $.update($(this).data("url"), {}, function (response) {
                 Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert("Status changed Successfully", response.message);
@@ -776,7 +801,8 @@ $("body").on('change', ".status-change", function(event) {
                     tinyAlert("Failed", response.message);
                 }
             });
-        } else {
+        }
+        else{
             return false;
         }
     });
@@ -793,7 +819,7 @@ $("body").on('click', ".vendor-status-change", function(event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            $.update($(this).data("url"), {}, function(response) {
+            $.update($(this).data("url"), {}, function (response) {
                 Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert("Status changed Successfully", response.message);
@@ -802,7 +828,8 @@ $("body").on('click', ".vendor-status-change", function(event) {
                     tinyAlert("Failed", response.message);
                 }
             });
-        } else {
+        }
+        else{
             return false;
         }
     });
@@ -819,7 +846,7 @@ $("body").on('click', ".booking-status-change", function(event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            $.update($(this).data("url"), {}, function(response) {
+            $.update($(this).data("url"), {}, function (response) {
                 Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert("Confirmed Successfully", response.message);
@@ -828,7 +855,8 @@ $("body").on('click', ".booking-status-change", function(event) {
                     tinyAlert("Failed", response.message);
                 }
             });
-        } else {
+        }
+        else{
             return false;
         }
     });
@@ -837,8 +865,8 @@ $("body").on('click', ".booking-status-change", function(event) {
 $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
     Logger.info(data);
-    if (confirm('Are you sure want to change status?')) {
-        $.update($(this).data("url"), { data }, function(response) {
+    if(confirm('Are you sure want to change status?')) {
+        $.update($(this).data("url"), {data}, function (response) {
             Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Status changed Successfully", response.message);
@@ -853,8 +881,8 @@ $("body").on('change', ".reply_status", function(event) {
 
 $("body").on('change', ".reschedule", function(event) {
     var data = document.getElementById("movement_dates").value;
-    if (confirm('Are you sure want to reschedule this order?')) {
-        $.update($(this).data("url"), { data }, function(response) {
+    if(confirm('Are you sure want to reschedule this order?')) {
+        $.update($(this).data("url"), {data}, function (response) {
             Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Reschedule Order Successfully", response.message);
@@ -867,8 +895,8 @@ $("body").on('change', ".reschedule", function(event) {
 });
 
 $("body").on('change', ".cancel-booking", function(event) {
-    if (confirm('Are you sure want to Cancel this order?')) {
-        $.update($(this).data("url"), { data }, function(response) {
+    if(confirm('Are you sure want to Cancel this order?')) {
+        $.update($(this).data("url"), {data}, function (response) {
             Logger.info(response);
             if (response.status == "success") {
                 tinySuccessAlert("Cancelde Order Successfully", response.message);
@@ -881,7 +909,7 @@ $("body").on('change', ".cancel-booking", function(event) {
 });
 
 $("body").on('keydown', ".table-search", function(event) {
-    if (event.keyCode == 13) {
+    if(event.keyCode == 13){
         var query = $(this).val();
         if (query.length >= 3) {
             var url = window.location.href.split("?")[0];
@@ -891,7 +919,7 @@ $("body").on('keydown', ".table-search", function(event) {
 });
 
 $("body").on('keydown', ".table-search1", function(event) {
-    if (event.keyCode == 13) {
+    if(event.keyCode == 13){
         var query = $(this).val();
         if (query.length >= 15) {
             var url = window.location.href.split("?")[0];
@@ -901,11 +929,11 @@ $("body").on('keydown', ".table-search1", function(event) {
 });
 
 $("body").on('click', ".searchButton", function(event) {
-    var query1 = $('.table-search').val();
-    if (query1.length >= 3) {
-        var url = window.location.href.split("?")[0];
-        redirectTo(url + "?search=" + query1);
-    }
+        var query1 = $('.table-search').val();
+        if (query1.length >= 3) {
+            var url = window.location.href.split("?")[0];
+            redirectTo(url + "?search=" + query1);
+        }
 });
 
 $("body").on('click', ".searchButton1", function(event) {
@@ -926,7 +954,7 @@ $("body").on('click', ".searchResultButton", function(event) {
 
 
 $("body").on('change', ".check-toggle", function(event) {
-    Logger.info($(this).val());
+Logger.info($(this).val());
     if ($(this).val() == $(this).data("value")) {
         $(this).val("0");
         $($(this).data("target")).removeClass("hidden");
@@ -950,7 +978,7 @@ $("body").on('click', ".bookings", function(event) {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            $.update($(this).data("url"), {}, function(response) {
+            $.update($(this).data("url"), {}, function (response) {
                 Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert($(this).data('success'), response.message);
@@ -959,7 +987,8 @@ $("body").on('click', ".bookings", function(event) {
                     tinyAlert("Failed", response.message);
                 }
             });
-        } else {
+        }
+        else{
             return false;
         }
     });
@@ -978,7 +1007,7 @@ $("body").on('click', ".rejected", function(event) {
     }).then((result) => {
         if (result.isConfirmed) {
             var target = $(this).closest($(this).data("parent"));
-            $.update($(this).data("url"), {}, function(response) {
+            $.update($(this).data("url"), {}, function (response) {
                 Logger.info(response);
                 if (response.status == "success") {
                     tinySuccessAlert($(this).data('success'), response.message);
@@ -1000,13 +1029,13 @@ $("body").on('click', ".rejected", function(event) {
 
 $("body").on('change', ".inventory-item-select", function(event) {
     var query = $(this).val();
-    redirectTo($(this).data('url') + "?item=" + query);
+    redirectTo($(this).data('url')+"?item="+query);
 });
 
 $("body").on('click', ".next-btn-1-admin", function(event) {
 
     let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each(function() {
+    $($(this).closest('form').find('input.validate-input')).each( function() {
         Logger.info(isValid);
         if ($(this).parsley().validate() !== true)
             isValid = false;
@@ -1018,26 +1047,27 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
         $('.bid-expt').val(quote);
         // est = est.replace(/,/g, "");
 
-        var high = parseInt(est) + parseInt(est / 2);
-        var low = parseInt(est) - parseInt(est / 2);
+        var high = parseInt(est)+parseInt(est/2);
+        var low = parseInt(est)-parseInt(est/2);
 
         Logger.info(quote);
-        if (quote <= 0) {
+        if(quote <= 0) {
             tinyAlert("Warning", "Quote cannot be zero.");
             return false;
         }
 
-        if (low >= quote) {
+        if(low >= quote) {
             tinyAlert("Warning", "This Quote is to low for bidding!");
-        } else if (high <= quote) {
+        }
+         else if(high <= quote){
             tinyAlert("Warning", "This Quote is to high for bidding!");
         }
-        $(this).hide();
-        $(this).closest('form').find('.bid-amount-admin').hide();
-        $(this).closest('form').find('.bid-amount-3-admin').hide();
-        $(this).closest('form').find('.bid-amount-2-admin').show();
-        $(this).closest('form').find('.next-btn-2-admin').show();
-        $(this).closest('form').find('.next-btn-back-2-admin').removeClass("hidden");
+            $(this).hide();
+            $(this).closest('form').find('.bid-amount-admin').hide();
+            $(this).closest('form').find('.bid-amount-3-admin').hide();
+            $(this).closest('form').find('.bid-amount-2-admin').show();
+            $(this).closest('form').find('.next-btn-2-admin').show();
+            $(this).closest('form').find('.next-btn-back-2-admin').removeClass("hidden");
     }
 });
 
@@ -1051,7 +1081,7 @@ $("body").on('click', ".next-btn-back-2-admin", function(event) {
 });
 
 $("body").on('click', ".next-btn-2-admin", function(event) {
-    var url = $(this).data("url");
+    var url= $(this).data("url");
 
     $(".bid-amount-2-admin").wrap("<form id='parsley-form'></form>");
     let isValid = $('#parsley-form').parsley().validate();
@@ -1062,11 +1092,11 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
             url: url,
             type: 'GET',
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 Logger.info(response);
                 $('.otp-bid').val(response.data.OTP);
             }
-        });
+            });
         $(this).hide();
         $(this).closest('form').find('.bid-amount-admin').hide();
         $(this).closest('form').find('.bid-amount-2-admin').hide();
@@ -1078,9 +1108,9 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
 });
 
 $("body").on('click', ".next-btn-1", function(event) {
-    Logger.info("next");
+ Logger.info("next");
     let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each(function() {
+    $($(this).closest('form').find('input.validate-input')).each( function() {
         if ($(this).parsley().validate() !== true)
             isValid = false;
     });
@@ -1091,7 +1121,7 @@ $("body").on('click', ".next-btn-1", function(event) {
 
         var high = parseInt(est) + parseInt(est / 2);
         var low = parseInt(est) - parseInt(est / 2);
-        if (parseFloat(quote) <= 0.00) {
+        if(parseFloat(quote) <= 0.00){
             Swal.fire({
                 title: 'Incorrect Quote',
                 text: "The quote cannot be zero.",
@@ -1122,11 +1152,11 @@ $("body").on('click', ".next-btn-1", function(event) {
             });
             // megaAlert("Warning", "This Quote is to high for bidding!");
         }
-        $(this).hide();
-        $(this).closest('form').find('.bid-amount').hide();
-        $(this).closest('form').find('.bid-amount-2').show();
-        $(this).closest('form').find('.next-btn-2').show();
-        $(this).closest('form').find('.next-btn-back-2').removeClass("hidden");
+            $(this).hide();
+            $(this).closest('form').find('.bid-amount').hide();
+            $(this).closest('form').find('.bid-amount-2').show();
+            $(this).closest('form').find('.next-btn-2').show();
+            $(this).closest('form').find('.next-btn-back-2').removeClass("hidden");
 
     }
 });
@@ -1152,29 +1182,29 @@ $("body").on('click', ".next-btn-2", function(event) {
         $(this).closest('form').find('.submitbtn').show();
         $(this).closest('form').find('.enter-pin').show();
         $(this).closest('form').find('.next-btn-back-2').addClass("hidden");
-    }
+     }
 });
 
 $("body").on('keyup', ".calc-total", function(event) {
-    let total = 0.00;
+    let total=0.00;
 
-    $(this).find('.calc-total-input').each(function() {
+   $(this).find('.calc-total-input').each(function(){
 
         total += parseInt($(this).val());
-    });
+   });
 
-    // $($(this).data("result")).val(total);
-    $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
+   // $($(this).data("result")).val(total);
+   $(this).closest("form").find($(this).data("result")).val(parseFloat(total).toFixed(2));
 });
 
 $("body").on('click', ".move-date", function(event) {
     var id = $(this).data("id");
     // $(this).closest(".select-date").find("input[type=checkbox]").removeAttr("checked");
-    $(this).closest(".move-add-date").find(".moving-date_" + id).removeAttr("checked");
-    $(this).closest(".move-add-date").find(".moving-date_" + id).attr("checked", "checked");
+    $(this).closest(".move-add-date").find(".moving-date_"+id).removeAttr("checked");
+    $(this).closest(".move-add-date").find(".moving-date_"+id).attr("checked", "checked");
 
     // $(".move-date").removeClass("radio-color");
-    $(".mdate_" + id).removeClass("radio-color");
+    $(".mdate_"+id).removeClass("radio-color");
     $(this).toggleClass("radio-color");
 });
 
@@ -1284,45 +1314,46 @@ $("body").on('click', ".back4", function(event) {
     $(".steps-step-4").removeClass("color-purple");
 });
 
-var selectedDates = [];
+var selectedDates=[];
 var dp = $('.bookdate').datepicker({
     multidate: true,
     format: 'd M',
     todayHighlight: true,
     'startDate': '+1d',
-    'endDate': '+20d',
+    'endDate':'+20d',
 
 });
 dp.on('changeDate', function(e) {
-    if (e.dates.length < 6) {
+    if(e.dates.length < 6){
         selectedDates = e.dates;
-    } else {
+    }else{
         dp.data('datepicker').setDates(selectedDates);
-        tinyAlert('Please note', 'Can only select upto 5 dates', 'info')
+        tinyAlert('Please note','Can only select upto 5 dates', 'info')
     }
 
-    if (e.dates.length > 1) {
+    if(e.dates.length > 1){
         $('.share').val(true);
         $('.share_check').attr("checked", "checked");
-    } else {
+    }
+    else{
         $('.share').val(false);
         $('.share_check').removeAttr("checked", "checked");
     }
-    selectedDates.sort(function(a, b) {
+    selectedDates.sort(function(a, b){
         return new Date(a.date) - new Date(b.date);
     });
 });
 
 
 $("body").on('change', ".switch", function(event) {
-    let phone = $(this).data('phone');
-    let name = $(this).data('name');
-    let email = $(this).data('email');
+    let phone=$(this).data('phone');
+    let name=$(this).data('name');
+    let email=$(this).data('email');
     if ($(this).val() == $(this).data("value")) {
         $(this).val("1");
-        $('#phone').val('');
-        $('#fullname').val('');
-        $('#email').val('');
+       $('#phone').val('');
+       $('#fullname').val('');
+       $('#email').val('');
     } else {
         $(this).val("0");
         $('#phone').val(phone);
@@ -1395,61 +1426,71 @@ $("body").on('change', ".card-methord02", function(event) {
 });
 
 $("body").on('click', ".raised", function(event) {
-    // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-    var data = $(this).data("booking");
-    var href = $(this).data("redirect");
-    $.add($(this).data("url"), { data }, function(response) {
-        if (response.status == "success") {
-            tinySuccessAlert("Ticket Raised Successfully", response.message);
-            window.location.href = href;
-        } else {
-            tinyAlert("Failed", response.message);
-        }
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var data = $(this).data("booking");
+        var href = $(this).data("redirect");
+        $.add($(this).data("url"), {data}, function (response){
+            if(response.status == "success")
+            {
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                window.location.href = href;
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
 
-    });
+        });
     return false;
 });
 
 $("body").on('click', ".reshcedule", function(event) {
-    // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-    var public_booking_id = $(this).data("id");
-    var href = $(this).data("next-url");
-    $.add($(this).data("url"), { public_booking_id }, function(response) {
-        if (response.status == "success") {
-            tinySuccessAlert("Ticket Raised Successfully", response.message);
-            window.location.href = href;
-            // redirectTo(href);
-        } else {
-            tinyAlert("Failed", response.message);
-        }
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var public_booking_id = $(this).data("id");
+        var href = $(this).data("next-url");
+        $.add($(this).data("url"), {public_booking_id}, function (response){
+            if(response.status == "success")
+            {
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                window.location.href = href;
+                // redirectTo(href);
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
 
-    });
+        });
     return false;
 });
 
 $("body").on('click', ".reject-booking", function(event) {
-    // $(this).closest($(this).data("parent")).fadeOut(100).remove();
-    var public_booking_id = $(this).data("id");
-    var href = $(this).data("next-url");
-    $.add($(this).data("url"), { public_booking_id }, function(response) {
-        if (response.status == "success") {
-            tinySuccessAlert("Ticket Raised Successfully", response.message);
-            window.location.href = href;
-            // redirectTo(href);
-        } else {
-            tinyAlert("Failed", response.message);
-        }
+        // $(this).closest($(this).data("parent")).fadeOut(100).remove();
+        var public_booking_id = $(this).data("id");
+        var href = $(this).data("next-url");
+        $.add($(this).data("url"), {public_booking_id}, function (response){
+            if(response.status == "success")
+            {
+                tinySuccessAlert("Ticket Raised Successfully", response.message);
+                window.location.href = href;
+                // redirectTo(href);
+            }
+            else
+            {
+                tinyAlert("Failed", response.message);
+            }
 
-    });
+        });
     return false;
 });
 
 $("body").on('click', ".copy", function(event) {
     var coupon_code = document.getElementById("coupon").value;
-    if (coupon_code == "") {
+    if(coupon_code == ""){
         var code = $(this).data("code");
         document.getElementById("coupon").value = code;
-    } else {
+    }
+    else{
         tinyAlert("Failed", "Coupon already added!");
         return false;
     }
@@ -1457,29 +1498,29 @@ $("body").on('click', ".copy", function(event) {
 });
 
 $("body").on('click', ".card-method", function(event) {
-    var method = $(this).data("method");
-    $('.card-method').removeClass('turntheme');
-    $('.card-method').removeClass('check-icon02');
+        var method = $(this).data("method");
+        $('.card-method').removeClass('turntheme');
+        $('.card-method').removeClass('check-icon02');
 
-    $(this).addClass('turntheme');
-    $(this).addClass('check-icon02');
+        $(this).addClass('turntheme');
+        $(this).addClass('check-icon02');
     return false;
 });
 
 $("body").on('click', ".payment", function(event) {
-    var method = $('.check-icon02').data("method");
-    Logger.info(method);
-    var amount = $(this).data("amount");
-    var booking_id = $(this).data("booking");
-    var coupon_code = document.getElementById("coupon").value;
-    var url = $(this).data("url");
-    var url_payment = $(this).data("payment");
-    var url_status = $(this).data("status");
-    var name = $(this).data("user-name");
-    var email = $(this).data("user-email");
-    var contact = $(this).data("user-contact");
-    var moving_date = $('#moving_date').val();
-    Logger.info(moving_date);
+        var method = $('.check-icon02').data("method");
+        Logger.info(method);
+        var amount = $(this).data("amount");
+        var booking_id = $(this).data("booking");
+        var coupon_code = document.getElementById("coupon").value;
+        var url = $(this).data("url");
+        var url_payment = $(this).data("payment");
+        var url_status = $(this).data("status");
+        var name = $(this).data("user-name");
+        var email = $(this).data("user-email");
+        var contact = $(this).data("user-contact");
+        var moving_date = $('#moving_date').val();
+        Logger.info(moving_date);
 
 
     $.ajax({
@@ -1487,33 +1528,29 @@ $("body").on('click', ".payment", function(event) {
         type: 'post',
         dataType: 'json',
         data: {
-            id: booking_id,
-            code: coupon_code,
-            moving_date: moving_date
+            id:booking_id ,code : coupon_code ,moving_date : moving_date
         },
-        success: function(response) {
+        success: function (response) {
             // options.order_id=response.data.payment.rzp_order_id;
             var options = {
                 "key": RZP_KEY, // secret key id
-                "order_id": response.data.payment.rzp_order_id,
-                "amount": (amount * 100), // 2000 paise = INR 20
+                "order_id":response.data.payment.rzp_order_id,
+                "amount": (amount *100), // 2000 paise = INR 20
                 "name": "Bidnest",
-                "description": "Movement on" + moving_date,
+                "description": "Movement on"+ moving_date,
                 "image": "https://dashboard-biddnest.dev.diginnovators.com/static/images/favicon.svg",
-                "handler": function(resp) {
+                "handler": function (resp){
                     Logger.info({
-                        booking_id: booking_id,
-                        payment_id: resp.razorpay_payment_id,
+                        booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                     });
                     $.ajax({
                         url: url_status,
                         type: 'post',
                         dataType: 'json',
                         data: {
-                            booking_id: booking_id,
-                            payment_id: resp.razorpay_payment_id,
+                            booking_id:booking_id ,payment_id : resp.razorpay_payment_id,
                         },
-                        success: function(msg) {
+                        success: function (msg) {
                             // redirectTo(url);
                             window.location.href = url;
                         }
@@ -1542,10 +1579,13 @@ $("body").on('click', ".payment", function(event) {
 
 $("body").on('click', ".call-request", function(event) {
     var data = document.getElementById("contact_no").value;
-    $.add($(this).data("url"), { data }, function(response) {
-        if (response.status == "success") {
+    $.add($(this).data("url"), {data}, function (response){
+        if(response.status == "success")
+        {
             tinySuccessAlert("Request Raised Successfully", response.message);
-        } else {
+        }
+        else
+        {
             tinyAlert("Failed", response.message);
         }
 
@@ -1556,22 +1596,25 @@ $("body").on('click', ".call-request", function(event) {
 $("body").on('click', ".verify-coupon", function(event) {
     var public_booking_id = document.getElementById("public_booking_id").value;
     var coupon = document.getElementById("coupon").value;
-    $.add($(this).data("url"), { public_booking_id, coupon }, function(response) {
-        if (response.status == "success") {
+    $.add($(this).data("url"), {public_booking_id, coupon}, function (response){
+        if(response.status == "success")
+        {
             Logger.info(response);
-            var grand_total = response.data.grand_total;
+            var grand_total =response.data.grand_total;
             grand_total = grand_total.replace(/\,/g, '');
 
             tinySuccessAlert("Coupon Verified", response.message);
 
             $('.discount').html(response.data.discount);
             $('.grand-total').html(grand_total);
-            $('.payment').attr("data-amount", grand_total);
+            $('.payment').attr("data-amount",grand_total);
             $(".verify-coupon").addClass("remove");
             $(".verify-coupon").text("Remove");
-            $(".verify-coupon").attr("data-app", response.data.grand_total);
+            $(".verify-coupon").attr("data-app",response.data.grand_total);
             $(".verify-coupon").removeClass("verify-coupon");
-        } else {
+        }
+        else
+        {
             tinyAlert("Failed", response.message);
         }
 
@@ -1586,16 +1629,16 @@ $("body").on('click', ".remove", function(event) {
 });
 
 $("body").on('click', ".web-category", function(event) {
-    var url = $(this).data("url");
-    var inventory_quantity_type = $(this).data("quantity-type");
+  var url=$(this).data("url");
+    var inventory_quantity_type=$(this).data("quantity-type");
     $(".inventory-quantity-type").val(inventory_quantity_type);
-    if (inventory_quantity_type == 0) {
+    if(inventory_quantity_type == 0){
         $('.quantity-filed').html('<div class="quantity d-flex justify-content-between quantity-operator">' +
             '            <span class="minus">-</span>' +
             '            <input type="text" name="quantity" readOnly value="1"/>' +
             '            <span class="plus">+</span>' +
             '        </div>');
-    } else {
+    }else{
         $('.quantity-filed').html('<div class="quantity-2" style="padding: 5px 2px">' +
             '            <input type="text" class="custom_slider range" name="quantity" value=""' +
             '                   data-type="double"' +
@@ -1611,15 +1654,15 @@ $("body").on('click', ".web-category", function(event) {
         url: url,
         type: 'get',
         dataType: 'json',
-        success: function(response) {
-            // Logger.info(response);
+        success: function (response) {
+           // Logger.info(response);
 
             var source = $("#entry-template").html();
             var template = Handlebars.compile(source);
             var html = template(response.data);
             $('.subservices').html(html);
 
-            if (!response.data.subservices.length) {
+            if(!response.data.subservices.length){
                 Logger.info("custom");
                 $('#subservice_id').val('custom');
                 $('.web-inventory').click();
@@ -1636,31 +1679,32 @@ $("body").on('click', ".web-category", function(event) {
 });
 
 $("body").on('click', ".web-inventory", function(event) {
-    var url = $(this).data("inv-url");
+    var url=$(this).data("inv-url");
     let inventory_quantity_type = $(".inventory-quantity-type").val();
     Logger.info(inventory_quantity_type);
     $.ajax({
         url: url,
         type: 'get',
         dataType: 'json',
-        beforeSend: function() {
+        beforeSend: function(){
             $("div.inventory-popup").css({
                 "opacity": "0.4"
             });
         },
-        success: async function(response) {
-            if (!response.data.max_custom.length) {
+        success: async function (response) {
+            if(!response.data.max_custom.length){
                 $('.max_count').val(0);
-            } else {
+            }else{
                 Logger.info(response.data.max_custom);
                 $('.max_count').val(response.data.max_custom);
-                $('.count-max').html(response.data.max_custom + ' Extra');
+                $('.count-max').html(response.data.max_custom+' Extra');
             }
 
             Logger.info(response);
-            for (var i = 0; i < response.data.extra_inventories.length; i++) {
-                response.data.extra_inventories[i].material = JSON.parse(response.data.extra_inventories[i].material);
-                response.data.extra_inventories[i].size = JSON.parse(response.data.extra_inventories[i].size);
+            for(var i=0; i< response.data.extra_inventories.length; i++)
+            {
+                response.data.extra_inventories[i].material=JSON.parse(response.data.extra_inventories[i].material);
+                response.data.extra_inventories[i].size=JSON.parse(response.data.extra_inventories[i].size);
             }
             var source = $("#extra-templateinventory").html();
             var template = Handlebars.compile(source);
@@ -1670,13 +1714,13 @@ $("body").on('click', ".web-inventory", function(event) {
                 "opacity": "1"
             });
 
-            if (inventory_quantity_type == 0) {
+            if(inventory_quantity_type == 0){
                 $('.quantity-filed').html('<div class="quantity d-flex justify-content-between quantity-operator">' +
                     '            <span class="minus">-</span>' +
                     '            <input type="text" name="quantity" readOnly value="1"/>' +
                     '            <span class="plus">+</span>' +
                     '        </div>');
-            } else {
+            }else{
                 $('.quantity-filed').html('<div class="quantity-2" style="padding: 5px 2px">' +
                     '            <input type="text" class="custom_slider range" name="quantity" value=""' +
                     '                   data-type="double"' +
@@ -1695,30 +1739,31 @@ $("body").on('click', ".web-inventory", function(event) {
 });
 
 $("body").on('click', ".web-sub-category", function(event) {
-    var url = $(this).data("url");
+  var url=$(this).data("url");
     let inventory_quantity_type = $(".inventory-quantity-type").val();
-    $('#subservice_id').val($(this).val());
+   $('#subservice_id').val($(this).val());
     $.ajax({
         url: url,
         type: 'get',
         dataType: 'json',
-        beforeSend: function() {
+        beforeSend: function(){
             $("div.inventory").css({
                 "opacity": "0.4"
             });
         },
-        success: function(response) {
-            Logger.info(response);
-            for (var i = 0; i < response.data.inventories.length; i++) {
-                response.data.inventories[i].meta.material = JSON.parse(response.data.inventories[i].meta.material);
-                response.data.inventories[i].meta.size = JSON.parse(response.data.inventories[i].meta.size);
+        success: function (response) {
+           Logger.info(response);
+            for(var i=0; i< response.data.inventories.length; i++)
+            {
+                response.data.inventories[i].meta.material=JSON.parse(response.data.inventories[i].meta.material);
+                response.data.inventories[i].meta.size=JSON.parse(response.data.inventories[i].meta.size);
 
             }
-            if (inventory_quantity_type == 0)
+            if(inventory_quantity_type == 0)
                 var source = $("#entry-templateinventory").html();
             else {
-                item.quantity_min = item.quantity.split(';')[0];
-                item.quantity_max = item.quantity.split(';')[1];
+                item.quantity_min=item.quantity.split(';')[0];
+                item.quantity_max=item.quantity.split(';')[1];
                 var source = $("#entry-templateinventory_range").html();
             }
 
@@ -1738,11 +1783,14 @@ $("body").on('click', ".web-sub-category", function(event) {
 $("body").on('click', ".filter-button", function(event) {
     var value = $(this).attr('data-filter');
 
-    if (value == "all") {
+    if(value == "all")
+    {
         $('.filter').show('1000');
-    } else {
-        $(".filter").not('.' + value).hide('3000');
-        $('.filter').filter('.' + value).show('3000');
+    }
+    else
+    {
+        $(".filter").not('.'+value).hide('3000');
+        $('.filter').filter('.'+value).show('3000');
 
     }
 
@@ -1756,45 +1804,46 @@ $("body").on('click', ".filter-button", function(event) {
 
 $("body").on('click', ".add-item", function(event) {
 
-    if ($(".custom-item").length >= $(".max-inv-count").val()) {
+    if($(".custom-item").length >= $(".max-inv-count").val()){
         megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
         return false;
     }
 
     let item = [];
     let inventory_quantity_type = $(".inventory-quantity-type").val();
-    $(this).closest(".item-single-wrapper").find("input").each(function() {
-        item[$(this).attr('name')] = $(this).val();
-    });
+    $(this).closest(".item-single-wrapper").find("input").each(function(){
+            item[$(this).attr('name')] = $(this).val();
+        });
     item = Object.assign({}, item);
     Logger.info(item);
-    if (item.material == '') {
+    if(item.material == ''){
         megaAlert("Oops", "Please select Material");
         return false;
     }
-    if (item.size == '') {
+    if(item.size == ''){
         megaAlert("Oops", "Please select Size");
         return false;
     }
-    let class_name = item.meta_name + "-" + item.material + "-" + item.size + "-" + item.meta_id + "a";
+    let class_name=item.meta_name+"-"+item.material+"-"+item.size+"-"+item.meta_id+"a";
     class_name = class_name.replace(/[^a-zA-Z0-9]/g, '');
 
-    class_name = class_name.replace(' ', '-');
+    class_name=class_name.replace(' ', '-');
 
     Logger.info(class_name);
-    if ($("." + class_name).length > 0) {
+    if($("."+class_name).length > 0)
+    {
         megaAlert("Oops", "This item has been already added");
         return false;
     }
 
-    item.meta_material = item.meta_material;
-    item.meta_size = item.meta_size;
+    item.meta_material=item.meta_material;
+    item.meta_size=item.meta_size;
 
-    if (inventory_quantity_type == 0)
+    if(inventory_quantity_type == 0)
         var source = $("#entry-templateinventory_append").html();
     else {
-        item.quantity_min = item.quantity.split(';')[0];
-        item.quantity_max = item.quantity.split(';')[1];
+        item.quantity_min=item.quantity.split(';')[0];
+        item.quantity_max=item.quantity.split(';')[1];
         var source = $("#entry-templateinventory_append_range").html();
     }
 
@@ -1806,35 +1855,35 @@ $("body").on('click', ".add-item", function(event) {
 });
 
 $("body").on('click', ".add-search-item", function(event) {
-    if ($(".custom-item").length >= $(".max-inv-count").val()) {
+    if($(".custom-item").length >= $(".max-inv-count").val()){
         megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
         return false;
     }
     let item = [];
     let inventory_quantity_type = $(".inventory-quantity-type").val();
-    $(this).closest(".item-single-wrapper").find("input").each(function() {
-        item[$(this).attr('name')] = $(this).val();
-    });
+    $(this).closest(".item-single-wrapper").find("input").each(function(){
+            item[$(this).attr('name')] = $(this).val();
+        });
     item = Object.assign({}, item);
     Logger.info(item);
-    if (item.material == '') {
+    if(item.material == ''){
         tinyAlert("Oops", "Please select Material");
         return false;
     }
-    if (item.size == '') {
+    if(item.size == ''){
         tinyAlert("Oops", "Please select Size");
         return false;
     }
-    if (item.meta_material != '') {
+    if(item.meta_material != '') {
         item.meta_material = item.meta_material.split(',');
         item.meta_size = item.meta_size.split(',');
     }
 
-    if (inventory_quantity_type == 0)
+    if(inventory_quantity_type == 0)
         var source = $("#entry-templateinventory_append").html();
     else {
-        item.quantity_min = item.quantity.split(';')[0];
-        item.quantity_max = item.quantity.split(';')[1];
+        item.quantity_min=item.quantity.split(';')[0];
+        item.quantity_max=item.quantity.split(';')[1];
         var source = $("#entry-templateinventory_append_range").html();
     }
 
@@ -1853,48 +1902,49 @@ $("body").on('click', ".add-search-item", function(event) {
 });
 
 $("body").on('keyup', ".search-item", function(event) {
-    var query = $(this).val();
-    var url = $(this).data('url');
+        var query = $(this).val();
+        var url = $(this).data('url');
 
-    if (query.length >= 3) {
+        if (query.length >= 3) {
 
-        $.ajax({
-            url: url + "?search=" + query,
-            type: 'GET',
-            dataType: 'json',
-            beforeSend: function() {
-                $(".fade-enable").css({
-                    "opacity": "0.4"
-                });
-            },
-            success: function(response) {
-                $('.items-display').html('');
-                let inventory_quantity_type = $(".inventory-quantity-type").val();
-                if (response.data.inventories.length > 0) {
-                    for (var i = 0; i < response.data.inventories.length; i++) {
-                        response.data.inventories[i].material = JSON.parse(response.data.inventories[i].material);
-                        response.data.inventories[i].size = JSON.parse(response.data.inventories[i].size);
+            $.ajax({
+                url: url+ "?search=" + query,
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(){
+                    $(".fade-enable").css({
+                        "opacity": "0.4"
+                    });
+                },
+                success: function (response) {
+                    $('.items-display').html('');
+                    let inventory_quantity_type = $(".inventory-quantity-type").val();
+                    if(response.data.inventories.length > 0)
+                    {
+                        for (var i = 0; i < response.data.inventories.length; i++) {
+                            response.data.inventories[i].material = JSON.parse(response.data.inventories[i].material);
+                            response.data.inventories[i].size = JSON.parse(response.data.inventories[i].size);
+                        }
+
+                        let source = inventory_quantity_type == 0 ? $("#search_item").html() : $("#search_item_range").html();
+
+                        let template = Handlebars.compile(source);
+                        let html = template(response.data);
+                        $('.items-display').html(html);
+                    }else{
+                        let html = inventory_quantity_type == 0 ? $("#search_item_custome").html() : $("#search_item_custome_range").html();
+                        $('.items-display').html(html);
                     }
 
-                    let source = inventory_quantity_type == 0 ? $("#search_item").html() : $("#search_item_range").html();
+                    if(inventory_quantity_type != 0)
+                        initRangeSlider();
 
-                    let template = Handlebars.compile(source);
-                    let html = template(response.data);
-                    $('.items-display').html(html);
-                } else {
-                    let html = inventory_quantity_type == 0 ? $("#search_item_custome").html() : $("#search_item_custome_range").html();
-                    $('.items-display').html(html);
+                    $(".fade-enable").css({
+                        "opacity": "1"
+                    });
                 }
-
-                if (inventory_quantity_type != 0)
-                    initRangeSlider();
-
-                $(".fade-enable").css({
-                    "opacity": "1"
-                });
-            }
-        });
-    }
+            });
+        }
 });
 
 $("body").on('input', ".upload-image", function(event) {
@@ -1902,10 +1952,10 @@ $("body").on('input', ".upload-image", function(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-        $(this).closest('.upload-section').find(".upload-preview").css({ "max-width": "120px" });
+        $(this).closest('.upload-section').find(".upload-preview").css({ "max-width": "120px"});
         $(this).closest('.upload-section').find(".upload-preview").attr("src", reader.result);
         $(this).parent().find(".base-holder").val(reader.result);
-        let image = { "image": reader.result };
+        let image= {"image":reader.result};
         var source = $("#image_upload_preview").html();
         var template = Handlebars.compile(source);
         var html = template(image);
@@ -1918,28 +1968,27 @@ $("body").on('input', ".upload-image", function(event) {
 $("body").on('keyup', ".live-search-input", function(event) {
 
     // Retrieve the input field text and reset the count to zero
-    var filter = $(this).val(),
-        count = 0;
+    var filter = $(this).val(), count = 0;
 
-    $(".live-search-result").css({ "opacity": 0.5 });
+    $(".live-search-result").css({"opacity": 0.5});
     // Loop through the comment list
-    $(".live-search-result").each(function() {
+    $(".live-search-result").each(function(){
 
         // If the list item does not contain the text phrase fade it out
         if ($(this).text().search(new RegExp(filter, "i")) < 0)
             $(this).fadeOut();
-        else {
+         else {
             $(this).show();
             count++;
         }
     });
-    $(".live-search-result").css({ "opacity": 1 });
+    $(".live-search-result").css({"opacity": 1});
 
     // Update the count
     var numberItems = count;
     /*display count*/
 
-    if (numberItems === 0) {
+    if(numberItems === 0) {
         if ($(".toast:not(.hidden)").length === 0)
             tinyAlert("Oops", "No Results found.");
     }
@@ -1947,14 +1996,15 @@ $("body").on('keyup', ".live-search-input", function(event) {
 
 $("body").on('change', ".category-change", function(event) {
     var filter = $(this).val()
-    if (filter == 2 || filter == 3) {
-        $('.booking-id').attr("required", "required");
-    } else {
-        $('.booking-id').removeAttr("required", "required");
+    if (filter == 2 || filter == 3){
+        $('.booking-id').attr("required","required");
+    }
+    else{
+        $('.booking-id').removeAttr("required","required");
     }
 });
 
-$("body").on('click', ".csv", function(event) {
+$("body").on('click', ".csv", function(event){
     Logger.info($(this).data('url'));
 
     let _url = $(this).data('url');
@@ -1965,20 +2015,21 @@ $("body").on('click', ".csv", function(event) {
         url: _url,
         type: 'POST',
         contentType: "application/json",
-        data: data,
-        success: function(response) {
+        data:data,
+        success: function (response) {
             Logger.info(response);
-            if (response.status == "success") {
+            if(response.status == "success")
+            {
                 Logger.info(url);
-                window.open(url + '?file=app/' + response.data.file_name, '_blank');
+                window.open(url+'?file=app/'+response.data.file_name, '_blank');
                 tinySuccessAlert("Export Successfully", response.message);
             }
         }
     });
 });
 
-$("body").on('click', ".calc-result", function(event) {
-    if (!$(this).data("confirmed")) {
+$("body").on('click', ".calc-result", function(event){
+    if(!$(this).data("confirmed")){
         if (confirm("Are you sure want to edit the total quote? You wont be able to edit the individual items prices.")) {
 
             if (true) {
@@ -1992,8 +2043,8 @@ $("body").on('click', ".calc-result", function(event) {
     }
 });
 
-$("body").on('click', ".calc-total-input", function(event) {
-    if (!$(this).data("confirmed")) {
+$("body").on('click', ".calc-total-input", function(event){
+    if(!$(this).data("confirmed")) {
         if (confirm("Are you sure want to edit the individual item quote? You wont be able to edit the total quote.")) {
             if (true) {
                 $(this).closest("form").find(".calc-total-input").attr("data-confirmed", "true");
@@ -2007,12 +2058,12 @@ $("body").on('click', ".calc-total-input", function(event) {
 });
 
 $("body").on('keydown', ".number, .phone", function(event) {
-    return (event.ctrlKey || event.altKey ||
-        (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) ||
-        (95 < event.keyCode && event.keyCode < 106) ||
-        (event.keyCode == 8) || (event.keyCode == 9) ||
-        (event.keyCode > 34 && event.keyCode < 40) ||
-        (event.keyCode == 46));
+    return ( event.ctrlKey || event.altKey
+        || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+        || (95<event.keyCode && event.keyCode<106)
+        || (event.keyCode==8) || (event.keyCode==9)
+        || (event.keyCode>34 && event.keyCode<40)
+        || (event.keyCode==46) );
 });
 
 $("body").on('keypress', ".alphabet", function(event) {
@@ -2044,7 +2095,7 @@ $("body").on('click', ".sidebar-toggle_booking", function(event) {
         '                </div>');
 
     $('.side-bar-pop-up').addClass('display-pop-up');
-    $.get($(this).data("sidebar"), {}, function(response) {
+    $.get($(this).data("sidebar"), {}, function(response){
 
         $(".side-bar-pop-up").html(response);
     });
@@ -2059,11 +2110,11 @@ $("body").on('click', ".sidebar-toggle_details td:not(:last-child)", function(ev
 });
 
 $("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amount", function(event) {
-    var bid_amount = $('.bid-amount').val();
-    var commission = $('.commission').val();
-    var other_charges = $('.other_charges').val();
-    var discount_amount = $('.discount_amount').val();
-    var tax = $('.tax').val();
+    var bid_amount =$('.bid-amount').val();
+    var commission =$('.commission').val();
+    var other_charges =$('.other_charges').val();
+    var discount_amount =$('.discount_amount').val();
+    var tax =$('.tax').val();
 
     var sub_total = parseFloat(bid_amount) + parseFloat(commission);
     var grand_amount = parseFloat(sub_total) + parseFloat(other_charges) + parseFloat(tax) - parseFloat(discount_amount);
@@ -2074,7 +2125,7 @@ $("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amoun
 });
 
 
-$("body").on("click", ".side-bar-pop-up a i.dripicons-pencil", function() {
+$("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
     $(this).closest(".side-bar-pop-up").removeClass("display-pop-up");
 });
 
@@ -2083,7 +2134,7 @@ $("body").on("click", ".side-bar-pop-up a i.dripicons-pencil", function() {
     $(this).parsley().validate();
 });*/
 
-$("body").on("input change focusout", ".main-content form input", function() {
+$("body").on("input change focusout",".main-content form input",function(){
     Logger.info("Validating Input");
     $(this).parsley().validate();
 });

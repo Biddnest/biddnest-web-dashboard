@@ -1,6 +1,6 @@
 <div class="modal-header pb-0 border-none">
     <h3 class="f-18 p-15">
-        Manage User Roles
+        User Info
     </h3>
     <button type="button" class="close theme-text margin-topneg-10" data-dismiss="modal" aria-label="Close" onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');">
         <!-- <span aria-hidden="true" >&times;</span> -->
@@ -17,7 +17,7 @@
                     <div class="theme-text f-14 bold">
                         <div class="d-flex justify-content-around">
                             <figure>
-                                <img src="{{$user->image ?? ''}}" alt="">
+                                <img src="{{$user->image ?? ''}}" style="max-width: 120px" alt="">
                             </figure>
                             <div class="profile-details ml-3">
                                 <div class="d-flex justify-content-between">
@@ -119,7 +119,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14 d-flex justify-content-between">
-                        {{json_decode($user->meta, true)['address_line1'] ?? ''}}, {{json_decode($user->meta, true)['address_line2'] ?? ''}}
+                        {{json_decode($user->meta, true)[0]['address_line1'] ?? ''}}, {{json_decode($user->meta, true)[0]['address_line2'] ?? ''}}
                     </div>
                 </div>
             </div>
@@ -127,12 +127,25 @@
             <div class="d-flex  row  p-8">
                 <div class="col-sm-6">
                     <div class="text-drawer f-14 ">
-                        State,City
+                        City
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{ucwords($user->state) ?? ''}}, {{ucwords($user->city) ?? ''}}
+                        {{ucwords($user->city) ?? ''}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex  row  p-8">
+                <div class="col-sm-6">
+                    <div class="text-drawer f-14">
+                       State
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="theme-text f-14">
+                        {{ucwords($user->state) ?? ''}}
                     </div>
                 </div>
             </div>

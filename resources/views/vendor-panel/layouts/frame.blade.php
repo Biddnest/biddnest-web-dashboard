@@ -19,8 +19,8 @@
             <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation">
                 <form class="col-7 p-0 margin-topneg-10">
                     <div class="search ">
-                        <input type="text" class="searchTerm" placeholder="Search...">
-                        <button type="submit" class="searchButton">
+                        <input type="text"  class="searchTerm table-search" data-url="{{route('vendor.searchresult')}}" placeholder="Search...">
+                        <button type="submit" class="searchResultButton">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -31,7 +31,7 @@
                         <li class="notifications"><a href="#"><span class="icon-navbar"><i class="icon dripicons-bell notification-icon"height="15"></i></span></a>
                             <div class="dropdown">
                                 <ul>
-                                    @foreach(\App\Models\Notification::where('vendor_id', \Illuminate\Support\Facades\Session::get('account')['id'])->latest()->limit(10)->get() as $notification)
+                                    @foreach(\App\Models\Notification::where(['vendor_id'=>\Illuminate\Support\Facades\Session::get('account')['id'], "generated_by"=>\App\Enums\NotificationEnums::$GENERATE_BY['admin']])->latest()->limit(10)->get() as $notification)
                                         <li><a href="{{$notification->url ?? '#'}}">
                                                 <div class="d-flex notification-msg ">
                                                     <div class="order-icon">

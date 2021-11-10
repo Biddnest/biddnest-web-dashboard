@@ -104,7 +104,7 @@
                                         </div>
                                     </a>
                                 </div>--}}
-                                <input type="text" value="{{$search}}" class="searchTerm table-search" data-url="{{route('vendor.bookings', ['type'=>$type])}}" placeholder="Search...">
+                                <input type="text"  class="searchTerm table-search" data-url="{{route('vendor.bookings', ['type'=>$type])}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
                                 </button>

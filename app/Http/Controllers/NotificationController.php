@@ -18,7 +18,6 @@ class NotificationController extends Controller
 {
     public static function createNotification($title, $for, $desc, $selected_user=null, $selected_vendor=null)
     {
-
         switch ($for){
             case NotificationEnums::$RECEPIENT_TYPE['customer']:
 

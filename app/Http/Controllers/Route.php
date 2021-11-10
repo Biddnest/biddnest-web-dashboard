@@ -503,7 +503,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return OrganisationController::updatePrices($request->all(), $request->id, $request->subservice->id);
+        return OrganisationController::updatePrices($request->all(), $request->id);
     }
 
     public function bank_add(Request $request)

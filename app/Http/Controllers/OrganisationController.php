@@ -695,10 +695,10 @@ class OrganisationController extends Controller
 
     }
 
-    public static function updatePrices($data, $id, $service_id){
+    public static function updatePrices($data, $id){
         $exist = Organization::findOrFail($id);
 
-        $pricing = SubservicePrice::where(["organization_id"=>$id, "id"=>$service_id])->first();
+        $pricing = SubservicePrice::where(["organization_id"=>$id, "id"=>$data['subservice']['id']])->first();
         if(!$pricing)
             return Helper::response(false,"Subservice prices dosen't exist.");
 
@@ -716,7 +716,7 @@ class OrganisationController extends Controller
                 $premium_margin_percentag = (($data['subservice']['market']['price']['premium'] - $data['subservice']['bidnest']['price']['premium'])/$data['subservice']['market']['price']['premium'])*100;
             }
 
-            $pricing_update = SubservicePrice::where(["organization_id"=>$id, "id"=>$service_id])
+            $pricing_update = SubservicePrice::where(["organization_id"=>$id, "id"=>$data['subservice']['id']])
                 ->update([
                     "bp_economic"=>round($data['subservice']['bidnest']['price']['economy'],2),
                     "bp_premium"=>round($data['subservice']['bidnest']['price']['premium'],2),

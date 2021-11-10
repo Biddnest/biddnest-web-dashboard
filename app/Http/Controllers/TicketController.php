@@ -488,11 +488,13 @@ class TicketController extends Controller
 
     public static function createForWeb($sender_id, $ticket_type, $meta, $ticket_images, $heading=null, $body=null)
     {
-        $images = [];
-        $imageman = new ImageManager(array('driver' => 'gd'));
-        foreach ($ticket_images as $key_img => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
-            Log::info($images);
+            $images = [];
+        if($ticket_images){
+            $imageman = new ImageManager(array('driver' => 'gd'));
+            foreach ($ticket_images as $key_img => $image) {
+                $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
+                Log::info($images);
+            }
         }
 
         switch ($ticket_type) {

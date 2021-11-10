@@ -74,50 +74,50 @@
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][price][economics]" id="" placeholder="400"></div>
+                                                        <div class="form-input table-input"><input type="text" min="0.00" data-parsley-type="number" class="form-control" name="price[][bidnest][price][economics]" id="" placeholder="400"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][bidnest][price][premium]" min="0.00" data-parsley-type="number" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][price][economics]" id="" placeholder="400"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][market][price][economics]" min="0.00" data-parsley-type="number" id="" placeholder="400"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][market][price][premium]" id="" min="0.00" data-parsley-type="number" placeholder="500"></div>
                                                     </div>
                                                 </td>
 
                                                 <td class="text-center">
                                                     <div class="d-flex inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][additional][price][economics]" id="" placeholder="400"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][bidnest][additional][price][economics]" min="0.00" data-parsley-type="number" id="" placeholder="400"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][bidnest][additional][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][bidnest][additional][price][premium]" min="0.00" data-parsley-type="number" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][additional][price][economics]" id="" placeholder="400"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][market][additional][price][economics]" min="0.00" data-parsley-type="number" id="" placeholder="400"></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex inventroy-price">
                                                         <div class="currancy">₹</div>
-                                                        <div class="form-input table-input"><input type="number" class="form-control" name="price[][market][additional][price][premium]" id="" placeholder="500"></div>
+                                                        <div class="form-input table-input"><input type="text" class="form-control" name="price[][market][additional][price][premium]" min="0.00" data-parsley-type="number" id="" placeholder="500"></div>
                                                     </div>
                                                 </td>
                                             </tr>

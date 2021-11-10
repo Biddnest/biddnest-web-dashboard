@@ -2125,7 +2125,21 @@ $("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
     $(this).parsley().validate();
 });*/
 
-$("body").on("input change focusout",".main-content form input",function(){
+$("body").on("input change focusout","form input",function(){
     Logger.info("Validating Input");
     $(this).parsley().validate();
 });
+
+/*
+/!*$("body").on("click",".side-bar-pop-up",function(e){
+        e.stopPropagation;
+});*!/
+
+$("body").on("click",".main-content",function(e){
+
+    if($(this).closest(".side-bar-pop-up").length)
+        $(".side-bar-pop-up").removeClass("display-pop-up");
+
+        Logger.info("Sidebar autoclose");
+});
+*/

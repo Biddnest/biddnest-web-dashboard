@@ -284,7 +284,7 @@ class InventoryController extends Controller
 
     public static function deletePrice($id)
     {
-        $result=InventoryPrice::where(["inventory_id"=>$id, 'organization_id'=>Session::get('organization_id')])->update(["deleted"=>1]);
+        $result=InventoryPrice::where(["inventory_id"=>$id, 'organization_id'=>Session::get('organization_id')])->delete();//update(["deleted"=>CommonEnums::$YES]);
 
         if(!$result)
             return Helper::response(false,"Couldn't Delete data $result");

@@ -304,7 +304,7 @@ class VendorUserController extends Controller
             $user_id->where('status',$request->status);
 
 
-        $users = $user_id->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
+        $users = $user_id->where("deleted",CommonEnums::$NO)->with('organization')->paginate(CommonEnums::$PAGE_LENGTH);
 
         if($web)
             return $users;

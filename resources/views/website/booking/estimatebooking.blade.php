@@ -157,7 +157,7 @@
 
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
                                                     <div class="row col-sm-10 move-add-date est-box move-dates">
-                                                        <input type="radio" id="economy" value="economic" name="service_type" class="card-input-element moving-dates" required>
+                                                        <input type="radio" id="economy" value="economic" name="service_type" class="card-input-element moving-dates" required data-parsley-errors-container="#error-message" data-parsley-error-message="Please choose service to proceed">
                                                         <div class="col-3" style="padding: 0 !important;">
                                                             <img src="{{ asset('static/website/images/images/Group 14563.svg')}}" class="blue-img" style="height: 80%; padding: 5%;">
                                                             <img src="{{ asset('static/website/images/images/Group 14563_white.svg')}}" class="white-img hidden" style="height: 80%; padding: 5%;">
@@ -172,10 +172,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
 
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
                                                     <div class="row col-sm-10 move-add-date est-box move-dates">
-                                                        <input type="radio" id="premium" value="premium" name="service_type" class="card-input-element moving-dates" required>
+                                                        <input type="radio" id="premium" value="premium" name="service_type" class="card-input-element moving-dates" required data-parsley-errors-container="#error-message" 
+																		   data-parsley-error-message="Please choose service to proceed.">
                                                         <div class="col-3" style="padding: 0 !important;">
                                                             <img src="{{ asset('static/website/images/images/Group 14564.svg')}}" class="blue-img" style="height: 80%; padding: 5%;">
                                                             <img src="{{ asset('static/website/images/images/Group 14564_white.svg')}}" class="white-img hidden" style="height: 80%; padding: 5%;">
@@ -191,6 +193,11 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="error-wrapper" id="error-message" style="margin-right: 8%; float: right;">
+															
+												</div>
+                                                <br>
+
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer" data-toggle="modal" data-target="#reject-modal">
                                                     <div class="row col-sm-10 est-box" >
                                                         <div class="col-11">
@@ -203,7 +210,7 @@
                                                     </div>
                                                 </div>
 
-
+                                                
                                             </div>
 
                                             <div class="actionBtn-view border-top move-btn">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Helper;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\BookingsController;
 use App\StringFormatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -1244,7 +1245,7 @@ class Route extends Controller
             return BookingsController::confirmBooking($request->public_booking_id, $request->service_type, $request->id);
     }
 
-    /* public function booking_reject(Request $request)
+     public function booking_reject(Request $request)
      {
          $validation = Validator::make($request->all(),[
              'reason' => 'required|string',
@@ -1255,8 +1256,8 @@ class Route extends Controller
          if($validation->fails())
              return Helper::response(false,"validation failed", $validation->errors(), 400);
          else
-             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc, $request->id);
-     }*/
+             return BookingsController::cancelBooking($request->public_booking_id, $request->reason, $request->desc);
+     }
 
     public function booking_add_bid(Request $request)
     {
@@ -1444,6 +1445,20 @@ class Route extends Controller
              return Helper::response(false,"validation failed", $validation->errors(), 400);
 
          return InventoryController::getBySubserviceForApp($request->subservice_id);
+     }
+
+
+     public function assignVirtualAssistant(Request $request)
+     {
+         $validation = Validator::make($request->all(),[
+             'admin_id'=>'required',
+             'booking_id'=>'required',
+         ]);
+
+         if($validation->fails())
+             return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+         return BookingsController::assignVirtualAssistant($request->booking_id, $request->admin_id);
      }
 
 }

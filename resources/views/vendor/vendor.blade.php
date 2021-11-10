@@ -7,7 +7,7 @@
                                 <div class="mr-20">
                                    <a href="{{ route('create-vendors')}}">
                                     <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
-                                        aria-hidden="true"></i>ONBOARD VENDER</button>
+                                        aria-hidden="true"></i>ONBOARD VENDOR</button>
                                    </a>
                                 </div>
                             </div>
@@ -131,6 +131,7 @@
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                     @foreach($vendors as $vendor)
+
                                                         <tr class="tb-border cursor-pointer org_{{$vendor->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>$vendor->id]) }}">
                                                             <td scope="row">
                                                                 @if(isset($vendor->vendor))

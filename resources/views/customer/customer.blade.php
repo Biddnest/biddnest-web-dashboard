@@ -125,16 +125,18 @@
                                                 <td class="" style="text-align: center;">
                                                     @if($user->status == 0)
                                                         <div class="status-badge red-bg text-center">Pending Signup</div>
-                                                    @else
+                                                    @elseif($user->status == 1)
                                                         <div class="status-badge green-bg text-center">Active</div>
+                                                    @else
+                                                        <div class="status-badge red-bg text-center">Suspended</div>
                                                     @endif
                                                 </td>
 
                                                 <td style="text-align: center !important;">
                                                     <a class ="inline-icon-button mr-4" href="{{route('edit-customers', ['id'=>$user->id])}}"><i class="fa fa-pencil p-1 " aria-hidden="true"></i></a>
-                                                    <a href="#" class ="inline-icon-button" >
+                                                    {{--<a href="#" class ="inline-icon-button" >
                                                     <i class="fa fa-ban" aria-hidden="true" style="cursor: no-drop !important;"></i>
-                                                    </a>
+                                                    </a>--}}
                                                 </td>
                                             </tr>
                                            @endforeach

@@ -1835,7 +1835,7 @@ class BookingsController extends Controller
             return Helper::response(false,"Confirmation failed.");
     }
 
-    public static function cancelBooking($public_booking_id)
+    public static function cancelBooking($public_booking_id, $reason, $desc)
     {
         $exist = Booking::where(["public_booking_id" => $public_booking_id])->first();
         if (!$exist) {
@@ -1846,9 +1846,16 @@ class BookingsController extends Controller
             return Helper::response(false, "This order is already cancelled");
         }
 
-        $cancelbooking = Booking::where(["user_id" => $exist->user_id,
+        /*$cancelbooking = Booking::where(["user_id" => $exist->user_id,
             "public_booking_id" => $exist->public_booking_id])
-            ->update(["status" => BookingEnums::$STATUS['cancelled']]);
+            ->update(["status" => BookingEnums::$STATUS['cancelled']]);*/
+
+        $cancelbooking = Booking::where(["public_booking_id" => $exist->public_booking_id])->update([
+            "status" => BookingEnums::$STATUS['cancelled'],
+            "cancelled_by" => BookingEnums::$AGENT['admin'],
+            "cancelled_by_admin_id" => Session::get('account')['id'],
+            "cancelled_meta" => json_encode(["reason"=>$reason, "desc"=>$desc])
+        ]);
 
         $result_status = self::statusChange($exist->id, BookingEnums::$STATUS['cancelled']);
 
@@ -1932,5 +1939,16 @@ class BookingsController extends Controller
             BidController::addvendors($booking['id']);
         }
         return true;
+    }
+
+    public static function assignVirtualAssistant($booking_id, $admin_id){
+        $booking = Booking::find($booking_id);
+
+        if(!$booking)
+            return Helper::response(false, "This booking id is invalid.");
+
+        Booking::where("id",$booking_id)->update(["virtual_assistant_id"=>$admin_id]);
+
+        return Helper::response(true, "Virtual assistant has been assigned to this booking.");
     }
 }

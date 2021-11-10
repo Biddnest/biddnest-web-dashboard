@@ -39,11 +39,12 @@
                                     <th scope="col">To</th>
                                     <th scope="col">Order Date</th>
                                     <th scope="col" style="text-align: center !important;">Order Status</th>
+                                    <th scope="col">View</th>
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20  f-13">
                                 @foreach($bookings as $booking)
-                                    <tr class="tb-border  cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}"  {{--onclick="$('.side-bar-pop-up').toggleClass('display-pop-up');"--}}>
+                                    <tr class="tb-border">
                                         <td scope="row">{{$booking->public_enquiry_id}}</td>
                                         <td>@if($booking->source_meta){{json_decode($booking->source_meta, true)['city']}}@endif</td>
                                         <td>@if($booking->destination_meta){{json_decode($booking->destination_meta, true)['city']}}@endif</td>
@@ -98,6 +99,10 @@
                                                 <span class="status-badge red-bg  text-center td-padding">In Progress</span>
                                                 @break
                                             @endswitch
+                                        </td>
+                                        <td class="no-toggle sidebar-toggle_booking" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
+                                            <a href="#" class="inline-icon-button ml-4"  style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
+                                            {{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
                                         </td>
                                     </tr>
                                 @endforeach

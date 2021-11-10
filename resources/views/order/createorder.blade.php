@@ -55,7 +55,7 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Phone Number</label>
-                                <input type="tel" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" required>
+                                <input type="text" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" required data-parsley-type="number">
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
@@ -274,7 +274,7 @@
                             <div class="form-input" >
                               <label class="start-date">Choose a Date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 bookdate dateselect cursor-pointer" required="required" placeholder="15 Jan"  />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 bookdate dateselect date cursor-pointer" required="required" placeholder="15 Jan" style="padding-right: 20px;" />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>

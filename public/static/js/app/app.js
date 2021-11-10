@@ -114,7 +114,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
         let form = $(this);
         let requestData = form.serializeJSON();
         let button = form.find("button[type=submit]");
-        console.log(button);
+        Logger.info(button);
         let buttonPretext = button.html();
         Logger.info("Loggin request payload", requestData);
 
@@ -134,6 +134,10 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
 
                     tinySuccessAlert("Success", response.message);
                     if (form.data("next")) { //   data-next="redirect"
+                        if(form.data("next") == "nothing") {
+                            revertFormAnim(button, buttonPretext);
+                            return false;
+                        }
                         if (form.data("next") == "redirect") {
                             if (form.hasClass("add-slider")) {
                                 var url = form.data('url');
@@ -192,13 +196,13 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
                     }
                     if (form.hasClass("order_track_web")) {
                         var enq_id = response.data.booking.public_booking_id;
-                        console.log(enq_id);
+                        Logger.info(enq_id);
                         $('.enq-id').val(enq_id);
                     }
 
                     if (form.hasClass("track_next1")) {
                         revertFormAnim(button, "NEXT");
-                        console.log('entered');
+                        Logger.info('entered');
                             $('.step-1').css('display', 'none');
                             $('.step-2').css('display', 'block');
                             $(".completed-step-2").addClass("turntheme");
@@ -275,7 +279,7 @@ $("body").on('submit', "form:not(.no-ajax)", function() {
             error: (error, ajaxOptions, thrownError) => {
                 Logger.info(error.responseText);
                 if(error.status === 400)
-                    megaAlert("Incorrect Data", "Please make sure to fill all fields with valid input.");
+                    megaAlert("Fill all fields", "Please make sure to fill all fields with valid input.");
                 else
                     megaAlert("Oops", "Something went wrong in server. This action couldn't be processed.");
                 revertFormAnim(button, buttonPretext);
@@ -522,7 +526,7 @@ $("body").on('change', ".subservices", function(event) {
         success: function (response) {
             if(response.status == "success")
             {
-                console.log(response.data.items);
+                Logger.info(response.data.items);
                 if(response.data.items.length > 0)
                 {
                     for (var i = 0; i < response.data.items.length; i++) {
@@ -860,7 +864,7 @@ $("body").on('click', ".booking-status-change", function(event) {
 
 $("body").on('change', ".reply_status", function(event) {
     var data = $(this).val();
-    console.log(data);
+    Logger.info(data);
     if(confirm('Are you sure want to change status?')) {
         $.update($(this).data("url"), {data}, function (response) {
             Logger.info(response);
@@ -1037,7 +1041,7 @@ $("body").on('click', ".next-btn-1-admin", function(event) {
         var high = parseInt(est)+parseInt(est/2);
         var low = parseInt(est)-parseInt(est/2);
 
-        console.log(quote);
+        Logger.info(quote);
         if(quote <= 0) {
             tinyAlert("Warning", "Quote cannot be zero.");
             return false;
@@ -1095,7 +1099,7 @@ $("body").on('click', ".next-btn-2-admin", function(event) {
 });
 
 $("body").on('click', ".next-btn-1", function(event) {
- console.log("next");
+ Logger.info("next");
     let isValid = true;
     $($(this).closest('form').find('input.validate-input')).each( function() {
         if ($(this).parsley().validate() !== true)
@@ -1507,7 +1511,7 @@ $("body").on('click', ".payment", function(event) {
         var email = $(this).data("user-email");
         var contact = $(this).data("user-contact");
         var moving_date = $('#moving_date').val();
-        console.log(moving_date);
+        Logger.info(moving_date);
 
 
     $.ajax({
@@ -1650,7 +1654,7 @@ $("body").on('click', ".web-category", function(event) {
             $('.subservices').html(html);
 
             if(!response.data.subservices.length){
-                console.log("custom");
+                Logger.info("custom");
                 $('#subservice_id').val('custom');
                 $('.web-inventory').click();
             }
@@ -1668,7 +1672,7 @@ $("body").on('click', ".web-category", function(event) {
 $("body").on('click', ".web-inventory", function(event) {
     var url=$(this).data("inv-url");
     let inventory_quantity_type = $(".inventory-quantity-type").val();
-    console.log(inventory_quantity_type);
+    Logger.info(inventory_quantity_type);
     $.ajax({
         url: url,
         type: 'get',
@@ -1682,7 +1686,7 @@ $("body").on('click', ".web-inventory", function(event) {
             if(!response.data.max_custom.length){
                 $('.max_count').val(0);
             }else{
-                console.log(response.data.max_custom);
+                Logger.info(response.data.max_custom);
                 $('.max_count').val(response.data.max_custom);
                 $('.count-max').html(response.data.max_custom+' Extra');
             }
@@ -1992,22 +1996,22 @@ $("body").on('change', ".category-change", function(event) {
 });
 
 $("body").on('click', ".csv", function(event){
-    console.log($(this).data('url'));
+    Logger.info($(this).data('url'));
 
     let _url = $(this).data('url');
     let url = $(this).data('dwonload_url');
     var data = JSON.stringify($(this).closest('form').serializeJSON());
-    console.log(data);
+    Logger.info(data);
     $.ajax({
         url: _url,
         type: 'POST',
         contentType: "application/json",
         data:data,
         success: function (response) {
-            console.log(response);
+            Logger.info(response);
             if(response.status == "success")
             {
-                console.log(url);
+                Logger.info(url);
                 window.open(url+'?file=app/'+response.data.file_name, '_blank');
                 tinySuccessAlert("Export Successfully", response.message);
             }
@@ -2113,6 +2117,15 @@ $("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amoun
 
 
 $("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
-    console.log("called");
     $(this).closest(".side-bar-pop-up").removeClass("display-pop-up");
+});
+
+/*$("body").on("focusout",".main-content form input",function(){
+    Logger.info("Validating Input");
+    $(this).parsley().validate();
+});*/
+
+$("body").on("input change focusout",".main-content form input",function(){
+    Logger.info("Validating Input");
+    $(this).parsley().validate();
 });

@@ -183,7 +183,7 @@
                             @if(count($bookings)== 0)
                                 <div class="row hide-on-data">
                                     <div class="col-md-12 text-center p-20">
-                                        <p class="font14"><i>. No Orders Are Bounced.</i></p>
+                                        <p class="font14"><i>. No Orders Are Cancelled.</i></p>
                                     </div>
                                 </div>
                             @endif

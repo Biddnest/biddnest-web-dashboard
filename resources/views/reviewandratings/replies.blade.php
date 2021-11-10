@@ -60,7 +60,7 @@
                                         @break
 
                                         @case(\App\Enums\CommonEnums::$TICKET_STATUS['approve'])
-                                        <span class="status-badge green-bg text-black-50 text-center">Aprooved</span>
+                                        <span class="status-badge green-bg text-black-50 text-center">Approved</span>
                                         @break
 
                                         @case(\App\Enums\CommonEnums::$TICKET_STATUS['modify'])
@@ -241,8 +241,8 @@
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                                     <div class="form-input">
-                                                        <form action="PUT" action="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" data-next="refresh" data-parsley-validate>
-                                                        <label>Aproval Status</label>
+                                                        <form method="PUT" action="{{route('change_Branchticket_status', ['id'=>$ticket_info->id])}}" data-next="refresh" data-parsley-validate>
+                                                        <label>Approval Status</label>
                                                             <select id="status" name="status" class="form-control" required>
                                                                 @foreach(\App\Enums\CommonEnums::$TICKET_STATUS as $key=>$status)
                                                                     <option id="reply" value="{{$status}}" @if($ticket_info->ticket_status==$status) Selected @endif >{{ucwords(str_replace("_", " ", $key))}}</option>
@@ -281,7 +281,7 @@
                                                 </div>
                                                 <div class="col-sm-12 " style="margin-right: 20px; margin-top: 10px;">
                                                     <div class="form-input">
-                                                        <form action="PUT" action="{{route('change_priceticket_status', ['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" data-next="refresh" data-parsley-validate>
+                                                        <form method="PUT" action="{{route('change_priceticket_status', ['id'=>$ticket_info->inventory_id, 'org_id'=>$ticket_info->organization_id, 'cat_id'=>$ticket_info->service_type])}}" data-next="refresh" data-parsley-validate>
                                                             <label>Aproval Status</label>
 
                                                             <select id="status" name="status" class="form-control" required>

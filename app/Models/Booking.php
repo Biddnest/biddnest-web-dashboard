@@ -88,4 +88,9 @@ class Booking extends Model
     {
         return $this->hasOne(Review::class);
     }
+
+    public function virtual_assistant()
+    {
+        return $this->belongsTo(Admin::class,"virtual_assistant_id","id");
+    }
 }

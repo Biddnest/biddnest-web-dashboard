@@ -190,6 +190,8 @@ Route::prefix('web/api')->group(function () {
     Route::post('/reports/csv',[ExportController::class,'exoprtSale'])->name("export.csv");
     Route::get('/download/csv',[ExportController::class,'downloadCsv'])->name("download.csv");
 
+    Route::post('/booking/assign-va',[Router::class,'assignVirtualAssistant'])->name("api.va.assign");
+
     /*vendor web apis start*/
     Route::prefix('vendor')->group(function () {
         Route::prefix('auth')->group(function () {
@@ -210,6 +212,7 @@ Route::prefix('web/api')->group(function () {
         Route::put('/booking/{id}/reject',[VendorRouter::class,'reject'])->name("api.booking.reject");
         Route::put('/booking/{id}/bookmark',[VendorRouter::class,'addBookmark'])->name("api.booking.bookmark");
         Route::post('/booking/assign-driver',[VendorRouter::class,'assignDriver'])->name("api.driver.assign");
+
 
         Route::post('/tickets',[VendorRouter::class,'createTickets'])->name("api.tickets.create");
         Route::post('/add/reply',[VendorRouter::class,'addReply'])->name("api.ticket.addreply");

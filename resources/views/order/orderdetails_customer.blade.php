@@ -102,8 +102,14 @@
                         <div class="d-flex  row  match-height  p-15 pb-0" >
                             <div class="col-sm-4 match-item secondg-bg margin-topneg-15 pt-10">
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Assigned Virtual Assistant
+                                </div>
+
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Order ID
                                 </div>
+
+
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Booked On
                                 </div>
@@ -146,6 +152,24 @@
                             </div>
 
                             <div class="col-sm-8  match-item white-bg  margin-topneg-15 pt-10">
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+
+                                    <form class="form-inline" method="POST" action="{{route("api.va.assign")}}" data-next="nothing" data-alert="tiny" data-parsley-validate>
+                                        <input type="hidden" name="booking_id" value="{{$booking->id}}" />
+                                        <select name="admin_id" class="form-control mb-2 mr-sm-2">
+                                            <option value="">--Select--</option>
+
+                                            @foreach($virtual_assistants as $va)
+
+                                                <option value="{{$va->id}}" @if($booking->virtual_assistant && ($booking->virtual_assistant->id == $va->id)) selected @endif>{{$va->fname}} {{$va->lname}}</option>
+
+                                            @endforeach
+                                        </select>
+
+                                        <button type="submit" class="btn theme-bg  mb-2" style="margin: 0;padding: 5px 9px;"><i class="icon dripicons-checkmark" style="font-size: 18px; font-weight: bold;"></i></button>
+                                    </form>
+                                </div>
+
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if(in_array($booking->status,[
                                         \App\Enums\BookingEnums::$STATUS['pending_driver_assign'],

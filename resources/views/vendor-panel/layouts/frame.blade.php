@@ -20,7 +20,7 @@
                 <form class="col-7 p-0 margin-topneg-10">
                     <div class="search ">
                         <input type="text"  class="searchTerm table-search" data-url="{{route('vendor.searchresult')}}" placeholder="Search...">
-                        <button type="submit" class="searchResultButton">
+                        <button type="submit" class="searchButton searchResultButton">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>

@@ -99,15 +99,15 @@
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['completed'])
-                                                <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;"> In Transit</span>
+                                                <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Completed</span>
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-                                                <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Price Review Pending</span>
+                                                <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Cancelled</span>
                                             @break
 
                                             @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
-                                                <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;"> In Transit</span>
+                                                <span class="grey-bg  text-center status-badge complete-bg" style="font-weight: 600!important;">Awaiting Bid Result</span>
                                             @break
 
                                         @endswitch

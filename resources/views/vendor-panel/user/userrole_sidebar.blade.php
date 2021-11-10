@@ -30,10 +30,10 @@
                             </div>
                             <div class="profile-switch">
                                 <div class="theme-text f-14 p-05">
-                                   <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i>
+                                   <a href="{{route('vendor.editusermgt', ['id'=>$user->id])}}"><i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i></a>
                                 </div>
                                 <label class="switch-small">
-                                    <input type="checkbox" id="switch"   class="change_status cursor-pointer">
+                                    <input type="checkbox" id="switch"  class="change_status cursor-pointer"  data-url="{{route('api.user.status',['id'=>$user->id])}}">
                                     <span class="slider"></span>
                                 </label>
                             </div>

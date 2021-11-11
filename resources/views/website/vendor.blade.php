@@ -14,13 +14,13 @@
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput">First Name</label>
-                                        <input type="text" class="form-control" id="formGroupExampleInput" name="fname" placeholder="David" required>
+                                        <input type="text" class="form-control" id="formGroupExampleInput" name="fname" placeholder="David" required data-parsley-pattern="^[a-zA-Z]+$">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Last Name</label>
-                                        <input type="text" class="form-control" id="formGroupExampleInput2" name="lname" placeholder="Jeromi" required>
+                                        <input type="text" class="form-control" id="formGroupExampleInput2" name="lname" placeholder="Jeromi" required data-parsley-pattern="^[a-zA-Z]+$">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-xs-12">
@@ -32,7 +32,7 @@
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label class="phone-num-lable">Phone Number</label>
-                                        <input type="text" id="phone" placeholder="9990009900" name="phone[primary]" class=" form-control form-control-tel phone" required maxlength="10" minlength="10" >
+                                        <input type="text" id="phone" placeholder="9990009900" name="phone[primary]" class=" form-control form-control-tel phone" required maxlength="10" minlength="10" data-parsley-type="number">
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
@@ -62,7 +62,13 @@
                                 <div class="col-lg-6 col-xs-12 mt-1 pt-2">
                                     <div class="form-group">
                                         <label for="formGroupExampleInput">Organization Type</label>
-                                        <input type="text" class="form-control" name="organization[org_type]" id="formGroupExampleInput" required>
+                                        <select class="form-control" name="organization[org_type]" required>
+                                            <option>-- Select --</option>
+                                            @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $reg)
+                                            <option value="{{$reg}}">{{$reg}}</option>
+                                            @endforeach
+                                        </select>
+                                        {{--<input type="text" class="form-control" name="organization[org_type]" id="formGroupExampleInput" required>--}}
                                         <span class="error-message">Please enter valid
                                             Organisation Type</span>
                                     </div>

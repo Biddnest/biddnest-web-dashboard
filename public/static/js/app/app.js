@@ -2134,7 +2134,7 @@ $("body").on("click",".side-bar-pop-up a i.dripicons-pencil",function(){
     $(this).parsley().validate();
 });*/
 
-$("body").on("input change focusout",".main-content form input",function(){
+$("body").on("input change focusout","form input",function(){
     Logger.info("Validating Input");
     $(this).parsley().validate();
 });

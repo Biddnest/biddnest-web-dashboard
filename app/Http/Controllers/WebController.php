@@ -1071,7 +1071,7 @@ class WebController extends Controller
 
     public function createCoupons(Request $request)
     {
-        $coupons = Coupon::where("id",$request->coupon_id)->with('zones')->with('organizations')->with('users')->first();
+        $coupons = Coupon::where("id",$request->id)->with('zones')->with('organizations')->with('users')->first();
         return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get(), 'coupons'=>$coupons]);
     }
 

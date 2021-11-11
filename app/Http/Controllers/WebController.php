@@ -1545,4 +1545,17 @@ class WebController extends Controller
 
         return VendorUserController::impersonate($request->org);
     }
+
+    public function searchResult(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = [Session::get('admin_zones')];
+
+        $bookings = Booking::where("deleted", CommonEnums::$NO)->where('public_booking_id', 'like', $request->search."%")
+            ->orWhere('public_enquiry_id', 'like', $request->search."%")->get();
+
+        return view('layouts.searchresult', ['bookings'=>$bookings]);
+    }
 }

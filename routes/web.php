@@ -273,7 +273,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
         Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");
-
+        
+        Route::get('/search/result/',[WebController::class,'searchResult'])->name("admin.searchresult");
         //booking and orders
         Route::prefix('booking')->group(function () {
             Route::get('/enquiry',[WebController::class,'ordersBookingsEnquiry'])->name("enquiry-booking");

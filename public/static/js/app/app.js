@@ -918,6 +918,14 @@ $("body").on('keydown', ".table-search", function(event) {
     }
 });
 
+$("body").on('click', ".searchButton", function(event) {
+        var query = $(this).closest("div").find("input").val();
+        if (query.length >= 3) {
+            var url = window.location.href.split("?")[0];
+            redirectTo(url + "?search=" + query);
+        }
+});
+
 $("body").on('keydown', ".table-search1", function(event) {
     if(event.keyCode == 13){
         var query = $(this).val();

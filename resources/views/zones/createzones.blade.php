@@ -32,17 +32,26 @@
                     @if($zones)
                         <input type="hidden" value="{{$zones->id}}" name="id">
                     @endif
+                    <div class="col-sm-12">
+                        <div class="form-input">
+                            <label>Set Zone Center</label>
+                            <input type="text" placeholder="Search place or address" name="geocode" class="form-control source-autocomplete">
+                            <span class="error-message">Please enter valid</span>
+                        </div>
+                        <div style="width: 100%; height: 280px;" class="source-map-picker"></div>
+                        <br />
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="latitude">Latitude</label>
-                            <input type="text" id="coupon-name" placeholder="57.2046° N" name="lat" value="@if($zones){{$zones->lat}}@endif" class="form-control" required>
+                            <input type="text" id="source-lat" placeholder="57.2046" name="lat" value="@if($zones){{$zones->lat}}@endif" class="form-control" required>
                             <span class="error-message">Please enter valid Latitide</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="logitude">Logitude</label>
-                            <input type="text"  placeholder="77.2046° E" id="logitude" name="lng" value="@if($zones){{$zones->lng}}@endif" class="form-control" required>
+                            <input type="text"  placeholder="77.2046" id="source-lng" name="lng" value="@if($zones){{$zones->lng}}@endif" class="form-control" required>
                             <span class="error-message">Please enter valid Logitude</span>
                         </div>
                     </div>

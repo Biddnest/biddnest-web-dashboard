@@ -203,13 +203,13 @@
             </div>
           </div>
 
-          <div class="col-sm-6 zones hidden" >
+          <div class="col-sm-6 zones @if($coupons && ($coupons->zone_scope == \App\Enums\CouponEnums::$ZONE_SCOPE['custom'])) @else hidden @endif" >
             <div class="form-input">
               <label>Select Zones</label>
               <div>
                 <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
 
-                    @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                    @foreach(\App\Models\Zone::where(["status"=>\App\Enums\CommonEnums::$YES, "deleted"=>\App\Enums\CommonEnums::$NO])->get() as $zone)
                       <option value="{{$zone->id}}" @if($coupons) @foreach($coupons->zones as $zones)  @if($zones->id == $zone->id) selected @endif @endforeach @endif>{{ucfirst(trans($zone->name))}}</option>
                     @endforeach
                 </select>
@@ -264,11 +264,11 @@
               <label>Select Users</label>
               <div>
                   <select class="form-control searchuser" name="users[]" multiple>
-                      @if($coupons)
-                          @foreach($coupons->users as $user)
-                              <option value="{{$user->id}}" selected>{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</option>
-                          @endforeach
-                      @endif
+                  @if(isset($coupons))
+                      @foreach($coupons->users as $users_scope)
+                        <option value="{{$users_scope->id}}" selected>{{ucfirst($users_scope->fname)}} {{ucfirst($users_scope->lname)}}</option>
+                      @endforeach
+                    @endif
                   </select>
               </div>
             </div>

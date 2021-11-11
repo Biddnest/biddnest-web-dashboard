@@ -142,9 +142,9 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        @switch($coupon->type)
+                                        @switch($coupon->discount_type)
                                             @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
-                                                &#8377; {{$coupon->discount_amount}}
+                                                &#8377;{{$coupon->discount_amount}}
                                             @break
 
                                             @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
@@ -157,10 +157,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex  vertical-center">
-                                            <div class="progress" style="height: 10px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
 
+                                            <div class="progress">
+                                                <div class="progress-bar bg-progress" role="progressbar" style="width: {{$coupon->usage*100/$coupon->max_usage}}%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
                                             </div>
                                         </div>
                                     </td>

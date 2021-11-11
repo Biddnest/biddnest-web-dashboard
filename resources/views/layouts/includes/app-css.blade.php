@@ -1150,5 +1150,13 @@
                 color:red;
             }
 
+            .progress {
+                width: 100%;
+                height: 12px;
+                text-align: right;
+                margin-left: 10px;
+                opacity: 1;
+                background-color: #fce181;
+            }
 
         </style>

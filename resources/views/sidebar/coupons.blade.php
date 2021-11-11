@@ -65,10 +65,11 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        <div class="d-flex vertical-center">
-                            {{$coupons->usage}}
-                            <div class="progress  ">
-                                <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupons->usage}}" aria-valuemin="0" aria-valuemax="{{$coupons->max_usage}}"></div>
+                        <div class="d-flex flex-column">
+                            <p>{{$coupons->usage}} of {{$coupons->max_usage}} coupons used.</p>
+
+                            <div class="progress" style="display: block;">
+                                <div class="progress-bar bg-progress" role="progressbar" style="width: {{$coupons->usage*100/$coupons->max_usage}}%" aria-valuenow="{{$coupons->usage}}" aria-valuemin="0" aria-valuemax="{{$coupons->max_usage}}"></div>
                             </div>
                         </div>
                     </div>
@@ -98,6 +99,8 @@
                             @foreach($coupons->zones as $zone)
                                 {{ucfirst(trans($zone->name))}}
                             @endforeach
+                        @else
+                            Applicable across all zones
                         @endif
                     </div>
                 </div>

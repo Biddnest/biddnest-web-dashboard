@@ -292,7 +292,7 @@ class PaymentController extends Controller
         return Helper::response(true, "Payment successful");
     }
 
-    public static function updateBookingPaymentData($booking_id, $bid_amount, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00){
+    public static function updateBookingPaymentData($booking_id, $bid_amount, $subtotal, $commission, $other_charges, $tax, $discount, $grand_total = 0.00, $amount_confirm=false){
         Log::info($commission);
         $booking_exist = Booking::where("id", $booking_id)->first();
 
@@ -312,6 +312,12 @@ class PaymentController extends Controller
         Booking::where('id', $booking_id)->update([
             "final_quote"=>round((float)$subtotal, 2)
         ]);
+
+        if($amount_confirm)
+        {
+            BookingsController::changeStatusBooking($booking_id, BookingEnums::$STATUS['payment_pending']);
+            BookingsController::statusChange($booking_id, BookingEnums::$STATUS['payment_pending']);
+        }
 
         return Helper::response(true, "Payment details have been updated.");
     }

@@ -2106,7 +2106,8 @@ $("body").on('click', ".sidebar-toggle_booking", function(event) {
 
 $("body").on('click', ".sidebar-toggle_details td:not(:last-child)", function(event) {
     var url = $(this).parent().data("url");
-    window.location.href = url;
+    // window.location.href = url;
+    redirectTo(url);
 });
 
 $("body").on('input', ".bid-amount, .commission, .other_charges, .discount_amount", function(event) {

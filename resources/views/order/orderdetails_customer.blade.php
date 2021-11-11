@@ -78,11 +78,11 @@
                             <li class="nav-item">
                                 <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
                             </li>
-                            @if($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                            {{-- @if($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'])
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-bidding-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding Review</a>
                                 </li>
-                            @endif
+                            @endif --}}
                            {{-- <li class="nav-item">
                                 <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                             </li>--}}
@@ -329,7 +329,7 @@
                             </thead>
                             <tbody class="mtop-15">
                                 @foreach($booking->inventories as $inventory)
-                                    <tr class="tb-border  cursor-pointer">
+                                    <tr class="tb-border">
                                       <th scope="row" style="padding-left: 15px !important;">{{$inventory->name}}</th>
                                       <td  class="text-center">
                                           @if($inventory->quantity_type == \App\Enums\BookingInventoryEnums::$QUANTITY['fixed'])

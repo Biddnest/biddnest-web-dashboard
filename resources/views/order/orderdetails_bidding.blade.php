@@ -75,11 +75,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active p-15" id="bidding-tab" data-toggle="tab" href="{{route('order-details-bidding', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding</a>
                                 </li>
-                                @if($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                {{-- @if($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'])
                                     <li class="nav-item">
                                         <a class="nav-link p-15" id="vendor-tab" data-toggle="tab" href="{{route('order-bidding-review', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Bidding Review</a>
                                     </li>
-                                @endif
+                                @endif --}}
                                {{-- <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation-tab" data-toggle="tab" href="{{route('order-details-payment', ['id'=>$booking->id])}}" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
                                 </li>--}}
@@ -252,7 +252,7 @@
                                                                 </td>
                                                             @else
                                                                 <td class="">
-                                                                    @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
+                                                                    @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                                                         <a class="modal-toggle" data-target="#change_bid_amt">
                                                                             <button class="btn white-text theme-bg">Edit Quote</button>
                                                                         </a>
@@ -517,6 +517,9 @@
                                     <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
                                         Grand Amount
                                     </div>
+                                    <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 20px;">
+                                        Confirm Amount
+                                    </div>
                                 </div>
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                     <div class="theme-text f-14  p-15" style="padding-top: 5px;">
@@ -541,8 +544,13 @@
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
                                         <input type="text" class="form-control  grand_total" value="{{$booking->payment->grand_total}}" name="grand_total" min="0.00" readonly required>
                                     </div>
+                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                        <input type="checkbox" name="confirm:boolean" value="true"/>
+                                    </div> 
                                 </div>
                             </div>
+                            
+                            
                         </div>
                         <div class="modal-footer p-15 ">
                             <div class="w-50">

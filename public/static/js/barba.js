@@ -80,6 +80,7 @@ barba.init({
 
 barba.hooks.before((data) => {
     NProgress.inc();
+    $(".side-bar-pop-up").removeClass("display-pop-up");
     $(".main-content").css("opacity", 0.5);
   });
 

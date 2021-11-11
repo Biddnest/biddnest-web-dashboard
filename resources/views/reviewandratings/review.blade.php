@@ -79,7 +79,7 @@
                     </div>
                     <div class="card-head left col-sm-3">
                         <div class="search">
-                            <input type="text" class="searchTerm table-search" data-url="{{route('review')}}" placeholder="Search...">
+                            <input type="text" class="searchTerm table-search" data-url="{{route('review')}}" placeholder="Search by desc...">
                             <button type="submit" class="searchButton">
                                 <i class="fa fa-search"></i>
                             </button>

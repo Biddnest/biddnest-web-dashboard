@@ -329,7 +329,7 @@
                             </thead>
                             <tbody class="mtop-15">
                                 @foreach($booking->inventories as $inventory)
-                                    <tr class="tb-border  cursor-pointer">
+                                    <tr class="tb-border">
                                       <th scope="row" style="padding-left: 15px !important;">{{$inventory->name}}</th>
                                       <td  class="text-center">
                                           @if($inventory->quantity_type == \App\Enums\BookingInventoryEnums::$QUANTITY['fixed'])

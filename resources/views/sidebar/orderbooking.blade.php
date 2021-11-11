@@ -177,15 +177,15 @@
                                 <thead class="secondg-bg  p-0">
                                 <tr>
                                     <th scope="col" style="text-align:left !important; padding-left: 12px !important;">Item Name</th>
-                                    <th scope="col">Quantity</th>
                                     <th scope="col">Size</th>
+                                    <th scope="col">Material</th>
 
                                 </tr>
                                 </thead>
                                 <tbody class="mtop-20">
 
                                 @foreach($booking->inventories as $inventory)
-                                <tr class="tb-border  cursor-pointer">
+                                <tr class="tb-border">
                                     <th scope="row" style="text-align:left !important; padding-left: 12px !important;">{{$inventory->name}}</th>
 
                                     <td class="text-center">@if(json_decode($inventory->size,true)){{json_decode($inventory->size,true)['min']}} - {{json_decode($inventory->size,true)['max']}}@else {{$inventory->size}} @endif</td>

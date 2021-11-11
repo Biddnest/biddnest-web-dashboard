@@ -122,7 +122,7 @@ class CouponController extends Controller
            return Helper::response(false, "couldn't Update");
 
        if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']) {
-           if (count($data['organizations']) > 0) {
+           if (isset($data['organizations']) && count($data['organizations']) > 0) {
                CouponOrganization::where("coupon_id", $exist_coupon->id)->delete();
                foreach ($data['organizations'] as $organization) {
                    $coupon_organizaton = new CouponOrganization;
@@ -134,7 +134,7 @@ class CouponController extends Controller
        }
 
        if($data['zone_scope']== CouponEnums::$ZONE_SCOPE['custom']){
-           if(count($data['zones']) > 0){
+           if(isset($data['zones']) && count($data['zones']) > 0){
                CouponZone::where("coupon_id", $exist_coupon->id)->delete();
                foreach($data['zones'] as $zone) {
                    $coupon_zone = new CouponZone;
@@ -146,7 +146,7 @@ class CouponController extends Controller
        }
 
        if($data['user_scope']== CouponEnums::$USER_SCOPE['custom']){
-           if(count($data['users']) > 0){
+           if(isset($data['users']) && count($data['users']) > 0){
                CouponUser::where("coupon_id", $exist_coupon->id)->delete();
                foreach($data['users'] as $user) {
                    $coupon_user = new CouponUser;

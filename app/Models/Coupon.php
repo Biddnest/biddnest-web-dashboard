@@ -11,15 +11,18 @@ class Coupon extends Model
     use HasFactory;
 
     public function zones(){
-        return $this->hasManyThrough(Zone::class, CouponZone::class,"zone_id","id","id","coupon_id");
+        return $this->belongsToMany(Zone::class,"coupon_zone_map","coupon_id","zone_id","id","id");
+//        return $this->hasManyThrough(Zone::class, CouponZone::class,"zone_id","id","id","coupon_id");
     }
 
     public function organizations(){
-        return $this->hasManyThrough(Organization::class, CouponOrganization::class,"organization_id","id","id","coupon_id");
+        return $this->belongsToMany(Zone::class,"coupon_organization_map","coupon_id","organization_id","id","id");
+//        return $this->hasManyThrough(Organization::class, CouponOrganization::class,"organization_id","id","id","coupon_id");
     }
 
     public function users(){
-        return $this->hasManyThrough(User::class, CouponUser::class,"user_id","id","id","coupon_id");
+        return $this->belongsToMany(Zone::class,"coupon_user_map","coupon_id","user_id","id","id");
+//        return $this->hasManyThrough(User::class, CouponUser::class,"user_id","id","id","coupon_id");
     }
 
     public function payment()

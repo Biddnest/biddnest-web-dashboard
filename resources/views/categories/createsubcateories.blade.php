@@ -86,9 +86,9 @@
                                 <div class="form-input">
                                     <label class="phone-num-lable"> Extra Inventory List</label>
                                     <select class="form-control searchitem" name="extra_inventories[]" multiple @if( isset($subcategory) && ($subcategory->custom_flag == \App\Enums\CommonEnums::$YES)) disabled @endif>
-                                        @if(isset($sub_category))
-                                            @foreach($sub_category->extraitems as $extraitems)
-                                                <option value="{{$extraitems->id}}" selected>{{ucfirst(trans($user->meta->name))}}</option>
+                                        @if(isset($subcategory))
+                                            @foreach($subcategory->extraitems as $extraitems)
+                                                <option value="{{$extraitems->id}}" selected>{{ucfirst(trans($extraitems->meta->name))}}</option>
                                             @endforeach
                                         @endif
                                     </select>

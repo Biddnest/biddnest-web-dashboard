@@ -16,6 +16,7 @@ use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
+use App\Enums\PayoutEnums;
 use App\Models\Admin;
 use App\Models\AdminZone;
 use App\Models\Banners;
@@ -1021,8 +1022,6 @@ class WebController extends Controller
 
        $coupons = Coupon::where("deleted", CommonEnums::$NO);
 
-
-
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
             $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 
@@ -1033,10 +1032,9 @@ class WebController extends Controller
 
 
 
-        if($request->search)
-            $coupons->where(function($query) use($request){
-                $query->where("name","LIKE","%{$request->search}%")->orWhere("code","LIKE","%{$request->search}%");
-            });
+        if(isset($request->search)){
+            $coupons=$coupons->where('name', 'like', "%".$request->search."%");
+        }
 
         $coupons_active= Coupon::where(['status'=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
@@ -1071,7 +1069,7 @@ class WebController extends Controller
 
     public function createCoupons(Request $request)
     {
-        $coupons = Coupon::where("id",$request->id)->with('zones')->with('organizations')->with('users')->first();
+        $coupons = Coupon::where(["id"=>$request->id])->with('zones')->with('organizations')->with('users')->first();
         return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get(), 'coupons'=>$coupons]);
     }
 
@@ -1315,7 +1313,10 @@ class WebController extends Controller
         }
         $payout->orderBy("id","DESC");
 
-        return view('vendorpayout.payout', ['payouts'=>$payout->paginate(CommonEnums::$PAGE_LENGTH)]);
+        $scheduled = Payout::where('status', PayoutEnums::$STATUS['scheduled'])->count();
+        $failed = Payout::where('status', PayoutEnums::$STATUS['suspended'])->count();
+
+        return view('vendorpayout.payout', ['payouts'=>$payout->paginate(CommonEnums::$PAGE_LENGTH), 'failed'=>$failed, 'scheduled'=>$scheduled]);
     }
 
     public function sidebar_payout(Request $request)

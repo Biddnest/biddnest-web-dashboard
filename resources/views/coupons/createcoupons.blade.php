@@ -173,7 +173,7 @@
             <div class="form-input">
               <label class="max-usage">Max Usage</label>
               <span class="">
-                <input type="number" name="max_usage"  placeholder="Max No of total used this coupon" value="@if($coupons){{$coupons->max_usage}}@endif" id="" class="form-control" required>
+                <input type="number" name="max_usage"  placeholder="Max No of total used this coupon" value="@if($coupons){{$coupons->max_usage}}@endif" id="" class="form-control" required min="1">
                <span class="error-message">Please enter  valid </span>
               </span>
             </div>
@@ -183,7 +183,7 @@
             <div class="form-input">
               <label class="max-usage-user">Max Usage/User</label>
               <span class="">
-                <input type="number" name="max_usage_per_user" placeholder="Max No of coupon Usage/User" value="@if($coupons){{$coupons->max_usage_per_user}}@endif" id="" class="form-control" required>
+                <input type="number" name="max_usage_per_user" placeholder="Max No of coupon Usage/User" value="@if($coupons){{$coupons->max_usage_per_user}}@endif" id="" class="form-control" required min="1">
                <span class="error-message">Please enter  valid </span>
               </span>
             </div>

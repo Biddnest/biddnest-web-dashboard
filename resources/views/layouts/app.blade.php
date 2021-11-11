@@ -11,73 +11,12 @@
                 <!-- top_nav_bar -->
                 <div class="h-auto">
                     <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation header">
-                        <form class="search-bar form-inline col-6 p-0" style="position: relative !important;opacity: 0;">
-                            <input class="form-control w-100 search-bar" type="search" placeholder="Search anything..."
-                                aria-label="Search">
-                            <div class="search-sugestion-wrapper hidden">
-
-                                <span>Search results</span>
-                                <div class="search-suggestions">
-                                    <div class="suggest-group">
-                                        <h6 class="section-title">Results in Users</h6>
-                                        <ul>
-                                            <li><a href="#" class="suggest-snip d-flex flex-row">
-                                                    <figure class="thumb-nail">
-                                                        <img src="" />
-                                                    </figure>
-                                                    <div class="meta">
-                                                        <p>Order</p>
-                                                        <span class=""></span>
-                                                    </div>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="suggest-group">
-                                        <h6 class="section-title">Results in Inventory</h6>
-                                        <ul>
-                                            <li><a href="#" class="suggest-snip d-flex flex-row">
-                                                    <figure class="thumb-nail">
-                                                        <img src="" />
-                                                    </figure>
-                                                    <div class="meta">
-                                                        <p></p>
-                                                        <span class=""></span>
-                                                    </div>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="suggest-group">
-                                        <h6 class="section-title">Results in Subservices</h6>
-                                        <ul>
-                                            <li><a href="#" class="suggest-snip d-flex flex-row">
-                                                    <figure class="thumb-nail">
-                                                        <img src="" />
-                                                    </figure>
-                                                    <div class="meta">
-                                                        <p></p>
-                                                        <span class=""></span>
-                                                    </div>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="suggest-group">
-                                        <h6 class="section-title">Results in Services</h6>
-                                        <ul>
-                                            <li><a href="#" class="suggest-snip d-flex flex-row">
-                                                    <figure class="thumb-nail">
-                                                        <img src="" />
-                                                    </figure>
-                                                    <div class="meta">
-                                                        <p></p>
-                                                        <span class=""></span>
-                                                    </div>
-                                                </a></li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
+                        <form class="col-6 p-0 margin-topneg-10">
+                            <div class="search ">
+                                <input type="text"  class="searchTerm table-search" data-url="{{route('admin.searchresult')}}" placeholder="Search...">
+                                <button type="submit" class="searchButton searchResultButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
                         </form>
                         <div class="col-6">

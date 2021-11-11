@@ -33,7 +33,7 @@
                                    <a href="{{route('vendor.editusermgt', ['id'=>$user->id])}}"><i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i></a>
                                 </div>
                                 <label class="switch-small">
-                                    <input type="checkbox" id="switch"  class="change_status cursor-pointer"  data-url="{{route('api.user.status',['id'=>$user->id])}}">
+                                    <input type="checkbox" {{($user->status == \App\Enums\CommonEnums::$NO) ? 'checked' : ''}} id="switch"  class="change_status cursor-pointer"  data-url="{{route('api.user.status',['id'=>$user->id])}}">
                                     <span class="slider"></span>
                                 </label>
                             </div>

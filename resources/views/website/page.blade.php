@@ -15,14 +15,18 @@
                     <div class="col-9 p-4 pr-2" id="terms-section">
                         <!-- Replacing Sections here yo yo  -->
                         <div class=" mt-1 pt-3">
-                            <h4 class="ml-2 pl-1">{{ucwords($page->title)}}</h4>
+                            <h4 class="">{{ucwords($page->title)}}</h4>
                             @if($page->updated_at)
                                 <p class="text-muted">Updated {{date('M Y', strtotime($page->updated_at))}}</p>
                             @endif
                         </div>
                         <div class="mt-1 pt-3">
 {{--                            <h5 class="ml-2">Accepting the Terms</h5>--}}
-                            <p class="mt-1 f-14 pr-4" style="white-space: normal !important;text-align: justify; ">{!! $page->content !!}</p>
+{{--                            <p class="mt-1 f-14 pr-4" style="white-space: normal !important;text-align: justify; ">--}}
+                            <div class="mt-1 custom-page-content" style="white-space: normal !important">
+                                {!! $page->content !!}
+                            </div>
+{{--                            </p>--}}
                         </div>
                     </div>
                 </div>

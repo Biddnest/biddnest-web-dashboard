@@ -115,7 +115,7 @@
                         <thead class="secondg-bg  p-0">
                                                     <tr>
                                                         <th scope="col">Coupon  Name</th>
-                                                        <th scope="col">Coupon Type</th>
+                                                        <th scope="col">Discount Type</th>
                                                         <th scope="col">Value</th>
                                                         <th scope="col">Coupon Usage</th>
                                                         <th scope="col">Coupon Description</th>
@@ -128,7 +128,7 @@
                                 <tr class="tb-border cursor-pointer coup_{{$coupon->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.coupon',['id'=>$coupon->id]) }}">
                                     <td scope="row">{{$coupon->name}}</td>
                                     <td>
-                                        @switch($coupon->type)
+                                        @switch($coupon->discount_type)
                                             @case(\App\Enums\CouponEnums::$DISCOUNT_TYPE["fixed"])
                                                 Fixed
                                             @break
@@ -157,8 +157,10 @@
                                     </td>
                                     <td>
                                         <div class="d-flex  vertical-center">
-                                            <div class="progress">
-                                                <div class="progress-bar bg-progress" role="progressbar" style="width: 30%" aria-valuenow="{{$coupon->usage}}" aria-valuemin="0" aria-valuemax="{{$coupon->max_usage}}"></div>
+                                            <div class="progress" style="height: 10px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+
                                             </div>
                                         </div>
                                     </td>

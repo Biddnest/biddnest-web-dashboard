@@ -139,7 +139,7 @@ class VendorWebController extends Controller
     public function bookingType(Request $request)
     {
         $count_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereNotIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
-        $participated_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->count();
+        $participated_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->whereIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
         $schedul_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
         $save_booking=Bid::where(['organization_id'=>Session::get('organization_id'), 'bookmarked'=>CommonEnums::$YES])->count();
 

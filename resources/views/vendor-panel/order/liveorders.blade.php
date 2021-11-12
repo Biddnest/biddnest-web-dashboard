@@ -145,11 +145,11 @@
                                     @foreach($bookings as $booking)
                                         <tr class="tb-border reject_{{$booking->id}}">
                                         <td scope="row" class="text-left" style="padding: 14px;" >
-                                            @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                            {{--@if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                                 {{$booking->public_booking_id}}
-                                            @else
+                                            @else--}}
                                                 {{$booking->public_enquiry_id}}
-                                            @endif
+{{--                                            @endif--}}
                                         </td>
                                         <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
                                         <td style="padding: 14px; " >{{json_decode($booking->destination_meta, true)['city']}}</td>

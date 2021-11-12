@@ -924,7 +924,7 @@ class Route extends Controller
             'username'=>'required',
             'password'=>'required',
             'role'=>'required',
-            'zone'=>'required',
+            'zone'=>'nullable',
             'phone'=>'required',
             'email'=>'required',
             'dob'=>'required',

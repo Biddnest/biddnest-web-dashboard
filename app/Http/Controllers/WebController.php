@@ -589,7 +589,7 @@ class WebController extends Controller
 
         $price_type = $booking->booking_type == BookingEnums::$BOOKING_TYPE["economic"] ? "bp_economic" : "bp_premium";
 
-        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $request->id)
+        $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $request->id)->where($price_type, ">", 0.00)
             ->min($price_type);
 
         return view('order.orderdetails_bidding',[

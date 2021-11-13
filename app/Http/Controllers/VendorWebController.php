@@ -70,7 +70,7 @@ class VendorWebController extends Controller
 
     public function dashboard()
     {
-        $count_live=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereNotIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
+        $count_live=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereIn('booking_id', Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->pluck('id'))->count();
         $count_ongoing=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
         $count_won= Bid::where(['status'=>BidEnums::$STATUS['won'], 'vendor_id'=>Session::get('account')['id']])->count();
         $count_branch=Organization::where("id", Session::get('account')['id'])->orWhere("parent_org_id", Session::get('account')['id'])->count();
@@ -138,7 +138,7 @@ class VendorWebController extends Controller
 
     public function bookingType(Request $request)
     {
-        $count_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereNotIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
+        $count_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereIn('booking_id', Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->pluck('id'))->count();
         $participated_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['bid_submitted'], BidEnums::$STATUS['lost']])->whereIn('booking_id', Booking::whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['in_progress']])->pluck('id'))->count();
         $schedul_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
         $save_booking=Bid::where(['organization_id'=>Session::get('organization_id'), 'bookmarked'=>CommonEnums::$YES])->count();

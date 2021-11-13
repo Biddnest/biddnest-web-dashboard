@@ -86,8 +86,9 @@ class BookingsController extends Controller
     }
 
     $booking = new Booking;
-    $booking_id = "BDO-" . uniqid();
-    $enquiry_id = "ENQ-" . uniqid();
+    $uniqid = uniqid();
+    $booking_id = "BDO-" . $uniqid;
+    $enquiry_id = "ENQ-" . $uniqid;
     $booking->public_booking_id = strtoupper($booking_id);
     $booking->public_enquiry_id = strtoupper($enquiry_id);
     $booking->user_id = (int)$user_id;
@@ -1110,8 +1111,9 @@ class BookingsController extends Controller
         */
 
         $booking = new Booking;
-        $booking_id = "BDO-" . uniqid();
-        $enquiry_id = "ENQ-" . uniqid();
+        $uniqid = uniqid();
+        $booking_id = "BDO-" . $uniqid;
+        $enquiry_id = "ENQ-" . $uniqid;
         $booking->public_booking_id = strtoupper($booking_id);
         $booking->public_enquiry_id = strtoupper($enquiry_id);
         $booking->user_id = (int)$user_id;
@@ -1375,8 +1377,9 @@ class BookingsController extends Controller
 
         if (!$data['public_booking_id']) {
             $booking = new Booking;
-            $booking_id = "BDO-" . uniqid();
-            $enquiry_id = "ENQ-" . uniqid();
+            $uniqid = uniqid();
+            $booking_id = "BDO-" . $uniqid;
+            $enquiry_id = "ENQ-" . $uniqid;
             $booking->public_booking_id = strtoupper($booking_id);
             $booking->public_enquiry_id = strtoupper($enquiry_id);
             $booking->user_id = (int)$user_id;

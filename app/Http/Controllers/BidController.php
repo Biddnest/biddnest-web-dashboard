@@ -204,6 +204,10 @@ class BidController extends Controller
         }
 
         $least_agent_price = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])
+            /*
+             * below criteria is mandatory because if base prices for a vendor is not stored, then in db the value is set as 0.00. And we dont want to work with 0.00 value for further calculations.
+             * */
+            ->where($booking_type_column,">",0.00)
             ->min($booking_type_column);
 
         $average_margin_percentage = BookingOrganizationGeneratedPrice::where('booking_id', $booking_data['id'])

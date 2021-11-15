@@ -380,7 +380,7 @@
                                                     <div>
                                                         <label class="switch2">
                                                             <input type="hidden" class="share" value=@if(count($share) > 1) "true" @else "false" @endif name="source[meta][shared_service]:boolean" id="m_type">
-                                                            <input type="checkbox" name="select_letter" class="share_check" @if(count($share) > 1) checked @endif value="1" id="movemnt" onchange="document.getElementById('m_type').value = this.checked ? true : false" disabled>
+                                                            <input type="checkbox" name="select_letter" class="share_check" @if(count($share) > 1) checked @endif value="1" id="movemnt" onchange="document.getElementById('m_type').value = this.checked ? true : false">
                                                             <span class="slider2"></span>
                                                         </label>
                                                     </div>

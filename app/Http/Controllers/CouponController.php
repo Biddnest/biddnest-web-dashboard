@@ -221,7 +221,7 @@ class CouponController extends Controller
        if($coupon->min_order_amount >= $booking->final_quote)
            return "You have exceeded the maximum amount for this coupon.";
 
-       if($coupon->zone_scope == CouponEnums::$ZONE_SCOPE['custom']){
+       if($coupon->zone_scope == CouponEnums::$ZONE_SCOPE['custom'] && (isset($coupon->zone) && count($coupon->zone) > 0)){
            $coupon_valid = false;
            foreach ($coupon->zone as $zone){
                if($zone->id == $booking->organization->id){
@@ -232,7 +232,7 @@ class CouponController extends Controller
                return "This coupon is not valid in your city.";
        }
 
-       if($coupon->organization_scope == CouponEnums::$ORGANIZATION_SCOPE['custom']){
+       if($coupon->organization_scope == CouponEnums::$ORGANIZATION_SCOPE['custom'] && (isset($coupon->organizations) && count($coupon->organizations) > 0)){
            $coupon_valid = false;
            foreach ($coupon->organizations as $org){
                if($org->id == $booking->organization_id){
@@ -243,7 +243,7 @@ class CouponController extends Controller
                return "This coupon is not applicable o on this vendor.";
        }
 
-       if($coupon->user_scope == CouponEnums::$USER_SCOPE['custom']){
+       if($coupon->user_scope == CouponEnums::$USER_SCOPE['custom'] && (isset($coupon->users) && count($coupon->users) > 0)){
            $coupon_valid = false;
            foreach ($coupon->users as $user){
                if($user->id == $booking->user_id){

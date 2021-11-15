@@ -1262,6 +1262,7 @@ class BookingsController extends Controller
                 "source_meta" => json_encode($meta),
             ]);
 
+        MovementDates::where("booking_id",$booking_exist->id)->delete();
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking_exist->id;
@@ -1500,6 +1501,7 @@ class BookingsController extends Controller
                 "zone_id" => $zone_id
             ]);
 
+        MovementDates::where("booking_id",$booking_exist->id)->delete();
         foreach ($movement_dates as $dates) {
             $movementdates = new MovementDates;
             $movementdates->booking_id = $booking_exist->id;

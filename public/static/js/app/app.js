@@ -1158,10 +1158,27 @@ $("body").on('click', ".next-btn-2", function(event) {
         $(this).closest('form').find('.bid-amount').hide();
         $(this).closest('form').find('.bid-amount-2').hide();
         $(this).closest('form').find('.submitbtn').show();
+        $(this).closest('form').find('.next-btn-back-3').show();
+        $(this).closest('form').find('.next-btn-back-3').removeClass('hidden');
         $(this).closest('form').find('.enter-pin').show();
         $(this).closest('form').find('.next-btn-back-2').addClass("hidden");
     }
 });
+
+/*$("body").on('click', ".next-btn-back-3", function(event) {
+    $(this).addClass("hidden");
+    $(this).closest('form').find('.submitbtn').hide();
+
+    $(this).closest('form').find('.bid-amount').show();
+    $(this).closest('form').find('.bid-amount-2').show();
+});*/
+
+
+$("body").on('click', ".next-btn-3", function(event) {
+    $(this).closest("form").submit();
+});
+
+
 
 $("body").on('keyup', ".calc-total", function(event) {
     let total = 0.00;

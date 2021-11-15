@@ -169,12 +169,14 @@
                                                         </div>
                                                     @endif
                                                 </div>
+
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">MOVING DATE</div>
                                                     @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+
                                                         <div class="value">
-                                                            @foreach($bidding->moving_dates as $mdate)
-                                                                <span class="status-3">{{date("d M Y", strtotime($mdate))}}</span>
+                                                            @foreach(json_decode($bidding->moving_dates,true) as $mdate)
+                                                                <span class="status-3">{{$mdate}} </span>
                                                             @endforeach
                                                         </div>
                                                     @else

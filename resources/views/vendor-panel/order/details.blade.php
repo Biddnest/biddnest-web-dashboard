@@ -430,8 +430,10 @@ Debugbar::info($price);
                                         class="btn theme-bg white-text w-30 hidden next-btn-back-2" id="next-btn-back-2" style="margin-bottom: 20px;">Back</button>
                                 <button type="button"
                                         class="btn theme-bg white-text w-30 next-btn-2" id="next-btn-2" style="margin-bottom: 20px;">Next</button>
+                                {{--<button type="button"
+                                        class="btn theme-bg white-text w-30 hidden next-btn-back-3" id="next-btn-back-2" style="margin-bottom: 20px;">Back</button>--}}
                                 <button
-                                    class="btn theme-bg white-text w-30 submitbtn" id="submitbtn" style="margin-bottom: 20px;">Submit</button>
+                                    class="btn theme-bg white-text w-30 submitbtn next-btn-3" id="submitbtn" style="margin-bottom: 20px;" type="submit">Submit</button>
                             </a>
                         </div>
                     </div>

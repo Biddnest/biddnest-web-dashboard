@@ -15,13 +15,15 @@ use Monolog\Logger;
 
 class TicketController extends Controller
 {
-    public static function create($sender_id, $ticket_type, $meta, $ticket_images, $heading=null, $body=null)
+    public static function create($sender_id, $ticket_type, $meta, $ticket_images = null, $heading=null, $body=null)
     {
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        foreach ($ticket_images as $key_img => $image) {
-            $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
-            Log::info($images);
+        if($ticket_images && count($ticket_images) > 0){
+            foreach ($ticket_images as $key_img => $image) {
+                $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
+//                Log::info($images);
+            }
         }
 
         switch ($ticket_type) {

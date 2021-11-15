@@ -68,7 +68,7 @@ class TicketController extends Controller
                         ->where("user_id", $sender_id)
                         ->first();
 
-                    Booking::where("public_booking_id", $meta['public_booking_id'])->update(["status"=>BookingEnums::$STATUS['cancelrequest']]);
+                    Booking::where("public_booking_id", $meta['public_booking_id'])->update(["status"=>BookingEnums::$STATUS['cancel_request']]);
                     $title = str_replace("{{booking.id}}", "", $title);
                     $title = str_replace("{{user.name}}", "", $title);
 
@@ -184,7 +184,7 @@ class TicketController extends Controller
                         ->with('user')
                         ->where("user_id", $sender_id)
                         ->first();
-                    Booking::where("public_booking_id", $meta['public_booking_id'])->update(["status"=>BookingEnums::$STATUS['cancelrequest']]);
+                    Booking::where("public_booking_id", $meta['public_booking_id'])->update(["status"=>BookingEnums::$STATUS['cancel_request']]);
 
                     $title = str_replace("{{booking.id}}", "", $title);
                     $title = str_replace("{{user.name}}", "", $title);

@@ -1764,17 +1764,28 @@ $("body").on('click', ".filter-button", function(event) {
 
 $("body").on('click', ".add-item", function(event) {
 
-    if ($(".custom-item").length >= $(".max-inv-count").val()) {
-        megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
-        return false;
-    }
-
     let item = [];
     let inventory_quantity_type = $(".inventory-quantity-type").val();
     $(this).closest(".item-single-wrapper").find("input").each(function() {
         item[$(this).attr('name')] = $(this).val();
     });
     item = Object.assign({}, item);
+
+    let extra_item_count = 0;
+    $(".custom-item").each(function (){
+        console.log($(this).find(".quantity input").val());
+        extra_item_count += parseInt($(this).find(".quantity input").val());
+    });
+    extra_item_count += parseInt(item.quantity);
+
+    console.log("Total Extra Items:", extra_item_count);
+    console.log("Max Inv count:", $(".max-inv-count").val());
+    if (extra_item_count > $(".max-inv-count").val()) {
+        megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
+        return false;
+    }
+
+
     Logger.info(item);
     if (item.material == '') {
         megaAlert("Oops", "Please select Material");
@@ -1814,16 +1825,27 @@ $("body").on('click', ".add-item", function(event) {
 });
 
 $("body").on('click', ".add-search-item", function(event) {
-    if ($(".custom-item").length >= $(".max-inv-count").val()) {
-        megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
-        return false;
-    }
     let item = [];
     let inventory_quantity_type = $(".inventory-quantity-type").val();
     $(this).closest(".item-single-wrapper").find("input").each(function() {
         item[$(this).attr('name')] = $(this).val();
     });
     item = Object.assign({}, item);
+
+    let extra_item_count = 0;
+    $(".custom-item").each(function (){
+        console.log($(this).find(".quantity input").val());
+        extra_item_count += parseInt($(this).find(".quantity input").val());
+    });
+    extra_item_count += parseInt(item.quantity);
+
+    console.log("Total Extra Items:", extra_item_count);
+    console.log("Max Inv count:", $(".max-inv-count").val());
+    if (extra_item_count > $(".max-inv-count").val()) {
+        megaAlert("Oops", `You can only add upto ${$(".max-inv-count").val()} extra items.`);
+        return false;
+    }
+
     Logger.info(item);
     if (item.material == '') {
         tinyAlert("Oops", "Please select Material");

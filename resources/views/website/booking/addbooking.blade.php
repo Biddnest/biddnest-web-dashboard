@@ -186,7 +186,7 @@
                                                 <label>
                                                     <input type="radio" name="service_id" id="service_{{$category->id}}" value="{{$category->id}}" data-quantity-type="{{$category->inventory_quantity_type}}" class="card-input-element web-category" data-url="{{route('get_subservices', ['service_id'=>$category->id])}}" @if($prifill['service'] && ($category->id == $prifill['service'])) chaecked @endif/>
                                                     <div class="panel panel-default card-width card-input address-name card-methord02 text-center h-100 py-2 px-3 card-methord  bg-turnblue cursor-pointer  @if($prifill['service'] && ($category->id == $prifill['service']))turntheme check-icon02 @endif" style="border-radius: 6px;">
-                                                        <div class="panel-heading text-white f-direction" style="display: flex; justify-content-center;">
+                                                        <div class="panel-heading text-white f-direction" style="display: flex;">
                                                             <img src="{{$category->image}}" class="img-width">
                                                             {{ucwords($category->name)}}
                                                         </div>
@@ -255,7 +255,7 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">From Floor</label>
-                                                            <input type="number" placeholder="3" min="-3" max="99" name="source[meta][floor]" class="form-control " required>
+                                                            <input type="number" placeholder="3" min="-3" max="99" name="source[meta][floor]" class="form-control " required value="0">
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>
@@ -338,7 +338,7 @@
                                                     <div class="col-sm-6 ">
                                                         <div class="form-group ">
                                                             <label class="address-details-input ">To Floor </label>
-                                                            <input type="number" placeholder="5" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required >
+                                                            <input type="number" placeholder="5" min="-3" max="99" name="destination[meta][floor]" id="" class="form-control" required value="0">
                                                             <span class="error-message ">Please enter valid</span>
                                                         </div>
                                                     </div>

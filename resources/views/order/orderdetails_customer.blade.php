@@ -135,14 +135,25 @@
                                     Delivery Distance
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Category
+                                </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Package
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Movement Type
                                 </div>
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
-                                    Movement Dates
+                                    User Provided Dates
                                 </div>
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                    Instructions/Notes by Customer
+                                </div>
+                                @if($booking->bid)
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                    Confirmed Movement Date by Vendor
+                                </div>
+                                @endif
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Price suggested to Customer
                                 </div>
@@ -219,8 +230,14 @@
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     {{ json_decode($booking->meta, true)['distance'] ?? '-'}}Kms
                                 </div>
+
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                    @if($booking->booking_type)
+                                    {{ $booking->service->name }} @isset(json_decode($booking->meta,
+                                    true)['subcategory']) - {{json_decode($booking->meta,
+                                    true)['subcategory']}} @endisset
+                                </div>
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    @isset($booking->booking_type)
                                         @if($booking->booking_type == \App\Enums\BookingEnums::$BOOKING_TYPE['economic'])
                                             Economic
                                         @else
@@ -237,6 +254,18 @@
                                         <span class="status-3" style="margin-right: 5px;">{{date("d M Y", strtotime($mdate['date']))}}</span>
                                     @endforeach
                                 </div>
+
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    <i>"{{ json_decode($booking->meta, true)['customer']['remarks'] }}"</i>
+
+                                </div>
+
+                                @if($booking->bid)
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+
+                                        {{date("d M Y", strtotime(json_decode($booking->bid->moving_dates, true)[0]))}}
+                                </div>
+                                @endif
 
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                     @if($booking->final_quote)
@@ -315,7 +344,7 @@
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
                             </div>--}}
                         </div>
-                            <div class="col-sm-12 pl-0 pr-0 ">
+                            <div class="col-sm-6 pl-0 pr-0 " style="padding:5px">
                                 <div class="heading f-16 p-10 pl-4 border-around ">
                                   Inventory List
                                 </div>
@@ -343,6 +372,25 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
+
+                            <div class="col-sm-6 pl-0 pr-0" style="padding:5px">
+                                <div class="heading f-16 p-10 pl-4 border-around ">
+                                  Images by Customer
+                                </div>
+                                <div class="row d-flex mr-2 justify-content-start  mt-2">
+                                    @if(count(json_decode($booking->meta, true)['images']) === 0)
+                                        <div class="col-sm-12 text-center" style="padding: 50px 0">
+                                            <i>No image has been uploaded by the customer.</i>
+                                        </div>
+                                    @endif
+
+                                    @foreach(json_decode($booking->meta, true)['images'] as $image)
+                                        <div class="col-sm-3">
+                                            <a href="{{$image}}" data-lightbox="image"><img src="{{$image}}" style="width: 100%;"></a>
+                                        </div>
+                                    @endforeach
+                                </div>
                         </div>
 
                         @if(count($booking->inventories)== 0)

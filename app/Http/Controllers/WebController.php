@@ -449,7 +449,9 @@ class WebController extends Controller
 
         $booking = Booking::with(['status_history'])->with(['status_hist'=>function($query){
             $query->limit(1)->orderBy("id","DESC");
-        }])->with('movement_dates')->with('inventories')->with('driver')->with('organization')->with('user')->with("virtual_assistant")->findOrFail($request->id);
+        }])->with('movement_dates')->with('inventories')->with('driver')->with('organization')->with('user')->with("virtual_assistant")->with(["bid"=>function($query){
+            $query->where("status",BidEnums::$STATUS['won']);
+        }])->with('service')->findOrFail($request->id);
 
         $hist = [];
 

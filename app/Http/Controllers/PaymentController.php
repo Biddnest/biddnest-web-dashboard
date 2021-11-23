@@ -243,21 +243,23 @@ class PaymentController extends Controller
         if(!$order_exist)
             return Helper::response(false, "Payment order is not exist");
 
-        MailController::invoice_email($public_booking_id);
+
 
         $bid_exist = Bid::where(["organization_id"=>$booking_exist['organization_id'], "booking_id"=>$booking_exist['id']])->pluck("vendor_id");
 
-        dispatch(function () use ($booking_exist, $bid_exist) {
+        dispatch(function () use ($booking_exist, $bid_exist, $public_booking_id) {
             NotificationController::sendTo("user", [$booking_exist->user_id], "We have received your payment for booking id #".$booking_exist->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $booking_exist->public_booking_id,
                 "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
             ]);
 
-            NotificationController::sendTo("vendor", $bid_exist, "Customer coinfirmed for booking id #".$booking_exist->public_booking_id." on moving date :".$booking_exist->final_moving_date, "This order has been confirmed.", [
+            NotificationController::sendTo("vendor", $bid_exist, "Customer has confirmed booking id #".$booking_exist->public_booking_id." on moving date :".$booking_exist->final_moving_date, "This order has been confirmed.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $booking_exist->public_booking_id
             ]);
+
+            MailController::invoice_email($public_booking_id);
 
         })->afterResponse();
 

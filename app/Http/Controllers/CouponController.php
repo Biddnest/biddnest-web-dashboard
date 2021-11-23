@@ -23,7 +23,7 @@ class CouponController extends Controller
    public function __construct(){}
 
    public static function add($data){
-    /*$name,$desc, $code, $type, $discount_type, $discount_amount, $max_discount, $min_order_value, $deduction_source, $orgnization_id, $max_usage, $max_usage_user, $scope, $eligibiity_type, $valid_from, $valid_to*/
+    /*$name,$desc, $code, $type, $discount_type, $discount_amount, $max_discount, $min_order_value, $deduction_source, $organization_id, $max_usage, $max_usage_user, $scope, $eligibiity_type, $valid_from, $valid_to*/
     $exist = Coupon::where("code",strtoupper($data['code']))->first();
 
     if($exist)
@@ -54,8 +54,8 @@ class CouponController extends Controller
         return Helper::response(false, "couldn't save");
 
     if($data['organization_scope']== CouponEnums::$ORGANIZATION_SCOPE['custom']){
-        if(count($data['orgnizations']) > 0){
-            foreach($data['orgnizations'] as $organization) {
+        if(count($data['organizations']) > 0){
+            foreach($data['organizations'] as $organization) {
                 $coupon_organizaton = new CouponOrganization;
                 $coupon_organizaton->organization_id = $organization;
                 $coupon_organizaton->coupon_id = $coupon->id;

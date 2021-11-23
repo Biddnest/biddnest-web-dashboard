@@ -259,7 +259,7 @@ class PaymentController extends Controller
                 "public_booking_id" => $booking_exist->public_booking_id
             ]);
 
-            MailController::invoice_email($public_booking_id);
+//            MailController::invoice_email($public_booking_id);
 
         })->afterResponse();
 

@@ -699,7 +699,7 @@ class Route extends Controller
             'type'=>'required|integer',
             'discount_type'=>'required|integer',
             'discount_amount'=>'required',
-            'max_discount_amount'=>'required',
+            'max_discount_amount'=>'nullable',
             'min_order_amount'=>'required',
             'deduction_source'=>'required|integer',
             'max_usage'=>'required|integer',
@@ -730,7 +730,7 @@ class Route extends Controller
             'type'=>'required|integer',
             'discount_type'=>'required|integer',
             'discount_amount'=>'required',
-            'max_discount_amount'=>'required',
+            'max_discount_amount'=>'nullable',
             'min_order_amount'=>'required',
             'deduction_source'=>'required|integer',
             'max_usage'=>'required|integer',
@@ -1134,6 +1134,10 @@ class Route extends Controller
         return SettingController::update_contact($request->phone, $request->email, $request->address);
     }
 
+    public function api_settings_general(Request $request)
+    {
+        return SettingController::update_api_general($request->all());
+    }
     public function api_settings_update(Request $request)
     {
         return SettingController::update_api($request->all());

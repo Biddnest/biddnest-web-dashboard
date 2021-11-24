@@ -160,8 +160,15 @@ class WebController extends Controller
 
     public function apiSettings()
     {
-        $setting =Settings::whereNotIn('key', ["contact_details"])->get();
+        $setting =Settings::whereNotIn('key', ["contact_details", "msg91_key", "google_api_key", "razor_key", "razor_secret", "razor_webhook_secret", "onesignal_user_app_creds", "onesignal_vendor_app_creds", "razorpayx_key", "razorpayx_secret", "msg91_sender_id"])->get();
         return view('system_setting.all_setting', ['settings'=>$setting]);
+    }
+
+    public function apiSettingsapi()
+    {
+        $setting =Settings::whereNotIn('key', ["contact_details"])->whereIn('key', ["msg91_key", "google_api_key", "razor_key", "razor_secret", "razor_webhook_secret", "onesignal_user_app_creds", "onesignal_vendor_app_creds", "razorpayx_key", "razorpayx_secret", "msg91_sender_id"])->get();
+       
+        return view('system_setting.api_setting', ['settings'=>$setting]);
     }
 
     public function faq()

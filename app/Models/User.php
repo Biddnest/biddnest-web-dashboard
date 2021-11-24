@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
 
-    protected $hidden = ['laravel_through_key','created_at','updated_at','deleted'];
+    protected $hidden = ['laravel_through_key','updated_at','deleted'];
     use HasFactory;
 
     public function bookings(){

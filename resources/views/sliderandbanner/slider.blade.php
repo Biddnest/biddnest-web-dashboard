@@ -83,7 +83,8 @@
                                     <th scope="col" style="text-align: center !important;">Status</th>
                                     <th scope="col">Platform</th>
                                     <th scope="col">Created On</th>
-                                    <th scope="col" style="text-align: center !important; width: 20%">Operations</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col" style="text-align: center !important; width: 15%">Operations</th>
                                 </tr>
                             </thead>
                             <tbody class="mtop-20 f-14">
@@ -95,7 +96,7 @@
                                                                     src="{{asset('static/images/Backward.svg')}}">
                                                 <div class="slick-container slick-container_{{$slider->id}}">
                                                     @foreach($slider->banners as $banner)
-                                                        <img class="slick-image" src="{{$banner->image}}" alt="">
+                                                        <img class="" src="{{$banner->image}}" alt="" style="width:80% !important;">
                                                     @endforeach
                                                 </div>
                                                 <img class="p-2" onclick="$('.slick-container_{{$slider->id}}').slick('slickNext')"
@@ -124,6 +125,11 @@
                                         <td>
                                             {{ \Carbon\Carbon::parse($slider->created_at)->format("d M Y") }}
                                         </td>
+                                        <td>
+                                            <a href="#" class="modal-toggle mr-20" data-toggle="modal" data-target="#slide_{{$slider->id}}">
+                                                <button class="btn theme-bg white-text">View</button>
+                                            </a>
+                                        </td>
                                         <td style="text-align:center !important">
                                             <a class="inline-icon-button" href="{{route('edit-slider', ['id'=>$slider->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                             <a href="#" class="delete inline-icon-button" data-parent=".slider_{{$slider->id}}" data-confirm="Are you sure, you want delete this Slider permenently? You won't be able to undo this." data-url="{{route('sliders_delete',['id'=>$slider->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
@@ -132,6 +138,34 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @foreach($sliders as $slider)
+                        <div class="fullscreen-modal" id="slide_{{$slider->id}}">
+                            <div class="fullscreen-modal-body" role="document" style="height: 450px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">{{$slider->name}} Slider</h5>
+                                    <button type="button" class="close theme-text" data-dismiss="modal" aria-label="Close" id="imodalclose">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body" style="padding: 25px 10px; margin-bottom: 0;">
+                                    <div class="d-flex justify-content-center" style="transform: scale(4) translateY(30px);">
+                                        <img class="" onclick="$('.slick-container_{{$slider->id}}').slick('slickPrev')"
+                                                                    src="{{asset('static/images/Backward.svg')}}" style="width: 10px !important;">
+                                        <div class="slick-container slick-container_{{$slider->id}}">
+                                            @foreach($slider->banners as $banner)
+                                                    <img class="slick-image" src="{{$banner->image}}" alt="" >
+                                                
+                                            @endforeach
+                                        </div>
+                                        <img class="" onclick="$('.slick-container_{{$slider->id}}').slick('slickNext')"
+                                                                    src="{{asset('static/images/forward.svg')}}" style="width: 10px !important;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
                         @if(count($sliders)== 0)
                             <div class="row hide-on-data">
                                 <div class="col-md-12 text-center p-20">

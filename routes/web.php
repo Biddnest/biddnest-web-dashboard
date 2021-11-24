@@ -179,6 +179,7 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/delete/{id}/faq',[Router::class,'faq_delete'])->name("faq_delete");
     Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
+    Route::post('/api-settings-general',[Router::class,'api_settings_general'])->name("api_settings_general");
 
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");
@@ -261,6 +262,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard',[WebController::class,'dashboard'])->name("dashboard");
         Route::get('/my-profile/{id}',[WebController::class,'details_user'])->name('my-profile');
         Route::get('/api-settings',[WebController::class,'apiSettings'])->name("api-settings");
+        Route::get('/api-settings-api',[WebController::class,'apiSettingsapi'])->name("api-settings-api");
 
         Route::get('/pages',[WebController::class,'pages'])->name("pages");
         Route::get('/pages/create',[WebController::class,'createpages'])->name("pages_create");

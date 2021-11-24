@@ -1159,4 +1159,9 @@
                 background-color: #fce181;
             }
 
+            .toast{
+                margin-top: 65px !important;
+                margin-right: 40%  !important;
+            }
+
         </style>

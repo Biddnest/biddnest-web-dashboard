@@ -6,21 +6,21 @@
 </div>
 <div class="modal-body">
     <div class="row d-flex  pb-4 pl-3 ">
-        {{--<div class="col-lg-12">
+        <!-- <div class="col-lg-12">
             <div class="profile-section span3">
                 <div class="d-flex justify-content-center">
-                    <img class="p-2" onclick="$('.slick-container_{{$sliders->id}}').slick('slickPrev')"
-                         src="{{asset('static/images/Backward.svg')}}">
+                    <img class="p-2" onclick="$('.slick-container_{{$sliders->id}}').slick('slickPrev')" src="{{asset('static/images/Backward.svg')}}">
                     <div class="slick-container slick-container_{{$sliders->id}}">
                         @foreach($sliders->banners as $banner)
-                            <img class="slick-image" src="{{$banner->image}}" alt="" style="width: 100% !important;">
+                            <img class="slick-image" src="{{$banner->image}}" alt="">
                         @endforeach
                     </div>
-                    <img class="p-2" onclick="$('.slick-container_{{$sliders->id}}').slick('slickNext')"
-                         src="{{asset('static/images/forward.svg')}}">
+                    <img class="p-2" onclick="$('.slick-container_{{$sliders->id}}').slick('slickNext')" src="{{asset('static/images/forward.svg')}}">
                 </div>
             </div>
-        </div>--}}
+        </div> -->
+
+        
         <div class="col-lg-12  pl-0 ">
             <div class="profile-section">
                 <div class="profile-details-side-pop">

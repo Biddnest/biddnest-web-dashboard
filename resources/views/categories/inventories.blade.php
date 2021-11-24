@@ -148,6 +148,11 @@
                         </form></div>
                 </div>
                 <div class="modal-footer p-15">
+                <div class="w-50 text-left">
+                        <a class="white-text p-10" href="{{ asset('static/csv_temp.csv')}}" download>
+                            <button type="button" class="btn theme-bg white-text w-40 " style="margin-bottom: 20px;">Download CSV</button>
+                        </a>
+                    </div>
                     <div class="w-50 text-right">
                         <a class="white-text p-10" href="#">
                             <button data-dismiss="modal" aria-label="Close" type="button" class="btn theme-bg white-text w-30 " style="margin-bottom: 20px;" onclick="$('#imodalclose').click();">Close</button>

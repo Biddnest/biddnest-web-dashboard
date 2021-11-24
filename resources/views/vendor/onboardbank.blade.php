@@ -164,13 +164,28 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-lg-4">
+                                <p class="img-label">Additional file</p>
+                                <div class="upload-section p-20 pt-0">
+                                    <img class="upload-preview" src="{{asset("static/images/upload-ing.svg")}}" alt="">
+                                    <div class="ml-1">
+                                        <div class="file-upload">
+                                            <input type="hidden" class="base-holder" name="doc[additional_file]" value="{{$bank->additional_file ?? ''}}" required />
+                                            <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->additional_file) CHANGE @else UPLOAD FILE @endif</button>
+                                            <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->additional_file) required @endif>
+                                        </div>
+                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="d-flex  justify-content-between flex-row  p-10 py-0" style="border-top: 1px solid #70707040;">
                             <div class="w-50"><a class="white-text p-10" href="{{route("onboard-branch-vendors",['id'=> $id])}}">
                                     <button type="button" class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                             </div>
                             <div class="w-50 text-right">
-{{--                                    <button class="btn theme-br white-text w-30">Next</button>--}}
+                                {{--<button class="btn theme-br white-text w-30">Next</button>--}}
                                 <a class="white-text p-10" href="#">
                                     <button type="submit" class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                             </div>

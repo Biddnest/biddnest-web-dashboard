@@ -307,6 +307,7 @@ class Route extends Controller
             'organization.org_name' => 'required|string',
             'organization.org_type' => 'required|string',
             'organization.gstin' => 'required|string|min:15|max:15',
+            'organization.regi_no' => 'required|string|min:21|max:21',
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
@@ -327,7 +328,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "register_no"=>$request->organization['regi_no'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
         $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);
 
@@ -350,6 +351,7 @@ class Route extends Controller
             'organization.org_name' => 'required|string',
             'organization.org_type' => 'required|string',
             'organization.gstin' => 'required|string|min:15|max:15',
+            'organization.regi_no' => 'required|string|min:21|max:21',
             'organization.description' =>'required|string',
 
             'address.address' => 'required|string',
@@ -370,7 +372,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
+        $meta = array("auth_fname"=>$request->fname, "auth_lname"=>$request->lname, "secondory_phone"=>$request->phone['secondory'],  "gstin_no"=>$request->organization['gstin'], "register_no"=>$request->organization['regi_no'], "org_description"=>$request->organization['description'], "address"=>$request->address['address'], "landmark"=>$request->address['landmark']);
 
         $admin = array("fname"=>$request->fname, "lname"=>$request->lname, "email"=>$request->email, "phone"=>$request->phone['primary']);
 
@@ -521,6 +523,7 @@ class Route extends Controller
             'doc.biddnest_agreement' =>'required|string',
             'doc.pan_card' =>'required|string',
             'doc.company_registration_certificate' =>'required|string',
+            'doc.additional_file' =>'required|string',
         ]);
 
         if($validation->fails())
@@ -762,6 +765,7 @@ class Route extends Controller
             'lng'=>'required|numeric',
             'city'=>'required|string',
             'district'=>'required|string',
+            'service_radius'=>'required|numeric',
             'state'=>'required|string',
             'area'=>'required'
         ]);
@@ -769,7 +773,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ZoneController::add($request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
+        return ZoneController::add($request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area,  $request->service_radius);
     }
 
     public function zones_edit(Request $request)
@@ -781,6 +785,7 @@ class Route extends Controller
             'lng'=>'required|numeric',
             'city'=>'required|string',
             'district'=>'required|string',
+            'service_radius'=>'required|numeric',
             'state'=>'required|string',
             'area'=>'required'
         ]);
@@ -788,7 +793,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area);
+        return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area,  $request->service_radius);
     }
 
     public function zone_status_update(Request $request)

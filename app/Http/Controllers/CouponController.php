@@ -256,7 +256,8 @@ class CouponController extends Controller
 
        $discount_amount = $coupon->discount_type == CouponEnums::$DISCOUNT_TYPE['fixed'] ? number_format($coupon->discount_amount,2) :  number_format($booking->final_quote * ($coupon->discount_amount / 100),2);
 
-       $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
+       if($coupon->discount_type != CouponEnums::$DISCOUNT_TYPE['fixed'])
+            $discount_amount = $discount_amount > $coupon->max_discount_amount ? $coupon->max_discount_amount : $discount_amount;
 
        $tax_percentage = Settings::where("key", "tax")->pluck('value')[0];
 

@@ -20,7 +20,7 @@ class ZoneController extends Controller
         return Zone::where("deleted",CommonEnums::$NO)->findOrFail($id);
     }
 
-    public static function add($name, $lat, $lng, $city, $district, $state, $area){
+    public static function add($name, $lat, $lng, $city, $district, $state, $area, $radius){
         $zone = new Zone();
         $zone->name = ucwords($name);
         $zone->lat = $lat;
@@ -29,6 +29,7 @@ class ZoneController extends Controller
         $zone->area = json_encode($area);
         $zone->city = $city;
         $zone->district = $district;
+        $zone->service_radius = $radius;
         $zone->state = $state;
         $result= $zone->save();
 
@@ -46,7 +47,7 @@ class ZoneController extends Controller
         return Helper::response(true,"Zone save Successfully",["zone"=>Zone::findOrFail($zone->id)]);
     }
 
-    public static function update($id, $name, $lat, $lng, $city, $district, $state, $area)
+    public static function update($id, $name, $lat, $lng, $city, $district, $state, $area, $radius)
     {
         $exist =Zone::where(['id'=>$id, "deleted"=>CommonEnums::$NO])->first();
         if(!$exist)
@@ -60,6 +61,7 @@ class ZoneController extends Controller
                 "area"=>json_encode($area),
                 "city"=>$city,
                 "district"=>$district,
+                "service_radius"=>$radius,
                 "state"=>$state
             ]);
 

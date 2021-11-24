@@ -147,7 +147,7 @@
           </div>
           <div class="col-sm-6">
             <div class="form-input">
-              <label class="min-order">Mini Order Amount</label>
+              <label class="min-order">Minimum Order Amount</label>
               <span class="">
                 <input type="number"  placeholder="5000" id="min-order" value="@if($coupons){{$coupons->min_order_amount}}@endif" name="min_order_amount" class="form-control" required>
                <span class="error-message">Please enter  valid </span>

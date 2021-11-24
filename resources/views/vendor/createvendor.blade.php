@@ -130,6 +130,8 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6">
+                                    </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -190,6 +192,14 @@
                                                    minlength="15" required>
                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Register/License Number of Organisation</label>
+                                            <input type="text" id="fullname"  placeholder="L21091KA2019OPC141331" class="form-control" name="organization[regi_no]" maxlength="21" minlength="21" required>
+                                            <span class="error-message">Please enter valid Register/License Number</span>
                                         </div>
                                     </div>
 
@@ -378,16 +388,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 d-none" >
-                                        <div class="form-input">
-                                            <label class="full-name">Commission</label>
-                                            <input type="hidden" id="commission" placeholder="Commission"
-                                                   class="form-control" name="commission" min="1" required value="0">
-                                            <span class="error-message">Please enter valid
-                                                                Commission</span>
-                                        </div>
-                                    </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Base distance in km</label>
@@ -406,7 +406,17 @@
                                             <input type="text" name="extrabasedist" placeholder="Extra Distance"
                                                    class="form-control number">
                                             <span class="error-message">Please enter valid Distance</span>
-                                        </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 d-none" >
+                                        <div class="form-input">
+                                            <label class="full-name">Commission</label>
+                                            <input type="hidden" id="commission" placeholder="Commission"
+                                                   class="form-control" name="commission" min="1" required value="0">
+                                            <span class="error-message">Please enter valid
+                                                                Commission</span>
                                         </div>
                                     </div>
                                 </div>

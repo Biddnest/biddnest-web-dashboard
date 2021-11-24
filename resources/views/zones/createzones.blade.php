@@ -135,6 +135,15 @@
                             <span class="error-message">Please enter  valid </span>
                         </div>
                     </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-input">
+                            <label class="district">Service Radius</label>
+                            <input type="number"  placeholder="10" id="district" name="service_radius" value="@if($zones){{$zones->service_radius}}@endif" class="form-control" required>
+                            <span class="error-message">Please enter valid Service Radius </span>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="d-flex    w-100 p-10 border-top margin-r-20 justify-content-between ">
                     <div class="w-50 ">

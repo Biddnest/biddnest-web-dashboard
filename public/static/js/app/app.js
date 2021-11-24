@@ -51,7 +51,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
-import { initRangeSlider, initRevenueChart, initBarChart } from "./initFunctions.js";
+import { initRangeSlider, initRevenueChart, initBarChart, initDateBookPicker } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -370,7 +370,7 @@ $("body").on('click', ".repeater", function(event) {
             $(`.inventory-snip:last-child`).closest(".inventory-snip").addClass("is_custom");
         });
     }
-
+    initDateBookPicker();
 });
 
 $("body").on('click', ".closer", function(event) {

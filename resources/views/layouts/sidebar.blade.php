@@ -59,7 +59,7 @@
                         
                         <li class="menu-item" data-toggle="" href="#Customer" role="button" aria-expanded="false"
                             aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user"></i></span> </span>Customer Management</a>
-                        </li`>
+                        </li>
                         <!-- sublinks -->
                         <ul class="sub-menu" id="Customer">
                             <li class="sub-menu-item"><a href="{{route('customers')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
@@ -161,6 +161,8 @@
                                     aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
                             </li>
 
+                        @endif
+
                             <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
                                 aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
                             </li>
@@ -171,7 +173,6 @@
                                 <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
                                                 class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
                             </ul>
-                        @endif
 
                         @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
                             <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"

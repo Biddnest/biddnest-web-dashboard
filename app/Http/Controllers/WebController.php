@@ -105,14 +105,24 @@ class WebController extends Controller
         else
             $zone = Session::get('admin_zones');
 
-        $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone)->count();
+        $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone);
+        
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $count_orders->where('virtual_assistant_id', Session::get('account')['id']);
+
+        $count_orders->count();
 
         $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
 
         $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
 
-        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone)->count();
+        $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone);
+        
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $count_live_orders->where('virtual_assistant_id', Session::get('account')['id']);
+
+        $count_live_orders->count();
 
         $dataset = [];
         $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
@@ -123,16 +133,23 @@ class WebController extends Controller
         foreach ($this_week as $key=>$date){
             $date1 = $date->format('Y-m-d');
             $this_week[$key] = $date->format('d M');
-            $this_week_sale[] = Booking::whereDate("created_at",$date1)
-                                       ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
-                                        ->sum("final_quote");
+            $sale_bookings = Booking::whereDate("created_at",$date1)
+                                       ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign']);
+            if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+                $sale_bookings->where('virtual_assistant_id', Session::get('account')['id']);
+
+            $this_week_sale[] = $sale_bookings->sum("final_quote");
         }
         foreach ($last_week as $key=>$date){
             $date1 = $date->format('Y-m-d');
 //            $last_week[$key] = $date->format('d M');
-            $last_week_sale[] = Booking::whereDate("created_at",$date1)
-                                       ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign'])
-                                       ->sum("final_quote");
+             $week_booking = Booking::whereDate("created_at",$date1)
+                                       ->whereDate("status",">=",BookingEnums::$STATUS['pending_driver_assign']);
+
+            if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+                $week_booking->where('virtual_assistant_id', Session::get('account')['id']);
+
+            $last_week_sale[] = $week_booking->sum("final_quote");
         }
         $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(3)->get();
         return view('index', ['count_orders'=>$count_orders,

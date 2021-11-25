@@ -23,7 +23,7 @@ class VoucherController extends Controller
         $image_name = "voucher".$name."-".uniqid().".png";
 
         $voucher = new Voucher();
-        $voucher->image = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"voucher");
+        $voucher->image = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"vouchers");
 
         $voucher->name = $name;
         $voucher->title = $title;
@@ -64,10 +64,10 @@ class VoucherController extends Controller
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));
 
-        $image_name = "service".$name."-".uniqid().".png";
+        $image_name = "voucher".$name."-".uniqid().".png";
 
         $voucher = Voucher::where("id",$id)->update([
-            "image" => Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"services"),
+            "image" => Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"vouchers"),
         "name" => $name,
         "title" => $title,
         "desc" => $desc,

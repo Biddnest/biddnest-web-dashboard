@@ -112,7 +112,7 @@
                                     </td>
                                     <td>
                                         <a  class="inline-icon-button mr-4" style="display: table-cell; transform: translate(8px, 0px); " href="{{route('edit-voucher', ['id'=>$voucher->id])}}"><i class="icon dripicons-pencil p-1 mr-4" aria-hidden="true"></i></a>
-                                        <a href="#" style="display: table-cell; transform: translate(16px, 0px);" class="delete inline-icon-button ml-4" data-parent=".coup_{{$voucher->id}}" data-confirm="Are you sure, you want delete this Coupon permanently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$voucher->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                        <a href="{{route('api.voucher.delete', ['id'=>$voucher->id])}}" style="display: table-cell; transform: translate(16px, 0px);" class="delete inline-icon-button ml-4" data-parent=".coup_{{$voucher->id}}" data-confirm="Are you sure, you want delete this Coupon permanently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$voucher->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

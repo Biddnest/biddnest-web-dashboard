@@ -41,17 +41,17 @@
         <div class="col-sm-6">
           <div class="form-input">
             <label class="coupon-name">Voucher Logo</label>
-            <div class="upload-section p-20 pt-0">
-              <img class="upload-preview" src="{{asset('static/images/upload-image.svg')}}" alt=""/>
-              <div class="ml-1">
+            <div class="upload-section p-20 pt-0" style="padding-left: 0px;">
+              <img class="upload-preview" src="@if(!$vouchers){{asset('static/images/upload-image.svg')}}@else{{$vouchers->image}}@endif" alt=""/>
+                <div class="ml-1">
                 <div class="file-upload">
-                  <input type="hidden" class="base-holder" name="image" value="" required/>
+                  <input type="hidden" class="base-holder" name="image" value="@if($vouchers){{$vouchers->image}}@endif" required />
                   <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
                     UPLOAD IMAGE
                   </button>
-                  <input type="file" accept=".png,.jpg,.jpeg" required/>
+                  <input type="file" accept=".png,.jpg,.jpeg" @if(!$vouchers) required @endif/>
                 </div>
-                <p class="text-black">Max File size: 1MB</p>
+                <p>Max File size: 1MB</p>
               </div>
             </div>
          </div>
@@ -168,18 +168,35 @@
                     </tr>
                     </thead>
                     <tbody class="mtop-20 f-13 item-subservice" id="add-inventory-wrapper">
-                    <tr class="inventory-snip">
-                        <td scope="row" class="text-left">
-                            <input type="text" name="codes[][code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
-                        </td>
+                      @if($vouchers && $vouchers->codes)
+                        @foreach($vouchers->codes as $code)
+                        <tr class="inventory-snip">
+                            <td scope="row" class="text-left">
+                                <input type="text" name="codes[][code]" class="form-control br-5" value="{{$code->voucher_code}}" required="required" placeholder="ABCD123456DEF"/>
+                            </td>
 
-                        <td class="">
-                            <input type="text" class="form-control br-5 date dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
-                        </td>
-                        <td>
-                            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                        </td>
-                    </tr>
+                            <td class="">
+                                <input type="text" class="form-control br-5 date dateselect" value="{{$code->expires_at}}" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
+                            </td>
+                            <td>
+                                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                            </td>
+                        </tr>
+                        @endforeach
+                      @else
+                        <tr class="inventory-snip">
+                            <td scope="row" class="text-left">
+                                <input type="text" name="codes[][code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
+                            </td>
+
+                            <td class="">
+                                <input type="text" class="form-control br-5 date dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
+                            </td>
+                            <td>
+                                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                            </td>
+                        </tr>
+                      @endif
                     </tbody>
                 </table>
             </div>

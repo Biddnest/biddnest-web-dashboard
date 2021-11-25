@@ -1483,7 +1483,7 @@ class Route extends Controller
             'max_redemptions'=>'required|integer',
             'type'=>'required|integer',
             'codes.*.code'=>'required',
-            'codes.*.expires_on'=>'required'
+            'codes.*.expires_at'=>'required'
         ]);
 
         if($validation->fails())

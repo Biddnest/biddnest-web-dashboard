@@ -10,7 +10,7 @@ use App\Http\Controllers\RewardPointController;
 
 class ReferralController extends Controller
 {
-    public static function update(Request $request/*$zone_id, $reward_type, $reward_points, $voucher_id, $trigger_on*/){
+    public static function update(Request $request){
 
         ZoneReferralReward::where("zone_id",$request->zone_id)->delete();
 

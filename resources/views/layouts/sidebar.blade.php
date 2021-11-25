@@ -13,7 +13,7 @@
                         </li>
                         @endif
 
-                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin') || \App\Helper::is('virtual_assistant'))
                         <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
                             aria-expanded="false" aria-controls="Booking"> <a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span> </span> Booking & Orders </a>
                         </li>

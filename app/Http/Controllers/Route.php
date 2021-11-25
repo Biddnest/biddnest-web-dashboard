@@ -1470,4 +1470,54 @@ class Route extends Controller
          return BookingsController::assignVirtualAssistant($request->booking_id, $request->admin_id);
      }
 
+
+     public function voucherCreate(Request $request){
+
+        $validation = Validator::make($request->all(),[
+            'image'=>'required|string',
+            'name'=>'required|string',
+            'title'=>'required|string',
+            'desc'=>'required|string',
+            'provider'=>'required|string',
+            'provider_url'=>'required|string',
+            'max_redemptions'=>'required|integer',
+            'type'=>'required|integer',
+            'codes.*.code'=>'required',
+            'codes.*.expires_on'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VoucherController::create($request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes);
+     }
+
+
+     public function voucherEdit(Request $request){
+
+        $validation = Validator::make($request->all(),[
+            'id'=> 'required|integer',
+            'image'=>'required|string',
+            'name'=>'required|string',
+            'title'=>'required|string',
+            'desc'=>'required|string',
+            'provider'=>'required|string',
+            'provider_url'=>'required|string',
+            'max_redemptions'=>'required|integer',
+            'type'=>'required|integer',
+            'codes.*.code'=>'required',
+            'codes.*.expires_on'=>'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return VoucherController::edit($request->id, $request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes);
+     }
+     
+
+     public function voucherDelete(Request $request){
+        return VoucherController::delete($request->id);
+     }
+
 }

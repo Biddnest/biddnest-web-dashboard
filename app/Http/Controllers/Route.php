@@ -1506,13 +1506,14 @@ class Route extends Controller
             'max_redemptions'=>'required|integer',
             'type'=>'required|integer',
             'codes.*.code'=>'required',
-            'codes.*.expires_at'=>'required'
+            'codes.*.expires_at'=>'required',
+            'status'=>'required'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return VoucherController::edit($request->id, $request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes);
+        return VoucherController::edit($request->id, $request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes, $request->status);
      }
      
 

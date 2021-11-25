@@ -55,7 +55,7 @@ class VoucherController extends Controller
 
     }
 
-    public static function edit($id, $image, $name, $title, $desc, $provider, $provider_url, $max_redemptions, $type, $codes){
+    public static function edit($id, $image, $name, $title, $desc, $provider, $provider_url, $max_redemptions, $type, $codes, $status){
         $voucher_exists = Voucher::find($id);
 
         if(!$voucher_exists)
@@ -76,6 +76,7 @@ class VoucherController extends Controller
         "provider_url" => $provider_url != "" ? $provider_url : null,
         "max_redemptions" => $max_redemptions,
         "type" => $type,
+        "status"=>status
         ]);
 
 

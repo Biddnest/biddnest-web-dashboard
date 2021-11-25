@@ -1156,7 +1156,7 @@ class WebController extends Controller
 
         $vouchers_active= Voucher::where(['status'=>VoucherEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO]);
 
-        $vouchers_inactive= Voucher::where(['status'=>VoucherEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO]);
+        $vouchers_inactive= Voucher::where(['status'=>VoucherEnums::$STATUS['inactive'], "deleted"=>CommonEnums::$NO]);
 
 
         return view('vouchers.vouchers',["vouchers"=>$vouchers->paginate(CommonEnums::$PAGE_LENGTH), "vouchers_active"=>$vouchers_active->paginate(CommonEnums::$PAGE_LENGTH), "vouchers_inactive"=>$vouchers_inactive->paginate(CommonEnums::$PAGE_LENGTH)]);

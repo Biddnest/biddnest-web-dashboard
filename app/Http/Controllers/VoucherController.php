@@ -134,6 +134,4 @@ class VoucherController extends Controller
         else
             return  $output_bool ? false: Helper::response(false,"Couldn't delete the voucher. Something went wrong.");
     }
-
-
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterUsersAddZone extends Migration
+class AlterZrrTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AlterUsersAddZone extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger("zone_id")->index("zone_id")->nullable();
-            $table->foreign("zone_id")->references("id")->on("zones");
+        Schema::table('zone_referral_rewards', function (Blueprint $table) {
+            $table->tinyInteger("referral_role")->after("reward_points");
         });
     }
 
@@ -26,7 +25,7 @@ class AlterUsersAddZone extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('zone_referral_rewards', function (Blueprint $table) {
             //
         });
     }

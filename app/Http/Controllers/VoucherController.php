@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use App\Enums\VoucherEnums;
+use App\Enums\CommonEnums;
 use App\Models\Voucher;
 use App\Helper;
 use App\Models\VoucherCode;

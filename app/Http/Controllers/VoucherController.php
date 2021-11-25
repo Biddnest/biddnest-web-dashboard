@@ -84,7 +84,7 @@ class VoucherController extends Controller
 
             foreach($codes as $code){
                 $vcode = new VoucherCode;
-                $vcode->voucher_id = $voucher->id;
+                $vcode->voucher_id = $id;
                 $vcode->user_id = null;
                 $vcode->voucher_code = $code['code'];
                 $vcode->expires_at = $code['expires_at'];

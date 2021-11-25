@@ -20,7 +20,8 @@ class ReferralController extends Controller
         $referral->reward_points = $request->referrer->reward_type == ReferralEnums::$TYPE['points'] ? $request->referrer->reward_points : null;
         $referral->referrer->voucher_id = $request->referrer->voucher_id == ReferralEnums::$TYPE['voucher'] ? $request->referrer->voucher_id : null;
         $referral->meta = null;
-        $referral->trigger_on = $request->referrer->trigger_on
+        $referral->referral_role = ReferralEnums::$ROLE['referrer'];
+        $referral->trigger_on = $request->referrer->trigger_on;
 
         $referee = new ZoneReferralReward;
         $referee->zone_id = $request->zone_id;
@@ -28,6 +29,7 @@ class ReferralController extends Controller
         $referee->reward_points = $request->referee->reward_type == ReferralEnums::$TYPE['points'] ? $request->referee->reward_points : null;
         $referee->referee->voucher_id = $request->referee->voucher_id == ReferralEnums::$TYPE['voucher'] ? $request->referee->voucher_id : null;
         $referee->meta = null;
+        $referral->referral_role = ReferralEnums::$ROLE['referee'];
         $referee->trigger_on = $request->referee->trigger_on;
 
         if($referral->save() && $referee->save())

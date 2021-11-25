@@ -30,7 +30,7 @@ class ReferralController extends Controller
         $referee->meta = null;
         $referee->trigger_on = $request->referee->trigger_on;
 
-        if($referral->save && $referee->save())
+        if($referral->save() && $referee->save())
             return Helper::response(true,"Referral System has been updated.", [ "referral_system" => $referral ]);
         else
             return Helper::response(false,"Could'nt update referral system. Something went wrong.");

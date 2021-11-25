@@ -74,17 +74,22 @@ class Helper
                 case "admin":
                     if (Session::get('user_role') === AdminEnums::$ROLES['admin'])
                         return true;
-                    break;
+                break;
 
                 case "zone_admin":
                     if (Session::get('user_role') === AdminEnums::$ROLES['zone_admin'])
                         return true;
-                    break;
+                break;
 
                 case "marketing":
                     if (Session::get('user_role') === AdminEnums::$ROLES['marketing'])
                         return true;
-                    break;
+                break;
+
+                case "virtual_assistant":
+                    if (Session::get('user_role') === AdminEnums::$ROLES['virtual_assistant'])
+                        return true;
+                break;
 
             }
 

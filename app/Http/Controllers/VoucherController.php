@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use App\Enums\VoucherEnums;
 use App\Models\Voucher;
+use App\Helper;
 use App\Models\VoucherCode;
 
 class VoucherController extends Controller

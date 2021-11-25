@@ -220,6 +220,9 @@ class WebController extends Controller
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']])
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone);
 
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $bookings->where('virtual_assistant_id', Session::get('account')['id']);
+
         $confirm_count = $bookings->count();
 
         if($request->search){
@@ -255,6 +258,9 @@ class WebController extends Controller
                 ->orWhereIn('status', [BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']]);
         })
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $bookings->where('virtual_assistant_id', Session::get('account')['id']);
 
         $booking_count = $bookings->count();
 
@@ -294,6 +300,9 @@ class WebController extends Controller
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+           $bookings->where('virtual_assistant_id', Session::get('account')['id']);
+
         $past_count=$bookings->count();
 
         if(isset($request->search)){
@@ -327,6 +336,9 @@ class WebController extends Controller
 
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])
            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+           $bookings->where('virtual_assistant_id', Session::get('account')['id']);
 
         $hold_count=$bookings->count();
 
@@ -362,6 +374,9 @@ class WebController extends Controller
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])
            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+           $bookings->where('virtual_assistant_id', Session::get('account')['id']);
+
         $bounced_count=$bookings->count();
 
         if(isset($request->search)){
@@ -395,6 +410,9 @@ class WebController extends Controller
 
         $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"],BookingEnums::$STATUS["cancelled"]])
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $bookings->where('virtual_assistant_id', Session::get('account')['id']);
 
         $cancelled_count=$bookings->count();
 
@@ -433,6 +451,9 @@ class WebController extends Controller
 
         $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["in_progress"]])
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $bookings->where('virtual_assistant_id', Session::get('account')['id']);
 
         if(isset($request->search)){
             $bookings->where('public_booking_id', 'like', $request->search."%")

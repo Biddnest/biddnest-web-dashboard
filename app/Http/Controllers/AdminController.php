@@ -43,7 +43,7 @@ class AdminController extends Controller
                         'email'=>$admin_user->email]]);
             Session::put('sessionFor', "admin");
             Session::put('user_role', $admin_user->role);
-            $zone = [];
+            $zones = [];
 
             if($admin_user->zones){
                 Session::put("zones",$admin_user->zones);

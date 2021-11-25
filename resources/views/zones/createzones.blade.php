@@ -18,12 +18,23 @@
     </div>
 
 <!-- Dashboard cards -->
-    <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
+    <div class="d-flex flex-row justify-content-center Dashboard-lcards">
     <div class="col-sm-10">
-        <div class="card  h-auto p-0 pt-10 ">
-            <div class="card-head right text-left border-bottom-2 p-10 pt-20">
-                <h3 class="f-18 theme-text pl-2 ml-1 mt-1 mb-2">
-                    @if(!$zones) Create @else Edit @endif Zone
+        <div class="card  h-auto p-0">
+            <div class="card-head right text-left border-bottom-2 pb-0">
+                <h3 class="f-18 mb-0">
+                    <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
+                               href="#order" role="tab" aria-controls="home"
+                               aria-selected="true">@if(!$zones) Create @else Edit @endif Zone</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-15" id="quotation" href="@if(!$zones)#@else{{route("zone-referral-system", ['id'=>$zones->id])}}@endif"
+                            >Referral System</a>
+                        </li>
+
+                    </ul>
                 </h3>
             </div>
             <form action="@if(!$zones){{route('zones_add')}}@else{{route('zones_edit')}}@endif" method="@if(!$zones){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('zones')}}" data-alert="tiny"

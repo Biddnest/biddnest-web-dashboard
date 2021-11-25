@@ -16,6 +16,7 @@ use App\Enums\SliderEnum;
 use App\Enums\TicketEnums;
 use App\Enums\UserEnums;
 use App\Enums\VendorEnums;
+use App\Enums\VoucherEnums;
 use App\Enums\PayoutEnums;
 use App\Models\Admin;
 use App\Models\AdminZone;
@@ -47,7 +48,9 @@ use App\Models\TicketReply;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
+use Bavix\Wallet\Models\Transaction;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -58,6 +61,8 @@ use Illuminate\Support\Facades\Validator;
 
 class WebController extends Controller
 {
+
+
     public function login()
     {
         return view('login.login');
@@ -702,6 +707,17 @@ class WebController extends Controller
         return view('customer.createcustomer', ["users"=>$user]);
     }
 
+    public function customerRewardPoints(Request $request)
+    {
+        $user = User::where("id", $request->id)->with("wallet")->first();
+        $user->wallet->transactions = Transaction::where("wallet_id",$user->wallet->id)->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return view('customer.customerwallet', [
+            "users"=>$user,
+            "vouchers"=>Voucher::where(['status'=>VoucherEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])->get()
+            ]);
+    }
+
     public function sidebar_customer(Request $request)
     {
         $user =User::where("id", $request->id)->with(['bookings'=>function($query){
@@ -1080,6 +1096,33 @@ class WebController extends Controller
         return view('coupons.detailscoupons');
     }
 
+    public function vouchers(Request $request)
+    {
+      /*  if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = Session::get('admin_zones');*/
+
+        $vouchers = Voucher::where("deleted", CommonEnums::$NO);
+
+        if($request->search){
+          $vouchers->where('name', 'like', "%".$request->search."%");
+        }
+
+        $vouchers_active= Voucher::where(['status'=>VoucherEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO]);
+
+        $vouchers_inactive= Voucher::where(['status'=>VoucherEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO]);
+
+
+        return view('vouchers.vouchers',["vouchers"=>$vouchers->paginate(CommonEnums::$PAGE_LENGTH), "vouchers_active"=>$vouchers_active->paginate(CommonEnums::$PAGE_LENGTH), "vouchers_inactive"=>$vouchers_inactive->paginate(CommonEnums::$PAGE_LENGTH)]);
+    }
+
+    public function createVoucher(Request $request)
+    {
+        $vouchers = Voucher::where(["id"=>$request->id])->with('codes')->first();
+        return view('vouchers.createvouchers', ['vouchers'=>$vouchers]);
+    }
+
     public function zones(Request $request)
     {
         if(Session::get('active_zone'))
@@ -1111,6 +1154,15 @@ class WebController extends Controller
     {
         $zone = Zone::where('id',$request->id)->first();
         return view('zones.createzones', ['zones'=>$zone]);
+    }
+
+    public function zoneReferralSystem(Request $request)
+    {
+        $zone = Zone::where('id',$request->id)->first();
+        return view('zones.referralsystem', [
+            'zones'=>$zone,
+            "vouchers"=>Voucher::where("status",VoucherEnums::$STATUS['active'])->get()
+            ]);
     }
 
     public function slider(Request $request)

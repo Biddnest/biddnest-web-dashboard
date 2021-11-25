@@ -305,6 +305,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/',[WebController::class,'customers'])->name("customers");
             Route::get('/create',[WebController::class,'createCustomers'])->name("create-customers");
             Route::get('/{id}/edit',[WebController::class,'createCustomers'])->name("edit-customers");
+            Route::get('/{id}/reward-points',[WebController::class,'customerRewardPoints'])->name("rewards-customers");
         });
 
         Route::prefix('vendors')->group(function () {
@@ -346,10 +347,17 @@ Route::prefix('admin')->group(function () {
             Route::get('/details',[WebController::class,'detailsCoupons'])->name("details-coupons");
         });
 
+        Route::prefix('refferal-vouchers')->group(function () {
+            Route::get('/',[WebController::class,'vouchers'])->name("vouchers");
+            Route::get('/create',[WebController::class,'createVoucher'])->name("create-voucher");
+            Route::get('/{id}/edit',[WebController::class,'createVoucher'])->name("edit-voucher");
+        });
+
         Route::prefix('zones')->group(function () {
             Route::get('/',[WebController::class,'zones'])->name("zones");
             Route::get('/create',[WebController::class,'createZones'])->name("create-zones");
             Route::get('/{id}/edit',[WebController::class,'createZones'])->name("edit-zones");
+            Route::get('/{id}/referral-system',[WebController::class,'zoneReferralSystem'])->name("zone-referral-system");
         });
 
         Route::prefix('slider')->group(function () {

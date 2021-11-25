@@ -129,6 +129,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/zones/{id}',[Router::class,'zone_status_update'])->name("zone_status_update");
     Route::get('/zones/{id}',[Router::class,'zones_get'])->name("zones_get");
     Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
+    Route::post('/zones/referal',[Router::class,'zones_referal'])->name("zones_save_referal");
 
     //Sliders and Banners API
     Route::get('/sliders',[Router::class,'sliders'])->name("sliders");

@@ -1521,4 +1521,9 @@ class Route extends Controller
         return VoucherController::delete($request->id);
      }
 
+
+     public function zones_referal(Request $request){
+         
+     }
+
 }

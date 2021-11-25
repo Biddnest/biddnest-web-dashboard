@@ -104,6 +104,23 @@
                         </ul>
                             @endif
 
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                                <li class="menu-item" data-toggle="" href="#Coupons" role="button" aria-expanded="false"
+                                    aria-controls="Coupons"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-ticket"></i></span> </span></i> Reward Vouchers</a>
+                                </li>
+                                <!-- sublinks -->
+                                <ul class="sub-menu" id="Coupons">
+                                    <li class="sub-menu-item"><a href="{{route('vouchers')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
+                                                                                                  aria-hidden="true"></i>Vouchers</a></li>
+                                    <li class="sub-menu-item"><a href="{{route('create-voucher')}}"> <i
+                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create
+                                            Voucher</a></li>
+                                    <!-- <li class="sub-menu-item"> <a href="edit-coupons.html"> <i
+                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Coupons</a>
+                                    </li> -->
+                                </ul>
+                            @endif
+
                             @if(\App\Helper::is('admin'))
                         <li class="menu-item" data-toggle="" href="#Zone" role="button" aria-expanded="false"
                             aria-controls="Zone"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-location "></i></span> </span> Zone Managment</a>

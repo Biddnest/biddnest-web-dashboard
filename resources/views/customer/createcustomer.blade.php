@@ -19,12 +19,23 @@
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-lg-10">
                 <div class="card  h-auto p-0 pt-10 ">
+                    <div class="card-head right text-left border-bottom-2 pb-0">
+                        <h3 class="f-18 mb-0">
+                            <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
+                                       href="#order" role="tab" aria-controls="home"
+                                       aria-selected="true">@if(!$users) Create @else Edit @endif Customer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-15" id="quotation" href="@if(!$users)#@else{{route("rewards-customers", ['id'=>$users->id])}}@endif"
+                                    >Reward Points</a>
+                                </li>
+
+                            </ul>
+                        </h3>
+                    </div>
                     <div class="create-customer">
-                        <header>
-                            <h3 class="f-18 mt-0 mb-0">
-                                @if(!$users) Create @else Edit @endif Customer
-                            </h3>
-                        </header>
                         <div class="form-wrapper">
                             <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="refresh" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
                                 <div class="row pr-3 pl-3">
@@ -94,7 +105,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Date of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control dateselect birthdate" required>
+                                            <input type="text" id="fullname" name="dob" value="@if($users){{$users->dob}}@endif" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control singledate dateselect birthdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>

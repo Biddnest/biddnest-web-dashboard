@@ -9,54 +9,52 @@
                 <div class="nav-links">
                     <ul class="menu p-1">
                         @if(\App\Helper::is('admin'))
-                            <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('dashboard')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> </span> Dashboard</a>
-                            </li>
+                        <li class="menu-item active-menu-item"><a class="regular-nav" href="{{route('dashboard')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-meter "></i></span> </span> Dashboard</a>
+                        </li>
                         @endif
 
-                        @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin') || \App\Helper::is('virtual_assistant'))
-                            <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
-                                aria-expanded="false" aria-controls="Booking"> <a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span> </span> Booking & Orders </a>
-                            </li>
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                        <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
+                            aria-expanded="false" aria-controls="Booking"> <a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span> </span> Booking & Orders </a>
+                        </li>
 
-                            <ul class="sub-menu booking" id="booking">
-                                <li class="sub-menu-item  "><a href="{{route('enquiry-booking')}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
-                                        Booking & Orders</a></li>
-                                <li class="sub-menu-item"><a href="{{route('create-order')}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
-                                        Create New Order</a></li>
-                                <li class="sub-menu-item"><a href="{{route('orders-booking-inprogress')}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
-                                        In Progress Orders</a></li>
-                                <!-- <li class="sub-menu-item"><a href="edit-order.html"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
-                                        Edit Order</a></li> -->
-                            </ul>
+                        <ul class="sub-menu booking" id="booking">
+                            <li class="sub-menu-item  "><a href="{{route('enquiry-booking')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                    Booking & Orders</a></li>
+                            <li class="sub-menu-item"><a href="{{route('create-order')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                    Create New Order</a></li>
+                            <li class="sub-menu-item"><a href="{{route('orders-booking-inprogress')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                    In Progress Orders</a></li>
+                            <!-- <li class="sub-menu-item"><a href="edit-order.html"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>
+                                    Edit Order</a></li> -->
+                        </ul>
+                        <li class="menu-item b-purple" data-toggle="#vendors" href="#Vendors" role="button"
+                            aria-expanded="false" aria-controls="Vendors"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-store "></i></span> </span> Vendors Management</a>
 
-                            <li class="menu-item b-purple" data-toggle="#vendors" href="#Vendors" role="button"
-                                aria-expanded="false" aria-controls="Vendors"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-store "></i></span> </span> Vendors Management</a>
-
-                            </li>
-                            <!-- vendor sublink -->
-                            <ul class="sub-menu vendor" id="vendors">
-                                <li class="sub-menu-item"><a href="{{route('vendors')}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor
-                                        Management</a></li>
-                                <li class="sub-menu-item"><a href="{{route('create-vendors')}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Onboard
-                                        Vendor</a></li>
-                                <li class="sub-menu-item"> <a href="{{route('lead-vendors')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
-                                            aria-hidden="true"></i>
-                                        Leads</a></li>
-                                {{-- <li class="sub-menu-item"> <a href="{{route('pending-vendors')}}"> <i--}}
-                                {{-- class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Pending--}}
-                                {{-- Vendors</a></li>--}}
-                                <li class="sub-menu-item"> <a href="{{route('verified-vendors')}}"><i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Verified
-                                        Vendors</a></li>
-                            </ul>
-                        @endif
-                        
+                        </li>
+                        <!-- vendor sublink -->
+                        <ul class="sub-menu vendor" id="vendors">
+                            <li class="sub-menu-item"><a href="{{route('vendors')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor
+                                    Management</a></li>
+                            <li class="sub-menu-item"><a href="{{route('create-vendors')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Onboard
+                                    Vendor</a></li>
+                            <li class="sub-menu-item"> <a href="{{route('lead-vendors')}}"><i class="fa fa-dot-circle-o icons-space mr-2"
+                                        aria-hidden="true"></i>
+                                    Leads</a></li>
+{{--                            <li class="sub-menu-item"> <a href="{{route('pending-vendors')}}"> <i--}}
+{{--                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Pending--}}
+{{--                                    Vendors</a></li>--}}
+                            <li class="sub-menu-item"> <a href="{{route('verified-vendors')}}"><i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Verified
+                                    Vendors</a></li>
+                        </ul>
+                            @endif
                         <li class="menu-item" data-toggle="" href="#Customer" role="button" aria-expanded="false"
                             aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user"></i></span> </span>Customer Management</a>
                         </li>
@@ -71,100 +69,102 @@
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Customer
                                     Details</a></li> -->
                         </ul>
-
-                        @if(\App\Helper::is('admin'))
-                            <li class="menu-item" data-toggle="" href="#Categories" role="button" aria-expanded="false"
-                                aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories</a>
+                            @if(\App\Helper::is('admin'))
+                        <li class="menu-item" data-toggle="" href="#Categories" role="button" aria-expanded="false"
+                            aria-controls="Categories"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-view-thumb"></i></span> </span> Categories</a>
+                        </li>
+                        <!-- sublinks -->
+                        <ul class="sub-menu" id="Categories">
+                            <li class="sub-menu-item"><a href="{{route('categories')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Categories</a>
                             </li>
-                            <!-- sublinks -->
-                            <ul class="sub-menu" id="Categories">
-                                <li class="sub-menu-item"><a href="{{route('categories')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Categories</a>
-                                </li>
-                                <li class="sub-menu-item"><a href="{{route('subcateories')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Subcategory
-                                        </a></li>
-                                <li class="sub-menu-item"> <a href="{{route('inventories')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Inventory</a>
-                                </li>
-                            </ul>
-
-                        @endif
-
-                        @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
-                            <li class="menu-item" data-toggle="" href="#Coupons" role="button" aria-expanded="false"
-                                aria-controls="Coupons"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-ticket"></i></span> </span></i> Coupons & Offers</a>
+                            <li class="sub-menu-item"><a href="{{route('subcateories')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Subcategory
+                                    </a></li>
+                            <li class="sub-menu-item"> <a href="{{route('inventories')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Inventory</a>
                             </li>
-                            <!-- sublinks -->
-                            <ul class="sub-menu" id="Coupons">
-                                <li class="sub-menu-item"><a href="{{route('coupons')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
-                                            aria-hidden="true"></i>Coupons</a></li>
-                                <li class="sub-menu-item"><a href="{{route('create-coupons')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create
-                                        Coupons</a></li>
-                                <!-- <li class="sub-menu-item"> <a href="edit-coupons.html"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Coupons</a>
-                                </li> -->
-                            </ul>
-                        @endif
+                        </ul>
 
-                        @if(\App\Helper::is('admin'))
-                            <li class="menu-item" data-toggle="" href="#Zone" role="button" aria-expanded="false"
-                                aria-controls="Zone"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-location "></i></span> </span> Zone Managment</a>
+                            @endif
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                        <li class="menu-item" data-toggle="" href="#Coupons" role="button" aria-expanded="false"
+                            aria-controls="Coupons"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-ticket"></i></span> </span></i> Coupons & Offers</a>
+                        </li>
+                        <!-- sublinks -->
+                        <ul class="sub-menu" id="Coupons">
+                            <li class="sub-menu-item"><a href="{{route('coupons')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
+                                        aria-hidden="true"></i>Coupons</a></li>
+                            <li class="sub-menu-item"><a href="{{route('create-coupons')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create
+                                    Coupons</a></li>
+                            <!-- <li class="sub-menu-item"> <a href="edit-coupons.html"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Coupons</a>
+                            </li> -->
+                        </ul>
+                            @endif
+
+                            @if(\App\Helper::is('admin'))
+                        <li class="menu-item" data-toggle="" href="#Zone" role="button" aria-expanded="false"
+                            aria-controls="Zone"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-location "></i></span> </span> Zone Managment</a>
+                        </li>
+                        <!-- sublinks -->
+                        <ul class="sub-menu" id="Zone">
+                            <li class="sub-menu-item"><a href="{{route('zones')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
+                                        aria-hidden="true"></i>Zones</a></li>
+                            <li class="sub-menu-item"><a href="{{route('create-zones')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create Zones</a>
                             </li>
-                            <!-- sublinks -->
-                            <ul class="sub-menu" id="Zone">
-                                <li class="sub-menu-item"><a href="{{route('zones')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
-                                            aria-hidden="true"></i>Zones</a></li>
-                                <li class="sub-menu-item"><a href="{{route('create-zones')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create Zones</a>
-                                </li>
-                                <!-- <li class="sub-menu-item"> <a href="edit-zones.html"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Zone</a></li> -->
-                            </ul>
-                        @endif
+                            <!-- <li class="sub-menu-item"> <a href="edit-zones.html"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Zone</a></li> -->
+                        </ul>
+                            @endif
 
-                        @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
                             <li class="menu-item" data-toggle="" href="#Sliders" role="button" aria-expanded="false"
                             aria-controls="Sliders"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-photo-group"></i></span> </span> Sliders & Banners</a>
+                        </li>
+
+                        <!-- sublinks -->
+                        <ul class="sub-menu" id="Sliders">
+                            <li class="sub-menu-item"><a href="{{route('slider')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sliders &
+                                    Banners</a></li>
+                            <li class="sub-menu-item"> <a href="{{route('testimonials')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Testimonials</a>
                             </li>
 
-                            <!-- sublinks -->
-                            <ul class="sub-menu" id="Sliders">
-                                <li class="sub-menu-item"><a href="{{route('slider')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sliders &
-                                        Banners</a></li>
-                                <li class="sub-menu-item"> <a href="{{route('testimonials')}}"> <i
-                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Testimonials</a>
-                                </li>
-
-                            </ul>
-                            <li class="menu-item" data-toggle="" href="#Notification" role="button" aria-expanded="false"
-                                        aria-controls="Notifications"><a class="" href="{{route('push-notification')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-bell"></i></span> </span>Notifications</a>
-                            </li>
-                        @endif
+                        </ul>
+                        <li class="menu-item" data-toggle="" href="#Notification" role="button" aria-expanded="false"
+                                    aria-controls="Notifications"><a class="" href="{{route('push-notification')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-bell"></i></span> </span>Notifications</a>
+                        </li>
+                            @endif
 
                         @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin') || \App\Helper::is('marketing'))
 
                             <li class="menu-item" data-toggle="" href="#reports" role="button" aria-expanded="false"
-                                    aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-bar"></i></span> </span>Reports</a>
+                                aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-graph-bar"></i></span> </span>Reports</a>
                             </li>
                             <ul class="sub-menu" id="reports">
                                 <li class="sub-menu-item"><a href="{{route('report.summary')}}"> <i
-                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Summary</a>
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Summary</a>
                                 </li>
                                 <li class="sub-menu-item"> <a href="{{route('report.sales')}}"> <i
-                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sales</a></li>
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sales</a></li>
                             </ul>
 
-                            <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
-                                    aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
-                            </li>
+                        <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
+                            aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
+                        </li>
 
                         @endif
 
                             <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
-                                aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
+                            aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
+                        </li>
+                        <ul class="sub-menu" id="ticket">
+                            <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
+                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                             </li>
                             <ul class="sub-menu" id="ticket">
                                 <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i

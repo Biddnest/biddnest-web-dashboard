@@ -189,8 +189,14 @@ class UserController extends Controller
 
         Session::save();
 
+        if(!$user->hasWallet('reward-points'))
+            $wallet = $user->createWallet([
+                'name' => 'Reward Points',
+                'slug' => 'reward-points',
+            ]);
+
         return Helper::response(true, "User has been signed up",[
-            "user"=>User::select(self::$publicData)->findOrFail($user->id)
+            "user"=> User::select(self::$publicData)->findOrFail($user->id)
         ]);
     }
 
@@ -456,4 +462,16 @@ class UserController extends Controller
 
         return Helper::response(true, "Links have been send to $phone", ['sms'=>$sms_body]);
     }
+
+    public static function addRewardPoints($user_id, $amount): bool{
+        $user = User::find($user_id);
+
+        if($user) {
+            $user->deposit($amount);
+            return true;
+        }
+        else
+            return false;
+    }
+
 }

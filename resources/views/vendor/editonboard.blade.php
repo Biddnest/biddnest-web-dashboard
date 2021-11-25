@@ -112,6 +112,8 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6">
+                                    </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -156,6 +158,13 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Register/License Number of Organisation</label>
+                                            <input type="text" id="fullname" value="{{json_decode($organization->meta, true)['register_no'] ?? ''}}" placeholder="L21091KA2019OPC141331" class="form-control" name="organization[regi_no]" maxlength="21" minlength="21" required>
+                                            <span class="error-message">Please enter valid Register/License Number</span>
+                                        </div>
+                                    </div>
 
                                     <div class="col-lg-12">
                                         <div class="form-input">
@@ -301,14 +310,6 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Commission</label>
-                                            <input type="text" id="commission" value="{{$organization->commission}}" placeholder="Commission" class="form-control" name="commission" required>
-                                            <span class="error-message">Please enter valid Commission</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-input">
                                             <label class="full-name">Base distance in km</label>
                                             <span class="">
                                             <input type="text" name="basedist" placeholder="Distance" value="{{$organization->base_distance}}"
@@ -326,6 +327,14 @@
                                                    class="form-control number">
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Commission</label>
+                                            <input type="text" id="commission" value="{{$organization->commission}}" placeholder="Commission" class="form-control" name="commission" required>
+                                            <span class="error-message">Please enter valid Commission</span>
                                         </div>
                                     </div>
 

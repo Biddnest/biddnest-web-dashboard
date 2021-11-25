@@ -31,12 +31,12 @@
                         <h3 class="f-18 mb-0 mt-0">
                             <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="genaeral" data-toggle="tab"
-                                       href="#genaeral" role="tab" aria-controls="home"
-                                       aria-selected="true">Genaeral Key Settings</a>
+                                    <a class="nav-link p-15" id="genaeral" href="{{route('api-settings')}}">Genaeral Key Settings</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15" id="api" href="{{route('api-settings-api')}}">API Key Settings</a>
+                                    <a class="nav-link active p-15" id="api" data-toggle="tab"
+                                       href="#genaeral" role="tab" aria-controls="home"
+                                       aria-selected="true">API Key Settings</a>
                                 </li>
                                 
                             </ul>
@@ -45,7 +45,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active margin-topneg-15" id="genaeral" role="tabpanel"
                              aria-labelledby="new-order-tab">
-                            <form action="{{route('api_settings_general')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('api-settings')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
+                            <form action="{{route('api_settings_update')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('api-settings')}}" data-alert="tiny" class="form-new-order pt-4 mt-3" id="newForm" data-parsley-validate >
                                 <table class="table text-center p-0 theme-text mb-0 primary-table">
                                     <thead class="secondg-bg p-0">
                                         <tr>

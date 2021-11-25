@@ -94,7 +94,7 @@
             <div class="form-input">
               <label class="coupon-id">Discount Type</label>
               <div>
-              <select class="form-control br-5" name="discount_type" required>
+              <select class="form-control br-5 discount_type" name="discount_type" required>
                 <option value="">--Select--</option>
                   @foreach(\App\Enums\CouponEnums::$DISCOUNT_TYPE as $key=>$type)
                     <option value="{{$type}}" @if($coupons && ($coupons->discount_type == $type)) selected @endif>{{ucfirst(trans($key))}}</option>
@@ -136,18 +136,18 @@
             </div>
           </div>
 
-          <div class="col-sm-6">
+          <div class="col-sm-6 max-disc-amt @if($coupons && $coupons->discount_type == \App\Enums\CouponEnums::$DISCOUNT_TYPE['fixed']) hidden @endif">
             <div class="form-input">
               <label class="max-discount">Max Discount Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" value="@if($coupons){{$coupons->max_discount_amount}}@endif" class="form-control">
+                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" value="@if($coupons){{$coupons->max_discount_amount}}@endif" class="form-control max-disc-input">
                 <span class="error-message">Please enter  valid </span>
               </span>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-input">
-              <label class="min-order">Mini Order Amount</label>
+              <label class="min-order">Minimum Order Amount</label>
               <span class="">
                 <input type="number"  placeholder="5000" id="min-order" value="@if($coupons){{$coupons->min_order_amount}}@endif" name="min_order_amount" class="form-control" required>
                <span class="error-message">Please enter  valid </span>

@@ -51,7 +51,7 @@ Logger.useDefaults();
 
 // const helper = import("./helpers.js");
 import { getLocationPermission, redirectTo, redirectHard, tinySuccessAlert, inlineAlert, megaAlert, tinyAlert, revertFormAnim, triggerFormAnim } from "./helpers.js";
-import { initRangeSlider, initRevenueChart, initBarChart, initDateBookPicker } from "./initFunctions.js";
+import { initRangeSlider, initRevenueChart, initBarChart, initDateBookPicker, initSlick } from "./initFunctions.js";
 // require("./helpers");
 const env = "development";
 
@@ -659,6 +659,7 @@ $("body").on('click', ".sidebar-toggle_slider td:not(:first-child, :last-child)"
 
         $(".side-bar-pop-up").html(response);
     });
+    initSlick();
     initRevenueChart(
         Logger.info('graph')
     );
@@ -1326,13 +1327,13 @@ dp.on('changeDate', function(e) {
         tinyAlert('Please note', 'Can only select upto 5 dates', 'info')
     }
 
-   /* if (e.dates.length > 1) {
-        $('.share').val(true);
-        $('.share_check').attr("checked", "checked");
-    } else {
-        $('.share').val(false);
-        $('.share_check').removeAttr("checked", "checked");
-    }*/
+    /* if (e.dates.length > 1) {
+         $('.share').val(true);
+         $('.share_check').attr("checked", "checked");
+     } else {
+         $('.share').val(false);
+         $('.share_check').removeAttr("checked", "checked");
+     }*/
     selectedDates.sort(function(a, b) {
         return new Date(a.date) - new Date(b.date);
     });
@@ -1789,7 +1790,7 @@ $("body").on('click', ".add-item", function(event) {
     item = Object.assign({}, item);
 
     let extra_item_count = 0;
-    $(".custom-item").each(function (){
+    $(".custom-item").each(function() {
         console.log($(this).find(".quantity input").val());
         extra_item_count += parseInt($(this).find(".quantity input").val());
     });
@@ -1850,7 +1851,7 @@ $("body").on('click', ".add-search-item", function(event) {
     item = Object.assign({}, item);
 
     let extra_item_count = 0;
-    $(".custom-item").each(function (){
+    $(".custom-item").each(function() {
         console.log($(this).find(".quantity input").val());
         extra_item_count += parseInt($(this).find(".quantity input").val());
     });
@@ -2134,4 +2135,16 @@ $("body").on("click", ".side-bar-pop-up a i.dripicons-pencil", function() {
 $("body").on("input change focusout", "form input", function() {
     Logger.info("Validating Input");
     $(this).parsley().validate();
+});
+
+$("body").on('change', ".discount_type", function(event) {
+    Logger.info($(this).val());
+    if ($(this).val() == 0) {
+        $(this).closest("form").find(".max-disc-amt").addClass("hidden");
+        $(this).closest("form").find(".max-disc-input").removeAttr("required");
+
+    } else {
+        $(this).closest("form").find(".max-disc-amt").removeClass("hidden");
+        $(this).closest("form").find(".max-disc-input").attr("required", "required");
+    }
 });

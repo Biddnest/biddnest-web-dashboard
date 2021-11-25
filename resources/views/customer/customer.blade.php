@@ -112,6 +112,7 @@
                                                 <th scope="col">Customer Name</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Email</th>
+                                                <th scope="col">Joining Date</th>
                                                 <th scope="col" style="text-align: center !important;width: 15%;">Status</th>
                                                 <th scope="col" style="text-align: center !important;">Operations</th>
                             </tr>
@@ -122,6 +123,7 @@
                                                 <td scope="row">{{$user->fname}} {{$user->lname}}</td>
                                                 <td>{{$user->phone}}</td>
                                                 <td>{{$user->email}}</td>
+                                                <td>{{date('d-m-Y', strtotime($user->created_at))}}</td>
                                                 <td class="" style="text-align: center;">
                                                     @if($user->status == 0)
                                                         <div class="status-badge red-bg text-center">Pending Signup</div>

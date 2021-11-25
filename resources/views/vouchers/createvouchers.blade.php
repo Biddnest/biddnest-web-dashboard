@@ -170,11 +170,11 @@
                     <tbody class="mtop-20 f-13 item-subservice" id="add-inventory-wrapper">
                     <tr class="inventory-snip">
                         <td scope="row" class="text-left">
-                            <input type="text" name="codes[code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
+                            <input type="text" name="codes[][code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
                         </td>
 
                         <td class="">
-                            <input type="text" class="form-control br-5 date dateselect" value="" name="codes[expires_at]" required="required" placeholder="15/02/2021"/>
+                            <input type="text" class="form-control br-5 date dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
                         </td>
                         <td>
                             <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>

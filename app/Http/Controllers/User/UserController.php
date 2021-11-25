@@ -10,8 +10,10 @@ use App\Enums\SliderEnum;
 use App\Enums\UserEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ReferralController;
 use App\Models\Slider;
 use App\Models\User;
+use App\Models\ReferralHistory;
 use App\Sms;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
@@ -180,20 +182,40 @@ class UserController extends Controller
             'gender'=>$gender,
             'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
             'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
+            "referral_code"=>$ref_code,
             "status"=>1
         ]);
 
         $user1 = User::where("id",$id)->where([ 'deleted'=>0])->first();
         Session::put(["account" => ['id' => $user1->id, 'fname'=>$user1->fname, 'lname'=>$user1->lname,'email'=>$user1->email, 'phone'=>$user1->phone]]);
         Session::put('sessionFor', "user");
-
         Session::save();
 
-        if(!$user->hasWallet('reward-points'))
-            $wallet = $user->createWallet([
-                'name' => 'Reward Points',
-                'slug' => 'reward-points',
-            ]);
+        /* Creating wallet for user */
+
+
+        dispatch(function() use($user, $refby_code, $id){
+            if(!$user->hasWallet('reward-points'))
+                $wallet = $user->createWallet([
+                    'name' => 'Reward Points',
+                    'slug' => 'reward-points',
+                ]);
+
+            if($refby_code && $refby_code != ""){
+
+                $referrer = User::where("referral_code",$refby_code)->get();
+                $referal = new ReferralHistory();
+                $referal->user_id = $id;
+                $referal->referred_by_id = $referrer->id;
+                $referal->zone_id = $referrer->zone_id;
+                $referrer->save();
+
+            }
+
+            ReferralController::checkTrigger(ReferralEnums::$TRIGGER['signup']);
+
+        })->afterResponse();
+
 
         return Helper::response(true, "User has been signed up",[
             "user"=> User::select(self::$publicData)->findOrFail($user->id)

@@ -12,5 +12,6 @@ class ReferralEnums
     public static $STATUS = ["active" => 0, "inactive" => 1, "out_of_stock"=>2];
     public static $TRIGGER = ["signup" => 0, "payment_completion"=>1, "booking_completion"=>2];
     public static $TYPE = ["points" => 0,"voucher"=>1];
+    public static $ROLES = ["referrer" => 0,"referee"=>1];
 
 }

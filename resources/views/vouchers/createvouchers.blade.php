@@ -33,11 +33,33 @@
                 </h3>
             </div>
 
-            <form action="@if($vouchers){{route('coupon_edit')}}@else{{route('coupon_add')}}@endif" method="@if(isset($vouchers)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('coupons')}}" data-alert="tiny" class="create-coupons" id="myForm" data-parsley-validate>
+            <form action="@if($vouchers){{route('api.voucher.edit')}}@else{{route('api.voucher.add')}}@endif" method="@if(isset($vouchers)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('vouchers')}}" data-alert="tiny" class="create-coupons" id="myForm" data-parsley-validate>
     <div class="d-flex  row  p-20" >
         @if($vouchers)
             <input type="hidden" name="id" value="{{$vouchers->id}}">
         @endif
+        <div class="col-sm-6">
+          <div class="form-input">
+            <label class="coupon-name">Voucher Logo</label>
+            <div class="upload-section p-20 pt-0" style="padding-left: 0px;">
+              <img class="upload-preview" src="@if(!$vouchers){{asset('static/images/upload-image.svg')}}@else{{$vouchers->image}}@endif" alt=""/>
+                <div class="ml-1">
+                <div class="file-upload">
+                  <input type="hidden" class="base-holder" name="image" value="@if($vouchers){{$vouchers->image}}@endif" required />
+                  <button type="button" class="btn theme-bg white-text my-0" data-action="upload">
+                    UPLOAD IMAGE
+                  </button>
+                  <input type="file" accept=".png,.jpg,.jpeg" @if(!$vouchers) required @endif/>
+                </div>
+                <p>Max File size: 1MB</p>
+              </div>
+            </div>
+         </div>
+        </div>
+        
+        <div class="col-sm-6">
+        </div>
+        
         <div class="col-sm-6">
           <div class="form-input">
             <label class="coupon-name">Voucher Name</label>
@@ -51,7 +73,7 @@
           <div class="form-input">
             <label class="email-label">Title</label>
             <div>
-                <input type="text" id="coupon-name" name="name" placeholder="Amazon Diwali Coupon" value="@if($vouchers){{$vouchers->title}}@endif" class="form-control" required>
+                <input type="text" id="coupon-name" name="title" placeholder="Amazon Diwali Coupon" value="@if($vouchers){{$vouchers->title}}@endif" class="form-control" required>
             </div>
           </div>
         </div>
@@ -76,7 +98,7 @@
             <div class="form-input">
               <label class="coupon-code">Provider</label>
               <span class="">
-               <select class="form-control br-5" name="discount_type" required>
+               <select class="form-control br-5" name="provider" required>
                 <option value="">--Select--</option>
                   @foreach(\App\Enums\VoucherEnums::$PROVIDER as $key=>$value)
                        <option value="{{$value}}" @if($vouchers && ($vouchers->provider == $value)) selected @endif>{{ucfirst(trans($key))}}</option>
@@ -94,7 +116,7 @@
             <div class="form-input">
               <label>Provider Url</label>
               <span class="">
-                <input type="url" name="discount_amount" class="form-control br-5" value="@if($vouchers){{$vouchers->provider_url}}@endif" required="required" placeholder="Discount Amount"/>
+                <input type="url" name="provider_url" class="form-control br-5" value="@if($vouchers){{$vouchers->provider_url}}@endif" required="required" placeholder="Discount Amount"/>
                 <span class="error-message">Please enter  valid</span>
               </span>
            </div>
@@ -106,7 +128,7 @@
             <div class="form-input">
               <label>Max Redemptions</label>
               <span class="">
-                <input type="number" name="discount_amount" class="form-control br-5" value="@if($vouchers){{$vouchers->max_redemptions}}@endif" required="required" placeholder="Discount Amount"/>
+                <input type="number" name="max_redemptions" class="form-control br-5" value="@if($vouchers){{$vouchers->max_redemptions}}@endif" required="required" placeholder="Discount Amount"/>
                 <span class="error-message">Please enter  valid</span>
               </span>
            </div>
@@ -117,7 +139,7 @@
                 <div class="form-input">
                     <label class="coupon-code">Type</label>
                     <span class="">
-               <select class="form-control br-5" name="discount_type" required>
+               <select class="form-control br-5" name="type" required>
                 <option value="">--Select--</option>
                 <option value="{{\App\Enums\VoucherEnums::$TYPE['predefined']}}" selected> Predefined </option>
                  {{-- @foreach(\App\Enums\VoucherEnums::$PROVIDER as $key=>$value)
@@ -146,18 +168,35 @@
                     </tr>
                     </thead>
                     <tbody class="mtop-20 f-13 item-subservice" id="add-inventory-wrapper">
-                    <tr class="inventory-snip">
-                        <td scope="row" class="text-left">
-                            <input type="text" name="codes[code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
-                        </td>
+                      @if($vouchers && $vouchers->codes)
+                        @foreach($vouchers->codes as $code)
+                        <tr class="inventory-snip">
+                            <td scope="row" class="text-left">
+                                <input type="text" name="codes[][code]" class="form-control br-5" value="{{$code->voucher_code}}" required="required" placeholder="ABCD123456DEF"/>
+                            </td>
 
-                        <td class="">
-                            <input type="text" class="form-control br-5 date dateselect" value="" name="codes[expires_on]" required="required" placeholder="15/02/2021"/>
-                        </td>
-                        <td>
-                            <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
-                        </td>
-                    </tr>
+                            <td class="">
+                                <input type="text" class="form-control br-5 date dateselect" value="{{$code->expires_at}}" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
+                            </td>
+                            <td>
+                                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                            </td>
+                        </tr>
+                        @endforeach
+                      @else
+                        <tr class="inventory-snip">
+                            <td scope="row" class="text-left">
+                                <input type="text" name="codes[][code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
+                            </td>
+
+                            <td class="">
+                                <input type="text" class="form-control br-5 date dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
+                            </td>
+                            <td>
+                                <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
+                            </td>
+                        </tr>
+                      @endif
                     </tbody>
                 </table>
             </div>
@@ -205,11 +244,11 @@
     <script type="text/html" id="add-inventory-row">
         <tr class="inventory-snip">
             <td scope="row" class="text-left">
-                <input type="text" name="codes[code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
+                <input type="text" name="codes[][code]" class="form-control br-5" value="" required="required" placeholder="ABCD123456DEF"/>
             </td>
 
             <td class="">
-                <input type="text" class="form-control br-5 singledate dateselect" value="" name="codes[expires_on]" required="required" placeholder="15/02/2021"/>
+                <input type="text" class="form-control br-5 singledate date dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
             </td>
             <td>
                 <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>

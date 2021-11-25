@@ -193,6 +193,11 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/booking/assign-va',[Router::class,'assignVirtualAssistant'])->name("api.va.assign");
 
+
+    Route::post('/voucher/add',[Router::class,'voucherCreate'])->name("api.voucher.add");
+    Route::put('/voucher/edit',[Router::class,'voucherEdit'])->name("api.voucher.edit");
+    Route::delete('/voucher/delete/{id}',[Router::class,'voucherDelete'])->name("api.voucher.delete");
+
     /*vendor web apis start*/
     Route::prefix('vendor')->group(function () {
         Route::prefix('auth')->group(function () {

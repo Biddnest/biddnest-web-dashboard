@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use App\Enums\VoucherEnums;
+use App\Enums\CommonEnums;
 use App\Models\Voucher;
+use App\Helper;
 use App\Models\VoucherCode;
 
 class VoucherController extends Controller
@@ -19,10 +21,10 @@ class VoucherController extends Controller
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));
 
-        $image_name = "service".$name."-".uniqid().".png";
+        $image_name = "voucher".$name."-".uniqid().".png";
 
         $voucher = new Voucher();
-        $voucher->image = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"services");
+        $voucher->image = Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"vouchers");
 
         $voucher->name = $name;
         $voucher->title = $title;
@@ -54,7 +56,7 @@ class VoucherController extends Controller
 
     }
 
-    public static function edit($id, $image, $name, $title, $desc, $provider, $provider_url, $max_redemptions, $type, $codes){
+    public static function edit($id, $image, $name, $title, $desc, $provider, $provider_url, $max_redemptions, $type, $codes, $status){
         $voucher_exists = Voucher::find($id);
 
         if(!$voucher_exists)
@@ -63,10 +65,10 @@ class VoucherController extends Controller
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));
 
-        $image_name = "service".$name."-".uniqid().".png";
+        $image_name = "voucher".$name."-".uniqid().".png";
 
         $voucher = Voucher::where("id",$id)->update([
-            "image" => Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"services"),
+            "image" => Helper::saveFile($imageman->make($image)->resize(256,256)->encode('png', 100),$image_name,"vouchers"),
         "name" => $name,
         "title" => $title,
         "desc" => $desc,
@@ -75,6 +77,7 @@ class VoucherController extends Controller
         "provider_url" => $provider_url != "" ? $provider_url : null,
         "max_redemptions" => $max_redemptions,
         "type" => $type,
+        "status"=>status
         ]);
 
 
@@ -83,7 +86,7 @@ class VoucherController extends Controller
 
             foreach($codes as $code){
                 $vcode = new VoucherCode;
-                $vcode->voucher_id = $voucher->id;
+                $vcode->voucher_id = $id;
                 $vcode->user_id = null;
                 $vcode->voucher_code = $code['code'];
                 $vcode->expires_at = $code['expires_at'];
@@ -105,7 +108,8 @@ class VoucherController extends Controller
         if(!$voucher_exists)
             return Helper::response(false, "Sorry this voucher code does not exists.");
 
-        $delete_voucher = Voucher::where("id",$id)->update("deleted",CommonEnums::$YES);
+        $delete_voucher = Voucher::where("id",$id)->update(["deleted"=>CommonEnums::$YES]);
+
         if($delete_voucher)
             return Helper::response(true,"Voucher has been deleted.");
         else

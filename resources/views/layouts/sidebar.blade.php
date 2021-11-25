@@ -13,7 +13,7 @@
                         </li>
                         @endif
 
-                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin') || \App\Helper::is('virtual_assistant'))
                         <li class="menu-item b-purple" data-toggle="#booking" href="#Booking" role="button"
                             aria-expanded="false" aria-controls="Booking"> <a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-to-do "></i></span> </span> Booking & Orders </a>
                         </li>
@@ -174,6 +174,8 @@
                             aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
                         </li>
 
+                        @endif
+
                             <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
                             aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
                         </li>
@@ -181,45 +183,48 @@
                             <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                             </li>
-                            <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
-                        </ul>
-                            @endif
+                            <ul class="sub-menu" id="ticket">
+                                <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
+                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
+                                </li>
+                                <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
+                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
+                            </ul>
 
-                            @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
-                        <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"
-                            aria-controls="Payout"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-wallet"></i></span> </span> Vendors Payout</a>
-                        </li>
-                        <!-- sublinks -->
-                        <ul class="sub-menu" id="Payout">
-                            <li class="sub-menu-item"><a href="{{route('vendor-payout')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor Payout</a>
+                        @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
+                            <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"
+                                aria-controls="Payout"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-wallet"></i></span> </span> Vendors Payout</a>
                             </li>
-                            <li class="sub-menu-item"><a href="{{route('create-payout')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create Payout</a>
-                            </li>
-                            <!-- <li class="sub-menu-item"> <a href="edit-payout.html"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Payout</a>
-                            </li> -->
-                        </ul>
-                            @endif
+                            <!-- sublinks -->
+                            <ul class="sub-menu" id="Payout">
+                                <li class="sub-menu-item"><a href="{{route('vendor-payout')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Vendor Payout</a>
+                                </li>
+                                <li class="sub-menu-item"><a href="{{route('create-payout')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Create Payout</a>
+                                </li>
+                                <!-- <li class="sub-menu-item"> <a href="edit-payout.html"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit Payout</a>
+                                </li> -->
+                            </ul>
+                        @endif
 
-                            @if(\App\Helper::is('admin'))
-                        <li class="menu-item" data-toggle="" href="#Users" role="button" aria-expanded="false"
-                            aria-controls=" Users"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user-group"></i></span> </span> Users & Roles</a>
-                        </li>
-                        <!-- sublinks -->
-                        <ul class="sub-menu" id="Users">
-                            <li class="sub-menu-item"><a href="{{route('users')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Users Roles</a>
+                        @if(\App\Helper::is('admin'))
+                            <li class="menu-item" data-toggle="" href="#Users" role="button" aria-expanded="false"
+                                aria-controls=" Users"><a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-user-group"></i></span> </span> Users & Roles</a>
                             </li>
-                            <li class="sub-menu-item"><a href="{{route('create-users')}}"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Add New Users</a>
-                            </li>
-                            <!-- <li class="sub-menu-item"> <a href="edit-users.html"> <i
-                                        class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit-users</a>
-                            </li> -->
-                        </ul>
+                            <!-- sublinks -->
+                            <ul class="sub-menu" id="Users">
+                                <li class="sub-menu-item"><a href="{{route('users')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Users Roles</a>
+                                </li>
+                                <li class="sub-menu-item"><a href="{{route('create-users')}}"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Add New Users</a>
+                                </li>
+                                <!-- <li class="sub-menu-item"> <a href="edit-users.html"> <i
+                                            class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Edit-users</a>
+                                </li> -->
+                            </ul>
                         @endif
                     </ul>
                 </div>

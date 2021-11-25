@@ -108,7 +108,8 @@ class VoucherController extends Controller
         if(!$voucher_exists)
             return Helper::response(false, "Sorry this voucher code does not exists.");
 
-        $delete_voucher = Voucher::where("id",$id)->update("deleted",CommonEnums::$YES);
+        $delete_voucher = Voucher::where("id",$id)->update(["deleted"=>CommonEnums::$YES]);
+
         if($delete_voucher)
             return Helper::response(true,"Voucher has been deleted.");
         else

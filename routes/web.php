@@ -121,6 +121,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/customer',[Router::class,'customer_add'])->name("customer_add");
     Route::put('/customer',[Router::class,'customer_edit'])->name("customer_edit");
+    Route::put('/points/add',[Router::class,'addPoints'])->name("admin.add_points");
+    Route::put('/points/reddem',[Router::class,'redeemPoints'])->name("admin.redeem_points");
 
     //zone APIs
     Route::get('/zones',[Router::class,'zones'])->name("zones");

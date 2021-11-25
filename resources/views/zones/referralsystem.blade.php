@@ -26,22 +26,22 @@
                     <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link  p-15" id="new-order-tab" data-toggle="tab"
-                               href="@if(!$zones)#@else{{route("edit-zones", ['id'=>$zones->id])}}@endif" role="tab" aria-controls="home"
+                               href="@if(!$zones)#@else{{route('edit-zones', ['id'=>$zones->id])}}@endif" role="tab" aria-controls="home"
                                aria-selected="true">@if(!$zones) Create @else Edit @endif Zone</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active p-15" id="quotation" href="@if(!$zones)#@else{{route("zone-referral-system", ['id'=>$zones->id])}}@endif"
+                            <a class="nav-link active p-15" id="quotation" href="@if(!$zones)#@else{{route('zone-referral-system', ['id'=>$zones->id])}}@endif"
                             >Referral System</a>
                         </li>
 
                     </ul>
                 </h3>
             </div>
-            <form action="@if(!$zones){{route('zones_add')}}@else{{route('zones_edit')}}@endif" method="@if(!$zones){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('zones')}}" data-alert="tiny"
+            <form action="{{route('zones_save_referal')}}" method="POST" data-next="redirect" data-redirect-type="hard" data-url="{{route('zones')}}" data-alert="tiny"
                   class="form-new-order" id="myForm" data-parsley-validate >
                 <div class="d-flex  row  m-20  p-20" >
                     @if($zones)
-                        <input type="hidden" value="{{$zones->id}}" name="id">
+                        <input type="hidden" value="{{$zones->id}}" name="zone_id">
                     @endif
                         <div class="col-sm-12 p-10  secondg-bg heading">
                             <div>Referrer Settings</div>

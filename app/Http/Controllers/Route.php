@@ -1523,7 +1523,49 @@ class Route extends Controller
 
 
      public function zones_referal(Request $request){
-         
+        $validation = Validator::make($request->all(),[
+            'id'=> 'required|integer',
+            'referrer.reward_type'=>'required|integer',
+            'referrer.reward_points'=>'required|integer',
+            'referrer.voucher_id'=>'required|integer',
+            'referrer.trigger_on'=>'required|integer',
+            'referee.reward_type'=>'required|integer',
+            'referee.voucher_id'=>'required|integer',
+            'referee.trigger_on'=>'required|integer'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return ReferralController::update($request);
+     }
+
+     public function redeemPoints(Request $request){
+        $validation = Validator::make($request->all(),[
+            'user_id'=> 'required|integer',
+            'points'=>'required|integer',
+            'voucher_id'=>'required|integer',
+            'comments'=>'nullable|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return RewardPointController::redeem($request->user_id, $request->points, $request->voucher_id, $request->comments);
+     }
+
+
+     public function addPoints(Request $request){
+        $validation = Validator::make($request->all(),[
+            'user_id'=> 'required|integer',
+            'points'=>'required|integer',
+            'comments'=>'nullable|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return RewardPointController::deposit($request->user_id, $request->points, $request->comments);
      }
 
 }

@@ -56,10 +56,10 @@
             </div>
          </div>
         </div>
-        
+
         <div class="col-sm-6">
         </div>
-        
+
         <div class="col-sm-6">
           <div class="form-input">
             <label class="coupon-name">Voucher Name</label>
@@ -172,11 +172,11 @@
                         @foreach($vouchers->codes as $code)
                         <tr class="inventory-snip">
                             <td scope="row" class="text-left">
-                                <input type="text" name="codes[][code]" class="form-control br-5" value="{{$code->voucher_code}}" required="required" placeholder="ABCD123456DEF"/>
+                                <input type="text" name="codes[][code]" class="form-control br-5" value="{{$code->voucher_code}}" required="required" placeholder="ABCD123456DEF" />
                             </td>
 
                             <td class="">
-                                <input type="text" class="form-control br-5 date dateselect" value="{{$code->expires_at}}" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
+                                <input type="text" class="form-control br-5 singledate dateselect" value="{{$code->expires_at}}" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
                             </td>
                             <td>
                                 <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>
@@ -190,7 +190,7 @@
                             </td>
 
                             <td class="">
-                                <input type="text" class="form-control br-5 date dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
+                                <input type="text" class="form-control br-5 singledate dateselect" value="" name="codes[][expires_at]" required="required" placeholder="15/02/2021"/>
                             </td>
                             <td>
                                 <span class="closer" data-parent=".inventory-snip"><i class="fa fa-trash p-1 cursor-pointer" aria-hidden="true"></i></span>

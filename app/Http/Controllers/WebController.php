@@ -105,17 +105,19 @@ class WebController extends Controller
     //index.php
     public function dashboard()
     {
+
+//        return "hai";
         if(Session::get('active_zone'))
             $zone = [Session::get('active_zone')];
         else
             $zone = Session::get('admin_zones');
 
         $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone);
-        
+
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $count_orders->where('virtual_assistant_id', Session::get('account')['id']);
 
-        $count_orders->count();
+
 
         $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
@@ -123,11 +125,11 @@ class WebController extends Controller
         $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
 
         $count_live_orders=Booking::where(['deleted'=>CommonEnums::$NO])->whereNotIn('status', [BookingEnums::$STATUS['enquiry'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->whereIn("zone_id",$zone);
-        
+
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $count_live_orders->where('virtual_assistant_id', Session::get('account')['id']);
 
-        $count_live_orders->count();
+
 
         $dataset = [];
         $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
@@ -157,11 +159,13 @@ class WebController extends Controller
             $last_week_sale[] = $week_booking->sum("final_quote");
         }
         $booking = Booking::where(['deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->orderBy("updated_at","DESC")->limit(3)->get();
-        return view('index', ['count_orders'=>$count_orders,
+
+
+        return view('index', ['count_orders'=>$count_orders->count(),
             'count_vendors'=>$count_vendors,
             'count_users'=>$count_users,
             'count_zones'=>$count_zones,
-            'count_live_orders'=>$count_live_orders,
+            'count_live_orders'=>$count_live_orders->count(),
             'bookings'=>$booking,
             'graph'=>[
                 "revenue"=>[
@@ -189,7 +193,7 @@ class WebController extends Controller
     public function apiSettingsapi()
     {
         $setting =Settings::whereNotIn('key', ["contact_details"])->whereIn('key', ["msg91_key", "google_api_key", "razor_key", "razor_secret", "razor_webhook_secret", "onesignal_user_app_creds", "onesignal_vendor_app_creds", "razorpayx_key", "razorpayx_secret", "msg91_sender_id"])->get();
-       
+
         return view('system_setting.api_setting', ['settings'=>$setting]);
     }
 

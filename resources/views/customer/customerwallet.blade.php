@@ -117,7 +117,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('admin.add_points')}}" data-next="redirect" data-redirect-type="hard"  data-url="{{route('customers')}}" data-alert="mega" method="POST" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('admin.add_points')}}" data-next="refresh" data-redirect-type="hard"  data-url="{{route('customers')}}" data-alert="mega" method="POST" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
                         <div class="d-flex match-height row p-15 quotation-main pb-0" >
                             <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
@@ -161,7 +161,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('admin.redeem_points')}}" data-next="redirect" data-redirect-type="hard"  data-url="{{route('customers')}}" data-alert="mega" method="POST" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('admin.redeem_points')}}" data-next="refresh" data-redirect-type="hard"  data-url="{{route('customers')}}" data-alert="mega" method="POST" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
                         <div class="d-flex match-height row p-15 quotation-main pb-0" >
                             <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
@@ -189,7 +189,7 @@
                                     </select>
                                 </div>
                                 <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                    <input type="text" class="form-control" value="0" name="comments" min="1" required placeholder="Eg: Against Amazon Voucher" data-parsley-type="number">
+                                    <input type="text" class="form-control" value="" name="comments" min="1" placeholder="Optional">
                                 </div>
                             </div>
                         </div>

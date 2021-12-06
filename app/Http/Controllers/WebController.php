@@ -58,6 +58,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Models\ZoneReferralReward;
+use App\Enums\ReferralEnums;
 
 class WebController extends Controller
 {
@@ -767,6 +769,17 @@ class WebController extends Controller
             ]);
     }
 
+    public function customerVouchers(Request $request)
+    {
+        $user = User::where("id", $request->id)->with(["vouchers"=>function($query){
+                $query->with("meta");
+            }])->first();
+//        return $user->vouchers[0];
+        return view('customer.customervouchers', [
+            "users"=>$user
+            ]);
+    }
+
     public function sidebar_customer(Request $request)
     {
         $user =User::where("id", $request->id)->with(['bookings'=>function($query){
@@ -1123,7 +1136,7 @@ class WebController extends Controller
         }
 
 
-        //        $coupons->with('zones')->orderBy('id','DESC');
+                $coupons->with('created_by')->orderBy('id','DESC');
 
         return view('coupons.coupons',["coupons"=>$coupons->paginate(CommonEnums::$PAGE_LENGTH), "coupons_active"=>$coupons_active->paginate(CommonEnums::$PAGE_LENGTH), "coupons_inactive"=>$coupons_inactive->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
@@ -1207,10 +1220,19 @@ class WebController extends Controller
 
     public function zoneReferralSystem(Request $request)
     {
+
         $zone = Zone::where('id',$request->id)->first();
+        /*return [
+            'zones'=>$zone,
+            "vouchers"=>Voucher::where("status",VoucherEnums::$STATUS['active'])->get(),
+            "referrer"=>ZoneReferralReward::where("referral_role",ReferralEnums::$ROLE['referrer'])->where("zone_id",$zone->id)->first(),
+            "referee"=>ZoneReferralReward::where("referral_role",ReferralEnums::$ROLE['referee'])->where("zone_id",$zone->id)->first()
+        ];*/
         return view('zones.referralsystem', [
             'zones'=>$zone,
-            "vouchers"=>Voucher::where("status",VoucherEnums::$STATUS['active'])->get()
+            "vouchers"=>Voucher::where("status",VoucherEnums::$STATUS['active'])->get(),
+            "referrer"=>ZoneReferralReward::where("referral_role",ReferralEnums::$ROLE['referrer'])->where("zone_id",$zone->id)->first(),
+            "referee"=>ZoneReferralReward::where("referral_role",ReferralEnums::$ROLE['referee'])->where("zone_id",$zone->id)->first()
             ]);
     }
 

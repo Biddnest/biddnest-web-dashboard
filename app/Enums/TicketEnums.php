@@ -12,7 +12,7 @@ use Fabito\AvatarGenerator\Avatar;
 
 class TicketEnums
 {
-    public static $TYPE = ["complaint"=>0, "service_request"=>1, "order_cancellation"=>2, "order_reschedule"=>3, "call_back"=>4, "new_branch"=>5, "price_update"=>6];
+    public static $TYPE = ["complaint"=>0, "service_request"=>1, "order_cancellation"=>2, "order_reschedule"=>3, "call_back"=>4, "new_branch"=>5, "price_update"=>6, "reward_point_redemption"=>7];
 
     public static $STATUS = ["open"=>0, "rejected"=>1, "resolved"=>2, "closed"=>3];
     /*
@@ -23,6 +23,8 @@ class TicketEnums
     public static $TEMPLATES = ["order_reschedule"=>["title_template"=>"Request for order reschedule {{booking.id}}{{user.name}}", "body_template"=>"I want like to reshedule my current order"],
                                 "order_cancellation"=>["title_template"=>"Request for order cancel {{booking.id}}{{user.name}}", "body_template"=>"I want like to cancel my current order"],
                                 "call_back"=>["title_template"=>"Request for call back", "body_template"=>"I would like to talk to Executive"],
-                                "new_branch"=>["title_template"=>"Request for Branch Aproval ", "body_template"=>"I have Added new Branch"],
-                                "price_update"=>["title_template"=>"Request for Inventory Price Aproval", "body_template"=>"I have updated/added new price for Inventory Items"]];
+                                "new_branch"=>["title_template"=>"Request for Branch Approval ", "body_template"=>"I have Added new Branch"],
+                                "price_update"=>["title_template"=>"Request for Inventory Price Approval", "body_template"=>"I have updated/added new price for Inventory Items"],
+        "reward_point_redemption"=>["title_template"=>"Request for Reward Redemption", "body_template"=>"I would like to redeem my reward points."]
+    ];
 }

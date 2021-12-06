@@ -140,7 +140,7 @@
             <div class="form-input">
               <label class="max-discount">Max Discount Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" value="@if($coupons){{$coupons->max_discount_amount}}@endif" class="form-control max-disc-input">
+                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" value="@if($coupons){{$coupons->max_discount_amount}}@else0@endif" class="form-control max-disc-input">
                 <span class="error-message">Please enter  valid </span>
               </span>
             </div>
@@ -149,7 +149,7 @@
             <div class="form-input">
               <label class="min-order">Minimum Order Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" id="min-order" value="@if($coupons){{$coupons->min_order_amount}}@endif" name="min_order_amount" class="form-control" required>
+                <input type="number"  placeholder="5000" id="min-order" value="@if($coupons){{$coupons->min_order_amount}}@else0@endif" name="min_order_amount" class="form-control" required>
                <span class="error-message">Please enter  valid </span>
               </span>
             </div>

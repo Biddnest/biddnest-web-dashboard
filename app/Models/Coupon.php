@@ -29,4 +29,8 @@ class Coupon extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function created_by(){
+        return $this->belongsTo(Admin::class, "created_by","id");
+    }
 }

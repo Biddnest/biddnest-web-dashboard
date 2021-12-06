@@ -121,8 +121,8 @@ Route::prefix('web/api')->group(function () {
 
     Route::post('/customer',[Router::class,'customer_add'])->name("customer_add");
     Route::put('/customer',[Router::class,'customer_edit'])->name("customer_edit");
-    Route::put('/points/add',[Router::class,'addPoints'])->name("admin.add_points");
-    Route::put('/points/reddem',[Router::class,'redeemPoints'])->name("admin.redeem_points");
+    Route::post('/points/add',[Router::class,'addPoints'])->name("admin.add_points");
+    Route::post('/points/reddem',[Router::class,'redeemPoints'])->name("admin.redeem_points");
 
     //zone APIs
     Route::get('/zones',[Router::class,'zones'])->name("zones");
@@ -316,6 +316,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/create',[WebController::class,'createCustomers'])->name("create-customers");
             Route::get('/{id}/edit',[WebController::class,'createCustomers'])->name("edit-customers");
             Route::get('/{id}/reward-points',[WebController::class,'customerRewardPoints'])->name("rewards-customers");
+            Route::get('/{id}/vouchers',[WebController::class,'customerVouchers'])->name("vouchers-customers");
         });
 
         Route::prefix('vendors')->group(function () {

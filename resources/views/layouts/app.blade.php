@@ -9,6 +9,7 @@
             @include('layouts.sidebar')
             <div class="content-wrapper">
                 <!-- top_nav_bar -->
+
                 <div class="h-auto">
                     <nav class="navbar navbar-light theme-bg h-70  d-felx felx-row justify-content-between navigation-top header-navigation header">
                         <form class="col-6 p-0 margin-topneg-10">

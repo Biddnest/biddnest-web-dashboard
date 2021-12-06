@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Helper;
 use Illuminate\Http\Request;
 
 class RewardPointController extends Controller
@@ -31,14 +32,20 @@ class RewardPointController extends Controller
     }
 
     public function redeem($user_id, $points, $voucher_id, $comments = null){
-        $withdraw = self::withdraw($user_id, $points, $comments, true);
+        $comments = $comments && $comments != "" ? $comments : null;
+        $withdraw = self::withdraw($user_id, $points, $comments ?: "Redemption again voucher.", true);
 
         if($withdraw) {
-             $assign_coupon = VoucherController::assignToUser($voucher_id, $user_id);
-            return Helper::response(true, "Voucher has been assigned to this user.");
+             $assign_coupon = VoucherController::assignToUser($voucher_id, $user_id, true);
+            if($assign_coupon)
+             return Helper::response(true, "Voucher has been assigned to this user.");
+            else {
+                $deposit = self::deposit($user_id, $points, $comments ?: "Refund against failed voucher assignation.", true);
+                return Helper::response(false, "No more voucher codes are available to use. Couldn't assign voucher to user.");
+            }
         }
         else
-            return Helper::response(false, "There are no enough points in the users account to make this transaction.");
+            return Helper::response(false, "There are not enough points in the users account to make this transaction.");
     }
 
 }

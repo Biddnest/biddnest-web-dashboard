@@ -52,7 +52,7 @@
                             <select class="form-control" name="referrer[reward_type]">
                                 <option value="">--Choose--</option>
                                 @foreach(\App\Enums\ReferralEnums::$TYPE as $key=>$value)
-                                    <option value="{{$value}}"> {{ucwords($key)}} </option>
+                                    <option value="{{$value}}" @if($referrer && $referrer->reward_type == $value) selected @endif> {{ucwords($key)}} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -60,7 +60,7 @@
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="logitude">Points to be rewarded</label>
-                            <input type="number" placeholder="Enter points" id="source-lng" name="referrer[reward_points]" value="0" class="form-control" required min="1">
+                            <input type="number" placeholder="Enter points" id="source-lng" name="referrer[reward_points]" value="{{$referrer ? $referrer->reward_points : 0}}" class="form-control" required min="1">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -69,7 +69,7 @@
                             <select class="form-control" name="referrer[voucher_id]">
                                 <option value="">--Choose--</option>
                                 @foreach($vouchers as $voucher)
-                                    <option value="{{$voucher->id}}"> {{$voucher->name}} </option>
+                                    <option value="{{$voucher->id}}" @if($referrer && $referrer->voucher_id == $voucher->id) checked @endif> {{$voucher->name}} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -80,7 +80,7 @@
                             <select class="form-control" name="referrer[trigger_on]">
                                 <option value="">--Choose--</option>
                                 @foreach(\App\Enums\ReferralEnums::$TRIGGER as $key=>$value)
-                                    <option value="{{$value}}"> {{ucwords(str_replace("_"," ",$key))}} </option>
+                                    <option value="{{$value}}" @if($referrer && $referrer->trigger_on == $value) selected @endif> {{ucwords(str_replace("_"," ",$key))}} </option>
                                 @endforeach
                             </select>
                     </div>
@@ -96,7 +96,7 @@
                             <select class="form-control" name="referee[reward_type]">
                                 <option value="">--Choose--</option>
                                 @foreach(\App\Enums\ReferralEnums::$TYPE as $key=>$value)
-                                    <option value="{{$value}}"> {{ucwords($key)}} </option>
+                                    <option value="{{$value}}" @if($referee && $referee->reward_type == $value) selected @endif> {{ucwords($key)}} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -104,7 +104,7 @@
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="logitude">Points to be rewarded</label>
-                            <input type="number" placeholder="Enter points" id="source-lng" name="referee[reward_points]" value="0" class="form-control" required min="1">
+                            <input type="number" placeholder="Enter points" id="source-lng" name="referee[reward_points]" value="{{$referrer ? $referrer->reward_points : 0}}" class="form-control" required min="1">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -113,7 +113,7 @@
                             <select class="form-control" name="referee[voucher_id]">
                                 <option value="">--Choose--</option>
                                 @foreach($vouchers as $voucher)
-                                    <option value="{{$voucher->id}}"> {{$voucher->name}} </option>
+                                    <option value="{{$voucher->id}}" @if($referee && $referee->voucher_id == $voucher->id) selected @endif> {{$voucher->name}} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -124,7 +124,7 @@
                             <select class="form-control" name="referee[trigger_on]">
                                 <option value="">--Choose--</option>
                                 @foreach(\App\Enums\ReferralEnums::$TRIGGER as $key=>$value)
-                                    <option value="{{$value}}"> {{ucwords(str_replace("_"," ",$key))}} </option>
+                                    <option value="{{$value}}" @if($referee && $referee->trigger_on == $value) selected @endif> {{ucwords(str_replace("_"," ",$key))}} </option>
                                 @endforeach
                             </select>
                     </div>
@@ -140,6 +140,7 @@
                             <button class="btn theme-bg white-text w-30">Save</button>
                         </a>
                     </div>
+                </div>
                 </div>
             </form>
         </div>

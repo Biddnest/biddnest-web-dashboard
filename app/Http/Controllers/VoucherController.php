@@ -77,7 +77,7 @@ class VoucherController extends Controller
         "provider_url" => $provider_url != "" ? $provider_url : null,
         "max_redemptions" => $max_redemptions,
         "type" => $type,
-        "status"=>status
+        "status"=>$status
         ]);
 
 

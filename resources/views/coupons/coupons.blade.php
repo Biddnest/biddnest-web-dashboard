@@ -119,6 +119,7 @@
                                                         <th scope="col">Value</th>
                                                         <th scope="col">Coupon Usage</th>
                                                         <th scope="col">Coupon Description</th>
+                                                        <th scope="col">Created By</th>
                                                         <th scope="col" style="text-align: center !important;">Status</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
@@ -164,7 +165,8 @@
                                         </div>
                                     </td>
                                     <td>{!! $coupon->desc !!}</td>
-                                    <td >
+                                    <td>@isset($coupon->created_by) {{ $coupon->created_by->fname }} {{ $coupon->created_by->lname }} @else - @endif</td>
+                                    <td>
                                         @switch($coupon->status)
                                             @case(\App\Enums\CouponEnums::$STATUS['active'])
                                                 <span class="status-badge green-bg  text-center td-padding">Active</span>

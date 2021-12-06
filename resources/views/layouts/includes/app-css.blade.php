@@ -1164,4 +1164,16 @@
                 margin-right: 40%  !important;
             }
 
+            /*Voucher styles*/
+            .voucher-code{
+                font-size: 14px;text-align: center;font-weight: 700;
+
+            }
+            .voucher-code span{
+                display: inline-block;
+                padding: 10px 20px;
+                background: #FDC403;
+                border: 2px dashed #000;
+            }
+
         </style>

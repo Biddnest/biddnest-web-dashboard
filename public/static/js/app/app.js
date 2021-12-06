@@ -1325,18 +1325,9 @@ dp.on('changeDate', function(e) {
     } else {
         dp.data('datepicker').setDates(selectedDates);
         tinyAlert('Please note', 'Can only select upto 5 dates', 'info')
+        return false;
     }
 
-    /* if (e.dates.length > 1) {
-         $('.share').val(true);
-         $('.share_check').attr("checked", "checked");
-     } else {
-         $('.share').val(false);
-         $('.share_check').removeAttr("checked", "checked");
-     }*/
-    selectedDates.sort(function(a, b) {
-        return new Date(a.date) - new Date(b.date);
-    });
 });
 
 
@@ -2147,4 +2138,28 @@ $("body").on('change', ".discount_type", function(event) {
         $(this).closest("form").find(".max-disc-amt").removeClass("hidden");
         $(this).closest("form").find(".max-disc-input").attr("required", "required");
     }
+});
+
+$("body").on('change', ".date", function(event) {
+    Logger.info($(this).val());
+    let dates = $(this).val();
+    dates = dates.split(",");
+    dates.sort(function(a,b){
+        if (a < b) {
+            return 1;
+        }
+        if (a > b) {
+            return -1;
+        }
+        return 0;
+    });
+
+    Logger.info(dates);
+
+    dates.every(function(date){
+        return `${new Date(date).getDate()} ${new Date(date).getMonth()}`;
+    });
+
+    // Logger.info(e);
+    $(this).val(dates.join(","));
 });

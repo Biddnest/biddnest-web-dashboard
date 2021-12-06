@@ -129,6 +129,62 @@
                 <div class="modal-body p-15 margin-topneg-7">
                     <input type="hidden" name="id" value="{{$id}}">
                     <div class="d-flex row">
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Authorizer First Name</label>
+                                <input type="text" id="fullname" placeholder="First Name"
+                                       class="form-control alphabet" name="fname" pattern="[a-zA-Z]+" required>
+                                <span class="error-message">Please enter valid
+                                                                First Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Authorizer Last Name</label>
+                                <input type="text" id="fullname" placeholder="Last Name"
+                                       class="form-control alphabet" name="lname" pattern="[a-zA-Z]+" required>
+                                <span class="error-message">Please enter valid
+                                                                Last Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Email ID</label>
+                                <input type="email" id="email" placeholder="abc@email.com"
+                                       class="form-control" name="email" autocomplete="off" required>
+                                <span class="error-message">Please enter valid
+                                                                Email ID</span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="phone-num-lable">Primary Contact Number</label>
+                                <input type="text" id="phone" placeholder="9876543210"
+                                       class="form-control phone" name="phone[primary]" maxlength="10" minlength="10"
+                                       aria-valuemax="10" required>
+                                <span class="error-message">Please enter valid
+                                                                Phone number</span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="phone-num-lable">Secondary Contact Number</label>
+                                <input type="text" id="phone-pop-up" placeholder="9876543210"
+                                       class="form-control phone" name="phone[secondory]" maxlength="10"
+                                       minlength="10" required>
+                                <span class="error-message">Please enter valid
+                                                                Phone number</span>
+                            </div>
+                        </div>
+
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Organization Name</label>
@@ -141,8 +197,13 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Organization Type</label>
-                                <input type="text" id="fullname" placeholder="Pvt Ltd"
-                                       class="form-control" name="organization[org_type]" value="{{$organization->org_type}}" required>
+                                <select class="form-control" name="organization[org_type]" required>
+                                    <option value="">--Select--</option>
+
+                                    @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)
+                                        <option value="{{$type}}">{{$type}}</option>
+                                    @endforeach
+                                </select>
                                 <span class="error-message">Please enter valid
                                             Organization Type</span>
                             </div>
@@ -299,9 +360,22 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
-                                <label class="full-name">Commision</label>
-                                <input type="number" id="fullname" placeholder="Commission" value="{{$organization->commission}}%"
-                                       class="form-control" readonly>
+                                <label class="full-name">Base distance in km</label>
+                                <span class="">
+                                            <input type="text" name="basedist" placeholder="Distance"
+                                                   class="form-control number" value="{{$organization->base_distance}}" required>
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Extra Base distance in km</label>
+                                <span class="">
+                                            <input type="text" name="extrabasedist" placeholder="Extra Distance"
+                                                   class="form-control number" required value="{{$organization->additional_distance}}">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                            </span>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -348,9 +422,66 @@
                         <div class="d-flex row">
                             <div class="col-lg-6">
                                 <div class="form-input">
+                                    <label class="full-name">Authorizer First Name</label>
+                                    <input type="text" id="fullname" placeholder="First Name"
+                                           class="form-control alphabet" name="fname" pattern="[a-zA-Z]+" required value="{{ucfirst(trans(json_decode($branch->meta, true)['auth_fname'])) ?? ''}}">
+                                    <span class="error-message">Please enter valid
+                                                                First Name</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Authorizer Last Name</label>
+                                    <input type="text" id="fullname" placeholder="Last Name"
+                                           class="form-control alphabet" name="lname" pattern="[a-zA-Z]+" required value="{{ucfirst(trans(json_decode($branch->meta, true)['auth_lname'])) ?? ''}}">
+                                    <span class="error-message">Please enter valid
+                                                                Last Name</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Email ID</label>
+                                    <input type="email" id="email" placeholder="abc@email.com"
+                                           class="form-control" name="email" autocomplete="off" required value="{{$branch->email}}">
+                                    <span class="error-message">Please enter valid
+                                                                Email ID</span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="phone-num-lable">Primary Contact Number</label>
+                                    <input type="text" id="phone" placeholder="9876543210"
+                                           class="form-control phone" name="phone[primary]" maxlength="10" minlength="10"
+                                           aria-valuemax="10" required value="{{$branch->phone}}">
+                                    <span class="error-message">Please enter valid
+                                                                Phone number</span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="phone-num-lable">Secondary Contact Number</label>
+                                    <input type="text" id="phone-pop-up" placeholder="9876543210"
+                                           class="form-control phone" name="phone[secondory]" maxlength="10"
+                                           minlength="10" required value="{{json_decode($branch->meta, true)['secondory_phone'] ?? ''}}">
+                                    <span class="error-message">Please enter valid
+                                                                Phone number</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+
+
+
+                                <div class="form-input">
                                     <label class="full-name">Organization Name</label>
                                     <input type="text" id="fullname" placeholder="Wayne Packing Pvt Ltd" value="{{$organization->org_name}}"
-                                           class="form-control" name="organization[org_name]" required>
+                                           class="form-control" name="organization[org_name]" required readonly>
                                     <span class="error-message">Please enter valid
                                             Organization Name</span>
                                 </div>
@@ -358,8 +489,13 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="phone-num-lable">Organization Type</label>
-                                    <input type="text" id="fullname" placeholder="Pvt Ltd"
-                                           class="form-control" name="organization[org_type]" value="{{$organization->org_type}}" required>
+                                    <select class="form-control" name="organization[org_type]" required>
+                                        <option value="">--Select--</option>
+
+                                        @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)
+                                            <option value="{{$type}}">{{$type}}</option>
+                                        @endforeach
+                                    </select>
                                     <span class="error-message">Please enter valid
                                             Organization Type</span>
                                 </div>
@@ -515,13 +651,28 @@
                                                                 Service</span>
                                 </div>
                             </div>
+
                             <div class="col-lg-6">
                                 <div class="form-input">
-                                    <label class="full-name">Commision</label>
-                                    <input type="number" id="fullname" placeholder="Commission" value="{{$branch->commission}}"
-                                           class="form-control" name="commission" required>
+                                    <label class="full-name">Base distance in km</label>
+                                    <span class="">
+                                            <input type="text" name="basedist" placeholder="Distance"
+                                                   class="form-control number" value="{{$branch->base_distance}}" required>
+                                            <span class="error-message">Please enter valid Distance</span>
+                                        </span>
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Extra Base distance in km</label>
+                                    <span class="">
+                                            <input type="text" name="extrabasedist" placeholder="Extra Distance"
+                                                   class="form-control number" required value="{{$branch->additional_distance}}">
+                                            <span class="error-message">Please enter valid Distance</span>
+                                            </span>
+                                </div>
+                            </div>
+
                             <div class="col-lg-12">
                                 <div class="form-input">
                                     <label class="full-name">Branch Description</label>

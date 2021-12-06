@@ -1515,7 +1515,7 @@ class Route extends Controller
 
         return VoucherController::edit($request->id, $request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes, $request->status);
      }
-     
+
 
      public function voucherDelete(Request $request){
         return VoucherController::delete($request->id);
@@ -1524,13 +1524,13 @@ class Route extends Controller
 
      public function zones_referal(Request $request){
         $validation = Validator::make($request->all(),[
-            'id'=> 'required|integer',
+            'zone_id'=> 'required|integer',
             'referrer.reward_type'=>'required|integer',
-            'referrer.reward_points'=>'required|integer',
-            'referrer.voucher_id'=>'required|integer',
+            'referrer.reward_points'=>'integer',
+            'referrer.voucher_id'=>'numeric|nullable',
             'referrer.trigger_on'=>'required|integer',
             'referee.reward_type'=>'required|integer',
-            'referee.voucher_id'=>'required|integer',
+            'referee.voucher_id'=>'numeric|nullable',
             'referee.trigger_on'=>'required|integer'
         ]);
 

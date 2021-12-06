@@ -11,6 +11,6 @@ class VoucherCode extends Model
     use HasFactory;
 
     public function meta(){
-        return $this->belongsTo(Voucher::class);
+        return $this->belongsTo(Voucher::class,"voucher_id","id");
     }
 }

@@ -130,8 +130,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
-                                    </div>
+
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -172,7 +171,7 @@
                                             <label class="phone-num-lable">Organisation Type</label>
                                             {{--<input type="text" id="fullname" placeholder="Pvt Ltd"
                                                    class="form-control" name="organization[org_type]" required>--}}
-                                            <select class="form-control" name="organization[org_type]">
+                                            <select class="form-control" name="organization[org_type]" required>
                                                 <option value="">--Select--</option>
 
                                                 @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)

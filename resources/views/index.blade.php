@@ -142,29 +142,35 @@
     <!-- Dashboard cards -->
     <div class="vender-all-details dashboard-cards flex-row">
         <div class="simple-card">
+            <a href="{{route('enquiry-booking')}}">
             <p>ORDERS</p>
             <h1>{{$count_orders}}</h1>
+            </a>
         </div>
         <div class="simple-card">
+            <a href="{{route('vendors')}}">
             <p>VENDORS</p>
             <h1>{{$count_vendors}}</h1>
+            </a>
         </div>
         <div class="simple-card">
-            <p>USERS</p>
-            <h1>{{$count_users}}</h1>
+            <a href="{{route('customers')}}">
+                <p>USERS</p>
+                <h1>{{$count_users}}</h1>
+            </a>
         </div>
         <div class="simple-card">
-            <p>ZONES</p>
-            <h1>{{$count_zones}}</h1>
+            <a href="{{route('zones')}}">
+                <p>ZONES</p>
+                <h1>{{$count_zones}}</h1>
+            </a>
         </div>
         <div class="simple-card">
-            <p>LIVE ORDERS</p>
-            <h1>{{$count_live_orders}}</h1>
+            <a href="{{route('enquiry-booking')}}">
+                <p>LIVE ORDERS</p>
+                <h1>{{$count_live_orders}}</h1>
+            </a>
         </div>
-        {{--<div class="simple-card">
-            <p>SALES</p>
-            <h1>2,248</h1>
-        </div>--}}
     </div>
     <!--  dashboard Columns -->
     <div class="d-flex flex-row justify-content-between Dashboard-lcards">

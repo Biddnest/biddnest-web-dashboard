@@ -50,6 +50,7 @@ class CouponController extends Controller
     $coupon->valid_from = date("Y-m-d", strtotime($data['valid_from']));
     $coupon->valid_to = date("Y-m-d", strtotime($data['valid_to']));
     $coupon->status = CouponEnums::$STATUS['active'];
+    $coupon->admin_id = Session::get('account')['id'];
     if(!$coupon->save())
         return Helper::response(false, "couldn't save");
 

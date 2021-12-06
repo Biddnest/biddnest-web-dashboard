@@ -2144,7 +2144,7 @@ $("body").on('change', ".date", function(event) {
     Logger.info($(this).val());
     let dates = $(this).val();
     dates = dates.split(",");
-    dates.sort(function(a,b){
+    dates.sort(function(a, b) {
         if (a < b) {
             return 1;
         }
@@ -2156,7 +2156,7 @@ $("body").on('change', ".date", function(event) {
 
     Logger.info(dates);
 
-    dates.every(function(date){
+    dates.every(function(date) {
         return `${new Date(date).getDate()} ${new Date(date).getMonth()}`;
     });
 

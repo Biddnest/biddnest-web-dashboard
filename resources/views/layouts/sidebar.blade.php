@@ -170,26 +170,25 @@
                                             class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>Sales</a></li>
                             </ul>
 
-                        <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
+                            <li class="menu-item" data-toggle="" href="#reviews" role="button" aria-expanded="false"
                             aria-controls="Reviews"><a href="{{route('review')}}"><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-star"></i></span> </span>Reviews & Ratings</a>
-                        </li>
+                            </li>
 
                         @endif
 
-                            <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
+                       
+                        <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
                             aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
                         </li>
                         <ul class="sub-menu" id="ticket">
                             <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                             </li>
-                            <ul class="sub-menu" id="ticket">
-                                <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
-                                                class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
-                                </li>
-                                <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
+                            
+                            <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
                                                 class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
-                            </ul>
+                           
+                        </ul>
 
                         @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))
                             <li class="menu-item" data-toggle="" href="#Payout" role="button" aria-expanded="false"

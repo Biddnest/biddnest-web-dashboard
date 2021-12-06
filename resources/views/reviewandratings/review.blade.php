@@ -47,35 +47,9 @@
                         <h3 class="f-18 ml-2 mt-3 ">Review & Ratings</h3 >
                     </div>
                     <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
-                        {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                        </a>
-                        <div class="dropdown-menu menu-lg">
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="total-no-orders">
-                                    <label class="form-check-label" for="total-no-orders">
-                                        Ratings
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="statu">
-                                    <label class="form-check-label" for="status">
-                                        Organisation name
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="city">
-                                    <label class="form-check-label" for="city">
-                                        Customer name
-                                    </label>
-                                </div>
-                            </a>
-                        </div>--}}
+                        </a> 
                     </div>
                     <div class="card-head left col-sm-3">
                         <div class="search">
@@ -87,6 +61,27 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
+                    <div class="collapse" id="filter-menu">
+                        <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                        <div class="row f-14">
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Organization</label>
+                                <select id="" class="form-control searchvendor single selectfilter" data-action="id" name="organization_id">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Ratings</label>
+                                <select class="form-control br-5 selectfilter" name="status" data-action="ratings">
+                                    <option value="">--Select--</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table text-left p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg  p-0">
                             <tr>

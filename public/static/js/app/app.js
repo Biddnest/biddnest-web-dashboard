@@ -2163,3 +2163,53 @@ $("body").on('change', ".date", function(event) {
     // Logger.info(e);
     $(this).val(dates.join(","));
 });
+
+
+$("body").on('change', ".selectfilter", function() {
+    var query = $('.selectfilter').val();
+    var action = $('.selectfilter').data("action");
+    var url = window.location.href;
+    if (url.indexOf(action) > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&" + action + "=" + query);
+    } else {
+        redirectTo(url + "?" + action + "=" + query);
+    }
+});
+
+$("body").on('input', ".searchcity", function() {
+    var query = $('.searchcity').val();
+    var action = $('.searchcity').data("action");
+    if (query.length >= 3) {
+        var url = window.location.href;
+        if (url.indexOf(action) > -1) {
+            url = window.location.href.split("?")[0];
+        }
+        if (url.indexOf("?") > -1) {
+            redirectTo(url + "&" + action + "=" + query);
+        } else {
+            redirectTo(url + "?" + action + "=" + query);
+        }
+    }
+});
+
+$("body").on('change', ".todate", function() {
+    var from_query = $('.fromdate').val();
+    var to_query = $('.todate').val();
+    var url = window.location.href;
+    if (url.indexOf("from") > -1 && url.indexOf("to") > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&from=" + from_query + "&to=" + to_query);
+    } else {
+        redirectTo(url + "?from=" + from_query + "&to=" + to_query);
+    }
+});
+
+$("body").on('click', ".clear-filter", function() {
+    var url = window.location.href.split("?")[0];
+    redirectTo(url);
+});

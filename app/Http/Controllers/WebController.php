@@ -1115,6 +1115,12 @@ class WebController extends Controller
         if(isset($request->search)){
             $coupons=$coupons->where('name', 'like', "%".$request->search."%");
         }
+        if(isset($request->status)){
+            $coupons=$coupons->where('status', $request->status);
+        }
+        if(isset($request->fromdate) && isset($request->todate)){
+            $coupons=$coupons->where('valid_from', '>=', $request->fromdate)->where('valid_to', '<=', $request->todate);
+        }
 
         $coupons_active= Coupon::where(['status'=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
@@ -1199,6 +1205,14 @@ class WebController extends Controller
 
         if(isset($request->search)){
             $zones=$zones->where('name', 'like', "%".$request->search."%");
+        }
+
+        if(isset($request->city)){
+            $zones=$zones->where('city', 'like', "%".$request->city."%");
+        }
+
+        if(isset($request->status)){
+            $zones=$zones->where('status', $request->status);
         }
 
             $total=Zone::where(["deleted"=>CommonEnums::$NO])->count();
@@ -1334,6 +1348,15 @@ class WebController extends Controller
         if(isset($request->search)){
             $review=$review->where('desc', 'like', "%".$request->search."%");
         }
+
+        if(isset($request->ratings)){
+            $review=$review->where('star', $request->ratings);
+        }
+
+        if(isset($request->id)){
+            $payout=$payout->where('booking_id', Booking::where("organization_id", $request->id)->pluck("id")[0]);
+        }
+
         $review->with(['Booking'=>function($query){
             $query->with('organization');
         }])->with('user')->orderBy("id","DESC");
@@ -1436,7 +1459,19 @@ class WebController extends Controller
         if(isset($request->search)){
             $payout=$payout->where('public_payout_id', 'like', "%".$request->search."%");
         }
-        $payout->orderBy("id","DESC");
+
+        if(isset($request->id)){
+            $payout=$payout->where('organization_id', $request->id);
+        }
+
+        if(isset($request->status)){
+            $payout=$payout->where('status', $request->status);
+        }
+        
+        if(isset($request->from) && isset($request->to)){
+            $payout=$payout->where('dispatch_at', '>=', $request->from)->where('dispatch_at', '<=', $request->to);
+        }
+        $payout->with('organization')->orderBy("id","DESC");
 
         $scheduled = Payout::where('status', PayoutEnums::$STATUS['scheduled'])->count();
         $failed = Payout::where('status', PayoutEnums::$STATUS['suspended'])->count();

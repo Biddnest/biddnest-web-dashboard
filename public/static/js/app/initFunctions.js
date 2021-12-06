@@ -5,13 +5,13 @@
 export function initMapPicker() {
     var lat = $('#source-lat').val();
     var lng = $('#source-lng').val();
-    if(lat == "" && lng == ""){
+    if (lat == "" && lng == "") {
         lat = 12.930621;
         lng = 80.111410;
     }
     var dlat = $('#dest-lat').val();
     var dlng = $('#dest-lng').val();
-    if(dlat == "" && dlng == ""){
+    if (dlat == "" && dlng == "") {
         dlat = 12.930621;
         dlng = 80.111410;
     }
@@ -41,36 +41,35 @@ export function initMapPicker() {
         draggable: true,
         onchanged: function(currentLocation, radius, isMarkerDropped) {
 
-                    var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key="+API_google_key;
-                    $.get(url, function (response){
-                        console.log(response);
-                        let street = [];
-                        let city, state, pincode =null;
-                       for(let i=0; i<= response.results[0].address_components.length; i++)
-                        {
-                            let addr = response.results[0].address_components[i];
-                            if(typeof addr != "undefined") {
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + currentLocation.latitude + "," + currentLocation.longitude + "&key=" + API_google_key;
+            $.get(url, function(response) {
+                console.log(response);
+                let street = [];
+                let city, state, pincode = null;
+                for (let i = 0; i <= response.results[0].address_components.length; i++) {
+                    let addr = response.results[0].address_components[i];
+                    if (typeof addr != "undefined") {
 
-                                if ((addr.types.includes('locality') && addr.types.includes('political')) || addr.types.includes('administrative_area_level_2')) {
-                                    console.log(addr.long_name);
-                                    if(!city)
-                                        city=addr.long_name;
-                                }
-                                if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
-                                    if(!state)
-                                        state=addr.long_name;
-                                }
-                                if (addr.types.includes('postal_code')) {
-                                    if(!pincode)
-                                        pincode=addr.long_name;
-                                }
-                            }
+                        if ((addr.types.includes('locality') && addr.types.includes('political')) || addr.types.includes('administrative_area_level_2')) {
+                            console.log(addr.long_name);
+                            if (!city)
+                                city = addr.long_name;
                         }
-                        $("#source-city").val(city);
-                        $("#source-state").val(state);
-                        $("#source-pin").val(pincode);
-                        console.log(city, state, pincode);
-                    });
+                        if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
+                            if (!state)
+                                state = addr.long_name;
+                        }
+                        if (addr.types.includes('postal_code')) {
+                            if (!pincode)
+                                pincode = addr.long_name;
+                        }
+                    }
+                }
+                $("#source-city").val(city);
+                $("#source-state").val(state);
+                $("#source-pin").val(pincode);
+                console.log(city, state, pincode);
+            });
 
 
         },
@@ -108,27 +107,26 @@ export function initMapPicker() {
         enableReverseGeocode: true,
         draggable: true,
         onchanged: function(currentLocation, radius, isMarkerDropped) {
-            var url="https://maps.googleapis.com/maps/api/geocode/json?address="+currentLocation.latitude+","+currentLocation.longitude+"&key="+API_google_key;
-            $.get(url, function (response){
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + currentLocation.latitude + "," + currentLocation.longitude + "&key=" + API_google_key;
+            $.get(url, function(response) {
                 console.log(response);
-                let street=[];
-                let city, state, pincode =null;
-                for(let i=0; i<= response.results[0].address_components.length; i++)
-                {
+                let street = [];
+                let city, state, pincode = null;
+                for (let i = 0; i <= response.results[0].address_components.length; i++) {
                     let addr = response.results[0].address_components[i];
-                    if(typeof addr != "undefined") {
+                    if (typeof addr != "undefined") {
                         if ((addr.types.includes('locality') && addr.types.includes('political')) || addr.types.includes('administrative_area_level_2')) {
                             console.log(addr.long_name);
-                            if(!city)
-                                city=addr.long_name;
+                            if (!city)
+                                city = addr.long_name;
                         }
                         if (addr.types.includes('administrative_area_level_1') && addr.types.includes('political')) {
-                            if(!state)
-                                state=addr.long_name;
+                            if (!state)
+                                state = addr.long_name;
                         }
                         if (addr.types.includes('postal_code')) {
-                            if(!pincode)
-                                pincode=addr.long_name;
+                            if (!pincode)
+                                pincode = addr.long_name;
                         }
                     }
                 }
@@ -139,7 +137,7 @@ export function initMapPicker() {
             });
         },
         onlocationnotfound: function(locationName) {},
-        oninitialized: function(component) { },
+        oninitialized: function(component) {},
         // must be undefined to use the default gMaps marker
         markerIcon: undefined,
         markerDraggable: true,
@@ -228,8 +226,12 @@ export function initAllSelectBoxes() {
 
     if ($(".searchvendor").length) {
 
+        let multiple = true;
+        if ($(".searchvendor").hasClass('single'))
+            multiple = false;
+
         $(".searchvendor").select2({
-            multiple: true,
+            multiple: multiple,
             tags: false,
             minimumResultsForSearch: 3,
             minimumInputLength: 3,
@@ -373,7 +375,7 @@ export function initAllSelectBoxes() {
     }
 }
 
-export function initSlick(){
+export function initSlick() {
     $('.slick-container').slick({
         arrows: false
     });
@@ -390,16 +392,16 @@ export function initTextAreaEditor() {
 
 }
 
-export function initTooltip(){
-        $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
-        $('[data-toggle="tooltip').on('click', function () {
-            $(this).tooltip('hide');
-        });
+export function initTooltip() {
+    $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
+    $('[data-toggle="tooltip').on('click', function() {
+        $(this).tooltip('hide');
+    });
 }
 
-export function initequalheights(){
+export function initequalheights() {
     $("form").find("input").attr("autcomplete", "false");
-    $(".match-item").eq(1).find("div").each(function(index){
+    $(".match-item").eq(1).find("div").each(function(index) {
         $(".match-item").eq(0).find("div").eq(index).height($(this).height());
     });
 }
@@ -474,7 +476,7 @@ export function initRevenueChart() {
     }
 }
 
-export function initOrderDistributionChart(){
+export function initOrderDistributionChart() {
     // console.log("icam called");
     if ($("#my-legend-con").length) {
         Chart.pluginService.register({
@@ -486,28 +488,28 @@ export function initOrderDistributionChart(){
                 var fontSize = (height / 114).toFixed(2);
                 ctx.font = fontSize + "em sans-serif";
                 ctx.textBaseline = "middle";
-                var text = chart.config.options.elements.center ?.text || '',
+                var text = chart.config.options.elements.center ? text : '',
                     textX = Math.round((width - ctx.measureText(text).width) / 2),
                     textY = height / 2;
                 ctx.fillText(text, textX, textY);
                 ctx.save();
             }
         });
-        if($("#order_dist_dataset").length){
+        if ($("#order_dist_dataset").length) {
             var chartData = JSON.parse($("#order_dist_dataset").val());
-            var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
+            var sum = chartData.map((item) => item.value).reduce((a, b) => a + b);
             var textInside = sum.toString();
             var myChart = new Chart(document.getElementById('mychart'), {
                 type: 'doughnut',
-                animation:{
-                    animateScale:true
+                animation: {
+                    animateScale: true
                 },
                 data: {
-                    labels: chartData.map((item) => item.label ),
+                    labels: chartData.map((item) => item.label),
                     datasets: [{
 
                         label: 'Visitor',
-                        data: chartData.map((item) => item.value ),
+                        data: chartData.map((item) => item.value),
                         backgroundColor: [
                             "#f8c446",
                             "#fbd64e",
@@ -532,10 +534,10 @@ export function initOrderDistributionChart(){
                         var legendHtml = [];
                         legendHtml.push('<ul>');
                         var item = chart.data.datasets[0];
-                        for (var i=0; i < item.data.length; i++) {
+                        for (var i = 0; i < item.data.length; i++) {
 
                             legendHtml.push('<li>');
-                            legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
+                            legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] + '"></span>');
                             legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div>`);
                             legendHtml.push('</li>');
                         }
@@ -550,7 +552,7 @@ export function initOrderDistributionChart(){
                         callbacks: {
                             label: function(tooltipItem, data) {
                                 var indice = tooltipItem.index;
-                                return  data.labels[indice] ;
+                                return data.labels[indice];
                             }
                         }
                     },
@@ -562,11 +564,11 @@ export function initOrderDistributionChart(){
     }
 }
 
-export function initOrderDistributionChartVendor(){
+export function initOrderDistributionChartVendor() {
     // console.log("icam called");
-    if($("#my-legend-con_vendor").length){
+    if ($("#my-legend-con_vendor").length) {
         Chart.pluginService.register({
-            beforeDraw: function (chart) {
+            beforeDraw: function(chart) {
                 var width = chart.chart.width,
                     height = chart.chart.height,
                     ctx = chart.chart.ctx;
@@ -574,30 +576,30 @@ export function initOrderDistributionChartVendor(){
                 var fontSize = (height / 90).toFixed(2);
                 ctx.font = fontSize + "em sans-serif";
                 ctx.textBaseline = "middle";
-                var text = chart.config.options.elements.center?.text || '',
+                var text = chart.config.options.elements.center ? text : '',
                     textX = Math.round((width - ctx.measureText(text).width) / 2),
                     textY = height / 2;
                 ctx.fillText(text, textX, textY);
                 ctx.save();
             }
         });
-        if($("#order_dist_dataset_vendor").length){
+        if ($("#order_dist_dataset_vendor").length) {
             var chartData = JSON.parse($("#order_dist_dataset_vendor").val());
             console.log(chartData);
-            var sum = chartData.map((item) => item.value ).reduce((a, b ) => a+b );
-            var textInside = sum.toString()+" "+
+            var sum = chartData.map((item) => item.value).reduce((a, b) => a + b);
+            var textInside = sum.toString() + " " +
                 "Orders";
             var myChart = new Chart(document.getElementById('mychart'), {
                 type: 'doughnut',
-                animation:{
-                    animateScale:true
+                animation: {
+                    animateScale: true
                 },
                 data: {
-                    labels: chartData.map((item) => item.label ),
+                    labels: chartData.map((item) => item.label),
                     datasets: [{
 
                         label: 'Visitor',
-                        data: chartData.map((item) => item.value ),
+                        data: chartData.map((item) => item.value),
                         backgroundColor: [
                             "#83E8B5",
                             "#FFADB4",
@@ -623,10 +625,10 @@ export function initOrderDistributionChartVendor(){
                         var legendHtml = [];
                         legendHtml.push('<ul>');
                         var item = chart.data.datasets[0];
-                        for (var i=0; i < item.data.length; i++) {
+                        for (var i = 0; i < item.data.length; i++) {
 
                             legendHtml.push('<li>');
-                            legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] +'"></span>');
+                            legendHtml.push('<span class="chart-legend" style=" background-color:' + item.backgroundColor[i] + '"></span>');
                             legendHtml.push(`<div class="legend-text"><span class="chart-legend-label-text">${chart.data.labels[i]} (${chart.data.datasets[0].data[i]})</span></span> </div`);
                             legendHtml.push('</li>');
                         }
@@ -641,7 +643,7 @@ export function initOrderDistributionChartVendor(){
                         callbacks: {
                             label: function(tooltipItem, data) {
                                 var indice = tooltipItem.index;
-                                return  data.labels[indice] ;
+                                return data.labels[indice];
                             }
                         }
                     },
@@ -667,26 +669,24 @@ export function initOrderDistributionChartVendor(){
 }
 
 export function InitUserZoneChart() {
-    if($("#my-legend-con").length) {
+    if ($("#my-legend-con").length) {
 
         var chartData = JSON.parse($("#vendor_dist_dataset").val())
         let chartConfig = {
-            shapes: [
-                {
+            shapes: [{
                     type: 'circle',
                     id: '1950',
                     backgroundColor: '#141c75',
                     borderColor: '#141c75',
                     borderWidth: '1px',
                     cursor: 'pointer',
-                    label:
-                        {
-                            text: 'Karnataka 65%',
+                    label: {
+                        text: 'Karnataka 65%',
 
-                            fontColor: '#666666',
-                            fontFamily: 'Roboto',
-                            offsetX: '55px'
-                        },
+                        fontColor: '#666666',
+                        fontFamily: 'Roboto',
+                        offsetX: '55px'
+                    },
                     size: '8px',
                     x: '65%',
                     y: '60%'
@@ -853,7 +853,7 @@ export function initBarChart() {
                     label: 'Reports',
                     data: dataset.revenue.this_week.sales,
                     backgroundColor: '#5a27cead',
-                   borderColor:  '#251055',
+                    borderColor: '#251055',
                     borderWidth: 1
                 }]
             },
@@ -872,15 +872,15 @@ export function initCountdown() {
 
     if ($(".timer").length) {
 
-        $(".timer").each(function(){
+        $(".timer").each(function() {
             var BID_END_TIME = $(this).data("time");
             // if (typeof BID_END_TIME !== undefined) {
 
-                $(this).countdown(BID_END_TIME, function (event) {
-                    $(this).text(
-                        event.strftime('%H:%M:%S')
-                    );
-                });
+            $(this).countdown(BID_END_TIME, function(event) {
+                $(this).text(
+                    event.strftime('%H:%M:%S')
+                );
+            });
             // }
         });
 
@@ -889,8 +889,8 @@ export function initCountdown() {
     }
 }
 
-export function initDateBookPicker(){
-    if($(".date").length) {
+export function initDateBookPicker() {
+    if ($(".date").length) {
 
         $('.date').datepicker({
             // multidateSeparator:",",
@@ -901,7 +901,7 @@ export function initDateBookPicker(){
         });
     }
 
-    if($(".singledate").length) {
+    if ($(".singledate").length) {
 
         $('.singledate').datepicker({
             multidate: false,
@@ -910,8 +910,8 @@ export function initDateBookPicker(){
     }
 }
 
-export function initDatePicker(){
-    if($(".filterdate").length) {
+export function initDatePicker() {
+    if ($(".filterdate").length) {
 
         $('.filterdate').datepicker({
             // multidateSeparator:",",
@@ -921,8 +921,8 @@ export function initDatePicker(){
     }
 }
 
-export function initPopUp(){
-    $(document).ready(function(){
+export function initPopUp() {
+    $(document).ready(function() {
         $('.enter-pin').hide();
         $('.submitbtn').hide();
         $('.next-btn-2').hide();
@@ -938,10 +938,10 @@ export function initPopUp(){
     });
 }
 
-export function initPopUpAdmin(){
-        $('.submitbtn-admin').hide();
-        $('.next-btn-2-admin').hide();
-        $('.bid-amount-2-admin').hide();
+export function initPopUpAdmin() {
+    $('.submitbtn-admin').hide();
+    $('.next-btn-2-admin').hide();
+    $('.bid-amount-2-admin').hide();
 
     /*if($(".bid-modal").length) {
         $(".bid-modal").each(function (){
@@ -958,8 +958,8 @@ export function initPopUpAdmin(){
     }*/
 }
 
-export function initRangeSlider(){
-    if($(".custom_slider").length) {
+export function initRangeSlider() {
+    if ($(".custom_slider").length) {
         console.log("slider");
         $(".custom_slider").ionRangeSlider({
             type: $(this).data("type"),
@@ -987,78 +987,78 @@ export function initToggles() {
 }
 
 export function initSortable() {
-    if($(".sortable-list").length){
-    console.log("Sortable");
-    $(".sortable-list").sortable({
-        handle: '.dragger',
-    });
+    if ($(".sortable-list").length) {
+        console.log("Sortable");
+        $(".sortable-list").sortable({
+            handle: '.dragger',
+        });
     }
 }
 
 export function initSelect() {
 
 
-   /* $('select:not(.select-box2, .select-box)').each(function(){
-        var $this = $(this), numberOfOptions = $(this).children('option').length;
+    /* $('select:not(.select-box2, .select-box)').each(function(){
+         var $this = $(this), numberOfOptions = $(this).children('option').length;
 
-        $this.addClass('select-hidden');
-        $this.wrap('<div class="select"></div>');
-        $this.after('<div class="select-styled"></div>');
+         $this.addClass('select-hidden');
+         $this.wrap('<div class="select"></div>');
+         $this.after('<div class="select-styled"></div>');
 
-        var $styledSelect = $this.next('div.select-styled');
-        $styledSelect.text($this.children('option').eq(0).text());
+         var $styledSelect = $this.next('div.select-styled');
+         $styledSelect.text($this.children('option').eq(0).text());
 
-        var $list = $('<ul />', {
-            'class': 'select-options'
-        }).insertAfter($styledSelect);
+         var $list = $('<ul />', {
+             'class': 'select-options'
+         }).insertAfter($styledSelect);
 
-        for (var i = 0; i < numberOfOptions; i++) {
-            $('<li />', {
-                text: $this.children('option').eq(i).text(),
-                rel: $this.children('option').eq(i).val()
-            }).appendTo($list);
-        }
+         for (var i = 0; i < numberOfOptions; i++) {
+             $('<li />', {
+                 text: $this.children('option').eq(i).text(),
+                 rel: $this.children('option').eq(i).val()
+             }).appendTo($list);
+         }
 
-        var $listItems = $list.children('li');
+         var $listItems = $list.children('li');
 
-        $styledSelect.click(function(e) {
-            e.stopPropagation();
-            $('div.select-styled.active').not(this).each(function(){
-                $(this).removeClass('active').next('ul.select-options').hide();
-            });
-            $(this).toggleClass('active').next('ul.select-options').toggle();
-        });
+         $styledSelect.click(function(e) {
+             e.stopPropagation();
+             $('div.select-styled.active').not(this).each(function(){
+                 $(this).removeClass('active').next('ul.select-options').hide();
+             });
+             $(this).toggleClass('active').next('ul.select-options').toggle();
+         });
 
-        $listItems.click(function(e) {
-            e.stopPropagation();
-            $styledSelect.text($(this).text()).removeClass('active');
-            $this.val($(this).attr('rel'));
-            $list.hide();
-            //console.log($this.val());
-        });
+         $listItems.click(function(e) {
+             e.stopPropagation();
+             $styledSelect.text($(this).text()).removeClass('active');
+             $this.val($(this).attr('rel'));
+             $list.hide();
+             //console.log($this.val());
+         });
 
-        $(document).click(function() {
-            $styledSelect.removeClass('active');
-            $list.hide();
-        });
+         $(document).click(function() {
+             $styledSelect.removeClass('active');
+             $list.hide();
+         });
 
-    });*/
-// table-select
+     });*/
+    // table-select
 
 }
 
 export function initInventoryDropzone() {
-    if($(".dropzone-import").length){
+    if ($(".dropzone-import").length) {
         console.log("init dropzone");
         let url = $(".dropzone-import").attr('action');
         $('.dropzone-import').dropzone({
             url: url,
             paramName: "file",
             acceptedFiles: ".csv,.xls, .xlsx",
-            complete: function(response){
+            complete: function(response) {
                 console.log(response);
             },
-            cancelled: function (response){
+            cancelled: function(response) {
                 console.log(response);
             }
         });

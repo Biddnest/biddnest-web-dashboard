@@ -13,13 +13,19 @@ class ReviewController extends Controller
     public static function add($user_id, $public_booking_id, $review, $suggestion)
     {
         $review_exist = Review::where('user_id', $user_id)
-                        ->where(['booking_id'=>Booking::where(['public_booking_id'=>$public_booking_id, 'user_id'=>$user_id])
-                            ->where(['status'=>BookingEnums::$STATUS['completed']])->pluck('id')[0]])
+                        ->where(['booking_id'=>Booking::where(['public_booking_id'=>$public_booking_id, 'user_id'=>$user_id])->where(['status'=>BookingEnums::$STATUS['completed']])->pluck('id')[0]])
                         ->first();
         if($review_exist)
             return Helper::response(false, "review already exist");
+            
+        // return $review;
 
+        $ratings =0;
 
+        foreach($review as $key=>$rating){
+            $ratings =$ratings + $rating['rating'];
+        }
+      
         if(!$review_exist)
         {
             $reviews = new Review;
@@ -27,6 +33,7 @@ class ReviewController extends Controller
             $reviews->booking_id =Booking::where('public_booking_id', $public_booking_id)->pluck('id')[0];
             $reviews->desc =$suggestion;
             $reviews->ratings =json_encode($review);
+            $reviews->star =round($ratings/3);
             $review_result =$reviews->save();
 
             if(!$review_result)

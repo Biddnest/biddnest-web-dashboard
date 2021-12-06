@@ -36,7 +36,7 @@
                     <div class="header-wrap p-0 col-sm-1 " style="display: flex; justify-content: flex-end;  margin-right: -18px;">
                         <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                        </a>
+                        </a> 
                     </div>
                     <div class="card-head  mt-1 left col-sm-3">
                         <div class="search">
@@ -49,7 +49,33 @@
                 </div>
 
                 <div class="all-vender-details">
-                    <div class="collapse" id="filter-menu"><a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a></div>
+                    <div class="collapse" id="filter-menu">
+                        <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                        <div class="row f-14">
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Organization</label>
+                                <select id="" class="form-control searchvendor single selectfilter" data-action="id" name="organization_id">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Status</label>
+                                <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                    <option value="">--Select--</option>
+                                    @foreach(\App\Enums\PayoutEnums::$STATUS as $key=>$status)
+                                       <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                   @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Payout From</label>
+                                <input type="text" id="dateselect" name="payout_date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Payout To</label>
+                                <input type="text" id="dateselect1" name="payout_date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                            </div>
+                        </div>
+                    </div>
                     <table class="table text-left p-0 theme-text mb-0 primary-table">
                         <thead class="secondg-bg  p-0">
                             <tr>
@@ -68,7 +94,7 @@
                                 <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.payout',['id'=>$payout->id]) }}">
                                     <td scope="row">{{$payout->public_payout_id}}</td>
     {{--                                <td>Payment for BLR movers</td>--}}
-                                    <td>{{$payout->organization_id}}</td>
+                                    <td>{{$payout->organization->org_name}}</td>
                                     <td style="text-align: center !important;">
                                         @switch($payout->status)
                                             @case(\App\Enums\PayoutEnums::$STATUS['scheduled'])
@@ -85,6 +111,18 @@
 
                                             @case(\App\Enums\PayoutEnums::$STATUS['processing'])
                                             <span class="status-badge green-bg text-center">Processing</span>
+                                            @break
+
+                                            @case(\App\Enums\PayoutEnums::$STATUS['cancelled'])
+                                            <span class="status-badge red-bg text-center">Cancelled</span>
+                                            @break
+
+                                            @case(\App\Enums\PayoutEnums::$STATUS['temporary_hold'])
+                                            <span class="status-badge red-bg text-center">Temporary Hold</span>
+                                            @break
+
+                                            @case(\App\Enums\PayoutEnums::$STATUS['queued'])
+                                            <span class="status-badge green-bg text-center">Queued</span>
                                             @break
                                         @endswitch
                                     </td>

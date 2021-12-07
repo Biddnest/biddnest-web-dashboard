@@ -73,41 +73,11 @@
                                                     <h3 class="f-18 pl-8 title " style="margin-bottom: 0px !important;">All Vendors</h3 >
 
                                                 </div>
-                                                {{--<div class="col-sm-1" style="margin-right: -11%;">
-                                                    <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
+                                                <div class="col-sm-1" style="margin-right: -11%;">
+                                                    <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
                                                         <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-
                                                     </a>
-                                                    <div class="dropdown-menu ">
-                                                        <a class="dropdown-item border-top-bottom" href="#">
-                                                            <div class="form-check f-14">
-                                                                <input class="form-check-input" type="checkbox" value="" id="city">
-                                                                <label class="form-check-label" for="city">
-                                                                    City
-                                                                </label>
-                                                            </div>
-                                                        </a>
-                                                        <a class="dropdown-item border-top-bottom" href="#">
-                                                            <div class="form-check f-14">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    id="Customer">
-                                                                <label class="form-check-label" for=" Customer">
-                                                                    Customer Status
-                                                                </label>
-                                                            </div>
-                                                        </a>
-                                                        <a class="dropdown-item border-top-bottom" href="#">
-                                                            <div class="form-check f-14">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    id="customerType">
-                                                                <label class="form-check-label" for="customerType">
-                                                                    Customer Type
-                                                                </label>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>--}}
+                                                </div>
                                                 <div class="card-head  pt-2  left col-sm-3" style="padding: 8px 20px;">
                                                     <div class="search">
                                                         <input type="text" class="searchTerm table-search" data-url="{{route('vendors')}}" placeholder="Search...">
@@ -119,6 +89,46 @@
                                             </div>
                                             <div class="col-lg-12 pr-0 pl-0">
                                     <div class="all-vender-details">
+                                        <div class="collapse" id="filter-menu">
+                                            <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                                            <div class="row f-14">
+                                                <div class="col">
+                                                    <label style="font-weight:500 !important;">Zones</label>
+                                                    <select class="form-control br-5 selectfilter" name="zones" data-action="zones">
+                                                        <option value="">--Select--</option>
+                                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label style="font-weight:500 !important;">Status</label>
+                                                    <select class="form-control br-5 selectstatus" name="status" data-action="status">
+                                                        <option value="">--Select--</option>
+                                                        @foreach(\App\Enums\VendorEnums::$STATUS as $key=>$status)
+                                                            <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label style="font-weight:500 !important;">Servie Type</label>
+                                                    <select class="form-control br-5 selectservice" name="service" data-action="service">
+                                                        <option value="">--Select--</option>
+                                                        @foreach(\App\Enums\OrganizationEnums::$SERVICES as $service_type=>$value)
+                                                            <option value="{{$value}}">{{ucfirst(trans($service_type))}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label style="font-weight:500 !important;">Joining From</label>
+                                                    <input type="text" id="dateselect" name="date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                                                </div>
+                                                <div class="col">
+                                                    <label style="font-weight:500 !important;">Joining To</label>
+                                                    <input type="text" id="dateselect1" name="date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                                                </div>
+                                            </div>
+                                        </div>
                                             <table class="table  p-0 theme-text mb-0 ">
                                                 <thead class="secondg-bg bx-shadowg p-0 f-14" style="font-weight: 700 !important;">
                                                     <tr class="">

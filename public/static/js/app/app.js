@@ -2213,3 +2213,31 @@ $("body").on('click', ".clear-filter", function() {
     var url = window.location.href.split("?")[0];
     redirectTo(url);
 });
+
+$("body").on('change', ".selectstatus", function() {
+    var query = $('.selectstatus').val();
+    var action = $('.selectstatus').data("action");
+    var url = window.location.href;
+    if (url.indexOf(action) > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&" + action + "=" + query);
+    } else {
+        redirectTo(url + "?" + action + "=" + query);
+    }
+});
+
+$("body").on('change', ".selectservice", function() {
+    var query = $('.selectservice').val();
+    var action = $('.selectservice').data("action");
+    var url = window.location.href;
+    if (url.indexOf(action) > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&" + action + "=" + query);
+    } else {
+        redirectTo(url + "?" + action + "=" + query);
+    }
+});

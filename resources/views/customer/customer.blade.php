@@ -60,42 +60,11 @@
                         <h3 class="f-18 pl-8 title" >Customers</h3 >
 
                     </div>
-                    <div class="col-sm-1 -mr-4 pt-4 pl-8 ">
-                    </div>
-                    {{--<div class="col-sm-1 -mr-4 pt-4 pl-8 " >
-                        <a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="col-sm-1 -mr-4 pt-4 pl-8 " >
+                        <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                         </a>
-                        <div class="dropdown-menu ">
-
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check f-14">
-                                    <input class="form-check-input" type="checkbox" value="" id="city">
-                                    <label class="form-check-label" for="city">
-                                        City
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check f-14">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="Customer">
-                                    <label class="form-check-label" for=" Customer">
-                                        Customer Status
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check f-14">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="customerType">
-                                    <label class="form-check-label" for="customerType">
-                                        Customer Type
-                                    </label>
-                                </div>
-                            </a>
-                        </div>
-                    </div>--}}
+                    </div>
                     <div class="card-head  pt-3  left col-sm-3">
                         <div class="search">
                             <input type="text" class="searchTerm table-search" data-url="{{route('customers')}}" placeholder="Search...">
@@ -106,6 +75,28 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
+                    <div class="collapse" id="filter-menu">
+                        <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                        <div class="row f-14">
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Status</label>
+                                <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                    <option value="">--Select--</option>
+                                    @foreach(\App\Enums\UserEnums::$STATUS as $key=>$status)
+                                       <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                   @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Joining From</label>
+                                <input type="text" id="dateselect" name="date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Joining To</label>
+                                <input type="text" id="dateselect1" name="date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                            </div>
+                        </div>
+                    </div>
                     <table class="table text-center p-0 theme-text mb-0  f-14 left-col-table">
                         <thead class="secondg-bg  p-0">
                             <tr>

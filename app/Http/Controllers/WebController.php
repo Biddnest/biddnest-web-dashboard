@@ -734,6 +734,13 @@ class WebController extends Controller
                 ->orWhere('phone', 'like', $request->search."%");
         }
 
+        if(isset($request->status)){
+           $user->where('status', $request->status);
+        }
+        if(isset($request->from) && isset($request->to)){
+            $user->where('created_at', '>=', $request->from)->where('created_at', '<=', $request->to);
+        }
+
         if($request->sort)
             $user->where('status', UserEnums::$STATUS[$request->sort]);
         else
@@ -803,6 +810,21 @@ class WebController extends Controller
 
         if(isset($request->search)){
             $vendors->where('org_name', 'like', "%".$request->search."%");
+        }
+
+        if(isset($request->status)){
+            $vendors->where('status', $request->status);
+        }
+        
+        if(isset($request->zones)){
+            $vendors->where('zone_id', $request->zones);
+        }
+        if(isset($request->service)){
+            $vendors->where('service_type', $request->service);
+        }
+
+        if(isset($request->from) && isset($request->to)){
+             $vendors->where('created_at', '>=', $request->from)->where('created_at', '<=', $request->to);
         }
 
 //        return OrganizationEnums::$STATUS[$request->sort];
@@ -1118,8 +1140,8 @@ class WebController extends Controller
         if(isset($request->status)){
             $coupons=$coupons->where('status', $request->status);
         }
-        if(isset($request->fromdate) && isset($request->todate)){
-            $coupons=$coupons->where('valid_from', '>=', $request->fromdate)->where('valid_to', '<=', $request->todate);
+        if(isset($request->from) && isset($request->to)){
+            $coupons=$coupons->where('valid_from', '>=', $request->from)->where('valid_to', '<=', $request->to);
         }
 
         $coupons_active= Coupon::where(['status'=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);

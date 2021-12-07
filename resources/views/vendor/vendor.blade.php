@@ -89,46 +89,46 @@
                                             </div>
                                             <div class="col-lg-12 pr-0 pl-0">
                                     <div class="all-vender-details">
-                                        <div class="collapse" id="filter-menu">
-                                            <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
-                                            <div class="row f-14">
-                                                <div class="col">
-                                                    <label style="font-weight:500 !important;">Zones</label>
-                                                    <select class="form-control br-5 selectfilter" name="zones" data-action="zones">
-                                                        <option value="">--Select--</option>
-                                                        @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                            <option value="{{$zone->id}}">{{$zone->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <label style="font-weight:500 !important;">Status</label>
-                                                    <select class="form-control br-5 selectstatus" name="status" data-action="status">
-                                                        <option value="">--Select--</option>
-                                                        @foreach(\App\Enums\VendorEnums::$STATUS as $key=>$status)
-                                                            <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <label style="font-weight:500 !important;">Servie Type</label>
-                                                    <select class="form-control br-5 selectservice" name="service" data-action="service">
-                                                        <option value="">--Select--</option>
-                                                        @foreach(\App\Enums\OrganizationEnums::$SERVICES as $service_type=>$value)
-                                                            <option value="{{$value}}">{{ucfirst(trans($service_type))}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <label style="font-weight:500 !important;">Joining From</label>
-                                                    <input type="text" id="dateselect" name="date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
-                                                </div>
-                                                <div class="col">
-                                                    <label style="font-weight:500 !important;">Joining To</label>
-                                                    <input type="text" id="dateselect1" name="date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                                            <div class="collapse" id="filter-menu">
+                                                <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                                                <div class="row f-14">
+                                                    <div class="col">
+                                                        <label style="font-weight:500 !important;">Zones</label>
+                                                        <select class="form-control br-5 selectfilter" name="zones" data-action="zones">
+                                                            <option value="">--Select--</option>
+                                                            @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                                <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label style="font-weight:500 !important;">Status</label>
+                                                        <select class="form-control br-5 selectstatus" name="status" data-action="status">
+                                                            <option value="">--Select--</option>
+                                                            @foreach(\App\Enums\VendorEnums::$STATUS as $key=>$status)
+                                                                <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label style="font-weight:500 !important;">Servie Type</label>
+                                                        <select class="form-control br-5 selectservice" name="service" data-action="service">
+                                                            <option value="">--Select--</option>
+                                                            @foreach(\App\Enums\OrganizationEnums::$SERVICES as $service_type=>$value)
+                                                                <option value="{{$value}}">{{ucfirst(trans($service_type))}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label style="font-weight:500 !important;">Joining From</label>
+                                                        <input type="text" id="dateselect" name="date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <label style="font-weight:500 !important;">Joining To</label>
+                                                        <input type="text" id="dateselect1" name="date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                             <table class="table  p-0 theme-text mb-0 ">
                                                 <thead class="secondg-bg bx-shadowg p-0 f-14" style="font-weight: 700 !important;">
                                                     <tr class="">

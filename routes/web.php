@@ -285,6 +285,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");
 
         Route::get('/search/result/',[WebController::class,'searchResult'])->name("admin.searchresult");
+        Route::get('/filter/result/',[WebController::class,'filterResult'])->name("admin.filter-booking");
         //booking and orders
         Route::prefix('booking')->group(function () {
             Route::get('/enquiry',[WebController::class,'ordersBookingsEnquiry'])->name("enquiry-booking");

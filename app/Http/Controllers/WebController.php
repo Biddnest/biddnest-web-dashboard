@@ -1744,4 +1744,42 @@ class WebController extends Controller
 
         return view('layouts.searchresult', ['bookings'=>$bookings]);
     }
+
+    
+    public function filterResult(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = [Session::get('admin_zones')];
+
+        $bookings = Booking::where("deleted", CommonEnums::$NO);
+
+        if(isset($request->zones))
+        {
+            $bookings->where("zone_id",$request->zones);
+        }
+
+        if(isset($request->status))
+        {
+            $bookings->where("status",$request->status);
+        }
+
+        if(isset($request->category))
+        {
+            $bookings->where("service_id",$request->category);
+        }
+
+        if(isset($request->booking_type))
+        {
+            $bookings->where("booking_type",$request->booking_type);
+        }
+
+        if(isset($request->from) && isset($request->to)){
+            $movement_dates->where('date', '>=', $request->from)->where('date', '<=', $request->to)->groupBy("booking_id")->pluck("booking_id");
+            $bookings->whereIn("id",$movement_dates);
+        }
+        
+        return view('layouts.searchresult', ['bookings'=>$bookings->paginate(CommonEnums::$PAGE_LENGTH)]);
+    }
 }

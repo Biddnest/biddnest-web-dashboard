@@ -2241,3 +2241,15 @@ $("body").on('change', ".selectservice", function() {
         redirectTo(url + "?" + action + "=" + query);
     }
 });
+
+$("body").on('click', ".filter-button", function(event) {
+    var url = $('.filter-button').data("url");
+    var zones = $('.zones').val();
+    var status = $('.status').val();
+    var category = $('.category').val();
+    var booking_type = $('.booking_type').val();
+    var booking_form = $('.booking-form').val();
+    var booking_to = $('.booking-to').val();
+
+    redirectTo(url + "?zones=" + zones + "&status=" + status + "&category=" + category + "&booking_type=" + booking_type + "&booking_form=" + booking_form + "&booking_to=" + booking_to);
+});

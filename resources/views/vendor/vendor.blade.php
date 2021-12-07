@@ -119,14 +119,18 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="col">
+                                                </div>
+                                                <div class="row f-14 p-10">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-3">
                                                         <label style="font-weight:500 !important;">Joining From</label>
                                                         <input type="text" id="dateselect" name="date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-md-3">
                                                         <label style="font-weight:500 !important;">Joining To</label>
                                                         <input type="text" id="dateselect1" name="date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
                                                     </div>
+                                                    <div class="col-md-3"></div>
                                                 </div>
                                             </div>
                                             <table class="table  p-0 theme-text mb-0 ">

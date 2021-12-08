@@ -102,6 +102,11 @@ Route::prefix('v1')->group(function () {
 
     Route::put("/freshchat/restore/id",[ApiRouter::class, 'updateFreshChatRestoreID']);
 
+    /*wallet apis*/
+    Route::get("/reward-points/balance",[ApiRouter::class, 'getRewardPointsBalance']);
+    Route::get("/reward-points/ledger",[ApiRouter::class, 'getRewardPointsLedger']);
+    Route::get("/vouchers",[ApiRouter::class, 'getVouchers']);
+
 });
 
 
@@ -189,6 +194,8 @@ Route::prefix('vendors/v1')->group(function () {
     Route::put("/details/update",[VendorApiRouter::class, 'updateDetails']);
 
     Route::put("/profile/update",[VendorApiRouter::class, 'updateProfile']);
+
+
 
 
     //Webhooks for websocket server

@@ -120,7 +120,7 @@
             <div class="form-input">
               <label>Start Date </label>
               <span class="">
-                <input type="text" class="form-control br-5 date dateselect" value="@if($coupons){{$coupons->valid_from}}@endif" name="valid_from" required="required" placeholder="15/02/2021"/>
+                <input type="text" class="form-control br-5 singledate dateselect" value="@if($coupons){{$coupons->valid_from}}@endif" name="valid_from" required="required" placeholder="15/02/2021" id="cfrom" data-parsley-gte="#cto" />
                <span class="error-message">Please enter  valid</span>
               </span>
            </div>
@@ -130,7 +130,7 @@
             <div class="form-input">
               <label>End Date </label>
               <span class="">
-                <input type="text" class=" form-control br-5 date dateselect " name="valid_to" value="@if($coupons){{$coupons->valid_to}}@endif" required="required"  placeholder="15/02/2021"/>
+                <input type="text" class=" form-control br-5 singledate dateselect " name="valid_to" value="@if($coupons){{$coupons->valid_to}}@endif" required="required"  placeholder="15/02/2021" data-parsley-gte="#cfrom" id="cto"/>
                <span class="error-message">Please enter  valid</span>
               </span>
             </div>
@@ -140,7 +140,7 @@
             <div class="form-input">
               <label class="max-discount">Max Discount Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" value="@if($coupons){{$coupons->max_discount_amount}}@else0@endif" class="form-control max-disc-input">
+                <input type="number"  placeholder="5000" name="max_discount_amount" id="max-discount" value="@if($coupons){{$coupons->max_discount_amount}} @else 0 @endif" class="form-control max-disc-input">
                 <span class="error-message">Please enter  valid </span>
               </span>
             </div>
@@ -149,7 +149,7 @@
             <div class="form-input">
               <label class="min-order">Minimum Order Amount</label>
               <span class="">
-                <input type="number"  placeholder="5000" id="min-order" value="@if($coupons){{$coupons->min_order_amount}}@else0@endif" name="min_order_amount" class="form-control" required>
+                <input type="number"  placeholder="5000" id="min-order" value="@if($coupons){{$coupons->min_order_amount}}@else 0 @endif" name="min_order_amount" class="form-control" required>
                <span class="error-message">Please enter  valid </span>
               </span>
             </div>

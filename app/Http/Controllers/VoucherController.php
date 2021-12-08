@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use App\Enums\VoucherEnums;
@@ -137,5 +138,18 @@ class VoucherController extends Controller
             return $output_bool ? true:  Helper::response(true,"Voucher has been deleted.");
         else
             return  $output_bool ? false: Helper::response(false,"Couldn't delete the voucher. Something went wrong.");
+    }
+
+    public static function getUserVouchers($user_id){
+
+        $user = User::find($user_id);
+
+        if(!$user)
+            return Helper::response(false, "This user doesnt exist.");
+
+        return Helper::response(true, "Here are the user vouchers", [
+            "vouchers"=>VoucherCode::where("user_id",$user_id)->with('meta')->get()
+        ]);
+
     }
 }

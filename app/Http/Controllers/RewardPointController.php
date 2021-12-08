@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonEnums;
 use App\Models\User;
 use App\Helper;
+use Bavix\Wallet\Models\Transaction;
 use Illuminate\Http\Request;
 
 class RewardPointController extends Controller
@@ -46,6 +48,29 @@ class RewardPointController extends Controller
         }
         else
             return Helper::response(false, "There are not enough points in the users account to make this transaction.");
+    }
+
+    public static function getUserBalance(int $user_id){
+        $user = User::find($user_id);
+
+        if(!$user)
+            return Helper::response(false, "This user doesnt exist.");
+
+        return Helper::response(true, "Here are the wallet details.",["wallet"=>$user->getWallet("reward-points")]);
+    }
+
+    public static function getUserLedger(Request $request){
+        $user = User::with("wallet")->find($request->token_payload->id);
+
+        if(!$user)
+            return Helper::response(false, "This user doesnt exist.");
+        $transactions =     Transaction::where("wallet_id",$user->wallet->id)->orderBy("id","DESC")->paginate(CommonEnums::$PAGE_LENGTH);
+
+        return Helper::response(true, "Here are the wallet details.",["ledger" =>
+            $transactions->items(), "paging" => [
+            "current_page" => $transactions->currentPage(), "total_pages" => $transactions->lastPage(), "next_page" => $transactions->nextPageUrl(), "previous_page" => $transactions->previousPageUrl()
+        ]
+        ]);
     }
 
 }

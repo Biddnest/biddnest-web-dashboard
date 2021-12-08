@@ -763,4 +763,17 @@ class ApiRouteController extends Controller
         else
             return BookingsController::trackInventoryData($request->all(), $request->token_payload->id);
     }
+
+    public function getRewardPointsBalance(Request $request){
+        return RewardPointController::getUserBalance($request->token_payload->id);
+    }
+
+    public function getRewardPointsLedger(Request $request){
+        return RewardPointController::getUserLedger($request);
+    }
+
+    public function getVouchers(Request $request){
+        return VoucherController::getUserVouchers($request->token_payload->id);
+    }
+
 }

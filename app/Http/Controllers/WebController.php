@@ -734,6 +734,13 @@ class WebController extends Controller
                 ->orWhere('phone', 'like', $request->search."%");
         }
 
+        if(isset($request->status)){
+           $user->where('status', $request->status);
+        }
+        if(isset($request->from) && isset($request->to)){
+            $user->where('created_at', '>=', $request->from)->where('created_at', '<=', $request->to);
+        }
+
         if($request->sort)
             $user->where('status', UserEnums::$STATUS[$request->sort]);
         else
@@ -803,6 +810,21 @@ class WebController extends Controller
 
         if(isset($request->search)){
             $vendors->where('org_name', 'like', "%".$request->search."%");
+        }
+
+        if(isset($request->status)){
+            $vendors->where('status', $request->status);
+        }
+        
+        if(isset($request->zones)){
+            $vendors->where('zone_id', $request->zones);
+        }
+        if(isset($request->service)){
+            $vendors->where('service_type', $request->service);
+        }
+
+        if(isset($request->from) && isset($request->to)){
+             $vendors->where('created_at', '>=', $request->from)->where('created_at', '<=', $request->to);
         }
 
 //        return OrganizationEnums::$STATUS[$request->sort];
@@ -1115,6 +1137,12 @@ class WebController extends Controller
         if(isset($request->search)){
             $coupons=$coupons->where('name', 'like', "%".$request->search."%");
         }
+        if(isset($request->status)){
+            $coupons=$coupons->where('status', $request->status);
+        }
+        if(isset($request->from) && isset($request->to)){
+            $coupons=$coupons->where('valid_from', '>=', $request->from)->where('valid_to', '<=', $request->to);
+        }
 
         $coupons_active= Coupon::where(['status'=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
         if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
@@ -1199,6 +1227,14 @@ class WebController extends Controller
 
         if(isset($request->search)){
             $zones=$zones->where('name', 'like', "%".$request->search."%");
+        }
+
+        if(isset($request->city)){
+            $zones=$zones->where('city', 'like', "%".$request->city."%");
+        }
+
+        if(isset($request->status)){
+            $zones=$zones->where('status', $request->status);
         }
 
             $total=Zone::where(["deleted"=>CommonEnums::$NO])->count();
@@ -1334,6 +1370,15 @@ class WebController extends Controller
         if(isset($request->search)){
             $review=$review->where('desc', 'like', "%".$request->search."%");
         }
+
+        if(isset($request->ratings)){
+            $review=$review->where('star', $request->ratings);
+        }
+
+        if(isset($request->id)){
+            $payout=$payout->where('booking_id', Booking::where("organization_id", $request->id)->pluck("id")[0]);
+        }
+
         $review->with(['Booking'=>function($query){
             $query->with('organization');
         }])->with('user')->orderBy("id","DESC");
@@ -1436,7 +1481,19 @@ class WebController extends Controller
         if(isset($request->search)){
             $payout=$payout->where('public_payout_id', 'like', "%".$request->search."%");
         }
-        $payout->orderBy("id","DESC");
+
+        if(isset($request->id)){
+            $payout=$payout->where('organization_id', $request->id);
+        }
+
+        if(isset($request->status)){
+            $payout=$payout->where('status', $request->status);
+        }
+        
+        if(isset($request->from) && isset($request->to)){
+            $payout=$payout->where('dispatch_at', '>=', $request->from)->where('dispatch_at', '<=', $request->to);
+        }
+        $payout->with('organization')->orderBy("id","DESC");
 
         $scheduled = Payout::where('status', PayoutEnums::$STATUS['scheduled'])->count();
         $failed = Payout::where('status', PayoutEnums::$STATUS['suspended'])->count();
@@ -1686,5 +1743,43 @@ class WebController extends Controller
             ->orWhere('public_enquiry_id', 'like', $request->search."%")->get();
 
         return view('layouts.searchresult', ['bookings'=>$bookings]);
+    }
+
+    
+    public function filterResult(Request $request)
+    {
+        if(Session::get('active_zone'))
+            $zone = [Session::get('active_zone')];
+        else
+            $zone = [Session::get('admin_zones')];
+
+        $bookings = Booking::where("deleted", CommonEnums::$NO);
+
+        if(isset($request->zones))
+        {
+            $bookings->where("zone_id",$request->zones);
+        }
+
+        if(isset($request->status))
+        {
+            $bookings->where("status",$request->status);
+        }
+
+        if(isset($request->category))
+        {
+            $bookings->where("service_id",$request->category);
+        }
+
+        if(isset($request->booking_type))
+        {
+            $bookings->where("booking_type",$request->booking_type);
+        }
+
+        if(isset($request->from) && isset($request->to)){
+            $movement_dates->where('date', '>=', $request->from)->where('date', '<=', $request->to)->groupBy("booking_id")->pluck("booking_id");
+            $bookings->whereIn("id",$movement_dates);
+        }
+        
+        return view('layouts.searchresult', ['bookings'=>$bookings->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 }

@@ -48,57 +48,9 @@
                     </div>
 
                     <div class="header-wrap p-0 col-sm-1" style="display: flex; justify-content: flex-end;  margin-right: -28px;" >
-                        {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i><img src="{{asset('static/images/filter.svg')}}" alt="" srcset="" ></i>
+                        <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                            <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="date">
-                                    <label class="form-check-label" for="date">
-                                        Date
-                                    </label>
-                            </div></a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="zone">
-                                    <label class="form-check-label" for="zone">
-                                        Zone
-                                    </label>
-                            </div></a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="city">
-                                    <label class="form-check-label" for="city">
-                                        City
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="couponName">
-                                    <label class="form-check-label" for="couponName">
-                                        Coupon Name
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="couponType">
-                                    <label class="form-check-label" for="couponType">
-                                        Coupon Type
-                                    </label>
-                                </div>
-                            </a>
-                            <a class="dropdown-item border-top-bottom" href="#">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="status">
-                                    <label class="form-check-label" for="status">
-                                        Status
-                                    </label>
-                                </div>
-                            </a>
-                        </div>--}}
                     </div>
 
                     <div class="card-head left col-sm-3">
@@ -111,6 +63,28 @@
                     </div>
                 </div>
                 <div class="all-vender-details">
+                    <div class="collapse" id="filter-menu">
+                        <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                        <div class="row f-14">
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Status</label>
+                                <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                    <option value="">--Select--</option>
+                                    @foreach(\App\Enums\CouponEnums::$STATUS as $key=>$status)
+                                       <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                   @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Valied From</label>
+                                <input type="text" id="dateselect" name="payout_date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                            </div>
+                            <div class="col">
+                                <label style="font-weight:500 !important;">Valied To</label>
+                                <input type="text" id="dateselect1" name="payout_date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                            </div>
+                        </div>
+                    </div>
                     <table class="table text-center p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg  p-0">
                                                     <tr>

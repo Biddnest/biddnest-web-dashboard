@@ -2144,7 +2144,7 @@ $("body").on('change', ".date", function(event) {
     Logger.info($(this).val());
     let dates = $(this).val();
     dates = dates.split(",");
-    dates.sort(function(a,b){
+    dates.sort(function(a, b) {
         if (a < b) {
             return 1;
         }
@@ -2156,10 +2156,100 @@ $("body").on('change', ".date", function(event) {
 
     Logger.info(dates);
 
-    dates.every(function(date){
+    dates.every(function(date) {
         return `${new Date(date).getDate()} ${new Date(date).getMonth()}`;
     });
 
     // Logger.info(e);
     $(this).val(dates.join(","));
+});
+
+
+$("body").on('change', ".selectfilter", function() {
+    var query = $('.selectfilter').val();
+    var action = $('.selectfilter').data("action");
+    var url = window.location.href;
+    if (url.indexOf(action) > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&" + action + "=" + query);
+    } else {
+        redirectTo(url + "?" + action + "=" + query);
+    }
+});
+
+$("body").on('input', ".searchcity", function() {
+    var query = $('.searchcity').val();
+    var action = $('.searchcity').data("action");
+    if (query.length >= 3) {
+        var url = window.location.href;
+        if (url.indexOf(action) > -1) {
+            url = window.location.href.split("?")[0];
+        }
+        if (url.indexOf("?") > -1) {
+            redirectTo(url + "&" + action + "=" + query);
+        } else {
+            redirectTo(url + "?" + action + "=" + query);
+        }
+    }
+});
+
+$("body").on('change', ".todate", function() {
+    var from_query = $('.fromdate').val();
+    var to_query = $('.todate').val();
+    var url = window.location.href;
+    if (url.indexOf("from") > -1 && url.indexOf("to") > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&from=" + from_query + "&to=" + to_query);
+    } else {
+        redirectTo(url + "?from=" + from_query + "&to=" + to_query);
+    }
+});
+
+$("body").on('click', ".clear-filter", function() {
+    var url = window.location.href.split("?")[0];
+    redirectTo(url);
+});
+
+$("body").on('change', ".selectstatus", function() {
+    var query = $('.selectstatus').val();
+    var action = $('.selectstatus').data("action");
+    var url = window.location.href;
+    if (url.indexOf(action) > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&" + action + "=" + query);
+    } else {
+        redirectTo(url + "?" + action + "=" + query);
+    }
+});
+
+$("body").on('change', ".selectservice", function() {
+    var query = $('.selectservice').val();
+    var action = $('.selectservice').data("action");
+    var url = window.location.href;
+    if (url.indexOf(action) > -1) {
+        url = window.location.href.split("?")[0];
+    }
+    if (url.indexOf("?") > -1) {
+        redirectTo(url + "&" + action + "=" + query);
+    } else {
+        redirectTo(url + "?" + action + "=" + query);
+    }
+});
+
+$("body").on('click', ".filter-button", function(event) {
+    var url = $('.filter-button').data("url");
+    var zones = $('.zones').val();
+    var status = $('.status').val();
+    var category = $('.category').val();
+    var booking_type = $('.booking_type').val();
+    var booking_form = $('.booking-form').val();
+    var booking_to = $('.booking-to').val();
+
+    redirectTo(url + "?zones=" + zones + "&status=" + status + "&category=" + category + "&booking_type=" + booking_type + "&booking_form=" + booking_form + "&booking_to=" + booking_to);
 });

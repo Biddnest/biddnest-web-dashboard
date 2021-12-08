@@ -347,8 +347,7 @@
                                                     required>
                                                 <option value=""> -Select-</option>
                                                 @foreach($services as $service=>$value)
-                                                    <option
-                                                        value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
+                                                    <option value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid

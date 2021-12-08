@@ -54,8 +54,8 @@
                                 <tr class="tb-border">
                                     <td  scope="row" class="text-left" style="padding: 14px;">
                                             {{$booking->public_booking_id}}</td>
-                                    <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city']}}</td>
-                                    <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city']}}</td>
+                                    <td style="padding: 14px;">{{json_decode($booking->source_meta, true)['city'] ?? ''}}</td>
+                                    <td style="padding: 14px;">{{json_decode($booking->destination_meta, true)['city'] ?? ''}}</td>
                                     <td style="padding: 14px;" >{{$booking->created_at->format('d M Y')}}</td>
 {{--                                    <td style="text-align: center !important; padding: 14px;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>--}}
                                     <td style="text-align: center !important; padding: 14px;">{{$booking->final_quote ?? "-"}}</td>
@@ -143,7 +143,7 @@
 
                                         @endswitch
                                     </td>
-                                    <td style="padding: 14px;"><a href="{{route('order-details',["id"=>$booking->id])}}">
+                                    <td style="padding: 14px;"><a href="{{route('order-details',['id'=>$booking->id])}}">
                                             <i class="tooltip-trigger">
                                                 <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" >
                                             </i>
@@ -153,13 +153,29 @@
                             @endforeach
                         </tbody>
                     </table>
-                    @if(count($bookings)== 0)
+                     @if($bookings && (count($bookings) == 0))
                         <div class="row hide-on-data">
                             <div class="col-md-12 text-center p-20">
                                 <p class="font14"><i>. You don't have any Bookings on this search.</i></p>
                             </div>
                         </div>
-                    @endif
+                    @endif 
+                    <div class="pagination">
+                        <ul>
+                            <li class="p-1">Page</li>
+                            <li class="digit">{{$bookings->currentPage()}}</li>
+                            <li class="label">of</li>
+                            <li class="digit">{{$bookings->lastPage()}}</li>
+                            @if(!$bookings->onFirstPage())
+                                <li class="button"><a href="{{$bookings->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                </li>
+                            @endif
+                            @if($bookings->currentPage() != $bookings->lastPage())
+                                <li class="button"><a href="{{$bookings->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

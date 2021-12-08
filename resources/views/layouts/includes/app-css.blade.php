@@ -1176,4 +1176,9 @@
                 border: 2px dashed #000;
             }
 
+            .clear-filter{
+                float: right;
+                margin: 20px;
+            }
+
         </style>

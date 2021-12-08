@@ -6,8 +6,11 @@
         <div class="d-flex  flex-row justify-content-between">
             <h3 class="page-head text-left p-4 f-20">Bookings & Orders</h3>
             <div class="mr-20">
-                <a href="{{ route('create-order')}}">
+                <a href="{{ route('create-order')}}" style="margin-right: 20px;">
                     <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Create New order</button>
+                </a>
+                <a href="#" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                    <button class="btn theme-bg white-text" ><i class="fa fa-search p-1" aria-hidden="true"></i> Search</button>
                 </a>
             </div>
         </div>
@@ -19,6 +22,65 @@
                         <li class="breadcrumb-item">Manage Bookings</li>
                     </ol>
                 </nav>
+            </div>
+        </div>
+        <div class="collapse justify-content-between Dashboard-lcards" id="filter-menu">
+            <div class="card  h-auto p-0 pt-10">
+                <div class="justify-content-between p-10">
+                    <div class=" card-head right text-left">
+                            <div class="row f-14 p-10">
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Zones</label>
+                                    <select class="form-control br-5 zones" name="zones">
+                                            <option value="">--Select--</option>
+                                            @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Status</label>
+                                        <select class="form-control br-5 status" name="status">
+                                            <option value="">--Select--</option>
+                                                @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
+                                                    <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                                @endforeach
+                                        </select>
+                                </div>
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Category</label>
+                                    <select class="form-control br-5 category" name="category">
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Models\Service::where(["status"=>\App\Enums\CommonEnums::$YES, "deleted"=>\App\Enums\CommonEnums::$NO])->get() as $service)
+                                            <option value="{{$service->id}}">{{ucfirst(trans($service->name))}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row f-14 p-10">
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Booking Type</label>
+                                    <select class="form-control br-5 booking_type" name="booking_type">
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\BookingEnums::$BOOKING_TYPE as $booking_type=>$value)
+                                            <option value="{{$value}}">{{ucfirst(trans($booking_type))}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Booking Date From</label>
+                                    <input type="text" id="dateselect" name="date_from" class="singledate form-control br-5 booking-form" placeholder="23/Nov/2020" />
+                                </div>
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Booking Date To</label>
+                                    <input type="text" id="dateselect1" name="date_to" class="singledate form-control br-5 booking-to" placeholder="23/Dec/2020" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button class="btn theme-bg white-text filter-button" data-url="{{route('admin.filter-booking')}}"></i>Submit</button>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="vender-all-details">

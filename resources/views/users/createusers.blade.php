@@ -192,6 +192,22 @@
 
                                 <div class="col-lg-6">
                                     <div class="form-input">
+                                        <label class="full-name">Date of Relieving</label>
+                                        <input type="text" id="fullname" placeholder="yyyy-mm-dd" name="meta[dor]" class="form-control singledate" value="@if($users){{json_decode($users->meta, true)['dor'] ?? ''}}@endif" required>
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="full-name">Educational Qualifications</label>
+                                        <input type="text" id="fullname" placeholder="Btech Mechanical" name="meta[education]" class="form-control" value="@if($users){{json_decode($users->meta, true)['education'] ?? ''}}@endif" required>
+                                        <span class="error-message">Please enter valid</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
                                         <label class="full-name">PAN Card Number</label>
                                         <input type="text" id="fullname" placeholder="btech Mechanical" name="meta[pan_no]" class="form-control" value="@if($users){{json_decode($users->meta, true)['pan_no']}}@endif" required>
                                         <span class="error-message">Please enter valid</span>

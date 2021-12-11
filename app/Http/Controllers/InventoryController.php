@@ -476,7 +476,7 @@ class InventoryController extends Controller
                 break;
 
             default:
-                return Helper::response([false, "This user is supended. Please use the vendor panel to enable."]);
+                return Helper::response([false, "This is an invalid input. Try again."]);
                 break;
         }
 

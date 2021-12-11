@@ -1568,4 +1568,20 @@ class Route extends Controller
         return RewardPointController::deposit($request->user_id, $request->points, $request->comments);
      }
 
+     public function autofill_customer_data(Request $request){
+        $validation = Validator::make($request->all(),[
+            'phone'=> 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return UserController::getByPhone($request->phone);
+     }
+
+    public function coupon_status_update(Request $request)
+    {
+        return CouponController::statusUpdate($request->id);
+    }
+
 }

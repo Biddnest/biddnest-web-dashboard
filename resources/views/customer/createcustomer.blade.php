@@ -37,7 +37,7 @@
                     </div>
                     <div class="create-customer">
                         <div class="form-wrapper">
-                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="refresh" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
+                            <form action="@if(!$users){{route('customer_add')}}@else{{route('customer_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="nothing" data-redirect-type="hard" data-url="{{route('customers')}}" data-alert="mega" class="form-new-order mt-3 input-text-blue" id="myForm" data-parsley-validate >
                                 <div class="row pr-3 pl-3">
                                     <div class="col-lg-6">
                                         <p class="img-label" style="padding-left: 0px;">Image</p>

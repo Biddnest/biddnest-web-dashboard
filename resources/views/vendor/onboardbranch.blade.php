@@ -347,11 +347,11 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Service</label>
-                                <select id="" class="form-control select-box" name="service[]" multiple required>
+                                <select id="" class="form-control select-box field-toggle" name="service[]" data-target=".subservices" multiple
+                                        required>
                                     <option value=""> -Select-</option>
-                                    @foreach($services as $service=>$value)
-                                        <option
-                                            value="{{$value->id}}">{{ucfirst(trans($value->name))}}</option>
+                                    @foreach($services as $service)
+                                        <option value="{{$service->id}}">{{ucfirst(trans($service->name))}}</option>
                                     @endforeach
                                 </select>
                                 <span class="error-message">Please enter valid

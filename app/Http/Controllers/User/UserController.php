@@ -496,4 +496,16 @@ class UserController extends Controller
             return false;
     }
 
+    public static function getByPhone($phone){
+
+        $user = User::where("phone",$phone)->first();
+
+        if(!$user)
+         return Helper::response(false, "No user found");
+
+         return Helper::response(true, "Here are the user details",[
+            "user"=> $user
+            ]);
+    }
+
 }

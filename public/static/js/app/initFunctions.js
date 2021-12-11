@@ -64,6 +64,8 @@ export function initMapPicker() {
                                 pincode = addr.long_name;
                         }
                     }
+
+                    $('.source-autocomplete').eq(1).val(response.results[0].formatted_address);
                 }
                 $("#source-city").val(city);
                 $("#source-state").val(state);
@@ -129,6 +131,9 @@ export function initMapPicker() {
                                 pincode = addr.long_name;
                         }
                     }
+
+                    $('.dest-autocomplete').eq(1).val(response.results[0].formatted_address);
+
                 }
                 $("#dest-city").val(city);
                 $("#dest-state").val(state);

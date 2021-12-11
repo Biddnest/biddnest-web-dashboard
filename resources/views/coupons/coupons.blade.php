@@ -76,11 +76,11 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <label style="font-weight:500 !important;">Valied From</label>
+                                <label style="font-weight:500 !important;">Valid From</label>
                                 <input type="text" id="dateselect" name="payout_date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
                             </div>
                             <div class="col">
-                                <label style="font-weight:500 !important;">Valied To</label>
+                                <label style="font-weight:500 !important;">Valid To</label>
                                 <input type="text" id="dateselect1" name="payout_date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
                             </div>
                         </div>
@@ -95,12 +95,13 @@
                                                         <th scope="col">Coupon Description</th>
                                                         <th scope="col">Created By</th>
                                                         <th scope="col" style="text-align: center !important;">Status</th>
+                                                        <th scope="col">View</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>
                         <tbody class="mtop-20 f-13">
                             @foreach($coupons as $coupon)
-                                <tr class="tb-border cursor-pointer coup_{{$coupon->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.coupon',['id'=>$coupon->id]) }}">
+                                <tr class="tb-border cursor-pointer coup_{{$coupon->id}}">
                                     <td scope="row">{{$coupon->name}}</td>
                                     <td>
                                         @switch($coupon->discount_type)
@@ -141,19 +142,15 @@
                                     <td>{!! $coupon->desc !!}</td>
                                     <td>@isset($coupon->created_by) {{ $coupon->created_by->fname }} {{ $coupon->created_by->lname }} @else - @endif</td>
                                     <td>
-                                        @switch($coupon->status)
-                                            @case(\App\Enums\CouponEnums::$STATUS['active'])
-                                                <span class="status-badge green-bg  text-center td-padding">Active</span>
-                                            @break
-                                            @case(\App\Enums\CouponEnums::$STATUS['inactive'])
-                                                <span class="status-badge red-bg  text-center td-padding">Inactive</span>
-                                            @break
-                                            @case(\App\Enums\CouponEnums::$STATUS['expired'])
-                                                <span class="status-badge info-bg  text-center td-padding">Expired</span>
-                                            @break
-                                        @endswitch
+                                        @if($coupon->status != \App\Enums\CouponEnums::$STATUS['expired'])
+                                            <input type="checkbox" {{($coupon->status == \App\Enums\CouponEnums::$STATUS['active']) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('coupon_status_update',['id'=>$coupon->id])}}">
+                                        @else
+                                            <span class="status-badge info-bg  text-center td-padding">Expired</span>
+                                        @endif
                                     </td>
+<td><a  class="inline-icon-button mr-4 sidebar-toggle-link" style="display: table-cell; transform: translate(8px, 0px); " href="#" data-sidebar="{{ route('sidebar.coupon',['id'=>$coupon->id]) }}"><i class="icon fa fa-eye p-1 mr-4" aria-hidden="true"></i></a></td>
                                     <td>
+
                                         <a  class="inline-icon-button mr-4" style="display: table-cell; transform: translate(8px, 0px); " href="{{route('edit-coupons', ['id'=>$coupon->id])}}"><i class="icon dripicons-pencil p-1 mr-4" aria-hidden="true"></i></a>
                                         <a href="#" style="display: table-cell; transform: translate(16px, 0px);" class="delete inline-icon-button ml-4" data-parent=".coup_{{$coupon->id}}" data-confirm="Are you sure, you want delete this Coupon permanently? You won't be able to undo this." data-url="{{route('coupon_delete',['id'=>$coupon->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                     </td>

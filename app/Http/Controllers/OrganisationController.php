@@ -254,7 +254,13 @@ class OrganisationController extends Controller
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
-        $meta = json_decode($exist['meta'], true);
+//        $meta = json_decode($exist['meta'], true);
+        $meta = ["auth_fname"=>$data['fname'] ?? '',
+        "auth_lname"=>$data['lname'] ?? '',
+        "secondory_phone"=>$data['phone']['secondary'] ?? '',
+        "gstin_no"=>json_decode($exist['meta'], true)['gstin_no'] ?? ''
+        ];
+
         $meta['org_description']= $data['organization']['description'];
         $meta['address']= $data['address']['address'];
         $meta['landmark']= $data['address']['landmark'];
@@ -318,7 +324,12 @@ class OrganisationController extends Controller
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
-        $meta = json_decode($exist['meta'], true);
+        $meta = ["auth_fname"=>$data['fname'] ?? '',
+            "auth_lname"=>$data['lname'] ?? '',
+            "secondory_phone"=>$data['phone']['secondary'] ?? '',
+            "gstin_no"=>json_decode($exist['meta'], true)['gstin_no'] ?? ''
+        ];
+
         $meta['org_description']= $data['organization']['description'];
         $meta['address']= $data['address']['address'];
         $meta['landmark']= $data['address']['landmark'];
@@ -436,7 +447,7 @@ class OrganisationController extends Controller
 
             if(filter_var($bidnest_agreement, FILTER_VALIDATE_URL) === FALSE)
                 $update_data["bidnest_agreement"] = Helper::saveFile(base64_decode($bidnest_agreement),"BD".uniqid().explode('/', mime_content_type($bidnest_agreement))[1],"vendors/bank/".$id.$exist['org_name']);
-            
+
             if(filter_var($additional_file, FILTER_VALIDATE_URL) === FALSE)
                 $update_data["additional_file"] = Helper::saveFile(base64_decode($additional_file),"BD".uniqid().explode('/', mime_content_type($additional_file))[1],"vendors/bank/".$id.$exist['org_name']);
 
@@ -478,7 +489,7 @@ class OrganisationController extends Controller
         if($vendor_phone)
             return Helper::response(false,"Phone no is already exist in system.");
 
-        $meta = array(["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']]);
+        $meta = ["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']];
 
         if(!$data['password'])
             $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
@@ -503,6 +514,7 @@ class OrganisationController extends Controller
         $vendor->dor = date("Y-m-d", strtotime($data['dor']));
         $vendor->state = $data['state'];
         $vendor->city = $data['city'];
+        $vendor->gender = $data['gender'];
         $vendor_result = $vendor->save();
 
         if(!$vendor_result)
@@ -527,7 +539,11 @@ class OrganisationController extends Controller
         if(!$exist)
             return Helper::response(false,"Incorrect Role or Organization id");
 
-        $meta = array(["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']]);
+        $meta = [
+            "branch"=>$data['branch'],
+            "address_line1"=>$data['address1'],
+            "address_line2"=>$data['address2']
+        ];
 
         $image = $data['image'];
         $uniq = uniqid();
@@ -554,6 +570,7 @@ class OrganisationController extends Controller
             "doj"=>date("Y-m-d", strtotime($data['doj'])),
             "dor"=>date("Y-m-d", strtotime($data['dor'])),
             "state"=>$data['state'],
+            "gender"=>$data['gender'],
             "city"=>$data['city']
         ];
 

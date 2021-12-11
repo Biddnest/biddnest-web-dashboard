@@ -49,7 +49,7 @@
                     <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
                         <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
                             <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                        </a> 
+                        </a>
                     </div>
                     <div class="card-head left col-sm-3">
                         <div class="search">
@@ -88,19 +88,23 @@
                                 <th scope="col">Order ID</th>
                                 <th scope="col">Customer Name</th>
                                 <th scope="col">Organisation Name</th>
-                                <th scope="col">Review Description</th>
+                                <th scope="col">Reviewed On</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Ratings</th>
-{{--                                <th scope="col">Operations</th>--}}
+                                <th scope="col">Operations</th>
                             </tr>
                         </thead>
                         <tbody class="mtop-20 f-12">
                             @foreach($reviews as $review)
-                                <tr class="tb-border cursor-pointer invsidebar" data-sidebar="{{ route('sidebar.reviews',['id'=>$review->id]) }}">
+                                <tr class="tb-border cursor-pointer">
                                     <td scope="row">@if($review->booking){{$review->booking->public_booking_id}} @else - @endif</td>
-                                    <td>{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</td>
-                                    <td>@if($review->booking && $review->booking->organization) {{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}  @else - @endif</td>
-                                    <td>{{$review->desc}}</td>
+                                    <td>
+                                        <a href="#0" data-sidebar="{{ route('sidebar.customer',['id'=>$review->user->id]) }}" class="sidebar-toggle-link cursor-pointer underline">{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</a>
+                                    </td>
+                                    <td>@if($review->booking && $review->booking->organization)
+                                            <a href="#0" data-sidebar="{{ route('sidebar.customer',['id'=> $review->booking->organization->id]) }}" class="sidebar-toggle-link cursor-pointer underline">{{ucfirst(trans($review->booking->organization->org_name))}} {{$review->booking->organization->org_type}}</a>
+                                        @else - @endif</td>
+                                    <td>{{\Carbon\Carbon::parse($review->created_at)->format("d M Y")}}</td>
                                     <td class="">
                                         <div class="status-badge light-bg text-center">
                                             @if(\App\Enums\ReviewEnums::$STATUS['active'] == $review->status)
@@ -129,16 +133,9 @@
                                             <i class="fa fa-star-o bg-yellow" aria-hidden="true"></i>
                                         @endfor
                                     </td>
-                                    {{--<td>
-                                        <a  class = "inline-icon-button mr-4" href="{{route('create-review')}}">
-                                            <i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i>
-
-                                        </a>
-                                        <a href="#" class ="inline-icon-button">
-                                        <i class="icon dripicons-trash p-1" aria-hidden="true"></i>
-                                        </a>
-
-                                    </td>--}}
+                                    <td class="no-toggle sidebar-toggle_booking" style="text-align: center !important;" data-sidebar="{{ route('sidebar.reviews',['id'=>$review->id]) }}">
+                                        <a href="#0" class="inline-icon-button ml-4" style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

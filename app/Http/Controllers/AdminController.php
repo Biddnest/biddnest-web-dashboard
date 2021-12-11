@@ -137,7 +137,7 @@ class AdminController extends Controller
         $image_man = new ImageManager(array('driver' => 'gd'));
         $uniq = uniqid();
 
-        $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2']]);
+        $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2'], "dor"=>$data['meta']['dor'],"education"=>$data['meta']['education']]);
 
         $admin =new Admin;
         $admin->image=Helper::saveFile($image_man->make($data['image'])->resize(100,100)->encode('png', 75),"BD".$uniq.".png","admins/".$uniq.$data['fname']);
@@ -190,7 +190,7 @@ class AdminController extends Controller
        $image_man = new ImageManager(array('driver' => 'gd'));
        $uniq = uniqid();
 
-       $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2']]);
+       $meta =json_encode(["manager_name" => $data['meta']['manager_name'], "alt_phone" => $data['meta']['alt_phone'], "gender"=>$data['meta']['gender'], "pan_no"=>$data['meta']['pan_no'], "aadha_no"=>$data['meta']['adhar_no'], "address_line1"=>$data['meta']['address_line1'], "address_line2"=>$data['meta']['address_line2'], "dor"=>$data['meta']['dor'],"education"=>$data['meta']['education']]);
 
        $update_data =[
             "fname"=>$data['fname'],

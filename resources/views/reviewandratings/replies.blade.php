@@ -144,8 +144,15 @@
                                                         Order ID
                                                     </div>
                                                     <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                                        Status
+                                                        User
                                                     </div>
+
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Vendor
+                                                    </div>
+                                                    {{--<div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Status
+                                                    </div>--}}
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
@@ -157,7 +164,26 @@
                                                             @endif
                                                         </a>
                                                     </div>
+
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.customer',['id'=>$ticket_info->user->id]) }}">
+
+                                                                {{$ticket_info->user->fname}} {{$ticket_info->user->lname}}
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        @if($ticket_info->organization)
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->id]) }}">
+                                                                {{$ticket_info->organization->name}}
+                                                        </a>
+                                                        @else
+                                                            Not Assigned Yet
+                                                        @endif
+                                                    </div>
+
+
+                                                    {{--<div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                         @switch($ticket_info->status)
                                                             @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
                                                                 Enquiry
@@ -205,7 +231,8 @@
                                                                 Hold
                                                             @break
                                                         @endswitch
-                                                    </div>
+                                                    </div>--}}
+
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                        @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'])
                                                             <input type="text" id="movement_dates" name="movement_dates" class="form-control br-5 filterdate dateselect" required="required" placeholder="15 Jan"  />

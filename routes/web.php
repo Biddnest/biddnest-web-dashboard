@@ -98,8 +98,10 @@ Route::prefix('web/api')->group(function () {
 
     Route::put('/book/edit',[Router::class,'booking_edit'])->name("edit_booking");
     Route::post('/bid/edit',[Router::class,'booking_fianl_bid_edit'])->name("edit_booking_final_bid");
+
     Route::put("/booking/status",[Router::class, 'bookinStatusChange'])->name("status-change-booking");
 
+    Route::get("/autofill",[Router::class, 'autofill_customer_data'])->name("autofill-customer-data");
 
     //organization API's==>updated Vendor Api's
     Route::post('/vendors',[Router::class,'vendor_add'])->name("add_onvoard_vendor");
@@ -151,6 +153,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/coupon',[Router::class,'coupon_add'])->name("coupon_add");
     Route::put('/coupon',[Router::class,'coupon_edit'])->name("coupon_edit");
     Route::delete('/coupon/{id}',[Router::class,'coupon_delete'])->name("coupon_delete");
+    Route::put('/coupon/{id}',[Router::class,'coupon_status_update'])->name("coupon_status_update");
 
     Route::post('/testimonial',[Router::class,'testimonial_add'])->name("testimonial_add");
     Route::put('/testimonial',[Router::class,'testimonial_edit'])->name("testimonial_edit");

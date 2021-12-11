@@ -14,6 +14,7 @@ use App\Models\Coupon;
 use App\Models\CouponOrganization;
 use App\Models\CouponUser;
 use App\Models\CouponZone;
+use App\Models\Inventory;
 use App\Models\Payment;
 use App\Models\Settings;
 use Carbon\Carbon;
@@ -24,10 +25,10 @@ class CouponController extends Controller
 
    public static function add($data){
     /*$name,$desc, $code, $type, $discount_type, $discount_amount, $max_discount, $min_order_value, $deduction_source, $organization_id, $max_usage, $max_usage_user, $scope, $eligibiity_type, $valid_from, $valid_to*/
-    $exist = Coupon::where("code",strtoupper($data['code']))->first();
+    $exist = Coupon::where("code",strtoupper($data['code']))->orWhere("name",$data['name'])->first();
 
     if($exist)
-        return false;
+        return Helper::response(false, "Seems like this coupon name or code already exists. Please try again");
 
     $coupon = new Coupon;
     $coupon->name = $data['name'];
@@ -37,7 +38,7 @@ class CouponController extends Controller
     $coupon->discount_type = in_array($data['discount_type'], CouponEnums::$DISCOUNT_TYPE) ? $data['discount_type'] : null;
 
     $coupon->discount_amount = $data['discount_amount'];
-    $coupon->max_discount_amount = $data['max_discount_amount'];
+    $coupon->max_discount_amount = $data['max_discount_amount'] ?? 0.00;
     $coupon->min_order_amount = $data['min_order_amount'];
     $coupon->deduction_source = in_array($data['deduction_source'], CouponEnums::$DEDUCTION_SOURCE) ? $data['deduction_source'] : null;
     //    $coupon->organization_id = $data['organization_id'];
@@ -106,7 +107,7 @@ class CouponController extends Controller
                "coupon_type"=>$data['type'] == CouponEnums::$COUPON_TYPE['discount'] ? CouponEnums::$COUPON_TYPE['discount'] : 0,
                "discount_type"=>in_array($data['discount_type'], CouponEnums::$DISCOUNT_TYPE) ? $data['discount_type'] : null,
                "discount_amount"=>$data['discount_amount'],
-               "max_discount_amount"=>$data['max_discount_amount'],
+               "max_discount_amount"=>$data['max_discount_amount'] ?? 0.00,
                "min_order_amount"=>$data['min_order_amount'],
                "deduction_source"=>in_array($data['deduction_source'], CouponEnums::$DEDUCTION_SOURCE) ? $data['deduction_source'] : null,
                "max_usage"=>$data['max_usage'],
@@ -313,6 +314,30 @@ class CouponController extends Controller
         ]];
 
         // return $discount_amount;
+    }
+
+    public static function statusUpdate($id)
+    {
+        $inventory = Coupon::find($id);
+
+        switch($inventory->status){
+            case CommonEnums::$YES:
+                $status = CommonEnums::$NO;
+                break;
+
+            case CommonEnums::$NO:
+                $status = CommonEnums::$YES;
+                break;
+
+            default:
+                return Helper::response([false, "This is an invalid input. Try again."]);
+        }
+
+        $update_status = Coupon::where('id',$id)->update(["status"=>$status]);
+        if(!$update_status)
+            return Helper::response(false, "Failed to updated coupon status");
+
+        return Helper::response(true, "Coupon status updated successfully");
     }
 
 

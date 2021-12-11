@@ -158,6 +158,18 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-input">
+                                <label class="phone-num-lable">Gender</label>
+                                <select class="form-control" name="gender" required>
+                                    <option>--Select--</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="3rd gender">3rd Gender</option>
+                                </select>
+                                <span class="error-message">Please enter valid Phone number</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-input">
                                 <label class="phone-num-lable">Employee Contact Number</label>
                                 <input type="tel" id="Employee" placeholder="9876543210" name="phone" class=" form-control phone" maxlength="10" minlength="10" required>
                                 <span class="error-message">Please enter valid Phone number</span>
@@ -330,7 +342,7 @@
         <div class="fullscreen-modal" id="role_{{$role->id}}">
             <div class="fullscreen-modal-body" role="document">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Role</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Role User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -376,6 +388,18 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-input">
+                                    <label class="phone-num-lable">Gender</label>
+                                    <select class="form-control" name="gender" required>
+                                        <option>--Select--</option>
+                                        <option value="female" @if($role && ($role->gender == "female")) Selected @endif>Female</option>
+                                        <option value="male" @if($role && ($role->gender == "male")) Selected @endif>Male</option>
+                                        <option value="3rd gender" @if($role && ($role->gender == "3rd gender")) Selected @endif>3rd Gender</option>
+                                    </select>
+                                    <span class="error-message">Please enter valid Phone number</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-input">
                                     <label class="phone-num-lable">Employee Contact Number</label>
                                     <input type="tel" id="Employee" placeholder="9876543210" value="{{$role->phone}}" name="phone" class=" form-control phone" maxlength="10" minlength="10" required>
                                     <span class="error-message">Please enter valid Phone number</span>
@@ -406,6 +430,8 @@
                                     <span class="error-message">Please enter valid Branch</span>
                                 </div>
                             </div>
+
+
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Email ID</label>
@@ -417,7 +443,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Password</label>
-                                    <input type="password" id="fullname" placeholder="Enter Password" name="password" class="form-control">
+                                    <input type="password" id="fullname" placeholder="Enter new to update" name="password" class="form-control">
                                     <span class="error-message">Please enter valid Password</span>
                                 </div>
                             </div>
@@ -425,7 +451,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Birth</label>
-                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control birthdate dateselect" required>
+                                    <input type="text" id="fullname" name="dob" value="{{$role->dob ? \Carbon\Carbon::parse($role->dob)->format("Y-m-d") : ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control birthdate dateselect" required>
                                     <span class="error-message">Please enter valid Date of Birth</span>
                                 </div>
                             </div>
@@ -433,7 +459,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Joining</label>
-                                    <input type="text" id="fullname" name="doj" value="{{$role->doj ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="doj" value="{{$role->doj ? \Carbon\Carbon::parse($role->doj)->format("Y-m-d") : ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
                                     <span class="error-message">Please enter valid Date of Joining</span>
                                 </div>
                             </div>
@@ -441,7 +467,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="">Date Of Relieving</label>
-                                    <input type="text" id="fullname" name="dor" value="{{$role->dor ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                    <input type="text" id="fullname" name="dor" value="{{$role->dob ? \Carbon\Carbon::parse($role->dob)->format("Y-m-d") : ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
                                     <span class="error-message">Please enter valid Date of Relieving</span>
                                 </div>
                             </div>

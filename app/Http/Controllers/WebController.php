@@ -245,6 +245,9 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
+
         $bookings = Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']])
             ->where("deleted", CommonEnums::$NO)->where("status", ">", BookingEnums::$STATUS['payment_pending'])->whereIn("zone_id", $zone);
 
@@ -280,6 +283,9 @@ class WebController extends Controller
             $zone = [Session::get('active_zone')];
         else
             $zone = [Session::get('admin_zones')];
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
 
         $bookings = Booking::where(function($query){
             $query->where("status", "<=", BookingEnums::$STATUS['payment_pending'])
@@ -325,6 +331,9 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
+
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])
            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
@@ -361,6 +370,9 @@ class WebController extends Controller
             $zone = [Session::get('active_zone')];
         else
             $zone = [Session::get('admin_zones')];
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
 
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["hold"]])
            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
@@ -399,6 +411,9 @@ class WebController extends Controller
         else
             $zone = [Session::get('admin_zones')];
 
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
+
        $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["bounced"]])
            ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
 
@@ -435,6 +450,9 @@ class WebController extends Controller
             $zone = [Session::get('active_zone')];
         else
             $zone = Session::get('admin_zones');
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
 
         $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["cancel_request"],BookingEnums::$STATUS["cancelled"]])
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
@@ -476,6 +494,9 @@ class WebController extends Controller
             $zone = [Session::get('active_zone')];
         else
             $zone = [Session::get('admin_zones')];
+
+        if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
+            $zone = Zone::pluck('id');
 
         $bookings = Booking::whereIn("status",[BookingEnums::$STATUS["in_progress"]])
             ->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone);
@@ -815,7 +836,7 @@ class WebController extends Controller
         if(isset($request->status)){
             $vendors->where('status', $request->status);
         }
-        
+
         if(isset($request->zones)){
             $vendors->where('zone_id', $request->zones);
         }
@@ -1418,7 +1439,11 @@ class WebController extends Controller
     {
         $service_status=[];
         $ticket_info=[];
-        $ticket=Ticket::where('id', $request->id)->with('reply')->first();
+        $ticket=Ticket::where('id', $request->id)
+            ->with(["booking"=>function($query){
+                $query->with('user')->with('organization');
+            }])
+            ->with('reply')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
@@ -1432,13 +1457,13 @@ class WebController extends Controller
         }
         elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
         {
-            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->first();
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->with("user")->first();
             $service_status=$ticket_info->ticket_status;
         }
         elseif ($ticket->type == TicketEnums::$TYPE['call_back'])
         {
             if(json_decode($ticket->meta, true)['public_booking_id']) {
-                $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
+                $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->with('user')->with('organization')->first();
                 $service_status = [];
             }
 
@@ -1446,7 +1471,7 @@ class WebController extends Controller
         elseif ($ticket->type == TicketEnums::$TYPE['complaint'])
         {
             if(json_decode($ticket->meta, true)['public_booking_id']) {
-                $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->first();
+                $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->with('user')->with('organization')->first();
                 $service_status = [];
             }
 
@@ -1489,7 +1514,7 @@ class WebController extends Controller
         if(isset($request->status)){
             $payout=$payout->where('status', $request->status);
         }
-        
+
         if(isset($request->from) && isset($request->to)){
             $payout=$payout->where('dispatch_at', '>=', $request->from)->where('dispatch_at', '<=', $request->to);
         }
@@ -1745,7 +1770,7 @@ class WebController extends Controller
         return view('layouts.searchresult', ['bookings'=>$bookings]);
     }
 
-    
+
     public function filterResult(Request $request)
     {
         if(Session::get('active_zone'))
@@ -1779,7 +1804,7 @@ class WebController extends Controller
             $movement_dates->where('date', '>=', $request->from)->where('date', '<=', $request->to)->groupBy("booking_id")->pluck("booking_id");
             $bookings->whereIn("id",$movement_dates);
         }
-        
+
         return view('layouts.searchresult', ['bookings'=>$bookings->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 }

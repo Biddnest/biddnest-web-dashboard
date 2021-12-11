@@ -2253,3 +2253,20 @@ $("body").on('click', ".filter-button", function(event) {
 
     redirectTo(url + "?zones=" + zones + "&status=" + status + "&category=" + category + "&booking_type=" + booking_type + "&booking_form=" + booking_form + "&booking_to=" + booking_to);
 });
+
+$("body").on('input', ".phone-search", function(event) {
+    if($(this).val().length >= 10){
+        $.get($(this).data("url")+"?phone="+$(this).val(),function(response){
+            Logger.info(response);
+            if(response.status == "success"){
+                $(".autofill-name").val(response.data.user.fname +" "+response.data.user.lname);
+                $(".autofill-email").val(response.data.user.email);
+                tinySuccessAlert("User is registered.","Details have been autofilled.");
+            }else{
+                $(".autofill-name").val('');
+                $(".autofill-email").val('');
+                // tinySuccessAlert("User is not registered.","An account will be created on booking.");
+            }
+        });
+    }
+});

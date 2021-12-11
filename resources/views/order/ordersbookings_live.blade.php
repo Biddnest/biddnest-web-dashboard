@@ -255,7 +255,7 @@
 
                                     <td class="no-toggle sidebar-toggle_booking" style="text-align: center !important;" data-sidebar="{{ route('sidebar.booking',['id'=>$booking->id]) }}">
                                         <a href="#" class="inline-icon-button ml-4" style="display: flex;"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a>
-{{--                                        <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>--}}
+{{-- <a href="{{route('order-details',["id"=>$booking->id])}}" class="inline-icon-button" style="display: table-cell"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a> --}}
                                     </td>
                                 </tr>
                             @endforeach

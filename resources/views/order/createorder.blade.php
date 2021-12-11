@@ -55,21 +55,21 @@
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="phone-num-lable">Phone Number</label>
-                                <input type="text" id="phone" placeholder="987654321" class=" form-control" name="contact_details[phone]" maxlength="10" minlength="10" required data-parsley-type="number">
+                                <input type="text" id="phone" placeholder="987654321" class="phone-search form-control" name="contact_details[phone]" maxlength="10" minlength="10" required data-parsley-type="number" data-url="{{route('autofill-customer-data')}}">
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="full-name">Full Name</label>
-                                <input type="text" id="fullname" placeholder="David Jerome" name="contact_details[name]" class="form-control" required>
+                                <input type="text" id="fullname" placeholder="David Jerome" name="contact_details[name]" class="form-control autofill-name" required>
                                 <span class="error-message">Please enter valid Phone number</span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-input">
                               <label class="email-label">Email</label>
-                                <input type="email" placeholder="abc@mail.com" name="contact_details[email]" id="E-mail" class="form-control" required>
+                                <input type="email" placeholder="abc@mail.com" name="contact_details[email]" id="E-mail" class="form-control autofill-email" required>
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>

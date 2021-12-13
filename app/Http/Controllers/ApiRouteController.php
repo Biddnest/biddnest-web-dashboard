@@ -776,4 +776,9 @@ class ApiRouteController extends Controller
         return VoucherController::getUserVouchers($request->token_payload->id);
     }
 
+    public function getReferralUrl(Request $request)
+    {
+        return UserController::getReferralUrl($request->token_payload->id);
+    }
+
 }

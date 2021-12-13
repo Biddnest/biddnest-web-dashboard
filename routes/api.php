@@ -107,6 +107,8 @@ Route::prefix('v1')->group(function () {
     Route::get("/reward-points/ledger",[ApiRouter::class, 'getRewardPointsLedger']);
     Route::get("/vouchers",[ApiRouter::class, 'getVouchers']);
 
+    Route::get('/referral-link', [Router::class, 'getReferralUrl'])->name("referrerUrl");
+
 });
 
 

@@ -22,7 +22,7 @@ class SubServiceController extends Controller
     {
 
         if(Subservice::where("name",$data['name'])->first())
-            Helper::response(false, "This Sub Category already exists.");
+            return  Helper::response(false, "This Sub Category already exists.");
 
         $imageman = new ImageManager(array('driver' => 'imagick'));
         $imageman->configure(array('driver' => 'gd'));

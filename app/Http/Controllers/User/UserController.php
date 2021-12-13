@@ -18,6 +18,7 @@ use App\Sms;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
 use PUGX\Shortid\Shortid;
@@ -203,7 +204,7 @@ class UserController extends Controller
 
             if($refby_code && $refby_code != ""){
 
-                $referrer = User::where("referral_code",$refby_code)->get();
+                $referrer = User::where("referral_code",$refby_code)->first();
                 $referal = new ReferralHistory();
                 $referal->user_id = $id;
                 $referal->referred_by_id = $referrer->id;
@@ -506,6 +507,29 @@ class UserController extends Controller
          return Helper::response(true, "Here are the user details",[
             "user"=> $user
             ]);
+    }
+
+    public static function getReferralUrl($user_id){
+        $user = User::find($user_id);
+
+        if(!$user)
+            return Helper::response(false, "No user found.");
+        $referrer_code = $user->referral_code;
+        $long_url = "https://play.google.com/store/apps/details?id=com.bidnest.customer&referrer={$referrer_code}";
+        $response = Http::withToken(env("BITLY_TOKEN"))->acceptJson()->post('https://api-ssl.bitly.com/v4/shorten', [
+            'long_url' => $long_url,
+            "domain"=>'bit.ly'
+        ]);
+
+        if($response->successful())
+            return Helper::response(true, "Here is the short url", [
+                "short_url"=>$response->json()['link']
+            ]);
+        else
+            return Helper::response(false, "Invalid Response from url shortner service.");
+
+
+
     }
 
 }

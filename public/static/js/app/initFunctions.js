@@ -181,8 +181,12 @@ export function initAllSelectBoxes() {
 
     if ($(".searchuser").length) {
 
+        let multiple = true;
+        if ($(".searchuser").hasClass('single'))
+            multiple = false;
+
         $(".searchuser").select2({
-            multiple: true,
+            multiple: multiple,
             tags: false,
             minimumResultsForSearch: 3,
             minimumInputLength: 3,
@@ -370,6 +374,58 @@ export function initAllSelectBoxes() {
                         })
                     }
 
+                    return {
+                        results: output
+                    };
+                }
+
+            }
+        });
+    }
+
+    if ($(".searchorder").length) {
+
+        let multiple = true;
+        if ($(".searchorder").hasClass('single'))
+            multiple = false;
+
+        $(".searchorder").select2({
+            multiple: multiple,
+            tags: false,
+            minimumResultsForSearch: 3,
+            minimumInputLength: 3,
+            closeOnSelect: false,
+            debug: true,
+            placeholder: 'Search for order id',
+            // allowClear: true,
+            ajax: {
+                url: API_SEARCH_ORDER,
+                method: "GET",
+                data: function(params) {
+
+                    var query = {
+                        q: params.term,
+                        page: params.page || 1
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    return query;
+                },
+                error: (a, b, c) => {
+                    Logger.error(a.responseText, b, c);
+                },
+
+                processResults: function(data) {
+
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+
+                    var output = [];
+                    for (var i = 0; i < data.data.order.length; i++) {
+                        output.push({
+                            id: data.data.order[i].public_booking_id,
+                            text: data.data.order[i].public_booking_id + "-" + data.data.order[i].user.fname + " " + data.data.order[i].user.lname
+                        })
+                    }
                     return {
                         results: output
                     };

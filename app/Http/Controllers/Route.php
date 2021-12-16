@@ -843,6 +843,11 @@ class Route extends Controller
         return InventoryController::searchItem($request);
     }
 
+    public function serachOrder(Request $request)
+    {
+        return BookingsController::serachOrder($request);
+    }
+
     public function testimonial_add(Request $request)
     {
         $validation = Validator::make($request->all(),[
@@ -1325,6 +1330,10 @@ class Route extends Controller
     {
         return OrganisationController::sendOtpForBid($request->id);
     }
+    public function send_otp_booking(Request $request)
+    {
+        return BookingsController::sendOtpForBooking($request);
+    }
 
     public function sendInvoiceMail(Request $request)
     {
@@ -1584,6 +1593,29 @@ class Route extends Controller
     public function coupon_status_update(Request $request)
     {
         return CouponController::statusUpdate($request->id);
+    }
+
+    public function complaintAdd(Request $request){
+        $validation = Validator::make($request->all(),[
+            'heading'=> 'required',
+            'category'=> 'required',
+            'status'=> 'required',
+            'desc'=> 'required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        $ticket_images = null;
+
+        if($request->search_user_id){
+            $id = $request->search_user_id;
+        }
+        else{
+            $id =$request->user_id;
+        }
+
+        return TicketController::create($id, $request->category, ["public_booking_id"=>$request->public_booking_id], $ticket_images, $request->heading, $request->desc, $request->status);
     }
 
 }

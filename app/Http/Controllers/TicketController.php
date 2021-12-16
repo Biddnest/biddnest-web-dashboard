@@ -15,7 +15,7 @@ use Monolog\Logger;
 
 class TicketController extends Controller
 {
-    public static function create($sender_id, $ticket_type, $meta, $ticket_images = null, $heading=null, $body=null)
+    public static function create($sender_id, $ticket_type, $meta, $ticket_images = null, $heading=null, $body=null, $status=null)
     {
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
@@ -24,6 +24,12 @@ class TicketController extends Controller
                 $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
 //                Log::info($images);
             }
+        }
+        if($status){
+            $status_def=$status;
+        }
+        else{
+            $status_def=TicketEnums::$STATUS['open'];
         }
 
         switch ($ticket_type) {
@@ -53,6 +59,7 @@ class TicketController extends Controller
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
                 $ticket->image = json_encode($images);
+                $ticket->status = $status_def;
             break;
 
             case TicketEnums::$TYPE['order_cancellation']:
@@ -84,6 +91,7 @@ class TicketController extends Controller
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
                 $ticket->image = json_encode($images);
+                $ticket->status = $status_def;
             break;
 
             case TicketEnums::$TYPE['complaint']:
@@ -96,6 +104,7 @@ class TicketController extends Controller
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
                 $ticket->image = json_encode($images);
+                $ticket->status = $status_def;
             break;
 
             case TicketEnums::$TYPE['call_back']:
@@ -108,6 +117,7 @@ class TicketController extends Controller
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
                 $ticket->image = json_encode($images);
+                $ticket->status = $status_def;
             break;
 
             case TicketEnums::$TYPE['service_request']:
@@ -120,6 +130,7 @@ class TicketController extends Controller
                 $ticket->type = $ticket_type;
                 $ticket->meta = json_encode($meta);
                 $ticket->image = json_encode($images);
+                $ticket->status = $status_def;
                 break;
 
             default:

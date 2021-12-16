@@ -2164,6 +2164,18 @@ $("body").on('change', ".dateaddbooking", function(event) {
     $(this).val(dates.join(","));
 });
 
+$("body").on('change', ".enddate", function(event) {
+    let enddate = $(this).val();
+    let startdate = $('.startdate').val();
+    if(enddate < startdate){
+        $(this).val('');
+        tinyAlert("Warning", "End date should be grater than start date.");
+    }
+    else{
+        return false;
+    }
+});
+
 
 $("body").on('change', ".selectfilter", function() {
     var query = $(this).val();
@@ -2266,6 +2278,56 @@ $("body").on('input', ".phone-search", function(event) {
                 $(".autofill-name").val('');
                 $(".autofill-email").val('');
                 // tinySuccessAlert("User is not registered.","An account will be created on booking.");
+            }
+        });
+    }
+});
+
+$("body").on('change', ".order-search", function(event) {
+    if($(this).val().length) {
+        $.get(API_SEARCH_ORDER + "?q=" + $(this).val(), function (response) {
+            Logger.info(response);
+            if (response.status == "success") {
+                $(".autofill-select").addClass("hidden");
+                $(".autofill-name").removeClass("hidden");
+                $(".autofill-name").closest(".autofill").find(".select2").addClass("hidden");
+                $(".autofill-name").val(response.data.order[0].user.fname + " " + response.data.order[0].user.lname);
+                $(".autofill-id").val(response.data.order[0].user_id);
+            } else {
+                $(".autofill-name").val('');
+                $(".autofill-id").val('');
+            }
+        });
+    }
+});
+
+$("body").on('click', ".send-otp", function(event) {
+    let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each(function () {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    Logger.info(isValid);
+    if (isValid) {
+        var phone = $("#phone").val();
+        var name = $("#fullname").val();
+        var email = $("#email").val();
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                phone: phone,
+                name: name,
+                email: email
+            }
+            success: function(response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    $("#add-otp").show();
+                    // $('.otp-bid').val(response.data.OTP);
+                }
             }
         });
     }

@@ -1181,4 +1181,8 @@
                 margin: 20px;
             }
 
+            .select2-dropdown{
+                width: 27.5% !important;
+            }
+
         </style>

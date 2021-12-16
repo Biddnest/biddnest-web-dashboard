@@ -233,7 +233,7 @@ class UserController extends Controller
      * @param $avatar
      * @return JsonResponse|object
      */
-    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar, $phone=null){
+    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar, $phone=null, $city){
         $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);
@@ -254,6 +254,7 @@ class UserController extends Controller
             'email'=>$email,
             'gender'=>$gender,
             'dob'=>$dob,
+             "meta"=>json_encode(["city"=>$city])
         ];
         if($avatar){
             $image_man = new ImageManager(array('driver' => 'gd'));
@@ -346,7 +347,7 @@ class UserController extends Controller
             return Helper::response(false, "Something went wrong in server. Please contact support.", null, 401);
     }
 
-    public static function add($fname, $lname, $phone, $email, $gender, $dob, $avatar)
+    public static function add($fname, $lname, $phone, $email, $gender, $dob, $avatar, $city)
     {
         $user_email=User::where('email', $email)->first();
         if($user_email)
@@ -368,6 +369,7 @@ class UserController extends Controller
         $user->phone=$phone;
         $user->gender=$gender;
         $user->avatar=$image;
+        $user->meta=json_encode(["city"=>$city]);
         $user->dob=date("Y-m-d", strtotime($dob));
         $save_result = $user->save();
 

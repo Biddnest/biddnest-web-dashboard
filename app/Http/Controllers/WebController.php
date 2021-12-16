@@ -745,7 +745,7 @@ class WebController extends Controller
 
     public function customers(Request $request)
     {
-        $user=User::where("deleted", CommonEnums::$NO);
+        $user=User::where("deleted", CommonEnums::$NO)->with("zone");
 
 
 
@@ -773,7 +773,6 @@ class WebController extends Controller
         $active_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['active']])->count();
         $inactive_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['suspended']])->count();
         $pending_user =User::where(["deleted"=>CommonEnums::$NO, "status"=>UserEnums::$STATUS['verification_pending']])->count();
-
         return view('customer.customer',[
             "users"=>$user->paginate(15),
             "total_user"=>$total_user, "active_user"=>$active_user, "inactive_user"=>$inactive_user, "pending_user"=>$pending_user
@@ -1389,24 +1388,26 @@ class WebController extends Controller
         $review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where("deleted", CommonEnums::$NO);
 
         if(isset($request->search)){
-            $review=$review->where('desc', 'like', "%".$request->search."%");
+            $review->where('desc', 'like', "%".$request->search."%");
         }
 
-        if(isset($request->ratings)){
-            $review=$review->where('star', $request->ratings);
+        if($request->ratings){
+            $review->where('star', $request->ratings);
         }
 
-        if(isset($request->id)){
-            $payout=$payout->where('booking_id', Booking::where("organization_id", $request->id)->pluck("id")[0]);
+        if($request->id) {
+            $review->whereIn('booking_id', Booking::where("organization_id", $request->id)->pluck("id"));
         }
 
-        $review->with(['Booking'=>function($query){
+        $review->with(['booking'=>function($query){
             $query->with('organization');
         }])->with('user')->orderBy("id","DESC");
 //        return $review->paginate(CommonEnums::$PAGE_LENGTH);
         $total_review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where("deleted", CommonEnums::$NO)->count();
         $active_review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->count();
         $inactive_review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$NO])->count();
+
+//        return $review->paginate(CommonEnums::$PAGE_LENGTH);
         return view('reviewandratings.review', ['reviews'=>$review->paginate(CommonEnums::$PAGE_LENGTH), 'total_review'=>$total_review, 'active_review'=>$active_review, 'inactive_review'=>$inactive_review]);
     }
 

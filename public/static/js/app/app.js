@@ -2166,8 +2166,8 @@ $("body").on('change', ".date", function(event) {
 
 
 $("body").on('change', ".selectfilter", function() {
-    var query = $('.selectfilter').val();
-    var action = $('.selectfilter').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     var url = window.location.href;
     if (url.indexOf(action) > -1) {
         url = window.location.href.split("?")[0];
@@ -2175,7 +2175,7 @@ $("body").on('change', ".selectfilter", function() {
     if (url.indexOf("?") > -1) {
         redirectTo(url + "&" + action + "=" + query);
     } else {
-        redirectTo(url + "?" + action + "=" + query);
+        redirectTo(url + "?" + <a href=""></a>ction + "=" + query);
     }
 });
 

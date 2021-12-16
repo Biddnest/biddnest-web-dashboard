@@ -97,7 +97,10 @@
                         <tbody class="mtop-20 f-12">
                             @foreach($reviews as $review)
                                 <tr class="tb-border cursor-pointer">
-                                    <td scope="row">@if($review->booking){{$review->booking->public_booking_id}} @else - @endif</td>
+                                    <td scope="row">@if($review->booking)
+                                            <a href="#0" data-sidebar="{{ route('sidebar.booking',['id'=>$review->booking->id]) }}" class="sidebar-toggle-link cursor-pointer underline">{{$review->booking->public_booking_id}}</a>
+
+                                        @else - @endif</td>
                                     <td>
                                         <a href="#0" data-sidebar="{{ route('sidebar.customer',['id'=>$review->user->id]) }}" class="sidebar-toggle-link cursor-pointer underline">{{ucfirst(trans($review->user->fname))}} {{ucfirst(trans($review->user->lname))}}</a>
                                     </td>
@@ -120,7 +123,7 @@
                                             @php $ratings += is_numeric($rating['rating']) ? (integer)$rating['rating'] : 0; @endphp
                                         @endforeach
                                         @php $ratings = number_format($ratings/count(json_decode($review->ratings, true)), 2); @endphp
-                                        @for($star=$ratings; $star > 0; $star--)
+                                        @for($star = $review->star; $star > 0; $star--)
                                             @if($star < 1)
                                                 <i class="fa fa-star-half-o checked bg-yellow" aria-hidden="true"></i>
                                             @else

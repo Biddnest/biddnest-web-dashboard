@@ -109,6 +109,14 @@
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">City</label>
+                                            <input type="text" name="city" value="@if($users){{json_decode($users->meta, true)['city']}}@endif" autocomplete="off" placeholder="Eg: Chennai" class="form-control" required>
+                                            <span class="error-message">Please enter valid Date of Birth</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="d-flex  justify-content-between flex-row  " style="border-top: 1px solid #70707040;margin-top: 70px;">
                                     <div class="w-50">

@@ -101,9 +101,10 @@
                         <thead class="secondg-bg  p-0">
                             <tr>
                                                 <th scope="col">Customer Name</th>
-                                                <th scope="col">Phone</th>
-                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone & Email</th>
+
                                                 <th scope="col">Joining Date</th>
+                                                <th scope="col">Zone</th>
                                                 <th scope="col" style="text-align: center !important;width: 15%;">Status</th>
                                                 <th scope="col" style="text-align: center !important;">Operations</th>
                             </tr>
@@ -112,9 +113,10 @@
                                            @foreach($users as $user)
                                             <tr class="tb-border cursor-pointer sidebar-toggle" data-sidebar="{{ route('sidebar.customer',['id'=>$user->id]) }}">
                                                 <td scope="row">{{$user->fname}} {{$user->lname}}</td>
-                                                <td>{{$user->phone}}</td>
-                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone}} <br /> {{$user->email}}</td>
+
                                                 <td>{{date('d-m-Y', strtotime($user->created_at))}}</td>
+                                                <td>{{$user->zone->name ?? "-"}}</td>
                                                 <td class="" style="text-align: center;">
                                                     @if($user->status == 0)
                                                         <div class="status-badge red-bg text-center">Pending Signup</div>

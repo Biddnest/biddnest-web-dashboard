@@ -892,13 +892,14 @@ class Route extends Controller
             'email'=>'required',
             'gender'=>'required|string',
             'dob'=>'required',
-            'image'=>'required'
+            'image'=>'required',
+            'city'=>'required|nullable'
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return UserController::add($request->fname, $request->lname, $request->phone, $request->email, $request->gender, $request->dob, $request->image);
+        return UserController::add($request->fname, $request->lname, $request->phone, $request->email, $request->gender, $request->dob, $request->image,$request->city);
     }
 
     public function customer_edit(Request $request)
@@ -911,13 +912,14 @@ class Route extends Controller
             'email'=>'required',
             'gender'=>'required|string',
             'dob'=>'required|date',
-            'image'=>'required'
+            'image'=>'required',
+            'city'=>"required|nullable"
         ]);
 
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone);
+        return UserController::update($request->id, $request->fname, $request->lname, $request->email, $request->gender, $request->dob, $request->image, $request->phone, $request->city);
     }
 
     public function user_add(Request $request)

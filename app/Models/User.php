@@ -20,4 +20,8 @@ class User extends Model implements Wallet
     public function vouchers(){
         return $this->hasMany(VoucherCode::class);
     }
+
+    public function zone(){
+        return $this->belongsTo(Zone::class);
+    }
 }

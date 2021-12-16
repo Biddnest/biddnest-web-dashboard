@@ -1240,6 +1240,8 @@ class Route extends Controller
             'inventory_items.*.size' =>'required|string',
             'inventory_items.*.quantity' =>'required',
             'inventory_items.*.is_custom' =>'required|boolean',
+
+            'otp'=>'required|min:6|max:6'
         ]);
 
         if($validation->fails())

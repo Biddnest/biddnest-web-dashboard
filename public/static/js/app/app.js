@@ -2267,6 +2267,7 @@ $("body").on('click', ".filter-button", function(event) {
 });
 
 $("body").on('input', ".phone-search", function(event) {
+    console.log("add");
     if($(this).val().length >= 10){
         $.get($(this).data("url")+"?phone="+$(this).val(),function(response){
             Logger.info(response);
@@ -2313,6 +2314,7 @@ $("body").on('click', ".send-otp", function(event) {
         var phone = $("#phone").val();
         var name = $("#fullname").val();
         var email = $("#email").val();
+        var url =$(this).data("url");
         $.ajax({
             url: url,
             type: 'GET',
@@ -2321,7 +2323,7 @@ $("body").on('click', ".send-otp", function(event) {
                 phone: phone,
                 name: name,
                 email: email
-            }
+            },
             success: function(response) {
                 Logger.info(response);
                 if (response.status == "success") {

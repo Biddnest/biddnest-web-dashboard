@@ -38,8 +38,8 @@ class BookingsController extends Controller
 
     public static function createEnquiryForAdmin(Request $request)
     {
-        $user = User::where("phone", $request->phone)
-            ->orWhere("email", $request->email)
+        $user = User::where("phone", $request->contact_details['phone'])
+            ->orWhere("email", $request->contact_details['email'])
             ->first();
         if ($user) {
             $user_id = $user->id;
@@ -59,6 +59,9 @@ class BookingsController extends Controller
          $movement_dates = explode(",", $request->movement_dates);
 //        $movement_dates =$request->movement_dates;
 
+        if($user->verf_code != $request->otp){
+            return Helper::response(false, "otp is incorrect", ['user'=>$user]);
+        }
         return self::createEnquiry($request->all(), $user_id, $movement_dates, false, true);
 
     }

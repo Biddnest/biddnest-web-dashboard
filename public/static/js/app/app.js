@@ -2175,7 +2175,7 @@ $("body").on('change', ".selectfilter", function() {
     if (url.indexOf("?") > -1) {
         redirectTo(url + "&" + action + "=" + query);
     } else {
-        redirectTo(url + "?" + <a href=""></a>ction + "=" + query);
+        redirectTo(url + "?" + action + "=" + query);
     }
 });
 

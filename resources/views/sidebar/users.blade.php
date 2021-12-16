@@ -119,7 +119,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="theme-text f-14">
-                        {{json_decode($users->meta, true)['pan_no']}}
+                        {{--{{json_decode($users->meta, true)['pan_no']}}--}}
+                        {{substr(json_decode($users->meta, true)['pan_no'], 0, 4).str_repeat("X", strlen(json_decode($users->meta, true)['pan_no'])-4)}}
                     </div>
                 </div>
             </div>

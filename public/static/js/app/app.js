@@ -2140,15 +2140,15 @@ $("body").on('change', ".discount_type", function(event) {
     }
 });
 
-$("body").on('change', ".date", function(event) {
+$("body").on('change', ".dateaddbooking", function(event) {
     Logger.info($(this).val());
     let dates = $(this).val();
     dates = dates.split(",");
     dates.sort(function(a, b) {
-        if (a < b) {
+        if (a > b) {
             return 1;
         }
-        if (a > b) {
+        if (a < b) {
             return -1;
         }
         return 0;
@@ -2166,8 +2166,8 @@ $("body").on('change', ".date", function(event) {
 
 
 $("body").on('change', ".selectfilter", function() {
-    var query = $('.selectfilter').val();
-    var action = $('.selectfilter').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     var url = window.location.href;
     if (url.indexOf(action) > -1) {
         url = window.location.href.split("?")[0];
@@ -2180,8 +2180,8 @@ $("body").on('change', ".selectfilter", function() {
 });
 
 $("body").on('input', ".searchcity", function() {
-    var query = $('.searchcity').val();
-    var action = $('.searchcity').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     if (query.length >= 3) {
         var url = window.location.href;
         if (url.indexOf(action) > -1) {
@@ -2196,8 +2196,8 @@ $("body").on('input', ".searchcity", function() {
 });
 
 $("body").on('change', ".todate", function() {
-    var from_query = $('.fromdate').val();
-    var to_query = $('.todate').val();
+    var from_query = $(this).closest('.collapse').find('.fromdate').val();
+    var to_query = $(this).val();
     var url = window.location.href;
     if (url.indexOf("from") > -1 && url.indexOf("to") > -1) {
         url = window.location.href.split("?")[0];
@@ -2215,8 +2215,8 @@ $("body").on('click', ".clear-filter", function() {
 });
 
 $("body").on('change', ".selectstatus", function() {
-    var query = $('.selectstatus').val();
-    var action = $('.selectstatus').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     var url = window.location.href;
     if (url.indexOf(action) > -1) {
         url = window.location.href.split("?")[0];
@@ -2229,8 +2229,8 @@ $("body").on('change', ".selectstatus", function() {
 });
 
 $("body").on('change', ".selectservice", function() {
-    var query = $('.selectservice').val();
-    var action = $('.selectservice').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     var url = window.location.href;
     if (url.indexOf(action) > -1) {
         url = window.location.href.split("?")[0];

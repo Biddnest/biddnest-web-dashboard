@@ -92,7 +92,7 @@
             }
 
             main .menu-sidebar .Brand-logo {
-                height: 70px;
+                height: 90px;
             }
 
             .ml-48 {

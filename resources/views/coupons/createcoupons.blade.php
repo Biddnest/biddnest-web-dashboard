@@ -120,7 +120,7 @@
             <div class="form-input">
               <label>Start Date </label>
               <span class="">
-                <input type="text" class="form-control br-5 singledate dateselect" value="@if($coupons){{$coupons->valid_from}}@endif" name="valid_from" required="required" placeholder="15/02/2021" id="cfrom" data-parsley-gte="#cto" />
+                <input type="text" class="form-control br-5 singledate startdate" value="@if($coupons){{$coupons->valid_from}}@endif" name="valid_from" required="required" placeholder="15/02/2021" id="cfrom" data-parsley-gte="#cto" />
                <span class="error-message">Please enter  valid</span>
               </span>
            </div>

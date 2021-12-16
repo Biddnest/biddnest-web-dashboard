@@ -106,7 +106,8 @@
                                   {{date('d M y', strtotime($users->dob))}}
                               </div>
                               <div class="theme-text f-14 p-10">
-                                  {{json_decode($users->meta, true)['pan_no']}}
+{{--                                  {{json_decode($users->meta, true)['pan_no']}}--}}
+                                  {{substr(json_decode($users->meta, true)['pan_no'], 0, 4).str_repeat("X", strlen(json_decode($users->meta, true)['pan_no'])-4)}}
                               </div>
                               <div class="theme-text f-14 p-10 ">
                                   {{json_decode($users->meta, true)['address_line1']}} {{json_decode($users->meta, true)['address_line2']}}
@@ -135,7 +136,7 @@
                     <div class="tab-pane fade   " id="vendor-details" role="tabpanel" aria-labelledby="vendor-tab">
 
                         <div class="d-flex  row p-15 pb-0 " >
-                        @if(!json_decode($users->bank_meta, true)['acc_no'])
+                        @if(!$users->bank_meta || !json_decode($users->bank_meta, true)['acc_no'])
                                 <div class="row hide-on-data">
                                     <div class="col-md-12 text-center p-20">
                                         <p class="font14"><i>. Bank Details not available.</i></p>

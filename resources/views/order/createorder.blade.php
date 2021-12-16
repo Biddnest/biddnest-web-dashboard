@@ -73,14 +73,14 @@
                                 <span class="error-message">Please enter valid Email</span>
                             </div>
                           </div>
-                            <input type="hidden" value="true" name="meta[self_booking]:boolean">
-                            <div class="col-sm-6" hidden>
+{{--                            <input type="hidden" value="true" name="meta[self_booking]:boolean">--}}
+                            <div class="col-sm-6">
                                 <div class="form-inputs ">
                                 <label class="form-check-box mb-0" style="margin-top: 10px;margin-left:8px" for="Lift1">For Youself</label>
                                     <label class="container" style="margin-top: 10px;margin-left:-30px">
-{{--                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">--}}
+                                        <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">
                                         <input type="checkbox" checked class="check-toggle" data-value="1" data-target=".toggle-input" name="select_letter" value="1" id="slef1" onchange="document.getElementById('slef').value = this.checked ? true : false">
-                                        <!-- <span class="checkmark"></span> -->
+{{--                                        <span class="checkmark"></span>--}}
                                     </label>
 
                                     <span class="error-message">Please enter valid</span>
@@ -274,7 +274,7 @@
                             <div class="form-input" >
                               <label class="start-date">Choose a Date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 bookdate dateselect date cursor-pointer" required="required" placeholder="15 Jan" style="padding-right: 20px;" />
+                                <input type="text" id="dateselect" name="movement_dates" class="form-control br-5 bookdate dateselect date cursor-pointer dateaddbooking" required="required" placeholder="15 Jan" style="padding-right: 20px;" />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>

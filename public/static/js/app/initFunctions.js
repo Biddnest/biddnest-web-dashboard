@@ -907,7 +907,6 @@ export function initDateBookPicker() {
     }
 
     if ($(".singledate").length) {
-
         $('.singledate').datepicker({
             multidate: false,
             format: 'yyyy-mm-dd'

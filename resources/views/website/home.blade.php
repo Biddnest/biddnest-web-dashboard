@@ -47,7 +47,7 @@
                     <div class="card-body d-flex justify-content-between h-100">
                         <div>
                             <p style="font-size: 13px;">DATE OF MOVEMENT</p>
-                            <input id="dp1" class="input-overwrite bookdate" type="text" name="move_date" placeholder="Choose" readonly/>
+                            <input id="dp1" class="input-overwrite bookdate dateaddbooking" type="text" name="move_date" placeholder="Choose" readonly/>
                             <input class="input-overwrite small-heading text-heading book-address mb-1 mt-0" style="cursor: pointer;" type="text" placeholder="You can choose upto 5 dates" readonly required>
                         </div>
                         {{--<div class="form-group  mr-1">

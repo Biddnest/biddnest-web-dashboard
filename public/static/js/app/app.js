@@ -2211,6 +2211,7 @@ $("body").on('change', ".todate", function() {
     var from_query = $(this).closest('.collapse').find('.fromdate').val();
     var to_query = $(this).val();
     var url = window.location.href;
+    console.log(url);
     if (url.indexOf("from") > -1 && url.indexOf("to") > -1) {
         url = window.location.href.split("?")[0];
     }

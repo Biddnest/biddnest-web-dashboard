@@ -30,7 +30,7 @@
                             <div class="col-lg-6" style="padding-left: 0 !important;">
                                     <div class="form-input">
                                         <label class="full-name"> Choose Booking </label>
-                                        <select id="ban-type" class="form-control br-5" name="public_booking_id" required>
+                                        <select id="ban-type" class="form-control br-5" name="public_booking_id" >
                                             <option value="">--select--</option>
                                             @foreach($past_bookings as $booking)
                                                 <option value="{{$booking->public_booking_id}}">{{ucwords(json_decode($booking->source_meta, true)['city'])}} - {{ucwords(json_decode($booking->destination_meta, true)['city'])}} [#{{$booking->public_booking_id}}]</option>

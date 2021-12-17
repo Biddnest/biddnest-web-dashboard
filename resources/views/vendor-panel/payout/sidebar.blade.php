@@ -94,6 +94,18 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex  row  p-10">
+                <div class="col-sm-6">
+                    <div class="theme-text f-14 bold">
+                        No of Orders
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="theme-text f-14">
+                        {{json_decode($payout->meta, true)['total_bookings']}}
+                    </div>
+                </div>
+            </div>
             <div class="d-flex  row  p-10 border-top-pop">
                 <div class="col-sm-6">
                     <div class="theme-text f-14 bold">
@@ -112,7 +124,7 @@
                 <tbody class="mtop-20">
                 @foreach($payout->organization->booking as $booking)
                     <tr class="tb-border  cursor-pointer">
-                        <th scope="row">{{$booking->public_booking_id}}</th>
+                        <th scope="row"><a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}" target="_blank">{{$booking->public_booking_id}}</a></th>
                         <td class="text-center">{{date('d M Y', strtotime($booking->created_at))}}</td>
                         <td class="">₹{{$booking->final_quote}}</td>
                     </tr>

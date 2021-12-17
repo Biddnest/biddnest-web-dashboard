@@ -74,11 +74,14 @@
                                 <div class="theme-text f-14 bold p-8 pb-20">
                                     Organization Description
                                 </div>
-                                <div class="theme-text f-14 bold p-8">
+                               {{-- <div class="theme-text f-14 bold p-8">
                                     Organization ID
-                                </div>
+                                </div>--}}
                                 <div class="theme-text f-14 bold p-8 ">
                                     Parent Branch
+                                </div>
+                                <div class="theme-text f-14 bold p-8 ">
+                                    Home Branch
                                 </div>
                                 <div class="theme-text f-14 bold p-8">
                                     Contact Number
@@ -154,11 +157,14 @@
                                 <div class="theme-text f-14  p-8 pb-20">
                                    {{json_decode($user->organization->meta, true)['org_description']}}
                                 </div>
-                                <div class="theme-text f-14  p-8">
+                               {{-- <div class="theme-text f-14  p-8">
                                     {{$user->organization->id}}
-                                </div>
+                                </div>--}}
                                 <div class="theme-text f-14 ml-0 p-8">
                                     {{ucwords($branch->city)}} <span class="status-badge-3">Parent Branch</span>
+                                </div>
+                                <div class="theme-text f-14  p-8 pb-20">
+                                    {{$user->organization->city}}
                                 </div>
 
                                 <div class="theme-text f-14  p-8">

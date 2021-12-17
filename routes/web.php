@@ -536,6 +536,8 @@ Route::prefix('vendor')->group(function(){
             Route::get('/{role}',[VendorWebController::class,'login'])->name("vendor.users");
         });
 
+        Route::get('/reports',[VendorWebController::class,'getReports'])->name("vendor.reports");
+
     });
 });
 

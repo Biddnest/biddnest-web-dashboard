@@ -3,7 +3,7 @@
             <div class="side-nav-bar">
                 <div class="Brand-logo">
                     <div class="brand-logo">
-                        <img src="{{ asset('static/images/logo.png')}}" />
+                        <img src="{{ asset('static/images/192PX.png')}}" />
                     </div>
                 </div>
                 <br>
@@ -46,9 +46,9 @@
                             aria-controls="Customer"> <a class="" href="{{route('vendor.service_request')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 7.svg')}}" alt=""></i></span> </span>Service Requests</a>
                         </li>
 
-                        {{--<li class="menu-item" data-toggle="" href="#Reports" role="button" aria-expanded="false"
-                            aria-controls="Customer"> <a class=""> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 8.svg')}}" alt=""></i></span> </span>Reports</a>
-                        </li>--}}
+                        <li class="menu-item" data-toggle="" href="#Reports" role="button" aria-expanded="false"
+                            aria-controls="Customer"> <a class="" href="{{route('vendor.reports')}}"> <span class="side-nac-icon"><span class="icon-sidebar"><i class=""><img src="{{asset('static/vendor/images/Active 8.svg')}}" alt=""></i></span> </span>Reports</a>
+                        </li>
 
                     </ul>
                 </div>

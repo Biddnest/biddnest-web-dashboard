@@ -11,7 +11,11 @@
                     @endif
                 @endforeach
             </h3>
-
+            <div class="mr-20">
+                <a href="{{route('vendor.service_request')}}">
+                    <button class="btn theme-bg white-text mt-5">Back</button>
+                </a>
+            </div>
         </div>
 
         <!-- Dashboard cards -->

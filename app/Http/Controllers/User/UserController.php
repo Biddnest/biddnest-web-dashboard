@@ -59,7 +59,7 @@ class UserController extends Controller
 
         }
 
-        $data['rsp'] = Sms::sendOtp($phone, $otp);
+//        $data['rsp'] = Sms::sendOtp($phone, $otp);
         dispatch(function() use($phone, $otp){
             Sms::sendOtp($phone, $otp);
         })->afterResponse();

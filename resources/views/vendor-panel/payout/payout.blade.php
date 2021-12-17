@@ -26,6 +26,11 @@
                         <div class="header-wrap toal-header">
                             <h3 class="f-18 mt-0 mb-0 ml-1">Payouts</h3>
                             <div class="header-wrap p-0 ">
+                                <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
+                                    <a href="#" class="margin-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                                        <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+                                    </a>
+                                </div>
                                 <div class="search">
                                     <input type="text" value="{{$search}}" class="searchTerm table-search" data-url="{{route('vendor.payout')}}" placeholder="Search...">
                                     <button type="submit" class="searchButton">
@@ -36,6 +41,28 @@
                         </div>
 
                         <div class="all-vender-details">
+                            <div class="collapse" id="filter-menu">
+                                <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                                <div class="row f-14">
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Status</label>
+                                        <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                            <option value="">--Select--</option>
+                                            @foreach(\App\Enums\PayoutEnums::$STATUS as $key=>$status)
+                                                <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Payout From</label>
+                                        <input type="text" id="dateselect" name="payout_date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                                    </div>
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Payout To</label>
+                                        <input type="text" id="dateselect1" name="payout_date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                                    </div>
+                                </div>
+                            </div>
                             <table class="table text-left p-0 theme-text mb-0 primary-table">
                                 <thead class="secondg-bg  p-0">
                                 <tr>

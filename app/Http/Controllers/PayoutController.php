@@ -186,6 +186,12 @@ class PayoutController extends Controller
             if(isset($request->search)){
                 $payouts=$payouts->where('public_payout_id', 'like', "%".$request->search."%");
             }
+            if(isset($request->status)){
+                $payouts=$payouts->where('status', $request->status);
+            }
+            if(isset($request->from) && isset($request->to)){
+                $payouts->where('dispatch_at', '>=', $request->from)->where('dispatch_at', '<=', $request->to);
+            }
         }
         $payouts=$payouts->paginate(CommonEnums::$PAGE_LENGTH);
 

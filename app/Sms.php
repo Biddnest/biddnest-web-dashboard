@@ -21,8 +21,9 @@ class Sms
             /* IN THE FOLLOWING SEND OTP ROUTE OF MSG91, COUNTRY CODE OF INDIA (91) IS HARD CODED. CHANGE IF REQUIRED*/
             $request_url = "http://api.msg91.com/api/sendotp.php?authkey={$auth_key}&mobile=91{$phone}&message={$message}&sender={$sender_id}&otp={$otp}";
             file_get_contents($request_url);
+           return true;
 
-//            return Msg91::otp()->to('91'.$phone)->template('615b120390e4cd4b6714a7e3')->send();
+//            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['otp'])->variable('otp', $otp)->send();
 
        /* } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];

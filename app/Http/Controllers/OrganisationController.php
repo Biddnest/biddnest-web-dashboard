@@ -489,7 +489,7 @@ class OrganisationController extends Controller
         if($vendor_phone)
             return Helper::response(false,"Phone no is already exist in system.");
 
-        $meta = ["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2']];
+        $meta = ["branch"=>$data['branch'], "address_line1"=>$data['address1'], "address_line2"=>$data['address2'],"secondary_phone"=>$data['secondary_phone'] ?? ""];
 
         if(!$data['password'])
             $password=password_hash($data['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
@@ -542,7 +542,8 @@ class OrganisationController extends Controller
         $meta = [
             "branch"=>$data['branch'],
             "address_line1"=>$data['address1'],
-            "address_line2"=>$data['address2']
+            "address_line2"=>$data['address2'],
+            "secondary_phone"=>$data['secondary_phone'] ?? ""
         ];
 
         $image = $data['image'];

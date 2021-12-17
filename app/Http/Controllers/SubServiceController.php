@@ -95,7 +95,7 @@ class SubServiceController extends Controller
 
         $update_data = ["name"=>$name,"max_extra_items"=>$max_extra_items];
 
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 75),$image_name,"subservices");
 
         $subservice=Subservice::where("id", $id)->update($update_data);

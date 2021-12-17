@@ -5,6 +5,11 @@
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="driverdetail">
         <div class="d-flex  flex-row justify-content-between vertical-center">
             <h3 class="page-head text-left p-4 f-20 theme-text">Order Details</h3>
+            <div class="mr-20">
+                <a href="#" class="goback">
+                    <button class="btn theme-bg white-text mt-5">Back</button>
+                </a>
+            </div>
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left  pt-0 pb-0 p-2">
@@ -73,14 +78,14 @@
                                         <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
                                     </li>
 
-                                @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'] ))
+                                {{--@elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status <= \App\Enums\BookingEnums::$STATUS['in_transit'] ))
 
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
-                                    </li>
+                                    </li>--}}
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="#">Driver Details</a>
                                     </li>

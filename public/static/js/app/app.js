@@ -2227,6 +2227,11 @@ $("body").on('click', ".clear-filter", function() {
     redirectTo(url);
 });
 
+$("body").on('click', ".goback", function() {
+    var url = window.history.back();
+    redirectTo(url);
+});
+
 $("body").on('change', ".selectstatus", function() {
     var query = $(this).val();
     var action = $(this).data("action");

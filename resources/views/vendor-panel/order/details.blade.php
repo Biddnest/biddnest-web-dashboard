@@ -5,6 +5,11 @@
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetail">
         <div class="d-flex  flex-row justify-content-between vertical-center">
             <h3 class="page-head text-left p-4 f-20 theme-text">Order Details</h3>
+            <div class="mr-20">
+                <a href="#" class="goback">
+                    <button class="btn theme-bg white-text mt-5">Back</button>
+                </a>
+            </div>
         </div>
         <div class="d-flex  flex-row justify-content-between">
             <div class="page-head text-left  pt-0 pb-0 p-2">
@@ -360,7 +365,8 @@ Debugbar::info($price);
                                 <div class="d-flex flex-row p-10 pr-4 justify-content-between secondg-bg heading status-badge">
                                     <div><p class="mt-2">Expected Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple calc-result bid-expt" type="text" value="{{$price['total']}}" placeholder="6000" readonly/>
+{{--                                        <input class="form-control border-purple calc-result bid-expt" type="text" value="{{$price['total']}}" placeholder="6000" readonly/>--}}
+                                        <input class="form-control border-purple calc-result bid-expt" type="text" value="{{$booking->organization_rec_quote}}" placeholder="6000" readonly/>
                                     </div>
                                 </div>
                                 <div class="d-flex row p-10">

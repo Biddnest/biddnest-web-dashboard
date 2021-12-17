@@ -314,6 +314,8 @@ class VendorRouteController extends Controller
             'parent_org_id'=>'required',
             'phone.primary'=>'required|min:10|max:10',
 
+            'fname' => 'required|string',
+            'lname' => 'required|string',
             'organization.org_name' => 'required|string',
             'organization.org_type' => 'required|string',
             'organization.description' =>'required|string',
@@ -343,6 +345,8 @@ class VendorRouteController extends Controller
             'parent_org_id'=>'required',
             'phone.primary'=>'required|min:10|max:10',
 
+            'fname' => 'required|string',
+            'lname' => 'required|string',
             'organization.org_name' => 'required|string',
             'organization.org_type' => 'required|string',
             'organization.description' =>'required|string',

@@ -27,6 +27,24 @@
                                 <div class="d-flex row">
                                     <div class="col-lg-6">
                                         <div class="form-input">
+                                            <label class="full-name">Authorizer First Name</label>
+                                            <input type="text" id="fullname" placeholder="First Name"
+                                                   class="form-control alphabet" name="fname" pattern="[a-zA-Z]+" required value="{{ucfirst(trans(json_decode($branch->meta, true)['auth_fname'])) ?? ''}}">
+                                            <span class="error-message">Please enter valid
+                                            Organization Name</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="phone-num-lable">Authorizer Last Name</label>
+                                            <input type="text" id="fullname" placeholder="Last Name"
+                                                   class="form-control alphabet" name="lname" pattern="[a-zA-Z]+" required value="{{ucfirst(trans(json_decode($branch->meta, true)['auth_lname'])) ?? ''}}">
+                                            <span class="error-message">Please enter valid
+                                            Organization Type</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
                                             <label class="full-name">Organization Name</label>
                                             <input type="text" id="fullname" placeholder="Wayne Packing Pvt Ltd" value="{{$organization->org_name}}"
                                                    class="form-control" name="organization[org_name]" required>
@@ -202,6 +220,18 @@
                                                    class="form-control" name="commission" required maxlength="2" readonly>
                                         </div>
                                     </div>
+                                    @if($branch->ticket_status == CommonEnums::$YES)
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <label class="full-name">Status</label>
+                                                @foreach(OrganizationEnums::$STATUS as $status=>$key)
+                                                    <option value="{{$key}}"
+                                                            @if($branch && ($branch->status == $org_service->id)) selected                                                                 @endif
+                                                         @endif>{{ucfirst(trans($status))}}</option>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="col-lg-12">
                                         <div class="form-input">
                                             <label class="full-name">Branch Description</label>

@@ -42,7 +42,7 @@ class VendorWebController extends Controller
         Session::forget('user_role');*/
 
         Session::flush();
-//        session_unset();
+        //        session_unset();
         return response()->redirectToRoute('vendor.login');
     }
 

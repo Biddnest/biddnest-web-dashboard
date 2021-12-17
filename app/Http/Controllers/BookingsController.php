@@ -583,6 +583,8 @@ class BookingsController extends Controller
 
             case "bookmarked":
                 $bid_id->where("bookmarked", CommonEnums::$YES);
+                if($web)
+                    $bid_id->where("status","!=",BidEnums::$STATUS["expired"]);
                 break;
 
             case "participated":

@@ -149,6 +149,15 @@
                                 <div class="tab-pane fade active show" id="order-details" role="tabpanel" aria-labelledby="order-details-tab">
                                     <div class="d-flex  row pt-3 pr-4 pl-3 margin-topneg-15">
                                         <div class="col-sm-4 match-item  secondg-bg  mt-2 ml-2 pt-10">
+                                            @if(in_array($booking->status, [\App\Enums\BookingEnums::$STATUS['biding'],\App\Enums\BookingEnums::$STATUS['rebiding'],\App\Enums\BookingEnums::$STATUS['price_review_pending'],\App\Enums\BookingEnums::$STATUS['payment_pending'],\App\Enums\BookingEnums::$STATUS['hold']]))
+                                            <div class="theme-text f-14 bold p-8">
+                                                Enquiry ID
+                                            </div>
+                                            @else
+                                                <div class="theme-text f-14 bold p-8">
+                                                    Booking ID
+                                                </div>
+                                            @endif
                                             <div class="theme-text f-14 bold p-8">
                                                 From
                                             </div>
@@ -185,6 +194,14 @@
                                         </div>
 
                                         <div class="col-sm-5 match-item mt-2  pt-10">
+                                            <div class="theme-text f-14 p-8">
+                                                @if(in_array($booking->status, [\App\Enums\BookingEnums::$STATUS['biding'],\App\Enums\BookingEnums::$STATUS['rebiding'],\App\Enums\BookingEnums::$STATUS['price_review_pending'],\App\Enums\BookingEnums::$STATUS['payment_pending'],\App\Enums\BookingEnums::$STATUS['hold']]))
+                                                    {{$booking->public_enquiry_id}}
+                                                @else
+                                                    {{$booking->public_booking_id}}
+                                                @endif
+                                            </div>
+
                                             <div class="theme-text f-14 p-8">
                                                {{json_decode($booking->source_meta, true)['address']}}
                                             </div>
@@ -225,7 +242,7 @@
                                 </div>
                                 <div class="border-top">
                                     <div class="d-flex pb-2 pt-1 justify-content-end button-section">
-                                        @if($booking->bid->status != \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                        @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
                                             <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                 <button class="btn theme-br theme-text  white-bg  justify-content-center">Quote Later</button>
                                             </a>
@@ -254,7 +271,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="refresh" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id]) }}" data-alert="tiny" method="POST" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="refresh" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id]) }}" data-alert="mega" method="POST" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex justify-content-center row ">
                             <div class="col-sm-12 bid-amount">
@@ -352,12 +369,10 @@ Debugbar::info($price);
                                             <label class="full-name mb-4">Type of Movement</label>
                                             <select id="" class="form-control mt-2" name="type_of_movement" required>
                                                 <option value="">--select--</option>
-                                                @if(json_decode($booking->source_meta, true)['shared_service']== false)
-                                                    <option value="dedicated">Dedicated</option>
-                                                @else
+                                                @if((bool)json_decode($booking->source_meta, true)['shared_service'] === true)
                                                     <option value="shared">Shared</option>
-                                                    <option value="dedicated">Dedicated</option>
                                                 @endif
+                                                <option value="dedicated">Dedicated</option>
                                             </select>
                                             <span class="error-message"></span>
                                         </div>

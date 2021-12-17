@@ -103,12 +103,24 @@
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>
                                             <input type="tel" id="phone"
-                                                   placeholder="987654321" name="phone" value="{{$roles->phone ?? ''}}"
+                                                   placeholder="Type here" name="phone" value="{{$roles->phone ?? ''}}"
                                                    class=" form-control" required>
                                             <span class="error-message">Please enter valid
                                                 Phone number</span>
                                         </div>
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Additional Phone Number</label>
+                                        <input type="tel" id="phone"
+                                               placeholder="Type here" name="secondary_phone" value="{{json_decode($role->meta, true)['secondary_phone'] ?? ''}}"
+                                               class=" form-control">
+                                        <span class="error-message">Please enter valid
+                                                Phone number</span>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Email ID</label>
@@ -142,7 +154,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="">Date Of Relieving</label>
-                                        <input type="text" id="fullname" name="dor" value="{{$roles->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                        <input type="text" id="fullname" name="dor" value="{{$roles->dor ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect">
                                         <span class="error-message">Please enter valid Date of Relieving</span>
                                     </div>
                                 </div>

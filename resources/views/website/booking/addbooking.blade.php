@@ -369,7 +369,7 @@
                                                 <div class="form-group ">
                                                     <label class="start-date ">Choose a Date</label>
                                                     <div id="my-modal ">
-                                                        <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect" placeholder="15 Jan" value="{{$prifill['move_date']}}" name="movement_dates" required />
+                                                        <input type="text" id="dateselect" class="form-control br-5 bookdate dateselect dateaddbooking" placeholder="15 Jan" value="{{$prifill['move_date']}}" name="movement_dates" required />
                                                         <span class="error-message ">please enter valid date</span>
                                                     </div>
                                                 </div>

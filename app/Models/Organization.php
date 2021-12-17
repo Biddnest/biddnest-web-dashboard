@@ -38,6 +38,10 @@ class Organization extends Model
     {
         return $this->hasManyThrough(Service::class, OrganizationService::class, 'organization_id', 'id','id', 'service_id');
     }
+    public function zone_map()
+    {
+        return $this->hasManyThrough(Zone::class, OrganizationZone::class, 'organization_id', 'id','id', 'zone_id');
+    }
 
     public function bank()
     {

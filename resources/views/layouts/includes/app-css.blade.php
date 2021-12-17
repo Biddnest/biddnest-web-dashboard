@@ -92,7 +92,7 @@
             }
 
             main .menu-sidebar .Brand-logo {
-                height: 70px;
+                height: 90px;
             }
 
             .ml-48 {
@@ -1179,6 +1179,10 @@
             .clear-filter{
                 float: right;
                 margin: 20px;
+            }
+
+            .select2-dropdown{
+                width: 27.5% !important;
             }
 
         </style>

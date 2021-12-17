@@ -131,7 +131,7 @@
                 <form class="form-new-order input-text-blue" action="{{route('update_pricing')}}" data-next="redirect" data-url="{{route("onboard-base-extra-price", ['id'=>$id])}}" data-alert="mega" method="POST"  data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px; margin-bottom: 0px !important;">
                         <div class="d-flex match-height row p-15 quotation-main pb-0" >
-                            <div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
+                            {{--<div class="col-sm-4 secondg-bg margin-topneg-15 pt-10">
                                 <div class="theme-text f-14 bold p-15 pl-2" style="padding-top: 15px;">
                                     Market Price Economy
                                 </div>
@@ -182,6 +182,44 @@
                                     <input type="text" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="subservice[mp_additional][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;" >
+                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="subservice[bp_additional][price][premium]" min="0.00" required>
+                                </div>
+                            </div>--}}
+                            <div class="row" style="margin-bottom: 30px;">
+                                <div class="col-md-3">
+                                    <label>Marked Price Economic</label>
+                                    <input type="text" class="form-control bid-amount" value="{{$price->mp_economic}}" name="subservice[market][price][economy]" min="0.00" required>
+                                    <input type="hidden" class="form-control" value="{{$price->organization_id}}" name="id" required>
+                                    <input type="hidden" class="form-control" value="{{$price->id}}" name="subservice[id]" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Market Price Premium</label>
+                                    <input type="text" class="form-control" value="{{$price->bp_economic}}" name="subservice[bidnest][price][economy]" min="0.00" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Add. Market Price Economy</label>
+                                    <input type="text" class="form-control " value="{{$price->mp_additional_distance_economic_price }}" name="subservice[mp_additional][price][economy]" min="0.00" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Add. Market Price Premium</label>
+                                    <input type="text" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="subservice[mp_additional][price][premium]" min="0.00" required>
+                                </div>
+                            </div>
+                            <div class="row secondg-bg margin-topneg-15 pt-10" style="margin-right: -9px !important; padding-bottom: 10px;">
+                                <div class="col-md-3">
+                                    <label>Biddnest Price Economy</label>
+                                    <input type="text" class="form-control" value="{{$price->bp_economic}}" name="subservice[bidnest][price][economy]" min="0.00" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Biddnest Price Premium</label>
+                                    <input type="text" class="form-control" value="{{$price->bp_premium}}" name="subservice[bidnest][price][premium]" min="0.00" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Add. Biddnest Price Economy</label>
+                                    <input type="text" class="form-control " value="{{$price->bp_additional_distance_economic_price}}" name="subservice[bp_additional][price][economy]" min="0.00" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Add. Biddnest Price Premium</label>
                                     <input type="text" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="subservice[bp_additional][price][premium]" min="0.00" required>
                                 </div>
                             </div>

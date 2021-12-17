@@ -55,9 +55,8 @@ class ServiceController extends Controller
         $update_data=  ["name"=>$name,
             "inventory_quantity_type"=>$inventory_quantity_type];
 
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
+        if(filter_var($image, FILTER_VALIDATE_URL) !== FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"services");
-
 
         $service=Service::where("id", $id)->update($update_data);
 

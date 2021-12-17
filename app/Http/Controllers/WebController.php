@@ -50,6 +50,7 @@ use App\Models\Vendor;
 use App\Models\Zone;
 use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
+use App\Models\MovementDates;
 use Bavix\Wallet\Models\Transaction;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -1802,10 +1803,14 @@ class WebController extends Controller
         }
 
         if(isset($request->from) && isset($request->to)){
-            $movement_dates->where('date', '>=', $request->from)->where('date', '<=', $request->to)->groupBy("booking_id")->pluck("booking_id");
+            $movement_dates= MovementDates::where('date', '>=', $request->from)->where('date', '<=', $request->to)->groupBy("booking_id")->pluck("booking_id");
             $bookings->whereIn("id",$movement_dates);
         }
 
         return view('layouts.searchresult', ['bookings'=>$bookings->paginate(CommonEnums::$PAGE_LENGTH)]);
+    }
+
+    public function createComplaints(){
+        return view('reviewandratings.createcomplaints');
     }
 }

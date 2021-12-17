@@ -95,6 +95,7 @@ Route::prefix('web/api')->group(function () {
     Route::put('/reject',[Router::class,'booking_reject'])->name("order_reject");
     Route::post('/add-bid',[Router::class,'booking_add_bid'])->name("add_booking_bid");
     Route::get('/otp-bid/{id}',[Router::class,'send_otp_bid'])->name("send_bid_otp");
+    Route::get('/otp-booking',[Router::class,'send_otp_booking'])->name("send_booking_otp");
 
     Route::put('/book/edit',[Router::class,'booking_edit'])->name("edit_booking");
     Route::post('/bid/edit',[Router::class,'booking_fianl_bid_edit'])->name("edit_booking_final_bid");
@@ -175,6 +176,7 @@ Route::prefix('web/api')->group(function () {
     Route::get('vendor/search', [Router::class, 'searchVendor'])->name("search_vendor");
     Route::get('admin/search', [Router::class, 'searchadmin'])->name("search_admin");
     Route::get('inventory/search', [Router::class, 'searchitem'])->name("search_inventory");
+    Route::get('order/serach', [Router::class, 'serachOrder'])->name("search_order");
 
     Route::post('/pages',[Router::class,'page_add'])->name("page_add");
     Route::put('/pages',[Router::class,'page_edit'])->name("page_edit");
@@ -186,6 +188,7 @@ Route::prefix('web/api')->group(function () {
     Route::post('/contact-us',[Router::class,'contact_us'])->name("contact_add");
     Route::post('/api-settings',[Router::class,'api_settings_update'])->name("api_settings_update");
     Route::post('/api-settings-general',[Router::class,'api_settings_general'])->name("api_settings_general");
+    Route::post('/add/complaint',[Router::class,'complaintAdd'])->name("complaint_add");
 
     Route::post('/reply-add',[Router::class,'reply_add'])->name("add_reply");
     Route::put('/{id}/change-status',[Router::class,'changeStatus'])->name("change_status");

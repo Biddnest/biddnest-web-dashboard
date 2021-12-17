@@ -2,7 +2,7 @@
             <div class="side-nav-bar">
                 <div class="Brand-logo">
                     <div class="brand-logo">
-                        <img src="{{ asset('static/images/logo.png')}}" />
+                        <img src="{{ asset('static/images/192PX.png')}}" />
                     </div>
                 </div>
                 <br>
@@ -176,7 +176,7 @@
 
                         @endif
 
-                       
+
                         <li class="menu-item" data-toggle="" href="#ticket" role="button" aria-expanded="false"
                             aria-controls="Ticket"><a class=""><span class="side-nac-icon"><span class="icon-sidebar"><i class="icon dripicons-checklist"></i></span> </span>Tickets</a>
                         </li>
@@ -184,10 +184,10 @@
                             <li class="sub-menu-item"><a href="{{route('complaints')}}"> <i
                                         class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i> Complaints</a>
                             </li>
-                            
+
                             <li class="sub-menu-item"> <a href="{{route('service-requests')}}"> <i
                                                 class="fa fa-dot-circle-o icons-space mr-2" aria-hidden="true"></i>All Tickets</a></li>
-                           
+
                         </ul>
 
                         @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin'))

@@ -2140,15 +2140,15 @@ $("body").on('change', ".discount_type", function(event) {
     }
 });
 
-$("body").on('change', ".date", function(event) {
+$("body").on('change', ".dateaddbooking", function(event) {
     Logger.info($(this).val());
     let dates = $(this).val();
     dates = dates.split(",");
     dates.sort(function(a, b) {
-        if (a < b) {
+        if (a > b) {
             return 1;
         }
-        if (a > b) {
+        if (a < b) {
             return -1;
         }
         return 0;
@@ -2162,6 +2162,18 @@ $("body").on('change', ".date", function(event) {
 
     // Logger.info(e);
     $(this).val(dates.join(","));
+});
+
+$("body").on('change', ".enddate", function(event) {
+    let enddate = $(this).val();
+    let startdate = $('.startdate').val();
+    if(enddate < startdate){
+        $(this).val('');
+        tinyAlert("Warning", "End date should be grater than start date.");
+    }
+    else{
+        return false;
+    }
 });
 
 
@@ -2180,8 +2192,8 @@ $("body").on('change', ".selectfilter", function() {
 });
 
 $("body").on('input', ".searchcity", function() {
-    var query = $('.searchcity').val();
-    var action = $('.searchcity').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     if (query.length >= 3) {
         var url = window.location.href;
         if (url.indexOf(action) > -1) {
@@ -2196,8 +2208,8 @@ $("body").on('input', ".searchcity", function() {
 });
 
 $("body").on('change', ".todate", function() {
-    var from_query = $('.fromdate').val();
-    var to_query = $('.todate').val();
+    var from_query = $(this).closest('.collapse').find('.fromdate').val();
+    var to_query = $(this).val();
     var url = window.location.href;
     if (url.indexOf("from") > -1 && url.indexOf("to") > -1) {
         url = window.location.href.split("?")[0];
@@ -2215,8 +2227,8 @@ $("body").on('click', ".clear-filter", function() {
 });
 
 $("body").on('change', ".selectstatus", function() {
-    var query = $('.selectstatus').val();
-    var action = $('.selectstatus').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     var url = window.location.href;
     if (url.indexOf(action) > -1) {
         url = window.location.href.split("?")[0];
@@ -2229,8 +2241,8 @@ $("body").on('change', ".selectstatus", function() {
 });
 
 $("body").on('change', ".selectservice", function() {
-    var query = $('.selectservice').val();
-    var action = $('.selectservice').data("action");
+    var query = $(this).val();
+    var action = $(this).data("action");
     var url = window.location.href;
     if (url.indexOf(action) > -1) {
         url = window.location.href.split("?")[0];
@@ -2255,6 +2267,7 @@ $("body").on('click', ".filter-button", function(event) {
 });
 
 $("body").on('input', ".phone-search", function(event) {
+    console.log("add");
     if($(this).val().length >= 10){
         $.get($(this).data("url")+"?phone="+$(this).val(),function(response){
             Logger.info(response);
@@ -2266,6 +2279,57 @@ $("body").on('input', ".phone-search", function(event) {
                 $(".autofill-name").val('');
                 $(".autofill-email").val('');
                 // tinySuccessAlert("User is not registered.","An account will be created on booking.");
+            }
+        });
+    }
+});
+
+$("body").on('change', ".order-search", function(event) {
+    if($(this).val().length) {
+        $.get(API_SEARCH_ORDER + "?q=" + $(this).val(), function (response) {
+            Logger.info(response);
+            if (response.status == "success") {
+                $(".autofill-select").addClass("hidden");
+                $(".autofill-name").removeClass("hidden");
+                $(".autofill-name").closest(".autofill").find(".select2").addClass("hidden");
+                $(".autofill-name").val(response.data.order[0].user.fname + " " + response.data.order[0].user.lname);
+                $(".autofill-id").val(response.data.order[0].user_id);
+            } else {
+                $(".autofill-name").val('');
+                $(".autofill-id").val('');
+            }
+        });
+    }
+});
+
+$("body").on('click', ".send-otp", function(event) {
+    let isValid = true;
+    $($(this).closest('form').find('input.validate-input')).each(function () {
+        Logger.info(isValid);
+        if ($(this).parsley().validate() !== true)
+            isValid = false;
+    });
+    Logger.info(isValid);
+    if (isValid) {
+        var phone = $("#phone").val();
+        var name = $("#fullname").val();
+        var email = $("#email").val();
+        var url =$(this).data("url");
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                phone: phone,
+                name: name,
+                email: email
+            },
+            success: function(response) {
+                Logger.info(response);
+                if (response.status == "success") {
+                    $("#add-otp").show();
+                    // $('.otp-bid').val(response.data.OTP);
+                }
             }
         });
     }

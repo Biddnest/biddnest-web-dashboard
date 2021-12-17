@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\ImageManager;
-
+use App\Sms;
 //use App\Http\Controllers\BookingController;
 
 class BookingsController extends Controller
@@ -38,8 +38,8 @@ class BookingsController extends Controller
 
     public static function createEnquiryForAdmin(Request $request)
     {
-        $user = User::where("phone", $request->phone)
-            ->orWhere("email", $request->email)
+        $user = User::where("phone", $request->contact_details['phone'])
+            ->orWhere("email", $request->contact_details['email'])
             ->first();
         if ($user) {
             $user_id = $user->id;
@@ -59,6 +59,9 @@ class BookingsController extends Controller
          $movement_dates = explode(",", $request->movement_dates);
 //        $movement_dates =$request->movement_dates;
 
+        if($user->verf_code != $request->otp){
+            return Helper::response(false, "otp is incorrect", ['user'=>$user]);
+        }
         return self::createEnquiry($request->all(), $user_id, $movement_dates, false, true);
 
     }
@@ -1957,5 +1960,47 @@ class BookingsController extends Controller
         Booking::where("id",$booking_id)->update(["virtual_assistant_id"=>$admin_id]);
 
         return Helper::response(true, "Virtual assistant has been assigned to this booking.");
+    }
+
+    public static function serachOrder(Request $request)
+    {
+        $query = $request->q;
+
+        if (empty($query))
+            return Helper::response(true, "Data fetched successfully", ["items" => []]);
+
+        $order = Booking::where("public_booking_id", "LIKE", '%'.$query .'%')->with('user')->paginate(5);
+        return Helper::response(true, "Data fetched successfully", ["order" => $order->items()]);
+    }
+
+    public static function sendOtpForBooking(Request $request)
+    {
+        $phone =$request->phone;
+        $user = User::where("phone", $phone)
+            ->first();
+        if ($user) {
+            $user_id = $user->id;
+        } else {
+            $fname = explode($request->name, " ")[0];
+            $lname = str_replace($fname, "", $request->name);
+
+            $newuser = UserController::directSignup($phone, $fname, $lname, $request->email);
+
+            $user_id = $newuser->id;
+        }
+        $otp = Helper::generateOTP(6);
+        $user_update =User::where("id", $user_id)
+            ->update([
+                'verf_code'=>$otp
+            ]);
+
+        dispatch(function() use($phone, $otp){
+            Sms::sendOtp($phone, $otp);
+        })->afterResponse();
+
+        if(!$user_update)
+            return Helper::response(false,"Couldn't sent OTP");
+
+        return Helper::response(true,"OTP sent successfully", ['OTP'=>$otp]);
     }
 }

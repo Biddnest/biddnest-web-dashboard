@@ -139,14 +139,16 @@
                                                         <th scope="col" >Vendor Name</th>
                                                         <th scope="col">Org Name</th>
                                                         <th scope="col">Zone</th>
+                                                        <th scope="col" >Created At</th>
                                                         <th scope="col" style="    text-align: center !important; width: 16%;">Status</th>
+                                                        <th scope="col">Branch</th>
                                                         <th scope="col">Operations</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mtop-20">
                                                     @foreach($vendors as $vendor)
 
-                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>$vendor->id]) }}">
+                                                        <tr class="tb-border cursor-pointer org_{{$vendor->id}} category-sidebar-toggle" data-sidebar="{{ route('sidebar.vendors',['id'=>$vendor->id]) }}">
                                                             <td scope="row">
                                                                 @if(isset($vendor->vendor))
                                                                 {{ucfirst(trans($vendor->vendor->fname))}} {{ucfirst(trans($vendor->vendor->lname))}}
@@ -156,6 +158,7 @@
                                                             </td>
                                                             <td >{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
                                                             <td  >{{ucfirst(trans($vendor->zone->name))}}</td>
+                                                            <td  >{{date('d M Y', strtotime($vendor->created_at))}}</td>
                                                             <td >@switch($vendor->status)
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['active'])
                                                                     <span class="status-badge green-bg text-center">Active</span>
@@ -172,7 +175,8 @@
                                                                     <span class="status-badge info-bg text-center">Unknown</span>
                                                                 @endswitch
                                                             </td>
-                                 <td> <a  class = "inline-icon-button mr-4" href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
+                                                            <td  >{{\App\Models\Organization::where("parent_org_id", $vendor->id)->count()}} <a href="{{route('onboard-branch-vendors', ['id'=>$vendor->id])}}"><i class="icon fa fa-eye pb-2" aria-hidden="true"></i></a></td>
+                                                            <td> <a  class = "inline-icon-button mr-4" href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                                                 <a  class = "inline-icon-button delete" href="#" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                              </td>
                                                         </tr>

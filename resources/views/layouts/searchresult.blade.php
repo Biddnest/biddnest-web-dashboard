@@ -31,7 +31,7 @@
                             <select class="form-control br-5 status" name="status">
                                 <option value="">--Select--</option>
                                 @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
-                                    <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                    <option value="{{$status}}">{{ucfirst(trans(str_replace("_", " ", $key)))}}</option>
                                 @endforeach
                             </select>
                         </div>

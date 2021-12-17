@@ -70,40 +70,11 @@
                         </div>
                         <div class="pt-1 card-head left col-sm-3 ">
                             <div class="search">
-                                {{--<a href="#" class="margin-r-20 pt-2" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
-
-                                </a>
-                                <div class="dropdown-menu" x-placement="bottom-start">
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="total-no-orders">
-                                            <label class="form-check-label" for="total-no-orders">
-                                                From
-                                            </label>
-                                        </div>
+                                <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
+                                    <a href="#" class="margin-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                                        <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                                     </a>
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="status">
-                                            <label class="form-check-label" for="status">
-                                                To
-                                            </label>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item border-top-bottom" href="#">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="city">
-                                            <label class="form-check-label" for="city">
-                                                Order
-                                            </label>
-                                        </div>
-                                    </a>
-                                </div>--}}
+                                </div>
                                 <input type="text"  class="searchTerm table-search" data-url="{{route('vendor.bookings', ['type'=>$type])}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
                                     <i class="fa fa-search"></i>
@@ -116,6 +87,30 @@
 
                         <div class="tab-pane fade show active" id="live" role="tabpanel"
                          aria-labelledby="live-tab">
+                            <div class="collapse" id="filter-menu">
+                                <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                                <div class="row f-14">
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Status</label>
+                                        <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                            <option value="">--Select--</option>
+                                            @foreach(\App\Enums\BookingEnums::$STATUS as $key=>$status)
+                                                @if(($status != 0) && ($status != 1) && ($status != 9) && ($status != 10) && ($status != 11) && ($status != 12) && ($status != 13))
+                                                    <option value="{{$status}}">{{ucfirst(trans(str_replace("_", " ", $key)))}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Moving Date From</label>
+                                        <input type="text" id="dateselect" name="payout_date_from" class="singledate form-control br-5 fromdate" placeholder="23/Nov/2020" />
+                                    </div>
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Moving Date To</label>
+                                        <input type="text" id="dateselect1" name="payout_date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
+                                    </div>
+                                </div>
+                            </div>
                             <table class="table text-left p-0  theme-text ">
                                 <thead class="secondg-bg  p-0 f-14">
                                     <tr>

@@ -71,12 +71,11 @@
                     <div class="header-wrap toal-header">
                         <h3 class="f-18 mt-0 mb-0 ml-1">Branch Details</h3>
                         <div class="header-wrap p-0 ">
-                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">
-                                <i class="filter-dropdown "><img class="bg-grey-icon"
-                                                                     src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
-
-                            </a>--}}
+                            <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
+                                <a href="#" class="margin-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                                    <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+                                </a>
+                            </div>
                             <div class="search">
                                 <input type="text" class="searchTerm table-search" data-url="{{route('vendor.branches')}}" value="{{$search}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
@@ -87,46 +86,24 @@
                     </div>
 
                     <div class="all-vender-details">
-                       {{-- <div class="d-flex row  filter-menus diplay-none">
-                            <div class="col-lg-4">
-                                <div class="form-input">
-                                    <select id="" class="form-control f-12">
-                                        <option>Branch Name </option>
-                                        <option>kolkata </option>
-                                        <option>Mumbai</option>
+                        <div class="collapse" id="filter-menu">
+                            <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                            <div class="row f-14">
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Status</label>
+                                    <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\OrganizationEnums::$STATUS as $key=>$status)
+                                            <option value="{{$status}}">{{ucfirst(trans($key))}}</option>
+                                        @endforeach
                                     </select>
-                                    <span class="error-message">Please enter valid
-                                                        Phone number</span>
-                                    </span>
+                                </div>
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">City</label>
+                                    <input type="text" id="dateselect" name="city" class="form-control br-5 filter-city" data-action="city" placeholder="Chennai" />
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-input">
-                                    <span class="select-role">
-                                        <select id="select-role" class="form-control">
-                                            <option>City</option>
-                                            <option>Chennai</option>
-                                            <option>Vizag</option>
-                                        </select>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-input">
-                                    <span class="">
-                                        <select id="" class="form-control">
-                                            <option>Status</option>
-                                            <option>Pending </option>
-                                            <option>Awaiting Pickup</option>
-                                            <option>Completed</option>
-                                        </select>
-                                        <span class="error-message">Please enter valid
-                                                        Phone number</span>
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>--}}
+                        </div>
                         <table class="table text-left p-0 theme-text mb-0 primary-table">
                             <thead class="secondg-bg p-0">
                             <tr>

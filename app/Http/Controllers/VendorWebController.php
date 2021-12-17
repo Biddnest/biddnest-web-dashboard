@@ -222,16 +222,26 @@ class VendorWebController extends Controller
         if($home_branch->parent_org_id) {
             $branch = Organization::where('parent_org_id', $home_branch->parent_org_id)->orWhere('id', $home_branch->parent_org_id)->where('id', '!=', $home_branch->id);
             if(isset($request->search)){
-                $branch=$branch->where('phone', 'like', $request->search."%")
-                    ->where('city', 'like', "%".$request->search."%");
+                $branch=$branch->where('phone', 'like', $request->search."%");
+            }
+            if(isset($request->status)){
+                $branch->where('status', $request->status);
+            }
+            if(isset($request->city)){
+                $branch->where('city', 'like', "%".$request->city."%");
             }
             $branch =$branch->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
         }
         else {
             $branch = Organization::where("parent_org_id", $home_branch->id);
             if(isset($request->search)){
-                $branch=$branch->where('phone', 'like', $request->search."%")
-                    ->where('city', 'like', "%".$request->search."%");
+                $branch=$branch->where('phone', 'like', $request->search."%");
+            }
+            if(isset($request->status)){
+                $branch->where('status', $request->status);
+            }
+            if(isset($request->city)){
+                $branch->where('city', 'like', "%".$request->city."%");
             }
             $branch = $branch->with('admin')->paginate(CommonEnums::$PAGE_LENGTH);
         }

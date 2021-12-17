@@ -59,6 +59,7 @@ class UserController extends Controller
 
         }
 
+//        $data['rsp'] = Sms::sendOtp($phone, $otp);
         dispatch(function() use($phone, $otp){
             Sms::sendOtp($phone, $otp);
         })->afterResponse();
@@ -254,7 +255,8 @@ class UserController extends Controller
             'email'=>$email,
             'gender'=>$gender,
             'dob'=>$dob,
-             "meta"=>json_encode(["city"=>$city])
+             "meta"=>json_encode(["city"=>$city]),
+             "city"=>$city
         ];
         if($avatar){
             $image_man = new ImageManager(array('driver' => 'gd'));
@@ -370,6 +372,7 @@ class UserController extends Controller
         $user->gender=$gender;
         $user->avatar=$image;
         $user->meta=json_encode(["city"=>$city]);
+        $user->city=$city;
         $user->dob=date("Y-m-d", strtotime($dob));
         $save_result = $user->save();
 

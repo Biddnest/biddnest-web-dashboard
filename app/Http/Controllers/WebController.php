@@ -763,6 +763,14 @@ class WebController extends Controller
             $user->where('created_at', '>=', $request->from)->where('created_at', '<=', $request->to);
         }
 
+        if($request->zone){
+            $user->where('zone_id', $request->zone);
+        }
+
+        if($request->city){
+            $user->where('city', 'like', "%".$request->city."%");
+        }
+
         if($request->sort)
             $user->where('status', UserEnums::$STATUS[$request->sort]);
         else
@@ -1153,7 +1161,14 @@ class WebController extends Controller
                 $coupons->whereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
         }
 
+        if(isset($request->zone)){
+            $zones_id = CouponZone::where('zone_id', $request->zone)->pluck('coupon_id');
+            $coupons->whereIn('id', $zones_id);
+        }
 
+        if(isset($request->type)){
+            $coupons->where('discount_type', $request->type);
+        }
 
         if(isset($request->search)){
             $coupons=$coupons->where('name', 'like', "%".$request->search."%");

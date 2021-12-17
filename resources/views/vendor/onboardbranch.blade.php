@@ -189,7 +189,7 @@
                             <div class="form-input">
                                 <label class="full-name">Organization Name</label>
                                 <input type="text" id="fullname" placeholder="Wayne Packing Pvt Ltd" value="{{$organization->org_name}}"
-                                       class="form-control" name="organization[org_name]" required>
+                                       class="form-control" name="organization[org_name]" readonly required>
                                 <span class="error-message">Please enter valid
                                             Organization Name</span>
                             </div>
@@ -197,13 +197,15 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="phone-num-lable">Organization Type</label>
-                                <select class="form-control" name="organization[org_type]" required>
+                               {{-- <select class="form-control" name="organization[org_type]" required>
                                     <option value="">--Select--</option>
 
                                     @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)
                                         <option value="{{$type}}">{{$type}}</option>
                                     @endforeach
-                                </select>
+                                </select>--}}
+                                <input type="text" id="fullname" placeholder="Pvt Ltd" value="{{$organization->org_type}}"
+                                       class="form-control" name="organization[org_type]" readonly required>
                                 <span class="error-message">Please enter valid
                                             Organization Type</span>
                             </div>
@@ -489,13 +491,15 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="phone-num-lable">Organization Type</label>
-                                    <select class="form-control" name="organization[org_type]" required>
+                                    {{--<select class="form-control" name="organization[org_type]" required>
                                         <option value="">--Select--</option>
 
                                         @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)
                                             <option value="{{$type}}">{{$type}}</option>
                                         @endforeach
-                                    </select>
+                                    </select>--}}
+                                    <input type="text" id="fullname" placeholder="Pvt Ltd" value="{{$organization->org_type}}"
+                                           class="form-control" name="organization[org_type]" readonly required>
                                     <span class="error-message">Please enter valid
                                             Organization Type</span>
                                 </div>

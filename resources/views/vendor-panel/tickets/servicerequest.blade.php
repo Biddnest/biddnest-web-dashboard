@@ -26,35 +26,11 @@
                     <div class="header-wrap pt-4 pb-4">
                         <h3 class="f-18 mt-0 mb-0  ml-1">Service Request</h3>
                         <div class="header-wrap  p-0 filter-dropdown ">
-                            {{--<a href="#" class="margin-r-20" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i><img src="{{asset('static/vendor/images/filter.svg')}}" alt="" srcset=""></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="total-no-orders">
-                                        <label class="form-check-label" for="total-no-orders">
-                                                    From
-                                        </label>
-                                    </div>
+                            <div class="header-wrap p-0 col-sm-1"  style="display: flex; justify-content: flex-end;  margin-right: -18px;" >
+                                <a href="#" class="margin-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                                    <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                                 </a>
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="status">
-                                        <label class="form-check-label" for="status">
-                                                    To
-                                        </label>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="city">
-                                        <label class="form-check-label" for="city">
-                                                    Order
-                                        </label>
-                                    </div>
-                                </a>
-                            </div>--}}
+                            </div>
                             <div class="search">
                                 <input type="text" class="searchTerm table-search" data-url="{{route('vendor.service_request')}}" value="{{$search}}" placeholder="Search...">
                                 <button type="submit" class="searchButton">
@@ -65,6 +41,29 @@
                     </div>
 
                     <div class="all-vender-details">
+                        <div class="collapse" id="filter-menu">
+                            <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                            <div class="row f-14">
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Category</label>
+                                    <select class="form-control br-5 selectfilter" name="status" data-action="category">
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\TicketEnums::$TYPE as $key_type=>$type)
+                                            <option value="{{$type}}">{{ucwords($key_type)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label style="font-weight:500 !important;">Status</label>
+                                    <select class="form-control br-5 selectfilter" name="status" data-action="status">
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\TicketEnums::$STATUS as $key=>$status)
+                                            <option value="{{$status}}">{{ucwords($key)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <table class="table text-center p-0  theme-text ">
                             <thead class="secondg-bg  p-0 f-14">
                                 <tr class="f-weight-500">

@@ -2334,3 +2334,20 @@ $("body").on('click', ".send-otp", function(event) {
         });
     }
 });
+
+$("body").on('input', ".filter-city", function(event) {
+    console.log("add");
+    if($(this).val().length >= 3){
+        var query = $(this).val();
+        var action = $(this).data("action");
+        var url = window.location.href;
+        if (url.indexOf(action) > -1) {
+            url = window.location.href.split("?")[0];
+        }
+        if (url.indexOf("?") > -1) {
+            redirectTo(url + "&" + action + "=" + query);
+        } else {
+            redirectTo(url + "?" + action + "=" + query);
+        }
+    }
+});

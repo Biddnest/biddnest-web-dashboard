@@ -31,7 +31,7 @@ return [
     ],
 
     "msg91" => [
-          'key' => env("Msg91_KEY"),
+          'key' => env("Msg91_KEY")
     ],
 
     'onesignal' => [

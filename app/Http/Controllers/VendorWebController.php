@@ -272,6 +272,13 @@ class VendorWebController extends Controller
         if(isset($request->search)){
             $tickets=$tickets->where('heading', 'like',"%".$request->search."%");
         }
+        if(isset($request->category)){
+            $tickets->where('type', $request->category);
+        }
+        if(isset($request->status)){
+            $tickets->where('status', $request->status);
+        }
+
         $tickets=$tickets->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor-panel.tickets.servicerequest', ['tickets'=>$tickets, 'type'=>$request->type,
             "search"=>$request->search ?: ""
@@ -514,9 +521,13 @@ class VendorWebController extends Controller
         return view('vendor-panel.inventory.editinventory', ['inventories'=>$inventory, 'item'=>$inventory_item, 'service_types'=>$service_types, 'inventory_id'=>$request->id]);
     }
 
-
     public function searchResult(Request $request){
         $bookings=$booking=BookingsController::getBookingsForVendorApp($request, true);;
         return view('vendor-panel.layouts.searchresult', ['bookings'=>$bookings]);
+    }
+
+    public function getReports(Request $request){
+        $reports = ReportController::getReport(Session::get('account')['id'], true);
+        return view('vendor-panel.reports.report', ['reports'=>$reports]);
     }
 }

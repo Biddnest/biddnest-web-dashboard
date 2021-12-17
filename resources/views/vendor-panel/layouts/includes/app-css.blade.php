@@ -273,4 +273,12 @@
     .error-message{
         color:red;
     }
+
+    .margin-20 {
+        margin-right: 40px !important;
+    }
+    .clear-filter {
+        float: right;
+        margin: 25px;
+    }
 </style>

@@ -84,6 +84,28 @@
                                 <input type="text" id="dateselect1" name="payout_date_to" class="singledate form-control br-5 todate" placeholder="23/Dec/2020" />
                             </div>
                         </div>
+                        <div class="row f-14 p-10">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <label style="font-weight:500 !important;">Discount Type</label>
+                                <select class="form-control br-5 selectfilter" name="zones" data-action="type">
+                                    <option value="">--Select--</option>
+                                    @foreach(\App\Enums\CouponEnums::$DISCOUNT_TYPE as $key_type=>$type)
+                                        <option value="{{$type}}">{{ucwords($key_type)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label style="font-weight:500 !important;">Zone</label>
+                                <select class="form-control br-5 selectfilter" name="zones" data-action="zone">
+                                    <option value="">--Select--</option>
+                                    @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                        <option value="{{$zone->id}}">{{ucwords($zone->name)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
                     </div>
                     <table class="table text-center p-0 theme-text mb-0 f-14">
                         <thead class="secondg-bg  p-0">

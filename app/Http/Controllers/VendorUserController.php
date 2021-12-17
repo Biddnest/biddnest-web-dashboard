@@ -25,6 +25,7 @@ class VendorUserController extends Controller
     public static function login($username, $password)
 {
     $vendor_user=Vendor::where(['email'=>$username])
+        ->where('user_role', "!=", VendorEnums::$ROLES['driver'])
         ->where([ 'status'=>1, 'deleted'=>0])
         ->with("organization")
         ->first();
@@ -38,8 +39,13 @@ class VendorUserController extends Controller
 
     if(password_verify($password, $vendor_user->password))
     {
+
         if($vendor_user->status != VendorEnums::$STATUS['active'])
             return Helper::response(false, "Your Account is inactive or suspended. Please contact your organization admin.");
+
+
+
+
 
         Session::put(["account"=>['id'=>$vendor_user->id,
             'name'=>$vendor_user->fname.' '.$vendor_user->lname,

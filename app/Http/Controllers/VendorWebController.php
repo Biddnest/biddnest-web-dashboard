@@ -144,7 +144,7 @@ class VendorWebController extends Controller
         $save_booking=Bid::where(['organization_id'=>Session::get('organization_id'), 'bookmarked'=>CommonEnums::$YES])->count();
 
         $past_booking=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereIn('status', [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
-        
+
         $booking=BookingsController::getBookingsForVendorApp($request, true);
         return view('vendor-panel.order.liveorders', ['bookings'=>$booking, 'type'=>$request->type, 'count_booking'=>$count_booking, 'participated_booking'=>$participated_booking, 'schedul_booking'=>$schedul_booking, 'save_booking'=>$save_booking, 'past_booking'=>$past_booking, "search"=>$request->search ?: ""]);
     }
@@ -380,7 +380,11 @@ class VendorWebController extends Controller
         }
 
         $booking->status_ids = $hist;
-        return view('vendor-panel.order.myquote', ['booking'=>$booking]);
+
+        $bid = Bid::where("organization_id",Session::get('organization_id'))->where("booking_id", $booking->id)->first();
+//        return $booking;
+
+        return view('vendor-panel.order.myquote', ['booking'=>$booking,"bid"=>$bid]);
     }
 
     public function myBid(Request $request)

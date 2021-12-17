@@ -111,10 +111,29 @@
                                     <div class="d-flex  row margin-topneg-15  p-60">
                                         <div class="col-sm-6    pt-10 p-60 text-center">
                                             <img src="{{asset('static/vendor/images/Group 14106.svg')}}">
+                                            @if($bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'])
                                             <div class="p-8 mt-2">
-                                                <h4 class="f-20">Your quote has been Submitted !!</h4>
+                                                <h4 class="f-20">Your quote has been Submitted</h4>
                                                 <h3 class="f-24">BID PLACED</h3>
                                             </div>
+                                            @elseif($bid->status == \App\Enums\BidEnums::$STATUS['won'])
+                                                <div class="p-8 mt-2">
+                                                    <h4 class="f-20">You have won this bid.</h4>
+                                                    <h3 class="f-24">BID WON</h3>
+                                                </div>
+
+                                            @elseif($bid->status == \App\Enums\BidEnums::$STATUS['lost'])
+                                                <div class="p-8 mt-2">
+                                                    <h4 class="f-20">You lost this bid.</h4>
+                                                    <h3 class="f-24">BID LOST</h3>
+                                                </div>
+
+                                            @else
+                                                <div class="p-8 mt-2">
+                                                    <h4 class="f-20">This bid has expired.</h4>
+                                                    <h3 class="f-24">Bid Expired</h3>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 pt-10 p-60 text-center">
                                             <h3 class="f-24 theme-text bold p-10" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">Time Left</h3>

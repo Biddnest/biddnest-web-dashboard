@@ -79,28 +79,47 @@
         <!-- Dashboard cards -->
         <div class="vender-all-details dashboard-cards flex-row">
             <div class="simple-card">
+                <a href="{{route('vendor.bookings', ['type'=>"live"])}}">
+
                 <p> LIVE ORDERS</p>
                 <h1 style="font-size: 30px;">{{$count_live}}</h1>
+                </a>
+
             </div>
             <div class="simple-card">
+                <a href="{{route('vendor.bookings', ['type'=>"scheduled"])}}">
+
                 <p>ONGOING ORDERS</p>
                 <h1 style="font-size: 30px;">{{$count_ongoing}}</h1>
+                </a>
             </div>
             <div class="simple-card">
+                <a href="{{route('vendor.bookings', ['type'=>"scheduled"])}}">
+
                 <p>ORDERS WON</p>
                 <h1 style="font-size: 30px;">{{$count_won}}</h1>
+                </a>
             </div>
             <div class="simple-card">
+                <a href="{{route('vendor.branches')}}">
+
                 <p>TOTAL BRANCHES</p>
                 <h1 style="font-size: 30px;">{{$count_branch}}</h1>
+                </a>
             </div>
             <div class="simple-card">
+                <a href="{{route('vendor.managerusermgt', ['type'=>"admin"])}}">
+
                 <p>TOTAL EMPLOYEES</p>
                 <h1 style="font-size: 30px;">{{$count_emp}}</h1>
+                </a>
             </div>
             <div class="simple-card">
+                <a href="{{route('vendor.payout')}}">
+
                 <p>TOTAL REVENUE</p>
                 <h1 style="font-size: 30px;"> ₹{{round($total_revenue/1000)}}K</h1>
+                </a>
             </div>
         </div>
         <!--  dashboard Columns -->

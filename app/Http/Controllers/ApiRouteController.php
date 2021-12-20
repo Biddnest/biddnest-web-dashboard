@@ -781,4 +781,20 @@ class ApiRouteController extends Controller
         return UserController::getReferralUrl($request->token_payload->id);
     }
 
+    public function captureUserLocation(Request $request)
+    {
+
+        $validation = Validator::make($request->all(),[
+            'latitude' => 'string|required',
+            'longitude' => 'string|required'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
+
+        return UserController::saveLocation($request->token_payload->id, $request
+        ->latitude, $request->longitude);
+
+    }
+
 }

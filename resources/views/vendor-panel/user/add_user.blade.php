@@ -102,9 +102,8 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>
-                                            <input type="text" id="phone"
-                                                   placeholder="Type here" name="phone" value="{{$roles->phone ?? ''}}"
-                                                   class="form-control phone" required maxlength="10" minlength="10">
+                                            <input type="tel" id="phone" placeholder="987654321" class="form-control phone" name="phone" value="{{$roles->phone ?? ''}}" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
+
                                             <span class="error-message">Please enter valid
                                                 Phone number</span>
                                         </div>

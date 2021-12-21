@@ -571,11 +571,13 @@ class OrganisationController extends Controller
             "organization_id"=>$data['branch'],
             "dob"=>date("Y-m-d", strtotime($data['dob'])),
             "doj"=>date("Y-m-d", strtotime($data['doj'])),
-            "dor"=>date("Y-m-d", strtotime($data['dor'])),
             "state"=>$data['state'],
             "gender"=>$data['gender'],
             "city"=>$data['city']
         ];
+
+        if($data['dor'])
+            $update_data["dor"] =date("Y-m-d", strtotime($data['dor']));
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"vendors/".$data['fname']);

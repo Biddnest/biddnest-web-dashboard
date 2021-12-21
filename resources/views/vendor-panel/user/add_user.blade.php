@@ -114,7 +114,7 @@
                                     <div class="form-input">
                                         <label class="phone-num-lable">Alternate Phone Number</label>
                                         <input type="tel" id="phone"
-                                               placeholder="Type here" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone']}}@endif"
+                                               placeholder="Type here" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone'] ?? ''}}@endif"
                                                class=" form-control phone" max="10" min="10">
                                         <span class="error-message">Please enter valid
                                                 Phone number</span>

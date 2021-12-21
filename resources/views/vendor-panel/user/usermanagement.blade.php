@@ -56,6 +56,7 @@
                                     <th scope="col" class="text-left" style="padding: 16px 26px;">Name</th>
                                     <th scope="col" style="padding: 16px 26px;" >Email</th>
                                     <th scope="col" style="padding: 16px 26px;">Phone</th>
+                                    <th scope="col" style="padding: 16px 26px;">Alt. Phone</th>
                                     <th scope="col" class="text-left" style="padding: 16px 26px;">Branch</th>
                                     <th scope="col " class="text-center" style="padding: 16px 26px;">Status</th>
                                     @if(\App\Helper::is("admin", true))
@@ -70,6 +71,7 @@
 
                                             <td style="text-align:left!important; padding-top: 20px;" >{{$user->email}}</td>
                                             <td style="text-align:left!important; padding-top: 20px">{{$user->phone}}</td>
+                                            <td style="text-align:left!important; padding-top: 20px">{{json_decode($user->meta, true)['secondary_phone'] ?? ''}}</td>
                                             <td style="text-align:left!important; padding-top: 20px;">{{ucfirst(trans($user->organization->city))}}</td>
 
                                             <td class="text-center" style="padding: 14px;">

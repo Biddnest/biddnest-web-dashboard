@@ -289,7 +289,6 @@ class VendorRouteController extends Controller
             'image'=>'required',
             'dob'=>'required',
             'doj'=>'required',
-            'dor'=>'required',
             'state'=>'required',
             'city'=>'required',
             'address1'=>'required',

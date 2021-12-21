@@ -10,6 +10,7 @@ use App\Enums\SliderEnum;
 use App\Enums\UserEnums;
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\GeoController;
 use App\Http\Controllers\ReferralController;
 use App\Models\Slider;
 use App\Models\User;
@@ -532,8 +533,18 @@ class UserController extends Controller
             ]);
         else
             return Helper::response(false, "Invalid Response from url shortner service.");
+    }
 
+    public function saveLocation($user_id, $lat, $long){
 
+        $update = User::where("id",$user_id)->update([
+            "zone_id"=>GeoController::getNearestZone($lat,$long)
+        ]);
+
+        if($update)
+            return Helper::response(true,"Location has been captured.");
+        else
+            return Helper::response(false,"Could not update location.");
 
     }
 

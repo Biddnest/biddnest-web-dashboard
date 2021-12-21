@@ -108,6 +108,7 @@ Route::prefix('v1')->group(function () {
     Route::get("/vouchers",[ApiRouter::class, 'getVouchers']);
 
     Route::get('/referral-link', [ApiRouter::class, 'getReferralUrl'])->name("referrerUrl");
+    Route::post('/zone/register', [ApiRouter::class, 'captureUserLocation'])->name("captureLocation");
 
 });
 

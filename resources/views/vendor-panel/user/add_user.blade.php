@@ -113,9 +113,9 @@
                                         <label class="phone-num-lable">Gender</label>
                                         <select class="form-control" name="gender" required>
                                             <option>--Select--</option>
-                                            <option value="female">Female</option>
-                                            <option value="male">Male</option>
-                                            <option value="3rd gender">3rd Gender</option>
+                                            <option value="female" @if($roles && ($roles->gender == "female")) Selected @endif>Female</option>
+                                            <option value="male" @if($roles && ($roles->gender == "male")) Selected @endif>Male</option>
+                                            <option value="3rd gender" @if($roles && ($roles->gender == "3rd gender")) Selected @endif>3rd Gender</option>
                                         </select>
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
@@ -143,7 +143,7 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="">Date Of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect birthdate" required>
+                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control singledate dateselect birthdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                 </div>

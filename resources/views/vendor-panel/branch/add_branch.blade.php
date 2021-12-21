@@ -122,7 +122,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">City</label>
-                                            <input type="text" id="fullname" placeholder="Bengaluru" value="@if($branch){{$branch->city}}@endif"
+                                            <input type="text" id="fullname" placeholder="Bengaluru" value="@if($branch){{$branch->city}} @endif"
                                                    class="form-control" name="address[city]" required>
                                             <span class="error-message">Please enter valid
                                             City</span>
@@ -227,7 +227,7 @@
                                                 @foreach(OrganizationEnums::$STATUS as $status=>$key)
                                                     <option value="{{$key}}"
                                                             @if($branch && ($branch->status == $org_service->id)) selected                                                                 @endif
-                                                         @endif>{{ucfirst(trans($status))}}</option>
+                                                         @endif >{{ucfirst(trans($status))}}</option>
                                                 @endforeach
                                             </div>
                                         </div>

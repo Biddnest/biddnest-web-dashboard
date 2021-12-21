@@ -108,6 +108,18 @@
                                                 Phone number</span>
                                         </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Gender</label>
+                                        <select class="form-control" name="gender" required>
+                                            <option>--Select--</option>
+                                            <option value="female">Female</option>
+                                            <option value="male">Male</option>
+                                            <option value="3rd gender">3rd Gender</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid Phone number</span>
+                                    </div>
+                                </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-input">
@@ -115,8 +127,7 @@
                                         <input type="tel" id="phone"
                                                placeholder="Type here" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone'] ?? ''}}@endif"
                                                class=" form-control phone" maxlength="10" minlength="10">
-                                        <span class="error-message">Please enter valid
-                                                Phone number</span>
+                                        <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
 
@@ -132,7 +143,7 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="">Date Of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect birthdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                 </div>

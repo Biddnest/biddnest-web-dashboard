@@ -285,6 +285,7 @@ class VendorRouteController extends Controller
             'email' => 'required|string',
             'phone'=>'required|min:10|max:10',
             'branch' => 'required',
+            'gender' => 'required',
             'role'=>'required',
             'image'=>'required',
             'dob'=>'required',

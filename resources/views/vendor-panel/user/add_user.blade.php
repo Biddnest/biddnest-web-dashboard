@@ -104,7 +104,7 @@
                                             <label class="phone-num-lable">Phone Number</label>
                                             <input type="text" id="phone"
                                                    placeholder="Type here" name="phone" value="{{$roles->phone ?? ''}}"
-                                                   class="form-control phone" required max="10" min="10">
+                                                   class="form-control phone" required maxlength="10" minlength="10">
                                             <span class="error-message">Please enter valid
                                                 Phone number</span>
                                         </div>
@@ -115,7 +115,7 @@
                                         <label class="phone-num-lable">Alternate Phone Number</label>
                                         <input type="tel" id="phone"
                                                placeholder="Type here" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone'] ?? ''}}@endif"
-                                               class=" form-control phone" max="10" min="10">
+                                               class=" form-control phone" maxlength="10" minlength="10">
                                         <span class="error-message">Please enter valid
                                                 Phone number</span>
                                     </div>

@@ -220,14 +220,12 @@
                                                    class="form-control" name="commission" required maxlength="2" readonly>
                                         </div>
                                     </div>
-                                    @if($branch->ticket_status == CommonEnums::$YES)
+                                    @if($branch && ($branch->ticket_status == CommonEnums::$YES))
                                         <div class="col-lg-6">
                                             <div class="form-input">
                                                 <label class="full-name">Status</label>
                                                 @foreach(OrganizationEnums::$STATUS as $status=>$key)
-                                                    <option value="{{$key}}"
-                                                            @if($branch && ($branch->status == $org_service->id)) selected                                                                 @endif
-                                                         @endif >{{ucfirst(trans($status))}}</option>
+                                                    <option value="{{$key}}" @if($branch && ($branch->status == $org_service->id)) selected @endif>{{ucfirst(trans($status))}}</option>
                                                 @endforeach
                                             </div>
                                         </div>

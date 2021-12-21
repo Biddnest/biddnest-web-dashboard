@@ -511,7 +511,9 @@ class OrganisationController extends Controller
         $vendor->password = $password;
         $vendor->dob = date("Y-m-d", strtotime($data['dob']));
         $vendor->doj = date("Y-m-d", strtotime($data['doj']));
-        $vendor->dor = date("Y-m-d", strtotime($data['dor']));
+        if($data['dor']){
+            $vendor->dor = date("Y-m-d", strtotime($data['dor']));
+        }
         $vendor->state = $data['state'];
         $vendor->city = $data['city'];
         $vendor->gender = $data['gender'];

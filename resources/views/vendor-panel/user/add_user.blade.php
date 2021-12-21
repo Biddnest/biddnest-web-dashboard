@@ -112,7 +112,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="phone-num-lable">Additional Phone Number</label>
+                                        <label class="phone-num-lable">Alternate Phone Number</label>
                                         <input type="tel" id="phone"
                                                placeholder="Type here" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone']}}@endif"
                                                class=" form-control phone" max="10" min="10">

@@ -29,7 +29,7 @@
                                         <div class="form-input">
                                             <label class="full-name">Authorizer First Name</label>
                                             <input type="text" id="fullname" placeholder="First Name"
-                                                   class="form-control alphabet" name="fname" pattern="[a-zA-Z]+" required value="{{ucfirst(trans(json_decode($branch->meta, true)['auth_fname'])) ?? ''}}">
+                                                   class="form-control alphabet" name="fname" pattern="[a-zA-Z]+" required value="@if($branch && $branch->meta){{ucfirst(trans(json_decode($branch->meta, true)['auth_fname']))}}@endif">
                                             <span class="error-message">Please enter valid
                                             Organization Name</span>
                                         </div>
@@ -38,7 +38,7 @@
                                         <div class="form-input">
                                             <label class="phone-num-lable">Authorizer Last Name</label>
                                             <input type="text" id="fullname" placeholder="Last Name"
-                                                   class="form-control alphabet" name="lname" pattern="[a-zA-Z]+" required value="{{ucfirst(trans(json_decode($branch->meta, true)['auth_lname'])) ?? ''}}">
+                                                   class="form-control alphabet" name="lname" pattern="[a-zA-Z]+" required value="@if($branch && $branch->meta){{ucfirst(trans(json_decode($branch->meta, true)['auth_lname']))}}@endif">
                                             <span class="error-message">Please enter valid
                                             Organization Type</span>
                                         </div>

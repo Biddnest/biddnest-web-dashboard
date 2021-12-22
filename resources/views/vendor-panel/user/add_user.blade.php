@@ -110,6 +110,16 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
+                                        <label class="phone-num-lable">Alternate Phone Number</label>
+                                        <input type="tel" id="phone"
+                                               placeholder="987654321" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone'] ?? ''}}@endif"
+                                               class=" form-control phone" maxlength="10" minlength="10">
+                                        <span class="error-message">Please enter valid Phone number</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-input">
                                         <label class="phone-num-lable">Gender</label>
                                         <select class="form-control" name="gender" required>
                                             <option>--Select--</option>
@@ -123,11 +133,22 @@
 
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="phone-num-lable">Alternate Phone Number</label>
-                                        <input type="tel" id="phone"
-                                               placeholder="Type here" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone'] ?? ''}}@endif"
-                                               class=" form-control phone" maxlength="10" minlength="10">
-                                        <span class="error-message">Please enter valid Phone number</span>
+                                        <label class="full-name">Modules under this roles</label>
+                                        <select class="form-control select-box" name="assign_module[]" multiple required>
+                                            <option value="">--Select--</option>
+                                            @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
+                                                <option value="{{$module}}"
+                                                        @if($roles && $roles->assign_module)
+                                                            @foreach(json_decode($roles->assign_module, true) as $assigned)
+                                                                @if($assigned == $module)
+                                                                    selected
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                >{{ucfirst(trans(str_replace("_", " ", $key_module)))}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="error-message">Please enter valid Service</span>
                                     </div>
                                 </div>
 
@@ -236,6 +257,7 @@
                                         </span>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">City</label>

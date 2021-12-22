@@ -52,7 +52,7 @@ class VendorUserController extends Controller
             'email'=>$vendor_user->email]]);
         Session::put('sessionFor', "vendor");
         Session::put('user_role', $vendor_user->user_role);
-
+        Session::put('assign_module', $vendor_user->assign_module);
         Session::put('organization_id', $vendor_user->organization->id);
 
         return Helper::response(true, "Login was successfull");

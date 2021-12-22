@@ -267,7 +267,8 @@ class VendorRouteController extends Controller
             'state'=>'required',
             'city'=>'required',
             'address1'=>'required',
-            'address2'=>'required'
+            'address2'=>'required',
+            'assign_module.*'=>'required'
         ]);
 
         if($validation->fails())
@@ -293,7 +294,8 @@ class VendorRouteController extends Controller
             'state'=>'required',
             'city'=>'required',
             'address1'=>'required',
-            'address2'=>'required'
+            'address2'=>'required',
+            'assign_module.*'=>'required'
         ]);
 
         if($validation->fails())

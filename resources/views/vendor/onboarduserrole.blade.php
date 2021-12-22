@@ -438,7 +438,7 @@
                                         @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
                                             <option value="{{$module}}"
                                                     @if($role && $role->assign_module)
-                                                        @foreach($role->assign_module as $assigned)
+                                                        @foreach(json_decode($role->assign_module, true) as $assigned)
                                                             @if($assigned == $module)
                                                                 selected
                                                             @endif

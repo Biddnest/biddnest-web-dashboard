@@ -151,8 +151,6 @@ export function initMapPicker() {
 }
 
 export function initAllSelectBoxes() {
-
-
     if ($(".select-box").length) {
         $(".select-box").select2({
             tags: false,
@@ -162,6 +160,7 @@ export function initAllSelectBoxes() {
             // allowClear: true,
             placeholder: 'Type here',
             minimumResultsForSearch: 1,
+            dropdownParent: $(".fullscreen-modal"),
             // minimumInputLength: 3,
         });
     }

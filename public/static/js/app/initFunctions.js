@@ -166,16 +166,19 @@ export function initAllSelectBoxes() {
         });
     }
     if ($(".select-box-model").length) {
-        $(".select-box-model").select2({
-            tags: false,
-            multiple: true,
-            closeOnSelect: false,
-            // debug: true,
-            // allowClear: true,
-            placeholder: 'Type here',
-            minimumResultsForSearch: 1,
-            dropdownParent: $('.fullscreen-modal'),
-            // minimumInputLength: 3,
+        $(".select-box-model").each(function(){
+            let model = $(this);
+            $(this).select2({
+                tags: false,
+                multiple: true,
+                closeOnSelect: false,
+                // debug: true,
+                // allowClear: true,
+                placeholder: 'Type here',
+                minimumResultsForSearch: 1,
+                dropdownParent: model.closest(".form-input"),
+                // minimumInputLength: 3,
+            });
         });
     }
 

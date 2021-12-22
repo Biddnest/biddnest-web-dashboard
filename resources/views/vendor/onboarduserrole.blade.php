@@ -190,7 +190,7 @@
                         <div class="col-lg-6">
                             <div class="form-input">
                                 <label class="full-name">Modules under this roles</label>
-                                <select name="assign_module[]" class="form-control select-box" multiple required>
+                                <select name="assign_module[]" class="form-control select-box-model" multiple required>
                                     <option value="">--Select--</option>
                                     @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
                                         <option value="{{$module}}">{{ucfirst(trans(str_replace("_", " ", $key_module)))}}</option>
@@ -433,7 +433,7 @@
                             <div class="col-lg-6">
                                 <div class="form-input">
                                     <label class="full-name">Modules under this roles</label>
-                                    <select class="form-control select-box" name="assign_module[]" multiple required>
+                                    <select class="form-control select-box-model" name="assign_module[]" multiple required>
                                         <option value="">--Select--</option>
                                         @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
                                             <option value="{{$module}}"

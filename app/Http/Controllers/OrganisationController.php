@@ -76,6 +76,11 @@ class OrganisationController extends Controller
             $result_service= $service->save();
         }
 
+        $models = [];
+        foreach(RoleGroupEnums::$MODUlES as $model=>$model_key){
+            array_push($model_key, $models);
+        }
+
         $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
 
         $vendor = new Vendor;
@@ -90,6 +95,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->assign_module = $models;
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor_result = $vendor->save();
 
@@ -142,6 +148,11 @@ class OrganisationController extends Controller
             $result_service= $service->save();
         }*/
 
+        $models = [];
+        foreach(RoleGroupEnums::$MODUlES as $model=>$model_key){
+            array_push($model_key, $models);
+        }
+
         $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
 
         $vendor = new Vendor;
@@ -157,6 +168,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->assign_module = $models;
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor_result = $vendor->save();
 

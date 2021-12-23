@@ -39,5 +39,11 @@ class Sms
         return true;
     }
 
+    public static function send($phone, $message){
+        return true;
+    }
+
+
+
 
 }

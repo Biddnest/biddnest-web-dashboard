@@ -520,7 +520,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $data['branch'];
         $vendor->meta = json_encode($meta);
         $vendor->user_role = $data['role'];
-        $vendor->assign_module = $data['assign_module'];
+        $vendor->assign_module = json_encode($data['assign_module']);
         $vendor->password = $password;
         $vendor->dob = date("Y-m-d", strtotime($data['dob']));
         $vendor->doj = date("Y-m-d", strtotime($data['doj']));

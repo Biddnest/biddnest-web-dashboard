@@ -845,7 +845,7 @@ class BookingsController extends Controller
             "public_booking_id" => $public_booking_id,
             "organization_id" => $organization_id,
             "status" => BookingEnums::$STATUS['awaiting_pickup']
-        ])->first();
+        ])->with('driver')->first();
 
         if (!$booking)
             return Helper::response(false, "Invalid Order id");
@@ -865,8 +865,8 @@ class BookingsController extends Controller
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
             $phone = User::where(['id'=>$booking->user_id])->pluck('phone')[0];
-            $drivername = Vendor::where('id', $driver_id)->pluck['fname'][0]." ".Vendor::where('id', $driver_id)->pluck['lname'][0];
-            $driverphone = Vendor::where('id', $driver_id)->pluck['phone'][0];
+            $drivername = Vendor::where('id', $booking->driver->driver_id)->pluck['fname'][0]." ".Vendor::where('id', $booking->driver->driver_id)->pluck['lname'][0];
+            $driverphone = Vendor::where('id', $booking->driver->driver_id)->pluck['phone'][0];
 
 
             dispatch(function () use ($booking, $phone, $public_booking_id, $drivername, $driverphone) {
@@ -909,15 +909,16 @@ class BookingsController extends Controller
             // $result_status = $bookingstatus->save();
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['completed']);
-
-            dispatch(function () use ($booking) {
+            $phone = User::where(['id'=>$booking->user_id])->pluck('phone')[0];
+            $playstoreurl = "the app";
+            dispatch(function () use ($booking, $phone, $playstoreurl) {
 
                 NotificationController::sendTo("user", [$booking->user_id], "Your booking has been completed.", "Thankyou for choosing Biddnest.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" => $booking->public_booking_id,
                     "booking_status" => BookingEnums::$STATUS['completed']
                 ]);
-
+                Sms::sendOrderComplete($phone, $playstoreurl);
             })->afterResponse();
             return Helper::response(true, "Your order has been completed.");
         } else {

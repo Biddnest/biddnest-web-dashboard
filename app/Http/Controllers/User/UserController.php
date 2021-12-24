@@ -485,8 +485,9 @@ class UserController extends Controller
     public static function sendLink($phone){
         $sms_body ="Hey there, I invite you to install. Click here to install For Android APP:- https://play.google.com/store, IOS APP:- https://play.google.com/store";
 
-        dispatch(function() use($phone, $sms_body){
-            Sms::send($phone, $sms_body);
+        $playstoreurl = "the app";
+        dispatch(function() use($phone, $playstoreurl){
+            Sms::sendReferalLink($phone, $playstoreurl);
         });
 
         return Helper::response(true, "Links have been send to $phone", ['sms'=>$sms_body]);

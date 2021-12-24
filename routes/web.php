@@ -592,7 +592,8 @@ Route::prefix('website/api')->group(function () {
 Route::prefix('site')->group(function () {
     Route::get('/', [WebsiteController::class, 'home'])->name("home");
 
-
+    Route::get('/order-details/{public_booking_id}', [WebsiteController::class, 'getOrderDetails'])->name("getOrderDetails");
+    
     Route::get('/join-vendor', [WebsiteController::class, 'joinVendor'])->name("join-vendor");
     Route::get('/vendor/success', [WebsiteController::class, 'getVendor'])->name("web.vendor.success");
     Route::get('/contact-us', [WebsiteController::class, 'contactUs'])->name("contact_us");

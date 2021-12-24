@@ -660,6 +660,11 @@ class OrganisationController extends Controller
                 'verf_code'=>$otp
             ]);
 
+        $phone = $vendor->phone;
+        dispatch(function() use($phone, $otp){
+            Sms::sendOtp($phone, $otp);
+        })->afterResponse();
+
         if(!$newvendor)
             return Helper::response(false,"Couldn't sent OTP");
 

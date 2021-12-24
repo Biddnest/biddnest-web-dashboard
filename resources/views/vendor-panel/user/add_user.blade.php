@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @else
+                            @elseif($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
                                 <div class="d-flex row p-15 pt-0 pb-0">
                                     <div class="col-lg-6">
                                         <div class="form-input">

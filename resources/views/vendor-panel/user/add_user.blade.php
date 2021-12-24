@@ -24,7 +24,7 @@
                             @if($roles)
                                 <input type="hidden" name="role_id" value="{{$roles->id}}">
                             @endif
-                            @if($role && ($role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                            @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
                                 <div class="d-flex row p-15 pt-0 pb-0">
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -161,8 +161,8 @@
                                         <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
-                                
-                                @if($role && ($role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+
+                                @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Modules under this roles</label>

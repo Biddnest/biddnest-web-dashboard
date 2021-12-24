@@ -95,7 +95,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
-        $vendor->assign_module = $models;
+        $vendor->assign_module = json_encode($models);
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor_result = $vendor->save();
 
@@ -168,7 +168,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
-        $vendor->assign_module = $models;
+        $vendor->assign_module = json_encode($models);
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor_result = $vendor->save();
 
@@ -581,7 +581,7 @@ class OrganisationController extends Controller
             "meta"=>json_encode($meta),
             "password"=>$password,
             "user_role"=>$data['role'],
-            "assign_module"=>$data['assign_module'],
+            "assign_module"=>json_encode($data['assign_module']),
             "organization_id"=>$data['branch'],
             "dob"=>date("Y-m-d", strtotime($data['dob'])),
             "doj"=>date("Y-m-d", strtotime($data['doj'])),

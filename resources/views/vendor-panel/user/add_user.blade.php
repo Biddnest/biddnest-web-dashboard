@@ -183,6 +183,19 @@
                                             <span class="error-message">Please enter valid Service</span>
                                         </div>
                                     </div>
+                                @else
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Modules under this roles</label>
+                                            <select class="form-control select-box" name="assign_module[]" multiple required>
+                                                <option value="">--Select--</option>
+                                                @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
+                                                    <option value="{{$module}}">{{ucfirst(trans(str_replace("_", " ", $key_module)))}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid Service</span>
+                                        </div>
+                                    </div>
                                 @endif
 
                                 <div class="col-lg-6">

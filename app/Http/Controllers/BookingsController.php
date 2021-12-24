@@ -818,15 +818,19 @@ class BookingsController extends Controller
             ->update(["status" => BookingEnums::$STATUS['awaiting_pickup']]);
 
         $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['awaiting_pickup']);
+        $phone = User::where(['id'=>$assign_driver->user_id])->pluck('phone')[0];
+        $movementdate = Bid::where(['organization_id'=>$assign_driver->organization_id, 'booking_id'=>$assign_driver->id])->pluck['meta'][0]['moving_date'];
+        $drivername = Vendor::where('id', $driver_id)->pluck['fname'][0]." ".Vendor::where('id', $driver_id)->pluck['lname'][0];
+        $driverphone = Vendor::where('id', $driver_id)->pluck['phone'][0];
 
-        dispatch(function () use ($assign_driver) {
+        dispatch(function () use ($assign_driver, $phone, $drivername, $driverphone, $movementdate) {
 
             NotificationController::sendTo("user", [$assign_driver->user_id], "Driver has been assigned for your movement.", "Tap to view details.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $assign_driver->public_booking_id,
                 "booking_status" => BookingEnums::$STATUS['pending_driver_assign']
             ]);
-
+            Sms::sendDriverAssign($phone, $drivername, $driverphone, $movementdate);
         })->afterResponse();
 
         if (!$result_driver && !$assign_driver_status)
@@ -860,15 +864,19 @@ class BookingsController extends Controller
             // $result_status = $bookingstatus->save();
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
+            $phone = User::where(['id'=>$booking->user_id])->pluck('phone')[0];
+            $drivername = Vendor::where('id', $driver_id)->pluck['fname'][0]." ".Vendor::where('id', $driver_id)->pluck['lname'][0];
+            $driverphone = Vendor::where('id', $driver_id)->pluck['phone'][0];
 
-            dispatch(function () use ($booking) {
+
+            dispatch(function () use ($booking, $phone, $public_booking_id, $drivername, $driverphone) {
 
                 NotificationController::sendTo("user", [$booking->user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" => $booking->public_booking_id,
                     "booking_status" => BookingEnums::$STATUS['in_transit']
                 ]);
-
+                Sms::sendTripStart($phone, $public_booking_id, $drivername, $driverphone);
             })->afterResponse();
 
             return Helper::response(true, "Your trip Has been started.");

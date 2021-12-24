@@ -111,7 +111,7 @@
                             <button type="button" class="btn theme-br theme-text w-30 white-bg">Back</button></a>
                         </div>
                         <div class="w-50 text-right">
-                            <a class="white-text p-10" href="#">
+                            <a class="white-text p-10" href="{{route("onboard-branch-vendors",["id"=>$id])}}">
                             <button class="btn theme-bg theme-text w-30 white-bg">Next</button></a>
                         </div>
                     </div>

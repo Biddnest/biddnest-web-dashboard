@@ -310,6 +310,13 @@ class BidController extends Controller
             "public_booking_id" =>Booking::where("id", $book_id)->pluck('public_booking_id')[0]
         ] );
 
+        $phone = User::where('id', $booking_data->user_id)->pluck('phone')[0];
+        $enquiryid = $booking_data->public_enquiry_id;
+        $paymenturl = "the app";
+        dispatch(function () use ($phone, $enquiryid, $paymenturl) {
+            Sms::sendFinalQuote($phone, $enquiryid, $paymenturl);
+        });
+
         return true;
     }
 

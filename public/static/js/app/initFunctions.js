@@ -165,6 +165,22 @@ export function initAllSelectBoxes() {
             // minimumInputLength: 3,
         });
     }
+    if ($(".select-box-model").length) {
+        $(".select-box-model").each(function(){
+            let model = $(this);
+            $(this).select2({
+                tags: false,
+                multiple: true,
+                closeOnSelect: false,
+                // debug: true,
+                // allowClear: true,
+                placeholder: 'Type here',
+                minimumResultsForSearch: 1,
+                dropdownParent: model.closest(".form-input"),
+                // minimumInputLength: 3,
+            });
+        });
+    }
 
     if ($(".select-box2").length) {
         $(".select-box2").select2({

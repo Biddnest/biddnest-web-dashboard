@@ -264,11 +264,11 @@ class VendorRouteController extends Controller
             'image'=>'required',
             'dob'=>'required',
             'doj'=>'required',
-            'dor'=>'required',
             'state'=>'required',
             'city'=>'required',
             'address1'=>'required',
-            'address2'=>'required'
+            'address2'=>'required',
+            'assign_module.*'=>'required'
         ]);
 
         if($validation->fails())
@@ -286,15 +286,16 @@ class VendorRouteController extends Controller
             'email' => 'required|string',
             'phone'=>'required|min:10|max:10',
             'branch' => 'required',
+            'gender' => 'required',
             'role'=>'required',
             'image'=>'required',
             'dob'=>'required',
             'doj'=>'required',
-            'dor'=>'required',
             'state'=>'required',
             'city'=>'required',
             'address1'=>'required',
-            'address2'=>'required'
+            'address2'=>'required',
+            'assign_module.*'=>'required'
         ]);
 
         if($validation->fails())

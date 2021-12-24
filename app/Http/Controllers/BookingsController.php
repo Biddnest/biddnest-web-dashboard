@@ -296,14 +296,18 @@ class BookingsController extends Controller
             return Helper::response(false, "Couldn't save data");
         }
         $booking_id = $exist->id;
+        $public_enquiry_id=$exist->public_enquiry_id;
+        $phone = User::where('id', $user_id)->pluck('phone')[0];
 
-        dispatch(function () use ($booking_id, $user_id, $complete_time, $public_booking_id) {
+
+        dispatch(function () use ($booking_id, $user_id, $complete_time, $public_booking_id, $public_enquiry_id, $phone) {
             NotificationController::sendTo("user", [$user_id], "Your booking has been recieved.", "We are getting the best price for you. You will be notified soon.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $public_booking_id,
                 "booking_status" => BookingEnums::$STATUS['biding']
             ]);
             BidController::addvendors($booking_id);
+            Sms::sendEnquiry($phone, $public_enquiry_id);
         })->afterResponse();
 
         return Helper::response(true, "Thankyou for confirming.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->where("public_booking_id", $public_booking_id)->first()]);
@@ -553,7 +557,7 @@ class BookingsController extends Controller
         } else
             return Helper::response(true, "Get payment data successfully", ["payment_details" => [
                 "sub_total" => $booking->payment->sub_total + $booking->payment->other_charges,
-//                "surge_charge" => $booking->payment->other_charges,
+                //                "surge_charge" => $booking->payment->other_charges,
                 "discount" => $discount_amount,
                 "tax(" . $tax_percentage . "%)" => $tax,
                 "grand_total" => $grand_total
@@ -999,7 +1003,6 @@ class BookingsController extends Controller
     }
 
     /*apis for websocket running in websocket.js*/
-
     public static function startVendorWatch($request)
     {
         $token = (object)Helper::validateAuthToken($request['token']);
@@ -1041,7 +1044,6 @@ class BookingsController extends Controller
     }
 
     /*This following api is not been used*/
-
     public static function sendDetailsToPhone($public_booking_id, $phone)
     {
         $booking = Booking::where("public_booking_id", $public_booking_id)
@@ -1072,9 +1074,9 @@ class BookingsController extends Controller
         }
 
         $sms_body = "Hey there, I am shifting form " . json_decode($booking->source_meta, true)['address'] . " " . json_decode($booking->source_meta, true)['geocode'] . " to " . json_decode($booking->destination_meta, true)['address'] . " " . json_decode($booking->destination_meta, true)['geocode'] . " on " . json_decode($booking->bid->meta, true)['moving_date'] . "<br> Here are the details:  Vendor: " . $booking->organization->org_name;
-//        $sms_body ="";
-        dispatch(function () use ($phone, $sms_body) {
-            Sms::send($phone, $sms_body);
+        $orderdetailurl = url('/')."site/order-details/".$public_booking_id;
+        dispatch(function () use ($phone, $public_booking_id, $orderdetailurl) {
+            Sms::sendOrderDetails($phone, $public_booking_id, $orderdetailurl);
         });
 
 
@@ -1082,7 +1084,6 @@ class BookingsController extends Controller
     }
 
     /*End socket apis*/
-
     public static function getBookingsByUser($user_id, $count = 10, $web = false)
     {
         $bookings = Booking::where("user_id", $user_id)->orderBy("id", "DESC")->limit($count)->get();
@@ -1374,7 +1375,6 @@ class BookingsController extends Controller
         DB::commit();
         return Helper::response(true, "We received your enquiry.", ["booking" => Booking::with('movement_dates')->with('inventories')->with('status_history')->findOrFail($booking_exist->id)]);
     }
-
 
     /*Track APIs for website*/
     public static function trackCustomerDataForWeb($data, $user_id, $web = false, $created_by_support = false)

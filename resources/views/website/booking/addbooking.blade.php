@@ -116,7 +116,7 @@
                                                         <label class="phone-num-lable">I am booking For Friend</label>
                                                         <div>
                                                             <label class="switch2">
-                                                                <input type="hidden" value="true" name="meta[self_booking]:boolean" id="slef">
+                                                                <input type="hidden" value="false" name="meta[self_booking]:boolean" id="slef">
                                                                 <input type="checkbox" class="switch" data-value="0" data-target=".toggle-input" name="select_letter" value="0" id="slef1" onchange="document.getElementById('slef').value = this.checked ? false : true" data-phone="{{\Illuminate\Support\Facades\Session::get('account')['phone']}}" data-name="{{\Illuminate\Support\Facades\Session::get('account')['fname']}} {{\Illuminate\Support\Facades\Session::get('account')['lname']}}" data-email="{{\Illuminate\Support\Facades\Session::get('account')['email']}}">
                                                                 <span class="slider2"></span>
                                                             </label>

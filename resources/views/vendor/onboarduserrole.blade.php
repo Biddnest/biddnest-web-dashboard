@@ -187,6 +187,18 @@
                                 <span class="error-message">Please enter valid Service</span>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="form-input">
+                                <label class="full-name">Modules under this roles</label>
+                                <select name="assign_module[]" class="form-control select-box-model" multiple required>
+                                    <option value="">--Select--</option>
+                                    @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
+                                        <option value="{{$module}}">{{ucfirst(trans(str_replace("_", " ", $key_module)))}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="error-message">Please enter valid Service</span>
+                            </div>
+                        </div>
 
                         <div class="col-lg-6">
                             <div class="form-input">
@@ -412,6 +424,26 @@
                                         <option value="">--Select--</option>
                                         @foreach(\App\Enums\VendorEnums::$ROLES as $key=>$type)
                                             <option value="{{$type}}" @if ($type == $role->user_role) selected @endif>{{ucfirst(trans($key))}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="error-message">Please enter valid Service</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-input">
+                                    <label class="full-name">Modules under this roles</label>
+                                    <select class="form-control select-box-model" name="assign_module[]" multiple required>
+                                        <option value="">--Select--</option>
+                                        @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
+                                            <option value="{{$module}}"
+                                                    @if($role && $role->assign_module)
+                                                        @foreach(json_decode($role->assign_module, true) as $assigned)
+                                                            @if($assigned == $module)
+                                                                selected
+                                                            @endif
+                                                        @endforeach
+                                                    @endif>{{ucfirst(trans(str_replace("_", " ", $key_module)))}}</option>
                                         @endforeach
                                     </select>
                                     <span class="error-message">Please enter valid Service</span>

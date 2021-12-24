@@ -281,4 +281,20 @@
         float: right;
         margin: 25px;
     }
+
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-search__field {
+        width: 100% !important;
+        /*width: 0.75em !important;*/
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        border: 2px solid #DFE6EC;
+        font-size: 14px;
+        min-height: 34px;
+        border-radius: 5px;
+    }
 </style>

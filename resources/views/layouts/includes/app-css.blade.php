@@ -1185,4 +1185,7 @@
                 width: 27.5% !important;
             }
 
+            .fullscreen-modal .select2-dropdown{
+                width: 92% !important;
+            }
         </style>

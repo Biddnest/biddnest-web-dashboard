@@ -76,6 +76,11 @@ class OrganisationController extends Controller
             $result_service= $service->save();
         }
 
+        $models = [];
+        foreach(RoleGroupEnums::$MODUlES as $model=>$model_key){
+            array_push($model_key, $models);
+        }
+
         $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
 
         $vendor = new Vendor;
@@ -90,6 +95,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->assign_module = $models;
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor_result = $vendor->save();
 
@@ -142,6 +148,11 @@ class OrganisationController extends Controller
             $result_service= $service->save();
         }*/
 
+        $models = [];
+        foreach(RoleGroupEnums::$MODUlES as $model=>$model_key){
+            array_push($model_key, $models);
+        }
+
         $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
 
         $vendor = new Vendor;
@@ -157,6 +168,7 @@ class OrganisationController extends Controller
         $vendor->organization_id = $organizations->id;
         $vendor->meta = json_encode($admin_meta);
         $vendor->user_role = VendorEnums::$ROLES["admin"];
+        $vendor->assign_module = $models;
         $vendor->password = password_hash($admin['fname'].Helper::generateOTP(6), PASSWORD_DEFAULT);
         $vendor_result = $vendor->save();
 
@@ -508,10 +520,13 @@ class OrganisationController extends Controller
         $vendor->organization_id = $data['branch'];
         $vendor->meta = json_encode($meta);
         $vendor->user_role = $data['role'];
+        $vendor->assign_module = $data['assign_module'];
         $vendor->password = $password;
         $vendor->dob = date("Y-m-d", strtotime($data['dob']));
         $vendor->doj = date("Y-m-d", strtotime($data['doj']));
-        $vendor->dor = date("Y-m-d", strtotime($data['dor']));
+        if($data['dor']){
+            $vendor->dor = date("Y-m-d", strtotime($data['dor']));
+        }
         $vendor->state = $data['state'];
         $vendor->city = $data['city'];
         $vendor->gender = $data['gender'];
@@ -566,14 +581,17 @@ class OrganisationController extends Controller
             "meta"=>json_encode($meta),
             "password"=>$password,
             "user_role"=>$data['role'],
+            "assign_module"=>$data['assign_module'],
             "organization_id"=>$data['branch'],
             "dob"=>date("Y-m-d", strtotime($data['dob'])),
             "doj"=>date("Y-m-d", strtotime($data['doj'])),
-            "dor"=>date("Y-m-d", strtotime($data['dor'])),
             "state"=>$data['state'],
             "gender"=>$data['gender'],
             "city"=>$data['city']
         ];
+
+        if($data['dor'])
+            $update_data["dor"] =date("Y-m-d", strtotime($data['dor']));
 
         if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
             $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"vendors/".$data['fname']);
@@ -641,6 +659,11 @@ class OrganisationController extends Controller
             ->update([
                 'verf_code'=>$otp
             ]);
+
+        $phone = $vendor->phone;
+        dispatch(function() use($phone, $otp){
+            Sms::sendOtp($phone, $otp);
+        })->afterResponse();
 
         if(!$newvendor)
             return Helper::response(false,"Couldn't sent OTP");

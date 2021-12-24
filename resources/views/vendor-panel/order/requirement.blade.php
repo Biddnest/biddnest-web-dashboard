@@ -87,6 +87,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " id="requirments-tab" href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">Driver Details</a>
+                                    </li>
                                     {{--<li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Driver Details</a>
                                     </li>

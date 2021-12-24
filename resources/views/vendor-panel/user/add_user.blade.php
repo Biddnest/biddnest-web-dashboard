@@ -24,34 +24,65 @@
                             @if($roles)
                                 <input type="hidden" name="role_id" value="{{$roles->id}}">
                             @endif
-                            <div class="d-flex row p-15 pt-0 pb-0">
-                                <div class="col-lg-6">
-                                    <div class="form-input">
-                                        <label class="">Select Role</label>
-                                        <span class="select-role">
-                                            <select  id="select-role" name="role" class="form-control" required>
-                                                <option  value="">--select--</option>
-                                               @foreach(\App\Enums\VendorEnums::$ROLES as $role=>$key)
-                                                    <option  value="{{$key}}" @if($roles && ($roles->user_role == $key)) selected @endif>{{ucwords($role)}}</option>
+                            @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                                <div class="d-flex row p-15 pt-0 pb-0">
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="">Select Role</label>
+                                            <span class="select-role">
+                                                <select  id="select-role" name="role" class="form-control" required>
+                                                    <option  value="">--select--</option>
+                                                   @foreach(\App\Enums\VendorEnums::$ROLES as $role=>$key)
+                                                        <option  value="{{$key}}" @if($roles && ($roles->user_role == $key)) selected @endif>{{ucwords($role)}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="">Branch Name</label>
+                                            <select class="form-control" name="branch" required>
+                                                <option value="">--Select--</option>
+                                                @foreach($branches as $branch)
+                                                    <option value="{{$branch->id}}" @if($roles && ($branch->id == $roles->organization_id)) selected @endif>{{$branch->city}}</option>
                                                 @endforeach
                                             </select>
-                                        </span>
+                                            <span class="error-message">Please enter valid
+                                                    Phone number</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-input">
-                                        <label class="">Branch Name</label>
-                                        <select class="form-control" name="branch" required>
-                                            <option value="">--Select--</option>
-                                            @foreach($branches as $branch)
-                                                <option value="{{$branch->id}}" @if($roles && ($branch->id == $roles->organization_id)) selected @endif>{{$branch->city}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="error-message">Please enter valid
-                                                Phone number</span>
+                            @else
+                                <div class="d-flex row p-15 pt-0 pb-0">
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="">Select Role</label>
+                                            <span class="select-role">
+                                                <select  id="select-role" name="role" class="form-control" required>
+                                                    <option  value="">--select--</option>
+                                                   @foreach(\App\Enums\VendorEnums::$ROLES as $role=>$key)
+                                                        <option  value="{{$key}}" >{{ucwords($role)}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="">Branch Name</label>
+                                            <select class="form-control" name="branch" required>
+                                                    <option value="">--Select--</option>
+                                                    @foreach($branches as $branch)
+                                                        <option value="{{$branch->id}}">{{$branch->city}}</option>
+                                                    @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid
+                                                    Phone number</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                         <div class="new-user-form border-top">
                         <!-- form starts -->
@@ -102,24 +133,57 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Phone Number</label>
-                                            <input type="tel" id="phone"
-                                                   placeholder="Type here" name="phone" value="{{$roles->phone ?? ''}}"
-                                                   class=" form-control" required>
+                                            <input type="tel" id="phone" placeholder="987654321" class="form-control phone" name="phone" value="{{$roles->phone ?? ''}}" autocomplete="off" placeholder="9990009990" maxlength="10" minlength="10" required>
+
                                             <span class="error-message">Please enter valid
                                                 Phone number</span>
                                         </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-input">
+                                        <label class="phone-num-lable">Alternate Phone Number</label>
+                                        <input type="tel" id="phone"
+                                               placeholder="987654321" name="secondary_phone" value="@if($roles && $roles->meta){{json_decode($roles->meta, true)['secondary_phone'] ?? ''}}@endif"
+                                               class=" form-control phone" maxlength="10" minlength="10">
+                                        <span class="error-message">Please enter valid Phone number</span>
+                                    </div>
+                                </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-input">
-                                        <label class="phone-num-lable">Additional Phone Number</label>
-                                        <input type="tel" id="phone"
-                                               placeholder="Type here" name="secondary_phone" value="{{json_decode($role->meta, true)['secondary_phone'] ?? ''}}"
-                                               class=" form-control">
-                                        <span class="error-message">Please enter valid
-                                                Phone number</span>
+                                        <label class="phone-num-lable">Gender</label>
+                                        <select class="form-control" name="gender" required>
+                                            <option>--Select--</option>
+                                            <option value="female" @if($roles && ($roles->gender == "female")) Selected @endif>Female</option>
+                                            <option value="male" @if($roles && ($roles->gender == "male")) Selected @endif>Male</option>
+                                            <option value="3rd gender" @if($roles && ($roles->gender == "3rd gender")) Selected @endif>3rd Gender</option>
+                                        </select>
+                                        <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
+
+                                @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                                    <div class="col-lg-6">
+                                        <div class="form-input">
+                                            <label class="full-name">Modules under this roles</label>
+                                            <select class="form-control select-box" name="assign_module[]" multiple required>
+                                                <option value="">--Select--</option>
+                                                @foreach(\App\Enums\RoleGroupEnums::$MODUlES as $key_module=>$module)
+                                                    <option value="{{$module}}"
+                                                            @if($roles && $roles->assign_module)
+                                                                @foreach(json_decode($roles->assign_module, true) as $assigned)
+                                                                    @if($assigned == $module)
+                                                                        selected
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                    >{{ucfirst(trans(str_replace("_", " ", $key_module)))}}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error-message">Please enter valid Service</span>
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div class="col-lg-6">
                                         <div class="form-input">
@@ -133,7 +197,7 @@
                                 <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="">Date Of Birth</label>
-                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" placeholder="dd/mm/yyyy" class="form-control filterdate dateselect" required>
+                                            <input type="text" id="fullname" name="dob" value="{{$roles->dob ?? ''}}" autocomplete="off" placeholder="dd/mm/yyyy" class="form-control singledate dateselect birthdate" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                 </div>
@@ -226,6 +290,7 @@
                                         </span>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">City</label>

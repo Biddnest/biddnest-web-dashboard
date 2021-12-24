@@ -87,7 +87,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
                                     </li>
-                                @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'] && $booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'] ))
+                                    <li class="nav-item">
+                                        <a class="nav-link " id="requirments-tab" href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">Driver Details</a>
+                                    </li>
+                                @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && (($booking->status >= \App\Enums\BookingEnums::$STATUS['payment_pending']) && ($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])))
                                    {{-- <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>--}}
@@ -276,7 +279,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="refresh" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id]) }}" data-alert="mega" method="POST" data-parsley-validate>
+                <form class="form-new-order pt-4 mt-3 onboard-vendor-branch input-text-blue" action="{{route('api.booking.bid')}}" data-next="redirect" data-redirect-type="hard" data-url="{{route('vendor.my-quote',['id'=>$booking->public_booking_id]) }}" data-alert="mega" method="POST" data-parsley-validate>
                     <div class="modal-body" style="padding: 10px 9px;">
                         <div class="d-flex justify-content-center row ">
                             <div class="col-sm-12 bid-amount">
@@ -366,7 +369,7 @@ Debugbar::info($price);
                                     <div><p class="mt-2">Expected Price</p></div>
                                     <div class="col-2">
 {{--                                        <input class="form-control border-purple calc-result bid-expt" type="text" value="{{$price['total']}}" placeholder="6000" readonly/>--}}
-                                        <input class="form-control border-purple calc-result bid-expt" type="text" value="{{$booking->organization_rec_quote}}" placeholder="6000" readonly/>
+                                        <input class="form-control border-purple" type="text" value="{{$booking->organization_rec_quote}}" placeholder="6000" readonly/>
                                     </div>
                                 </div>
                                 <div class="d-flex row p-10">

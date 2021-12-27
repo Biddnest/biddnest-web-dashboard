@@ -1313,7 +1313,7 @@ $("body").on('click', ".back4", function(event) {
 var selectedDates = [];
 var dp = $('.bookdate').datepicker({
     multidate: true,
-    format: 'd M Y',
+    format: 'd M y',
     todayHighlight: true,
     'startDate': '+1d',
     'endDate': '+20d',

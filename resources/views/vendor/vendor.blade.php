@@ -170,6 +170,9 @@
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['lead'])
                                                                     <span class="status-badge red-bg text-center"> Lead</span>
                                                                     @break
+                                                                    @case(\App\Enums\OrganizationEnums::$STATUS['inactive'])
+                                                                    <span class="status-badge red-bg text-center"> Inactive</span>
+                                                                    @break
 
                                                                     @default
                                                                     <span class="status-badge info-bg text-center">Unknown</span>

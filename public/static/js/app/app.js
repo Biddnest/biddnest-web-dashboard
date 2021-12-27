@@ -2144,6 +2144,9 @@ $("body").on('change', ".dateaddbooking", function(event) {
     Logger.info($(this).val());
     let dates = $(this).val();
     dates = dates.split(",");
+    dates.every(function(date) {
+        return new Date(date);
+    });
     dates.sort(function(a, b) {
         if (a > b) {
             return 1;

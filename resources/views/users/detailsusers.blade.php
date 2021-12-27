@@ -40,7 +40,7 @@
                                 <div class="theme-text f-14 bold p-10">
                                     <div class="d-flex justify-content-between">
                                         <figure class="">
-                                            <img src="{{$users->image}}" alt="">
+                                            <img src="{{$users->image}}" alt="" style="max-width: 80px !important;">
                                         </figure>
                                         <div class="profile-details">
                                             <p class="profile-name">{{ucfirst(trans($users->fname))}} {{ucfirst(trans($users->lname))}}</p>

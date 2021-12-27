@@ -275,7 +275,7 @@
                             <div class="form-input" >
                               <label class="start-date">Choose a Date</label>
                               <div id="my-modal">
-                                <input type="text" id="dateselect" name="movement_dates" value="{{$moving_dates ?? ''}}" class="form-control br-5 selectdate bookdate cursor-pointer" required="required" placeholder="15 Jan"  />
+                                <input type="text" id="dateselect" name="movement_dates" value="{{$moving_dates ?? ''}}" class="form-control br-5 selectdate bookdate cursor-pointer" required="required" placeholder="15-01-2021"  />
                                 <span class="error-message">please enter valid date</span>
                                   <input type="hidden" name="meta[images][]">
                               </div>

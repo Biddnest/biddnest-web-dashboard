@@ -1313,7 +1313,7 @@ $("body").on('click', ".back4", function(event) {
 var selectedDates = [];
 var dp = $('.bookdate').datepicker({
     multidate: true,
-    format: 'd M y',
+    format: 'dd-mm-yyyy',
     todayHighlight: true,
     'startDate': '+1d',
     'endDate': '+20d',
@@ -2160,7 +2160,7 @@ $("body").on('change', ".dateaddbooking", function(event) {
     Logger.info(dates);
 
     dates.every(function(date) {
-        return `${new Date(date).getDate()} ${new Date(date).getMonth()}`;
+        return new Date(date);
     });
 
     // Logger.info(e);

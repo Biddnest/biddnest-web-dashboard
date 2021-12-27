@@ -7,7 +7,7 @@
                     <div class="d-flex  flex-row justify-content-between vertical-center">
                         <h3 class="page-head text-left p-4 f-20 theme-text">Zone Management</h3>
                         <div class="mr-20">
-                            <a href="{{ route('create-zones')}}">
+                            <a href="{{ route('create-cities')}}">
                                 <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
                                         aria-hidden="true"></i>CREATE CITY</button>
                             </a>
@@ -78,8 +78,46 @@
                                         <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
                                         <div class="row f-14">
                                             <div class="col">
-                                                <label style="font-weight:500 !important;">City</label>
-                                                <input type="text" name="city" class="form-control br-5 searchcity" data-action="city" placeholder="Chennai" />
+                                                <label style="font-weight:500 !important;">State</label>
+                                                <select id="state" class="form-control selectfilter" name="state" data-action="state" required>
+                                                    <option value="">--select--</option>
+                                                    <option value="Andhra Pradesh" >Andhra Pradesh</option>
+                                                    <option value="Andaman and Nicobar Islands" >Andaman and Nicobar Islands</option>
+                                                    <option value="Arunachal Pradesh" >Arunachal Pradesh</option>
+                                                    <option value="Assam" >Assam</option>
+                                                    <option value="Bihar" >Bihar</option>
+                                                    <option value="Chandigarh" >Chandigarh</option>
+                                                    <option value="Chhattisgarh" >Chhattisgarh</option>
+                                                    <option value="Dadar and Nagar Haveli" >Dadar and Nagar Haveli</option>
+                                                    <option value="Daman and Diu" >Daman and Diu</option>
+                                                    <option value="Delhi">Delhi</option>
+                                                    <option value="Lakshadweep" >Lakshadweep</option>
+                                                    <option value="Puducherry" >Puducherry</option>
+                                                    <option value="Goa" >Goa</option>
+                                                    <option value="Gujarat" >Gujarat</option>
+                                                    <option value="Haryana">Haryana</option>
+                                                    <option value="Himachal Pradesh" >Himachal Pradesh</option>
+                                                    <option value="Jammu and Kashmir" >Jammu and Kashmir</option>
+                                                    <option value="Jharkhand" >Jharkhand</option>
+                                                    <option value="Karnataka">Karnataka</option>
+                                                    <option value="Kerala" >Kerala</option>
+                                                    <option value="Madhya Pradesh" >Madhya Pradesh</option>
+                                                    <option value="Maharashtra" >Maharashtra</option>
+                                                    <option value="Manipur" >Manipur</option>
+                                                    <option value="Meghalaya" >Meghalaya</option>
+                                                    <option value="Mizoram" >Mizoram</option>
+                                                    <option value="Nagaland" >Nagaland</option>
+                                                    <option value="Odisha">Odisha</option>
+                                                    <option value="Punjab" >Punjab</option>
+                                                    <option value="Rajasthan">Rajasthan</option>
+                                                    <option value="Sikkim">Sikkim</option>
+                                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                                    <option value="Telangana" >Telangana</option>
+                                                    <option value="Tripura" >Tripura</option>
+                                                    <option value="Uttar Pradesh" >Uttar Pradesh</option>
+                                                    <option value="Uttarakhand" >Uttarakhand</option>
+                                                    <option value="West Bengal">West Bengal</option>
+                                                </select>
                                             </div>
                                             <div class="col">
                                                 <label style="font-weight:500 !important;">Status</label>
@@ -96,7 +134,6 @@
                                         <thead class="secondg-bg  p-0">
                                             <tr>
                                                 <th scope="col">City Name</th>
-                                                <th scope="col">District</th>
                                                 <th scope="col">State</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Operations</th>
@@ -104,16 +141,15 @@
                                         </thead>
                                         <tbody class="mtop-20 f-13">
                                         @foreach($cities as $city)
-                                            <tr class="tb-border zone_{{$city->id}}">
+                                            <tr class="tb-border city_{{$city->id}}">
                                                 <td scope="row" >{{$city->name}}</td>
-                                                <td >{{$city->district}}</td>
                                                 <td>{{$city->state}}</td>
                                                 <td>
                                                     <input type="checkbox" {{($city->status == \App\Enums\CommonEnums::$YES) ? 'checked' : ''}}  class="change_status cursor-pointer changeclick" data-url="{{route('city_status_update',['id'=>$city->id])}}">
                                                 </td>
                                                 <td>
                                                     <a  class = "inline-icon-button mr-4"  href="{{route('edit-cities', ['id'=>$city->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
-                                                    <a href="#" class="delete inline-icon-button" data-parent=".zone_{{$city->id}}" data-confirm="Are you sure, you want delete this City permenently? You won't be able to undo this." data-url="{{route('cities_delete',['id'=>$city->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
+                                                    <a href="#" class="delete inline-icon-button" data-parent=".city_{{$city->id}}" data-confirm="Are you sure, you want delete this City permenently? You won't be able to undo this." data-url="{{route('cities_delete',['id'=>$city->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

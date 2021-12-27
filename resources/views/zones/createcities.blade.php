@@ -33,8 +33,8 @@
                 <form action="@if(!$cities){{route('cities_add')}}@else{{route('cities_edit')}}@endif" method="@if(!$cities){{"POST"}}@else{{"PUT"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="{{route('zones-city')}}" data-alert="tiny"
                       class="form-new-order" id="myForm" data-parsley-validate >
                     <div class="d-flex  row  m-20  p-20" >
-                        @if($zones)
-                            <input type="hidden" value="{{$zones->id}}" name="id">
+                        @if($cities)
+                            <input type="hidden" value="{{$cities->id}}" name="id">
                         @endif
                         <div class="col-sm-6">
                             <div class="form-input">
@@ -45,9 +45,14 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-input">
-                                <label class="district">District</label>
-                                <input type="text"  placeholder="Bengaluru" id="district" name="district" value="@if($cities){{$cities->district}}@endif" class="form-control" required>
-                                <span class="error-message">Please enter  valid </span>
+                                <label class="zoneName">Zones</label>
+                                <select id="" class="form-control select-box" name="zones[]" multiple required>
+                                    <option value="">--Select--</option>
+                                    @foreach($cities as $city=>$cityvalue)
+                                        <option value="{{$cityvalue->id}}">{{ucfirst(trans($cityvalue->name))}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="error-message">Please enter valid Service</span>
                             </div>
                         </div>
                         <div class="col-sm-6">

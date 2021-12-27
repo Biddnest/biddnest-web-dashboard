@@ -79,7 +79,12 @@
                                         <div class="row f-14">
                                             <div class="col">
                                                 <label style="font-weight:500 !important;">City</label>
-                                                <input type="text" name="city" class="form-control br-5 searchcity" data-action="city" placeholder="Chennai" />
+                                                <select class="form-control br-5 selectfilter" name="city" data-action="city">
+                                                    <option value="">--Select--</option>
+                                                    @foreach(\App\Models\City::where('deleted', \App\Enums\CommonEnums::$NO)->get() as $citykey=>$city)
+                                                        <option value="{{$city->id}}">{{ucfirst(trans($city->name))}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col">
                                                 <label style="font-weight:500 !important;">Status</label>
@@ -107,7 +112,7 @@
                                         @foreach($zones as $zone)
                                             <tr class="tb-border zone_{{$zone->id}}">
                                                 <td scope="row" >{{$zone->name}}</td>
-                                                <td >{{$zone->city}}</td>
+                                                <td >@if($zone->city){{$zone->city->name}}@endif</td>
                                                 <td >{{$zone->district}}</td>
                                                 <td>{{$zone->state}}</td>
                                                 <td>

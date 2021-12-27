@@ -48,6 +48,7 @@ use App\Models\TicketReply;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\City;
 use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
 use App\Models\MovementDates;
@@ -1266,7 +1267,7 @@ class WebController extends Controller
         }
 
         if(isset($request->city)){
-            $zones=$zones->where('city', 'like', "%".$request->city."%");
+            $zones=$zones->where('city_id', $request->city);
         }
 
         if(isset($request->status)){
@@ -1277,7 +1278,7 @@ class WebController extends Controller
             $active=Zone::where(["deleted"=>CommonEnums::$NO])->where(["status"=>CommonEnums::$YES])->count();
             $inactive=Zone::where(["deleted"=>CommonEnums::$NO])->where(["status"=>CommonEnums::$NO])->count();
         return view('zones.zones',[
-            "zones"=>$zones->paginate(CommonEnums::$PAGE_LENGTH),
+            "zones"=>$zones->with('city')->paginate(CommonEnums::$PAGE_LENGTH),
             'total'=>$total,
             'active'=>$active,
             'inactive'=>$inactive
@@ -1832,5 +1833,38 @@ class WebController extends Controller
 
     public function createComplaints(){
         return view('reviewandratings.createcomplaints');
+    }
+
+    public function zonesCity(Request $request){
+        $cities = City::where(['deleted'=>CommonEnums::$NO]);
+
+        if(isset($request->search)){
+            $cities =$cities->where('name', 'like', "%".$request->search."%");
+        }
+
+        if(isset($request->state)){
+            $cities = $cities->where('state', 'like', "%".$request->state."%");
+        }
+
+        if(isset($request->status)){
+            $cities =$cities->where('status', $request->status);
+        }
+
+        $total=City::where(["deleted"=>CommonEnums::$NO])->count();
+        $active=City::where(["deleted"=>CommonEnums::$NO])->where(["status"=>CommonEnums::$YES])->count();
+        $inactive=City::where(["deleted"=>CommonEnums::$NO])->where(["status"=>CommonEnums::$NO])->count();
+        return view('zones.cities',[
+            "cities"=>$cities->paginate(CommonEnums::$PAGE_LENGTH),
+            'total'=>$total,
+            'active'=>$active,
+            'inactive'=>$inactive
+        ]);
+    }
+
+    public function createCities(Request $request)
+    {
+        $zone = Zone::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->get();
+        $city = City::where('id',$request->id)->first();
+        return view('zones.createcities', ['zones'=>$zone, 'cities'=>$city]);
     }
 }

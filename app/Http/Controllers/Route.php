@@ -765,7 +765,7 @@ class Route extends Controller
             'name'=>'required|string',
             'lat'=>'required|numeric',
             'lng'=>'required|numeric',
-            'city'=>'required|string',
+            'city'=>'required|integer',
             'district'=>'required|string',
             'service_radius'=>'required|numeric',
             'state'=>'required|string',
@@ -785,7 +785,7 @@ class Route extends Controller
             'name'=>'required|string',
             'lat'=>'required|numeric',
             'lng'=>'required|numeric',
-            'city'=>'required|string',
+            'city'=>'required|integer',
             'district'=>'required|string',
             'service_radius'=>'required|numeric',
             'state'=>'required|string',
@@ -1620,6 +1620,45 @@ class Route extends Controller
         }
 
         return TicketController::create($id, $request->category, ["public_booking_id"=>$request->public_booking_id], $ticket_images, $request->heading, $request->desc, $request->status);
+    }
+
+    public function cities_add(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'name'=>'required|string',
+            'zones.*'=>'required',
+            'state'=>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return ZoneController::addCity($request->name, $request->zones, $request->state);
+    }
+
+    public function cities_edit(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required|string',
+            'zones.*'=>'required',
+            'state'=>'required|string'
+        ]);
+
+        if($validation->fails())
+            return Helper::response(false,"validation failed", $validation->errors(), 400);
+
+        return ZoneController::updateCity($request->id, $request->name, $request->zones, $request->state);
+    }
+
+    public function city_status_update(Request $request)
+    {
+        return ZoneController::statusUpdateCity($request->id);
+    }
+
+    public function cities_delete(Request $request)
+    {
+        return ZoneController::deleteCity($request->id);
     }
 
 }

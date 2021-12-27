@@ -10,4 +10,7 @@ class Zone extends Model
     use HasFactory;
     protected $hidden = ["deleted"];
 
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
 }

@@ -136,6 +136,11 @@ Route::prefix('web/api')->group(function () {
     Route::delete('/zones/{id}',[Router::class,'zones_delete'])->name("zones_delete");
     Route::post('/zones/referal',[Router::class,'zones_referal'])->name("zones_save_referal");
 
+    Route::post('/cities',[Router::class,'cities_add'])->name("cities_add");
+    Route::put('/cities',[Router::class,'cities_edit'])->name("cities_edit");
+    Route::put('/cities/{id}',[Router::class,'city_status_update'])->name("city_status_update");
+    Route::delete('/cities/{id}',[Router::class,'cities_delete'])->name("cities_delete");
+
     //Sliders and Banners API
     Route::get('/sliders',[Router::class,'sliders'])->name("sliders");
     Route::post('/sliders',[Router::class,'sliders_add'])->name("sliders_add");
@@ -378,6 +383,8 @@ Route::prefix('admin')->group(function () {
             Route::get('/{id}/referral-system',[WebController::class,'zoneReferralSystem'])->name("zone-referral-system");
             Route::prefix('cities')->group(function () {
                 Route::get('/',[WebController::class,'zonesCity'])->name("zones-city");
+                Route::get('/create',[WebController::class,'createCities'])->name("create-cities");
+                Route::get('/{id}/edit',[WebController::class,'createCities'])->name("edit-cities");
             });
         });
 

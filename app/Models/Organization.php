@@ -26,7 +26,7 @@ class Organization extends Model
         return $this->hasOne(Vendor::class);
     }
 
-    public function InventoryPrice(){
+    public function inventoryprice(){
         return $this->hasMany(InventoryPrice::class);
     }
 

@@ -1474,7 +1474,7 @@ class WebController extends Controller
         }
         elseif ($ticket->type == TicketEnums::$TYPE['price_update'])
         {
-            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->with("user")->first();
+            $ticket_info=InventoryPrice::where(['organization_id'=>json_decode($ticket->meta, true)['parent_org_id'], 'inventory_id'=>json_decode($ticket->meta, true)['inventory_id']])->with('inventory')->with('organization')->first();
             $service_status=$ticket_info->ticket_status;
         }
         elseif ($ticket->type == TicketEnums::$TYPE['call_back'])

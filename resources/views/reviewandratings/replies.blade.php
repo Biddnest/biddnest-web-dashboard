@@ -140,99 +140,71 @@
                                         <div class="col-sm-12" style="margin-top: 20px; margin: 0px !important; padding: 0px !important;">
                                             @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['order_cancellation'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['call_back'] || $tickets->type == \App\Enums\TicketEnums::$TYPE['complaint'])
                                                 <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
-                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                                        Order ID
-                                                    </div>
-                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                                        User
-                                                    </div>
-
-                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
-                                                        Vendor
-                                                    </div>
+                                                    @if(json_decode($tickets->meta, true)['public_booking_id'])
+                                                        @if($ticket_info->public_booking_id)
+                                                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                                Order ID
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                    @if($tickets->user_id)
+                                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                            User
+                                                        </div>
+                                                    @elseif($tickets->vendor_id)
+                                                        <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                            Vendor
+                                                        </div>
+                                                    @endif
+                                                    @if(json_decode($tickets->meta, true)['public_booking_id'])
+                                                        @if($ticket_info->organization)
+                                                            <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                                Vendor
+                                                            </div>
+                                                        @endif
+                                                    @endif
                                                     {{--<div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
                                                         Status
                                                     </div>--}}
                                                 </div>
                                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
-                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">
-                                                            @if($ticket_info->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                                                {{$ticket_info->public_booking_id}}
-                                                            @else
-                                                                {{$ticket_info->public_enquiry_id}}
-                                                            @endif
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.customer',['id'=>$ticket_info->user->id]) }}">
-
-                                                                {{$ticket_info->user->fname}} {{$ticket_info->user->lname}}
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        @if($ticket_info->organization)
-                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->id]) }}">
-                                                                {{$ticket_info->organization->name}}
-                                                        </a>
-                                                        @else
-                                                            Not Assigned Yet
+                                                    @if(json_decode($tickets->meta, true)['public_booking_id'])
+                                                        @if($ticket_info->public_booking_id)
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                                <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.booking',['id'=>$ticket_info->id]) }}">
+                                                                    @if($ticket_info->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                                        {{$ticket_info->public_booking_id}}
+                                                                    @else
+                                                                        {{$ticket_info->public_enquiry_id}}
+                                                                    @endif
+                                                                </a>
+                                                            </div>
                                                         @endif
-                                                    </div>
-
-
-                                                    {{--<div class="theme-text f-14 p-15" style="padding-top: 5px;">
-                                                        @switch($ticket_info->status)
-                                                            @case(\App\Enums\BookingEnums::$STATUS['enquiry'])
-                                                                Enquiry
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['placed'])
-                                                                Placed
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['biding'])
-                                                                Bidding
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['rebiding'])
-                                                                Rebidding
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
-                                                                Payment Pending
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
-                                                                Pending Driver Assign
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
-                                                                Awaiting Pickup
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
-                                                                In Transit
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['completed'])
-                                                                Completed
-                                                            @break
-
-                                                            @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
-                                                                Cancelled
-                                                            @break
-                                                            @case(\App\Enums\BookingEnums::$STATUS['bounced'])
-                                                                Bounced
-                                                            @break
-                                                            @case(\App\Enums\BookingEnums::$STATUS['hold'])
-                                                                Hold
-                                                            @break
-                                                        @endswitch
-                                                    </div>--}}
-
+                                                    @endif
+                                                    @if($tickets->user_id)
+                                                        <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                            <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.customer',['id'=>$ticket_info->user->id]) }}">
+                                                                    {{$ticket_info->user->fname}} {{$ticket_info->user->lname}}
+                                                            </a>
+                                                        </div>
+                                                    @elseif($tickets->vendor_id)
+                                                            <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>json_decode($tickets->vendor, true)['organization_id']])}}">
+                                                                {{json_decode($tickets->vendor, true)['fname']}} {{json_decode($tickets->vendor, true)['lname']}}
+                                                            </a>
+                                                    @endif
+                                                    @if(json_decode($tickets->meta, true)['public_booking_id'])
+                                                        @if($ticket_info->organization)
+                                                            <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                                @if($ticket_info->id)
+                                                                <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->id]) }}">
+                                                                        {{$ticket_info->organization->org_name}}
+                                                                </a>
+                                                                @else
+                                                                    Not Assigned Yet
+                                                                @endif
+                                                            </div>
+                                                        @endif
+                                                    @endif
                                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;">
                                                        @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_reschedule'])
                                                             <input type="text" id="movement_dates" name="movement_dates" class="form-control br-5 filterdate dateselect" required="required" placeholder="15 Jan"  />
@@ -322,6 +294,19 @@
                                                                 <button class="btn theme-bg white-text w-100">Submit</button>
                                                             </a>
                                                         </form>
+                                                    </div>
+                                                </div>
+                                            @elseif($tickets->type == \App\Enums\TicketEnums::$TYPE['service_request'])
+                                                <div class="col-sm-5 secondg-bg margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                                        Vendor Name
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
+                                                    <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                                        <a href="#" class="cursor-pointer invsidebar a-underline" data-sidebar="{{ route('sidebar.vendors',['id'=>$ticket_info->id]) }}">
+                                                            {{json_decode($ticket_info->meta, true)['auth_fname']}} {{json_decode($ticket_info->meta, true)['auth_lname']}}
+                                                        </a>
                                                     </div>
                                                 </div>
                                             @endif

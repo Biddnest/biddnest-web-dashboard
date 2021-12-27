@@ -104,7 +104,7 @@
                                         <div class="form-input">
                                             <label class="full-name">Authorizer First Name</label>
                                             <input type="text" id="fullname" placeholder="First Name"
-                                                   class="form-control alphabet" name="fname" pattern="[a-zA-Z]+" required>
+                                                   class="form-control alpha" name="fname" pattern="[a-zA-Z]+" required>
                                             <span class="error-message">Please enter valid
                                                                 First Name</span>
                                         </div>
@@ -114,7 +114,7 @@
                                         <div class="form-input">
                                             <label class="full-name">Authorizer Last Name</label>
                                             <input type="text" id="fullname" placeholder="Last Name"
-                                                   class="form-control alphabet" name="lname" pattern="[a-zA-Z]+" required>
+                                                   class="form-control alpha" name="lname" pattern="[a-zA-Z]+" required>
                                             <span class="error-message">Please enter valid
                                                                 Last Name</span>
                                         </div>
@@ -159,7 +159,7 @@
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
                                             <input type="text" id="fullname" placeholder="Wayne Pvt Ltd"
-                                                   class="form-control" name="organization[org_name]" required>
+                                                   class="form-control" name="organization[org_name]" data-parsley-type="alphanum" required>
                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
                                         </div>
@@ -188,7 +188,7 @@
                                             <label class="full-name">GSTIN Number of Organisation</label>
                                             <input type="text" id="fullname" placeholder="GST12355464"
                                                    class="form-control" name="organization[gstin]" maxlength="15"
-                                                   minlength="15" required>
+                                                   minlength="15" data-parsley-type="alphanum" required >
                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
                                         </div>
@@ -197,7 +197,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Register/License Number of Organisation</label>
-                                            <input type="text" id="fullname"  placeholder="L21091KA2019OPC141331" class="form-control" name="organization[regi_no]" maxlength="21" minlength="21" required>
+                                            <input type="text" id="fullname"  placeholder="L21091KA2019OPC141331" class="form-control" name="organization[regi_no]" data-parsley-type="alphanum" maxlength="21" minlength="21" required>
                                             <span class="error-message">Please enter valid Register/License Number</span>
                                         </div>
                                     </div>
@@ -391,7 +391,7 @@
                                             <label class="full-name">Base distance in km</label>
                                             <span class="">
                                             <input type="text" name="basedist" placeholder="Distance"
-                                                   class="form-control number">
+                                                   class="form-control number" required>
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>
                                         </div>
@@ -402,7 +402,7 @@
                                             <label class="full-name">Extra Base distance in km</label>
                                             <span class="">
                                             <input type="text" name="extrabasedist" placeholder="Extra Distance"
-                                                   class="form-control number">
+                                                   class="form-control number" required>
                                             <span class="error-message">Please enter valid Distance</span>
                                             </span>
                                         </div>

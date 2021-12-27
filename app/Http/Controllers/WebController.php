@@ -1458,9 +1458,9 @@ class WebController extends Controller
         $ticket_info=[];
         $ticket=Ticket::where('id', $request->id)
             ->with(["booking"=>function($query){
-                $query->with('user')->with('organization');
+                $query->with('user')->with('vendor');
             }])
-            ->with('reply')->first();
+            ->with('reply')->with('user')->with('vendor')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();
 
         if($ticket->type == TicketEnums::$TYPE['order_cancellation'] || $ticket->type == TicketEnums::$TYPE['order_reschedule'])
@@ -1491,9 +1491,14 @@ class WebController extends Controller
                 $ticket_info = Booking::where(['public_booking_id' => json_decode($ticket->meta, true)['public_booking_id']])->with('user')->with('organization')->first();
                 $service_status = [];
             }
-
+            else{
+                $ticket_info['user'] = User::where(['id' => $ticket->user_id])->first();
+            }
         }
-
+        elseif ($ticket->type == TicketEnums::$TYPE['organization'])
+        {
+            $ticket_info = Organization::where(['id' => $ticket->vendor_id])->first();
+        }
         return view('reviewandratings.replies', ['tickets'=>$ticket, 'replies'=>$replies, 'service'=>$service_status, 'ticket_info'=>$ticket_info]);
     }
 

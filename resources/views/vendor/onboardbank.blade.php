@@ -104,7 +104,11 @@
                                             <button id="upload-btn" type="button" data-action="upload" class="btn theme-bg white-text my-0 cursor-pointer">@if($bank && $bank->aadhar_card) CHANGE @else UPLOAD FILE @endif</button>
                                             <input id="upload" type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" class="cursor-pointer" @if(!$bank || !$bank->aadhar_card) required @endif>
                                         </div>
-                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @if($bank && $bank->aadhar_card)
+                                            <a href="{{$bank->aadhar_card}}" target="_blank" class="file-name">View File</a>
+                                        @else
+                                            <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +122,11 @@
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->gst_certificate) CHANGE @else UPLOAD FILE @endif</button>
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->gst_certificate) required @endif>
                                         </div>
-                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @if($bank && $bank->gst_certificate)
+                                            <a href="{{$bank->gst_certificate}}" target="_blank" class="file-name">View File</a>
+                                        @else
+                                            <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +140,11 @@
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->bidnest_agreement) CHANGE @else UPLOAD FILE @endif</button>
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->bidnest_agreement) required @endif>
                                         </div>
-                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @if($bank && $bank->bidnest_agreement)
+                                            <a href="{{$bank->bidnest_agreement}}" target="_blank" class="file-name">View File</a>
+                                        @else
+                                            <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +158,11 @@
                                             <input type="hidden" class="base-holder" name="doc[pan_card]" value="{{$bank->pan_card ?? ''}}" required />
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->pan_card) required @endif/>
                                         </div>
-                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @if($bank && $bank->pan_card)
+                                            <a href="{{$bank->pan_card}}" target="_blank" class="file-name">View File</a>
+                                        @else
+                                            <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +176,11 @@
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->company_reg_certificate) CHANGE @else UPLOAD FILE @endif</button>
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->company_reg_certificate) required @endif>
                                         </div>
-                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @if($bank && $bank->company_reg_certificate)
+                                            <a href="{{$bank->company_reg_certificate}}" target="_blank" class="file-name">View File</a>
+                                        @else
+                                            <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +195,11 @@
                                             <button type="button" class="btn theme-bg white-text my-0" data-action="upload">@if($bank && $bank->additional_file) CHANGE @else UPLOAD FILE @endif</button>
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->additional_file) required @endif>
                                         </div>
-                                        <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @if($bank && $bank->additional_file)
+                                            <a href="{{$bank->additional_file}}" target="_blank" class="file-name">View File</a>
+                                        @else
+                                            <p class="file-name">Allowed: pdf, doc, image</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

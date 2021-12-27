@@ -171,12 +171,12 @@ class WebsiteRouteController extends Controller
 
     public function requestCallback(Request $request)
     {
-        $validation = Validator::make($request->all(),[
+        /*$validation = Validator::make($request->all(),[
             'data' => 'required',
         ]);
 
         if($validation->fails())
-            return Helper::response(false,"validation failed", $validation->errors(), 400);
+            return Helper::response(false,"validation failed", $validation->errors(), 400);*/
 
         return TicketController::createCallBack(4, $request->data);
     }

@@ -105,7 +105,7 @@
                                             <input id="upload" type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" class="cursor-pointer" @if(!$bank || !$bank->aadhar_card) required @endif>
                                         </div>
                                         @if($bank && $bank->aadhar_card)
-                                            <a href="{{$bank->aadhar_card}}" target="_blank" class="file-name">View File</a>
+                                            <a href="{{$bank->aadhar_card}}" target="_blank"><p class="file-name">View File</p></a>
                                         @else
                                             <p class="file-name">Allowed: pdf, doc, image</p>
                                         @endif
@@ -123,7 +123,7 @@
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->gst_certificate) required @endif>
                                         </div>
                                         @if($bank && $bank->gst_certificate)
-                                            <a href="{{$bank->gst_certificate}}" target="_blank" class="file-name">View File</a>
+                                            <a href="{{$bank->gst_certificate}}" target="_blank"><p class="file-name">View File</p></a>
                                         @else
                                             <p class="file-name">Allowed: pdf, doc, image</p>
                                         @endif
@@ -141,7 +141,7 @@
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->bidnest_agreement) required @endif>
                                         </div>
                                         @if($bank && $bank->bidnest_agreement)
-                                            <a href="{{$bank->bidnest_agreement}}" target="_blank" class="file-name">View File</a>
+                                            <a href="{{$bank->bidnest_agreement}}" target="_blank"><p class="file-name">View File</p></a>
                                         @else
                                             <p class="file-name">Allowed: pdf, doc, image</p>
                                         @endif
@@ -159,7 +159,7 @@
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->pan_card) required @endif/>
                                         </div>
                                         @if($bank && $bank->pan_card)
-                                            <a href="{{$bank->pan_card}}" target="_blank" class="file-name">View File</a>
+                                            <a href="{{$bank->pan_card}}" target="_blank"><p class="file-name">View File</p></a>
                                         @else
                                             <p class="file-name">Allowed: pdf, doc, image</p>
                                         @endif
@@ -177,7 +177,7 @@
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->company_reg_certificate) required @endif>
                                         </div>
                                         @if($bank && $bank->company_reg_certificate)
-                                            <a href="{{$bank->company_reg_certificate}}" target="_blank" class="file-name">View File</a>
+                                            <a href="{{$bank->company_reg_certificate}}" target="_blank"><p class="file-name">View File</p></a>
                                         @else
                                             <p class="file-name">Allowed: pdf, doc, image</p>
                                         @endif
@@ -196,7 +196,7 @@
                                             <input type="file" id="upload" accept=".pdf,.doc,.png,.jpg,.jpeg" @if(!$bank || !$bank->additional_file) required @endif>
                                         </div>
                                         @if($bank && $bank->additional_file)
-                                            <a href="{{$bank->additional_file}}" target="_blank" class="file-name">View File</a>
+                                            <a href="{{$bank->additional_file}}" target="_blank"><p class="file-name">View File</p></a>
                                         @else
                                             <p class="file-name">Allowed: pdf, doc, image</p>
                                         @endif

@@ -1288,7 +1288,8 @@ class WebController extends Controller
     public function createZones(Request $request)
     {
         $zone = Zone::where('id',$request->id)->first();
-        return view('zones.createzones', ['zones'=>$zone]);
+        $cities = City::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->get();
+        return view('zones.createzones', ['zones'=>$zone, 'cities'=>$cities]);
     }
 
     public function zoneReferralSystem(Request $request)
@@ -1864,7 +1865,7 @@ class WebController extends Controller
     public function createCities(Request $request)
     {
         $zone = Zone::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->get();
-        $city = City::where('id',$request->id)->first();
+        $city = City::where('id',$request->id)->with('zones')->first();
         return view('zones.createcities', ['zones'=>$zone, 'cities'=>$city]);
     }
 }

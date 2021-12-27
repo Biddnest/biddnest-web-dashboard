@@ -76,7 +76,12 @@
                     <div class="col-sm-6">
                         <div class="form-input">
                             <label class="city">City</label>
-                            <input type="text"  placeholder="Bengaluru" id="city" name="city" value="@if($zones){{$zones->city}}@endif" class="form-control" required>
+                            <select class="form-control" name="city" data-action="city" >
+                                <option value="">--Select--</option>
+                                @foreach($cities as $citykey=>$city)
+                                    <option value="{{$city->id}}" @if($zones && ($zones->city_id == $city->id)) selected @endif>{{ucfirst(trans($city->name))}}</option>
+                                @endforeach
+                            </select>
                             <span class="error-message">Please enter  valid </span>
                         </div>
                     </div>

@@ -43,7 +43,7 @@ class RazorpayX
         catch(ClientException $e){
             return $e->getMessage();
         }
-        return json_decode($response,true);
+        return $response;
     }
 
     public function fetch($payment_id){

@@ -10,6 +10,7 @@ use App\Enums\CommonEnums;
 use App\Enums\CouponEnums;
 use App\Enums\PayoutEnums;
 use App\Helper;
+use App\RazorpayX;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\Org_kyc;
@@ -29,7 +30,7 @@ class PayoutController extends Controller
         // $schedule_from = Carbon::parse('last sunday')->format("Y-m-d H:i:s");
         // $schedule_to = Carbon::parse('last saturday')->format("Y-m-d H:i:s");
 
-      $payouts = Payout::where("dispatch_at", "<=", Carbon::now())
+      $payouts = Payout::where("dispatch_at", "<=", Carbon::now())->where("organization_id", 1)
             ->where("status", ">=", PayoutEnums::$STATUS['scheduled'])
             ->with(['organization'=>function($query){
                 $query->with('kyc');
@@ -38,7 +39,7 @@ class PayoutController extends Controller
 
         if($payouts){
 
-//        $rx = new RazorpayX(Settings::where("key","razor_key")->pluck('value')[0], Settings::where("key","razor_secret")->pluck('value')[0]);
+        $rx = new RazorpayX(Settings::where("key","razor_key")->pluck('value')[0], Settings::where("key","razor_secret")->pluck('value')[0]);
 
             foreach($payouts as $payout){
 
@@ -61,10 +62,11 @@ class PayoutController extends Controller
                     "queue_if_low_balance"=> true,
                     "reference_id"=> "Biddnest Payout ID #".$payout->public_payout_id,
                     "narration"=> $payout->remarks,
-                    "notes"=> $payout->meta
+//                    "notes"=> $payout->meta
+                    "notes"=> []
                 ];
 
-                 /*$rx->payout();
+                /* $rx->payout();
                 return $create = $rx->create($payload);*/
                 $client = new client();
                 $request_url = 'https://api.razorpay.com/v1/payouts/';
@@ -92,7 +94,7 @@ class PayoutController extends Controller
                     return $e->getMessage();
                 }
             }
-            Helper::response(true, "payouts processed");
+            Helper::response(true, "payouts processed",['payouts'=>$payouts]);
         }
 
     }
@@ -170,7 +172,7 @@ class PayoutController extends Controller
            }
        }
 
-       return Helper::response(true, "Payouts scheduled");
+       return Helper::response(true, "Payouts scheduled",['org_id'=>$distinct_orgs]);
     }
 
     public static function getByOrganization(Request $request, $web=false)

@@ -164,7 +164,7 @@
                     </div>
                     <div class="w-50 text-right">
                         <a class="white-text p-10" data-target="#for-friend">
-                            <button class="btn theme-bg white-text w-30">Save</button>
+                            <button class="btn theme-bg white-text w-30">@if(!$zones) Save @else Update @endif</button>
                         </a>
                     </div>
                 </div>

@@ -127,6 +127,8 @@
                         </li>
                         <!-- sublinks -->
                         <ul class="sub-menu" id="Zone">
+                            <li class="sub-menu-item"><a href="{{route('zones-city')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
+                                                                                       aria-hidden="true"></i>Cities</a></li>
                             <li class="sub-menu-item"><a href="{{route('zones')}}"> <i class="fa fa-dot-circle-o icons-space mr-2"
                                         aria-hidden="true"></i>Zones</a></li>
                             <li class="sub-menu-item"><a href="{{route('create-zones')}}"> <i

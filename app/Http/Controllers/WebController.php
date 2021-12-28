@@ -1323,7 +1323,7 @@ class WebController extends Controller
             $slider->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
-            $slider->where("zone_scope", SliderEnum::$ZONE['all']);
+            $slider->where("zone_scope", SliderEnum::$ZONE['all'])->orWhere("zone_scope", SliderEnum::$ZONE['custom']);
 
         if(isset($request->search)){
             $slider=$slider->where('name', 'like', "%".$request->search."%");
@@ -1593,7 +1593,7 @@ class WebController extends Controller
 
     public function details_user(Request $request)
     {
-        $user=Admin::where("id", $request->id)->with('zones')->first();
+        $user=Admin::where("id", $request->id)->with('zones')->with('cities')->first();
         return view('users.detailsusers', ['users'=>$user]);
     }
 

@@ -17,4 +17,9 @@ class Slider extends Model
     {
         return $this->hasManyThrough(Zone::class, SliderZone::class, 'slider_id', 'id', 'id', 'zone_id');
     }
+
+    public function cities()
+    {
+        return $this->hasManyThrough(City::class, SliderCity::class, 'slider_id', 'id', 'id', 'city_id');
+    }
 }

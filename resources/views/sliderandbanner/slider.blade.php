@@ -155,7 +155,7 @@
                                         <div class="slick-container slick-container_{{$slider->id}}">
                                             @foreach($slider->banners as $banner)
                                                     <img class="slick-image" src="{{$banner->image}}" alt="" >
-                                                
+
                                             @endforeach
                                         </div>
                                         <img class="" onclick="$('.slick-container_{{$slider->id}}').slick('slickNext')"
@@ -173,6 +173,22 @@
                                 </div>
                             </div>
                         @endif
+                        <div class="pagination">
+                            <ul>
+                                <li class="p-1">Page</li>
+                                <li class="digit">{{$sliders->currentPage()}}</li>
+                                <li class="label">of</li>
+                                <li class="digit">{{$sliders->lastPage()}}</li>
+                                @if(!$sliders->onFirstPage())
+                                    <li class="button"><a href="{{$sliders->previousPageUrl()}}"><img src="{{asset('static/images/Backward.svg')}}"></a>
+                                    </li>
+                                @endif
+                                @if($sliders->currentPage() != $sliders->lastPage())
+                                    <li class="button"><a href="{{$sliders->nextPageUrl()}}"><img src="{{asset('static/images/forward.svg')}}"></a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

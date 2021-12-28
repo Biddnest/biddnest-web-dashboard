@@ -31,6 +31,9 @@ class AdminController extends Controller
             ->with(["zones"=>function($query){
                 $query->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
             }])
+            ->with(["cities"=>function($query_city){
+                $query_city->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
+            }])
             ->first();
 
         if(!$admin_user)
@@ -45,20 +48,27 @@ class AdminController extends Controller
             Session::put('user_role', $admin_user->role);
             $zones = [];
 
-            if($admin_user->zones){
-                Session::put("zones",$admin_user->zones);
-                foreach($admin_user->zones as $zone){
-                    $zones[] = $zone->id;
+
+                if($admin_user->zones){
+                    Session::put("zones",$admin_user->zones);
+                    foreach($admin_user->zones as $zone){
+                        $zones[] = $zone->id;
+                    }
                 }
-            }
-            Session::put('admin_zones', $zones);
+                Session::put('admin_zones', $zones);
+                if($admin_user->cities){
+                    Session::put("cities",$admin_user->cities);
+                    foreach($admin_user->cities as $city){
+                        $cities[] = $city->id;
+                    }
+                }
+                Session::put('admin_cities', $cities);
 
            return Helper::response(true, "Login was successfully");
         }
         else{
             return Helper::response(false, "password is incorrect");
         }
-
     }
 
     /**

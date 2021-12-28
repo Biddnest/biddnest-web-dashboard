@@ -293,11 +293,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}/faq',[WebController::class,'editfaq'])->name("admin.editfaq");
         Route::get('/contact-us',[WebController::class,'contact_us'])->name("admin.contact_us");
 
-        Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");
-
         Route::get('/search/result/',[WebController::class,'searchResult'])->name("admin.searchresult");
         Route::get('/filter/result/',[WebController::class,'filterResult'])->name("admin.filter-booking");
-        //booking and orders
+
+        Route::get('/zone/check-serviceability',[Router::class, 'checkServiceable'])->name("admin.zone.check-serviceability");
+
+         //booking and orders
         Route::prefix('booking')->group(function () {
             Route::get('/enquiry',[WebController::class,'ordersBookingsEnquiry'])->name("enquiry-booking");
             Route::get('/live',[WebController::class,'ordersBookingsLive'])->name("orders-booking");
@@ -482,7 +483,7 @@ Route::prefix('vendor')->group(function(){
 
         Route::get('/dashboard',[VendorWebController::class,'dashboard'])->name("vendor.dashboard");
         Route::get('/{id}/my-profile',[VendorWebController::class,'profile'])->name("vendor.myprofile");
-        Route::get('/search/result/',[VendorWebController::class,'searchResult'])->name("vendor.searchresult");
+        Route::get('/search',[VendorWebController::class,'searchResult'])->name("vendor.searchresult");
 
         Route::prefix('/booking')->group(function () {
             Route::get('/{type}',[VendorWebController::class,'bookingType'])->name("vendor.bookings");

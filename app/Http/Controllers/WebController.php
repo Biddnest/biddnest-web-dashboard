@@ -1789,11 +1789,10 @@ class WebController extends Controller
             $zone = [Session::get('admin_zones')];
 
         $bookings = Booking::where("deleted", CommonEnums::$NO)->where('public_booking_id', 'like', $request->search."%")
-            ->orWhere('public_enquiry_id', 'like', $request->search."%")->get();
+            ->orWhere('public_enquiry_id', 'like', $request->search."%");
 
-        return view('layouts.searchresult', ['bookings'=>$bookings]);
+        return view('layouts.searchresult', ['bookings'=>$bookings->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
-
 
     public function filterResult(Request $request)
     {

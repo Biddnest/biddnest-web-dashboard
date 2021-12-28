@@ -11,7 +11,7 @@
       <div class="page-head text-left p-4 pt-0 pb-0">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('coupons')}}">Create Voucher</a></li>
+            <li class="breadcrumb-item"><a href="{{route('vouchers')}}">Voucher</a></li>
             <li class="breadcrumb-item active" aria-current="page">@if($vouchers) Edit voucher @else Create Voucher @endif</li>
           </ol>
         </nav>
@@ -20,6 +20,15 @@
       </div>
 
   </div>
+    <div class="d-flex flex-row text-left ml-120">
+        <a href="{{route('vouchers')}}" class="text-decoration-none">
+            <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                <i class="p-1">
+                    <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                </i> Back to Voucher
+            </h3>
+        </a>
+    </div>
 
 <!-- Dashboard cards -->
 

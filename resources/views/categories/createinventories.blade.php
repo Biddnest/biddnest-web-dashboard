@@ -23,6 +23,15 @@
             </nav>
         </div>
     </div>
+    <div class="d-flex flex-row text-left ml-120">
+        <a href="{{route('categories')}}" class="text-decoration-none">
+            <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                <i class="p-1">
+                    <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                </i> Back to Categories
+            </h3>
+        </a>
+    </div>
     <div class="d-flex flex-row justify-content-center Dashboard-lcards">
         <div class="col-sm-10">
             <div class="card h-auto p-0 p-10">

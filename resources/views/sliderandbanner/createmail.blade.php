@@ -6,7 +6,7 @@
             <div class="d-flex flex-row justify-content-between">
               <h3 class="page-head text-left p-4 pb-0 f-18">Create Mail</h3>
             </div>
-            
+
             <!-- Dashboard cards -->
             <div class="d-flex  flex-row justify-content-between">
               <div class="page-head text-left   mt-3 pb-0   p-2">
@@ -16,15 +16,24 @@
                     </li>
                     <li class="breadcrumb-item"><a href="{{route('mail-notification')}}"> Notifications</a></li>
                     <li class="breadcrumb-item"><a href="#"> Create Mail</a></li>
-                    
-                   
+
+
                   </ol>
                 </nav>
-              
-              
+
+
               </div>
-        
+
           </div>
+    <div class="d-flex flex-row text-left ml-120">
+        <a href="{{route('push-notification')}}" class="text-decoration-none">
+            <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                <i class="p-1">
+                    <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                </i> Back to Notifications
+            </h3>
+        </a>
+    </div>
             <div
               class="d-flex flex-row justify-content-center Dashboard-lcards">
               <div class="col-lg-10">
@@ -63,7 +72,7 @@
                         </div>
 
                         <div class="d-flex row p-20 -mt-20 ml-1 mr-1">
-                         
+
                             <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Subject</label>
@@ -78,7 +87,7 @@
                                   >
                                 </div>
                               </div>
-                             
+
                               <div class="col-lg-6">
                                 <div class="form-input">
                                   <label class="full-name">Users</label>
@@ -87,8 +96,8 @@
                                     <option>Customer 2</option>
                                     <option>Customer 3</option>
                                   </select>
-                                  
-    
+
+
                                   <span class="error-message"
                                     >Please enter a valid banner type</span
                                   >
@@ -98,20 +107,20 @@
                                 <div class="form-input">
                                   <label class="phone-num-lable">Zone ID</label>
                                   <input
-                                  
+
                                     type="text"
                                     placeholder="Z123456"
                                     id="areas"
                                     class="form-control"
-                                    
+
                                   />
-    
+
                                   <span class="error-message"
                                     >Please enter valid Phone number</span
                                   >
                                 </div>
                               </div>
-                            
+
                               <div class="col-lg-12">
                                 <div class="form-input">
                                   <label class="full-name">Description</label>
@@ -126,7 +135,7 @@
                                   >
                                 </div>
                               </div>
-                             
+
                         </div>
                         <div class="accordion bg-white pl-0 pr-0" id="comments">
                           <div

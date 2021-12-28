@@ -24,7 +24,15 @@
             </nav>
         </div>
     </div>
-
+    <div class="d-flex flex-row text-left ml-25 pb-25">
+        <a href="{{route('orders-booking')}}" class="text-decoration-none">
+            <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                <i class="p-1">
+                    <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                </i> Back to Bookings & Orders
+            </h3>
+        </a>
+    </div>
               <!-- Dashboard cards -->
 
     <div class="row">

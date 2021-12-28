@@ -3,27 +3,35 @@
 @section('content')
 
 <div class="main-content grey-bg" data-barba="container" data-barba-namespace="orderdetails">
-              <div class="d-flex  flex-row justify-content-between">
-                  <h3 class="page-head text-left p-4">Order Details</h3>
-                  @if(($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['in_progress']))
-                      <div class="mr-20">
-                          <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
-                              <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
-                          </a>
-                      </div>
-                  @endif
-              </div>
-              <div class="d-flex  flex-row justify-content-between">
-                <div class="page-head text-left p-4 pt-0 pb-0">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Order Details</li>
-                    </ol>
-                  </nav>
-                </div>
-
-              </div>
+    <div class="d-flex  flex-row justify-content-between">
+        <h3 class="page-head text-left p-4">Order Details</h3>
+        @if(($booking->status == \App\Enums\BookingEnums::$STATUS['enquiry']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['in_progress']))
+            <div class="mr-20">
+                <a href="{{ route('edit-order', ['id'=>$booking->public_booking_id])}}">
+                    <button class="btn theme-bg white-text" ><i class="fa fa-plus p-1" aria-hidden="true"></i> Edit order</button>
+                </a>
+            </div>
+        @endif
+    </div>
+    <div class="d-flex  flex-row justify-content-between">
+        <div class="page-head text-left p-4 pt-0 pb-0">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('orders-booking')}}">Booking & Orders</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="d-flex flex-row text-left ml-25 pb-25">
+        <a href="{{route('orders-booking')}}" class="text-decoration-none">
+            <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                <i class="p-1">
+                    <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                </i> Back to Bookings & Orders
+            </h3>
+        </a>
+    </div>
     <div class="row">
 
         <div class="col-md-12" style="padding: 0px 40px; border: none;">

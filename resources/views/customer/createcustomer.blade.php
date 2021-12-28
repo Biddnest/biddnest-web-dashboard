@@ -15,6 +15,15 @@
                 </nav>
             </div>
         </div>
+        <div class="d-flex flex-row text-left ml-120">
+            <a href="{{route('customers')}}" class="text-decoration-none">
+                <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                    <i class="p-1">
+                        <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                    </i> Back to Customer Management
+                </h3>
+            </a>
+        </div>
         <!-- Dashboard cards -->
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-lg-10">
@@ -113,7 +122,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">City</label>
-                                            <input type="text" name="city" value="@if($users){{json_decode($users->meta, true)['city']}}@endif" autocomplete="off" placeholder="Eg: Chennai" class="form-control" required>
+                                            <input type="text" name="city" value="@if($users && $users->meta){{json_decode($users->meta, true)['city']}}@endif" autocomplete="off" placeholder="Eg: Chennai" class="form-control" required>
                                             <span class="error-message">Please enter valid Date of Birth</span>
                                         </div>
                                     </div>

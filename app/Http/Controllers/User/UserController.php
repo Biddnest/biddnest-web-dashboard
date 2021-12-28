@@ -184,7 +184,7 @@ class UserController extends Controller
             'email'=>$email,
             'gender'=>$gender,
             'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
-            'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code]),
+            'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code, "city"=>$city]),
             "referral_code"=>$ref_code,
             "status"=>1
         ]);
@@ -250,13 +250,16 @@ class UserController extends Controller
         if($phone)
             $updateColumns["phone"] =$phone;
 
+        $meta = json_decode($user['meta'], true);
+        $meta['city'] = $city;
+
             $updateColumns = [
             'fname'=>$fname,
             'lname'=>$lname,
             'email'=>$email,
             'gender'=>$gender,
             'dob'=>$dob,
-             "meta"=>json_encode(["city"=>$city]),
+             "meta"=>json_encode($meta),
              "city"=>$city
         ];
         if($avatar){
@@ -372,7 +375,7 @@ class UserController extends Controller
         $user->phone=$phone;
         $user->gender=$gender;
         $user->avatar=$image;
-        $user->meta=json_encode(["city"=>$city]);
+        $user->meta=json_encode(["refferal_code"=>"", "reffered_by"=>"", "city"=>$city]);
         $user->city=$city;
         $user->dob=date("Y-m-d", strtotime($dob));
         $save_result = $user->save();

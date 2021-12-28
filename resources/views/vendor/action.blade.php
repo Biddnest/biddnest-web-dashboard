@@ -22,6 +22,15 @@
                 </a>
             </div>
         </div>
+        <div class="d-flex flex-row text-left ml-120">
+            <a href="{{route('vendors')}}" class="text-decoration-none">
+                <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                    <i class="p-1">
+                        <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                    </i> Back to Vendors
+                </h3>
+            </a>
+        </div>
         <!-- Dashboard cards -->
 
         <div class="d-flex flex-row justify-content-center Dashboard-lcards " style="min-height: 100vh;">

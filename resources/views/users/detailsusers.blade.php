@@ -7,6 +7,15 @@
     <div class="d-flex  flex-row justify-content-between">
         <h3 class="page-head text-left p-4">User Details</h3>
     </div>
+    <div class="d-flex flex-row text-left ml-120">
+        <a href="{{route('users')}}" class="text-decoration-none">
+            <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                <i class="p-1">
+                    <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                </i> Back to User Role
+            </h3>
+        </a>
+    </div>
 
     <!-- Dashboard cards -->
 

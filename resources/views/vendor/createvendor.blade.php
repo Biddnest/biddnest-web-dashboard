@@ -22,14 +22,14 @@
             </div>
 
         </div>
-        <div class="d-flex  flex-row text-left ml-120">
-            <!-- <a href="vendor-management.html" class="text-decoration-none">
-                        <h3 class="page-subhead text-left p-4 f-20 theme-text">
-                            <i class="p-1"> <img src="assets/images/Icon feather-chevrons-left.svg" alt=""
-                                    srcset=""></i>Back to Vendors
-                        </h3>
-                    </a> -->
-
+        <div class="d-flex flex-row text-left ml-120">
+            <a href="{{route('vendors')}}" class="text-decoration-none">
+                <h3 class="page-subhead text-left f-18" style="margin-top: 10px; !important; color: #2e0789;">
+                    <i class="p-1">
+                        <img src="{{asset('static/images/Icon feather-chevrons-left.svg')}}" alt="" srcset="">
+                    </i> Back to Vendors
+                </h3>
+            </a>
         </div>
         <!-- Dashboard cards -->
 
@@ -37,14 +37,11 @@
         <div class="d-flex flex-row justify-content-center Dashboard-lcards ">
             <div class="col-lg-10">
                 <div class="card  h-auto p-0 pt-10 ">
-
                     <div class="card-head right text-left border-bottom-2 p-10 pt-10 pb-0">
                         <h3 class="f-18 mb-0 mt-0">
                             <ul class="nav nav-tabs  p-0" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab"
-                                       href="#order" role="tab" aria-controls="home"
-                                       aria-selected="true">Onboard Vendor</a>
+                                    <a class="nav-link active p-15" id="new-order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="home" aria-selected="true">Onboard Vendor</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15" id="quotation" href="#">Pricing</a>
@@ -53,12 +50,10 @@
                                     <a class="nav-link p-15 disabled" id="quotation" href="#">Branch</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15 disabled" id="quotation" href="#"
-                                    >Banking Details</a>
+                                    <a class="nav-link p-15 disabled" id="quotation" href="#">Banking Details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link p-15 disabled" id="quotation" href="#"
-                                    >Actions</a>
+                                    <a class="nav-link p-15 disabled" id="quotation" href="#">Actions</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link p-15 disabled" id="quotation" href="#">Roles</a>
@@ -80,16 +75,11 @@
                                     <div class="col-lg-6">
                                         <p class="img-label">Image</p>
                                         <div class="upload-section p-20 pt-0">
-                                            <img class="upload-preview"
-                                                 src="{{asset('static/images/upload-image.svg')}}"
-                                                 alt=""
-                                            />
+                                            <img class="upload-preview" src="{{asset('static/images/upload-image.svg')}}" alt=""/>
                                             <div class="ml-1">
                                                 <div class="file-upload">
-                                                    <input type="hidden" class="base-holder" name="image" value=""
-                                                           required/>
-                                                    <button type="button" class="btn theme-bg white-text my-0"
-                                                            data-action="upload">
+                                                    <input type="hidden" class="base-holder" name="image" value="" required/>
+                                                    <button type="button" class="btn theme-bg white-text my-0"  data-action="upload">
                                                         UPLOAD IMAGE
                                                     </button>
                                                     <input type="file" accept=".png,.jpg,.jpeg" required/>
@@ -103,92 +93,68 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer First Name</label>
-                                            <input type="text" id="fullname" placeholder="First Name"
-                                                   class="form-control alpha" name="fname" pattern="[a-zA-Z]+" required>
-                                            <span class="error-message">Please enter valid
-                                                                First Name</span>
+                                            <input type="text" id="fullname" placeholder="First Name" class="form-control alpha" name="fname" pattern="[a-zA-Z]+" required>
+                                            <span class="error-message">Please enter valid First Name</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Authorizer Last Name</label>
-                                            <input type="text" id="fullname" placeholder="Last Name"
-                                                   class="form-control alpha" name="lname" pattern="[a-zA-Z]+" required>
-                                            <span class="error-message">Please enter valid
-                                                                Last Name</span>
+                                            <input type="text" id="fullname" placeholder="Last Name" class="form-control alpha" name="lname" pattern="[a-zA-Z]+" required>
+                                            <span class="error-message">Please enter valid Last Name</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Email ID</label>
-                                            <input type="email" id="email" placeholder="abc@email.com"
-                                                   class="form-control" name="email" autocomplete="off" required>
-                                            <span class="error-message">Please enter valid
-                                                                Email ID</span>
+                                            <input type="email" id="email" placeholder="abc@email.com"  class="form-control" name="email" autocomplete="off" required>
+                                            <span class="error-message">Please enter valid Email ID</span>
                                         </div>
                                     </div>
-
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Primary Contact Number</label>
-                                            <input type="text" id="phone" placeholder="9876543210"
-                                                   class="form-control phone" name="phone[primary]" maxlength="10" minlength="10"
-                                                   aria-valuemax="10" required>
-                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
+                                            <input type="text" id="phone" placeholder="9876543210" class="form-control phone" name="phone[primary]" maxlength="10" minlength="10" aria-valuemax="10" required>
+                                            <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Secondary Contact Number</label>
-                                            <input type="text" id="phone-pop-up" placeholder="9876543210"
-                                                   class="form-control phone" name="phone[secondory]" maxlength="10"
-                                                   minlength="10" required>
-                                            <span class="error-message">Please enter valid
-                                                                Phone number</span>
+                                            <input type="text" id="phone-pop-up" placeholder="9876543210" class="form-control phone" name="phone[secondory]" maxlength="10" minlength="10" required>
+                                            <span class="error-message">Please enter valid Phone number</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
-                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd"
-                                                   class="form-control" name="organization[org_name]" data-parsley-type="alphanum" required>
-                                            <span class="error-message">Please enter valid
-                                                                Organization Name</span>
+                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd" class="form-control" name="organization[org_name]" data-parsley-type="alphanum" required>
+                                            <span class="error-message">Please enter valid Organization Name</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="phone-num-lable">Organisation Type</label>
-                                            {{--<input type="text" id="fullname" placeholder="Pvt Ltd"
-                                                   class="form-control" name="organization[org_type]" required>--}}
                                             <select class="form-control" name="organization[org_type]" required>
                                                 <option value="">--Select--</option>
-
                                                 @foreach(\App\Enums\OrganizationEnums::$REGISTRATION_TYPE as $type)
-                                                <option value="{{$type}}">{{$type}}</option>
+                                                    <option value="{{$type}}">{{$type}}</option>
                                                 @endforeach
                                             </select>
-                                            <span class="error-message">Please enter valid
-                                                                Organization Type</span>
+                                            <span class="error-message">Please enter valid Organization Type</span>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">GSTIN Number of Organisation</label>
-                                            <input type="text" id="fullname" placeholder="GST12355464"
-                                                   class="form-control" name="organization[gstin]" maxlength="15"
-                                                   minlength="15" data-parsley-type="alphanum" required >
+                                            <input type="text" id="fullname" placeholder="GST12355464" class="form-control" name="organization[gstin]" maxlength="15" minlength="15" data-parsley-type="alphanum" required >
                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
                                         </div>
@@ -201,7 +167,6 @@
                                             <span class="error-message">Please enter valid Register/License Number</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-12">
                                         <div class="form-input">
@@ -218,7 +183,6 @@
                                                                 Description</span>
                                         </div>
                                     </div>
-
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -278,9 +242,7 @@
                                             <select id="state" class="form-control" name="address[state]" required>
                                                 <option value="">--Select--</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar
-                                                    Islands
-                                                </option>
+                                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                                 <option value="Assam">Assam</option>
                                                 <option value="Bihar">Bihar</option>
@@ -316,8 +278,7 @@
                                                 <option value="Uttarakhand">Uttarakhand</option>
                                                 <option value="West Bengal">West Bengal</option>
                                             </select>
-                                            <span class="error-message">Please enter valid
-                                                                Landmark</span>
+                                            <span class="error-message">Please enter valid Landmark</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

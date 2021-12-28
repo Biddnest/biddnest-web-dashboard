@@ -77,7 +77,6 @@ class BidController extends Controller
 
     public static function getbookings($public_booking_id = null)
     {
-
         $current_time = Carbon::now()->roundMinutes()->format("Y-m-d H:i:s");
 
         if(!$public_booking_id) {
@@ -95,7 +94,6 @@ class BidController extends Controller
             $bid_end = self::updateStatus($booking['id']);
 
             /*tax is always taken as percentage*/
-
 
             $id[]=$booking['id'];
         }
@@ -641,7 +639,7 @@ class BidController extends Controller
                             $list_item["price"] = round($booking_inventory['quantity'] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)), 2);
                         }
                         else{
-//                            $list_item["price"] = 0.00;
+                            // $list_item["price"] = 0.00;
                             $list_item["price"] = round(explode(";",$booking_inventory['quantity'])[0] * ($base_price + (($additional_distance / (float)$vendor['additional_distance']) * $ad_price)), 2);
                         }
                     }

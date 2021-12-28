@@ -103,7 +103,8 @@ class ApiRouteController extends Controller
             'email' => 'required|email|max:50',
             'gender' => 'required|string|max:6',
             'dob' => 'required|date',
-            'avatar'=> 'nullable|string'
+            'avatar'=> 'nullable|string',
+            "city" => "nullable|string"
         ]);
 
         $formatedRequest = StringFormatter::format($request->all(),[
@@ -118,7 +119,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
         else
-            return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->avatar);
+            return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->avatar,null, $request->city);
 
     }
 

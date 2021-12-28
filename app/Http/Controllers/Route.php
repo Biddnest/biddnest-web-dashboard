@@ -1633,7 +1633,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ZoneController::addCity($request->name, $request->zones, $request->state);
+        return CityController::addCity($request->name, $request->zones, $request->state);
     }
 
     public function cities_edit(Request $request)
@@ -1648,17 +1648,17 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ZoneController::updateCity($request->id, $request->name, $request->zones, $request->state);
+        return CityController::updateCity($request->id, $request->name, $request->zones, $request->state);
     }
 
     public function city_status_update(Request $request)
     {
-        return ZoneController::statusUpdateCity($request->id);
+        return CityController::statusUpdateCity($request->id);
     }
 
     public function cities_delete(Request $request)
     {
-        return ZoneController::deleteCity($request->id);
+        return CityController::deleteCity($request->id);
     }
 
 }

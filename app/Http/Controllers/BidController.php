@@ -24,6 +24,7 @@ use App\Models\Settings;
 use App\Models\Vendor;
 use App\Models\SubservicePrice;
 use App\Models\Subservice;
+use App\Models\OrganizationZone;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
@@ -34,8 +35,9 @@ class BidController extends Controller
     public static function addvendors($booking_id)
     {
 //        try {
+        $vendor_ids = OrganizationZone::where("zone_id", Booking::where("id", $booking_id)->pluck('zone_id')[0])->pluck('organization_id');
            $vendorlist = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO])
-            ->where('zone_id',Booking::where("id", $booking_id)->pluck('zone_id')[0])->get();
+            ->whereIn('id', $vendor_ids)->get();
 
         if(!$vendorlist)
             return false;

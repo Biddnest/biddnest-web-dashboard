@@ -413,7 +413,7 @@ class Route extends Controller
             'address.state' => 'required|string',
             'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
-            'zone' => 'required|integer',
+            'cities.*' => 'required|integer',
             'service.*' =>'required|integer',
             'service_type' =>'required|string'
         ]);
@@ -442,7 +442,7 @@ class Route extends Controller
             'address.state' => 'required|string',
             'address.city' => 'required|string',
             'address.pincode' => 'required|min:6|max:6',
-            'zone' => 'required|integer',
+            'cities.*' => 'required|integer',
             'service.*' =>'required|integer',
             'service_type' =>'required|string'
         ]);

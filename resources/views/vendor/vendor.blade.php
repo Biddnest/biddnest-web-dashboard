@@ -138,7 +138,7 @@
                                                     <tr class="">
                                                         <th scope="col" >Vendor Name</th>
                                                         <th scope="col">Org Name</th>
-                                                        <th scope="col">Zone</th>
+                                                        <th scope="col">Cities</th>
                                                         <th scope="col" >Created At</th>
                                                         <th scope="col" style="    text-align: center !important; width: 16%;">Status</th>
                                                         <th scope="col">Branch</th>
@@ -157,7 +157,11 @@
                                                                 @endif
                                                             </td>
                                                             <td >{{ucfirst(trans($vendor->org_name))}} {{$vendor->org_type}}</td>
-                                                            <td  >{{ucfirst(trans($vendor->zone->name))}}</td>
+                                                            <td>
+                                                                @foreach($vendor->cities as $city)
+                                                                    {{ucfirst(trans($city->name))}},
+                                                                @endforeach
+                                                            </td>
                                                             <td  >{{date('d M Y', strtotime($vendor->created_at))}}</td>
                                                             <td >@switch($vendor->status)
                                                                     @case(\App\Enums\OrganizationEnums::$STATUS['active'])

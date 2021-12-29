@@ -101,8 +101,8 @@
                                 <tr class="tb-border cursor-pointer user_{{$user->id}} sidebar-toggle" data-sidebar="{{ route('sidebar.user',['id'=>$user->id]) }}">
                                     <td scope="row">{{ucfirst(trans($user->fname))}} {{ucfirst(trans($user->lname))}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>@foreach($user->zones as $zone)
-                                            {{ucfirst(trans($zone->name))}},
+                                    <td>@foreach($user->cities as $city)
+                                            {{ucfirst(trans($city->name))}},
                                         @endforeach
                                     </td>
                                     <td class="">

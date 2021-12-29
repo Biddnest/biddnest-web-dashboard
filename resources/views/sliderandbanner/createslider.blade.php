@@ -149,7 +149,7 @@
 
                                 <div class="col-lg-6">
                                   <div class="form-input">
-                                    <label class="phone-num-lable">Zone Scope</label>
+                                    <label class="phone-num-lable">City Scope</label>
                                       <select class="form-control field-toggle br-5" required name="zone_scope" data-value="{{\App\Enums\SliderEnum::$ZONE['custom']}}" data-target=".zones_list">
                                           <option value=""> -Select- </option>
                                           @foreach(\App\Enums\SliderEnum::$ZONE as $zone_type=>$value)
@@ -162,18 +162,17 @@
 
                                 <div class="col-lg-6 zones_list @if(($slider->zone_scope ?? '') != \App\Enums\SliderEnum::$ZONE['custom']) hidden @endif">
                                   <div class="form-input">
-                                    <label class="phone-num-lable">Select Zones</label>
-                                      <select  class="form-control br-5 select-box" name="zones[]" multiple @if(($slider->zone_scope ?? '') == \App\Enums\SliderEnum::$ZONE['custom']) required @endif>
-                                          @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-
-                                              <option value="{{$zone->id}}"
+                                    <label class="phone-num-lable">Select Cities</label>
+                                      <select  class="form-control br-5 select-box" name="city[]" multiple @if(($slider->zone_scope ?? '') == \App\Enums\SliderEnum::$ZONE['custom']) required @endif>
+                                          @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                              <option value="{{$city->id}}"
                                                       @if(isset($slider))
-                                                @foreach($slider->zones as $slider_zone)
-                                                  @if($zone->id == $slider_zone->id) selected @endif
+                                                @foreach($slider->cities as $slider_city)
+                                                  @if($city->id == $slider_city->id) selected @endif
                                                 @endforeach
                                                   @endif
                                                       >
-                                                  {{$zone->name}}
+                                                  {{$city->name}}
                                               </option>
 
                                           @endforeach

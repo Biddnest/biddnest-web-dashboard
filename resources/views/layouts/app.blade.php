@@ -23,20 +23,20 @@
                         <div class="col-6">
                             <ul class="header-controls d-flex flex-row justify-content-end">
                                 @if(\App\Helper::is("admin") || \App\Helper::is('zone_admin'))
-                                <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-web "height="15"></i></span> </a>
+                                    <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-web "height="15"></i></span> </a>
 
-                                    <div class="dropdown settings" style="height: auto;">
-                                        <ul>
-                                            <li style="cursor: pointer;" onclick="location.assign('{{ route('switch-zone') }}')"><a>All Zones @if(!\Illuminate\Support\Facades\Session::get('active_zone')) (Showing Now) @endif</a></li>
+                                        <div class="dropdown settings" style="height: auto;">
+                                            <ul>
+                                                <li style="cursor: pointer;" onclick="location.assign('{{ route('switch-zone') }}')"><a>All Zones @if(!\Illuminate\Support\Facades\Session::get('active_zone')) (Showing Now) @endif</a></li>
 
-                                            @foreach(\Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                <li style="cursor: pointer;" onclick="location.assign('{{ route('switch-zone') }}?zone={{$zone->id}}');"><a >{{$zone->name}}
-                                                    @if(\Illuminate\Support\Facades\Session::get('active_zone') && \Illuminate\Support\Facades\Session::get('active_zone') == $zone->id) (selected) @endif</a></li>
-                                            @endforeach
+                                                @foreach(\Illuminate\Support\Facades\Session::get('zones') as $zone)
+                                                    <li style="cursor: pointer;" onclick="location.assign('{{ route('switch-zone') }}?zone={{$zone->id}}');"><a >{{$zone->name}}
+                                                        @if(\Illuminate\Support\Facades\Session::get('active_zone') && \Illuminate\Support\Facades\Session::get('active_zone') == $zone->id) (selected) @endif</a></li>
+                                                @endforeach
 
-                                        </ul>
-                                    </div>
-                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
                                 @endif
 
                                 @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin') || \App\Helper::is('marketing'))

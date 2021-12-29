@@ -81,7 +81,7 @@
                                             </select>--}}
                                             <select id="role" name="cities[]" class="form-control select-box" multiple>
                                                 <option value="">--Select--</option>
-                                                @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                                @foreach($Cities as $city)
                                                     <option value="{{$city->id}}"
                                                             @if($branch && $branch->cities)
                                                             @foreach($branch->cities as $admin_cities)

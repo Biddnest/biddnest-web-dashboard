@@ -10,6 +10,7 @@ use App\Enums\CouponEnums;
 use App\Enums\PaymentEnums;
 use App\Helper;
 use App\Models\Booking;
+use App\Models\CityZone;
 use App\Models\Coupon;
 use App\Models\CouponOrganization;
 use App\Models\CouponUser;
@@ -67,12 +68,27 @@ class CouponController extends Controller
     }
 
     if($data['zone_scope']== CouponEnums::$ZONE_SCOPE['custom']){
-        if(count($data['zones']) > 0){
-            foreach($data['zones'] as $zone) {
+        if(count($data['city']) > 0){
+            /*foreach($data['zones'] as $zone) {
                 $coupon_zone = new CouponZone;
                 $coupon_zone->zone_id = $zone;
                 $coupon_zone->coupon_id = $coupon->id;
                 $coupon_zone->save();
+            }*/
+
+            $zones = [];
+            foreach($data['city'] as $city_id) {
+                $cc=new CouponCity();
+                $cc->coupon_id=$coupon->id;
+                $cc->city_id = $city_id;
+                $save_cc= $cc->save();
+
+                foreach(CityZone::where("city_id",$city_id)->pluck("zone_id") as $zone_id){
+                    $cz = new CouponZone();
+                    $cz->coupon_id = $coupon->id;
+                    $cz->zone_id = $zone_id;
+                    $save_cz = $cz->save();
+                }
             }
         }
     }

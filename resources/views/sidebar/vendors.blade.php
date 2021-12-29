@@ -87,7 +87,11 @@
                     <h1 class="f-14  bold">Zone</h1>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-between align-items-center">
-                    <h1 class="side-popup-content">{{ucfirst(trans($organization->zone->name))}}</h1>
+                    <h1 class="side-popup-content">
+                        @foreach($organization->cities as $city)
+                            {{ucfirst(trans($city->name))}},
+                        @endforeach
+                    </h1>
                 </div>
             </div>
            {{-- <div class="row pb-3 pl-3">

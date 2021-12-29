@@ -206,7 +206,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Zone</label>
+                                            <label class="full-name">Cities</label>
                                             <select id="role" name="cities[]" class="form-control select-box" multiple>
                                                 <option value="">--Select--</option>
                                                 @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)

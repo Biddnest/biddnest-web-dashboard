@@ -1012,7 +1012,7 @@ class WebController extends Controller
 
     public function onbaordBranch(Request $request)
     {
-        $branch = Organization::where(["parent_org_id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->get();
+        $branch = Organization::where(["parent_org_id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('cities')->with('services')->get();
         $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.onboardbranch', ['id'=>$request->id, 'services'=>$services, 'branches'=>$branch, 'organization'=>$organization]);
@@ -1154,7 +1154,7 @@ class WebController extends Controller
 
        $coupons = Coupon::where("deleted", CommonEnums::$NO);
 
-        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+        if(Session::get('user_role') == AdminEnums::$ROLES['city_admin'])
             $coupons->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
@@ -1182,7 +1182,7 @@ class WebController extends Controller
         }
 
         $coupons_active= Coupon::where(['status'=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO]);
-        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+        if(Session::get('user_role') == AdminEnums::$ROLES['city_admin'])
             $coupons_active->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
@@ -1192,7 +1192,7 @@ class WebController extends Controller
 
 
         $coupons_inactive= Coupon::where(['status'=>CommonEnums::$NO, "deleted"=>CommonEnums::$NO]);
-        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+        if(Session::get('user_role') == AdminEnums::$ROLES['city_admin'])
             $coupons_inactive->whereIn('id', CouponZone::whereIn("zone_id", $zone)->pluck('coupon_id'))->where("zone_scope", CouponEnums::$ZONE_SCOPE['custom']);
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])
@@ -1319,7 +1319,7 @@ class WebController extends Controller
 
         $slider=Slider::where(["deleted"=>CommonEnums::$NO]);
 
-        if(Session::get('user_role') == AdminEnums::$ROLES['zone_admin'])
+        if(Session::get('user_role') == AdminEnums::$ROLES['city_admin'])
             $slider->whereIn('id', SliderZone::whereIn("zone_id", $zone)->pluck('slider_id'));
 
         if(Session::get('user_role') == AdminEnums::$ROLES['admin'])

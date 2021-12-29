@@ -6,7 +6,9 @@ use App\Enums\CommonEnums;
 use App\Helper;
 use App\Models\Admin;
 use App\Models\AdminZone;
+use App\Models\AdminCity;
 use App\Models\Zone;
+use App\Models\City;
 use App\Sms;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -167,19 +169,36 @@ class AdminController extends Controller
         $admin_result=$admin->save();
 
         if($data['role'] == AdminEnums::$ROLES['admin']){
-            foreach(Zone::pluck('id') as $zone){
-                $zones = new AdminZone;
+            foreach(City::pluck('id') as $city){
+                $zones = new AdminCity;
                 $zones->admin_id =$admin->id;
-                $zones->zone_id = $zone;
+                $zones->city_id = $city;
                 $zones->save();
-            }
-            } elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
-            if(isset($data['zone']) && count($data['zone'])> 0) {
-                foreach ($data['zone'] as $zone) {
-                    $zones = new AdminZone();
-                    $zones->admin_id = $admin->id;
-                    $zones->zone_id = $zone;
+                $city_zones = City::where("id", $city)->with('zones')->get();
+
+                foreach($city_zones as $zone){
+                    $zones = new AdminZone;
+                    $zones->admin_id =$admin->id;
+                    $zones->zone_id = $zone->zone_id;
                     $zones->save();
+                }
+            }
+        }
+        elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
+            if(isset($data['cities']) && count($data['cities'])> 0) {
+                foreach ($data['cities'] as $city) {
+                    $zones = new AdminCity();
+                    $zones->admin_id = $admin->id;
+                    $zones->city_id = $city;
+                    $zones->save();
+
+                    $city_zones = City::where("id", $city)->with('zones')->get();
+                    foreach($city_zones->zones as $zone){
+                        $slider_zone = new AdminZone;
+                        $slider_zone->admin_id = $admin->id;
+                        $slider_zone->zone_id = $zone->zone_id;
+                        $slider_zone->save();
+                    }
                 }
             }
         }
@@ -222,22 +241,40 @@ class AdminController extends Controller
 
         $update = Admin::where("id", $data['id'])->update($update_data);
 
-        AdminZone::where('admin_id',$data['id'])->delete();
 
+       AdminCity::where('admin_id', $data['id'])->delete();
+       AdminZone::where('admin_id',$data['id'])->delete();
        if($data['role'] == AdminEnums::$ROLES['admin']){
-           foreach(Zone::pluck('id') as $zone){
-               $zones = new AdminZone;
+           foreach(City::pluck('id') as $city){
+               $zones = new AdminCity;
                $zones->admin_id =$data['id'];
-               $zones->zone_id = $zone;
+               $zones->city_id = $city;
                $zones->save();
-           }
-       } elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
-           if(count($data['zone']) > 0) {
-               foreach ($data['zone'] as $zone) {
+               $city_zones = City::where("id", $city)->with('zones')->get();
+
+               foreach($city_zones as $zone){
                    $zones = new AdminZone;
-                   $zones->admin_id = $data['id'];
-                   $zones->zone_id = $zone;
+                   $zones->admin_id =$data['id'];
+                   $zones->zone_id = $zone->zone_id;
                    $zones->save();
+               }
+           }
+       }
+       elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
+           if(isset($data['cities']) && count($data['cities'])> 0) {
+               foreach ($data['cities'] as $city) {
+                   $zones = new AdminCity();
+                   $zones->admin_id = $data['id'];
+                   $zones->city_id = $city;
+                   $zones->save();
+
+                   $city_zones = City::where("id", $city)->with('zones')->get();
+                   foreach($city_zones->zones as $zone){
+                       $slider_zone = new AdminZone;
+                       $slider_zone->admin_id = $data['id'];
+                       $slider_zone->zone_id = $zone->zone_id;
+                       $slider_zone->save();
+                   }
                }
            }
        }
@@ -318,13 +355,13 @@ class AdminController extends Controller
 
     public static function search(Request $request)
     {
-//        return $request;
-//        $query = $request->all()['query'];
+        //        return $request;
+        //        $query = $request->all()['query'];
         $query = $request->q;
 
         if (empty($query))
             return Helper::response(true, "Data fetched successfully", ["users" => []]);
-//        return $query;
+        //        return $query;
         $users = Admin::where("fname", "LIKE", $query . '%')->paginate(5);
         return Helper::response(true, "Data fetched successfully", ["users" => $users->items()]);
     }

@@ -124,7 +124,7 @@
                                 <div class="col-lg-6 zones @if($users && $users->role ==\App\Enums\AdminEnums::$ROLES['city_admin']) @else {{"hidden"}} @endif " >
                                     <div class="form-input">
                                         <label class="full-name">City</label>
-                                        <select id="role" name="zone[]" class="form-control select-box" multiple>
+                                        <select id="role" name="cities[]" class="form-control select-box" multiple>
                                             <option value="">--Select--</option>
                                             @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
                                                 <option value="{{$city->id}}"

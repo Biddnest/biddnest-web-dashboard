@@ -618,7 +618,7 @@ class Route extends Controller
             'position' => 'required', 'platform' => 'required',
             'size' => 'required', 'from_date' => 'required',
             'to_date' => 'required', 'city_scope' => 'required',
-            'cities.*'=>"nullable"
+            'cities'=>"nullable"
         ]);
 
         $formatedRequest = StringFormatter::format($request->all(),[
@@ -640,7 +640,7 @@ class Route extends Controller
             'position' => 'required', 'platform' => 'required',
             'size' => 'required', 'from_date' => 'required',
             'to_date' => 'required', 'zone_scope' => 'required',
-            'zones'=>"nullable"
+            'cities'=>"nullable"
         ]);
 
         $formatedRequest = StringFormatter::format($request->all(),[
@@ -938,7 +938,7 @@ class Route extends Controller
             'username'=>'required',
             'password'=>'required',
             'role'=>'required',
-            'zone'=>'nullable',
+            'cities'=>'nullable',
             'phone'=>'required',
             'email'=>'required',
             'dob'=>'required',
@@ -970,7 +970,7 @@ class Route extends Controller
             'lname'=>'required|string',
             'username'=>'required',
             'role'=>'required',
-            'zone'=>'required',
+            'cities'=>'nullable',
             'phone'=>'required',
             'email'=>'required',
             'dob'=>'required',
@@ -1147,6 +1147,7 @@ class Route extends Controller
     {
         return SettingController::update_api_general($request->all());
     }
+
     public function api_settings_update(Request $request)
     {
         return SettingController::update_api($request->all());
@@ -1334,6 +1335,7 @@ class Route extends Controller
     {
         return OrganisationController::sendOtpForBid($request->id);
     }
+
     public function send_otp_booking(Request $request)
     {
         return BookingsController::sendOtpForBooking($request);
@@ -1452,12 +1454,9 @@ class Route extends Controller
          return PaymentController::updateBookingPaymentData($request->booking_id, $request->bid_amount, $request->sub_total, $request->commission, $request->other_charges, $request->tax, $request->discount_amount, $request->grand_total, $request->confirm);
      }
 
-
-
      public function bookinStatusChange(Request $request){
          return BookingsController::changeStatusBooking($request->id, $request->status);
      }
-
 
      public function getSubserviceInventories(Request $request)
      {
@@ -1471,7 +1470,6 @@ class Route extends Controller
          return InventoryController::getBySubserviceForApp($request->subservice_id);
      }
 
-
      public function assignVirtualAssistant(Request $request)
      {
          $validation = Validator::make($request->all(),[
@@ -1484,7 +1482,6 @@ class Route extends Controller
 
          return BookingsController::assignVirtualAssistant($request->booking_id, $request->admin_id);
      }
-
 
      public function voucherCreate(Request $request){
 
@@ -1506,7 +1503,6 @@ class Route extends Controller
 
         return VoucherController::create($request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes);
      }
-
 
      public function voucherEdit(Request $request){
 
@@ -1531,11 +1527,9 @@ class Route extends Controller
         return VoucherController::edit($request->id, $request->image, $request->name, $request->title, $request->desc, $request->provider, $request->provider_url, $request->max_redemptions, $request->type, $request->codes, $request->status);
      }
 
-
      public function voucherDelete(Request $request){
         return VoucherController::delete($request->id);
      }
-
 
      public function zones_referal(Request $request){
         $validation = Validator::make($request->all(),[
@@ -1568,7 +1562,6 @@ class Route extends Controller
 
         return RewardPointController::redeem($request->user_id, $request->points, $request->voucher_id, $request->comments);
      }
-
 
      public function addPoints(Request $request){
         $validation = Validator::make($request->all(),[

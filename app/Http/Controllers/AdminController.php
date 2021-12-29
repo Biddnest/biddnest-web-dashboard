@@ -173,7 +173,7 @@ class AdminController extends Controller
                 $zones->zone_id = $zone;
                 $zones->save();
             }
-            } elseif($data['role'] == AdminEnums::$ROLES['zone_admin']){
+            } elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
             if(isset($data['zone']) && count($data['zone'])> 0) {
                 foreach ($data['zone'] as $zone) {
                     $zones = new AdminZone();
@@ -231,7 +231,7 @@ class AdminController extends Controller
                $zones->zone_id = $zone;
                $zones->save();
            }
-       } elseif($data['role'] == AdminEnums::$ROLES['zone_admin']){
+       } elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
            if(count($data['zone']) > 0) {
                foreach ($data['zone'] as $zone) {
                    $zones = new AdminZone;

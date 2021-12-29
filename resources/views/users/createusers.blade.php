@@ -45,7 +45,6 @@
                     </h3>
                 </div>
                 <div class="tab-content margin-topneg-7 border-top" id="myTabContent">
-
                     <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="new-order-tab">
                         <!-- form starts -->
                         <form action="@if(!$users){{route('user_add')}}@else{{route('user_edit')}}@endif" method="@if(isset($users)){{"PUT"}}@else{{"POST"}}@endif" data-next="redirect" data-redirect-type="hard" data-url="@if(!$users){{route('create-bank', ['id'=>':id'])}}@else{{route('create-bank', ['id'=>$users->id])}}@endif" data-alert="tiny" class="form-new-order pt-4 mt-3 input-text-blue user-form" id="myForm" data-parsley-validate >
@@ -66,7 +65,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-6">
                                     @if($users)
                                         <input type="hidden" value="{{$users->id}}" name="id">
@@ -88,7 +86,6 @@
                                         <span class="error-message">Please enter valid First Name</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Employee Last Name</label>
@@ -96,7 +93,6 @@
                                             <span class="error-message">Please enter valid Last Name</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Employee ID/ Username</label>
@@ -125,28 +121,24 @@
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6 zones @if($users && $users->role ==\App\Enums\AdminEnums::$ROLES['zone_admin']) @else {{"hidden"}} @endif " >
+                                <div class="col-lg-6 zones @if($users && $users->role ==\App\Enums\AdminEnums::$ROLES['city_admin']) @else {{"hidden"}} @endif " >
                                     <div class="form-input">
-                                        <label class="full-name">Zone</label>
+                                        <label class="full-name">City</label>
                                         <select id="role" name="zone[]" class="form-control select-box" multiple>
                                             <option value="">--Select--</option>
-                                            @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                <option value="{{$zone->id}}"
-
-                                                        @if($users && $users->zones)
-                                                        @foreach($users->zones as $admin_zones)
-                                                            @if($admin_zones->id == $zone->id) selected @endif
+                                            @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                                <option value="{{$city->id}}"
+                                                        @if($users && $users->cities)
+                                                        @foreach($users->cities as $admin_cities)
+                                                            @if($admin_cities->city_id == $city->id) selected @endif
                                                         @endforeach
                                                     @endif
-
-                                                >{{$zone->name}}</option>
+                                                >{{$city->name}}</option>
                                             @endforeach
                                         </select>
                                         <span class="error-message">Please enter Zone</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Manager Name</label>
@@ -157,20 +149,17 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Phone Number</label>
-                                            <input type="tel" id="phone" placeholder="987654321" name="phone" maxlength="10" minlength="10" class=" form-control" value="@if($users){{$users->phone}}@endif" required>
-                                            <span class="error-message">Please enter valid
-                                                Phone number</span>
+                                        <input type="tel" id="phone" placeholder="987654321" name="phone" maxlength="10" minlength="10" class=" form-control" value="@if($users){{$users->phone}}@endif" required>
+                                        <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="phone-num-lable">Alternate Phone Number</label>
-                                            <input type="tel" id="phone-1" placeholder="987654321" name="meta[alt_phone]" maxlength="10" minlength="10" class=" form-control" value="@if($users){{json_decode($users->meta, true)['alt_phone']}}@endif" required>
-                                            <span class="error-message">Please enter valid
-                                                Phone number</span>
+                                        <input type="tel" id="phone-1" placeholder="987654321" name="meta[alt_phone]" maxlength="10" minlength="10" class=" form-control" value="@if($users){{json_decode($users->meta, true)['alt_phone']}}@endif" required>
+                                        <span class="error-message">Please enter valid Phone number</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Email ID</label>
@@ -190,7 +179,6 @@
                                         <span class="error-message">Please enter valid Gender</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Birth</label>
@@ -198,7 +186,6 @@
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Relieving</label>
@@ -206,7 +193,6 @@
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Educational Qualifications</label>
@@ -214,11 +200,10 @@
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">PAN Card Number</label>
-{{--                                        <input type="text" id="fullname" placeholder="btech Mechanical" name="meta[pan_no]" class="form-control" value="@if($users){{json_decode($users->meta, true)['pan_no']}}@endif" required>--}}
+                                        {{-- <input type="text" id="fullname" placeholder="btech Mechanical" name="meta[pan_no]" class="form-control" value="@if($users){{json_decode($users->meta, true)['pan_no']}}@endif" required>--}}
                                         <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control" value="@if($users){{substr(json_decode($users->meta, true)['pan_no'], 0, 4).str_repeat("X", strlen(json_decode($users->meta, true)['pan_no'])-4)}}@endif" required readonly>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
@@ -226,12 +211,11 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Aadhar Card Number</label>
-{{--                                        <input type="text" id="fullname" name="meta[adhar_no]" placeholder="btech Mechanical" class="form-control" value="@if($users){{json_decode($users->meta, true)['aadha_no']}}@endif" required>--}}
+                                        {{--  <input type="text" id="fullname" name="meta[adhar_no]" placeholder="btech Mechanical" class="form-control" value="@if($users){{json_decode($users->meta, true)['aadha_no']}}@endif" required>--}}
                                         <input type="text" id="fullname" placeholder="btech Mechanical" class="form-control" value="@if($users){{substr(json_decode($users->meta, true)['aadha_no'], 0, 4).str_repeat("X", strlen(json_decode($users->meta, true)['aadha_no'])-4)}}@endif" required readonly>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Address Line 1</label>
@@ -246,7 +230,6 @@
                                         <span class="error-message">Please enter valid Address Line</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">State</label>
@@ -299,7 +282,6 @@
                                         <span class="error-message">Please enter valid Zone</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Pincode</label>
@@ -307,15 +289,13 @@
                                         <span class="error-message">Please enter valid Pincode</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Joining</label>
-                                            <input type="date" class=" form-control br-5" name="joinig_date" required="required"  value="@if($users){{$users->date_of_joining}}@endif"   placeholder="15/02/2021"/>
-                                            <span class="error-message">Please enter valid Pincode</span>
+                                        <input type="date" class=" form-control br-5" name="joinig_date" required="required"  value="@if($users){{$users->date_of_joining}}@endif"   placeholder="15/02/2021"/>
+                                        <span class="error-message">Please enter valid Pincode</span>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="" id="comments">
                                 <div class="d-flex  justify-content-between flex-row ml-20 p-10 py-0 " style="border-top: 1px solid #70707040;">
@@ -333,15 +313,10 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
 
  @endsection

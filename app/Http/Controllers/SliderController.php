@@ -8,7 +8,9 @@ use App\Helper;
 use App\Models\Banners;
 use App\Models\SlideBanner;
 use App\Models\Slider;
+use App\Models\City;
 use App\Models\SliderZone;
+use App\Models\SliderCity;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 
@@ -36,7 +38,7 @@ class SliderController extends Controller
             return Helper::response(true,"Data fetched successfully", ["sliders"=>$result]);
     }
 
-    public static function add($name, $type, $position, $platform, $size, $from_date, $to_date, $zone_scope,$zones)
+    public static function add($name, $type, $position, $platform, $size, $from_date, $to_date, $city_scope, $cities)
     {
         $slider=new Slider;
         $slider->name = $name;
@@ -46,15 +48,23 @@ class SliderController extends Controller
         $slider->size = $size;
         $slider->from_date = date("Y-m-d", strtotime($from_date));
         $slider->to_date = date("Y-m-d", strtotime($to_date));
-        $slider->zone_scope = $zone_scope;
+        $slider->$city_scope = $city_scope;
         $result= $slider->save();
 
-        if($zone_scope == SliderEnum::$ZONE['custom']){
-            foreach($zones as $zone){
-                $slider_zone = new SliderZone;
-                $slider_zone->slider_id = $slider->id;
-                $slider_zone->zone_id = $zone;
-                $slider_zone->save();
+        if($city_scope == SliderEnum::$ZONE['custom']){
+            foreach($cities as $city){
+                $slider_city = new SliderCity;
+                $slider_city->slider_id = $slider->id;
+                $slider_city->city_id = $city;
+                $slider_city->save();
+
+                $city_zones = City::where("id", $city)->with('zones')->get();
+                foreach($city_zones->zones as $zone){
+                    $slider_zone = new SliderZone;
+                    $slider_zone->slider_id = $slider->id;
+                    $slider_zone->zone_id = $zone->zone_id;
+                    $slider_zone->save();
+                }
             }
         }
 
@@ -65,7 +75,7 @@ class SliderController extends Controller
 
     }
 
-    public static function edit($id, $name, $type, $position, $platform, $size, $from_date, $to_date, $zone_scope,$zones)
+    public static function edit($id, $name, $type, $position, $platform, $size, $from_date, $to_date, $city_scope, $cities)
     {
         $slider=Slider::where('id', $id)
         ->update([
@@ -76,16 +86,23 @@ class SliderController extends Controller
             'size' => $size,
             'from_date' => date("Y-m-d", strtotime($from_date)),
             'to_date' => date("Y-m-d", strtotime($to_date)),
-            'zone_scope' => $zone_scope,
+            'zone_scope' => $city_scope,
         ]);
 
-        if($zone_scope == SliderEnum::$ZONE['custom']){
-            SliderZone::where("slider_id", $id)->delete();
-            foreach($zones as $zone){
-                $slider_zone = new SliderZone;
-                $slider_zone->slider_id = $id;
-                $slider_zone->zone_id = $zone;
-                $slider_zone->save();
+        if($city_scope == SliderEnum::$ZONE['custom']){
+            foreach($cities as $city){
+                $slider_city = new SliderCity;
+                $slider_city->slider_id = $slider->id;
+                $slider_city->city_id = $city;
+                $slider_city->save();
+
+                $city_zones = City::where("id", $city)->with('zones')->get();
+                foreach($city_zones->zones as $zone){
+                    $slider_zone = new SliderZone;
+                    $slider_zone->slider_id = $slider->id;
+                    $slider_zone->zone_id = $zone->zone_id;
+                    $slider_zone->save();
+                }
             }
         }
 

@@ -888,7 +888,7 @@ class WebController extends Controller
 
     public function sidebar_vendors(Request $request)
     {
-        $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')->first();
+        $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')->with('cities')->first();
         $branch = Organization::where("parent_org_id", $request->id)->count();
         $payouts = Payout::where("organization_id", $request->id)->get();
 
@@ -930,7 +930,7 @@ class WebController extends Controller
 
     public function vendorsDetails(Request $request)
     {
-        $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')
+        $vendor = Organization::where("id", $request->id)->with('admin')->with('services')->with('zone')->with('cities')
             ->with(['vendors'=>function($query){
                 $query->where('user_role', VendorEnums::$ROLES['driver']);
             }])->first();

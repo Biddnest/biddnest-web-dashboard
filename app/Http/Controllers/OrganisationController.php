@@ -83,6 +83,7 @@ class OrganisationController extends Controller
         }
 
         $zones = [];
+        //cities
         foreach($data['city'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id=$organizations->id;

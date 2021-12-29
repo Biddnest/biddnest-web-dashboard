@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
-    public function addCity($name, $zones, $state){
+    public static function addCity($name, $zones, $state){
         $exists = City::where(["name"=>$name, "state"=>$state])->first();
 
         if($exists)
@@ -38,7 +38,7 @@ class CityController extends Controller
         return Helper::response(true,"City save Successfully",["city"=>City::findOrFail($city->id)]);
     }
 
-    public function cities_edit($id, $name, $zones, $state){
+    public static function cities_edit($id, $name, $zones, $state){
         $exists = City::where(["id"=>$id])->first();
 
         if(!$exists)
@@ -67,7 +67,7 @@ class CityController extends Controller
 
     }
 
-    public function statusUpdateCity($id){
+    public static function statusUpdateCity($id){
         $city = City::where("id", $id)->with('zones')->first;
 
         switch($city->status){
@@ -94,7 +94,7 @@ class CityController extends Controller
         return Helper::response(true, "status updated successfully");
     }
 
-    public function cities_delete($id){
+    public static function cities_delete($id){
         $exists = City::where(["id"=>$id, "deleted"=>CommonEnums::$NO])->with('zones')->first();
 
         if(!$exists)

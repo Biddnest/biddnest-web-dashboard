@@ -100,7 +100,7 @@ class OrganisationController extends Controller
 
         $models = [];
         foreach(RoleGroupEnums::$MODUlES as $model=>$model_key){
-            array_push($model_key, $models);
+            array_push($models, $model_key);
         }
 
         $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];

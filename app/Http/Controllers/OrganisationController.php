@@ -84,7 +84,7 @@ class OrganisationController extends Controller
 
         $zones = [];
         //cities
-        foreach($data['city'] as $city) {
+        foreach($data['cities'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id=$organizations->id;
             $oc->city_id = $city;
@@ -251,7 +251,7 @@ class OrganisationController extends Controller
         }
 
         $zones = [];
-        foreach($data['city'] as $city) {
+        foreach($data['cities'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id = $id;
             $oc->city_id = $city;

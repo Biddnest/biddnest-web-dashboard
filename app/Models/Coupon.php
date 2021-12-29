@@ -33,4 +33,9 @@ class Coupon extends Model
     public function created_by(){
         return $this->belongsTo(Admin::class, "created_by","id");
     }
+
+    public function cities(){
+        return $this->belongsToMany(City::class,"coupon_city_map","coupon_id","city_id","id","id");
+//        return $this->hasManyThrough(Zone::class, CouponZone::class,"zone_id","id","id","coupon_id");
+    }
 }

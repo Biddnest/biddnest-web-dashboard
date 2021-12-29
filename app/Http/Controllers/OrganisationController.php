@@ -7,9 +7,12 @@ use App\Enums\OrganizationEnums;
 use App\Enums\VendorEnums;
 use App\Enums\RoleGroupEnums;
 use App\Helper;
+use App\Models\CityZone;
 use App\Models\Org_kyc;
 use App\Models\Organization;
+use App\Models\OrganizationCity;
 use App\Models\OrganizationService;
+use App\Models\OrganizationZone;
 use App\Models\SubservicePrice;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -55,14 +58,16 @@ class OrganisationController extends Controller
         $organizations->phone=$data['phone']['primary'];
         $organizations->org_name=$data['organization']['org_name'];
         $organizations->org_type=$data['organization']['org_type'];
-       /* $organizations->lat =$data['address']['lat'];
-        $organizations->lng =$data['address']['lng'];*/
-        $organizations->lat =0;
-        $organizations->lng =0;
-        $organizations->zone_id =$data['zone'];
+
+        /*Rejected columns - to be removed in future updates. No more needed.*/
+        $organizations->lat = 0;
+        $organizations->lng = 0;
+        $organizations->zone_id =0;
+        /*End rejected columns*/
+
         $organizations->pincode =$data['address']['pincode'];
-        $organizations->city =$data['address']['city'];
-        $organizations->state =$data['address']['state'];
+        $organizations->city = $data['address']['city'];
+        $organizations->state = $data['address']['state'];
         $organizations->service_type =$data['service_type'];
         $organizations->meta =json_encode($meta);
         $organizations->commission = $data['commission'];
@@ -75,6 +80,21 @@ class OrganisationController extends Controller
             $service->organization_id=$organizations->id;
             $service->service_id=$value;
             $result_service= $service->save();
+        }
+
+        $zones = [];
+        foreach($data['city'] as $city) {
+            $oc=new OrganizationCity();
+            $oc->organization_id=$organizations->id;
+            $oc->city_id=$value;
+            $result_oc= $oc->save();
+
+            foreach(CityZone::where("city_id",$city)->pluck("zone_id") as $zone_id){
+                $oz = new OrganizationZone();
+                $oz->organization_id = $organizations->id;
+                $oz->city_id = $zone_id;
+                $result_oz = $oz->save();
+            }
         }
 
         $models = [];

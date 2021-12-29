@@ -68,7 +68,7 @@ class CityController extends Controller
     }
 
     public static function statusUpdateCity($id){
-        $city = City::where("id", $id)->with('zones')->first;
+        $city = City::where("id", $id)->with('zones')->first();
 
         switch($city->status){
             case CommonEnums::$YES:

@@ -1651,7 +1651,7 @@ class Route extends Controller
 
     public function cities_delete(Request $request)
     {
-        return CityController::deleteCity($request->id);
+        return CityController::cities_delete($request->id);
     }
 
 }

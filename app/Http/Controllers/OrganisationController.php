@@ -87,13 +87,13 @@ class OrganisationController extends Controller
         foreach($data['city'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id=$organizations->id;
-            $oc->city_id=$value;
+            $oc->city_id = $city;
             $result_oc= $oc->save();
 
             foreach(CityZone::where("city_id",$city)->pluck("zone_id") as $zone_id){
                 $oz = new OrganizationZone();
                 $oz->organization_id = $organizations->id;
-                $oz->city_id = $zone_id;
+                $oz->zone_id = $zone_id;
                 $result_oz = $oz->save();
             }
         }

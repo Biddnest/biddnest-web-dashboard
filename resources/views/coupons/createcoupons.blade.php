@@ -200,7 +200,7 @@
 
           <div class="col-sm-6">
             <div class="form-input">
-              <label>Zone</label>
+              <label>City Scope</label>
               <div>
                 <select class="form-control br-5 field-toggle" data-value="1" data-target=".zones" name="zone_scope" required>
                   <option value="">--Select--</option>
@@ -214,12 +214,12 @@
 
           <div class="col-sm-6 zones @if($coupons && ($coupons->zone_scope == \App\Enums\CouponEnums::$ZONE_SCOPE['custom'])) @else hidden @endif" >
             <div class="form-input">
-              <label>Select Zones</label>
+              <label>Select Cities</label>
               <div>
-                <select class="form-control br-5 field-toggle select-box" name="zones[]" multiple>
+                <select class="form-control br-5 field-toggle select-box" name="cities[]" multiple>
 
-                    @foreach(\App\Models\Zone::where(["status"=>\App\Enums\CommonEnums::$YES, "deleted"=>\App\Enums\CommonEnums::$NO])->get() as $zone)
-                      <option value="{{$zone->id}}" @if($coupons) @foreach($coupons->zones as $zones)  @if($zones->id == $zone->id) selected @endif @endforeach @endif>{{ucfirst(trans($zone->name))}}</option>
+                    @foreach(\App\Models\City::where(["status"=>\App\Enums\CommonEnums::$YES, "deleted"=>\App\Enums\CommonEnums::$NO])->get() as $city)
+                      <option value="{{$city->id}}" @if($coupons) @foreach($coupons->cities as $cities)  @if($cities->id == $city->id) selected @endif @endforeach @endif>{{ucfirst(trans($city->name))}}</option>
                     @endforeach
                 </select>
               </div>

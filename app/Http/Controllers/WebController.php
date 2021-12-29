@@ -48,6 +48,7 @@ use App\Models\TicketReply;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\CityZone;
 use App\Models\City;
 use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
@@ -111,10 +112,12 @@ class WebController extends Controller
     {
 
 //        return "hai";
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $count_orders =Booking::where('deleted', CommonEnums::$NO)->whereIn("zone_id",$zone);
 
@@ -242,10 +245,12 @@ class WebController extends Controller
 
     public function ordersBookingsLive(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -281,10 +286,12 @@ class WebController extends Controller
 
     public function ordersBookingsEnquiry(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -328,10 +335,12 @@ class WebController extends Controller
 
     public function ordersBookingsPast(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -368,10 +377,12 @@ class WebController extends Controller
 
     public function ordersBookingsHold(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -408,10 +419,12 @@ class WebController extends Controller
 
     public function ordersBookingsBounced(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -448,10 +461,12 @@ class WebController extends Controller
 
     public function ordersBookingsCancelled(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -492,10 +507,12 @@ class WebController extends Controller
 
     public function ordersBookingsInProgress(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $zone = Zone::pluck('id');
@@ -831,10 +848,12 @@ class WebController extends Controller
 
     public function vendors(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
 
@@ -1039,10 +1058,12 @@ class WebController extends Controller
 
     public function leadVendors()
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
             if(isset($request->search)){
@@ -1060,10 +1081,12 @@ class WebController extends Controller
 
     public function verifiedVendors()
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
             if(isset($request->search)){
@@ -1147,10 +1170,12 @@ class WebController extends Controller
 
     public function coupons(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
        $coupons = Coupon::where("deleted", CommonEnums::$NO);
 
@@ -1214,7 +1239,7 @@ class WebController extends Controller
 
     public function createCoupons(Request $request)
     {
-        $coupons = Coupon::where(["id"=>$request->id])->with('zones')->with('organizations')->with('users')->first();
+        $coupons = Coupon::where(["id"=>$request->id])->with('zones')->with('cities')->with('organizations')->with('users')->first();
         return view('coupons.createcoupons', ['organizations'=>Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get(), 'coupons'=>$coupons]);
     }
 
@@ -1252,10 +1277,12 @@ class WebController extends Controller
 
     public function zones(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $zones =Zone::where(["deleted"=>CommonEnums::$NO]);
 
@@ -1312,10 +1339,12 @@ class WebController extends Controller
 
     public function slider(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $slider=Slider::where(["deleted"=>CommonEnums::$NO]);
 
@@ -1398,10 +1427,12 @@ class WebController extends Controller
 
     public function review(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $review=Review::whereIn('user_id', Booking::whereIn("zone_id", $zone)->pluck('user_id'))->where("deleted", CommonEnums::$NO);
 
@@ -1436,10 +1467,12 @@ class WebController extends Controller
 
     public function complaints(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $complaints=Ticket::where("type", TicketEnums::$TYPE['complaint']);
 
@@ -1521,10 +1554,12 @@ class WebController extends Controller
 
     public function vendorPayout(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $payout =Payout::whereIn('organization_id', Organization::whereIn("zone_id", $zone)->pluck('id'));
         if(isset($request->search)){
@@ -1572,16 +1607,18 @@ class WebController extends Controller
 
     public function users(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $users=Admin::whereIn('id', AdminZone::whereIn("zone_id", $zone)->pluck('admin_id'))->where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES]);
         if(isset($request->search)){
             $users=$users->where('fname', 'like', "%".$request->search."%");
         }
-        $users->with('zones')->orderBy("id","DESC");
+        $users->with('zones')->with('cities')->orderBy("id","DESC");
         return view('users.users', ['users'=>$users->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 
@@ -1617,10 +1654,12 @@ class WebController extends Controller
 
     public function sidebar_booking(Request $request){
 
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         return view('sidebar.orderbooking',[
             "booking"=>Booking::where('id',$request->id)
@@ -1639,15 +1678,15 @@ class WebController extends Controller
     public function switchToZone(Request $request){
 
         if(isset($request->zone)) {
-         if(in_array($request->zone, Session::get('admin_zones')))
-            Session::put('active_zone', $request->zone);
+         if(in_array($request->zone, Session::get('admin_cities')))
+            Session::put('active_city', $request->zone);
         }
         else{
-            if(Session::get('active_zone'))
-                Session::forget('active_zone');
+            if(Session::get('active_city'))
+                Session::forget('active_city');
         }
 
-        Session::flash('redirect','Zone has been toggled');
+        Session::flash('redirect','City has been toggled');
         return back();
 
     }
@@ -1688,10 +1727,12 @@ class WebController extends Controller
     public static function sales_report(Request $request)
     {
 
-        if(Session::get('active_zone'))
-            $zone = Session::get('active_zone');
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = Session::get('admin_zones');
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $bookings = Booking::whereIn("zone_id",$zone);
         if(isset($request->from) && isset($request->to))
@@ -1783,10 +1824,12 @@ class WebController extends Controller
 
     public function searchResult(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $bookings = Booking::where("deleted", CommonEnums::$NO)->where('public_booking_id', 'like', $request->search."%")
             ->orWhere('public_enquiry_id', 'like', $request->search."%");
@@ -1796,10 +1839,12 @@ class WebController extends Controller
 
     public function filterResult(Request $request)
     {
-        if(Session::get('active_zone'))
-            $zone = [Session::get('active_zone')];
+        if(Session::get('active_city'))
+            $city = [Session::get('active_city')];
         else
-            $zone = [Session::get('admin_zones')];
+            $city = Session::get('admin_cities');
+
+        $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
         $bookings = Booking::where("deleted", CommonEnums::$NO);
 

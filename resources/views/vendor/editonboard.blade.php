@@ -65,7 +65,7 @@
                         <div class="tab-pane fade show active margin-topneg-15" id="order" role="tabpanel"
                              aria-labelledby="new-order-tab">
                             <!-- form starts -->
-                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" data-next="redirect" data-url="{{route('onboard-branch-vendors', ['id'=>$organization->id])}}" id="myForm" data-parsley-validate>
+                            <form class="form-new-order pt-4 mt-3 input-text-blue" action="{{route('edit_onvoard_vendor')}}" data-alert="mega" method="PUT" data-next="redirect" data-url="{{route("onboard-base-price", ['id'=>$id])}}" id="myForm" data-parsley-validate>
 
                                 <div class="d-flex row p-20">
                                     <div class="col-lg-6">

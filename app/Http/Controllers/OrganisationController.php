@@ -84,7 +84,7 @@ class OrganisationController extends Controller
 
         $zones = [];
         //cities
-        foreach($data['city'] as $city) {
+        foreach($data['cities'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id=$organizations->id;
             $oc->city_id = $city;
@@ -100,7 +100,7 @@ class OrganisationController extends Controller
 
         $models = [];
         foreach(RoleGroupEnums::$MODUlES as $model=>$model_key){
-            array_push($model_key, $models);
+            array_push($models, $model_key);
         }
 
         $admin_meta=["vendor_id"=>null, "branch"=>null, "assigned_module"=>null];
@@ -251,7 +251,7 @@ class OrganisationController extends Controller
         }
 
         $zones = [];
-        foreach($data['city'] as $city) {
+        foreach($data['cities'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id = $id;
             $oc->city_id = $city;

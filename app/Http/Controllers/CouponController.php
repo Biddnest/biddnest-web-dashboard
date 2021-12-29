@@ -12,6 +12,7 @@ use App\Helper;
 use App\Models\Booking;
 use App\Models\CityZone;
 use App\Models\Coupon;
+use App\Models\CouponCity;
 use App\Models\CouponOrganization;
 use App\Models\CouponUser;
 use App\Models\CouponZone;

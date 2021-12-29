@@ -62,7 +62,7 @@ class OrganisationController extends Controller
         /*Rejected columns - to be removed in future updates. No more needed.*/
         $organizations->lat = 0;
         $organizations->lng = 0;
-        $organizations->zone_id =0;
+        $organizations->zone_id = null;
         /*End rejected columns*/
 
         $organizations->pincode =$data['address']['pincode'];
@@ -151,9 +151,11 @@ class OrganisationController extends Controller
         $organizations->phone=$data['phone']['primary'];
         $organizations->org_name=$data['organization']['org_name'];
         $organizations->org_type=$data['organization']['org_type'];
+
         $organizations->lat =0;
         $organizations->lng =0;
         $organizations->zone_id =null;
+
         $organizations->pincode =$data['address']['pincode'];
         $organizations->city =$data['address']['city'];
         $organizations->state =$data['address']['state'];
@@ -222,11 +224,12 @@ class OrganisationController extends Controller
             "phone"=>$data['phone']['primary'],
             "org_name"=>$data['organization']['org_name'],
             "org_type"=>$data['organization']['org_type'],
-          /*  "lat"=>$data['address']['lat'],
-            "lng"=>$data['address']['lng'],*/
+
+
             "lat"=>0,
             "lng"=>0,
-            "zone_id"=>$data['zone'],
+            "zone_id"=>null,
+
             "pincode"=>$data['address']['pincode'],
             "city"=>$data['address']['city'],
             "state"=>$data['address']['state'],
@@ -245,6 +248,21 @@ class OrganisationController extends Controller
             $service->organization_id=$id;
             $service->service_id =$value;
             $result_service = $service->save();
+        }
+
+        $zones = [];
+        foreach($data['city'] as $city) {
+            $oc=new OrganizationCity();
+            $oc->organization_id = $id;
+            $oc->city_id = $city;
+            $result_oc= $oc->save();
+
+            foreach(CityZone::where("city_id",$city)->pluck("zone_id") as $zone_id){
+                $oz = new OrganizationZone();
+                $oz->organization_id = $id;
+                $oz->zone_id = $zone_id;
+                $result_oz = $oz->save();
+            }
         }
 
         $vendor_result =Vendor::where(["id"=>$vendor_id, "organization_id"=>$id])

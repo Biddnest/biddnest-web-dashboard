@@ -2369,3 +2369,41 @@ $("body").on('keydown', ".alpha", function(event) {
         (event.keyCode > 34 && event.keyCode < 40)||
         (event.keyCode == 46));
 });
+
+
+$("body").on('click', ".pagination a", function(event) {
+
+        let url = window.location.href;
+
+    if(url.indexOf("=") >= 0){
+        Logger.info("Navigating Page");
+
+        let next_url = $(this).attr("href");
+
+        let qs = url.substring(url.indexOf('?') + 1).split('&');
+        let ss = next_url.substring(url.indexOf('?') + 1).split('&');
+
+        let result = {}, result2 = {}
+        for (let i = 0; i < qs.length; i++) {
+            qs[i] = qs[i].split('=');
+            result[qs[i][0]] = decodeURIComponent(qs[i][1]);
+        }
+
+        delete result.page;
+
+        for (let j = 0; j < ss.length; j++) {
+            ss[j] = ss[j].split('=');
+            result2[ss[j][0]] = decodeURIComponent(ss[j][1]);
+        }
+
+        let params = {
+            ...result,
+            ...result2
+        };
+
+        redirectTo(`${window.location.origin}${window.location.pathname}?${new URLSearchParams(params).toString()}`);
+
+        return false;
+    }
+});
+

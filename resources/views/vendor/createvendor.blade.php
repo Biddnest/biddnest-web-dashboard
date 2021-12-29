@@ -225,11 +225,11 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Zone</label>
-                                            <select class="form-control br-5" name="zone" required>
+                                            <label class="full-name">Cities</label>
+                                            <select id="role" name="cities[]" class="form-control select-box" multiple>
                                                 <option value="">--Select--</option>
-                                                @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                    <option value="{{$zone->id}}">{{$zone->name}}</option>
+                                                @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                                    <option value="{{$city->id}}">{{$city->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid Zone</span>

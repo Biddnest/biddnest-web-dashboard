@@ -207,10 +207,16 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Zone</label>
-                                            <select  class="form-control br-5" name="zone" required>
+                                            <select id="role" name="cities[]" class="form-control select-box" multiple>
                                                 <option value="">--Select--</option>
-                                                @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                    <option value="{{$zone->id}}" @if($zone->id == ($organization->zone_id ?? '')) selected @endif>{{$zone->name}}</option>
+                                                @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                                    <option value="{{$city->id}}"
+                                                            @if($organization && $organization->cities)
+                                                            @foreach($organization->cities as $admin_cities)
+                                                            @if($admin_cities->city_id == $city->id) selected @endif
+                                                        @endforeach
+                                                        @endif
+                                                    >{{$city->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid Zone</span>

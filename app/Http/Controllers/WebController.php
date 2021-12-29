@@ -977,12 +977,12 @@ class WebController extends Controller
     {
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('vendor.createvendor', ['services'=>$services, 'subservices'=>$subservices]);
+        return view('vendor.createvendor', ['services'=>$services, 'subservices'=>$subservices, 'cities'=>City::get()]);
     }
 
     public function onbaordEdit(Request  $request)
     {
-        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('admin')->with('services')->first();
+        $organization = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('admin')->with('services')->with("cities")->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         return view('vendor.editonboard', ['id'=>$request->id, 'services'=>$services, 'organization'=>$organization]);
     }

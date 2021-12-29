@@ -69,4 +69,8 @@ class Organization extends Model
     public function subservicePrice(){
         return $this->hasMany(SubservicePrice::class);
     }
+
+    public function cities(){
+        return $this->hasManyThrough(City::class, OrganizationCity::class, 'organization_id', 'id','id', 'city_id');
+    }
 }

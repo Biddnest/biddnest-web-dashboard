@@ -1314,8 +1314,12 @@ class WebController extends Controller
 
     public function createZones(Request $request)
     {
+
+        $all_zones = Zone::with("coordinates")->get();
         $zone = Zone::where('id',$request->id)->first();
         $cities = City::where(["deleted"=>CommonEnums::$NO, "status"=>CommonEnums::$YES])->get();
+
+
         return view('zones.createzones', ['zones'=>$zone, 'cities'=>$cities]);
     }
 

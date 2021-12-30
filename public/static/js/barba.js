@@ -36,6 +36,7 @@ function changeMenu(){
 import {
     initCountdown,
     initMapPicker,
+    initZoneMap,
     initAllSelectBoxes,
     initSlick,
     initTextAreaEditor,
@@ -95,6 +96,7 @@ barba.hooks.after((data) => {
     initCountdown();
 
     initMapPicker();
+    initZoneMap();
     initDatePicker();
     initDateBookPicker();
     initPopUp();
@@ -114,6 +116,7 @@ barba.hooks.after((data) => {
     initTextAreaEditor();
     initSortable();
     initInventoryDropzone();
+
             // return false;
 });
 
@@ -122,6 +125,7 @@ changeMenu();
 // loadRevenueChart();
 $(document).ready(function(){
     initMapPicker();
+    initZoneMap();
     initAllSelectBoxes();
     initSlick();
     initCountdown();
@@ -142,5 +146,6 @@ $(document).ready(function(){
     initSortable();
     initBarChart();
     initInventoryDropzone();
+
 });
 

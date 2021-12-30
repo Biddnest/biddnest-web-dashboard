@@ -763,8 +763,9 @@ class Route extends Controller
     {
         $validation = Validator::make($request->all(),[
             'name'=>'required|string',
-            'lat'=>'required|numeric',
-            'lng'=>'required|numeric',
+//            'lat'=>'required|numeric',
+//            'lng'=>'required|numeric',
+            'coordinates'=>'required|string',
             'city'=>'required|integer',
             'district'=>'required|string',
             'service_radius'=>'required|numeric',
@@ -775,7 +776,20 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ZoneController::add($request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area,  $request->service_radius);
+        $coordinate_grp = explode(",",$request->coordinates);
+
+        $final_coords = [];
+        foreach ($coordinate_grp as $coordinates){
+        $final_coords[]['latitude'] = explode("explode",str_replace(
+            array('(',')'), array('',''),
+            $coordinates))[0];
+
+        $final_coords[]['longitude'] = explode("explode",str_replace(
+            array('(',')'), array('',''),
+            $coordinates))[1];
+        }
+
+        return ZoneController::add($request->name, $final_coords, $request->city, $request->district, $request->state, $request->area);
     }
 
     public function zones_edit(Request $request)
@@ -783,8 +797,9 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id'=>'required',
             'name'=>'required|string',
-            'lat'=>'required|numeric',
-            'lng'=>'required|numeric',
+//            'lat'=>'required|numeric',
+//            'lng'=>'required|numeric',
+            'coordinates'=>'required|string',
             'city'=>'required|integer',
             'district'=>'required|string',
             'service_radius'=>'required|numeric',
@@ -792,10 +807,23 @@ class Route extends Controller
             'area'=>'required'
         ]);
 
+        $coordinate_grp = explode(",",$request->coordinates);
+
+        $final_coords = [];
+        foreach ($coordinate_grp as $coordinates){
+            $final_coords[]['latitude'] = explode("explode",str_replace(
+                array('(',')'), array('',''),
+                $coordinates))[0];
+
+            $final_coords[]['longitude'] = explode("explode",str_replace(
+                array('(',')'), array('',''),
+                $coordinates))[1];
+        }
+
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        return ZoneController::update($request->id, $request->name, $request->lat, $request->lng, $request->city, $request->district, $request->state, $request->area,  $request->service_radius);
+        return ZoneController::update($request->id, $request->name, $final_coords, $request->city, $request->district, $request->state, $request->area);
     }
 
     public function zone_status_update(Request $request)
@@ -1652,6 +1680,11 @@ class Route extends Controller
     public function cities_delete(Request $request)
     {
         return CityController::deleteCity($request->id);
+    }
+
+    public function getAllZones(Request $request)
+    {
+        return ZoneController::get();
     }
 
 }

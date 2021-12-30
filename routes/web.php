@@ -212,6 +212,11 @@ Route::prefix('web/api')->group(function () {
     Route::put('/voucher/edit',[Router::class,'voucherEdit'])->name("api.voucher.edit");
     Route::delete('/voucher/delete/{id}',[Router::class,'voucherDelete'])->name("api.voucher.delete");
 
+    /*internal routes used by Ajax Services*/
+
+//        getAllZones
+    Route::get('/internal/fetch-zones',[Router::class,'getAllZones'])->name("internal.zones.get");
+
     /*vendor web apis start*/
     Route::prefix('vendor')->group(function () {
         Route::prefix('auth')->group(function () {

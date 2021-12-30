@@ -13,4 +13,8 @@ class Zone extends Model
     public function city(){
         return $this->belongsTo(City::class);
     }
+
+    public function coordinates(){
+        return $this->hasMany(ZoneCoordinate::class);
+    }
 }

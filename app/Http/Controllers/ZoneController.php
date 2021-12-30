@@ -10,19 +10,25 @@ use App\Models\AdminZone;
 use App\Models\Zone;
 use App\Models\City;
 use App\Models\CityZone;
+use App\Models\ZoneCoordinate;
 
 class ZoneController extends Controller
 {
 
-    public static function get(){
-        $zones=Zone::where("deleted",CommonEnums::$NO)->where("status",CommonEnums::$YES)->get();
-        return Helper::response(true, "zone shows successfully", ['zones'=>$zones]);
+    public static function get($ignore_status = false){
+        $zones=Zone::where("deleted",CommonEnums::$NO);
+
+        if(!$ignore_status)
+            $zones->where("status",CommonEnums::$YES);
+
+
+        return Helper::response(true, "zone shows successfully", ['zones'=>$zones->with("coordinates")->get()]);
     }
     public static function getOne($id){
         return Zone::where("deleted",CommonEnums::$NO)->findOrFail($id);
     }
 
-    public static function add($name, $lat, $lng, $city, $district, $state, $area, $radius){
+    public static function add($name, $coords, $city, $district, $state, $area){
         $exists = Zone::where("name", $name)->first();
 
         if($exists)
@@ -30,15 +36,22 @@ class ZoneController extends Controller
 
         $zone = new Zone();
         $zone->name = ucwords($name);
-        $zone->lat = $lat;
-        $zone->lng = $lng;
-        $zone->service_radius =10;
+        $zone->lat = 0;
+        $zone->lng = 0;
+        $zone->service_radius = 0;
         $zone->area = json_encode($area);
         $zone->city_id = $city;
         $zone->district = $district;
-        $zone->service_radius = $radius;
         $zone->state = $state;
         $result= $zone->save();
+
+        foreach ($coords as $cor){
+            $zc = new ZoneCoordinate();
+            $zc->zone_id = $zone->id;
+            $zc->lat = $cor['latitude'];
+            $zc->lng = $cor['longitude'];
+            $zc->save();
+        }
 
         $admins=Admin::where("role", AdminEnums::$ROLES['admin'])->pluck('id');
         foreach($admins as $admin){
@@ -54,7 +67,7 @@ class ZoneController extends Controller
         return Helper::response(true,"Zone save Successfully",["zone"=>Zone::findOrFail($zone->id)]);
     }
 
-    public static function update($id, $name, $lat, $lng, $city, $district, $state, $area, $radius)
+    public static function update($id, $name, $coords, $city, $district, $state, $area)
     {
         $exist =Zone::where(['id'=>$id, "deleted"=>CommonEnums::$NO])->first();
         if(!$exist)
@@ -63,14 +76,26 @@ class ZoneController extends Controller
         $zone_update=Zone::where('id', $id)
             ->update([
                 "name"=>$name,
-                "lat"=>$lat,
-                "lng"=>$lng,
+                "lat"=>0,
+                "lng"=>0,
                 "area"=>json_encode($area),
                 "city_id"=>$city,
                 "district"=>$district,
-                "service_radius"=>$radius,
+                "service_radius"=>0,
                 "state"=>$state
             ]);
+
+
+        ZoneCoordinate::where("zone_id",$id)->delete();
+
+        foreach ($coords as $cor){
+            $zc = new ZoneCoordinate();
+            $zc->zone_id = $id;
+            $zc->lat = $cor['latitude'];
+            $zc->lng = $cor['longitude'];
+            $zc->save();
+        }
+
 
         if(!$zone_update)
             return Helper::response(false, "Couldn't update zone");

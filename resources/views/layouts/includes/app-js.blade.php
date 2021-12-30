@@ -37,7 +37,7 @@ crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
 
 
-<script type="text/javascript" src='https://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=places'></script>
+<script type="text/javascript" src='https://maps.google.com/maps/api/js?&key={{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}&sensor=false&libraries=drawing,places&v=3.45.8'></script>
 <script src="{{ asset('static/js/locationpicker.jquery.js')}}"></script>
 
 <script src="{{ asset('static/js/jQuery.tagify.min.js')}}"></script>
@@ -87,6 +87,7 @@ crossorigin="anonymous"></script>
     const API_SEARCH_ADMIN = '{{route('search_admin')}}';
     const API_SEARCH_ITEM = '{{route('search_inventory')}}';
     const API_SEARCH_ORDER = '{{route('search_order')}}';
+    const API_FETCH_ZONES = '{{route('internal.zones.get')}}';
     const API_google_key = '{{json_decode(\App\Models\Settings::where('key','google_api_key')->pluck('value'),true)[0]}}';
 
     @if (\Illuminate\Support\Facades\Session::has('redirect'))

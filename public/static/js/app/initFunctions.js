@@ -333,7 +333,7 @@ export function initZoneMap(){
                        infoWindow.open(map);
 
                        if(current_id == zone.id)
-                       map.setCenter(poly_bounds.getCenter());
+                        map.setCenter(poly_bounds.getCenter());
                    // });
 
                });
@@ -702,8 +702,6 @@ export function initRevenueChart() {
                             'rgba(45,43,135,1)',
                             'rgba(45,43,135,1)',
                             'rgba(45,43,135,1)',
-
-
                         ],
                         borderWidth: 1
                     },

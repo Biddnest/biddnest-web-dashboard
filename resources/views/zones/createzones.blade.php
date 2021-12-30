@@ -61,11 +61,22 @@
                         <div style="width: 100%; height: 280px;" class="zone-map" id="zone-map"></div>
                         <br />
                     </div>
+                        @php $cg = []; @endphp
+                        @if($zones)
+                        @php
+
+
+                        foreach($zones->coordinates as $coords){
+                                $cg[] = "({$coords->lat}, {$coords->lng})";
+                        }
+                        @endphp
+                        @endif
+
 
                         <div class="col-sm-12">
                             <div class="form-input">
                                 <label class="latitude">Coordinates</label>
-                                <input type="text" placeholder="Mark area on map to generate coordinates" name="coordinates" id="zone-coords" value="@if($zones){{$zones->lat}}@endif" class="form-control no-richtext" required readonly />
+                                <input type="text" placeholder="Mark area on map to generate coordinates" name="coordinates" id="zone-coords" class="form-control no-richtext" required readonly value="{{$cg ? implode(',',$cg) : ''}}" required data-parsley-error-message="Please plot a map location on the map." />
                                 <span class="error-message">Please enter valid Latitide</span>
                             </div>
                         </div>
@@ -170,10 +181,11 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                        {{--Following input field is depricated.--}}
+                    <div class="col-sm-6 hidden">
                         <div class="form-input">
                             <label class="district">Service Radius</label>
-                            <input type="number"  placeholder="10" id="district" name="service_radius" value="@if($zones){{$zones->service_radius}}@endif" class="form-control" required>
+                            <input type="number"  placeholder="10" id="district" name="service_radius" value="0" class="form-control" required>
                             <span class="error-message">Please enter valid Service Radius </span>
                         </div>
                     </div>

@@ -213,15 +213,15 @@
                         <ul class="header-controls d-flex flex-row justify-content-end">
                             <li class="settings-icon drpdwn chart-filter"><a href="#">@if(request()->period == 'monthly')
                                         Monthly
-                                    @elseif(request()->period == 'quaterly')
+                                    @elseif(request()->period == 'quarterly')
                                         Quaterly
                                     @else
                                         Weekly
                                     @endif</a>
                                 <div class="dropdown settings" style="height: auto; width: 200% !important;">
                                     <ul>
-                                        <li style="cursor: pointer;"><a href="{{route(''vendor.dashboard')}}?period=monthly">Monthly</a></li>
-                                        <li style="cursor: pointer;"><a href="{{route(''vendor.dashboard')}}?period=quarterly">Quarterly</a></li>
+                                        <li style="cursor: pointer;"><a href="{{route('vendor.dashboard')}}?period=monthly">Monthly</a></li>
+                                        <li style="cursor: pointer;"><a href="{{route('vendor.dashboard')}}?period=quarterly">Quarterly</a></li>
                                     </ul>
                                 </div>
                             </li>

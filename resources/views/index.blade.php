@@ -338,7 +338,7 @@
                                 <ul class="header-controls d-flex flex-row justify-content-end">
                                     <li class="settings-icon drpdwn chart-filter"><a href="#">@if(request()->period == 'monthly')
                                                 Monthly
-                                            @elseif(request()->period == 'quaterly')
+                                            @elseif(request()->period == 'quarterly')
                                                 Quaterly
                                             @else
                                                 Weekly

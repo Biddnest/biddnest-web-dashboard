@@ -18,8 +18,8 @@ class CreateZoneCordinatesTable extends Migration
             $table->unsignedBigInteger("zone_id");
             $table->foreign("zone_id")->references("id")->on("zones");
 
-            $table->decimal("lat",20,20);
-            $table->decimal("lng",20,20);
+            $table->double("lat");
+            $table->double("lng");
 
             $table->timestamps();
         });

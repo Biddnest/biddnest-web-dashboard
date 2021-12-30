@@ -776,19 +776,24 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
 
-        $coordinate_grp = explode(",",$request->coordinates);
+        $coordinate_grp = str_replace(
+            array('(',')'), array('[','] '),
+            $request->coordinates);
+
+        $coordinate = explode(" ,",$coordinate_grp);
 
         $final_coords = [];
-        foreach ($coordinate_grp as $coordinates){
-        $final_coords[]['latitude'] = explode("explode",str_replace(
-            array('(',')'), array('',''),
+        $count = 0;
+        foreach ($coordinate as $coordinates){
+            $final_coords[$count]['latitude'] = explode(",",str_replace(
+            array('[',']'), array('',''),
             $coordinates))[0];
 
-        $final_coords[]['longitude'] = explode("explode",str_replace(
-            array('(',')'), array('',''),
+           $final_coords[$count]['longitude'] = explode(",",str_replace(
+                array('[',']'), array('',''),
             $coordinates))[1];
+            $count ++;
         }
-
         return ZoneController::add($request->name, $final_coords, $request->city, $request->district, $request->state, $request->area);
     }
 
@@ -807,17 +812,23 @@ class Route extends Controller
             'area'=>'required'
         ]);
 
-        $coordinate_grp = explode(",",$request->coordinates);
+        $coordinate_grp = str_replace(
+            array('(',')'), array('[','] '),
+            $request->coordinates);
+
+        $coordinate = explode(" ,",$coordinate_grp);
 
         $final_coords = [];
-        foreach ($coordinate_grp as $coordinates){
-            $final_coords[]['latitude'] = explode("explode",str_replace(
-                array('(',')'), array('',''),
+        $count = 0;
+        foreach ($coordinate as $coordinates){
+            $final_coords[$count]['latitude'] = explode(",",str_replace(
+                array('[',']'), array('',''),
                 $coordinates))[0];
 
-            $final_coords[]['longitude'] = explode("explode",str_replace(
-                array('(',')'), array('',''),
+            $final_coords[$count]['longitude'] = explode(",",str_replace(
+                array('[',']'), array('',''),
                 $coordinates))[1];
+            $count ++;
         }
 
         if($validation->fails())

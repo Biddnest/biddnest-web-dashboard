@@ -35,27 +35,56 @@ class GeoController extends Controller
         return (double)$kms;
     }
 
-    public static function getNearestZone($lat, $lng){
+    /*public static function getNearestZone($lat, $lng){
         $zone_id = 0;
         $distance = 10000;
 
-        foreach (Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get() as $zone){
+        foreach (Zone::where("status", CommonEnums::$YES)->get() as $zone){
             $tempDis  = self::distance($lat, $lng, $zone->lat,$zone->lng);
             $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
             $distance =$tempDis;
         }
         return $zone_id;
+    }*/
+
+    public static function getNearestZone($lat, $lng){
+        foreach (Zone::where("status", CommonEnums::$YES)->with("coordinates")->get() as $zone){
+
+            $cord_set = [];
+            foreach($zone->coordinates as $cords){
+                $cord_set[] = [$cords->lat, $cords->lng];
+            }
+
+            if(count($cord_set)){
+                $polygon = new \PolygonEngine($cord_set);
+                if($polygon->isCrossesWith($lat, $lng))
+                    return $zone->id;
+            }
+        }
     }
 
     public static function isServiceable($lat, $lng){
 
         $serviceable = false;
-        $activeZones = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $activeZones = Zone::where("status", CommonEnums::$YES)->with("coordinates")->get();
 
         foreach ( $activeZones as $zone){
-                $tempDis = self::distance($lat, $lng, $zone['lat'], $zone['lng']);
-                if ((double)$tempDis <= (double)$zone['service_radius'])
+
+            $cord_set = [];
+            foreach($zone->coordinates as $cords){
+                $cord_set[] = [$cords->lat, $cords->lng];
+            }
+
+            if(count($cord_set)){
+                $polygon = new \PolygonEngine($cord_set);
+                if($polygon->isCrossesWith($lat, $lng))
                     return $serviceable = true;
+            }
+
+                /*$tempDis = self::distance($lat, $lng, $zone['lat'], $zone['lng']);
+                if ((double)$tempDis <= (double)$zone['service_radius'])
+                    return $serviceable = true;*/
+
         }
         return $serviceable;
     }

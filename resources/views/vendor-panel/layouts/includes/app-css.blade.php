@@ -131,7 +131,7 @@
         border-top-color: #2e0789 !important;
     }
 
-    select {
+    select, .drpdwn {
             -webkit-appearance: none !important;
             -moz-appearance: none !important;
             background: transparent !important;
@@ -296,5 +296,14 @@
         font-size: 14px;
         min-height: 34px;
         border-radius: 5px;
+    }
+
+    .chart-filter{
+        height: 30px;
+        width: 100%;
+        font-size: 14px;
+        padding-top: 6px;
+        background-position-y: 5px !important;
+        padding-right: 20px !important;
     }
 </style>

@@ -7,6 +7,7 @@ use Craftsys\Msg91\Exceptions\ValidationException;
 use Craftsys\Msg91\Facade\Msg91;
 use Exception;
 use App\Models\Settings;
+use App\Models\Booking;
 use App\Enums\SmsEnums;
 
 class Sms
@@ -49,7 +50,7 @@ class Sms
 
     public static function sendFinalQuote($phone, $enquiryid, $paymenturl){
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['enquiry_received'])->variable(['enquiryid'=>$enquiryid, 'paymenturl'=>$paymenturl])->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['finalquote_ready'])->variable(['enquiryid'=>$enquiryid, 'paymenturl'=>$paymenturl])->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {
@@ -61,7 +62,7 @@ class Sms
 
     public static function sendBookingConfirm($phone, $movementdate, $vendorname){
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['enquiry_received'])->variable(['movementdate'=>$movementdate, 'vendorname'=>$vendorname])->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['booking_confirm'])->variable(['bookingdate'=>$movementdate, 'vendorname'=>$vendorname])->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {
@@ -73,7 +74,7 @@ class Sms
 
     public static function sendDriverAssign($phone, $drivername, $driverphone, $movementdate){
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['enquiry_received'])->variable(['drivername'=>$drivername, 'driverphone'=>$driverphone, 'movementdate'=>$movementdate])->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['driver_assign'])->variable(['drivername'=>$drivername, 'driverphone'=>$driverphone, 'movementdate'=>$movementdate])->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {
@@ -85,7 +86,7 @@ class Sms
 
     public static function sendTripStart($phone, $bookingid, $drivername, $driverphone){
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['enquiry_received'])->variable(['bookingid'=>$bookingid, 'drivername'=>$drivername, 'driverphone'=>$driverphone])->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['trip_start'])->variable(['bookingid'=>$bookingid, 'drivername'=>$drivername, 'driverphone'=>$driverphone])->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {
@@ -97,7 +98,7 @@ class Sms
 
     public static function sendOrderComplete($phone, $playstoreurl){
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['enquiry_received'])->variable('playstoreurl', $playstoreurl)->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['order_complete'])->variable('playstoreurl', $playstoreurl)->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {
@@ -109,7 +110,7 @@ class Sms
 
     public static function sendReferalLink($phone, $playstoreurl){
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['enquiry_received'])->variable('playstoreurl', $playstoreurl)->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['app_share'])->variable('storeurl', $playstoreurl)->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {
@@ -120,8 +121,20 @@ class Sms
     }
 
     public static function sendOrderDetails($phone, $bookingid, $orderdetailurl){
+        $booking =Booking::where("public_booking_id", $bookingid)->with('organization')->first();
         try {
-            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['order_details'])->variable(['bookingid'=>$bookingid, 'orderdetailurl'=>$orderdetailurl])->send();
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['booking_confirm'])->variable(['bookingdate'=>$movementdate, 'vendorname'=>$vendorname])->send();
+        } catch (ValidationException $e) {
+            return [false, "error" => $e->getMessage()];
+        } catch (ResponseErrorException $e) {
+            return [false, "error" => $e->getMessage()];
+        } catch (Exception $e) {
+            return [false, "error" => $e->getMessage()];
+        }
+    }
+    public static function sendOrderCancel($phone, $reason){
+        try {
+            return Msg91::sms()->to('91'.$phone)->flow(SmsEnums::$TEMPLATES['order_cancel'])->variable(['reason'=>$reason])->send();
         } catch (ValidationException $e) {
             return [false, "error" => $e->getMessage()];
         } catch (ResponseErrorException $e) {

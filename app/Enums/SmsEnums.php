@@ -11,5 +11,5 @@ class SmsEnums{
                                 "trip_start"=>"61bc508730ef1f3a8d414ed3",
                                 "order_complete"=>"61bc511a1c45fa24bc4a4333",
                                 "app_share"=>"",
-                                "order_details"=>""];
+                                "order_cancel"=>""];
 }

@@ -39,7 +39,7 @@ class GeoController extends Controller
         $zone_id = 0;
         $distance = 10000;
 
-        foreach (Zone::where("status", CommonEnums::$YES)->get() as $zone){
+        foreach (Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get() as $zone){
             $tempDis  = self::distance($lat, $lng, $zone->lat,$zone->lng);
             $zone_id = $tempDis < $distance ? $zone->id : $zone_id;
             $distance =$tempDis;
@@ -50,7 +50,7 @@ class GeoController extends Controller
     public static function isServiceable($lat, $lng){
 
         $serviceable = false;
-        $activeZones = Zone::where("status", CommonEnums::$YES)->get();
+        $activeZones = Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
 
         foreach ( $activeZones as $zone){
                 $tempDis = self::distance($lat, $lng, $zone['lat'], $zone['lng']);

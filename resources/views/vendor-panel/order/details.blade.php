@@ -109,6 +109,25 @@
                                     <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Complete</a>
                                     </li>--}}
+                                @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'])))
+                                    {{-- <li class="nav-item">
+                                         <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">My Quote</a>
+                                     </li>--}}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " id="requirments-tab" href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">Driver Details</a>
+                                    </li>
+                                    {{-- <li class="nav-item">
+                                         <a class="nav-link disabled" id="requirments-tab" href="#">In Transit</a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a class="nav-link disabled" id="requirments-tab" href="#">Complete</a>
+                                     </li>--}}
 
                                 @elseif($booking->bid->status = \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['in_transit'])
                                    {{-- <li class="nav-item">

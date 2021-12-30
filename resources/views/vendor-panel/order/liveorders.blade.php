@@ -327,7 +327,7 @@
                                                         @break
 
                                                         @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
-                                                        <a href="{{route('vendor.in-transit', ['id'=>$booking->public_booking_id])}}">
+                                                        <a href="{{route('vendor.detailsbookings', ['id'=>$booking->public_booking_id])}}">
                                                             <i class="tooltip-trigger">
                                                                 <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}"
                                                                      alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">

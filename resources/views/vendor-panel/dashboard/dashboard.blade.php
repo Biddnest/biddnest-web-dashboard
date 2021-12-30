@@ -214,7 +214,7 @@
                             <li class="settings-icon drpdwn chart-filter"><a href="#">@if(request()->period == 'monthly')
                                         Monthly
                                     @elseif(request()->period == 'quarterly')
-                                        Quaterly
+                                        Quarterly
                                     @else
                                         Weekly
                                     @endif</a>

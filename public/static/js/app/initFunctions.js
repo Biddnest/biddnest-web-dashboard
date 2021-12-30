@@ -285,6 +285,60 @@ export function initZoneMap(){
 
         $.get(API_FETCH_ZONES, function(response){
            Logger.info(response);
+
+           if(response.status == "success"){
+               let i = 0;
+               response.data.zones.map((zone)=>{
+
+                   let current_id = false;
+                   if($("#zone_id").length)
+                    current_id = $("#zone_id").val();
+
+                   let poly_bounds = new google.maps.LatLngBounds();
+                   let polygonCoords = [];
+
+                   for(let k = 0; k < zone.coordinates.length; k++){
+                       polygonCoords.push(new google.maps.LatLng(zone.coordinates[k]['lat'], zone.coordinates[k]['lng']));
+                   }
+
+                   Logger.info("Poly cord object",polygonCoords);
+
+                   for (let j = 0; j < polygonCoords.length; j++) {
+                       poly_bounds.extend(polygonCoords[j]);
+
+
+                   }
+
+                   polygons.push(new google.maps.Polygon({
+                       paths: zone.coordinates,
+                       strokeColor: current_id == zone.id ? "#2E0789" : "#d2ac25",
+                       strokeOpacity: 0.8,
+                       strokeWeight: 2,
+                       fillColor: current_id == zone.id ? "#9266fd" : "#fdc403",
+                       fillOpacity: 0.1,
+                       // draggable: current_id == zone.id ? true : false,
+                       editable: current_id == zone.id ? true : false,
+                       zIndex: current_id == zone.id ? 9999 : 99,
+
+                   }));
+                   polygons[i].setMap(map);
+                   i++;
+
+                   let infoWindow = new google.maps.InfoWindow({});
+
+                   // google.maps.event.addListener(polygon, 'mouseover', function (e) {
+                       infoWindow.setContent(zone.name);
+                       // let latLng = e.latLng;
+                       infoWindow.setPosition(poly_bounds.getCenter());
+                       infoWindow.open(map);
+
+                       if(current_id == zone.id)
+                       map.setCenter(poly_bounds.getCenter());
+                   // });
+
+               });
+           }
+
         });
 
     }

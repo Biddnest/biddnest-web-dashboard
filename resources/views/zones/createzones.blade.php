@@ -50,7 +50,7 @@
                   class="form-new-order" id="myForm" data-parsley-validate >
                 <div class="d-flex  row  m-20  p-20" >
                     @if($zones)
-                        <input type="hidden" value="{{$zones->id}}" name="id">
+                        <input type="hidden" value="{{$zones->id}}" name="id" id="zone_id">
                     @endif
                     <div class="col-sm-12">
                         <div class="form-input">

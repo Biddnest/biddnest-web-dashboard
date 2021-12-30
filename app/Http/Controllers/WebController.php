@@ -53,6 +53,7 @@ use App\Models\City;
 use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
 use App\Models\MovementDates;
+use App\Models\OrganizationZone;
 use Bavix\Wallet\Models\Transaction;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -124,9 +125,8 @@ class WebController extends Controller
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $count_orders->where('virtual_assistant_id', Session::get('account')['id']);
 
-
-
-        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("zone_id",$zone)->count();
+        $id_org_zone = OrganizationZone :: whereIn("zone_id", $zone)->groupBy("organization_id")->pluck('organization_id');
+        $count_vendors=Organization::where(['status'=>OrganizationEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->whereIn("id",$id_org_zone)->count();
         $count_users=User::where(['status'=>UserEnums::$STATUS['active'], 'deleted'=>CommonEnums::$NO])->count();
 
         $count_zones=Zone::where(['status'=>CommonEnums::$YES, 'deleted'=>CommonEnums::$NO])->whereIn("id",$zone)->count();
@@ -135,7 +135,6 @@ class WebController extends Controller
 
         if(Session::get('user_role') == AdminEnums::$ROLES['virtual_assistant'])
             $count_live_orders->where('virtual_assistant_id', Session::get('account')['id']);
-
 
 
         $dataset = [];
@@ -855,7 +854,9 @@ class WebController extends Controller
 
         $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
 
-        $vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+        $id_org_zone = OrganizationZone :: whereIn("zone_id", $zone)->groupBy("organization_id")->pluck('organization_id');
+
+        $vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone);
 
         if(isset($request->search)){
             $vendors->where('org_name', 'like', "%".$request->search."%");
@@ -884,15 +885,15 @@ class WebController extends Controller
 
         $vendors->with('admin');
 
-        $count_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone)->count();
 
-        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "status"=>OrganizationEnums::$STATUS['pending_approval'], "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_verified_vendors = Organization::where(["deleted"=>CommonEnums::$NO, "status"=>OrganizationEnums::$STATUS['pending_approval'], "parent_org_id"=>null])->whereIn("id", $id_org_zone)->count();
 
-        $count_active_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_active_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['active'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone)->count();
 
-        $count_lead_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['lead'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_lead_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['lead'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone)->count();
 
-        $count_suspended_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['suspended'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone)->count();
+        $count_suspended_vendors = Organization::where(["status"=>OrganizationEnums::$STATUS['suspended'], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone)->count();
 
 //        return $vendors->paginate(CommonEnums::$PAGE_LENGTH);
         return view('vendor.vendor',[
@@ -1064,8 +1065,9 @@ class WebController extends Controller
             $city = Session::get('admin_cities');
 
         $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
+        $id_org_zone = OrganizationZone :: whereIn("zone_id", $zone)->groupBy("organization_id")->pluck('organization_id');
 
-        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+        $leads = Organization::where(["status"=>OrganizationEnums::$STATUS["lead"], "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone);
             if(isset($request->search)){
                 $leads=$leads->where('org_name', 'like', "%".$request->search."%");
             }
@@ -1087,8 +1089,9 @@ class WebController extends Controller
             $city = Session::get('admin_cities');
 
         $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
+        $id_org_zone = OrganizationZone :: whereIn("zone_id", $zone)->groupBy("organization_id")->pluck('organization_id');
 
-        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("zone_id", $zone);
+        $vendors = Organization::where(["verification_status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO, "parent_org_id"=>null])->whereIn("id", $id_org_zone);
             if(isset($request->search)){
                 $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
             }
@@ -1560,8 +1563,9 @@ class WebController extends Controller
             $city = Session::get('admin_cities');
 
         $zone = CityZone::whereIn('city_id', $city)->pluck('zone_id');
+        $id_org_zone = OrganizationZone :: whereIn("zone_id", $zone)->groupBy("organization_id")->pluck('organization_id');
 
-        $payout =Payout::whereIn('organization_id', Organization::whereIn("zone_id", $zone)->pluck('id'));
+        $payout =Payout::whereIn('organization_id', Organization::whereIn("id", $id_org_zone)->pluck('id'));
         if(isset($request->search)){
             $payout=$payout->where('public_payout_id', 'like', "%".$request->search."%");
         }
@@ -1595,7 +1599,9 @@ class WebController extends Controller
 
     public function createVendorPayout(Request $request)
     {
-        $organizations =Organization::whereIn('zone_id', Session::get('admin_zones'))->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        $id_org_zone = OrganizationZone :: whereIn("zone_id", Session::get('admin_cities'))->groupBy("organization_id")->pluck('organization_id');
+
+        $organizations =Organization::whereIn('id', $id_org_zone)->orWhere(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $payout =Payout::where('id', $request->id)->first();
         return view('vendorpayout.createpayout', ['payout'=>$payout, 'organizations'=>$organizations]);
     }

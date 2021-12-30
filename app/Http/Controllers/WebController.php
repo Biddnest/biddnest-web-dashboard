@@ -109,7 +109,7 @@ class WebController extends Controller
     }
 
     //index.php
-    public function dashboard()
+    public function dashboard(Request $request)
     {
 
 //        return "hai";
@@ -137,9 +137,18 @@ class WebController extends Controller
             $count_live_orders->where('virtual_assistant_id', Session::get('account')['id']);
 
 
+        $days = 7;
+        if($request->period == "monthly")
+            $days = 30;
+
+        if($request->period == "quaterly")
+            $days = 90;
+
+
         $dataset = [];
-        $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
-        $last_week = CarbonPeriod::create( Carbon::now()->subDays(14)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
+        $this_week = CarbonPeriod::create( Carbon::now()->subDays($days)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
+
+        $last_week = CarbonPeriod::create( Carbon::now()->subDays($days*2)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
 
         $this_week_sale = [];
         $last_week_sale = [];

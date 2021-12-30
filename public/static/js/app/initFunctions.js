@@ -633,7 +633,7 @@ export function initRevenueChart() {
             data: {
                 labels: dataset.revenue.this_week.dates,
                 datasets: [{
-                        label: 'This Week',
+                        label: 'Most Recent',
                         data: dataset.revenue.last_week.sales,
 
                         backgroundColor: [

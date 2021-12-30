@@ -133,7 +133,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
-                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd" class="form-control" name="organization[org_name]" data-parsley-type="alphanum" required>
+                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd" class="form-control alpha number" name="organization[org_name]" required>
                                             <span class="error-message">Please enter valid Organization Name</span>
                                         </div>
                                     </div>

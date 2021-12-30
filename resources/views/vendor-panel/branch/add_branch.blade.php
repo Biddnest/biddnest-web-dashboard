@@ -72,11 +72,23 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-input">
-                                            <label class="full-name">Zone</label>
-                                            <select  class="form-control br-5" name="zone" required>
+                                            <label class="full-name">Cities</label>
+                                            {{--<select  class="form-control br-5" name="zone" required>
                                                 <option value="">--Select--</option>
                                                 @foreach($zones as $zone)
                                                     <option value="{{$zone->id}}" @if($zone->id == ($branch->zone_id ?? '')) selected @endif>{{$zone->name}}</option>
+                                                @endforeach
+                                            </select>--}}
+                                            <select id="role" name="cities[]" class="form-control select-box" multiple>
+                                                <option value="">--Select--</option>
+                                                @foreach($Cities as $city)
+                                                    <option value="{{$city->id}}"
+                                                            @if($branch && $branch->cities)
+                                                            @foreach($branch->cities as $admin_cities)
+                                                            @if($admin_cities->city_id == $city->id) selected @endif
+                                                        @endforeach
+                                                        @endif
+                                                    >{{$city->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="error-message">Please enter valid

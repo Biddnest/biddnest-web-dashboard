@@ -334,11 +334,12 @@ class VendorWebController extends Controller
 
     public function addBranch(Request $request)
     {
-        $branch = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->first();
+        $branch = Organization::where(["id"=>$request->id, "deleted"=>CommonEnums::$NO])->with('services')->with('cities')->first();
         $zones=Zone::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
         $organization = Organization::where(["id"=>Session::get('organization_id'), "deleted"=>CommonEnums::$NO])->first();
         $services = Service::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
-        return view('vendor-panel.branch.add_branch', ['id'=>Session::get('organization_id'), 'services'=>$services, 'organization'=>$organization, 'zones'=>$zones, 'branch'=>$branch]);
+        $Cities = City::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+        return view('vendor-panel.branch.add_branch', ['id'=>Session::get('organization_id'), 'services'=>$services, 'organization'=>$organization, 'zones'=>$zones, 'branch'=>$branch, 'cities'=>$Cities]);
     }
 
     public function serviceRequestAdd()

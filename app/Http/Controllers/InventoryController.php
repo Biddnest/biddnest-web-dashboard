@@ -23,6 +23,7 @@ use App\Models\Organization;
 use App\Models\Service;
 use App\Models\SubserviceInventory;
 use App\Models\BookingOrganizationGeneratedPrice;
+use App\Models\OrganizationZone;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -295,7 +296,8 @@ class InventoryController extends Controller
     public static function generateOrganizationBasePrices($data, $booking_data){
         $output =[];
         $result = [];
-        $vendors = Organization::where("zone_id",$booking_data['zone_id'])
+        $org_zone_id = OrganizationZone::where("zone_id",$booking_data['zone_id'])->groupBy("organization_id")->pluck('organization_id');
+        $vendors = Organization::whereIn("id",$org_zone_id)
             ->where('status',OrganizationEnums::$STATUS['active'])
             ->get();
 

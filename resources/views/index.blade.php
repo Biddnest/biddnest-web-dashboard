@@ -335,7 +335,22 @@
                 <div class="d-flex  card ">
                     <div class="p-10 d-flex justify-content-between ">
                         <h3 class="f-18 mt-0">Revenue Trend</h3>
-
+                                <ul class="header-controls d-flex flex-row justify-content-end">
+                                    <li class="settings-icon drpdwn chart-filter"><a href="#">@if(request()->period == 'monthly')
+                                                Monthly
+                                            @elseif(request()->period == 'quaterly')
+                                                Quaterly
+                                            @else
+                                                Weekly
+                                            @endif</a>
+                                        <div class="dropdown settings" style="height: auto; width: 200% !important;">
+                                            <ul>
+                                                <li style="cursor: pointer;"><a href="{{route('dashboard')}}?period=monthly">Monthly</a></li>
+                                                <li style="cursor: pointer;"><a href="{{route('dashboard')}}?period=quarterly">Quarterly</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
                     </div>
                     <div class="revenue-chart">
                         <canvas id="myRevenueChart" height="230px" width="700px"></canvas>

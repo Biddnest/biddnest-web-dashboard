@@ -68,7 +68,7 @@ class VendorWebController extends Controller
         return view('vendor-panel.dashboard.reset_password', ['vendor'=>$vendor]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $count_live=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereIn('booking_id', Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->pluck('id'))->count();
         $count_ongoing=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
@@ -79,9 +79,16 @@ class VendorWebController extends Controller
 
         $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->latest()->limit(3)->get();
 
+        $days = 7;
+        if($request->period == "monthly")
+            $days = 30;
+
+        if($request->period == "quarterly")
+            $days = 90;
+
         $dataset = [];
-        $this_week = CarbonPeriod::create( Carbon::now()->subDays(7)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
-        $last_week = CarbonPeriod::create( Carbon::now()->subDays(14)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
+        $this_week = CarbonPeriod::create( Carbon::now()->subDays($days)->format("Y-m-d"),Carbon::now()->format("Y-m-d"))->toArray();
+        $last_week = CarbonPeriod::create( Carbon::now()->subDays($days*2)->format("Y-m-d"), Carbon::now()->subDays(7)->format("Y-m-d"))->toArray();
 
         $this_week_sale = [];
         $last_week_sale = [];

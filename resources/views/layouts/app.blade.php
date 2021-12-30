@@ -41,14 +41,12 @@
 
                                 @if(\App\Helper::is('admin') || \App\Helper::is('zone_admin') || \App\Helper::is('marketing'))
                                     <li class="settings-icon"><a href="#"><span class="notification-icon"><i class="icon dripicons-toggles "height="15"></i></span> </a>
-
                                         <div class="dropdown settings" style="height: auto;">
                                             <ul>
                                                 <li><a href="{{route('pages')}}">General Pages</a></li>
                                                 <li><a href="{{route('admin.faq')}}">FAQ</a></li>
                                                 <li><a href="{{route('admin.contact_us')}}">Contact-Us</a></li>
                                                 <li><a href="{{route('api-settings')}}">API Settings</a></li>
-
                                             </ul>
                                         </div>
                                     </li>

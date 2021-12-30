@@ -950,7 +950,7 @@
                 text-decoration-color: #f8c446;
 
             }
-            select {
+            select, .drpdwn {
             -webkit-appearance: none !important;
             -moz-appearance: none !important;
             background: transparent !important;
@@ -1187,5 +1187,14 @@
 
             .fullscreen-modal .select2-dropdown{
                 width: 92% !important;
+            }
+
+            .chart-filter{
+                height: 30px;
+                width: 100%;
+                font-size: 14px;
+                padding-top: 6px;
+                background-position-y: 5px !important;
+                padding-right: 20px !important;
             }
         </style>

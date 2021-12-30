@@ -141,7 +141,7 @@ class WebController extends Controller
         if($request->period == "monthly")
             $days = 30;
 
-        if($request->period == "quaterly")
+        if($request->period == "quarterly")
             $days = 90;
 
 

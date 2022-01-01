@@ -24,6 +24,7 @@ use App\Models\Banners;
 use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\CouponZone;
+use App\Models\CouponCity;
 use App\Models\Faq;
 use App\Models\Inventory;
 use App\Models\InventoryPrice;
@@ -54,6 +55,7 @@ use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
 use App\Models\MovementDates;
 use App\Models\OrganizationZone;
+use App\Models\OrganizationCity;
 use Bavix\Wallet\Models\Transaction;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -875,8 +877,9 @@ class WebController extends Controller
             $vendors->where('status', $request->status);
         }
 
-        if(isset($request->zones)){
-            $vendors->where('zone_id', $request->zones);
+        if(isset($request->cities)){
+            $vendor_ids= OrganizationCity :: where("city_id", $request->cities)->groupBy("organization_id")->pluck('organization_id');
+            $vendors->whereIn('id', $vendor_ids);
         }
         if(isset($request->service)){
             $vendors->where('service_type', $request->service);
@@ -1199,9 +1202,9 @@ class WebController extends Controller
                 $coupons->whereIn("zone_scope", [CouponEnums::$ZONE_SCOPE['all'], CouponEnums::$ZONE_SCOPE['custom']]);
         }
 
-        if(isset($request->zone)){
-            $zones_id = CouponZone::where('zone_id', $request->zone)->pluck('coupon_id');
-            $coupons->whereIn('id', $zones_id);
+        if(isset($request->city)){
+            $cities_id = CouponCity::where('city_id', $request->city)->pluck('coupon_id');
+            $coupons->whereIn('id', $cities_id);
         }
 
         if(isset($request->type)){

@@ -12,7 +12,6 @@
                                 <ul>
                                     <li><a href="{{route('create-push-notification')}}">Push Notification</a></li>
                                     <li><a href="{{route('create-mail-notification')}}">Mail</a></li>
-
                                 </ul>
                             </div>
 
@@ -48,7 +47,7 @@
                                                 <a class="nav-link  p-15" id="live-tab" href="{{ route('push-notification')}}">Push Notifications</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link active p-15" id="past-tab" href="mail-notification" role="tab" aria-controls="profile" aria-selected="true">Mails</a>
+                                                <a class="nav-link active p-15" id="past-tab" href="#" role="tab" aria-controls="profile" aria-selected="true">Mails</a>
                                             </li>
 
                                         </ul>

@@ -99,8 +99,8 @@
                                 <label style="font-weight:500 !important;">Zone</label>
                                 <select class="form-control br-5 selectfilter" name="zones" data-action="zone">
                                     <option value="">--Select--</option>
-                                    @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                        <option value="{{$zone->id}}">{{ucwords($zone->name)}}</option>
+                                    @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                        <option value="{{$city->id}}">{{ucwords($city->name)}}</option>
                                     @endforeach
                                 </select>
                             </div>

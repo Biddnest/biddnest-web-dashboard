@@ -3,101 +3,95 @@
 @section('content')
     <div class="main-content grey-bg" data-barba="container" data-barba-namespace="vendor">
         <div class="d-flex  flex-row justify-content-between vertical-center">
-                                <h3 class="page-head text-left p-4 f-20 theme-text">Vendor Management</h3>
-                                <div class="mr-20">
-                                   <a href="{{ route('create-vendors')}}">
-                                    <button class="btn theme-bg white-text"><i class="fa fa-plus p-1"
-                                        aria-hidden="true"></i>ONBOARD VENDOR</button>
-                                   </a>
-                                </div>
-                            </div>
+            <h3 class="page-head text-left p-4 f-20 theme-text">Vendor Management</h3>
+            <div class="mr-20">
+                <a href="{{ route('create-vendors')}}">
+                    <button class="btn theme-bg white-text">
+                        <i class="fa fa-plus p-1" aria-hidden="true"></i>ONBOARD VENDOR
+                    </button>
+                </a>
+            </div>
+        </div>
         <div class="d-flex  flex-row justify-content-between">
-                                <div class="page-head text-left  pt-0 pb-0 p-2">
-                                  <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('vendors')}}">Vendor Management</a></li>
-                                      <li class="breadcrumb-item">Manage Vendor</li>
-
-                                    </ol>
-                                  </nav>
-
-
-                                </div>
-
-                            </div>
+            <div class="page-head text-left  pt-0 pb-0 p-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route('vendors')}}">Vendor Management</a></li>
+                        <li class="breadcrumb-item">Manage Vendor</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
         <div class="vender-all-details">
-
-                                    <div class="simple-card" >
-                                        <a href="{{route('vendors')}}">
-                                            <p>TOTAL VENDORS</p>
-                                            <h1>{{$vendors_count }}</h1>
-                                        </a>
-                                    </div>
-
-                                    <div class="simple-card" >
-                                        <a href="{{route('vendors')}}?sort=active">
-                                            <p> ACTIVE VENDORS</p>
-                                            <h1>{{$active_vendors}}</h1>
-                                        </a>
-                                    </div>
-                                <div class="simple-card" >
-                                    <a href="{{route('vendors')}}?sort=pending_approval">
-{{--                                        <p> VERIFIED VENDORS</p>--}}
-                                        <p>PENDING APPROVAL</p>
-                                        <h1>{{$verifide_vendors}}</h1>
-                                    </a>
-                                </div>
-                                <div class="simple-card">
-                                    <a href="{{route('vendors')}}?sort=lead">
-                                        <p> LEADS</p>
-                                        <h1>{{$lead_vendors}}</h1>
-                                    </a>
-                                </div>
-                                <div class="simple-card">
-                                    <a href="{{route('vendors')}}?sort=suspended">
-                                        <p>SUSPENDED VENDORS</p>
-                                        <h1>{{$suspended_vendors}}</h1>
-                                    </a>
-                                </div>
-                            </div>
+            <div class="simple-card" >
+                <a href="{{route('vendors')}}">
+                    <p>TOTAL VENDORS</p>
+                    <h1>{{$vendors_count }}</h1>
+                </a>
+            </div>
+            <div class="simple-card" >
+                <a href="{{route('vendors')}}?sort=active">
+                    <p> ACTIVE VENDORS</p>
+                    <h1>{{$active_vendors}}</h1>
+                </a>
+            </div>
+            <div class="simple-card" >
+                <a href="{{route('vendors')}}?sort=pending_approval">
+                {{--   <p> VERIFIED VENDORS</p>--}}
+                    <p>PENDING APPROVAL</p>
+                    <h1>{{$verifide_vendors}}</h1>
+                </a>
+            </div>
+            <div class="simple-card">
+                <a href="{{route('vendors')}}?sort=lead">
+                    <p> LEADS</p>
+                    <h1>{{$lead_vendors}}</h1>
+                </a>
+            </div>
+            <div class="simple-card">
+                <a href="{{route('vendors')}}?sort=suspended">
+                    <p>SUSPENDED VENDORS</p>
+                    <h1>{{$suspended_vendors}}</h1>
+                </a>
+            </div>
+        </div>
         <!-- Dashboard cards -->
         <div class="d-flex flex-row justify-content-between Dashboard-lcards ">
-                                <div class="col-lg-12 pr-0 pl-0">
-                                    <div class="card  h-auto p-0  pt-10">
-                                        <div class="header-wrap">
-                                            <!-- <h3 class="f-18 pl-2">All Vendors</h3>
-                                            <a href="#">
+            <div class="col-lg-12 pr-0 pl-0">
+                <div class="card  h-auto p-0  pt-10">
+                    <div class="header-wrap">
+                    <!-- <h3 class="f-18 pl-2">All Vendors</h3>
+                                      <a href="#">
                                                 <i><img src="{{ asset('static/images/filter.svg')}}" alt="" srcset=""></i>
                                             </a> -->
-                                                <div class="col-sm-8 p-3 ">
-                                                    <h3 class="f-18 pl-8 title " style="margin-bottom: 0px !important;">All Vendors</h3 >
-
-                                                </div>
-                                                <div class="col-sm-1" style="margin-right: -11%;">
-                                                    <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
-                                                        <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-head  pt-2  left col-sm-3" style="padding: 8px 20px;">
-                                                    <div class="search">
-                                                        <input type="text" class="searchTerm table-search" data-url="{{route('vendors')}}" placeholder="Search...">
-                                                        <button type="submit" class="searchButton">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 pr-0 pl-0">
-                                    <div class="all-vender-details">
-                                            <div class="collapse" id="filter-menu">
-                                                <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
-                                                <div class="row f-14">
-                                                    <div class="col">
-                                                        <label style="font-weight:500 !important;">Zones</label>
-                                                        <select class="form-control br-5 selectfilter" name="zones" data-action="zones">
-                                                            <option value="">--Select--</option>
-                                                            @foreach(Illuminate\Support\Facades\Session::get('zones') as $zone)
-                                                                <option value="{{$zone->id}}">{{$zone->name}}</option>
+                        <div class="col-sm-8 p-3 ">
+                            <h3 class="f-18 pl-8 title " style="margin-bottom: 0px !important;">All Vendors</h3 >
+                        </div>
+                        <div class="col-sm-1" style="margin-right: -11%;">
+                            <a href="#" class="margin-r-20 filter-icon" aria-haspopup="true"  aria-expanded="false"  data-toggle="collapse" data-target="#filter-menu">
+                                <i><img class="" src="{{asset('static/images/filter.svg')}}" alt="" srcset=""></i>
+                            </a>
+                        </div>
+                        <div class="card-head  pt-2  left col-sm-3" style="padding: 8px 20px;">
+                            <div class="search">
+                                <input type="text" class="searchTerm table-search" data-url="{{route('vendors')}}" placeholder="Search...">
+                                <button type="submit" class="searchButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 pr-0 pl-0">
+                        <div class="all-vender-details">
+                            <div class="collapse" id="filter-menu">
+                                <a href="#" class="btn theme-bg white-text clear-filter" id="clear">Clear</a>
+                                <div class="row f-14">
+                                    <div class="col">
+                                        <label style="font-weight:500 !important;">Cities</label>
+                                        <select class="form-control br-5 selectfilter" name="zones" data-action="cities">
+                                            <option value="">--Select--</option>
+                                                            @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
+                                                                <option value="{{$city->id}}">{{$city->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

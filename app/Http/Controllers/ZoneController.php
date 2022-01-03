@@ -21,9 +21,9 @@ class ZoneController extends Controller
         if(!$ignore_status)
             $zones->where("status",CommonEnums::$YES);
 
-
-        return Helper::response(true, "zone shows successfully", ['zones'=>$zones->with("coordinates")->get()]);
+        return Helper::response(true, "Zone shows successfully.", ['zones'=>$zones->with("coordinates")->get()]);
     }
+
     public static function getOne($id){
         return Zone::where("deleted",CommonEnums::$NO)->findOrFail($id);
     }

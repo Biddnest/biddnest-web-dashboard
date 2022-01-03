@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CommonEnums;
 use App\Models\Settings;
 use App\Models\Zone;
+use App\PolygonEngine;
 
 class GeoController extends Controller
 {
@@ -56,7 +57,7 @@ class GeoController extends Controller
             }
 
             if(count($cord_set)){
-                $polygon = new \PolygonEngine($cord_set);
+                $polygon = new PolygonEngine($cord_set);
                 if($polygon->isCrossesWith($lat, $lng))
                     return $zone->id;
             }
@@ -76,7 +77,7 @@ class GeoController extends Controller
             }
 
             if(count($cord_set)){
-                $polygon = new \PolygonEngine($cord_set);
+                $polygon = new PolygonEngine($cord_set);
                 if($polygon->isCrossesWith($lat, $lng))
                     return $serviceable = true;
             }

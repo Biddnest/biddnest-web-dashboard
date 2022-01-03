@@ -5,6 +5,8 @@
  * Source: https://github.com/xopbatgh/sb-polygon-pointer/blob/master/sbPolyPointer.php
  */
 
+namespace App;
+
 class PolygonEngine {
 
     public $map_width = 500;

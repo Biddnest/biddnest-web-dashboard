@@ -131,35 +131,7 @@
                             <h3 class="f-18 mt-0 ml-4">Live Orders</h3>
                         </div>
                         <div class="p-10 card-head left mr-4">
-                            <a><i><img src="{{asset('static/vendor//images/filter1.svg')}}" alt="" srcset=""></i></a>
-                            <!-- <a><i><img src="./assets/images/filter.svg" alt="" srcset=""></i> -->
-                            <div class="dropdown-menu ">
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                               id="total-no-orders">
-                                        <label class="form-check-label" for="total-no-orders">
-                                            Total no of orders
-                                        </label>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="status">
-                                        <label class="form-check-label" for="status">
-                                            Status
-                                        </label>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item border-top-bottom" href="#">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="city">
-                                        <label class="form-check-label" for="city">
-                                            City
-                                        </label>
-                                    </div>
-                                </a>
-                            </div>
+                         
                         </div>
 
                     </div>

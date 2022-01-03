@@ -639,7 +639,7 @@ class Route extends Controller
             'name' => 'required|string', 'type' => 'required',
             'position' => 'required', 'platform' => 'required',
             'size' => 'required', 'from_date' => 'required',
-            'to_date' => 'required', 'zone_scope' => 'required',
+            'to_date' => 'required', 'city_scope' => 'required',
             'cities'=>"nullable"
         ]);
 

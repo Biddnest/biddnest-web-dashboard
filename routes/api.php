@@ -111,7 +111,7 @@ Route::prefix('v1')->group(function () {
 
     Route::post('/zone/register', [ApiRouter::class, 'captureUserLocation'])->name("captureLocation");
 
-    Route::get('/zone/check-serviceability',[ApiRouter::class, 'checkServiceable'])->name("api.zone.check-serviceability");
+    Route::post('/zone/check-serviceability',[ApiRouter::class, 'checkServiceable'])->name("api.zone.check-serviceability");
 
 });
 

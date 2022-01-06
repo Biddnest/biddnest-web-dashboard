@@ -639,7 +639,7 @@ class Route extends Controller
             'name' => 'required|string', 'type' => 'required',
             'position' => 'required', 'platform' => 'required',
             'size' => 'required', 'from_date' => 'required',
-            'to_date' => 'required', 'zone_scope' => 'required',
+            'to_date' => 'required', 'city_scope' => 'required',
             'cities'=>"nullable"
         ]);
 
@@ -651,7 +651,7 @@ class Route extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->errors(), 400);
         else
-            return SliderController::edit($request->id, $request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->zone_scope, $request->zones);
+            return SliderController::edit($request->id, $request->name, $request->type, $request->position, $request->platform, $request->size, $formatedRequest->from_date, $formatedRequest->to_date, $request->city_scope, $request->cities);
     }
 
     public function slider_status_update(Request $request)

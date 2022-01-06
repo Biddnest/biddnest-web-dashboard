@@ -74,9 +74,9 @@
                 <!-- coupon -->
                 <div class="border-bottom ">
                     <p class="para-head mt-2 pl-0  f-16">Available Coupons</p>
-                    <div class="d-flex direction-col  mb-4" id="coupon1">
+                    <div class="row direction-col mb-4 col-md-12" id="coupon1" style="margin-left: 10%;">
                         @foreach($coupons as $coupon)
-                        <div class="coupon ">
+                        <div class="coupon mb-4 col-md-3">
                             <div class="d-flex mt-1 justify-content-center">
                                 <h5 class="coupon-code center d-flex">
                                     {{$coupon->code}}

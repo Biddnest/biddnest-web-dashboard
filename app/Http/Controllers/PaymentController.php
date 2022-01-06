@@ -249,11 +249,14 @@ class PaymentController extends Controller
 
         $bid_exist = Bid::where(["organization_id"=>$booking_exist['organization_id'], "booking_id"=>$booking_exist['id']])->pluck("vendor_id");
 
-        $phone = User::where('id', $user_id)->pluck('phone')[0];
-        $movementdate = Bid::where(['organization_id'=>$order_exist->organization_id, 'booking_id'=>$order_exist->id])->pluck['meta'][0]['moving_date'];
-        $vendorname = Organization::where('id', $order_exist->organization_id)->pluck['org_name'][0];
 
-        dispatch(function () use ($booking_exist, $bid_exist, $public_booking_id, $phone, $movementdate, $vendorname) {
+
+        dispatch(function () use ($booking_exist, $bid_exist, $public_booking_id, $user_id, $order_exist) {
+
+            $phone = User::where('id', $user_id)->first()->pluck('phone')[0];
+            $movementdate = Bid::where(['organization_id'=>$order_exist->organization_id, 'booking_id'=>$order_exist->id])->pluck['meta'][0]['moving_date'];
+            $vendorname = Organization::where('id', $order_exist->organization_id)->pluck['org_name'][0];
+
             NotificationController::sendTo("user", [$booking_exist->user_id], "We have received your payment for booking id #".$booking_exist->public_booking_id, "Your order has been confirmed and a driver will be assigned soon.", [
                 "type" => NotificationEnums::$TYPE['booking'],
                 "public_booking_id" => $booking_exist->public_booking_id,

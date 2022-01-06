@@ -240,7 +240,7 @@ class PaymentController extends Controller
 
         $order_id = $payment_data['order_id'];
 
-        $order_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])->first();
+        $order_exist = Payment::where(['booking_id'=>$booking_exist['id'], 'rzp_order_id'=>$order_id])->with("booking")->first();
 
         if(!$order_exist)
             return Helper::response(false, "Payment order is not exist");
@@ -249,7 +249,7 @@ class PaymentController extends Controller
 
         $bid_exist = Bid::where(["organization_id"=>$booking_exist['organization_id'], "booking_id"=>$booking_exist['id']])->pluck("vendor_id");
 
-        $phone = User::where('id', $order_exist->user_id)->pluck('phone')[0];
+        $phone = User::where('id', $user_id)->pluck('phone')[0];
         $movementdate = Bid::where(['organization_id'=>$order_exist->organization_id, 'booking_id'=>$order_exist->id])->pluck['meta'][0]['moving_date'];
         $vendorname = Organization::where('id', $order_exist->organization_id)->pluck['org_name'][0];
 

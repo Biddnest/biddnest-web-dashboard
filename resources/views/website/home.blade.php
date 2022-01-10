@@ -355,24 +355,24 @@
                         <h1 style="    font-weight: 400;">Get <span class="site-app">BIDDNEST</span> App Now!</h1>
                     </div>
                     <p class="section-app-subheading m-0">
-                        Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text.
+                        The joy of easy movement is now at your finger tips. Available on both App store and Google play.
                     </p>
                     <div>
                         <div class="d-flex mt-1 mb-view view-content-center">
                             <i class="icon dripicons-checkmark"></i>
-                            <p class="pl-1 check-text">Easy & Interactive UI.</p>
+                            <p class="pl-1 check-text">Easy & Interactive UI</p>
                         </div>
                         <div class="d-flex mt-1 mb-view view-content-center">
                             <i class="icon dripicons-checkmark"></i>
-                            <p class="pl-1 check-text">Easy & Interactive UI.</p>
+                            <p class="pl-1 check-text">Convenient movement tracking</p>
                         </div>
                         <div class="d-flex mt-1 mb-view view-content-center">
                             <i class="icon dripicons-checkmark"></i>
-                            <p class="pl-1 check-text">Easy & Interactive UI.</p>
+                            <p class="pl-1 check-text">Real time status updates</p>
                         </div>
                         <div class="d-flex mt-1 mb-view view-content-center">
                             <i class="icon dripicons-checkmark"></i>
-                            <p class="pl-1 check-text">Easy & Interactive UI.</p>
+                            <p class="pl-1 check-text">Stay up-to-date with offer notifications</p>
                         </div>
                     </div>
 

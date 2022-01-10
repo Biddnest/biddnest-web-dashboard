@@ -820,8 +820,8 @@ class BookingsController extends Controller
         $result_status = self::statusChange($assign_driver->id, BookingEnums::$STATUS['awaiting_pickup']);
         $phone = User::where(['id'=>$assign_driver->user_id])->pluck('phone')[0];
         $movementdate = json_decode(Bid::where(['organization_id'=>$assign_driver->organization_id, 'booking_id'=>$assign_driver->id])->pluck('meta')[0], true)['moving_date'];
-        $drivername = Vendor::where('id', $driver_id)->pluck['fname'][0]." ".Vendor::where('id', $driver_id)->pluck['lname'][0];
-        $driverphone = Vendor::where('id', $driver_id)->pluck['phone'][0];
+        $drivername = Vendor::where('id', $driver_id)->pluck('fname')[0]." ".Vendor::where('id', $driver_id)->pluck('lname')[0];
+        $driverphone = Vendor::where('id', $driver_id)->pluck('phone')[0];
 
         dispatch(function () use ($assign_driver, $phone, $drivername, $driverphone, $movementdate) {
 
@@ -865,8 +865,8 @@ class BookingsController extends Controller
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
             $phone = User::where(['id'=>$booking->user_id])->pluck('phone')[0];
-            $drivername = Vendor::where('id', $booking->driver->driver_id)->pluck['fname'][0]." ".Vendor::where('id', $booking->driver->driver_id)->pluck['lname'][0];
-            $driverphone = Vendor::where('id', $booking->driver->driver_id)->pluck['phone'][0];
+            $drivername = Vendor::where('id', $booking->driver->driver_id)->pluck('fname')[0]." ".Vendor::where('id', $booking->driver->driver_id)->pluck('lname')[0];
+            $driverphone = Vendor::where('id', $booking->driver->driver_id)->pluck('phone')[0];
 
 
             dispatch(function () use ($booking, $phone, $public_booking_id, $drivername, $driverphone) {

@@ -176,6 +176,7 @@
             <img src="{{ asset('static/website/images/icons/bot.svg')}}">
         </div>
     </div>
+
     <!-- section join vendor -->
     <section id="join-vendor">
         <div class="container pl-3 pr-3">
@@ -277,6 +278,7 @@
             </div>
         </div>
     </section>
+
     <!-- section testimonials -->
     <section id="testimonials mb-4">
         <div class="container">
@@ -313,6 +315,7 @@
             </div>
         </div>
     </section>
+
     <!-- section refer and earn -->
     <section id="refer-earn" class="refer-earn p-10 mt-3 ">
         <div class="container">
@@ -320,7 +323,7 @@
                 <div class="col-md-6" style="width: auto;">
                     <div class="refer-head mt-3 center-align" style="font-size:30px!important;">Refer and Earn</div>
                     <div class="refer-para mb-4 mt-1 center-align" style="font-size:18px!important;">
-                        Dummy Text of the printing and typesetting industry. Lorem Ipsum has been the industry's started dummy text
+                        Share the Biddnest App with your friends and earn exciting rewards.
                     </div>
                     <div class="btn-refer" >
                         @if(\Illuminate\Support\Facades\Session::get('account'))

@@ -24,7 +24,7 @@
                             @if($roles)
                                 <input type="hidden" name="role_id" value="{{$roles->id}}">
                             @endif
-                            @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                            @if($user_role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
                                 <div class="d-flex row p-15 pt-0 pb-0">
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @elseif($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                            @elseif($user_role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
                                 <div class="d-flex row p-15 pt-0 pb-0">
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
 
-                                @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                                @if($user_role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Modules under this roles</label>
@@ -184,7 +184,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
+                                    @if($user_role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
                                         <div class="col-lg-6">
                                             <div class="form-input">
                                                 <label class="full-name">Modules under this roles</label>

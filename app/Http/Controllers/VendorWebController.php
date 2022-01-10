@@ -334,9 +334,13 @@ class VendorWebController extends Controller
 
    public function userAdd(Request $request)
     {
-        $users = Vendor::where("id", $request->id)->first();
+        $users=[];
+        if($request->id)
+            $users = Vendor::where("id", $request->id)->first();
+
+        $roles = Vendor::where("id", Session::get('account')['id'])->first();
         $branch = Organization::where(["parent_org_id"=>Session::get('organization_id'), "status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->orWhere("id", Session::get('organization_id'))->get();
-        return view('vendor-panel.user.add_user',['id'=>$request->id, 'roles'=>$users, 'branches'=>$branch]);
+        return view('vendor-panel.user.add_user',['id'=>$request->id, 'roles'=>$users, 'user_role'=>$roles, 'branches'=>$branch]);
     }
 
     public function addBranch(Request $request)

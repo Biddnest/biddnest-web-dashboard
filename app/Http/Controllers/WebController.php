@@ -1549,7 +1549,7 @@ class WebController extends Controller
                 $ticket_info['user'] = User::where(['id' => $ticket->user_id])->first();
             }
         }
-        elseif ($ticket->type == TicketEnums::$TYPE['organization'])
+        elseif ($ticket->type == TicketEnums::$TYPE['service_request'])
         {
             $ticket_info = Organization::where(['id' => $ticket->vendor_id])->first();
         }

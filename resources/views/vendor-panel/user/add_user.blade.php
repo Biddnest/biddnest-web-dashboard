@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @elseif($user_role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
+                            @else
                                 <div class="d-flex row p-15 pt-0 pb-0">
                                     <div class="col-lg-6">
                                         <div class="form-input">
@@ -184,7 +184,6 @@
                                         </div>
                                     </div>
                                 @else
-                                    @if($user_role->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
                                         <div class="col-lg-6">
                                             <div class="form-input">
                                                 <label class="full-name">Modules under this roles</label>
@@ -197,7 +196,6 @@
                                                 <span class="error-message">Please enter valid Service</span>
                                             </div>
                                         </div>
-                                    @endif
                                 @endif
 
                                 <div class="col-lg-6">

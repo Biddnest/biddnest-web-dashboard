@@ -58,7 +58,7 @@ a.menu:hover{
                             @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a class="nav-link f-14" >
                             <i class="icon-2 dripicons-user"></i>
-                                <span class="pl-1  l-cap " style="letter-spacing: 1px; ">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}}&nbsp;&nbsp;{{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
+                                <span class="pl-1  l-cap " style="letter-spacing: 1px; ">{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                             @else
                             <a class="nav-link f-14"  data-toggle="modal" data-target="#Login-modal">

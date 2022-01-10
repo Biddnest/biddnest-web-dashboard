@@ -43,7 +43,7 @@ margin-left: 18%;
                         @if(\Illuminate\Support\Facades\Session::get('account'))
                             <a class="nav-link f-14" >
                             <i class="icon-2 dripicons-user"></i>
-                                <span class="ml-1 l-cap profile-name" >{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}}&nbsp;&nbsp;{{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
+                                <span class="ml-1 l-cap profile-name" >{{\Illuminate\Support\Facades\Session::get('account')['fname'] ?? 'Hello'}} {{\Illuminate\Support\Facades\Session::get('account')['lname'] ?? ''}}</span>
                             </a>
                         @else
                             <a data-toggle="modal" data-target="#Login-modal">

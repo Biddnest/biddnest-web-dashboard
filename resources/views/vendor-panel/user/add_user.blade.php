@@ -184,7 +184,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    @if($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] )
+                                    @if($roles && ($roles->user_role == \App\Enums\VendorEnums::$ROLES['admin'] ))
                                         <div class="col-lg-6">
                                             <div class="form-input">
                                                 <label class="full-name">Modules under this roles</label>

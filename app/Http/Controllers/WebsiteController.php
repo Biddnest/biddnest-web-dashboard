@@ -67,7 +67,7 @@ class WebsiteController extends Controller
         $booking=[];
         $ticket_details=[];
         if(Session::get('account')) {
-            $booking = Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->latest()->limit(1)->first();
+            $booking = Booking::where("user_id", Session::get('account')['id'])->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled'], BookingEnums::$STATUS['in_progress']])->latest()->limit(1)->first();
            if($booking) {
                $ticket_details = Ticket::where("booking_id", $booking->id)->with(['reply' => function ($query) {
                    $query->where("user_id", null)->with('admin')->latest()->limit(1);

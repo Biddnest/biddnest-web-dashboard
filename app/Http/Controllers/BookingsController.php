@@ -2012,4 +2012,24 @@ class BookingsController extends Controller
 
         return Helper::response(true,"OTP sent successfully", ['OTP'=>$otp]);
     }
+
+    public static function expireUnpaidBookings(){
+
+        /*Method for cron
+        * This method expires all bookings whose payment is not done before movement date.
+        */
+
+        $order_ids = Bid::where("moving_date",json_encode([Carbon::now()->format("d M Y")]))->where("status", BidEnums::$STATUS['won'])->pluck("booking_id");
+
+        $update_booking = Booking::whereIn("id",$order_ids)->where("status",BookingEnums::$STATUS['payment_pending'])->update([
+            "status"=> BookingEnums::$STATUS['cancelled'],
+            "cancelled_meta" => json_encode([
+                "reason" => "This booking has expired.",
+                "desc" => "This booking has been auto cancelled by the system as the payment was not done before the movement date. "
+            ])
+        ]);
+
+        return true;
+
+    }
 }

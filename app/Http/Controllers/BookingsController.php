@@ -391,7 +391,7 @@ class BookingsController extends Controller
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
             ->where(function($query){
-            $query->where("status", "<=", BookingEnums::$STATUS["payment_pending"])
+            $query->where("status", "<", BookingEnums::$STATUS["payment_pending"])
             ->orWhereIn("status", [BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']]);
             })
             ->where("deleted", CommonEnums::$NO)
@@ -446,7 +446,7 @@ class BookingsController extends Controller
         $bookingorder = Booking::where(["deleted" => CommonEnums::$NO,
             "user_id" => $user_id])
             ->whereNotIn("status", [BookingEnums::$STATUS["cancelled"], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['awaiting_bid_result'], BookingEnums::$STATUS['price_review_pending']])
-            ->where("status", ">", BookingEnums::$STATUS["payment_pending"])
+            ->where("status", ">=", BookingEnums::$STATUS["payment_pending"])
             ->where("deleted", CommonEnums::$NO)
             ->with('movement_dates')
 //            ->with('inventories')

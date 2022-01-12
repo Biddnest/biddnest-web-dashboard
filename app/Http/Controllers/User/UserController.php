@@ -235,7 +235,7 @@ class UserController extends Controller
      * @param $avatar
      * @return JsonResponse|object
      */
-    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar, $phone=null, $city){
+    public static function update($id, $fname, $lname, $email, $gender, $dob, $avatar, $city=null, $phone=null){
         $user = User::where("id",$id)->where([ 'deleted'=>CommonEnums::$NO])->first();
         if(!$user)
             return Helper::response(false, "The phone number is not registered. Invalid action.",null,401);

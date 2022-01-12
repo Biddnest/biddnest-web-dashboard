@@ -184,7 +184,7 @@ class UserController extends Controller
             'email'=>$email,
             'gender'=>$gender,
             'avatar'=>Helper::saveFile(Helper::generateAvatar($fname." ".$lname),$avatar_file_name,"avatars"),
-            'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code, "city"=>$city]),
+            'meta'=>json_encode(["refferal_code"=>$ref_code, "reffered_by"=>$refby_code, "city"=>""]),
             "referral_code"=>$ref_code,
             "status"=>1
         ]);

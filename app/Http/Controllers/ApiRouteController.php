@@ -119,7 +119,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", $validation->getMessageBag(), 400);
         else
-            return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->avatar,null, $request->city);
+            return UserController::update($request->token_payload->id, $formatedRequest->fname, $formatedRequest->lname, $formatedRequest->email, $formatedRequest->gender, $formatedRequest->dob, $request->city, $request->avatar,null);
 
     }
 

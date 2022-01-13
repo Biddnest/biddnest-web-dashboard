@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Http\Controllers\BookingsController;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -34,6 +35,10 @@ class Kernel extends ConsoleKernel
 
         // generates bid result
         $schedule->command('bid:end all')->everyMinute();
+
+        $schedule->call(function(){
+            BookingsController::expireUnpaidBookings();
+        })->dailyAt(Carbon::parse("00:00:00")->format("H:i:s"));
 
         $schedule->command('reports:generate')->everyThirtyMinutes();
 

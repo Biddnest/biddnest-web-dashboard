@@ -58,6 +58,7 @@ class AdminController extends Controller
                     }
                 }
                 Session::put('admin_zones', $zones);
+                $cities = [];
                 if($admin_user->cities){
                     Session::put("cities",$admin_user->cities);
                     foreach($admin_user->cities as $city){

@@ -62,7 +62,7 @@
                         <div class="d-flex  border-bottom pb-0">
                             <ul class="nav nav-tabs pt-20 p-0 f-18" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active show" id="new-order-tab" data-toggle="tab" href="#order-details" role="tab" aria-controls="home" aria-selected="true">Order Details</a>
+                                    <a class="nav-link active show" id="new-order-tab" data-toggle="tab" href="{{route('vendor.detailsbookings',['id'=>$booking->public_booking_id])}}" role="tab" aria-controls="home" aria-selected="true">Order Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">Item List</a>
@@ -226,9 +226,13 @@
                                                 Rs. {{$booking->organization_rec_quote}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                @foreach(json_decode($booking->movement_dates, true) as $mdate)
-                                                    <span class="status-3">{{date("d M Y", strtotime($mdate['date']))}}</span>
-                                                @endforeach
+                                                @if($bidding && json_decode($bidding->meta, true)['moving_date'])
+                                                        <div class="status-3">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                @else
+                                                    @foreach(json_decode($booking->movement_dates, true) as $mdate)
+                                                        <span class="status-3">{{date("d M Y", strtotime($mdate['date']))}}</span>
+                                                    @endforeach
+                                                @endif        
                                             </div>
                                         </div>
                                     </div>

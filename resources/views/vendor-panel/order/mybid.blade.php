@@ -55,7 +55,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">Item List</a>
                                 </li>
-                                @if($bidding->status == \App\Enums\BidEnums::$STATUS['bid_submitted'])
+                                @if($bid_status == \App\Enums\BidEnums::$STATUS['bid_submitted'])
                                     {{--<li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>--}}
@@ -65,7 +65,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link disabled" id="requirments-tab" href="#">Schedule</a>
                                     </li>
-                                @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                     {{-- <li class="nav-item">
                                          <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                      </li>--}}
@@ -78,7 +78,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link " id="requirments-tab" href="#">Driver Details</a>
                                     </li>
-                                @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && (($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending']) && ($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])))
+                                @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && (($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending']) && ($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])))
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
@@ -88,14 +88,14 @@
                                     <li class="nav-item">
                                         <a class="nav-link " id="requirments-tab" href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">Driver Details</a>
                                     </li>
-                                @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending']))
+                                @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending']))
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
                                     </li>
-                                @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['in_transit'])
+                                @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['in_transit'])
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
@@ -108,7 +108,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.in-transit',['id'=>$booking->public_booking_id])}}">In Transit</a>
                                     </li>
-                                @elseif($bidding->status = \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['completed'] || $booking->status == \App\Enums\BookingEnums::$STATUS['cancelled']))
+                                @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['completed'] || $booking->status == \App\Enums\BookingEnums::$STATUS['cancelled']))
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
@@ -128,7 +128,7 @@
                             <div class="tab-content w-100" id="myTabContent">
                                 <div class="tab-pane fade active show" id="requirements" role="tabpanel" aria-labelledby="requirments-tab">
                                     <div class="heading theme-text    p-10  d-felx justify-content-center text-center ">
-                                        @if($bidding->status == \App\Enums\BidEnums::$STATUS['lost'])
+                                        @if($bid_status == \App\Enums\BidEnums::$STATUS['lost'])
                                             <div class="d-flex   justify-content-center  pb-0">
                                                 <div class="alert">
                                                     <img src="{{asset('static/vendor/images/error.svg')}}">
@@ -153,7 +153,7 @@
                                                     <a href="{{route('vendor.dashboard')}}"><button class="btn">Go To Home</button></a>
                                                 </div>
                                             </div>
-                                        @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['bid_submitted'] || $bidding->status == \App\Enums\BidEnums::$STATUS['active'])
+                                        @elseif($bid_status == \App\Enums\BidEnums::$STATUS['bid_submitted'] || $bid_status == \App\Enums\BidEnums::$STATUS['active'])
                                             @if($bidding->bid_type == \App\Enums\CommonEnums::$YES)
                                                 <div class=" d-flex justify-content-center status-badge info-message">
                                                     <div class="">
@@ -218,7 +218,7 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                        @elseif($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
+                                        @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'])
                                             <div class="p-15 ">
                                                 <div class="d-felx justify-content-around row  ">
                                                     <div class="bid-badge" style="margin: 0 auto !important;">

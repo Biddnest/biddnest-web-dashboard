@@ -366,6 +366,9 @@ class VendorWebController extends Controller
         }])->with(['bid'=>function($q){
             $q->where(['organization_id'=>Session::get('organization_id')]);
         }])->first();
+
+        $bidding=Bid::where(['booking_id'=>$booking->id, 'organization_id'=>Session::get('organization_id')])->first();
+
         $hist = [];
 
         foreach ($booking->status_history as $status){
@@ -376,7 +379,7 @@ class VendorWebController extends Controller
         $booking->status_ids = $hist;
 
         $vehicle=VehicleController::getVehicles(Session::get('organization_id'), true);
-        return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle]);
+        return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle, 'bidding'=>$bidding]);
     }
 
     public function bookingRequirment(Request $request)
@@ -411,7 +414,7 @@ class VendorWebController extends Controller
         $booking->status_ids = $hist;
 
         $bid = Bid::where("organization_id",Session::get('organization_id'))->where("booking_id", $booking->id)->first();
-//        return $booking;
+        //        return $booking;
 
         return view('vendor-panel.order.myquote', ['booking'=>$booking,"bid"=>$bid]);
     }
@@ -434,6 +437,9 @@ class VendorWebController extends Controller
         $bidding_graph_x=[];
         $bidding_graph_y=[];
         $rank=[];
+
+        $status = $bidding->status;
+
         if($bidding->status == BidEnums::$STATUS['lost'])
         {
             $bidding_graph_x=BookingsController::getposition(Session::get('account')['id'], $request->id)['axis']['x'];
@@ -441,7 +447,8 @@ class VendorWebController extends Controller
             $rank=BookingsController::getposition(Session::get('account')['id'], $request->id)['rank'];
         }
 
-        return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'rank'=>$rank,
+    
+        return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'rank'=>$rank, 'bid_status'=>$status,
             'graph'=>[
                 "revenue"=>[
                     "this_week"=>[

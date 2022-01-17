@@ -133,7 +133,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Organization Name</label>
-                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd" class="form-control alpha number" name="organization[org_name]" required>
+                                            <input type="text" id="fullname" placeholder="Wayne Pvt Ltd" class="form-control alphanum" name="organization[org_name]" required>
                                             <span class="error-message">Please enter valid Organization Name</span>
                                         </div>
                                     </div>
@@ -154,7 +154,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">GSTIN Number of Organisation</label>
-                                            <input type="text" id="fullname" placeholder="GST12355464" class="form-control" name="organization[gstin]" maxlength="15" minlength="15" data-parsley-type="alphanum" required >
+                                            <input type="text" id="fullname" placeholder="GST12355464" class="form-control alphanum" name="organization[gstin]" maxlength="15" minlength="15" required >
                                             <span class="error-message">Please enter valid
                                                                 Organization Name</span>
                                         </div>
@@ -163,7 +163,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-input">
                                             <label class="full-name">Register/License Number of Organisation</label>
-                                            <input type="text" id="fullname"  placeholder="L21091KA2019OPC141331" class="form-control" name="organization[regi_no]" data-parsley-type="alphanum" maxlength="21" minlength="21" required>
+                                            <input type="text" id="fullname"  placeholder="L21091KA2019OPC141331" class="form-control alphanum" name="organization[regi_no]" data-parsley-type="alphanum" maxlength="21" minlength="21" required>
                                             <span class="error-message">Please enter valid Register/License Number</span>
                                         </div>
                                     </div>

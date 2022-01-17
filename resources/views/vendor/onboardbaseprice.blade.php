@@ -203,7 +203,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label>Market Price Premium</label>
-                                    <input type="text" class="form-control" value="{{$price->bp_economic}}" name="subservice[bidnest][price][economy]" min="0.00" required>
+                                    <input type="text" class="form-control" value="{{$price->bp_economic}}" name="subservice[market][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Market Price Economy</label>

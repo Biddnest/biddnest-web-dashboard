@@ -50,7 +50,7 @@
                         <div class="d-flex border-top  border-bottom pb-0">
                             <ul class="nav nav-tabs pt-20 p-0 f-18" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="new-order-tab" data-toggle="tab" href="#order-details" role="tab" aria-controls="home" aria-selected="true">Order Details</a>
+                                    <a class="nav-link" id="new-order-tab" data-toggle="tab" href="{{route('vendor.detailsbookings',['id'=>$booking->public_booking_id])}}" role="tab" aria-controls="home" aria-selected="true">Order Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="requirments-tab" href="{{route('vendor.requirment-order',['id'=>$booking->public_booking_id])}}">Item List</a>

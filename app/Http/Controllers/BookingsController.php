@@ -841,6 +841,7 @@ class BookingsController extends Controller
 
     public static function startTrip($public_booking_id, $organization_id, $pin)
     {
+        
         $booking = Booking::where([
             "public_booking_id" => $public_booking_id,
             "organization_id" => $organization_id,
@@ -865,9 +866,12 @@ class BookingsController extends Controller
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
             $phone = User::where(['id'=>$booking->user_id])->pluck('phone')[0];
-            $drivername = Vendor::where('id', $booking->driver->driver_id)->pluck('fname')[0]." ".Vendor::where('id', $booking->driver->driver_id)->pluck('lname')[0];
-            $driverphone = Vendor::where('id', $booking->driver->driver_id)->pluck('phone')[0];
-
+            $drivername = "Driver";
+            $driverphone = "";
+            if ($booking->driver) {
+                $drivername = Vendor::where('id', $booking->driver->driver_id)->pluck('fname')[0]." ".Vendor::where('id', $booking->driver->driver_id)->pluck('lname')[0];
+                $driverphone = Vendor::where('id', $booking->driver->driver_id)->pluck('phone')[0];
+            }
 
             dispatch(function () use ($booking, $phone, $public_booking_id, $drivername, $driverphone) {
 

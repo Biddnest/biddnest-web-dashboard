@@ -869,15 +869,15 @@ class BookingsController extends Controller
             // $result_status = $bookingstatus->save();
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
-            $phone = User::where(['id'=>$booking->user_id])->pluck('phone')[0];
-            $drivername = "Driver";
-            $driverphone = "";
-            if ($booking->driver) {
-                $drivername = Vendor::where('id', $booking->driver->driver_id)->pluck('fname')[0]." ".Vendor::where('id', $booking->driver->driver_id)->pluck('lname')[0];
-                $driverphone = Vendor::where('id', $booking->driver->driver_id)->pluck('phone')[0];
-            }
+            $user_id=$booking->user_id;
+            $driver_id = $booking->driver->driver_id;
+            
+            dispatch(function () use ($booking, $user_id, $public_booking_id, $driver_id) {
 
-            dispatch(function () use ($booking, $phone, $public_booking_id, $drivername, $driverphone) {
+                $phone = User::where(['id'=>$user_id])->pluck('phone')[0];
+                $drivername = Vendor::where('id', $driver_id)->pluck('fname')[0]." ".Vendor::where('id', $driver_id)->pluck('lname')[0];
+                $driverphone = Vendor::where('id', $driver_id)->pluck('phone')[0];
+
 
                 NotificationController::sendTo("user", [$booking->user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
                     "type" => NotificationEnums::$TYPE['booking'],

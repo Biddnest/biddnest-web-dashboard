@@ -155,6 +155,31 @@
                                                     </div>
                                                 </div>--}}
 
+                                                <div class="d-flex justify-content-center f-14 mt-2 mb-3">
+                                                    <div class="row col-sm-10">
+                                                        <div class="d-flex col-4" style="padding: 10px;">
+                                                            <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" style="transform: translate(2px, 0px) !important;"/>
+                                                            <div class="d-flex f-direction">
+                                                                <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">From</label>
+                                                                <div class="f-22">{{ucwords(json_decode($booking->source_meta, true)['city'])}}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex col-4" style="padding: 10px;">
+                                                            <img class="card-icons img-location" src="{{asset('static/website/images/icons/location.svg')}}" style="transform: translate(2px, 0px) !important;"/>
+                                                            <div class="d-flex f-direction">
+                                                                <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">To</label>
+                                                                <div class="f-22">{{ucwords(json_decode($booking->destination_meta, true)['city'])}}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex col-4" style="padding: 10px;">
+                                                            <div class="d-flex f-direction">
+                                                                <label class="d-flex" style="margin-bottom: 0; margin-top: .5rem">Distance</label>
+                                                                <div class="f-22">{{json_decode($booking->meta, true)['distance']}} Km</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="d-flex justify-content-center f-14 mt-2 mb-3 cursor-pointer">
                                                     <div class="row col-sm-10 move-add-date est-box move-dates">
                                                         <input type="radio" id="economy" value="economic" name="service_type" class="card-input-element moving-dates" required data-parsley-errors-container="#error-message" data-parsley-error-message="Please choose service to proceed">

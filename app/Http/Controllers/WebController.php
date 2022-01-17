@@ -1109,7 +1109,7 @@ class WebController extends Controller
                 $vendors=$vendors->where('org_name', 'like', "%".$request->search."%");
             }
 
-        $vendors->with('admin')->with('zone');
+        $vendors->with('admin')->with('zone_map');
 
         return view('vendor.verified',['vendors'=>$vendors->paginate(CommonEnums::$PAGE_LENGTH)]);
     }

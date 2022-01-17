@@ -2063,12 +2063,6 @@ $("body").on('keypress', ".alphabet", function(event) {
 
 });
 
-$('.birthdate').datepicker({
-    // multidateSeparator:",",
-    format: 'yyyy-mm-dd',
-    endDate: '-18y'
-
-});
 
 $("body").on('click', ".sidebar-toggle_booking", function(event) {
     var $this = $(this);
@@ -2170,11 +2164,10 @@ $("body").on('change', ".dateaddbooking", function(event) {
 $("body").on('change', ".enddate", function(event) {
     let enddate = $(this).val();
     let startdate = $('.startdate').val();
-    if(enddate < startdate){
+    if (enddate < startdate) {
         $(this).val('');
         tinyAlert("Warning", "End date should be grater than start date.");
-    }
-    else{
+    } else {
         return false;
     }
 });
@@ -2277,14 +2270,14 @@ $("body").on('click', ".filter-button", function(event) {
 
 $("body").on('input', ".phone-search", function(event) {
     console.log("add");
-    if($(this).val().length >= 10){
-        $.get($(this).data("url")+"?phone="+$(this).val(),function(response){
+    if ($(this).val().length >= 10) {
+        $.get($(this).data("url") + "?phone=" + $(this).val(), function(response) {
             Logger.info(response);
-            if(response.status == "success"){
-                $(".autofill-name").val(response.data.user.fname +" "+response.data.user.lname);
+            if (response.status == "success") {
+                $(".autofill-name").val(response.data.user.fname + " " + response.data.user.lname);
                 $(".autofill-email").val(response.data.user.email);
-                tinySuccessAlert("User is registered.","Details have been autofilled.");
-            }else{
+                tinySuccessAlert("User is registered.", "Details have been autofilled.");
+            } else {
                 $(".autofill-name").val('');
                 $(".autofill-email").val('');
                 // tinySuccessAlert("User is not registered.","An account will be created on booking.");
@@ -2294,8 +2287,8 @@ $("body").on('input', ".phone-search", function(event) {
 });
 
 $("body").on('change', ".order-search", function(event) {
-    if($(this).val().length) {
-        $.get(API_SEARCH_ORDER + "?q=" + $(this).val(), function (response) {
+    if ($(this).val().length) {
+        $.get(API_SEARCH_ORDER + "?q=" + $(this).val(), function(response) {
             Logger.info(response);
             if (response.status == "success") {
                 $(".autofill-select").addClass("hidden");
@@ -2313,7 +2306,7 @@ $("body").on('change', ".order-search", function(event) {
 
 $("body").on('click', ".send-otp", function(event) {
     let isValid = true;
-    $($(this).closest('form').find('input.validate-input')).each(function () {
+    $($(this).closest('form').find('input.validate-input')).each(function() {
         Logger.info(isValid);
         if ($(this).parsley().validate() !== true)
             isValid = false;
@@ -2323,7 +2316,7 @@ $("body").on('click', ".send-otp", function(event) {
         var phone = $("#phone").val();
         var name = $("#fullname").val();
         var email = $("#email").val();
-        var url =$(this).data("url");
+        var url = $(this).data("url");
         $.ajax({
             url: url,
             type: 'GET',
@@ -2346,7 +2339,7 @@ $("body").on('click', ".send-otp", function(event) {
 
 $("body").on('input', ".filter-city", function(event) {
     console.log("add");
-    if($(this).val().length >= 3){
+    if ($(this).val().length >= 3) {
         var query = $(this).val();
         var action = $(this).data("action");
         var url = window.location.href;
@@ -2365,17 +2358,17 @@ $("body").on('input', ".filter-city", function(event) {
 $("body").on('keydown', ".alpha", function(event) {
     return (event.ctrlKey || event.altKey ||
         (65 < event.keyCode && event.keyCode < 90 && event.shiftKey == true) ||
-        (65 < event.keyCode && event.keyCode < 90) || (event.keyCode == 8)|| (event.keyCode == 9) ||
-        (event.keyCode > 34 && event.keyCode < 40)||
+        (65 < event.keyCode && event.keyCode < 90) || (event.keyCode == 8) || (event.keyCode == 9) ||
+        (event.keyCode > 34 && event.keyCode < 40) ||
         (event.keyCode == 46));
 });
 
 
 $("body").on('click', ".pagination a", function(event) {
 
-        let url = window.location.href;
+    let url = window.location.href;
 
-    if(url.indexOf("=") >= 0){
+    if (url.indexOf("=") >= 0) {
         Logger.info("Navigating Page");
 
         let next_url = $(this).attr("href");
@@ -2383,7 +2376,8 @@ $("body").on('click', ".pagination a", function(event) {
         let qs = url.substring(url.indexOf('?') + 1).split('&');
         let ss = next_url.substring(url.indexOf('?') + 1).split('&');
 
-        let result = {}, result2 = {}
+        let result = {},
+            result2 = {}
         for (let i = 0; i < qs.length; i++) {
             qs[i] = qs[i].split('=');
             result[qs[i][0]] = decodeURIComponent(qs[i][1]);
@@ -2406,4 +2400,3 @@ $("body").on('click', ".pagination a", function(event) {
         return false;
     }
 });
-

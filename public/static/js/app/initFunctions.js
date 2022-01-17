@@ -150,8 +150,8 @@ export function initMapPicker() {
     });
 }
 
-export function initZoneMap(){
-    if($(".zone-map").length){
+export function initZoneMap() {
+    if ($(".zone-map").length) {
 
         function resetMap(controlDiv) {
             // Set CSS for the control border.
@@ -200,7 +200,7 @@ export function initZoneMap(){
         };
 
         map = new google.maps.Map(document.getElementById("zone-map"), myOptions);
-         drawingManager = new google.maps.drawing.DrawingManager({
+        drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: google.maps.drawing.OverlayType.POLYGON,
             drawingControl: true,
             drawingControlOptions: {
@@ -213,8 +213,7 @@ export function initZoneMap(){
         });
         drawingManager.setMap(map);
         google.maps.event.addListener(drawingManager, "overlaycomplete", function(event) {
-            if(lastpolygon)
-            {
+            if (lastpolygon) {
                 lastpolygon.setMap(null);
             }
             $('#zone-coords').val(event.overlay.getPath().getArray());
@@ -283,61 +282,61 @@ export function initZoneMap(){
             map.fitBounds(bounds);
         });
 
-        $.get(API_FETCH_ZONES, function(response){
-           Logger.info(response);
+        $.get(API_FETCH_ZONES, function(response) {
+            Logger.info(response);
 
-           if(response.status == "success"){
-               let i = 0;
-               response.data.zones.map((zone)=>{
+            if (response.status == "success") {
+                let i = 0;
+                response.data.zones.map((zone) => {
 
-                   let current_id = false;
-                   if($("#zone_id").length)
-                    current_id = $("#zone_id").val();
+                    let current_id = false;
+                    if ($("#zone_id").length)
+                        current_id = $("#zone_id").val();
 
-                   let poly_bounds = new google.maps.LatLngBounds();
-                   let polygonCoords = [];
+                    let poly_bounds = new google.maps.LatLngBounds();
+                    let polygonCoords = [];
 
-                   for(let k = 0; k < zone.coordinates.length; k++){
-                       polygonCoords.push(new google.maps.LatLng(zone.coordinates[k]['lat'], zone.coordinates[k]['lng']));
-                   }
+                    for (let k = 0; k < zone.coordinates.length; k++) {
+                        polygonCoords.push(new google.maps.LatLng(zone.coordinates[k]['lat'], zone.coordinates[k]['lng']));
+                    }
 
-                   Logger.info("Poly cord object",polygonCoords);
+                    Logger.info("Poly cord object", polygonCoords);
 
-                   for (let j = 0; j < polygonCoords.length; j++) {
-                       poly_bounds.extend(polygonCoords[j]);
+                    for (let j = 0; j < polygonCoords.length; j++) {
+                        poly_bounds.extend(polygonCoords[j]);
 
 
-                   }
+                    }
 
-                   polygons.push(new google.maps.Polygon({
-                       paths: zone.coordinates,
-                       strokeColor: current_id == zone.id ? "#2E0789" : "#d2ac25",
-                       strokeOpacity: 0.8,
-                       strokeWeight: 2,
-                       fillColor: current_id == zone.id ? "#9266fd" : "#fdc403",
-                       fillOpacity: 0.1,
-                       // draggable: current_id == zone.id ? true : false,
-                       editable: current_id == zone.id ? true : false,
-                       zIndex: current_id == zone.id ? 9999 : 99,
+                    polygons.push(new google.maps.Polygon({
+                        paths: zone.coordinates,
+                        strokeColor: current_id == zone.id ? "#2E0789" : "#d2ac25",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: current_id == zone.id ? "#9266fd" : "#fdc403",
+                        fillOpacity: 0.1,
+                        // draggable: current_id == zone.id ? true : false,
+                        editable: current_id == zone.id ? true : false,
+                        zIndex: current_id == zone.id ? 9999 : 99,
 
-                   }));
-                   polygons[i].setMap(map);
-                   i++;
+                    }));
+                    polygons[i].setMap(map);
+                    i++;
 
-                   let infoWindow = new google.maps.InfoWindow({});
+                    let infoWindow = new google.maps.InfoWindow({});
 
-                   // google.maps.event.addListener(polygon, 'mouseover', function (e) {
-                       infoWindow.setContent(zone.name);
-                       // let latLng = e.latLng;
-                       infoWindow.setPosition(poly_bounds.getCenter());
-                       infoWindow.open(map);
+                    // google.maps.event.addListener(polygon, 'mouseover', function (e) {
+                    infoWindow.setContent(zone.name);
+                    // let latLng = e.latLng;
+                    infoWindow.setPosition(poly_bounds.getCenter());
+                    infoWindow.open(map);
 
-                       if(current_id == zone.id)
+                    if (current_id == zone.id)
                         map.setCenter(poly_bounds.getCenter());
-                   // });
+                    // });
 
-               });
-           }
+                });
+            }
 
         });
 
@@ -360,7 +359,7 @@ export function initAllSelectBoxes() {
         });
     }
     if ($(".select-box-model").length) {
-        $(".select-box-model").each(function(){
+        $(".select-box-model").each(function() {
             let model = $(this);
             $(this).select2({
                 tags: false,
@@ -656,7 +655,7 @@ export function initTextAreaEditor() {
     // $("textarea").addClass('editor');
     if ($('textarea').length) {
         // var editor = new FroalaEditor('.editor');
-            $('textarea').not(".select2-search__field").richText();
+        $('textarea').not(".select2-search__field").richText();
 
     }
 
@@ -1173,6 +1172,15 @@ export function initDateBookPicker() {
         $('.singledate').datepicker({
             multidate: false,
             format: 'yyyy-mm-dd'
+        });
+    }
+
+    if ($(".birthdate").length) {
+        $('.birthdate').datepicker({
+            // multidateSeparator:",",
+            format: 'yyyy-mm-dd',
+            endDate: '-18y'
+
         });
     }
 }

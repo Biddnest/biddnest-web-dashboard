@@ -159,7 +159,7 @@
                                             <div class="">
                                                 <div class="pr-3">
                                                     <p class="l-cap f-12 mb-0  p-0 text-right">Manpower</p>
-                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->movement_specifications){{json_decode($booking->movement_specifications->meta, true)['min_man_power']}}@else N/A @endif</p>
+                                                    <p class="mt-0 f-14  p-0 text-right">@if($booking->movement_specifications)0 - {{json_decode($booking->movement_specifications->meta, true)['min_man_power']}}@else N/A @endif</p>
                                                 </div>
                                             </div>
                                         </div>

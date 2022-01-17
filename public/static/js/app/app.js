@@ -1531,8 +1531,8 @@ $("body").on('click', ".payment", function(event) {
                             payment_id: resp.razorpay_payment_id,
                         },
                         success: function(msg) {
-                            // redirectTo(url);
-                            window.location.href = url;
+                            redirectTo(url);
+                            // window.location.href = url;
                         }
                     });
                 },

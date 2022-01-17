@@ -854,6 +854,7 @@ class BookingsController extends Controller
 
         if (!$booking)
             return Helper::response(false, "Invalid Order id");
+
         $meta = json_decode($booking->meta, true);
         if ($meta['start_pin'] == $pin) {
             $meta["end_pin"] = Helper::generateOTP(4);
@@ -863,14 +864,14 @@ class BookingsController extends Controller
                 "meta" => $meta
             ]);
 
-            // $bookingstatus = new BookingStatus;
-            // $bookingstatus->booking_id = $booking->id;
-            // $bookingstatus->status=BookingEnums::$STATUS['in_transit'];
-            // $result_status = $bookingstatus->save();
+            $bookingstatus = new BookingStatus;
+            $bookingstatus->booking_id = $booking->id;
+            $bookingstatus->status=BookingEnums::$STATUS['in_transit'];
+            $result_status = $bookingstatus->save();
 
             $result_status = self::statusChange($booking->id, BookingEnums::$STATUS['in_transit']);
             $user_id=$booking->user_id;
-            $driver_id = $booking->driver->driver_id;
+            $driver_id = $booking->driver->id;
             
             dispatch(function () use ($booking, $user_id, $public_booking_id, $driver_id) {
 
@@ -878,13 +879,12 @@ class BookingsController extends Controller
                 $drivername = Vendor::where('id', $driver_id)->pluck('fname')[0]." ".Vendor::where('id', $driver_id)->pluck('lname')[0];
                 $driverphone = Vendor::where('id', $driver_id)->pluck('phone')[0];
 
-
-                NotificationController::sendTo("user", [$booking->user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
+                NotificationController::sendTo("user", [$user_id], "Hurray! Your trip has been started.", "Your home will be delivered safely.", [
                     "type" => NotificationEnums::$TYPE['booking'],
                     "public_booking_id" => $booking->public_booking_id,
                     "booking_status" => BookingEnums::$STATUS['in_transit']
                 ]);
-                Sms::sendTripStart($phone, $public_booking_id, $drivername, $driverphone);
+                //Sms::sendTripStart($phone, $public_booking_id, $drivername, $driverphone);
             })->afterResponse();
 
             return Helper::response(true, "Your trip Has been started.");

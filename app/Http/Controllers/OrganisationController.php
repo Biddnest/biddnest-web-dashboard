@@ -548,10 +548,19 @@ class OrganisationController extends Controller
         else
             $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $vendor = new Vendor;
-        $image =$data['image'];
+        $image =$data['image']; 
         $uniq = uniqid();
-        $vendor->image =Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['fname']);
+        $avatar_file_name = $data['fname']."-".$data['lname']."-".$uniq.".png";
+
+        $vendor = new Vendor;
+
+        if(!$image){
+            $vendor->image = Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['fname']);
+        }
+        else{
+            $vendor->image =Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['fname']);
+        }
+       
         $vendor->fname = $data['fname'];
         $vendor->lname = $data['lname'];
         $vendor->email = $data['email'];
@@ -606,6 +615,7 @@ class OrganisationController extends Controller
 
         $image_man = new ImageManager(array('driver' => 'gd'));
         $image_name = "BD".$uniq.".png";
+        $avatar_file_name = $data['fname']."-".$data['lname']."-".$uniq.".png";
 
 
         if(!$data['password'])
@@ -633,9 +643,15 @@ class OrganisationController extends Controller
         if($data['dor'])
             $update_data["dor"] =date("Y-m-d", strtotime($data['dor']));
 
-        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE)
-            $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"vendors/".$data['fname']);
-
+        if(filter_var($image, FILTER_VALIDATE_URL) === FALSE){
+            if(!$image){
+                $update_data["image"] = Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['fname']);
+            }
+            else{
+                $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"vendors/".$data['fname']);
+             }
+        }
+           
 
         $vendor_result = Vendor::where(["id"=>$role_id])
             ->update($update_data);

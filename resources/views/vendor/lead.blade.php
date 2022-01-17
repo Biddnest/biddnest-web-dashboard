@@ -67,9 +67,11 @@
                                                         <td style="text-align: left;">{{$vendor->phone}}</td>
                                                         <td style="text-align: left;">{{ucfirst(trans($vendor->city))}}</td>
                                                         <td style="text-align: left;">
+                                                        @if($vendor->zone_map)
                                                             @foreach($vendor->zone_map as $zone_map)
                                                                 {{ucfirst(trans($zone_map->name))}},
                                                             @endforeach
+                                                        @endif
                                                         </td>
                                                         <td> <a  class = "inline-icon-button" href="{{route('onboard-edit-vendors', ["id"=>$vendor->id])}}"><i class="icon dripicons-pencil p-1 mr-2" aria-hidden="true"></i></a>
                                                             <a href="#" class="delete inline-icon-button" data-parent=".org_{{$vendor->id}}" data-confirm="Are you sure, you want delete this Organization permenently? You won't be able to undo this." data-url="{{route('vendor_delete',['id'=>$vendor->id])}}"><i class="icon dripicons-trash p-1" aria-hidden="true"></i></a>

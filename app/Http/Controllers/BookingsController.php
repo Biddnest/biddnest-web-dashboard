@@ -577,7 +577,7 @@ class BookingsController extends Controller
             $vendor_id = $request->token_payload->id;
         }
 
-        $bid_id = Bid::where("organization_id", $organization_id);
+        $bid_id = Bid::where("organization_id", $organization_id)->pluck('booking_id');
 
         switch ($request->type) {
             case "live":
@@ -607,20 +607,24 @@ class BookingsController extends Controller
                 break;
         }
 
-        $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
+        $bookings = Booking::whereIn("id", $bid_id)
             ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'],
 //                BookingEnums::$STATUS['awaiting_bid_result'],
 //                BookingEnums::$STATUS['price_review_pending']
             ]);
 
+            
+
         if ($web) {
             if (isset($request->search)) {
-                $bookings = $bookings->where('public_booking_id', 'like', "%" . $request->search . "%")
-                    ->orWhere('public_enquiry_id', 'like', "%" . $request->search . "%")
-                    ->orWhere('source_meta', 'like', "%" . $request->search . "%")
-                    ->orWhere('destination_meta', 'like', "%" . $request->search . "%");
+                  $bookings->where('public_booking_id', 'like', "%".$request->search."%")
+                    ->orWhere('public_enquiry_id', 'like', "%".$request->search."%")
+                    ->orWhere('source_meta', 'like', "%".$request->search."%")
+                    ->orWhere('destination_meta', 'like', "%".$request->search."%");
             }
         }
+
+        
 
         $bookings->orderBy('id', 'DESC')->with('user');
         if ($request->type == "participated" || $request->type == "past")

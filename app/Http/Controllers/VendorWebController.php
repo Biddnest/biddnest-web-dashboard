@@ -544,7 +544,7 @@ class VendorWebController extends Controller
     }
 
     public function searchResult(Request $request){
-        $bookings=$booking=BookingsController::getBookingsForVendorApp($request, true);;
+        return $bookings=$booking=BookingsController::getBookingsForVendorApp($request, true);;
         return view('vendor-panel.layouts.searchresult', ['bookings'=>$bookings]);
     }
 

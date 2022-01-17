@@ -1084,7 +1084,8 @@ class WebController extends Controller
                 $leads=$leads->where('org_name', 'like', "%".$request->search."%");
             }
 
-        $leads->with('admin')->with('zone');
+        $leads->with('admin')->with('zone_map');
+
         return view('vendor.lead',['vendors'=>$leads->paginate(CommonEnums::$PAGE_LENGTH)]);
     }
 

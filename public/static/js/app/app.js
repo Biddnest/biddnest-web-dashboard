@@ -2357,9 +2357,9 @@ $("body").on('input', ".filter-city", function(event) {
 
 $("body").on('keydown', ".alpha", function(event) {
     return (event.ctrlKey || event.altKey ||
-        (65 < event.keyCode && event.keyCode < 90 && event.shiftKey == true) ||
-        (65 < event.keyCode && event.keyCode < 90) || (event.keyCode == 8) || (event.keyCode == 9) ||
-        (event.keyCode > 34 && event.keyCode < 40) ||
+        (65 <= event.keyCode && event.keyCode <= 90 && event.shiftKey == true) ||
+        (65 <= event.keyCode && event.keyCode <= 90) || (event.keyCode == 8) || (event.keyCode == 9) ||
+        (event.keyCode >= 34 && event.keyCode <= 40) ||
         (event.keyCode == 46));
 });
 

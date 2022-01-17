@@ -2056,7 +2056,7 @@ $("body").on('keydown', ".number, .phone", function(event) {
 
 $("body").on('keypress', ".alphabet", function(event) {
     var keyCode = (event.which) ? event.which : event.keyCode;
-    if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+    if ((keyCode <= 65 || keyCode >= 90) && (keyCode <= 97 || keyCode >= 123) && keyCode != 32)
         return false;
 
     return true;

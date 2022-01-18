@@ -60,10 +60,7 @@
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
                                     </li>--}}
                                     <li class="nav-item">
-                                        <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link disabled" id="requirments-tab" href="#">Schedule</a>
+                                        <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
                                 @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                     {{-- <li class="nav-item">
@@ -74,9 +71,6 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " id="requirments-tab" href="#">Driver Details</a>
                                     </li>
                                 @elseif($bid_status == \App\Enums\BidEnums::$STATUS['won'] && (($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending']) && ($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])))
                                     <li class="nav-item">
@@ -189,16 +183,12 @@
 
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">MOVING DATE</div>
-                                                    @if($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending'])
-
                                                         <div class="value">
                                                             @foreach(json_decode($bidding->moving_dates,true) as $mdate)
-                                                                <span class="status-3">{{$mdate}} </span>
+                                                                <span>{{$mdate}} </span>
                                                             @endforeach
                                                         </div>
-                                                    @else
-                                                        <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
-                                                    @endif
+                
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">CATEGORY</div>
@@ -223,16 +213,29 @@
                                                 <div class="d-felx justify-content-around row  ">
                                                     <div class="bid-badge" style="margin: 0 auto !important;">
                                                         <h4 style="padding: 12px 70px;" class="">₹ {{$bidding->bid_amount}}</h4>
-                                                        <p>Your Bid Price</p>
+                                                        <p>Your Final Quote</p>
+                                                    </div>
+                                                    <div class="bid-badge" style="margin: 0 auto !important;">
+                                                        <h4 style="padding: 12px 70px;" class="">₹ {{$booking->organization_rec_quote}}</h4>
+                                                        <p>Estimated Price</p>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="d-flex justify-content-between  detail-order">
                                                     <div class="data">ORDER ID</div>
                                                     <div class="value">#{{$booking->public_booking_id}}</div>
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">MOVING DATE</div>
-                                                    <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                    @if($booking->status <=  \App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                        <div class="value">
+                                                                @foreach(json_decode($bidding->moving_dates,true) as $mdate)
+                                                                    <span>{{$mdate}} </span>
+                                                                @endforeach
+                                                        </div>
+                                                    @else
+                                                        <div class="value">{{date("d M Y", strtotime(json_decode($bidding->meta, true)['moving_date']))}}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="d-flex justify-content-between detail-order">
                                                     <div class="data">CATEGORY</div>

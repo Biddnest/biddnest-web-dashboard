@@ -577,7 +577,7 @@ class BookingsController extends Controller
             $vendor_id = $request->token_payload->id;
         }
 
-        $bid_id = Bid::where("organization_id", $organization_id)->pluck('booking_id');
+        $bid_id = Bid::where("organization_id", $organization_id);
 
         switch ($request->type) {
             case "live":
@@ -591,7 +591,7 @@ class BookingsController extends Controller
             case "bookmarked":
                 $bid_id->where("bookmarked", CommonEnums::$YES);
                 if($web)
-                    $bid_id->where("status","!=",BidEnums::$STATUS["expired"]);
+                    $bid_id->where("status", BidEnums::$STATUS['active']);
                 break;
 
             case "participated":
@@ -607,9 +607,11 @@ class BookingsController extends Controller
                 break;
         }
 
-        $bookings = Booking::whereIn("id", $bid_id)
-            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'],
-//                BookingEnums::$STATUS['awaiting_bid_result'],
+        
+
+        $bookings = Booking::whereIn("id", $bid_id->pluck('booking_id'))
+            ->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['in_progress'],
+               BookingEnums::$STATUS['hold']
 //                BookingEnums::$STATUS['price_review_pending']
             ]);
 
@@ -631,8 +633,7 @@ class BookingsController extends Controller
             $bookings->with('status_history');
 
 
-        $bookings->where("status", "!=", BookingEnums::$STATUS['hold'])
-            ->with('service')
+        $bookings->with('service')
             ->with('movement_dates')
             ->with(['bid' => function ($bid) use ($organization_id) {
                 $bid->where("organization_id", $organization_id)
@@ -666,10 +667,10 @@ class BookingsController extends Controller
                 $bookings->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']]);
 
             if ($request->type == "past")
-                $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                $bookings->whereIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled'], BookingEnums::$STATUS['cancel_request']]);
 
             if ($request->type == "scheduled")
-                $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']]);
+                $bookings->whereNotIn("status", [BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled'], BookingEnums::$STATUS['cancel_request']]);
         }
 
         if (isset($request->service_id))

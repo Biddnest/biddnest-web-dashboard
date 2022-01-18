@@ -151,7 +151,7 @@
                                         <td style="padding: 14px; ">{{$booking->created_at->format('d M Y')}}</td>
                                         @if($type == "participated")
                                             <td style="padding: 14px; text-align: center !important; ">{{$booking->bid->bid_amount}}</td>
-{{--                                            <td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}
+                                            {{--<td style="padding: 14px;">{{ucfirst(trans($booking->bid->vendor->fname))}} {{ucfirst(trans($booking->bid->vendor->lname))}} </td>--}}
                                         @endif
                                         @if($type != "scheduled")
                                             <td style="padding: 10px;"><span class="timer-bg text-center status-badge timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span>
@@ -208,14 +208,14 @@
                                                     </a>
                                                     <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                         <i class="tooltip-trigger">
-                                                            @if($booking->bid && ($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO))
+                                                            @if($type != "bookmarked"))
                                                                 <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
                                                                      title="Add To Bookmark">
                                                             @else
                                                                 <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
-                                                                     title="Add To Bookmark">
+                                                                     title="Added To Bookmark">
                                                             @endif
                                                         </i>
                                                     </a>
@@ -238,14 +238,14 @@
                                                 </a>
                                                 <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                     <i class="tooltip-trigger">
-                                                            @if($booking->bid && ($booking->bid->bookmarked == \App\Enums\CommonEnums::$NO))
+                                                           @if($type != "bookmarked"))
                                                                 <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                             data-toggle="tooltip" data-placement="top"
                                                             title="Add To Bookmark">
                                                             @else
                                                                 <img src="{{asset('static/vendor/images/fill-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
-                                                                     title="Add To Bookmark">
+                                                                     title="Added To Bookmark">
                                                             @endif
                                                     </i>
                                                 </a>

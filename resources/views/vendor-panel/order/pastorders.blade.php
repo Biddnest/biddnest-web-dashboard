@@ -124,11 +124,13 @@
                                     <td style="padding: 14px;" >{{$booking->created_at->format('d M Y')}}</td>
 {{--                                    <td style="text-align: center !important; padding: 14px;">{{json_decode($booking->bid->meta, true)['moving_date']}}</td>--}}
                                     <td style="text-align: center !important; padding: 14px;">{{$booking->final_quote}}</td>
-                                    <td class="" style="padding: 14px;"><span class="complete-bg  text-center td-padding">
+                                    <td class="text-center" style="padding: 14px;"><span class="complete-bg  text-center td-padding">
                                             @if($booking->status == \App\Enums\BookingEnums::$STATUS['completed'])
                                                 Completed
                                             @elseif($booking->status ==\App\Enums\BookingEnums::$STATUS['cancelled'])
                                                 cancelled
+                                            @elseif($booking->status ==\App\Enums\BookingEnums::$STATUS['cancel_request'])
+                                                Request to cancel
                                             @endif
                                         </span></td>
                                     <td style="padding: 14px;"><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">

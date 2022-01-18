@@ -280,12 +280,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12  p-0  pb-0" >
-                                    <div class="heading p-8 mtop-22">
-                                        <p class="text-muted light">
-                                            <span class="bold">Note:</span>
-                                            you can modify the old price for individual item OR you can directly set a new Total Price
-                                        </p>
-                                    </div>
+                                    
                                     <table class="table text-left theme-text tb-border2" id="items" >
                                         <thead class="secondg-bg bx-shadowg p-0 f-14">
                                         <tr class="">
@@ -350,6 +345,12 @@ Debugbar::info($price);
                                     <div class="col-2">
                                         <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
                                     </div>
+                                </div>
+                                <div class="heading p-8 mtop-22">
+                                        <p class="text-muted light">
+                                            <span class="bold">Note:</span>
+                                            you can modify the old price for individual item OR you can directly set a new Total Price
+                                        </p>
                                 </div>
                             </div>
 

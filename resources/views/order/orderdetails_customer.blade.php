@@ -168,6 +168,17 @@
                                 <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
                                   Booking Status
                                 </div>
+
+                                @if(in_array($booking->status,[\App\Enums\BookingEnums::$STATUS['cancel_request'],\App\Enums\BookingEnums::$STATUS['cancelled'],\App\Enums\BookingEnums::$STATUS['bounced']]))
+                                <div class="theme-text f-14  bold p-15 pl-0" style="padding-top: 5px;">
+                                  Cancellation Reason
+                                </div>
+
+                                <div class="theme-text f-14 bold p-15 pl-0" style="padding-top: 5px;">
+                                  Cancellation Description
+                                </div>
+                                @endif
+
                             </div>
 
                             <div class="col-sm-8  match-item white-bg  margin-topneg-15 pt-10">
@@ -348,6 +359,16 @@
                                     @endswitch
                                 </div>
 
+                                @if(in_array($booking->status,[\App\Enums\BookingEnums::$STATUS['cancel_request'],\App\Enums\BookingEnums::$STATUS['cancelled'],\App\Enums\BookingEnums::$STATUS['bounced']]))
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    {{json_decode($booking->cancelled_meta, true)['reason'] ?? "-"}}
+                                </div>
+
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+                                    {{json_decode($booking->cancelled_meta, true)['desc'] ?? "-"}}
+                                </div>
+                                @endif
+
                            {{-- <div class="d-flex  mtop-5">
                                 <i class="icon dripicons-pencil p-1 cursor-pointer " aria-hidden="true"></i> <a href="{{route('order-details',["id"=>$booking->id])}}" class="ml-1 text-decoration-none primary-text">Edit</a>
                             </div>--}}
@@ -437,5 +458,3 @@
 </div>
 
 @endsection
-
-

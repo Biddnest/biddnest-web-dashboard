@@ -352,6 +352,7 @@
                                     </li>
                                 </ul>
                     </div>
+
                     <div class="revenue-chart">
                         <canvas id="myRevenueChart" height="230px" width="700px"></canvas>
                     </div>

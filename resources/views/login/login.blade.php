@@ -1,5 +1,5 @@
 @extends('login_layout.app')
-@section('title') Biddnest Amin Login @endsection
+@section('title') Biddnest Dashboard Login @endsection
 @section('content')
 <main data-barba="container" data-barba-namespace="login">
     <div class="loader"></div>

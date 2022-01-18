@@ -168,13 +168,13 @@
                                 <div class="col-md-6 col-xs-12  col-sm-12 mt-4 pl-4 text-left">
                                     <div class="d-flex justify-content-between" style="width: 94%;">
                                         <div>
-{{--                                            {{(string)json_decode($booking->bid,true)['meta']}}--}}
+                                            {{--  {{(string)json_decode($booking->bid,true)['meta']}}--}}
                                             <h6 class="l-cap f-14 p-0">Date</h6>
                                             <h5 class="f-16">@if($booking->movement_specifications){{date('d M Y', strtotime(json_decode($booking->movement_specifications->meta, true)['moving_date']))}}@endif</h5>
                                         </div>
                                         <div>
-                                            <h6 class="l-cap f-14">Price </h6>
-                                            <h5 class="f-16">Rs. {{$booking->final_quote}}</h5>
+                                            <h6 class="l-cap f-14 text-right">Price </h6>
+                                            <h5 class="f-16 text-right">Rs. {{$booking->final_quote}}</h5>
                                         </div>
                                     </div>
                                     <div class="d-flex  justify-content-between mt-2 " style="width: 97%;">
@@ -183,8 +183,8 @@
                                             <h5 class="f-16">{{$booking->public_booking_id}}</h5>
                                         </div>
                                         <div>
-                                            <h6 class="l-cap f-14">Distance</h6>
-                                            <h5 class="f-16">{{json_decode($booking->meta, true)['distance']}} KM</h5>
+                                            <h6 class="l-cap f-14 text-right">Distance</h6>
+                                            <h5 class="f-16 text-right">{{json_decode($booking->meta, true)['distance']}} KM</h5>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between  mt-2 " style="width: 92%;">
@@ -211,8 +211,20 @@
                                             </h5>
                                         </div>
                                         <div class="margin-cat">
-                                            <h6 class="l-cap f-14">Category</h6>
-                                            <h5 class="f-16">{{ucwords($booking->service->name)}}</h5>
+                                            <h6 class="l-cap f-14 text-right">Category</h6>
+                                            <h5 class="f-16 text-right">{{ucwords($booking->service->name)}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between  mt-2 " style="width: 92%;">
+                                        <div>
+                                            
+                                        </div>
+                                        <div class="margin-cat">
+                                            <h6 class="l-cap f-14 text-right">Moving Type</h6>
+                                            <h5 class="f-16 text-right">
+                                                @if($booking->movement_specifications)
+                                                    {{ucwords(json_decode($booking->movement_specifications->meta, true)['type_of_movement'])}}
+                                                @endif</h5>
                                         </div>
                                     </div>
                                 </div>

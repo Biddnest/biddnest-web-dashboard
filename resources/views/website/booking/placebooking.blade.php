@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="border-bottom">
                                             <span class="center successful-icon mt-2 view-block text-view-center">
-                                            <img class="w-150" src="{{ asset('static/website/images/images/gifs/4.gif')}}" alt="some-picture" />
+                                                <img class="w-150" src="{{asset('static/vendor/images/Group 14106.svg')}}" alt="some-picture" />
                                             </span>
                                             <p class="text-muted f-16 center italic order-status-message text-view-center">
                                                 Your Order has been submitted</p>

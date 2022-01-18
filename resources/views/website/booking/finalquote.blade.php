@@ -29,6 +29,9 @@
                 <div class="tab-content margin-topneg-7 border-top" id="myTabContent">
                     <div class="tab-pane fade show active" id="past" role="tabpanel" aria-labelledby="past-tab">
                         @if(($booking->status == \App\Enums\BookingEnums::$STATUS['biding']) || ($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding']))
+                            <span class="center successful-icon mt-2 view-block text-view-center">
+                                <img class="w-150" src="{{ asset('static/website/images/images/gifs/4.gif')}}" alt="some-picture" />
+                            </span>
                             <div class="text-center" id="timer" data-count="{{\Carbon\Carbon::now()->diffInSeconds($booking->bid_result_at)}}">
                                 <h4 class="border-bottom p-4">ENQUIRY ID <span>#{{$booking->public_enquiry_id}}</span></h4>
                                 <p class="text-muted pt-4 italic">
@@ -59,9 +62,9 @@
                                         </div>
                                         <div class="col-12 mt-2 final-price center f-direction">
                                             <h4 class="d-flex center">Final Bidding</h4>
-                                            <div class="price-circle mt-2 theme-text">
-                                                <h4 class="m-10">₹ {{$booking->final_quote}}</h4>
-                                                <p class="final-price">Final Price</p>
+                                            <div class="price-circle mt-2 theme-text" style="display:table !important; height: 200px !important; width: 200px !important;">
+                                                <h4 class="m-10" style="dispaly:table-cell !important; verticle-align:middle !important; text-align:center !important;">₹ {{$booking->final_quote}}</h4>
+                                                <p class="final-price" style="dispaly:table-cell !important; verticle-align:middle !important; text-align:center !important;">Final Price</p>
                                             </div>
                                             <h5 class="theme-text mt-2 f-16">
                                                 @if($booking->booking_type == \App\Enums\BookingEnums::$BOOKING_TYPE['premium'])
@@ -73,18 +76,31 @@
                                         </div>
                                     </div>
                                     <div class="row d-flex center border-bottom mt-4">
-                                        {{--<div class="pr-3">
-                                            <p>VEHICLE NAME</p>
-
-                                            <p >N/A @if($booking->vehicle){{ucwords($booking->vehicle->name)}} {{$booking->vehicle->number}}@endif</p>
-                                        </div>--}}
+                                        <div class="pr-3">
+                                            <p><b>OREDR ID</b></p>
+                                            <p class="text-center f-14">{{$booking->public_booking_id ?? ''}}</p>
+                                        </div>
+                                        <div class="pr-3">
+                                            <p><b>INITIAL QUOTE</b></p>
+                                            <p class="text-center f-14">{{$booking->final_estimated_quote ?? ''}}</p>
+                                        </div>
+                                        <div class="pr-3">
+                                            <p><b>FINAL QUOTE</b></p>
+                                            <p class="text-center f-14">{{$booking->final_quote ?? ''}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex center mt-4">
                                         <div class="pr-3">
                                             <p><b>VEHICLE TYPE</b></p>
-                                            <p class="text-center">@if($booking->movement_specifications->meta){{ucwords(json_decode($booking->movement_specifications->meta, true)['vehicle_type']) ?? ''}}@endif</p>
+                                            <p class="text-center f-14">@if($booking->movement_specifications->meta){{ucwords(json_decode($booking->movement_specifications->meta, true)['vehicle_type']) ?? ''}}@endif</p>
                                         </div>
                                         <div class="pr-3">
                                             <p><b>MANPOWER</b></p>
-                                            <p class="text-center"> @if($booking->movement_specifications->meta){{json_decode($booking->movement_specifications->meta, true)['min_man_power'] ?? ''}} - {{json_decode($booking->movement_specifications->meta, true)['max_man_power'] ?? ''}}@endif</p>
+                                            <p class="text-center f-14"> @if($booking->movement_specifications->meta){{json_decode($booking->movement_specifications->meta, true)['min_man_power'] ?? ''}} - {{json_decode($booking->movement_specifications->meta, true)['max_man_power'] ?? ''}}@endif</p>
+                                        </div>
+                                        <div class="pr-3">
+                                            <p><b>MOVEMENT TYPE</b></p>
+                                            <p class="text-center f-14"> @if($booking->movement_specifications->meta){{ucwords(json_decode($booking->movement_specifications->meta, true)['type_of_movement']) ?? ''}}@endif</p>
                                         </div>
                                     </div>
                                 </div>

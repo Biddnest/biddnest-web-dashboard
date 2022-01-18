@@ -70,15 +70,15 @@ class VendorWebController extends Controller
 
     public function dashboard(Request $request)
     {
-        $count_live=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['active']])->whereIn('booking_id', Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->pluck('id'))->count();
+        $count_live=Bid::where(['organization_id'=>Session::get('organization_id'), 'status'=>BidEnums::$STATUS['active']])->whereIn('booking_id', Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->pluck('id'))->count();
         $count_ongoing=Bid::where(['organization_id'=>Session::get('organization_id')])->whereIn('status', [BidEnums::$STATUS['won']])->whereIn('booking_id', Booking::where("organization_id", 1)->whereNotIn('status', [BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['cancelled']])->pluck('id'))->count();
         $count_won= Bid::where(['status'=>BidEnums::$STATUS['won'], 'vendor_id'=>Session::get('account')['id']])->count();
         $count_branch=Organization::where("id", Session::get('account')['id'])->orWhere("parent_org_id", Session::get('account')['id'])->count();
         $count_emp=Vendor::where('organization_id', Session::get('organization_id'))->count();
         $total_revenue =Payout::where('organization_id', Session::get('organization_id'))->sum('final_payout');
 
-        $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->latest()->limit(3)->get();
-
+        $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->whereIn('id', Bid::where(['organization_id'=>Session::get('organization_id'), 'status'=>BidEnums::$STATUS['active']])->pluck('booking_id'))->latest()->limit(3)->get();
+        
         $days = 7;
         if($request->period == "monthly")
             $days = 30;

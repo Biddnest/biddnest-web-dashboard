@@ -189,7 +189,7 @@
                                                 {{$booking->service->name}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                Rs. {{$booking->final_quote}}
+                                                Rs. {{$bidding->bid_amount}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 @foreach(json_decode($booking->bid->moving_dates, true) as $mdates)

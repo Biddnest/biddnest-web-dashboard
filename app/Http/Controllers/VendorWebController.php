@@ -77,7 +77,12 @@ class VendorWebController extends Controller
         $count_emp=Vendor::where('organization_id', Session::get('organization_id'))->count();
         $total_revenue =Payout::where('organization_id', Session::get('organization_id'))->sum('final_payout');
 
-        $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])->latest()->limit(3)->get();
+
+
+        $booking_live= Booking::whereIn('status', [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding']])
+        ->whereNotIn("status",Bid::where("organization_id", Session::get('organization_id'))->where("status", BidEnums::$STATUS['bid_submitted'])->pluck("booking_id"))
+        ->limit(3)
+        ->get();
 
         $days = 7;
         if($request->period == "monthly")
@@ -448,7 +453,7 @@ class VendorWebController extends Controller
             $rank=BookingsController::getposition(Session::get('account')['id'], $request->id)['rank'];
         }
 
-    
+
         return view('vendor-panel.order.mybid', ['booking'=>$booking, 'bidding'=>$bidding, 'rank'=>$rank, 'bid_status'=>$status,
             'graph'=>[
                 "revenue"=>[

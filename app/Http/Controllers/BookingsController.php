@@ -489,6 +489,11 @@ class BookingsController extends Controller
             ->update([
                 "meta" => json_encode($meta)
             ]);
+        
+        Booking::where(["public_booking_id" => $public_booking_id])
+        ->update([
+            "final_moving_date"=>Carbon::parse($date)->format('Y-m-d'),
+        ]);
 
         dispatch(function () use ($exist) {
 

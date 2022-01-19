@@ -554,6 +554,8 @@ Route::prefix('vendor')->group(function(){
 
         Route::get('/reports',[VendorWebController::class,'getReports'])->name("vendor.reports");
 
+        Route::get('/base-prices',[VendorWebController::class,'basePrices'])->name("vendor.base_prices");
+
     });
 });
 

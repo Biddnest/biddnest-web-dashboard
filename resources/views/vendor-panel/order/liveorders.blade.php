@@ -208,7 +208,7 @@
                                                     </a>
                                                     <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                         <i class="tooltip-trigger">
-                                                            @if($type != "bookmarked"))
+                                                            @if($type != "bookmarked")
                                                                 <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                                      data-toggle="tooltip" data-placement="top"
                                                                      title="Add To Bookmark">
@@ -238,7 +238,7 @@
                                                 </a>
                                                 <a href="#" class="bookings inline-icon-button" data-url="{{route('api.booking.bookmark', ['id'=>$booking->public_booking_id])}}" data-confirm="Do you want add this booking in Bookmarked?">
                                                     <i class="tooltip-trigger">
-                                                           @if($type != "bookmarked"))
+                                                           @if($type != "bookmarked")
                                                                 <img src="{{asset('static/vendor/images/later-mark.svg')}}" alt=""
                                                             data-toggle="tooltip" data-placement="top"
                                                             title="Add To Bookmark">

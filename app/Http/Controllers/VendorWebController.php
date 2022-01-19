@@ -386,8 +386,10 @@ class VendorWebController extends Controller
 
         $booking->status_ids = $hist;
 
+       $price = BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true);
+
         $vehicle=VehicleController::getVehicles(Session::get('organization_id'), true);
-        return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle, 'bidding'=>$bidding]);
+        return view('vendor-panel.order.details', ['booking'=>$booking, 'vehicles'=>$vehicle, 'bidding'=>$bidding, 'price'=>$price]);
     }
 
     public function bookingRequirment(Request $request)

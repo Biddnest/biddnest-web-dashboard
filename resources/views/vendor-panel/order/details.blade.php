@@ -291,17 +291,13 @@
                                         </tr>
                                         </thead>
                                         <tbody class="mtop-20 f-13 calc-total" data-result=".calc-result">
-                                        @php
-                                            $price = \App\Http\Controllers\BidController::getPriceList($booking->public_booking_id, \Illuminate\Support\Facades\Session::get('organization_id'), true);
-Debugbar::info($price);
-                                        @endphp
                                         @if($price['base_price'] != 0)
                                             <tr>
                                                 <td>Base Price</td>
                                                 <td>-</td>
                                                 <td>-</td>
                                                 <td>
-                                                    <input class="form-control disabled border-purple w-88 validate-input calc-result validate-input" name="base_amount:number" id="amount_base" value="{{$price['base_price']}}" type="number" placeholder="0.00"/>
+                                                    <input class="form-control disabled border-purple w-88 validate-input calc-result validate-input" name="base_amount" id="amount_base" value="{{$price['base_price']}}" type="text" data-parsley-type="number" placeholder="0.00"/>
                                                 </td>
                                             </tr>
                                         @endif
@@ -325,13 +321,13 @@ Debugbar::info($price);
                                                             @if($inv_price['bid_inventory_id'] == $inventory->id)
                                                                  <input type="hidden" name="inventory[][is_custom]" value="{{$inv_price['bid_inventory_id']}}:boolean"/>
 
-                                                                    <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="number" placeholder="2000"/>
+                                                                    <input class="form-control border-purple w-88 calc-total-input validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="{{$inv_price['price'] ?? '0'}}" type="text" data-parsley-type="number" placeholder="2000"/>
                                                            @endif
                                                         @endforeach
                                                     @else
                                                         <input type="hidden" name="inventory[][is_custom]:boolean" value="false"/>
 
-                                                        <input class="form-control disabled border-purple w-88 validate-input" name="inventory[][amount]:number" id="amount_{{$inventory->id}}" value="0.00" type="number" placeholder="0.00" readonly/>
+                                                        <input class="form-control disabled border-purple w-88 validate-input" name="inventory[][amount]" id="amount_{{$inventory->id}}" value="0.00" type="text" data-parsley-type="number" placeholder="0.00" readonly/>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -343,7 +339,7 @@ Debugbar::info($price);
                                 <div class="d-flex mtop-22 mb-4 flex-row p-10 justify-content-between secondg-bg status-badge heading">
                                     <div><p class="mt-2">Total Price</p></div>
                                     <div class="col-2">
-                                        <input class="form-control border-purple calc-result validate-input" type="number" value="{{$price['total']}}" name="bid_amount" id="bid_amount" required placeholder="4000" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
+                                        <input class="form-control border-purple calc-result validate-input" type="text" data-parsley-type="number" value="@if($price['total'] == 0){{$price['base_price']}}@else {{$price['total']}}@endif" name="bid_amount" id="bid_amount" required placeholder="000.00" data-est-quote="{{str_replace(",", "", $booking->final_estimated_quote)}}" />
                                     </div>
                                 </div>
                                 <div class="heading p-8 mtop-22">

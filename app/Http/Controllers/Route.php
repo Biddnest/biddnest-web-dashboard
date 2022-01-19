@@ -1326,9 +1326,10 @@ class Route extends Controller
             'organization_id' => 'required',
             'vendor_id'=>'required',
             'inventory.*.booking_inventory_id'=>'required|integer',
-            'inventory.*.amount'=>'required',
+            'inventory.*.amount'=>'required|numeric',
+            'inventory.*.is_custom'=>'required',
 
-            'bid_amount'=>'required',
+            'bid_amount'=>'required|numeric',
             'type_of_movement'=>'required|string',
             'moving_date'=>'required',
             'vehicle_type'=>'required|string',

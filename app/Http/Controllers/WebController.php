@@ -681,7 +681,11 @@ class WebController extends Controller
             $bid->orderBy('updated_at')->orderBy('status')->with(['organization'=>function($query){
                 $query->with('vehicle')->with('admin');
             }])->with('vendor');
-        }])->with(['payment'=>function($q){
+        }])
+        ->with(["bid"=>function($query){
+          $query->where("status",BidEnums::$STATUS['won']);
+        }])
+        ->with(['payment'=>function($q){
            $q->with('coupon');
        }])
            ->findOrFail($request->id);

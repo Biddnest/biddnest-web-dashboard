@@ -46,14 +46,14 @@
                                     @endforeach
                                 </div>
                             </div>
-                            @if($booking->bid->status != \App\Enums\BidEnums::$STATUS['bid_submitted'] || $booking->bid->status != \App\Enums\BidEnums::$STATUS['active'])
+                            @if($booking->bid->status == \App\Enums\BidEnums::$STATUS['bid_submitted'] || $booking->bid->status == \App\Enums\BidEnums::$STATUS['active'])
                                 <div class="d-felx justify-content-center pt-4 border-top row">
                                     <div class="bid-badge mr-4">
-                                        <h4 class="step-title">₹ {{$booking->final_estimated_quote}}</h4>
+                                        <h4 class="step-title" style="padding: 12px 34px;">₹ {{$booking->organization_rec_quote}}</h4>
                                         <p>Estimated Price</p>
                                     </div>
                                     <div class="bid-badge mr-4">
-                                        <h4 class="step-title"><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h4>
+                                        <h4 class="step-title " style="padding: 12px 34px;"><span class="text-center timer" data-time="{{$booking->bid_result_at}}" style="min-width: 0px !important;"></span></h4>
                                         <p>Time Left</p>
                                     </div>
                                 </div>

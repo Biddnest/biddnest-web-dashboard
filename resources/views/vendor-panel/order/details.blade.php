@@ -219,7 +219,11 @@
                                                 {{$booking->service->name}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                Rs. {{$booking->organization_rec_quote}}
+                                                @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'])
+                                                Rs. {{$bidding->bid_amount}}
+                                                @else    
+                                                    Rs. {{$booking->organization_rec_quote}}
+                                                @endif
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 @if($bidding && json_decode($bidding->meta, true)['moving_date'])

@@ -112,11 +112,73 @@
 
                                         @endswitch
                                     </td>
-                                    <td style="padding: 14px;"><a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">
-                                            <i class="tooltip-trigger">
-                                                <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
-                                            </i>
-                                        </a>
+                                    <td style="padding: 14px;">
+                                        @switch($booking->status)
+                                            @case(\App\Enums\BookingEnums::$STATUS['payment_pending'])
+                                                <a href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+                                            
+                                            @case(\App\Enums\BookingEnums::$STATUS['pending_driver_assign'])
+                                            <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_pickup'])
+                                            <a href="{{route('vendor.driver-details',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['in_transit'])
+                                                <a href="{{route('vendor.in-transit',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['price_review_pending'])
+                                                <a href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['completed'])
+                                                <a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['cancelled'])
+                                                <a href="{{route('vendor.complete-order',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                            @case(\App\Enums\BookingEnums::$STATUS['awaiting_bid_result'])
+                                                <a href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">
+                                                    <i class="tooltip-trigger">
+                                                        <img src="{{asset('static/vendor/images/Icon material-remove-red-eye.svg')}}" alt="" data-toggle="tooltip" data-placement="top" title="View Order Detail">
+                                                    </i>
+                                                </a>
+                                            @break
+
+                                        @endswitch
                                     </td>
                                 </tr>
                             @endforeach

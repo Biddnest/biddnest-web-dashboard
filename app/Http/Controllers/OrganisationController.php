@@ -207,14 +207,20 @@ class OrganisationController extends Controller
         $org_email=Organization::where('email', $data['email'])->first();
         $vendor_email=Vendor::where('email', $admin['email'])->first();
         if($org_email || $vendor_email)
-            return Helper::response(false,"Email id is already exist in system");
+        {
+            if($id != $org_email->id || $vendor_email->id !=  $vendor_id)
+                return Helper::response(false,"Email id is already exist in system");
+        }
+            
 
         $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
         $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
-        if($org_phone || $vendor_phone)
-            return Helper::response(false,"Phone no is already exist in system");
-
-
+        if($org_email || $vendor_email)
+        {
+            if($id != $org_email->id || $vendor_email->id !=  $vendor_id)
+                return Helper::response(false,"Phone no is already exist in system");
+        }
+        
         //$organization_exist = Organization::findOrFail($id);
         $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
         if(!$vendor_exist)
@@ -262,6 +268,8 @@ class OrganisationController extends Controller
         }
 
         $zones = [];
+        OrganizationCity::where("organization_id", $id)->delete();
+        OrganizationZone::where("organization_id", $id)->delete();
         foreach($data['cities'] as $city) {
             $oc=new OrganizationCity();
             $oc->organization_id = $id;

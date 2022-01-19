@@ -351,8 +351,8 @@
                                         <div class="form-input">
                                             <label class="full-name">Base distance in km</label>
                                             <span class="">
-                                            <input type="text" name="basedist" placeholder="Distance"
-                                                   class="form-control number" required>
+                                            <input type="text" name="basedist" data-parsley-type="number" placeholder="Distance"
+                                                   class="form-control" required>
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>
                                         </div>
@@ -362,8 +362,8 @@
                                         <div class="form-input">
                                             <label class="full-name">Extra Base distance in km</label>
                                             <span class="">
-                                            <input type="text" name="extrabasedist" placeholder="Extra Distance"
-                                                   class="form-control number" required>
+                                            <input type="text" name="extrabasedist" data-parsley-type="number" placeholder="Extra Distance"
+                                                   class="form-control" required>
                                             <span class="error-message">Please enter valid Distance</span>
                                             </span>
                                         </div>

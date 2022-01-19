@@ -143,39 +143,39 @@
                             <div class="row" style="margin-bottom: 30px;">
                                 <div class="col-md-3">
                                     <label>Marked Price Economic</label>
-                                    <input type="number" class="form-control bid-amount" value="{{$price->mp_economic}}" name="subservice[market][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control bid-amount" value="{{$price->mp_economic}}" name="subservice[market][price][economy]" min="0.00" required>
                                     <input type="hidden" class="form-control" value="{{$price->organization_id}}" name="id" required>
                                     <input type="hidden" class="form-control" value="{{$price->id}}" name="subservice[id]" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Biddnest Price Economy</label>
-                                    <input type="number" class="form-control" value="{{$price->bp_economic}}" name="subservice[bidnest][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control" value="{{$price->bp_economic}}" name="subservice[bidnest][price][economy]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Market Price Economy</label>
-                                    <input type="number" class="form-control " value="{{$price->mp_additional_distance_economic_price }}" name="subservice[mp_additional][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="{{$price->mp_additional_distance_economic_price }}" name="subservice[mp_additional][price][economy]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Biddnest Price Economy</label>
-                                    <input type="number" class="form-control " value="{{$price->bp_additional_distance_economic_price}}" name="subservice[bp_additional][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="{{$price->bp_additional_distance_economic_price}}" name="subservice[bp_additional][price][economy]" min="0.00" required>
                                 </div>
                             </div>
                             <div class="row secondg-bg margin-topneg-15 pt-10" style="margin-right: -9px !important; padding-bottom: 10px;">
                             <div class="col-md-3">
                                     <label>Market Price Premium</label>
-                                    <input type="number" class="form-control" value="{{$price->mp_premium}}" name="subservice[market][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control" value="{{$price->mp_premium}}" name="subservice[market][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Biddnest Price Premium</label>
-                                    <input type="number" class="form-control" value="{{$price->bp_premium}}" name="subservice[bidnest][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control" value="{{$price->bp_premium}}" name="subservice[bidnest][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Market Price Premium</label>
-                                    <input type="number" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="subservice[mp_additional][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control" value="{{$price->mp_additional_distance_premium_price}}" name="subservice[mp_additional][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Biddnest Price Premium</label>
-                                    <input type="number" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="subservice[bp_additional][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="{{$price->bp_additional_distance_premium_price}}" name="subservice[bp_additional][price][premium]" min="0.00" required>
                                 </div>
                             </div>
                         </div>
@@ -309,38 +309,38 @@
                             <div class="row" style="margin-bottom: 30px; margin-left: 0 !important; margin-right: 0 !important;">
                                 <div class="col-md-3">
                                     <label>Marked Price Economic</label>
-                                    <input type="number" class="form-control" value="0.00" name="subservice[market][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control" value="0.00" name="subservice[market][price][economy]" min="0.00" required>
                                     <input type="hidden" class="form-control" value="{{$id}}" name="id" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Biddnest Price Economy</label>
-                                    <input type="number" class="form-control " value="0.00" name="subservice[bidnest][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="0.00" name="subservice[bidnest][price][economy]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Market Price Economy</label>
-                                    <input type="number" class="form-control " value="0.00" name="subservice[mp_additional][price][economy]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="0.00" name="subservice[mp_additional][price][economy]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Biddnest Price Economy</label>
-                                    <input type="number" class="form-control " value="0.00" name="subservice[bp_additional][price][economy]" min="0.00" required >
+                                    <input type="text" data-parsley-type="number" class="form-control " value="0.00" name="subservice[bp_additional][price][economy]" min="0.00" required >
                                 </div>
                             </div>
                             <div class="row secondg-bg margin-topneg-15 pt-10" style="padding-bottom: 10px; margin-left: 0 !important; margin-right: 0 !important;">
                                 <div class="col-md-3">
                                     <label>Market Price Premium</label>
-                                    <input type="number" class="form-control" value="0.00" name="subservice[market][price][premium]" min="0.00" required >
+                                    <input type="text" data-parsley-type="number" class="form-control" value="0.00" name="subservice[market][price][premium]" min="0.00" required >
                                 </div>
                                 <div class="col-md-3">
                                     <label>Biddnest Price Premium</label>
-                                    <input type="number" class="form-control " value="0.00" name="subservice[bidnest][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="0.00" name="subservice[bidnest][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Market Price Premium</label>
-                                    <input type="number" class="form-control" value="0.00" name="subservice[mp_additional][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control" value="0.00" name="subservice[mp_additional][price][premium]" min="0.00" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Add. Biddnest Price Premium</label>
-                                    <input type="number" class="form-control " value="0.00" name="subservice[bp_additional][price][premium]" min="0.00" required>
+                                    <input type="text" data-parsley-type="number" class="form-control " value="0.00" name="subservice[bp_additional][price][premium]" min="0.00" required>
                                 </div>
                             </div>
                         </div>

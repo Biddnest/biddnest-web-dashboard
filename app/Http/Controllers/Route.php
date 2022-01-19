@@ -365,7 +365,7 @@ class Route extends Controller
             'service_type' =>'required',
             'service.*' =>'required',
             'commission' =>'required',
-            'basedist'=>'required|integer',
+            'basedist'=>'required|numeric',
             'extrabasedist'=>'required|numeric'
         ]);
 
@@ -472,14 +472,14 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id'=>'required',
             'subservice.id'=>'required',
-            'subservice.bidnest.price.economy'=>'required',
-            'subservice.bidnest.price.premium'=>'required',
-            'subservice.market.price.economy'=>'required',
-            'subservice.market.price.premium'=>'required',
-            'subservice.mp_additional.price.economy'=>'required',
-            'subservice.mp_additional.price.premium'=>'required',
-            'subservice.bp_additional.price.economy'=>'required',
-            'subservice.bp_additional.price.premium'=>'required',
+            'subservice.bidnest.price.economy'=>'required|numeric',
+            'subservice.bidnest.price.premium'=>'required|numeric',
+            'subservice.market.price.economy'=>'required|numeric',
+            'subservice.market.price.premium'=>'required|numeric',
+            'subservice.mp_additional.price.economy'=>'required|numeric',
+            'subservice.mp_additional.price.premium'=>'required|numeric',
+            'subservice.bp_additional.price.economy'=>'required|numeric',
+            'subservice.bp_additional.price.premium'=>'required|numeric',
         ]);
 
         if($validation->fails())
@@ -492,14 +492,14 @@ class Route extends Controller
         $validation = Validator::make($request->all(),[
             'id'=>'required',
             'subservice.id'=>'required',
-            'subservice.bidnest.price.economy'=>'required',
-            'subservice.bidnest.price.premium'=>'required',
-            'subservice.market.price.economy'=>'required',
-            'subservice.market.price.premium'=>'required',
-            'subservice.mp_additional.price.economy'=>'required',
-            'subservice.mp_additional.price.premium'=>'required',
-            'subservice.bp_additional.price.economy'=>'required',
-            'subservice.bp_additional.price.premium'=>'required',
+            'subservice.bidnest.price.economy'=>'required|numeric',
+            'subservice.bidnest.price.premium'=>'required|numeric',
+            'subservice.market.price.economy'=>'required|numeric',
+            'subservice.market.price.premium'=>'required|numeric',
+            'subservice.mp_additional.price.economy'=>'required|numeric',
+            'subservice.mp_additional.price.premium'=>'required|numeric',
+            'subservice.bp_additional.price.economy'=>'required|numeric',
+            'subservice.bp_additional.price.premium'=>'required|numeric',
         ]);
 
         if($validation->fails())

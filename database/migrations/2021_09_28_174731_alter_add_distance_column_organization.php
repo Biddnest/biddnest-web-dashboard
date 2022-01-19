@@ -14,7 +14,7 @@ class AlterAddDistanceColumnOrganization extends Migration
     public function up()
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->tinyInteger('base_distance')->nullable()->after('zone_id');
+            $table->decimal('base_distance', 10, 2)->nullable()->after('zone_id');
         });
     }
 

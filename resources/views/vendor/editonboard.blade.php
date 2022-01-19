@@ -211,10 +211,10 @@
                                                 <option value="">--Select--</option>
                                                 @foreach(Illuminate\Support\Facades\Session::get('cities') as $city)
                                                     <option value="{{$city->id}}"
-                                                            @if($organization && $organization->cities)
+                                                        @if($organization && $organization->cities)
                                                             @foreach($organization->cities as $admin_cities)
-                                                            @if($admin_cities->city_id == $city->id) selected @endif
-                                                        @endforeach
+                                                                @if($admin_cities->id == $city->id) selected @endif
+                                                            @endforeach
                                                         @endif
                                                     >{{$city->name}}</option>
                                                 @endforeach
@@ -318,8 +318,8 @@
                                         <div class="form-input">
                                             <label class="full-name">Base distance in km</label>
                                             <span class="">
-                                            <input type="text" name="basedist" placeholder="Distance" value="{{$organization->base_distance}}"
-                                                   class="form-control number" required>
+                                            <input type="text" name="basedist" data-parsley-type="number" placeholder="Distance" value="{{$organization->base_distance}}"
+                                                   class="form-control" required>
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>
                                         </div>
@@ -330,7 +330,7 @@
                                             <label class="full-name">Extra Base distance in km</label>
                                             <span class="">
                                             <input type="text" name="extrabasedist" placeholder="Extra Distance" value="{{$organization->additional_distance}}"
-                                                   class="form-control number" required>
+                                                   class="form-control" data-parsley-type="number" required>
                                             <span class="error-message">Please enter valid Distance</span>
                                         </span>
                                         </div>

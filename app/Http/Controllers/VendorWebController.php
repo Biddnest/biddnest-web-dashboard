@@ -20,6 +20,8 @@ use App\Models\TicketReply;
 use App\Models\Vehicle;
 use App\Models\Vendor;
 use App\Models\Zone;
+use App\Models\Subservice;
+use App\Models\SubservicePrice;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -565,4 +567,16 @@ class VendorWebController extends Controller
         $reports = ReportController::getReport(Session::get('account')['id'], true);
         return view('vendor-panel.reports.report', ['reports'=>$reports]);
     }
+
+    public function basePrices(Request $request){
+        $subservices = Subservice::where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->whereNotIn("name", ["custom"])
+             ->get();
+
+        $vendor_price = SubservicePrice::where("organization_id", Session::get('organization_id'))->with('subservice')->get();
+
+        // $add_subservices = Subservice::whereNotIn("id", SubservicePrice::where("organization_id", $request->id)->pluck('subservice_id'))->whereNotIn("name", ["custom"])->where(["status"=>CommonEnums::$YES, "deleted"=>CommonEnums::$NO])->get();
+
+        return view('vendor-panel.base_price.base_price', ['id'=>$request->id, 'subservices'=>$subservices, "prices"=>$vendor_price]);
+    }
+
 }

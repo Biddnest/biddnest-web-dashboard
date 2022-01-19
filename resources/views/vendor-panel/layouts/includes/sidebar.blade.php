@@ -75,6 +75,18 @@
                             </span>Inventory Management
                         </a>
                     </li>
+                    <li class="menu-item b-purple" data-toggle="#inventory" href="#Inventory" role="button"
+                        aria-expanded="false" aria-controls="Vendors">
+                        <a class="" href="{{route('vendor.base_prices')}}">
+                            <span class="side-nac-icon">
+                                <span class="icon-sidebar">
+                                    <i class="">
+                                        <img src="{{asset('static/vendor/images/Active 3.svg')}}" alt="">
+                                    </i>
+                                </span>
+                            </span>Base Price Management
+                        </a>
+                    </li>
                 @endif
                 @if(in_array(\App\Enums\RoleGroupEnums::$MODUlES['branches'], json_decode(\Illuminate\Support\Facades\Session::get("assign_module"))))
                     <li class="menu-item" data-toggle="" href="#Branches" role="button" aria-expanded="false"
@@ -150,14 +162,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

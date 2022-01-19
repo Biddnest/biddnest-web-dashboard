@@ -182,14 +182,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Birth</label>
-                                        <input type="date" class=" form-control br-5" value="@if($users){{$users->dob}}@endif" name="dob" required="required"  placeholder="15/02/2021"/>
+                                        <input type="text" class=" form-control br-5 birthdate dateselect" value="@if($users){{$users->dob}}@endif" name="dob" required="required"  placeholder="15/02/2021"/>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Relieving</label>
-                                        <input type="text" id="fullname" placeholder="yyyy-mm-dd" name="meta[dor]" class="form-control singledate" value="@if($users){{json_decode($users->meta, true)['dor'] ?? ''}}@endif" required>
+                                        <input type="text" id="fullname" placeholder="yyyy-mm-dd" name="meta[dor]" class="form-control filterdate dateselect" value="@if($users){{json_decode($users->meta, true)['dor'] ?? ''}}@endif" required>
                                         <span class="error-message">Please enter valid</span>
                                     </div>
                                 </div>
@@ -292,7 +292,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-input">
                                         <label class="full-name">Date of Joining</label>
-                                        <input type="date" class=" form-control br-5" name="joinig_date" required="required"  value="@if($users){{$users->date_of_joining}}@endif"   placeholder="15/02/2021"/>
+                                        <input type="text" class=" form-control br-5 filterdate dateselect" name="joinig_date" required="required"  value="@if($users){{$users->date_of_joining}}@endif"   placeholder="15/02/2021"/>
                                         <span class="error-message">Please enter valid Pincode</span>
                                     </div>
                                 </div>

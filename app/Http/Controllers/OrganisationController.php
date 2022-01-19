@@ -7,6 +7,7 @@ use App\Enums\OrganizationEnums;
 use App\Enums\VendorEnums;
 use App\Enums\RoleGroupEnums;
 use App\Helper;
+use App\Sms;
 use App\Models\CityZone;
 use App\Models\Org_kyc;
 use App\Models\Organization;
@@ -211,7 +212,7 @@ class OrganisationController extends Controller
             if($id != $org_email->id || $vendor_email->id !=  $vendor_id)
                 return Helper::response(false,"Email id is already exist in system");
         }
-            
+
 
         $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
         $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
@@ -220,7 +221,7 @@ class OrganisationController extends Controller
             if($id != $org_email->id || $vendor_email->id !=  $vendor_id)
                 return Helper::response(false,"Phone no is already exist in system");
         }
-        
+
         //$organization_exist = Organization::findOrFail($id);
         $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
         if(!$vendor_exist)
@@ -578,7 +579,7 @@ class OrganisationController extends Controller
         else
             $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $image =$data['image']; 
+        $image =$data['image'];
         $uniq = uniqid();
         $avatar_file_name = $data['fname']."-".$data['lname']."-".$uniq.".png";
 
@@ -590,7 +591,7 @@ class OrganisationController extends Controller
         else{
             $vendor->image =Helper::saveFile($imageman->make($image)->resize(100,100)->encode('png', 75),"BD".$uniq.".png","vendors/".$uniq.$data['fname']);
         }
-       
+
         $vendor->fname = $data['fname'];
         $vendor->lname = $data['lname'];
         $vendor->email = $data['email'];
@@ -681,7 +682,7 @@ class OrganisationController extends Controller
                 $update_data["image"] = Helper::saveFile($image_man->make($image)->resize(256,256)->encode('png', 100),$image_name,"vendors/".$data['fname']);
              }
         }
-           
+
 
         $vendor_result = Vendor::where(["id"=>$role_id])
             ->update($update_data);

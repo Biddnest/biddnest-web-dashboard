@@ -149,9 +149,11 @@ class TicketController extends Controller
     {
         $images = [];
         $imageman = new ImageManager(array('driver' => 'gd'));
-        foreach ($ticket_images as $key_img => $image) {
+        if($ticket_images && count($ticket_images)){
+          foreach ($ticket_images as $key_img => $image) {
             $images[] = Helper::saveFile($imageman->make($image)->encode('png', 100), "BD" . uniqid() . $key_img . ".png", "tickets/" . $sender_id);
-           Log::info($images);
+            Log::info($images);
+          }
         }
 
         switch ($ticket_type) {
@@ -198,7 +200,7 @@ class TicketController extends Controller
                     Booking::where("public_booking_id", $meta['public_booking_id'])
                     ->update([
                         "status"=>BookingEnums::$STATUS['cancel_request'],
-                        "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>body])
+                        "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>$body])
                     ]);
 
                     $title = str_replace("{{booking.id}}", "", $title);

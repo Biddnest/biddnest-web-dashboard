@@ -399,6 +399,7 @@ class BidController extends Controller
                 "vendor_id"=>$vendor_id,
                 "bid_amount"=>$data['bid_amount'],
                 "moving_dates"=>json_encode($data['moving_date']),
+                "final_moving_date"=>Carbon::parse($data['moving_date'])->format("d-m-Y"),
                 "meta"=>json_encode($meta),
                 "status"=>BidEnums::$STATUS['bid_submitted'],
                 "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
@@ -448,9 +449,10 @@ class BidController extends Controller
                     "vendor_id"=>$data['vendor_id'],
                     "bid_amount"=>$data['bid_amount'],
                     "moving_dates"=>json_encode($data['moving_date']),
+                    "final_moving_date"=>Carbon::parse($data['moving_date'])->format("d-m-Y"),
                     "meta"=>json_encode($meta),
                     //  "status"=>BidEnums::$STATUS['bid_submitted'],
-                    "submit_at"=>Carbon::now()
+                    "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
                 ]);
 
                 //  Booking::where()->update();
@@ -560,7 +562,7 @@ class BidController extends Controller
 
             $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['payment_pending']);
         }
-        
+
         /* $won_vendor_id = Bid::where(["booking_id"=>$booking_id, "status"=>BidEnums::$STATUS['won']])->pluck("vendor_id");
           NotificationController::sendTo( "vendor", $won_vendor_id, "Hurrey ! You Won Bid On This Booking.", "Tap to respond.", [
               "type" => NotificationEnums::$TYPE['booking'],

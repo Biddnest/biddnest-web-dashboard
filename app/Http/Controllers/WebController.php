@@ -1513,7 +1513,7 @@ class WebController extends Controller
         $ticket_info=[];
         $ticket=Ticket::where('id', $request->id)
             ->with(["booking"=>function($query){
-                $query->with('user')->with('vendor');
+                $query->with('user')->with('organization');
             }])
             ->with('reply')->with('user')->with('vendor')->first();
         $replies=TicketReply::where('ticket_id', $request->id)->with('admin')->with('user')->with('vendor')->get();

@@ -419,7 +419,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::create($request->token_payload->id, 3,  ["public_booking_id"=>$request->public_booking_id]);
+        return TicketController::createForUserApp($request->token_payload->id, TicketEnums::$TYPE['order_reschedule'],  ["public_booking_id"=>$request->public_booking_id]);
     }
 
     public function createCancellationTicket(Request $request)
@@ -434,7 +434,7 @@ class ApiRouteController extends Controller
         if($validation->fails())
             return Helper::response(false,"validation failed", implode(",",$validation->messages()->all()), 400);
 
-        return TicketController::create($request->token_payload->id,TicketEnums::$TYPE['order_cancellation'],  ["public_booking_id"=>$request->public_booking_id]);
+        return TicketController::createForUserApp($request->token_payload->id,TicketEnums::$TYPE['order_cancellation'],  ["public_booking_id"=>$request->public_booking_id], null, $request->reason, $request->desc);
     }
 
     public function createRejectedTicket(Request $request)

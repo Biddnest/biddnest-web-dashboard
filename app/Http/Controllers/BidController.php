@@ -346,7 +346,7 @@ class BidController extends Controller
             ->where("booking_id", Booking::where(['public_booking_id'=>$data['public_booking_id']])->pluck('id')[0])
             ->with("rejected_by")
             ->with("watched_by")
-//                            ->whereIn("status", [BidEnums::$STATUS['active']])
+            // ->whereIn("status", [BidEnums::$STATUS['active']])
             ->first();
 
         /* here refresh_current_activity will refresh the page in mobile app if vendor tries to submit bid for an order her is not listed for */
@@ -449,11 +449,11 @@ class BidController extends Controller
                     "bid_amount"=>$data['bid_amount'],
                     "moving_dates"=>json_encode($data['moving_date']),
                     "meta"=>json_encode($meta),
-//                    "status"=>BidEnums::$STATUS['bid_submitted'],
+                    //  "status"=>BidEnums::$STATUS['bid_submitted'],
                     "submit_at"=>Carbon::now()
                 ]);
 
-//            Booking::where()->update();
+                //  Booking::where()->update();
 
                 $bid_end = self::bidEndByAdmin($exist_bid['booking_id'], $data['organization_id'], $data['vendor_id'], $data['bid_amount']);
 
@@ -527,15 +527,29 @@ class BidController extends Controller
 
         $payment = new Payment;
         $payment->public_transaction_id = Uuid::uuid4();
+        $payment->vendor_quote = round($won_vendor->bid_amount, 2);
         $payment->booking_id = $booking_id;
-        $payment->other_charges = round($other_charges,2);
+        $payment->other_charges = round($other_charges, 2);
         $payment->tax = round($tax,2);
-        $payment->sub_total= round($sub_total,2);
-        $payment->commission = round($commission,2);
-        $payment->grand_total = round($grand_total,2);
+        $payment->sub_total= round($sub_total, 2);
+        $payment->commission = round($commission, 2);
+        $payment->grand_total = round($grand_total, 2);
         $payment_result = $payment->save();
 
-        $booking_update_status = Booking::where("id", $booking_id)
+        if($final_bid_amount = null){
+            $booking_update_status = Booking::where("id", $booking_id)
+            ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding'], BookingEnums::$STATUS['hold']])
+            ->update([
+                "organization_id"=>$org_id,
+                "final_quote"=>round($final_bid_amount,2),
+                "final_moving_date"=>date("Y-m-d", strtotime(json_decode($bid_details->meta, true)['moving_date'])),
+                "status"=>BookingEnums::$STATUS['price_review_pending']
+            ]);
+
+            $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['price_review_pending']);
+        }
+        else{
+            $booking_update_status = Booking::where("id", $booking_id)
             ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding'], BookingEnums::$STATUS['hold']])
             ->update([
                 "organization_id"=>$org_id,
@@ -544,8 +558,9 @@ class BidController extends Controller
                 "status"=>BookingEnums::$STATUS['payment_pending']
             ]);
 
-        $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['payment_pending']);
-
+            $result_status = BookingsController::statusChange($booking_id, BookingEnums::$STATUS['payment_pending']);
+        }
+        
         /* $won_vendor_id = Bid::where(["booking_id"=>$booking_id, "status"=>BidEnums::$STATUS['won']])->pluck("vendor_id");
           NotificationController::sendTo( "vendor", $won_vendor_id, "Hurrey ! You Won Bid On This Booking.", "Tap to respond.", [
               "type" => NotificationEnums::$TYPE['booking'],

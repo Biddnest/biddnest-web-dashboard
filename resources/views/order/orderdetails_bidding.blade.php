@@ -261,7 +261,7 @@
                                                                 </td>
                                                             @else
                                                                 <td class="">
-                                                                    @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'] || $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending']))
+                                                                    @if($bidding->status == \App\Enums\BidEnums::$STATUS['won'] && ($booking->status == \App\Enums\BookingEnums::$STATUS['price_review_pending'] || $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'] || $booking->status == \App\Enums\BookingEnums::$STATUS['cancel_request']))
                                                                         <a class="modal-toggle" data-target="#change_bid_amt">
                                                                             <button class="btn white-text theme-bg">Edit Quote</button>
                                                                         </a>

@@ -399,7 +399,7 @@ class BidController extends Controller
                 "vendor_id"=>$vendor_id,
                 "bid_amount"=>$data['bid_amount'],
                 "moving_dates"=>json_encode($data['moving_date']),
-                "final_moving_date"=>Carbon::parse($data['moving_date'])->format("d-m-Y"),
+                "final_moving_date"=> $data['moving_date'] ? Carbon::parse($data['moving_date'])->format("d-m-Y") : null,
                 "meta"=>json_encode($meta),
                 "status"=>BidEnums::$STATUS['bid_submitted'],
                 "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
@@ -449,7 +449,7 @@ class BidController extends Controller
                     "vendor_id"=>$data['vendor_id'],
                     "bid_amount"=>$data['bid_amount'],
                     "moving_dates"=>json_encode($data['moving_date']),
-                    "final_moving_date"=>Carbon::parse($data['moving_date'])->format("d-m-Y"),
+                    "final_moving_date"=> $data['moving_date'] ? Carbon::parse($data['moving_date'])->format("d-m-Y") : null,
                     "meta"=>json_encode($meta),
                     //  "status"=>BidEnums::$STATUS['bid_submitted'],
                     "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")

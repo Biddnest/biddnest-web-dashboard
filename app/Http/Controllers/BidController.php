@@ -527,7 +527,7 @@ class BidController extends Controller
 
         $payment = new Payment;
         $payment->public_transaction_id = Uuid::uuid4();
-        $payment->vendor_quote = round($won_vendor->bid_amount, 2);
+        $payment->vendor_quote = (float) $final_bid_amount;
         $payment->booking_id = $booking_id;
         $payment->other_charges = round($other_charges, 2);
         $payment->tax = round($tax,2);

@@ -128,9 +128,9 @@
                                 </div>
                                 <div class="d-flex  row  p-10 theme-text ml-20">
                                     @if($booking->status == \App\Enums\BookingEnums::$STATUS['biding'])
-                                        <h4>Bidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("H:iA")}}</h4>
+                                        <h4>Bidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("h:iA")}}</h4>
                                     @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding'])
-                                        <h4>Rebidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("H:iA")}}</h4>
+                                        <h4>Rebidding in Progress: Results will be declared at {{\Carbon\Carbon::parse($booking->bid_result_at)->format("h:iA")}}</h4>
                                     @endif
 
 

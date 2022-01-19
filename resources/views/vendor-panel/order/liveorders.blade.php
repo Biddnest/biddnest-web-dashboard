@@ -161,10 +161,10 @@
                                             <td style="text-align: center;" style="padding: 10px;">
                                                     @switch($booking->bid->status)
                                                         @case(\App\Enums\BidEnums::$STATUS['bid_submitted'])
-                                                            @if($booking->status == \App\Enums\BookingEnums::$STATUS['biding'])
-                                                                <span class="bg-light  text-center status-badge complete-bg">Bidding</span>
-                                                            @elseif($booking->status == \App\Enums\BookingEnums::$STATUS['rebiding'])
-                                                                <span class="badge-light text-center status-badge complete-bg">Re-Bidding</span>
+                                                            @if($booking->bid->bid_type == \App\Enums\BidEnums::$BID_TYPE['bid'])
+                                                                <span class="bg-light  text-center status-badge complete-bg">Bid Submitted</span>
+                                                            @elseif($booking->bid->bid_type == \App\Enums\BidEnums::$BID_TYPE['rebid'])
+                                                                <span class="badge-light text-center status-badge complete-bg">Re-Bid Submitted</span>
                                                             @endif
                                                         @break
 

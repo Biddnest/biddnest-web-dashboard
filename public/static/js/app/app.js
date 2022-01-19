@@ -853,6 +853,7 @@ $("body").on('change', ".reply_status", function(event) {
 });
 
 $("body").on('click', ".reschedule", function(event) {
+    console.log("dfgdfg");
     var data = document.getElementById("movement_dates").value;
     if (confirm('Are you sure want to reschedule this order?')) {
         $.update($(this).data("url"), { data }, function(response) {

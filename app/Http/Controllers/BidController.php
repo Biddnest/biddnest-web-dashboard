@@ -536,7 +536,7 @@ class BidController extends Controller
         $payment->grand_total = round($grand_total, 2);
         $payment_result = $payment->save();
 
-        if($final_bid_amount = null){
+        if($final_bid_amount == null){
             $booking_update_status = Booking::where("id", $booking_id)
             ->whereIn("status", [BookingEnums::$STATUS['biding'], BookingEnums::$STATUS['rebiding'], BookingEnums::$STATUS['hold']])
             ->update([

@@ -325,7 +325,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12  p-0  pb-0" >
-                                        
+
                                         <table class="table text-left theme-text tb-border2" id="items" >
                                             <thead class="secondg-bg bx-shadowg p-0 f-14">
                                             <tr class="">
@@ -533,7 +533,7 @@
                                 </div>
                                 <div class="col-sm-7 white-bg  margin-topneg-15 pt-10">
                                     <div class="theme-text f-14  p-15" style="padding-top: 5px;">
-                                        <input type="text" class="form-control bid-amount" value="{{$booking->payment->vendor_quote}}" name="bid_amount" min="0.00" required>
+                                        <input type="text" class="form-control bid-amount" value="{{$booking->payment->vendor_quote ?? $booking->bid->bid_amount}}" name="bid_amount" min="0.00" required>
                                         <input type="hidden" class="form-control" value="{{$booking->id}}" name="booking_id" required>
                                     </div>
                                     <div class="theme-text f-14 p-15" style="padding-top: 5px;" >

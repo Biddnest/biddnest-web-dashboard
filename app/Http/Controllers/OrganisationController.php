@@ -145,7 +145,7 @@ class OrganisationController extends Controller
         $organizations=new Organization;
         $avatar_file_name = ucwords(strtolower($admin['fname']))."-".ucwords(strtolower($admin['lname']))."-".".png";
         $uniq = uniqid();
-//        $organizations->image=Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['organization']['org_name']);
+        //$organizations->image=Helper::saveFile(Helper::generateAvatar($data['fname']." ".$data['lname']),$avatar_file_name,"vendors/".$uniq.$data['organization']['org_name']);
         $organizations->image=null;
         $organizations->email=$data['email'];
         $organizations->phone=$data['phone']['primary'];
@@ -204,7 +204,18 @@ class OrganisationController extends Controller
 
     public static function update($data, $meta, $admin, $id, $vendor_id)
     {
-//            $organization_exist = Organization::findOrFail($id);
+        $org_email=Organization::where('email', $data['email'])->first();
+        $vendor_email=Vendor::where('email', $admin['email'])->first();
+        if($org_email || $vendor_email)
+            return Helper::response(false,"Email id is already exist in system");
+
+        $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
+        $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
+        if($org_phone || $vendor_phone)
+            return Helper::response(false,"Phone no is already exist in system");
+
+
+        //$organization_exist = Organization::findOrFail($id);
         $vendor_exist = Vendor::where(["organization_id"=>$id, "user_role"=>VendorEnums::$ROLES["admin"]])->first();
         if(!$vendor_exist)
             return Helper::response(false,"Incorrect Vendor id.");
@@ -302,11 +313,22 @@ class OrganisationController extends Controller
 
     public static function addBranch($data, $id, $vendor=false)
     {
+        $org_email=Organization::where('email', $data['email'])->first();
+        $vendor_email=Vendor::where('email', $admin['email'])->first();
+        if($org_email || $vendor_email)
+            return Helper::response(false,"Email id is already exist in system");
+
+        $org_phone=Organization::where('phone', $data['phone']['primary'])->first();
+        $vendor_phone=Vendor::where('phone',$admin['phone'])->first();
+        if($org_phone || $vendor_phone)
+            return Helper::response(false,"Phone no is already exist in system");
+
+
         $exist = Organization::findOrFail($id);
         if(!$exist)
             return Helper::response(false,"Incorrect Organization id.");
 
-//        $meta = json_decode($exist['meta'], true);
+        // $meta = json_decode($exist['meta'], true);
         $meta = ["auth_fname"=>$data['fname'] ?? '',
         "auth_lname"=>$data['lname'] ?? '',
         "secondory_phone"=>$data['phone']['secondary'] ?? '',

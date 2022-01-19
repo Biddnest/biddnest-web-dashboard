@@ -200,7 +200,7 @@ class TicketController extends Controller
                     Booking::where("public_booking_id", $meta['public_booking_id'])
                     ->update([
                         "status"=>BookingEnums::$STATUS['cancel_request'],
-                        "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>body])
+                        "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>$body])
                     ]);
 
                     $title = str_replace("{{booking.id}}", "", $title);

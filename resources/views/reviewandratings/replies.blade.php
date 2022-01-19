@@ -216,7 +216,7 @@
                                                         @endif
                                                         @if($tickets->type == \App\Enums\TicketEnums::$TYPE['order_cancellation'])
                                                             <a class="white-text cancel-booking" href="#" data-url="{{route('cancel-order', ['id'=>$ticket_info->public_booking_id])}}">
-                                                                <button class="btn theme-bg white-text w-100">Reject</button>
+                                                                <button class="btn theme-bg white-text w-100">Cancel</button>
                                                             </a>
                                                         @endif
                                                     </div>

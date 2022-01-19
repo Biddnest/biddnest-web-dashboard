@@ -175,12 +175,12 @@ class AdminController extends Controller
                 $zones->admin_id =$admin->id;
                 $zones->city_id = $city;
                 $zones->save();
-                $city_zones = City::where("id", $city)->with('zones')->get();
+                $city_zones = Zones::where("city_id", $city)->pluck('id');
 
-                foreach($city_zones as $zone){
+                foreach($city_zones as $zone_id){
                     $zones = new AdminZone;
                     $zones->admin_id =$admin->id;
-                    $zones->zone_id = $zone->zone_id;
+                    $zones->zone_id = $zone_id;
                     $zones->save();
                 }
             }
@@ -193,12 +193,12 @@ class AdminController extends Controller
                     $zones->city_id = $city;
                     $zones->save();
 
-                    $city_zones = City::where("id", $city)->with('zones')->get();
-                    foreach($city_zones->zones as $zone){
-                        $slider_zone = new AdminZone;
-                        $slider_zone->admin_id = $admin->id;
-                        $slider_zone->zone_id = $zone->zone_id;
-                        $slider_zone->save();
+                    $city_zones = Zones::where("city_id", $city)->pluck('id');
+                    foreach($city_zones as $zone_id){
+                        $zones = new AdminZone;
+                        $zones->admin_id =$admin->id;
+                        $zones->zone_id = $zone_id;
+                        $zones->save();
                     }
                 }
             }
@@ -251,14 +251,14 @@ class AdminController extends Controller
                $zones->admin_id =$data['id'];
                $zones->city_id = $city;
                $zones->save();
-               $city_zones = City::where("id", $city)->with('zones')->get();
+               $city_zones = Zones::where("city_id", $city)->pluck('id');
 
-               foreach($city_zones as $zone){
-                   $zones = new AdminZone;
-                   $zones->admin_id =$data['id'];
-                   $zones->zone_id = $zone->zone_id;
-                   $zones->save();
-               }
+                foreach($city_zones as $zone_id){
+                    $zones = new AdminZone;
+                    $zones->admin_id =$admin->id;
+                    $zones->zone_id = $zone_id;
+                    $zones->save();
+                }
            }
        }
        elseif($data['role'] == AdminEnums::$ROLES['city_admin']){
@@ -269,13 +269,13 @@ class AdminController extends Controller
                    $zones->city_id = $city;
                    $zones->save();
 
-                   $city_zones = City::where("id", $city)->with('zones')->get();
-                   foreach($city_zones->zones as $zone){
-                       $slider_zone = new AdminZone;
-                       $slider_zone->admin_id = $data['id'];
-                       $slider_zone->zone_id = $zone->zone_id;
-                       $slider_zone->save();
-                   }
+                   $city_zones = Zones::where("city_id", $city)->pluck('id');
+                    foreach($city_zones as $zone_id){
+                        $zones = new AdminZone;
+                        $zones->admin_id =$admin->id;
+                        $zones->zone_id = $zone_id;
+                        $zones->save();
+                    }
                }
            }
        }

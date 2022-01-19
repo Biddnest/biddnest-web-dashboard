@@ -282,7 +282,7 @@
                                 @if($booking->bid)
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
 
-                                        {{date("d M Y", strtotime(json_decode($booking->bid->moving_dates, true)[0]))}}
+                                        {{date("d M Y", strtotime($booking->final_moving_date)}}
                                 </div>
                                 @endif
 

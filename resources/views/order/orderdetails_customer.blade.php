@@ -287,8 +287,9 @@
                                 @endif
 
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
+
                                     @if($booking->final_quote)
-                                        &#8377;@if($booking->final_quote){{$booking->final_quote}} @else {{$booking->final_estimated_quote}} @endif
+                                        @if($booking->final_quote)&#8377;{{$booking->final_quote}} @else &#8377;{{$booking->final_estimated_quote}} @endif
                                     @else - @endif
                                 </div>
 

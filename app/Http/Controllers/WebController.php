@@ -51,6 +51,7 @@ use App\Models\Vendor;
 use App\Models\Zone;
 use App\Models\CityZone;
 use App\Models\City;
+use App\Models\BookingStatus;
 use App\Models\Voucher;
 use App\Models\BookingOrganizationGeneratedPrice;
 use App\Models\MovementDates;
@@ -714,11 +715,18 @@ class WebController extends Controller
            ->findOrFail($request->id);
 
         $hist = [];
-
+        $count=0;
         foreach ($booking->status_history as $status){
-            if(!in_array($status->status, $hist))
+            if(!in_array($status->status, $hist)){
                 $hist[] = $status->status;
+                $count++;
+            }
         }
+
+        for($i=1; $i <=$count-1; $i++){
+            $pre_id=$hist[$i];
+        }
+        $previous_status = $pre_id;
 
         $booking->status_ids = $hist;
 
@@ -729,7 +737,8 @@ class WebController extends Controller
 
         return view('order.orderdetails_bidding',[
             "booking" => $booking,
-            "least_agent_price"=> $least_agent_price
+            "least_agent_price"=> $least_agent_price,
+            "previous_status"=>$previous_status
         ]);
     }
 

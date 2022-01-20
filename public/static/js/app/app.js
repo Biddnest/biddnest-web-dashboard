@@ -852,7 +852,8 @@ $("body").on('change', ".reply_status", function(event) {
     return false;
 });
 
-$("body").on('change', ".reschedule", function(event) {
+$("body").on('click', ".reschedule", function(event) {
+    console.log("dfgdfg");
     var data = document.getElementById("movement_dates").value;
     if (confirm('Are you sure want to reschedule this order?')) {
         $.update($(this).data("url"), { data }, function(response) {
@@ -867,7 +868,7 @@ $("body").on('change', ".reschedule", function(event) {
     return false;
 });
 
-$("body").on('change', ".cancel-booking", function(event) {
+$("body").on('click', ".cancel-booking", function(event) {
     if (confirm('Are you sure want to Cancel this order?')) {
         $.update($(this).data("url"), { data }, function(response) {
             Logger.info(response);

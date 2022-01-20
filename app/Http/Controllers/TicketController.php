@@ -197,11 +197,22 @@ class TicketController extends Controller
                         ->with('user')
                         ->where("user_id", $sender_id)
                         ->first();
-                    Booking::where("public_booking_id", $meta['public_booking_id'])
-                    ->update([
-                        "status"=>BookingEnums::$STATUS['cancel_request'],
-                        "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>$body])
-                    ]);
+                        if($booking->status > BookingEnums::$STATUS['payment_pending']){
+                            Booking::where("public_booking_id", $meta['public_booking_id'])
+                            ->update([
+                                "status"=>BookingEnums::$STATUS['cancel_request'],
+                                "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>$body])
+                            ]);
+                        }
+                        elseif($booking->status == BookingEnums::$STATUS['payment_pending']){
+                            Booking::where("public_booking_id", $meta['public_booking_id'])
+                            ->update([
+                                "status"=>BookingEnums::$STATUS['cancelled'],
+                                "cancelled_meta"=>json_encode(['reason'=>$heading, 'desc'=>$body])
+                            ]);
+                            return Helper::response(true, "Oreder cancelled successfully");
+                        }
+                           
 
                     $title = str_replace("{{booking.id}}", "", $title);
                     $title = str_replace("{{user.name}}", "", $title);

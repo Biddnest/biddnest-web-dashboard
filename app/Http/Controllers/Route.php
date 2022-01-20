@@ -1347,8 +1347,7 @@ class Route extends Controller
     public function rescheduleOrder(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'id' => 'required',
-            'data' => 'required',
+            'data' => 'required'
         ]);
 
         if($validation->fails())

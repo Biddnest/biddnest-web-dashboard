@@ -126,7 +126,7 @@ class BidController extends Controller
 
         if(!$min_amount || $low_quoted_vendors > 1) {
             $count_rebid=BookingStatus::where(["booking_id"=>$book_id, "status"=>BookingEnums::$STATUS['biding']])->count();
-            if($count_rebid >= (int)Settings::where('key', 'max_rebid_count')->pluck('value')[0]) {
+            if(!$min_amount && $count_rebid >= (int)Settings::where('key', 'max_rebid_count')->pluck('value')[0]) {
                 BookingsController::statusChange($book_id, BookingEnums::$STATUS['hold']);
                 Booking::where("id", $book_id)->update(["status"=>BookingEnums::$STATUS['hold']]);
                 return true;
@@ -170,13 +170,13 @@ class BidController extends Controller
                         "bid_result_at" => $complete_time,
                         "bid_end_at" =>  $bid_end_time
                     ]);
-                $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']);
+                $result_status = BookingsController::statusChange($book_id, BookingEnums::$STATUS['rebiding']); 
             }
 
-            $vendor_id =  Bid::where("booking_id", $book_id)->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['active']])->whereNotNull('vendor_id')->pluck('vendor_id');
+            $vendor_id =  Bid::where("booking_id", $book_id)->where("status", BidEnums::$STATUS['bid_submitted'])->whereNotNull('vendor_id')->pluck('id');
 
             if($low_quoted_vendors > 1) {
-                Bid::where("booking_id", $book_id)->whereNotIn("status", [BidEnums::$STATUS['rejected'], BidEnums::$STATUS['active']])
+                Bid::where("booking_id", $book_id)->whereIn("id", $vendor_id)
                     ->update([
                         "bid_type" => BidEnums::$BID_TYPE['rebid'],
                         "status" => BidEnums::$STATUS['active']
@@ -399,7 +399,7 @@ class BidController extends Controller
                 "vendor_id"=>$vendor_id,
                 "bid_amount"=>$data['bid_amount'],
                 "moving_dates"=>json_encode($data['moving_date']),
-                "final_moving_date"=> $data['moving_date'] ? Carbon::parse($data['moving_date'][0])->format("d-m-Y") : null,
+                "final_moving_date"=> $data['moving_date'] ? Carbon::parse($data['moving_date'][0])->format("Y-m-d") : null,
                 "meta"=>json_encode($meta),
                 "status"=>BidEnums::$STATUS['bid_submitted'],
                 "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")
@@ -449,7 +449,7 @@ class BidController extends Controller
                     "vendor_id"=>$data['vendor_id'],
                     "bid_amount"=>$data['bid_amount'],
                     "moving_dates"=>json_encode($data['moving_date']),
-                    "final_moving_date"=> $data['moving_date'] ? Carbon::parse($data['moving_date'][0])->format("d-m-Y") : null,
+                    "final_moving_date"=> $data['moving_date'] ? Carbon::parse($data['moving_date'][0])->format("Y-m-d") : null,
                     "meta"=>json_encode($meta),
                     //  "status"=>BidEnums::$STATUS['bid_submitted'],
                     "submit_at"=>Carbon::now()->format("Y-m-d H:i:s")

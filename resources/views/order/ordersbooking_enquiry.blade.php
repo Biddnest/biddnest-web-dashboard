@@ -168,8 +168,8 @@
                                     <th scope="col">Enquiry ID</th>
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
-                                    <!-- <th scope="col" style="width: 40%;">Service Type</th> -->
-                                    
+                                    <th scope="col" style="width: 40%;">Created At</th>
+
                                     <th scope="col" style="width: 23%;">Assigned Vendor</th>
                                     <th scope="col" style="text-align: center !important;">Enquiry Status</th>
                                     <th scope="col">Operations</th>

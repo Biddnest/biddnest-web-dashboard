@@ -280,8 +280,20 @@ class WebController extends Controller
         }
 
         $bookings->with('service')
-            ->with('organization')
-            ->orderBy("id","DESC");
+            ->with('organization');
+
+
+            // Sorting by column
+            if($request->moving_date){
+              if($request->moving_date == "asc")
+                $bookings->orderBy("final_moving_date");
+
+              if($request->moving_date == "desc")
+                $bookings->orderBy("final_moving_date", "DESC");
+            }
+            else
+            $bookings->orderBy("id","DESC");
+
 
         $booking_count =  Booking::where("status", "<=", BookingEnums::$STATUS['payment_pending'])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $past_count =  Booking::whereIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed']])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
@@ -325,6 +337,8 @@ class WebController extends Controller
                     ->orWhere('destination_meta', 'like', "%".$request->search."%");
             });
         }
+
+
 
         $bookings->with('service')
             ->with('organization')
@@ -370,8 +384,17 @@ class WebController extends Controller
         }
 
         $bookings->with("service")
-           ->with('organization')
-           ->orderBy("id","DESC");
+           ->with('organization');
+
+           if($request->moving_date){
+             if($request->moving_date == "asc")
+               $bookings->orderBy("final_moving_date");
+
+             if($request->moving_date == "desc")
+               $bookings->orderBy("final_moving_date", "DESC");
+           }
+           else
+           $bookings->orderBy("id","DESC");
 
         $booking_count =  Booking::where("status", "<=", BookingEnums::$STATUS['payment_pending'])->where("deleted", CommonEnums::$NO)->whereIn("zone_id", $zone)->count();
         $confirm_count =Booking::whereNotIn("status",[BookingEnums::$STATUS["cancelled"],BookingEnums::$STATUS['completed'], BookingEnums::$STATUS['hold'], BookingEnums::$STATUS['bounced'], BookingEnums::$STATUS['cancel_request'], BookingEnums::$STATUS['in_progress'], BookingEnums::$STATUS['price_review_pending']])

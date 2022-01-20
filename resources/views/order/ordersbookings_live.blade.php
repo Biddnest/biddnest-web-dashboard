@@ -169,7 +169,23 @@
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <!-- <th scope="col" style="width: 40%;">Service Type</th> -->
-                                <th scope="col" style="width: 22%; ">Order Date</th>
+                                <th scope="col" style="width: 22%; ">Moving Date
+
+
+                                  @if(!request()->moving_date)
+                                    <a href="{{\Illuminate\Support\Facades\URL::current()}}?moving_date=asc"><i class="fa fa-caret-down"></i></a>
+                                  @endif
+
+                                  @if(request()->moving_date == "asc" || request()->moving_date == "ASC")
+                                    <a href="{{\Illuminate\Support\Facades\URL::current()}}?moving_date=desc"><i class="fa fa-caret-up"></i></a>
+                                  @endif
+
+                                  @if(request()->moving_date == "desc" || request()->moving_date == "DESC")
+                                    <a href="{{\Illuminate\Support\Facades\URL::current()}}?moving_date=asc"><i class="fa fa-caret-down"></i></a>
+                                  @endif
+
+
+                                </th>
                                 <th scope="col" style="width: 23%;">Assigned Vendor</th>
                                 <th scope="col" style="text-align: center !important;">Order Status</th>
                                 <th scope="col">Operations</th>
@@ -195,6 +211,9 @@
                                             {{$booking->service->name}} - Unknown
                                         @endswitch
                                     </td> -->
+                                    <td>
+                                        {{ $booking->final_moving_date ? \Carbon\Carbon::parse($booking->final_moving_date)->format('d M Y') : "-" }}
+                                    </td>
                                     <td>{{$booking->created_at->format('d M Y')}}</td>
                                     <td>
                                         @if($booking->organization_id)

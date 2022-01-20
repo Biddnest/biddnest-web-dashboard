@@ -169,7 +169,7 @@
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
                                     <!-- <th scope="col" style="width: 40%;">Service Type</th> -->
-                                    <th scope="col" style="width: 22%; ">Enquiry Date</th>
+                                    
                                     <th scope="col" style="width: 23%;">Assigned Vendor</th>
                                     <th scope="col" style="text-align: center !important;">Enquiry Status</th>
                                     <th scope="col">Operations</th>

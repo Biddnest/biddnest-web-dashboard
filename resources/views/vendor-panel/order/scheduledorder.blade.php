@@ -62,7 +62,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
                                     </li>
-                                   
+
                                 @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'] && $booking->status == \App\Enums\BookingEnums::$STATUS['payment_pending'])
                                     {{-- <li class="nav-item">
                                          <a class="nav-link disabled" id="requirments-tab" href="{{route('vendor.my-quote',['id'=>$booking->public_booking_id])}}">My Quote</a>
@@ -73,7 +73,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active show" id="requirments-tab" href="{{route('vendor.schedule-order',['id'=>$booking->public_booking_id])}}">Schedule</a>
                                     </li>
-                                   
+
                                 @elseif($booking->bid->status == \App\Enums\BidEnums::$STATUS['won'] && (($booking->status > \App\Enums\BookingEnums::$STATUS['payment_pending']) && ($booking->status < \App\Enums\BookingEnums::$STATUS['in_transit'])))
                                     <li class="nav-item">
                                         <a class="nav-link" id="requirments-tab" href="{{route('vendor.my-bid',['id'=>$booking->public_booking_id])}}">My Bid</a>
@@ -189,7 +189,7 @@
                                                 {{$booking->service->name}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
-                                                Rs. {{$bidding->bid_amount}}
+                                                Rs. {{$booking->bid->bid_amount ?? "-"}}
                                             </div>
                                             <div class="theme-text f-14 p-8">
                                                 @foreach(json_decode($booking->bid->moving_dates, true) as $mdates)

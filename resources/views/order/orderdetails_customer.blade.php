@@ -280,14 +280,12 @@
                                 </div>
 
                                 @if($booking->bid)
-                                <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-
-                                        {{date("d M Y", strtotime($booking->final_moving_date)}}
+                                <div class="theme-text f-14 p-15" style="padding-top: 5px">
+                                        {{ \Carbon\Carbon::parse($booking->final_moving_date)->format('d M Y') }}
                                 </div>
                                 @endif
 
                                 <div class="theme-text f-14 p-15" style="padding-top: 5px;">
-
                                     @if($booking->final_quote)
                                         @if($booking->final_quote)&#8377;{{$booking->final_quote}} @else &#8377;{{$booking->final_estimated_quote}} @endif
                                     @else - @endif

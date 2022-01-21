@@ -113,7 +113,7 @@ crossorigin="anonymous"></script>
 
     socket.on("booking.watch.end", (data)=>{
       console.log("Listened watch end");
-      $(".bidding-actions").removeClass("hidden");
+      // $(".bidding-actions").removeClass("hidden");
     });
 
 </script>

@@ -1372,7 +1372,7 @@ export function initSocket(){
 
       socket.on("booking.rejected", (data)=>{
         console.log("Listened booking rejected");
-        $(".bidding-actions").addClass("hidden");
+        // $(".bidding-actions").addClass("hidden");
         // if(confirm("Somebody from your organization has rejected this booking. You will be taken to live orders."))
           // location.assign('{{route('vendor.bookings', ['type'=>"live"])}}');
       });

@@ -100,7 +100,8 @@ crossorigin="anonymous"></script>
     @endif
 
     // Inititalizing socket
-    const socket = io(SOCKET_SERVER_URL);
+    // const socket = io(SOCKET_SERVER_URL);
+    const socket = io("127.0.0.1:{{env('DEFAULT_SOCKET_SERVER_PORT')}}");
 
     socket.on("connect",()=>{
       console.log("connected to socket");
@@ -114,8 +115,6 @@ crossorigin="anonymous"></script>
       console.log("Listened watch end");
       $(".bidding-actions").removeClass("hidden");
     });
-
-
 
 </script>
 
